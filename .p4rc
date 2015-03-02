@@ -1,0 +1,5 @@
+alias p4u='$HOME/p4rc/p4u.sh'
+alias pdiff='$HOME/p4rc/pdiff.sh'
+export P4CLIENT="huangyingw"
+export P4PORT="perforce.xetus.com:1666"
+export P4USER="Ying_Huang"

@@ -1,0 +1,4 @@
+alias svndiff='$HOME/svnrc/svndiff.sh'
+alias svnhistory='$HOME/svnrc/svnhistory.sh'
+alias svnst='$HOME/svnrc/svnst.sh'
+alias svnvdiff='$HOME/svnrc/svnvdiff.sh'
