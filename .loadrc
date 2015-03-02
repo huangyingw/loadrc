@@ -1,0 +1,17 @@
+#!/bin/bash
+. $HOME/loadrc/.envrc    
+. $HOME/loadrc/.shellrc  
+. $HOME/loadrc/.gitrc    
+. $HOME/loadrc/.kvmrc    
+. $HOME/loadrc/openrc.sh 
+. $HOME/loadrc/.hgrc     
+. $HOME/loadrc/.sqlrc    
+. $HOME/loadrc/.p4rc     
+. $HOME/loadrc/.svnrc    
+. $HOME/loadrc/.androidrc
+
+HNAME=`hostname`
+if [ $HNAME == "scl-1yihuang-m.corporate.local" ]
+then
+  . $HOME/loadrc/.rovirc
+fi
