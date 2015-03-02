@@ -10,8 +10,9 @@
 . $HOME/loadrc/.svnrc    
 . $HOME/loadrc/.androidrc
 
-HNAME=`hostname`
-if [ $HNAME == "scl-1yihuang-m.corporate.local" ]
+HOSTRC=$HOME/loadrc/."`hostname`"rc
+echo "$HOSTRC"
+if [ -f "$HOSTRC" ]
 then
-  . $HOME/loadrc/.rovirc
+  . "$HOSTRC"
 fi
