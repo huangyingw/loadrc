@@ -1,4 +1,3 @@
-#alias ssh='$HOME/bashrc/ssh.sh'
 #alias sshfs='sshfs -o allow_other,uid=1000,gid=1000'
 alias apf='apt-get update && aptitude full-upgrade'
 alias api='apt-get install'
@@ -60,6 +59,7 @@ alias rsynctype='$HOME/bashrc/rsynctype.sh'
 alias sMov='$HOME/bashrc/sMov.sh'
 alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho 
 alias sleep='$HOME/bashrc/sleep.sh'
+alias ssh='$HOME/bashrc/ssh.sh'
 alias sshmount='$HOME/bashrc/sshmount.sh'
 alias sts='/opt/springsource/sts-2.9.2.RELEASE/STS'
 alias su='sudo su'
