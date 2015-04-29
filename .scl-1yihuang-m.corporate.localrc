@@ -56,3 +56,5 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 #alias ls='ls -la'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
 alias runmongo='mongod --fork --logpath /var/log/mongodb.log'
+
+export PATH=/usr/local/Cellar/ctags/5.8/bin:${PATH}
