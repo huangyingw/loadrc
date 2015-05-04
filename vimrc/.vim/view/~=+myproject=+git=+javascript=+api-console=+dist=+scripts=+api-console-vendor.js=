@@ -1,0 +1,47 @@
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+argglobal
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+15070
+normal! zo
+15107
+normal! zo
+15129
+normal! zo
+15151
+normal! zo
+15190
+normal! zo
+15224
+normal! zo
+15253
+normal! zo
+15274
+normal! zo
+15293
+normal! zo
+15334
+normal! zo
+15354
+normal! zo
+15375
+normal! zo
+15396
+normal! zo
+15420
+normal! zo
+let s:l = 19424 - ((1 * winheight(0) + 12) / 25)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+19424
+normal! 0
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+" vim: set ft=vim :

@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/yihuang/myproject/git/work/rovi/template-api'
+let g:netrw_dirhist_2='/Users/yihuang/myproject/git/work/rovi/template-api/template-admin-api/src/test/java/com/rovicorp/template/admin/api/impl'
+let g:netrw_dirhist_3='/Users/yihuang/myproject/git/work/rovi/template-api/template-common-core/src/main/java/com/rovicorp/template/common/core/enums'
+let g:netrw_dirhist_4='/export/home1/username/cscope_db'
+let g:netrw_dirhist_5='/Users/yihuang/myproject/git/work/rovi/dbscripts'
+let g:netrw_dirhist_6='/Users/yihuang/Dropbox/loadrc'

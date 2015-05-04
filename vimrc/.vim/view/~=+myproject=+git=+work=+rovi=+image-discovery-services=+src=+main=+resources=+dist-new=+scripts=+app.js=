@@ -1,0 +1,369 @@
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+argglobal
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=9
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+1
+normal! zo
+65
+normal! zo
+68
+normal! zo
+69
+normal! zo
+71
+normal! zo
+72
+normal! zo
+93
+normal! zo
+96
+normal! zo
+97
+normal! zo
+101
+normal! zo
+117
+normal! zo
+120
+normal! zo
+121
+normal! zo
+125
+normal! zo
+150
+normal! zo
+183
+normal! zo
+190
+normal! zo
+235
+normal! zo
+285
+normal! zo
+312
+normal! zo
+314
+normal! zo
+315
+normal! zo
+329
+normal! zo
+332
+normal! zo
+333
+normal! zo
+337
+normal! zo
+338
+normal! zo
+343
+normal! zo
+346
+normal! zo
+356
+normal! zo
+384
+normal! zo
+406
+normal! zo
+453
+normal! zo
+456
+normal! zo
+491
+normal! zo
+494
+normal! zo
+495
+normal! zo
+505
+normal! zo
+520
+normal! zo
+523
+normal! zo
+531
+normal! zo
+534
+normal! zo
+546
+normal! zo
+559
+normal! zo
+580
+normal! zo
+581
+normal! zo
+584
+normal! zo
+596
+normal! zo
+599
+normal! zo
+600
+normal! zo
+608
+normal! zo
+628
+normal! zo
+690
+normal! zo
+693
+normal! zo
+694
+normal! zo
+698
+normal! zo
+701
+normal! zo
+708
+normal! zo
+735
+normal! zo
+741
+normal! zo
+749
+normal! zo
+792
+normal! zo
+795
+normal! zo
+796
+normal! zo
+800
+normal! zo
+804
+normal! zo
+812
+normal! zo
+815
+normal! zo
+855
+normal! zo
+876
+normal! zo
+882
+normal! zo
+913
+normal! zo
+916
+normal! zo
+917
+normal! zo
+921
+normal! zo
+970
+normal! zo
+973
+normal! zo
+1032
+normal! zo
+1037
+normal! zo
+1077
+normal! zo
+1078
+normal! zo
+1100
+normal! zo
+1109
+normal! zo
+1117
+normal! zo
+1136
+normal! zo
+1141
+normal! zo
+1169
+normal! zo
+1183
+normal! zo
+1194
+normal! zo
+1202
+normal! zo
+1204
+normal! zo
+1205
+normal! zo
+1234
+normal! zo
+1238
+normal! zo
+1246
+normal! zo
+1276
+normal! zo
+1286
+normal! zo
+1290
+normal! zo
+1303
+normal! zo
+1324
+normal! zo
+1343
+normal! zo
+1345
+normal! zo
+1372
+normal! zo
+1393
+normal! zo
+1396
+normal! zo
+1397
+normal! zo
+1401
+normal! zo
+1417
+normal! zo
+1420
+normal! zo
+1421
+normal! zo
+1425
+normal! zo
+1426
+normal! zo
+1433
+normal! zo
+1457
+normal! zo
+1460
+normal! zo
+1461
+normal! zo
+1463
+normal! zo
+1464
+normal! zo
+1470
+normal! zo
+1541
+normal! zo
+1544
+normal! zo
+1545
+normal! zo
+1549
+normal! zo
+1563
+normal! zo
+1566
+normal! zo
+1567
+normal! zo
+1574
+normal! zo
+1607
+normal! zo
+1613
+normal! zo
+1634
+normal! zo
+1643
+normal! zo
+1657
+normal! zo
+1660
+normal! zo
+1680
+normal! zo
+1686
+normal! zo
+1700
+normal! zo
+1703
+normal! zo
+1704
+normal! zo
+1711
+normal! zo
+1723
+normal! zo
+1726
+normal! zo
+1727
+normal! zo
+1734
+normal! zo
+1748
+normal! zo
+1751
+normal! zo
+1752
+normal! zo
+1756
+normal! zo
+1794
+normal! zo
+1810
+normal! zo
+1813
+normal! zo
+1824
+normal! zo
+1825
+normal! zo
+1838
+normal! zo
+1839
+normal! zo
+2151
+normal! zo
+2170
+normal! zo
+2181
+normal! zo
+2290
+normal! zo
+2318
+normal! zo
+2329
+normal! zo
+2330
+normal! zo
+2331
+normal! zo
+2392
+normal! zo
+3011
+normal! zo
+3016
+normal! zo
+3030
+normal! zo
+3036
+normal! zo
+3041
+normal! zo
+3123
+normal! zo
+3150
+normal! zo
+3153
+normal! zo
+3197
+normal! zo
+3216
+normal! zo
+3219
+normal! zo
+3280
+normal! zo
+let s:l = 5624 - ((11 * winheight(0) + 14) / 29)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+5624
+normal! 0106|
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+" vim: set ft=vim :

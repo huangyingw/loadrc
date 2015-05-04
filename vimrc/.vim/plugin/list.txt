@@ -1,0 +1,9 @@
+/Users/yihuang/myproject/git/work/rovi/condor-common-core
+/Users/yihuang/myproject/git/work/rovi/template-common-core
+/Users/yihuang/myproject/git/work/rovi/template-common-dao
+/Users/yihuang/myproject/git/work/rovi/template-admin-api
+/Users/yihuang/myproject/git/work/rovi/template-admin-services
+/Users/yihuang/myproject/git/work/rovi/template-admin-tool
+/Users/yihuang/myproject/git/work/rovi/image-discovery-common
+/Users/yihuang/myproject/git/work/rovi/image-discovery-services
+/Users/yihuang/myproject/git/work/rovi/asset-publisher

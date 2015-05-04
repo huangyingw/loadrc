@@ -1,0 +1,201 @@
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+argglobal
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=9
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+49
+normal! zo
+502
+normal! zo
+505
+normal! zo
+512
+normal! zo
+538
+normal! zo
+512
+normal! zo
+538
+normal! zo
+584
+normal! zo
+606
+normal! zo
+628
+normal! zo
+634
+normal! zo
+638
+normal! zo
+648
+normal! zo
+653
+normal! zo
+655
+normal! zo
+661
+normal! zo
+720
+normal! zo
+724
+normal! zo
+729
+normal! zo
+771
+normal! zo
+773
+normal! zo
+801
+normal! zo
+805
+normal! zo
+856
+normal! zo
+879
+normal! zo
+882
+normal! zo
+584
+normal! zo
+606
+normal! zo
+628
+normal! zo
+634
+normal! zo
+638
+normal! zo
+648
+normal! zo
+653
+normal! zo
+655
+normal! zo
+661
+normal! zo
+719
+normal! zo
+723
+normal! zo
+728
+normal! zo
+770
+normal! zo
+772
+normal! zo
+800
+normal! zo
+804
+normal! zo
+816
+normal! zo
+855
+normal! zo
+878
+normal! zo
+881
+normal! zo
+49
+normal! zo
+118
+normal! zo
+140
+normal! zo
+145
+normal! zo
+180
+normal! zo
+199
+normal! zo
+201
+normal! zo
+229
+normal! zo
+231
+normal! zo
+233
+normal! zo
+236
+normal! zo
+249
+normal! zo
+272
+normal! zo
+333
+normal! zo
+335
+normal! zo
+337
+normal! zo
+340
+normal! zo
+363
+normal! zo
+392
+normal! zo
+409
+normal! zo
+449
+normal! zo
+452
+normal! zo
+497
+normal! zo
+502
+normal! zo
+512
+normal! zo
+538
+normal! zo
+584
+normal! zo
+606
+normal! zo
+628
+normal! zo
+634
+normal! zo
+638
+normal! zo
+648
+normal! zo
+653
+normal! zo
+655
+normal! zo
+661
+normal! zo
+719
+normal! zo
+723
+normal! zo
+728
+normal! zo
+770
+normal! zo
+772
+normal! zo
+800
+normal! zo
+804
+normal! zo
+855
+normal! zo
+878
+normal! zo
+881
+normal! zo
+let s:l = 500 - ((4 * winheight(0) + 13) / 26)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+500
+normal! 0
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+" vim: set ft=vim :
