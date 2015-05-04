@@ -1,0 +1,13 @@
+/dev/pts/
+/etc/NetworkManager/system-connections/
+/etc/hostname
+/etc/network/interfaces
+/etc/udev/rules.d/70-persistent-net.rules
+/home/huangyingw/.dropbox/
+/home/huangyingw/Dropbox/
+/media/
+/proc/
+/run/
+/sys/
+/tmp/
+/var/lib/NetworkManager/
