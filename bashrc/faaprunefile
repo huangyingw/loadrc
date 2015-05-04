@@ -1,0 +1,12 @@
+*.tmp
+diff.cc
+dwww.xetusone.com
+find.cc
+jquery-*.js
+jquery.js
+jquery\.*.js
+jquery_*.js
+tmp
+cscope.out
+classes
+test-classes

@@ -1,0 +1,9 @@
+bin
+classes
+dwww.xetusone.com
+jquery-*.js
+jquery.js
+jquery\.*.js
+jquery_*.js
+target
+test-classes
