@@ -4,7 +4,7 @@
 " Revision: 0.5
 
 if exists("loaded_autoload_cscope")
-	finish
+  finish
 endif
 let loaded_autoload_cscope = 1
 
@@ -34,7 +34,7 @@ function s:windowdir()
   else 
     let unislash = fnamemodify(bufname(winbufnr(0)), ':p:h')
   endif
-    return tr(unislash, '\', '/')
+  return tr(unislash, '\', '/')
 endfunc
 "
 "==
@@ -88,23 +88,23 @@ function s:Cycle_macros_menus()
     silent! map <unique> <C-\>i :cs find i <C-R>=expand("<cword>")<CR><CR>
     if has("menu")
       nmenu &Cscope.Find.Symbol<Tab><c-\\>s
-        \ :cs find s <C-R>=expand("<cword>")<CR><CR>
+            \ :cs find s <C-R>=expand("<cword>")<CR><CR>
       nmenu &Cscope.Find.Definition<Tab><c-\\>g
-        \ :cs find g <C-R>=expand("<cword>")<CR><CR>
+            \ :cs find g <C-R>=expand("<cword>")<CR><CR>
       nmenu &Cscope.Find.Called<Tab><c-\\>d
-        \ :cs find d <C-R>=expand("<cword>")<CR><CR>
+            \ :cs find d <C-R>=expand("<cword>")<CR><CR>
       nmenu &Cscope.Find.Calling<Tab><c-\\>c
-        \ :cs find c <C-R>=expand("<cword>")<CR><CR>
+            \ :cs find c <C-R>=expand("<cword>")<CR><CR>
       nmenu &Cscope.Find.Assignment<Tab><c-\\>t
-        \ :cs find t <C-R>=expand("<cword>")<CR><CR>
+            \ :cs find t <C-R>=expand("<cword>")<CR><CR>
       nmenu &Cscope.Find.Egrep<Tab><c-\\>e
-        \ :cs find e <C-R>=expand("<cword>")<CR><CR>
+            \ :cs find e <C-R>=expand("<cword>")<CR><CR>
       nmenu &Cscope.Find.File<Tab><c-\\>f
-        \ :cs find f <C-R>=expand("<cword>")<CR><CR>
+            \ :cs find f <C-R>=expand("<cword>")<CR><CR>
       nmenu &Cscope.Find.Including<Tab><c-\\>i
-        \ :cs find i <C-R>=expand("<cword>")<CR><CR>
-"      nmenu &Cscope.Add :cs add 
-"      nmenu &Cscope.Remove  :cs kill 
+            \ :cs find i <C-R>=expand("<cword>")<CR><CR>
+      "      nmenu &Cscope.Add :cs add 
+      "      nmenu &Cscope.Remove  :cs kill 
       nmenu &Cscope.Reset :cs reset<cr>
       nmenu &Cscope.Show :cs show<cr>
       " Need to figure out how to do the add/remove. May end up writing
@@ -147,59 +147,59 @@ endfunc
 " Cycle_csdb
 "  cycle the loaded cscope db.
 function s:Cycle_csdb()
-    if exists("b:csdbpath")
-      if cscope_connection(3, "out", b:csdbpath)
-        return
-        "it is already loaded. don't try to reload it.
-      endif
+  if exists("b:csdbpath")
+    if cscope_connection(3, "out", b:csdbpath)
+      return
+      "it is already loaded. don't try to reload it.
     endif
-    let newcsdbpath = s:Find_in_parent("cscope.out",s:windowdir(),$HOME)
-"    echo "Found cscope.out at: " . newcsdbpath
-"    echo "Windowdir: " . s:windowdir()
-    if newcsdbpath != "Nothing"
-      let b:csdbpath = newcsdbpath
-      if !cscope_connection(3, "out", b:csdbpath)
-        let save_csvb = &csverb
-        set nocsverb
-        exe "cs add " . b:csdbpath . "/cscope.out " . b:csdbpath
-        set csverb
-        let &csverb = save_csvb
-      endif
-      "
-    else " No cscope database, undo things. (someone rm-ed it or somesuch)
-      call s:Unload_csdb()
+  endif
+  let newcsdbpath = s:Find_in_parent("cscope.out",s:windowdir(),$HOME)
+  "    echo "Found cscope.out at: " . newcsdbpath
+  "    echo "Windowdir: " . s:windowdir()
+  if newcsdbpath != "Nothing"
+    let b:csdbpath = newcsdbpath
+    if !cscope_connection(3, "out", b:csdbpath)
+      let save_csvb = &csverb
+      set nocsverb
+      exe "cs add " . b:csdbpath . "/cscope.out " . b:csdbpath
+      set csverb
+      let &csverb = save_csvb
     endif
+    "
+  else " No cscope database, undo things. (someone rm-ed it or somesuch)
+    call s:Unload_csdb()
+  endif
 endfunc
 
 " auto toggle the menu
 augroup autoload_cscope
- au!
- au BufEnter *.[chly]  call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
- au BufEnter *.cc      call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
- au BufEnter *.findresult     call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
- au BufEnter *.hta     call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
- au BufEnter *.htm     call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
- au BufEnter *.html    call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
- au BufEnter *.java    call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
- au BufEnter *.js      call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
- au BufEnter *.jsp     call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
- au BufEnter *.py      call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
- au BufEnter *.vim     call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
- au BufEnter *.xhtml   call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
- au BufEnter *.xml     call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
- au BufUnload *.[chly] call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
- au BufUnload *.cc     call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
- au BufUnload *.findresult    call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
- au BufUnload *.hta    call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
- au BufUnload *.htm    call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
- au BufUnload *.html   call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
- au BufUnload *.java   call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
- au BufUnload *.js     call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
- au BufUnload *.jsp    call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
- au BufUnload *.py     call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
- au BufUnload *.vim    call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
- au BufUnload *.xhtml  call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
- au BufUnload *.xml    call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
+  au!
+  au BufEnter *.[chly]  call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
+  au BufEnter *.cc      call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
+  au BufEnter *.findresult     call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
+  au BufEnter *.hta     call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
+  au BufEnter *.htm     call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
+  au BufEnter *.html    call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
+  au BufEnter *.java    call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
+  au BufEnter *.js      call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
+  au BufEnter *.jsp     call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
+  au BufEnter *.py      call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
+  au BufEnter *.vim     call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
+  au BufEnter *.xhtml   call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
+  au BufEnter *.xml     call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
+  au BufUnload *.[chly] call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
+  au BufUnload *.cc     call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
+  au BufUnload *.findresult    call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
+  au BufUnload *.hta    call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
+  au BufUnload *.htm    call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
+  au BufUnload *.html   call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
+  au BufUnload *.java   call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
+  au BufUnload *.js     call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
+  au BufUnload *.jsp    call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
+  au BufUnload *.py     call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
+  au BufUnload *.vim    call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
+  au BufUnload *.xhtml  call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
+  au BufUnload *.xml    call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
 augroup END
 
 let &cpo = s:save_cpo
