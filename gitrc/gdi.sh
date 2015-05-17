@@ -1,3 +1,3 @@
 #!/bin/bash
-git diff > find.cc
-vi find.cc
+git diff > gdi.findresult
+vi gdi.findresult
