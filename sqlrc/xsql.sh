@@ -2,7 +2,7 @@
 red='\033[0;31m'
 green='\033[0;32m'
 NC='\033[0;0m' # No Color
-if [ ! $(git ls-files|grep '.login') ] || [ git status|grep -q '.login' ];
+if !(git ls-files|grep '.login') || (git status|grep -q '.login');
 then
   echo -e "${red}the .login is unclean, please check it before continuing... ${NC}"
   exit 1
