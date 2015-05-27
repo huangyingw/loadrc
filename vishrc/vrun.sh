@@ -3,7 +3,7 @@ file=${1}
 extension=${file##*.}
 case $extension in
   sql)
-    ~/loadrc/sqlrc/xsql.sh ${1} > ${1}.findresult 2>&1   
+    ~/loadrc/sqlrc/xsql.sh ${1} ${2} > ${1}.findresult 2>&1   
     read -p "press any key to continue...." update
     ;;
   findresult)

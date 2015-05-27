@@ -46,6 +46,10 @@ function! CSCSearchQ()
   exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 1 . ' ' . 'qcsc'
   exec 'vsplit ' . b:csdbpath . '/' . b:keyword . '.qcsc.findresult'
 endfunction
+function! VRun()
+  let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
+  exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
+endfunction
 function! CSCSearch()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   let b:keyword = expand("<cword>")
@@ -169,7 +173,7 @@ nnoremap Q :call RememberQuit()<cr>
 nnoremap H :call ShowVITAG()<cr> 
 nnoremap T :vs /export/home1/username/cscope_db/<CR>
 nnoremap L :vs <C-R>"<CR>
-map <F5> :<C-U>exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p")<CR> 
+map <F5> :call VRun()<cr>  
 nnoremap gf gF
 map oo :vertical wincmd F<CR>
 nnoremap <silent> <leader>g :!gitk %:p<CR>
