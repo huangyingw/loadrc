@@ -9,7 +9,7 @@
 
 VDIFF3="kdiff3"
 DIFF3="diff3"
-DIFF="kdiff3"
+DIFF="diff"
 
 promptUser ()
 {
