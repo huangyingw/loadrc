@@ -65,6 +65,8 @@ function! VimSearch()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   let b:keyword = @@
   exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
+  let b:keyword = substitute(b:keyword, " ", "_", "")
+  let b:keyword = substitute(b:keyword, "/", "_", "")
   exec 'vsplit ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
 endfunction
 function! ShowProjectRoot()
