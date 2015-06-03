@@ -1,6 +1,11 @@
 #!/bin/bash
 CURRENT_BRANCH="`git branch |awk '/^\*/{print $2}'`"
-TARGET_BRANCH="$1"
+TARGET_BRANCH=`echo ${CURRENT_BRANCH} | sed -e "s|.fix$||"` 
+if [ -n "$1" ];
+then
+  TARGET_BRANCH="$1"
+fi
+echo "$TARGET_BRANCH"
 if  ( git status|grep -q 'nothing to commit' )
 then
   git checkout "$TARGET_BRANCH" \
