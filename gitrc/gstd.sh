@@ -1,5 +1,5 @@
 #!/bin/bash
-ready_file="gstv.already"
+ready_file="gstv.ready"
 if [ ! -f ${ready_file} ];
 then
   echo -e "${red}gstv must be run before gmfix first ... ${NC}"

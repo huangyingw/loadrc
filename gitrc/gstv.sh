@@ -9,3 +9,4 @@ then
   exit 0
 fi
 git difftool stash@{0}^!
+touch gstv.ready
