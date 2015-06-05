@@ -180,7 +180,7 @@ nnoremap H :call ShowVITAG()<cr>
 nnoremap T :sp /export/home1/username/cscope_db/<CR>:resize<CR>
 nnoremap L :sp <C-R>"<CR>:resize<CR>
 map <F5> :call VRun()<cr>  
-nnoremap gf :gF<CR>:resize<CR> 
+nnoremap gf gF<CR>:resize<CR> 
 map oo :wincmd F<CR>:resize<CR> 
 nnoremap <silent> <leader>g :!gitk %:p<CR>
 nnoremap <leader>1 :let @"=expand("%:p")<CR> 
