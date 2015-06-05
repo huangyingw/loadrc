@@ -51,5 +51,5 @@ function! ShowVITAG()
   let cur_dir = s:Cycle_csdb()
   let cur_dir = substitute(cur_dir, '.*/', "", "")
   let cur_dir = "/export/home1/username/cscope_db/".cur_dir
-  exe 'vs '.cur_dir
+  exe 'sp '.cur_dir
 endfunction

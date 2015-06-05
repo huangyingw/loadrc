@@ -81,8 +81,8 @@ function! ShowRemember()
 endfunction
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR>
 nnoremap <leader>L :TlistClose<CR>
-nnoremap hh <c-w>h<c-w><Bar>
-nnoremap ll <c-w>l<c-w><Bar>
+nnoremap hh <c-w>j<c-w>_
+nnoremap ll <c-w>k<c-w>_
 nnoremap ff <c-f>
 nnoremap vv <c-b>
 nnoremap <c-l> l
@@ -108,12 +108,12 @@ vnoremap <Space> za
 "nnoremap <silent> <leader>f za
 "onoremap <silent> <leader>f <C-C>za
 "vnoremap <silent> <leader>f zf
-nnoremap <silent> <leader>e :vs $HOME/.bash_history<CR>
-nnoremap <silent> <leader>f :vs $HOME/loadrc/.loadrc<CR>
+nnoremap <silent> <leader>e :sp $HOME/.bash_history<CR>
+nnoremap <silent> <leader>f :sp $HOME/loadrc/.loadrc<CR>
 nnoremap <silent> <leader>v :so $MYVIMRC<CR>
 nnoremap <leader>sh :execute "leftabove vsplit" bufname('#')<cr>
 nnoremap <leader>sl :execute "rightbelow vsplit" bufname('#')<cr>
-nnoremap W :vs .<CR>
+nnoremap W :sp .<CR>
 " Quickly reload current file
 nnoremap E :mkview<CR>:e!<CR>
 " Quickly save current file
@@ -124,7 +124,7 @@ nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 nnoremap tt :Autoformat<CR>
-nnoremap D :vs %:p<CR>
+nnoremap D :sp %:p<CR>
 " Quickly open current dir in current windows
 nnoremap <leader>d :call ShowProjectRoot()<cr>   
 nnoremap <tab> %
@@ -173,11 +173,11 @@ nmap <C-f> :call CSCSearchQ()<CR><CR>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr> 
 nnoremap H :call ShowVITAG()<cr> 
-nnoremap T :vs /export/home1/username/cscope_db/<CR>
-nnoremap L :vs <C-R>"<CR>
+nnoremap T :sp /export/home1/username/cscope_db/<CR>
+nnoremap L :sp <C-R>"<CR>
 map <F5> :call VRun()<cr>  
 nnoremap gf gF
-map oo :vertical wincmd F<CR>
+map oo :wincmd F<CR>
 nnoremap <silent> <leader>g :!gitk %:p<CR>
 nnoremap <leader>1 :let @"=expand("%:p")<CR> 
 
