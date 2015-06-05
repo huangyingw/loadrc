@@ -44,7 +44,7 @@ function! CSCSearchQ()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   let b:keyword = expand("<cword>")
   exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 1 . ' ' . 'qcsc'
-  exec 'vsplit ' . b:csdbpath . '/' . b:keyword . '.qcsc.findresult'
+  exec 'sp ' . b:csdbpath . '/' . b:keyword . '.qcsc.findresult'
 endfunction
 function! VRun()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
@@ -54,7 +54,7 @@ function! CSCSearch()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   let b:keyword = expand("<cword>")
   exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 4 . ' ' . 'csc' 
-  exec 'vsplit ' . b:csdbpath . '/' . b:keyword . '.csc.findresult'
+  exec 'sp ' . b:csdbpath . '/' . b:keyword . '.csc.findresult'
 endfunction
 function! UpdateCscope()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
@@ -67,13 +67,13 @@ function! VimSearch()
   exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
   let b:keyword = substitute(b:keyword, " ", "_", "g")
   let b:keyword = substitute(b:keyword, "/", "_", "g")
-  exec 'vsplit ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
+  exec 'sp ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
 endfunction
 function! ShowProjectRoot()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   let @+=b:csdbpath
   echom b:csdbpath
-  exec 'vsplit ' . b:csdbpath
+  exec 'sp ' . b:csdbpath
 endfunction
 function! ShowRemember()
   let @+=expand('%:p')
@@ -111,8 +111,8 @@ vnoremap <Space> za
 nnoremap <silent> <leader>e :sp $HOME/.bash_history<CR>
 nnoremap <silent> <leader>f :sp $HOME/loadrc/.loadrc<CR>
 nnoremap <silent> <leader>v :so $MYVIMRC<CR>
-nnoremap <leader>sh :execute "leftabove vsplit" bufname('#')<cr>
-nnoremap <leader>sl :execute "rightbelow vsplit" bufname('#')<cr>
+nnoremap <leader>sh :execute "leftabove sp" bufname('#')<cr>
+nnoremap <leader>sl :execute "rightbelow sp" bufname('#')<cr>
 nnoremap W :sp .<CR>
 " Quickly reload current file
 nnoremap E :mkview<CR>:e!<CR>
