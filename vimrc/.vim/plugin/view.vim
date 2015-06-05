@@ -14,3 +14,4 @@ set statusline +=[%n]%m                "modified flag
 "set statusline +=%2*0x%04B\ %*          "character under cursor
 set cursorline                  " underline the current line, for quick orientation
 " Split previously opened file ('#') in a split window
+let Tlist_Use_Horiz_Window = 1

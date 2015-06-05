@@ -9,7 +9,7 @@ function s:windowdir()
   else 
     let unislash = fnamemodify(bufname(winbufnr(0)), ':p:h')
   endif
-    return tr(unislash, '\', '/')
+  return tr(unislash, '\', '/')
 endfunc
 "
 "==
@@ -40,11 +40,11 @@ endfunc
 " Cycle_csdb
 "  cycle the loaded cscope db.
 function s:Cycle_csdb()
-    let newcsdbpath = s:Find_in_parent("cscope.out",s:windowdir(),$HOME)
-"    echo "Found cscope.out at: " . newcsdbpath
-    if newcsdbpath != "Nothing"
-      return newcsdbpath
-    endif
+  let newcsdbpath = s:Find_in_parent("cscope.out",s:windowdir(),$HOME)
+  "    echo "Found cscope.out at: " . newcsdbpath
+  if newcsdbpath != "Nothing"
+    return newcsdbpath
+  endif
 endfunc
 
 function! ShowVITAG()
@@ -52,4 +52,5 @@ function! ShowVITAG()
   let cur_dir = substitute(cur_dir, '.*/', "", "")
   let cur_dir = "/export/home1/username/cscope_db/".cur_dir
   exe 'sp '.cur_dir
+  resize
 endfunction
