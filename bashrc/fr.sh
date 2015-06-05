@@ -2,6 +2,11 @@
 red='\033[0;31m'
 green='\033[0;32m'
 NC='\033[0;0m' # No Color
+if ! (git status|grep -q 'nothing to commit')
+then
+  echo -e "${red}the git repository is unclean, please check it before continuing... ${NC}"
+  exit 1
+fi
 FILE_POSTFIX=postfix.findresult
 PRUNE_POSTFIX=prunefix.findresult
 PRUNE_FILE=prunefile.findresult
@@ -31,12 +36,6 @@ do
 done < "$PRUNE_FILE"
 FIND=$2
 REPLACE=$3
-if [ -n "$1" ];
-then
-  folderForGit="$1"
-else
-  folderForGit=.
-fi
 OS=`uname`
 if [ "$OS" == "Linux" ]
 then
