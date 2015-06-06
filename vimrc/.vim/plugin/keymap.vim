@@ -85,10 +85,9 @@ function! ShowRemember()
 endfunction
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR>
 nnoremap <leader>L :TlistClose<CR>
-nnoremap hh <c-w>h
-nnoremap ll <c-w>l
-nnoremap mm <c-w><Bar>
-nnoremap mn <c-w>=
+nnoremap hh <c-w>h<c-w><Bar>
+nnoremap ll <c-w>l<c-w><Bar>
+nnoremap mm <c-w>=
 nnoremap ff <c-f>
 nnoremap vv <c-b>
 nnoremap <c-l> l
