@@ -44,7 +44,7 @@ function! CSCSearchQ()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   let b:keyword = expand("<cword>")
   exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 1 . ' ' . 'qcsc'
-  exec 'sp ' . b:csdbpath . '/' . b:keyword . '.qcsc.findresult'
+  exec 'vs ' . b:csdbpath . '/' . b:keyword . '.qcsc.findresult'
   resize
 endfunction
 function! VRun()
@@ -55,7 +55,7 @@ function! CSCSearch()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   let b:keyword = expand("<cword>")
   exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 4 . ' ' . 'csc' 
-  exec 'sp ' . b:csdbpath . '/' . b:keyword . '.csc.findresult'
+  exec 'vs ' . b:csdbpath . '/' . b:keyword . '.csc.findresult'
   resize
 endfunction
 function! UpdateCscope()
@@ -69,14 +69,14 @@ function! VimSearch()
   exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
   let b:keyword = substitute(b:keyword, " ", "_", "g")
   let b:keyword = substitute(b:keyword, "/", "_", "g")
-  exec 'sp ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
+  exec 'vs ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
   resize
 endfunction
 function! ShowProjectRoot()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   let @+=b:csdbpath
   echom b:csdbpath
-  exec 'sp ' . b:csdbpath
+  exec 'vs ' . b:csdbpath
   resize
 endfunction
 function! ShowRemember()
@@ -85,8 +85,8 @@ function! ShowRemember()
 endfunction
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR>
 nnoremap <leader>L :TlistClose<CR>
-nnoremap hh <c-w>j<c-w>_
-nnoremap ll <c-w>k<c-w>_
+nnoremap hh <c-w>h<c-w><Bar>
+nnoremap ll <c-w>l<c-w><Bar>
 nnoremap ff <c-f>
 nnoremap vv <c-b>
 nnoremap <c-l> l
@@ -112,12 +112,12 @@ vnoremap <Space> za
 "nnoremap <silent> <leader>f za
 "onoremap <silent> <leader>f <C-C>za
 "vnoremap <silent> <leader>f zf
-nnoremap <silent> <leader>e :sp $HOME/.bash_history<CR>:resize<CR>
-nnoremap <silent> <leader>f :sp $HOME/loadrc/.loadrc<CR>:resize<CR>
+nnoremap <silent> <leader>e :vs $HOME/.bash_history<CR>:resize<CR>
+nnoremap <silent> <leader>f :vs $HOME/loadrc/.loadrc<CR>:resize<CR>
 nnoremap <silent> <leader>v :so $MYVIMRC<CR>
-nnoremap <leader>sh :execute "leftabove sp" bufname('#')<cr>resize
-nnoremap <leader>sl :execute "rightbelow sp" bufname('#')<cr>resize
-nnoremap W :sp .<CR>:resize<CR>
+nnoremap <leader>sh :execute "leftabove vs" bufname('#')<cr>:resize<CR>
+nnoremap <leader>sl :execute "rightbelow vs" bufname('#')<cr>:resize<CR>
+nnoremap W :vs .<CR>:resize<CR>
 " Quickly reload current file
 nnoremap E :mkview<CR>:e!<CR>
 " Quickly save current file
@@ -128,7 +128,7 @@ nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 nnoremap tt :Autoformat<CR>
-nnoremap D :sp %:p<CR>:resize<CR>
+nnoremap D :vs %:p<CR>:resize<CR>
 " Quickly open current dir in current windows
 nnoremap <leader>d :call ShowProjectRoot()<cr>   
 nnoremap <tab> %
@@ -177,11 +177,11 @@ nmap <C-f> :call CSCSearchQ()<CR><CR>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr> 
 nnoremap H :call ShowVITAG()<cr> 
-nnoremap T :sp /export/home1/username/cscope_db/<CR>:resize<CR>
-nnoremap L :sp <C-R>"<CR>:resize<CR>
+nnoremap T :vs /export/home1/username/cscope_db/<CR>:resize<CR>
+nnoremap L :vs <C-R>"<CR>:resize<CR>
 map <F5> :call VRun()<cr>  
 nnoremap gf gF<CR>:resize<CR> 
-map oo :wincmd F<CR>:resize<CR> 
+map oo :vertical wincmd F<CR>:resize<CR>
 nnoremap <silent> <leader>g :!gitk %:p<CR>
 nnoremap <leader>1 :let @"=expand("%:p")<CR> 
 
