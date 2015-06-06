@@ -79,10 +79,6 @@ function! ShowProjectRoot()
   exec 'vs ' . b:csdbpath
   resize
 endfunction
-function! DuplicateFile()
-  vert resize 
-  exec 'vs ' . expand("%:p")
-endfunction
 function! ShowRemember()
   let @+=expand('%:p')
   echom expand('%:p')
@@ -134,7 +130,7 @@ nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 nnoremap tt :Autoformat<CR>
-nnoremap D :call DuplicateFile()<CR>
+nnoremap D :vert resize<CR>:vs %:p<CR>
 " Quickly open current dir in current windows
 nnoremap <leader>d :call ShowProjectRoot()<cr>   
 nnoremap <tab> %
