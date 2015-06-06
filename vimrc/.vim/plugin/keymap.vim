@@ -113,12 +113,12 @@ vnoremap <Space> za
 "nnoremap <silent> <leader>f za
 "onoremap <silent> <leader>f <C-C>za
 "vnoremap <silent> <leader>f zf
-nnoremap <silent> <leader>e :vs $HOME/.bash_history<CR>:resize<CR>
-nnoremap <silent> <leader>f :vs $HOME/loadrc/.loadrc<CR>:resize<CR>
+nnoremap <silent> <leader>e :vs $HOME/.bash_history<CR>:vert resize<CR>
+nnoremap <silent> <leader>f :vs $HOME/loadrc/.loadrc<CR>:vert resize<CR>
 nnoremap <silent> <leader>v :so $MYVIMRC<CR>
-nnoremap <leader>sh :execute "leftabove vs" bufname('#')<cr>:resize<CR>
-nnoremap <leader>sl :execute "rightbelow vs" bufname('#')<cr>:resize<CR>
-nnoremap W :vs .<CR>:resize<CR>
+nnoremap <leader>sh :execute "leftabove vs" bufname('#')<cr>:vert resize<CR>
+nnoremap <leader>sl :execute "rightbelow vs" bufname('#')<cr>:vert resize<CR>
+nnoremap W :vs .<CR>:vert resize<CR>
 " Quickly reload current file
 nnoremap E :mkview<CR>:e!<CR>
 " Quickly save current file
@@ -178,11 +178,11 @@ nmap <C-f> :call CSCSearchQ()<CR><CR>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr> 
 nnoremap H :call ShowVITAG()<cr> 
-nnoremap T :vs /export/home1/username/cscope_db/<CR>:resize<CR>
-nnoremap L :vs <C-R>"<CR>:resize<CR>
+nnoremap T :vs /export/home1/username/cscope_db/<CR>:vert resize<CR>
+nnoremap L :vs <C-R>"<CR>:vert resize<CR>
 map <F5> :call VRun()<cr>  
-nnoremap gf gF<CR>:resize<CR> 
-map oo :vertical wincmd F<CR>:resize<CR>
+nnoremap gf gF<CR>:vert resize<CR> 
+map oo :vert wincmd F<CR>:vert resize<CR>
 nnoremap <silent> <leader>g :!gitk %:p<CR>
 nnoremap <leader>1 :let @"=expand("%:p")<CR> 
 

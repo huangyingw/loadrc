@@ -52,5 +52,5 @@ function! ShowVITAG()
   let cur_dir = substitute(cur_dir, '.*/', "", "")
   let cur_dir = "/export/home1/username/cscope_db/".cur_dir
   exe 'vs '.cur_dir
-  resize
+  vert resize
 endfunction
