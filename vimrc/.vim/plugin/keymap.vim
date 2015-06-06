@@ -45,7 +45,7 @@ function! CSCSearchQ()
   let b:keyword = expand("<cword>")
   exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 1 . ' ' . 'qcsc'
   exec 'vs ' . b:csdbpath . '/' . b:keyword . '.qcsc.findresult'
-  resize
+  vert resize
 endfunction
 function! VRun()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
@@ -56,7 +56,7 @@ function! CSCSearch()
   let b:keyword = expand("<cword>")
   exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 4 . ' ' . 'csc'
   exec 'vs ' . b:csdbpath . '/' . b:keyword . '.csc.findresult'
-  resize
+  vert resize
 endfunction
 function! UpdateCscope()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
@@ -70,14 +70,14 @@ function! VimSearch()
   let b:keyword = substitute(b:keyword, " ", "_", "g")
   let b:keyword = substitute(b:keyword, "/", "_", "g")
   exec 'vs ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
-  resize
+  vert resize
 endfunction
 function! ShowProjectRoot()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   let @+=b:csdbpath
   echom b:csdbpath
   exec 'vs ' . b:csdbpath
-  resize
+  vert resize
 endfunction
 function! ShowRemember()
   let @+=expand('%:p')
@@ -129,7 +129,7 @@ nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 nnoremap tt :Autoformat<CR>
-nnoremap D :vert resize<CR>:vs %:p<CR>
+nnoremap D :vs %:p<CR>:vert resize<CR>
 " Quickly open current dir in current windows
 nnoremap <leader>d :call ShowProjectRoot()<cr>
 nnoremap <tab> %
