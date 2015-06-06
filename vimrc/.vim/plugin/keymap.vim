@@ -11,7 +11,7 @@ endfunction
 function s:windowdir()
   if winbufnr(0) == -1
     let unislash = getcwd()
-  else 
+  else
     let unislash = fnamemodify(bufname(winbufnr(0)), ':p:h')
   endif
   return tr(unislash, '\', '/')
@@ -54,7 +54,7 @@ endfunction
 function! CSCSearch()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   let b:keyword = expand("<cword>")
-  exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 4 . ' ' . 'csc' 
+  exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 4 . ' ' . 'csc'
   exec 'vs ' . b:csdbpath . '/' . b:keyword . '.csc.findresult'
   resize
 endfunction
@@ -131,7 +131,7 @@ nnoremap <leader>P "+P
 nnoremap tt :Autoformat<CR>
 nnoremap D :vert resize<CR>:vs %:p<CR>
 " Quickly open current dir in current windows
-nnoremap <leader>d :call ShowProjectRoot()<cr>   
+nnoremap <leader>d :call ShowProjectRoot()<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 nnoremap M zM
@@ -170,28 +170,28 @@ else
   nmap fs :let @"=expand("%")<CR>
   nmap <leader>p :let @"=expand("%:p")<CR>
 endif
-" nnoremap F :echom expand('%:p')<cr>  
-nnoremap F :call ShowRemember()<cr>  
-vnoremap <silent>f :call VimSearch()<cr>  
-nmap <C-@> :call CSCSearch()<CR><CR>	
-nmap <C-f> :call CSCSearchQ()<CR><CR>	
+" nnoremap F :echom expand('%:p')<cr>
+nnoremap F :call ShowRemember()<cr>
+vnoremap <silent>f :call VimSearch()<cr>
+nmap <C-@> :call CSCSearch()<CR><CR>
+nmap <C-f> :call CSCSearchQ()<CR><CR>
 " Quickly close the current window
-nnoremap Q :call RememberQuit()<cr> 
-nnoremap H :call ShowVITAG()<cr> 
+nnoremap Q :call RememberQuit()<cr>
+nnoremap H :call ShowVITAG()<cr>
 nnoremap T :vs /export/home1/username/cscope_db/<CR>:vert resize<CR>
 nnoremap L :vs <C-R>"<CR>:vert resize<CR>
-map <F5> :call VRun()<cr>  
-nnoremap gf gF<CR>:vert resize<CR> 
+map <F5> :call VRun()<cr>
+nnoremap gf gF<CR>:vert resize<CR>
 map oo :vert wincmd F<CR>:vert resize<CR>
 nnoremap <silent> <leader>g :!gitk %:p<CR>
-nnoremap <leader>1 :let @"=expand("%:p")<CR> 
+nnoremap <leader>1 :let @"=expand("%:p")<CR>
 
 function! CompareTwoFiles()
   execute '!kdiff3' @" expand("%:p")
 endfunc
 
-nnoremap <leader>2 :call CompareTwoFiles()<cr>   
-nnoremap <leader>c :call UpdateCscope()<cr>   
+nnoremap <leader>2 :call CompareTwoFiles()<cr>
+nnoremap <leader>c :call UpdateCscope()<cr>
 set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
 "    paste mode, where you can paste mass data
 "    that won't be autoindented
