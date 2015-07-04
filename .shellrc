@@ -1,5 +1,5 @@
 #alias sshfs='sshfs -o allow_other,uid=1000,gid=1000'
-alias apf='apt-get update && aptitude -y full-upgrade'
+alias apf='apt-get update && aptitude -y full-upgrade && pm-suspend'
 alias api='apt-get install'
 alias aps='$HOME/loadrc/bashrc/aps.sh'
 alias apu='apt-get update'
