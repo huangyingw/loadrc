@@ -10,9 +10,9 @@ function rec_dir() {
 if [[ $2 -gt 11 ]]; then
   return 
 fi
-for file in `ls $1`
+for file in `ls -al $1`
 do
-  if [ -d "$1/$file" ]
+  if [ -d "$1/$file" ] && [ "$file" != ".." ] && [ "$file" != "." ]
   then
     if [ -d "$1/$file/.git" ]
     then
@@ -25,7 +25,10 @@ do
       fi 
       cd - 1>/dev/null
     else
-      rec_dir "$1/$file" $(($2 + 1))
+      if [ "$file" != ".git" ] && [ "$file" != ".." ] && [ "$file" != "." ]
+      then
+        rec_dir "$1/$file" $(($2 + 1))
+      fi
     fi
   fi 
 done
