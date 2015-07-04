@@ -1,6 +1,7 @@
 function! RememberQuit()
   let @"=expand("%:p")
   q
+  vert resize
 endfunction
 
 "==

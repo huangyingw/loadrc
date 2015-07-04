@@ -15,3 +15,8 @@ pdf
 nonimmigrant
 JDBC
 mysql
+API
+ReusablePool
+ConcreteMediator
+ConcreteColleague
+multidirectional
