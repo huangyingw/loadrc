@@ -7,5 +7,5 @@ then
   echo -e "${red}please provide the host name... ${NC}"
   exit 1
 fi
-rsync -aH --force -e ssh ~/.ssh/ "$1":~/.ssh/ \
+rsync -aH --force -e ssh ~/.ssh/ root@"$1":~/.ssh/ \
   && scp -v ~/loadrc/bashrc/ssh_host_* root@"$1":/etc/ssh/
