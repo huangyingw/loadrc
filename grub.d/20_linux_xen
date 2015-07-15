@@ -197,6 +197,7 @@ fi
 
   is_top_level=true
   GRUB_DISABLE_SUBMENU=y
+  GRUB_DISABLE_RECOVERY=true
 
   while [ "x${xen_list}" != "x" ] ; do
     list="${linux_list}"

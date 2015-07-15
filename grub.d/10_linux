@@ -275,6 +275,7 @@ submenu_indentation=""
 
 is_top_level=true
 GRUB_DISABLE_SUBMENU=y
+GRUB_DISABLE_RECOVERY=true
 while [ "x$list" != "x" ] ; do
   linux=`version_find_latest $list`
   case $linux in

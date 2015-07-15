@@ -230,6 +230,7 @@ EOF
       boot_device_id=
       is_top_level=true
       GRUB_DISABLE_SUBMENU=y
+      GRUB_DISABLE_RECOVERY=true
       title_correction_code=
       OS="${LONGNAME}"
 
