@@ -14,4 +14,7 @@ elif [ "$1" == "mini" ]; then
 elif [ "$1" == "ubuntu" ]; then
   wakeonlan 00:0a:cd:1e:e9:be #server
   ping ubuntu
+elif [ "$1" == "mac" ]; then
+  wakeonlan 6C:40:08:AA:76:86 #mac
+  ping mac
 fi
