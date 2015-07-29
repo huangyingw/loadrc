@@ -8,4 +8,4 @@ then
   exit 0
 fi
 commits=( $(git log --follow "$1"|awk '/commit/{print $2}') )
-for (( i=0; i<${#commits[@]}; i++ )); do git difftool ${commits[i]}^! "$1"; done
+for (( i=0; i<${#commits[@]}; i++ )); do echo ${commits[i]};git difftool ${commits[i]}^! "$1"; done
