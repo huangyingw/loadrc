@@ -18,4 +18,8 @@ case $extension in
     python ${1}
     read -p "press any key to continue...." update
     ;;
+  vim)
+    source ${1}
+    read -p "press any key to continue...." update
+    ;;
 esac
