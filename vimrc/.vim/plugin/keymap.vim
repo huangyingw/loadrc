@@ -185,6 +185,7 @@ nnoremap L :vs <C-R>"<CR>:vert resize<CR>
 map <F5> :call VRun()<cr>
 nnoremap gf gF<CR>:vert resize<CR>
 map oo :vert wincmd F<CR>:vert resize<CR>
+nmap <C-g> :exec '!~/loadrc/gitrc/gsh.sh ' . expand("%:p")<CR>
 nnoremap <silent> <leader>g :!gitk %:p<CR>
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
 
