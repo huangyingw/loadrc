@@ -2,7 +2,7 @@
 SOURCE=$1
 TARGET=$2
 
-ready_file="tmirror.ready"
+ready_file="${TARGET}"/"tmirror.ready"
 if [ ! -d "${TARGET}" ];
 then   
   mkdir -p "${TARGET}"
