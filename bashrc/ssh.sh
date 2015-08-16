@@ -4,5 +4,5 @@ if [ "$OS" == "Linux" ]
 then
   autossh -X "$1"
 else
-  ssh -X "$1"
+  ssh -X "$1" -t -- 'tmux new-session -A -s main'
 fi
