@@ -5,6 +5,6 @@ fi
 rm ~/fav/*
 find "$FAV" -type f -mtime -30 -size +700M -exec ls -rt {} \+|tail -n 100|while read ss
 do 
-    ftemp=`basename "$ss"`
-    ln -s "$ss" ~/fav/"$ftemp"
+  ftemp=`basename "$ss"`
+  ln -s "$ss" ~/fav/"$ftemp"
 done
