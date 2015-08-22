@@ -1,7 +1,9 @@
 #! /bin/bash
-if [ -f $HOME/.passwd ]; then
+if [ -z "$1" ];
+then
   FAV=`cat $HOME/.passwd |grep fav|awk '{print $3}'`
+else
+  FAV="$1"
 fi
-rm ~/fav/*
-find "$FAV" -type f -mtime -30 -size +700M -exec ls -t {} \+ > fav.findresult
+find "$FAV" -type f -mtime -30 -exec ls -t {} \+ > fav.findresult
 vi fav.findresult
