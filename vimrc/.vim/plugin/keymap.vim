@@ -41,6 +41,10 @@ function s:Find_in_parent(fln,flsrt,flstp)
   endwhile
   return "Nothing"
 endfunc
+function! PlayAV()
+  let line=getline('.')
+  exec '!/Applications/VLC.app/Contents/MacOS/VLC ' . '"' .  line . '"'
+endfunction
 function! CSCSearchQ()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   let b:keyword = expand("<cword>")
@@ -177,6 +181,7 @@ nnoremap F :call ShowRemember()<cr>
 vnoremap <silent>f :call VimSearch()<cr>
 nmap <C-@> :call CSCSearch()<CR><CR>
 nmap <C-f> :call CSCSearchQ()<CR><CR>
+nmap <C-j> :call PlayAV()<CR><CR>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr>
 nnoremap H :call ShowVITAG()<cr>
