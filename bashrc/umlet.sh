@@ -1,8 +1,7 @@
 #!/bin/bash
-if [ -z "$1" ];
-then
-    target=.
-else
-    target="$1"
+programDir=~/bin/Umlet
+
+if [ $# -eq 1 ]
+ then java -jar ${programDir}/umlet.jar -filename="$1"
+ else java -jar ${programDir}/umlet.jar "$@"
 fi
-find "$target" -type f -name \*.uxf -exec umlet -filename={} \;
