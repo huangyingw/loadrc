@@ -1,8 +1,4 @@
 #!/bin/bash
-PRUNE_POSTFIX="$1/"prunefix.findresult
-PRUNE_FILE="$1/"prunefile.findresult
-prune_params=();
-prune_files=();
 find_result="$1/""`echo "$2".vaa.findresult |sed  -e "s/\//\_/g;s/\ /\_/g"`"
 if [ -f "$find_result" ]; then
   read -p "the search is already done, if you want to update, press u --> " update
@@ -17,23 +13,8 @@ if [ -f "$find_result" ]; then
       ;;
   esac
 fi
-or="";
-grep_params="";
-if [ -n "$3" ]
-then grep_params=" -A"$3" -B"$3;
-fi
-or="";
-while read suf
-do
-  prune_params+=( $or "-iname" "*.$suf" )
-  or="-o"
-done < "$PRUNE_POSTFIX"
-while read suf
-do
-  prune_files+=( $or "-wholename" "$suf" )
-  or="-o"
-done < "$PRUNE_FILE"
 echo "search in " "$1"
 cd "$1"
+cscope_db_file="/export/home1/username/cscope_db/""${PWD##*/}"
 echo "result in " "$find_result"
-find "$1" "(" "${prune_params[@]}" "${prune_files[@]}" "-o" "-name" "$find_result" ")" -prune -o -type f -exec fgrep -inH  $grep_params "$2" {} \; > "$find_result"
+xargs fgrep -inH "$2" < "$cscope_db_file" > "$find_result"
