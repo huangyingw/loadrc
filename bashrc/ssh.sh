@@ -6,8 +6,8 @@ then
 else
   if [ `hostname` == "MacPro" ]
   then
-    ssh -X root@"$1" -t -- 'tmux new-session -A -s main'
+    ssh -X root@"$1" -t -- 'tmux attach'
   else
-    ssh -X "$1" -t -- 'tmux new-session -A -s main'
+    ssh -X "$1" -t -- 'tmux attach'
   fi
 fi
