@@ -6,7 +6,12 @@ then
 else
   if [ `hostname` == "MacPro" ]
   then
-    ssh -X root@"$1" -t -- 'tmux attach'
+    if [ "$1" == "mac" ]
+    then
+      ssh -X "$1" -t -- 'tmux attach'
+    else
+      ssh -X root@"$1" -t -- 'tmux attach'
+    fi
   else
     ssh -X "$1" -t -- 'tmux attach'
   fi
