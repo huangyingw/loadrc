@@ -4,7 +4,7 @@ if [ "$OS" == "Linux" ]
 then
   autossh -X "$1" -t -- 'tmux new-session -A -s main'
 else
-  if [ `hostname` == "MacPro" ]
+  if [ `hostname` == "MacPro" ] || [ `hostname` == "mac" ]
   then
     if [ "$1" == "mac" ]
     then
