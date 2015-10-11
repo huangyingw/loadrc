@@ -40,8 +40,14 @@ endfunc
 " Cycle_csdb
 "  cycle the loaded cscope db.
 function s:Cycle_csdb()
-  let newcsdbpath = s:Find_in_parent("cscope.out",s:windowdir(),$HOME)
-  "    echo "Found cscope.out at: " . newcsdbpath
+  let newcsdbpath = s:Find_in_parent("cscope.out",s:windowdir(),"/")
+  "echo "Found cscope.out at: " . newcsdbpath
+  if newcsdbpath == "/"
+    let newcsdbpath = "osroot"
+  endif
+  if newcsdbpath == "Nothing"
+    let newcsdbpath = "osroot"
+  endif
   if newcsdbpath != "Nothing"
     return newcsdbpath
   endif
