@@ -39,7 +39,7 @@ function s:Find_in_parent(fln,flsrt,flstp)
       break
     endif
   endwhile
-  return "Nothing"
+  return "/"
 endfunc
 function! PlayAV()
   let line=getline('.')
@@ -69,7 +69,7 @@ function! UpdateCscope()
 endfunction
 function! VimSearch()
   normal! gvy<CR>
-  let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
+  let b:csdbpath = <SID>Find_in_parent("cscope.out",s:windowdir(),"/")
   let b:keyword = @@
   exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
   let b:keyword = substitute(b:keyword, " ", "_", "g")
