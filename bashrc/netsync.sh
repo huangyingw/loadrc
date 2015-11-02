@@ -15,4 +15,6 @@ do
   exclude_params+=( "--exclude=$suf" )
 done < "$NETSYNC"
 rsync -e ssh -aH --delete-during --force "${exclude_params[@]}" "${SOURCE}":/ / \
-  && pm-suspend
+  &&grub-install /dev/sda \
+  &&update-grub2 \
+  && reboot
