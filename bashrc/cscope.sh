@@ -6,7 +6,12 @@ else
   TARGETEDIR=`realpath "$1"`
 fi
 cd "$TARGETEDIR"
-TARGET='/export/home1/username/cscope_db/'`pwd |sed -e "s/^.*\///g"`
+TARGET=`pwd |sed -e "s/^.*\///g"`
+if [ -z $TARGET ];
+then
+  TARGET='osroot'
+fi
+TARGET='/export/home1/username/cscope_db/'$TARGET
 echo $TARGET
 PARA=-bqR
 PRUNE_POSTFIX=prunefix.findresult

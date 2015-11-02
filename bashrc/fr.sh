@@ -7,39 +7,13 @@ then
   echo -e "${red}the git repository is unclean, please check it before continuing... ${NC}"
   exit 1
 fi
-FILE_POSTFIX=postfix.findresult
-PRUNE_POSTFIX=prunefix.findresult
-PRUNE_FILE=prunefile.findresult
-find_params=();
-prune_params=();
-prune_files=();
-or="";
-grep_params="";
-if [ -n "$3" ]
-then grep_params=" -A"$3" -B"$3;
-fi
-while read suf
-do
-  find_params+=( $or "-iname" "*.$suf" )
-  or="-o"
-done < "$FILE_POSTFIX"
-or="";
-while read suf
-do
-  prune_params+=( $or "-iname" "*.$suf" )
-  or="-o"
-done < "$PRUNE_POSTFIX"
-while read suf
-do
-  prune_files+=( $or "-iname" "$suf" )
-  or="-o"
-done < "$PRUNE_FILE"
-FIND=$2
-REPLACE=$3
+FIND=$1
+REPLACE=$2
+cscope_db_file="/export/home1/username/cscope_db/""${PWD##*/}"
 OS=`uname`
 if [ "$OS" == "Linux" ]
 then
-  find "$1" "(" "${prune_params[@]}" "${prune_files[@]}" ")" -prune -o "(" "${find_params[@]}" "-o" "-iname" "makefile" ")" -type f -exec sed -i""  "s/\b${FIND}\b/${REPLACE}/g" {} +
+  xargs sed -i""  "s/\b${FIND}\b/${REPLACE}/g" < "$cscope_db_file"
 else
-  find "$1" "(" "${prune_params[@]}" "${prune_files[@]}" ")" -prune -o "(" "${find_params[@]}" "-o" "-iname" "makefile" ")" -type f -exec sed -i ""  "s/[[:<:]]${FIND}[[:>:]]/${REPLACE}/g" {} +
+  xargs sed -i ""  "s/[[:<:]]${FIND}[[:>:]]/${REPLACE}/g" < "$cscope_db_file"
 fi
