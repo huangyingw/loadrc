@@ -15,7 +15,7 @@ do
   exclude_params+=( "--exclude=$suf" )
 done < "$NETSYNC"
 rsync -e ssh -aH --delete-during --force "${exclude_params[@]}" "${SOURCE}":/ / \
-  && scp -v "${SOURCE}"boot/vmlinuz-* "${SOURCE}"boot/initrd.img-*   /boot/ \
+  && scp "${SOURCE}":/boot/vmlinuz-* "${SOURCE}":/boot/initrd.img-*   /boot/ \
   && update-initramfs -u \
   && update-grub2 \
   && reboot
