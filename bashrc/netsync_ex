@@ -1,5 +1,6 @@
 /dev/pts/
 /etc/NetworkManager/system-connections/
+/etc/fstab
 /etc/hostname
 /etc/network/interfaces
 /etc/udev/rules.d/70-persistent-net.rules
@@ -7,6 +8,7 @@
 /home/huangyingw/Dropbox/
 /media/
 /proc/
+/root/loadrc/
 /run/
 /sys/
 /tmp/
