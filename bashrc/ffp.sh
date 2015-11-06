@@ -1,6 +1,6 @@
 #!/bin/bash
-PRUNE_POSTFIX=$HOME/bashrc/prunefix
-PRUNE_FILE=$HOME/bashrc/prunefile
+PRUNE_POSTFIX=$HOME/loadrc/bashrc/prunefix
+PRUNE_FILE=$HOME/loadrc/bashrc/prunefile
 prune_params=();
 find_result="`echo "$2".ffp.findresult |sed  -e "s/\//\_/g"`"
 if [ -f "$find_result" ]; then
