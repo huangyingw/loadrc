@@ -1,5 +1,5 @@
 #!/bin/bash
-APPLIST=$HOME/bashrc/app_list
+APPLIST=$HOME/loadrc/bashrc/app_list
 app_list=();
 while read suf
 do

@@ -5,8 +5,8 @@ then
   TARGET="$1"
 fi
 echo $TARGET
-UBAKEX="$HOME/bashrc/usync_ex"
-UBAKIN="$HOME/bashrc/usync_in"
+UBAKEX="$HOME/loadrc/bashrc/usync_ex"
+UBAKIN="$HOME/loadrc/bashrc/usync_in"
 exclude_params=();
 while read suf
 do

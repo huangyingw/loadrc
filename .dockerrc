@@ -1,3 +1,3 @@
-#alias for git
+#alias for docker
 alias cdocker='$HOME/loadrc/dockerrc/cdocker.sh'
 alias edocker='$HOME/loadrc/dockerrc/edocker.sh'
