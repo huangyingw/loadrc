@@ -3,4 +3,4 @@ docker run  \
   -v /root:/root \
   -v /media/volgrp/mldonkey/:/var/lib/mldonkey/ \
   -h mldonkey \
-  -ti huangyingw/ubuntu bash
+  -ti huangyingw/mldonkey bash
