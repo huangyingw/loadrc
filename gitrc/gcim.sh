@@ -1,2 +1,2 @@
 #!/bin/bash
-git commit -m "`cat .git/MERGE_MSG |awk 'NR==1'`"
+~/loadrc/gitrc/g.sh "`cat .git/MERGE_MSG |awk 'NR==1'`"

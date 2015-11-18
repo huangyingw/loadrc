@@ -1,5 +1,5 @@
 #!/bin/bash
 git init
 git add .
-git commit -am "n"
+~/loadrc/gitrc/gci.sh
 $HOME/loadrc/gitrc/gclb.sh

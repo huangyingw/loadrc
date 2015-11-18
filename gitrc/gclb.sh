@@ -9,7 +9,7 @@ if [ ! -d ".git" ];
 then
   git init
   git add .
-  git commit -am "n"
+  ~/loadrc/gitrc/gci.sh
 else
   if [ -d ${x} ];
   then
