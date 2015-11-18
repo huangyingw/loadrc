@@ -17,4 +17,4 @@ then
   exit 1
 fi
 git checkout $up_branch \
-  && git merge $current_branch
+  && ~/loadrc/gitrc/gme.sh $current_branch

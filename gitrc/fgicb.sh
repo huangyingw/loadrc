@@ -4,7 +4,7 @@ do
   cd $file
   git init
   git add .
-  git commit -am "n"
+  ~/loadrc/gitrc/gci.sh
   $HOME/loadrc/gitrc/gclb.sh
   cd - 1>/dev/null
 done
