@@ -7,8 +7,8 @@ then
   echo -e "${red}the git repository is unclean, please check it before continuing... ${NC}"
   exit 1
 fi
-FIND=$1
-REPLACE=$2
+FIND=$(echo $1 | sed 's/\//\\\//g')
+REPLACE=$(echo $2 | sed 's/\//\\\//g')
 cscope_db_file="/export/home1/username/cscope_db/""${PWD##*/}"
 OS=`uname`
 if [ "$OS" == "Linux" ]

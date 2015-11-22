@@ -176,6 +176,7 @@ augroup autoload_cscope
   au!
   au BufEnter *.[chly]  call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
   au BufEnter *.cc      call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
+  au BufEnter *.cpp      call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
   au BufEnter *.findresult     call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
   au BufEnter *.hta     call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
   au BufEnter *.htm     call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
@@ -192,6 +193,7 @@ augroup autoload_cscope
   au BufEnter *.xml     call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
   au BufUnload *.[chly] call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
   au BufUnload *.cc     call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
+  au BufUnload *.cpp     call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
   au BufUnload *.findresult    call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
   au BufUnload *.hta    call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
   au BufUnload *.htm    call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()

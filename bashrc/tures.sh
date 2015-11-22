@@ -11,8 +11,8 @@ then
 fi
 echo $SOURCE
 echo $TARGET
-URESEX="$HOME/bashrc/ures_ex"
-URESIN="$HOME/bashrc/ures_in"
+URESEX="$HOME/loadrc/bashrc/ures_ex"
+URESIN="$HOME/loadrc/bashrc/ures_in"
 exclude_params=();
 while read suf
 do

@@ -6,7 +6,7 @@ do
   then
     if [ -d "$file/.git" ];
     then
-      $HOME/bashrc/gagh.sh "$file"
+      $HOME/loadrc/bashrc/gagh.sh "$file"
     else
       iterate_dir "$file"
     fi

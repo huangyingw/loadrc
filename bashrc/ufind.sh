@@ -1,9 +1,9 @@
 #!/bin/bash
 function Find()
 {
-  FILE_POSTFIX=$HOME/bashrc/postfix
-  PRUNE_POSTFIX=$HOME/bashrc/prunefix
-  PRUNE_FILE=$HOME/bashrc/prunefile
+  FILE_POSTFIX=$HOME/loadrc/bashrc/postfix
+  PRUNE_POSTFIX=$HOME/loadrc/bashrc/prunefix
+  PRUNE_FILE=$HOME/loadrc/bashrc/prunefile
   find_params=();
   prune_params=();
   prune_files=();

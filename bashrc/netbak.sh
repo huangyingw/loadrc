@@ -1,3 +1,3 @@
 #! /bin/bash
 rsync -aH --force -e ssh --exclude=/media/volgrp/kvm/* /media/volgrp/ ubuntu:/media/volgrp/ \
-  ; $HOME/bashrc/rsleep.sh
+  ; $HOME/loadrc/bashrc/rsleep.sh

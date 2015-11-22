@@ -11,8 +11,8 @@ then
 fi
 echo $SOURCE
 echo $TARGET
-UTRANEX="$HOME/bashrc/utran_ex"
-UTRANIN="$HOME/bashrc/utran_in"
+UTRANEX="$HOME/loadrc/bashrc/utran_ex"
+UTRANIN="$HOME/loadrc/bashrc/utran_in"
 exclude_params=();
 while read suf
 do

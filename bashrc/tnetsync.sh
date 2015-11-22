@@ -14,8 +14,5 @@ while read suf
 do
   exclude_params+=( "--exclude=$suf" )
 done < "$NETSYNC"
-rsync -e ssh -aH --delete-during --force "${exclude_params[@]}" "${SOURCE}":/ / \
-  && scp "${SOURCE}":/boot/vmlinuz-* "${SOURCE}":/boot/initrd.img-*   /boot/ \
-  && update-initramfs -u \
-  && update-grub2 \
-  && reboot
+rsync -e ssh -aHinv --delete-during --force "${exclude_params[@]}" "${SOURCE}":/ / > gs.findresult
+vi gs.findresult

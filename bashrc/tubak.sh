@@ -5,8 +5,8 @@ then
     TARGET="$1":$TARGET
 fi
 echo $TARGET
-UBAKEX="$HOME/bashrc/ubak_ex"
-UBAKIN="$HOME/bashrc/ubak_in"
+UBAKEX="$HOME/loadrc/bashrc/ubak_ex"
+UBAKIN="$HOME/loadrc/bashrc/ubak_in"
 exclude_params=();
 while read suf
 do
