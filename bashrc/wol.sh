@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ -z "$1" ]; then
-  wakeonlan 00:01:c0:12:94:05 #vserver
-  ping vserver
+  wakeonlan 00:01:c0:12:94:05 #mini
+  ping mini
 elif [ "$1" == "timemachine" ]; then
   wakeonlan 00:01:c0:12:92:a2 #timemachine
   ping timemachine
@@ -14,9 +14,9 @@ elif [ "$1" == "toshiba" ]; then
 elif [ "$1" == "mini" ]; then
   wakeonlan 00:01:c0:15:fa:ed #mini
   ping mini
-elif [ "$1" == "ubuntu" ]; then
+elif [ "$1" == "server" ]; then
   wakeonlan 00:0a:cd:1e:e9:be #server
-  ping ubuntu
+  ping server
 elif [ "$1" == "mac" ]; then
   wakeonlan 6C:40:08:AA:76:86 #mac
   ping mac
