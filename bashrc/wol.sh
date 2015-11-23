@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ -z "$1" ]; then
-  wakeonlan 00:01:c0:12:94:05 #vserver
-  ping vserver
+  wakeonlan 00:01:c0:12:94:05 #mini
+  ping mini
 elif [ "$1" == "timemachine" ]; then
   wakeonlan 00:01:c0:12:92:a2 #timemachine
   ping timemachine
