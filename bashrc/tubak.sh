@@ -1,8 +1,8 @@
 #! /bin/bash
-TARGET=/media/volgrp/slink/media/`hostname`/  
+TARGET=/media/volgrp/media/`hostname`/
 if [ -n "$1" ]
 then 
-    TARGET="$1":$TARGET
+  TARGET="$1"
 fi
 echo $TARGET
 UBAKEX="$HOME/loadrc/bashrc/ubak_ex"
@@ -17,5 +17,5 @@ while read suf
 do
   include_params+=( "--include=$suf" )
 done < "$UBAKIN"
-rsync -aHinv --delete-during "${exclude_params[@]}" "${include_params[@]}" / "${TARGET}"> find.findresult
+rsync -aHinv --force --delete-during "${exclude_params[@]}" "${include_params[@]}" / "${TARGET}"> find.findresult
 vi find.findresult
