@@ -18,7 +18,7 @@ then
 fi
 
 rsync -aH --delete-during --force \
-  "${SOURCE}" "${TARGET}" \
+  "${SOURCE}/" "${TARGET}/" \
   && if [ -f ${ready_file} ];
     then
       rm ${ready_file}
