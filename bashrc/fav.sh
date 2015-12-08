@@ -1,11 +1,11 @@
 #! /bin/bash
 if [ `hostname` == "mbuntu" ]
 then
-  if [ -f $HOME/.passwd ]; then
+  if [ -f $HOME/loadrc/.passwd ]; then
     FAV=`cat $HOME/.passwd |grep fav|awk '{print $3}'`
   fi
   rm ~/fav/*
-  find "$FAV" -type f -mtime -30 -size +700M -exec ls -rt {} \+|tail -n 100|while read ss
+  find "$FAV" -type f -mtime -700 -iname 9\* -size +700M -exec ls -rt {} \+|tail -n 100|while read ss
 do 
   ftemp=`basename "$ss"`
   ln -s "$ss" ~/fav/"$ftemp"
