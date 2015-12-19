@@ -3,7 +3,6 @@ red='\033[0;31m'
 green='\033[0;32m'
 NC='\033[0;0m' # No Color
 
-~/loadrc/gitrc/gps.sh
 GCIDEFAULT=gci.default
 commit_message='n'
 if [ -z "$1" ];
