@@ -1,2 +1,4 @@
-/etc/fstab
 /media/
+/proc/
+/run/
+/sys/

@@ -4,4 +4,4 @@ DIRECTORY=`echo "$1" |sed 's/\/\w\+.qcow2//g'`
 if [ ! -d "$DIRECTORY" ]; then
   mkdir -p "$DIRECTORY"
 fi 
-qemu-img create -f qcow2 "$TARGET".qcow2  1000G
+qemu-img create -f qcow2 "$TARGET".qcow2  5000G
