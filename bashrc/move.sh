@@ -1,8 +1,4 @@
 #!/bin/bash
-red='\033[0;31m'
-green='\033[0;32m'
-NC='\033[0;0m' # No Color
-
 if [ ! -d "$2" ];
 then   
   mkdir -p "$2"
