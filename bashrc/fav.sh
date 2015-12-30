@@ -17,6 +17,6 @@ else
   else
     FAV="$1"
   fi
-  find "$FAV" -type f -mtime -30 -iname 9\* -exec ls -t {} \+ > fav.findresult
+  find "$FAV" -type f -mtime -300 -iname 9\* -exec ls -t {} \+ > fav.findresult
   vi fav.findresult
 fi
