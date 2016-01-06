@@ -15,8 +15,8 @@ fi
 TARGET='/export/home1/username/cscope_db/'$TARGET
 echo $TARGET
 PARA=-bqR
-PRUNE_POSTFIX=prunefix.findresult
-PRUNE_FILE=prunefile.findresult
+PRUNE_POSTFIX=prunefix.conf
+PRUNE_FILE=prunefile.conf
 or="";
 while read suf
 do
