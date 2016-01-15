@@ -8,5 +8,5 @@ then
   echo -e "${red}It must be run in fix branch ... ${NC}"
   exit 1
 fi 
-git vd $previous_branch
 touch gfvd.already
+git vd $previous_branch
