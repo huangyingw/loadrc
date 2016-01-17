@@ -12,4 +12,4 @@ while read suf
 do
   include_params+=( "--include=$suf" )
 done < "$MBAKIN"
-sudo rsync -aH --force --delete-during "${exclude_params[@]}" "${include_params[@]}" / "${TARGET}"
+sudo rsync -aHv --progress --force --delete-during "${exclude_params[@]}" "${include_params[@]}" / "${TARGET}"
