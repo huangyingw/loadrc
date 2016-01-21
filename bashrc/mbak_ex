@@ -1,12 +1,6 @@
-/Applications/
-/Library/
-/Network/
-/System/
 /Users/huangyingw/Documents/Parallels/
 /Volumes/
 /installer.failurerequests/
-/media/
-/net/
-/opt/
+/Users/huangyingw/samba/
 /private/var/vm/sleepimage
 /private/var/vm/swapfile*
