@@ -6,7 +6,7 @@ else
   TARGETEDIR=`realpath "$1"`
 fi
 cd "$TARGETEDIR"
-cp -nv ~/loadrc/bashrc/prunefi* ./
+cp -nv ~/loadrc/prunefi* ./
 TARGET=`pwd |sed -e "s/^.*\///g"`
 if [ -z $TARGET ];
 then
