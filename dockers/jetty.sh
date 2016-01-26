@@ -1,7 +1,7 @@
 #!/bin/bash
 SCRIPT_DIR=$(dirname $0)
 docker run  \
-  -v ~/myproject/git/work/TutorGroup/h2h-server/signalling/server/opt/jetty/jetty9/demo-base/:/var/lib/jetty/ \
+  -v /Users/huangyingw/myproject/git/work/TutorGroup/jetty/jetty9/demo-base/:/var/lib/jetty/ \
   --env-file $SCRIPT_DIR/env.list \
   -h jetty \
   -p 80:8080 \
