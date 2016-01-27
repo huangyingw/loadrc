@@ -3,5 +3,8 @@ x=`pwd`
 x=`echo ${x} | sed -e "s|/.*/myproject|$HOME/Dropbox/myproject|"`
 echo ${x}
 
-git clone --bare . ${x}
-git remote add dropbox ${x}
+if [ ! -d ${x} ];
+then
+  git clone --bare . ${x}
+  git remote add dropbox ${x}
+fi
