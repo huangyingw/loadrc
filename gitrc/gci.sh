@@ -12,4 +12,5 @@ else
   commit_message="$1"
 fi
 git commit -am "$commit_message"
+~/loadrc/gitrc/gclb.sh
 ~/loadrc/gitrc/gps.sh              
