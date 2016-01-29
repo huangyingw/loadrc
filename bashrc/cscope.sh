@@ -30,3 +30,4 @@ do
 done < "$PRUNE_FILE"
 find "$TARGETEDIR" "(" "${prune_params[@]}" "${prune_files[@]}" ")" -a -prune -o -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > ${TARGET}
 cscope $PARA -i ${TARGET} 
+find /export/home1/username/cscope_db "(" "${prune_params[@]}" "${prune_files[@]}" ")" -a -prune -o -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > ~/cscope.findresult
