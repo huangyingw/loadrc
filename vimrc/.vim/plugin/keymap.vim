@@ -81,8 +81,6 @@ function! ShowProjectRoot()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   let @+=b:csdbpath
   echom b:csdbpath
-  exec 'vs ' . b:csdbpath
-  vert resize
 endfunction
 function! ShowRemember()
   let @+=expand('%:p')

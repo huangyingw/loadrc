@@ -6,7 +6,7 @@ then
   then
     vim $TARGET
   else
-    vim /export/home1/username/cscope_db/
+    vim ~/cscope.findresult
   fi
 else
   vim "$1"
