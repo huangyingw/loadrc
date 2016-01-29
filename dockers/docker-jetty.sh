@@ -1,4 +1,5 @@
 #!/bin/bash
+docker stop docker-jetty
 docker rm docker-jetty
 SCRIPT_DIR=$(dirname $0)
 docker run  \
