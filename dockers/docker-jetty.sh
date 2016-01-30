@@ -3,9 +3,8 @@ docker stop docker-jetty
 docker rm docker-jetty
 SCRIPT_DIR=$(dirname $0)
 docker run  \
-  -v /Users/huangyingw/myproject/git/work/TutorGroup/webapps/:/opt/jetty/webapps/ \
-  -v /Users/huangyingw/myproject/git/work/TutorGroup/logs/:/opt/jetty/logs/ \
-  -v /Users/huangyingw/myproject/git/tools/jetty-distribution-9.3.6.v20151106/resources/log4j.properties:/opt/jetty/resources/log4j.properties \
+  -v /Users/huangyingw/myproject/git/work/TutorGroup/mybase/:/opt/web/mybase/ \
+  -v /Users/huangyingw/myproject/git/work/TutorGroup/jetty/:/opt/jetty/ \
   --env-file $SCRIPT_DIR/env.list \
   -h docker-jetty \
   --name docker-jetty \
