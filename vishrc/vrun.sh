@@ -3,19 +3,19 @@ file=${1}
 extension=${file##*.}
 case $extension in
   sql)
-    ~/loadrc/sqlrc/xsql.sh ${1} ${2} > ${1}.findresult 2>&1   
+    ~/loadrc/sqlrc/xsql.sh ${1} ${2} 2>&1 | tee -a ${1}.findresult 
     read -p "press any key to continue...." update
     ;;
   findresult)
-    sh ${1}
+    sh ${1} 2>&1 | tee -a ${1}.findresult
     read -p "press any key to continue...." update
     ;;
   sh)
-    sh ${1}
+    sh ${1} 2>&1 | tee -a ${1}.findresult 
     read -p "press any key to continue...." update
     ;;
   py)
-    python ${1}
+    python ${1} 2>&1 | tee -a ${1}.findresult 
     read -p "press any key to continue...." update
     ;;
   vim)
