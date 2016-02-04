@@ -1,8 +1,8 @@
 #!/bin/bash 
 if [ -z "$1" ];
 then
-  /usr/bin/ssh vserver "sudo pm-suspend" \
-    & ping vserver
+  /usr/bin/ssh mini "sudo pm-suspend" \
+    & ping mini
   exit 1
 fi
 ssh "$1" pm-suspend

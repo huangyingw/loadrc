@@ -1,7 +1,4 @@
 #!/bin/bash
-red='\033[0;31m'
-green='\033[0;32m'
-NC='\033[0;0m' # No Color
 ready_file="gstv.ready"
 if [ ! -f ${ready_file} ];
 then

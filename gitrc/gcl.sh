@@ -2,17 +2,16 @@
 
 if [ -z "$1" ];
 then
-	echo "Please provide parameter"
+  echo -e "${red}Please provide parameter ... ${NC}"
+  exit 1
 else
-	x=`echo $1 | sed -e "s|/media/smb|$HOME|"`
-	echo ${x}
+  x=`echo $1 | sed -e "s|Dropbox/||"`
+  echo ${x}
 fi
 
-
-if [ -d ${x} ];
+if [ -d "$x" ];
 then
-	echo local repository exist!!!
+  echo local repository exist!!!
 else
-	#echo "git clone -v "$1" ${x}"
-	git clone -v "$1" ${x}
+  git clone -v "$1" "$x"
 fi

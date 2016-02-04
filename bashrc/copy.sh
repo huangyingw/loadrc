@@ -8,4 +8,4 @@ then
 fi
 
 rsync -aH --force \
-  "${SOURCE}" "${TARGET}" \
+  "${SOURCE}/" "${TARGET}/" \

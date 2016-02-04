@@ -4,14 +4,9 @@ if [ "$OS" == "Linux" ]
 then
   autossh -X "$1" -t -- 'tmux new-session -A -s main'
 else
-  if [ `hostname` == "MacPro" ] || [ `hostname` == "mac" ]
+  if [ `hostname` == "MacPro" ] || [ `hostname` == "mac.lan" ]
   then
-    if [ "$1" == "mac" ]
-    then
-      ssh -X "$1" -t -- 'tmux attach'
-    else
-      ssh -X root@"$1" -t -- 'tmux attach'
-    fi
+    ssh -X root@"$1" -t -- 'tmux attach'
   else
     ssh -X "$1" -t -- 'tmux attach'
   fi

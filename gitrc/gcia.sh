@@ -1,7 +1,4 @@
 #!/bin/bash
-red='\033[0;31m'
-green='\033[0;32m'
-NC='\033[0;0m' # No Color
 if (git status|grep -q '# Changes to be committed:')
 then
   echo -e "${red}should not run gcia, while there is sth to be committed ... ${NC}"

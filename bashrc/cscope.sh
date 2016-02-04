@@ -6,7 +6,7 @@ else
   TARGETEDIR=`realpath "$1"`
 fi
 cd "$TARGETEDIR"
-cp -nv ~/loadrc/bashrc/prunefi* ./
+cp -nv ~/loadrc/prunefi* ./
 TARGET=`pwd |sed -e "s/^.*\///g"`
 if [ -z $TARGET ];
 then
@@ -15,8 +15,8 @@ fi
 TARGET='/export/home1/username/cscope_db/'$TARGET
 echo $TARGET
 PARA=-bqR
-PRUNE_POSTFIX=prunefix.findresult
-PRUNE_FILE=prunefile.findresult
+PRUNE_POSTFIX=prunefix.conf
+PRUNE_FILE=prunefile.conf
 or="";
 while read suf
 do
@@ -28,5 +28,6 @@ do
   prune_files+=( $or "-wholename" "$suf" )
   or="-o"
 done < "$PRUNE_FILE"
-find "$TARGETEDIR" "(" "${prune_params[@]}" "${prune_files[@]}" ")" -a -prune -o -type f -size -9000k -print -exec file {} \; | grep text | cut -d: -f1 | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > ${TARGET}
+find "$TARGETEDIR" "(" "${prune_params[@]}" "${prune_files[@]}" ")" -a -prune -o -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > ${TARGET}
 cscope $PARA -i ${TARGET} 
+find /export/home1/username/cscope_db "(" "${prune_params[@]}" "${prune_files[@]}" ")" -a -prune -o -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > ~/cscope.findresult

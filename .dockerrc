@@ -1,3 +1,8 @@
 #alias for docker
+OS=`uname`
+if [ "$OS" == "Darwin" ]
+then
+  eval "$(docker-machine env default)"
+fi
 alias cdocker='$HOME/loadrc/dockerrc/cdocker.sh'
 alias edocker='$HOME/loadrc/dockerrc/edocker.sh'

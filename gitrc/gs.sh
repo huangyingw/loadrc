@@ -1,8 +1,8 @@
 #!/bin/bash
 if [ -n "$1" ];
 then
-  git status "$1" > gs.findresult
+  git status "$1" 2>&1 | tee -a gs.findresult
 else
-  git status > gs.findresult 
+  git status 2>&1 | tee -a gs.findresult
 fi
 vi gs.findresult
