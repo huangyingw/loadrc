@@ -1,7 +1,4 @@
 #!/bin/bash 
-red='\033[0;31m'
-green='\033[0;32m'
-NC='\033[0;0m' # No Color
 SOURCE=$1
 TARGET=$2
 
@@ -18,7 +15,7 @@ then
 fi
 
 rsync -aH --delete-during --force \
-  "${SOURCE}" "${TARGET}" \
+  "${SOURCE}/" "${TARGET}/" \
   && if [ -f ${ready_file} ];
     then
       rm ${ready_file}

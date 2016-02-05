@@ -1,7 +1,4 @@
 #!/bin/bash
-red='\033[0;31m'
-green='\033[0;32m'
-NC='\033[0;0m' # No Color
 if [ -n "$1" ];
 then
   folderForGit="$1"

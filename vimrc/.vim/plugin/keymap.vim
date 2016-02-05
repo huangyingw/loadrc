@@ -81,8 +81,6 @@ function! ShowProjectRoot()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   let @+=b:csdbpath
   echom b:csdbpath
-  exec 'vs ' . b:csdbpath
-  vert resize
 endfunction
 function! ShowRemember()
   let @+=expand('%:p')
@@ -185,7 +183,7 @@ nmap <C-f> :call CSCSearchQ()<CR><CR>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr>
 nnoremap H :call ShowVITAG()<cr>
-nnoremap T :vs /export/home1/username/cscope_db/<CR>:vert resize<CR>
+nnoremap T :vs $HOME/cscope.findresult<CR>:vert resize<CR>
 nnoremap L :vs <C-R>"<CR>:vert resize<CR>
 map <F5> :call VRun()<cr>
 nnoremap gf gF<CR>:vert resize<CR>

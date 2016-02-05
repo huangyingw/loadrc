@@ -1,4 +1,4 @@
 #!/bin/bash
 fusermount -u /media/samba/ \
-  ; sshfs ubuntu:/media/ /media/samba/ \
+  ; sshfs server:/media/ /media/samba/ \
   && df -Th
