@@ -10,17 +10,6 @@ let mapleader=","
 let maplocalleader="\\"
 filetype indent on
 
-function! CHANGE_CURR_DIR()
-  let _dir = expand("%:p:h")
-  exec "cd " . fnameescape(_dir)
-  unlet _dir
-  if filereadable(".vimdc")
-    source .vimdc
-  endif
-endfunction
-
-autocmd BufEnter * call CHANGE_CURR_DIR()
-
 autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 source ~/.vim/plugin/cscope_maps.vim
