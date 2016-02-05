@@ -14,7 +14,7 @@ autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "nor
 
 source ~/.vim/plugin/cscope_maps.vim
 
-autoclose html/xml tag autocmd BufNewFile,BufRead *.html,*.htm,*.xml inoremap </ </<c-x><c-o>
+" autoclose html/xml tag autocmd BufNewFile,BufRead *.html,*.htm,*.xml inoremap </ </<c-x><c-o>
 function! RemovePairs()
   let l:line = getline(".")
   let l:previous_char = l:line[col(".")-1] " 取得当前光标前一个字符
@@ -245,7 +245,6 @@ endfunction
 
 execute pathogen#infect()
 " map <C-t> :tabedit 
-:CommandT<CR>
 " powerline{
 "  set guifont=PowerlineSymbols\ for\ Powerline
 "  set nocompatible
