@@ -19,5 +19,5 @@ set laststatus=2 "black status line at bottom of window
 if has("win32")
   set statusline+=\ %<%f%h%m%r%=%{strftime(\"%I:%M:%S\ \%p,\ %a\ %b\ %d,\ %Y\")}\ %{&ff}\ %l,%c%V\ %P
 else
-  set statusline+=\ %<%h%m%r%=%{strftime(\"%l:%M:%S\ \%p\")}\
+  set statusline+=\ %<%h%m%r%=%{strftime(\"%l:%M:%S\ \%p\")}
 endif
