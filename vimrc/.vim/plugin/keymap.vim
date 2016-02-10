@@ -44,6 +44,7 @@ endfunc
 function! PlayAV()
   let line=getline('.')
   exec '!/Applications/VLC.app/Contents/MacOS/VLC ' . '"' .  line . '"'
+  vert resize
 endfunction
 function! CSCSearchQ()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
@@ -55,6 +56,7 @@ endfunction
 function! VRun()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
+  vert resize
 endfunction
 function! CSCSearch()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
@@ -66,6 +68,7 @@ endfunction
 function! UpdateCscope()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
+  vert resize
 endfunction
 function! VimSearch()
   normal! gvy<CR>
