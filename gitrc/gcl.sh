@@ -10,7 +10,9 @@ if [[ "$1" == *"Dropbox"* ]]
 then
   target=`echo $1 | sed -e "s|Dropbox/||"`
   echo ${target}
-  git clone "$1" "$target"
+  git clone "$1" "$target" \
+    && cd ${target} \
+    && $HOME/loadrc/bashrc/cscope.sh
 else
   target=`echo $1 | sed -e "s|.git$||;s|^.*\/||"` \
     && echo ${target} \
