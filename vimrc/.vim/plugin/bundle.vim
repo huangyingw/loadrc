@@ -26,5 +26,5 @@ Bundle 'FuzzyFinder'
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle commands are not allowed.
 Bundle "huangyingw/vim-autoformat"
-Bundle "Valloric/YouCompleteMe"
+" Bundle "Valloric/YouCompleteMe"
 Bundle "ekalinin/Dockerfile.vim"
