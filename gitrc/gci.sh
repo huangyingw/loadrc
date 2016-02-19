@@ -1,5 +1,4 @@
 #!/bin/bash
-echo "$1"
 GCIDEFAULT=gci.default
 commit_message='n'
 if [ -z "$1" ];
