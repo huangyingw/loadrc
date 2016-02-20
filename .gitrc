@@ -1,4 +1,3 @@
-#alias for git
 alias fgicb='$HOME/loadrc/gitrc/fgicb.sh'
 alias fgs='$HOME/loadrc/gitrc/fgs.sh'
 alias g='$HOME/loadrc/gitrc/g.sh'
@@ -32,8 +31,6 @@ alias gfe='git fetch'
 alias gff='$HOME/loadrc/gitrc/gff.sh'
 alias gfix='$HOME/loadrc/gitrc/gfix.sh'
 alias gfvd='$HOME/loadrc/gitrc/gfvd.sh'
-alias gi='$HOME/loadrc/gitrc/gi.sh'
-alias gib='$HOME/loadrc/gitrc/gib.sh'
 alias gicb='$HOME/loadrc/gitrc/gicb.sh'
 alias glf='git ls-files'
 alias glg='$HOME/loadrc/gitrc/glg.sh'
