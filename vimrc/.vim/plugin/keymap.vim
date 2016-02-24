@@ -71,7 +71,6 @@ function! UpdateCscope()
   vert resize
 endfunction
 function! VimOpen()
-  echom 
   let b:fileName = expand(expand("<cfile>"))
   let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
   if !isdirectory(b:filePath)
