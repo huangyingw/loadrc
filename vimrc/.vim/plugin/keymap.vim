@@ -71,15 +71,20 @@ function! UpdateCscope()
   vert resize
 endfunction
 function! VimOpen()
+  echom 
   let b:fileName = expand(expand("<cfile>"))
   let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
   if !isdirectory(b:filePath)
     call mkdir(b:filePath, "p")
   endif
-  if !filereadable(b:fileName)
-    exec 'vs ' . b:fileName
-  else
+  if (expand("%") ==# 'index')
     vert wincmd F
+  else
+    if !filereadable(b:fileName)
+      exec 'vs ' . b:fileName
+    else
+      vert wincmd F
+    endif
   endif
   vert resize
 endfunction
