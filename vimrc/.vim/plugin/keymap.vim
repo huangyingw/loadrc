@@ -70,6 +70,19 @@ function! UpdateCscope()
   exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
   vert resize
 endfunction
+function! VimOpen()
+  let b:fileName = expand(expand("<cfile>"))
+  let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
+  if !isdirectory(b:filePath)
+    call mkdir(b:filePath, "p")
+  endif
+  if !filereadable(b:fileName)
+    exec 'vs ' . b:fileName
+  else
+    vert wincmd F
+  endif
+  vert resize
+endfunction
 function! VimSearch()
   normal! gvy<CR>
   let b:csdbpath = <SID>Find_in_parent("cscope.out",s:windowdir(),"/")
@@ -180,6 +193,7 @@ endif
 " nnoremap F :echom expand('%:p')<cr>
 nnoremap F :call ShowRemember()<cr>
 vnoremap <silent>f :call VimSearch()<cr>
+"vnoremap <silent>o :call VimOpen()<cr>
 nmap <C-@> :call CSCSearch()<CR><CR>
 nmap <C-f> :call CSCSearchQ()<CR><CR>
 " nmap <C-j> :call PlayAV()<CR><CR>
@@ -190,7 +204,7 @@ nnoremap T :vs $HOME/cscope.findresult<CR>:vert resize<CR>
 nnoremap L :vs <C-R>"<CR>:vert resize<CR>
 map <F5> :call VRun()<cr>
 nnoremap gf gF<CR>:vert resize<CR>
-map oo :vert wincmd F<CR>:vert resize<CR>
+map oo :call VimOpen()<cr>
 nmap <C-g> :exec '!~/loadrc/gitrc/gsh.sh ' . expand("%:p")<CR>
 nnoremap <silent> <leader>g :!gitk %:p<CR>:vert resize<CR> 
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
