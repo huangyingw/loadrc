@@ -193,7 +193,6 @@ endif
 " nnoremap F :echom expand('%:p')<cr>
 nnoremap F :call ShowRemember()<cr>
 vnoremap <silent>f :call VimSearch()<cr>
-"vnoremap <silent>o :call VimOpen()<cr>
 nmap <C-@> :call CSCSearch()<CR><CR>
 nmap <C-f> :call CSCSearchQ()<CR><CR>
 " nmap <C-j> :call PlayAV()<CR><CR>
