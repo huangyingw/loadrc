@@ -65,6 +65,12 @@ function! CSCSearch()
   exec 'vs ' . b:csdbpath . '/' . b:keyword . '.csc.findresult'
   vert resize
 endfunction
+function! UpCscope()
+  normal! gvy<CR>
+  let b:keyword = @@
+  exec '!~/loadrc/bashrc/cscope.sh ' . b:keyword
+  vert resize
+endfunction
 function! UpdateCscope()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
@@ -197,6 +203,7 @@ endif
 " nnoremap F :echom expand('%:p')<cr>
 nnoremap F :call ShowRemember()<cr>
 vnoremap <silent>f :call VimSearch()<cr>
+vnoremap <silent>o :call UpCscope()<cr>
 nmap <C-@> :call CSCSearch()<CR><CR>
 nmap <C-f> :call CSCSearchQ()<CR><CR>
 " nmap <C-j> :call PlayAV()<CR><CR>
