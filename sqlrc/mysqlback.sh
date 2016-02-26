@@ -1,6 +1,6 @@
 #!/bin/sh
 file=${1}
-loginFile="$HOME/loadrc/sqlrc/.login"
+loginFile=.login
 if [ -n "$2" ];
 then
   loginFile=${2}/.login
