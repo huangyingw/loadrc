@@ -28,4 +28,4 @@ Bundle 'FuzzyFinder'
 Bundle "huangyingw/vim-autoformat"
 " Bundle "Valloric/YouCompleteMe"
 Bundle "ekalinin/Dockerfile.vim"
-Bundle "vim-scripts/bash-support.vim"
+Bundle "huangyingw/bash-support.vim.git"
