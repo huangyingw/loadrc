@@ -82,10 +82,14 @@ function! VimOpen()
   if !isdirectory(b:filePath)
     call mkdir(b:filePath, "p")
   endif
-  if !filereadable(b:fileName)
-    exec 'vs ' . b:fileName
-  else
+  if (expand("%") ==# 'index')
     vert wincmd F
+  else
+    if !filereadable(b:fileName)
+      exec 'vs ' . b:fileName
+    else
+      vert wincmd F
+    endif
   endif
   vert resize
 endfunction
