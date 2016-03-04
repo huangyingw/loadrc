@@ -18,7 +18,6 @@ else
     && echo ${target} \
     && git clone "$1" \
     && cd ${target} \
-    && git remote rm origin \
     && $HOME/loadrc/gitrc/gcob.sh dev \
     && touch gci.default \
     && touch gps.default \
