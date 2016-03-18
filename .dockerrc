@@ -5,4 +5,5 @@ then
   eval "$(docker-machine env default)"
 fi
 alias cdocker='$HOME/loadrc/dockerrc/cdocker.sh'
+alias cleanDocker='$HOME/loadrc/dockerrc/cleandocker.sh'
 alias edocker='$HOME/loadrc/dockerrc/edocker.sh'
