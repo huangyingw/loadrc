@@ -79,14 +79,19 @@ endfunction
 function! VimOpen()
   let b:fileName = expand(expand("<cfile>"))
   let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
-  if !isdirectory(b:filePath)
-    call mkdir(b:filePath, "p")
-  endif
   if (expand("%") ==# 'index')
     vert wincmd F
+  elseif (expand("%") ==# 'glg.findresult')
+    let b:commit = expand("<cword>")
+    exec '!~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"' 
+    vert resize
   else
     if !filereadable(b:fileName)
+      if !isdirectory(b:filePath)
+        call mkdir(b:filePath, "p")
+      endif
       exec 'vs ' . b:fileName
+      vert resize
     else
       vert wincmd F
     endif
