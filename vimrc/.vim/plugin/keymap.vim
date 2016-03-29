@@ -87,7 +87,7 @@ function! VimOpen()
     vert resize
   elseif (expand("%") ==# 'glg.findresult')
     let b:commit = expand("<cword>")
-    exec '!~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"' 
+    exec '!git checkout ' . '"' .  b:commit . '"' 
     vert resize
   else
     if !filereadable(b:fileName)
