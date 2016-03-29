@@ -1,5 +1,10 @@
 #!/bin/bash
 file=${1}
+if [ "$file" == "gbil.findresult" ];
+then
+  ~/loadrc/gitrc/gbir.sh
+  exit 0
+fi
 extension=${file##*.}
 case $extension in
   sql)

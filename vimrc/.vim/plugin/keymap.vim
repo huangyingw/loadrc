@@ -81,6 +81,10 @@ function! VimOpen()
   let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
   if (expand("%") ==# 'index')
     vert wincmd F
+  elseif (expand("%") ==# 'gbil.findresult')
+    let b:commit = expand("<cword>")
+    exec '!git checkout ' . '"' .  b:commit . '"' 
+    vert resize
   elseif (expand("%") ==# 'glg.findresult')
     let b:commit = expand("<cword>")
     exec '!~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"' 

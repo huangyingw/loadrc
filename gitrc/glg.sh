@@ -1,2 +1,2 @@
 #!/bin/bash
-git log --oneline > glg.findresult
+git log --oneline | tee  glg.findresult
