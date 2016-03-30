@@ -18,10 +18,6 @@
 #===============================================================================
 
 set -o nounset                              # Treat unset variables as an error
-# Delete all containers
-docker stop $(docker ps -aq)
-docker rm $(docker ps -aq)
-# Delete all images
 docker images|awk '/<none>/{print $3}'|sed 's/sha256://g'|while read ss; 
 do 
   docker rmi -f "$ss";
