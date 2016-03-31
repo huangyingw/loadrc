@@ -21,3 +21,5 @@ if has("win32")
 else
   set statusline+=\%{strftime(\"%l:%M:%S\")}
 endif
+syn match ipaddr /\(\(25\_[0-5]\|2\_[0-4]\_[0-9]\|\_[01]\?\_[0-9]\_[0-9]\?\)\.\)\{3\}\(25\_[0-5]\|2\_[0-4]\_[0-9]\|\_[01]\?\_[0-9]\_[0-9]\?\)/
+hi link ipaddr Identifier
