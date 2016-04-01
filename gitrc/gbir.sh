@@ -24,4 +24,5 @@ then
   echo -e "${red}Must run with gbil.findresult file... ${NC}"
   exit 1
 fi
-git bisect replay gbil.findresult
+git bisect replay gbil.findresult \
+  && ~/loadrc/gitrc/gbil.sh

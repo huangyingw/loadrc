@@ -19,5 +19,4 @@
 
 set -o nounset                              # Treat unset variables as an error
 
-~/loadrc/gitrc/gbil.sh \
-  && git bisect start
+git bisect start
