@@ -71,6 +71,11 @@ function! UpCscope()
   exec '!~/loadrc/bashrc/cscope.sh ' . b:keyword
   vert resize
 endfunction
+function! ShowDiff()
+  let b:commit = expand("<cword>")
+  exec '!~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"' 
+  vert resize
+endfunction
 function! UpdateCscope()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
@@ -214,6 +219,7 @@ nnoremap F :call ShowRemember()<cr>
 vnoremap <silent>f :call VimSearch()<cr>
 vnoremap <silent>o :call UpCscope()<cr>
 nmap <C-@> :call CSCSearch()<CR><CR>
+nmap <C-d> :call ShowDiff()<CR><CR>
 nmap <C-f> :call CSCSearchQ()<CR><CR>
 " nmap <C-j> :call PlayAV()<CR><CR>
 " Quickly close the current window
