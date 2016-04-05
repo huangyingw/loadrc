@@ -1,11 +1,13 @@
 #!/bin/bash
-if [ -z "$1" ];
+TARGET_BRANCH_DEFAULT=branch.default
+if [ ! -f "$TARGET_BRANCH_DEFAULT" ];
 then
-  echo -e "${red}Must provide the target branch ... ${NC}"
+  echo -e "${red}Please put the default sync branch in branch.default file... ${NC}"
   exit 1
 fi
+TARGET_BRANCH=$(cat "$TARGET_BRANCH_DEFAULT")
+echo "$TARGET_BRANCH"
 CURRENT_BRANCH="`git branch |awk '/^\*/{print $2}'`"
-TARGET_BRANCH="$1"
 git checkout "$TARGET_BRANCH" \
   && ~/loadrc/gitrc/gpl.sh \
   && git checkout "$CURRENT_BRANCH" \
