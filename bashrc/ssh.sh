@@ -4,10 +4,13 @@ if [ "$OS" == "Linux" ]
 then
   autossh -X "$1" -t -- 'tmux new-session -A -s main'
 else
-  if [ `hostname` == "MacPro" ] || [ `hostname` == "mac.lan" ]
+  SERVER="$1"
+  KEY=$(~/loadrc/keys/getKey.sh "$SERVER")
+
+  if [ $KEY == "/Users/huangyingw/loadrc/keys/.pem" ];
   then
-    ssh -X root@"$1" -t -- 'tmux attach'
+    ssh -X root@"$SERVER" -t -- 'tmux new-session -A -s main'
   else
-    ssh -X "$1" -t -- 'tmux attach'
+    ssh -X -i "$KEY" ubuntu@"$SERVER" -t -- 'tmux new-session -A -s main'
   fi
 fi
