@@ -19,4 +19,12 @@
 
 set -o nounset                              # Treat unset variables as an error
 
-mosh --ssh='ssh -i /Users/huangyingw/loadrc/keys/tg_h2h.pem' ubuntu@54.222.220.219 -- tmux attach || tmux new main
+SERVER="$1"
+KEY=$(~/loadrc/keys/getKey.sh "$SERVER")
+
+if [ $KEY == "/Users/huangyingw/loadrc/keys/.pem" ];
+then
+  echo variable is null
+else
+  mosh --ssh='ssh -i '"$KEY" ubuntu@"$SERVER" -- tmux attach || tmux new main
+fi
