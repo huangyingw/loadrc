@@ -24,7 +24,7 @@ KEY=$(~/loadrc/keys/getKey.sh "$SERVER")
 
 if [ $KEY == "/Users/huangyingw/loadrc/keys/.pem" ];
 then
-  mosh "$SERVER" -- tmux new-session -A -s main 
+  mosh "$SERVER" -- ${tmuxAction}
 else
-  mosh --ssh='ssh -i '"$KEY" ubuntu@"$SERVER" -- tmux new-session -A -s main
+  mosh --ssh='ssh -i '"$KEY" ubuntu@"$SERVER" -- ${tmuxAction}
 fi

@@ -2,15 +2,15 @@
 OS=`uname`
 if [ "$OS" == "Linux" ]
 then
-  autossh -X "$1" -t -- 'tmux new-session -A -s main'
+  autossh -X "$1" -t -- ${tmuxAction}
 else
   SERVER="$1"
   KEY=$(~/loadrc/keys/getKey.sh "$SERVER")
 
   if [ $KEY == "/Users/huangyingw/loadrc/keys/.pem" ];
   then
-    ssh -X root@"$SERVER" -t -- 'tmux new-session -A -s main'
+    ssh -X root@"$SERVER" -t -- ${tmuxAction}
   else
-    ssh -X -i "$KEY" ubuntu@"$SERVER" -t -- 'tmux new-session -A -s main'
+    ssh -X -i "$KEY" ubuntu@"$SERVER" -t -- ${tmuxAction}
   fi
 fi
