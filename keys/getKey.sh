@@ -20,7 +20,7 @@
 set -o nounset                              # Treat unset variables as an error
 
 server="$1"
-KEYFILE="$HOME/keys"
+KEYFILE="$HOME/loadrc/keys/keymap"
 KEYFOLDER="$HOME/loadrc/keys/"
 key=$(cat ${KEYFILE} |awk -F'=' '/'"$server"'/{print $2}')
 echo "$KEYFOLDER""$key"".pem"
