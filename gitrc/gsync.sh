@@ -1,4 +1,5 @@
 #!/bin/bash
+~/loadrc/gitrc/gmup.sh
 TARGET_BRANCH_DEFAULT=branch.default
 if [ ! -f "$TARGET_BRANCH_DEFAULT" ];
 then
