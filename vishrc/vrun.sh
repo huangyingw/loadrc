@@ -1,6 +1,6 @@
 #!/bin/bash
 file=${1}
-if [ "$file" == "gbil.findresult" ];
+if [ $(basename "$file") == "gbil.findresult" ];
 then
   ~/loadrc/gitrc/gbir.sh
   exit 0
