@@ -18,7 +18,4 @@
 #===============================================================================
 
 set -o nounset                              # Treat unset variables as an error
-docker images|awk '/<none>/{print $3}'|sed 's/sha256://g'|while read ss; 
-do 
-  docker rmi -f "$ss";
-done
+docker rmi -f $(docker images | grep '<none>' | tr -s ' ' | cut -d ' ' -f 3)
