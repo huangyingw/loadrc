@@ -19,8 +19,8 @@ else
     && git clone "$1" \
     && cd ${target} \
     && $HOME/loadrc/gitrc/gcob.sh dev \
+    && echo master > branch.default \
     && touch gci.default \
-    && touch gps.default \
     && touch gme.default \
     && $HOME/loadrc/bashrc/cscope.sh \
     && git add . \
