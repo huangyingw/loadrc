@@ -13,4 +13,5 @@ else
 fi
 git commit  --no-verify -m "$commit_message"
 ~/loadrc/gitrc/gclb.sh
+~/loadrc/gitrc/gsync.sh              
 ~/loadrc/gitrc/gps.sh

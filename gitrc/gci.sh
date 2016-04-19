@@ -13,4 +13,5 @@ else
 fi
 git commit -am "$commit_message"
 ~/loadrc/gitrc/gclb.sh
+~/loadrc/gitrc/gsync.sh              
 ~/loadrc/gitrc/gps.sh              
