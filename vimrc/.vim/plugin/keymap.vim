@@ -107,6 +107,17 @@ function! VimOpen()
   endif
   vert resize
 endfunction
+function! GitSearch()
+  normal! gvy<CR>
+  let b:csdbpath = <SID>Find_in_parent(".git/config",<SID>windowdir(),$HOME)
+  let b:keyword = @@
+  exec "cd " . b:csdbpath
+  exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"'
+  let b:keyword = substitute(b:keyword, " ", "_", "g")
+  let b:keyword = substitute(b:keyword, "/", "_", "g")
+  exec 'vs ' . b:keyword . '.gsearch.findresult'
+  vert resize
+endfunction
 function! VimSearch()
   normal! gvy<CR>
   let b:csdbpath = <SID>Find_in_parent("cscope.out",s:windowdir(),"/")
@@ -217,6 +228,7 @@ endif
 " nnoremap F :echom expand('%:p')<cr>
 nnoremap F :call ShowRemember()<cr>
 vnoremap <silent>f :call VimSearch()<cr>
+vnoremap <silent>g :call GitSearch()<cr>
 vnoremap <silent>o :call UpCscope()<cr>
 nmap <C-@> :call CSCSearch()<CR><CR>
 nmap <C-d> :call ShowDiff()<CR><CR>
