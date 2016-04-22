@@ -13,5 +13,5 @@ if [ -n "$1" ];
 then
   git stash pop stash@{"$1"}
 else
-git stash pop
+  git stash pop
 fi
