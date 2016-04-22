@@ -1,8 +1,10 @@
 52.10.96.151=aws_tg
 52.201.187.118=aws_tg_virginia
 52.207.217.29=aws_tg_virginia
+52.207.241.102=aws_tg_virginia
 52.23.206.252=aws_tg_virginia
 52.23.207.191=aws_tg_virginia
+52.24.208.192=smommileti
 52.34.122.85=aws_tg
 52.36.83.63=aws_tg_virginia
 52.73.166.255=aws_tg_virginia
@@ -13,6 +15,7 @@
 52.91.113.186=aws_tg_virginia
 54.152.173.114=aws_tg_virginia
 54.172.32.66=aws_tg_virginia
+54.208.20.27=aws_tg_virginia
 54.222.156.20=tg_h2h
 54.222.170.81=tg_h2h
 54.222.220.219=tg_h2h
@@ -20,4 +23,6 @@
 54.222.236.31=tg_h2h
 54.67.5.254=aws_tg_cal
 54.88.55.145=aws_tg_virginia
-52.24.208.192=smommileti
+52.23.219.110=aws_tg_virginia
+54.236.111.141=aws_tg_virginia
+52.36.87.182=aws_tg
