@@ -17,8 +17,6 @@
 #      REVISION:  ---
 #===============================================================================
 
-set -o nounset                              # Treat unset variables as an error
-
 if [ -z "$1" ];
 then
   echo -e "${red}please provide the new branch name... ${NC}"
@@ -33,9 +31,11 @@ git branch -m "$CURRENT_BRANCH" "$NEW_BRANCH"
 if [ -f dropbox.only ];
 then
   git push -u dropbox "$CURRENT_BRANCH":"$NEW_BRANCH"
+  git push dropbox :"$CURRENT_BRANCH"
   exit 0
 fi
 for ss in `git remote -v |awk '/\(fetch\)$/{print $1}'`
 do 
   git push -u $ss "$CURRENT_BRANCH":"$NEW_BRANCH"
+  git push $ss :"$CURRENT_BRANCH"
 done
