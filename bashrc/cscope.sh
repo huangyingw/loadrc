@@ -6,6 +6,10 @@ else
   TARGETEDIR=`realpath "$1"`
 fi
 cd "$TARGETEDIR"
+if [ ! -f cscope.out ]; then
+  echo -e "${red}No cscope.out file here, will not build the index ... ${NC}"
+  exit 0
+fi
 cp -nv ~/loadrc/prunefi* ./
 cp -nv ~/loadrc/includefile.conf ./
 TARGET=`pwd |sed -e "s/^.*\///g"`

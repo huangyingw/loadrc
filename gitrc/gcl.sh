@@ -21,6 +21,7 @@ else
     && $HOME/loadrc/gitrc/gcob.sh dev \
     && echo master > branch.default \
     && touch gci.default \
+    && touch cscope.out \
     && touch dropbox.only \
     && touch gme.default \
     && $HOME/loadrc/bashrc/cscope.sh \
