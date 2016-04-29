@@ -18,11 +18,12 @@
 #===============================================================================
 
 set -o nounset                              # Treat unset variables as an error
+cscope_db_file="/export/home1/username/cscope_db/""${PWD##*/}"
 while read fullfile
 do
-  echo "$fullfile"
   filename=$(basename "$fullfile")
-  extension="${filename##*.}"
   filename="${filename%.*}"
-  echo "$filename"
+  if [ $(xargs fgrep -wnH "$filename" < "$cscope_db_file" |wc -l) -eq 0 ]; then
+    echo "$fullfile"
+  fi
 done < '/export/home1/username/cscope_db/'`pwd |sed -e "s/^.*\///g"` 
