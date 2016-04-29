@@ -19,6 +19,7 @@
 
 set -o nounset                              # Treat unset variables as an error
 find_result=fnotinuse.findresult
+echo > "$find_result"
 cscope_db_file="/export/home1/username/cscope_db/""${PWD##*/}"
 while read fullfile
 do
