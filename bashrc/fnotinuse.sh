@@ -18,7 +18,11 @@
 #===============================================================================
 
 set -o nounset                              # Treat unset variables as an error
-while read suf
+while read fullfile
 do
-  echo "$suf"
+  echo "$fullfile"
+  filename=$(basename "$fullfile")
+  extension="${filename##*.}"
+  filename="${filename%.*}"
+  echo "$filename"
 done < '/export/home1/username/cscope_db/'`pwd |sed -e "s/^.*\///g"` 
