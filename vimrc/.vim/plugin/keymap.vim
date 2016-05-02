@@ -68,6 +68,7 @@ endfunction
 function! UpCscope()
   normal! gvy<CR>
   let b:keyword = @@
+  exec '!touch ' . b:keyword . '/cscope.out'
   exec '!~/loadrc/bashrc/cscope.sh ' . b:keyword
   vert resize
 endfunction
