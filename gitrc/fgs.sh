@@ -7,32 +7,31 @@ else
 fi
 RESULT="$TARGETEDIR"/fgs.findresult
 function rec_dir() {
-if [[ $2 -gt 11 ]]; then
-  return 
-fi
-for file in `ls -al $1`
-do
-  if [ -d "$1/$file" ] && [ "$file" != ".." ] && [ "$file" != "." ]
-  then
-    if [ -d "$1/$file/.git" ]
+  if [[ $2 -gt 11 ]]; then
+    return 
+  fi
+  for file in `ls -al $1`
+  do
+    if [ -d "$1/$file" ] && [ "$file" != ".." ] && [ "$file" != "." ]
     then
-      cd "$1/$file"
-      if  ( git status|grep -q modified: )
+      if [ -d "$1/$file/.git" ]
       then
-        echo "$1/$file" >> "$RESULT"
+        cd "$1/$file"
+        if  ( git status|grep -q modified: )
+        then
+          echo "$1/$file" >> "$RESULT"
+        else
+          ~/loadrc/gitrc/gsync.sh              
+        fi 
+        cd - 1>/dev/null
       else
-        ~/loadrc/gitrc/gpl.sh
-      fi 
-      cd - 1>/dev/null
-    else
-      if [ "$file" != ".git" ] && [ "$file" != ".." ] && [ "$file" != "." ]
-      then
-        rec_dir "$1/$file" $(($2 + 1))
+        if [ "$file" != ".git" ] && [ "$file" != ".." ] && [ "$file" != "." ]
+        then
+          rec_dir "$1/$file" $(($2 + 1))
+        fi
       fi
-    fi
-  fi 
-done
+    fi 
+  done
 }
 rm "$RESULT"
 rec_dir "$TARGETEDIR" 0
-vi "$RESULT"

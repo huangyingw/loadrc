@@ -7,4 +7,5 @@ if [ ! -d ${x} ];
 then
   git clone --bare . ${x}
 fi
+git remote rm dropbox
 git remote add dropbox ${x}
