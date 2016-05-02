@@ -1,6 +1,6 @@
 #!/bin/bash
 x=`pwd`
-x=`echo ${x} | sed -e "s|/.*/myproject|$HOME/Dropbox/myproject|"`
+x=`echo ${x} | sed -e "s|/.*/myproject|$HOME/BareReps/myproject|"`
 echo ${x}
 
 if [ ! -d ${x} ];
