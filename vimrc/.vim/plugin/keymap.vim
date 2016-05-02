@@ -85,7 +85,6 @@ function! VimOpen()
   let b:fileName = expand(expand("<cfile>"))
   let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
   if (expand("%") ==# 'index')
-    echom getcwd() . '/../' . b:fileName
     if isdirectory(getcwd() . '/../' . b:fileName)
       exec 'vs ' . getcwd() . '/../' . b:fileName . '/.git/index'
     else
