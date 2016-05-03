@@ -1,5 +1,5 @@
 alias fgicb='$HOME/loadrc/gitrc/fgicb.sh'
-alias fgs='$HOME/loadrc/gitrc/fgs.sh'
+alias fsync='$HOME/loadrc/gitrc/fsync.sh'
 alias g='$HOME/loadrc/gitrc/g.sh'
 alias ga='$HOME/loadrc/gitrc/ga.sh'
 alias gagh='$HOME/loadrc/gitrc/gagh.sh'
