@@ -33,14 +33,14 @@ if [ -f "$find_result" ]; then
       ;;
   esac
 fi
-grep -rnH \
+grep -rl \
   --include *.jar \
   --include *.class \
   --include *.tar \
   --include *.war \
   "$1" \
   . > "$find_result" 
-grep -rnH \
+grep -rl \
   --include *.jar \
   --include *.class \
   --include *.tar \
