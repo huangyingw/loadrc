@@ -40,3 +40,10 @@ grep -rnH \
   --include *.war \
   "$1" \
   . > "$find_result" 
+grep -rnH \
+  --include *.jar \
+  --include *.class \
+  --include *.tar \
+  --include *.war \
+  "$1" \
+  ~/.m2/ >> "$find_result" 
