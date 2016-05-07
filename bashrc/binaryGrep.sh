@@ -38,6 +38,7 @@ grep -rl \
   --include *.class \
   --include *.tar \
   --include *.war \
+  --include *target* \
   "$1" \
   . > "$find_result" 
 grep -rl \
