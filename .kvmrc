@@ -2,6 +2,7 @@
 alias vclone='$HOME/loadrc/kvmrc/vclone.sh'
 alias vdestroy='$HOME/loadrc/kvmrc/vdestroy.sh'
 alias vdisk='$HOME/loadrc/kvmrc/vdisk.sh' 
+alias vmount='$HOME/loadrc/kvmrc/vmount.sh' 
 alias vreset='$HOME/loadrc/kvmrc/vreset.sh' 
 alias vrestore='$HOME/loadrc/kvmrc/vrestore.sh'
 alias vresume='$HOME/loadrc/kvmrc/vresume.sh' 
