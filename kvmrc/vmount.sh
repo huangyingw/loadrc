@@ -17,13 +17,14 @@
 #      REVISION:  ---
 #===============================================================================
 
-#if [ -z "$1" ] || [ ! -f "$1" ];
-#then
-#  echo -e "${red}Please provide the full path to qcow2 file... ${NC}"
-#  exit 1
-#fi
+if [ -z "$1" ] || [ ! -f "$1" ];
+then
+  echo -e "${red}Please provide the full path to qcow2 file... ${NC}"
+  exit 1
+fi
+modprobe nbd max_part=8
 nbdDevice=$(~/loadrc/bashrc/find-free-nbd-device.sh)
 echo "$nbdDevice" 
-#qcow2File="$1"
-#modprobe nbd max_part=8
-#qemu-nbd --connect=/dev/nbd0 "$qcow2File"
+qcow2File="$1"
+qemu-nbd --connect="$nbdDevice" "$qcow2File"
+fdisk "$nbdDevice" -l
