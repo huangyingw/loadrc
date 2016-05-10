@@ -9,7 +9,7 @@ else
 
   if [ $KEY == "/Users/huangyingw/loadrc/keys/.pem" ];
   then
-    ssh -X root@"$SERVER" -t -- ${tmuxAction}
+    ssh -X "$SERVER" -t -- ${tmuxAction}
   else
     ssh -X -i "$KEY" ubuntu@"$SERVER" -t -- ${tmuxAction}
   fi
