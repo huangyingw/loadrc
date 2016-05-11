@@ -2,15 +2,13 @@
 SOURCE=$1
 TARGET=$2
 
-SCRIPT=$(realpath "$0")
-SCRIPTPATH=$(dirname "$SCRIPT")
-. "$SCRIPTPATH"/getConDetails.sh "mini:/media/volgrp"
+. ~/loadrc/bashrc/getConDetails.sh "mini:/media/volgrp"
 
 echo $user
 echo $host
 echo $folder
 
-. "$SCRIPTPATH"/getConDetails.sh "huangyingw@mini:/media/volgrp"
+. ~/loadrc/bashrc/getConDetails.sh "huangyingw@mini:/media/volgrp"
 
 echo
 echo $user
