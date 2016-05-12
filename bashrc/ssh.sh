@@ -6,6 +6,9 @@ then
 else
   SERVER="$1"
   . ~/loadrc/keys/getConDetails.sh "$SERVER"
+  echo "$host"
+  echo "$key"
+  echo "$user"
 
   if [ $key == "/Users/huangyingw/loadrc/keys/.pem" ];
   then
