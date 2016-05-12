@@ -5,16 +5,12 @@ then
   autossh -X "$1" -t -- ${tmuxAction}
 else
   SERVER="$1"
-  KEY=$(~/loadrc/keys/getKey.sh "$SERVER")
+  . ~/loadrc/bashrc/getConDetails.sh "$SERVER"
 
-  if [ $KEY == "/Users/huangyingw/loadrc/keys/.pem" ];
+  if [ $key == "/Users/huangyingw/loadrc/keys/.pem" ];
   then
-    if [[ $SERVER != *"@"* ]]
-    then
-      SERVER=root@"$SERVER"
-    fi
-    echo ssh -X "$SERVER" -t -- ${tmuxAction}
+    ssh -X "$user"@"$host" -t -- ${tmuxAction}
   else
-    echo ssh -X -i "$KEY" ubuntu@"$SERVER" -t -- ${tmuxAction}
+    ssh -X -i "$key" "$user"@"$host" -t -- ${tmuxAction}
   fi
 fi
