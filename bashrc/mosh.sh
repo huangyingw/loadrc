@@ -21,12 +21,10 @@ set -o nounset                              # Treat unset variables as an error
 
 SERVER="$1"
 . ~/loadrc/bashrc/getConDetails.sh "$SERVER"
-echo $user
-echo $host
 
 if [ $key == "/Users/huangyingw/loadrc/keys/.pem" ];
 then
-  echo mosh "$user"@"$host" -- ${tmuxAction}
+  mosh "$user"@"$host" -- ${tmuxAction}
 else
-  echo mosh --ssh='ssh -i '"$key" "$user"@"$host" -- ${tmuxAction}
+  mosh --ssh='ssh -i '"$key" "$user"@"$host" -- ${tmuxAction}
 fi

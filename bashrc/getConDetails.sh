@@ -7,5 +7,10 @@ host=${DOMAIN##*@}
 key=$(~/loadrc/keys/getKey.sh "$host")
 if [ $user == $host ];
 then
-  user="root"
+  if [ $key == "/Users/huangyingw/loadrc/keys/.pem" ];
+  then
+    user="root"
+  else
+    user="ubuntu"
+  fi
 fi
