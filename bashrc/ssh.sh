@@ -13,8 +13,8 @@ else
     then
       SERVER=root@"$SERVER"
     fi
-    ssh -X "$SERVER" -t -- ${tmuxAction}
+    echo ssh -X "$SERVER" -t -- ${tmuxAction}
   else
-    ssh -X -i "$KEY" ubuntu@"$SERVER" -t -- ${tmuxAction}
+    echo ssh -X -i "$KEY" ubuntu@"$SERVER" -t -- ${tmuxAction}
   fi
 fi
