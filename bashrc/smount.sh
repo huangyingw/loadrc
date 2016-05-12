@@ -6,13 +6,13 @@ then
 fi
 diskutil umount force ~/samba
 SERVER="$1"
-KEY=$(~/loadrc/keys/getKey.sh "$SERVER")
+. ~/loadrc/bashrc/getConDetails.sh "$SERVER"
 
-if [ $KEY == "/Users/huangyingw/loadrc/keys/.pem" ];
+if [ $key == "/Users/huangyingw/loadrc/keys/.pem" ];
 then
-  sshfs root@"$SERVER":/ ~/samba
+  sshfs "$user"@"$host":/ ~/samba
 else
-  sshfs -o "IdentityFile=""$KEY" ubuntu@"$SERVER":/ ~/samba 
+  sshfs -o "IdentityFile=""$key" "$user"@"$host":/ ~/samba 
 fi
 df \
   && cd ~/samba \
