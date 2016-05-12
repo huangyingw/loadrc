@@ -19,6 +19,7 @@
 
 set -o nounset                              # Treat unset variables as an error
 
+~/loadrc/bashrc/smount.sh "$1"
 SERVER="$1"
 . ~/loadrc/keys/getConDetails.sh "$SERVER"
 
