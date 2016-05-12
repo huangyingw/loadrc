@@ -20,7 +20,7 @@
 set -o nounset                              # Treat unset variables as an error
 
 SERVER="$1"
-. ~/loadrc/bashrc/getConDetails.sh "$SERVER"
+. ~/loadrc/keys/getConDetails.sh "$SERVER"
 
 if [ $key == "/Users/huangyingw/loadrc/keys/.pem" ];
 then
