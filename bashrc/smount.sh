@@ -4,7 +4,13 @@ then
   echo -e "${red}please provide the host name... ${NC}"
   exit 1
 fi
-diskutil umount force ~/samba
+OS=`uname`
+if [ "$OS" == "Linux" ]
+then
+  umount ~/samba
+else
+  diskutil umount force ~/samba
+fi
 SERVER="$1"
 . ~/loadrc/bashrc/getConDetails.sh "$SERVER"
 
@@ -12,7 +18,7 @@ if [ $key == "/Users/huangyingw/loadrc/keys/.pem" ];
 then
   sshfs "$user"@"$host":/ ~/samba
 else
-  sshfs -o "IdentityFile=""$key" "$user"@"$host":/ ~/samba 
+  sshfs -o IdentityFile="$key" "$user"@"$host":/ ~/samba 
 fi
 df \
   && cd ~/samba \
