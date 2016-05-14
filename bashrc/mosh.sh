@@ -23,7 +23,7 @@ set -o nounset                              # Treat unset variables as an error
 SERVER="$1"
 . ~/loadrc/keys/getConDetails.sh "$SERVER"
 
-if [ $key == "/Users/huangyingw/loadrc/keys/.pem" ];
+if [ -z "$key" ];
 then
   mosh "$user"@"$host" -- ${tmuxAction}
 else

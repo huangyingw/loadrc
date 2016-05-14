@@ -14,7 +14,7 @@ fi
 SERVER="$1"
 . ~/loadrc/keys/getConDetails.sh "$SERVER"
 
-if [ $key == "/Users/huangyingw/loadrc/keys/.pem" ];
+if [ -z "$key" ];
 then
   sshfs "$user"@"$host":/ ~/samba
 else

@@ -8,7 +8,7 @@ else
   SERVER="$1"
   . ~/loadrc/keys/getConDetails.sh "$SERVER"
 
-  if [ $key == "/Users/huangyingw/loadrc/keys/.pem" ];
+  if [ -z "$key" ];
   then
     ssh -X "$user"@"$host" -t -- ${tmuxAction}
   else
