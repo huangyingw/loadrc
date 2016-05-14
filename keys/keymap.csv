@@ -1,3 +1,4 @@
+172.16.7.218,,tutorabc
 52.10.96.151,aws_tg,ubuntu
 52.201.187.118,aws_tg_virginia,ubuntu
 52.207.217.29,aws_tg_virginia,ubuntu
@@ -19,7 +20,7 @@
 52.86.26.204,aws_tg_virginia,ubuntu
 52.87.227.9,aws_tg_virginia,ubuntu
 52.87.228.152,aws_tg_virginia,ubuntu
-52.9.207.180,aws_tg_cal,ec2-user
+52.9.207.180,aws_tg_cal,ubuntu
 52.90.188.119,aws_tg_virginia,ubuntu
 52.91.113.186,aws_tg_virginia,ubuntu
 54.152.144.147,aws_tg_virginia,ubuntu
@@ -51,3 +52,4 @@
 54.67.5.254,aws_tg_cal,ubuntu
 54.88.55.145,aws_tg_virginia,ubuntu
 mini,,root
+vmac,,huangyingw
