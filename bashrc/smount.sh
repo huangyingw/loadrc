@@ -12,7 +12,7 @@ else
   diskutil umount force ~/samba
 fi
 SERVER="$1"
-. ~/loadrc/keys/getConDetails.sh "$SERVER"
+. ~/loadrc/bashrc/getConDetails.sh "$SERVER"
 
 if [ $key == "/Users/huangyingw/loadrc/keys/.pem" ];
 then
