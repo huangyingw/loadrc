@@ -18,3 +18,15 @@
 #===============================================================================
 
 SOURCE=$1
+#. ~/loadrc/keys/getConDetails.sh "$SOURCE"
+. ~/loadrc/keys/getConDetails.sh "52.23.206.252:/media/volgrp/timemachine/"
+echo "$user"
+echo "$host"
+echo "$key"
+echo "$folder"
+echo
+. ~/loadrc/keys/getConDetails.sh "mini:/media/volgrp/timemachine/"
+echo "$user"
+echo "$host"
+echo "$key"
+echo "$folder"

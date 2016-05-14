@@ -1,5 +1,7 @@
 #!/bin/bash - 
-host="$1" 
+SOURCE="$1" 
+host=${SOURCE%:*}  
+folder=${SOURCE##*:}
 
 mapFILE="$HOME/loadrc/keys/keymap.csv"
 KEYFOLDER="$HOME/loadrc/keys/"
