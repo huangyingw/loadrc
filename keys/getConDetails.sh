@@ -1,19 +1,16 @@
 #!/bin/bash - 
-user=
-host=
-key=
-folder=
-
-SOURCE="$1" 
-host=${SOURCE%:*}  
-folder=${SOURCE##*:}
-if [ "$folder" == "$host" ];
-then
-  folder=
-fi
+host="$1" 
 
 mapFILE="$HOME/loadrc/keys/keymap.csv"
 KEYFOLDER="$HOME/loadrc/keys/"
+host="$(cat ${mapFILE} |awk -F',' '/'"$host"'/{print $1}')"
+
+if [ -z "$host" ];
+then
+  echo -e "${red}this host is not in the keymap.csv file ... ${NC}"
+  exit 1
+fi
+
 key="$(cat ${mapFILE} |awk -F',' '/'"$host"'/{print $2}')"
 if [ -n "$key" ];
 then
@@ -21,8 +18,3 @@ then
   chmod 400 "$key"
 fi
 user="$(cat ${mapFILE} |awk -F',' '/'"$host"'/{print $3}')"
-echo "origin --> ""$1"
-echo "user --> ""$user"
-echo "host --> ""$host"
-echo "key --> ""$key"
-echo "folder --> ""$folder"
