@@ -6,7 +6,7 @@ then
   autossh -X "$1" -t -- ${tmuxAction}
 else
   SERVER="$1"
-  . ~/loadrc/bashrc/getConDetails.sh "$SERVER"
+  . ~/loadrc/keys/getConDetails.sh "$SERVER"
 
   if [ $key == "/Users/huangyingw/loadrc/keys/.pem" ];
   then
