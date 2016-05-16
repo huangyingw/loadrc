@@ -29,6 +29,7 @@
 54.152.255.50,aws_tg_virginia,ubuntu
 54.153.10.46,aws_tg_cal,ubuntu
 54.153.115.116,aws_tg_cal,ubuntu
+54.153.3.234,aws_tg_cal,ubuntu
 54.172.32.66,aws_tg_virginia,ubuntu
 54.183.13.24,aws_tg_cal,ubuntu
 54.183.187.73,aws_tg_cal,ubuntu
@@ -52,6 +53,8 @@
 54.222.236.31,tg_h2h,ubuntu
 54.67.5.254,aws_tg_cal,ubuntu
 54.88.55.145,aws_tg_virginia,ubuntu
+macpro,,huangyingw
 mini,,root
 mldonkey,,root
+thinkpad,,root
 vmac,,huangyingw
