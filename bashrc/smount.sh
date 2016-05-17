@@ -9,7 +9,7 @@ if [ "$OS" == "Linux" ]
 then
   umount ~/samba
 else
-  diskutil umount force ~/samba
+  diskutil unmountDisk force ~/samba
 fi
 SERVER="$1"
 . ~/loadrc/keys/getConDetails.sh "$SERVER"

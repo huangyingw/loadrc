@@ -1,4 +1,6 @@
 172.16.7.218,,tutorabc
+172.16.7.219,,tutorabc
+172.16.7.220,,tutorabc
 52.10.96.151,aws_tg,ubuntu
 52.201.187.118,aws_tg_virginia,ubuntu
 52.207.217.29,aws_tg_virginia,ubuntu
@@ -30,6 +32,7 @@
 54.153.10.46,aws_tg_cal,ubuntu
 54.153.115.116,aws_tg_cal,ubuntu
 54.153.3.234,aws_tg_cal,ubuntu
+54.153.73.99,aws_tg_cal,ubuntu
 54.172.32.66,aws_tg_virginia,ubuntu
 54.183.13.24,aws_tg_cal,ubuntu
 54.183.187.73,aws_tg_cal,ubuntu
@@ -56,5 +59,6 @@
 macpro,,huangyingw
 mini,,root
 mldonkey,,root
+server,,root
 thinkpad,,root
 vmac,,huangyingw
