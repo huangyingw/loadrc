@@ -1,6 +1,11 @@
+107.23.154.36,aws_tg_virginia,ubuntu
+114.141.155.209,,tutorabc
+114.141.155.210,,tutorabc
+114.141.155.218,,tutorabc
 172.16.7.218,,tutorabc
 172.16.7.219,,tutorabc
 172.16.7.220,,tutorabc
+50.18.27.230,aws_tg_cal,ubuntu
 52.10.96.151,aws_tg,ubuntu
 52.201.187.118,aws_tg_virginia,ubuntu
 52.207.217.29,aws_tg_virginia,ubuntu
@@ -15,6 +20,7 @@
 52.53.176.177,aws_tg_cal,ubuntu
 52.53.198.160,aws_tg_cal,ubuntu
 52.53.208.73,aws_tg_cal,ubuntu
+52.53.212.21,aws_tg_cal,ubuntu
 52.53.236.198,aws_tg_cal,ubuntu
 52.53.238.174,aws_tg_cal,ubuntu
 52.73.166.255,aws_tg_virginia,ubuntu
@@ -23,6 +29,7 @@
 52.87.227.9,aws_tg_virginia,ubuntu
 52.87.228.152,aws_tg_virginia,ubuntu
 52.9.207.180,aws_tg_cal,ubuntu
+52.9.227.99,aws_tg_cal,ubuntu
 52.90.188.119,aws_tg_virginia,ubuntu
 52.91.113.186,aws_tg_virginia,ubuntu
 54.152.144.147,aws_tg_virginia,ubuntu
@@ -33,12 +40,14 @@
 54.153.115.116,aws_tg_cal,ubuntu
 54.153.3.234,aws_tg_cal,ubuntu
 54.153.73.99,aws_tg_cal,ubuntu
+54.153.76.5,aws_tg_cal,ubuntu
 54.172.32.66,aws_tg_virginia,ubuntu
 54.183.13.24,aws_tg_cal,ubuntu
 54.183.187.73,aws_tg_cal,ubuntu
 54.183.42.93,aws_tg_cal,ubuntu
 54.208.20.27,aws_tg_virginia,ubuntu
 54.222.130.243,tg_h2h,ubuntu
+54.222.133.18,tg_h2h,ubuntu
 54.222.140.252,tg_h2h,ubuntu
 54.222.156.20,tg_h2h,ubuntu
 54.222.170.81,tg_h2h,ubuntu
@@ -46,6 +55,7 @@
 54.222.176.219,tg_h2h,ubuntu
 54.222.177.89,tg_h2h,ubuntu
 54.222.196.222,tg_h2h,ubuntu
+54.222.200.232,tg_h2h,ubuntu
 54.222.203.168,tg_h2h,ubuntu
 54.222.205.244,tg_h2h,ubuntu
 54.222.207.218,tg_h2h,ubuntu
@@ -54,6 +64,7 @@
 54.222.221.243,tg_h2h,ubuntu
 54.222.225.217,tg_h2h,ubuntu
 54.222.236.31,tg_h2h,ubuntu
+54.223.61.41,tg_h2h,ubuntu
 54.67.5.254,aws_tg_cal,ubuntu
 54.88.55.145,aws_tg_virginia,ubuntu
 macpro,,huangyingw
@@ -61,4 +72,5 @@ mini,,root
 mldonkey,,root
 server,,root
 thinkpad,,root
+vbuntu,,root
 vmac,,huangyingw

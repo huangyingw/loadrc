@@ -19,4 +19,4 @@
 
 set -o nounset                              # Treat unset variables as an error
 
-xargs grep -oE -- "([0-9]{1,3}\.){3}[0-9]{1,3}" /dev/null < /export/home1/username/cscope_db/H2HSetup
+xargs grep -onHE -- "([0-9]{1,3}\.){3}[0-9]{1,3}" /dev/null < /export/home1/username/cscope_db/H2HSetup
