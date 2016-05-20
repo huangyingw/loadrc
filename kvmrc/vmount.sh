@@ -23,8 +23,9 @@ then
   exit 1
 fi
 modprobe nbd max_part=8
-nbdDevice=$(~/loadrc/bashrc/find-free-nbd-device.sh)
-echo "$nbdDevice" 
+umount -fl /media/nbd0
+qemu-nbd --disconnect /dev/nbd0
 qcow2File="$1"
-qemu-nbd --connect="$nbdDevice" "$qcow2File"
-fdisk "$nbdDevice" -l
+qemu-nbd --connect=/dev/nbd0 "$qcow2File"
+mount $(fdisk /dev/nbd0 -l|awk '/nbd0/ {a=$1} END{print a}') /media/nbd0 
+df -TH
