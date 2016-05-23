@@ -62,6 +62,7 @@ alias rsync_svn='$HOME/loadrc/bashrc/rsync_svn.sh'
 alias rsynctype='$HOME/loadrc/bashrc/rsynctype.sh'
 alias sMov='$HOME/loadrc/bashrc/sMov.sh'
 alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho 
+alias selectCopy='$HOME/loadrc/bashrc/selectCopy.sh'
 alias sleep='$HOME/loadrc/bashrc/sleep.sh'
 alias sload='$HOME/loadrc/bashrc/sload.sh'
 alias smount='$HOME/loadrc/bashrc/smount.sh'
