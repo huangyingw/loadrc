@@ -1,7 +1,7 @@
 #!/bin/bash
 git init \
   && $HOME/loadrc/gitrc/gcob.sh dev \
-  && git config branches.sync master \
+  && echo master > branch.default \
   && touch gci.default \
   && touch cscope.out \
   && touch gme.default \
