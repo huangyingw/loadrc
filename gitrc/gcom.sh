@@ -1,7 +1,7 @@
 #!/bin/bash
 old_branch=`git branch |awk '/^\*/{print $2}'`
 echo $old_branch
-if  ( git status|grep -q 'nothing to commit' )
+if [ -z "$(git status --porcelain)" ]
 then
   git checkout "$1" \
     && ~/loadrc/gitrc/gme.sh "$old_branch"

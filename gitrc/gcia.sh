@@ -1,7 +1,7 @@
 #!/bin/bash
-if (git status|grep -q '# Changes to be committed:')
+~/loadrc/gitrc/checkGitStatus.sh
+if [ $? -ne 0 ]
 then
-  echo -e "${red}should not run gcia, while there is sth to be committed ... ${NC}"
   exit 1
 fi
 last_message=`git log -1 --pretty=%B|awk 'NR==1'`
