@@ -1,7 +1,7 @@
 #!/bin/bash
-if [ -n "$(git status --porcelain)" ]
+~/loadrc/gitrc/checkGitStatus.sh
+if [ $? -ne 0 ]
 then
-  echo -e "${red}the git repository is unclean, please check it before continuing... ${NC}"
   exit 1
 fi
 FIND=$(echo $1 | sed 's/\//\\\//g')
