@@ -3,7 +3,6 @@
 114.141.155.210,,tutorabc
 114.141.155.218,,tutorabc
 172.16.7.218,,tutorabc
-meet3.liveh2h.com,,tutorabc
 172.16.7.219,,tutorabc
 172.16.7.220,,tutorabc
 197.96.28.8,,root
@@ -13,9 +12,6 @@ meet3.liveh2h.com,,tutorabc
 207.20.44.209,,root
 207.20.44.210,,root
 50.18.27.230,aws_tg_cal,ubuntu
-meet1.liveh2h.com,aws_tg_cal,ubuntu
-52.9.198.188,aws_tg_cal,ubuntu
-kms2.liveh2h.com,tg_h2h,ubuntu
 52.10.96.151,aws_tg,ubuntu
 52.201.187.118,aws_tg_virginia,ubuntu
 52.207.217.29,aws_tg_virginia,ubuntu
@@ -41,6 +37,7 @@ kms2.liveh2h.com,tg_h2h,ubuntu
 52.86.26.204,aws_tg_virginia,ubuntu
 52.87.227.9,aws_tg_virginia,ubuntu
 52.87.228.152,aws_tg_virginia,ubuntu
+52.9.198.188,aws_tg_cal,ubuntu
 52.9.207.180,aws_tg_cal,ubuntu
 52.9.222.208,aws_tg_cal,ubuntu
 52.9.227.99,aws_tg_cal,ubuntu
@@ -76,7 +73,6 @@ kms2.liveh2h.com,tg_h2h,ubuntu
 54.222.177.89,tg_h2h,ubuntu
 54.222.196.222,tg_h2h,ubuntu
 54.222.200.232,tg_h2h,ubuntu
-meet2.liveh2h.com,tg_h2h,ubuntu
 54.222.203.168,tg_h2h,ubuntu
 54.222.205.244,tg_h2h,ubuntu
 54.222.207.218,tg_h2h,ubuntu
@@ -90,7 +86,12 @@ meet2.liveh2h.com,tg_h2h,ubuntu
 54.67.5.254,aws_tg_cal,ubuntu
 54.67.95.178,aws_tg_cal,ubuntu
 54.88.55.145,aws_tg_virginia,ubuntu
+kms1.liveh2h.com,aws_tg_cal,ubuntu
+kms2.liveh2h.com,tg_h2h,ubuntu
 macpro,,huangyingw
+meet1.liveh2h.com,aws_tg_cal,ubuntu
+meet2.liveh2h.com,tg_h2h,ubuntu
+meet3.liveh2h.com,,tutorabc
 mini,,root
 mldonkey,,root
 server,,root
