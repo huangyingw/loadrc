@@ -22,7 +22,6 @@ else
     && echo master > branch.default \
     && touch gci.default \
     && touch cscope.out \
-    && touch dropbox.only \
     && touch gme.default \
     && $HOME/loadrc/bashrc/cscope.sh \
     && git add . \
