@@ -19,7 +19,7 @@ else
     && git clone "$1" \
     && cd ${target} \
     && $HOME/loadrc/gitrc/gcob.sh dev \
-    && echo master > branch.default \
+    && git config branches.sync master \
     && touch gci.default \
     && touch cscope.out \
     && touch gme.default \

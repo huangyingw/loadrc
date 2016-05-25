@@ -1,20 +1,14 @@
 #!/bin/bash
-TARGET_BRANCH_DEFAULT=branch.default
-if [ ! -f "$TARGET_BRANCH_DEFAULT" ];
+SYNC_BRANCH=$(git config branches.sync)
+if [ -z "$SYNC_BRANCH" ]
 then
-  echo -e "${red}Please put the default sync branch in branch.default file... ${NC}"
+  echo -e "${red}Please set the default sync branch in .git/config file... ${NC}"
   exit 1
 fi
-TARGET_BRANCH=$(cat "$TARGET_BRANCH_DEFAULT")
-if [ -z "$TARGET_BRANCH" ]
-then
-  echo -e "${red}Please put the default sync branch in branch.default file... ${NC}"
-  exit 1
-fi
-echo "$TARGET_BRANCH"
+echo "$SYNC_BRANCH"
 CURRENT_BRANCH="`git branch |awk '/^\*/{print $2}'`"
-git checkout "$TARGET_BRANCH" \
+git checkout "$SYNC_BRANCH" \
   && ~/loadrc/gitrc/gpl.sh \
   ; git checkout "$CURRENT_BRANCH" \
-  && ~/loadrc/gitrc/gme.sh "$TARGET_BRANCH" \
+  && ~/loadrc/gitrc/gme.sh "$SYNC_BRANCH" \
   && ~/loadrc/bashrc/cscope.sh
