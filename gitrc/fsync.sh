@@ -17,7 +17,7 @@ function rec_dir() {
       if [ -d "$1/$file/.git" ]
       then
         cd "$1/$file"
-        if  ( git status|grep -q modified: )
+        if [ -n "$(git status --porcelain)" ]
         then
           echo "$1/$file" >> "$RESULT"
         else
