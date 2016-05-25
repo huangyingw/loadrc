@@ -3,7 +3,7 @@ GCIDEFAULT=gci.default
 commit_message='n'
 if [ -z "$1" ];
 then
-  if [ ! -f "$GCIDEFAULT" ] && [ ! $(git status|grep -q 'nothing to commit') ]
+  if [ ! -f "$GCIDEFAULT" ] && [ -n "$(git status --porcelain)" ]
   then
     echo -e "${red}Must provide the commit message ... ${NC}"
     exit 1
