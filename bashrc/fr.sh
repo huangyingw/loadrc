@@ -1,5 +1,5 @@
 #!/bin/bash
-if ! (git status|grep -q 'nothing to commit')
+if [ -n "$(git status --porcelain)" ]
 then
   echo -e "${red}the git repository is unclean, please check it before continuing... ${NC}"
   exit 1
