@@ -11,7 +11,7 @@ then
 else
   commit_message="$1"
 fi
-#git commit -am "$commit_message"
-#~/loadrc/gitrc/gclb.sh
-#~/loadrc/gitrc/gsync.sh              
-#~/loadrc/gitrc/gps.sh              
+git commit -am "$commit_message"
+~/loadrc/gitrc/gclb.sh
+~/loadrc/gitrc/gsync.sh              
+~/loadrc/gitrc/gps.sh              
