@@ -12,7 +12,7 @@ then
   echo -e "${red}It must be run in fix branch ... ${NC}"
   exit 1
 fi 
-if  ( git status|grep -q 'nothing to commit' )
+if [ -z "$(git status --porcelain)" ]
 then
   git checkout "$parent_branch" \
     && ~/loadrc/gitrc/gme.sh "$fix_branch" \
