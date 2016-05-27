@@ -86,8 +86,10 @@
 54.67.5.254,aws_tg_cal,ubuntu
 54.67.95.178,aws_tg_cal,ubuntu
 54.88.55.145,aws_tg_virginia,ubuntu
+kms-dev.animedvd.net,aws_tg_cal,ubuntu
 kms1.liveh2h.com,aws_tg_cal,ubuntu
 kms2.liveh2h.com,tg_h2h,ubuntu
+kms3.liveh2h.com,,tutorabc
 macpro,,huangyingw
 meet1.liveh2h.com,aws_tg_cal,ubuntu
 meet2.liveh2h.com,tg_h2h,ubuntu
@@ -98,3 +100,4 @@ server,,root
 thinkpad,,root
 vbuntu,,root
 vmac,,huangyingw
+webrtcdev.liveh2h.com,aws_tg_cal,ubuntu

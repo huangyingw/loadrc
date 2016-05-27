@@ -6,7 +6,7 @@ then
   TARGET_BRANCH="$1"
 fi
 echo "$TARGET_BRANCH"
-if  ( git status|grep -q 'nothing to commit' )
+if [ -z "$(git status --porcelain)" ]
 then
   git checkout "$TARGET_BRANCH" \
     && ~/loadrc/gitrc/gme.sh "$CURRENT_BRANCH" \

@@ -8,7 +8,7 @@ then
     git diff --name-status "$1" | tee gdif.findresult  
   fi
 else
-  if (git status|grep -q 'nothing to commit')
+  if [ -z "$(git status --porcelain)" ]
   then
     git diff --name-status `git log --oneline|awk 'NR==2{print $1}'` | tee gdif.findresult  
   else
