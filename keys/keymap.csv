@@ -40,6 +40,7 @@
 52.9.198.188,aws_tg_cal,ubuntu
 52.9.207.180,aws_tg_cal,ubuntu
 52.9.222.208,aws_tg_cal,ubuntu
+52.9.225.246,aws_tg_cal,ubuntu
 52.9.227.99,aws_tg_cal,ubuntu
 52.90.188.119,aws_tg_virginia,ubuntu
 52.91.113.186,aws_tg_virginia,ubuntu
@@ -86,6 +87,7 @@
 54.67.5.254,aws_tg_cal,ubuntu
 54.67.95.178,aws_tg_cal,ubuntu
 54.88.55.145,aws_tg_virginia,ubuntu
+h2hadmin.liveh2h.com,aws_tg_cal,ubuntu
 kms-dev.animedvd.net,aws_tg_cal,ubuntu
 kms1.liveh2h.com,aws_tg_cal,ubuntu
 kms2.liveh2h.com,tg_h2h,ubuntu
