@@ -1,7 +1,4 @@
 107.23.154.36,aws_tg_virginia,ubuntu
-61.220.62.28,,tutorabc
-61.220.62.30,,tutorabc
-61.220.62.29,,tutorabc
 114.141.155.209,,tutorabc
 114.141.155.210,,tutorabc
 114.141.155.218,,tutorabc
@@ -86,10 +83,14 @@
 54.222.225.217,tg_h2h,ubuntu
 54.222.236.31,tg_h2h,ubuntu
 54.223.61.41,tg_h2h,ubuntu
+54.223.74.93,tg_h2h,ubuntu
 54.237.214.57,aws_tg_virginia,ubuntu
 54.67.5.254,aws_tg_cal,ubuntu
 54.67.95.178,aws_tg_cal,ubuntu
 54.88.55.145,aws_tg_virginia,ubuntu
+61.220.62.28,,tutorabc
+61.220.62.29,,tutorabc
+61.220.62.30,,tutorabc
 h2hadmin.liveh2h.com,aws_tg_cal,ubuntu
 kms-dev.animedvd.net,aws_tg_cal,ubuntu
 kms1.liveh2h.com,aws_tg_cal,ubuntu
