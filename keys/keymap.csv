@@ -1,3 +1,4 @@
+107.22.131.187,aws_tg_virginia,ubuntu
 107.23.154.36,aws_tg_virginia,ubuntu
 114.141.155.209,,tutorabc
 114.141.155.210,,tutorabc
@@ -56,6 +57,8 @@
 54.153.76.5,aws_tg_cal,ubuntu
 54.153.89.111,aws_tg_cal,ubuntu
 54.172.32.66,aws_tg_virginia,ubuntu
+54.175.128.20,aws_tg_virginia,ubuntu
+54.175.199.100,aws_tg_virginia,ubuntu
 54.183.117.158,aws_tg_cal,ubuntu
 54.183.118.144,aws_tg_cal,ubuntu
 54.183.13.24,aws_tg_cal,ubuntu
