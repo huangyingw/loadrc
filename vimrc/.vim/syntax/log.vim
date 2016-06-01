@@ -41,4 +41,4 @@ hi link httplogBrowser	String
 hi link httplogLocal	Special
 hi link httplogLAN	PreProc
 
-let b:current_syntax = "httplog"
+let b:current_syntax = "log"

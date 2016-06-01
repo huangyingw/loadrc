@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.log* setfiletype httplog
+au BufRead,BufNewFile *.log* setfiletype log
