@@ -247,7 +247,7 @@ nnoremap L :vs <C-R>"<CR>:vert resize<CR>
 map <F5> :call VRun()<cr>
 nnoremap gf gF<CR>:vert resize<CR>
 map oo :call VimOpen()<cr>
-nmap <C-g> :exec '!~/loadrc/gitrc/gsh.sh ' . expand("%:p")<CR>
+nmap <C-g> :!gitk --follow --all -p %:p<CR>:vert resize<CR>  
 nnoremap <silent> <leader>g :!gitk --follow -p %:p<CR>:vert resize<CR> 
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
 
