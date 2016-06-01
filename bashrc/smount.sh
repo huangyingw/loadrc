@@ -16,9 +16,9 @@ SERVER="$1"
 
 if [ -z "$key" ];
 then
-  sshfs "$user"@"$host":/ ~/samba
+  sshfs -o Ciphers=arcfour -o Compression=no "$user"@"$host":/ ~/samba
 else
-  sshfs -o IdentityFile="$key" "$user"@"$host":/ ~/samba 
+  sshfs -o Ciphers=arcfour -o Compression=no -o IdentityFile="$key" "$user"@"$host":/ ~/samba 
 fi
 df \
   && cd ~/samba \
