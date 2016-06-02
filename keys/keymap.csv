@@ -12,9 +12,11 @@
 207.20.44.208,,root
 207.20.44.209,,root
 207.20.44.210,,root
+23.20.237.115,aws_tg_virginia,ubuntu
 50.18.27.230,aws_tg_cal,ubuntu
 52.10.96.151,aws_tg,ubuntu
 52.201.187.118,aws_tg_virginia,ubuntu
+52.204.1.63,aws_tg_virginia,ubuntu
 52.207.217.29,aws_tg_virginia,ubuntu
 52.207.241.102,aws_tg_virginia,ubuntu
 52.23.206.252,aws_tg_virginia,ubuntu
@@ -33,6 +35,7 @@
 52.53.236.198,aws_tg_cal,ubuntu
 52.53.238.174,aws_tg_cal,ubuntu
 52.53.242.85,aws_tg_cal,ubuntu
+52.72.26.130,aws_tg_virginia,ubuntu
 52.73.166.255,aws_tg_virginia,ubuntu
 52.86.26.155,aws_tg_virginia,ubuntu
 52.86.26.204,aws_tg_virginia,ubuntu
