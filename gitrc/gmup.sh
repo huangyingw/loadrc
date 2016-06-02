@@ -1,4 +1,10 @@
 #!/bin/bash
+gitClean=true
+if [ -n "$(git status --porcelain)" ]
+then
+  git stash
+  gitClean=false
+fi 
 origin_branch=`git branch |awk '/^\*/{print $2}'`
 current_branch=`git branch |awk '/^\*/{print $2}'`
 up_branch=`echo ${current_branch} | sed 's/\(\.[^.]*\)$//'`
@@ -11,3 +17,7 @@ do
 done 
 git checkout $origin_branch \
   && ~/loadrc/gitrc/gme.sh $up_branch
+if [ "$gitClean" != "true" ]
+then
+  git stash pop stash@{0}
+fi
