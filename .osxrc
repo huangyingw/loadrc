@@ -1,0 +1,6 @@
+#!/bin/bash
+OS=`uname`
+if [ $OS == "Darwin" ];
+then
+  sudo pmset -a displaysleep 30
+fi
