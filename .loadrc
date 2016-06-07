@@ -5,11 +5,12 @@
 . $HOME/loadrc/.gitrc
 . $HOME/loadrc/.hgrc
 . $HOME/loadrc/.kvmrc
-. $HOME/loadrc/.p4rc
 . $HOME/loadrc/.osxrc
+. $HOME/loadrc/.p4rc
 . $HOME/loadrc/.shellrc
 . $HOME/loadrc/.sqlrc
 . $HOME/loadrc/.svnrc
+. $HOME/loadrc/.vbunturc
 . $HOME/loadrc/openrc.sh
 
 HOSTRC=$HOME/loadrc/."`hostname`"rc
