@@ -18,4 +18,4 @@
 #===============================================================================
 
 set -o nounset                              # Treat unset variables as an error
-docker rmi -f $(docker images | grep '<none>' | tr -s ' ' | cut -d ' ' -f 3)
+docker rmi -f $(docker images -a | grep '<none>' | tr -s ' ' | cut -d ' ' -f 3)
