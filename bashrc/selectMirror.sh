@@ -7,4 +7,4 @@ then
 fi
 SOURCE="$1"
 TARGET="$2"
-rsync -aHv --exclude-from=excludeFile "$SOURCE"/  "$TARGET"/ | tee selectMirror.findresult
+rsync -aHv --exclude-from=excludeFile --delete-during --force "$SOURCE"/  "$TARGET"/ | tee selectMirror.findresult
