@@ -2,7 +2,7 @@
 TARGET_BRANCH_DEFAULT=branch.default
 if [ ! -f "$TARGET_BRANCH_DEFAULT" ];
 then
-  echo -e "${red}Please put the default sync branch in branch.default file... ${NC}"
+  echo -e "${red}branch.default file does not exist... ${NC}"
   exit 1
 fi
 TARGET_BRANCH=$(cat "$TARGET_BRANCH_DEFAULT")
