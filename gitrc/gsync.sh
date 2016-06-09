@@ -2,7 +2,7 @@
 TARGET_BRANCH_DEFAULT=branch.default
 if [ ! -f "$TARGET_BRANCH_DEFAULT" ];
 then
-  echo -e "${red}branch.default file does not exist... ${NC}"
+  echo -e "${red}$(pwd)/branch.default file does not exist... ${NC}"
   exit 1
 fi
 TARGET_BRANCH=$(cat "$TARGET_BRANCH_DEFAULT")
