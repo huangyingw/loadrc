@@ -1,6 +1,6 @@
 #!/bin/bash
 git init \
-  && $HOME/loadrc/gitrc/gcob.sh dev \
+  && $HOME/loadrc/gitrc/gcob.sh dev.fix \
   && echo master > branch.default \
   && touch gci.default \
   && touch cscope.out \
