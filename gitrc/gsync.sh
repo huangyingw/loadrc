@@ -8,7 +8,7 @@ fi
 TARGET_BRANCH=$(cat "$TARGET_BRANCH_DEFAULT")
 if [ -z "$TARGET_BRANCH" ]
 then
-  echo -e "${red}Please put the default sync branch in branch.default file... ${NC}"
+  echo -e "${red}Please put the default sync branch in $(pwd)/branch.default file... ${NC}"
   exit 1
 fi
 echo "$TARGET_BRANCH"
