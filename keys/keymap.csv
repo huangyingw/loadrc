@@ -35,6 +35,7 @@
 52.53.236.198,aws_tg_cal,ubuntu
 52.53.238.174,aws_tg_cal,ubuntu
 52.53.242.85,aws_tg_cal,ubuntu
+52.58.83.18,aws_tg_frankfurt,ubuntu
 52.72.26.130,aws_tg_virginia,ubuntu
 52.73.166.255,aws_tg_virginia,ubuntu
 52.86.26.155,aws_tg_virginia,ubuntu
@@ -103,16 +104,15 @@ kms3.liveh2h.com,,tutorabc
 kms6.liveh2h.com,,tutorabc
 macpro,,huangyingw
 meet1.liveh2h.com,aws_tg_cal,ubuntu
-52.58.83.18,aws_tg_frankfurt,ubuntu
 meet2.liveh2h.com,tg_h2h,ubuntu
 meet3.liveh2h.com,,tutorabc
 meet6.liveh2h.com,,tutorabc
 mini,,root
 mldonkey,,root
-wrt,,root
 server,,root
 thinkpad,,root
 vbuntu,,root
 vmac,,huangyingw
 vserver,,root
 webrtcdev.liveh2h.com,aws_tg_cal,ubuntu
+wrt,,root
