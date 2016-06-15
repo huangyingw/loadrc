@@ -1,5 +1,5 @@
 #!/bin/bash - 
-host="$1" 
+host=$(echo "$1" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
 
 mapFILE="$HOME/loadrc/keys/keymap.csv"
 KEYFOLDER="$HOME/loadrc/keys/"
