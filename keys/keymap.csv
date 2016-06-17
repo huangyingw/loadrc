@@ -103,6 +103,7 @@ kms2.liveh2h.com,tg_h2h,ubuntu
 kms3.liveh2h.com,,tutorabc
 kms6.liveh2h.com,,tutorabc
 macpro,,huangyingw
+mbuntu,,root
 meet1.liveh2h.com,aws_tg_cal,ubuntu
 meet2.liveh2h.com,tg_h2h,ubuntu
 meet3.liveh2h.com,,tutorabc
@@ -115,4 +116,5 @@ vbuntu,,root
 vmac,,huangyingw
 vserver,,root
 webrtcdev.liveh2h.com,aws_tg_cal,ubuntu
+work,,huangyingw
 wrt,,root
