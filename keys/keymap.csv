@@ -2,6 +2,8 @@
 107.23.154.36,aws_tg_virginia,ubuntu
 114.141.155.209,,tutorabc
 114.141.155.210,,tutorabc
+172.16.7.227,,tutorabc
+114.141.155.217,,tutorabc
 114.141.155.218,,tutorabc
 172.16.7.218,,tutorabc
 172.16.7.219,,tutorabc
@@ -10,6 +12,7 @@
 197.96.28.80,,root
 197.96.28.9,,root
 207.20.44.208,,root
+192.168.2.135,,root
 207.20.44.209,,root
 207.20.44.210,,root
 23.20.237.115,aws_tg_virginia,ubuntu
