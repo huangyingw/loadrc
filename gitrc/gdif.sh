@@ -15,3 +15,10 @@ else
     git diff --name-status | tee gdif.findresult  
   fi
 fi
+OS=`uname`
+if [ "$OS" == "Linux" ]
+then
+  xargs sed -i"" "s/\bA\b/git\srm/g" < gdif.findresult
+else
+  sed -i.bak "s/[[:<:]]A[[:>:]]/git rm/g" gdif.findresult 
+fi
