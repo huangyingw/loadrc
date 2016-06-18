@@ -21,4 +21,6 @@ then
   xargs sed -i"" "s/\bA\b/git\srm/g" < gdif.findresult
 else
   sed -i.bak "s/[[:<:]]A[[:>:]]/git rm/g" gdif.findresult 
+  sed -i.bak "s/[[:<:]]D[[:>:]]/git checkout $1 -- /g" gdif.findresult 
+  sed -i.bak "s/[[:<:]]M[[:>:]]/git checkout $1 -- /g" gdif.findresult 
 fi
