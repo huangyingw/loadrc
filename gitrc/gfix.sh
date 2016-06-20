@@ -1,6 +1,6 @@
 #!/bin/bash
 current_branch=`git branch |awk '/^\*/{print $2}'`
-if  ( echo $current_branch|grep -q 'fix$' )
+if ( echo $current_branch|grep -q 'fix$' )
 then
   echo -e "${red}gfix should not be run in fix branch ... ${NC}"
   exit 1
