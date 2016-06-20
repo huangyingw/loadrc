@@ -25,4 +25,4 @@ then
   exit 1
 fi
 git bisect replay gbil.findresult \
-  && ~/loadrc/gitrc/gbil.sh
+  && git bisect log | tee gbil.findresult

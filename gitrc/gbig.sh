@@ -20,4 +20,4 @@
 set -o nounset                              # Treat unset variables as an error
 
 git bisect good
-~/loadrc/gitrc/gbil.sh
+git bisect log | tee gbil.findresult
