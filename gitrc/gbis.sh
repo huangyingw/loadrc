@@ -19,8 +19,5 @@
 
 set -o nounset                              # Treat unset variables as an error
 
-if [ ! -f gbil.findresult ];
-then
-  echo git bisect start > gbil.findresult
-  exit 0
-fi
+git bisect skip
+git bisect log | tee gbil.findresult
