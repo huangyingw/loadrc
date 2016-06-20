@@ -1,8 +1,9 @@
 #!/bin/bash - 
-host="$1"
 portList="$HOME/Dropbox/loadrc/bashrc/portList"
 while read port
 do
-  nc -zv "$host" "$port" | tee testPorts.findresult
-  nc -zuv "$host" "$port" | tee testPorts.findresult 
+  $HOME/loadrc/bashrc/rssh.sh "$1" "nc -l $port"
+  nc -zv "$1" "$port" | tee testPorts.findresult
+  $HOME/loadrc/bashrc/rssh.sh "$1" "nc -lu $port"
+  nc -zuv "$1" "$port" | tee testPorts.findresult 
 done < "$portList"
