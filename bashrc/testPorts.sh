@@ -2,7 +2,11 @@
 portList="$HOME/Dropbox/loadrc/bashrc/portList"
 while read port
 do
-  echo "port --> $port"
+  echo "port listening --> $port"
   $HOME/loadrc/bashrc/rssh.sh "$1" "sudo nc -l $port" &
-  nc -zv "$1" "$port" | tee testPorts.findresult
+done < "$portList"
+while read port
+do
+  echo "port requesting --> $port"
+  nc -zv "$1" "$port" &
 done < "$portList"
