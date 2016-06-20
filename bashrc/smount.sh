@@ -4,6 +4,7 @@ then
   echo -e "${red}please provide the host name... ${NC}"
   exit 1
 fi
+ps ax|awk '/sshfs/{print $1}'|while read ss; do kill -9 "$ss"; done
 OS=`uname`
 if [ "$OS" == "Linux" ]
 then
