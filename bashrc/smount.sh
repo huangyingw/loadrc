@@ -12,15 +12,8 @@ then
 else
   diskutil unmountDisk force ~/samba
 fi
-SERVER="$1"
-. ~/loadrc/keys/getConDetails.sh "$SERVER"
 
-if [ -z "$key" ];
-then
-  sshfs "$user"@"$host":/ ~/samba
-else
-  sshfs -o IdentityFile="$key" "$user"@"$host":/ ~/samba 
-fi
+sshfs "$1":/ ~/samba 
 df \
   && cd ~/samba \
   && echo -e "${green}$(pwd) ${NC}" "in"  "${green}$1 ${NC}"
