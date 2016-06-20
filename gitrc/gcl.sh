@@ -20,7 +20,6 @@ else
     && cd ${target} \
     && $HOME/loadrc/gitrc/gcob.sh dev.fix \
     && echo master > branch.default \
-    && touch gci.default \
     && touch cscope.out \
     && touch dropbox.only \
     && touch gme.default \
