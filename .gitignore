@@ -1,4 +1,5 @@
 .passwd
+.ssh/known_hosts
 bashrc/.bash_history
 bashrc/output
 gstv.ready
