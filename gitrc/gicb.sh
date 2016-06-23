@@ -7,4 +7,4 @@ git init \
   && touch gme.default \
   && $HOME/loadrc/bashrc/cscope.sh \
   && git add . \
-  && $HOME/loadrc/gitrc/gci.sh
+  && $HOME/loadrc/gitrc/gci.sh n
