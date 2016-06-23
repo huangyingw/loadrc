@@ -1,5 +1,4 @@
 #! /bin/bash
-~/loadrc/bashrc/smount.sh "$1"
 OS=`uname`
 if [ "$OS" == "Linux" ]
 then
