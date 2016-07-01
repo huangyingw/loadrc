@@ -1,9 +1,10 @@
 #alias for docker
 if [ "$(uname)" == "Darwin" ]
 then
-  eval "$(docker-machine env default)"
+eval "$(docker-machine env default)"
 fi
 alias cdocker='$HOME/loadrc/dockerrc/cdocker.sh'
 alias cleanDocker='$HOME/loadrc/dockerrc/cleandocker.sh'
 alias dlogs='$HOME/loadrc/dockerrc/dlogs.sh'
 alias edocker='$HOME/loadrc/dockerrc/edocker.sh'
+alias idocker='$HOME/loadrc/dockerrc/idocker.sh'
