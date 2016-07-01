@@ -12,7 +12,9 @@ then
   exit 1
 fi
 echo "$TARGET_BRANCH"
-for ss in `git remote -v |awk '/\(fetch\)$/{print $1}'`
-do 
-  git pull $ss $TARGET_BRANCH
-done
+CURRENT_BRANCH="`git branch |awk '/^\*/{print $2}'`"
+git checkout "$TARGET_BRANCH" \
+  && ~/loadrc/gitrc/gpl.sh \
+  ; git checkout "$CURRENT_BRANCH" \
+  && ~/loadrc/gitrc/gme.sh "$TARGET_BRANCH" \
+  && ~/loadrc/bashrc/cscope.sh
