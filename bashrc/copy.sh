@@ -7,5 +7,5 @@ then
   mkdir -p "${TARGET}"
 fi
 
-rsync -e ssh -aH --force \
+rsync -aH --force \
   "${SOURCE}/" "${TARGET}/" \
