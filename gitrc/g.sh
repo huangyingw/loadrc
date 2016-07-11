@@ -13,6 +13,11 @@ if [ -n "$1" ]
 then
   commit_message="$1"
 fi
+if [ -f .git/COMMIT_EDITMSG ]
+then
+  commit_message=$(cat .git/COMMIT_EDITMSG)
+  echo > .git/COMMIT_EDITMSG
+fi
 if [ -f .git/MERGE_MSG ]
 then
   commit_message=$(cat .git/MERGE_MSG |awk 'NR==1')
