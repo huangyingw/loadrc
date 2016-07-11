@@ -5,3 +5,4 @@ then
   return
 fi
 sudo pmset -a displaysleep 30
+chmod 400 ~/loadrc/keys/*.pem
