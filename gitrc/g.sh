@@ -16,7 +16,7 @@ fi
 if [ -f .git/COMMIT_EDITMSG ]
 then
   commit_message=$(cat .git/COMMIT_EDITMSG)
-  truncate -s 0 .git/COMMIT_EDITMSG
+  > .git/COMMIT_EDITMSG
 fi
 if [ -f .git/MERGE_MSG ]
 then
