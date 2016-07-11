@@ -16,7 +16,6 @@ fi
 if [ -n "$(cat .git/COMMIT_EDITMSG)" ]
 then
   commit_message=$(cat .git/COMMIT_EDITMSG)
-  > .git/COMMIT_EDITMSG
 fi
 if [ -f .git/MERGE_MSG ]
 then
@@ -28,6 +27,7 @@ then
   exit 1
 fi
 git commit  --no-verify -m "$commit_message"
+> .git/COMMIT_EDITMSG
 ~/loadrc/gitrc/gclb.sh
 ~/loadrc/gitrc/gsync.sh              
 ~/loadrc/gitrc/gps.sh
