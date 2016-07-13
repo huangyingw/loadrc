@@ -23,4 +23,5 @@ else
   sed -i.bak "s/[[:<:]]A[[:>:]]/git rm/g" gdif.findresult 
   sed -i.bak "s/[[:<:]]D[[:>:]]/git checkout $1 -- /g" gdif.findresult 
   sed -i.bak "s/[[:<:]]M[[:>:]]/git checkout $1 -- /g" gdif.findresult 
+  sed -i.bak "s/[[:<:]]T[[:>:]]/git checkout $1 -- /g" gdif.findresult 
 fi
