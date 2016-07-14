@@ -9,14 +9,10 @@ fi
 if [ -z "$(git status --porcelain)" ]
 then
   git checkout "$parent_branch" \
-    && ~/loadrc/gitrc/gme.sh "$fix_branch" \
-    && git checkout "$fix_branch"
+    && ~/loadrc/gitrc/gme.sh "$fix_branch"
 else
   git add . \
     && git stash|grep -q "HEAD is now at" \
     && git checkout "$parent_branch" \
-    && ~/loadrc/gitrc/gme.sh "$fix_branch" \
-    && git checkout "$fix_branch" \
-    && git stash pop stash@{0} \
-    && git reset HEAD . 
+    && ~/loadrc/gitrc/gme.sh "$fix_branch"
 fi 
