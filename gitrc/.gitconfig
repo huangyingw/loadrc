@@ -57,6 +57,14 @@
   smudge = git media smudge %f
   required = true
 [push]
-	default = current
+  default = current
 [pull]
-	default = current
+  default = current
+[gdif]
+  ignore = branch.default
+  ignore = dropbox.only
+  ignore = gci.default
+  ignore = gme.default
+  ignore = includefile.conf
+  ignore = prunefile.conf
+  ignore = prunefix.conf
