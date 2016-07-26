@@ -19,10 +19,7 @@ else
     && git clone "$1" \
     && cd ${target} \
     && $HOME/loadrc/gitrc/gcob.sh dev.fix \
-    && echo master > branch.default \
-    && touch cscope.out \
-    && touch dropbox.only \
-    && touch gme.default \
+    && $HOME/loadrc/gitrc/gdev.sh \
     && $HOME/loadrc/bashrc/cscope.sh \
     && git add . \
     && $HOME/loadrc/gitrc/gci.sh
