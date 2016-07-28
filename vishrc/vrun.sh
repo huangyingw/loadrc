@@ -2,7 +2,7 @@
 file=${1}
 if [ $(basename "$file") == "docker-compose.yml" ];
 then
-  docker-compose up -d
+  docker-compose -f "$file" up -d 2>&1 | tee "$file".findresult
   exit 0
 fi
 if [ $(basename "$file") == "gbil.findresult" ];
