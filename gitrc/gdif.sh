@@ -29,4 +29,3 @@ else
     sed -i.bak "/$ss/d" gdif.findresult 
   done
 fi
-echo "gdif sync with $1" > .git/COMMIT_EDITMSG
