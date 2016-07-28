@@ -1,10 +1,5 @@
 #!/bin/bash
 file=${1}
-if [ $(basename "$file") == "docker-compose.yml" ];
-then
-  docker-compose -f "$file" up --build --force-recreate -d 2>&1 | tee "$file".findresult
-  exit 0
-fi
 if [ $(basename "$file") == "gbil.findresult" ];
 then
   ~/loadrc/gitrc/gbir.sh
@@ -30,6 +25,10 @@ case $extension in
     ;;
   vim)
     source ${1}
+    read -p "press any key to continue...." update
+    ;;
+  yml)
+    docker-compose -f "$file" up --build --force-recreate -d 2>&1 | tee "$file".findresult
     read -p "press any key to continue...." update
     ;;
 esac
