@@ -55,7 +55,8 @@ function! CSCSearchQ()
 endfunction
 function! VRun()
   let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
-  exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
+  exec "cd " . b:csdbpath
+  exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p")
   vert resize
 endfunction
 function! CSCSearch()

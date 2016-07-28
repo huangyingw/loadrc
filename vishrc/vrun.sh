@@ -1,5 +1,10 @@
 #!/bin/bash
 file=${1}
+if [ $(basename "$file") == "docker-compose.yml" ];
+then
+  docker-compose up -d
+  exit 0
+fi
 if [ $(basename "$file") == "gbil.findresult" ];
 then
   ~/loadrc/gitrc/gbir.sh
