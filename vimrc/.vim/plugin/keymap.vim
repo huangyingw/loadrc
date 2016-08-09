@@ -91,6 +91,10 @@ function! VimOpen()
     else
       vert wincmd F
     endif
+  elseif (expand("%") ==# 'gbr.findresult')
+    let b:commit = expand("<cword>")
+    exec '!git checkout ' . '"' .  b:commit . '"' 
+    vert resize
   elseif (expand("%") ==# 'gbil.findresult')
     let b:commit = expand("<cword>")
     exec '!git checkout ' . '"' .  b:commit . '"' 
