@@ -17,49 +17,25 @@ function s:windowdir()
   endif
   return tr(unislash, '\', '/')
 endfunc
-"
-"==
-" Find_in_parent
-" find the file argument and returns the path to it.
-" Starting with the current working dir, it walks up the parent folders
-" until it finds the file, or it hits the stop dir.
-" If it doesn't find it, it returns "Nothing"
-function s:Find_in_parent(fln,flsrt,flstp)
-  let here = a:flsrt
-  while ( strlen( here) > 0 )
-    if filereadable( here . "/" . a:fln )
-      return here
-    endif
-    let fr = match(here, "/[^/]*$")
-    if fr == -1
-      break
-    endif
-    let here = strpart(here, 0, fr)
-    if here == a:flstp
-      break
-    endif
-  endwhile
-  return "/"
-endfunc
 function! PlayAV()
   let line=getline('.')
   exec '!/Applications/VLC.app/Contents/MacOS/VLC ' . '"' .  line . '"'
   vert resize
 endfunction
 function! CSCSearchQ()
-  let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
+  let b:csdbpath = Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   let b:keyword = expand("<cword>")
   exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 1 . ' ' . 'qcsc'
   exec 'vs ' . b:csdbpath . '/' . b:keyword . '.qcsc.findresult'
   vert resize
 endfunction
 function! VRun()
-  let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
+  let b:csdbpath = Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
   vert resize
 endfunction
 function! CSCSearch()
-  let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
+  let b:csdbpath = Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   let b:keyword = expand("<cword>")
   exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 4 . ' ' . 'csc'
   exec 'vs ' . b:csdbpath . '/' . b:keyword . '.csc.findresult'
@@ -78,7 +54,7 @@ function! ShowDiff()
   vert resize
 endfunction
 function! UpdateCscope()
-  let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
+  let b:csdbpath = Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
   vert resize
 endfunction
@@ -118,7 +94,7 @@ function! VimOpen()
 endfunction
 function! GitSearch()
   normal! gvy<CR>
-  let b:csdbpath = <SID>Find_in_parent(".git/config",<SID>windowdir(),$HOME)
+  let b:csdbpath = Find_in_parent(".git/config",<SID>windowdir(),$HOME)
   let b:keyword = @@
   exec "cd " . b:csdbpath
   exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"'
@@ -129,7 +105,7 @@ function! GitSearch()
 endfunction
 function! VimSearch()
   normal! gvy<CR>
-  let b:csdbpath = <SID>Find_in_parent("cscope.out",s:windowdir(),"/")
+  let b:csdbpath = Find_in_parent("cscope.out",s:windowdir(),"/")
   let b:keyword = @@
   exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
   let b:keyword = substitute(b:keyword, " ", "_", "g")
@@ -138,7 +114,7 @@ function! VimSearch()
   vert resize
 endfunction
 function! ShowProjectRoot()
-  let b:csdbpath = <SID>Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
+  let b:csdbpath = Find_in_parent("cscope.out",<SID>windowdir(),$HOME)
   let @+=b:csdbpath
   echom b:csdbpath
 endfunction
