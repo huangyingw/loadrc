@@ -354,3 +354,17 @@ function! Find_in_parent(fln,flsrt,flstp)
   endwhile
   return "/"
 endfunc
+
+"==
+" windowdir
+"  Gets the directory for the file in the current window
+"  Or the current working dir if there isn't one for the window.
+"  Use tr to allow that other OS paths, too
+function! Windowdir()
+  if winbufnr(0) == -1
+    let unislash = getcwd()
+  else 
+    let unislash = fnamemodify(bufname(winbufnr(0)), ':p:h')
+  endif
+  return tr(unislash, '\', '/')
+endfunc

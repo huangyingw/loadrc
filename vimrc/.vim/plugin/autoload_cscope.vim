@@ -22,20 +22,6 @@ set cpo&vim
 if !exists("g:autocscope_menus")
   let g:autocscope_menus = 1
 endif
-
-"==
-" windowdir
-"  Gets the directory for the file in the current window
-"  Or the current working dir if there isn't one for the window.
-"  Use tr to allow that other OS paths, too
-function s:windowdir()
-  if winbufnr(0) == -1
-    let unislash = getcwd()
-  else 
-    let unislash = fnamemodify(bufname(winbufnr(0)), ':p:h')
-  endif
-  return tr(unislash, '\', '/')
-endfunc
 "
 "==
 " Cycle_macros_menus
@@ -129,9 +115,9 @@ function s:Cycle_csdb()
       "it is already loaded. don't try to reload it.
     endif
   endif
-  let newcsdbpath = Find_in_parent("cscope.out",s:windowdir(),$HOME)
+  let newcsdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
   "    echo "Found cscope.out at: " . newcsdbpath
-  "    echo "Windowdir: " . s:windowdir()
+  "    echo "Windowdir: " . Windowdir()
   if newcsdbpath != "Nothing"
     let b:csdbpath = newcsdbpath
     if !cscope_connection(3, "out", b:csdbpath)
