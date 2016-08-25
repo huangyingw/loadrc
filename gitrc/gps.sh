@@ -1,4 +1,5 @@
 #!/bin/bash
+chmod 400 ~/.ssh/id_rsa
 ~/loadrc/gitrc/gpl.sh
 if [ -f dropbox.only ];
 then
