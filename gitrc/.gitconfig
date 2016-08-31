@@ -61,6 +61,8 @@
 [pull]
   default = current
 [gdif]
+  ignore = .classpath
+  ignore = .project
   ignore = branch.default
   ignore = dropbox.only
   ignore = gci.default
