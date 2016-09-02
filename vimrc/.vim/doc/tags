@@ -50,7 +50,6 @@
 'Tlist_WinWidth'	taglist.txt	/*'Tlist_WinWidth'*
 'Tlist_javascript_Hide_Extras'	taglist-plus.txt	/*'Tlist_javascript_Hide_Extras'*
 :Large	LargeFile.txt	/*:Large*
-:ShowSearchIndex	indexedsearch.txt	/*:ShowSearchIndex*
 :TlistAddFiles	taglist-plus.txt	/*:TlistAddFiles*
 :TlistAddFiles	taglist.txt	/*:TlistAddFiles*
 :TlistAddFilesRecursive	taglist-plus.txt	/*:TlistAddFilesRecursive*
@@ -95,8 +94,6 @@ Tlist_Set_App()	taglist-plus.txt	/*Tlist_Set_App()*
 Tlist_Set_App()	taglist.txt	/*Tlist_Set_App()*
 Tlist_Update_File_Tags()	taglist-plus.txt	/*Tlist_Update_File_Tags()*
 Tlist_Update_File_Tags()	taglist.txt	/*Tlist_Update_File_Tags()*
-indexedsearch	indexedsearch.txt	/*indexedsearch*
-indexedsearch.txt	indexedsearch.txt	/*indexedsearch.txt*
 largefile	LargeFile.txt	/*largefile*
 largefile-history	LargeFile.txt	/*largefile-history*
 sqlutil	SQLUtilities.txt	/*sqlutil*
