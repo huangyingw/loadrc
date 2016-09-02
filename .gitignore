@@ -6,4 +6,5 @@ gstv.ready
 keys/
 kvmrc/.ropeproject/
 vimrc/.vim/.netrwhist
+vimrc/.vim/bundle/vim-indexed-search/
 vimrc/.vim/view/
