@@ -29,3 +29,4 @@ else
     sed -i.bak "/$ss/d" gdif.findresult 
   done
 fi
+sort -u gdif.findresult -o gdif.findresult
