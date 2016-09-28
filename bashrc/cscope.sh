@@ -17,9 +17,8 @@ if [ ! -f cscope.out ]; then
     exit 0
 fi
 TARGETEDIR=`realpath "$PWD"`
-touch prunefile.conf
-touch prunefix.conf
-touch includefile.conf
+cp -nv ~/loadrc/prunefi* ./
+cp -nv ~/loadrc/includefile.conf ./
 TARGET=`pwd |sed -e "s/^.*\///g"`
 if [ -z $TARGET ];
 then
