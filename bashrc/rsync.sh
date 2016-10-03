@@ -1,5 +1,5 @@
 #!/bin/bash - 
-rsync -aHv --delete --force --progress \
+rsync -aHv --force --progress \
     --exclude-from="excludeFile" \
     "$1" \
     "$2"
