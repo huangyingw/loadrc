@@ -1,4 +1,8 @@
 *.bak
 *.findresult
+*.orig
+*.swp
 .git/
-cscope.*
+cscope.in.out
+cscope.out
+cscope.po.out
