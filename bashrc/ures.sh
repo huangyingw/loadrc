@@ -2,18 +2,18 @@
 OS=`uname`
 if [ "$OS" == "Darwin" ]
 then
-  echo -e "${red}It could only run in Linux... ${NC}"
-  exit 1
+    echo -e "${red}It could only run in Linux... ${NC}"
+    exit 1
 fi
 SOURCE=/media/volgrp/slink/media/`hostname`/ 
 TARGET=/
 if [ -n "$1" ]
 then 
-  SOURCE="$1"
+    SOURCE="$1"
 fi
 if [ -n "$2" ]
 then 
-  TARGET="$2"
+    TARGET="$2"
 fi
 echo $SOURCE
 echo $TARGET
@@ -22,15 +22,14 @@ URESIN="$HOME/loadrc/bashrc/ures_in"
 exclude_params=();
 while read suf
 do
-  exclude_params+=( "--exclude=$suf" )
+    exclude_params+=( "--exclude=$suf" )
 done < "$URESEX"
 include_params=();
 while read suf
 do
-  include_params+=( "--include=$suf" )
+    include_params+=( "--include=$suf" )
 done < "$URESIN"
 rsync -aH --delete-during "${exclude_params[@]}" "${SOURCE}" "${TARGET}" \
-  && scp -v "${SOURCE}"boot/vmlinuz-* "${SOURCE}"boot/initrd.img-*   "${TARGET}"boot/ \
-  && update-initramfs -u \
-  && update-grub2 \
-  && reboot
+    ; update-initramfs -u \
+    && update-grub2 \
+    && reboot
