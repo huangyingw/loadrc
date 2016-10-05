@@ -1,4 +1,10 @@
 #!/bin/bash 
+OS=`uname`
+if [ "$OS" == "Darwin" ]
+then
+  echo -e "${red}It could only run in Linux... ${NC}"
+  exit 1
+fi
 SOURCE=/media/volgrp/slink/media/`hostname`/ 
 TARGET=/
 if [ -n "$1" ]
