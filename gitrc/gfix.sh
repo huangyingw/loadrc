@@ -7,7 +7,7 @@ then
 fi 
 fix_branch=`git branch |awk '/^\*/{print $2}'`.fix
 echo $fix_branch
-if ( git branch|grep -q "\s$fix_branch\s" )
+if ( git branch|grep -q "$fix_branch" )
 then
     git checkout "$fix_branch"
     exit 0

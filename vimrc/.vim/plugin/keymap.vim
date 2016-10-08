@@ -155,7 +155,7 @@ nnoremap X :x<CR>
 nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
-nnoremap tt :Autoformat<CR>
+nnoremap tt :Autoformat<CR>:w<CR> 
 nnoremap D :vs %:p<CR>:vert resize<CR>
 " Quickly open current dir in current windows
 nnoremap <leader>d :call ShowProjectRoot()<cr>
