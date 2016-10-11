@@ -4,6 +4,12 @@ function! RememberQuit()
   vert resize
 endfunction
 
+function! VFilter()
+  normal! gvy<CR>
+  let b:keyword = @@
+  exec '%g!/' . b:keyword . '/d'
+  vert resize
+endfunction
 function! Filter()
   let b:keyword = expand("<cword>")
   exec '%g!/' . b:keyword . '/d'
@@ -205,7 +211,8 @@ endif
 " nnoremap F :echom expand('%:p')<cr>
 nnoremap F :call ShowRemember()<cr>
 vnoremap <silent>f :call VimSearch()<cr>
-vnoremap <silent>g :call GitSearch()<cr>
+" vnoremap <silent>g :call GitSearch()<cr>
+vnoremap <silent>g :call VFilter()<cr>
 vnoremap <silent>o :call UpCscope()<cr>
 nmap <C-@> :call CSCSearch()<CR><CR>
 nmap <C-d> :call ShowDiff()<CR><CR>
