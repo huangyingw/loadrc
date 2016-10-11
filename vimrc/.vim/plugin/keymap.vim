@@ -4,6 +4,11 @@ function! RememberQuit()
   vert resize
 endfunction
 
+function! Filter()
+  let b:keyword = expand("<cword>")
+  exec '%g!/' . b:keyword . '/d'
+  vert resize
+endfunction
 function! PlayAV()
   let line=getline('.')
   exec '!/Applications/VLC.app/Contents/MacOS/VLC ' . '"' .  line . '"'
@@ -141,7 +146,7 @@ vnoremap <Space> za
 "onoremap <silent> <leader>f <C-C>za
 "vnoremap <silent> <leader>f zf
 nnoremap <silent> <leader>e :vs $HOME/.bash_history<CR>:vert resize<CR>
-nnoremap <silent> <leader>f :vs $HOME/loadrc/.loadrc<CR>:vert resize<CR>
+nnoremap <silent> <leader>f :call Filter()<CR><CR> 
 nnoremap <silent> <leader>v :so $MYVIMRC<CR>
 nnoremap <leader>sh :execute "leftabove vs" bufname('#')<cr>:vert resize<CR>
 nnoremap <leader>sl :execute "rightbelow vs" bufname('#')<cr>:vert resize<CR>
