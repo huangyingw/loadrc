@@ -8,6 +8,7 @@ function! VFilter()
   normal! gvy<CR>
   let b:keyword = @@
   exec '%g!/' . b:keyword . '/d'
+  w
   vert resize
 endfunction
 function! Filter()
