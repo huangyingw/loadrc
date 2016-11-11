@@ -1,2 +1,2 @@
 #!/bin/bash
-git branch -a
+git branch -a | tee gbra.findresult
