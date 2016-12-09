@@ -8,7 +8,7 @@ realDeploy () {
     echo "Begin loadrc deploy on $server"
     ./rsync.sh ~/loadrc/ "$server":~/loadrc/
     ./rsync.sh ~/.tmux.conf "$server":~/.tmux.conf
-    ssh -n "$server" "apt-get install -y vim-gnome cscope"
+    ssh -n "$server" "apt-get install -y vim-gnome cscope tmux"
     ssh -n "$server" "ln -s ~/loadrc/vimrc/.vimrc ~/.vimrc"
     ssh -n "$server" "ln -s ~/loadrc/vimrc/.vim ~/.vim"
     ssh -n "$server" "mkdir -p /export/home1/username/cscope_db/"
