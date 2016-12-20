@@ -17,7 +17,7 @@ realDeploy () {
 if [ -n "$1" ]
 then
     realDeploy "$1"
-    return
+    exit
 fi
 
 while read -r line || [[ -n "$line" ]]; do
