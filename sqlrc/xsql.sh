@@ -19,4 +19,4 @@ echo "host --> $host"
 echo "dbinstance --> $dbinstance"
 echo "file --> $file"
 
-mysql -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
+mysql -v -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
