@@ -6,3 +6,4 @@
 cscope.in.out
 cscope.out
 cscope.po.out
+vimrc/.vim/view/*
