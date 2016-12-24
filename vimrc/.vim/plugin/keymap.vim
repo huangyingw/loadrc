@@ -18,6 +18,10 @@ function! VFilter()
   w
   vert resize
 endfunction
+function! ShowRemember()
+  let @+=expand('%:p')
+  echom expand('%:p')
+endfunction
 function! Filter()
   let b:keyword = expand("<cword>")
   exec '%g!/' . b:keyword . '/d'
@@ -124,15 +128,14 @@ function! ShowProjectRoot()
   let @+=b:csdbpath
   echom b:csdbpath
 endfunction
-function! FindCAlling()
+function! FindCalling()
   let @+=expand('%:p')
   let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
-  let b:keyword = expand('%:t')
+  let b:keyword = expand('%:r')
   exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
   let b:keyword = substitute(b:keyword, " ", "_", "g")
   let b:keyword = substitute(b:keyword, "/", "_", "g")
   exec 'vs ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
-  echom expand('%:p')
 endfunction
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR>
 nnoremap <leader>L :TlistClose<CR>
@@ -166,7 +169,7 @@ vnoremap <Space> za
 "onoremap <silent> <leader>f <C-C>za
 "vnoremap <silent> <leader>f zf
 nnoremap <silent> <leader>e :vs $HOME/.bash_history<CR>:vert resize<CR>
-nnoremap <silent> <leader>f :call Filter()<CR><CR> 
+nnoremap <silent> <leader>f :call ShowRemember()<CR><CR> 
 nnoremap <silent> <leader>v :so $MYVIMRC<CR>
 nnoremap <leader>sh :execute "leftabove vs" bufname('#')<cr>:vert resize<CR>
 nnoremap <leader>sl :execute "rightbelow vs" bufname('#')<cr>:vert resize<CR>
@@ -223,7 +226,7 @@ else
   nmap <leader>p :let @"=expand("%:p")<CR>
 endif
 " nnoremap F :echom expand('%:p')<cr>
-nnoremap F :call FindCAlling()<cr>
+nnoremap F :call FindCalling()<cr>
 vnoremap <silent>f :call VimSearch()<cr>
 " vnoremap <silent>g :call GitSearch()<cr>
 vnoremap <silent>g :call VFilter()<cr>
