@@ -124,8 +124,14 @@ function! ShowProjectRoot()
   let @+=b:csdbpath
   echom b:csdbpath
 endfunction
-function! ShowRemember()
+function! FindCAlling()
   let @+=expand('%:p')
+  let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
+  let b:keyword = expand('%:t')
+  exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
+  let b:keyword = substitute(b:keyword, " ", "_", "g")
+  let b:keyword = substitute(b:keyword, "/", "_", "g")
+  exec 'vs ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
   echom expand('%:p')
 endfunction
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR>
@@ -217,7 +223,7 @@ else
   nmap <leader>p :let @"=expand("%:p")<CR>
 endif
 " nnoremap F :echom expand('%:p')<cr>
-nnoremap F :call ShowRemember()<cr>
+nnoremap F :call FindCAlling()<cr>
 vnoremap <silent>f :call VimSearch()<cr>
 " vnoremap <silent>g :call GitSearch()<cr>
 vnoremap <silent>g :call VFilter()<cr>
