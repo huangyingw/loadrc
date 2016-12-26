@@ -1,18 +1,18 @@
-#!/bin/bash - 
+#!/bin/bash -
 #===============================================================================
 #
 #          FILE: searchIP.sh
-# 
-#         USAGE: ./searchIP.sh 
-# 
-#   DESCRIPTION: 
-# 
+#
+#         USAGE: ./searchIP.sh
+#
+#   DESCRIPTION:
+#
 #       OPTIONS: ---
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
-#        AUTHOR: YOUR NAME (), 
-#  ORGANIZATION: 
+#        AUTHOR: YOUR NAME (),
+#  ORGANIZATION:
 #       CREATED: 05/19/2016 17:57
 #      REVISION:  ---
 #===============================================================================
