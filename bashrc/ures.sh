@@ -1,18 +1,18 @@
-#!/bin/bash 
+#!/bin/bash
 OS=`uname`
 if [ "$OS" == "Darwin" ]
 then
     echo -e "${red}It could only run in Linux... ${NC}"
     exit 1
 fi
-SOURCE=/media/volgrp/slink/media/`hostname`/ 
+SOURCE=/media/volgrp/slink/media/`hostname`/
 TARGET=/
 if [ -n "$1" ]
-then 
+then
     SOURCE="$1"
 fi
 if [ -n "$2" ]
-then 
+then
     TARGET="$2"
 fi
 echo $SOURCE
@@ -29,7 +29,7 @@ while read suf
 do
     include_params+=( "--include=$suf" )
 done < "$URESIN"
-rsync -aH --delete-during "${exclude_params[@]}" "${SOURCE}" "${TARGET}" \
+rsync -aH --force --delete-during "${exclude_params[@]}" "${SOURCE}" "${TARGET}" \
     ; update-initramfs -u \
     && update-grub2 \
     && reboot
