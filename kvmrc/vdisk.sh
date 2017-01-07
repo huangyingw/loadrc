@@ -5,4 +5,4 @@ if [ ! -d "$DIRECTORY" ];
 then
   mkdir -p "$DIRECTORY"
 fi 
-qemu-img create -f qcow2 "$1" 5000G
+qemu-img create -f qcow2 "$1" 500G
