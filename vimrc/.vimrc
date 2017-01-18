@@ -11,12 +11,12 @@ let maplocalleader="\\"
 filetype indent on
 
 function! CHANGE_CURR_DIR()
-  let _dir = expand("%:p:h")
-  exec "cd " . fnameescape(_dir)
-  unlet _dir
-  if filereadable(".vimdc")
-    source .vimdc
-  endif
+    let _dir = expand("%:p:h")
+    exec "cd " . fnameescape(_dir)
+    unlet _dir
+    if filereadable(".vimdc")
+        source .vimdc
+    endif
 endfunction
 
 autocmd BufEnter * call CHANGE_CURR_DIR()
@@ -27,44 +27,44 @@ source ~/.vim/plugin/cscope_maps.vim
 
 " autoclose html/xml tag autocmd BufNewFile,BufRead *.html,*.htm,*.xml inoremap </ </<c-x><c-o>
 function! RemovePairs()
-  let l:line = getline(".")
-  let l:previous_char = l:line[col(".")-1] " 取得当前光标前一个字符
+    let l:line = getline(".")
+    let l:previous_char = l:line[col(".")-1] " 取得当前光标前一个字符
 
-  if index(["(", "[", "{"], l:previous_char) != -1
-    let l:original_pos = getpos(".")
-    execute "normal %"
-    let l:new_pos = getpos(".")
+    if index(["(", "[", "{"], l:previous_char) != -1
+        let l:original_pos = getpos(".")
+        execute "normal %"
+        let l:new_pos = getpos(".")
 
-    " 如果没有匹配的右括号
-    if l:original_pos == l:new_pos
-      execute "normal! a\<BS>"
-      return
-    end
+        " 如果没有匹配的右括号
+        if l:original_pos == l:new_pos
+            execute "normal! a\<BS>"
+            return
+        end
 
-    let l:line2 = getline(".")
-    if len(l:line2) == col(".")
-      " 如果右括号是当前行最后一个字符
-      execute "normal! v%xa"
+        let l:line2 = getline(".")
+        if len(l:line2) == col(".")
+            " 如果右括号是当前行最后一个字符
+            execute "normal! v%xa"
+        else
+            " 如果右括号不是当前行最后一个字符
+            execute "normal! v%xi"
+        end
+
     else
-      " 如果右括号不是当前行最后一个字符
-      execute "normal! v%xi"
+        execute "normal! a\<BS>"
     end
-
-  else
-    execute "normal! a\<BS>"
-  end
 endfunction
 " 用退格键删除一个左括号时同时删除对应的右括号
 inoremap <BS> <ESC>:call RemovePairs()<CR>a
 function! RemoveNextDoubleChar(char)
-  let l:line = getline(".")
-  let l:next_char = l:line[col(".")] " 取得当前光标后一个字符
+    let l:line = getline(".")
+    let l:next_char = l:line[col(".")] " 取得当前光标后一个字符
 
-  if a:char == l:next_char
-    execute "normal! l"
-  else
-    execute "normal! i" . a:char . ""
-  end
+    if a:char == l:next_char
+        execute "normal! l"
+    else
+        execute "normal! i" . a:char . ""
+    end
 endfunction
 inoremap ) <ESC>:call RemoveNextDoubleChar(')')<CR>a
 inoremap ] <ESC>:call RemoveNextDoubleChar(']')<CR>a
@@ -81,7 +81,7 @@ au! BufRead,BufNewFile *.hta  setfiletype html
 " Mapping ESC in insert mode and command mode to double j
 imap jj <C-[>
 " cmap jj  <C-[]]
-" This sets the minimum window height to 0, so you can stack many more files before things get crowded. Vim will only display the filename. 
+" This sets the minimum window height to 0, so you can stack many more files before things get crowded. Vim will only display the filename.
 set wmw=0
 set wmh=0
 " Editing behaviour {{{
@@ -153,9 +153,9 @@ set foldlevelstart=99           " start out with everything folded
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 " which commands trigger auto-unfold
 autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview 
+autocmd BufWinEnter *.* silent loadview
 set viewoptions=cursor,folds,slash,unix
-" let g:skipview_files = ['*\.vim'] 
+" let g:skipview_files = ['*\.vim']
 " }}}
 " Editor layout {{{
 set termencoding=utf-8
@@ -175,87 +175,87 @@ set cmdheight=1                 " use a status bar that is 2 rows high
 " Pulse ------------------------------------------------------------------- {{{
 
 function! PulseCursorLine()
-  let current_window = winnr()
+    let current_window = winnr()
 
-  windo set nocursorline
-  execute current_window . 'wincmd w'
+    windo set nocursorline
+    execute current_window . 'wincmd w'
 
-  setlocal cursorline
+    setlocal cursorline
 
-  redir => old_hi
-  silent execute 'hi CursorLine'
-  redir END
-  let old_hi = split(old_hi, '\n')[0]
-  let old_hi = substitute(old_hi, 'xxx', '', '')
+    redir => old_hi
+    silent execute 'hi CursorLine'
+    redir END
+    let old_hi = split(old_hi, '\n')[0]
+    let old_hi = substitute(old_hi, 'xxx', '', '')
 
-  hi CursorLine guibg=#3a3a3a
-  redraw
-  sleep 20m
+    hi CursorLine guibg=#3a3a3a
+    redraw
+    sleep 20m
 
-  hi CursorLine guibg=#4a4a4a
-  redraw
-  sleep 30m
+    hi CursorLine guibg=#4a4a4a
+    redraw
+    sleep 30m
 
-  hi CursorLine guibg=#3a3a3a
-  redraw
-  sleep 30m
+    hi CursorLine guibg=#3a3a3a
+    redraw
+    sleep 30m
 
-  hi CursorLine guibg=#2a2a2a
-  redraw
-  sleep 20m
+    hi CursorLine guibg=#2a2a2a
+    redraw
+    sleep 20m
 
-  execute 'hi ' . old_hi
+    execute 'hi ' . old_hi
 
-  windo set cursorline
-  execute current_window . 'wincmd w'
+    windo set cursorline
+    execute current_window . 'wincmd w'
 endfunction
 
 " }}}
 highlight StatusLine cterm=bold ctermfg=yellow ctermbg=blue
 " 获取当前路径，将$HOME转化为~
 function! CurDir()
-  let curdir = substitute(getcwd(), $HOME, "~", "g")
-  return curdir
+    let curdir = substitute(getcwd(), $HOME, "~", "g")
+    return curdir
 endfunction
 
 " Set a nicer foldtext function
 set foldtext=MyFoldText()
 function! MyFoldText()
-  let line = getline(v:foldstart)
-  if match( line, '^[ \t]*\(\/\*\|\/\/\)[*/\\]*[ \t]*$' ) == 0
-    let initial = substitute( line, '^\([ \t]\)*\(\/\*\|\/\/\)\(.*\)', '\1\2', '' )
-    let linenum = v:foldstart + 1
-    while linenum < v:foldend
-      let line = getline( linenum )
-      let comment_content = substitute( line, '^\([ \t\/\*]*\)\(.*\)$', '\2', 'g' )
-      if comment_content != ''
-        break
-      endif
-      let linenum = linenum + 1
-    endwhile
-    let sub = initial . ' ' . comment_content
-  else
-    let sub = line
-    let startbrace = substitute( line, '^.*{[ \t]*$', '{', 'g')
-    if startbrace == '{'
-      let line = getline(v:foldend)
-      let endbrace = substitute( line, '^[ \t]*}\(.*\)$', '}', 'g')
-      if endbrace == '}'
-        let sub = sub.substitute( line, '^[ \t]*}\(.*\)$', '...}\1', 'g')
-      endif
+    let line = getline(v:foldstart)
+    if match( line, '^[ \t]*\(\/\*\|\/\/\)[*/\\]*[ \t]*$' ) == 0
+        let initial = substitute( line, '^\([ \t]\)*\(\/\*\|\/\/\)\(.*\)', '\1\2', '' )
+        let linenum = v:foldstart + 1
+        while linenum < v:foldend
+            let line = getline( linenum )
+            let comment_content = substitute( line, '^\([ \t\/\*]*\)\(.*\)$', '\2', 'g' )
+            if comment_content != ''
+                break
+            endif
+            let linenum = linenum + 1
+        endwhile
+        let sub = initial . ' ' . comment_content
+    else
+        let sub = line
+        let startbrace = substitute( line, '^.*{[ \t]*$', '{', 'g')
+        if startbrace == '{'
+            let line = getline(v:foldend)
+            let endbrace = substitute( line, '^[ \t]*}\(.*\)$', '}', 'g')
+            if endbrace == '}'
+                let sub = sub.substitute( line, '^[ \t]*}\(.*\)$', '...}\1', 'g')
+            endif
+        endif
     endif
-  endif
-  let n = v:foldend - v:foldstart + 1
-  let info = " " . n . " lines"
-  let sub = sub . "                                                                                                                  "
-  let num_w = getwinvar( 0, '&number' ) * getwinvar( 0, '&numberwidth' )
-  let fold_w = getwinvar( 0, '&foldcolumn' )
-  let sub = strpart( sub, 0, winwidth(0) - strlen( info ) - num_w - fold_w - 1 )
-  return sub . info
+    let n = v:foldend - v:foldstart + 1
+    let info = " " . n . " lines"
+    let sub = sub . "                                                                                                                  "
+    let num_w = getwinvar( 0, '&number' ) * getwinvar( 0, '&numberwidth' )
+    let fold_w = getwinvar( 0, '&foldcolumn' )
+    let sub = strpart( sub, 0, winwidth(0) - strlen( info ) - num_w - fold_w - 1 )
+    return sub . info
 endfunction
 
 execute pathogen#infect()
-" map <C-t> :tabedit 
+" map <C-t> :tabedit
 " powerline{
 "  set guifont=PowerlineSymbols\ for\ Powerline
 "  set nocompatible
@@ -276,15 +276,15 @@ let Tlist_GainFocus_On_ToggleOpen = 1
 set viminfo='10,\"100,:20,%,n~/.viminfo
 
 function! ResCur()
-  if line("'\"") <= line("$")
-    normal! g`"
-    return 1
-  endif
+    if line("'\"") <= line("$")
+        normal! g`"
+        return 1
+    endif
 endfunction
 
 augroup resCur
-  autocmd!
-  autocmd BufWinEnter * call ResCur()
+    autocmd!
+    autocmd BufWinEnter * call ResCur()
 augroup END
 
 :command -nargs=1 FF :vertical scscope find f <q-args>
@@ -311,9 +311,9 @@ call vundle#rc()
 filetype plugin indent on     " required!
 
 function TrimEndLines()
-  let save_cursor = getpos(".")
-  :silent! %s#\($\n\s*\)\+\%$##
-  call setpos('.', save_cursor)
+    let save_cursor = getpos(".")
+    :silent! %s#\($\n\s*\)\+\%$##
+    call setpos('.', save_cursor)
 endfunction
 
 au BufWritePre *.py call TrimEndLines()
@@ -324,9 +324,9 @@ au BufWritePre *.vimrc call TrimEndLines()
 ":set isfname+=32
 let os = substitute(system('uname'), "\n", "", "")
 if os == "Linux"
-  set clipboard=unnamedplus
+    set clipboard=unnamedplus
 else
-  set clipboard=unnamed 
+    set clipboard=unnamed
 endif
 au FileType javascript call JavaScriptFold()
 autocmd BufRead,BufNewFile *.txt setlocal spell
@@ -338,21 +338,21 @@ autocmd BufRead,BufNewFile *.txt setlocal spell
 " until it finds the file, or it hits the stop dir.
 " If it doesn't find it, it returns "Nothing"
 function! Find_in_parent(fln,flsrt,flstp)
-  let here = a:flsrt
-  while ( strlen( here) > 0 )
-    if filereadable( here . "/" . a:fln )
-      return here
-    endif
-    let fr = match(here, "/[^/]*$")
-    if fr == -1
-      break
-    endif
-    let here = strpart(here, 0, fr)
-    if here == a:flstp
-      break
-    endif
-  endwhile
-  return "/"
+    let here = a:flsrt
+    while ( strlen( here) > 0 )
+        if filereadable( here . "/" . a:fln )
+            return here
+        endif
+        let fr = match(here, "/[^/]*$")
+        if fr == -1
+            break
+        endif
+        let here = strpart(here, 0, fr)
+        if here == a:flstp
+            break
+        endif
+    endwhile
+    return "/"
 endfunc
 
 "==
@@ -361,10 +361,22 @@ endfunc
 "  Or the current working dir if there isn't one for the window.
 "  Use tr to allow that other OS paths, too
 function! Windowdir()
-  if winbufnr(0) == -1
-    let unislash = getcwd()
-  else 
-    let unislash = fnamemodify(bufname(winbufnr(0)), ':p:h')
-  endif
-  return tr(unislash, '\', '/')
+    if winbufnr(0) == -1
+        let unislash = getcwd()
+    else
+        let unislash = fnamemodify(bufname(winbufnr(0)), ':p:h')
+    endif
+    return tr(unislash, '\', '/')
+endfunc
+
+"==
+" windowdir
+"  Gets the directory for the file in the current window
+"  Or the current working dir if there isn't one for the window.
+"  Use tr to allow that other OS paths, too
+function! GetKeywordFileName(keyword)
+    let result = keyword
+    let result = substitute(result, " ", "_", "g")
+    let result = substitute(result, "/", "_", "g")
+    return result
 endfunc
