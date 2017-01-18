@@ -6,7 +6,10 @@ endfunction
 
 function! ExFilter()
   normal! gvy<CR>
-  let b:keyword = @@
+  let csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
+  let keyword = @@
+  exec 'w ' . csdbpath . '/' . keyword . '.vaa.findresult'
+  exec 'e ' . csdbpath . '/' . keyword . '.vaa.findresult'
   exec 'g/' . b:keyword . '/d'
   w
   vert resize
