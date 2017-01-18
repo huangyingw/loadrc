@@ -8,9 +8,11 @@ function! ExFilter()
   normal! gvy<CR>
   let csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
   let keyword = @@
-  exec 'w ' . csdbpath . '/' . keyword . '.vaa.findresult'
-  exec 'e ' . csdbpath . '/' . keyword . '.vaa.findresult'
-  exec 'g/' . b:keyword . '/d'
+  let fileName = substitute(keyword, " ", "_", "g")
+  let fileName = substitute(fileName, "/", "_", "g")
+  exec 'w ' . csdbpath . '/' . fileName . '.vaa.findresult'
+  exec 'e ' . csdbpath . '/' . fileName . '.vaa.findresult'
+  exec 'g/' . keyword . '/d'
   w
   vert resize
 endfunction
@@ -18,8 +20,10 @@ function! VFilter()
   normal! gvy<CR>
   let csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
   let keyword = @@
-  exec 'w ' . csdbpath . '/' . keyword . '.vaa.findresult'
-  exec 'e ' . csdbpath . '/' . keyword . '.vaa.findresult'
+  let fileName = substitute(keyword, " ", "_", "g")
+  let fileName = substitute(fileName, "/", "_", "g")
+  exec 'w ' . csdbpath . '/' . fileName . '.vaa.findresult'
+  exec 'e ' . csdbpath . '/' . fileName . '.vaa.findresult'
   exec '%g!/' . keyword . '/d'
   w
   vert resize
