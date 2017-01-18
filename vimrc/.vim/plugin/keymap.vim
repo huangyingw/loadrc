@@ -11,7 +11,7 @@ function! ExFilter()
   let fileName = substitute(keyword, " ", "_", "g")
   let fileName = substitute(fileName, "/", "_", "g")
   exec 'w ' . csdbpath . '/' . fileName . '.vaa.findresult'
-  exec 'e ' . csdbpath . '/' . fileName . '.vaa.findresult'
+  exec 'vs ' . csdbpath . '/' . fileName . '.vaa.findresult'
   exec 'g/' . keyword . '/d'
   w
   vert resize
@@ -23,7 +23,7 @@ function! VFilter()
   let fileName = substitute(keyword, " ", "_", "g")
   let fileName = substitute(fileName, "/", "_", "g")
   exec 'w ' . csdbpath . '/' . fileName . '.vaa.findresult'
-  exec 'e ' . csdbpath . '/' . fileName . '.vaa.findresult'
+  exec 'vs ' . csdbpath . '/' . fileName . '.vaa.findresult'
   exec '%g!/' . keyword . '/d'
   w
   vert resize
