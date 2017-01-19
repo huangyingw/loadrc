@@ -374,8 +374,8 @@ endfunc
 "  Gets the directory for the file in the current window
 "  Or the current working dir if there isn't one for the window.
 "  Use tr to allow that other OS paths, too
-function! GetKeywordFileName(keyword)
-    let result = keyword
+function! GetKeywordFileName(keywordStr)
+    let result = a:keywordStr
     let result = substitute(result, " ", "_", "g")
     let result = substitute(result, "/", "_", "g")
     return result
