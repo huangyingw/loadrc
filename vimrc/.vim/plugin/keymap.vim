@@ -23,9 +23,13 @@ function! VFilter()
     normal! gvy<CR>
     let csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
     let keyword = @@
-    let fileName = GetKeywordFileName(keyword)
-    exec 'w ' . csdbpath . '/' . fileName . '.vaa.findresult'
-    exec 'vs ' . csdbpath . '/' . fileName . '.vaa.findresult'
+
+    if expand('%:e') != "findresult"
+        let fileName = GetKeywordFileName(keyword)
+        exec 'w ' . csdbpath . '/' . fileName . '.vaa.findresult'
+        exec 'vs ' . csdbpath . '/' . fileName . '.vaa.findresult'
+    endif
+
     exec '%g!/' . keyword . '/d'
     w
     vert resize
