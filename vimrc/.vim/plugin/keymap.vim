@@ -11,7 +11,7 @@ function! ExFilter()
 
     if expand('%:e') != "findresult"
         let fileName = GetKeywordFileName(keyword)
-        exec 'w ' . csdbpath . '/' . fileName . '.vaa.findresult'
+        exec 'w! ' . csdbpath . '/' . fileName . '.vaa.findresult'
         exec 'vs ' . csdbpath . '/' . fileName . '.vaa.findresult'
     endif
 
@@ -26,7 +26,7 @@ function! VFilter()
 
     if expand('%:e') != "findresult"
         let fileName = GetKeywordFileName(keyword)
-        exec 'w ' . csdbpath . '/' . fileName . '.vaa.findresult'
+        exec 'w! ' . csdbpath . '/' . fileName . '.vaa.findresult'
         exec 'vs ' . csdbpath . '/' . fileName . '.vaa.findresult'
     endif
 
