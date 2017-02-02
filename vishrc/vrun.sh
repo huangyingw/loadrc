@@ -28,7 +28,7 @@ case $extension in
     read -p "press any key to continue...." update
     ;;
   yml)
-    docker-compose -f "$file" up -d 2>&1 | tee "$file".findresult
+    docker-compose -f "$file" up --build --force-recreate -d 2>&1 | tee "$file".findresult
     read -p "press any key to continue...." update
     ;;
   ymldebug)
