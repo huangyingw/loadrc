@@ -1,7 +1,8 @@
 #!/bin/bash
-if [ `hostname` == "mini14" ]
+OS=`uname`
+if [ $OS == "Darwin" ];
 then
-  sudo -u huangyingw gnome-screensaver-command --lock && sudo pm-suspend
+    ~/loadrc/dockerrc/killDockers.sh ; pmset sleepnow
 else
-  sudo pm-suspend
+    sudo -u huangyingw gnome-screensaver-command --lock && sudo pm-suspend
 fi
