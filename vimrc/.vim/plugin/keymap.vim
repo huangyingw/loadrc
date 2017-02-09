@@ -1,141 +1,154 @@
 function! RememberQuit()
-  let @"=expand("%:p")
-  q
-  vert resize
+    let @"=expand("%:p")
+    q
+    vert resize
 endfunction
 
 function! ExFilter()
-  normal! gvy<CR>
-  let b:keyword = @@
-  exec 'g/' . b:keyword . '/d'
-  w
-  vert resize
+    normal! gvy<CR>
+    let csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
+    let keyword = @@
+
+    if expand('%:e') != "findresult"
+        let fileName = GetKeywordFileName(keyword)
+        exec 'w! ' . csdbpath . '/' . fileName . '.vaa.findresult'
+        exec 'vs ' . csdbpath . '/' . fileName . '.vaa.findresult'
+    endif
+
+    exec 'g/' . keyword . '/d'
+    w
+    vert resize
 endfunction
 function! VFilter()
-  normal! gvy<CR>
-  let b:keyword = @@
-  exec '%g!/' . b:keyword . '/d'
-  w
-  vert resize
+    normal! gvy<CR>
+    let csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
+    let keyword = @@
+
+    if expand('%:e') != "findresult"
+        let fileName = GetKeywordFileName(keyword)
+        exec 'w! ' . csdbpath . '/' . fileName . '.vaa.findresult'
+        exec 'vs ' . csdbpath . '/' . fileName . '.vaa.findresult'
+    endif
+
+    exec '%g!/' . keyword . '/d'
+    w
+    vert resize
 endfunction
 function! ShowRemember()
-  let @+=expand('%:p')
-  echom expand('%:p')
+    let @+=expand('%:p')
+    echom expand('%:p')
 endfunction
 function! Filter()
-  let b:keyword = expand("<cword>")
-  exec '%g!/' . b:keyword . '/d'
-  vert resize
+    let b:keyword = expand("<cword>")
+    exec '%g!/' . b:keyword . '/d'
+    vert resize
 endfunction
 function! PlayAV()
-  let line=getline('.')
-  exec '!/Applications/VLC.app/Contents/MacOS/VLC ' . '"' .  line . '"'
-  vert resize
+    let line=getline('.')
+    exec '!/Applications/VLC.app/Contents/MacOS/VLC ' . '"' .  line . '"'
+    vert resize
 endfunction
 function! CSCSearchQ()
-  let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
-  let b:keyword = expand("<cword>")
-  exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 1 . ' ' . 'qcsc'
-  exec 'vs ' . b:csdbpath . '/' . b:keyword . '.qcsc.findresult'
-  vert resize
+    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
+    let b:keyword = expand("<cword>")
+    exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 1 . ' ' . 'qcsc'
+    exec 'vs ' . b:csdbpath . '/' . b:keyword . '.qcsc.findresult'
+    vert resize
 endfunction
 function! VRun()
-  let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
-  exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
-  vert resize
+    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
+    exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
+    vert resize
 endfunction
 function! CSCSearch()
-  let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
-  let b:keyword = expand("<cword>")
-  exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 4 . ' ' . 'csc'
-  exec 'vs ' . b:csdbpath . '/' . b:keyword . '.csc.findresult'
-  vert resize
+    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
+    let b:keyword = expand("<cword>")
+    exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 4 . ' ' . 'csc'
+    exec 'vs ' . b:csdbpath . '/' . b:keyword . '.csc.findresult'
+    vert resize
 endfunction
 function! UpCscope()
-  normal! gvy<CR>
-  let b:keyword = @@
-  exec '!touch ' . b:keyword . '/cscope.out'
-  exec '!~/loadrc/bashrc/cscope.sh ' . b:keyword
-  vert resize
+    normal! gvy<CR>
+    let b:keyword = @@
+    exec '!touch ' . b:keyword . '/cscope.out'
+    exec '!~/loadrc/bashrc/cscope.sh ' . b:keyword
+    vert resize
 endfunction
 function! ShowDiff()
-  let b:commit = expand("<cword>")
-  exec '!~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"' 
-  vert resize
+    let b:commit = expand("<cword>")
+    exec '!~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"'
+    vert resize
 endfunction
 function! UpdateCscope()
-  let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
-  exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
-  vert resize
+    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
+    exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
+    vert resize
 endfunction
 function! VimOpen()
-  let b:fileName = expand(expand("<cfile>"))
-  let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
-  if (expand("%") ==# 'index')
-    if isdirectory(getcwd() . '/../' . b:fileName)
-      exec 'vs ' . getcwd() . '/../' . b:fileName . '/.git/index'
+    let b:fileName = expand(expand("<cfile>"))
+    let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
+    if (expand("%") ==# 'index')
+        if isdirectory(getcwd() . '/../' . b:fileName)
+            exec 'vs ' . getcwd() . '/../' . b:fileName . '/.git/index'
+        else
+            vert wincmd F
+        endif
+    elseif (expand("%") ==# 'gbr.findresult')
+        let b:commit = expand("<cword>")
+        exec '!git checkout ' . '"' .  b:commit . '"'
+        vert resize
+    elseif (expand("%") ==# 'gbil.findresult')
+        let b:commit = expand("<cword>")
+        exec '!git checkout ' . '"' .  b:commit . '"'
+        vert resize
+    elseif (expand("%") ==# 'glg.findresult')
+        let b:commit = expand("<cword>")
+        exec '!git checkout ' . '"' .  b:commit . '"'
+        vert resize
     else
-      vert wincmd F
+        if !filereadable(b:fileName)
+            if !isdirectory(b:filePath)
+                call mkdir(b:filePath, "p")
+            endif
+            exec 'vs ' . b:fileName
+            vert resize
+        else
+            vert wincmd F
+        endif
     endif
-  elseif (expand("%") ==# 'gbr.findresult')
-    let b:commit = expand("<cword>")
-    exec '!git checkout ' . '"' .  b:commit . '"' 
     vert resize
-  elseif (expand("%") ==# 'gbil.findresult')
-    let b:commit = expand("<cword>")
-    exec '!git checkout ' . '"' .  b:commit . '"' 
-    vert resize
-  elseif (expand("%") ==# 'glg.findresult')
-    let b:commit = expand("<cword>")
-    exec '!git checkout ' . '"' .  b:commit . '"' 
-    vert resize
-  else
-    if !filereadable(b:fileName)
-      if !isdirectory(b:filePath)
-        call mkdir(b:filePath, "p")
-      endif
-      exec 'vs ' . b:fileName
-      vert resize
-    else
-      vert wincmd F
-    endif
-  endif
-  vert resize
 endfunction
 function! GitSearch()
-  normal! gvy<CR>
-  let b:csdbpath = Find_in_parent(".git/config",Windowdir(),$HOME)
-  let b:keyword = @@
-  exec "cd " . b:csdbpath
-  exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"'
-  let b:keyword = substitute(b:keyword, " ", "_", "g")
-  let b:keyword = substitute(b:keyword, "/", "_", "g")
-  exec 'vs ' . b:keyword . '.gsearch.findresult'
-  vert resize
+    normal! gvy<CR>
+    let b:csdbpath = Find_in_parent(".git/config",Windowdir(),$HOME)
+    let b:keyword = @@
+    exec "cd " . b:csdbpath
+    exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"'
+    let b:keyword = GetKeywordFileName(b:keyword)
+    exec 'vs ' . b:keyword . '.gsearch.findresult'
+    vert resize
 endfunction
 function! VimSearch()
-  normal! gvy<CR>
-  let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
-  let b:keyword = @@
-  exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
-  let b:keyword = substitute(b:keyword, " ", "_", "g")
-  let b:keyword = substitute(b:keyword, "/", "_", "g")
-  exec 'vs ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
-  vert resize
+    normal! gvy<CR>
+    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
+    let b:keyword = @@
+    exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
+    let b:keyword = GetKeywordFileName(b:keyword)
+    exec 'vs ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
+    vert resize
 endfunction
 function! ShowProjectRoot()
-  let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
-  let @+=b:csdbpath
-  echom b:csdbpath
+    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
+    let @+=b:csdbpath
+    echom b:csdbpath
 endfunction
 function! FindCalling()
-  let @+=expand('%:p')
-  let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
-  let b:keyword = expand('%:t')
-  exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
-  let b:keyword = substitute(b:keyword, " ", "_", "g")
-  let b:keyword = substitute(b:keyword, "/", "_", "g")
-  exec 'vs ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
+    let @+=expand('%:p')
+    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
+    let b:keyword = expand('%:t')
+    exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
+    let b:keyword = GetKeywordFileName(b:keyword)
+    exec 'vs ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
 endfunction
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR>
 nnoremap <leader>L :TlistClose<CR>
@@ -169,7 +182,7 @@ vnoremap <Space> za
 "onoremap <silent> <leader>f <C-C>za
 "vnoremap <silent> <leader>f zf
 nnoremap <silent> <leader>e :vs $HOME/.bash_history<CR>:vert resize<CR>
-nnoremap <silent> <leader>f :call ShowRemember()<CR><CR> 
+nnoremap <silent> <leader>f :call ShowRemember()<CR><CR>
 nnoremap <silent> <leader>v :so $MYVIMRC<CR>
 nnoremap <leader>sh :execute "leftabove vs" bufname('#')<cr>:vert resize<CR>
 nnoremap <leader>sl :execute "rightbelow vs" bufname('#')<cr>:vert resize<CR>
@@ -183,7 +196,7 @@ nnoremap X :x<CR>
 nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
-nnoremap tt :Autoformat<CR>:w<CR> 
+nnoremap tt :Autoformat<CR>:w<CR>
 nnoremap D :vs %:p<CR>:vert resize<CR>
 " Quickly open current dir in current windows
 nnoremap <leader>d :call ShowProjectRoot()<cr>
@@ -195,35 +208,35 @@ nmap <f2> :set number! number?<cr>
 nmap <leader>w :set wrap!<cr>
 " Convert slashes to backslashes for Windows.
 if has('win32')
-  nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
-  nmap <leader>cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+    nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
+    nmap <leader>cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
 
-  " This will copy the path in 8.3 short format, for DOS and Windows 9x
-  nmap <leader>c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
+    " This will copy the path in 8.3 short format, for DOS and Windows 9x
+    nmap <leader>c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
 else
-  nmap <leader>cs :let @*=expand("%")<CR>
-  nmap <leader>cl :let @*=expand("%:p")<CR>
+    nmap <leader>cs :let @*=expand("%")<CR>
+    nmap <leader>cl :let @*=expand("%:p")<CR>
 endif
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
-      \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-      \gvy/<C-R><C-R>=substitute(
-      \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-      \gV:call setreg('"', old_reg, old_regtype)<CR>
+            \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+            \gvy/<C-R><C-R>=substitute(
+            \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+            \gV:call setreg('"', old_reg, old_regtype)<CR>
 vnoremap <silent> # :<C-U>
-      \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-      \gvy?<C-R><C-R>=substitute(
-      \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-      \gV:call setreg('"', old_reg, old_regtype)<CR>
+            \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+            \gvy?<C-R><C-R>=substitute(
+            \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+            \gV:call setreg('"', old_reg, old_regtype)<CR>
 if has('win32')
-  nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
-  nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+    nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
+    nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
 
-  " This will copy the path in 8.3 short format, for DOS and Windows 9x
-  nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
+    " This will copy the path in 8.3 short format, for DOS and Windows 9x
+    nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
 else
-  nmap fs :let @"=expand("%")<CR>
-  nmap <leader>p :let @"=expand("%:p")<CR>
+    nmap fs :let @"=expand("%")<CR>
+    nmap <leader>p :let @"=expand("%:p")<CR>
 endif
 " nnoremap F :echom expand('%:p')<cr>
 nnoremap F :call FindCalling()<cr>
@@ -244,12 +257,12 @@ nnoremap L :vs <C-R>"<CR>:vert resize<CR>
 map <F5> :call VRun()<cr>
 nnoremap gf gF<CR>:vert resize<CR>
 map oo :call VimOpen()<cr>
-nmap <C-g> :!gitk --follow --all -p -- %:p<CR>:vert resize<CR>  
-nnoremap <silent> <leader>g :!gitk --follow --all -p -- %:p<CR>:vert resize<CR> 
+nmap <C-g> :!gitk --follow --all -p -- %:p<CR>:vert resize<CR>
+nnoremap <silent> <leader>g :!gitk --follow --all -p -- %:p<CR>:vert resize<CR>
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
 
 function! CompareTwoFiles()
-  execute '!kdiff3' @" expand("%:p")
+    execute '!kdiff3' @" expand("%:p")
 endfunc
 
 nnoremap <leader>2 :call CompareTwoFiles()<cr>
