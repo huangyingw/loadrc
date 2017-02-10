@@ -29,7 +29,4 @@ while read suf
 do
     include_params+=( "--include=$suf" )
 done < "$URESIN"
-rsync -aH --force --delete-during "${exclude_params[@]}" "${SOURCE}" "${TARGET}" \
-    ; update-initramfs -u \
-    && update-grub2 \
-    && reboot
+rsync -aH --force --delete-during "${exclude_params[@]}" "${SOURCE}" "${TARGET}"
