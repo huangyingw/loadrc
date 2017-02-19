@@ -1,5 +1,6 @@
+/media
 /proc/
+/sys/
 fstab
 hostname
 interfaces
-/media
