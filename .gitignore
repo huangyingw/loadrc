@@ -5,7 +5,4 @@ bashrc/output
 gstv.ready
 kvmrc/.ropeproject/
 vimrc/.vim/.netrwhist
-vimrc/.vim/bundle/swift.vim/
-vimrc/.vim/bundle/vim-ansible-yaml/
-vimrc/.vim/bundle/vim-indexed-search/
 vimrc/.vim/view/
