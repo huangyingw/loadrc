@@ -1,3 +1,6 @@
 [submodule "keys"]
 	path = keys
 	url = ./keys/
+[submodule "vimrc/.vim/bundle/swift.vim"]
+	path = vimrc/.vim/bundle/swift.vim
+	url = ./vimrc/.vim/.netrwhist
