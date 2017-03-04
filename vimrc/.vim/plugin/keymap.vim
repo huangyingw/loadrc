@@ -260,7 +260,7 @@ nnoremap H :call ShowVITAG()<cr>
 nnoremap T :vs $HOME/cscope.findresult<CR>:vert resize<CR>
 nnoremap L :vs <C-R>"<CR>:vert resize<CR>
 map <F5> :call VRun()<cr>
-map <F4> :call VDebug()<cr>
+map <F3> :call VDebug()<cr>
 nnoremap gf gF<CR>:vert resize<CR>
 map oo :call VimOpen()<cr>
 nmap <C-g> :!gitk --follow --all -p -- %:p<CR>:vert resize<CR>
