@@ -1,5 +1,6 @@
 /media
 /proc/
+/run/
 /sys/
 fstab
 hostname
