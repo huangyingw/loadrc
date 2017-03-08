@@ -3,10 +3,6 @@
 bashrc/.bash_history
 bashrc/output
 gstv.ready
-keys/
 kvmrc/.ropeproject/
 vimrc/.vim/.netrwhist
-vimrc/.vim/bundle/swift.vim/
-vimrc/.vim/bundle/vim-indexed-search/
 vimrc/.vim/view/
-vimrc/.vim/bundle/vim-ansible-yaml/

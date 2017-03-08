@@ -329,7 +329,6 @@ else
     set clipboard=unnamed
 endif
 au FileType javascript call JavaScriptFold()
-autocmd BufRead,BufNewFile *.txt setlocal spell
 "
 "==
 " Find_in_parent

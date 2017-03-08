@@ -1,0 +1,12 @@
+[submodule "keys"]
+    path = keys
+    url = ./keys/
+[submodule "vimrc/.vim/bundle/swift.vim"]
+    path = vimrc/.vim/bundle/swift.vim
+    url = /Users/huangyingw/loadrc/vimrc/.vim/bundle/swift.vim/
+[submodule "vimrc/.vim/bundle/vim-ansible-yaml"]
+    path = vimrc/.vim/bundle/vim-ansible-yaml
+    url = /Users/huangyingw/loadrc/vimrc/.vim/bundle/vim-ansible-yaml/
+[submodule "vimrc/.vim/bundle/vim-indexed-search"]
+    path = vimrc/.vim/bundle/vim-indexed-search
+    url = /Users/huangyingw/loadrc/vimrc/.vim/bundle/vim-indexed-search/
