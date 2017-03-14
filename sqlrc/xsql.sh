@@ -13,10 +13,10 @@ host=`cat ${loginFile} |awk -F'=' '/host/{print $2}'`
 dbinstance=`cat ${loginFile} |awk -F'=' '/dbinstance/{print $2}'`
 
 echo "loginFile --> $loginFile"
-echo "user --> $user"
-echo "password --> $password"
-echo "host --> $host"
-echo "dbinstance --> $dbinstance"
+echo "user=$user"
+echo "password=$password"
+echo "host=$host"
+echo "dbinstance=$dbinstance"
 echo "file --> $file"
 
 mysql -v -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
