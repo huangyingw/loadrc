@@ -24,7 +24,7 @@ function! VFilter()
     let csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
     let keyword = @@
 
-    if expand('%:e') != "findresult"
+    if expand('%:e') != "findresult" || expand('%:p') =~ "*\/cscope_db\/*"
         let fileName = GetKeywordFileName(keyword)
         exec 'w! ' . csdbpath . '/' . fileName . '.vaa.findresult'
         exec 'vs ' . csdbpath . '/' . fileName . '.vaa.findresult'
