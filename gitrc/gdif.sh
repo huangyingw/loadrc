@@ -5,7 +5,7 @@ then
   then
     git diff --name-status "$1" "$2" | tee gdif.findresult 
   else
-    git diff --name-status "$1" | tee gdif.findresult  
+    git diff --name-status HEAD "$1" | tee gdif.findresult  
   fi
 else
   if [ -z "$(git status --porcelain)" ]
@@ -20,10 +20,12 @@ if [ "$OS" == "Linux" ]
 then
   xargs sed -i"" "s/\bA\b/git\srm/g" < gdif.findresult
 else
-  sed -i.bak "s/[[:<:]]A[[:>:]]/git rm/g" gdif.findresult 
-  sed -i.bak "s/[[:<:]]D[[:>:]]/git checkout $1 -- /g" gdif.findresult 
-  sed -i.bak "s/[[:<:]]M[[:>:]]/git checkout $1 -- /g" gdif.findresult 
-  sed -i.bak "s/[[:<:]]T[[:>:]]/git checkout $1 -- /g" gdif.findresult 
+  sed -i.bak "s/[[:<:]]D[[:>:]]/git rm/g" gdif.findresult 
+  sed -i.bak "s/[[:<:]][AMT][[:>:]]/git checkout $1 -- /g" gdif.findresult 
+  #sed -i.bak "s/[[:<:]]A[[:>:]]/git rm/g" gdif.findresult 
+  #sed -i.bak "s/[[:<:]]D[[:>:]]/git checkout $1 -- /g" gdif.findresult 
+  #sed -i.bak "s/[[:<:]]M[[:>:]]/git checkout $1 -- /g" gdif.findresult 
+  #sed -i.bak "s/[[:<:]]T[[:>:]]/git checkout $1 -- /g" gdif.findresult 
   for ss in $(git config --get-all gdif.ignore)
   do 
     sed -i.bak "/$ss/d" gdif.findresult 
