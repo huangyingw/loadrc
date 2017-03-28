@@ -12,6 +12,7 @@
 *.pyc
 *.sql.result
 *.suo
+*.sv[a-z]
 *.sw[a-z]
 *.xls
 *.zip
