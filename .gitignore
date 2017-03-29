@@ -1,3 +1,4 @@
+*.list
 .passwd
 .ssh/known_hosts
 bashrc/.bash_history
