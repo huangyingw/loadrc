@@ -373,9 +373,24 @@ endfunc
 "  Gets the directory for the file in the current window
 "  Or the current working dir if there isn't one for the window.
 "  Use tr to allow that other OS paths, too
-function! GetKeywordFileName(keywordStr)
+function! GetEscapedKeyword(keywordStr)
     let result = a:keywordStr
-    let result = substitute(result, " ", "_", "g")
-    let result = substitute(result, "/", "_", "g")
+    let result = substitute(result, '/', '\/', 'g')
+    let result = substitute(result, '\"', '\\"', 'g')
+    let result = substitute(result, '\_s\+$', '\\s\\*', '')
+    let result = substitute(result, '\_s\+', '\\_s\\+', 'g')
+    let result = substitute(result, '\n', '\\n', 'g')
+    let result = substitute(result, '^\_s\+', '\\s\\+', '')
+    return result
+endfunc
+function! GetEscapedResult(keywordStr)
+    let result = a:keywordStr
+    let result = substitute(result, " ", "", "g")
+    let result = substitute(result, "/", "", "g")
+    let result = substitute(result, "(", "", "g")
+    let result = substitute(result, ")", "", "g")
+    let result = substitute(result, '\"', '', 'g')
+    let result = substitute(result, '\,', '', 'g')
+    let result = substitute(result, '\\', '', 'g')
     return result
 endfunc

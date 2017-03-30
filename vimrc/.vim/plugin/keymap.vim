@@ -10,7 +10,7 @@ function! ExFilter()
     let keyword = @@
 
     if expand('%:e') != "findresult"
-        let fileName = GetKeywordFileName(keyword)
+        let fileName = GetEscapedKeyword(keyword)
         exec 'w! ' . csdbpath . '/' . fileName . '.vaa.findresult'
         exec 'vs ' . csdbpath . '/' . fileName . '.vaa.findresult'
     endif
@@ -25,7 +25,7 @@ function! VFilter()
     let keyword = @@
 
     if expand('%:e') != "findresult"
-        let fileName = GetKeywordFileName(keyword)
+        let fileName = GetEscapedKeyword(keyword)
         exec 'w! ' . csdbpath . '/' . fileName . '.vaa.findresult'
         exec 'vs ' . csdbpath . '/' . fileName . '.vaa.findresult'
     endif
@@ -129,17 +129,17 @@ function! GitSearch()
     let b:keyword = @@
     exec "cd " . b:csdbpath
     exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"'
-    let b:keyword = GetKeywordFileName(b:keyword)
+    let b:keyword = GetEscapedKeyword(b:keyword)
     exec 'vs ' . b:keyword . '.gsearch.findresult'
     vert resize
 endfunction
 function! VimSearch()
     normal! gvy<CR>
     let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
-    let b:keyword = @@
-    exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
-    let b:keyword = GetKeywordFileName(b:keyword)
-    exec 'vs ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
+    let b:keyword = GetEscapedKeyword(@@)
+    let b:result = GetEscapedResult(b:keyword)
+    exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"' . ' "' .  b:result . '"'
+    exec 'vs ' . b:csdbpath.'/'.b:result.'.vaa.findresult'  
     vert resize
 endfunction
 function! ShowProjectRoot()
@@ -152,7 +152,7 @@ function! FindCalling()
     let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
     let b:keyword = expand('%:t')
     exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
-    let b:keyword = GetKeywordFileName(b:keyword)
+    let b:keyword = GetEscapedKeyword(b:keyword)
     exec 'vs ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
 endfunction
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR>
