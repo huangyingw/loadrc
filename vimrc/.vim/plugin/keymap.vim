@@ -25,11 +25,13 @@ function! VFilter()
     normal! gvy<CR>
     let csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
     let keyword = @@
+    let b:result = GetEscapedResult(keyword)
+    let keyword = GetEscapedKeywordForVIM(keyword)
+    echom 'keyword : '.keyword
 
     if expand('%:e') != "findresult"
-        let fileName = GetEscapedKeyword(keyword)
-        exec 'w! ' . csdbpath . '/' . fileName . '.vaa.findresult'
-        exec 'vs ' . csdbpath . '/' . fileName . '.vaa.findresult'
+        exec 'w! ' . csdbpath . '/' . b:result . '.vaa.findresult'
+        exec 'vs ' . csdbpath . '/' . b:result . '.vaa.findresult'
     endif
 
     exec '%g!/' . keyword . '/d'
