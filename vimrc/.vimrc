@@ -377,8 +377,9 @@ function! GetEscapedKeyword(keywordStr)
     let result = a:keywordStr
     let result = substitute(result, '/', '\/', 'g')
     let result = substitute(result, '\"', '\\"', 'g')
+    let result = substitute(result, '\$', '\\$', 'g')
     let result = substitute(result, '\_s\+$', '\\s\\*', '')
-    let result = substitute(result, '\_s\+', '\\_s\\+', 'g')
+    let result = substitute(result, '\_s', ' ', 'g')
     let result = substitute(result, '\n', '\\n', 'g')
     let result = substitute(result, '^\_s\+', '\\s\\+', '')
     return result
@@ -392,5 +393,6 @@ function! GetEscapedResult(keywordStr)
     let result = substitute(result, '\"', '', 'g')
     let result = substitute(result, '\,', '', 'g')
     let result = substitute(result, '\\', '', 'g')
+    let result = substitute(result, '\$', '', 'g')
     return result
 endfunc
