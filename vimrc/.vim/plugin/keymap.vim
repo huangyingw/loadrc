@@ -145,6 +145,23 @@ function! VimSearch()
     exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"' . ' "' .  b:result . '"'
     exec 'vs ' . b:csdbpath.'/'.b:result.'.vaa.findresult'
     vert resize
+    let old_reg = getreg('"')
+    let old_regtype = getregtype('"')
+    if @@ =~? '^[0-9a-z,_]*$' || @@ =~? '^[0-9a-z ,_]*$' && g:VeryLiteral
+        let @/ = @@
+    else
+        let pat = escape(@@, '\')
+        if g:VeryLiteral
+            let pat = substitute(pat, '\n', '\\n', 'g')
+        else
+            let pat = substitute(pat, '^\_s\+', '\\s\\+', '')
+            let pat = substitute(pat, '\_s\+$', '\\s\\*', '')
+            let pat = substitute(pat, '\_s\+', '\\_s\\+', 'g')
+        endif
+        let @/ = '\V'.pat
+    endif
+    normal! gV
+    call setreg('"', old_reg, old_regtype)
 endfunction
 function! ShowProjectRoot()
     let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
