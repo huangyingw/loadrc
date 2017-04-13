@@ -24,4 +24,4 @@ then
 fi
 echo "cscope_db_file " "$cscope_db_file"
 echo "result in " "$1/$find_result"
-xargs fgrep -inH "$2" < "$cscope_db_file" | tee "$find_result"
+xargs fgrep -inH "$2" < "$cscope_db_file" > "$find_result"
