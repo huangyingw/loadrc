@@ -170,7 +170,6 @@ function! ShowProjectRoot()
     echom b:csdbpath
 endfunction
 function! FindCalling()
-    let @+=expand('%:p')
     let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
     let b:keyword = expand('%:t')
     exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
