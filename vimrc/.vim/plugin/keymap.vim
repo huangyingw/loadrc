@@ -139,12 +139,12 @@ function! GitSearch()
 endfunction
 function! VimSearch()
     normal! gvy<CR>
-    let csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
-    let keyword = GetEscapedKeyword(@@)
-    let result = GetEscapedResult(keyword)
-    exec '!~/loadrc/vishrc/vaa.sh ' . csdbpath . ' "' .  keyword . '"' . ' "' .  result . '"'
-    exec 'vs ' . csdbpath.'/'.result.'.vaa.findresult'
-    exec 'w! ' . csdbpath.'/'.result.'.vaa.findresult' 
+    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
+    let b:keyword = GetEscapedKeyword(@@)
+    let b:result = GetEscapedResult(b:keyword)
+    exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"' . ' "' .  b:result . '"'
+    exec 'vs ' . b:csdbpath.'/'.b:result.'.vaa.findresult'
+    exec 'w! ' . expand('%:p')
     vert resize
     let old_reg = getreg('"')
     let old_regtype = getregtype('"')
