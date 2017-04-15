@@ -47,7 +47,7 @@ do
     include_params+=( $or "-wholename" "$suf" )
     or="-o"
 done < "$INCLUDE_FILE"
-find -L "$TARGETEDIR" "(" "${prune_params[@]}" "${prune_files[@]}" ")" -a -prune -o -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > ${TARGET}
+find -L "$TARGETEDIR" "(" "${prune_params[@]}" "${prune_files[@]}" ")" -a -prune -o -type f -size -900k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > ${TARGET}
 if [ ${#include_params[@]} -gt 0 ]; then
     find -L "$TARGETEDIR" "(" "${include_params[@]}" ")" -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET}
 fi
