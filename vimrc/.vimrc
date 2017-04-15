@@ -393,6 +393,7 @@ function! GetEscapedResult(keywordStr)
     let result = a:keywordStr
     let result = substitute(result, " ", "", "g")
     let result = substitute(result, "/", "", "g")
+    let result = substitute(result, "|", "", "g")
     let result = substitute(result, "(", "", "g")
     let result = substitute(result, ")", "", "g")
     let result = substitute(result, '\"', '', 'g')
