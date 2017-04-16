@@ -1,6 +1,6 @@
 #alias sshfs='sshfs -o allow_other,uid=1000,gid=1000'
 #alias tmux='$HOME/loadrc/bashrc/tmux.sh'
-alias apf='apt-get update && aptitude -y full-upgrade'
+alias apf='$HOME/loadrc/bashrc/apf.sh'
 alias api='apt-get install -y'
 alias aps='$HOME/loadrc/bashrc/aps.sh'
 alias apu='apt-get update'
@@ -64,7 +64,7 @@ alias rssh='$HOME/loadrc/bashrc/rssh.sh'
 alias rsync_svn='$HOME/loadrc/bashrc/rsync_svn.sh'
 alias rsynctype='$HOME/loadrc/bashrc/rsynctype.sh'
 alias sMov='$HOME/loadrc/bashrc/sMov.sh'
-alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho 
+alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
 alias selectCopy='$HOME/loadrc/bashrc/selectCopy.sh'
 alias selectMirror='$HOME/loadrc/bashrc/selectMirror.sh'
 alias sleep='$HOME/loadrc/bashrc/sleep.sh'
