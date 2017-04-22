@@ -207,7 +207,7 @@ vnoremap <Space> za
 "nnoremap <silent> <leader>f za
 "onoremap <silent> <leader>f <C-C>za
 "vnoremap <silent> <leader>f zf
-nnoremap <silent> <leader>e :vs $HOME/.bash_history<CR>:vert resize<CR>
+nnoremap <silent> <leader>e :call VsMax($HOME . "/.bash_history") <CR>
 nnoremap <silent> <leader>f :call ShowRemember()<CR><CR>
 nnoremap <silent> <leader>v :so $MYVIMRC<CR>
 nnoremap <leader>sh :execute "leftabove vs" bufname('#')<cr>:vert resize<CR>
