@@ -212,7 +212,7 @@ nnoremap <silent> <leader>f :call ShowRemember()<CR><CR>
 nnoremap <silent> <leader>v :so $MYVIMRC<CR>
 nnoremap <leader>sh :execute "leftabove vs" bufname('#')<cr>:vert resize<CR>
 nnoremap <leader>sl :execute "rightbelow vs" bufname('#')<cr>:vert resize<CR>
-nnoremap W :vs .<CR>:vert resize<CR>
+nnoremap W :call VsMax(".")<CR>
 " Quickly reload current file
 nnoremap E :mkview<CR>:e!<CR>
 " Quickly save current file
