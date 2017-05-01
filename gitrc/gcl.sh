@@ -14,8 +14,12 @@ then
         && cd ${target} \
         && $HOME/loadrc/bashrc/cscope.sh
 else
-    target=`echo $1 | sed -e "s|.git$||;s|^.*github.com.||;s|\/|-|"` \
-        && echo ${target} \
+    target=`echo $1 | sed -e "s|.git$||;s|^.*github.com.||;s|\/|-|"`
+    if [ -n "$2" ];
+    then
+        target="$2"
+    fi
+    echo ${target} \
         && git clone "$1" ${target} \
         && cd ${target} \
         && $HOME/loadrc/gitrc/gcob.sh dev.fix \
