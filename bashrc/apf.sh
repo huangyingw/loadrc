@@ -10,5 +10,3 @@ then
 else
     brew update ; brew upgrade
 fi
-
-cd -
