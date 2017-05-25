@@ -1,69 +1,70 @@
 [user]
-  name = Ying Huang
-  email = yinghuang@itutorgroup.com
+    name = Ying Huang
+    email = yinghuang@itutorgroup.com
 [merge]
-  tool = kdiff3
+    tool = kdiff3
 [color]
-  ui = auto
+    ui = auto
 [color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
+    current = yellow reverse
+    local = yellow
+    remote = green
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
 [color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
+    added = yellow
+    changed = green
+    untracked = cyan
 [color]
-  ui = true
+    ui = true
 [color "diff"]
-  whitespace = red reverse
+    whitespace = red reverse
 [core]
-  whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 [diff]
-  tool = kdiff3
+    tool = kdiff3
 [alias]
-  ad = add
-  bi = bisect
-  ci = commit
-  co = checkout
-  me = merge
-  mt = mergetool
-  rs = reset --hard
-  sm = submodule
-  st = status
-  sta = stash
-  tg = tag -l -n1
-  vd = difftool
+    ad = add
+    bi = bisect
+    ci = commit
+    co = checkout
+    me = merge
+    mt = mergetool
+    rs = reset --hard
+    sm = submodule
+    st = status
+    sta = stash
+    tg = tag -l -n1
+    vd = difftool
 [difftool]
-  prompt = true
+    prompt = true
 [core]
-  excludesfile = "~/.globalgitignore"
-  mergeoptions = --no-edit
+    excludesfile = "~/.globalgitignore"
+    mergeoptions = --no-edit
 [color]
-  ui = auto
+    ui = auto
 [giggle]
-  main-window-maximized = true
-  main-window-geometry = 700x550+0+55
-  history-view-vpane-position = 403
-  main-window-view = HistoryView
-  file-view-vpane-position = 609
+    main-window-maximized = true
+    main-window-geometry = 700x550+0+55
+    history-view-vpane-position = 403
+    main-window-view = HistoryView
+    file-view-vpane-position = 609
 [filter "media"]
-  clean = git media clean %f
-  smudge = git media smudge %f
-  required = true
+    clean = git media clean %f
+    smudge = git media smudge %f
+    required = true
 [push]
-  default = current
+    default = current
 [pull]
-  default = current
+    default = current
 [gdif]
-  ignore = branch.default
-  ignore = dropbox.only
-  ignore = gci.default
-  ignore = gme.default
-  ignore = includefile.conf
-  ignore = prunefix.conf
+    ignore = branch.default
+    ignore = dropbox.only
+    ignore = gci.default
+    ignore = gme.default
+    ignore = gps.default
+    ignore = includefile.conf
+    ignore = prunefix.conf
