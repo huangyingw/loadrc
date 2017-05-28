@@ -114,6 +114,10 @@ function! VimOpen()
         let b:commit = expand("<cword>")
         exec '!git checkout ' . '"' .  b:commit . '"'
         vert resize
+    elseif (expand("%") ==# 'dps.findresult')
+        let b:commit = expand("<cword>")
+        exec '!~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"'
+        vert resize
     else
         if !filereadable(b:fileName)
             if !isdirectory(b:filePath)
