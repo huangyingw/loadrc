@@ -29,7 +29,6 @@ case $extension in
         ;;
     yml)
         docker-compose -f "$file" up -d 2>&1 | tee "$file".findresult
-        docker-compose -f "$file" restart 2>&1 | tee "$file".findresult
         read -p "press any key to continue...." update
         ;;
     ymldebug)
