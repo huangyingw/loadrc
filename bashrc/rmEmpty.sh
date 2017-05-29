@@ -1,9 +1,10 @@
 #!/bin/bash
+
 if [ -z "$1" ];
 then
-  TARGETEDIR=.
+    TARGETEDIR=.
 else
-  TARGETEDIR="$1"
+    TARGETEDIR="$1"
 fi
 
-find "$TARGETEDIR" -type d -depth -empty -exec rmdir "{}" \;
+find "$TARGETEDIR" -type d -empty -delete
