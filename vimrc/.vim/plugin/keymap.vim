@@ -69,13 +69,6 @@ function! VRun()
     exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
     vert resize
 endfunction
-function! CSCSearch()
-    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
-    let b:keyword = expand("<cword>")
-    exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 4 . ' ' . 'csc'
-    exec 'vs ' . b:csdbpath . '/' . b:keyword . '.csc.findresult'
-    vert resize
-endfunction
 function! UpCscope()
     normal! gvy<CR>
     let b:keyword = @@
@@ -275,7 +268,6 @@ vnoremap <silent>f :call VimSearch()<cr>
 vnoremap <silent>g :call VFilter()<cr>
 vnoremap <silent>i :call ExFilter()<cr>
 vnoremap <silent>o :call UpCscope()<cr>
-nmap <C-@> :call CSCSearch()<CR><CR>
 nmap <C-d> :call ShowDiff()<CR><CR>
 nmap <C-f> :call CSCSearchQ()<CR><CR>
 " nmap <C-j> :call PlayAV()<CR><CR>

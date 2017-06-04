@@ -19,13 +19,7 @@ fi
 TARGETEDIR=`realpath "$PWD"`
 cp -nv ~/loadrc/prunefi* ./
 cp -nv ~/loadrc/includefile.conf ./
-TARGET=`pwd |sed -e "s/^.*\///g"`
-if [ -z $TARGET ];
-then
-    TARGET='osroot'
-fi
-TARGET='/export/home1/username/cscope_db/'$TARGET
-echo $TARGET
+TARGET=cscope.findresult
 PARA=-bqR
 PRUNE_POSTFIX=prunefix.conf
 PRUNE_FILE=prunefile.conf
@@ -47,9 +41,8 @@ do
     include_params+=( $or "-wholename" "$suf" )
     or="-o"
 done < "$INCLUDE_FILE"
-find -L "$TARGETEDIR" "(" "${prune_params[@]}" "${prune_files[@]}" ")" -a -prune -o -type f -size -900k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > ${TARGET}
+find -L . "(" "${prune_params[@]}" "${prune_files[@]}" ")" -a -prune -o -type f -size -900k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > ${TARGET}
 if [ ${#include_params[@]} -gt 0 ]; then
-    find -L "$TARGETEDIR" "(" "${include_params[@]}" ")" -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET}
+    find -L . "(" "${include_params[@]}" ")" -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET}
 fi
 sort -u ${TARGET} -o ${TARGET}
-find /export/home1/username/cscope_db "(" "${prune_params[@]}" "${prune_files[@]}" ")" -a -prune -o -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > ~/cscope.findresult
