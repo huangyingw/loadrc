@@ -16,7 +16,7 @@ case $extension in
         read -p "press any key to continue...." update
         ;;
     sh)
-        sh ${1} 2>&1 | tee ${1}.findresult
+        bash ${1} 2>&1 | tee ${1}.findresult
         read -p "press any key to continue...." update
         ;;
     py)
