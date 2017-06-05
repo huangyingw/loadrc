@@ -17,11 +17,6 @@ if [ -f "$find_result" ]; then
 fi
 echo "search in " "$1"
 cd "$1"
-cscope_db_file="/export/home1/username/cscope_db/""${PWD##*/}"
-if [ "$1" == "/" ];
-then
-    cscope_db_file="/export/home1/username/cscope_db/osroot"
-fi
-echo "cscope_db_file " "$cscope_db_file"
+cscope_db_file=cscope.findresult
 echo "result in " "$1/$find_result"
 xargs fgrep -inH "$2" < "$cscope_db_file" > "$find_result"
