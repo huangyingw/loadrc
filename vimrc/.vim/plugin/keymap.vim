@@ -71,10 +71,28 @@ function! VRun()
 endfunction
 function! CSCSearch()
     let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
-    let b:keyword = expand("<cword>")
-    exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 4 . ' ' . 'csc'
-    exec 'vs ' . b:csdbpath . '/' . b:keyword . '.csc.findresult'
+    let keyword = expand("<cword>")
+    exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 4 . ' ' . 'csc'
+    exec 'vs ' . b:csdbpath . '/' . keyword . '.csc.findresult'
     vert resize
+    let @@ = keyword
+    let old_reg = getreg('"')
+    let old_regtype = getregtype('"')
+    if @@ =~? '^[0-9a-z,_]*$' || @@ =~? '^[0-9a-z ,_]*$' && g:VeryLiteral
+        let @/ = @@
+    else
+        let pat = escape(@@, '\')
+        if g:VeryLiteral
+            let pat = substitute(pat, '\n', '\\n', 'g')
+        else
+            let pat = substitute(pat, '^\_s\+', '\\s\\+', '')
+            let pat = substitute(pat, '\_s\+$', '\\s\\*', '')
+            let pat = substitute(pat, '\_s\+', '\\_s\\+', 'g')
+        endif
+        let @/ = '\V'.pat
+    endif
+    normal! gV
+    call setreg('"', old_reg, old_regtype)
 endfunction
 function! UpCscope()
     normal! gvy<CR>
