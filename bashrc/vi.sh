@@ -1,5 +1,5 @@
 #!/bin/bash
-TARGET=cscope.findresult
+TARGET=files.proj
 if [ -z "$1" ];
 then
   if [ -f "$TARGET" ]

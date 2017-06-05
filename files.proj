@@ -1134,7 +1134,6 @@
 "./vimrc/.vim/ftplugin/org.eclipse.jdt.core.prefs"
 "./vimrc/.vim/indent/json.vim"
 "./vimrc/.vim/indent/vala.vim"
-"./vimrc/.vim/plugin/.keymap.vim.swi"
 "./vimrc/.vim/plugin/AddSubtract.vim"
 "./vimrc/.vim/plugin/AutoClose.vim"
 "./vimrc/.vim/plugin/IndexedSearch.vim"

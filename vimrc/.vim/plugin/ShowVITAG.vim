@@ -19,6 +19,6 @@ endfunc
 function! ShowVITAG()
     let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
     exec "cd " . b:csdbpath
-    exe 'vs cscope.findresult'
+    exe 'vs files.proj'
     vert resize
 endfunction
