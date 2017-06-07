@@ -4,6 +4,7 @@ if [ $OS != "Darwin" ];
 then
   return
 fi
+sudo pmset -a displaysleep 60
 chmod 400 ~/.ssh/id_rsa
 chmod 400 ~/loadrc/keys/*.pem
 alias restartBluetooth='$HOME/loadrc/osxrc/restart_bluetooth.sh '
