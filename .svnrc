@@ -1,5 +1,6 @@
 alias svndiff='$HOME/loadrc/svnrc/svndiff.sh'
 alias svnhistory='$HOME/loadrc/svnrc/svnhistory.sh'
+alias svnreset='$HOME/loadrc/svnrc/svnreset.sh'
 alias svnst='$HOME/loadrc/svnrc/svnst.sh'
 alias svnup='$HOME/loadrc/svnrc/svnup.sh'
 alias svnvdiff='$HOME/loadrc/svnrc/svnvdiff.sh'
