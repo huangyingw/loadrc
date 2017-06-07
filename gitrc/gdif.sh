@@ -18,7 +18,7 @@ fi
 OS=`uname`
 if [ "$OS" == "Linux" ]
 then
-    xargs sed -i"" "s/\bA\b/git\srm/g" < gdif.findresult
+    sed -i.bak "s/\b[AMT]\b/git checkout $1 -- /g" gdif.findresult
 else
     sed -i.bak "s/[[:<:]]D[[:>:]]/git rm/g" gdif.findresult
     sed -i.bak "s/[[:<:]][AMT][[:>:]]/git checkout $1 -- /g" gdif.findresult
