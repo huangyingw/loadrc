@@ -13,7 +13,7 @@
 . $HOME/loadrc/.vbunturc
 . $HOME/loadrc/openrc.sh
 
-HOSTRC=$HOME/loadrc/."`hostname`"rc
+HOSTRC=$HOME/loadrc/."`hostname`".rc
 if [ -f "$HOSTRC" ]
 then
   . "$HOSTRC"
