@@ -8,3 +8,4 @@ else
 fi
 
 find "$TARGETEDIR" -type d -empty -delete
+rmdir "$TARGETEDIR"
