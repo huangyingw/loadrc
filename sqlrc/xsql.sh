@@ -7,16 +7,19 @@ then
     loginFile=${2}/.login
 fi
 
+echo "loginFile --> $loginFile"
 user=`cat ${loginFile} |awk -F'=' '/user/{print $2}'`
 password=`cat ${loginFile} |awk -F'=' '/password/{print $2}'`
 host=`cat ${loginFile} |awk -F'=' '/host/{print $2}'`
 dbinstance=`cat ${loginFile} |awk -F'=' '/dbinstance/{print $2}'`
 
-echo "loginFile --> $loginFile"
-echo "user=$user"
-echo "password=$password"
-echo "host=$host"
-echo "dbinstance=$dbinstance"
-echo "file --> $file"
+if [ -z "$host" ];
+then
+    echo "dbinstance=$dbinstance" >> "$loginFile"
+    echo "host=$host" >> "$loginFile"
+    echo "password=$password" >> "$loginFile"
+    echo "user=$user" >> "$loginFile"
+fi
 
+sort -u "$loginFile" -o "$loginFile"
 mysql -v -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
