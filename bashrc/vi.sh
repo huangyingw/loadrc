@@ -17,4 +17,3 @@ else
 fi
 
 upsearch "$TARGET"
-vim $TARGET
