@@ -7,6 +7,4 @@ files.proj
 gstv.ready
 kvmrc/.ropeproject/
 vimrc/.vim/.netrwhist
-vimrc/.vim/bundle/Dockerfile.vim/
-vimrc/.vim/bundle/vim-docker-compose-syntax/
 vimrc/.vim/view/
