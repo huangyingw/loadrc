@@ -3,10 +3,24 @@
     url = ./keys/
 [submodule "vimrc/.vim/bundle/swift.vim"]
     path = vimrc/.vim/bundle/swift.vim
-    url = /Users/huangyingw/loadrc/vimrc/.vim/bundle/swift.vim/
+    url = ~/loadrc/vimrc/.vim/bundle/swift.vim/
 [submodule "vimrc/.vim/bundle/vim-ansible-yaml"]
     path = vimrc/.vim/bundle/vim-ansible-yaml
-    url = /Users/huangyingw/loadrc/vimrc/.vim/bundle/vim-ansible-yaml/
+    url = ~/loadrc/vimrc/.vim/bundle/vim-ansible-yaml/
 [submodule "vimrc/.vim/bundle/vim-indexed-search"]
     path = vimrc/.vim/bundle/vim-indexed-search
-    url = /Users/huangyingw/loadrc/vimrc/.vim/bundle/vim-indexed-search/
+    url = ~/loadrc/vimrc/.vim/bundle/vim-indexed-search/
+[submodule "vimrc/.vim/bundle/indentLine"]
+	path = vimrc/.vim/bundle/indentLine
+	url = ~/loadrc/vimrc/.vim/bundle/indentLine/
+[submodule "vimrc/.vim/bundle/bash-support.vim"]
+	path = vimrc/.vim/bundle/bash-support.vim
+[submodule "Dockerfile.vim"]
+	path = Dockerfile.vim
+	url = ./vimrc/.vim/bundle/Dockerfile.vim/
+[submodule "vimrc/.vim/bundle/vim-docker-compose-syntax"]
+	path = vimrc/.vim/bundle/vim-docker-compose-syntax
+	url = ~/loadrc/vimrc/.vim/bundle/vim-docker-compose-syntax/
+[submodule "vimrc/.vim/bundle/Dockerfile.vim"]
+	path = vimrc/.vim/bundle/Dockerfile.vim
+	url = ~/loadrc/vimrc/.vim/bundle/Dockerfile.vim/
