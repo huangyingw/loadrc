@@ -27,3 +27,6 @@
 [submodule "vimrc/.vim/bundle/SimpylFold"]
 	path = vimrc/.vim/bundle/SimpylFold
 	url = /Users/yhuang/loadrc/vimrc/.vim/bundle/SimpylFold/
+[submodule ".ssh"]
+	path = .ssh
+	url = ./.ssh/
