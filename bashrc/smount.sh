@@ -8,7 +8,6 @@ fi
 OS=`uname`
 if [ "$OS" == "Linux" ]
 then
-    umount /media/samba
     mkdir -p /media/"$1"
     sshfs "$1":/media /media/"$1"
     df -TH
