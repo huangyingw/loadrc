@@ -3,7 +3,7 @@
 SLOADRC=$HOME/loadrc/."`hostname`".sloadrc
 if [ -f "$SLOADRC" ]
 then
-    ./bashrc/sload.sh
+    $HOME/loadrc/bashrc/sload.sh
 fi
 
 . $HOME/loadrc/.androidrc
