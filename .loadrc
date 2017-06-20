@@ -1,11 +1,4 @@
 #!/bin/bash
-
-SLOADRC=$HOME/loadrc/."`hostname`".sloadrc
-if [ -f "$SLOADRC" ]
-then
-    $HOME/loadrc/bashrc/sload.sh
-fi
-
 . $HOME/loadrc/.androidrc
 . $HOME/loadrc/.dockerrc
 . $HOME/loadrc/.envrc
