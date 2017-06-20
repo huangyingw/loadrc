@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SLOADRC=$HOME/LOADRC/."`HOSTNAME`".sloadrc
+SLOADRC=$HOME/loadrc/."`hostname`".sloadrc
 if [ -f "$SLOADRC" ]
 then
     ./bashrc/sload.sh
