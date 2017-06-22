@@ -8,6 +8,7 @@ fi
 OS=`uname`
 if [ "$OS" == "Linux" ]
 then
+    sudo umount -l ~/"$1"
     mkdir -p ~/"$1"
     sshfs "$1":/ ~/"$1"
     df -TH

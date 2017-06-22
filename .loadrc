@@ -16,5 +16,5 @@
 HOSTRC=$HOME/loadrc/."`hostname`".rc
 if [ -f "$HOSTRC" ]
 then
-  . "$HOSTRC"
+    . "$HOSTRC"
 fi
