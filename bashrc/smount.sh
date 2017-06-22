@@ -8,8 +8,8 @@ fi
 OS=`uname`
 if [ "$OS" == "Linux" ]
 then
-    mkdir -p /media/"$1"
-    sshfs "$1":/media /media/"$1"
+    mkdir -p ~/"$1"
+    sshfs "$1":/ ~/"$1"
     df -TH
 else
     diskutil unmountDisk force ~/samba
