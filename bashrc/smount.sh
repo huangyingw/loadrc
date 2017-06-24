@@ -5,16 +5,18 @@ then
     exit 1
 fi
 
+remoteServer=echo "$1" | sed  -e "s/\/$//g"
+
 OS=`uname`
 if [ "$OS" == "Linux" ]
 then
-    sudo umount -l ~/"$1"
-    mkdir -p ~/"$1"
-    sshfs "$1":/ ~/"$1"
+    sudo umount -l ~/"$remoteServer"
+    mkdir -p ~/"$remoteServer"
+    sshfs "$remoteServer":/ ~/"$remoteServer"
     df -TH
 else
     diskutil unmountDisk force ~/samba
-    mkdir -p ~/"$1"
-    sshfs "$1":/ ~/"$1"
+    mkdir -p ~/"$remoteServer"
+    sshfs "$remoteServer":/ ~/"$remoteServer"
     df -H
 fi
