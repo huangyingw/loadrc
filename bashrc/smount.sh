@@ -5,7 +5,7 @@ then
     exit 1
 fi
 
-remoteServer=echo "$1" | sed  -e "s/\/$//g"
+remoteServer=$(echo "$1" | sed  -e "s/\/$//g")
 
 OS=`uname`
 if [ "$OS" == "Linux" ]
