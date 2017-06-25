@@ -15,7 +15,7 @@ then
     sshfs "$remoteServer":/ ~/"$remoteServer"
     df -TH
 else
-    diskutil unmountDisk force ~/samba
+    diskutil unmountDisk force ~/"$remoteServer"
     mkdir -p ~/"$remoteServer"
     sshfs "$remoteServer":/ ~/"$remoteServer"
     df -H
