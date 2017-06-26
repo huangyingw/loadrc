@@ -3,7 +3,6 @@
 .ssh/known_hosts
 bashrc/.bash_history
 bashrc/output
-files.proj
 gstv.ready
 kvmrc/.ropeproject/
 vimrc/.vim/.netrwhist
