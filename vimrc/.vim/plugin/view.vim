@@ -3,11 +3,11 @@
 set statusline=%r%h
 set statusline +=\ %.55F            "full path
 set statusline+=\ %{WordCount()}\ words,
-set statusline +=%=        " Switch to the right side            
+set statusline +=%=        " Switch to the right side
 set statusline +=\ %l             "current line
 set statusline +=/%L               "total lines
 set statusline +=\ %v             "virtual column number
-set statusline +=\ %f                
+set statusline +=\ %f
 set statusline +=\ %m                "modified flag
 "set statusline +=%1*\ %n\ %*            "buffer number
 "set statusline +=%5*%{&ff}%*            "file format
@@ -17,9 +17,10 @@ set cursorline                  " underline the current line, for quick orientat
 " Split previously opened file ('#') in a split window
 set laststatus=2 "black status line at bottom of window
 if has("win32")
-  set statusline+=\ %<%f%h%m%r%=%{strftime(\"%I:%M:%S\ \%p,\ %a\ %b\ %d,\ %Y\")}\ %{&ff}\ %l,%c%V\ %P
+    set statusline+=\ %<%f%h%m%r%=%{strftime(\"%I:%M:%S\ \%p,\ %a\ %b\ %d,\ %Y\")}\ %{&ff}\ %l,%c%V\ %P
 else
-  set statusline+=\%{strftime(\"%l:%M:%S\")}
+    set statusline+=\%{strftime(\"%l:%M:%S\")}
 endif
 syn match ipaddr /\(\(25\_[0-5]\|2\_[0-4]\_[0-9]\|\_[01]\?\_[0-9]\_[0-9]\?\)\.\)\{3\}\(25\_[0-5]\|2\_[0-4]\_[0-9]\|\_[01]\?\_[0-9]\_[0-9]\?\)/
 hi link ipaddr Identifier
+set completeopt-=preview
