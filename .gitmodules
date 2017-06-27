@@ -24,9 +24,6 @@
 [submodule "vimrc/.vim/bundle/Dockerfile.vim"]
 	path = vimrc/.vim/bundle/Dockerfile.vim
 	url = ~/loadrc/vimrc/.vim/bundle/Dockerfile.vim/
-[submodule "vimrc/.vim/bundle/SimpylFold"]
-	path = vimrc/.vim/bundle/SimpylFold
-	url = ~/loadrc/vimrc/.vim/bundle/SimpylFold/
 [submodule ".ssh"]
 	path = .ssh
 	url = ./.ssh/
