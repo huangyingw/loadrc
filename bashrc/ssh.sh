@@ -1,2 +1,3 @@
 #! /bin/bash
-ssh -X "$1" -t -- ${tmuxAction}
+target=$(echo "$1" | sed  -e "s/\/$//g")
+ssh -X "$target" -t -- ${tmuxAction}
