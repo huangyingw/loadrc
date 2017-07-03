@@ -1,18 +1,20 @@
 #!/bin/bash
-
-if [ -z "$1" ];
+if [ -n "$1" ];
 then
-    echo -e "${red}Please provide parameter ... ${NC}"
-    exit 1
-fi
-
-if [ -n "$2" ];
-then
-    git diff --name-status "$1" "$2" | tee gdif.findresult
+    if [ -n "$2" ];
+    then
+        git diff --name-status "$1" "$2" | tee gdif.findresult
+    else
+        git diff --name-status HEAD "$1" | tee gdif.findresult
+    fi
 else
-    git diff --name-status HEAD "$1" | tee gdif.findresult
+    if [ -z "$(git status --porcelain)" ]
+    then
+        git diff --name-status `git log --oneline|awk 'NR==2{print $1}'` | tee gdif.findresult
+    else
+        git diff --name-status | tee gdif.findresult
+    fi
 fi
-
 OS=`uname`
 if [ "$OS" == "Linux" ]
 then
