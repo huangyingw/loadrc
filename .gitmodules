@@ -15,6 +15,7 @@
 	url = ~/loadrc/vimrc/.vim/bundle/indentLine/
 [submodule "vimrc/.vim/bundle/bash-support.vim"]
 	path = vimrc/.vim/bundle/bash-support.vim
+	url = ssh://git@bitbucket.org/huangyingw/bash-support.git
 [submodule "vimrc/.vim/bundle/vim-docker-compose-syntax"]
 	path = vimrc/.vim/bundle/vim-docker-compose-syntax
 	url = ~/loadrc/vimrc/.vim/bundle/vim-docker-compose-syntax/
