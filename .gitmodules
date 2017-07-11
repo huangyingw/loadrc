@@ -1,6 +1,6 @@
 [submodule "keys"]
     path = keys
-    url = ./keys/
+	url = ssh://git@bitbucket.org/huangyingw/keys.git
 [submodule "vimrc/.vim/bundle/swift.vim"]
     path = vimrc/.vim/bundle/swift.vim
     url = ~/loadrc/vimrc/.vim/bundle/swift.vim/
@@ -11,17 +11,17 @@
     path = vimrc/.vim/bundle/vim-indexed-search
     url = ~/loadrc/vimrc/.vim/bundle/vim-indexed-search/
 [submodule "vimrc/.vim/bundle/indentLine"]
-	path = vimrc/.vim/bundle/indentLine
-	url = ~/loadrc/vimrc/.vim/bundle/indentLine/
+    path = vimrc/.vim/bundle/indentLine
+    url = ~/loadrc/vimrc/.vim/bundle/indentLine/
 [submodule "vimrc/.vim/bundle/bash-support.vim"]
-	path = vimrc/.vim/bundle/bash-support.vim
-	url = ssh://git@bitbucket.org/huangyingw/bash-support.git
+    path = vimrc/.vim/bundle/bash-support.vim
+    url = ssh://git@bitbucket.org/huangyingw/bash-support.git
 [submodule "vimrc/.vim/bundle/vim-docker-compose-syntax"]
-	path = vimrc/.vim/bundle/vim-docker-compose-syntax
-	url = ~/loadrc/vimrc/.vim/bundle/vim-docker-compose-syntax/
+    path = vimrc/.vim/bundle/vim-docker-compose-syntax
+    url = ~/loadrc/vimrc/.vim/bundle/vim-docker-compose-syntax/
 [submodule "vimrc/.vim/bundle/Dockerfile.vim"]
-	path = vimrc/.vim/bundle/Dockerfile.vim
-	url = ~/loadrc/vimrc/.vim/bundle/Dockerfile.vim/
+    path = vimrc/.vim/bundle/Dockerfile.vim
+    url = ssh://git@bitbucket.org/huangyingw/Dockerfile.vim.git
 [submodule ".ssh"]
-	path = .ssh
-	url = ssh://git@bitbucket.org/huangyingw/.ssh.git
+    path = .ssh
+    url = ssh://git@bitbucket.org/huangyingw/.ssh.git
