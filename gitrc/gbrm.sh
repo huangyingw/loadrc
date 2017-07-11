@@ -28,5 +28,5 @@ NEW_BRANCH="$1"
 
 git branch -m "$CURRENT_BRANCH" "$NEW_BRANCH"
 
-git push -u dropbox "$CURRENT_BRANCH":"$NEW_BRANCH"
-git push dropbox :"$CURRENT_BRANCH"
+git push -u default "$CURRENT_BRANCH":"$NEW_BRANCH"
+git push default :"$CURRENT_BRANCH"

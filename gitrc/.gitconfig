@@ -62,7 +62,7 @@
     default = current
 [gdif]
     ignore = branch.default
-    ignore = dropbox.only
+    ignore = default.only
     ignore = gci.default
     ignore = gme.default
     ignore = gps.default

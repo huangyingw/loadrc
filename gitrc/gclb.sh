@@ -8,4 +8,4 @@ if [ ! -d ${x} ];
 then
   git clone --bare . ${x}
 fi
-git remote add dropbox ${x}
+git remote add default ${x}
