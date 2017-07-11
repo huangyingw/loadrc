@@ -19,6 +19,9 @@
 [submodule "vimrc/.vim/bundle/vim-docker-compose-syntax"]
     path = vimrc/.vim/bundle/vim-docker-compose-syntax
     url = ~/loadrc/vimrc/.vim/bundle/vim-docker-compose-syntax/
+[submodule "vimrc/.vim/bundle/FuzzyFinder"]
+    path = vimrc/.vim/bundle/FuzzyFinder
+	url = https://github.com/vim-scripts/FuzzyFinder.git
 [submodule "vimrc/.vim/bundle/Dockerfile.vim"]
     path = vimrc/.vim/bundle/Dockerfile.vim
     url = ssh://git@bitbucket.org/huangyingw/Dockerfile.vim.git
