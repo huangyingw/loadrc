@@ -30,7 +30,7 @@
     url = https://github.com/vim-scripts/FuzzyFinder.git
 [submodule "vimrc/.vim/bundle/Dockerfile.vim"]
     path = vimrc/.vim/bundle/Dockerfile.vim
-    url = ssh://git@bitbucket.org/huangyingw/Dockerfile.vim.git
+    url = https://github.com/ekalinin/Dockerfile.vim.git
 [submodule "vimrc/.vim/bundle/sparkup"]
     path = vimrc/.vim/bundle/sparkup
     url = https://github.com/rstacruz/sparkup.git
