@@ -15,7 +15,7 @@
     url = https://github.com/Yggdroot/indentLine.git
 [submodule "vimrc/.vim/bundle/bash-support.vim"]
     path = vimrc/.vim/bundle/bash-support.vim
-    url = ssh://git@bitbucket.org/huangyingw/bash-support.git
+    url = https://github.com/vim-scripts/bash-support.vim.git
 [submodule "vimrc/.vim/bundle/vim-docker-compose-syntax"]
     path = vimrc/.vim/bundle/vim-docker-compose-syntax
     url = ~/loadrc/vimrc/.vim/bundle/vim-docker-compose-syntax/
@@ -61,6 +61,9 @@
 [submodule "vimrc/.vim/bundle/vim-scala"]
     path = vimrc/.vim/bundle/vim-scala
     url = git@github.com:derekwyatt/vim-scala.git
+[submodule "vimrc/.vim/bundle/vundle"]
+    path = vimrc/.vim/bundle/vundle
+    url = https://github.com/gmarik/vundle.git
 [submodule ".ssh"]
     path = .ssh
     url = ssh://git@bitbucket.org/huangyingw/.ssh.git
