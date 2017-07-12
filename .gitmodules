@@ -3,13 +3,13 @@
     url = ssh://git@bitbucket.org/huangyingw/keys.git
 [submodule "vimrc/.vim/bundle/swift.vim"]
     path = vimrc/.vim/bundle/swift.vim
-    url = ~/loadrc/vimrc/.vim/bundle/swift.vim/
+    url = https://github.com/keith/swift.vim.git
 [submodule "vimrc/.vim/bundle/vim-ansible-yaml"]
     path = vimrc/.vim/bundle/vim-ansible-yaml
-    url = ~/loadrc/vimrc/.vim/bundle/vim-ansible-yaml/
+    url = https://github.com/chase/vim-ansible-yaml.git
 [submodule "vimrc/.vim/bundle/vim-indexed-search"]
     path = vimrc/.vim/bundle/vim-indexed-search
-    url = ~/loadrc/vimrc/.vim/bundle/vim-indexed-search/
+    url = https://github.com/henrik/vim-indexed-search.git
 [submodule "vimrc/.vim/bundle/indentLine"]
     path = vimrc/.vim/bundle/indentLine
     url = https://github.com/Yggdroot/indentLine.git
@@ -18,7 +18,7 @@
     url = https://github.com/vim-scripts/bash-support.vim.git
 [submodule "vimrc/.vim/bundle/vim-docker-compose-syntax"]
     path = vimrc/.vim/bundle/vim-docker-compose-syntax
-    url = ~/loadrc/vimrc/.vim/bundle/vim-docker-compose-syntax/
+    url = https://github.com/NLKNguyen/vim-docker-compose-syntax.git
 [submodule "vimrc/.vim/bundle/L9"]
     path = vimrc/.vim/bundle/L9
     url = https://github.com/vim-scripts/L9.git
