@@ -58,6 +58,9 @@
 [submodule "vimrc/.vim/bundle/vim-rails"]
     path = vimrc/.vim/bundle/vim-rails
     url = https://github.com/tpope/vim-rails.git
+[submodule "vimrc/.vim/bundle/vim-scala"]
+    path = vimrc/.vim/bundle/vim-scala
+    url = git@github.com:derekwyatt/vim-scala.git
 [submodule ".ssh"]
     path = .ssh
     url = ssh://git@bitbucket.org/huangyingw/.ssh.git
