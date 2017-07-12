@@ -31,6 +31,15 @@
 [submodule "vimrc/.vim/bundle/Dockerfile.vim"]
     path = vimrc/.vim/bundle/Dockerfile.vim
     url = ssh://git@bitbucket.org/huangyingw/Dockerfile.vim.git
+[submodule "vimrc/.vim/bundle/sparkup"]
+    path = vimrc/.vim/bundle/sparkup
+    url = https://github.com/rstacruz/sparkup.git
+[submodule "vimrc/.vim/bundle/vala.vim"]
+    path = vimrc/.vim/bundle/vala.vim
+	url = https://github.com/arrufat/vala.vim.git
+[submodule "vimrc/.vim/bundle/vim-autoformat"]
+    path = vimrc/.vim/bundle/vim-autoformat
+	url = git@github.com:Chiel92/vim-autoformat.git
 [submodule ".ssh"]
     path = .ssh
     url = ssh://git@bitbucket.org/huangyingw/.ssh.git
