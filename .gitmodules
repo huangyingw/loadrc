@@ -42,7 +42,7 @@
     url = git@github.com:Chiel92/vim-autoformat.git
 [submodule "vimrc/.vim/bundle/vim-fugitive"]
     path = vimrc/.vim/bundle/vim-fugitive
-    url = https://github.com/tpope/vim-fugitive.git
+    url = git@bitbucket.org:huangyingw/vim-fugitive.git
 [submodule "vimrc/.vim/bundle/vim-easymotion"]
     path = vimrc/.vim/bundle/vim-easymotion
     url = https://github.com/Lokaltog/vim-easymotion.git

@@ -68,3 +68,5 @@
     ignore = gps.default
     ignore = includefile.conf
     ignore = prunefix.conf
+[include]
+	path = ../.gitconfig
