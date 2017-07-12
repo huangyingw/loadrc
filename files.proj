@@ -310,6 +310,7 @@
 "./vimrc/.vim/bundle/Dockerfile.vim/Makefile"
 "./vimrc/.vim/bundle/Dockerfile.vim/README.md"
 "./vimrc/.vim/bundle/Dockerfile.vim/branch.default"
+"./vimrc/.vim/bundle/Dockerfile.vim/default.only"
 "./vimrc/.vim/bundle/Dockerfile.vim/ftdetect/Dockerfile.vim"
 "./vimrc/.vim/bundle/Dockerfile.vim/ftdetect/docker-compose.vim"
 "./vimrc/.vim/bundle/Dockerfile.vim/ftplugin/Dockerfile.vim"
