@@ -67,3 +67,5 @@
     ignore = gps.default
     ignore = includefile.conf
     ignore = prunefix.conf
+[push]
+    remote = BareReps

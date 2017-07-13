@@ -3,4 +3,3 @@
     fetch = +refs/heads/*:refs/remotes/bitbucket/*
 [push]
     remote = bitbucket
-    remote = BareReps
