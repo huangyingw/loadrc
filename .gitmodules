@@ -1,69 +1,92 @@
 [submodule "keys"]
     path = keys
     url = git@bitbucket.org:huangyingw/keys.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/swift.vim"]
     path = vimrc/.vim/bundle/swift.vim
     url = git@bitbucket.org:huangyingw/swift.vim.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/vim-ansible-yaml"]
     path = vimrc/.vim/bundle/vim-ansible-yaml
     url = git@bitbucket.org:huangyingw/vim-ansible-yaml.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/vim-indexed-search"]
     path = vimrc/.vim/bundle/vim-indexed-search
     url = git@bitbucket.org:huangyingw/vim-indexed-search.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/indentLine"]
     path = vimrc/.vim/bundle/indentLine
     url = git@bitbucket.org:huangyingw/indentLine.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/bash-support.vim"]
     path = vimrc/.vim/bundle/bash-support.vim
     url = git@bitbucket.org:huangyingw/bash-support.vim.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/vim-docker-compose-syntax"]
     path = vimrc/.vim/bundle/vim-docker-compose-syntax
     url = git@bitbucket.org:huangyingw/vim-docker-compose-syntax.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/L9"]
     path = vimrc/.vim/bundle/L9
     url = git@bitbucket.org:huangyingw/L9.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/python-mode"]
     path = vimrc/.vim/bundle/python-mode
     url = git@bitbucket.org:huangyingw/python-mode.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/FuzzyFinder"]
     path = vimrc/.vim/bundle/FuzzyFinder
     url = git@bitbucket.org:huangyingw/FuzzyFinder.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/Dockerfile.vim"]
     path = vimrc/.vim/bundle/Dockerfile.vim
     url = git@bitbucket.org:huangyingw/Dockerfile.vim.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/sparkup"]
     path = vimrc/.vim/bundle/sparkup
     url = git@bitbucket.org:huangyingw/sparkup.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/vala.vim"]
     path = vimrc/.vim/bundle/vala.vim
     url = git@bitbucket.org:huangyingw/vala.vim.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/vim-autoformat"]
     path = vimrc/.vim/bundle/vim-autoformat
     url = git@bitbucket.org:huangyingw/vim-autoformat.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/vim-fugitive"]
     path = vimrc/.vim/bundle/vim-fugitive
     url = git@bitbucket.org:huangyingw/vim-fugitive.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/vim-easymotion"]
     path = vimrc/.vim/bundle/vim-easymotion
     url = git@bitbucket.org:huangyingw/vim-easymotion.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/vim-gradle"]
     path = vimrc/.vim/bundle/vim-gradle
     url = git@bitbucket.org:huangyingw/vim-gradle
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/vim-javascript-syntax"]
     path = vimrc/.vim/bundle/vim-javascript-syntax
     url = git@bitbucket.org:huangyingw/vim-javascript-syntax.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/vim-log-syntax"]
     path = vimrc/.vim/bundle/vim-log-syntax
     url = git@bitbucket.org:huangyingw/vim-log-syntax.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/vim-rails"]
     path = vimrc/.vim/bundle/vim-rails
     url = git@bitbucket.org:huangyingw/vim-rails.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/vim-scala"]
     path = vimrc/.vim/bundle/vim-scala
     url = git@bitbucket.org:huangyingw/vim-scala.git
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/vundle"]
     path = vimrc/.vim/bundle/vundle
     url = git@bitbucket.org:huangyingw/vundle.git
+    branch = dev.fix
 [submodule ".ssh"]
     path = .ssh
     url = git@bitbucket.org:huangyingw/.ssh.git
+    branch = dev.fix
