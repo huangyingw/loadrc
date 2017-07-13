@@ -10,10 +10,10 @@ else
 fi
 cd "$TARGETEDIR"
 
-upsearch cscope.out
+upsearch files.proj
 
-if [ ! -f cscope.out ]; then
-    echo -e "${red}No cscope.out file here, will not build the index ... ${NC}"
+if [ ! -f files.proj ]; then
+    echo -e "${red}No files.proj file here, will not build the index ... ${NC}"
     exit 0
 fi
 TARGETEDIR=`realpath "$PWD"`

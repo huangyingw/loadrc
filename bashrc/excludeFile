@@ -4,6 +4,6 @@
 *.swp
 .git/
 cscope.in.out
-cscope.out
+files.proj
 cscope.po.out
 vimrc/.vim/view/*

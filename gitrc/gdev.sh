@@ -8,5 +8,5 @@ if [ ! -f branch.default ]
 then
   echo $syncBranch > branch.default
 fi \
-  && touch cscope.out \
+  && touch files.proj \
   && touch gme.default

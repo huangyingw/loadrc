@@ -6,7 +6,7 @@ endfunction
 
 function! ExFilter()
     normal! gvy<CR>
-    let csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
+    let csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let keyword = @@
     let b:result = GetEscapedResult(keyword)
     let keyword = GetEscapedKeywordForVIM(keyword)
@@ -23,7 +23,7 @@ function! ExFilter()
 endfunction
 function! VFilter()
     normal! gvy<CR>
-    let csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
+    let csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let keyword = @@
     let b:result = GetEscapedResult(keyword)
     let keyword = GetEscapedKeywordForVIM(keyword)
@@ -53,24 +53,24 @@ function! PlayAV()
     vert resize
 endfunction
 function! CSCSearchQ()
-    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
+    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
     let b:keyword = expand("<cword>")
     exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 1 . ' ' . 'qcsc'
     exec 'vs ' . b:csdbpath . '/' . b:keyword . '.qcsc.findresult'
     vert resize
 endfunction
 function! VDebug()
-    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
+    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
     exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath
     vert resize
 endfunction
 function! VRun()
-    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
+    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
     exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
     vert resize
 endfunction
 function! CSCSearch()
-    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
+    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
     let keyword = expand("<cword>")
     exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 4 . ' ' . 'csc'
     exec 'vs ' . b:csdbpath . '/' . keyword . '.csc.findresult'
@@ -97,7 +97,7 @@ endfunction
 function! UpCscope()
     normal! gvy<CR>
     let b:keyword = @@
-    exec '!touch ' . b:keyword . '/cscope.out'
+    exec '!touch ' . b:keyword . '/files.proj'
     exec '!~/loadrc/bashrc/cscope.sh ' . b:keyword
     vert resize
 endfunction
@@ -107,7 +107,7 @@ function! ShowDiff()
     vert resize
 endfunction
 function! UpdateCscope()
-    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
+    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
     exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
     vert resize
 endfunction
@@ -161,7 +161,7 @@ function! GitSearch()
 endfunction
 function! VimSearch()
     normal! gvy<CR>
-    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
+    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let b:keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(b:keyword)
     exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"' . ' "' .  b:result . '"'
@@ -187,12 +187,12 @@ function! VimSearch()
     call setreg('"', old_reg, old_regtype)
 endfunction
 function! ShowProjectRoot()
-    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),$HOME)
+    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
     let @+=b:csdbpath
     echom b:csdbpath
 endfunction
 function! FindCalling()
-    let b:csdbpath = Find_in_parent("cscope.out",Windowdir(),"/")
+    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let b:keyword = expand('%:t')
     exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
     let b:keyword = GetEscapedKeyword(b:keyword)
