@@ -1,69 +1,69 @@
 [submodule "keys"]
     path = keys
-    url = ssh://git@bitbucket.org/huangyingw/keys.git
+    url = git@bitbucket.org:huangyingw/keys.git
 [submodule "vimrc/.vim/bundle/swift.vim"]
     path = vimrc/.vim/bundle/swift.vim
-    url = https://github.com/keith/swift.vim.git
+    url = git@bitbucket.org:huangyingw/swift.vim.git
 [submodule "vimrc/.vim/bundle/vim-ansible-yaml"]
     path = vimrc/.vim/bundle/vim-ansible-yaml
-    url = https://github.com/chase/vim-ansible-yaml.git
+    url = git@bitbucket.org:huangyingw/vim-ansible-yaml.git
 [submodule "vimrc/.vim/bundle/vim-indexed-search"]
     path = vimrc/.vim/bundle/vim-indexed-search
-    url = https://github.com/henrik/vim-indexed-search.git
+    url = git@bitbucket.org:huangyingw/vim-indexed-search.git
 [submodule "vimrc/.vim/bundle/indentLine"]
     path = vimrc/.vim/bundle/indentLine
-    url = https://github.com/Yggdroot/indentLine.git
+    url = git@bitbucket.org:huangyingw/indentLine.git
 [submodule "vimrc/.vim/bundle/bash-support.vim"]
     path = vimrc/.vim/bundle/bash-support.vim
-    url = https://github.com/vim-scripts/bash-support.vim.git
+    url = git@bitbucket.org:huangyingw/bash-support.vim.git
 [submodule "vimrc/.vim/bundle/vim-docker-compose-syntax"]
     path = vimrc/.vim/bundle/vim-docker-compose-syntax
-    url = https://github.com/NLKNguyen/vim-docker-compose-syntax.git
+    url = git@bitbucket.org:huangyingw/vim-docker-compose-syntax.git
 [submodule "vimrc/.vim/bundle/L9"]
     path = vimrc/.vim/bundle/L9
-    url = https://github.com/vim-scripts/L9.git
+    url = git@bitbucket.org:huangyingw/L9.git
 [submodule "vimrc/.vim/bundle/python-mode"]
     path = vimrc/.vim/bundle/python-mode
-    url = https://github.com/klen/python-mode.git
+    url = git@bitbucket.org:huangyingw/python-mode.git
 [submodule "vimrc/.vim/bundle/FuzzyFinder"]
     path = vimrc/.vim/bundle/FuzzyFinder
-    url = https://github.com/vim-scripts/FuzzyFinder.git
+    url = git@bitbucket.org:huangyingw/FuzzyFinder.git
 [submodule "vimrc/.vim/bundle/Dockerfile.vim"]
     path = vimrc/.vim/bundle/Dockerfile.vim
-    url = https://github.com/ekalinin/Dockerfile.vim.git
+    url = git@bitbucket.org:huangyingw/Dockerfile.vim.git
 [submodule "vimrc/.vim/bundle/sparkup"]
     path = vimrc/.vim/bundle/sparkup
-    url = https://github.com/rstacruz/sparkup.git
+    url = git@bitbucket.org:huangyingw/sparkup.git
 [submodule "vimrc/.vim/bundle/vala.vim"]
     path = vimrc/.vim/bundle/vala.vim
-    url = https://github.com/arrufat/vala.vim.git
+    url = git@bitbucket.org:huangyingw/vala.vim.git
 [submodule "vimrc/.vim/bundle/vim-autoformat"]
     path = vimrc/.vim/bundle/vim-autoformat
-    url = git@github.com:Chiel92/vim-autoformat.git
+    url = git@bitbucket.org:huangyingw/vim-autoformat.git
 [submodule "vimrc/.vim/bundle/vim-fugitive"]
     path = vimrc/.vim/bundle/vim-fugitive
     url = git@bitbucket.org:huangyingw/vim-fugitive.git
 [submodule "vimrc/.vim/bundle/vim-easymotion"]
     path = vimrc/.vim/bundle/vim-easymotion
-    url = https://github.com/Lokaltog/vim-easymotion.git
+    url = git@bitbucket.org:huangyingw/vim-easymotion.git
 [submodule "vimrc/.vim/bundle/vim-gradle"]
     path = vimrc/.vim/bundle/vim-gradle
-    url = https://github.com/tfnico/vim-gradle
+    url = git@bitbucket.org:huangyingw/vim-gradle
 [submodule "vimrc/.vim/bundle/vim-javascript-syntax"]
     path = vimrc/.vim/bundle/vim-javascript-syntax
-    url = https://github.com/jelera/vim-javascript-syntax.git
+    url = git@bitbucket.org:huangyingw/vim-javascript-syntax.git
 [submodule "vimrc/.vim/bundle/vim-log-syntax"]
     path = vimrc/.vim/bundle/vim-log-syntax
-    url = https://github.com/dzeban/vim-log-syntax.git
+    url = git@bitbucket.org:huangyingw/vim-log-syntax.git
 [submodule "vimrc/.vim/bundle/vim-rails"]
     path = vimrc/.vim/bundle/vim-rails
-    url = https://github.com/tpope/vim-rails.git
+    url = git@bitbucket.org:huangyingw/vim-rails.git
 [submodule "vimrc/.vim/bundle/vim-scala"]
     path = vimrc/.vim/bundle/vim-scala
-    url = git@github.com:derekwyatt/vim-scala.git
+    url = git@bitbucket.org:huangyingw/vim-scala.git
 [submodule "vimrc/.vim/bundle/vundle"]
     path = vimrc/.vim/bundle/vundle
-    url = https://github.com/gmarik/vundle.git
+    url = git@bitbucket.org:huangyingw/vundle.git
 [submodule ".ssh"]
     path = .ssh
-    url = ssh://git@bitbucket.org/huangyingw/.ssh.git
+    url = git@bitbucket.org:huangyingw/.ssh.git
