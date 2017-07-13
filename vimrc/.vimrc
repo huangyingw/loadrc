@@ -23,8 +23,6 @@ autocmd BufEnter * call CHANGE_CURR_DIR()
 
 autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-source ~/.vim/plugin/cscope_maps.vim
-
 " autoclose html/xml tag autocmd BufNewFile,BufRead *.html,*.htm,*.xml inoremap </ </<c-x><c-o>
 function! RemovePairs()
     let l:line = getline(".")
