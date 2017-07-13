@@ -61,7 +61,6 @@
 [pull]
     default = current
 [gdif]
-    ignore = branch.default
     ignore = gci.default
     ignore = gme.default
     ignore = gps.default
