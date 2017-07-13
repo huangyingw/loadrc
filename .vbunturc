@@ -3,4 +3,4 @@ if [ `hostname` != "vbuntu" ];
 then
   return
 fi
-#sshfs -o nonempty huangyingw@macpro:/Users/huangyingw/Dropbox/myproject/ /media/volgrp/myproject/
+#sshfs -o nonempty huangyingw@macpro:~/Dropbox/myproject/ /media/volgrp/myproject/
