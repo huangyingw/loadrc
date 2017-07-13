@@ -62,11 +62,8 @@
     default = current
 [gdif]
     ignore = branch.default
-    ignore = default.only
     ignore = gci.default
     ignore = gme.default
     ignore = gps.default
     ignore = includefile.conf
     ignore = prunefix.conf
-[include]
-	path = ../.gitconfig

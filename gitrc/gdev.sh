@@ -9,5 +9,4 @@ then
   echo $syncBranch > branch.default
 fi \
   && touch cscope.out \
-  && touch default.only \
   && touch gme.default
