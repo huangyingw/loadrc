@@ -1,2 +1,5 @@
 [push]
     remote = origin
+[gsync]
+    remote = origin
+    branch = master
