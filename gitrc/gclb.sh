@@ -1,7 +1,7 @@
 #!/bin/bash
 x=`pwd`
-x=`echo "$x" | sed -e "s|myproject|BareReps|"`
-x=`echo "$x" | sed -e "s|loadrc|BareReps/boad|"`
+x=`echo "$x" | sed -e "s|myproject|BareReps/myproject|"`
+x=`echo "$x" | sed -e "s|loadrc|BareReps/loadrc|"`
 echo "BareReps location --> $x"
 
 if [ ! -d "$x" ];
