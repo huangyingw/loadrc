@@ -1,5 +1,2 @@
-[remote "bitbucket"]
-    url = ssh://git@bitbucket.org/huangyingw/loadrc.git
-    fetch = +refs/heads/*:refs/remotes/bitbucket/*
 [push]
-    remote = bitbucket
+    remote = origin
