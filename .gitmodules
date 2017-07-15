@@ -82,9 +82,9 @@
     path = vimrc/.vim/bundle/vim-scala
     url = git@bitbucket.org:huangyingw/vim-scala.git
     branch = dev.fix
-[submodule "vimrc/.vim/bundle/vundle"]
-    path = vimrc/.vim/bundle/vundle
-    url = git@bitbucket.org:huangyingw/vundle.git
+[submodule "vimrc/.vim/bundle/vundle.vim"]
+    path = vimrc/.vim/bundle/vundle.vim
+    url = git@bitbucket.org:huangyingw/vundle.vim.git
     branch = dev.fix
 [submodule ".ssh"]
     path = .ssh
