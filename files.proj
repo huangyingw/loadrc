@@ -1654,7 +1654,6 @@
 "./vimrc/.vim/bundle/vim-docker-compose-syntax/Dockerfile"
 "./vimrc/.vim/bundle/vim-docker-compose-syntax/LICENSE.md"
 "./vimrc/.vim/bundle/vim-docker-compose-syntax/README.md"
-"./vimrc/.vim/bundle/vim-docker-compose-syntax/branch.default"
 "./vimrc/.vim/bundle/vim-docker-compose-syntax/docker-compose.yml"
 "./vimrc/.vim/bundle/vim-docker-compose-syntax/ftdetect/docker-compose.vim"
 "./vimrc/.vim/bundle/vim-docker-compose-syntax/generator.js"

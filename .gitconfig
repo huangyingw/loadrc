@@ -1,3 +1,6 @@
+[remote "origin"]
+    url = ssh://git@bitbucket.org/huangyingw/loadrc.git
+    fetch = +refs/heads/*:refs/remotes/origin/*
 [push]
     remote = origin
 [gsync]
