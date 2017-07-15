@@ -13,6 +13,7 @@ function! ExFilter()
     echom 'keyword : '.keyword
 
     if expand('%:e') != "findresult"
+        exec '!rm ' . csdbpath . '/' . b:result . '.vaa.findresult'
         exec 'w! ' . csdbpath . '/' . b:result . '.vaa.findresult'
         exec 'vs ' . csdbpath . '/' . b:result . '.vaa.findresult'
     endif
@@ -30,6 +31,7 @@ function! VFilter()
     echom 'keyword : '.keyword
 
     if expand('%:e') != "findresult"
+        exec '!rm ' . csdbpath . '/' . b:result . '.vaa.findresult'
         exec 'w! ' . csdbpath . '/' . b:result . '.vaa.findresult'
         exec 'vs ' . csdbpath . '/' . b:result . '.vaa.findresult'
     endif
