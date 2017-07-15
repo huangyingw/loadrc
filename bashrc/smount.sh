@@ -10,7 +10,7 @@ remoteServer=$(echo "$1" | sed  -e "s/\/$//g")
 OS=`uname`
 if [ "$OS" == "Linux" ]
 then
-    sudo umount -l ~/"$remoteServer"
+    umount -l ~/"$remoteServer"
     mkdir -p ~/"$remoteServer"
     sshfs "$remoteServer":/ ~/"$remoteServer"
     df -TH
