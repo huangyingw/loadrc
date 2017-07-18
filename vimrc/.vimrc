@@ -339,6 +339,8 @@ function! Find_in_parent(fln,flsrt,flstp)
     while ( strlen( here) > 0 )
         if filereadable( here . "/" . a:fln )
             return here
+        elseif isdirectory( here . "/" . a:fln )
+            return here
         endif
         let fr = match(here, "/[^/]*$")
         if fr == -1

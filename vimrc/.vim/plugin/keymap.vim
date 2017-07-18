@@ -153,7 +153,7 @@ function! VimOpen()
 endfunction
 function! GitSearch()
     normal! gvy<CR>
-    let b:csdbpath = Find_in_parent(".git/config",Windowdir(),$HOME)
+    let b:csdbpath = Find_in_parent(".git",Windowdir(),$HOME)
     let b:keyword = @@
     exec "cd " . b:csdbpath
     exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"'
