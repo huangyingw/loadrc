@@ -124,14 +124,7 @@ function! VimOpen()
             if filereadable(gitFile)
                 let indexFile = getcwd() . '/modules/' . b:fileName . '/index'
                 exec 'vs ' . indexFile
-            else
-                exec 'vs ' . '.git/index'
             endif
-
-            "echom substitute(system("cat " . gitFile . " |awk \'{print $2}\'" ), '\n', '', '')
-            "echom gitFile . substitute(system("cat " . gitFile . " |awk \'{print $2}\'" ), '\n', '', '')
-            "let gitdir = substitute(system("cat .git|awk \'{print $2}\'" ), '\n', '', '')
-            "exec 'vs ' . getcwd() . '/../' . b:fileName . '/.git/index'
         else
             vert wincmd F
         endif
