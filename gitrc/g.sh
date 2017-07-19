@@ -1,6 +1,6 @@
 #!/bin/bash
 worktree=$(pwd)
-worktree=`echo "$worktree/" | sed  -e "s/\.git\///g;s/modules\///g"`
+worktree=`echo "$worktree" | sed  -e "s/\.git\///g;s/modules\///g"`
 cd "$worktree"
 git config --local include.path "$worktree/.gitconfig"
 . ~/loadrc/gitrc/getCommit_message.sh "$1"
