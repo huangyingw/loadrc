@@ -119,7 +119,6 @@ function! VimOpen()
     let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
     if (expand("%") ==# 'index')
         if isdirectory(getcwd() . '/../' . b:fileName)
-            "echom getcwd() . '/../' . b:fileName . '/.git'
             let gitFile = getcwd() . '/../' . b:fileName . '/.git'
             if filereadable(gitFile)
                 let indexFile = getcwd() . '/modules/' . b:fileName . '/index'
