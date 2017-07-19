@@ -112,13 +112,18 @@ function! UpdateCscope()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
     exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
     vert resize
+    vert resize
 endfunction
 function! VimOpen()
     let b:fileName = expand(expand("<cfile>"))
     let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
     if (expand("%") ==# 'index')
         if isdirectory(getcwd() . '/../' . b:fileName)
-            exec 'vs ' . getcwd() . '/../' . b:fileName . '/.git/index'
+            let gitFile = getcwd() . '/../' . b:fileName . '/.git'
+            if filereadable(gitFile)
+                let indexFile = getcwd() . '/modules/' . b:fileName . '/index'
+                exec 'vs ' . indexFile
+            endif
         else
             vert wincmd F
         endif
