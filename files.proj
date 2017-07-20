@@ -224,6 +224,8 @@
 "./gitrc/gdif.sh"
 "./gitrc/getCommit_message.sh"
 "./gitrc/getCurrentBranch.sh"
+"./gitrc/get_index.sh"
+"./gitrc/get_worktree.sh"
 "./gitrc/gff.sh"
 "./gitrc/gfix.sh"
 "./gitrc/gfvd.sh"
