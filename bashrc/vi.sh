@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function upsearch () {
-    test / == "$PWD" && return || test -e "$1" && echo "found: " "$PWD" && return || cd .. && upsearch "$1"
+    test / == "$pwd" && return || test -e "$1" && echo "found: " "$pwd" && return || cd .. && upsearch "$1"
 }
 
 TARGET=files.proj

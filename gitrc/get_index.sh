@@ -1,6 +1,6 @@
 #!/bin/bash -
 function upsearch () {
-    test / == "$PWD" && return || test -e "$1" && return || cd .. && upsearch "$1"
+    test / == "$pwd" && return || test -e "$1" && return || cd .. && upsearch "$1"
 }
 
 DIR=$(dirname "$1")

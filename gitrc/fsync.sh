@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ -z "$1" ];
 then
-  TARGETEDIR="$PWD"
+  TARGETEDIR="$pwd"
 else
   TARGETEDIR="$1"
 fi

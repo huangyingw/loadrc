@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ -z "$1" ];
 then
-  TARGETEDIR=`realpath "$PWD"`
+  TARGETEDIR=`realpath "$pwd"`
 else
   TARGETEDIR=`realpath "$1"`
 fi

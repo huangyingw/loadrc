@@ -4,7 +4,7 @@ echo ${TARGETEDIR}
 read -p "press any key to2 continue --> " update
 if [ -z "$1" ];
 then
-  TARGETEDIR=`realpath "$PWD"`
+  TARGETEDIR=`realpath "$pwd"`
 else
   TARGETEDIR=`realpath "$1"`
 fi

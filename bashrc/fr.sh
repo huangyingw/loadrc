@@ -6,5 +6,5 @@ then
 fi
 FIND=$(echo $1 | sed 's/\//\\\//g')
 REPLACE=$(echo $2 | sed 's/\//\\\//g')
-cscope_db_file="/export/home1/username/cscope_db/""${PWD##*/}"
+cscope_db_file="/export/home1/username/cscope_db/""${pwd##*/}"
 xargs sed -i""  "s/\b${FIND}\b/${REPLACE}/g" < "$cscope_db_file"
