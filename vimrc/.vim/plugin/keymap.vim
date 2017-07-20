@@ -56,9 +56,9 @@ function! PlayAV()
 endfunction
 function! CSCSearchQ()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
-    let b:keyword = expand("<cword>")
-    exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  b:keyword . ' ' . 1 . ' ' . 'qcsc'
-    exec 'vs ' . b:csdbpath . '/' . b:keyword . '.qcsc.findresult'
+    let keyword = expand("<cword>")
+    exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 1 . ' ' . 'qcsc'
+    exec 'vs ' . b:csdbpath . '/' . keyword . '.qcsc.findresult'
     vert resize
 endfunction
 function! VDebug()
