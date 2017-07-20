@@ -1,11 +1,22 @@
 #!/bin/bash -
-configFile=$(echo "$1" | sed 's/index$/config/')
-workTree=$(cat "$configFile" | awk '/worktree/{print $3}')
-if [ -z "$workTree" ];
+function upsearch () {
+    test / == "$PWD" && return || test -e "$1" && return || cd .. && upsearch "$1"
+}
+
+DIR=$(dirname "$1")
+cd "$DIR"
+
+if [ -f config ]
 then
-    workTreeRelative=$(echo "$1" | sed 's/\.git\/index$//')
-    echo "$(realpath "$workTreeRelative")"
+    workTree=$(cat config | awk '/worktree/{print $3}')
+    if [ -z "$workTree" ];
+    then
+        upsearch .git
+    else
+        cd "$workTree"
+    fi
 else
-    workTreeRelative=$(echo "$workTree" | sed 's/index$//')
-    echo "$(realpath $(echo "$1" | sed 's/index$//')"$workTreeRelative")"
+    upsearch .git
 fi
+
+echo "$(realpath $(pwd))"
