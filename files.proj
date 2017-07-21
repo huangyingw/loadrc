@@ -42,6 +42,7 @@
 "./.ssh/.gitignore"
 "./.ssh/config"
 "./.ssh/environment"
+"./.ssh/known_hosts"
 "./.subversion/README.txt"
 "./.subversion/auth/svn.simple/6146213a2dda95c6394ae9ae66ab729c"
 "./.subversion/auth/svn.simple/aa981e5344c742bc4b68cc8ef33f0e18"
