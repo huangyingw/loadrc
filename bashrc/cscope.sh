@@ -1,10 +1,10 @@
 #!/bin/bash
 function upsearch () {
-    test / == "$pwd" && return || test -e "$1" && echo "found: " "$pwd" && return || cd .. && upsearch "$1"
+    test / == "$PWD" && return || test -e "$1" && echo "found: " "$PWD" && return || cd .. && upsearch "$1"
 }
 if [ -z "$1" ];
 then
-    TARGETEDIR=`realpath "$pwd"`
+    TARGETEDIR=`realpath "$PWD"`
 else
     TARGETEDIR=`realpath "$1"`
 fi
@@ -16,7 +16,7 @@ if [ ! -f files.proj ]; then
     echo -e "${red}No files.proj file here, will not build the index ... ${NC}"
     exit 0
 fi
-TARGETEDIR=`realpath "$pwd"`
+TARGETEDIR=`realpath "$PWD"`
 cp -nv ~/loadrc/prunefi* ./
 cp -nv ~/loadrc/includefile.conf ./
 TARGET=files.proj
