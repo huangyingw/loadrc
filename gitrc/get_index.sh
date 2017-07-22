@@ -9,7 +9,7 @@ upsearch .git
 if [ -f .git ]
 then
     relative=$(cat .git | awk '{print $2}')
-    echo $(realpath "$relative/index")
+    echo $(realpath "$relative")
 else
-    echo $(realpath .git/index)
+    echo $(realpath .git)
 fi
