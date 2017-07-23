@@ -1,7 +1,4 @@
 #!/bin/bash
-function upsearch () {
-    test / == "$PWD" && return || test -e "$1" && echo "found: " "$PWD" && return || cd .. && upsearch "$1"
-}
 if [ -z "$1" ];
 then
     TARGETEDIR=`realpath "$PWD"`
@@ -9,8 +6,6 @@ else
     TARGETEDIR=`realpath "$1"`
 fi
 cd "$TARGETEDIR"
-
-upsearch files.proj
 
 if [ ! -f files.proj ]; then
     echo -e "${red}No files.proj file here, will not build the index ... ${NC}"

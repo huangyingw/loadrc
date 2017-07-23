@@ -112,7 +112,6 @@ function! UpdateCscope()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
     exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
     vert resize
-    vert resize
 endfunction
 function! VimOpen()
     let b:fileName = expand(expand("<cfile>"))
