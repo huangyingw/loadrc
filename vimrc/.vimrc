@@ -406,3 +406,4 @@ function! VsMax(fileName)
     exec 'vs ' . a:fileName
     vert resize
 endfunc
+let g:phpfmt_autosave = 0
