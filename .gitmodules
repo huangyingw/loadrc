@@ -99,4 +99,4 @@
 	branch = dev.fix
 [submodule "vimrc/.vim/bundle/php-foldexpr.vim"]
 	path = vimrc/.vim/bundle/php-foldexpr.vim
-	url = git@github.com:swekaj/php-foldexpr.vim.git
+	url = git@github.com:huangyingw/php-foldexpr.vim.git
