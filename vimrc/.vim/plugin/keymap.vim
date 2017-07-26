@@ -117,8 +117,10 @@ function! VimOpen()
     let b:fileName = expand(expand("<cfile>"))
     let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
     if (expand("%") ==# 'index')
-        if filereadable(getcwd() . '/../' . b:fileName)
-            vert wincmd F
+        let worktree = substitute(system("~/loadrc/gitrc/get_worktree.sh " . expand('%:p')), '\n', '', '')
+        let realFile = worktree . '/' . b:fileName
+        if filereadable(realFile)
+            exec 'vs ' . realFile
         else
             let indexFile = getcwd() . '/modules/' . b:fileName . '/index'
             exec 'vs ' . indexFile
