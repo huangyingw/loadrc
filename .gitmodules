@@ -93,3 +93,7 @@
 [submodule "vimrc/.vim/bundle/vim-phpfmt"]
 	path = vimrc/.vim/bundle/vim-phpfmt
 	url = git@github.com:beanworks/vim-phpfmt.git
+[submodule "vimrc/.vim/bundle/YouCompleteMe"]
+	path = vimrc/.vim/bundle/YouCompleteMe
+	url = git@bitbucket.org:huangyingw/youcompleteme.git
+	branch = dev.fix
