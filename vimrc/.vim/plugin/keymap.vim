@@ -117,14 +117,11 @@ function! VimOpen()
     let b:fileName = expand(expand("<cfile>"))
     let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
     if (expand("%") ==# 'index')
-        if isdirectory(getcwd() . '/../' . b:fileName)
-            let gitFile = getcwd() . '/../' . b:fileName . '/.git'
-            if filereadable(gitFile)
-                let indexFile = getcwd() . '/modules/' . b:fileName . '/index'
-                exec 'vs ' . indexFile
-            endif
-        else
+        if filereadable(getcwd() . '/../' . b:fileName)
             vert wincmd F
+        else
+            let indexFile = getcwd() . '/modules/' . b:fileName . '/index'
+            exec 'vs ' . indexFile
         endif
     elseif (expand("%") ==# 'gbr.findresult')
         let b:commit = expand("<cword>")
