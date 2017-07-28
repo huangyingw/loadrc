@@ -1199,7 +1199,6 @@
 "./vimrc/.vim/ftplugin/org.eclipse.jdt.core.prefs"
 "./vimrc/.vim/indent/json.vim"
 "./vimrc/.vim/plugin/AddSubtract.vim"
-"./vimrc/.vim/plugin/AutoClose.vim"
 "./vimrc/.vim/plugin/IndexedSearch.vim"
 "./vimrc/.vim/plugin/LargeFile.vim"
 "./vimrc/.vim/plugin/Rename2.vim"

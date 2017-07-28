@@ -100,3 +100,6 @@
 [submodule "vimrc/.vim/bundle/php-foldexpr.vim"]
 	path = vimrc/.vim/bundle/php-foldexpr.vim
 	url = git@github.com:huangyingw/php-foldexpr.vim.git
+[submodule "vimrc/.vim/bundle/delimitMate"]
+	path = vimrc/.vim/bundle/delimitMate
+	url = git@github.com:Raimondi/delimitMate.git
