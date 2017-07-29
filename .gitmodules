@@ -103,3 +103,7 @@
 [submodule "vimrc/.vim/bundle/delimitMate"]
 	path = vimrc/.vim/bundle/delimitMate
 	url = git@github.com:Raimondi/delimitMate.git
+[submodule "macvim"]
+	path = macvim
+	url = git@bitbucket.org:huangyingw/macvim.git
+	branch = dev.fix
