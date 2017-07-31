@@ -257,7 +257,6 @@ execute pathogen#infect()
 " powerline{
 "  set guifont=PowerlineSymbols\ for\ Powerline
 "  set nocompatible
-"  set t_Co=256
 "  let g:Powerline_symbols = 'fancy'
 "  }
 " 设置tablist插件只显示当前编辑文件的tag内容，而非当前所有打开文件的tag内容
