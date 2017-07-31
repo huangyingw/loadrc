@@ -107,3 +107,6 @@
 	path = macvim
 	url = git@bitbucket.org:huangyingw/macvim.git
 	branch = dev.fix
+[submodule "vimrc/.vim/bundle/vim-multiple-cursors"]
+	path = vimrc/.vim/bundle/vim-multiple-cursors
+	url = git@github.com:terryma/vim-multiple-cursors.git
