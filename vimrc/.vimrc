@@ -407,3 +407,11 @@ function! VsMax(fileName)
     vert resize
 endfunc
 let g:phpfmt_autosave = 0
+syntax enable
+
+if system('uname -s') !~ "Darwin"
+    set background=dark
+    "let g:solarized_termcolors=256
+    let g:solarized_termtrans=1
+    colorscheme solarized
+endif
