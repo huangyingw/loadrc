@@ -119,11 +119,13 @@ function! VimOpen()
     if (expand("%") ==# 'index')
         let worktree = substitute(system("~/loadrc/gitrc/get_worktree.sh " . expand('%:p')), '\n', '', '')
         let realFile = worktree . '/' . b:fileName
+        let indexFile = getcwd() . '/modules/' . b:fileName . '/index'
         if filereadable(realFile)
             exec 'vs ' . realFile
-        else
-            let indexFile = getcwd() . '/modules/' . b:fileName . '/index'
+        elseif filereadable(indexFile) 
             exec 'vs ' . indexFile
+        else
+            exec 'vs ' . realFile
         endif
     elseif (expand("%") ==# 'gbr.findresult')
         let b:commit = expand("<cword>")
