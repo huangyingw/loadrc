@@ -3894,6 +3894,7 @@
 "./vimrc/.vim/bundle/vim-autoformat/plugin/autoformat.vim"
 "./vimrc/.vim/bundle/vim-autoformat/plugin/defaults.vim"
 "./vimrc/.vim/bundle/vim-buffergator/.gitattributes"
+"./vimrc/.vim/bundle/vim-buffergator/.gitconfig"
 "./vimrc/.vim/bundle/vim-buffergator/README.md"
 "./vimrc/.vim/bundle/vim-buffergator/autoload/buffergator.vim"
 "./vimrc/.vim/bundle/vim-buffergator/doc/.gitignore"
