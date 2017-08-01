@@ -113,9 +113,6 @@
 [submodule "dvim"]
 	path = dvim
 	url = git@bitbucket.org:huangyingw/alpine-vim.git
-[submodule "vimrc/.vim/bundle/vim-bufferline"]
-	path = vimrc/.vim/bundle/vim-bufferline
-	url = https://github.com/bling/vim-bufferline.git
 [submodule "vimrc/.vim/bundle/vim-buffergator"]
 	path = vimrc/.vim/bundle/vim-buffergator
-    url = git@bitbucket.org:huangyingw/vim-buffergator.git
+	url = git@bitbucket.org:huangyingw/vim-buffergator.git
