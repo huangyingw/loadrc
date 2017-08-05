@@ -406,3 +406,4 @@ function! VsMax(fileName)
     vert resize
 endfunc
 let g:phpfmt_autosave = 0
+let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'

@@ -92,7 +92,7 @@
     branch = dev.merge.fix
 [submodule "vimrc/.vim/bundle/vim-phpfmt"]
 	path = vimrc/.vim/bundle/vim-phpfmt
-	url = git@github.com:beanworks/vim-phpfmt.git
+	url = git@bitbucket.org:huangyingw/vim-phpfmt.git
 [submodule "vimrc/.vim/bundle/YouCompleteMe"]
 	path = vimrc/.vim/bundle/YouCompleteMe
 	url = git@bitbucket.org:huangyingw/youcompleteme.git
@@ -113,3 +113,6 @@
 [submodule "dvim"]
 	path = dvim
 	url = git@bitbucket.org:huangyingw/alpine-vim.git
+[submodule "vimrc/.vim/bundle/vim-buffergator"]
+	path = vimrc/.vim/bundle/vim-buffergator
+	url = git@bitbucket.org:huangyingw/vim-buffergator.git
