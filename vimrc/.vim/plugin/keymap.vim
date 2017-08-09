@@ -223,8 +223,8 @@ nnoremap <leader>N :setlocal number!<cr>
 " See http://stevelosh.com/blog/2010/09/coming-home-to-vim
 " nnoremap / /\v\c
 " vnoremap / /\v\c
-nnoremap / ?\c
-vnoremap / ?\c
+nnoremap / /\c
+vnoremap / /\c
 nnoremap ? ?\c
 vnoremap ? ?\c
 " Speed up scrolling of the viewport slightly
