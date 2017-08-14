@@ -1,4 +1,6 @@
 #!/bin/bash
+echo "search in " "$1"
+cd "$1"
 find_result="$1/""`echo "$2"."$4".findresult |sed  -e "s/\//\_/g;s/\ /\_/g"`"
 if [ -f "$find_result" ]; then
   read -p "the search is already done, if you want to update, press u --> " update
@@ -13,8 +15,6 @@ if [ -f "$find_result" ]; then
       ;;
   esac
 fi
-echo "search in " "$1"
-cd "$1"
 cscope_db_file=files.proj
 echo "result in " "$1/$find_result"
 xargs fgrep -wnH "$2" < "$cscope_db_file" > "$find_result"
