@@ -16,5 +16,5 @@ if [ -f "$find_result" ]; then
   esac
 fi
 cscope_db_file=files.proj
-echo "result in " "$1/$find_result"
+echo "result in " "$find_result"
 xargs fgrep -wnH "$2" < "$cscope_db_file" > "$find_result"
