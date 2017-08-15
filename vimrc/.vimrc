@@ -307,6 +307,14 @@ call vundle#rc()
 
 filetype plugin indent on     " required!
 
+function AddToGit()
+    let worktree = substitute(system("~/loadrc/gitrc/get_worktree.sh " . expand('%:p')), '\n', '', '')
+    exec "cd " . worktree
+    let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
+    exec '!~/loadrc/gitrc/autoadd.sh ' . '"' .  b:relativePath . '"'
+    vert resize
+endfunction
+
 function TrimEndLines()
     let save_cursor = getpos(".")
     :silent! %s#\($\n\s*\)\+\%$##
@@ -317,6 +325,7 @@ au BufWritePre *.py call TrimEndLines()
 au BufWritePre *.sh call TrimEndLines()
 au BufWritePre *.java call TrimEndLines()
 au BufWritePre *.vimrc call TrimEndLines()
+au BufWritePre *.* call AddToGit()
 "To have a space (ASCII 32) considered as a valid character for a file name
 ":set isfname+=32
 let os = substitute(system('uname'), "\n", "", "")
