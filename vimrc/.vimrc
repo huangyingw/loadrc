@@ -325,11 +325,7 @@ au BufWritePre *.py call TrimEndLines()
 au BufWritePre *.sh call TrimEndLines()
 au BufWritePre *.java call TrimEndLines()
 au BufWritePre *.vimrc call TrimEndLines()
-au BufWritePre *.py call AddToGit()
-au BufWritePre *.php call AddToGit()
-au BufWritePre *.sh call AddToGit()
-au BufWritePre *.java call AddToGit()
-au BufWritePre *.vimrc call AddToGit()
+au BufWritePre *.* call AddToGit()
 "To have a space (ASCII 32) considered as a valid character for a file name
 ":set isfname+=32
 let os = substitute(system('uname'), "\n", "", "")
