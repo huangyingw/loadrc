@@ -1,7 +1,7 @@
 #!/bin/bash -
 fileName="$1"
 
-if (cat files.proj | grep -q "$fileName")
+if grep -q "$fileName" files.proj
 then
     git add -f "$fileName"
 fi
