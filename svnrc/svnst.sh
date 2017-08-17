@@ -1,4 +1,16 @@
 #!/bin/bash
-svn status | sed -e '/^.*.\(findresult\|orig\|sw.\|bak\|default\)$/d' |sed -e '/\(files.proj\|.gitignore\|includefile.conf\|prunefile.conf\|prunefix.conf\)/d' | tee svnst.findresult 
+svn status | tee svnst.findresult 
+
+while read ss
+do
+    sed -i.bak "/^.*.$ss\$/d" svnst.findresult
+done < svnpostfix.ignore
+
+while read ss
+do
+    ss=$(echo $ss | sed  -e "s/\//\\\\\//g")
+    sed -i.bak "/$ss/d" svnst.findresult
+done < svnfiles.ignore
+
 sed -i.bak "/^$/d" svnst.findresult
 sed -i.bak "s/\b[M]\b/svn cl utest $1/g" svnst.findresult
