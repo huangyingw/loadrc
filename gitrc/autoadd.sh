@@ -1,7 +1,10 @@
 #!/bin/bash -
 fileName="$1"
 
-if grep -q "$fileName" files.proj
+if [[ -d .git ]] && [[ -f files.proj ]]
 then
-    git add -f "$fileName"
+    if grep -q "$fileName" files.proj
+    then
+        git add -f "$fileName"
+    fi
 fi
