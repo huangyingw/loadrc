@@ -308,7 +308,7 @@ call vundle#rc()
 filetype plugin indent on     " required!
 
 function AddToGit()
-    let worktree = substitute(system("~/loadrc/gitrc/get_worktree.sh " . expand('%:p')), '\n', '', '')
+    let worktree = Find_in_parent(".git", Windowdir(), "/")
     exec "cd " . worktree
     let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
     exec '!~/loadrc/gitrc/autoadd.sh ' . '"' .  b:relativePath . '"'
