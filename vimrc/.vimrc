@@ -418,3 +418,10 @@ function! VsMax(fileName)
 endfunc
 let g:phpfmt_autosave = 1
 let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
+
+" configuration for vim-anyfold
+filetype plugin indent on
+syntax on
+let anyfold_activate=1
+set foldlevel=0
+" configuration for vim-anyfold
