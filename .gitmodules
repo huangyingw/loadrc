@@ -116,3 +116,6 @@
 [submodule "vimrc/.vim/bundle/vim-buffergator"]
 	path = vimrc/.vim/bundle/vim-buffergator
 	url = git@bitbucket.org:huangyingw/vim-buffergator.git
+[submodule "vimrc/.vim/bundle/vim-anyfold"]
+	path = vimrc/.vim/bundle/vim-anyfold
+	url = https://github.com/pseewald/vim-anyfold.git
