@@ -96,11 +96,13 @@ function! CSCSearch()
     normal! gV
     call setreg('"', old_reg, old_regtype)
 endfunction
-function! UpCscope()
+function! SearchOpen()
     normal! gvy<CR>
     let b:keyword = @@
-    exec '!touch ' . b:keyword . '/files.proj'
-    exec '!~/loadrc/bashrc/cscope.sh ' . b:keyword
+    let worktree = substitute(system("~/loadrc/gitrc/get_worktree.sh " . expand('%:p')), '\n', '', '')
+    exec "cd " . worktree
+    let find_file = substitute(system("~/loadrc/gitrc/find_files.sh " . '"' .  b:keyword . '"'), '\n', '', '')
+    exec 'vs ' . find_file
     vert resize
 endfunction
 function! ShowDiff()
@@ -299,7 +301,7 @@ vnoremap <silent>f :call VimSearch()<cr>
 " vnoremap <silent>g :call GitSearch()<cr>
 vnoremap <silent>g :call VFilter()<cr>
 vnoremap <silent>i :call ExFilter()<cr>
-vnoremap <silent>o :call UpCscope()<cr>
+vnoremap <silent>o :call SearchOpen()<cr>
 nmap <C-@> :call CSCSearch()<CR><CR>
 nmap <C-d> :call ShowDiff()<CR><CR>
 " nmap <C-j> :call PlayAV()<CR><CR>
