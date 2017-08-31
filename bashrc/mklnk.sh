@@ -4,11 +4,11 @@ TARGET=$2
 
 if [ -L ${1%/} ] || [ -L ${2%/} ]
 then
-  echo -e "${red}please not use simbo link ! ... ${NC}"
-  exit 1
+    echo -e "${red}please not use simbo link ! ... ${NC}"
+    exit 1
 fi
 
 LNSOURCE=`echo $SOURCE | sed 's/\/$//'`
 
-~/loadrc/bashrc/move.sh "$SOURCE" "$TARGET" \
-  && ln -s "$TARGET" "$LNSOURCE" 
+~/loadrc/bashrc/move.sh "$SOURCE" "$TARGET"
+ln -s "$TARGET" "$LNSOURCE"
