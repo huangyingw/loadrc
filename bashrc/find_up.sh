@@ -7,4 +7,4 @@ do
     path=${path%/*}
 done
 
-echo "$path"
+echo "$path/$2"
