@@ -110,9 +110,6 @@
 [submodule "vimrc/.vim/bundle/vim-multiple-cursors"]
 	path = vimrc/.vim/bundle/vim-multiple-cursors
 	url = git@github.com:terryma/vim-multiple-cursors.git
-[submodule "dvim"]
-	path = dvim
-	url = git@bitbucket.org:huangyingw/alpine-vim.git
 [submodule "vimrc/.vim/bundle/vim-buffergator"]
 	path = vimrc/.vim/bundle/vim-buffergator
 	url = git@bitbucket.org:huangyingw/vim-buffergator.git
