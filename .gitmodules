@@ -116,7 +116,3 @@
 [submodule "vimrc/.vim/bundle/vim-anyfold"]
 	path = vimrc/.vim/bundle/vim-anyfold
 	url = git@bitbucket.org:huangyingw/vim-anyfold.git 
-[submodule "dvim"]
-	path = dvim
-	url = git@github.com:huangyingw/dvim.git
-	branch = dev.fix
