@@ -89,7 +89,7 @@
 [submodule ".ssh"]
     path = .ssh
     url = git@bitbucket.org:huangyingw/.ssh.git
-    branch = dev.merge.fix
+    branch = dev.fix
 [submodule "vimrc/.vim/bundle/vim-phpfmt"]
 	path = vimrc/.vim/bundle/vim-phpfmt
 	url = git@bitbucket.org:huangyingw/vim-phpfmt.git
