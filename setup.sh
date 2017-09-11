@@ -3,12 +3,13 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-ln -fs ./.bashrc ~/.bashrc
-ln -fs ./.tmux.conf ~/.tmux.conf
-ln -fs ./gitrc/.gitconfig ~/.gitconfig
-ln -fs ./gitrc/.globalgitignore ~/.globalgitignore
-ln -fs ./vimrc/.vim ~/.vim
-ln -fs ./vimrc/.vimrc ~/.vimrc
+ln -fs "$SCRIPTPATH" ~/loadrc
+ln -fs ~/loadrc/.bashrc ~/.bashrc
+ln -fs ~/loadrc/.tmux.conf ~/.tmux.conf
+ln -fs ~/loadrc/gitrc/.gitconfig ~/.gitconfig
+ln -fs ~/loadrc/gitrc/.globalgitignore ~/.globalgitignore
+ln -fs ~/loadrc/vimrc/.vim ~/.vim
+ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
 git submodule init
 git submodule sync
 git submodule update
