@@ -11,4 +11,4 @@ fi
 LNSOURCE=`echo $SOURCE | sed 's/\/$//'`
 
 ~/loadrc/bashrc/move.sh "$SOURCE" "$TARGET"
-ln -s "$TARGET" "$LNSOURCE"
+ln -fs "$TARGET" "$LNSOURCE"
