@@ -1,4 +1,5 @@
 #alias for kvm
+alias uvmount='$HOME/loadrc/kvmrc/uvmount.sh' 
 alias vclone='$HOME/loadrc/kvmrc/vclone.sh'
 alias vdestroy='$HOME/loadrc/kvmrc/vdestroy.sh'
 alias vdisk='$HOME/loadrc/kvmrc/vdisk.sh' 
