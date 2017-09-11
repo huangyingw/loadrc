@@ -11,6 +11,7 @@
 . $HOME/loadrc/.sqlrc
 . $HOME/loadrc/.svnrc
 . $HOME/loadrc/.vbunturc
+. $HOME/loadrc/.zerotierrc
 . $HOME/loadrc/openrc.sh
 
 HOSTRC=$HOME/loadrc/."`hostname`".rc
