@@ -1,1 +1,1 @@
-sudo zerotier-cli join 93afae5963560e41
+zerotier-cli join 93afae5963560e41
