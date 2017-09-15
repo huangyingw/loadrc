@@ -4,4 +4,3 @@ do
     umount $ss
 done
 qemu-nbd --disconnect /dev/nbd0
-df -TH
