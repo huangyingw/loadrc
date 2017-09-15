@@ -3,6 +3,7 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
+sudo apt-get install -y vim-gnome ssh tmux mosh git kdiff3 qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
 ln -fs "$SCRIPTPATH" ~/loadrc
 ln -fs ~/loadrc/.bashrc ~/.bashrc
 ln -fs ~/loadrc/.tmux.conf ~/.tmux.conf

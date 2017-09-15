@@ -5,7 +5,7 @@ then
     exit 1
 fi
 modprobe nbd max_part=8
-./uvmount.sh
+~/loadrc/kvmrc/uvmount.sh
 qcow2File="$1"
 qemu-nbd --connect=/dev/nbd0 "$qcow2File"
 
