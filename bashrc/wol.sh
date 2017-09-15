@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ -z "$1" ]; then
-    wakeonlan 50:e5:49:ca:fd:04 #mini
+    wakeonlan 10:7b:44:f0:e7:2f #server
     ping server
 elif [ "$1" == "mldonkey" ]; then
     wakeonlan 00:01:c0:12:92:a2 #mldonkey
