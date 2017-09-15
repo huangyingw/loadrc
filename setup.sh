@@ -3,6 +3,7 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
+OS=`uname`
 apt-get install -y vim-gnome ssh tmux mosh git kdiff3 qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
 ln -fs "$SCRIPTPATH" ~/loadrc
 ln -fs ~/loadrc/.bashrc ~/.bashrc
@@ -16,3 +17,8 @@ git submodule sync
 git submodule update
 ./macvim/build.sh
 ./vimrc/.vim/bundle/YouCompleteMe/install.sh
+if [ $OS != "Darwin" ]
+then
+    curl -s https://install.zerotier.com/ | bash
+    zerotier-cli join 93afae5963560e41
+fi
