@@ -5,4 +5,4 @@ then
     exit 1
 fi
 qcow2File="$1"
-/Users/yhuang/loadrc/kvmrc/vmount.sh "$qcow2File"
+~/loadrc/kvmrc/vmount.sh "$qcow2File"
