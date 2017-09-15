@@ -6,3 +6,6 @@ then
 fi
 qcow2File="$1"
 ~/loadrc/kvmrc/vmount.sh "$qcow2File"
+~/loadrc/bashrc/mirror.sh /root/ /media/dev/nbd0p1/root/
+~/loadrc/bashrc/mirror.sh /etc/ssh/ /media/dev/nbd0p1/etc/ssh/
+~/loadrc/kvmrc/uvmount.sh
