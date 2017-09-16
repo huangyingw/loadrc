@@ -17,7 +17,7 @@ elif [ "$1" == "mini" ]; then
 elif [ "$1" == "server" ]; then
     wakeonlan 50:e5:49:ca:fd:04 #server
     ping server
-elif [ "$1" == "mac" ]; then
-    wakeonlan 6C:40:08:AA:76:86 #mac
-    ping mac
+elif [ "$1" == "movie" ]; then
+    wakeonlan 50:e5:49:ca:fd:04 #movie
+    ping movie
 fi
