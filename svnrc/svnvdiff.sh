@@ -14,5 +14,4 @@ done < svnfiles.ignore
 
 sed -i.bak "/^$/d" svnvdiff.findresult
 sed -i.bak "/Changelist/d" svnvdiff.findresult
-sed -i.bak "/^\b[A]\b/d" svnvdiff.findresult
-sed -i.bak "s/\b[M]\b/svn diff --diff-cmd kdiff3 $1/g" svnvdiff.findresult
+sed -i.bak "s/\b[A|M]\b/svn diff --diff-cmd kdiff3 $1/g" svnvdiff.findresult
