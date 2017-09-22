@@ -7,7 +7,7 @@ else
 fi
 cd "$TARGETEDIR"
 
-if [ ! -f files.proj ] 
+if [ ! -f files.proj ]
 then
     echo -e "${red}No files.proj file here, will not build the index ... ${NC}"
     exit 0
