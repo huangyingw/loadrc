@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -z "$1" ];
+if [ -z "$1" ]
 then
     TARGETEDIR=`realpath "$PWD"`
 else
@@ -7,7 +7,7 @@ else
 fi
 cd "$TARGETEDIR"
 
-if [ ! -f files.proj ]; then
+if [ ! -f files.proj ] then
     echo -e "${red}No files.proj file here, will not build the index ... ${NC}"
     exit 0
 fi
@@ -37,7 +37,8 @@ do
     or="-o"
 done < "$INCLUDE_FILE"
 find -L . "(" "${prune_params[@]}" "${prune_files[@]}" ")" -a -prune -o -type f -size -900k -print -exec file {} \; | grep text | cut -d: -f1 | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > ${TARGET}
-if [ ${#include_params[@]} -gt 0 ]; then
+if [ ${#include_params[@]} -gt 0 ]
+then
     find -L . "(" "${include_params[@]}" ")" -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET}
 fi
 sort -u ${TARGET} -o ${TARGET}

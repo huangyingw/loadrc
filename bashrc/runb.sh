@@ -1,10 +1,9 @@
 #!/bin/bash
 make -B
-if [ -f "run.sh" ]; then
-  ./run.sh
+if [ -f "run.sh" ] then
+    ./run.sh
 else
-  if [ -f "run" ]; then
-    ./run
-  fi
+    if [ -f "run" ] then
+        ./run
+    fi
 fi
-

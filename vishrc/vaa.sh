@@ -4,7 +4,7 @@ echo "search in " "$1"
 cd "$1"
 find_result="$3".vaa.findresult
 echo "find_result --> $find_result"
-if [ -f "$find_result" ]; then
+if [ -f "$find_result" ] then
     read -p "the search is already done, if you want to update, press u --> " update
     case $update in
         u)
