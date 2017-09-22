@@ -22,3 +22,8 @@ rsync -aH --delete-during --force \
     then
         rm ${ready_file}
     fi
+
+if [ -f ${MIRRORCHECK} ]
+then
+    pm-suspend
+fi
