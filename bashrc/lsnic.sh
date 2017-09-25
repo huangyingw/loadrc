@@ -79,5 +79,3 @@ do
     echo "    Driver version = No driver loaded"
   fi
 done
-exit 0
-

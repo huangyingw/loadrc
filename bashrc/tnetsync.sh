@@ -2,7 +2,7 @@
 if [ -z "$1" ];
 then
   echo -e "${red}please specify the source server ... ${NC}"
-  exit 0
+  exit 1
 fi
 SOURCE="$1"
 NETSYNC="$HOME/loadrc/bashrc/netsync_ex"
