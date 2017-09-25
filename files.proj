@@ -301,6 +301,7 @@
 "./kvmrc/vsd.py"
 "./kvmrc/vsd.sh"
 "./kvmrc/vsdx.sh"
+"./kvmrc/vshrink.sh"
 "./kvmrc/vsl.sh"
 "./kvmrc/vss.sh"
 "./kvmrc/vssc.sh"
