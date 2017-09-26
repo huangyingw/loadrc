@@ -243,6 +243,7 @@
 "./gitrc/gclb.sh"
 "./gitrc/gclean.sh"
 "./gitrc/gco.sh"
+"./gitrc/gco_test.sh"
 "./gitrc/gcob.sh"
 "./gitrc/gcof.sh"
 "./gitrc/gcom.sh"
