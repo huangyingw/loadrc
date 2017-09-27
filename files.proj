@@ -3120,6 +3120,7 @@
 "./macvim/src/testdir/unix.vim"
 "./macvim/src/testdir/view_util.vim"
 "./macvim/src/testdir/vms.vim"
+"./macvim/src/testdir/xterm_ramp.vim"
 "./macvim/src/toolbar.phi"
 "./macvim/src/toolcheck"
 "./macvim/src/typemap"
