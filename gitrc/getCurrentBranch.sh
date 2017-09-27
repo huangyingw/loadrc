@@ -1,2 +1,2 @@
 #!/bin/bash - 
-currentBranch=`git branch |awk '/\*/{print $2}'`
+currentBranch=`git branch --contains HEAD | grep -v HEAD`
