@@ -31,7 +31,7 @@ then
         # the process IS running
         # handle it
         echo this process is running
-        exit 0
+        exit 1
     fi
   else
     echo $$ > "${LCK_FILE}"

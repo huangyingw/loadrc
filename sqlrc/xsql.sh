@@ -2,7 +2,7 @@
 file=${1}
 loginFile=.login
 
-if [ -n "$2" ];
+if [ -n "$2" ]
 then
     loginFile=${2}/.login
 fi
@@ -13,7 +13,7 @@ password=`cat ${loginFile} |awk -F'=' '/password/{print $2}'`
 host=`cat ${loginFile} |awk -F'=' '/host/{print $2}'`
 dbinstance=`cat ${loginFile} |awk -F'=' '/dbinstance/{print $2}'`
 
-if [ -z "$host" ];
+if [ -z "$host" ]
 then
     echo "dbinstance=$dbinstance" >> "$loginFile"
     echo "host=$host" >> "$loginFile"

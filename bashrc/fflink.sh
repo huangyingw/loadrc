@@ -19,4 +19,3 @@ do
         echo "Usage:$0 dir1 dir2 ..."
     fi
 done
-exit 0

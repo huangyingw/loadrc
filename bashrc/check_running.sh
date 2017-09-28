@@ -27,7 +27,7 @@ if [ -f "${LCK_FILE}" ]; then
   else
       # the process IS running
       # handle it
-      exit 0
+      exit 1
   fi
 else
   echo $$ > "${LCK_FILE}"

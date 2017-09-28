@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z "$1" ];
+if [ -z "$1" ]
 then
     echo -e "${red}Please provide parameter ... ${NC}"
     exit 1
@@ -15,7 +15,7 @@ then
         && $HOME/loadrc/bashrc/cscope.sh
 else
     target=`echo $1 | sed -e "s|.git$||;s|^.*github.com.||"`
-    if [ -n "$2" ];
+    if [ -n "$2" ]
     then
         target="$2"
     fi
