@@ -8,6 +8,12 @@ then
     exit 1
 fi
 
+if [ -f "$TARGET" ]
+then
+    echo -e "${red}Please consider backup/move the target folder --> $TARGET first ! ... ${NC}"
+    exit 1
+fi
+
 LNSOURCE=`echo $SOURCE | sed 's/\/$//'`
 
 ~/loadrc/bashrc/move.sh "$SOURCE" "$TARGET"
