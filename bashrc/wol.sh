@@ -21,7 +21,7 @@ then
     ping mini
 elif [ "$1" == "server" ]
 then
-    wakeonlan 50:e5:49:ca:fd:04 #server
+    wakeonlan 10:7b:44:f0:e7:2f #server
     ping server
 elif [ "$1" == "movie" ]
 then
