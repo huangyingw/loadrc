@@ -259,6 +259,8 @@
 "./gitrc/gfix.sh"
 "./gitrc/gfvd.sh"
 "./gitrc/gicb.sh"
+"./gitrc/git_bisect_run.sh"
+"./gitrc/git_run_shell_command_for_each_commit.sh"
 "./gitrc/glg.sh"
 "./gitrc/gme.sh"
 "./gitrc/gme2.sh"
