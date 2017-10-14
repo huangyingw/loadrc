@@ -13,8 +13,6 @@ realDeploy () {
     ssh -n "$server" "ln -fs ~/loadrc/vimrc/.vim ~/.vim"
     ssh -n "$server" "ln -fs ~/loadrc/gitrc/.gitconfig ~/.gitconfig"
     ssh -n "$server" "ln -fs ~/loadrc/gitrc/.globalgitignore ~/.globalgitignore"
-    ssh -n "$server" "sudo mkdir -p /export/home1/username/cscope_db/"
-    ssh -n "$server" "sudo chmod -R 777 /export/home1/username/cscope_db/"
 }
 
 if [ -n "$1" ]
