@@ -8,4 +8,5 @@ then
 fi
 
 rsync -aHvn --delete-during --force \
+    --exclude-from=~/loadrc/bashrc/osmirror_exclude \
     "${SOURCE}/" "${TARGET}/"
