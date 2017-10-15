@@ -7,6 +7,6 @@ then
     mkdir -p "${TARGET}"
 fi
 
-rsync -aHvn --delete-during --force \
+rsync -aH --delete-during --force \
     --exclude-from="$HOME"/loadrc/bashrc/osmirror_exclude \
     "${SOURCE}/" "${TARGET}/"
