@@ -1,5 +1,7 @@
 etc/NetworkManager/system-connections/
 etc/crypttab
 etc/fstab
+etc/hostname
+etc/hosts
 etc/mdadm/mdadm.conf
 etc/network/interfaces
