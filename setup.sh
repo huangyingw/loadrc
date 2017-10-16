@@ -18,6 +18,7 @@ git submodule sync
 git submodule update
 ./macvim/build.sh
 ./vimrc/.vim/bundle/YouCompleteMe/install.sh
+./bashrc/cscope.sh
 if [ $OS != "Darwin" ]
 then
     curl -s https://install.zerotier.com/ | bash
