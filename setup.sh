@@ -12,6 +12,7 @@ ln -fs ~/loadrc/gitrc/.gitconfig ~/.gitconfig
 ln -fs ~/loadrc/gitrc/.globalgitignore ~/.globalgitignore
 ln -fs ~/loadrc/vimrc/.vim ~/.vim
 ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
+ln -fs ~/loadrc/.config/git/gitk  ~/.config/git/gitk
 git submodule init
 git submodule sync
 git submodule update

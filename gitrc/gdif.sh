@@ -22,6 +22,7 @@ sed -i.bak "s/\bD\b/git rm/g" gdif.findresult
 sed -i.bak "s/^R[0-9]*/git mv/g" gdif.findresult
 for ss in $(git config --get-all gdif.ignore)
 do
+    ss=$(echo $ss | sed  -e "s/\//\\\\\//g")
     sed -i.bak "/$ss/d" gdif.findresult
 done
 
