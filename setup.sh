@@ -21,6 +21,8 @@ git submodule update
 ./vimrc/.vim/bundle/YouCompleteMe/install.sh
 ./bashrc/cscope.sh
 ./gitrc/gclean.sh
+./kvmrc/install.sh
+./dockerrc/install.sh
 if [ $OS != "Darwin" ]
 then
     curl -s https://install.zerotier.com/ | bash
