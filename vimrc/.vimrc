@@ -385,9 +385,9 @@ endfunc
 "  Use tr to allow that other OS paths, too
 function! GetEscapedKeywordForVIM(keywordStr)
     let result = a:keywordStr
-    let result = substitute(result, '/', '\\/', 'g')
     let result = substitute(result, '\', '\\\', 'g')
     let result = substitute(result, '\.', '\\.', 'g')
+    let result = substitute(result, '/', '\\/', 'g')
     return result
 endfunc
 function! GetEscapedKeyword(keywordStr)
