@@ -1,3 +1,4 @@
+boot/grub/grub.cfg
 etc/NetworkManager/system-connections/
 etc/crypttab
 etc/fstab
