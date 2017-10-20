@@ -136,7 +136,7 @@ set foldcolumn=2                " add a fold column
 "set foldmethod=syntax " detect triple-{ style fold markers
 " set foldmethod=indent " detect triple-{ style fold markers
 set syntax=c
-set foldmethod=syntax 
+set foldmethod=syntax
 
 let javaScript_fold=1         " JavaScript
 let perl_fold=1               " Perl
@@ -291,21 +291,20 @@ augroup END
 " nnoremap fh <c-w>R
 " nnoremap fl <c-w>r
 " Pathogen load
-filetype off
 
 call pathogen#infect()
 call pathogen#helptags()
 
-filetype plugin indent on
 syntax on
 
 set nocompatible              " be iMproved
-filetype off                  " required!
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-filetype plugin indent on     " required!
+filetype on
+filetype plugin on
+filetype plugin indent on
 
 function AddToGit()
     let worktree = Find_in_parent(".git", Windowdir(), "/")
@@ -422,7 +421,6 @@ let g:phpfmt_autosave = 0
 let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
 
 " configuration for vim-anyfold
-filetype plugin indent on
 syntax on
 " let anyfold_activate=1
 autocmd Filetype java let b:anyfold_activate=1

@@ -120,7 +120,6 @@ endfunction "}}}1
 " Turn filetype detection off and back on again if it was already enabled.
 function! pathogen#cycle_filetype() " {{{1
   if exists('g:did_load_filetypes')
-    filetype off
     filetype on
   endif
 endfunction " }}}1
