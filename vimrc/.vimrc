@@ -136,7 +136,7 @@ set foldcolumn=2                " add a fold column
 "set foldmethod=syntax " detect triple-{ style fold markers
 " set foldmethod=indent " detect triple-{ style fold markers
 set syntax=c
-set foldmethod=expr
+set foldmethod=syntax 
 
 let javaScript_fold=1         " JavaScript
 let perl_fold=1               " Perl
