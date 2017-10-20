@@ -1,5 +1,5 @@
-#!/bin/bash - 
-if [ ! -f gbil.findresult ];
+#!/bin/bash -
+if [ ! -f gbil.findresult ]
 then
-  echo git bisect start > gbil.findresult
+    echo git bisect start > gbil.findresult
 fi
