@@ -4,7 +4,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
 OS=`uname`
-apt-get install -y vim-gnome ssh tmux mosh git kdiff3 qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils curl
+apt-get install -y vim-gnome ssh tmux mosh git kdiff3 qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils curl net-tools
 ln -fs "$SCRIPTPATH" ~/loadrc
 ln -fs ~/loadrc/.bashrc ~/.bashrc
 ln -fs ~/loadrc/.tmux.conf ~/.tmux.conf
