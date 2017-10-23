@@ -387,6 +387,8 @@ function! GetEscapedKeywordForVIM(keywordStr)
     let result = substitute(result, '\', '\\\', 'g')
     let result = substitute(result, '\.', '\\.', 'g')
     let result = substitute(result, '/', '\\/', 'g')
+    let result = substitute(result, '[', '\\[', 'g')
+    let result = substitute(result, ']', '\\]', 'g')
     return result
 endfunc
 function! GetEscapedKeyword(keywordStr)
@@ -422,12 +424,13 @@ let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
 
 " configuration for vim-anyfold
 syntax on
-" let anyfold_activate=1
-autocmd Filetype java let b:anyfold_activate=1
-autocmd Filetype jsp let b:anyfold_activate=1
-autocmd Filetype php let b:anyfold_activate=1
-autocmd Filetype sh let b:anyfold_activate=1
-autocmd Filetype python let b:anyfold_activate=1
+let anyfold_activate=1
+" autocmd Filetype java let b:anyfold_activate=1
+" autocmd Filetype jsp let b:anyfold_activate=1
+" autocmd Filetype php let b:anyfold_activate=1
+" autocmd Filetype sh let b:anyfold_activate=1
+" autocmd Filetype python let b:anyfold_activate=1
+" autocmd Filetype xml let b:anyfold_activate=1
 set foldlevel=0
 " configuration for vim-anyfold
 
