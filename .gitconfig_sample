@@ -1,0 +1,6 @@
+[remote "remoteVar"]
+    url = urlVar
+    fetch = +refs/heads/*:refs/remotes/remoteVar/*
+[gsync]
+    remote = remoteVar
+    branch = master
