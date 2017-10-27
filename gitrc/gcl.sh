@@ -16,10 +16,6 @@ then
 else
     target=`echo $1 | sed -e "s|.git$||;s|^.*github.com.||"`
     remote=`echo $1 | sed -e "s|.git$||;s|^.*github.com.||;s|\/.*||"`
-    sed -i.bak "s/remoteVar/$remote/g" ~/loadrc/.gitconfig_sample
-    var="$1"
-    var=$(echo "$var" | sed 's/\//\\\//g')
-    sed -i.bak "s/urlVar/$var/g" ~/loadrc/.gitconfig_sample
     if [ -n "$2" ]
     then
         target="$2"
@@ -27,8 +23,13 @@ else
     mkdir -p ${target}
     echo ${target} \
         && git clone "$1" ${target} \
-        && cp -v ~/loadrc/.gitconfig_sample ${target}/.gitconfig \
-        && cd ${target} \
+        && cp -v ~/loadrc/.gitconfig_sample ${target}/.gitconfig
+    sed -i.bak "s/remoteVar/$remote/g" ${target}/.gitconfig
+    var="$1"
+    var=$(echo "$var" | sed 's/\//\\\//g')
+    sed -i.bak "s/urlVar/$var/g" ${target}/.gitconfig
+
+    cd ${target} \
         && $HOME/loadrc/gitrc/gcob.sh dev.fix \
         && $HOME/loadrc/gitrc/gdev.sh \
         && $HOME/loadrc/bashrc/cscope.sh \
