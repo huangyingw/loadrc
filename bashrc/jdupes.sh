@@ -2,9 +2,18 @@
 
 if [ -z "$1" ]
 then
-    echo -e "${red}Please provide parameter ... ${NC}"
+    echo -e "${red}Please provide TARGET ... ${NC}"
+    exit 1
+fi
+
+if [ -z "$2" ]
+then
+    echo -e "${red}Please provide BACKUP ... ${NC}"
     exit 1
 fi
 
 TARGET="$1"
-jdupes -1dNr --xsize=300M "$TARGET"
+BACKUP="$2"
+~/loadrc/bashrc/copy.sh "$TARGET" "$BACKUP" \
+    && jdupes -1dNr --xsize=3M "$TARGET" \
+    && pm-suspend
