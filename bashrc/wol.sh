@@ -21,7 +21,7 @@ then
     ping vserver
 elif [ "$1" == "mini" ]
 then
-    wakeonlan 00:01:c0:15:fa:ed #mini
+    wakeonlan 00:01:c0:12:94:05 #mini
     ping mini
 elif [ "$1" == "server" ]
 then
