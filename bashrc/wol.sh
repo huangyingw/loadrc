@@ -15,6 +15,10 @@ elif [ "$1" == "toshiba" ]
 then
     wakeonlan b8:70:f4:ce:3d:f3 #toshiba
     ping toshiba
+elif [ "$1" == "vserver" ]
+then
+    wakeonlan 00:01:c0:15:fa:ed #vserver
+    ping vserver
 elif [ "$1" == "mini" ]
 then
     wakeonlan 00:01:c0:15:fa:ed #mini
