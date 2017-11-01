@@ -1,7 +1,7 @@
 #!/bin/bash -
 
 vmCount=$(virsh list | wc -l)
-if [ $vmCount > 3 ]
+if [ $vmCount -gt 3 ]
 then
     echo -e "${red}Please shutdown the running vm before mounting qcow2 file... ${NC}"
     exit 1
