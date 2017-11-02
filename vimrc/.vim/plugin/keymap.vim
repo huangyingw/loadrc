@@ -195,10 +195,11 @@ function! VimSearch()
     normal! gV
     call setreg('"', old_reg, old_regtype)
 endfunction
-function! ShowProjectRoot()
+function! OpenProjectRoot()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
     let @+=b:csdbpath
     echom b:csdbpath
+    exec 'vs ' . b:csdbpath 
 endfunction
 function! FindCalling()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
@@ -256,7 +257,7 @@ nnoremap <leader>P "+P
 nnoremap tt :!git add -f %:p<CR>:Autoformat<CR>:w<CR>
 nnoremap D :vs %:p<CR>:vert resize<CR>
 " Quickly open current dir in current windows
-nnoremap <leader>d :call ShowProjectRoot()<cr>
+nnoremap <leader>d :call OpenProjectRoot()<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 nnoremap M zM
