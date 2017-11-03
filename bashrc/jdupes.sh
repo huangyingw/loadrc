@@ -16,4 +16,4 @@ TARGET="$1"
 BACKUP="$2"
 ~/loadrc/bashrc/copy.sh "$TARGET" "$BACKUP" \
     && jdupes -1dNr --xsize=3M "$TARGET" \
-    && pm-suspend
+    && ~/loadrc/bashrc/sleep.sh
