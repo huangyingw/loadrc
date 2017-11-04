@@ -6,3 +6,4 @@ etc/hostname
 etc/hosts
 etc/mdadm/mdadm.conf
 etc/network/interfaces
+var/lib/zerotier-one
