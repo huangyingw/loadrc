@@ -2,6 +2,6 @@
 target=$(echo "$1" | sed  -e "s/\/$//g")
 if [ -z "$1" ]
 then
-    ssh server pm-suspend
+    ssh server "~/loadrc/bashrc/sleep.sh"
 fi
-ssh "$target" pm-suspend
+ssh "$target" "~/loadrc/bashrc/sleep.sh" 
