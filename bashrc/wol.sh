@@ -32,5 +32,6 @@ then
 elif [ "$target" == "movie" ]
 then
     wakeonlan 50:e5:49:ca:fd:04 #movie
+    wakeonlan 1c:87:2c:b7:a1:ce #movie wifi
     ping movie
 fi
