@@ -22,6 +22,7 @@ then
     exit
 fi
 
-while read -r line || [[ -n "$line" ]]; do
+while read -r line || [[ -n "$line" ]]
+do
     realDeploy "$line"
 done < deployLoadrc.list
