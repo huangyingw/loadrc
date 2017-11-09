@@ -8,7 +8,7 @@ realDeploy () {
     echo "Begin loadrc deploy on $server"
     ./rsync.sh ~/loadrc/ "$server":~/loadrc/
     ./rsync.sh ~/.tmux.conf "$server":~/.tmux.conf
-    ssh -n "$server" "sudo apt-get install -y vim-gnome cscope git tmux mosh htop realpath"
+    ssh -n "$server" "sudo apt-get update && sudo apt-get install -y vim-gnome cscope git tmux mosh htop realpath"
     ssh -n "$server" "ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc"
     ssh -n "$server" "ln -fs ~/loadrc/vimrc/.vim ~/.vim"
     ssh -n "$server" "ln -fs ~/loadrc/gitrc/.gitconfig ~/.gitconfig"
