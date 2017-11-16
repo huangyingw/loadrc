@@ -22,5 +22,4 @@ for c in notebook['cells']:
 
         c['source'] = pep8_cell
 
-new_file_path = file_path[:-6] + '-PEP8.ipynb'
-json.dump(notebook, open(new_file_path, "w"))
+json.dump(notebook, open(file_path, "w"))
