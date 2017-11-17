@@ -36,7 +36,7 @@ function! VFilter()
         exec 'vs ' . csdbpath . '/' . b:result . '.vaa.findresult'
     endif
 
-    exec '%g!/\c' . keyword . '/d'
+    exec 'g!/\c' . keyword . '/d'
     w
     vert resize
 endfunction
