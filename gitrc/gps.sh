@@ -2,6 +2,7 @@
 chmod 400 ~/.ssh/id_rsa
 ~/loadrc/gitrc/gpl.sh
 
+git config --local include.path $(realpath .gitconfig)
 if [[ $(git config --get-all push.remote) ]]
 then
     for ss in $(git config --get-all push.remote)
