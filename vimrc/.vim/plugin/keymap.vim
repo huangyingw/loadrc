@@ -299,7 +299,7 @@ endif
 " nnoremap F :echom expand('%:p')<cr>
 nnoremap F :call FindCalling()<cr>
 vnoremap <silent>f :call VimSearch()<cr>
-" vnoremap <silent>g :call GitSearch()<cr>
+vnoremap <silent>t :call GitSearch()<cr>
 vnoremap <silent>g :call VFilter()<cr>
 vnoremap <silent>i :call ExFilter()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
