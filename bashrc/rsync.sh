@@ -1,4 +1,4 @@
-#!/bin/bash - 
+#!/bin/bash -
 rsync -aHv --force --progress \
     --exclude-from="excludeFile" \
     "$1" \
