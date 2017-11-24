@@ -1,11 +1,8 @@
 #!/bin/bash -
-function upsearch () {
-    test / == "$pwd" && return || test -e "$1" && return || cd .. && upsearch "$1"
-}
-
 DIR=$(dirname "$1")
 cd "$DIR"
-upsearch .git
+
+. ~/loadrc/bashrc/find_up_goto.sh .git
 if [ -f .git ]
 then
     relative=$(cat .git | awk '{print $2}')
