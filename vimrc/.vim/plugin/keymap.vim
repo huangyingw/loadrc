@@ -161,11 +161,11 @@ endfunction
 function! GitSearch()
     normal! gvy<CR>
     let b:csdbpath = Find_in_parent(".git",Windowdir(),$HOME)
-    let b:keyword = @@
+    let b:keyword = GetEscapedKeyword(@@)
+    let b:result = GetEscapedResult(b:keyword)
     exec "cd " . b:csdbpath
-    exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"'
-    let b:keyword = GetEscapedKeyword(b:keyword)
-    exec 'vs ' . b:keyword . '.gsearch.findresult'
+    exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"' . ' "' .  b:result . '"' 
+    exec 'vs ' . b:result . '.gsearch.findresult'
     vert resize
 endfunction
 function! VimSearch()
