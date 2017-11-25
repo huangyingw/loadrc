@@ -5,6 +5,7 @@ cd "$SCRIPTPATH"
 
 OS=`uname`
 apt-get install -y vim-gnome ssh tmux mosh git kdiff3 qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils curl net-tools sshfs
+mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 ln -fs "$SCRIPTPATH" ~/loadrc
 ln -fs ~/loadrc/.bashrc ~/.bashrc
 ln -fs ~/loadrc/.tmux.conf ~/.tmux.conf
@@ -12,8 +13,8 @@ ln -fs ~/loadrc/gitrc/.gitconfig ~/.gitconfig
 ln -fs ~/loadrc/gitrc/.globalgitignore ~/.globalgitignore
 ln -fs ~/loadrc/vimrc/.vim ~/.vim
 ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
-mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 ln -fs ~/loadrc/.config/git/gitk  ~/.config/git/gitk
+ln -fs ~/loadrc/pythonrc/setup.cfg  ~/setup.cfg
 git submodule init
 git submodule sync
 git submodule update
