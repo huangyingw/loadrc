@@ -3154,6 +3154,7 @@
 "./prunefix.conf"
 "./pythonrc/autopep8-ipynb.py"
 "./pythonrc/remove-unuses.sh"
+"./pythonrc/setup.cfg"
 "./setup.sh"
 "./sqlrc/.login"
 "./sqlrc/mysqlback.sh"
