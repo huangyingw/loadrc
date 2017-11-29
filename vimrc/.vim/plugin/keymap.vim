@@ -99,8 +99,8 @@ endfunction
 function! SearchOpen()
     normal! gvy<CR>
     let b:keyword = @@
-    let worktree = substitute(system("~/loadrc/gitrc/get_worktree.sh " . expand('%:p')), '\n', '', '')
-    exec "cd " . worktree
+    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
+    exec "cd " . b:csdbpath
     let find_file = substitute(system("~/loadrc/gitrc/find_files.sh " . '"' .  b:keyword . '"'), '\n', '', '')
     exec 'vs ' . find_file
     vert resize
@@ -124,7 +124,7 @@ function! VimOpen()
         let indexFile = getcwd() . '/modules/' . b:fileName . '/index'
         if filereadable(realFile)
             exec 'vs ' . realFile
-        elseif filereadable(indexFile) 
+        elseif filereadable(indexFile)
             exec 'vs ' . indexFile
         else
             exec 'vs ' . realFile
@@ -164,7 +164,7 @@ function! GitSearch()
     let b:keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(b:keyword)
     exec "cd " . b:csdbpath
-    exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"' . ' "' .  b:result . '"' 
+    exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"' . ' "' .  b:result . '"'
     exec 'vs ' . b:result . '.gsearch.findresult'
     vert resize
 endfunction
@@ -199,7 +199,7 @@ function! OpenProjectRoot()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
     let @+=b:csdbpath
     echom b:csdbpath
-    exec 'vs ' . b:csdbpath 
+    exec 'vs ' . b:csdbpath
 endfunction
 function! FindCalling()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
