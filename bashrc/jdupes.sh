@@ -15,6 +15,6 @@ fi
 TARGET="$1"
 BACKUP="$2"
 ~/loadrc/bashrc/copy.sh "$TARGET" "$BACKUP" \
-    && jdupes -1dNr --xsize=3M "$TARGET" \
-    && jdupes -1dNr --xsize=3M "$BACKUP" \
+    && jdupes -1dNr --xsize=30M "$TARGET" \
+    && jdupes -1dNr --xsize=30M "$BACKUP" \
     && shutdown -h now
