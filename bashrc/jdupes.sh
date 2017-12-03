@@ -17,4 +17,4 @@ BACKUP="$2"
 ~/loadrc/bashrc/copy.sh "$TARGET" "$BACKUP" \
     && jdupes -1dNr --xsize=3M "$TARGET" \
     && jdupes -1dNr --xsize=3M "$BACKUP" \
-    && ~/loadrc/bashrc/sleep.sh
+    && shutdown -h now
