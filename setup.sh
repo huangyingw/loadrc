@@ -18,6 +18,9 @@ ln -fs ~/loadrc/pythonrc/setup.cfg  ~/setup.cfg
 git submodule init
 git submodule sync
 git submodule update
+git submodule foreach ~/loadrc/gitrc/gsync.sh
+git submodule foreach ~/loadrc/gitrc/gps.sh
+
 ./macvim/build.sh
 ./vimrc/.vim/bundle/YouCompleteMe/install.sh
 ./bashrc/cscope.sh
