@@ -17,6 +17,7 @@
 "./.git/modules/vimrc/.vim/bundle/YouCompleteMe/modules/third_party/ycmd/modules/third_party/JediHTTP/modules/vendor/argparse/config"
 "./.git/modules/vimrc/.vim/bundle/YouCompleteMe/modules/third_party/ycmd/modules/third_party/JediHTTP/modules/vendor/bottle/config"
 "./.git/modules/vimrc/.vim/bundle/YouCompleteMe/modules/third_party/ycmd/modules/third_party/JediHTTP/modules/vendor/jedi/config"
+"./.git/modules/vimrc/.vim/bundle/YouCompleteMe/modules/third_party/ycmd/modules/third_party/JediHTTP/modules/vendor/parso/config"
 "./.git/modules/vimrc/.vim/bundle/YouCompleteMe/modules/third_party/ycmd/modules/third_party/JediHTTP/modules/vendor/waitress/config"
 "./.git/modules/vimrc/.vim/bundle/YouCompleteMe/modules/third_party/ycmd/modules/third_party/OmniSharpServer/config"
 "./.git/modules/vimrc/.vim/bundle/YouCompleteMe/modules/third_party/ycmd/modules/third_party/OmniSharpServer/modules/NRefactory/config"
