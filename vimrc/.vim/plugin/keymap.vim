@@ -315,7 +315,7 @@ map <F5> :call VRun()<cr>
 map <F3> :call VDebug()<cr>
 nnoremap gf gF<CR>:vert resize<CR>
 map oo :call VimOpen()<cr>
-nnoremap <silent> <leader>g :!gitk --all -p --full-diff -- %:p<CR>:vert resize<CR>
+nnoremap <silent> <leader>g :!gitk --follow --all -p --full-diff -- %:p<CR>:vert resize<CR>
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
 
 function! CompareTwoFiles()
