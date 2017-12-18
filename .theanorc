@@ -1,6 +1,6 @@
 [global]
-force_device = True
-device = gpu
+force_device = False
+device = cpu
 floatX = float32
 
 [cuda]
