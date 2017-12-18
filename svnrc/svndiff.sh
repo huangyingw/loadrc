@@ -1,2 +1,2 @@
 #!/bin/bash
-svn diff --cl utest | tee svndiff.findresult
+svn diff --diff-cmd kdiff3 "$1"

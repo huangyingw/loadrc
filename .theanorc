@@ -1,0 +1,7 @@
+[global]
+force_device = True
+device = gpu
+floatX = float32
+
+[cuda]
+root = /usr/local/cuda
