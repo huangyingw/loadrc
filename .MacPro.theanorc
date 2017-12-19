@@ -1,0 +1,7 @@
+[global]
+force_device = False
+device = cpu
+floatX = float32
+
+[cuda]
+root = /usr/local/cuda
