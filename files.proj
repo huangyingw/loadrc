@@ -1,4 +1,5 @@
 "./.AF051611.employee-wifi.rwc.corp.imvu.com.rc"
+"./.AF051611.employee-wired.rwc.corp.imvu.com.theanorc"
 "./.androidrc"
 "./.bashrc"
 "./.config/git/gitk"
@@ -67,6 +68,7 @@
 "./.p4rc"
 "./.pythonrc"
 "./.scl-1yihuang-m.corporate.localrc"
+"./.server.theanorc"
 "./.shellrc"
 "./.sqlrc"
 "./.ssh/.gitconfig"
