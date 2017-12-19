@@ -15,7 +15,7 @@ ln -fs ~/loadrc/vimrc/.vim ~/.vim
 ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
 ln -fs ~/loadrc/.config/git/gitk  ~/.config/git/gitk
 ln -fs ~/loadrc/pythonrc/setup.cfg  ~/setup.cfg
-ln -fs ~/loadrc/.theanorc  ~/.theanorc
+ln -fs ~/loadrc/."`hostname`".theanorc  ~/.theanorc
 git submodule init
 git submodule sync
 git submodule update

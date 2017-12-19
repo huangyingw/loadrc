@@ -2,10 +2,7 @@
 fileName="$1"
 filesProj=$(~/loadrc/bashrc/find_up.sh $(pwd) "files.proj")
 
-if [[ -d .git || -f .git ]]
+if [ grep -q "$fileName" "$filesProj" ] && [ ! git ls-files --error-unmatch "$fileName" ]
 then
-    if grep -q "$fileName" "$filesProj"
-    then
-        git add -f "$fileName"
-    fi
+    git add -f "$fileName"
 fi
