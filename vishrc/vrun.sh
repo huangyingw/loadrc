@@ -20,6 +20,9 @@ case $extension in
         read -p "press any key to continue...." update
         ;;
     py)
+        SCRIPT=$(realpath "$1")
+        SCRIPTPATH=$(dirname "$SCRIPT")
+        cd "$SCRIPTPATH"
         python ${1} 2>&1 | tee ${1}.findresult
         read -p "press any key to continue...." update
         ;;
