@@ -29,9 +29,18 @@ git submodule foreach ~/loadrc/gitrc/gps.sh
 if [ $OS == "Darwin" ]
 then
     ./macvim/build.sh
+else
+    . /etc/lsb-release
+    cd ./pkg-vim/
+    git co "$DISTRIB_CODENAME".fix \
+        && ./build.sh
+    cd -
 fi
 ./vimrc/.vim/bundle/YouCompleteMe/install.sh
-./bashrc/cscope.sh
+if [ $OS == "Darwin" ]
+then
+    ./bashrc/cscope.sh
+fi
 ./gitrc/gclean.sh
 if [ $OS != "Darwin" ]
 then
