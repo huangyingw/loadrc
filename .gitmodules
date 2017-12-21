@@ -116,3 +116,6 @@
 [submodule "vimrc/.vim/bundle/vim-anyfold"]
 	path = vimrc/.vim/bundle/vim-anyfold
 	url = git@bitbucket.org:huangyingw/vim-anyfold.git 
+[submodule "pkg-vim"]
+	path = pkg-vim
+	url = git@github.com:huangyingw/pkg-vim.git
