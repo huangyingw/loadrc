@@ -4,7 +4,10 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
 OS=`uname`
-apt-get install -y vim-gnome ssh tmux mosh git kdiff3 qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils curl net-tools sshfs
+if [ $OS != "Darwin" ]
+then
+    apt-get install -y vim-gnome ssh tmux mosh git kdiff3 qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils curl net-tools sshfs
+fi
 mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 ln -fs "$SCRIPTPATH" ~/loadrc
 ln -fs ~/loadrc/.bashrc ~/.bashrc
@@ -23,14 +26,17 @@ git submodule update
 git submodule foreach ~/loadrc/gitrc/gsync.sh
 git submodule foreach ~/loadrc/gitrc/gps.sh
 
-./macvim/build.sh
+if [ $OS == "Darwin" ]
+then
+    ./macvim/build.sh
+fi
 ./vimrc/.vim/bundle/YouCompleteMe/install.sh
 ./bashrc/cscope.sh
 ./gitrc/gclean.sh
-./kvmrc/install.sh
-./dockerrc/install.sh
 if [ $OS != "Darwin" ]
 then
+    ./kvmrc/install.sh
+    ./dockerrc/install.sh
     curl -s https://install.zerotier.com/ | bash
     zerotier-cli join 93afae5963560e41
 fi
