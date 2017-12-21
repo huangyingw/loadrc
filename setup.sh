@@ -37,7 +37,10 @@ else
     cd -
 fi
 ./vimrc/.vim/bundle/YouCompleteMe/install.sh
-./bashrc/cscope.sh
+if [ $OS == "Darwin" ]
+then
+    ./bashrc/cscope.sh
+fi
 ./gitrc/gclean.sh
 if [ $OS != "Darwin" ]
 then
