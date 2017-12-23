@@ -111,7 +111,7 @@ if [ -f "${SSH_ENV}" ]; then
     . "${SSH_ENV}" > /dev/null
     #ps ${SSH_AGENT_PID} doesn't work under cywgin
     ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-        start_agent;
+    start_agent;
 }
 else
     start_agent;
@@ -147,4 +147,4 @@ export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
 export PATH=/usr/local/cuda/bin:$PATH
 
 # added by Anaconda2 4.4.0 installer
-export PATH="/media/volgrp/anaconda2/bin:$PATH"
+export PATH=$HOME"/anaconda2/bin:$PATH"
