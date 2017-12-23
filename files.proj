@@ -85,6 +85,7 @@
 "./.svnrc"
 "./.theanorc"
 "./.tmux.conf"
+"./.vserver.theanorc"
 "./bashrc/HuangYings-MacBook-Pro.local.csc.properties"
 "./bashrc/apf.sh"
 "./bashrc/app_list"
