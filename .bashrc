@@ -147,4 +147,4 @@ export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
 export PATH=/usr/local/cuda/bin:$PATH
 
 # added by Anaconda2 4.4.0 installer
-export PATH="/media/volgrp/anaconda2/bin:$PATH"
+export PATH="$HOME/anaconda2/bin:$PATH"
