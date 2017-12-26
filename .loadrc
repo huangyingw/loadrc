@@ -5,7 +5,7 @@
 . $HOME/loadrc/.gitrc
 . $HOME/loadrc/.hgrc
 . $HOME/loadrc/.kvmrc
-. $HOME/loadrc/.osxrc
+. $HOME/loadrc/."`hostname`".osxrc
 . $HOME/loadrc/.p4rc
 . $HOME/loadrc/.pythonrc
 . $HOME/loadrc/.shellrc
