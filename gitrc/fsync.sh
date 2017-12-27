@@ -7,7 +7,8 @@ else
 fi
 RESULT="$TARGETEDIR"/fgs.findresult
 function rec_dir() {
-    if [[ $2 -gt 11 ]]; then
+    if [[ $2 -gt 11 ]]
+    then
         return
     fi
     for file in `ls -al $1`
