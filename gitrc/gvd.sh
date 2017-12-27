@@ -1,7 +1,7 @@
 #!/bin/bash
-if [ -n "$1" ];
+if [ -n "$1" ]
 then
-    if [ -n "$2" ];
+    if [ -n "$2" ]
     then
         git difftool -y "$1" "$2"
     else
