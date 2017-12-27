@@ -35,11 +35,11 @@ declare -a IOPorts2
 
 for (( counter=0 ; counter < $TotalControllers ; counter++ ))
 do
-  offset=$(($counter+1))
-  IOPorts1[$counter]=`echo $temp|cut -f$offset -d" "`
-  if (ethtool -i eth$counter) &> /dev/null; then
-    IOPorts2[$counter]=`ethtool -i eth$counter|grep 'bus-info'|cut -f3- -d :`
-  fi
+    offset=$(($counter+1))
+    IOPorts1[$counter]=`echo $temp|cut -f$offset -d" "`
+    if (ethtool -i eth$counter) &> /dev/null; then
+        IOPorts2[$counter]=`ethtool -i eth$counter|grep 'bus-info'|cut -f3- -d :`
+    fi
 done
 
 #Loop through both arrays and determine if there's a match in IOPort1 & IOPort2.  If so
@@ -49,33 +49,34 @@ done
 
 for ((counter=0 ; counter < $TotalControllers ; counter++))
 do
-  Match=0
-  for ((counter1=0 ; counter1 < $TotalControllers; counter1++))
-  do              
-    if [ "${IOPorts1[$counter]}" = "${IOPorts2[$counter1]}" ]; then
-      Match=1                                 
-      DeviceID=`lspci -nn | grep ${IOPorts2[$counter1]} |cut -f3- -d"["| cut -c 1-9`
-      EthernetController=`lspci -v |grep ${IOPorts2[$counter1]} | cut -f4- -d" "|cut -f1 -d"("`
-      AdapterName=`lspci -v | grep ${IOPorts2[$counter1]} -A 1 | grep 'Subsystem'|cut -f2- -d" "`
-      DriverName=`ethtool -i eth$counter1 | grep -i 'driver' | cut -f2 -d" "`
-      DriverVersion=`ethtool -i eth$counter1 | grep -m 1 -i 'version'| cut -f2 -d" "`
-      echo "eth$counter1 : ${IOPorts2[$counter1]}"
-      echo "    Make/Model = $AdapterName"
-      echo "    Ethernet controller = $EthernetController"
-      echo "    VenID:DevID = $DeviceID"
-      echo "    Driver name = $DriverName"
-      echo "    Driver version = $DriverVersion"
+    Match=0
+    for ((counter1=0 ; counter1 < $TotalControllers; counter1++))
+    do
+        if [ "${IOPorts1[$counter]}" = "${IOPorts2[$counter1]}" ]
+        then
+            Match=1
+            DeviceID=`lspci -nn | grep ${IOPorts2[$counter1]} |cut -f3- -d"["| cut -c 1-9`
+            EthernetController=`lspci -v |grep ${IOPorts2[$counter1]} | cut -f4- -d" "|cut -f1 -d"("`
+            AdapterName=`lspci -v | grep ${IOPorts2[$counter1]} -A 1 | grep 'Subsystem'|cut -f2- -d" "`
+            DriverName=`ethtool -i eth$counter1 | grep -i 'driver' | cut -f2 -d" "`
+            DriverVersion=`ethtool -i eth$counter1 | grep -m 1 -i 'version'| cut -f2 -d" "`
+            echo "eth$counter1 : ${IOPorts2[$counter1]}"
+            echo "    Make/Model = $AdapterName"
+            echo "    Ethernet controller = $EthernetController"
+            echo "    VenID:DevID = $DeviceID"
+            echo "    Driver name = $DriverName"
+            echo "    Driver version = $DriverVersion"
+        fi
+    done
+    if [ "$Match" = "0" ] ; then
+        DeviceID=`lspci -nn | grep ${IOPorts1[$counter]} |cut -f3- -d"["| cut -c 1-9`
+        EthernetController=`lspci -v |grep ${IOPorts1[$counter]} | cut -f4- -d" "|cut -f1 -d"("`
+        AdapterName=`lspci -v | grep ${IOPorts1[$counter]} -A 1 | grep 'Subsystem'|cut -f2- -d" "`
+        echo ": ${IOPorts1[$counter]}"
+        echo "    Make/Model = $AdapterName"
+        echo "    Ethernet controller = $EthernetController"
+        echo "    VenID:DevID = $DeviceID"
+        echo "    Driver name = No driver loaded"
+        echo "    Driver version = No driver loaded"
     fi
-  done
-  if [ "$Match" = "0" ] ; then
-    DeviceID=`lspci -nn | grep ${IOPorts1[$counter]} |cut -f3- -d"["| cut -c 1-9`
-    EthernetController=`lspci -v |grep ${IOPorts1[$counter]} | cut -f4- -d" "|cut -f1 -d"("`
-    AdapterName=`lspci -v | grep ${IOPorts1[$counter]} -A 1 | grep 'Subsystem'|cut -f2- -d" "`
-    echo ": ${IOPorts1[$counter]}"
-    echo "    Make/Model = $AdapterName"
-    echo "    Ethernet controller = $EthernetController"
-    echo "    VenID:DevID = $DeviceID"
-    echo "    Driver name = No driver loaded"
-    echo "    Driver version = No driver loaded"
-  fi
 done
