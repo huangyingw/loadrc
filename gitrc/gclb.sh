@@ -5,7 +5,7 @@ x=`echo "$x" | sed -e "s|loadrc|BareReps/loadrc|"`
 x=`echo "$x" | sed -e "s|imvu|BareReps/imvu|"`
 echo "BareReps location --> $x"
 
-if [ ! -d "$x" ];
+if [ ! -d "$x" ]
 then
     git clone --bare . "$x"
 fi

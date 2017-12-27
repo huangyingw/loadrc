@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -n "$1" ];
+if [ -n "$1" ]
 then
     folderForGit="$1"
 else
