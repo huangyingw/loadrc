@@ -1,3 +1,3 @@
 #!/bin/bash -
 COMMIT="$1"
-git difftool "$COMMIT"^!
+git difftool -y "$COMMIT"^!
