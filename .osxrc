@@ -1,9 +1,4 @@
 #!/bin/bash
-OS=`uname`
-if [ $OS != "Darwin" ]
-then
-    return
-fi
 sudo pmset -a sleep 60
 sudo pmset -a displaysleep 30
 chmod 400 ~/.ssh/id_rsa
