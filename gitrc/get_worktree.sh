@@ -5,7 +5,7 @@ cd "$DIR"
 if [ -f config ]
 then
     workTree=$(cat config | awk '/worktree/{print $3}')
-    if [ -z "$workTree" ];
+    if [ -z "$workTree" ]
     then
         . ~/loadrc/bashrc/find_up_goto.sh .git
     else

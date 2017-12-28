@@ -1,13 +1,12 @@
-#!/bin/bash 
+#!/bin/bash
 SOURCE=$1
 TARGET=$2
 
-if [ ! -d "${TARGET}" ];
-then   
+if [ ! -d "${TARGET}" ]
+then
     mkdir -p "${TARGET}"
 fi
 
 rsync -aHinv --delete-after \
-		--exclude .svn --exclude *.sw* \
-		"${SOURCE}" "${TARGET}"|vim -
-
+    --exclude .svn --exclude *.sw* \
+    "${SOURCE}" "${TARGET}"|vim -

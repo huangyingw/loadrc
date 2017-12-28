@@ -6,11 +6,11 @@ command_params=`cat ${FILE_TYPE}|{ read suf; echo -n "--include=*.$suf";while re
 
 if [ "$SOURCE" != "$TARGET" ]
 then
-  if [ ! -d "$TARGET" ];
-  then   
-    mkdir -p "$TARGET"
-  fi
-  rsync -avH --include=*/  $command_params --exclude=* --prune-empty-dirs "$SOURCE" "$TARGET"
+    if [ ! -d "$TARGET" ]
+    then
+        mkdir -p "$TARGET"
+    fi
+    rsync -avH --include=*/  $command_params --exclude=* --prune-empty-dirs "$SOURCE" "$TARGET"
 else
-  echo "please choose the different dir!"
+    echo "please choose the different dir!"
 fi

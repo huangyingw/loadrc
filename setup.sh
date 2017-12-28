@@ -23,8 +23,8 @@ ln -fs ~/loadrc/."`hostname`".theanorc  ~/.theanorc
 git submodule init
 git submodule sync
 git submodule update
-git submodule foreach ~/loadrc/gitrc/gsync.sh
 git submodule foreach ~/loadrc/gitrc/gps.sh
+git submodule foreach ~/loadrc/gitrc/gsync.sh
 
 if [ $OS == "Darwin" ]
 then

@@ -1,9 +1,9 @@
 #!/bin/sh
 file=${1}
 loginFile=.login
-if [ -n "$2" ];
+if [ -n "$2" ]
 then
-  loginFile=${2}/.login
+    loginFile=${2}/.login
 fi
 user=`cat ${loginFile} |awk -F'=' '/user/{print $2}'`
 password=`cat ${loginFile} |awk -F'=' '/password/{print $2}'`

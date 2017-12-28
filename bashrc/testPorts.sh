@@ -1,6 +1,7 @@
-#!/bin/bash - 
+#!/bin/bash -
 portList="$HOME/Dropbox/loadrc/bashrc/portList"
-while read -r line || [[ -n "$line" ]]; do
+while read -r line || [[ -n "$line" ]]
+do
     while read port
     do
         echo "port listening --> $port"
