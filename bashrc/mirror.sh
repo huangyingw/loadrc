@@ -25,5 +25,5 @@ rsync -aH --delete-during --force \
 
 if [ -f ${MIRRORCHECK} ]
 then
-    ~/loadrc/bashrc/sleep.sh
+    shutdown -h now
 fi
