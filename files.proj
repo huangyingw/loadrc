@@ -150,6 +150,7 @@
 "./bashrc/linuxmirror.sh"
 "./bashrc/logFilter.sh"
 "./bashrc/lsnic.sh"
+"./bashrc/lsof.sh"
 "./bashrc/lucene.sh"
 "./bashrc/mbak_ex"
 "./bashrc/mbak_in"
