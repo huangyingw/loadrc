@@ -5,6 +5,7 @@ then
     exit 1
 fi
 qcow2File="$1"
+~/loadrc/kvmrc/uvmount.sh
 ~/loadrc/kvmrc/vmount.sh "$qcow2File"
 ~/loadrc/bashrc/mirror.sh /root/ /media/dev/nbd0p1/root/
 ~/loadrc/bashrc/mirror.sh /etc/ssh/ /media/dev/nbd0p1/etc/ssh/
