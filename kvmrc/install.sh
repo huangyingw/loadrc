@@ -1,2 +1,2 @@
 #!/bin/bash -
-apt-get install -y qemu-kvm libvirt-bin virtinst bridge-utils cpu-checker
+apt-get install -y qemu-kvm libvirt-bin virtinst bridge-utils cpu-checker virt-manager
