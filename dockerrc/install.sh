@@ -27,3 +27,4 @@ apt-get update
 # Install nvidia-docker2 and reload the Docker daemon configuration
 apt-get install -y nvidia-docker2
 pkill -SIGHUP dockerd
+pip install nvidia-docker-compose
