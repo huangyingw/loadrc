@@ -17,6 +17,8 @@ apt-get install -y \
     libvirt-bin \
     mosh \
     net-tools \
+    python-dev \
+    python-pip \
     qemu-kvm \
     software-properties-common \
     ssh \
@@ -24,3 +26,5 @@ apt-get install -y \
     tmux \
     ubuntu-vm-builder \
     vim-gnome
+pip install --upgrade pip
+pip install --upgrade virtualenv
