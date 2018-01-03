@@ -1,0 +1,9 @@
+#! /bin/sh
+# Workaround for not working nvidia cuda after suspend
+case $1 in
+    resume|thaw)
+        sudo rmmod nvidia_uvm
+        sudo modprobe nvidia_uvm
+        /etc/init.d/zerotier-one restart
+        ;;
+esac

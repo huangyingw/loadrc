@@ -6,7 +6,7 @@ cd "$SCRIPTPATH"
 OS=`uname`
 if [ $OS != "Darwin" ]
 then
-    apt-get install -y vim-gnome ssh tmux mosh git kdiff3 qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils curl net-tools sshfs
+    ./install_basic.sh
 fi
 mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 ln -fs "$SCRIPTPATH" ~/loadrc
@@ -45,6 +45,7 @@ fi
 if [ $OS != "Darwin" ]
 then
     ./kvmrc/install.sh
+    ./gpurc/install.sh
     ./dockerrc/install.sh
     curl -s https://install.zerotier.com/ | bash
     zerotier-cli join 93afae5963560e41
