@@ -17,7 +17,6 @@ apt-get install -y \
     kdiff3 \
     libvirt-bin \
     mdadm \
-    mldonkey-server \
     mosh \
     net-tools \
     python-dev \
