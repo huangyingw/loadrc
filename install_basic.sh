@@ -9,12 +9,14 @@ apt-get install -y \
     binutils \
     bridge-utils \
     build-essential \
+    cryptsetup \
     curl \
     g++ make \
     gcc \
     git \
     kdiff3 \
     libvirt-bin \
+    mldonkey-server \
     mosh \
     net-tools \
     python-dev \
