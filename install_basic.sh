@@ -6,11 +6,13 @@ cd "$SCRIPTPATH"
 apt-get update
 apt-get upgrade -y
 apt-get install -y \
+    bcmwl-kernel-source \
     binutils \
     bridge-utils \
     build-essential \
     cryptsetup \
     curl \
+    dkms \
     g++ make \
     gcc \
     git \
@@ -28,5 +30,6 @@ apt-get install -y \
     tmux \
     ubuntu-vm-builder \
     vim-gnome
+modprobe wl
 pip install --upgrade pip
 pip install --upgrade virtualenv
