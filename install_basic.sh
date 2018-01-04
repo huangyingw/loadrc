@@ -16,6 +16,7 @@ apt-get install -y \
     git \
     kdiff3 \
     libvirt-bin \
+    mdadm \
     mldonkey-server \
     mosh \
     net-tools \
