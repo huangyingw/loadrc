@@ -16,7 +16,7 @@ then
     mkdir -p "${TARGET}"
 fi
 
-rsync -aH --delete-during --force \
+rsync -aHS --delete-during --force \
     "${SOURCE}/" "${TARGET}/" \
     && if [ -f ${ready_file} ]
     then
