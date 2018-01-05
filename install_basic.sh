@@ -29,7 +29,8 @@ apt-get install -y \
     sshfs \
     tmux \
     ubuntu-vm-builder \
-    vim-gnome
+    vim-gnome \
+    virt-manager
 modprobe wl
 pip install --upgrade pip
 pip install --upgrade virtualenv
