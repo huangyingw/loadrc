@@ -36,3 +36,4 @@ pip install --upgrade virtualenv
 cp -fv ./etc/NetworkManager/system-connections/dd-wrt /etc/NetworkManager/system-connections/dd-wrt
 cp -fv ./etc/crypttab /etc/crypttab
 cp -fv ./etc/mdadm/mdadm.conf /etc/mdadm/mdadm.conf
+update-initramfs -u
