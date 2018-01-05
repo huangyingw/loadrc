@@ -7,4 +7,4 @@ then
 fi
 
 TARGET="$1"
-jdupes -1dNr --xsize=30M "$TARGET"
+jdupes -1dNr --xsize=3M "$TARGET"
