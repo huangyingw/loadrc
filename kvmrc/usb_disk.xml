@@ -44,7 +44,7 @@ or other application using the libvirt API.
     </disk>
     <disk type='block' device='disk'>
       <driver name='qemu' type='raw'/>
-      <source dev='/dev/disk/by-id/ata-KINGSTON_SV100S232G_32GB90004027'/>
+      <source dev='/dev/disk/by-id/ata-ST1000LM014-1EJ164_W3814JXM'/>
       <target dev='vdb' bus='virtio'/>
       <boot order='1'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x09' function='0x0'/>
