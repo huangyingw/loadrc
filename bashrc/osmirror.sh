@@ -7,13 +7,13 @@ then
     mkdir -p "${TARGET}"
 fi
 
-if [ ! -f "$SOURCE/etc/fstab" ]
+if [[ "${SOURCE}" != *":"* ]] && [ ! -f "$SOURCE/etc/fstab" ]
 then
     echo -e "${red}please choose the correct SOURCE os folder... ${NC}"
     exit 1
 fi
 
-if [ ! -f "$TARGET/etc/fstab" ]
+if [[ "${TARGET}" != *":"* ]] && [ ! -f "$TARGET/etc/fstab" ]
 then
     echo -e "${red}please choose the correct TARGET os folder... ${NC}"
     exit 1
