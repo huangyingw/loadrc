@@ -28,3 +28,5 @@ apt-get update
 apt-get install -y nvidia-docker2
 pkill -SIGHUP dockerd
 pip install nvidia-docker-compose
+/etc/init.d/docker stop \
+    && ~/loadrc/bashrc/mklnk.sh /var/lib/docker/ /media/volgrp/docker/
