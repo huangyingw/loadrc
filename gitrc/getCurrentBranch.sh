@@ -1,2 +1,2 @@
-#!/bin/bash - 
-currentBranch=`git branch --contains HEAD | grep -v HEAD | sed -e 's/^[* \t]*//'`
+#!/bin/bash
+currentBranch=`git rev-parse --abbrev-ref HEAD`
