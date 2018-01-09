@@ -1,4 +1,3 @@
 #!/bin/bash
 chmod 400 ~/.ssh/id_rsa
 chmod 400 ~/loadrc/keys/*.pem
-alias restartBluetooth='$HOME/loadrc/osxrc/restart_bluetooth.sh '
