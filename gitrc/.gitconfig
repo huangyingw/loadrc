@@ -61,9 +61,6 @@
 [pull]
     default = current
 [gdif]
-    ignore = gci.default
-    ignore = gme.default
-    ignore = gps.default
     ignore = includefile.conf
     ignore = prunefix.conf
 [push]
