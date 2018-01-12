@@ -1,3 +1,3 @@
 #!/bin/bash -
 touch files.proj \
-    && git config merge.allow true
+    && git config --file .gitconfig merge.allow true

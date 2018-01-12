@@ -10,3 +10,5 @@
 [gsync]
     remote = origin
     branch = master
+[merge]
+    allow = true
