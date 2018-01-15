@@ -1,1 +1,1 @@
-alias autopep8-ipynb='$HOME/pythonrc/autopep8-ipynb.py'
+alias autopep8ipynb='$HOME/loadrc/pythonrc/autopep8-ipynb.py'
