@@ -4,11 +4,9 @@ echo "branch --> $branch"
 
 git remote update
 remoteBranch=$(git branch -a | grep remotes/.*"$branch"$ | head -1 |  sed -e 's/^[ \t]*//')
-localBranch=$(git branch -a | grep "$branch" |  sed -e 's/^[* \t]*//')
-echo "localBranch --> $localBranch"
-echo "git checkout -b $localBranch $remoteBranch"
+localBranch=$(git branch | grep "$branch" |  sed -e 's/^[* \t]*//')
 
-if ( git branch | grep -q "$localBranch" )
+if [ -n "$localBranch" ]
 then
     git checkout "$localBranch"
 else
