@@ -12,6 +12,3 @@ then
 else
     git checkout -b "$localBranch" "$remoteBranch"
 fi
-
-current_branch=`git branch |awk '/^\*/{print $2}'`
-echo "current_branch --> $current_branch"
