@@ -7,11 +7,11 @@ OS=`uname`
 if [ $OS != "Darwin" ]
 then
     ./install_basic.sh
+    ln -fs ~/loadrc/.bashrc ~/.bashrc
 fi
 mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 ln -fs "$SCRIPTPATH" ~/loadrc
 ln -fs ~/loadrc/."`hostname`".theanorc  ~/.theanorc
-ln -fs ~/loadrc/.bashrc ~/.bashrc
 ln -fs ~/loadrc/.config/git/gitk  ~/.config/git/gitk
 ln -fs ~/loadrc/.profile ~/.profile
 ln -fs ~/loadrc/.tmux.conf ~/.tmux.conf
