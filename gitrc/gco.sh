@@ -10,5 +10,5 @@ if [ -n "$localBranch" ]
 then
     git checkout "$localBranch"
 else
-    git checkout -b "$localBranch" "$remoteBranch"
+    git checkout -b "$branch" "$remoteBranch"
 fi
