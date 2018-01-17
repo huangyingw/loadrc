@@ -152,7 +152,7 @@ fi
 . $HOME/loadrc/.loadrc
 export PATH="/usr/local/bin:/opt/local/sbin:$PATH"
 export CUDA_HOME=/usr/local/cuda
-export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-9.1/lib64:$LD_LIBRARY_PATH
 export PATH=/usr/local/cuda/bin:$PATH
 
 export PATH="$HOME/anaconda3/bin:$PATH"
