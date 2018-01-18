@@ -7,7 +7,6 @@ OS=`uname`
 if [ $OS != "Darwin" ]
 then
     ./install_basic.sh
-    ln -fs ~/loadrc/.bashrc ~/.bashrc
 fi
 ./deploy_links.sh
 git submodule init
