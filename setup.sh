@@ -21,7 +21,7 @@ then
 else
     . /etc/lsb-release
     cd ./pkg-vim/
-    git co "$DISTRIB_CODENAME".fix \
+    git co "$DISTRIB_CODENAME" \
         && ./build.sh
     cd -
 fi

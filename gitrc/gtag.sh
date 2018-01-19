@@ -1,12 +1,12 @@
 #!/bin/bash
 if [ -z "$1" ]
 then
-    echo "Please provide tag name"
+    echo -e "${red}Please provide tag name... ${NC}"
     exit 1
 fi
 if [ -z "$2" ]
 then
-    echo "Please provide commit message"
+    echo -e "${red}Please provide commit message... ${NC}"
     exit 1
 fi
 git tag "$1" -m "$2"
