@@ -10,6 +10,7 @@ fi
 
 apt-get update
 apt-get upgrade -y
+apt-get purge -y totem totem-plugins
 apt-get install -y \
     bcmwl-kernel-source \
     binutils \
