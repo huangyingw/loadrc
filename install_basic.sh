@@ -25,6 +25,7 @@ apt-get install -y \
     pm-utils \
     realpath  \
     slurm \
+    smplayer \
     ssh \
     sshfs \
     tmux \
