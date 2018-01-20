@@ -12,6 +12,7 @@ apt-get update
 apt-get upgrade -y
 apt-get install -y \
     bcmwl-kernel-source \
+    binutils \
     cryptsetup \
     curl \
     dkms \
@@ -22,6 +23,7 @@ apt-get install -y \
     mosh \
     net-tools \
     pm-utils \
+    realpath  \
     slurm \
     software-properties-common \
     ssh \

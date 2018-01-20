@@ -3,5 +3,10 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-./install_driver.sh
-./install_nvidia-reload.sh
+if [ $OS == "Darwin" ]
+then
+    exit 0
+fi
+
+. ./install_driver.sh
+. ./install_nvidia-reload.sh

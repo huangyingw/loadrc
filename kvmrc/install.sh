@@ -1,4 +1,7 @@
 #!/bin/bash -
+SCRIPT=$(realpath "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+cd "$SCRIPTPATH"
 
 if [ $OS == "Darwin" ]
 then
@@ -6,14 +9,9 @@ then
 fi
 
 apt-get install -y \
-    bcmwl-kernel-source \
-    binutils \
     bridge-utils \
     build-essential \
     cpu-checker \
-    cryptsetup \
-    curl \
-    dkms \
     g++ make \
     gcc \
     git \
@@ -35,5 +33,4 @@ apt-get install -y \
     ubuntu-vm-builder \
     vim-gnome \
     virt-manager \
-    virtinst \
-    virt-manager
+    virtinst
