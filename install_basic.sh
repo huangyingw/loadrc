@@ -25,7 +25,6 @@ apt-get install -y \
     pm-utils \
     realpath  \
     slurm \
-    software-properties-common \
     ssh \
     sshfs \
     tmux \
