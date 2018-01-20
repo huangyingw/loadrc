@@ -37,3 +37,6 @@ cp -fv ./etc/crypttab /etc/crypttab
 cp -fv ./etc/mdadm/mdadm.conf /etc/mdadm/mdadm.conf
 cp -fv ./etc/sudoers /etc/sudoers
 update-initramfs -u
+. ./deploy_links.sh
+. ./submodule_setup.sh
+. ./zerotier_install.sh
