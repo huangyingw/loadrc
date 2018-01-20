@@ -6,7 +6,7 @@ OS=`uname`
 . $HOME/loadrc/.gitrc
 . $HOME/loadrc/.hgrc
 . $HOME/loadrc/.kvmrc
-if [ $OS == "Darwin" ]
+if [ "$OS" == "Darwin" ]
 then
     . $HOME/loadrc/."`hostname`".osxrc
 fi

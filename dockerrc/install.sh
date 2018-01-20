@@ -3,7 +3,7 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-if [ $OS == "Darwin" ]
+if [ "$OS" == "Darwin" ]
 then
     exit 0
 fi
