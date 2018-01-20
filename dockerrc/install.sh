@@ -1,4 +1,10 @@
 #!/bin/bash -
+
+if [ $OS == "Darwin" ]
+then
+    exit 0
+fi
+
 apt-get install -y \
     apt-transport-https \
     ca-certificates \
