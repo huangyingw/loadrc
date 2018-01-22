@@ -17,6 +17,7 @@ fi
 . $HOME/loadrc/.svnrc
 . $HOME/loadrc/.zerotierrc
 . $HOME/loadrc/openrc.sh
+. $HOME/loadrc/gpurc/.gpurc
 
 HOSTRC=$HOME/loadrc/."`hostname`".rc
 if [ -f "$HOSTRC" ]
