@@ -5,7 +5,7 @@ cd "$SCRIPTPATH"
 
 if [ $(uname) == "Darwin" ]
 then
-    . ./macvim/build.sh
+    ./macvim/build.sh
 else
     . /etc/lsb-release
     cd ./pkg-vim/
