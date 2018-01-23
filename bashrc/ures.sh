@@ -1,6 +1,6 @@
 #!/bin/bash
 OS=`uname`
-if [ "$OS" == "Darwin" ]
+if [ $(uname) == "Darwin" ]
 then
     echo -e "${red}It could only run in Linux... ${NC}"
     exit 1
