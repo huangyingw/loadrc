@@ -5,8 +5,8 @@ cd "$SCRIPTPATH"
 
 if [ $(uname) == "Darwin" ]
 then
-    return
+    exit 0
 fi
 
-. ./install_driver.sh
-. ./install_nvidia-reload.sh
+./install_driver.sh
+./install_nvidia-reload.sh

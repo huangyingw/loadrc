@@ -5,7 +5,7 @@ cd "$SCRIPTPATH"
 
 if [ $(uname) == "Darwin" ]
 then
-    return
+    exit 0
 fi
 
 apt-get install -y \
