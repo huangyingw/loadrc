@@ -5,7 +5,7 @@ cd "$SCRIPTPATH"
 
 if [ "$OS" == "Darwin" ]
 then
-    exit 0
+    return
 fi
 
 apt-get install -y \

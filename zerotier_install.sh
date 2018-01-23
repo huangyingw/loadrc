@@ -5,7 +5,7 @@ cd "$SCRIPTPATH"
 
 if [ $OS == "Darwin" ]
 then
-    exit 0
+    return
 fi
 
 curl -s https://install.zerotier.com/ | bash
