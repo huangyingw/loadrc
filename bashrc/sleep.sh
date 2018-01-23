@@ -1,5 +1,4 @@
 #!/bin/bash
-OS=`uname`
 if [ $(uname) == "Darwin" ]
 then
     pmset sleepnow

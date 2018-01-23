@@ -1,5 +1,4 @@
 #!/bin/bash
-OS=`uname`
 . $HOME/loadrc/.androidrc
 . $HOME/loadrc/.dockerrc
 . $HOME/loadrc/.envrc
