@@ -22,3 +22,8 @@ rsync -aHS --delete-during --force \
     then
         rm ${ready_file}
     fi
+
+if [ -f ${MIRRORCHECK} ]
+then
+    ~/loadrc/bashrc/sleep.sh
+fi
