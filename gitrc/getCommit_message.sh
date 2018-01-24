@@ -7,6 +7,7 @@ then
     commit_message="n"
 fi
 
+~/loadrc/gitrc/include_gitconfig.sh
 commit_message=$(git config commit.message)
 
 if [ -n "$1" ]
