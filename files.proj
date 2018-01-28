@@ -316,6 +316,7 @@
 "./gitrc/gtag.sh"
 "./gitrc/gvd.sh"
 "./gitrc/gvlg.sh"
+"./gitrc/include_gitconfig.sh"
 "./gitrc/postCommit.sh"
 "./gpurc/.gpurc"
 "./gpurc/etc/modprobe.d/blacklist.conf"
