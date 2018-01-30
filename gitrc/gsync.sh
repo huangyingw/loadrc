@@ -1,5 +1,5 @@
 #!/bin/bash
-. ~/loadrc/gitrc/getCurrentBranch.sh
+currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 git co $currentBranch
 ~/loadrc/gitrc/include_gitconfig.sh
 if [ -n $(git config gsync.remote) ]
