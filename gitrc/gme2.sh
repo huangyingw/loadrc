@@ -1,5 +1,5 @@
 #!/bin/bash
-CURRENT_BRANCH="`git branch |awk '/^\*/{print $2}'`"
+CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
 if [ -z "$1" ]
 then
     echo -e "${red}Please provide target_branch... ${NC}"

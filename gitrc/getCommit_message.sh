@@ -1,5 +1,5 @@
 #!/bin/bash -
-current_branch=`git branch |awk '/^\*/{print $2}'`
+current_branch=$(~/loadrc/gitrc/get_current_branch.sh)
 commit_message=""
 
 if [ -z "$(git status --porcelain)" ]
