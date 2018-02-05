@@ -37,5 +37,4 @@ then
 fi
 
 ./deploy_links.sh
-./submodule_setup.sh
 ./zerotier_install.sh
