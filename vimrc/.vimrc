@@ -434,4 +434,4 @@ let anyfold_activate=1
 set foldlevel=0
 " configuration for vim-anyfold
 
-" let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1

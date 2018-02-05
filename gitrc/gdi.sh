@@ -1,2 +1,2 @@
 #!/bin/bash
-git diff | tee gdi.findresult
+git diff HEAD | tee gdi.findresult
