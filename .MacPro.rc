@@ -4,3 +4,4 @@ sudo pmset -a displaysleep 30
 chmod 400 ~/.ssh/id_rsa
 chmod 400 ~/loadrc/keys/*.pem
 alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
+export PATH="$HOME/anaconda3/bin:$PATH"
