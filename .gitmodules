@@ -116,3 +116,7 @@
 [submodule "pkg-vim"]
 	path = pkg-vim
 	url = git@github.com:huangyingw/pkg-vim.git
+[submodule "dvim"]
+	path = dvim
+	url = git@github.com:huangyingw/dvim.git
+	branch = dev.fix
