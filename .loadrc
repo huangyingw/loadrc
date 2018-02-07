@@ -5,10 +5,6 @@
 . $HOME/loadrc/.gitrc
 . $HOME/loadrc/.hgrc
 . $HOME/loadrc/.kvmrc
-if [ $(uname) == "Darwin" ]
-then
-    . $HOME/loadrc/."`hostname`".osxrc
-fi
 . $HOME/loadrc/.p4rc
 . $HOME/loadrc/.pythonrc
 . $HOME/loadrc/.shellrc
