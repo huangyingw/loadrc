@@ -120,3 +120,7 @@
 	path = dvim
 	url = git@github.com:huangyingw/dvim.git
 	branch = dev.fix
+[submodule "neovim"]
+	path = neovim
+	url = git@github.com:huangyingw/neovim.git
+	branch = dev
