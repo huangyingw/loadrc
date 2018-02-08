@@ -22,4 +22,5 @@ ln -fs ~/loadrc/pythonrc/setup.cfg  ~/setup.cfg
 ln -fs ~/loadrc/usr/NX/etc/node.cfg  /usr/NX/etc/node.cfg
 ln -fs ~/loadrc/vimrc/.vim ~/.vim
 ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
-ln -fs ~/loadrc/.config/nvim/init.vim  ~/.config/nvim/init.vim
+mkdir -p ~/.config/nvim/
+ln -fs ~/loadrc/.config/nvim/init.vim ~/.config/nvim/init.vim
