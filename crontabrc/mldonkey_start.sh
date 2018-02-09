@@ -1,2 +1,2 @@
 #!/bin/bash -
-/etc/init.d/mldonkey-server restart
+/etc/init.d/mldonkey-server start
