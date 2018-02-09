@@ -5,7 +5,7 @@ cd "$SCRIPTPATH"
 
 ./install_basic.sh
 ./submodule_setup.sh
-./neovim/install.sh
+./vim_build.sh
 ./vimrc/.vim/bundle/YouCompleteMe/install.sh
 ./kvmrc/install.sh
 ./gpurc/install.sh
