@@ -1,0 +1,2 @@
+0 0 * * * root /etc/init.d/mldonkey-server start
+0 7-23 * * * root /etc/init.d/mldonkey-server stop
