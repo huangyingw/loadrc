@@ -1,1 +1,1 @@
-* 23,0-7 * * * pm-suspend
+* 23,0-7 * * * /root/loadrc/bashrc/sleep.sh
