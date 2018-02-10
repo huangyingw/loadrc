@@ -1,1 +1,1 @@
-0 23,0-7 * * * pm-suspend
+0 23,0-7 * * * /usr/sbin/pm-suspend
