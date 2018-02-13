@@ -425,11 +425,12 @@ let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
 " configuration for vim-anyfold
 syntax on
 let anyfold_activate = 1
+let anyfold_fold_comments = 1
 set foldlevel=0
 " configuration for vim-anyfold
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 
 if !has('nvim')
-  set viminfo+=n~/.local/share/vim/viminfo
-endif 
+    set viminfo+=n~/.local/share/vim/viminfo
+endif
