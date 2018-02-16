@@ -19,7 +19,6 @@ ln -fs ~/loadrc/.tmux.conf ~/.tmux.conf
 ln -fs ~/loadrc/gitrc/.gitconfig ~/.gitconfig
 ln -fs ~/loadrc/gitrc/.globalgitignore ~/.globalgitignore
 ln -fs ~/loadrc/pythonrc/setup.cfg  ~/setup.cfg
-ln -fs ~/loadrc/usr/NX/etc/node.cfg  /usr/NX/etc/node.cfg
 ln -fs ~/loadrc/vimrc/.vim ~/.vim
 ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
 mkdir -p ~/.config/nvim/
