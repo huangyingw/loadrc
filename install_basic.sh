@@ -37,6 +37,6 @@ then
 fi
 
 ./deploy_links.sh
-dpkg -i /root/nomachine_*.deb \
-    && rm -fr /root/nomachine_*.deb
+. .loadrc
+dpkg -i $SOFTWARE/nx/nomachine_*.deb
 ./zerotier_install.sh

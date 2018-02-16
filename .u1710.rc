@@ -1,1 +1,4 @@
+mkdir -p /media/volgrp
 sshfs vserver:/media/volgrp/myproject/git/AI/setup/ /media/volgrp/myproject/git/AI/setup/
+sshfs vserver:/media/volgrp/software /media/volgrp/software
+export SOFTWARE=/media/volgrp/software
