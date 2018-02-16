@@ -81,9 +81,6 @@
     path = macvim
     url = git@bitbucket.org:huangyingw/macvim.git
     branch = dev.fix
-[submodule "vimrc/.vim/bundle/vim-buffergator"]
-    path = vimrc/.vim/bundle/vim-buffergator
-    url = git@bitbucket.org:huangyingw/vim-buffergator.git
 [submodule "vimrc/.vim/bundle/vim-anyfold"]
     path = vimrc/.vim/bundle/vim-anyfold
     url = git@bitbucket.org:huangyingw/vim-anyfold.git
