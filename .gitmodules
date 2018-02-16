@@ -70,6 +70,9 @@
     path = .ssh
     url = git@bitbucket.org:huangyingw/.ssh.git
     branch = dev.fix
+[submodule "vimrc/.vim/bundle/vim-phpfmt"]
+    path = vimrc/.vim/bundle/vim-phpfmt
+    url = git@bitbucket.org:huangyingw/vim-phpfmt.git
 [submodule "vimrc/.vim/bundle/YouCompleteMe"]
     path = vimrc/.vim/bundle/YouCompleteMe
     url = git@bitbucket.org:huangyingw/youcompleteme.git
