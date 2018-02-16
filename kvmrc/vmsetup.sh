@@ -9,4 +9,5 @@ qcow2File="$1"
 ~/loadrc/kvmrc/vmount.sh "$qcow2File"
 ~/loadrc/bashrc/mirror.sh /root/ /media/dev/nbd0p1/root/
 ~/loadrc/bashrc/mirror.sh /etc/ssh/ /media/dev/nbd0p1/etc/ssh/
+rsync -aHv --progress /media/volgrp/software/nx/nomachine_*.deb  /media/dev/nbd0p1/root/
 ~/loadrc/kvmrc/uvmount.sh
