@@ -1,1 +1,2 @@
 alias shutdown='pm-suspend'
+export SOFTWARE=/media/volgrp/software/
