@@ -264,6 +264,7 @@
 "./gitrc/ga.sh"
 "./gitrc/gagh.sh"
 "./gitrc/gbib.sh"
+"./gitrc/gbidebug.sh"
 "./gitrc/gbig.sh"
 "./gitrc/gbil.sh"
 "./gitrc/gbir.sh"
