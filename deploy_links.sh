@@ -24,3 +24,13 @@ ln -fs ~/loadrc/vimrc/.vim ~/.vim
 ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
 mkdir -p ~/.config/nvim/
 ln -fs ~/loadrc/.config/nvim/init.vim ~/.config/nvim/init.vim
+
+if [ -f ~/loadrc/"`hostname`"/var/lib/zerotier-one/identity.secret ]
+then
+    ln -fs ~/loadrc/"`hostname`"/var/lib/zerotier-one/identity.secret /var/lib/zerotier-one/identity.secret
+fi
+
+if [ -f ~/loadrc/"`hostname`"/var/lib/zerotier-one/identity.public ]
+then
+    ln -fs ~/loadrc/"`hostname`"/var/lib/zerotier-one/identity.public /var/lib/zerotier-one/identity.public
+fi
