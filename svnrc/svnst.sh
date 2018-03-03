@@ -15,3 +15,4 @@ done < svnfiles.ignore
 
 sed -i.bak "/^$/d" "$resultFile"
 sed -i.bak "s/\b[M]\b/svn cl utest $1/g" "$resultFile"
+svn diff --cl utest > utest.diff
