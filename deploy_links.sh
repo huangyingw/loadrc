@@ -19,7 +19,18 @@ ln -fs ~/loadrc/.tmux.conf ~/.tmux.conf
 ln -fs ~/loadrc/gitrc/.gitconfig ~/.gitconfig
 ln -fs ~/loadrc/gitrc/.globalgitignore ~/.globalgitignore
 ln -fs ~/loadrc/pythonrc/setup.cfg  ~/setup.cfg
+ln -fs ~/loadrc/usr/NX/etc/node.cfg  /usr/NX/etc/node.cfg
 ln -fs ~/loadrc/vimrc/.vim ~/.vim
 ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
 mkdir -p ~/.config/nvim/
 ln -fs ~/loadrc/.config/nvim/init.vim ~/.config/nvim/init.vim
+
+if [ -f ~/loadrc/"`hostname`"/var/lib/zerotier-one/identity.secret ]
+then
+    ln -fs ~/loadrc/"`hostname`"/var/lib/zerotier-one/identity.secret /var/lib/zerotier-one/identity.secret
+fi
+
+if [ -f ~/loadrc/"`hostname`"/var/lib/zerotier-one/identity.public ]
+then
+    ln -fs ~/loadrc/"`hostname`"/var/lib/zerotier-one/identity.public /var/lib/zerotier-one/identity.public
+fi

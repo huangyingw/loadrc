@@ -36,7 +36,6 @@ then
     update-initramfs -u
 fi
 
-./deploy_links.sh
-. .loadrc
-dpkg -i $SOFTWARE/nx/nomachine_*.deb
+./nxrc/install.sh
 ./zerotier_install.sh
+./deploy_links.sh
