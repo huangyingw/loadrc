@@ -99,3 +99,6 @@
     path = vimrc/.vim/bundle/LargeFile
     url = git@github.com:huangyingw/LargeFile.git
     branch = dev.fix
+[submodule "vimrc/.vim/bundle/vim-buffergator"]
+	path = vimrc/.vim/bundle/vim-buffergator
+	url = git@bitbucket.org:huangyingw/vim-buffergator.git
