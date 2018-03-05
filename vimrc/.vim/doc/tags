@@ -49,7 +49,6 @@
 'Tlist_WinWidth'	taglist-plus.txt	/*'Tlist_WinWidth'*
 'Tlist_WinWidth'	taglist.txt	/*'Tlist_WinWidth'*
 'Tlist_javascript_Hide_Extras'	taglist-plus.txt	/*'Tlist_javascript_Hide_Extras'*
-:Large	LargeFile.txt	/*:Large*
 :TlistAddFiles	taglist-plus.txt	/*:TlistAddFiles*
 :TlistAddFiles	taglist.txt	/*:TlistAddFiles*
 :TlistAddFilesRecursive	taglist-plus.txt	/*:TlistAddFilesRecursive*
@@ -82,9 +81,6 @@
 :TlistUnlock	taglist.txt	/*:TlistUnlock*
 :TlistUpdate	taglist-plus.txt	/*:TlistUpdate*
 :TlistUpdate	taglist.txt	/*:TlistUpdate*
-:Unlarge	LargeFile.txt	/*:Unlarge*
-LargeFile-copyright	LargeFile.txt	/*LargeFile-copyright*
-LargeFile.txt	LargeFile.txt	/*LargeFile.txt*
 SQLUtilities.txt	SQLUtilities.txt	/*SQLUtilities.txt*
 Tlist_Get_Tag_Prototype_By_Line()	taglist-plus.txt	/*Tlist_Get_Tag_Prototype_By_Line()*
 Tlist_Get_Tag_Prototype_By_Line()	taglist.txt	/*Tlist_Get_Tag_Prototype_By_Line()*
@@ -94,8 +90,6 @@ Tlist_Set_App()	taglist-plus.txt	/*Tlist_Set_App()*
 Tlist_Set_App()	taglist.txt	/*Tlist_Set_App()*
 Tlist_Update_File_Tags()	taglist-plus.txt	/*Tlist_Update_File_Tags()*
 Tlist_Update_File_Tags()	taglist.txt	/*Tlist_Update_File_Tags()*
-largefile	LargeFile.txt	/*largefile*
-largefile-history	LargeFile.txt	/*largefile-history*
 sqlutil	SQLUtilities.txt	/*sqlutil*
 sqlutil-align-comma	SQLUtilities.txt	/*sqlutil-align-comma*
 sqlutil-align-first-word	SQLUtilities.txt	/*sqlutil-align-first-word*

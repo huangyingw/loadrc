@@ -1,11 +1,14 @@
 #!/bin/bash
-CURRENT_BRANCH="`git branch |awk '/^\*/{print $2}'`"
-TARGET_BRANCH=`echo ${CURRENT_BRANCH} | sed -e "s|.fix$||"`
-if [ -n "$1" ]
+CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
+if [ -z "$1" ]
 then
-    TARGET_BRANCH="$1"
+    echo -e "${red}Please provide target_branch... ${NC}"
+    exit 1
 fi
+
+TARGET_BRANCH="$1"
 echo "$TARGET_BRANCH"
+
 if [ -z "$(git status --porcelain)" ]
 then
     git checkout "$TARGET_BRANCH" \

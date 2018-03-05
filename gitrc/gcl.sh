@@ -30,7 +30,7 @@ else
     sed -i.bak "s/urlVar/$var/g" ${target}/.gitconfig
 
     cd ${target} \
-        && $HOME/loadrc/gitrc/gcob.sh dev.fix \
+        && $HOME/loadrc/gitrc/gcob.sh dev \
         && $HOME/loadrc/gitrc/gdev.sh \
         && $HOME/loadrc/bashrc/cscope.sh \
         && git add . \

@@ -3,8 +3,7 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-OS=`uname`
-if [ $OS != "Darwin" ]
+if [ $(uname) != "Darwin" ]
 then
     apt-get update && aptitude -y full-upgrade
 else

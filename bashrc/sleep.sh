@@ -1,8 +1,7 @@
 #!/bin/bash
-OS=`uname`
-if [ $OS == "Darwin" ]
+if [ $(uname) == "Darwin" ]
 then
     pmset sleepnow
 else
-    iw phy0 wowlan enable magic-packet disconnect && pm-suspend
+    pm-suspend
 fi

@@ -7,8 +7,7 @@ fi
 
 remoteServer=$(echo "$1" | sed  -e "s/\/$//g")
 
-OS=`uname`
-if [ "$OS" == "Linux" ]
+if [ $(uname) == "Linux" ]
 then
     umount -l ~/"$remoteServer"
     mkdir -p ~/"$remoteServer"

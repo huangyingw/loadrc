@@ -20,7 +20,7 @@ branch=$(echo $1 | sed  -e "s/\//\\\\\//g")
 sed -i.bak "s/\b[AMT]\b/git checkout $branch -- /g" gdif.findresult
 sed -i.bak "s/\bD\b/git rm/g" gdif.findresult
 sed -i.bak "s/^R[0-9]*/git mv/g" gdif.findresult
-git config --local include.path $(realpath .gitconfig)
+~/loadrc/gitrc/include_gitconfig.sh
 for ss in $(git config --get-all gdif.ignore)
 do
     ss=$(echo $ss | sed  -e "s/\//\\\\\//g")

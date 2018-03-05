@@ -1,15 +1,10 @@
 #!/bin/bash
-OS=`uname`
 . $HOME/loadrc/.androidrc
 . $HOME/loadrc/.dockerrc
 . $HOME/loadrc/.envrc
 . $HOME/loadrc/.gitrc
 . $HOME/loadrc/.hgrc
 . $HOME/loadrc/.kvmrc
-if [ $OS == "Darwin" ]
-then
-    . $HOME/loadrc/."`hostname`".osxrc
-fi
 . $HOME/loadrc/.p4rc
 . $HOME/loadrc/.pythonrc
 . $HOME/loadrc/.shellrc
@@ -17,6 +12,8 @@ fi
 . $HOME/loadrc/.svnrc
 . $HOME/loadrc/.zerotierrc
 . $HOME/loadrc/openrc.sh
+. $HOME/loadrc/gpurc/.gpurc
+$HOME/loadrc/crontabrc/install.sh
 
 HOSTRC=$HOME/loadrc/."`hostname`".rc
 if [ -f "$HOSTRC" ]
