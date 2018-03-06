@@ -8,6 +8,7 @@
 "./.bashrc"
 "./.config/git/gitk"
 "./.config/nvim/init.vim"
+"./.dl1710.rc"
 "./.dockerrc"
 "./.envrc"
 "./.git/modules/.ssh/config"
