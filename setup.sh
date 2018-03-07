@@ -8,6 +8,5 @@ cd "$SCRIPTPATH"
 ./vim_build.sh
 ./vimrc/.vim/bundle/YouCompleteMe/install.sh
 ./kvmrc/install.sh
-./gpurc/install.sh
 ./dockerrc/install.sh
 ./post_setup.sh

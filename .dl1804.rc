@@ -1,0 +1,2 @@
+mkdir -p /media/volgrp/myproject/git/AI/setup/
+sshfs vserver:/media/volgrp/myproject/git/AI/setup/ /media/volgrp/myproject/git/AI/setup/
