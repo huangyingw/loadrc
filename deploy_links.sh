@@ -25,7 +25,4 @@ ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
 mkdir -p ~/.config/nvim/
 ln -fs ~/loadrc/.config/nvim/init.vim ~/.config/nvim/init.vim
 
-while read -r line || [[ -n "$line" ]]
-do
-    ./set_host_configuration.sh "$line"
-done < host.conf
+./set_host_configuration.sh
