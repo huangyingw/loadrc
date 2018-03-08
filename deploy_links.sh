@@ -25,5 +25,5 @@ ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
 mkdir -p ~/.config/nvim/
 ln -fs ~/loadrc/.config/nvim/init.vim ~/.config/nvim/init.vim
 
-./deploy_host_configuration.sh "/var/lib/zerotier-one/identity.secret"
-./deploy_host_configuration.sh "/var/lib/zerotier-one/identity.public"
+./set_host_configuration.sh "/var/lib/zerotier-one/identity.secret"
+./set_host_configuration.sh "/var/lib/zerotier-one/identity.public"
