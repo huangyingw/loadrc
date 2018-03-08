@@ -25,5 +25,7 @@ ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
 mkdir -p ~/.config/nvim/
 ln -fs ~/loadrc/.config/nvim/init.vim ~/.config/nvim/init.vim
 
-./set_host_configuration.sh "/var/lib/zerotier-one/identity.secret"
-./set_host_configuration.sh "/var/lib/zerotier-one/identity.public"
+while read -r line || [[ -n "$line" ]]
+do
+    ./set_host_configuration.sh "$line"
+done < host.conf
