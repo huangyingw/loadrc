@@ -27,7 +27,8 @@ then
         ssh \
         sshfs \
         tmux \
-        vim-gnome
+        vim-gnome \
+        wakeonlan
     modprobe wl
     cp -fv ./etc/NetworkManager/system-connections/dd-wrt /etc/NetworkManager/system-connections/dd-wrt
     cp -fv ./etc/crypttab /etc/crypttab
