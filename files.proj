@@ -234,7 +234,6 @@
 "./bashrc/wol.sh"
 "./bashrc/work.sh"
 "./bashrc/ygrep.sh"
-"./crontabrc/.mini.cron"
 "./crontabrc/.server.cron"
 "./crontabrc/.vserver.cron"
 "./crontabrc/install.sh"
