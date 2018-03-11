@@ -236,6 +236,7 @@
 "./bashrc/ygrep.sh"
 "./crontabrc/.mini.cron"
 "./crontabrc/.server.cron"
+"./crontabrc/.vserver.cron"
 "./crontabrc/install.sh"
 "./crontabrc/mldonkey_start.sh"
 "./crontabrc/mldonkey_stop.sh"
