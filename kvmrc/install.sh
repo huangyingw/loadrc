@@ -17,6 +17,7 @@ apt-get install -y \
     git \
     htop \
     kdiff3 \
+    kvm \
     libvirt-bin \
     mdadm \
     mosh \
@@ -24,6 +25,7 @@ apt-get install -y \
     pm-utils \
     python-dev \
     python-pip \
+    qemu \
     qemu-kvm \
     slurm \
     software-properties-common \
