@@ -5,7 +5,7 @@ then
     then
         git difftool -y "$1" "$2"
     else
-        git difftool -y "$1"
+        git difftool -y HEAD "$1"
     fi
 else
     git difftool -y --cached
