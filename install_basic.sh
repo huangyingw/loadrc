@@ -14,6 +14,7 @@ then
         cryptsetup \
         curl \
         dkms \
+        exuberant-ctags \
         git \
         htop \
         kdiff3 \
