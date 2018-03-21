@@ -1,3 +1,3 @@
 #!/bin/bash -
-~/loadrc/gitrc/gst.sh \
+~/loadrc/gitrc/gsave.sh \
     && ~/loadrc/gitrc/gvd.sh
