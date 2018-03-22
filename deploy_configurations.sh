@@ -25,4 +25,5 @@ ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
 mkdir -p ~/.config/nvim/
 ln -fs ~/loadrc/.config/nvim/init.vim ~/.config/nvim/init.vim
 
+./set_linux_configuration.sh
 ./set_host_configuration.sh

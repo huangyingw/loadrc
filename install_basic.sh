@@ -31,13 +31,9 @@ then
         vim-gnome \
         wakeonlan
     modprobe wl
-    cp -fv ./etc/NetworkManager/system-connections/dd-wrt /etc/NetworkManager/system-connections/dd-wrt
-    cp -fv ./etc/crypttab /etc/crypttab
-    cp -fv ./etc/mdadm/mdadm.conf /etc/mdadm/mdadm.conf
-    cp -fv ./etc/sudoers /etc/sudoers
     update-initramfs -u
 fi
 
 ./nxrc/install.sh
 ./zerotier_install.sh
-./deploy_links.sh
+./deploy_configurations.sh
