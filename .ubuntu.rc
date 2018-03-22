@@ -1,0 +1,6 @@
+ln -fs loadrc/.ssh/ ~/.ssh
+ln -fs loadrc/vimrc/.vimrc ~/.vimrc
+ln -fs /media/psf/Home/.local/share/shotwell/data/photo.db ~/.local/share/shotwell/data/photo.db
+ln -fs /media/psf/Home/.config/smplayer/ ~/.config/smplayer
+ln -fs loadrc/vimrc/.vim ~/.vim
+ln -fs loadrc/.tmux.conf ~/.tmux.conf
