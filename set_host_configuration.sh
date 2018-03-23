@@ -16,3 +16,9 @@ while read -r line || [[ -n "$line" ]]
 do
     deploy_configs "$line"
 done < host.conf
+
+HOSTLINKS=~/loadrc/"`hostname`.links"
+if [ -f "$HOSTLINKS" ]
+then
+    sh "$HOSTLINKS"
+fi
