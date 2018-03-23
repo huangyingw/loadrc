@@ -3314,6 +3314,7 @@
 "./u1804/var/lib/zerotier-one/identity.public"
 "./u1804/var/lib/zerotier-one/identity.secret"
 "./ubuntu.links"
+"./ubuntu/etc/hosts"
 "./ubuntu/etc/network/interfaces"
 "./usr/NX/etc/node.cfg"
 "./vim_build.sh"
