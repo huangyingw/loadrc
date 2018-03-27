@@ -22,8 +22,8 @@ do
     deploy_configs "$line"
 done < host.conf
 
-HOSTLINKS=~/loadrc/"`hostname`.links"
-if [ -f "$HOSTLINKS" ]
+HOSTTODOS=~/loadrc/"`hostname`/todos.sh"
+if [ -f "$HOSTTODOS" ]
 then
-    sh "$HOSTLINKS"
+    sh "$HOSTTODOS"
 fi
