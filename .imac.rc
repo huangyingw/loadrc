@@ -1,0 +1,1 @@
+alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
