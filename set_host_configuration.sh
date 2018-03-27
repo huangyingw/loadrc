@@ -25,5 +25,5 @@ done < host.conf
 HOSTTODOS=~/loadrc/"`hostname`/todos.sh"
 if [ -f "$HOSTTODOS" ]
 then
-    sh "$HOSTTODOS"
+    ./"$HOSTTODOS"
 fi
