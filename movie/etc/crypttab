@@ -1,5 +1,0 @@
-# <target name> <source device>     <key file>  <options>
-backup_crypt      /dev/disk/by-uuid/4211b914-5367-403f-aaa2-3dba45f41209  /root/loadrc/keys/keyfile   luks
-mini_crypt      /dev/disk/by-uuid/17a98493-8e53-449e-bdfb-4358aceac548  /root/loadrc/keys/keyfile   luks
-vserver_crypt      /dev/disk/by-uuid/a4ff213e-f734-4c88-aba9-2ce733d0de76  /root/loadrc/keys/keyfile   luks
-raid6_crypt      /dev/disk/by-uuid/99c4fad2-5f76-415a-a115-530d45f400c6  /root/loadrc/keys/keyfile   luks
