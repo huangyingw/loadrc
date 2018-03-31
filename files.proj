@@ -108,6 +108,8 @@
 "./bashrc/build.sh"
 "./bashrc/ca.sh"
 "./bashrc/catRSA.sh"
+"./bashrc/change_mac_hostname.sh"
+"./bashrc/change_mac_hostname_test.sh"
 "./bashrc/check_disk.sh"
 "./bashrc/check_raid.sh"
 "./bashrc/check_running.sh"
