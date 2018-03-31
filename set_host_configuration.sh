@@ -3,6 +3,11 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
+if [ $(uname) != "Linux" ]
+then
+    exit 0
+fi
+
 deploy_configs() {
     TARGET="$1"
     SOURCE=~/loadrc/"`hostname`$TARGET"
@@ -17,8 +22,8 @@ do
     deploy_configs "$line"
 done < host.conf
 
-HOSTLINKS=~/loadrc/"`hostname`.links"
-if [ -f "$HOSTLINKS" ]
+HOSTTODOS=~/loadrc/"`hostname`/todos.sh"
+if [ -f "$HOSTTODOS" ]
 then
-    sh "$HOSTLINKS"
+    "$HOSTTODOS"
 fi
