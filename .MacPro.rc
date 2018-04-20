@@ -1,6 +1,4 @@
 #!/bin/bash
-sudo pmset -a sleep 60
-sudo pmset -a displaysleep 30
 chmod 400 ~/.ssh/id_rsa
 chmod 400 ~/loadrc/keys/*.pem
 alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
