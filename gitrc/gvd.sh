@@ -9,5 +9,4 @@ then
     fi
 else
     git difftool -y --cached
-    git difftool -y
 fi
