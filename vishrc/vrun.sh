@@ -39,3 +39,9 @@ case $extension in
         read -p "press any key to continue...." update
         ;;
 esac
+
+if [[ "$file" = *'.leetcode.'* ]]
+then
+    leetcode submit "$file" 2>&1 | tee "$file".findresult
+    read -p "press any key to continue...." update
+fi
