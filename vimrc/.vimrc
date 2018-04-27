@@ -389,6 +389,9 @@ function! GetEscapedKeywordForVIM(keywordStr)
     let result = substitute(result, '/', '\\/', 'g')
     let result = substitute(result, '[', '\\[', 'g')
     let result = substitute(result, ']', '\\]', 'g')
+    let result = substitute(result, '^\_s\+', '\\s\\+', '')
+    let result = substitute(result, '\_s\+$', '\\s\\*', '')
+    let result = substitute(result, '\_s\+', '\\_s\\+', 'g')
     return result
 endfunc
 function! GetEscapedKeyword(keywordStr)
