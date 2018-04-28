@@ -404,6 +404,7 @@ function! GetEscapedKeyword(keywordStr)
     let result = substitute(result, '\_s', ' ', 'g')
     let result = substitute(result, '\n', '\\n', 'g')
     let result = substitute(result, '`', '\\`', 'g')
+    let result = substitute(result, '\#', '\\#', 'g')
     return result
 endfunc
 function! GetEscapedResult(keywordStr)
@@ -417,6 +418,7 @@ function! GetEscapedResult(keywordStr)
     let result = substitute(result, '\,', '', 'g')
     let result = substitute(result, '\\', '', 'g')
     let result = substitute(result, '\$', '', 'g')
+    let result = substitute(result, '#', '', 'g')
     return result
 endfunc
 function! VsMax(fileName)
