@@ -42,5 +42,5 @@ esac
 
 if [[ "$file" = *'.leetcode.'* ]]
 then
-    leetcode submit "$file" 2>&1 | tee "$file".findresult
+    leetcode test "$file" 2>&1 | tee "$file".findresult
 fi
