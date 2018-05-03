@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ -z "$1" ]
 then
-    nvim `~/loadrc/bashrc/find_up.sh "$PWD" files.proj`
+    vim `~/loadrc/bashrc/find_up.sh "$PWD" files.proj`
 else
-    nvim "$1"
+    vim "$1"
 fi
