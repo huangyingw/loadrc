@@ -1,5 +1,5 @@
 #!/bin/bash
-keyword=$(echo "$2" | sed -e "s/ \+/ \\\+/g")
+keyword=$(echo "$2" | sed -e "s/ \+/ \\\+/g;s/\[/\\\[/g;s/\]/\\\]/g")
 echo "keyword --> $keyword"
 echo "search in " "$1"
 cd "$1"
