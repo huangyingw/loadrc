@@ -34,6 +34,7 @@
 "./.git/modules/vimrc/.vim/bundle/YouCompleteMe/modules/third_party/ycmd/modules/third_party/OmniSharpServer/modules/cecil/config"
 "./.git/modules/vimrc/.vim/bundle/YouCompleteMe/modules/third_party/ycmd/modules/third_party/argparse/config"
 "./.git/modules/vimrc/.vim/bundle/YouCompleteMe/modules/third_party/ycmd/modules/third_party/bottle/config"
+"./.git/modules/vimrc/.vim/bundle/YouCompleteMe/modules/third_party/ycmd/modules/third_party/cregex/config"
 "./.git/modules/vimrc/.vim/bundle/YouCompleteMe/modules/third_party/ycmd/modules/third_party/frozendict/config"
 "./.git/modules/vimrc/.vim/bundle/YouCompleteMe/modules/third_party/ycmd/modules/third_party/gocode/config"
 "./.git/modules/vimrc/.vim/bundle/YouCompleteMe/modules/third_party/ycmd/modules/third_party/godef/config"
