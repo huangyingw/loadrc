@@ -76,6 +76,7 @@ function! CSCSearch()
     let keyword = expand("<cword>")
     exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 4 . ' ' . 'csc'
     exec 'vs ' . b:csdbpath . '/' . keyword . '.csc.findresult'
+    exec 'bufdo e'
     vert resize
     let @@ = keyword
     let old_reg = getreg('"')
@@ -175,7 +176,7 @@ function! VimSearch()
     let b:result = GetEscapedResult(b:keyword)
     exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"' . ' "' .  b:result . '"'
     exec 'vs ' . b:csdbpath.'/'.b:result.'.vaa.findresult'
-    exec 'w! ' . expand('%:p')
+    exec 'bufdo e'
     vert resize
     let old_reg = getreg('"')
     let old_regtype = getregtype('"')
