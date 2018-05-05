@@ -304,7 +304,7 @@ vnoremap <silent>g :call VFilter()<cr>
 vnoremap <silent>i :call ExFilter()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
 nmap <C-@> :call CSCSearch()<CR><CR>
-nmap <C-d> :!rm %:p<CR>:q<CR><CR>
+nmap <C-d> :call ShowDiff()<CR><CR>
 " nmap <C-j> :call PlayAV()<CR><CR>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr>
