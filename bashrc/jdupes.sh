@@ -7,5 +7,4 @@ then
 fi
 
 TARGET="$1"
-jdupes -1dNr --xsize=3K "$TARGET" \
-    && pm-suspend
+jdupes -1dNr "$TARGET"
