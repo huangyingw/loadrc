@@ -151,7 +151,7 @@ set foldlevelstart=99           " start out with everything folded
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 " which commands trigger auto-unfold
 autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
+" autocmd BufWinEnter *.* silent loadview
 set viewoptions=cursor,folds,slash,unix
 " let g:skipview_files = ['*\.vim']
 " }}}

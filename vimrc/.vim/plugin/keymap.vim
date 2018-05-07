@@ -209,8 +209,8 @@ function! FindCalling()
     let b:keyword = GetEscapedKeyword(b:keyword)
     exec 'vs ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
 endfunction
-nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR>
-nnoremap <leader>L :TlistClose<CR>
+nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR><CR>
+nnoremap <leader>L :TlistClose<CR><CR>
 nnoremap hh <c-w>h<c-w><Bar>
 nnoremap ll <c-w>l<c-w><Bar>
 nnoremap mm <c-w><Bar>
@@ -242,21 +242,21 @@ vnoremap <Space> za
 "vnoremap <silent> <leader>f zf
 nnoremap <silent> <leader>e :call VsMax($HOME . "/.bash_history") <CR>
 nnoremap <silent> <leader>f :call ShowRemember()<CR><CR>
-nnoremap <silent> <leader>v :so $MYVIMRC<CR>
-nnoremap <leader>sh :execute "leftabove vs" bufname('#')<cr>:vert resize<CR>
-nnoremap <leader>sl :execute "rightbelow vs" bufname('#')<cr>:vert resize<CR>
+nnoremap <silent> <leader>v :so $MYVIMRC<CR><CR>
+nnoremap <leader>sh :execute "leftabove vs" bufname('#')<cr>:vert resize<CR><CR>
+nnoremap <leader>sl :execute "rightbelow vs" bufname('#')<cr>:vert resize<CR><CR>
 nnoremap W :call VsMax(".")<CR>
 " Quickly reload current file
 nnoremap E :mkview<CR>:e!<CR>
 " Quickly save current file
-nnoremap S :w<CR>
+nnoremap S :w<CR><CR>
 " Quickly save and exit
-nnoremap X :x<CR>
+nnoremap X :x<CR><CR>
 nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
-nnoremap tt :Autoformat<CR>:w<CR>
-nnoremap D :vs %:p<CR>:vert resize<CR>
+nnoremap tt :Autoformat<CR>:w<CR><CR>
+nnoremap D :vs %:p<CR>:vert resize<CR><CR>
 " Quickly open current dir in current windows
 nnoremap <leader>d :call OpenProjectRoot()<cr>
 nnoremap <tab> %
@@ -310,13 +310,13 @@ nmap <C-d> :!rm %:p<CR>:q<CR><CR>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr>
 nnoremap H :call ShowVITAG()<cr>
-nnoremap T :vs $HOME/files.proj<CR>:vert resize<CR>
-nnoremap L :vs <C-R>"<CR>:vert resize<CR>
+nnoremap T :vs $HOME/files.proj<CR>:vert resize<CR><CR>
+nnoremap L :vs <C-R>"<CR>:vert resize<CR><CR>
 map <F5> :call VRun()<cr>
 map <F3> :call VDebug()<cr>
-nnoremap gf gF<CR>:vert resize<CR>
+nnoremap gf gF<CR>:vert resize<CR><CR>
 map oo :call VimOpen()<cr>
-nnoremap <silent> <leader>g :!gitk --all -p --full-diff -- %:p<CR>:vert resize<CR>
+nnoremap <silent> <leader>g :!gitk --all -p --full-diff -- %:p<CR>:vert resize<CR><CR>
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
 
 function! CompareTwoFiles()
