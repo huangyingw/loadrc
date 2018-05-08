@@ -310,7 +310,7 @@ function AddToGit()
     let worktree = Find_in_parent(".git", Windowdir(), "/")
     exec "cd " . worktree
     let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
-    exec '!~/loadrc/gitrc/autoadd.sh ' . '"' .  b:relativePath . '"'
+    exec 'silent !~/loadrc/gitrc/autoadd.sh ' . '"' .  b:relativePath . '"'
     vert resize
 endfunction
 

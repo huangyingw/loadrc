@@ -13,12 +13,12 @@ function! ExFilter()
     echom 'keyword : '.keyword
 
     if expand('%:e') != "findresult"
-        exec '!rm ' . csdbpath . '/' . b:result . '.vaa.findresult'
-        exec 'w! ' . csdbpath . '/' . b:result . '.vaa.findresult'
-        exec 'vs ' . csdbpath . '/' . b:result . '.vaa.findresult'
+        exec 'silent !rm ' . csdbpath . '/' . b:result . '.vaa.findresult'
+        exec 'silent w! ' . csdbpath . '/' . b:result . '.vaa.findresult'
+        exec 'silent vs ' . csdbpath . '/' . b:result . '.vaa.findresult'
     endif
 
-    exec 'g/\c' . keyword . '/d'
+    exec 'silent g/\c' . keyword . '/d'
     w
     vert resize
 endfunction
@@ -31,12 +31,12 @@ function! VFilter()
     echom 'keyword : '.keyword
 
     if expand('%:e') != "findresult"
-        exec '!rm ' . csdbpath . '/' . b:result . '.vaa.findresult'
-        exec 'w! ' . csdbpath . '/' . b:result . '.vaa.findresult'
-        exec 'vs ' . csdbpath . '/' . b:result . '.vaa.findresult'
+        exec 'silent !rm ' . csdbpath . '/' . b:result . '.vaa.findresult'
+        exec 'silent w! ' . csdbpath . '/' . b:result . '.vaa.findresult'
+        exec 'silent vs ' . csdbpath . '/' . b:result . '.vaa.findresult'
     endif
 
-    exec 'g!/\c' . keyword . '/d'
+    exec 'silent g!/\c' . keyword . '/d'
     w
     vert resize
 endfunction
@@ -74,11 +74,10 @@ endfunction
 function! CSCSearch()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
     let keyword = expand("<cword>")
-    exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 4 . ' ' . 'csc'
+    exec 'silent !~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 4 . ' ' . 'csc'
     exec 'vs ' . b:csdbpath . '/' . keyword . '.csc.findresult'
     exec 'e'
     vert resize
-    let @@ = keyword
     let old_reg = getreg('"')
     let old_regtype = getregtype('"')
     if @@ =~? '^[0-9a-z,_]*$' || @@ =~? '^[0-9a-z ,_]*$' && g:VeryLiteral
@@ -174,7 +173,7 @@ function! VimSearch()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let b:keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(b:keyword)
-    exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"' . ' "' .  b:result . '"'
+    exec 'silent !~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"' . ' "' .  b:result . '"'
     exec 'vs ' . b:csdbpath.'/'.b:result.'.vaa.findresult'
     exec 'e'
     vert resize
