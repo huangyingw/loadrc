@@ -78,6 +78,7 @@ function! CSCSearch()
     exec 'vs ' . b:csdbpath . '/' . keyword . '.csc.findresult'
     exec 'e'
     vert resize
+    let @@ = keyword
     let old_reg = getreg('"')
     let old_regtype = getregtype('"')
     if @@ =~? '^[0-9a-z,_]*$' || @@ =~? '^[0-9a-z ,_]*$' && g:VeryLiteral
