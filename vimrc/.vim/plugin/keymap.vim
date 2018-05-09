@@ -13,12 +13,12 @@ function! ExFilter()
     echom 'keyword : '.keyword
 
     if expand('%:e') != "findresult"
-        silent! exec 'rm ' . csdbpath . '/' . b:result . '.vaa.findresult'
-        silent! exec 'w! ' . csdbpath . '/' . b:result . '.vaa.findresult'
-        silent! exec 'vs ' . csdbpath . '/' . b:result . '.vaa.findresult'
+        silent exec '!rm ' . csdbpath . '/' . b:result . '.vaa.findresult'
+        silent exec 'w! ' . csdbpath . '/' . b:result . '.vaa.findresult'
+        silent exec 'vs ' . csdbpath . '/' . b:result . '.vaa.findresult'
     endif
 
-    silent! exec 'g/\c' . keyword . '/d'
+    silent exec 'g/\c' . keyword . '/d'
     w
     vert resize
 endfunction
@@ -31,12 +31,12 @@ function! VFilter()
     echom 'keyword : '.keyword
 
     if expand('%:e') != "findresult"
-        silent! exec 'rm ' . csdbpath . '/' . b:result . '.vaa.findresult'
-        silent! exec 'w! ' . csdbpath . '/' . b:result . '.vaa.findresult'
-        silent! exec 'vs ' . csdbpath . '/' . b:result . '.vaa.findresult'
+        silent exec '!rm ' . csdbpath . '/' . b:result . '.vaa.findresult'
+        silent exec 'w! ' . csdbpath . '/' . b:result . '.vaa.findresult'
+        silent exec 'vs ' . csdbpath . '/' . b:result . '.vaa.findresult'
     endif
 
-    silent! exec 'g!/\c' . keyword . '/d'
+    silent exec 'g!/\c' . keyword . '/d'
     w
     vert resize
 endfunction
@@ -58,7 +58,7 @@ function! CSCSearchQ()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
     let keyword = expand("<cword>")
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 1 . ' ' . 'qcsc'
-    exec 'vs ' . b:csdbpath . '/' . keyword . '.qcsc.findresult'
+    silent exec 'vs ' . b:csdbpath . '/' . keyword . '.qcsc.findresult'
     vert resize
 endfunction
 function! VDebug()
@@ -75,7 +75,7 @@ function! CSCSearch()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
     let keyword = expand("<cword>")
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 4 . ' ' . 'csc'
-    exec 'vs ' . b:csdbpath . '/' . keyword . '.csc.findresult'
+    silent exec 'vs ' . b:csdbpath . '/' . keyword . '.csc.findresult'
     exec 'e'
     vert resize
     let @@ = keyword
@@ -103,7 +103,7 @@ function! SearchOpen()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     exec "cd " . b:csdbpath
     let find_file = substitute(system("~/loadrc/gitrc/find_files.sh " . '"' .  b:keyword . '"'), '\n', '', '')
-    exec 'vs ' . find_file
+    silent exec 'vs ' . find_file
     vert resize
 endfunction
 function! ShowDiff()
@@ -124,11 +124,11 @@ function! VimOpen()
         let realFile = worktree . '/' . b:fileName
         let indexFile = getcwd() . '/modules/' . b:fileName . '/index'
         if filereadable(realFile)
-            exec 'vs ' . realFile
+            silent exec 'vs ' . realFile
         elseif filereadable(indexFile)
-            exec 'vs ' . indexFile
+            silent exec 'vs ' . indexFile
         else
-            exec 'vs ' . realFile
+            silent exec 'vs ' . realFile
         endif
     elseif (expand("%") ==# 'gbr.findresult')
         let b:commit = expand("<cword>")
@@ -151,7 +151,7 @@ function! VimOpen()
             if !isdirectory(b:filePath)
                 call mkdir(b:filePath, "p")
             endif
-            exec 'vs ' . b:fileName
+            silent exec 'vs ' . b:fileName
             vert resize
         else
             vert wincmd F
@@ -166,7 +166,7 @@ function! GitSearch()
     let b:result = GetEscapedResult(b:keyword)
     exec "cd " . b:csdbpath
     silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"' . ' "' .  b:result . '"'
-    exec 'vs ' . b:result . '.gsearch.findresult'
+    silent exec 'vs ' . b:result . '.gsearch.findresult'
     vert resize
 endfunction
 function! VimSearch()
@@ -175,7 +175,7 @@ function! VimSearch()
     let b:keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(b:keyword)
     silent exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"' . ' "' .  b:result . '"'
-    exec 'vs ' . b:csdbpath.'/'.b:result.'.vaa.findresult'
+    silent exec 'vs ' . b:csdbpath.'/'.b:result.'.vaa.findresult'
     exec 'e'
     vert resize
     let old_reg = getreg('"')
@@ -200,14 +200,14 @@ function! OpenProjectRoot()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
     let @+=b:csdbpath
     echom b:csdbpath
-    exec 'vs ' . b:csdbpath
+    silent exec 'vs ' . b:csdbpath
 endfunction
 function! FindCalling()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let b:keyword = expand('%:t')
     silent exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
     let b:keyword = GetEscapedKeyword(b:keyword)
-    exec 'vs ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
+    silent exec 'vs ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
 endfunction
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR><CR>
 nnoremap <leader>L :TlistClose<CR><CR>
