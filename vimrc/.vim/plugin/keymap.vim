@@ -62,13 +62,18 @@ function! CSCSearchQ()
     vert resize
 endfunction
 function! VDebug()
-    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
-    exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath
+    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
+    silent exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath
     vert resize
 endfunction
 function! VRun()
-    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
-    exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
+    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
+    let silent = system('git config vrun.silent')
+    if silent ==? "false"
+        exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
+    else
+        silent exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
+    endif
     vert resize
 endfunction
 function! CSCSearch()
