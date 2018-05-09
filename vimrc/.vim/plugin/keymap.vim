@@ -63,12 +63,12 @@ function! CSCSearchQ()
 endfunction
 function! VDebug()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
-    silent exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath
+    exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath
     vert resize
 endfunction
 function! VRun()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
-    silent exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
+    exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
     vert resize
 endfunction
 function! CSCSearch()
