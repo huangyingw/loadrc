@@ -68,7 +68,7 @@ function! VDebug()
 endfunction
 function! VRun()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
-    let silent = system('git config vrun.silent')
+    let silent = substitute(system('git config vrun.silent'), '\n', '', '')
     if silent ==? "false"
         exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
     else
