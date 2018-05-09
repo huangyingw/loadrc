@@ -51,24 +51,24 @@ function! Filter()
 endfunction
 function! PlayAV()
     let line=getline('.')
-    exec '!/Applications/VLC.app/Contents/MacOS/VLC ' . '"' .  line . '"'
+    silent exec '!/Applications/VLC.app/Contents/MacOS/VLC ' . '"' .  line . '"'
     vert resize
 endfunction
 function! CSCSearchQ()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
     let keyword = expand("<cword>")
-    exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 1 . ' ' . 'qcsc'
+    silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 1 . ' ' . 'qcsc'
     exec 'vs ' . b:csdbpath . '/' . keyword . '.qcsc.findresult'
     vert resize
 endfunction
 function! VDebug()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
-    exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath
+    silent exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath
     vert resize
 endfunction
 function! VRun()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
-    exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
+    silent exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
     vert resize
 endfunction
 function! CSCSearch()
@@ -108,12 +108,12 @@ function! SearchOpen()
 endfunction
 function! ShowDiff()
     let b:commit = expand("<cword>")
-    exec '!~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"'
+    silent exec '!~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"'
     vert resize
 endfunction
 function! UpdateCscope()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
-    exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
+    silent exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
     vert resize
 endfunction
 function! VimOpen()
@@ -132,19 +132,19 @@ function! VimOpen()
         endif
     elseif (expand("%") ==# 'gbr.findresult')
         let b:commit = expand("<cword>")
-        exec '!git checkout ' . '"' .  b:commit . '"'
+        silent exec '!git checkout ' . '"' .  b:commit . '"'
         vert resize
     elseif (expand("%") ==# 'gbil.findresult')
         let b:commit = expand("<cword>")
-        exec '!git checkout ' . '"' .  b:commit . '"'
+        silent exec '!git checkout ' . '"' .  b:commit . '"'
         vert resize
     elseif (expand("%") ==# 'glg.findresult')
         let b:commit = expand("<cword>")
-        exec '!git checkout ' . '"' .  b:commit . '"'
+        silent exec '!git checkout ' . '"' .  b:commit . '"'
         vert resize
     elseif (expand("%") ==# 'dps.findresult')
         let b:commit = expand("<cword>")
-        exec '!~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"'
+        silent exec '!~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"'
         vert resize
     else
         if !filereadable(b:fileName)
@@ -165,7 +165,7 @@ function! GitSearch()
     let b:keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(b:keyword)
     exec "cd " . b:csdbpath
-    exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"' . ' "' .  b:result . '"'
+    silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"' . ' "' .  b:result . '"'
     exec 'vs ' . b:result . '.gsearch.findresult'
     vert resize
 endfunction
@@ -205,7 +205,7 @@ endfunction
 function! FindCalling()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let b:keyword = expand('%:t')
-    exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
+    silent exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
     let b:keyword = GetEscapedKeyword(b:keyword)
     exec 'vs ' . b:csdbpath . '/' . b:keyword . '.vaa.findresult'
 endfunction
