@@ -55,7 +55,7 @@ function! PlayAV()
     vert resize
 endfunction
 function! CSCSearchQ()
-    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
+    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let keyword = expand("<cword>")
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 1 . ' ' . 'qcsc'
     silent exec 'vs ' . b:csdbpath . '/' . keyword . '.qcsc.findresult'
@@ -72,7 +72,7 @@ function! VRun()
     vert resize
 endfunction
 function! CSCSearch()
-    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
+    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let keyword = expand("<cword>")
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 4 . ' ' . 'csc'
     silent exec 'vs ' . b:csdbpath . '/' . keyword . '.csc.findresult'
@@ -112,7 +112,7 @@ function! ShowDiff()
     vert resize
 endfunction
 function! UpdateCscope()
-    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
+    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     silent exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
     vert resize
 endfunction
@@ -197,7 +197,7 @@ function! VimSearch()
     call setreg('"', old_reg, old_regtype)
 endfunction
 function! OpenProjectRoot()
-    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
+    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let @+=b:csdbpath
     echom b:csdbpath
     silent exec 'vs ' . b:csdbpath

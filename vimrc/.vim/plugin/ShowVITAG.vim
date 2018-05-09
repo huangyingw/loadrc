@@ -17,7 +17,7 @@ function s:Cycle_csdb()
 endfunc
 
 function! ShowVITAG()
-    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),$HOME)
+    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     exec "cd " . b:csdbpath
     exe 'vs files.proj'
     vert resize
