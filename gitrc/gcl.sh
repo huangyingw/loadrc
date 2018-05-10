@@ -26,8 +26,11 @@ else
         && cp -v ~/loadrc/.gitconfig_sample ${target}/.gitconfig
     sed -i.bak "s/remoteVar/$remote/g" ${target}/.gitconfig
     var="$1"
+    author=$(echo "$var" | sed "s/^.*github.com\///g;s/\/.*.git//g")
+    mine=$(echo "$var" | sed "s/$author/huangyingw/g")
     var=$(echo "$var" | sed 's/\//\\\//g')
-    sed -i.bak "s/urlVar/$var/g" ${target}/.gitconfig
+    mine=$(echo "$mine" | sed 's/\//\\\//g')
+    sed -i.bak "s/urlVar/$var/g;s/huangyingwVar/$mine/g" ${target}/.gitconfig
 
     cd ${target} \
         && $HOME/loadrc/gitrc/gcob.sh dev \
