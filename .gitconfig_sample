@@ -1,18 +1,18 @@
 [remote "remoteVar"]
     url = urlVar
     fetch = +refs/heads/*:refs/remotes/remoteVar/*
-[remote "origin"]
+[remote "github"]
     url = huangyingwVar
-    fetch = +refs/heads/*:refs/remotes/origin/*
+    fetch = +refs/heads/*:refs/remotes/github/*
 [push]
-    remote = origin
+    remote = github
 [gsync]
     remote = remoteVar
     branch = master
 [merge]
     allow = true
 [branch "dev"]
-    remote = origin
+    remote = github
     merge = refs/heads/dev
 [branch "master"]
     remote = remoteVar
