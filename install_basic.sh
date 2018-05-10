@@ -22,7 +22,6 @@ then
         mosh \
         net-tools \
         pm-utils \
-        realpath  \
         slurm \
         smplayer \
         ssh \
