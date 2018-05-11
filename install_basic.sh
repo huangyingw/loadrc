@@ -11,6 +11,7 @@ then
     apt-get install -y \
         bcmwl-kernel-source \
         binutils \
+        cmake \
         cryptsetup \
         curl \
         dkms \
