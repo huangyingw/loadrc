@@ -63,13 +63,23 @@ function! CSCSearchQ()
 endfunction
 function! VDebug()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
-    silent exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath . ' 2>&1 | tee ' . expand("%:p") . '.findresult'
+    let silent = substitute(system('git config vrun.silent'), '\n', '', '')
+    if silent ==? "false"
+        exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath . ' 2>&1 | tee ' . expand("%:p") . '.findresult'
+    else
+        silent exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath . ' 2>&1 | tee ' . expand("%:p") . '.findresult'
+    endif
     exec 'vs ' . expand("%:p") . '.findresult'
     vert resize
 endfunction
 function! VRun()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
-    silent exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath . ' 2>&1 | tee ' . expand("%:p") . '.findresult'
+    let silent = substitute(system('git config vrun.silent'), '\n', '', '')
+    if silent ==? "false"
+        exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath . ' 2>&1 | tee ' . expand("%:p") . '.findresult'
+    else
+        silent exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath . ' 2>&1 | tee ' . expand("%:p") . '.findresult'
+    endif
     exec 'vs ' . expand("%:p") . '.findresult'
     vert resize
 endfunction
