@@ -9,6 +9,7 @@ then
     apt-get upgrade -y
     apt-get purge -y totem totem-plugins
     apt-get install -y \
+        aptitude \
         bcmwl-kernel-source \
         binutils \
         cmake \
