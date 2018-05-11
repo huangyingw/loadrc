@@ -8,39 +8,32 @@ fi
 extension=${file##*.}
 case $extension in
     sql)
-        ~/loadrc/sqlrc/xsql.sh ${1} ${2} 2>&1 | tee ${1}.findresult
-        read -p "press any key to continue...." update
+        ~/loadrc/sqlrc/xsql.sh ${1} ${2}
         ;;
     findresult)
-        sh ${1} 2>&1 | tee ${1}.findresult
-        read -p "press any key to continue...." update
+        sh ${1}
         ;;
     sh)
-        bash ${1} 2>&1 | tee ${1}.findresult
-        read -p "press any key to continue...." update
+        bash ${1}
         ;;
     py)
         SCRIPT=$(realpath "$1")
         SCRIPTPATH=$(dirname "$SCRIPT")
         cd "$SCRIPTPATH"
-        python ${1} 2>&1 | tee ${1}.findresult
-        read -p "press any key to continue...." update
+        python ${1}
         ;;
     vim)
         source ${1}
-        read -p "press any key to continue...." update
         ;;
     yml)
-        docker-compose -f "$file" up -d 2>&1 | tee "$file".findresult
-        read -p "press any key to continue...." update
+        docker-compose -f "$file" up -d
         ;;
     ymldebug)
-        docker-compose -f "$file" up --build --force-recreate 2>&1 | tee "$file".findresult
-        read -p "press any key to continue...." update
+        docker-compose -f "$file" up --build --force-recreate
         ;;
 esac
 
 if [[ "$file" = *'.leetcode.'* ]]
 then
-    leetcode submit "$file" 2>&1 | tee "$file".findresult
+    leetcode submit "$file"
 fi
