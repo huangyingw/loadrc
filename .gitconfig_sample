@@ -2,7 +2,7 @@
     url = urlVar
     fetch = +refs/heads/*:refs/remotes/remoteVar/*
 [remote "github"]
-    url = huangyingwVar
+    url = git@github.com:huangyingw/projVar.git
     fetch = +refs/heads/*:refs/remotes/github/*
 [push]
     remote = github
