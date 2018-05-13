@@ -11,6 +11,12 @@ then
     exit 1
 fi
 
+if [ -z "$SOURCE" ]
+then
+    echo -e "${red}SOURCE could not be none... ${NC}"
+    exit 1
+fi
+
 if [ -z "$TARGET" ]
 then
     echo -e "${red}TARGET could not be none... ${NC}"
