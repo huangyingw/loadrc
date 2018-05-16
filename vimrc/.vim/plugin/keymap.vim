@@ -69,7 +69,6 @@ function! VDebug()
     else
         silent exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath . ' 2>&1 | tee ' . expand("%:p") . '.findresult'
     endif
-    exec 'vs ' . expand("%:p") . '.findresult'
     vert resize
 endfunction
 function! VRun()
@@ -80,7 +79,6 @@ function! VRun()
     else
         silent exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath . ' 2>&1 | tee ' . expand("%:p") . '.findresult'
     endif
-    exec 'vs ' . expand("%:p") . '.findresult'
     vert resize
 endfunction
 function! CSCSearch()
