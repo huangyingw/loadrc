@@ -66,8 +66,10 @@ function! VDebug()
     let silent = substitute(system('git config vrun.silent'), '\n', '', '')
     if silent ==? "false"
         exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath . ' 2>&1 | tee ' . expand("%:p") . '.findresult'
+        silent exec 'wincmd h'
     else
         silent exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath . ' 2>&1 | tee ' . expand("%:p") . '.findresult'
+        silent exec 'wincmd h'
     endif
     vert resize
 endfunction
@@ -76,8 +78,10 @@ function! VRun()
     let silent = substitute(system('git config vrun.silent'), '\n', '', '')
     if silent ==? "false"
         exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath . ' 2>&1 | tee ' . expand("%:p") . '.findresult'
+        silent exec 'wincmd h'
     else
         silent exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath . ' 2>&1 | tee ' . expand("%:p") . '.findresult'
+        silent exec 'wincmd h'
     endif
     vert resize
 endfunction
