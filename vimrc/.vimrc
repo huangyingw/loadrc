@@ -431,8 +431,7 @@ function! GetEscapedResult(keywordStr)
     return result
 endfunc
 function! VsMax(fileName)
-    exec 'vs ' . a:fileName
-    vert resize
+    call OpenOrSwitch(a:fileName)
 endfunc
 let g:phpfmt_autosave = 1
 let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
