@@ -19,6 +19,6 @@ endfunc
 function! ShowVITAG()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     exec "cd " . b:csdbpath
-    exe 'vs files.proj'
+    call OpenOrSwitch('files.proj')
     vert resize
 endfunction
