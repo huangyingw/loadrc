@@ -159,10 +159,8 @@ function! VimOpen()
             if !isdirectory(b:filePath)
                 call mkdir(b:filePath, "p")
             endif
-            call OpenOrSwitch(b:fileName)
-        else
-            vert wincmd F
         endif
+        call OpenOrSwitch(b:fileName)
     endif
     vert resize
 endfunction
