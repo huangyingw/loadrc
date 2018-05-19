@@ -66,24 +66,20 @@ function! VDebug()
     let silent = substitute(system('git config vrun.silent'), '\n', '', '')
     if silent ==? "false"
         exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath
-        silent exec 'wincmd h'
     else
         silent exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath
-        silent exec 'wincmd h'
     endif
-    vert resize
+    call OpenOrSwitch(expand("%:p") . '.findresult')
 endfunction
 function! VRun()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let silent = substitute(system('git config vrun.silent'), '\n', '', '')
     if silent ==? "false"
         exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
-        silent exec 'wincmd h'
     else
         silent exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
-        silent exec 'wincmd h'
     endif
-    vert resize
+    call OpenOrSwitch(expand("%:p") . '.findresult')
 endfunction
 function! CSCSearch()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
