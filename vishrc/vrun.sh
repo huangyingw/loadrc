@@ -33,7 +33,7 @@ case $extension in
         ;;
 esac
 
-if [ "$file" = *'.leetcode.java' ] || [ "$file" = *'.leetcode.py' ]
+if [[ "$file" = *'.leetcode.java' ]] || [[ "$file" = *'.leetcode.py' ]]
 then
     leetcode submit "$file" 2>&1 | tee "$file".findresult
 fi
