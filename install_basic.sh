@@ -33,6 +33,8 @@ then
         wakeonlan
     modprobe wl
     update-initramfs -u
+else
+    brew install coreutils
 fi
 
 ./nxrc/install.sh
