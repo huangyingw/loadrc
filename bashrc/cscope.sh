@@ -23,17 +23,20 @@ INCLUDE_FILE=includefile.conf
 or="";
 while read suf
 do
+    suf=$(echo "$suf" | sed 's/"//g')
     prune_params+=( $or "-iname" "*.$suf" )
     or="-o"
 done < "$PRUNE_POSTFIX"
 while read suf
 do
+    suf=$(echo "$suf" | sed 's/"//g')
     prune_files+=( $or "-wholename" "$suf" )
     or="-o"
 done < "$PRUNE_FILE"
 or="";
 while read suf
 do
+    suf=$(echo "$suf" | sed 's/"//g')
     include_params+=( $or "-wholename" "$suf" )
     or="-o"
 done < "$INCLUDE_FILE"
