@@ -1,6 +1,8 @@
 function! RememberQuit()
     let @"=expand("%:p")
-    q
+    if winbufnr(2) != -1
+        quit
+    endif
     vert resize
 endfunction
 
