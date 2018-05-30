@@ -12,6 +12,7 @@ then
         aptitude \
         bcmwl-kernel-source \
         binutils \
+        build-essential \
         cmake \
         cryptsetup \
         curl \
@@ -24,6 +25,8 @@ then
         mosh \
         net-tools \
         pm-utils \
+        python-dev \
+        python-pip \
         slurm \
         smplayer \
         ssh \
