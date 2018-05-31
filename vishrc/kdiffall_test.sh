@@ -1,6 +1,4 @@
 #!/bin/bash -
-SCRIPT=$(realpath "$0")
-SCRIPTPATH=$(dirname "$SCRIPT")
-cd "$SCRIPTPATH"
+cd /Users/yhuang/Dropbox/myproject/git/interview/skygragon/leetcode-cli/
 
-./kdiffall.sh kdiffall_test.list
+~/loadrc/vishrc/kdiffall.sh /Users/yhuang/Dropbox/myproject/git/interview/skygragon/leetcode-cli/.submissions100.same-tree.vaa.findresult
