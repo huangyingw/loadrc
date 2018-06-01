@@ -74,7 +74,7 @@ function! VDebug()
 endfunction
 function! VRun()
     if filereadable(expand("%:p") . '.sh')
-        call OpenOrSwitch(expand("%:p") . '.sh')
+        silent exec 'e ' . expand("%:p") . '.sh'
         return 0
     endif
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
