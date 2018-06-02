@@ -1,2 +1,2 @@
 #!/bin/bash
-git diff --cached HEAD | tee gdi.findresult
+git diff -w --cached HEAD | tee gdi.findresult
