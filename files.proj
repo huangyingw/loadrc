@@ -1115,6 +1115,7 @@
 "./vimrc/.vim/bundle/vim-fugitive/.gitignore"
 "./vimrc/.vim/bundle/vim-fugitive/CONTRIBUTING.markdown"
 "./vimrc/.vim/bundle/vim-fugitive/README.markdown"
+"./vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim"
 "./vimrc/.vim/bundle/vim-fugitive/doc/fugitive.txt"
 "./vimrc/.vim/bundle/vim-fugitive/doc/tags"
 "./vimrc/.vim/bundle/vim-fugitive/plugin/fugitive.vim"
