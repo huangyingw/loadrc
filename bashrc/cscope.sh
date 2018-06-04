@@ -23,25 +23,28 @@ INCLUDE_FILE=includefile.conf
 or="";
 while read suf
 do
+    suf=$(echo "$suf" | sed 's/"//g')
     prune_params+=( $or "-iname" "*.$suf" )
     or="-o"
 done < "$PRUNE_POSTFIX"
 while read suf
 do
+    suf=$(echo "$suf" | sed 's/"//g')
     prune_files+=( $or "-wholename" "$suf" )
     or="-o"
 done < "$PRUNE_FILE"
 or="";
 while read suf
 do
+    suf=$(echo "$suf" | sed 's/"//g')
     include_params+=( $or "-wholename" "$suf" )
     or="-o"
 done < "$INCLUDE_FILE"
-find . "(" "${prune_params[@]}" "${prune_files[@]}" ")" -a -prune -o -type f -print -exec file {} \; | grep text | cut -d: -f1 | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > ${TARGET}
+find . "(" "${prune_params[@]}" "${prune_files[@]}" ")" -a -prune -o -type f -print -exec file {} \; | grep text | cut -d: -f1 | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' > ${TARGET}
 if [ ${#include_params[@]} -gt 0 ]
 then
-    find . "(" "${include_params[@]}" ")" -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET}
+    find . "(" "${include_params[@]}" ")" -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ${TARGET}
 fi
 sort -u ${TARGET} -o ${TARGET}
-echo "$TARGETEDIR"/${TARGET} | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ~/files.proj
+echo "$TARGETEDIR"/${TARGET} | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/files.proj
 sort -u ~/files.proj -o ~/files.proj

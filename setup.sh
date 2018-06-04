@@ -3,6 +3,7 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
+~/loadrc/gitrc/gpl.sh
 ./install_basic.sh
 ./submodule_setup.sh
 ./vim_build.sh

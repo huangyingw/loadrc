@@ -1,3 +1,3 @@
 #!/bin/bash -
 ~/loadrc/gitrc/gsave.sh \
-    && git difftool -y
+    && git difftool -y HEAD
