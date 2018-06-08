@@ -27,6 +27,7 @@ then
         pm-utils \
         python-dev \
         python-pip \
+        resolvconf \
         slurm \
         smplayer \
         ssh \
