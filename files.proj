@@ -219,6 +219,7 @@
 "./bashrc/tmove.sh"
 "./bashrc/tmux.sh"
 "./bashrc/tnetsync.sh"
+"./bashrc/trim_lines.sh"
 "./bashrc/trsync_svn.sh"
 "./bashrc/tselectMirror.sh"
 "./bashrc/tubak.sh"
