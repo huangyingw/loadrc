@@ -9,10 +9,8 @@ fi
 TARGET="$1"
 
 mac_sync () {
-    folder="$1"
-    echo rsync -aHv --progress --delete-during --force \
-        "$folder" \
-        "$TARGET":"$folder"
+    eval folder="$1"
+    rsync -aHv --progress --delete-during --force "$folder" "$TARGET":"$1"
 }
 
 while read -r line || [[ -n "$line" ]]
