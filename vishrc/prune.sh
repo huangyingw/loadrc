@@ -6,4 +6,5 @@ line=$(realpath --relative-to="$rootFolder" "$currentFile")
 line=$(echo "$line" | sed 's/.*/"&"/')
 echo "$line" >> "$prunefile"
 sort -u "$prunefile" -o "$prunefile"
+cd "$rootFolder"
 ~/loadrc/bashrc/cscope.sh
