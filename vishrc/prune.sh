@@ -1,8 +1,8 @@
 #!/bin/bash -
 currentFile="$1"
-echo "currentFile --> $currentFile"
-prunefile=$(~/loadrc/bashrc/find_up.sh "$currentFile" "prunefile.conf")
-echo "prunefile --> $prunefile"
-echo realpath --relative-to="$prunefile" "$currentFile"
-realpath --relative-to="$prunefile" "$currentFile"
-realpath --relative-base="$prunefile" "$currentFile"
+rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$currentFile" "prunefile.conf")
+prunefile="$rootFolder/prunefile.conf"
+line=$(realpath --relative-to="$rootFolder" "$currentFile")
+line=$(echo "$line" | sed 's/.*/"&"/')
+echo "$line" >> "$prunefile"
+sort -u "$prunefile" -o "$prunefile"
