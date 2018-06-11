@@ -125,6 +125,9 @@ function! ShowDiff()
     silent exec '!~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"'
     vert resize
 endfunction
+function! Prune()
+    silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"'
+endfunction
 function! UpdateCscope()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     silent exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
@@ -317,6 +320,7 @@ vnoremap <silent>o :call SearchOpen()<cr>
 nmap <C-@> :call CSCSearch()<CR><CR>
 nmap <silent> <C-d> :!rm %:p<CR>:q<CR><CR>
 " nmap <C-j> :call PlayAV()<CR><CR>
+nmap <C-p> :call Prune()<CR><CR>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr>
 nnoremap H :call ShowVITAG()<cr>
