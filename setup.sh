@@ -8,7 +8,7 @@ cd "$SCRIPTPATH"
 ./submodule_setup.sh
 ./vim_build.sh
 ./vimrc/.vim/bundle/YouCompleteMe/install.sh
-./vimrc/.vim/bundle/vim-ghost/install
+./vimrc/.vim/bundle/vim-ghost/install.sh
 ./kvmrc/install.sh
 ./dockerrc/install.sh
 ./post_setup.sh
