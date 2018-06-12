@@ -1126,6 +1126,7 @@
 "./vimrc/.vim/bundle/vim-fugitive/doc/fugitive.txt"
 "./vimrc/.vim/bundle/vim-fugitive/doc/tags"
 "./vimrc/.vim/bundle/vim-fugitive/plugin/fugitive.vim"
+"./vimrc/.vim/bundle/vim-ghost/.gitconfig"
 "./vimrc/.vim/bundle/vim-ghost/.gitignore"
 "./vimrc/.vim/bundle/vim-ghost/README.adoc"
 "./vimrc/.vim/bundle/vim-ghost/doc/ghost.txt"
