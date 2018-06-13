@@ -1130,6 +1130,7 @@
 "./vimrc/.vim/bundle/vim-ghost/.gitignore"
 "./vimrc/.vim/bundle/vim-ghost/README.adoc"
 "./vimrc/.vim/bundle/vim-ghost/doc/ghost.txt"
+"./vimrc/.vim/bundle/vim-ghost/doc/tags"
 "./vimrc/.vim/bundle/vim-ghost/install.cmd"
 "./vimrc/.vim/bundle/vim-ghost/install.sh"
 "./vimrc/.vim/bundle/vim-ghost/plugin/ghost.vim"
