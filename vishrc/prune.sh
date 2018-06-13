@@ -7,4 +7,5 @@ line=$(echo "$line" | sed 's/.*/"\.\/&"/')
 echo "$line" >> "$prunefile"
 sort -u "$prunefile" -o "$prunefile"
 cd "$rootFolder"
-~/loadrc/bashrc/cscope.sh
+line=$(echo "$line" | sed 's/\//\\\//g')
+sed -i "/$line/d" files.proj
