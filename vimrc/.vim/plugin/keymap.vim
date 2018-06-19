@@ -1,4 +1,7 @@
 function! RememberQuit()
+    if (expand("%") ==# 'files.proj')
+        return
+    endif
     let @"=expand("%:p")
     if winbufnr(2) != -1
         quit
