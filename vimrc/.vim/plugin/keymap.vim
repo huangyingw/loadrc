@@ -328,7 +328,6 @@ nmap <C-p> :call Prune()<CR><CR>
 nnoremap Q :call RememberQuit()<cr>
 nnoremap H :call ShowVITAG()<cr>
 nnoremap T :vs $HOME/files.proj<CR>:vert resize<CR><CR>
-nnoremap L :vs <C-R>"<CR>:vert resize<CR><CR>
 map <F5> :call VRun()<cr>
 map <F3> :call VDebug()<cr>
 nnoremap gf gF<CR>:vert resize<CR><CR>
