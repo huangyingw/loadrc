@@ -1,4 +1,7 @@
 function! LcTest()
+    if (expand("%") !~ '.*leetcode.*') || (expand("%") =~ '.*\.sh')
+        return
+    endif
     silent exec '!~/loadrc/vishrc/lc_test.sh ' . '"' .  expand('%:p') . '"'
     call OpenOrSwitch(expand('%:p') . '.sh')
 endfunction
