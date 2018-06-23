@@ -1,11 +1,3 @@
-function! LcTest()
-    if (expand("%") !~ '.*leetcode.*') || (expand("%") =~ '.*\.sh')
-        return
-    endif
-    silent exec '!~/loadrc/vishrc/lc_test.sh ' . '"' .  expand('%:p') . '"'
-    call OpenOrSwitch(expand('%:p') . '.sh')
-endfunction
-
 function! RememberQuit()
     if (expand("%") ==# 'files.proj')
         return
@@ -336,7 +328,7 @@ nmap <C-p> :call Prune()<CR><CR>
 nnoremap Q :call RememberQuit()<cr>
 nnoremap H :call ShowVITAG()<cr>
 nnoremap T :vs $HOME/files.proj<CR>:vert resize<CR><CR>
-nnoremap L :call LcTest()<cr>
+nnoremap L :vs <C-R>"<CR>:vert resize<CR><CR>
 map <F5> :call VRun()<cr>
 map <F3> :call VDebug()<cr>
 nnoremap gf gF<CR>:vert resize<CR><CR>
