@@ -99,3 +99,6 @@
     path = vimrc/.vim/bundle/vala.vim
     url = git@bitbucket.org:huangyingw/vala.vim.git
     branch = dev
+[submodule "vimrc/.vim/bundle/vim-ghost"]
+    path = vimrc/.vim/bundle/vim-ghost
+    url = git@github.com:huangyingw/vim-ghost.git
