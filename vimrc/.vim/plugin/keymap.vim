@@ -6,7 +6,6 @@ function! RememberQuit()
     if winbufnr(2) != -1
         quit
     endif
-    vert resize
 endfunction
 
 function! ExFilter()
@@ -25,7 +24,6 @@ function! ExFilter()
 
     silent exec 'g/\c' . keyword . '/d'
     w
-    vert resize
 endfunction
 function! VFilter()
     normal! gvy<CR>
@@ -43,7 +41,6 @@ function! VFilter()
 
     silent exec 'g!/\c' . keyword . '/d'
     w
-    vert resize
 endfunction
 function! ShowRemember()
     let @+=expand('%:p')
@@ -52,12 +49,10 @@ endfunction
 function! Filter()
     let b:keyword = expand("<cword>")
     exec '%g!/' . b:keyword . '/d'
-    vert resize
 endfunction
 function! PlayAV()
     let line=getline('.')
     silent exec '!/Applications/VLC.app/Contents/MacOS/VLC ' . '"' .  line . '"'
-    vert resize
 endfunction
 function! CSCSearchQ()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
@@ -95,7 +90,6 @@ function! CSCSearch()
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 4 . ' ' . 'csc'
     call OpenOrSwitch(b:csdbpath . '/' . keyword . '.csc.findresult')
     exec 'e'
-    vert resize
     let @@ = keyword
     let old_reg = getreg('"')
     let old_regtype = getregtype('"')
@@ -126,7 +120,6 @@ endfunction
 function! ShowDiff()
     let b:commit = expand("<cword>")
     silent exec '!~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"'
-    vert resize
 endfunction
 function! Prune()
     silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"'
@@ -134,7 +127,6 @@ endfunction
 function! UpdateCscope()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     silent exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
-    vert resize
 endfunction
 function! VimOpen()
     let b:fileName = expand(expand("<cfile>"))
@@ -153,19 +145,15 @@ function! VimOpen()
     elseif (expand("%") ==# 'gbr.findresult')
         let b:commit = expand("<cword>")
         silent exec '!git checkout ' . '"' .  b:commit . '"'
-        vert resize
     elseif (expand("%") ==# 'gbil.findresult')
         let b:commit = expand("<cword>")
         silent exec '!git checkout ' . '"' .  b:commit . '"'
-        vert resize
     elseif (expand("%") ==# 'glg.findresult')
         let b:commit = expand("<cword>")
         silent exec '!git checkout ' . '"' .  b:commit . '"'
-        vert resize
     elseif (expand("%") ==# 'dps.findresult')
         let b:commit = expand("<cword>")
         silent exec '!~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"'
-        vert resize
     else
         if !filereadable(b:fileName)
             if !isdirectory(b:filePath)
@@ -174,7 +162,6 @@ function! VimOpen()
         endif
         call OpenOrSwitch(b:fileName)
     endif
-    vert resize
 endfunction
 function! GitSearch()
     normal! gvy<CR>
@@ -193,7 +180,6 @@ function! VimSearch()
     silent exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"' . ' "' .  b:result . '"'
     call OpenOrSwitch(b:csdbpath.'/'.b:result.'.vaa.findresult')
     exec 'e'
-    vert resize
     let old_reg = getreg('"')
     let old_regtype = getregtype('"')
     if @@ =~? '^[0-9a-z,_]*$' || @@ =~? '^[0-9a-z ,_]*$' && g:VeryLiteral
@@ -259,8 +245,8 @@ vnoremap <Space> za
 nnoremap <silent> <leader>e :call VsMax($HOME . "/.bash_history") <CR>
 nnoremap <silent> <leader>f :call ShowRemember()<CR><CR>
 nnoremap <silent> <leader>v :so $MYVIMRC<CR><CR>
-nnoremap <leader>sh :execute "leftabove vs" bufname('#')<cr>:vert resize<CR><CR>
-nnoremap <leader>sl :execute "rightbelow vs" bufname('#')<cr>:vert resize<CR><CR>
+nnoremap <leader>sh :execute "leftabove vs" bufname('#')<cr><CR>
+nnoremap <leader>sl :execute "rightbelow vs" bufname('#')<cr><CR>
 nnoremap W :call VsMax(".")<CR>
 " Quickly reload current file
 nnoremap E :mkview<CR>:e!<CR>
@@ -272,7 +258,7 @@ nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 nnoremap tt :Autoformat<CR>:w<CR><CR>
-nnoremap D :vs %:p<CR>:vert resize<CR><CR>
+nnoremap D :vs %:p<CR><CR>
 " Quickly open current dir in current windows
 nnoremap <leader>d :call OpenProjectRoot()<cr>
 nnoremap <tab> %
@@ -327,13 +313,13 @@ nmap <C-p> :call Prune()<CR><CR>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr>
 nnoremap H :call ShowVITAG()<cr>
-nnoremap T :vs $HOME/files.proj<CR>:vert resize<CR><CR>
-nnoremap L :vs <C-R>"<CR>:vert resize<CR><CR>
+nnoremap T :vs $HOME/files.proj<CR><CR>
+nnoremap L :vs <C-R>"<CR><CR>
 map <F5> :call VRun()<cr>
 map <F3> :call VDebug()<cr>
-nnoremap gf gF<CR>:vert resize<CR><CR>
+nnoremap gf gF<CR><CR>
 map oo :call VimOpen()<cr>
-nnoremap <silent> <leader>g :!gitk --all -p --full-diff -- %:p<CR>:vert resize<CR><CR>
+nnoremap <silent> <leader>g :!gitk --all -p --full-diff -- %:p<CR><CR>
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
 
 function! CompareTwoFiles()

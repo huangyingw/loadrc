@@ -311,7 +311,6 @@ function AddToGit()
     exec "cd " . worktree
     let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
     exec 'silent !~/loadrc/gitrc/autoadd.sh ' . '"' .  b:relativePath . '"'
-    vert resize
 endfunction
 
 function TrimEndLines()
@@ -368,7 +367,6 @@ function! OpenOrSwitch(buffername)
     else
         silent exec 'vs ' . a:buffername
     endif
-    vert resize
 endfunction
 
 "==
