@@ -448,3 +448,4 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 if !has('nvim')
     set viminfo+=n~/.local/share/vim/viminfo
 endif
+set winwidth=999999
