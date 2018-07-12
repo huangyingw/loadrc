@@ -326,7 +326,13 @@ function! CompareTwoFiles()
     execute '!kdiff3' @" expand("%:p")
 endfunc
 
+function! CommTwoFiles()
+    execute '!comm -1 -3 <(sort ' . @" . ') <(sort ' . expand("%:p") . ') > ' . expand("%:p") . '.findresult'
+    call OpenOrSwitch(expand("%:p") . '.findresult')
+endfunc
+
 nnoremap <leader>2 :call CompareTwoFiles()<cr>
+nnoremap <leader>3 :call CommTwoFiles()<cr>
 nnoremap <leader>c :call UpdateCscope()<cr>
 set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
 "    paste mode, where you can paste mass data
