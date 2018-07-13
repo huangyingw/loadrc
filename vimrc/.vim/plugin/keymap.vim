@@ -2,6 +2,10 @@ function! RememberQuit()
     if (expand("%") ==# 'files.proj')
         return
     endif
+    if (expand("%") =~ 'findresult')
+        silent exec 'bd'
+        return
+    endif
     let @"=expand("%:p")
     if winbufnr(2) != -1
         quit
