@@ -447,3 +447,6 @@ if !has('nvim')
     set viminfo+=n~/.local/share/vim/viminfo
 endif
 set winwidth=999999
+"
+" configuration for cscope_dynamic
+set cscopedb_auto_files=0
