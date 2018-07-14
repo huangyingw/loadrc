@@ -18,4 +18,4 @@ then
 fi
 cscope_db_file=files.proj
 echo "result in " "$find_result"
-xargs grep -wnH "$2" < "$cscope_db_file" > "$find_result"
+cscope -dL -f cscope.out -"$3""$2"|awk '!/findresult/{print $1}'|awk '!x[$0]++' > "$find_result" 
