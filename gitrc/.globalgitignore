@@ -25,6 +25,7 @@ build
 cscope.files
 cscope.in.out
 cscope.out
+cscope.out.files
 cscope.po.out
 doc/tags
 doc/tags-ja
