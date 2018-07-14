@@ -450,4 +450,3 @@ set winwidth=999999
 "
 " configuration for cscope_dynamic
 let cscopedb_auto_files=0
-let cscopedb_big_file='cscope.out'
