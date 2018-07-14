@@ -1267,7 +1267,6 @@
 "./vimrc/.vim/plugin/SQLUtilities.vim"
 "./vimrc/.vim/plugin/ShowVITAG.vim"
 "./vimrc/.vim/plugin/WordCount.vim"
-"./vimrc/.vim/plugin/autoload_cscope.vim"
 "./vimrc/.vim/plugin/bundle.vim"
 "./vimrc/.vim/plugin/copypath.vim"
 "./vimrc/.vim/plugin/dictionary.vim"
