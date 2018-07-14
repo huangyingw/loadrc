@@ -46,5 +46,6 @@ then
     find . "(" "${include_params[@]}" ")" -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ${TARGET}
 fi
 sort -u ${TARGET} -o ${TARGET}
+cscope $PARA -i ${TARGET}
 echo "$TARGETEDIR"/${TARGET} | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/files.proj
 sort -u ~/files.proj -o ~/files.proj
