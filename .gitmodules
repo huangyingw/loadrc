@@ -102,3 +102,6 @@
 [submodule "vimrc/.vim/bundle/vim-ghost"]
     path = vimrc/.vim/bundle/vim-ghost
     url = git@github.com:huangyingw/vim-ghost.git
+[submodule "vimrc/.vim/bundle/cscope_dynamic"]
+    path = vimrc/.vim/bundle/cscope_dynamic
+    url = git@github.com:erig0/cscope_dynamic.git
