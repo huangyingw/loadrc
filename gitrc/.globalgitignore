@@ -22,7 +22,7 @@
 .svn
 CVS
 build
-cscope.files
+cscope.*
 cscope.in.out
 cscope.out
 cscope.out.files
