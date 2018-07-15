@@ -19,6 +19,7 @@
 *devKeyStore
 .#*
 .DS_Store
+.cscopedb.lock
 .svn
 CVS
 build
