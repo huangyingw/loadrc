@@ -18,6 +18,9 @@
     allow = true
 [commit]
     message = n
+[branch "cscope/cscope_dynamic"]
+    remote = origin
+    merge = refs/heads/cscope/cscope_dynamic
 [branch "cscope"]
     remote = origin
     merge = refs/heads/cscope
