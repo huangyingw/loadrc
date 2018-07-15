@@ -15,7 +15,7 @@ fi
 TARGETEDIR=`realpath "$PWD"`
 cp -nv ~/loadrc/prunefi* ./
 cp -nv ~/loadrc/includefile.conf ./
-TARGET=files.proj
+TARGET=cscope.out.files
 PARA=-bqR
 PRUNE_POSTFIX=prunefix.conf
 PRUNE_FILE=prunefile.conf
@@ -47,5 +47,6 @@ then
 fi
 sort -u ${TARGET} -o ${TARGET}
 cscope $PARA -i ${TARGET}
-echo "$TARGETEDIR"/${TARGET} | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/files.proj
+cp -fv ${TARGET} files.proj
+echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/files.proj
 sort -u ~/files.proj -o ~/files.proj
