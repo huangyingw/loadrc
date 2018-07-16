@@ -1,1 +1,2 @@
 sshfs work:/Users/yhuang/Dropbox/BareReps/ /home/cit/BareReps/
+#sshfs -o idmap=user work:/Users/yhuang/website/ /home/cit/imvu/website-project/website
