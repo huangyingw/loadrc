@@ -1,18 +1,18 @@
 #!/bin/bash
-svn status | tee svnvdiff.findresult
+svn status | tee svn.vdiff
 
 while read ss
 do
-    sed -i.bak "/^.*.$ss\$/d" svnvdiff.findresult
+    sed -i.bak "/^.*.$ss\$/d" svn.vdiff
 done < svnpostfix.ignore
 
 while read ss
 do
     ss=$(echo $ss | sed  -e "s/\//\\\\\//g")
-    sed -i.bak "/$ss/d" svnvdiff.findresult
+    sed -i.bak "/$ss/d" svn.vdiff
 done < svnfiles.ignore
 
-sed -i.bak "/^$/d" svnvdiff.findresult
-sed -i.bak "/Changelist/d" svnvdiff.findresult
-sed -i.bak "s/\b[A|D|M]\b/svn diff --diff-cmd kdiff3 $1/g" svnvdiff.findresult
-sort -u svnvdiff.findresult -o svnvdiff.findresult
+sed -i.bak "/^$/d" svn.vdiff
+sed -i.bak "/Changelist/d" svn.vdiff
+sed -i.bak "s/\b[A|D|M]\b/svn diff --diff-cmd kdiff3 $1/g" svn.vdiff
+sort -u svn.vdiff -o svn.vdiff
