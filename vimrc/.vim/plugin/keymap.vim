@@ -130,7 +130,7 @@ function! Prune()
 endfunction
 function! UpdateCscope()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
-    silent exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
+    call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/cscope.sh')
 endfunction
 function! VimOpen()
     let b:fileName = expand(expand("<cfile>"))
