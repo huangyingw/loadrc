@@ -128,6 +128,10 @@ endfunction
 function! Prune()
     silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"'
 endfunction
+function! KdiffAll()
+    call asyncrun#stop('<bang>')
+    call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
+endfunction
 function! UpdateCscope()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/cscope.sh')
@@ -314,6 +318,7 @@ nmap <C-@> :call CSCSearch()<CR><CR>
 nmap <silent> <C-d> :!rm %:p<CR>:q<CR><CR>
 " nmap <C-j> :call PlayAV()<CR><CR>
 nmap <C-p> :call Prune()<CR><CR>
+nmap <C-k> :call KdiffAll()<CR><CR>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr>
 nnoremap H :call ShowVITAG()<cr>
