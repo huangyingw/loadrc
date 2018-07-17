@@ -548,6 +548,7 @@
 "./vimrc/.vim/bundle/asyncrun.vim/LICENSE"
 "./vimrc/.vim/bundle/asyncrun.vim/README.md"
 "./vimrc/.vim/bundle/asyncrun.vim/doc/asyncrun.txt"
+"./vimrc/.vim/bundle/asyncrun.vim/doc/tags"
 "./vimrc/.vim/bundle/asyncrun.vim/plugin/asyncrun.vim"
 "./vimrc/.vim/bundle/bash-support.vim/.gitconfig"
 "./vimrc/.vim/bundle/bash-support.vim/.gitignore"

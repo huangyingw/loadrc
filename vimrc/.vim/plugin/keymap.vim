@@ -61,7 +61,7 @@ endfunction
 function! CSCSearchQ()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let keyword = expand("<cword>")
-    silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 1 . ' ' . 'qcsc'
+    call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 1 . ' ' . 'qcsc')
     call OpenOrSwitch(b:csdbpath . '/' . keyword . '.qcsc.findresult')
 endfunction
 function! VDebug()
@@ -70,7 +70,7 @@ function! VDebug()
     if silent ==? "false"
         exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath
     else
-        silent exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath
+        call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath)
     endif
     call OpenOrSwitch(expand("%:p") . '.findresult')
 endfunction
@@ -84,14 +84,14 @@ function! VRun()
     if silent ==? "false"
         exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
     else
-        silent exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
+        call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath)
     endif
     call OpenOrSwitch(expand("%:p") . '.findresult')
 endfunction
 function! CSCSearch()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let keyword = expand("<cword>")
-    silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 4 . ' ' . 'csc'
+    call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 4 . ' ' . 'csc')
     call OpenOrSwitch(b:csdbpath . '/' . keyword . '.csc.findresult')
     exec 'e'
     let @@ = keyword
@@ -123,10 +123,10 @@ function! SearchOpen()
 endfunction
 function! ShowDiff()
     let b:commit = expand("<cword>")
-    silent exec '!~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"'
+    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"')
 endfunction
 function! Prune()
-    silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"'
+    call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
 endfunction
 function! UpdateCscope()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
@@ -157,7 +157,7 @@ function! VimOpen()
         silent exec '!git checkout ' . '"' .  b:commit . '"'
     elseif (expand("%") ==# 'dps.findresult')
         let b:commit = expand("<cword>")
-        silent exec '!~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"'
+        call asyncrun#run('<bang>', '', 'bash ~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
     else
         if !filereadable(b:fileName)
             if !isdirectory(b:filePath)
@@ -173,7 +173,7 @@ function! GitSearch()
     let b:keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(b:keyword)
     exec "cd " . b:csdbpath
-    silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"' . ' "' .  b:result . '"'
+    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"' . ' "' .  b:result . '"')
     call OpenOrSwitch(b:result . '.gsearch.findresult')
 endfunction
 function! VimSearch()
@@ -181,7 +181,7 @@ function! VimSearch()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let b:keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(b:keyword)
-    silent exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"' . ' "' .  b:result . '"'
+    call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"' . ' "' .  b:result . '"')
     call OpenOrSwitch(b:csdbpath.'/'.b:result.'.vaa.findresult')
     exec 'e'
     let old_reg = getreg('"')
@@ -211,7 +211,7 @@ endfunction
 function! FindCalling()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let b:keyword = expand('%:t')
-    silent exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
+    call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"')
     let b:keyword = GetEscapedKeyword(b:keyword)
     call OpenOrSwitch(b:csdbpath . '/' . b:keyword . '.vaa.findresult')
 endfunction
