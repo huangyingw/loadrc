@@ -70,7 +70,7 @@ function! VDebug()
     if silent ==? "false"
         exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath
     else
-        call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath)
+        silent exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath
     endif
     call OpenOrSwitch(expand("%:p") . '.findresult')
 endfunction
@@ -84,7 +84,7 @@ function! VRun()
     if silent ==? "false"
         exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
     else
-        call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath)
+        silent exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
     endif
     call OpenOrSwitch(expand("%:p") . '.findresult')
 endfunction
