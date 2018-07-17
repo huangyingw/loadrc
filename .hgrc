@@ -1,0 +1,10 @@
+[ui]
+username = Ying Huang <huangyingw@gmail.com>
+ignore = ~/.hgignore
+merge = kdiff3
+[extensions]
+hgext.extdiff =
+[extdiff]
+cmd.vd = kdiff3
+[merge-tools]
+kdiff3.args = $base $local $other -o $output
