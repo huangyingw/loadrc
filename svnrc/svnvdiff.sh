@@ -16,3 +16,6 @@ sed -i.bak "/^$/d" svn.vdiff
 sed -i.bak "/Changelist/d" svn.vdiff
 sed -i.bak "s/\b[A|D|M]\b/svn diff --diff-cmd kdiff3 $1/g" svn.vdiff
 sort -u svn.vdiff -o svn.vdiff
+
+sed "s/svn diff --diff-cmd kdiff3 //g" svn.vdiff | tee svn.diff
+sort -u svn.diff -o svn.diff
