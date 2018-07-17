@@ -102,3 +102,6 @@
 [submodule "vimrc/.vim/bundle/vim-ghost"]
     path = vimrc/.vim/bundle/vim-ghost
     url = git@github.com:huangyingw/vim-ghost.git
+[submodule "vimrc/.vim/bundle/asyncrun.vim"]
+	path = vimrc/.vim/bundle/asyncrun.vim
+	url = git@github.com:skywind3000/asyncrun.vim.git
