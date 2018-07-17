@@ -15,8 +15,7 @@ fi
 TARGETEDIR=`realpath "$PWD"`
 cp -nv ~/loadrc/prunefi* ./
 cp -nv ~/loadrc/includefile.conf ./
-TARGET=cscope.out.files
-PARA=-bqR
+TARGET=files.proj.bak
 PRUNE_POSTFIX=prunefix.conf
 PRUNE_FILE=prunefile.conf
 INCLUDE_FILE=includefile.conf
@@ -46,7 +45,8 @@ then
     find . "(" "${include_params[@]}" ")" -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ${TARGET}
 fi
 sort -u ${TARGET} -o ${TARGET}
-cscope $PARA -i ${TARGET}
+cscope -bqR -i ${TARGET} -f cscope.out.bak
+cp -fv cscope.out.bak cscope.out
 cp -fv ${TARGET} files.proj
 echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/files.proj
 sort -u ~/files.proj -o ~/files.proj
