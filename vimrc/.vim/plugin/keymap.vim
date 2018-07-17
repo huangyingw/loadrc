@@ -123,14 +123,18 @@ function! SearchOpen()
 endfunction
 function! ShowDiff()
     let b:commit = expand("<cword>")
-    silent exec '!~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"'
+    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"')
 endfunction
 function! Prune()
     silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"'
 endfunction
+function! KdiffAll()
+    call asyncrun#stop('<bang>')
+    call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
+endfunction
 function! UpdateCscope()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
-    silent exec '!~/loadrc/bashrc/cscope.sh ' . b:csdbpath
+    call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/cscope.sh')
 endfunction
 function! VimOpen()
     let b:fileName = expand(expand("<cfile>"))
@@ -157,7 +161,7 @@ function! VimOpen()
         silent exec '!git checkout ' . '"' .  b:commit . '"'
     elseif (expand("%") ==# 'dps.findresult')
         let b:commit = expand("<cword>")
-        silent exec '!~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"'
+        call asyncrun#run('<bang>', '', 'bash ~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
     else
         if !filereadable(b:fileName)
             if !isdirectory(b:filePath)
@@ -211,7 +215,7 @@ endfunction
 function! FindCalling()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let b:keyword = expand('%:t')
-    silent exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"'
+    call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"')
     let b:keyword = GetEscapedKeyword(b:keyword)
     call OpenOrSwitch(b:csdbpath . '/' . b:keyword . '.vaa.findresult')
 endfunction
@@ -314,6 +318,7 @@ nmap <C-@> :call CSCSearch()<CR><CR>
 nmap <silent> <C-d> :!rm %:p<CR>:q<CR><CR>
 " nmap <C-j> :call PlayAV()<CR><CR>
 nmap <C-p> :call Prune()<CR><CR>
+nmap <C-k> :call KdiffAll()<CR><CR>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr>
 nnoremap H :call ShowVITAG()<cr>
@@ -323,16 +328,16 @@ map <F5> :call VRun()<cr>
 map <F3> :call VDebug()<cr>
 nnoremap gf gF<CR><CR>
 map oo :call VimOpen()<cr>
-nnoremap <silent> <leader>g :!gitk --all -p --full-diff -- %:p<CR><CR>
+nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- ' . expand("%:p"))<CR><CR>
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
 
 function! CompareTwoFiles()
-    execute '!kdiff3' @" expand("%:p")
+    call asyncrun#run('<bang>', '', 'kdiff3 ' . @" . ' ' . expand("%:p"))
 endfunc
 
 function! CommTwoFiles()
-    execute '!comm -1 -3 <(sort ' . @" . ') <(sort ' . expand("%:p") . ') > ' . expand("%:p") . '.findresult'
-    call OpenOrSwitch(expand("%:p") . '.findresult')
+    silent exec '!comm -2 -3 <(sort ' . @" . ') <(sort ' . expand("%:p") . ') > ' . @" . '.findresult'
+    call OpenOrSwitch(@" . '.findresult')
 endfunc
 
 nnoremap <leader>2 :call CompareTwoFiles()<cr>

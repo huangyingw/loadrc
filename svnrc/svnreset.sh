@@ -1,10 +1,17 @@
 #!/bin/bash -
 resultFile="svnreset.findresult"
 svn status | tee "$resultFile"
+
 while read ss
 do
     sed -i.bak "/^.*.$ss\$/d" "$resultFile"
 done < svnpostfix.ignore
+
+while read ss
+do
+    ss=$(echo $ss | sed  -e "s/\//\\\\\//g")
+    sed -i.bak "/$ss/d" "$resultFile"
+done < svn.diff
 
 while read ss
 do
