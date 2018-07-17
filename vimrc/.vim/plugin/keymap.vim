@@ -61,7 +61,7 @@ endfunction
 function! CSCSearchQ()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let keyword = expand("<cword>")
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 1 . ' ' . 'qcsc')
+    silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 1 . ' ' . 'qcsc'
     call OpenOrSwitch(b:csdbpath . '/' . keyword . '.qcsc.findresult')
 endfunction
 function! VDebug()
@@ -91,7 +91,7 @@ endfunction
 function! CSCSearch()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let keyword = expand("<cword>")
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 4 . ' ' . 'csc')
+    silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 4 . ' ' . 'csc'
     call OpenOrSwitch(b:csdbpath . '/' . keyword . '.csc.findresult')
     exec 'e'
     let @@ = keyword
@@ -173,7 +173,7 @@ function! GitSearch()
     let b:keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(b:keyword)
     exec "cd " . b:csdbpath
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"' . ' "' .  b:result . '"')
+    silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"' . ' "' .  b:result . '"'
     call OpenOrSwitch(b:result . '.gsearch.findresult')
 endfunction
 function! VimSearch()
@@ -181,7 +181,7 @@ function! VimSearch()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let b:keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(b:keyword)
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"' . ' "' .  b:result . '"')
+    silent exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"' . ' "' .  b:result . '"'
     call OpenOrSwitch(b:csdbpath.'/'.b:result.'.vaa.findresult')
     exec 'e'
     let old_reg = getreg('"')
