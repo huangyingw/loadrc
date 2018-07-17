@@ -126,7 +126,7 @@ function! ShowDiff()
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"')
 endfunction
 function! Prune()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
+    silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"'
 endfunction
 function! UpdateCscope()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
