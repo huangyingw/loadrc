@@ -2,11 +2,14 @@ function! RememberQuit()
     if (expand("%") ==# 'files.proj')
         return
     endif
-    if (expand("%") =~ 'findresult')
+
+    if (expand('%:e') ==# 'findresult')
         silent exec 'bd'
         return
     endif
+
     let @"=expand("%:p")
+
     if winbufnr(2) != -1
         quit
     endif
@@ -79,13 +82,21 @@ function! VRun()
         call OpenOrSwitch(expand("%:p") . '.sh')
         return 0
     endif
+
+    if (expand('%:e') ==# 'vdiff')
+        call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath)
+        return 0
+    endif
+
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let silent = substitute(system('git config vrun.silent'), '\n', '', '')
+
     if silent ==? "false"
         exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
     else
         silent exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
     endif
+
     call OpenOrSwitch(expand("%:p") . '.findresult')
 endfunction
 function! CSCSearch()
