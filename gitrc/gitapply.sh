@@ -1,2 +1,2 @@
 #!/bin/bash -
-git apply utest.diff
+git apply svn.diff

@@ -16,4 +16,4 @@ done < svnfiles.ignore
 sed -i.bak "/^$/d" "$resultFile"
 sed -i.bak "s/\b[M]\b/svn cl utest $1/g" "$resultFile"
 ~/loadrc/svnrc/svnvdiff.sh
-svn diff -x -w --cl utest > utest.diff
+svn diff -x -w --cl utest > svn.diff

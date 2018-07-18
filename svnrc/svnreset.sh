@@ -11,7 +11,7 @@ while read ss
 do
     ss=$(echo $ss | sed  -e "s/\//\\\\\//g")
     sed -i.bak "/$ss/d" "$resultFile"
-done < svn.diff
+done < svn.diffiles
 
 while read ss
 do
