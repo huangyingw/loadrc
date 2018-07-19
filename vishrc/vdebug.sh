@@ -29,8 +29,3 @@ case $extension in
         docker-compose -f "$file" up --build --force-recreate 2>&1 | tee "$file".findresult
         ;;
 esac
-
-if [[ "$file" = *'.leetcode.java' ]] || [[ "$file" = *'.leetcode.py' ]]
-then
-    leetcode test "$file" 2>&1 | tee "$file".findresult
-fi
