@@ -3,12 +3,11 @@ function! RememberQuit()
         return
     endif
 
+    let @"=expand("%:p")
+
     if (expand('%:e') ==# 'findresult')
         silent exec 'bd'
-        return
     endif
-
-    let @"=expand("%:p")
 
     if winbufnr(2) != -1
         quit
