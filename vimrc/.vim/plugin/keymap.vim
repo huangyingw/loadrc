@@ -100,10 +100,10 @@ function! VRun()
 
     call OpenOrSwitch(expand("%:p") . '.findresult')
 endfunction
-function! CSCSearch()
+function! CSCSearch(num)
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let keyword = expand("<cword>")
-    silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 4 . ' ' . 'csc'
+    silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . a:num . ' ' . 'csc'
     call OpenOrSwitch(b:csdbpath . '/' . keyword . '.csc.findresult')
     exec 'e'
     let @@ = keyword
@@ -326,7 +326,8 @@ vnoremap <silent>t :call GitSearch()<cr>
 vnoremap <silent>g :call VFilter()<cr>
 vnoremap <silent>i :call ExFilter()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
-nmap <C-@> :call CSCSearch()<CR><CR>
+nmap <C-@> :call CSCSearch(0)<CR><CR>
+nmap <C-f> :call CSCSearch(4)<CR><CR>
 nmap <silent> <C-d> :!rm %:p<CR>:q<CR><CR>
 " nmap <C-j> :call PlayAV()<CR><CR>
 nmap <C-p> :call Prune()<CR><CR>
