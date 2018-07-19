@@ -7,6 +7,7 @@ function! RememberQuit()
 
     if (expand('%:e') ==# 'findresult')
         silent exec 'bd'
+        return
     endif
 
     if winbufnr(2) != -1
