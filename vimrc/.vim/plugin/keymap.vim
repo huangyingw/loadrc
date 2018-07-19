@@ -326,8 +326,8 @@ vnoremap <silent>t :call GitSearch()<cr>
 vnoremap <silent>g :call VFilter()<cr>
 vnoremap <silent>i :call ExFilter()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
-nmap <C-@> :call CSCSearch(0)<CR><CR>
-nmap <C-f> :call CSCSearch(4)<CR><CR>
+nmap <C-@> :call CSCSearch(4)<CR><CR>
+nmap <C-f> :call CSCSearch(0)<CR><CR>
 nmap <silent> <C-d> :!rm %:p<CR>:q<CR><CR>
 " nmap <C-j> :call PlayAV()<CR><CR>
 nmap <C-p> :call Prune()<CR><CR>
