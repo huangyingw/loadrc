@@ -1,4 +1,8 @@
 function! RememberQuit()
+    if winbufnr(2) == -1
+        return
+    endif
+
     if (expand("%") ==# 'files.proj')
         return
     endif
@@ -7,10 +11,7 @@ function! RememberQuit()
 
     if (expand('%:e') ==# 'findresult')
         silent exec 'bd'
-        return
-    endif
-
-    if winbufnr(2) != -1
+    else
         quit
     endif
 endfunction
