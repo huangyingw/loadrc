@@ -1,11 +1,5 @@
 #!/bin/bash
-if [ -n "$1" ]
-then
-    folderForGit="$1"
-else
-    folderForGit=.
-fi
-if  ( git status "$folderForGit"|grep -q 'nothing to commit' )
+if (git status "$folderForGit"|grep -q 'nothing to commit')
 then
     svn up | tee svnup.findresult
     git st
