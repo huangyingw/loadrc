@@ -1,9 +1,14 @@
 #!/bin/bash
-if !(git status "$folderForGit" | grep -q 'nothing to commit')
+
+if !(git status . | grep -q 'nothing to commit')
 then
     echo -e "${red}the git repository is unclean, please check it before continuing... ${NC}"
     exit 1
 fi
 
-svn up | tee svnup.findresult
-git st
+svn up
+
+while IFS= read -r line
+do
+    git add $line
+done < <( comm -23 <(git status --porcelain | awk '{print $2}') <(sort svn.diffiles) )
