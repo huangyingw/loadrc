@@ -12,3 +12,4 @@ while IFS= read -r line
 do
     git add $line
 done < <( comm -23 <(git status --porcelain | awk '{print $2}') <(sort svn.diffiles) )
+~/loadrc/gitrc/g.sh
