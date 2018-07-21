@@ -138,6 +138,7 @@
 "./bashrc/fc.sh"
 "./bashrc/fcscope.sh"
 "./bashrc/fflink.sh"
+"./bashrc/ffmpeg.sh"
 "./bashrc/ffp.sh"
 "./bashrc/fgh.sh"
 "./bashrc/file_type"
