@@ -84,7 +84,7 @@ function! VRun()
         return 0
     endif
 
-    if (expand('%:e') ==# 'vdiff')
+    if expand('%:e') ==# 'vdiff' || expand('%:e') ==# 'ash'
         call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath)
         return 0
     endif
