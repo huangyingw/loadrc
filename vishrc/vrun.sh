@@ -16,6 +16,9 @@ case $extension in
     vdiff)
         sh ${1} 2>&1 | tee ${1}.findresult
         ;;
+    ash)
+        bash ${1} 2>&1 | tee ${1}.findresult
+        ;;
     sh)
         bash ${1} 2>&1 | tee ${1}.findresult
         ;;
