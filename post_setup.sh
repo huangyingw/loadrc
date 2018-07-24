@@ -5,6 +5,6 @@ cd "$SCRIPTPATH"
 
 if [ $(uname) == "Darwin" ]
 then
-    ./bashrc/cscope.sh
+    ./bashrc/update_proj.sh
 fi
 ./gitrc/gclean.sh

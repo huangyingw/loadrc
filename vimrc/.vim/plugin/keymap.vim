@@ -145,9 +145,9 @@ function! KdiffAll()
     call asyncrun#stop('<bang>')
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
 endfunction
-function! UpdateCscope()
+function! UpdateProj()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/cscope.sh')
+    call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/update_proj.sh')
 endfunction
 function! VimOpen()
     let b:fileName = expand(expand("<cfile>"))
@@ -357,7 +357,7 @@ endfunc
 
 nnoremap <leader>2 :call CompareTwoFiles()<cr>
 nnoremap <leader>3 :call CommTwoFiles()<cr>
-nnoremap <leader>c :call UpdateCscope()<cr>
+nnoremap <leader>c :call UpdateProj()<cr>
 set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
 "    paste mode, where you can paste mass data
 "    that won't be autoindented

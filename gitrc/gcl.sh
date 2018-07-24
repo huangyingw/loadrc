@@ -12,7 +12,7 @@ then
     echo ${target}
     git clone "$1" "$target" \
         && cd ${target} \
-        && $HOME/loadrc/bashrc/cscope.sh
+        && $HOME/loadrc/bashrc/update_proj.sh
 else
     target=`echo $1 | sed -e "s|.git$||;s|^.*github.com.||"`
     remote=`echo $1 | sed -e "s|.git$||;s|^.*github.com.||;s|\/.*||"`
@@ -33,7 +33,7 @@ else
     cd ${target} \
         && $HOME/loadrc/gitrc/gcob.sh dev \
         && $HOME/loadrc/gitrc/gdev.sh \
-        && $HOME/loadrc/bashrc/cscope.sh \
+        && $HOME/loadrc/bashrc/update_proj.sh \
         && git add . \
         && $HOME/loadrc/gitrc/g.sh
 fi
