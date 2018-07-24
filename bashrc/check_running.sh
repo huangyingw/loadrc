@@ -2,8 +2,8 @@
 
 if [ -z "$1" ]
 then
-    echo
     echo -e "${red}Please provide the target file name... ${NC}"
+    exit 1
 fi
 
 targetFile="$1"
@@ -24,7 +24,7 @@ then
         # The process is not running
         # Echo current PID into lock file
         echo $$ > "${LCK_FILE}"
-        bash "$SCRIPT"
+        "$SCRIPT"
     else
         # the process IS running
         # handle it
