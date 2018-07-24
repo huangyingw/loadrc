@@ -1,5 +1,14 @@
 #! /bin/bash
 
+if [ -z "$1" ]
+then
+    echo
+    echo -e "${red}Please provide the target file name... ${NC}"
+fi
+
+targetFile="$1"
+SCRIPT=$(realpath "$targetFile")
+
 # check to see if script is already running
 PDIR=${0%`basename $0`}
 LCK_FILE=`basename $0`.lck
@@ -15,7 +24,7 @@ then
         # The process is not running
         # Echo current PID into lock file
         echo $$ > "${LCK_FILE}"
-        ./submission.sh
+        bash "$SCRIPT"
     else
         # the process IS running
         # handle it
