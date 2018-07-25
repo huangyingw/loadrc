@@ -450,3 +450,9 @@ set winwidth=999999
 "
 " configuration for cscope_dynamic
 let cscopedb_auto_files=0
+
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+
+" :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect
