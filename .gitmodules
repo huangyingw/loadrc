@@ -70,10 +70,6 @@
     path = vimrc/.vim/bundle/vim-phpfmt
     url = git@bitbucket.org:huangyingw/vim-phpfmt.git
     branch = dev
-[submodule "vimrc/.vim/bundle/YouCompleteMe"]
-    path = vimrc/.vim/bundle/YouCompleteMe
-    url = git@bitbucket.org:huangyingw/youcompleteme.git
-    branch = dev
 [submodule "vimrc/.vim/bundle/delimitMate"]
     path = vimrc/.vim/bundle/delimitMate
     url = git@github.com:Raimondi/delimitMate.git
