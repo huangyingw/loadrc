@@ -495,6 +495,7 @@
 "./vimrc/.vim/bundle/YouCompleteMe/ci/appveyor/appveyor_install.bat"
 "./vimrc/.vim/bundle/YouCompleteMe/ci/travis/travis_install.sh"
 "./vimrc/.vim/bundle/YouCompleteMe/codecov.yml"
+"./vimrc/.vim/bundle/YouCompleteMe/doc/tags"
 "./vimrc/.vim/bundle/YouCompleteMe/doc/youcompleteme.txt"
 "./vimrc/.vim/bundle/YouCompleteMe/install.py"
 "./vimrc/.vim/bundle/YouCompleteMe/install.sh"
