@@ -99,8 +99,14 @@
     path = vimrc/.vim/bundle/vim-ghost
     url = git@github.com:huangyingw/vim-ghost.git
 [submodule "vimrc/.vim/bundle/asyncrun.vim"]
-	path = vimrc/.vim/bundle/asyncrun.vim
-	url = git@github.com:skywind3000/asyncrun.vim.git
+    path = vimrc/.vim/bundle/asyncrun.vim
+    url = git@github.com:skywind3000/asyncrun.vim.git
 [submodule "vimrc/.vim/bundle/cscope_dynamic"]
     path = vimrc/.vim/bundle/cscope_dynamic
     url = git@github.com:huangyingw/cscope_dynamic.git
+[submodule "vimrc/.vim/bundle/nvim-yarp"]
+    path = vimrc/.vim/bundle/nvim-yarp
+    url = https://github.com/roxma/nvim-yarp.git
+[submodule "vimrc/.vim/bundle/ncm2"]
+    path = vimrc/.vim/bundle/ncm2
+    url = https://github.com/ncm2/ncm2.git
