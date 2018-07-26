@@ -134,9 +134,6 @@
 [submodule "vimrc/.vim/bundle/ncm2-look.vim"]
     path = vimrc/.vim/bundle/ncm2-look.vim
     url = https://github.com/filipekiss/ncm2-look.vim
-[submodule "vimrc/.vim/bundle/gen_tags.vim"]
-    path = vimrc/.vim/bundle/gen_tags.vim
-    url = https://github.com/jsfaint/gen_tags.vim
 [submodule "vimrc/.vim/bundle/ncm2-syntax"]
     path = vimrc/.vim/bundle/ncm2-syntax
     url = https://github.com/ncm2/ncm2-syntax
@@ -170,9 +167,6 @@
 [submodule "vimrc/.vim/bundle/ncm2-go"]
     path = vimrc/.vim/bundle/ncm2-go
     url = https://github.com/ncm2/ncm2-go
-[submodule "vimrc/.vim/bundle/ncm2-ultisnips"]
-    path = vimrc/.vim/bundle/ncm2-ultisnips
-    url = https://github.com/ncm2/ncm2-ultisnips
 [submodule "vimrc/.vim/bundle/ncm2-snipmate"]
     path = vimrc/.vim/bundle/ncm2-snipmate
     url = https://github.com/ncm2/ncm2-snipmate
