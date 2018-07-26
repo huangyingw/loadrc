@@ -4,7 +4,11 @@ function! RememberQuit()
     endif
 
     if (expand("%") ==# 'files.proj')
-        return
+        let LargeFile= 200
+        let fsz= getfsize(expand("%"))
+        if fsz >= LargeFile*1024
+            return
+        endif
     endif
 
     let @"=expand("%:p")
