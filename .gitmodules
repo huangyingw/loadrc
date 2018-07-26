@@ -110,3 +110,9 @@
 [submodule "vimrc/.vim/bundle/ncm2"]
     path = vimrc/.vim/bundle/ncm2
     url = https://github.com/ncm2/ncm2.git
+[submodule "vimrc/.vim/bundle/ncm2-bufword"]
+    path = vimrc/.vim/bundle/ncm2-bufword
+    url = https://github.com/ncm2/ncm2-bufword.git
+[submodule "vimrc/.vim/bundle/ncm2-path"]
+    path = vimrc/.vim/bundle/ncm2-path
+    url = https://github.com/ncm2/ncm2-path.git
