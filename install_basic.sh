@@ -38,7 +38,10 @@ then
     modprobe wl
     update-initramfs -u
 else
-    brew install coreutils
+    brew install \
+        coreutils \
+        neovim
+    brew link --overwrite neovim
 fi
 
 ./nxrc/install.sh
