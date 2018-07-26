@@ -16,6 +16,7 @@ function! RememberQuit()
     endif
 endfunction
 
+
 function! ExFilter()
     normal! gvy<CR>
     let csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
@@ -33,6 +34,7 @@ function! ExFilter()
     silent exec 'g/\c' . keyword . '/d'
     w
 endfunction
+
 function! HighlightKeyword(keyword)
     let @@ = a:keyword
     let old_reg = getreg('"')
@@ -53,6 +55,7 @@ function! HighlightKeyword(keyword)
     normal! gV
     call setreg('"', old_reg, old_regtype)
 endfunction
+
 function! VFilter()
     normal! gvy<CR>
     let csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
@@ -71,24 +74,29 @@ function! VFilter()
     w
     call HighlightKeyword(keyword)
 endfunction
+
 function! ShowRemember()
     let @+=expand('%:p')
     echom expand('%:p')
 endfunction
+
 function! Filter()
     let b:keyword = expand("<cword>")
     exec '%g!/' . b:keyword . '/d'
 endfunction
+
 function! PlayAV()
     let line=getline('.')
     silent exec '!/Applications/VLC.app/Contents/MacOS/VLC ' . '"' .  line . '"'
 endfunction
+
 function! CSCSearchQ()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let keyword = expand("<cword>")
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 1 . ' ' . 'qcsc'
     call OpenOrSwitch(b:csdbpath . '/' . keyword . '.qcsc.findresult')
 endfunction
+
 function! VDebug()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let silent = substitute(system('git config vrun.silent'), '\n', '', '')
@@ -99,6 +107,7 @@ function! VDebug()
     endif
     call OpenOrSwitch(expand("%:p") . '.findresult')
 endfunction
+
 function! VRun()
     if filereadable(expand("%:p") . '.sh')
         call OpenOrSwitch(expand("%:p") . '.sh')
@@ -122,6 +131,7 @@ function! VRun()
 
     call OpenOrSwitch(expand("%:p") . '.findresult')
 endfunction
+
 function! CSCSearch(num)
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let keyword = expand("<cword>")
@@ -130,6 +140,7 @@ function! CSCSearch(num)
     exec 'e'
     call HighlightKeyword(keyword)
 endfunction
+
 function! SearchOpen()
     normal! gvy<CR>
     let b:keyword = @@
@@ -138,21 +149,26 @@ function! SearchOpen()
     let find_file = substitute(system("~/loadrc/gitrc/find_files.sh " . '"' .  b:keyword . '"'), '\n', '', '')
     call OpenOrSwitch(find_file)
 endfunction
+
 function! ShowDiff()
     let b:commit = expand("<cword>")
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"')
 endfunction
+
 function! Prune()
     silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"'
 endfunction
+
 function! KdiffAll()
     call asyncrun#stop('<bang>')
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
 endfunction
+
 function! UpdateProj()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/update_proj.sh')
 endfunction
+
 function! VimOpen()
     let b:fileName = expand(expand("<cfile>"))
     let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
@@ -188,6 +204,7 @@ function! VimOpen()
         call OpenOrSwitch(b:fileName)
     endif
 endfunction
+
 function! GitSearch()
     normal! gvy<CR>
     let b:csdbpath = Find_in_parent(".git",Windowdir(),$HOME)
@@ -197,6 +214,7 @@ function! GitSearch()
     silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"' . ' "' .  b:result . '"'
     call OpenOrSwitch(b:result . '.gsearch.findresult')
 endfunction
+
 function! VimSearch()
     normal! gvy<CR>
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
@@ -207,12 +225,14 @@ function! VimSearch()
     exec 'e'
     call HighlightKeyword(keyword)
 endfunction
+
 function! OpenProjectRoot()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let @+=b:csdbpath
     echom b:csdbpath
     call OpenOrSwitch(b:csdbpath)
 endfunction
+
 function! FindCalling()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let b:keyword = expand('%:t')
