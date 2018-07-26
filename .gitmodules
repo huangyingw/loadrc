@@ -73,17 +73,9 @@
 [submodule "vimrc/.vim/bundle/delimitMate"]
     path = vimrc/.vim/bundle/delimitMate
     url = git@github.com:Raimondi/delimitMate.git
-[submodule "macvim"]
-    path = macvim
-    url = git@bitbucket.org:huangyingw/macvim.git
-    branch = dev
 [submodule "vimrc/.vim/bundle/vim-anyfold"]
     path = vimrc/.vim/bundle/vim-anyfold
     url = git@bitbucket.org:huangyingw/vim-anyfold.git
-[submodule "neovim"]
-    path = neovim
-    url = git@github.com:huangyingw/neovim.git
-    branch = dev
 [submodule "vimrc/.vim/bundle/LargeFile"]
     path = vimrc/.vim/bundle/LargeFile
     url = git@github.com:huangyingw/LargeFile.git
