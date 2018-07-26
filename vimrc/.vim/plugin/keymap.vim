@@ -200,12 +200,12 @@ endfunction
 function! VimSearch()
     normal! gvy<CR>
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
-    let b:keyword = GetEscapedKeyword(@@)
-    let b:result = GetEscapedResult(b:keyword)
-    silent exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"' . ' "' .  b:result . '"'
+    let keyword = GetEscapedKeyword(@@)
+    let b:result = GetEscapedResult(keyword)
+    silent exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  keyword . '"' . ' "' .  b:result . '"'
     call OpenOrSwitch(b:csdbpath.'/'.b:result.'.vaa.findresult')
     exec 'e'
-    call HighlightKeyword(b:keyword)
+    call HighlightKeyword(keyword)
 endfunction
 function! OpenProjectRoot()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
