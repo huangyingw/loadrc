@@ -33,23 +33,8 @@ function! ExFilter()
     silent exec 'g/\c' . keyword . '/d'
     w
 endfunction
-function! VFilter()
-    normal! gvy<CR>
-    let csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
-    let keyword = @@
-    let b:result = GetEscapedResult(keyword)
-    let keyword = GetEscapedKeywordForVIM(keyword)
-    echom 'keyword : '.keyword
-
-    if expand('%:e') != "findresult"
-        silent exec '!rm ' . csdbpath . '/' . b:result . '.vaa.findresult'
-        silent exec 'w! ' . csdbpath . '/' . b:result . '.vaa.findresult'
-        call OpenOrSwitch(csdbpath . '/' . b:result . '.vaa.findresult')
-    endif
-
-    silent exec 'g!/\c' . keyword . '/d'
-    w
-    let @@ = keyword
+function! HighlightKeyword(keyword)
+    let @@ = a:keyword
     let old_reg = getreg('"')
     let old_regtype = getregtype('"')
     if @@ =~? '^[0-9a-z,_]*$' || @@ =~? '^[0-9a-z ,_]*$' && g:VeryLiteral
@@ -67,6 +52,24 @@ function! VFilter()
     endif
     normal! gV
     call setreg('"', old_reg, old_regtype)
+endfunction
+function! VFilter()
+    normal! gvy<CR>
+    let csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
+    let keyword = @@
+    let b:result = GetEscapedResult(keyword)
+    let keyword = GetEscapedKeywordForVIM(keyword)
+    echom 'keyword : '.keyword
+
+    if expand('%:e') != "findresult"
+        silent exec '!rm ' . csdbpath . '/' . b:result . '.vaa.findresult'
+        silent exec 'w! ' . csdbpath . '/' . b:result . '.vaa.findresult'
+        call OpenOrSwitch(csdbpath . '/' . b:result . '.vaa.findresult')
+    endif
+
+    silent exec 'g!/\c' . keyword . '/d'
+    w
+    call HighlightKeyword(keyword)
 endfunction
 function! ShowRemember()
     let @+=expand('%:p')
@@ -125,24 +128,7 @@ function! CSCSearch(num)
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . a:num . ' ' . 'csc'
     call OpenOrSwitch(b:csdbpath . '/' . keyword . '.csc.findresult')
     exec 'e'
-    let @@ = keyword
-    let old_reg = getreg('"')
-    let old_regtype = getregtype('"')
-    if @@ =~? '^[0-9a-z,_]*$' || @@ =~? '^[0-9a-z ,_]*$' && g:VeryLiteral
-        let @/ = @@
-    else
-        let pat = escape(@@, '\')
-        if g:VeryLiteral
-            let pat = substitute(pat, '\n', '\\n', 'g')
-        else
-            let pat = substitute(pat, '^\_s\+', '\\s\\+', '')
-            let pat = substitute(pat, '\_s\+$', '\\s\\*', '')
-            let pat = substitute(pat, '\_s\+', '\\_s\\+', 'g')
-        endif
-        let @/ = '\V'.pat
-    endif
-    normal! gV
-    call setreg('"', old_reg, old_regtype)
+    call HighlightKeyword(keyword)
 endfunction
 function! SearchOpen()
     normal! gvy<CR>
@@ -219,23 +205,7 @@ function! VimSearch()
     silent exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"' . ' "' .  b:result . '"'
     call OpenOrSwitch(b:csdbpath.'/'.b:result.'.vaa.findresult')
     exec 'e'
-    let old_reg = getreg('"')
-    let old_regtype = getregtype('"')
-    if @@ =~? '^[0-9a-z,_]*$' || @@ =~? '^[0-9a-z ,_]*$' && g:VeryLiteral
-        let @/ = @@
-    else
-        let pat = escape(@@, '\')
-        if g:VeryLiteral
-            let pat = substitute(pat, '\n', '\\n', 'g')
-        else
-            let pat = substitute(pat, '^\_s\+', '\\s\\+', '')
-            let pat = substitute(pat, '\_s\+$', '\\s\\*', '')
-            let pat = substitute(pat, '\_s\+', '\\_s\\+', 'g')
-        endif
-        let @/ = '\V'.pat
-    endif
-    normal! gV
-    call setreg('"', old_reg, old_regtype)
+    call HighlightKeyword(b:keyword)
 endfunction
 function! OpenProjectRoot()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
