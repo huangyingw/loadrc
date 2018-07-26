@@ -116,3 +116,78 @@
 [submodule "vimrc/.vim/bundle/ncm2-path"]
     path = vimrc/.vim/bundle/ncm2-path
     url = https://github.com/ncm2/ncm2-path.git
+[submodule "ncm2-bufword"]
+    path = ncm2-bufword
+    url = https://github.com/ncm2/ncm2-bufword
+[submodule "ncm2-path"]
+    path = ncm2-path
+    url = https://github.com/ncm2/ncm2-path
+[submodule "ncm2-github"]
+    path = ncm2-github
+    url = https://github.com/ncm2/ncm2-github
+[submodule "ncm2-tmux"]
+    path = ncm2-tmux
+    url = https://github.com/ncm2/ncm2-tmux
+[submodule "ncm2-tagprefix"]
+    path = ncm2-tagprefix
+    url = https://github.com/ncm2/ncm2-tagprefix
+[submodule "ncm2-look.vim"]
+    path = ncm2-look.vim
+    url = https://github.com/filipekiss/ncm2-look.vim
+[submodule "gen_tags.vim"]
+    path = gen_tags.vim
+    url = https://github.com/jsfaint/gen_tags.vim
+[submodule "ncm2-syntax"]
+    path = ncm2-syntax
+    url = https://github.com/ncm2/ncm2-syntax
+[submodule "ncm2-neoinclude"]
+    path = ncm2-neoinclude
+    url = https://github.com/ncm2/ncm2-neoinclude
+[submodule "tmux-complete.vim"]
+    path = tmux-complete.vim
+    url = https://github.com/wellle/tmux-complete.vim
+[submodule "ncm2-cssomni"]
+    path = ncm2-cssomni
+    url = https://github.com/ncm2/ncm2-cssomni
+[submodule "ncm2-tern"]
+    path = ncm2-tern
+    url = https://github.com/ncm2/ncm2-tern
+[submodule "ncm2-jedi"]
+    path = ncm2-jedi
+    url = https://github.com/ncm2/ncm2-jedi
+[submodule "ncm2-racer"]
+    path = ncm2-racer
+    url = https://github.com/ncm2/ncm2-racer
+[submodule "ncm2-pyclang"]
+    path = ncm2-pyclang
+    url = https://github.com/ncm2/ncm2-pyclang
+[submodule "vimtex"]
+    path = vimtex
+    url = https://github.com/lervag/vimtex
+[submodule "ncm2-vim"]
+    path = ncm2-vim
+    url = https://github.com/ncm2/ncm2-vim
+[submodule "ncm2-go"]
+    path = ncm2-go
+    url = https://github.com/ncm2/ncm2-go
+[submodule "ncm2-ultisnips"]
+    path = ncm2-ultisnips
+    url = https://github.com/ncm2/ncm2-ultisnips
+[submodule "ncm2-snipmate"]
+    path = ncm2-snipmate
+    url = https://github.com/ncm2/ncm2-snipmate
+[submodule "ncm2-html-subscope"]
+    path = ncm2-html-subscope
+    url = https://github.com/ncm2/ncm2-html-subscope
+[submodule "ncm2-markdown-subscope"]
+    path = ncm2-markdown-subscope
+    url = https://github.com/ncm2/ncm2-markdown-subscope
+[submodule "ncm2-rst-subscope"]
+    path = ncm2-rst-subscope
+    url = https://github.com/ncm2/ncm2-rst-subscope
+[submodule "ncm2-match-highlight"]
+    path = ncm2-match-highlight
+    url = https://github.com/ncm2/ncm2-match-highlight
+[submodule "ncm2-highprio-pop"]
+    path = ncm2-highprio-pop
+    url = https://github.com/ncm2/ncm2-highprio-pop
