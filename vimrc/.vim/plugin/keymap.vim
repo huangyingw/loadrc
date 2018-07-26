@@ -1,4 +1,6 @@
 function! RememberQuit()
+    let @"=expand("%:p")
+
     if winbufnr(2) == -1
         return
     endif
@@ -10,8 +12,6 @@ function! RememberQuit()
             return
         endif
     endif
-
-    let @"=expand("%:p")
 
     if (expand('%:e') ==# 'findresult')
         silent exec 'bd'
