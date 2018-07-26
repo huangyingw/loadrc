@@ -124,16 +124,16 @@
     url = https://github.com/ncm2/ncm2-path.git
 [submodule "vimrc/.vim/bundle/ncm2-github"]
     path = vimrc/.vim/bundle/ncm2-github
-    url = https://github.com/ncm2/ncm2-github
+    url = https://github.com/ncm2/ncm2-github.git
 [submodule "vimrc/.vim/bundle/ncm2-tmux"]
     path = vimrc/.vim/bundle/ncm2-tmux
-    url = https://github.com/ncm2/ncm2-tmux
+    url = https://github.com/ncm2/ncm2-tmux.git
 [submodule "vimrc/.vim/bundle/ncm2-tagprefix"]
     path = vimrc/.vim/bundle/ncm2-tagprefix
-    url = https://github.com/ncm2/ncm2-tagprefix
+    url = https://github.com/ncm2/ncm2-tagprefix.git
 [submodule "vimrc/.vim/bundle/ncm2-look.vim"]
     path = vimrc/.vim/bundle/ncm2-look.vim
-    url = https://github.com/filipekiss/ncm2-look.vim
+    url = https://github.com/filipekiss/ncm2-look.vim.git
 [submodule "vimrc/.vim/bundle/ncm2-syntax"]
     path = vimrc/.vim/bundle/ncm2-syntax
     url = https://github.com/ncm2/ncm2-syntax
@@ -142,7 +142,7 @@
     url = https://github.com/ncm2/ncm2-neoinclude
 [submodule "vimrc/.vim/bundle/tmux-complete.vim"]
     path = vimrc/.vim/bundle/tmux-complete.vim
-    url = https://github.com/wellle/tmux-complete.vim
+    url = https://github.com/wellle/tmux-complete.vim.git
 [submodule "vimrc/.vim/bundle/ncm2-cssomni"]
     path = vimrc/.vim/bundle/ncm2-cssomni
     url = https://github.com/ncm2/ncm2-cssomni
@@ -169,16 +169,16 @@
     url = https://github.com/ncm2/ncm2-go
 [submodule "vimrc/.vim/bundle/ncm2-snipmate"]
     path = vimrc/.vim/bundle/ncm2-snipmate
-    url = https://github.com/ncm2/ncm2-snipmate
+    url = https://github.com/ncm2/ncm2-snipmate.git
 [submodule "vimrc/.vim/bundle/ncm2-html-subscope"]
     path = vimrc/.vim/bundle/ncm2-html-subscope
-    url = https://github.com/ncm2/ncm2-html-subscope
+    url = https://github.com/ncm2/ncm2-html-subscope.git
 [submodule "vimrc/.vim/bundle/ncm2-markdown-subscope"]
     path = vimrc/.vim/bundle/ncm2-markdown-subscope
-    url = https://github.com/ncm2/ncm2-markdown-subscope
+    url = https://github.com/ncm2/ncm2-markdown-subscope.git
 [submodule "vimrc/.vim/bundle/ncm2-rst-subscope"]
     path = vimrc/.vim/bundle/ncm2-rst-subscope
-    url = https://github.com/ncm2/ncm2-rst-subscope
+    url = https://github.com/ncm2/ncm2-rst-subscope.git
 [submodule "vimrc/.vim/bundle/ncm2-match-highlight"]
     path = vimrc/.vim/bundle/ncm2-match-highlight
     url = https://github.com/ncm2/ncm2-match-highlight
