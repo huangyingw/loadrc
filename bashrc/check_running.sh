@@ -11,7 +11,7 @@ SCRIPT=$(realpath "$targetFile")
 
 # check to see if script is already running
 PDIR=${0%`basename $0`}
-LCK_FILE="$SCRIPT.lck"
+LCK_FILE="running.lck"
 
 if [ -f "${LCK_FILE}" ]
 then

@@ -5,6 +5,7 @@
 *.gch
 *.hg
 *.keystore
+*.lck
 *.loT
 *.ncb
 *.o
@@ -24,7 +25,6 @@
 .svn
 CVS
 build
-check_running.sh.lck
 cscope.*
 cscope.in.out
 cscope.out
