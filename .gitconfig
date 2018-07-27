@@ -30,9 +30,9 @@
 [branch "remove/nvim"]
     remote = origin
     merge = refs/heads/remove/nvim
-[branch "ncm2/dev"]
+[branch "cscope/autoload"]
     remote = origin
-    merge = refs/heads/ncm2/dev
+    merge = refs/heads/cscope/autoload
 [branch "async"]
     remote = origin
     merge = refs/heads/async
