@@ -170,6 +170,7 @@ endfunction
 
 function! UpdateProj()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
+    exec "cd " . b:csdbpath
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/update_proj.sh')
 endfunction
 
