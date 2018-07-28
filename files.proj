@@ -576,6 +576,7 @@
 "./vimrc/.vim/bundle/ncm2-cssomni/ncm2-plugin/ncm2_cssomni.vim"
 "./vimrc/.vim/bundle/ncm2-github/.gitignore"
 "./vimrc/.vim/bundle/ncm2-github/LICENSE"
+"./vimrc/.vim/bundle/ncm2-github/README.md"
 "./vimrc/.vim/bundle/ncm2-github/autoload/ncm2_github.vim"
 "./vimrc/.vim/bundle/ncm2-github/ncm2-plugin/ncm2_github.vim"
 "./vimrc/.vim/bundle/ncm2-github/pythonx/ncm2_github.py"
