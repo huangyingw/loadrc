@@ -30,6 +30,7 @@ cscope.in.out
 cscope.out
 cscope.out.files
 cscope.po.out
+cscopedb.lock
 doc/tags
 doc/tags-ja
 error
