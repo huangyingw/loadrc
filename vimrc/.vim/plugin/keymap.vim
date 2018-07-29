@@ -14,10 +14,6 @@ function! RememberQuit()
     endif
 
     quit
-
-    if (expand('%:e') ==# 'findresult')
-        silent exec 'bd'
-    endif
 endfunction
 
 
