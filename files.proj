@@ -569,6 +569,7 @@
 "./vimrc/.vim/bundle/indentLine/glyph/indentLine-dotted-guide.eps"
 "./vimrc/.vim/bundle/ncm2-bufword/.gitignore"
 "./vimrc/.vim/bundle/ncm2-bufword/LICENSE"
+"./vimrc/.vim/bundle/ncm2-bufword/README.md"
 "./vimrc/.vim/bundle/ncm2-bufword/autoload/ncm2_bufword.vim"
 "./vimrc/.vim/bundle/ncm2-bufword/ncm2-plugin/ncm2_bufword.vim"
 "./vimrc/.vim/bundle/ncm2-bufword/pythonx/ncm2_bufword.py"
