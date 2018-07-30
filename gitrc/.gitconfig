@@ -59,13 +59,12 @@
     required = true
 [push]
     default = current
+    remote = BareReps
 [pull]
     default = current
 [gdif]
     ignore = includefile.conf
     ignore = prunefix.conf
-[push]
-    remote = BareReps
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
