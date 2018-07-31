@@ -13,9 +13,12 @@ function! RememberQuit()
         endif
     endif
 
-    quit
+    if (expand('%:e') ==# 'findresult')
+        silent exec 'bd'
+    else
+        quit
+    endif
 endfunction
-
 
 function! ExFilter()
     normal! gvy<CR>
