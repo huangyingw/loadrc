@@ -38,6 +38,10 @@ function! ExFilter()
     w
 endfunction
 
+if !exists('g:VeryLiteral')
+    let g:VeryLiteral = 0
+endif
+
 function! HighlightKeyword(keyword)
     let @@ = a:keyword
     let old_reg = getreg('"')
