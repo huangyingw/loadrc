@@ -6,10 +6,6 @@
     path = vimrc/.vim/bundle/swift.vim
     url = git@bitbucket.org:huangyingw/swift.vim.git
     branch = dev
-[submodule "vimrc/.vim/bundle/vim-indexed-search"]
-    path = vimrc/.vim/bundle/vim-indexed-search
-    url = git@bitbucket.org:huangyingw/vim-indexed-search.git
-    branch = dev
 [submodule "vimrc/.vim/bundle/indentLine"]
     path = vimrc/.vim/bundle/indentLine
     url = git@bitbucket.org:huangyingw/indentLine.git
