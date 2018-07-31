@@ -30,6 +30,9 @@
 [branch "remove/nvim"]
     remote = origin
     merge = refs/heads/remove/nvim
+[branch "IndexedSearch/dev"]
+    remote = origin
+    merge = refs/heads/IndexedSearch/dev
 [branch "cscope/autoload"]
     remote = origin
     merge = refs/heads/cscope/autoload
