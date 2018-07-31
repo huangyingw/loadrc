@@ -24,7 +24,7 @@ function! s:VSetSearch(cmd)
   endif
   normal! gV
   call setreg('"', old_reg, old_regtype)
-  let @" = '\V'.pat
+  let @" = '/\V' . pat . '/'
 endfunction
 
 vnoremap <silent> * :<C-U>call <SID>VSetSearch('/')<CR>/<C-R>/<CR>
