@@ -163,9 +163,13 @@ function! ShowDiff()
 endfunction
 
 function! Prune()
-    let line = getline('.')
-    normal dd
-    silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  line . '"'
+    if (expand('%:e') ==# 'findresult')
+        let line = getline('.')
+        normal dd
+        silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  line . '"'
+    else
+        silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"'
+    endif
 endfunction
 
 function! KdiffAll()
