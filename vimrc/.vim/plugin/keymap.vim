@@ -163,7 +163,9 @@ function! ShowDiff()
 endfunction
 
 function! Prune()
-    silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"'
+    let line = getline('.')
+    normal dd
+    silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  line . '"'
 endfunction
 
 function! KdiffAll()
