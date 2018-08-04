@@ -166,6 +166,7 @@ function! Prune()
     if (expand('%:e') ==# 'findresult')
         let line = getline('.')
         normal dd
+        w
         silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  line . '"'
     else
         silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"'
