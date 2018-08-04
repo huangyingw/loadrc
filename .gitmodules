@@ -167,3 +167,15 @@
 [submodule "vimrc/.vim/bundle/ncm2-highprio-pop"]
     path = vimrc/.vim/bundle/ncm2-highprio-pop
     url = https://github.com/ncm2/ncm2-highprio-pop
+[submodule "vimrc/.vim/bundle/tlib_vim"]
+    path = vimrc/.vim/bundle/tlib_vim
+    url = git@github.com:tomtom/tlib_vim.git
+[submodule "vimrc/.vim/bundle/vim-addon-mw-utils"]
+    path = vimrc/.vim/bundle/vim-addon-mw-utils
+    url = git@github.com:marcweber/vim-addon-mw-utils.git
+[submodule "vimrc/.vim/bundle/vim-snipmate"]
+    path = vimrc/.vim/bundle/vim-snipmate
+    url = git@github.com:garbas/vim-snipmate.git
+[submodule "vimrc/.vim/bundle/neco-syntax"]
+    path = vimrc/.vim/bundle/neco-syntax
+    url = git@github.com:Shougo/neco-syntax.git
