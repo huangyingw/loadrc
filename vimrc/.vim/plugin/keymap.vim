@@ -341,7 +341,7 @@ vnoremap <silent>i :call ExFilter()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
 nmap <C-@> :call CSCSearch(4)<CR><CR>
 " nmap <C-f> :call CSCSearch(0)<CR><CR>
-nmap <C-f> :call CSCSearch("w")<CR><CR>
+nmap <C-f> :call CSCSearch(7)<CR><CR>
 nnoremap <leader>d :!rm %:p<CR>:q<CR><CR> 
 " nmap <C-j> :call PlayAV()<CR><CR>
 nmap <C-p> :call Prune()<CR><CR>
