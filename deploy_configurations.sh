@@ -26,9 +26,5 @@ ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
 ln -fs ~/loadrc/.hgrc ~/.hgrc
 ln -fs ~/loadrc/.hgignore ~/.hgignore
 
-mkdir -p ~/.config/nvim/
-ln -fs ~/loadrc/.config/nvim/init.vim ~/.config/nvim/init.vim
-rm -v .viminfo*
-
 ./set_linux_configuration.sh
 ./set_host_configuration.sh

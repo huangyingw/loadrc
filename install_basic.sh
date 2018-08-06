@@ -23,12 +23,8 @@ then
         kdiff3 \
         mdadm \
         mosh \
-        neovim \
         net-tools \
         pm-utils \
-        python-dev \
-        python-pip \
-        python3-pip \
         resolvconf \
         slurm \
         smplayer \
@@ -41,14 +37,9 @@ then
     update-initramfs -u
 else
     brew install \
-        coreutils \
-        neovim
+        coreutils
     brew link --overwrite neovim
 fi
-
-pip install --upgrade neovim
-pip2 install --upgrade neovim
-pip3 install --upgrade neovim
 
 ./nxrc/install.sh
 ./zerotier_install.sh
