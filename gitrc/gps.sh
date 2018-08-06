@@ -16,5 +16,3 @@ then
         git push -v "$ss" && git push -v --tag "$ss"
     done
 fi
-
-git push -v BareReps && git push -v --tag BareReps
