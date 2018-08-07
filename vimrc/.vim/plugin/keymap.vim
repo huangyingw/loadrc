@@ -5,14 +5,6 @@ function! RememberQuit()
         return
     endif
 
-    if (expand("%") ==# 'files.proj')
-        let LargeFile= 200
-        let fsz= getfsize(expand("%"))
-        if fsz >= LargeFile*1024
-            return
-        endif
-    endif
-
     if (expand('%:e') ==# 'findresult')
         silent exec 'bd'
     else
