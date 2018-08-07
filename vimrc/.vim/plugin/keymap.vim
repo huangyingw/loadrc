@@ -345,7 +345,7 @@ nnoremap <c-space> :call CSCSearch(0)<CR><CR>
 nmap <C-@> :call CSCSearch(0)<CR><CR>
 nmap <C-f> :call CSCSearch(7)<CR><CR>
 nmap <C-d> :call CSCSearch(1)<CR><CR>
-nmap <C-c> :call CSCSearch(3)<CR><CR>
+nmap <C-i> :call CSCSearch(3)<CR><CR>
 nnoremap <leader>d :!rm %:p<CR>:q<CR><CR> 
 " nmap <C-j> :call PlayAV()<CR><CR>
 nmap <C-p> :call Prune()<CR><CR>
