@@ -55,7 +55,7 @@ then
 fi
 
 sort -u ${TARGET} -o ${TARGET}
-cscope -bqR -i ${TARGET} -f cscope.out.bak
+cscope -bq -i ${TARGET} -f cscope.out.bak
 cp -fv cscope.out.bak cscope.out
 cp -fv cscope.out.bak.in cscope.out.in
 cp -fv cscope.out.bak.po cscope.out.po
