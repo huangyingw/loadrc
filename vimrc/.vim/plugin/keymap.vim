@@ -132,6 +132,15 @@ function! VRun()
 endfunction
 
 function! CSCSearch(num)
+    " 0 Find this C symbol:
+    " 1 Find this function definition:
+    " 2 Find functions called by this function:
+    " 3 Find functions calling this function:
+    " 4 Find this text string:
+    " 5 Change this text string:
+    " 6 Find this egrep pattern:
+    " 7 Find this file:
+    " 8 Find files #including this file:
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
     let keyword = expand("<cword>")
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . a:num . ' ' . 'csc'
@@ -334,6 +343,8 @@ vnoremap <silent>o :call SearchOpen()<cr>
 nmap <C-@> :call CSCSearch(4)<CR><CR>
 " nmap <C-f> :call CSCSearch(0)<CR><CR>
 nmap <C-f> :call CSCSearch(7)<CR><CR>
+nmap <C-g> :call CSCSearch(1)<CR><CR>
+nmap <C-s> :call CSCSearch(3)<CR><CR>
 nnoremap <leader>d :!rm %:p<CR>:q<CR><CR> 
 " nmap <C-j> :call PlayAV()<CR><CR>
 nmap <C-p> :call Prune()<CR><CR>
