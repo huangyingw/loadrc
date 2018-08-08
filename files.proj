@@ -260,6 +260,7 @@
 "./crontabrc/mldonkey_start.sh"
 "./crontabrc/mldonkey_stop.sh"
 "./cscope/.gitconfig"
+"./cscope/build.sh"
 "./deploy_configurations.sh"
 "./dockerrc/cdocker.sh"
 "./dockerrc/cleandocker.sh"
