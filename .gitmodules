@@ -183,3 +183,7 @@
     path = cscope
     url = git@github.com:huangyingw/cscope.git
     branch = dev
+[submodule "jdupes"]
+    path = jdupes
+    url = git@github.com:huangyingw/jdupes.git
+    branch = dev
