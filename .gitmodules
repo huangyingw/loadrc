@@ -179,3 +179,7 @@
 [submodule "vimrc/.vim/bundle/neco-syntax"]
     path = vimrc/.vim/bundle/neco-syntax
     url = git@github.com:Shougo/neco-syntax.git
+[submodule "cscope"]
+    path = cscope
+    url = git@github.com:huangyingw/cscope.git
+    branch = dev
