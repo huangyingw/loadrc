@@ -7,6 +7,7 @@ cd "$SCRIPTPATH"
 ./install_basic.sh
 ./install_nvim.sh
 ./cscope/build.sh
+./jdupes/install.sh
 ./submodule_setup.sh
 ./vimrc/.vim/bundle/vim-ghost/install.sh
 ./kvmrc/install.sh
