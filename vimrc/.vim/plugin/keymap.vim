@@ -1,7 +1,7 @@
 function! RememberQuit()
     let @"=expand("%:p")
 
-    if winbufnr(2) == -1
+    if winbufnr(2) == -1 && &buftype !=# "terminal"
         return
     endif
 
