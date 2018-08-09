@@ -5,6 +5,7 @@ cd "$SCRIPTPATH"
 
 if [ $(uname) != "Darwin" ]
 then
+    add-apt-repository -y ppa:neovim-ppa/unstable
     apt-get update
     apt-get upgrade -y
     apt-get install -y \
