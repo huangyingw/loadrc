@@ -64,9 +64,14 @@ function! VFilter()
     echom 'keyword : '.keyword
 
     if expand('%:e') != "findresult"
-        silent exec '!rm ' . csdbpath . '/' . b:result . '.vaa.findresult'
-        silent exec 'w! ' . csdbpath . '/' . b:result . '.vaa.findresult'
-        call OpenOrSwitch(csdbpath . '/' . b:result . '.vaa.findresult')
+        let buffername = csdbpath . '/' . b:result . '.vaa.findresult'
+
+        if bufexists(buffername)
+            exe "bd!" . buffername
+        endif
+
+        silent exec 'w! ' . buffername
+        call OpenOrSwitch(buffername)
     endif
 
     silent exec 'g!/\c' . keyword . '/d'
@@ -346,7 +351,7 @@ nmap <C-@> :call CSCSearch(0)<CR><CR>
 nmap <C-f> :call CSCSearch(7)<CR><CR>
 nmap <C-d> :call CSCSearch(1)<CR><CR>
 nmap <C-g> :call CSCSearch(3)<CR><CR>
-nnoremap <leader>d :!rm %:p<CR>:q<CR><CR> 
+nnoremap <leader>d :!rm %:p<CR>:q<CR><CR>
 " nmap <C-j> :call PlayAV()<CR><CR>
 nmap <C-p> :call Prune()<CR><CR>
 nmap <C-k> :call KdiffAll()<CR><CR>
