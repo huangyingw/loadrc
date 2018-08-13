@@ -21,9 +21,14 @@ function! ExFilter()
     echom 'keyword : '.keyword
 
     if expand('%:e') != "findresult"
-        silent exec '!rm ' . csdbpath . '/' . b:result . '.vaa.findresult'
-        silent exec 'w! ' . csdbpath . '/' . b:result . '.vaa.findresult'
-        call OpenOrSwitch(csdbpath . '/' . b:result . '.vaa.findresult')
+        let buffername = csdbpath . '/' . b:result . '.vaa.findresult'
+
+        if bufexists(buffername)
+            exe "bd!" . buffername
+        endif
+
+        silent exec 'w! ' . buffername
+        call OpenOrSwitch(buffername)
     endif
 
     silent exec 'g/\c' . keyword . '/d'
