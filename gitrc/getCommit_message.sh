@@ -15,11 +15,11 @@ then
     commit_message="$1"
 fi
 
-cd $(~/loadrc/gitrc/get_index.sh $pwd)
+cd $(~/loadrc/gitrc/get_index.sh $pwd)/../
 
-if [ -n "$(cat COMMIT_EDITMSG)" ]
+if [ -n "$(cat .git/COMMIT_EDITMSG)" ]
 then
-    commit_message=$(cat COMMIT_EDITMSG)
+    commit_message=$(cat .git/COMMIT_EDITMSG)
 fi
 
 if [ -f .git/MERGE_MSG ]
