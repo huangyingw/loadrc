@@ -63,7 +63,10 @@
 [pull]
     default = current
 [gdif]
+    ignore = .gitconfig
+    ignore = files.proj
     ignore = includefile.conf
+    ignore = prunefile.conf
     ignore = prunefix.conf
 [filter "lfs"]
     clean = git-lfs clean -- %f
