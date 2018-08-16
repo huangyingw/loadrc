@@ -30,6 +30,7 @@ fi
 if [ -z "$commit_message" ]
 then
     echo -e "${red}Must provide the commit message ... ${NC}"
+    echo -e "${red}Please edit .git/COMMIT_EDITMSG to provide commit message ... ${NC}"
     exit 1
 fi
 
