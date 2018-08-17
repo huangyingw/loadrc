@@ -1,11 +1,5 @@
 #!/bin/bash
 currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
-
-if ( echo $currentBranch | grep -q 'fix$' )
-then
-    exit 1
-fi
-
 ~/loadrc/gitrc/gpl.sh
 ~/loadrc/gitrc/include_gitconfig.sh
 
