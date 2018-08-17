@@ -35,11 +35,15 @@ cscopedb.lock
 doc/tags
 doc/tags-ja
 error
+files.proj
 find.cc
 gfvd.already
+includefile.conf
 ncscope.in.out
 ncscope.out
 ncscope.po.out
+prunefile.conf
+prunefix.conf
 run
 running.time
 ~$*
