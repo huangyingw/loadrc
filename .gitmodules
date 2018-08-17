@@ -187,3 +187,7 @@
     path = jdupes
     url = git@github.com:huangyingw/jdupes.git
     branch = dev
+[submodule "vimrc/.vim/bundle/neoinclude.vim"]
+    path = vimrc/.vim/bundle/neoinclude.vim
+    url = git@github.com:Shougo/neoinclude.vim.git
+    branch = master
