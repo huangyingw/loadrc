@@ -22,6 +22,7 @@
 .DS_Store
 .cscopedb.lock
 .fuse_hidden*
+.gitconfig
 .svn
 CVS
 build
