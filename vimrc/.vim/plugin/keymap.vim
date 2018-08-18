@@ -108,12 +108,7 @@ endfunction
 
 function! VDebug()
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
-    let silent = substitute(system('git config vrun.silent'), '\n', '', '')
-    if silent ==? "false"
-        exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath
-    else
-        silent exec '!~/loadrc/vishrc/vdebug.sh ' . expand("%:p") . ' ' . b:csdbpath
-    endif
+    call RunShell('!~/loadrc/vishrc/vdebug.sh', expand("%:p"), b:csdbpath)
     call OpenOrSwitch(expand("%:p") . '.findresult')
 endfunction
 

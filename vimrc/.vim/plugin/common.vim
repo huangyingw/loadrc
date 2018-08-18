@@ -225,3 +225,12 @@ endfunc
 function! VsMax(fileName)
     call OpenOrSwitch(a:fileName)
 endfunc
+function! RunShell(shell, arg1, arg2, ...)
+    let silent = substitute(system('git config vrun.silent'), '\n', '', '')
+
+    if silent ==? "false"
+        exec a:shell . ' ' . a:arg1 . ' ' . a:arg2
+    else
+        silent exec a:shell . ' ' . a:arg1 . ' ' . a:arg2
+    endif
+endfunc
