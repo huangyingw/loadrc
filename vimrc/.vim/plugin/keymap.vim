@@ -125,14 +125,7 @@ function! VRun()
     endif
 
     let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
-    let silent = substitute(system('git config vrun.silent'), '\n', '', '')
-
-    if silent ==? "false"
-        exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
-    else
-        silent exec '!~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath
-    endif
-
+    call RunShell('!~/loadrc/vishrc/vrun.sh', expand("%:p"), b:csdbpath)
     call OpenOrSwitch(expand("%:p") . '.findresult')
 endfunction
 
