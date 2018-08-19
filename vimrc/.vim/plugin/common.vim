@@ -234,7 +234,7 @@ function! RunShell(shell, ...)
 
     if async ==? "false"
         if silent ==? "false"
-            exec a:shell . ' ' . arg1 . ' ' . arg2
+            exec '!' . a:shell . ' ' . arg1 . ' ' . arg2
         else
             silent exec '!' . a:shell . ' ' . arg1 . ' ' . arg2
         endif
