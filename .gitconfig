@@ -36,6 +36,9 @@
 [branch "cscope/autoload"]
     remote = origin
     merge = refs/heads/cscope/autoload
+[branch "RunShell"]
+    remote = origin
+    merge = refs/heads/RunShell
 [branch "async"]
     remote = origin
     merge = refs/heads/async
