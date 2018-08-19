@@ -230,10 +230,15 @@ function! RunShell(shell, ...)
     let arg2 = (a:0 >= 2) ? a:2 : ''
     let arg3 = (a:0 >= 3) ? a:3 : ''
     let silent = substitute(system('git config vrun.silent'), '\n', '', '')
+    let async = substitute(system('git config vrun.async'), '\n', '', '')
 
-    if silent ==? "false"
-        exec a:shell . ' ' . arg1 . ' ' . arg2
+    if async ==? "false"
+        if silent ==? "false"
+            exec a:shell . ' ' . arg1 . ' ' . arg2
+        else
+            silent exec '!' . a:shell . ' ' . arg1 . ' ' . arg2
+        endif
     else
-        silent exec a:shell . ' ' . arg1 . ' ' . arg2
+        call asyncrun#run('<bang>', '', 'bash ' . a:shell . ' "' .  arg1 . '"' .  arg2 . '" 2>&1 | tee g.findresult')
     endif
 endfunc
