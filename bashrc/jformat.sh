@@ -3,7 +3,7 @@ folderForGit=$(realpath .)
 LIST=( -name \*.java -o -name \*.vala )
 if [ -f $HOME/.workrc ]
 then
-  find "$folderForGit" -type f \( "${LIST[@]}" \) -exec astyle --mode=java -nfxejoU -y  --max-code-length=150 -s2 --style=java -pcH {} \;
+  find "$folderForGit" -type f \( "${LIST[@]}" \) -exec astyle --mode=java -nfxejoU -y -s2 --style=java -pcH {} \;
 else
-  find "$folderForGit" -type f \( "${LIST[@]}" \) -exec astyle --mode=java -nfxejoUys4pHU --max-code-length=150 --style=allman -pcH {} \;
+  find "$folderForGit" -type f \( "${LIST[@]}" \) -exec astyle --mode=java -nfxejoUys4pHU --style=allman -pcH {} \;
 fi
