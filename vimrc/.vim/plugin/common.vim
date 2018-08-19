@@ -239,6 +239,6 @@ function! RunShell(shell, ...)
             silent exec '!' . a:shell . ' ' . arg1 . ' ' . arg2
         endif
     else
-        call asyncrun#run('<bang>', '', 'bash ' . a:shell . ' "' .  arg1 . '"' .  arg2 . '" 2>&1 | tee g.findresult')
+        call asyncrun#run('<bang>', '', 'bash ' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee g.findresult')
     endif
 endfunc
