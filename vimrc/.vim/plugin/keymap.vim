@@ -124,7 +124,7 @@ function! VRun()
         return 0
     endif
 
-    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
+    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     call RunShell('~/loadrc/vishrc/vrun.sh', expand("%:p"), b:csdbpath)
     call OpenOrSwitch(expand("%:p") . '.findresult')
 endfunction
