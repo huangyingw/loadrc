@@ -4,4 +4,5 @@ then
     exit 0
 fi
 
-git config --local include.path $(realpath .gitconfig)
+config=$(~/loadrc/gitrc/get_index.sh)
+git config --local include.path $(realpath --relative-to="$config" .gitconfig)
