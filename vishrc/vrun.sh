@@ -23,7 +23,8 @@ case $extension in
         bash ${1} 2>&1 | tee ${1}.findresult
         ;;
     sh)
-        bash ${1} 2>&1 | tee ${1}.findresult
+        bash ${1} 2>&1 | tee ${1}.findresult.bak
+        cp ${1}.findresult.bak ${1}.findresult
         ;;
     py)
         SCRIPT=$(realpath "$1")

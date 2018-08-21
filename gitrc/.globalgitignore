@@ -15,6 +15,7 @@
 *.suo
 *.sv[a-z]
 *.sw[a-z]
+*.tmp
 *.xls
 *.zip
 *devKeyStore
