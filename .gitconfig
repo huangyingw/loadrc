@@ -44,3 +44,4 @@
     merge = refs/heads/async
 [vrun]
     silent = false
+    async = true
