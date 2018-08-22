@@ -8,6 +8,7 @@ echo "BareReps location --> $x"
 
 if [ ! -d "$x" ]
 then
+    mkdir -p $(dirname "$x")
     git clone --bare . "$x"
 fi
 
