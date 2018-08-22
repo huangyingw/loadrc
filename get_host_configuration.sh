@@ -13,6 +13,5 @@ get_configs() {
 
 while read -r line || [[ -n "$line" ]]
 do
-    line=$(echo "$line" | sed 's/ /\ /g')
     get_configs "$line"
 done < host.conf

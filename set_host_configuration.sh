@@ -3,17 +3,13 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-if [ $(uname) != "Linux" ]
-then
-    exit 0
-fi
-
 deploy_configs() {
     TARGET="$1"
     SOURCE=~/loadrc/"`hostname`$TARGET"
+
     if [ -f "$SOURCE" ]
     then
-        cp -fv "$SOURCE" "$TARGET"
+        sudo cp -fv "$SOURCE" "$TARGET"
     fi
 }
 
