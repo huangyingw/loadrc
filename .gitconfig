@@ -45,3 +45,5 @@
 [vrun]
     silent = false
     async = true
+[deploy]
+    target = mini:~/loadrc

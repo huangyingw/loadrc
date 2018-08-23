@@ -129,6 +129,7 @@
 "./bashrc/dcopy.sh"
 "./bashrc/debmirror.sh"
 "./bashrc/debug.sh"
+"./bashrc/deploy.sh"
 "./bashrc/deployLoadrc.sh"
 "./bashrc/dof.sh"
 "./bashrc/encrypt.sh"
