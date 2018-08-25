@@ -24,7 +24,7 @@ fi
 
 if [ -f .git/MERGE_MSG ]
 then
-    commit_message=$(cat .git/MERGE_MSG |awk 'NR==1')
+    commit_message=$(cat .git/MERGE_MSG | awk 'NR==1')
 fi
 
 if [ -z "$commit_message" ]
