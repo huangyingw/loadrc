@@ -239,4 +239,4 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " To have a space (ASCII 32) considered as a valid character for a file name
-set isfname+=32
+" set isfname+=32
