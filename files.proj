@@ -269,6 +269,7 @@
 "./bashrc/rsync.sh"
 "./bashrc/rsync_svn.sh"
 "./bashrc/rsynctype.sh"
+"./bashrc/run.rsh"
 "./bashrc/run.sh"
 "./bashrc/runb.sh"
 "./bashrc/sMov.sh"
