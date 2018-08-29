@@ -1,5 +1,5 @@
 #!/bin/bash
-file=${1}
+file="$1"
 
 if [ $(basename "$file") == "gbil.findresult" ]
 then
@@ -11,45 +11,45 @@ extension=${file##*.}
 
 case $extension in
     sql)
-        ~/loadrc/sqlrc/xsql.sh ${1} ${2} 2>&1 | tee ${1}.findresult
+        ~/loadrc/sqlrc/xsql.sh "$1" "$2"
         ;;
     findresult)
-        sh ${1} 2>&1 | tee ${1}.findresult
+        sh "$1"
         ;;
     vdiff)
-        sh ${1} 2>&1 | tee ${1}.findresult
+        sh "$1"
         ;;
     ash)
-        bash ${1} 2>&1 | tee ${1}.findresult
+        bash "$1"
         ;;
     sh)
-        bash ${1} 2>&1 | tee ${1}.findresult
+        bash "$1"
         ;;
     rsh)
         host=$(git config deploy.host)
         path=$(git config deploy.path)
         rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
         rfile=$(realpath --relative-to="$rootFolder" "$1")
-        ssh "$host" "$path/$rfile" 2>&1 | tee "$1".findresult
+        ssh "$host" "$path/$rfile"
         ;;
     py)
         SCRIPT=$(realpath "$1")
         SCRIPTPATH=$(dirname "$SCRIPT")
         cd "$SCRIPTPATH"
-        python ${1} 2>&1 | tee ${1}.findresult
+        python "$1"
         ;;
     vim)
-        source ${1}
+        source "$1"
         ;;
     yml)
-        docker-compose -f "$file" up -d 2>&1 | tee "$file".findresult
+        docker-compose -f "$file" up -d
         ;;
     ymldebug)
-        docker-compose -f "$file" up --build --force-recreate 2>&1 | tee "$file".findresult
+        docker-compose -f "$file" up --build --force-recreate
         ;;
 esac
 
 if [[ "$file" = *'.leetcode.java' ]] || [[ "$file" = *'.leetcode.py' ]]
 then
-    leetcode submit "$file" 2>&1 | tee "$file".findresult
+    leetcode submit "$file"
 fi
