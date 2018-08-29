@@ -25,6 +25,13 @@ case $extension in
     sh)
         bash ${1} 2>&1 | tee ${1}.findresult
         ;;
+    rsh)
+        host=$(git config deploy.host)
+        path=$(git config deploy.path)
+        rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
+        rfile=$(realpath --relative-to="$rootFolder" "$1")
+        ssh "$host" "$path/$rfile" 2>&1 | tee "$1".findresult
+        ;;
     py)
         SCRIPT=$(realpath "$1")
         SCRIPTPATH=$(dirname "$SCRIPT")
