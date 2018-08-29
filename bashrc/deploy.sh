@@ -1,6 +1,5 @@
 #!/bin/bash -
 
-for ss in $(git config --get-all deploy.target)
-do
-    ~/loadrc/bashrc/rsync.sh "$ss"
-done
+host=$(git config deploy.host)
+path=$(git config deploy.path)
+~/loadrc/bashrc/rsync.sh "$host:$path"
