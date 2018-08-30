@@ -113,6 +113,11 @@ function! VDebug()
 endfunction
 
 function! VRun()
+    if g:asyncrun_status ==# 'running'
+        echom 'background job is still running'
+        return 0
+    endif
+
     if filereadable(expand("%:p") . '.sh')
         call OpenOrSwitch(expand("%:p") . '.sh')
         return 0
