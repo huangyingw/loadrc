@@ -30,7 +30,7 @@ case $extension in
         path=$(git config deploy.path)
         rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
         rfile=$(realpath --relative-to="$rootFolder" "$1")
-        ssh "$host" "$path/$rfile"
+        ssh -nY "$host" "$path/$rfile"
         ;;
     py)
         SCRIPT=$(realpath "$1")
