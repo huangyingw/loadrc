@@ -1,3 +1,2 @@
-alias shutdown='pm-suspend'
 export PATH="$HOME/anaconda3/bin:$PATH"
 source activate fastai
