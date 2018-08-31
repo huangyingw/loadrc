@@ -356,7 +356,7 @@ nmap <C-k> :call KdiffAll()<CR><CR>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr>
 nnoremap H :call ShowVITAG()<cr>
-nnoremap T :vs $HOME/files.proj<CR><CR>
+nnoremap T :vs $HOME/all.proj<CR><CR>
 nnoremap L :vs <C-R>"<CR><CR>
 map <F5> :call VRun()<cr>
 map <F3> :call VDebug()<cr>
