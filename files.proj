@@ -430,6 +430,7 @@
 "./includefile.conf"
 "./install_basic.sh"
 "./install_nvim.sh"
+"./install_vagrant.sh"
 "./jdupes/.gitconfig"
 "./keys/.gitconfig"
 "./kvmrc/install.sh"
