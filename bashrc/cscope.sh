@@ -62,5 +62,5 @@ cp -fv cscope.out.bak.po cscope.out.po
 cp -fv ${TARGET} files.proj
 sed -i.bak 's/ /\\ /g' files.proj
 echo > cscope.small.files
-echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/files.proj
-sort -u ~/files.proj -o ~/files.proj
+echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj
+sort -u ~/all.proj -o ~/all.proj

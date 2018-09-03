@@ -113,6 +113,11 @@ function! VDebug()
 endfunction
 
 function! VRun()
+    if g:asyncrun_status ==# 'running'
+        echom 'background job is still running'
+        return 0
+    endif
+
     if filereadable(expand("%:p") . '.sh')
         call OpenOrSwitch(expand("%:p") . '.sh')
         return 0
@@ -188,12 +193,16 @@ function! VimOpen()
     let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
     if (expand("%") ==# 'index')
         let worktree = substitute(system("~/loadrc/gitrc/get_worktree.sh " . expand('%:p')), '\n', '', '')
-        let realFile = worktree . '/' . b:fileName
-        let indexFile = getcwd() . '/modules/' . b:fileName . '/index'
+        let realFile = worktree . '/' . b:fileName . ''
+        let indexFile = getcwd() . '/../' . b:fileName . '/.git/index'
+        let moduleIndexFile = getcwd() . '/modules/' . b:fileName . '/index'
+
         if filereadable(realFile)
             call OpenOrSwitch(realFile)
         elseif filereadable(indexFile)
             call OpenOrSwitch(indexFile)
+        elseif filereadable(moduleIndexFile)
+            call OpenOrSwitch(moduleIndexFile)
         else
             call OpenOrSwitch(realFile)
         endif
@@ -342,7 +351,7 @@ nmap <C-s> :call CSCSearch(4)<CR><CR>
 nnoremap <c-space> :call CSCSearch(0)<CR><CR>
 nmap <C-@> :call CSCSearch(0)<CR><CR>
 nmap <C-f> :call CSCSearch(7)<CR><CR>
-nmap <C-d> :call CSCSearch(1)<CR><CR>
+nmap <C-e> :call CSCSearch(1)<CR><CR>
 nmap <C-g> :call CSCSearch(3)<CR><CR>
 nnoremap <leader>d :!rm %:p<CR>:q<CR><CR>
 " nmap <C-j> :call PlayAV()<CR><CR>
@@ -351,7 +360,7 @@ nmap <C-k> :call KdiffAll()<CR><CR>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr>
 nnoremap H :call ShowVITAG()<cr>
-nnoremap T :vs $HOME/files.proj<CR><CR>
+nnoremap T :vs $HOME/all.proj<CR><CR>
 nnoremap L :vs <C-R>"<CR><CR>
 map <F5> :call VRun()<cr>
 map <F3> :call VDebug()<cr>
