@@ -44,7 +44,7 @@
     merge = refs/heads/async
 [vrun]
     silent = false
-    async = true
+    async = false
 [deploy]
     host = mini
     path = ~/loadrc
