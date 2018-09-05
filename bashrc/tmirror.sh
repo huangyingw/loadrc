@@ -8,6 +8,6 @@ then
     mkdir -p "${TARGET}"
 fi
 
-rsync -aHinv --delete-during --force \
+rsync -aHinv --delete-before --force \
     "${SOURCE}" "${TARGET}"> ${ready_file}
 vi ${ready_file}
