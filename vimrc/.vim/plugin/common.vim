@@ -129,7 +129,7 @@ function! ResCur()
         return 1
     endif
 endfunction
-"
+
 "==
 " Find_in_parent
 " find the file argument and returns the path to it.
@@ -138,23 +138,30 @@ endfunction
 " If it doesn't find it, it returns "Nothing"
 function! Find_in_parent(fln,flsrt,flstp)
     let here = a:flsrt
+
     while ( strlen( here) > 0 )
         if filereadable( here . "/" . a:fln )
             return here
         elseif isdirectory( here . "/" . a:fln )
             return here
         endif
+
         let fr = match(here, "/[^/]*$")
+
         if fr == -1
             break
         endif
+
         let here = strpart(here, 0, fr)
+
         if here == a:flstp
             break
         endif
     endwhile
-    return "/"
+
+    return $HOME
 endfunc
+
 function! OpenOrSwitch(buffername)
     let bnr = bufwinnr(a:buffername)
     if bnr > 0
