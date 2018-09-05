@@ -14,7 +14,7 @@ endfunction
 
 function! ExFilter()
     normal! gvy<CR>
-    let csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
+    let csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     let keyword = @@
     let b:result = GetEscapedResult(keyword)
     let keyword = GetEscapedKeywordForVIM(keyword)
@@ -62,7 +62,7 @@ endfunction
 
 function! VFilter()
     normal! gvy<CR>
-    let csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
+    let csdbpath = Find_in_parent("files.proj", Windowdir(), $HOME)
     let keyword = @@
     let b:result = GetEscapedResult(keyword)
     let keyword = GetEscapedKeywordForVIM(keyword)
@@ -100,14 +100,14 @@ function! PlayAV()
 endfunction
 
 function! CSCSearchQ()
-    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
+    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     let keyword = expand("<cword>")
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 1 . ' ' . 'qcsc'
     call OpenOrSwitch(b:csdbpath . '/' . keyword . '.qcsc.findresult')
 endfunction
 
 function! VDebug()
-    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
+    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     call RunShell('~/loadrc/vishrc/vdebug.sh', expand("%:p"), b:csdbpath)
     call OpenOrSwitch(expand("%:p") . '.findresult')
 endfunction
@@ -144,7 +144,7 @@ function! CSCSearch(num)
     " 6 Find this egrep pattern:
     " 7 Find this file:
     " 8 Find files #including this file:
-    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
+    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     let keyword = expand("<cword>")
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . a:num . ' ' . 'csc'
     call OpenOrSwitch(b:csdbpath . '/' . keyword . '.csc.findresult')
@@ -155,7 +155,7 @@ endfunction
 function! SearchOpen()
     normal! gvy<CR>
     let b:keyword = @@
-    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
+    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     exec "cd " . b:csdbpath
     let find_file = substitute(system("~/loadrc/gitrc/find_files.sh " . '"' .  b:keyword . '"'), '\n', '', '')
     call OpenOrSwitch(find_file)
@@ -183,7 +183,7 @@ function! KdiffAll()
 endfunction
 
 function! UpdateProj()
-    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
+    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     exec "cd " . b:csdbpath
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/update_proj.sh')
 endfunction
@@ -240,7 +240,7 @@ endfunction
 
 function! VimSearch()
     normal! gvy<CR>
-    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
+    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     let keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(keyword)
     silent exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  keyword . '"' . ' "' .  b:result . '"'
@@ -250,14 +250,14 @@ function! VimSearch()
 endfunction
 
 function! OpenProjectRoot()
-    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
+    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     let @+=b:csdbpath
     echom b:csdbpath
     call OpenOrSwitch(b:csdbpath)
 endfunction
 
 function! FindCalling()
-    let b:csdbpath = Find_in_parent("files.proj",Windowdir(),"/")
+    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     let b:keyword = expand('%:t')
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"')
     let b:keyword = GetEscapedKeyword(b:keyword)
