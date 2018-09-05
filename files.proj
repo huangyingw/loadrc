@@ -467,6 +467,7 @@
 "./kvmrc/vsuspend.sh"
 "./kvmrc/vview.sh"
 "./linux.conf"
+"./mac_sync.list"
 "./macrc/mac_sync.list"
 "./macrc/mac_sync.sh"
 "./macrc/mac_sync_test.sh"
