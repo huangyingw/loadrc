@@ -31,6 +31,10 @@ case $extension in
         rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
         rfile=$(realpath --relative-to="$rootFolder" "$1")
         ssh -nY "$host" "$path/$rfile"
+        rsync -aHv --force --progress \
+            --files-from=files.rev \
+            "$host:$path/" \
+            .
         ;;
     py)
         SCRIPT=$(realpath "$1")
