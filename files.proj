@@ -381,6 +381,7 @@
 "./gitrc/gcp.sh"
 "./gitrc/gctb.sh"
 "./gitrc/gdev.sh"
+"./gitrc/gdev_test.sh"
 "./gitrc/gdi.sh"
 "./gitrc/gdif.sh"
 "./gitrc/getCommit_message.sh"
