@@ -54,13 +54,13 @@ then
     find . "(" "${include_params[@]}" ")" -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET}
 fi
 
-sort -u ${TARGET} -o ${TARGET}
-cscope -bq -i ${TARGET} -f cscope.out.bak
-cp -fv cscope.out.bak cscope.out
-cp -fv cscope.out.bak.in cscope.out.in
-cp -fv cscope.out.bak.po cscope.out.po
-cp -fv ${TARGET} files.proj
-sed -i.bak 's/ /\\ /g' files.proj
-echo > cscope.small.files
-echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj
+sort -u ${TARGET} -o ${TARGET} \
+    && cscope -bq -i ${TARGET} -f cscope.out.bak \
+    && cp -fv cscope.out.bak cscope.out \
+    && cp -fv cscope.out.bak.in cscope.out.in \
+    && cp -fv cscope.out.bak.po cscope.out.po \
+    && cp -fv ${TARGET} files.proj \
+    && sed -i.bak 's/ /\\ /g' files.proj \
+    && echo > cscope.small.files \
+    && echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj
 sort -u ~/all.proj -o ~/all.proj
