@@ -207,6 +207,7 @@
 "./bashrc/fgh.sh"
 "./bashrc/file_type"
 "./bashrc/find-free-nbd-device.sh"
+"./bashrc/find_projects.sh"
 "./bashrc/find_up.sh"
 "./bashrc/find_up_folder.sh"
 "./bashrc/find_up_goto.sh"
