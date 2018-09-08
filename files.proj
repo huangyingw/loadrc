@@ -235,6 +235,7 @@
 "./bashrc/jdupes.sh"
 "./bashrc/jformat.sh"
 "./bashrc/kdisk.sh"
+"./bashrc/kill_port.sh"
 "./bashrc/linuxmirror.sh"
 "./bashrc/logFilter.sh"
 "./bashrc/lsnic.sh"
