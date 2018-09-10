@@ -5,7 +5,9 @@ cd "$SCRIPTPATH"
 
 if [ $(uname) != "Darwin" ]
 then
-    apt-get update && aptitude -y full-upgrade
+    apt-get update
+    aptitude -y full-upgrade
 else
-    brew update ; brew upgrade
+    brew update
+    brew upgrade
 fi
