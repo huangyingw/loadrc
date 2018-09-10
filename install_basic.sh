@@ -42,5 +42,5 @@ else
 fi
 
 ./nxrc/install.sh
-./zerotier_install.sh
+./zerotierrc/zerotier_install.sh
 ./deploy_configurations.sh
