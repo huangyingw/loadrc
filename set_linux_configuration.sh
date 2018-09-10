@@ -21,3 +21,5 @@ while read -r line || [[ -n "$line" ]]
 do
     deploy_configs "$line"
 done < linux.conf
+
+ln -fs /root/loadrc/etc/crypttab /etc/crypttab
