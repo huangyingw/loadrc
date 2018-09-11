@@ -45,3 +45,6 @@
 [vrun]
     silent = false
     async = false
+[deploy]
+    host = mini
+    path = ~/loadrc
