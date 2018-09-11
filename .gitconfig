@@ -46,5 +46,5 @@
     silent = false
     async = false
 [deploy]
-    host = mini
+    host = u1604
     path = ~/loadrc
