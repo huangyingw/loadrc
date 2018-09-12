@@ -421,6 +421,7 @@
 "./gitrc/gtag.sh"
 "./gitrc/gvd.sh"
 "./gitrc/gvlg.sh"
+"./gitrc/gwap.sh"
 "./gitrc/include_gitconfig.sh"
 "./gitrc/postCommit.sh"
 "./gitrc/restore_deleted.sh"
