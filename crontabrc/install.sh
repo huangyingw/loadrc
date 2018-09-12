@@ -9,7 +9,11 @@ then
     crontab "$CRONRC"
 fi
 
-crontab -l > crontab_file
-cat ./zerotier.cron >> crontab_file
-sort -u crontab_file -o crontab_file
-crontab crontab_file
+
+if [ $(uname) != "Darwin" ]
+then
+    crontab -l > crontab_file
+    cat ./zerotier.cron >> crontab_file
+    sort -u crontab_file -o crontab_file
+    crontab crontab_file
+fi
