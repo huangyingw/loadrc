@@ -7,5 +7,10 @@ then
 fi
 
 TARGET="$1"
-jdupes -1dNr "$TARGET" \
-    && pm-suspend
+MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
+
+jdupes -1dNr "$TARGET" && \
+    if [ -f ${MIRRORCHECK} ] ; \
+    then \
+        ~/loadrc/bashrc/sleep.sh ; \
+    fi
