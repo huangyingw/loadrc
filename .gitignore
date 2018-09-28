@@ -1,5 +1,6 @@
 *.list
 .passwd
+av.log
 bashrc/.bash_history
 bashrc/output
 crontabrc/crontab_file
