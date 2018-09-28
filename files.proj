@@ -172,6 +172,7 @@
 "./.vserver.rc"
 "./.vserver.theanorc"
 "./.work.rc"
+"./av.log"
 "./bashrc/HuangYings-MacBook-Pro.local.csc.properties"
 "./bashrc/apf.sh"
 "./bashrc/app_list"
