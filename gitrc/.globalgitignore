@@ -26,7 +26,6 @@
 .gitconfig
 .svn
 CVS
-av.log
 build
 cscope.*
 cscope.in.out
@@ -37,6 +36,7 @@ cscopedb.lock
 doc/tags
 doc/tags-ja
 error
+fav.log
 files.proj
 find.cc
 gfvd.already

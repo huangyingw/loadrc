@@ -10,4 +10,4 @@ cd "$FAV"
 
 find . -type f -size +100M -exec ls -t {} \+ > fav.log
 touch files.proj
-~/loadrc/bashrc/update_proj.sh
+. ~/loadrc/bashrc/cscope.sh
