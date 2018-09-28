@@ -95,8 +95,7 @@ function! Filter()
 endfunction
 
 function! PlayAV()
-    let line=getline('.')
-    silent exec '!/Applications/VLC.app/Contents/MacOS/VLC ' . '"' .  line . '"'
+    exec '!~/loadrc/vishrc/vlc.sh ' . '"' .  expand('%:p') . '"'
 endfunction
 
 function! CSCSearchQ()
@@ -354,7 +353,7 @@ nmap <C-f> :call CSCSearch(7)<CR><CR>
 nmap <C-e> :call CSCSearch(1)<CR><CR>
 nmap <C-g> :call CSCSearch(3)<CR><CR>
 nnoremap <leader>d :!rm %:p<CR>:q<CR><CR>
-" nmap <C-j> :call PlayAV()<CR><CR>
+nmap <C-j> :call PlayAV()<CR><CR>
 nmap <C-p> :call Prune()<CR><CR>
 nmap <C-k> :call KdiffAll()<CR><CR>
 " Quickly close the current window
