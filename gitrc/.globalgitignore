@@ -26,6 +26,7 @@
 .gitconfig
 .svn
 CVS
+av.log
 build
 cscope.*
 cscope.in.out
