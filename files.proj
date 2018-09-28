@@ -2342,6 +2342,7 @@
 "./vishrc/vaa_test.sh"
 "./vishrc/vcommand.sh"
 "./vishrc/vdebug.sh"
+"./vishrc/vlc.sh"
 "./vishrc/vrun.sh"
 "./vishrc/vsearch.sh"
 "./vserver/etc/mdadm/mdadm.conf"
