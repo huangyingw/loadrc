@@ -164,11 +164,13 @@ endfunc
 
 function! OpenOrSwitch(buffername)
     let bnr = bufwinnr(a:buffername)
+
     if bnr > 0
         exe bnr . "wincmd w"
     else
         silent exec 'vs ' . a:buffername
     endif
+
 endfunction
 
 "==
