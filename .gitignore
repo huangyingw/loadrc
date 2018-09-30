@@ -2,6 +2,7 @@
 .passwd
 av.log
 bashrc/.bash_history
+bashrc/copy_files.log
 bashrc/output
 crontabrc/crontab_file
 gstv.ready
