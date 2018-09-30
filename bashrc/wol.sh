@@ -22,7 +22,7 @@ then
     ping vserver
 elif [ "$target" == "mini" ]
 then
-    wakeonlan 00:01:c0:12:94:05 #mini
+    wakeonlan 00:01:c0:15:fa:ed #mini
     ping mini
 elif [ "$target" == "server" ]
 then
