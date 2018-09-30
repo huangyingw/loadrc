@@ -1,0 +1,2 @@
+#!/bin/bash -
+watch ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/copy_files.sh
