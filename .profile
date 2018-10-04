@@ -21,7 +21,5 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 export LANG="en_US.utf8"
-TZ='America/Los_Angeles';
 export LANGUAGE="en_US:en"
-export TZ
 . $HOME/loadrc/.loadrc
