@@ -95,7 +95,8 @@ function! Filter()
 endfunction
 
 function! PlayAV()
-    exec '!~/loadrc/vishrc/vlc.sh ' . '"' .  expand('%:p') . '"'
+    call asyncrun#stop('<bang>')
+    call RunShell('~/loadrc/vishrc/vlc.sh', expand("%:p"))
 endfunction
 
 function! CSCSearchQ()
