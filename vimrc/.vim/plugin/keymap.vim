@@ -131,7 +131,11 @@ function! VRun()
 
     let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     call RunShell('~/loadrc/vishrc/vrun.sh', expand("%:p"), b:csdbpath)
-    call OpenOrSwitch(expand("%:p") . '.findresult')
+    let show = substitute(system('git config vrun.show'), '\n', '', '')
+
+    if show ==? "true"
+        call OpenOrSwitch(expand("%:p") . '.findresult')
+    endif
 endfunction
 
 function! CSCSearch(num)

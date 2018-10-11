@@ -170,7 +170,6 @@ function! OpenOrSwitch(buffername)
     else
         silent exec 'vs ' . a:buffername
     endif
-
 endfunction
 
 "==
