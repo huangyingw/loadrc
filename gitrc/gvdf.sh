@@ -18,7 +18,7 @@ else
 fi
 
 branch=$(echo $1 | sed  -e "s/\//\\\\\//g")
-sed -i.bak "s/\b[AMT]\b/git checkout $branch -- /g" "$OUTPUT"
+sed -i.bak "s/\b[AMT]\b/git difftool -y $branch -- /g" "$OUTPUT"
 sed -i.bak "s/\bD\b/git rm/g" "$OUTPUT"
 sed -i.bak "s/^R[0-9]*/git mv/g" "$OUTPUT"
 ~/loadrc/gitrc/include_gitconfig.sh
