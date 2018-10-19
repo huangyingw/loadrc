@@ -29,4 +29,4 @@ do
     include_params+=( "--include=$suf" )
 done < "$URESIN"
 rsync -aHinv --force --delete-during "${exclude_params[@]}" "${SOURCE}" "${TARGET}"> tures.find_result
-vi tures.find_result
+nvim tures.find_result

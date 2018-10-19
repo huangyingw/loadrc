@@ -18,4 +18,4 @@ do
   include_params+=( "--include=$suf" )
 done < "$UBAKIN"
 rsync -aHinv --force --delete-during "${exclude_params[@]}" "${include_params[@]}" / "${TARGET}" > find.findresult
-vi find.findresult
+nvim find.findresult

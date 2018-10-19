@@ -4,4 +4,4 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 . ~/loadrc/dockerrc/getContainerID.sh "$1"
 docker inspect "$CONTAINERID" > idocker.json
-vi idocker.json
+nvim idocker.json

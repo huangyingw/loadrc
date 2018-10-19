@@ -9,4 +9,4 @@ fi
 
 rsync -aHinv \
     "${SOURCE}" "${TARGET}"> find.findresult
-vi find.findresult
+nvim find.findresult
