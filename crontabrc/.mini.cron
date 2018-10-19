@@ -1,2 +1,1 @@
 30 23,0-9 * * * /root/loadrc/crontabrc/mldonkey_start.sh
-0 10-23 * * * /root/loadrc/crontabrc/mldonkey_stop.sh
