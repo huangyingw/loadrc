@@ -23,6 +23,7 @@ then
         kdiff3 \
         mdadm \
         mosh \
+        mplayer \
         net-tools \
         pm-utils \
         resolvconf \
