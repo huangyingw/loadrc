@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ -z "$1" ]
 then
-    git diff -w --cached HEAD | tee gdi.findresult
+    git diff -w --cached HEAD
 else
     COMMAND="git diff -w --cached $1"
 
@@ -10,5 +10,5 @@ else
         COMMAND="$COMMAND  ':(exclude)$ss'"
     done
 
-    eval "$COMMAND" | tee gdi.findresult
+    eval "$COMMAND"
 fi

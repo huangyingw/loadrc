@@ -1,6 +1,7 @@
 *.#*
 *.bak
 *.bin
+*.diff
 *.findresult
 *.gch
 *.hg
