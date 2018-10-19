@@ -9,7 +9,7 @@ fi
 TARGET="$1"
 MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
 
-jdupes -1dNr "$TARGET" && \
+jdupes -1dNr "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
     if [ -f ${MIRRORCHECK} ] ; \
     then \
         ~/loadrc/bashrc/sleep.sh ; \

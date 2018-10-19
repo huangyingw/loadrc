@@ -1,8 +1,8 @@
 #!/bin/bash -
 
 mkdir -p ~/.local/share/shotwell/data/
-ln -fs /media/psf/Home/.local/share/shotwell/data/photo.db ~/.local/share/shotwell/data/photo.db
-ln -fs /media/psf/Home/.config/smplayer ~/.config/smplayer
+ln -fs /media/psf/Dropbox/.local/share/shotwell/data/photo.db ~/.local/share/shotwell/data/photo.db
+ln -fs /media/psf/Dropbox/.config/smplayer ~/.config/smplayer
 apt-get purge -y totem totem-plugins
 apt-get install -y \
     ibus-table \
