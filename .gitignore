@@ -1,6 +1,6 @@
 *.list
+*.log
 .passwd
-av.log
 bashrc/.bash_history
 bashrc/copy_files.log
 bashrc/output
