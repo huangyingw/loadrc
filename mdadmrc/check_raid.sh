@@ -5,14 +5,10 @@ then
     return
 fi
 DEVICE=`mdadm -D --scan|awk '{print $2}'`
-raid_count=`mdadm -D $DEVICE |grep "active sync"|wc -l`
-if [ $raid_count -lt 4 ]
+raid_state=$(mdadm -D /dev/md0 | awk '/State :/{print $3}')
+if [ "$raid_state" != "clean" ]
 then
     echo dangerous
     echo dangerous
     echo dangerous
-else
-    echo success
-    echo success
-    echo success
 fi
