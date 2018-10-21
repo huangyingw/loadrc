@@ -133,7 +133,7 @@ function! VRun()
     call RunShell('~/loadrc/vishrc/vrun.sh', expand("%:p"), b:csdbpath)
     let show = substitute(system('git config vrun.show'), '\n', '', '')
 
-    if show ==? "true"
+    if show !=? "false"
         call OpenOrSwitch(expand("%:p") . '.findresult')
     endif
 endfunction
