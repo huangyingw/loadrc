@@ -10,6 +10,8 @@ then
     apt-get purge -y totem totem-plugins
     apt-get install -y \
         aptitude \
+        automake \
+        autotools-dev \
         bcmwl-kernel-source \
         binutils \
         build-essential \
@@ -21,6 +23,8 @@ then
         git \
         htop \
         kdiff3 \
+        manpages-fr-extra \
+        manpages-pl \
         mdadm \
         mosh \
         mplayer \
