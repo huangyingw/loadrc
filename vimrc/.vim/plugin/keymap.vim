@@ -160,6 +160,7 @@ function! SearchOpen()
     exec "cd " . b:csdbpath
     let find_file = substitute(system("~/loadrc/gitrc/find_files.sh " . '"' .  b:keyword . '"'), '\n', '', '')
     call OpenOrSwitch(find_file)
+    e
 endfunction
 
 function! ShowDiff()
