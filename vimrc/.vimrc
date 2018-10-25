@@ -240,3 +240,4 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " To have a space (ASCII 32) considered as a valid character for a file name
 " set isfname+=32
+au BufRead,BufNewFile *.vala,*.vapi,*.valadoc set filetype=vala
