@@ -149,17 +149,17 @@ function! CSCSearch(num)
     let keyword = expand("<cword>")
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . a:num . ' ' . 'csc'
     call OpenOrSwitch(b:csdbpath . '/' . keyword . '.csc.findresult')
-    exec 'e'
     call HighlightKeyword(keyword)
 endfunction
 
 function! SearchOpen()
     normal! gvy<CR>
-    let b:keyword = @@
+    let keyword = @@
     let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     exec "cd " . b:csdbpath
-    let find_file = substitute(system("~/loadrc/gitrc/find_files.sh " . '"' .  b:keyword . '"'), '\n', '', '')
+    let find_file = substitute(system("~/loadrc/gitrc/find_files.sh " . '"' .  keyword . '"'), '\n', '', '')
     call OpenOrSwitch(find_file)
+    call HighlightKeyword(keyword)
 endfunction
 
 function! ShowDiff()
