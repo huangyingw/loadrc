@@ -24,7 +24,6 @@ else
     echo ${target} \
         && git clone "$1" ${target} \
         && cp -v ~/loadrc/.gitconfig_sample ${target}/.gitconfig
-    sed -i.bak "s/remoteVar/$remote/g" ${target}/.gitconfig
     urlVar="$1"
     projVar=$(echo "$urlVar" | sed 's/.*\///g;s/\.git//g')
     urlVar=$(echo "$urlVar" | sed 's/\//\\\//g')
