@@ -5,7 +5,14 @@ then
     then
         git difftool -y "$1" "$2"
     else
-        git difftool -y HEAD "$1"
+        COMMAND="git difftool -y HEAD $1"
+
+        for ss in $(git config --get-all gdif.ignore)
+        do
+            COMMAND="$COMMAND  ':(exclude)$ss'"
+        done
+
+        eval "$COMMAND"
     fi
 else
     git difftool -y --cached
