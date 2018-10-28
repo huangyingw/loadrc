@@ -1,7 +1,5 @@
 #!/bin/bash
-if [ -z "$1" ]
-then
-    git add .
-else
-    git add $1
-fi
+while read -r line || [[ -n "$line" ]]
+do
+    git add -f $(echo "$line" | sed 's/^"//g;s/"$//g')
+done < files.proj
