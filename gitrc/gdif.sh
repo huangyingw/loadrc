@@ -10,13 +10,13 @@ then
         COMMAND="$COMMAND  ':(exclude)$ss'"
     done
 
-    eval "$COMMAND" | tee gdif.findresult 
+    eval "$COMMAND" | tee gdif.findresult
 else
     if [ -z "$(git status --porcelain)" ]
     then
         git diff --name-status `git log --oneline|awk 'NR==2{print $1}'` | tee gdif.findresult
     else
-        git diff --name-status | tee gdif.findresult
+        git diff --name-status HEAD | tee gdif.findresult
     fi
 fi
 
