@@ -269,7 +269,7 @@
 "./bashrc/rmEmpty.sh"
 "./bashrc/rsleep.sh"
 "./bashrc/rssh.sh"
-"./bashrc/rsync.sh"
+"./bashrc/rsyncFiles.sh"
 "./bashrc/rsync_svn.sh"
 "./bashrc/rsynctype.sh"
 "./bashrc/run.rsh"
