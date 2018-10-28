@@ -1,3 +1,3 @@
 30 23,0-9 * * * /root/loadrc/crontabrc/mldonkey_start.sh
-0 7-22 * * * /root/loadrc/crontabrc/mldonkey_stop.sh
+0 7-22 * * 0,6 /root/loadrc/crontabrc/mldonkey_stop.sh
 0 * * * * /usr/bin/expressvpn connect smart
