@@ -12,5 +12,4 @@ then
     git clone --bare . "$x"
 fi
 
-git remote rm BareReps
 git remote add BareReps "$x"

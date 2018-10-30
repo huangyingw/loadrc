@@ -35,5 +35,6 @@ else
         && $HOME/loadrc/bashrc/cscope.sh \
         && git add . \
         && git add -f files.proj \
-        && $HOME/loadrc/gitrc/g.sh
+        && $HOME/loadrc/gitrc/g.sh \
+        && ~/loadrc/gitrc/gclb.sh
 fi
