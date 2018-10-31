@@ -425,6 +425,7 @@
 "./gitrc/include_gitconfig.sh"
 "./gitrc/postCommit.sh"
 "./gitrc/restore_deleted.sh"
+"./gitrc/subfolder_2_repository.sh"
 "./gpurc/.gpurc"
 "./gpurc/etc/modprobe.d/blacklist.conf"
 "./gpurc/etc/pm/sleep.d/nvidia-reload"
