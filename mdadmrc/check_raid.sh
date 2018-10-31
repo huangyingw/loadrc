@@ -5,7 +5,7 @@ then
     return
 fi
 DEVICE=`mdadm -D --scan|awk '{print $2}'`
-raid_state=$(mdadm -D /dev/md0 | awk '/State :/{print $3}')
+raid_state=$(mdadm -D "$DEVICE" | awk '/State :/{print $3}')
 
 if [[ "$raid_state" != "clean" ]] && [[ "$raid_state" != "active" ]]
 then
