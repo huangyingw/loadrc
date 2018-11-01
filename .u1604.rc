@@ -1,7 +1,2 @@
-mkdir -p /media/volgrp/myproject/
-sshfs mini:/media/volgrp/myproject/ /media/volgrp/myproject/
-mkdir -p /media/volgrp/software/
-sshfs mini:/media/volgrp/software/ /media/volgrp/software/
-export SOFTWARE=/media/volgrp/software/
 export PATH="$HOME/anaconda3/bin:$PATH"
 source activate fastai
