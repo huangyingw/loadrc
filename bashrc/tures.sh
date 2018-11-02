@@ -17,5 +17,6 @@ then
     exit 1
 fi
 
-rsync -aHSvn --progress --delete-before --force --exclude-from ~/loadrc/bashrc/ures_ex "$1" "$2" 2>&1 | tee tures.find_result
-nvim tures.find_result
+output="~/loadrc/tures.find_result"
+rsync -aHSvn --progress --delete-before --force --exclude-from ~/loadrc/bashrc/ures_ex "$1" "$2" 2>&1 | tee "$output"
+nvim "$output"
