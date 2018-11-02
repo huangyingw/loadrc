@@ -21,8 +21,6 @@ ln -fs ~/loadrc/gitrc/.gitconfig ~/.gitconfig
 ln -fs ~/loadrc/gitrc/.globalgitignore ~/.globalgitignore
 ln -fs ~/loadrc/pythonrc/setup.cfg  ~/setup.cfg
 ln -fs ~/loadrc/usr/NX/etc/node.cfg  /usr/NX/etc/node.cfg
-ln -fs ~/loadrc/vimrc/.vim ~/.vim
-ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
 ln -fs ~/loadrc/.hgrc ~/.hgrc
 ln -fs ~/loadrc/.hgignore ~/.hgignore
 ln -fs ~/loadrc/Library/Preferences/org.videolan.vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc

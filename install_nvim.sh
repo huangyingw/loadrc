@@ -25,5 +25,7 @@ pip2 install --upgrade neovim
 pip3 install --upgrade neovim
 
 mkdir -p ~/.config/nvim/
+ln -fs ~/loadrc/vimrc/.vim ~/.vim
+ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
 ln -fs ~/loadrc/.config/nvim/init.vim ~/.config/nvim/init.vim
 rm -v .viminfo*
