@@ -123,12 +123,6 @@ function! VRun()
         return 0
     endif
 
-    if expand('%:e') ==# 'vdiff' || expand('%:e') ==# 'ash'
-        call asyncrun#stop('<bang>')
-        call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vrun.sh ' . expand("%:p") . ' ' . b:csdbpath)
-        return 0
-    endif
-
     let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     call RunShell('~/loadrc/vishrc/vrun.sh', expand("%:p"), b:csdbpath)
     let show = substitute(system('git config vrun.show'), '\n', '', '')
