@@ -1,8 +1,4 @@
-/media
-/proc/
-/run/
-/sys/
-fstab
-hostname
-hosts
-interfaces
+etc/fstab
+etc/hostname
+etc/hosts
+etc/network/interfaces
