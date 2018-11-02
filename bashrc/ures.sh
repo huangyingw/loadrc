@@ -17,4 +17,6 @@ then
     exit 1
 fi
 
-rsync -aHSv --progress --delete-before --force --exclude-from ~/loadrc/bashrc/ures_ex "$1" "$2" 2>&1 | tee tures.find_result
+output=~/loadrc/tures.findresult
+touch "$output"
+rsync -aHSv --progress --delete-before --force --exclude-from ~/loadrc/bashrc/ures_ex "$1" "$2" 2>&1 | tee "$output"
