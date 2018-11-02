@@ -3,7 +3,7 @@ DEVICE=`mdadm -D --scan|awk '{print $2}'`
 
 if [ -z "$DEVICE" ]
 then
-    exit 1
+    return
 fi
 
 raid_state=$(mdadm -D "$DEVICE" | awk '/State :/{print $3}')
