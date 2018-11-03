@@ -26,7 +26,6 @@ then
         manpages-fr-extra \
         manpages-pl \
         mdadm \
-        mldonkey-server \
         mosh \
         mplayer \
         net-tools \
