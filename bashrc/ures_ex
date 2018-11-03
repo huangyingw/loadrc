@@ -1,4 +1,3 @@
 etc/fstab
 etc/hostname
 etc/hosts
-etc/network/interfaces
