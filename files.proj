@@ -344,6 +344,7 @@
 "./gitrc/autoadd.sh"
 "./gitrc/checkGitStatus.sh"
 "./gitrc/fgicb.sh"
+"./gitrc/find_deleted.sh"
 "./gitrc/find_files.sh"
 "./gitrc/find_files_test.sh"
 "./gitrc/fsync.sh"
