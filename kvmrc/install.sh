@@ -17,7 +17,6 @@ apt-get install -y \
     git \
     htop \
     kdiff3 \
-    kvm \
     libvirt-bin \
     mdadm \
     mosh \
