@@ -28,4 +28,4 @@ mkdir -p ~/.config/nvim/
 ln -fs ~/loadrc/vimrc/.vim ~/.vim
 ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
 ln -fs ~/loadrc/.config/nvim/init.vim ~/.config/nvim/init.vim
-rm -v .viminfo*
+rm -v ~/.viminfo*
