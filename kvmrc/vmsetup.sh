@@ -7,6 +7,5 @@ fi
 qcow2File="$1"
 ~/loadrc/kvmrc/uvmount.sh
 ~/loadrc/kvmrc/vmount.sh "$qcow2File"
-rsync -aHSv --progress --delete-before --force /root/ /media/dev/nbd0p1/root/
-rsync -aHSv --progress --delete-before --force /etc/ssh/ /media/dev/nbd0p1/etc/ssh/
+rsync -aHSv --progress --delete-before --force ~/loadrc/ /media/dev/nbd0p1/root/loadrc/
 ~/loadrc/kvmrc/uvmount.sh
