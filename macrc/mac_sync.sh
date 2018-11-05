@@ -9,8 +9,10 @@ fi
 TARGET="$1"
 
 mac_sync () {
-    eval folder="$1"
-    rsync -aHv --progress --delete-before --force "$folder" "$TARGET":"$folder"
+    #eval folder="$1"
+    #rsync -aHv --progress --delete-before --force "$folder" "$TARGET":"$folder"
+    #have to run from mbp
+    #rsync -aHv --progress --delete imac:"~/Pictures/Photos\ Library.photoslibrary/" ~/Pictures/Photos\ Library.photoslibrary/
 }
 
 while read -r line || [[ -n "$line" ]]
