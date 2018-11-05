@@ -277,7 +277,6 @@
 "./bashrc/sload.sh"
 "./bashrc/smount.sh"
 "./bashrc/ssh.sh"
-"./bashrc/syncFirefox.sh"
 "./bashrc/tcopy.sh"
 "./bashrc/testPorts.sh"
 "./bashrc/tmirror.sh"
