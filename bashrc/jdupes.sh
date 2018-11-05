@@ -6,8 +6,6 @@ then
     exit 1
 fi
 
-~/loadrc/bashrc/move67.sh
-
 TARGET="$1"
 MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
 

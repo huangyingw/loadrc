@@ -6,7 +6,7 @@ cd "$SCRIPTPATH"
 ~/loadrc/gitrc/gpl.sh
 ./install_basic.sh
 ./install_nvim.sh
-./gpurc/install_gpu.sh
+./gpurc/install.sh
 ./install_vagrant.sh
 ./cscope/build.sh
 ./jdupes/install.sh
