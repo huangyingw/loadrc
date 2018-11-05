@@ -125,7 +125,6 @@ function! VRun()
 
     let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     call RunShell('~/loadrc/vishrc/vrun.sh', expand("%:p"), b:csdbpath)
-    let show = substitute(system('git config vrun.show'), '\n', '', '')
     call OpenOrSwitch(expand("%:p") . '.findresult')
 endfunction
 
