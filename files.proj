@@ -549,6 +549,7 @@
 "./vimrc/.vim/bundle/SQLUtilities/doc/SQLUtilities.txt"
 "./vimrc/.vim/bundle/SQLUtilities/doc/tags"
 "./vimrc/.vim/bundle/SQLUtilities/plugin/SQLUtilities.vim"
+"./vimrc/.vim/bundle/asyncrun.vim/.gitconfig"
 "./vimrc/.vim/bundle/asyncrun.vim/.gitignore"
 "./vimrc/.vim/bundle/asyncrun.vim/LICENSE"
 "./vimrc/.vim/bundle/asyncrun.vim/README.md"
