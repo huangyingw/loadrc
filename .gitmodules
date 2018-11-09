@@ -185,5 +185,5 @@
     url = git@github.com:Shougo/neoinclude.vim.git
     branch = master
 [submodule "vimrc/.vim/bundle/cscope_dynamic"]
-	path = vimrc/.vim/bundle/cscope_dynamic
-	url = git@github.com:huangyingw/cscope_dynamic.git
+    path = vimrc/.vim/bundle/cscope_dynamic
+    url = git@github.com:huangyingw/cscope_dynamic.git
