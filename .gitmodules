@@ -84,7 +84,7 @@
     url = git@github.com:huangyingw/vim-ghost.git
 [submodule "vimrc/.vim/bundle/asyncrun.vim"]
     path = vimrc/.vim/bundle/asyncrun.vim
-    url = git@github.com:skywind3000/asyncrun.vim.git
+    url = git@github.com:huangyingw/asyncrun.vim.git
 [submodule "vimrc/.vim/bundle/nvim-yarp"]
     path = vimrc/.vim/bundle/nvim-yarp
     url = https://github.com/roxma/nvim-yarp.git
