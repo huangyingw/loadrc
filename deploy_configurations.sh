@@ -15,7 +15,7 @@ mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 ln -fs "$SCRIPTPATH" ~/loadrc
 ln -fs ~/loadrc/."`hostname`".theanorc  ~/.theanorc
 ln -fs ~/loadrc/.config/git/gitk  ~/.config/git/gitk
-ln -fs ~/loadrc/.ssh ~/.ssh
+#ln -fs ~/loadrc/.ssh ~/.ssh
 ln -fs ~/loadrc/.tmux.conf ~/.tmux.conf
 ln -fs ~/loadrc/gitrc/.gitconfig ~/.gitconfig
 ln -fs ~/loadrc/gitrc/.globalgitignore ~/.globalgitignore
