@@ -95,6 +95,7 @@ function! Filter()
 endfunction
 
 function! PlayAV()
+    call asyncrun#stop('<bang>')
     call RunShell('~/loadrc/vishrc/vlc.sh', expand("%:p"))
 endfunction
 
@@ -171,6 +172,7 @@ function! Prune()
 endfunction
 
 function! KdiffAll()
+    call asyncrun#stop('<bang>')
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
 endfunction
 
