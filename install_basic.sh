@@ -32,6 +32,7 @@ then
         net-tools \
         pm-utils \
         pv \
+        python-autopep8 \
         resolvconf \
         slurm \
         smplayer \
