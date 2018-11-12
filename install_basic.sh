@@ -10,6 +10,7 @@ then
     apt-get purge -y totem totem-plugins
     apt-get install -y \
         aptitude \
+        astyle \
         automake \
         autotools-dev \
         bcmwl-kernel-source \
