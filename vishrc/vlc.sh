@@ -3,4 +3,10 @@ SCRIPT=$(realpath "$1")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 IFS=$'\r\n' GLOBIGNORE='*' command eval  'LINES=($(cat $1))'
-/Applications/VLC.app/Contents/MacOS/VLC "${LINES[@]}"
+
+if [ $(uname) == "Darwin" ]
+then
+    /Applications/VLC.app/Contents/MacOS/VLC "${LINES[@]}"
+else
+    vlc "${LINES[@]}"
+fi
