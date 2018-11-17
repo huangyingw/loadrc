@@ -2364,5 +2364,6 @@
 "./vserver/var/lib/zerotier-one/identity.public"
 "./vserver/var/lib/zerotier-one/identity.secret"
 "./work.local.astylerc"
+"./zerotierrc.conf"
 "./zerotierrc/zerotier_install.sh"
 "./zerotierrc/zerotier_restart.sh"
