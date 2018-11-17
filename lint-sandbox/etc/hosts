@@ -1,0 +1,14 @@
+127.0.0.1	localhost
+127.0.1.1	lint-sandbox
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+127.0.0.1     localhost.imvu.com
+127.0.0.1     adminlocalhost.imvu.com
+127.0.0.1     avatarlocalhost.imvu.com
+127.0.0.1     feedslocalhost.imvu.com
+127.0.0.1     roomslocalhost.imvu.com
+127.0.0.1     local-customer-sandbox.com
+127.0.0.1     api.localhost.imvu.com
