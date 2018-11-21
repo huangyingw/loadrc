@@ -1918,6 +1918,7 @@
 "./vimrc/.vim/bundle/vimtex/test/issues/1151/minivimrc"
 "./vimrc/.vim/bundle/vimtex/test/issues/1159/minimal.tex"
 "./vimrc/.vim/bundle/vimtex/test/issues/1159/minivimrc"
+"./vimrc/.vim/bundle/vimtex/test/issues/1185/chapters/chap1.tex"
 "./vimrc/.vim/bundle/vimtex/test/issues/1185/minimal.tex"
 "./vimrc/.vim/bundle/vimtex/test/issues/1185/minivimrc"
 "./vimrc/.vim/bundle/vimtex/test/issues/1185/mybib.bib"
