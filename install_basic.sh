@@ -22,6 +22,7 @@ then
         dkms \
         exuberant-ctags \
         git \
+        gparted \
         htop \
         kdiff3 \
         manpages-fr-extra \
