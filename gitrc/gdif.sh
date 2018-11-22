@@ -21,7 +21,7 @@ else
 fi
 
 branch=$(echo $1 | sed  -e "s/\//\\\\\//g")
-sed -i.bak "s/\b[AMT]\b/git checkout $branch -- /g" gdif.findresult
-sed -i.bak "s/\bD\b/git rm/g" gdif.findresult
+sed -i.bak "s/\b[DMT]\b/git checkout $branch -- /g" gdif.findresult
+sed -i.bak "s/\bA\b/git rm/g" gdif.findresult
 sed -i.bak "s/^R[0-9]*/git mv/g" gdif.findresult
 sort -u gdif.findresult -o gdif.findresult
