@@ -47,6 +47,7 @@ then
 else
     brew install \
         coreutils
+    brew cask install kdiff3
     brew link --overwrite neovim
 fi
 
