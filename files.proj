@@ -185,6 +185,8 @@
 "./bashrc/check_running.sh"
 "./bashrc/clearDNS.sh"
 "./bashrc/copy.sh"
+"./bashrc/copy10.sh"
+"./bashrc/copy_dirs.sh"
 "./bashrc/copy_files.sh"
 "./bashrc/create_folders.sh"
 "./bashrc/cscope.sh"
