@@ -28,7 +28,7 @@ function! ExFilter()
         endif
 
         silent exec 'w! ' . buffername
-        call OpenOrSwitch(buffername)
+        call OpenOrSwitch(buffername, 'vs')
     endif
 
     silent exec 'g/\c' . keyword . '/d'
@@ -76,7 +76,7 @@ function! VFilter()
         endif
 
         silent exec 'w! ' . buffername
-        call OpenOrSwitch(buffername)
+        call OpenOrSwitch(buffername, 'vs')
     endif
 
     silent exec 'g!/\c' . keyword . '/d'
@@ -103,13 +103,13 @@ function! CSCSearchQ()
     let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     let keyword = expand("<cword>")
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 1 . ' ' . 'qcsc'
-    call OpenOrSwitch(b:csdbpath . '/' . keyword . '.qcsc.findresult')
+    call OpenOrSwitch(b:csdbpath . '/' . keyword . '.qcsc.findresult', 'vs')
 endfunction
 
 function! VDebug()
     let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     call RunShell('~/loadrc/vishrc/vdebug.sh', expand("%:p"), b:csdbpath)
-    call OpenOrSwitch(expand("%:p") . '.findresult')
+    call OpenOrSwitch(expand("%:p") . '.findresult', 'vs')
 endfunction
 
 function! VRun()
@@ -119,13 +119,13 @@ function! VRun()
     endif
 
     if filereadable(expand("%:p") . '.sh')
-        call OpenOrSwitch(expand("%:p") . '.sh')
+        call OpenOrSwitch(expand("%:p") . '.sh', 'vs')
         return 0
     endif
 
     let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     call RunShell('~/loadrc/vishrc/vrun.sh', expand("%:p"), b:csdbpath)
-    call OpenOrSwitch(expand("%:p") . '.findresult')
+    call OpenOrSwitch(expand("%:p") . '.findresult', 'vs')
 endfunction
 
 function! CSCSearch(num)
@@ -141,7 +141,7 @@ function! CSCSearch(num)
     let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     let keyword = expand("<cword>")
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . a:num . ' ' . 'csc'
-    call OpenOrSwitch(b:csdbpath . '/' . keyword . '.csc.findresult')
+    call OpenOrSwitch(b:csdbpath . '/' . keyword . '.csc.findresult', 'vs')
     call HighlightKeyword(keyword)
 endfunction
 
@@ -151,7 +151,7 @@ function! SearchOpen()
     let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     exec "cd " . b:csdbpath
     let find_file = substitute(system("~/loadrc/gitrc/find_files.sh " . '"' .  keyword . '"'), '\n', '', '')
-    call OpenOrSwitch(find_file)
+    call OpenOrSwitch(find_file, 'vs')
     call HighlightKeyword(keyword)
 endfunction
 
@@ -192,13 +192,13 @@ function! VimOpen()
         let moduleIndexFile = getcwd() . '/modules/' . b:fileName . '/index'
 
         if filereadable(realFile)
-            call OpenOrSwitch(realFile)
+            call OpenOrSwitch(realFile, 'vs')
         elseif filereadable(indexFile)
-            call OpenOrSwitch(indexFile)
+            call OpenOrSwitch(indexFile, 'vs')
         elseif filereadable(moduleIndexFile)
-            call OpenOrSwitch(moduleIndexFile)
+            call OpenOrSwitch(moduleIndexFile, 'vs')
         else
-            call OpenOrSwitch(realFile)
+            call OpenOrSwitch(realFile, 'vs')
         endif
     elseif (expand("%") ==# 'gbr.findresult')
         let b:commit = expand("<cword>")
@@ -218,7 +218,7 @@ function! VimOpen()
                 call mkdir(b:filePath, "p")
             endif
         endif
-        call OpenOrSwitch(b:fileName)
+        call OpenOrSwitch(b:fileName, 'vs')
     endif
 endfunction
 
@@ -229,7 +229,7 @@ function! GitSearch()
     let b:result = GetEscapedResult(b:keyword)
     exec "cd " . b:csdbpath
     silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"' . ' "' .  b:result . '"'
-    call OpenOrSwitch(b:result . '.gsearch.findresult')
+    call OpenOrSwitch(b:result . '.gsearch.findresult', 'vs')
 endfunction
 
 function! VimSearch()
@@ -238,7 +238,7 @@ function! VimSearch()
     let keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(keyword)
     silent exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  keyword . '"' . ' "' .  b:result . '"'
-    call OpenOrSwitch(b:csdbpath.'/'.b:result.'.vaa.findresult')
+    call OpenOrSwitch(b:csdbpath.'/'.b:result.'.vaa.findresult', 'vs')
     exec 'e'
     call HighlightKeyword(keyword)
 endfunction
@@ -247,7 +247,7 @@ function! OpenProjectRoot()
     let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     let @+=b:csdbpath
     echom b:csdbpath
-    call OpenOrSwitch(b:csdbpath)
+    call OpenOrSwitch(b:csdbpath, 'vs')
 endfunction
 
 function! FindCalling()
@@ -255,7 +255,7 @@ function! FindCalling()
     let b:keyword = expand('%:t')
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"')
     let b:keyword = GetEscapedKeyword(b:keyword)
-    call OpenOrSwitch(b:csdbpath . '/' . b:keyword . '.vaa.findresult')
+    call OpenOrSwitch(b:csdbpath . '/' . b:keyword . '.vaa.findresult', 'vs')
 endfunction
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR><CR>
 nnoremap <leader>L :TlistClose<CR><CR>
@@ -358,7 +358,8 @@ nnoremap T :vs $HOME/all.proj<CR><CR>
 nnoremap L :vs <C-R>"<CR><CR>
 map <F5> :call VRun()<cr>
 map <F3> :call VDebug()<cr>
-nnoremap gf gF<CR><CR>
+" nnoremap gf gF<CR><CR>
+nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<CR><CR> 
 map oo :call VimOpen()<cr>
 nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- ' . expand("%:p"))<CR><CR>
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
@@ -369,7 +370,7 @@ endfunc
 
 function! CommTwoFiles()
     silent exec '!comm -2 -3 <(sort ' . @" . ') <(sort ' . expand("%:p") . ') > ' . @" . '.findresult'
-    call OpenOrSwitch(@" . '.findresult')
+    call OpenOrSwitch(@" . '.findresult', 'vs')
 endfunc
 
 nnoremap <leader>2 :call CompareTwoFiles()<cr>

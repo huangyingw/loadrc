@@ -162,11 +162,13 @@ function! Find_in_parent(fln,flsrt,flstp)
     return $HOME
 endfunc
 
-function! OpenOrSwitch(buffername)
+function! OpenOrSwitch(buffername, openMode)
     let bnr = bufwinnr(a:buffername)
 
     if bnr > 0
         exe bnr . "wincmd w"
+    elseif a:openMode ==? "goto"
+        silent exec 'e ' . a:buffername
     else
         silent exec 'vs ' . a:buffername
     endif
@@ -231,7 +233,7 @@ function! GetEscapedResult(keywordStr)
     return result
 endfunc
 function! VsMax(fileName)
-    call OpenOrSwitch(a:fileName)
+    call OpenOrSwitch(a:fileName, 'vs')
 endfunc
 function! RunShell(shell, ...)
     let arg1 = (a:0 >= 1) ? a:1 : ''
