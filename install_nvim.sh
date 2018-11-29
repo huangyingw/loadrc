@@ -24,6 +24,10 @@ pip install --upgrade neovim
 pip2 install --upgrade neovim
 pip3 install --upgrade neovim
 
+pip install jedi
+pip3 install jedi
+pip3.7 install jedi
+
 mkdir -p ~/.config/nvim/
 ln -fs ~/loadrc/vimrc/.vim ~/.vim
 ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
