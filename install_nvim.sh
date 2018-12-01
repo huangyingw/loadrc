@@ -18,6 +18,7 @@ else
         coreutils \
         neovim
     brew link --overwrite neovim
+    #brew install --with-toolchain --with-clang llvm
 fi
 
 pip install --upgrade neovim
