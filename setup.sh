@@ -8,6 +8,7 @@ cd "$SCRIPTPATH"
 ./install_nvim.sh
 ./gpurc/install.sh
 ./install_vagrant.sh
+./install_flacon.sh
 ./cscope/build.sh
 ./jdupes/install.sh
 ./submodule_setup.sh
