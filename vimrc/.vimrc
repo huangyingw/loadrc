@@ -211,14 +211,6 @@ endif
 let g:phpfmt_autosave = 1
 let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
 
-" configuration for vim-anyfold
-syntax on
-let AnyFoldActivate = 1
-let anyfold_fold_comments = 1
-let anyfold_identify_comments = 1
-set foldlevel=0
-" configuration for vim-anyfold
-
 let g:ycm_autoclose_preview_window_after_completion = 1
 
 if !has('nvim')
@@ -241,3 +233,16 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " To have a space (ASCII 32) considered as a valid character for a file name
 " set isfname+=32
 au BufRead,BufNewFile *.vala,*.vapi,*.valadoc set filetype=vala
+
+" configuration for vim-anyfold
+filetype plugin indent on " required
+syntax on                 " required
+
+autocmd Filetype * AnyFoldActivate               " activate for all filetypes
+" or
+" autocmd Filetype <your-filetype> AnyFoldActivate " activate for a specific filetype
+
+set foldlevel=0  " close all folds
+" or
+" set foldlevel=99 " Open all folds
+" configuration for vim-anyfold
