@@ -213,7 +213,7 @@ let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
 
 " configuration for vim-anyfold
 syntax on
-let anyfold_activate = 1
+let AnyFoldActivate = 1
 let anyfold_fold_comments = 1
 let anyfold_identify_comments = 1
 set foldlevel=0
