@@ -331,6 +331,7 @@
 "./dockerrc/install.sh"
 "./dockerrc/killDockers.sh"
 "./dockerrc/nvidia-docker_install.sh"
+"./error"
 "./etc/NetworkManager/system-connections/dd-wrt"
 "./etc/crypttab"
 "./etc/resolvconf/resolv.conf.d/base"
