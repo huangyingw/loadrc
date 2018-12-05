@@ -434,6 +434,7 @@
 "./imac/etc/hosts"
 "./includefile.conf"
 "./install_basic.sh"
+"./install_flacon.sh"
 "./install_nvim.sh"
 "./install_vagrant.sh"
 "./jdupes/.gitconfig"
