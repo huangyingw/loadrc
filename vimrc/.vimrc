@@ -257,7 +257,3 @@ function LargeFile()
     augroup END
 endfunction
 " configuration for vim-anyfold
-
-let g:fold_cycle_default_mapping = 0 "disable default mappings
-nmap <Tab><Tab> <Plug>(fold-cycle-open)
-nmap <S-Tab> <Plug>(fold-cycle-close)
