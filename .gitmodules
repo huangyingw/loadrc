@@ -187,6 +187,3 @@
 [submodule "vimrc/.vim/bundle/cscope_dynamic"]
     path = vimrc/.vim/bundle/cscope_dynamic
     url = git@github.com:huangyingw/cscope_dynamic.git
-[submodule "vimrc/.vim/bundle/vim-fold-cycle"]
-	path = vimrc/.vim/bundle/vim-fold-cycle
-	url = git@github.com:arecarn/vim-fold-cycle.git
