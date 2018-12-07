@@ -30,10 +30,6 @@
     path = vimrc/.vim/bundle/vim-autoformat
     url = git@bitbucket.org:huangyingw/vim-autoformat.git
     branch = dev
-[submodule "vimrc/.vim/bundle/vim-fugitive"]
-    path = vimrc/.vim/bundle/vim-fugitive
-    url = git@bitbucket.org:huangyingw/vim-fugitive.git
-    branch = dev
 [submodule "vimrc/.vim/bundle/vim-gradle"]
     path = vimrc/.vim/bundle/vim-gradle
     url = git@bitbucket.org:huangyingw/vim-gradle.git
@@ -187,3 +183,7 @@
 [submodule "vimrc/.vim/bundle/cscope_dynamic"]
     path = vimrc/.vim/bundle/cscope_dynamic
     url = git@github.com:huangyingw/cscope_dynamic.git
+[submodule "vimrc/.vim/bundle/vim-fugitive"]
+	path = vimrc/.vim/bundle/vim-fugitive
+	url = git@bitbucket.org:huangyingw/vim-fugitive.git
+	branch = dev
