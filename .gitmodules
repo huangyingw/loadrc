@@ -184,6 +184,6 @@
     path = vimrc/.vim/bundle/cscope_dynamic
     url = git@github.com:huangyingw/cscope_dynamic.git
 [submodule "vimrc/.vim/bundle/vim-fugitive"]
-	path = vimrc/.vim/bundle/vim-fugitive
-	url = git@bitbucket.org:huangyingw/vim-fugitive.git
-	branch = dev
+    path = vimrc/.vim/bundle/vim-fugitive
+    url = git@bitbucket.org:huangyingw/vim-fugitive.git
+    branch = dev
