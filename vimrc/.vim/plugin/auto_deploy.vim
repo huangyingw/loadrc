@@ -1,7 +1,5 @@
 function! s:auto_deploy_augroup()
-    let b:auto_deploy_disable = (&buftype ==# "terminal")  || (&filetype ==# "gitcommit") || (&filetype ==# '')
-
-    if b:auto_deploy_disable
+    if (&buftype ==# "terminal")  || (&filetype ==# "gitcommit") || (&filetype ==# '')
         return
     endif
 

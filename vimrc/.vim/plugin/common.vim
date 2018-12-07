@@ -1,7 +1,14 @@
 function! CHANGE_CURR_DIR()
     let _dir = expand("%:p:h")
-    exec "cd " . fnameescape(_dir)
+
+    try
+        exec "cd " . fnameescape(_dir)
+    catch /.*/
+        echom 'Cought anything: ' . v:exception
+    endtry
+
     unlet _dir
+
     if filereadable(".vimdc")
         source .vimdc
     endif
