@@ -5,11 +5,7 @@ function! RememberQuit()
         return
     endif
 
-    if (expand('%:e') ==# 'findresult')
-        silent exec 'bd'
-    else
-        quit
-    endif
+    quit
 endfunction
 
 function! ExFilter()
