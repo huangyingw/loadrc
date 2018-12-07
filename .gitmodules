@@ -187,3 +187,6 @@
     path = vimrc/.vim/bundle/vim-fugitive
     url = git@bitbucket.org:huangyingw/vim-fugitive.git
     branch = dev
+[submodule "vimrc/.vim/bundle/split-term.vim"]
+	path = vimrc/.vim/bundle/split-term.vim
+	url = git@github.com:vimlab/split-term.vim.git
