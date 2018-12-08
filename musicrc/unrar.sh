@@ -10,6 +10,5 @@ find "$1" -type f -iname \*.rar | \
     while read ss \
     do ss="$(realpath "$ss")" && \
         cd "$(dirname "$ss")" && \
-        unrar x -r -o- "$ss" && \
-        rm "$ss" \
+        unrar x -r -o- "$ss"
     done
