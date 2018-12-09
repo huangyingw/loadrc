@@ -498,6 +498,7 @@
 "./movie/var/lib/zerotier-one/identity.public"
 "./movie/var/lib/zerotier-one/identity.secret"
 "./musicrc/unrar.sh"
+"./musicrc/unzip.sh"
 "./nxrc/install.sh"
 "./openrc.sh"
 "./osxrc/restart_wifi.sh"
