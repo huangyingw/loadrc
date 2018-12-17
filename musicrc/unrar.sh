@@ -11,5 +11,6 @@ find "$1" -type f -iname \*.rar | \
     do
         ss="$(realpath "$ss")" && \
             cd "$(dirname "$ss")" && \
-            unrar x -r -o- "$ss"
+            unrar x -r -photnrg -o+ "$ss" && \
+            rm "$ss"
     done
