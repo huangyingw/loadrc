@@ -18,6 +18,7 @@ function! ExFilter()
 
     if expand('%:e') != "findresult"
         let buffername = csdbpath . '/' . b:result . '.vaa.findresult'
+        silent exec '!rm ' . buffername
 
         if bufexists(buffername)
             exe "bd!" . buffername
@@ -66,6 +67,7 @@ function! VFilter()
 
     if expand('%:e') != "findresult"
         let buffername = csdbpath . '/' . b:result . '.vaa.findresult'
+        silent exec '!rm ' . buffername
 
         if bufexists(buffername)
             exe "bd!" . buffername
@@ -355,7 +357,7 @@ nnoremap L :vs <C-R>"<CR><CR>
 map <F5> :call VRun()<cr>
 map <F3> :call VDebug()<cr>
 " nnoremap gf gF<CR><CR>
-nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<CR><CR> 
+nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<CR><CR>
 map oo :call VimOpen()<cr>
 nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- ' . expand("%:p"))<CR><CR>
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
