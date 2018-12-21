@@ -25,7 +25,8 @@ fi
 
 pip install --upgrade pynvim
 pip2 install --upgrade pynvim
-pip3 install --upgrade pynvim
+pip3 unstall neovim pynvim
+pip3 install pynvim
 
 pip install jedi
 pip3 install jedi
