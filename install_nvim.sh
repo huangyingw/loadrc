@@ -21,9 +21,9 @@ else
     #brew install --with-toolchain --with-clang llvm
 fi
 
-pip install --upgrade neovim
-pip2 install --upgrade neovim
-pip3 install --upgrade neovim
+pip install --upgrade pynvim
+pip2 install --upgrade pynvim
+pip3 install --upgrade pynvim
 
 pip install jedi
 pip3 install jedi
