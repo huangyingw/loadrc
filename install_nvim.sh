@@ -11,7 +11,9 @@ then
     apt-get install -y \
         neovim \
         python-dev \
+        python-neovim \
         python-pip \
+        python3-neovim \
         python3-pip
 else
     brew install \
