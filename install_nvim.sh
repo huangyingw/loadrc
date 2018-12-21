@@ -11,7 +11,9 @@ then
     apt-get install -y \
         neovim \
         python-dev \
+        python-neovim \
         python-pip \
+        python3-neovim \
         python3-pip
 else
     brew install \
@@ -21,9 +23,9 @@ else
     #brew install --with-toolchain --with-clang llvm
 fi
 
-pip install --upgrade neovim
-pip2 install --upgrade neovim
-pip3 install --upgrade neovim
+pip install --upgrade pynvim
+pip2 install --upgrade pynvim
+pip3 install --upgrade pynvim
 
 pip install jedi
 pip3 install jedi
@@ -34,3 +36,4 @@ ln -fs ~/loadrc/vimrc/.vim ~/.vim
 ln -fs ~/loadrc/vimrc/.vimrc ~/.vimrc
 ln -fs ~/loadrc/.config/nvim/init.vim ~/.config/nvim/init.vim
 rm -v ~/.viminfo*
+./gitrc/gclean.sh
