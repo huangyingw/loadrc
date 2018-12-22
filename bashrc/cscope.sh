@@ -38,13 +38,6 @@ do
     or="-o"
 done < "$PRUNE_FILE"
 
-while read suf
-do
-    suf=$(echo "$suf" | sed 's/"//g')
-    prune_files+=( $or "-wholename" "$suf" )
-    or="-o"
-done < files.rev
-
 or="";
 
 while read suf
