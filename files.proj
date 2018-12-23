@@ -503,6 +503,7 @@
 "./musicrc/unzip.sh"
 "./nxrc/install.sh"
 "./openrc.sh"
+"./osxrc/restart_bluetooth.sh"
 "./osxrc/restart_wifi.sh"
 "./perlrc/replace.pl"
 "./post_setup.sh"
