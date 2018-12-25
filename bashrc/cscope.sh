@@ -16,8 +16,7 @@ then
 fi
 
 TARGETEDIR=`realpath "$PWD"`
-cp -nv ~/loadrc/prunefi* ./
-cp -nv ~/loadrc/includefile.conf ./
+touch prunefile.conf prunefix.conf includefile.conf
 TARGET=files.proj.bak
 PRUNE_POSTFIX=prunefix.conf
 PRUNE_FILE=prunefile.conf
