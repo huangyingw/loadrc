@@ -46,6 +46,7 @@ then
     update-initramfs -u
 else
     brew install \
+        blueutil \
         coreutils
     brew cask install kdiff3
     brew link --overwrite neovim

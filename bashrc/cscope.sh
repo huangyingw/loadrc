@@ -16,8 +16,8 @@ then
 fi
 
 TARGETEDIR=`realpath "$PWD"`
-cp -nv ~/loadrc/prunefi* ./
-cp -nv ~/loadrc/includefile.conf ./
+cp -nv ~/loadrc/prunefix.conf ./
+touch prunefile.conf includefile.conf
 TARGET=files.proj.bak
 PRUNE_POSTFIX=prunefix.conf
 PRUNE_FILE=prunefile.conf
@@ -37,13 +37,6 @@ do
     prune_files+=( $or "-wholename" "$suf" )
     or="-o"
 done < "$PRUNE_FILE"
-
-while read suf
-do
-    suf=$(echo "$suf" | sed 's/"//g')
-    prune_files+=( $or "-wholename" "$suf" )
-    or="-o"
-done < files.rev
 
 or="";
 
