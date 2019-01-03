@@ -1,4 +1,4 @@
 30 23,0-9 * * * /root/loadrc/crontabrc/mldonkey_start.sh
-0 7-22 * * * /root/loadrc/crontabrc/mldonkey_stop.sh
+0 9-20 * * * /root/loadrc/crontabrc/mldonkey_stop.sh
 0 * * * * /usr/bin/expressvpn connect smart
 0 22-23,0-6 * * * /root/myproject/git/interview/skygragon/leetcode-cli/watch.sh
