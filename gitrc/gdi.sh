@@ -1,11 +1,11 @@
 #!/bin/bash
 if [ -z "$1" ]
 then
-    git diff -U10 -w --cached HEAD
+    git diff -w --cached HEAD
 else
     if [ -z "$2" ]
     then
-        COMMAND="git diff -U10 -w $1"
+        COMMAND="git diff -w $1"
 
         for ss in $(git config --get-all gdif.ignore)
         do
@@ -14,6 +14,6 @@ else
 
         eval "$COMMAND"
     else
-        git diff -U10 -w "$1" "$2"
+        git diff -w "$1" "$2"
     fi
 fi
