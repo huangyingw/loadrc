@@ -2,7 +2,16 @@
 SOURCE=$1
 TARGET=$2
 
-rsync -aHv --progress --max-size=400m --force \
-    --exclude \*.zip  \
-    --exclude \*.rar  \
-    "${SOURCE}" "${TARGET}" \
+doCopy () {
+    rsync -aHv --progress --max-size="$1" --force \
+        --exclude \*.zip  \
+        --exclude \*.rar  \
+        "${SOURCE}" "${TARGET}"
+    }
+
+COUNTER=10
+while [  $COUNTER -lt 400 ]; do
+    MAXSIZE="$COUNTER""m"
+    doCopy "$MAXSIZE"
+    let COUNTER=COUNTER+10
+done

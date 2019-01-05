@@ -192,7 +192,7 @@ function! VimOpen()
     let b:fileName = expand(expand("<cfile>"))
     let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
     if (expand("%") ==# 'index')
-        let worktree = substitute(system("~/loadrc/gitrc/get_worktree.sh " . expand('%:p')), '\n', '', '')
+        let worktree = substitute(system("~/loadrc/gitrc/get_worktree.sh " . '"' . expand('%:p') . '"'), '\n', '', '')
         let realFile = worktree . '/' . b:fileName . ''
         let indexFile = getcwd() . '/../' . b:fileName . '/.git/index'
         let moduleIndexFile = getcwd() . '/modules/' . b:fileName . '/index'
@@ -359,6 +359,7 @@ nmap <C-p> :call Prune()<CR><CR>
 nmap <C-k> :call KdiffAll()<CR><CR>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr>
+nnoremap qq :call RememberQuit()<cr>
 nnoremap H :call ShowVITAG()<cr>
 nnoremap T :vs $HOME/all.proj<CR><CR>
 nnoremap L :vs <C-R>"<CR><CR>
