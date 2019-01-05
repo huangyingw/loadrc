@@ -501,6 +501,7 @@
 "./musicrc/copy.sh"
 "./musicrc/copy_test.sh"
 "./musicrc/unrar.sh"
+"./musicrc/unrar_test.sh"
 "./musicrc/unzip.sh"
 "./nxrc/install.sh"
 "./openrc.sh"
