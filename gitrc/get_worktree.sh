@@ -15,4 +15,4 @@ else
     . ~/loadrc/bashrc/find_up_goto.sh .git
 fi
 
-echo "$(realpath $(pwd))"
+realpath "$(pwd)"
