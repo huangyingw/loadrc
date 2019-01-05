@@ -16,4 +16,4 @@ jdupes -1dNr "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
         ~/loadrc/bashrc/sleep.sh ; \
     fi && \
     nvim ~/loadrc/jdupes.log
-$HOME/loadrc/crontabrc/install.sh
+~/loadrc/crontabrc/install.sh
