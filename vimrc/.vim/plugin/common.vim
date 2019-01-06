@@ -169,6 +169,10 @@ function! Find_in_parent(fln,flsrt,flstp)
     return $HOME
 endfunc
 
+function! GetWorktree()
+    return substitute(system("~/loadrc/gitrc/get_worktree.sh " . '"' . expand('%:p') . '"'), '\n', '', '')
+endfunction
+
 function! OpenOrSwitch(buffername, openMode)
     let bnr = bufwinnr(a:buffername)
 
