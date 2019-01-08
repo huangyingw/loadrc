@@ -238,7 +238,7 @@ function! VimSearch()
     let keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(keyword)
     silent exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  keyword . '"' . ' "' .  b:result . '"'
-    call OpenOrSwitch(b:csdbpath.'/'.b:result.'.vaa.findresult', 'vs')
+    call OpenOrSwitch(b:csdbpath . '/' . b:result . '.vaa.findresult', 'vs')
     exec 'e'
     call HighlightKeyword(keyword)
 endfunction
