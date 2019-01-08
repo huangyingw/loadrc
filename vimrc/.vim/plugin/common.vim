@@ -199,23 +199,6 @@ function! Windowdir()
     return tr(unislash, '\', '/')
 endfunc
 
-"==
-" windowdir
-"  Gets the directory for the file in the current window
-"  Or the current working dir if there isn't one for the window.
-"  Use tr to allow that other OS paths, too
-function! GetEscapedKeywordForVIM(keywordStr)
-    let result = a:keywordStr
-    let result = substitute(result, '\', '\\\', 'g')
-    let result = substitute(result, '\.', '\\.', 'g')
-    let result = substitute(result, '/', '\\/', 'g')
-    let result = substitute(result, '[', '\\[', 'g')
-    let result = substitute(result, ']', '\\]', 'g')
-    let result = substitute(result, '^\_s\+', '\\s\\+', '')
-    let result = substitute(result, '\_s\+$', '\\s\\*', '')
-    let result = substitute(result, '\_s\+', '\\_s\\+', 'g')
-    return result
-endfunc
 function! GetEscapedKeyword(keywordStr)
     let result = a:keywordStr
     let result = substitute(result, '/', '\/', 'g')
