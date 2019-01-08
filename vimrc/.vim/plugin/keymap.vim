@@ -20,8 +20,6 @@ endif
 
 function! HighlightKeyword(keyword)
     let @@ = a:keyword
-    let old_reg = getreg('"')
-    let old_regtype = getregtype('"')
     if @@ =~? '^[0-9a-z,_]*$' || @@ =~? '^[0-9a-z ,_]*$' && g:VeryLiteral
         let @/ = @@
     else
@@ -35,8 +33,6 @@ function! HighlightKeyword(keyword)
         endif
         let @/ = '\V'.pat
     endif
-    normal! gV
-    call setreg('"', old_reg, old_regtype)
 endfunction
 
 function! VFilter()
