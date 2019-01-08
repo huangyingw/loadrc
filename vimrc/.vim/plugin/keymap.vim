@@ -11,10 +11,8 @@ endfunction
 function! ExFilter()
     normal! gvy<CR>
     let csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    let keyword = @@
-    let b:result = GetEscapedResult(keyword)
-    let keyword = GetEscapedKeywordForVIM(keyword)
-    echom 'keyword : '.keyword
+    let b:result = GetEscapedResult(@/)
+    let keyword = "/" . @/ . "/"
 
     if expand('%:e') != "findresult"
         let buffername = csdbpath . '/' . b:result . '.vaa.findresult'
@@ -28,7 +26,7 @@ function! ExFilter()
         call OpenOrSwitch(buffername, 'vs')
     endif
 
-    silent exec 'g/\c' . keyword . '/d'
+    silent exec 'g' . keyword . 'd'
     w
 endfunction
 
@@ -60,10 +58,8 @@ endfunction
 function! VFilter()
     normal! gvy<CR>
     let csdbpath = Find_in_parent("files.proj", Windowdir(), $HOME)
-    let keyword = @@
-    let b:result = GetEscapedResult(keyword)
-    let keyword = GetEscapedKeywordForVIM(keyword)
-    echom 'keyword : '.keyword
+    let b:result = GetEscapedResult(@/)
+    let keyword = "/" . @/ . "/"
 
     if expand('%:e') != "findresult"
         let buffername = csdbpath . '/' . b:result . '.vaa.findresult'
@@ -77,9 +73,8 @@ function! VFilter()
         call OpenOrSwitch(buffername, 'vs')
     endif
 
-    silent exec 'g!/\c' . keyword . '/d'
+    silent exec 'g!' . keyword . 'd'
     w
-    call HighlightKeyword(keyword)
 endfunction
 
 function! ShowRemember()
