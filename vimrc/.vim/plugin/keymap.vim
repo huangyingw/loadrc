@@ -9,24 +9,8 @@ function! RememberQuit()
 endfunction
 
 function! ExFilter()
-    normal! gvy<CR>
-    let csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    let b:result = GetEscapedResult(@/)
-    let keyword = "/" . @/ . "/"
-
-    if expand('%:e') != "findresult"
-        let buffername = csdbpath . '/' . b:result . '.vaa.findresult'
-        silent exec '!rm ' . buffername
-
-        if bufexists(buffername)
-            exe "bd!" . buffername
-        endif
-
-        silent exec 'w! ' . buffername
-        call OpenOrSwitch(buffername, 'vs')
-    endif
-
-    silent exec 'g' . keyword . 'd'
+    call Filter2Findresult()
+    silent exec 'g/' . @/ . '/d'
     w
 endfunction
 
@@ -56,24 +40,8 @@ function! HighlightKeyword(keyword)
 endfunction
 
 function! VFilter()
-    normal! gvy<CR>
-    let csdbpath = Find_in_parent("files.proj", Windowdir(), $HOME)
-    let b:result = GetEscapedResult(@/)
-    let keyword = "/" . @/ . "/"
-
-    if expand('%:e') != "findresult"
-        let buffername = csdbpath . '/' . b:result . '.vaa.findresult'
-        silent exec '!rm ' . buffername
-
-        if bufexists(buffername)
-            exe "bd!" . buffername
-        endif
-
-        silent exec 'w! ' . buffername
-        call OpenOrSwitch(buffername, 'vs')
-    endif
-
-    silent exec 'g!' . keyword . 'd'
+    call Filter2Findresult()
+    silent exec 'g!/' . @/ . '/d'
     w
 endfunction
 

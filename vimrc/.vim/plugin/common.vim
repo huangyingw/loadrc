@@ -249,3 +249,21 @@ function! RunShell(shell, ...)
         call asyncrun#run('<bang>', '', 'bash ' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult')
     endif
 endfunc
+
+function! Filter2Findresult()
+    let csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
+    let keyword = @/
+    let b:result = GetEscapedResult(keyword)
+
+    if expand('%:e') != "findresult"
+        let buffername = csdbpath . '/' . b:result . '.vaa.findresult'
+        silent exec '!rm ' . buffername
+
+        if bufexists(buffername)
+            exe "bd!" . buffername
+        endif
+
+        silent exec 'w! ' . buffername
+        call OpenOrSwitch(buffername, 'vs')
+    endif
+endfunc
