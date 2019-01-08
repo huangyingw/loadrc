@@ -212,6 +212,7 @@ function! GetEscapedKeyword(keywordStr)
     let result = substitute(result, '\#', '\\#', 'g')
     return result
 endfunc
+
 function! GetEscapedResult(keywordStr)
     let result = a:keywordStr
     let result = substitute(result, " ", "", "g")
@@ -226,9 +227,11 @@ function! GetEscapedResult(keywordStr)
     let result = substitute(result, '#', '', 'g')
     return result
 endfunc
+
 function! VsMax(fileName)
     call OpenOrSwitch(a:fileName, 'vs')
 endfunc
+
 function! RunShell(shell, ...)
     let arg1 = (a:0 >= 1) ? a:1 : ''
     let arg2 = (a:0 >= 2) ? a:2 : ''
