@@ -1,0 +1,3 @@
+Error detected while processing function ReloadFolds:
+line   23:
+E121: Undefined variable: b:anyfold_ind_actual
