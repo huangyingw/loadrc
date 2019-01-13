@@ -166,7 +166,7 @@ function! Find_in_parent(fln,flsrt,flstp)
         endif
     endwhile
 
-    return $HOME
+    return "Nothing"
 endfunc
 
 function! GetWorktree()
