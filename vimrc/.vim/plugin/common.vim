@@ -143,7 +143,7 @@ endfunction
 " Starting with the current working dir, it walks up the parent folders
 " until it finds the file, or it hits the stop dir.
 " If it doesn't find it, it returns "Nothing"
-function! Find_in_parent(fln,flsrt,flstp)
+function! Find_in_parent(fln, flsrt, flstp)
     let here = a:flsrt
 
     while ( strlen( here) > 0 )
@@ -265,5 +265,13 @@ function! Filter2Findresult()
 
         silent exec 'w! ' . buffername
         call OpenOrSwitch(buffername, 'vs')
+    endif
+endfunc
+
+function! Cd2ParentFolder(filename)
+    let csdbpath = Find_in_parent(a:filename, Windowdir(), "/") 
+
+    if csdbpath != "Nothing"
+        exec "cd " . csdbpath
     endif
 endfunc

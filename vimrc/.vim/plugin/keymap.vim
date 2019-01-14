@@ -109,13 +109,7 @@ endfunction
 function! SearchOpen()
     normal! gvy<CR>
     let keyword = @@
-    let csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-
-    if csdbpath == "Nothing"
-        return
-    endif
-
-    exec "cd " . csdbpath
+    call Cd2ParentFolder("files.proj")
     let find_file = substitute(system("~/loadrc/gitrc/find_files.sh " . '"' .  keyword . '"'), '\n', '', '')
     call OpenOrSwitch(find_file, 'vs')
 endfunction
@@ -146,13 +140,7 @@ function! KdiffAll()
 endfunction
 
 function! UpdateProj()
-    let csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-
-    if csdbpath == "Nothing"
-        return
-    endif
-
-    exec "cd " . csdbpath
+    call Cd2ParentFolder("files.proj")
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/update_proj.sh')
 endfunction
 
@@ -197,15 +185,10 @@ endfunction
 
 function! GitSearch()
     normal! gvy<CR>
-    let csdbpath = Find_in_parent(".git",Windowdir(),$HOME)
     let b:keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(b:keyword)
 
-    if csdbpath == "Nothing"
-        return
-    endif
-
-    exec "cd " . csdbpath
+    call Cd2ParentFolder(".git")
     silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"' . ' "' .  b:result . '"'
     call OpenOrSwitch(b:result . '.gsearch.findresult', 'vs')
 endfunction
