@@ -185,12 +185,13 @@ endfunction
 
 function! GitSearch()
     normal! gvy<CR>
-    let b:keyword = GetEscapedKeyword(@@)
-    let b:result = GetEscapedResult(b:keyword)
+    let keyword = GetEscapedKeyword(@@)
+    let b:result = GetEscapedResult(keyword)
 
-    call Cd2ParentFolder(".git")
-    silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"' . ' "' .  b:result . '"'
+    call Cd2Worktree()
+    silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  keyword . '"' . ' "' .  b:result . '"'
     call OpenOrSwitch(b:result . '.gsearch.findresult', 'vs')
+    call HighlightKeyword(keyword)
 endfunction
 
 function! VimSearch()
