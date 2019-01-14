@@ -269,10 +269,16 @@ function! Filter2Findresult()
 endfunc
 
 function! Cd2ParentFolder(filename)
-    let csdbpath = Find_in_parent(a:filename, Windowdir(), "/") 
+    let csdbpath = Find_in_parent(a:filename, Windowdir(), "/")
 
     if csdbpath != "Nothing"
         exec "cd " . csdbpath
         return csdbpath
     endif
+endfunc
+
+function! Cd2Worktree()
+    let worktree = GetWorktree()
+    exec "cd " . worktree
+    return worktree
 endfunc
