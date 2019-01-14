@@ -273,5 +273,6 @@ function! Cd2ParentFolder(filename)
 
     if csdbpath != "Nothing"
         exec "cd " . csdbpath
+        return csdbpath
     endif
 endfunc

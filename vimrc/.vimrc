@@ -181,13 +181,7 @@ filetype plugin on
 filetype plugin indent on
 
 function AddToGit()
-    let worktree = Find_in_parent(".git", Windowdir(), "/")
-
-    if worktree == "Nothing"
-        return
-    endif
-
-    exec "cd " . worktree
+    let worktree = Cd2ParentFolder(".git")
     let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
     exec 'silent !~/loadrc/gitrc/autoadd.sh ' . '"' .  b:relativePath . '"'
 endfunction
