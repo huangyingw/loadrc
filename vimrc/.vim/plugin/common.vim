@@ -268,7 +268,7 @@ function! Filter2Findresult()
     endif
 endfunc
 
-function! Cd2ParentFolder(filename)
+function! Cd2ProjectRoot(filename)
     let csdbpath = Find_in_parent(a:filename, Windowdir(), "/")
 
     if csdbpath != "Nothing"

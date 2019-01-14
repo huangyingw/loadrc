@@ -3,7 +3,7 @@ function! s:auto_deploy_augroup()
         return
     endif
 
-    call Cd2ParentFolder("files.proj")
+    call Cd2ProjectRoot("files.proj")
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
 endfunction
 

@@ -109,7 +109,7 @@ endfunction
 function! SearchOpen()
     normal! gvy<CR>
     let keyword = @@
-    call Cd2ParentFolder("files.proj")
+    call Cd2ProjectRoot("files.proj")
     let find_file = substitute(system("~/loadrc/gitrc/find_files.sh " . '"' .  keyword . '"'), '\n', '', '')
     call OpenOrSwitch(find_file, 'vs')
 endfunction
@@ -140,7 +140,7 @@ function! KdiffAll()
 endfunction
 
 function! UpdateProj()
-    call Cd2ParentFolder("files.proj")
+    call Cd2ProjectRoot("files.proj")
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/update_proj.sh')
 endfunction
 
