@@ -191,3 +191,6 @@
     path = vimrc/.vim/bundle/split-term.vim
     url = git@bitbucket.org:huangyingw/split-term.vim.git
     branch = dev
+[submodule "vimrc/.vim/bundle/neco-vim"]
+    path = vimrc/.vim/bundle/neco-vim
+    url = git@github.com:Shougo/neco-vim.git
