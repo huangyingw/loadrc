@@ -13,3 +13,5 @@ au BufWritePre *.* call AddToGit()
 "to do: pymode_rope conflict with AddToGit(), it will cause vim hang.
 
 [ncm2_core@yarp] vim on_complete: Vim(let):E117: Unknown function: necovim#get_complete_position
+
+cscope: cannot read trailer offset from file cscope.out
