@@ -7,11 +7,4 @@ line   15:
 E609: Cscope error: cscope: cannot open file /media/volgrp/mirror/av/cscope.out.in
 Press ENTER or type command to continue
 
-E212: Can't open file for writing: invalid argument
-
-au BufWritePre *.* call AddToGit()
-"to do: pymode_rope conflict with AddToGit(), it will cause vim hang.
-
-[ncm2_core@yarp] vim on_complete: Vim(let):E117: Unknown function: necovim#get_complete_position
-
 cscope: cannot read trailer offset from file cscope.out
