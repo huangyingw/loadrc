@@ -13,6 +13,7 @@ deploy_configs() {
     SOURCE=~/loadrc/"$TARGET"
     if [ -f "$SOURCE" ]
     then
+        cp -nv "$TARGET" "$TARGET".bak
         cp -fv "$SOURCE" "$TARGET"
     fi
 }
