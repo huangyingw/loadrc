@@ -21,6 +21,8 @@ RUN apt-get install -y \
         vim-gnome \
         wget
 
+COPY ./.ssh/ /root/.ssh/
+RUN chmod 400 /root/.ssh/id_rsa
 COPY ./ /root/loadrc
 WORKDIR /root/loadrc
 RUN /root/loadrc/setup.sh
