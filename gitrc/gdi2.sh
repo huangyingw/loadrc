@@ -8,5 +8,5 @@ branch="$1"
 ~/loadrc/gitrc/gdi.sh "$branch"  2>&1 | tee gdi.findresult && \
     git co "$branch" && \
     ~/loadrc/gitrc/gsync.sh && \
-    git apply --ignore-space-change --ignore-whitespace gdi.findresult && \
+    git apply --reject --whitespace=fix gdi.findresult && \
     ~/loadrc/gitrc/gwap.sh
