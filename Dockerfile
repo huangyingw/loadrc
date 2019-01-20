@@ -23,9 +23,9 @@ RUN apt-get install -y \
 
 COPY ./.ssh/ /root/.ssh/
 RUN chmod 400 /root/.ssh/id_rsa
-COPY ./ /root/loadrc
+COPY ./install_nvim_pre.sh /root/loadrc/install_nvim_pre.sh
 WORKDIR /root/loadrc
-RUN /root/loadrc/setup.sh
+RUN /root/loadrc/install_nvim_pre.sh
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
