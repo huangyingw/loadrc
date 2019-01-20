@@ -446,6 +446,8 @@
 "./install_basic.sh"
 "./install_flacon.sh"
 "./install_nvim.sh"
+"./install_nvim_post.sh"
+"./install_nvim_pre.sh"
 "./install_vagrant.sh"
 "./jdupes/.gitconfig"
 "./jdupes/.gitignore"
