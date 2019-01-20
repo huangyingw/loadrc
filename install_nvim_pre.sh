@@ -9,6 +9,7 @@ then
     apt-get update
     apt-get upgrade -y
     apt-get install -y \
+        exuberant-ctags \
         neovim \
         python-dev \
         python-neovim \
