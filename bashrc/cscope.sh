@@ -60,6 +60,7 @@ find . "(" "${prune_params[@]}" "${prune_files[@]}" ")" -a -prune -o -type f -pr
     cp -fv cscope.out.bak.po cscope.out.po && \
     cp -fv ${TARGET} files.proj && \
     sed -i.bak 's/ /\\ /g' files.proj && \
+    cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > files.proj.tmp && \
     echo > cscope.small.files && \
     echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
     sort -u ~/all.proj -o ~/all.proj

@@ -1,5 +1,4 @@
 function! ShowVITAG()
-    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    exec "cd " . b:csdbpath
+    call Cd2ProjectRoot("files.proj")
     call OpenOrSwitch('files.proj', 'vs')
 endfunction

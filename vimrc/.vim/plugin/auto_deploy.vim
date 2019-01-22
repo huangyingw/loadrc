@@ -3,8 +3,7 @@ function! s:auto_deploy_augroup()
         return
     endif
 
-    let csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    exec "cd " . csdbpath
+    call Cd2ProjectRoot("files.proj")
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
 endfunction
 

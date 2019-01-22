@@ -181,8 +181,7 @@ filetype plugin on
 filetype plugin indent on
 
 function AddToGit()
-    let worktree = Find_in_parent(".git", Windowdir(), "/")
-    exec "cd " . worktree
+    let worktree = Cd2Worktree()
     let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
     exec 'silent !~/loadrc/gitrc/autoadd.sh ' . '"' .  b:relativePath . '"'
 endfunction
@@ -197,7 +196,7 @@ au BufWritePre *.py call TrimEndLines()
 au BufWritePre *.sh call TrimEndLines()
 au BufWritePre *.java call TrimEndLines()
 au BufWritePre *.vimrc call TrimEndLines()
-au BufWritePre *.* call AddToGit()
+au BufWritePre * call AddToGit()
 "to do: pymode_rope conflict with AddToGit(), it will cause vim hang.
 let g:pymode_rope = 0
 "To have a space (ASCII 32) considered as a valid character for a file name

@@ -7,7 +7,7 @@ then
     mkdir -p "${TARGET}"
 fi
 
-rsync -aH \
+~/loadrc/bashrc/copy.sh \
     "$SOURCE" "$TARGET" \
-    && rsync -aH \
+    && ~/loadrc/bashrc/copy.sh \
     "$TARGET" "$SOURCE"

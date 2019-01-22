@@ -109,11 +109,9 @@ endfunction
 function! SearchOpen()
     normal! gvy<CR>
     let keyword = @@
-    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    exec "cd " . b:csdbpath
+    call Cd2ProjectRoot("files.proj")
     let find_file = substitute(system("~/loadrc/gitrc/find_files.sh " . '"' .  keyword . '"'), '\n', '', '')
     call OpenOrSwitch(find_file, 'vs')
-    call HighlightKeyword(keyword)
 endfunction
 
 function! ShowDiff()
@@ -142,8 +140,7 @@ function! KdiffAll()
 endfunction
 
 function! UpdateProj()
-    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    exec "cd " . b:csdbpath
+    call Cd2ProjectRoot("files.proj")
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/update_proj.sh')
 endfunction
 
@@ -188,12 +185,13 @@ endfunction
 
 function! GitSearch()
     normal! gvy<CR>
-    let b:csdbpath = Find_in_parent(".git",Windowdir(),$HOME)
-    let b:keyword = GetEscapedKeyword(@@)
-    let b:result = GetEscapedResult(b:keyword)
-    exec "cd " . b:csdbpath
-    silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  b:keyword . '"' . ' "' .  b:result . '"'
+    let keyword = GetEscapedKeyword(@@)
+    let b:result = GetEscapedResult(keyword)
+
+    call Cd2Worktree()
+    silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  keyword . '"' . ' "' .  b:result . '"'
     call OpenOrSwitch(b:result . '.gsearch.findresult', 'vs')
+    call HighlightKeyword(keyword)
 endfunction
 
 function! VimSearch()

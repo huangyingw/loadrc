@@ -59,7 +59,6 @@
     required = true
 [push]
     default = current
-    remote = BareReps
 [pull]
     default = current
 [gdif]
