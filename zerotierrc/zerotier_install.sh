@@ -3,13 +3,11 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-if [ $(uname) == "Darwin" ]
+if [ $(uname) != "Darwin" ]
 then
-    exit 0
+    curl -s https://install.zerotier.com/ | bash
+    zerotier-cli join 93afae5963560e41
 fi
-
-curl -s https://install.zerotier.com/ | bash
-zerotier-cli join 93afae5963560e41
 
 deploy_configs() {
     TARGET="$1"
@@ -25,3 +23,5 @@ while read -r line || [[ -n "$line" ]]
 do
     deploy_configs "$line"
 done < zerotierrc.conf
+
+./zerotier_restart.sh
