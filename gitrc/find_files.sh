@@ -3,7 +3,7 @@ my_array=()
 
 while IFS= read -r line; do
     my_array+=( "$line" )
-done < <( grep  $1 files.proj | sed -e 's/"//g' )
+done < <( grep  -i $1 files.proj | sed -e 's/"//g' )
 
 output="$(echo "$1" | sed 's/\//_/g;s/ //g').findresult"
 
