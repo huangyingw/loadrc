@@ -30,6 +30,7 @@ function! HighlightKeyword(keyword)
             let pat = substitute(pat, '^\_s\+', '\\s\\+', '')
             let pat = substitute(pat, '\_s\+$', '\\s\\*', '')
             let pat = substitute(pat, '\_s\+', '\\_s\\+', 'g')
+            let pat = substitute(pat, '\\!', '!', 'g')
         endif
         let @/ = '\V'.pat
     endif
