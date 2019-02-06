@@ -329,12 +329,12 @@ nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --fu
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
 
 function! CompareTwoFiles()
-    call asyncrun#run('<bang>', '', 'kdiff3 ' . @" . ' ' . expand("%:p"))
+    call asyncrun#run('<bang>', '', 'kdiff3 "' . @" . '" "' . expand("%:p") . '"')
 endfunc
 
 function! CommTwoFiles()
     silent exec '!comm -2 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . @" . '".findresult'
-    call OpenOrSwitch(@" . '.findresult', 'vs')
+    call OpenOrSwitch('"' . @" . '"' . '.findresult', 'vs')
 endfunc
 
 nnoremap <leader>2 :call CompareTwoFiles()<cr>
