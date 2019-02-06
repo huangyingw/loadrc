@@ -288,3 +288,7 @@ endfunc
 function! GetCurrentFileName()
     return '"' . expand("%:p") . '"'
 endfunc
+
+function! GetUnnamedRegister()
+    return '"' . @" . '"'
+endfunc
