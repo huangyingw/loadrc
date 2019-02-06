@@ -1,5 +1,5 @@
 function! RememberQuit()
-    let @"=expand("%:p")
+    let @"='"' . expand("%:p") . '"'
 
     if winbufnr(2) == -1 && &buftype !=# "terminal"
         return

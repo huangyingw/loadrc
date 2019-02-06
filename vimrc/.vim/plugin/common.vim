@@ -243,9 +243,9 @@ function! RunShell(shell, ...)
 
     if async ==? "false"
         if silent ==? "false"
-            exec '!' . a:shell . ' ' . arg1 . ' ' . arg2 . ' 2>&1 | tee ' . arg1 . '.findresult'
+            exec '!' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult'
         else
-            silent exec '!' . a:shell . ' ' . arg1 . ' ' . arg2 . ' 2>&1 | tee ' . arg1 . '.findresult'
+            silent exec '!' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult'
         endif
     else
         call asyncrun#run('<bang>', '', 'bash ' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult')
