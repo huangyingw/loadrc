@@ -334,7 +334,7 @@ function! CompareTwoFiles()
 endfunc
 
 function! CommTwoFiles()
-    silent exec '!comm -2 -3 <(sort "' . @" . '") <(sort ' . GetCurrentFileName() . ') > "' . @" . '".findresult'
+    silent exec '!comm -2 -3 <(sort ' . @" . ') <(sort ' . GetCurrentFileName() . ') > ' . @" . '.findresult'
     call OpenOrSwitch(@" . '.findresult', 'vs')
 endfunc
 
