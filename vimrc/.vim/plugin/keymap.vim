@@ -330,12 +330,12 @@ nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --fu
 nnoremap <leader>1 :let @"=GetCurrentFileName()<CR>
 
 function! CompareTwoFiles()
-    call asyncrun#run('<bang>', '', 'kdiff3 ' . @" . ' ' . GetCurrentFileName())
+    call asyncrun#run('<bang>', '', 'kdiff3 ' . GetUnnamedRegister() . ' ' . GetCurrentFileName())
 endfunc
 
 function! CommTwoFiles()
-    silent exec '!comm -2 -3 <(sort ' . @" . ') <(sort ' . GetCurrentFileName() . ') > ' . @" . '.findresult'
-    call OpenOrSwitch(@" . '.findresult', 'vs')
+    silent exec '!comm -2 -3 <(sort ' . GetUnnamedRegister() . ') <(sort ' . GetCurrentFileName() . ') > ' . GetUnnamedRegister() . '.findresult'
+    call OpenOrSwitch(GetUnnamedRegister() . '.findresult', 'vs')
 endfunc
 
 nnoremap <leader>2 :call CompareTwoFiles()<cr>
