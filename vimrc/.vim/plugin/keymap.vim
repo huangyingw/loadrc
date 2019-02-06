@@ -1,5 +1,5 @@
 function! RememberQuit()
-    let @"=expand("%:p")
+    let @"=GetCurrentFileName()
 
     if winbufnr(2) == -1 && &buftype !=# "terminal"
         return
@@ -59,7 +59,7 @@ function! PlayAV()
     endif
 
     call asyncrun#stop('<bang>')
-    call RunShell('~/loadrc/vishrc/vlc.sh', expand("%:p"))
+    call RunShell('~/loadrc/vishrc/vlc.sh', GetCurrentFileName())
 endfunction
 
 function! CSCSearchQ()
@@ -71,8 +71,8 @@ endfunction
 
 function! VDebug()
     let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    call RunShell('~/loadrc/vishrc/vdebug.sh', expand("%:p"), b:csdbpath)
-    call OpenOrSwitch(expand("%:p") . '.findresult', 'vs')
+    call RunShell('~/loadrc/vishrc/vdebug.sh', GetCurrentFileName(), b:csdbpath)
+    call OpenOrSwitch(GetCurrentFileName() . '.findresult', 'vs')
 endfunction
 
 function! VRun()
@@ -81,14 +81,14 @@ function! VRun()
         return 0
     endif
 
-    if filereadable(expand("%:p") . '.sh')
-        call OpenOrSwitch(expand("%:p") . '.sh', 'vs')
+    if filereadable(GetCurrentFileName() . '.sh')
+        call OpenOrSwitch(GetCurrentFileName() . '.sh', 'vs')
         return 0
     endif
 
     let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    call RunShell('~/loadrc/vishrc/vrun.sh', expand("%:p"), b:csdbpath)
-    call OpenOrSwitch(expand("%:p") . '.findresult', 'vs')
+    call RunShell('~/loadrc/vishrc/vrun.sh', GetCurrentFileName(), b:csdbpath)
+    call OpenOrSwitch(GetCurrentFileName() . '.findresult', 'vs')
 endfunction
 
 function! CSCSearch(num)
@@ -326,15 +326,15 @@ map <F3> :call VDebug()<cr>
 " nnoremap gf gF<CR><CR>
 nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<CR><CR>
 map oo :call VimOpen()<cr>
-nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- ' . expand("%:p"))<CR><CR>
-nnoremap <leader>1 :let @"=expand("%:p")<CR>
+nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- ' . GetCurrentFileName())<CR><CR>
+nnoremap <leader>1 :let @"=GetCurrentFileName()<CR>
 
 function! CompareTwoFiles()
-    call asyncrun#run('<bang>', '', 'kdiff3 ' . @" . ' ' . expand("%:p"))
+    call asyncrun#run('<bang>', '', 'kdiff3 ' . @" . ' ' . GetCurrentFileName())
 endfunc
 
 function! CommTwoFiles()
-    silent exec '!comm -2 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . @" . '".findresult'
+    silent exec '!comm -2 -3 <(sort "' . @" . '") <(sort ' . GetCurrentFileName() . ') > "' . @" . '".findresult'
     call OpenOrSwitch(@" . '.findresult', 'vs')
 endfunc
 
