@@ -284,3 +284,7 @@ function! Cd2Worktree()
     exec "cd " . worktree
     return worktree
 endfunc
+
+function! GetCurrentFileName()
+    return '"' . expand("%:p") . '"'
+endfunc
