@@ -2,9 +2,11 @@
 *.bak
 *.bin
 *.diff
+*.exe
 *.findresult
 *.gch
 *.hg
+*.hi
 *.keystore
 *.lck
 *.loT
