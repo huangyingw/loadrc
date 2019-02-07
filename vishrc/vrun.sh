@@ -10,6 +10,11 @@ fi
 extension=${file##*.}
 
 case $extension in
+    hs)
+        target=$(echo "$1" | sed 's/\.hs/\.exe/g')
+        ghc -o "$target" "$1"
+        "$target"
+        ;;
     sql)
         ~/loadrc/sqlrc/xsql.sh "$1" "$2"
         ;;
