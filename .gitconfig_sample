@@ -6,7 +6,6 @@
     fetch = +refs/heads/*:refs/remotes/github/*
 [push]
     remote = github
-    remote = BareReps
 [gsync]
     remote = origin
     branch = master
