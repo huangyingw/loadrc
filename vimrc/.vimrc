@@ -181,6 +181,10 @@ filetype plugin on
 filetype plugin indent on
 
 function AddToGit()
+    if (expand('%:e') ==# 'findresult')
+        return
+    endif
+
     let worktree = Cd2Worktree()
     let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
     exec 'silent !~/loadrc/gitrc/autoadd.sh ' . '"' .  b:relativePath . '"'
