@@ -315,6 +315,7 @@
 "./bashrc/whole_ures_ex"
 "./bashrc/wol.sh"
 "./crontabrc/.mini.cron"
+"./crontabrc/.mldonkey.cron"
 "./crontabrc/.server.cron"
 "./crontabrc/.vserver.cron"
 "./crontabrc/install.sh"
