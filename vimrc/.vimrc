@@ -184,6 +184,12 @@ function AddToGit()
     if (expand('%:e') ==# 'findresult')
         return
     endif
+     
+    let inGit = substitute(system('[ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1 && echo inGit'), '\n', '', '')
+    
+    if inGit != 'inGit'
+        return
+    endif
 
     let worktree = Cd2Worktree()
     let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
