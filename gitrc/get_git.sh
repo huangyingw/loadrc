@@ -2,7 +2,7 @@
 DIR=$(dirname "$1")
 cd "$DIR"
 
-. ~/loadrc/bashrc/find_up_goto.sh .git
+cd $(git rev-parse --show-toplevel)
 if [ -f .git ]
 then
     relative=$(cat .git | awk '{print $2}')

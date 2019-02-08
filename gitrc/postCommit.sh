@@ -1,5 +1,5 @@
 #!/bin/bash -
-cd $(~/loadrc/gitrc/get_index.sh $pwd)
+cd $(~/loadrc/gitrc/get_git.sh $pwd)
 > COMMIT_EDITMSG
 cd -
 ~/loadrc/gitrc/gsync.sh

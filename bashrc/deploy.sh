@@ -10,7 +10,6 @@ fi
 
 if [[ -n "$host" ]] && [[ -n "$path" ]]
 then
-    . ~/loadrc/bashrc/find_up_goto.sh files.proj
     ssh -n "$host" "mkdir -p $path"
     . ~/loadrc/bashrc/rsyncFiles.sh . "$host:$path"
 fi

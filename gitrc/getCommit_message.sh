@@ -15,7 +15,7 @@ then
     commit_message="$1"
 fi
 
-cd $(~/loadrc/gitrc/get_index.sh $pwd)/../
+cd $(~/loadrc/gitrc/get_git.sh $pwd)/../
 
 if [ -n "$(cat .git/COMMIT_EDITMSG)" ]
 then
