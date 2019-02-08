@@ -8,3 +8,5 @@ E609: Cscope error: cscope: cannot open file /media/volgrp/mirror/av/cscope.out.
 Press ENTER or type command to continue
 
 cscope: cannot read trailer offset from file cscope.out
+fugitive: fatal: not under version control, source=kvmrc/v2qcow2.sh, destination=kvmrc/vmdk2qcow2.sh
+
