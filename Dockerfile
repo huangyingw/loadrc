@@ -11,11 +11,11 @@ RUN apt-get install -y \
         git \
         inetutils-traceroute \
         iputils-ping \
+        manpages-pl \
         netcat \
         perl \
         pwgen \
         python3-software-properties \
-        realpath \
         rsync \
         software-properties-common \
         ssh \
