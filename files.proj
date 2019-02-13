@@ -452,6 +452,7 @@
 "./install_nvim.sh"
 "./install_nvim_post.sh"
 "./install_nvim_pre.sh"
+"./install_prerequisite.sh"
 "./install_vagrant.sh"
 "./jdupes/.gitconfig"
 "./jdupes/.gitignore"
