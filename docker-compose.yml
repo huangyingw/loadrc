@@ -8,6 +8,7 @@ services:
         image: huangyingw/dloadrc
         volumes:
             - ./var/logs/:/var/logs/
+            - ./.bashrc:/root/.bashrc
             - ./:/root/loadrc
             - ./vimrc/.vim:/root/.vim
             - ./vimrc/.vimrc:/root/.vimrc
