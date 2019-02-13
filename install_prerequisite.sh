@@ -10,6 +10,7 @@ apt-get install -y \
     git \
     inetutils-traceroute \
     iputils-ping \
+    locales \
     manpages-pl \
     netcat \
     perl \
@@ -20,3 +21,4 @@ apt-get install -y \
     ssh \
     vim-gnome \
     wget
+locale-gen en_US.UTF-8
