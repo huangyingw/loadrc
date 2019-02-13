@@ -1,28 +1,10 @@
 FROM ubuntu:18.04
+
 ENV DEBIAN_FRONTEND noninteractive
-
-RUN apt-get update
-RUN apt-get install -y \
-        build-essential \
-        coreutils \
-        cscope \
-        curl \
-        gdebi-core \
-        git \
-        inetutils-traceroute \
-        iputils-ping \
-        manpages-pl \
-        netcat \
-        perl \
-        pwgen \
-        python3-software-properties \
-        rsync \
-        software-properties-common \
-        ssh \
-        vim-gnome \
-        wget
-
 WORKDIR /root/loadrc
+
+COPY ./install_prerequisite.sh /root/loadrc/install_prerequisite.sh
+RUN /root/loadrc/install_prerequisite.sh
 
 COPY ./.ssh/id_* /root/.ssh/
 RUN chmod 400 /root/.ssh/id_rsa
