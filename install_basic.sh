@@ -53,5 +53,7 @@ else
 fi
 
 ./nxrc/install.sh
+./enpass_install.sh
+./chrome_install.sh
 ./zerotierrc/zerotier_install.sh
 ./deploy_configurations.sh
