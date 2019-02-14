@@ -2,8 +2,9 @@
 "set statusline=[%n]\%f%m%r%h
 set statusline=%r%h
 set statusline +=\ %.55F            "full path
-set statusline+=\ %{WordCount()}\ words,
+set statusline +=\ %{WordCount()}\ words,
 set statusline +=%=        " Switch to the right side
+set statusline +=\ %{strftime('%m/%d/%y\ %H:%M:%S',getftime(expand('%')))} " file last modified time 
 set statusline +=\ %l             "current line
 set statusline +=/%L               "total lines
 set statusline +=\ %v             "virtual column number
