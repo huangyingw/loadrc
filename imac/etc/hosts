@@ -12,6 +12,7 @@
 192.168.1.2 movie
 34.215.56.158 tinc-master
 172.27.185.36 work
+172.27.83.234 sb
 172.27.131.85 sandbox
 
 # The following lines are desirable for IPv6 capable hosts
