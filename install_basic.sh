@@ -41,6 +41,8 @@ then
         sshfs \
         tmux \
         vim-gnome \
+        w3m \
+        w3m-img \
         wakeonlan
     modprobe wl
     update-initramfs -u
