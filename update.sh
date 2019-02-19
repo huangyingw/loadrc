@@ -11,7 +11,7 @@ cd "$SCRIPTPATH"
 ./install_flacon.sh
 ./cscope/build.sh
 ./jdupes/install.sh
-./submodule_update.sh
+. ./gitrc/submodule_update.sh
 ./vimrc/.vim/bundle/vim-ghost/install.sh
 ./kvmrc/install.sh
 ./dockerrc/install.sh
