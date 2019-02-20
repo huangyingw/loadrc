@@ -16,6 +16,6 @@ git branch "$branch" $(git config gsync.remote)"/"$(git config gsync.branch)
 ~/loadrc/gitrc/gdi.sh "$branch"  2>&1 | tee gdi.findresult && \
     git co "$branch" && \
     ~/loadrc/gitrc/gsync.sh && \
-    git apply --reject --whitespace=fix gdi.findresult && \
-    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
+    git apply --reject --whitespace=fix gdi.findresult
+~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
     ~/loadrc/gitrc/gwap.sh
