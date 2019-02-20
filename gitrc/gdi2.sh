@@ -9,6 +9,7 @@ then
     echo -e "${red}gsync.remote is not configured ... ${NC}"
 fi
 
+currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 branch="$1"
 git branch -D "$branch"
 git branch "$branch" $(git config gsync.remote)"/"$(git config gsync.branch)
@@ -16,4 +17,5 @@ git branch "$branch" $(git config gsync.remote)"/"$(git config gsync.branch)
     git co "$branch" && \
     ~/loadrc/gitrc/gsync.sh && \
     git apply --reject --whitespace=fix gdi.findresult && \
+    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
     ~/loadrc/gitrc/gwap.sh
