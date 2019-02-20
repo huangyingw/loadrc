@@ -4,8 +4,7 @@
     branch = dev
 [submodule "vimrc/.vim/bundle/swift.vim"]
     path = vimrc/.vim/bundle/swift.vim
-    url = git@bitbucket.org:huangyingw/swift.vim.git
-    branch = dev
+    url = git@github.com:keith/swift.vim.git 
 [submodule "vimrc/.vim/bundle/indentLine"]
     path = vimrc/.vim/bundle/indentLine
     url = git@github.com:Yggdroot/indentLine.git 
