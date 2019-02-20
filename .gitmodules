@@ -8,16 +8,14 @@
     branch = dev
 [submodule "vimrc/.vim/bundle/indentLine"]
     path = vimrc/.vim/bundle/indentLine
-    url = git@bitbucket.org:huangyingw/indentLine.git
-    branch = dev
+    url = git@github.com:Yggdroot/indentLine.git 
 [submodule "vimrc/.vim/bundle/bash-support.vim"]
     path = vimrc/.vim/bundle/bash-support.vim
     url = git@bitbucket.org:huangyingw/bash-support.vim.git
     branch = dev
 [submodule "vimrc/.vim/bundle/vim-docker-compose-syntax"]
     path = vimrc/.vim/bundle/vim-docker-compose-syntax
-    url = git@bitbucket.org:huangyingw/vim-docker-compose-syntax.git
-    branch = dev
+    url = git@github.com:NLKNguyen/vim-docker-compose-syntax.git 
 [submodule "vimrc/.vim/bundle/python-mode"]
     path = vimrc/.vim/bundle/python-mode
     url = git@bitbucket.org:huangyingw/python-mode.git
