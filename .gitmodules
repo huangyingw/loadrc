@@ -28,8 +28,7 @@
     branch = dev
 [submodule "vimrc/.vim/bundle/vim-gradle"]
     path = vimrc/.vim/bundle/vim-gradle
-    url = git@bitbucket.org:huangyingw/vim-gradle.git
-    branch = dev
+    url = git@github.com:tfnico/vim-gradle.git 
 [submodule "vimrc/.vim/bundle/vim-javascript-syntax"]
     path = vimrc/.vim/bundle/vim-javascript-syntax
     url = git@bitbucket.org:huangyingw/vim-javascript-syntax.git
