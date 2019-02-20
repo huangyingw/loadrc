@@ -21,8 +21,7 @@
     branch = dev
 [submodule "vimrc/.vim/bundle/Dockerfile.vim"]
     path = vimrc/.vim/bundle/Dockerfile.vim
-    url = git@bitbucket.org:huangyingw/Dockerfile.vim.git
-    branch = dev
+    url = git@github.com:ekalinin/Dockerfile.vim.git 
 [submodule "vimrc/.vim/bundle/vim-autoformat"]
     path = vimrc/.vim/bundle/vim-autoformat
     url = git@bitbucket.org:huangyingw/vim-autoformat.git
