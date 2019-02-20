@@ -1488,6 +1488,7 @@
 "./vimrc/.vim/bundle/vim-javascript-syntax/README.markdown"
 "./vimrc/.vim/bundle/vim-javascript-syntax/ftdetect/javascript.vim"
 "./vimrc/.vim/bundle/vim-javascript-syntax/syntax/javascript.vim"
+"./vimrc/.vim/bundle/vim-log-syntax/.gitconfig"
 "./vimrc/.vim/bundle/vim-log-syntax/README"
 "./vimrc/.vim/bundle/vim-log-syntax/ftdetect/log.vim"
 "./vimrc/.vim/bundle/vim-log-syntax/syntax/log.vim"
