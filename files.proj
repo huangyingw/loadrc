@@ -1484,6 +1484,7 @@
 "./vimrc/.vim/bundle/vim-gradle/compiler/gradle.vim"
 "./vimrc/.vim/bundle/vim-gradle/compiler/gradlew.vim"
 "./vimrc/.vim/bundle/vim-gradle/ftdetect/gradle.vim"
+"./vimrc/.vim/bundle/vim-javascript-syntax/.gitconfig"
 "./vimrc/.vim/bundle/vim-javascript-syntax/README.markdown"
 "./vimrc/.vim/bundle/vim-javascript-syntax/ftdetect/javascript.vim"
 "./vimrc/.vim/bundle/vim-javascript-syntax/syntax/javascript.vim"
