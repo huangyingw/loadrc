@@ -669,7 +669,6 @@
 "./vimrc/.vim/bundle/delimitMate/test/expand_space.vim"
 "./vimrc/.vim/bundle/delimitMate/test/first_buffer_no_ft.vim"
 "./vimrc/.vim/bundle/indentLine/.gitattributes"
-"./vimrc/.vim/bundle/indentLine/.gitconfig"
 "./vimrc/.vim/bundle/indentLine/.gitignore"
 "./vimrc/.vim/bundle/indentLine/LICENSE"
 "./vimrc/.vim/bundle/indentLine/README.md"
