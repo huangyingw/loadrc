@@ -559,7 +559,6 @@
 "./vimrc/.vim/autoload/SQLUtilities.vim"
 "./vimrc/.vim/autoload/indexed_search.vim"
 "./vimrc/.vim/autoload/pathogen.vim"
-"./vimrc/.vim/bundle/Dockerfile.vim/.gitconfig"
 "./vimrc/.vim/bundle/Dockerfile.vim/.gitignore"
 "./vimrc/.vim/bundle/Dockerfile.vim/LICENSE"
 "./vimrc/.vim/bundle/Dockerfile.vim/Makefile"
