@@ -39,8 +39,7 @@
     branch = dev
 [submodule "vimrc/.vim/bundle/vim-rails"]
     path = vimrc/.vim/bundle/vim-rails
-    url = git@bitbucket.org:huangyingw/vim-rails.git
-    branch = dev
+    url = git@github.com:tpope/vim-rails.git 
 [submodule "vimrc/.vim/bundle/vim-scala"]
     path = vimrc/.vim/bundle/vim-scala
     url = git@bitbucket.org:huangyingw/vim-scala.git
