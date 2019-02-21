@@ -45,8 +45,7 @@
     url = git@github.com:derekwyatt/vim-scala.git 
 [submodule "vimrc/.vim/bundle/vundle.vim"]
     path = vimrc/.vim/bundle/vundle.vim
-    url = git@bitbucket.org:huangyingw/vundle.vim.git
-    branch = dev
+    url = git@github.com:VundleVim/Vundle.vim.git 
 [submodule ".ssh"]
     path = .ssh
     url = git@bitbucket.org:huangyingw/.ssh.git
