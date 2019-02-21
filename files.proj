@@ -673,7 +673,6 @@
 "./vimrc/.vim/bundle/indentLine/README.md"
 "./vimrc/.vim/bundle/indentLine/after/plugin/indentLine.vim"
 "./vimrc/.vim/bundle/indentLine/after/syntax/indentLine.vim"
-"./vimrc/.vim/bundle/indentLine/cscope.small.files"
 "./vimrc/.vim/bundle/indentLine/doc/indentLine.txt"
 "./vimrc/.vim/bundle/indentLine/doc/tags"
 "./vimrc/.vim/bundle/indentLine/glyph/indentLine-dotted-guide.eps"
