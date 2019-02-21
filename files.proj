@@ -392,6 +392,7 @@
 "./gitrc/get_worktree.sh"
 "./gitrc/gff.sh"
 "./gitrc/gfix.sh"
+"./gitrc/ghypo.sh"
 "./gitrc/gicb.sh"
 "./gitrc/git_bisect_run.sh"
 "./gitrc/git_run_shell_command_for_each_commit.sh"
