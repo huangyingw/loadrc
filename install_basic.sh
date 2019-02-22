@@ -40,6 +40,7 @@ then
         ssh \
         sshfs \
         tmux \
+        unrar \
         vim-gnome \
         w3m \
         w3m-img \
