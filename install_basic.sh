@@ -5,48 +5,7 @@ cd "$SCRIPTPATH"
 
 if [ $(uname) != "Darwin" ]
 then
-    apt-get update
-    apt-get upgrade -y
-    apt-get purge -y totem totem-plugins
-    apt-get install -y \
-        aptitude \
-        astyle \
-        automake \
-        autotools-dev \
-        bcmwl-kernel-source \
-        binutils \
-        build-essential \
-        cmake \
-        cryptsetup \
-        curl \
-        dkms \
-        exuberant-ctags \
-        git \
-        gparted \
-        htop \
-        kdiff3 \
-        manpages-fr-extra \
-        manpages-pl \
-        mdadm \
-        mosh \
-        mplayer \
-        net-tools \
-        pm-utils \
-        pv \
-        python-autopep8 \
-        resolvconf \
-        slurm \
-        smplayer \
-        ssh \
-        sshfs \
-        tmux \
-        unrar \
-        vim-gnome \
-        w3m \
-        w3m-img \
-        wakeonlan
-    modprobe wl
-    update-initramfs -u
+    ./install_prerequisite.sh
 else
     brew install \
         blueutil \
