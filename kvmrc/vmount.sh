@@ -1,12 +1,4 @@
 #!/bin/bash -
-
-vmCount=$(virsh list | wc -l)
-if [ $vmCount -gt 3 ]
-then
-    echo -e "${red}Please shutdown the running vm before mounting qcow2 file... ${NC}"
-    exit 1
-fi
-
 if [ ! -f "$1" ] || [ -z "$1" ]
 then
     echo -e "${red}Please provide the full path to qcow2 file... ${NC}"
