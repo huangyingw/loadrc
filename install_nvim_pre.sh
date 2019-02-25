@@ -12,9 +12,7 @@ then
         exuberant-ctags \
         neovim \
         python-dev \
-        python-neovim \
         python-pip \
-        python3-neovim \
         python3-pip
 else
     brew install \
