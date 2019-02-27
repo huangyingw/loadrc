@@ -12,7 +12,6 @@ cd "$SCRIPTPATH"
 ./cscope/build.sh
 ./jdupes/install.sh
 ./submodule_setup.sh
-./vimrc/.vim/bundle/vim-ghost/install.sh
 ./kvmrc/install.sh
 ./dockerrc/install.sh
 ./post_setup.sh

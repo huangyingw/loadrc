@@ -7,10 +7,7 @@ then
     exit 1
 fi
 
-if [ -z "$1" ]
-then
-    targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
-fi
+targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
 
 if [ -z $(git config gsync.remote) ]
 then

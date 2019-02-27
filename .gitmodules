@@ -66,9 +66,6 @@
 [submodule "vimrc/.vim/bundle/vala.vim"]
     path = vimrc/.vim/bundle/vala.vim
     url = git@github.com:arrufat/vala.vim.git 
-[submodule "vimrc/.vim/bundle/vim-ghost"]
-    path = vimrc/.vim/bundle/vim-ghost
-    url = git@github.com:raghur/vim-ghost.git 
 [submodule "vimrc/.vim/bundle/asyncrun.vim"]
     path = vimrc/.vim/bundle/asyncrun.vim
     url = git@github.com:huangyingw/asyncrun.vim.git
