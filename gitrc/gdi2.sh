@@ -35,5 +35,5 @@ git branch "$targetBranch" $(git config gsync.remote)"/"$(git config gsync.branc
     git commit  --no-verify -m "$commit_message" && \
     > .git/COMMIT_EDITMSG && \
     git push -f && \
-    . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
+    . ~/loadrc/imvurc/ghypo.sh "$targetBranch" && \
     ~/loadrc/gitrc/gfix.sh
