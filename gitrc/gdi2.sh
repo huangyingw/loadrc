@@ -24,15 +24,16 @@ fi
 
 host=$(git config deploy.host)
 path=$(git config deploy.path)
-git branch -D "$targetBranch"
-git branch "$targetBranch" $(git config gsync.remote)"/"$(git config gsync.branch)
-~/loadrc/gitrc/gdi.sh "$targetBranch"  2>&1 | tee gdi.findresult && \
+
+~/loadrc/gitrc/gsync.sh && \
+    git branch -D "$targetBranch" && \
+    git branch "$targetBranch" $(git config gsync.remote)"/"$(git config gsync.branch) && \
+    ~/loadrc/gitrc/gdi.sh "$targetBranch"  2>&1 | tee gdi.findresult && \
     git co "$targetBranch" && \
     ~/loadrc/gitrc/gsync.sh && \
-    git apply --reject --whitespace=fix gdi.findresult
-~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
-    ~/loadrc/gitrc/gwap.sh && \
-    git commit  --no-verify -m "$commit_message" && \
+    git apply --reject --whitespace=fix gdi.findresult ; \
+    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
+    git commit  --no-verify -am "$commit_message" && \
     > .git/COMMIT_EDITMSG && \
     git push -f && \
     . ~/loadrc/imvurc/ghypo.sh "$targetBranch" && \
