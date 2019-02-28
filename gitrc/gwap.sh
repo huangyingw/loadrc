@@ -1,6 +1,4 @@
 #!/bin/bash -
 git reset HEAD && \
     git diff -w --no-color | \
-    git apply --cached --ignore-whitespace && \
-    git checkout -- . && \
-    git reset
+    git apply --cached --ignore-whitespace
