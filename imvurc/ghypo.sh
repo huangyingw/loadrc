@@ -1,10 +1,11 @@
-#!/bin/bash - 
+#!/bin/bash -
 
 if [ $(hostname) != "lint-sandbox" ]
 then
-    echo -e "${red}Please only run in imvu lint-sandbox ... ${NC}"  
-    exit 1
+    ssh -nY "$host" "cd $path ; ~/loadrc/imvurc/ghypo.sh $1"
+    exit 0
 fi
+
 
 ~/loadrc/gitrc/grsh.sh
 ~/loadrc/gitrc/gclean.sh
