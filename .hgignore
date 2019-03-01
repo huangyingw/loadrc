@@ -1,3 +1,9 @@
+.*.bak
+.*.findresult
 .*.orig
+.*.tmp
 .cscopedb.lock
+.git
 cscope.*
+files.proj.*
+running.*
