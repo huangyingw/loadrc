@@ -449,6 +449,7 @@
 "./install_nvim_pre.sh"
 "./install_prerequisite.sh"
 "./install_vagrant.sh"
+"./iterm2rc/movescreen.py"
 "./jdupes/.gitconfig"
 "./jdupes/.gitignore"
 "./keys/.gitconfig"
