@@ -26,7 +26,8 @@ host=$(git config deploy.host)
 path=$(git config deploy.path)
 
 ~/loadrc/gitrc/gsync.sh && \
-    git branch -D "$targetBranch" && \
+    git remote update && \
+    git branch -D "$targetBranch" ; \
     git branch "$targetBranch" $(git config gsync.remote)"/"$(git config gsync.branch) && \
     ~/loadrc/gitrc/gdi.sh "$targetBranch"  2>&1 | tee gdi.findresult && \
     git co "$targetBranch" && \
