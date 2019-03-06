@@ -798,6 +798,7 @@
 "./vimrc/.vim/bundle/ncm2/pythonx/ncm2.py"
 "./vimrc/.vim/bundle/ncm2/pythonx/ncm2_core.py"
 "./vimrc/.vim/bundle/ncm2/pythonx/ncm2_filter/abbr_ellipsis.py"
+"./vimrc/.vim/bundle/ncm2/pythonx/ncm2_filter/dedup.py"
 "./vimrc/.vim/bundle/ncm2/pythonx/ncm2_filter/none.py"
 "./vimrc/.vim/bundle/ncm2/pythonx/ncm2_filter/same_word.py"
 "./vimrc/.vim/bundle/ncm2/pythonx/ncm2_filter/set_dup.py"
