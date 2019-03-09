@@ -69,6 +69,7 @@ command! -bang -bar -nargs=* SvnRevert :execute s:SvnRevert()
 command! -bang -bar -nargs=* SvnSt :execute s:SvnSt()
 command! -bang -bar -nargs=* SvnUp :execute s:SvnUp()
 command! -bang -bar -nargs=* Tail :execute s:Tail()
+
 function! s:LogFilter(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
@@ -82,6 +83,7 @@ endfunction
 
 function! s:Gvd(...) abort
     let worktree = Cd2Worktree()
+
     if expand('%:t') != 'index'
         if a:0 == 0
             call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gvd.sh ' . 'HEAD ' . '"' .  expand('%:p') . '"')
@@ -100,6 +102,7 @@ function! s:Gvdo() abort
     let worktree = Cd2Worktree()
     let remote = substitute(system("git config gsync.remote"), '\n', '', '')
     let branch = substitute(system("git config gsync.branch"), '\n', '', '')
+
     if expand('%:t') != 'index'
         call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gvd.sh ' . '"' .  remote . '/' . branch . '" "' .  expand('%:p') . '"')
     else
@@ -303,8 +306,10 @@ function! s:Gdi(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
     let output = 'gdi.diff'
+
     if expand('%:t') != 'index'
         let output = expand('%:p') . '.diff'
+
         if a:0 == 0
             silent exec '!~/loadrc/gitrc/gdi.sh ' . '"HEAD" "' .  expand('%:p') . '" 2>&1 | tee ' . '"' .  output . '"'
         else
@@ -315,9 +320,11 @@ function! s:Gdi(...) abort
         let arg1 = (a:0 >= 1) ? a:1 : ''
         silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" 2>&1 | tee ' . '"' .  output . '"'
     endif
+
     if bufexists(output)
         exe "bd!" . output
     endif
+
     call OpenOrSwitch(output, 'vs')
     call s:DiffClean()
 endfunction
@@ -329,9 +336,11 @@ function! s:Gdio(...) abort
     let branch = substitute(system("git config gsync.branch"), '\n', '', '')
     exec '!~/loadrc/gitrc/gsync.sh'
     silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  remote . '/' . branch . '" 2>&1 | tee ' . '"' .  output . '"'
+
     if bufexists(output)
         exe "bd!" . output
     endif
+
     call OpenOrSwitch(output, 'vs')
     call s:DiffClean()
 endfunction
@@ -521,10 +530,13 @@ function! s:DiffClean() abort
     if expand('%:e') != "diff"
         return
     endif
+
     let buffername = expand('%:p') . '.bak'
+
     if bufexists(buffername)
         exe "bd!" . buffername
     endif
+
     silent exec '!rm ' . buffername
     silent exec 'w! ' . buffername
     call OpenOrSwitch(buffername, 'vs')
@@ -533,6 +545,7 @@ function! s:DiffClean() abort
     silent exec '%s/^--- a\//--- \.\//g'
     silent exec '%s/^+++ b\//+++ \.\//g'
     w
+
 endfunction
 
 function! s:Gfix() abort
