@@ -53,7 +53,7 @@ function! Filter()
     exec '%g!/' . b:keyword . '/d'
 endfunction
 
-function! PlayAV()
+function! PlayVideo()
     if &buftype ==# "terminal"
         return 0
     endif
@@ -312,7 +312,7 @@ nmap <C-f> :call CSCSearch(7)<CR><CR>
 nmap <C-e> :call CSCSearch(1)<CR><CR>
 nmap <C-g> :call CSCSearch(3)<CR><CR>
 nnoremap <leader>d :!rm %:p<CR>:q<CR><CR>
-nmap <C-j> :call PlayAV()<CR><CR>
+nmap <C-j> :call PlayVideo()<CR><CR>
 nmap <C-p> :call Prune()<CR><CR>
 nmap <C-k> :call KdiffAll()<CR><CR>
 " Quickly close the current window
