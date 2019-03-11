@@ -14,6 +14,8 @@
 #172.27.185.36 work
 172.27.83.234 sb
 172.27.131.85 sandbox
+172.27.7.157 mbp
+
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
