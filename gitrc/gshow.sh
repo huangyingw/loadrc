@@ -1,2 +1,2 @@
 #!/bin/bash -
-git show "$1"
+git show -w "$1"
