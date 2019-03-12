@@ -62,13 +62,6 @@ function! PlayVideo()
     call RunShell('~/loadrc/vishrc/vlc.sh', expand("%:p"))
 endfunction
 
-function! CSCSearchQ()
-    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    let keyword = expand("<cword>")
-    silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . 1 . ' ' . 'qcsc'
-    call OpenOrSwitch(b:csdbpath . '/' . keyword . '.qcsc.findresult', 'vs')
-endfunction
-
 function! VDebug()
     let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     call RunShell('~/loadrc/vishrc/vdebug.sh', expand("%:p"), b:csdbpath)
@@ -101,9 +94,9 @@ function! CSCSearch(num)
     " 6 Find this egrep pattern:
     " 7 Find this file:
     " 8 Find files #including this file:
-    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
+    call Cd2ProjectRoot('files.proj')
     let keyword = expand("<cword>")
-    silent exec '!~/loadrc/vishrc/vsearch.sh ' . b:csdbpath . ' ' .  keyword . ' ' . a:num . ' ' . 'csc'
+    silent exec '!~/loadrc/vishrc/vsearch.sh ' . keyword . ' ' . a:num . ' ' . 'csc'
     call OpenOrSwitch(b:csdbpath . '/' . keyword . '.csc.findresult', 'vs')
     call HighlightKeyword(keyword)
 endfunction
@@ -198,10 +191,10 @@ endfunction
 
 function! VimSearch()
     normal! gvy<CR>
-    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
+    call Cd2ProjectRoot('files.proj')
     let keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(keyword)
-    silent exec '!~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  keyword . '"' . ' "' .  b:result . '"'
+    silent exec '!~/loadrc/vishrc/vsearch.sh "' . files.proj . '" "' .  keyword . '"' . ' "' .  w . '"'
     call OpenOrSwitch(b:csdbpath . '/' . b:result . '.vaa.findresult', 'vs')
     exec 'e'
     call HighlightKeyword(keyword)

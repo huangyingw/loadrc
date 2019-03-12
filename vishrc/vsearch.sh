@@ -1,12 +1,10 @@
 #!/bin/bash
-echo "search in " "$1"
-cd "$1"
-find_result="$1/""`echo "$2"."$4".findresult |sed  -e "s/\//\_/g;s/\ /\_/g"`"
+find_result="`echo "$2".findresult |sed  -e "s/\//\_/g;s/\ /\_/g"`"
 echo "result in " "$find_result"
 
 if [[ "$3" == "w" ]]
 then
-    xargs grep -wnH "$2" < files.proj > "$find_result"
+    xargs grep -inH "$2" < "$1" > "$find_result"
 else
     cscope -dL -f cscope.out -"$3""$2" > "$find_result"
 fi
