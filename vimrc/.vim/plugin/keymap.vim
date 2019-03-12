@@ -207,13 +207,6 @@ function! OpenProjectRoot()
     call OpenOrSwitch(b:csdbpath, 'vs')
 endfunction
 
-function! FindCalling()
-    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    let b:keyword = expand('%:t')
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/vaa.sh ' . b:csdbpath . ' "' .  b:keyword . '"')
-    let b:keyword = GetEscapedKeyword(b:keyword)
-    call OpenOrSwitch(b:csdbpath . '/' . b:keyword . '.vaa.findresult', 'vs')
-endfunction
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR><CR>
 nnoremap <leader>L :TlistClose<CR><CR>
 nnoremap hh <c-w>h<c-w><Bar>
@@ -292,7 +285,6 @@ else
     nmap <leader>p :let @"=expand("%:p")<CR>
 endif
 " nnoremap F :echom expand('%:p')<cr>
-nnoremap F :call FindCalling()<cr>
 vnoremap <silent>f :call VimSearch()<cr>
 vnoremap <silent>t :call GitSearch()<cr>
 vnoremap <silent>g :call VFilter()<cr>
