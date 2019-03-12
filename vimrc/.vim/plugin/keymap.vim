@@ -96,7 +96,8 @@ function! CSCSearch(num)
     " 8 Find files #including this file:
     call Cd2ProjectRoot('files.proj')
     let keyword = expand("<cword>")
-    exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "' .  a:num . '"'
+    let b:result = GetEscapedResult(keyword)
+    exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "' .  a:num . '" ' . '"' . b:result . '"' 
     call OpenOrSwitch(b:csdbpath . '/' . keyword . '.findresult', 'vs')
     call HighlightKeyword(keyword)
 endfunction
@@ -194,7 +195,7 @@ function! VimSearch()
     call Cd2ProjectRoot('files.proj')
     let keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(keyword)
-    exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "w"'
+    exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "w" ' . '"' . b:result . '"'
     call OpenOrSwitch(b:csdbpath . '/' . b:result . '.findresult', 'vs')
     exec 'e'
     call HighlightKeyword(keyword)
