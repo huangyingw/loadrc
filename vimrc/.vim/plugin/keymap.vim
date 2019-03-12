@@ -84,6 +84,15 @@ function! VRun()
     call OpenOrSwitch(expand("%:p") . '.findresult', 'vs')
 endfunction
 
+function! SearchAgain()
+    call Cd2ProjectRoot('files.proj')
+    let keyword = @/
+    let b:result = GetEscapedResult(keyword)
+    exec '!~/loadrc/vishrc/vsearch.sh ' . expand("%:p") . ' "' .  keyword . '"' . ' "w" ' . '"' . b:result . '"'
+    call OpenOrSwitch(keyword . '.findresult', 'vs')
+    call HighlightKeyword(keyword)
+endfunction
+
 function! CSCSearch(num)
     " 0 Find this C symbol:
     " 1 Find this function definition:
@@ -97,8 +106,8 @@ function! CSCSearch(num)
     call Cd2ProjectRoot('files.proj')
     let keyword = expand("<cword>")
     let b:result = GetEscapedResult(keyword)
-    silent exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "' .  a:num . '" ' . '"' . b:result . '"' 
-    call OpenOrSwitch(b:csdbpath . '/' . keyword . '.findresult', 'vs')
+    silent exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "' .  a:num . '" ' . '"' . b:result . '"'
+    call OpenOrSwitch(keyword . '.findresult', 'vs')
     call HighlightKeyword(keyword)
 endfunction
 

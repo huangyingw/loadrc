@@ -1,6 +1,7 @@
 #!/bin/bash
 keyword=$(echo "$2" | sed -e "s/ \+/ \\\+/g;s/\[/\\\[/g;s/\]/\\\]/g")
 find_result="$4".findresult
+~/loadrc/bashrc/get_first_column_of_file.sh "$1"
 
 if [[ "$3" == "w" ]]
 then
