@@ -6,4 +6,4 @@ cd "$SCRIPTPATH"
 resultFile="/Users/yhuang/Dropbox/loadrc/vimrc.vim.findresult"
 cat "$resultFile" | wc -l
 ./get_first_column_of_file.sh "$resultFile"
-cat "$resultFile".bak | wc -l
+cat "$resultFile" | wc -l
