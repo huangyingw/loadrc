@@ -2422,7 +2422,6 @@
 "./vishrc/lc_test.template"
 "./vishrc/prune.sh"
 "./vishrc/prune_test.sh"
-"./vishrc/vaa.sh"
 "./vishrc/vaa_test.sh"
 "./vishrc/vcommand.sh"
 "./vishrc/vdebug.sh"
