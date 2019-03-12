@@ -88,9 +88,8 @@ function! SearchAgain()
     call Cd2ProjectRoot('files.proj')
     let keyword = @/
     let b:result = GetEscapedResult(keyword)
-    exec '!~/loadrc/vishrc/vsearch.sh ' . expand("%:p") . ' "' .  keyword . '"' . ' "w" ' . '"' . b:result . '"'
+    silent exec '!~/loadrc/vishrc/vsearch.sh ' . expand("%:p") . ' "' .  keyword . '"' . ' "w" ' . '"' . b:result . '"'
     call OpenOrSwitch(keyword . '.findresult', 'vs')
-    call HighlightKeyword(keyword)
 endfunction
 
 function! CSCSearch(num)
