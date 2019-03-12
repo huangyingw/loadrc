@@ -1,4 +1,6 @@
 #!/bin/bash -
 inputFile="$1"
 #awk '{print $1}' "$inputFile" | tee "$inputFile"
-awk -F":" '{print $1}' "$inputFile" > "$inputFile".bak
+cp -f "$inputFile" "$inputFile".bak
+awk -F":" '{print $1}' "$inputFile".bak > "$inputFile"
+sort -u "$inputFile" -o "$inputFile" 
