@@ -7,11 +7,11 @@ then
     exit 1
 fi
 
-commit_message=$(cat .git/COMMIT_EDITMSG)
+commit_message=$(cat COMMIT_EDITMSG)
 if [ -z "$commit_message" ]
 then
     echo -e "${red}Must provide the commit message ... ${NC}"
-    echo -e "${red}Please edit .git/COMMIT_EDITMSG to provide commit message ... ${NC}"
+    echo -e "${red}Please edit COMMIT_EDITMSG to provide commit message ... ${NC}"
     exit 1
 fi
 
@@ -35,7 +35,6 @@ path=$(git config deploy.path)
     git apply --reject --whitespace=fix gdi.findresult ; \
     ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
     git commit  --no-verify -am "$commit_message" && \
-    > .git/COMMIT_EDITMSG && \
     git push -f && \
     . ~/loadrc/imvurc/ghypo.sh "$targetBranch" && \
     ~/loadrc/gitrc/gfix.sh
