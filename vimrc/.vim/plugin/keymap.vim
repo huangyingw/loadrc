@@ -96,8 +96,8 @@ function! CSCSearch(num)
     " 8 Find files #including this file:
     call Cd2ProjectRoot('files.proj')
     let keyword = expand("<cword>")
-    silent exec '!~/loadrc/vishrc/vsearch.sh ' . keyword . ' ' . a:num . ' ' . 'csc'
-    call OpenOrSwitch(b:csdbpath . '/' . keyword . '.csc.findresult', 'vs')
+    silent exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "' .  a:num . '"'
+    call OpenOrSwitch(b:csdbpath . '/' . keyword . '.findresult', 'vs')
     call HighlightKeyword(keyword)
 endfunction
 
@@ -194,8 +194,8 @@ function! VimSearch()
     call Cd2ProjectRoot('files.proj')
     let keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(keyword)
-    silent exec '!~/loadrc/vishrc/vsearch.sh "' . files.proj . '" "' .  keyword . '"' . ' "' .  w . '"'
-    call OpenOrSwitch(b:csdbpath . '/' . b:result . '.vaa.findresult', 'vs')
+    silent exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "w"'
+    call OpenOrSwitch(b:csdbpath . '/' . b:result . '.findresult', 'vs')
     exec 'e'
     call HighlightKeyword(keyword)
 endfunction
@@ -286,7 +286,7 @@ else
 endif
 " nnoremap F :echom expand('%:p')<cr>
 vnoremap <silent>f :call VimSearch()<cr>
-vnoremap <silent>t :call GitSearch()<cr>
+vnoremap <silent>t :call SearchAgain()<cr>
 vnoremap <silent>g :call VFilter()<cr>
 vnoremap <silent>i :call ExFilter()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
