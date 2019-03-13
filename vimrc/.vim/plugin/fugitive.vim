@@ -256,6 +256,7 @@ endfunction
 function! s:Gsync() abort
     let worktree = Cd2Worktree()
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gsync.sh 2>&1 | tee gsync.findresult')
+    call OpenOrSwitch('gsync.findresult', 'vs')
 endfunction
 
 function! s:Grta(...) abort
@@ -349,7 +350,7 @@ function! s:Gdi2(...) abort
     let worktree = Cd2Worktree()
     let output = 'gdi2.findresult'
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    exec '!~/loadrc/gitrc/gdi2.sh 2>&1 | tee ' . '"' .  output . '"' 
+    exec '!~/loadrc/gitrc/gdi2.sh 2>&1 | tee ' . '"' .  output . '"'
     call OpenOrSwitch(output, 'vs')
 endfunction
 
@@ -531,7 +532,7 @@ function! s:DiffClean() abort
         return
     endif
 
-    silent exec '!cp -fv ' . expand('%:p') . ' ' . expand('%:p') . '.bak' 
+    silent exec '!cp -fv ' . expand('%:p') . ' ' . expand('%:p') . '.bak'
     silent exec 'g!/\c^[-|+]/d'
     silent exec 'g/\c^[-|+]$/d'
     silent exec '%s/^--- a\//--- \.\//g'
