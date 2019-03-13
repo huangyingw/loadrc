@@ -3,7 +3,7 @@
 if [ "$1" == "files.proj" ]
 then
     echo "files.proj"
-    return
+    exit
 fi
 
 inputFile="$1"

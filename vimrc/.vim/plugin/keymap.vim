@@ -89,7 +89,7 @@ function! SearchAgain()
     let keyword = @/
     let b:result = GetEscapedResult(keyword)
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . expand("%:p") . ' "' .  keyword . '"' . ' "w" ' . '"' . b:result . '"'
-    call OpenOrSwitch(keyword . '.findresult', 'vs')
+    call OpenOrSwitch(b:result . '.findresult', 'vs')
 endfunction
 
 function! CSCSearch(num)
@@ -106,7 +106,7 @@ function! CSCSearch(num)
     let keyword = expand("<cword>")
     let b:result = GetEscapedResult(keyword)
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "' .  a:num . '" ' . '"' . b:result . '"'
-    call OpenOrSwitch(keyword . '.findresult', 'vs')
+    call OpenOrSwitch(b:result . '.findresult', 'vs')
     call HighlightKeyword(keyword)
 endfunction
 
@@ -204,7 +204,7 @@ function! VimSearch()
     let keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(keyword)
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "w" ' . '"' . b:result . '"'
-    call OpenOrSwitch(b:csdbpath . '/' . b:result . '.findresult', 'vs')
+    call OpenOrSwitch(b:result . '.findresult', 'vs')
     exec 'e'
     call HighlightKeyword(keyword)
 endfunction

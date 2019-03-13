@@ -227,6 +227,8 @@ function! GetEscapedResult(keywordStr)
     let result = substitute(result, '\$', '', 'g')
     let result = substitute(result, '#', '', 'g')
     let result = substitute(result, '!', '\\!', 'g')
+    let result = substitute(result, "<", "", "g")
+    let result = substitute(result, ">", "", "g")
     return result
 endfunc
 
