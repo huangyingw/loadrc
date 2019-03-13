@@ -352,6 +352,7 @@
 "./gitrc/autoadd.sh"
 "./gitrc/checkGitStatus.sh"
 "./gitrc/checkout_rejs.sh"
+"./gitrc/dogsync.sh"
 "./gitrc/fetch_all.sh"
 "./gitrc/fgicb.sh"
 "./gitrc/find_deleted.sh"
