@@ -1,5 +1,6 @@
 #!/bin/bash -
 ~/loadrc/gitrc/include_gitconfig.sh
+git remote update
 
 if [ -n $(git config gsync.remote) ]
 then
