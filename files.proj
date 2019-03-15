@@ -1507,6 +1507,7 @@
 "./vimrc/.vim/bundle/vim-rails/after/syntax/eruby/rails.vim"
 "./vimrc/.vim/bundle/vim-rails/after/syntax/haml/rails.vim"
 "./vimrc/.vim/bundle/vim-rails/after/syntax/javascript/rails.vim"
+"./vimrc/.vim/bundle/vim-rails/after/syntax/less/rails.vim"
 "./vimrc/.vim/bundle/vim-rails/after/syntax/ruby/rails.vim"
 "./vimrc/.vim/bundle/vim-rails/after/syntax/sass/rails.vim"
 "./vimrc/.vim/bundle/vim-rails/after/syntax/scss/rails.vim"
