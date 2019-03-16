@@ -266,3 +266,6 @@ function LargeFile()
     augroup END
 endfunction
 " configuration for vim-anyfold
+
+" configuration for fugitive
+autocmd FileType fugitive set bufhidden=
