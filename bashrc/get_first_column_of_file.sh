@@ -8,8 +8,7 @@ fi
 
 inputFile="$1"
 inputBak="$inputFile".bak
-#awk '{print $1}' "$inputFile" | tee "$inputFile"
 awk -F":| " '{print $1}' "$inputFile" > "$inputBak"
-sed -in '/^$/d' "$inputBak"
+sed -i '/^$/d' "$inputBak"
 sort -u "$inputBak" -o "$inputBak"
 echo "$inputBak"
