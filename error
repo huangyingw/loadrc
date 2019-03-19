@@ -10,3 +10,29 @@ Press ENTER or type command to continue
 cscope: cannot read trailer offset from file cscope.out
 fugitive: fatal: not under version control, source=kvmrc/v2qcow2.sh, destination=kvmrc/vmdk2qcow2.sh
 
+ E325: ATTENTION
+"imvu/website/gdio.diff" 45L, 2473C
+[ncm2_tern@yarp] Traceback (most recent call last):
+[ncm2_tern@yarp]   File "/Users/yhuang/.vim/bundle/nvim-yarp/pythonx/yarp.py", line 65, in <module>
+[ncm2_tern@yarp]     module_obj = importlib.import_module(module)
+[ncm2_tern@yarp]   File "/usr/local/Cellar/python/3.7.2/Frameworks/Python.framework/Versions/3.7/lib/python3.7/importlib/__init__.py", line 127, in import_module
+[ncm2_tern@yarp]     return _bootstrap._gcd_import(name[level:], package, level)
+[ncm2_tern@yarp]   File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+[ncm2_tern@yarp]   File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+[ncm2_tern@yarp]   File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+[ncm2_tern@yarp]   File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+[ncm2_tern@yarp]   File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+[ncm2_tern@yarp]   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+[ncm2_tern@yarp]   File "/Users/yhuang/.vim/bundle/ncm2-tern/pythonx/ncm2_tern.py", line 188, in <module>
+[ncm2_tern@yarp]     source = Source(vim)
+[ncm2_tern@yarp]   File "/Users/yhuang/.vim/bundle/ncm2-tern/pythonx/ncm2_tern.py", line 103, in __init__
+[ncm2_tern@yarp]     'split(globpath(&rtp,"node_modules/tern/bin/tern",1),"\\n")[0]')
+[ncm2_tern@yarp]   File "/usr/local/lib/python3.7/site-packages/pynvim/api/nvim.py", line 295, in eval
+[ncm2_tern@yarp]     return self.request('nvim_eval', string, **kwargs)
+[ncm2_tern@yarp]   File "/usr/local/lib/python3.7/site-packages/pynvim/api/nvim.py", line 182, in request
+[ncm2_tern@yarp]     res = self._session.request(name, *args, **kwargs)
+[ncm2_tern@yarp]   File "/usr/local/lib/python3.7/site-packages/pynvim/msgpack_rpc/session.py", line 102, in request
+[ncm2_tern@yarp]     raise self.error_wrapper(err)
+[ncm2_tern@yarp] pynvim.api.nvim.NvimError: b'Vim:E684: list index out of range: 0'
+[ncm2_tern@yarp] Job is dead. cmd=['/usr/local/opt/python/bin/python3.7', '-u', '/Users/yhuang/.vim/bundle/nvim-yarp/pythonx/yarp.py', '/var/folders/zn/6zwn3dz13v3fdjtrsh9g_dv9ymvzkm
+/T/nvimUidvlP/0', 12, 'ncm2_tern']
