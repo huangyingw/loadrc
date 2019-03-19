@@ -34,6 +34,7 @@ path=$(git config deploy.path)
     ~/loadrc/gitrc/gsync.sh && \
     git apply --reject --whitespace=fix gdi.findresult ; \
     ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
+    git add . && \
     git commit  --no-verify -am "$commit_message" && \
     git push -f && \
     . ~/loadrc/imvurc/ghypo.sh "$targetBranch" && \
