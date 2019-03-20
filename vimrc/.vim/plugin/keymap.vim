@@ -300,7 +300,7 @@ vnoremap <silent>g :call VFilter()<cr>
 vnoremap <silent>i :call ExFilter()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
 nmap <C-s> :call CSCSearch(0)<CR><CR>
-nnoremap <c-space> :call CSCSearch(0)<CR><CR>
+nnoremap <c-space> :call CSCSearch(4)<CR><CR>
 nmap <C-@> :call CSCSearch(4)<CR><CR>
 nmap <C-f> :call CSCSearch(7)<CR><CR>
 nmap <C-e> :call CSCSearch(1)<CR><CR>
