@@ -301,6 +301,7 @@ else
 endif
 " nnoremap F :echom expand('%:p')<cr>
 vnoremap <silent>f :call VimSearch()<cr>
+vnoremap <silent>s :call GitSearch()<cr>
 vnoremap <silent>t :call SearchAgain()<cr>
 vnoremap <silent>g :call VFilter()<cr>
 vnoremap <silent>i :call ExFilter()<cr>
