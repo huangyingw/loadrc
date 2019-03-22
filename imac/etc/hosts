@@ -11,10 +11,12 @@
 52.26.142.204 awst2
 192.168.1.2 movie
 34.215.56.158 tinc-master
-#172.27.185.36 work
-172.27.83.234 sb
+172.27.185.36 work
+#172.27.83.234 sb
+192.168.112.14 sb
 172.27.131.85 sandbox
 172.27.7.157 mbp
+192.168.112.14 localhost.imvu.com
 
 
 # The following lines are desirable for IPv6 capable hosts
@@ -23,3 +25,7 @@ fe00::0 ip6-localnet
 ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
+# BEGIN section for OpenVPN Client SSL sites
+127.94.0.1	client.openvpn.net
+127.94.0.2	openvpn-client.vpn.dmz.imvu.com
+# END section for OpenVPN Client SSL sites
