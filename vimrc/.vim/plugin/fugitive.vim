@@ -390,13 +390,13 @@ endfunction
 function! s:Gbrm(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gbrm.sh ' . '"' .  arg1 . '"')
+    exec '!~/loadrc/gitrc/gbrm.sh ' . '"' .  arg1 . '"'
 endfunction
 
 function! s:Gbrd(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gbrd.sh ' . '"' .  arg1 . '"')
+    exec '!~/loadrc/gitrc/gbrd.sh ' . '"' .  arg1 . '"'
 endfunction
 
 function! s:Gdifo(...) abort
