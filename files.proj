@@ -2027,6 +2027,8 @@
 "./vimrc/.vim/bundle/vimtex/test/issues/1321/vimrc"
 "./vimrc/.vim/bundle/vimtex/test/issues/1334/minimal.tex"
 "./vimrc/.vim/bundle/vimtex/test/issues/1334/minivimrc"
+"./vimrc/.vim/bundle/vimtex/test/issues/1340/minimal.tex"
+"./vimrc/.vim/bundle/vimtex/test/issues/1340/minivimrc"
 "./vimrc/.vim/bundle/vimtex/test/issues/218/main.tex"
 "./vimrc/.vim/bundle/vimtex/test/issues/218/section.tex"
 "./vimrc/.vim/bundle/vimtex/test/issues/225/chapters/chapter.tex"
