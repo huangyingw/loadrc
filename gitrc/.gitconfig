@@ -63,6 +63,7 @@
     default = current
 [gdif]
     ignore = .gitconfig
+    ignore = COMMIT_EDITMSG
     ignore = files.proj
     ignore = includefile.conf
     ignore = prunefile.conf
