@@ -46,6 +46,8 @@ gfvd.already
 includefile.conf
 ncscope.in.out
 ncscope.out
+ncscope.out.bak.in
+ncscope.out.bak.po
 ncscope.po.out
 prunefile.conf
 prunefix.conf
