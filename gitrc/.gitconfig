@@ -64,6 +64,7 @@
 [gdif]
     ignore = .gitconfig
     ignore = COMMIT_EDITMSG
+    ignore = change
     ignore = files.proj
     ignore = includefile.conf
     ignore = prunefile.conf
