@@ -2443,6 +2443,8 @@
 "./vserver/etc/network/interfaces"
 "./vserver/var/lib/zerotier-one/identity.public"
 "./vserver/var/lib/zerotier-one/identity.secret"
+"./wifirc/enable.sh"
+"./wifirc/show.sh"
 "./work.local.astylerc"
 "./zerotierrc/zerotier_install.sh"
 "./zerotierrc/zerotier_restart.sh"
