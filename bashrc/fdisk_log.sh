@@ -9,5 +9,6 @@ DEVICE=`mdadm -D --scan|awk '{print $2}'`
 mdadm -D "$DEVICE" >> "$logFile"
 blkid >> "$logFile"
 ifconfig >> "$logFile"
+iw list >> "$logFile"
 cat /etc/network/interfaces >> "$logFile"
 nvim "$logFile"
