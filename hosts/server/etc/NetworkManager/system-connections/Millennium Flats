@@ -1,0 +1,24 @@
+[connection]
+id=Millennium Flats
+uuid=b99bafe1-8232-47f9-b795-e79a5af50d39
+type=wifi
+permissions=
+
+[wifi]
+mac-address=B0:EA:BC:09:20:C6
+mac-address-blacklist=
+mode=infrastructure
+ssid=Millennium Flats
+
+[wifi-security]
+key-mgmt=wpa-psk
+psk=RedwoodCity
+
+[ipv4]
+dns-search=
+method=auto
+
+[ipv6]
+addr-gen-mode=stable-privacy
+dns-search=
+method=auto
