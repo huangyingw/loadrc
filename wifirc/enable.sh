@@ -1,3 +1,6 @@
-#!/bin/bash - 
-PHY=$(iw list | awk '/Wiphy/{print $2}')
-iw "$PHY" wowlan enable magic-packet disconnect
+#!/bin/bash -
+if [ $(uname) != "Darwin" ]
+then
+    PHY=$(iw list | awk '/Wiphy/{print $2}')
+    iw "$PHY" wowlan enable magic-packet disconnect
+fi
