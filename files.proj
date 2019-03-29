@@ -314,6 +314,7 @@
 "./crontabrc/install.sh"
 "./crontabrc/mldonkey_start.sh"
 "./crontabrc/mldonkey_stop.sh"
+"./crontabrc/wifi.cron"
 "./crontabrc/zerotier.cron"
 "./cscope/.gitconfig"
 "./cscope/.gitignore"
