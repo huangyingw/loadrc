@@ -531,6 +531,7 @@
 "./pythonrc/setup.cfg"
 "./pythonrc/setup.cfg.src"
 "./ruleref.list"
+"./run.rsh"
 "./sandbox/var/lib/zerotier-one/identity.public"
 "./sandbox/var/lib/zerotier-one/identity.secret"
 "./server/etc/docker/daemon.json"
