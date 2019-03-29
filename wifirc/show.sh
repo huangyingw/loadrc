@@ -1,2 +1,3 @@
 #!/bin/bash - 
-iw phy0 wowlan show
+PHY=$(iw list | awk '/Wiphy/{print $2}')
+iw "$PHY" wowlan show

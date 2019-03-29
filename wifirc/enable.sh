@@ -1,2 +1,3 @@
 #!/bin/bash - 
-iw phy0 wowlan enable magic-packet disconnect
+PHY=$(iw list | awk '/Wiphy/{print $2}')
+iw "$PHY" wowlan enable magic-packet disconnect
