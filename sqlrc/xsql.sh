@@ -1,5 +1,5 @@
 #!/bin/sh
-file=${1}
+file="$1"
 loginFile=.login
 
 if [ -n "$2" ]
@@ -19,7 +19,7 @@ then
     echo "host=$host" >> "$loginFile"
     echo "password=$password" >> "$loginFile"
     echo "user=$user" >> "$loginFile"
+    sort -u "$loginFile" -o "$loginFile"
 fi
 
-sort -u "$loginFile" -o "$loginFile"
 mysql -v -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
