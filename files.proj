@@ -260,6 +260,7 @@
 "./bashrc/reboot.sh"
 "./bashrc/recurse.sh"
 "./bashrc/redo.sh"
+"./bashrc/replace_spaces_in_file_names.sh"
 "./bashrc/rmEmpty.sh"
 "./bashrc/rsleep.sh"
 "./bashrc/rssh.sh"
