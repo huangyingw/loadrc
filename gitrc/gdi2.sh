@@ -29,7 +29,7 @@ path=$(git config deploy.path)
     git remote update && \
     git branch -D "$targetBranch" ; \
     git branch "$targetBranch" $(git config gsync.remote)"/"$(git config gsync.branch) && \
-    ~/loadrc/gitrc/gdi.sh "$targetBranch"  2>&1 | tee gdi.findresult && \
+    ~/loadrc/gitrc/gdi.sh "$targetBranch" "$currentBranch" 2>&1 | tee gdi.findresult && \
     git co "$targetBranch" && \
     ~/loadrc/gitrc/gsync.sh && \
     git apply --reject --whitespace=fix gdi.findresult ; \
