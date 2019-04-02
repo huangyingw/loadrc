@@ -36,3 +36,9 @@ fugitive: fatal: not under version control, source=kvmrc/v2qcow2.sh, destination
 [ncm2_tern@yarp] pynvim.api.nvim.NvimError: b'Vim:E684: list index out of range: 0'
 [ncm2_tern@yarp] Job is dead. cmd=['/usr/local/opt/python/bin/python3.7', '-u', '/Users/yhuang/.vim/bundle/nvim-yarp/pythonx/yarp.py', '/var/folders/zn/6zwn3dz13v3fdjtrsh9g_dv9ymvzkm
 /T/nvimUidvlP/0', 12, 'ncm2_tern']
+
+
+GetEscapedKeyword
+Not\_s\+authorized\_s\+for\_s\+request
+Not\ \+authorized\ \+for\ \+request
+Not \+authorized \+for \+request
