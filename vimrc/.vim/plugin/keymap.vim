@@ -178,6 +178,7 @@ function! VimOpen()
         let b:commit = expand("<cword>")
         call asyncrun#run('<bang>', '', 'bash ~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
     elseif (&filetype ==# 'fugitiveblame')
+        call Cd2Worktree()
         let b:commit = expand("<cword>")
         exec '!git checkout ' . '"' .  b:commit . '^"'
     else
