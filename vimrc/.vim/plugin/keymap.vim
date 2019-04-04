@@ -167,16 +167,19 @@ function! VimOpen()
         endif
     elseif (expand("%") ==# 'gbr.findresult')
         let b:commit = expand("<cword>")
-        silent exec '!git checkout ' . '"' .  b:commit . '"'
+        exec '!git checkout ' . '"' .  b:commit . '"'
     elseif (expand("%") ==# 'gbil.findresult')
         let b:commit = expand("<cword>")
-        silent exec '!git checkout ' . '"' .  b:commit . '"'
+        exec '!git checkout ' . '"' .  b:commit . '"'
     elseif (expand("%") ==# 'glg.findresult')
         let b:commit = expand("<cword>")
-        silent exec '!git checkout ' . '"' .  b:commit . '"'
+        exec '!git checkout ' . '"' .  b:commit . '"'
     elseif (expand("%") ==# 'dps.findresult')
         let b:commit = expand("<cword>")
         call asyncrun#run('<bang>', '', 'bash ~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
+    elseif (&filetype ==# 'fugitiveblame')
+        let b:commit = expand("<cword>")
+        exec '!git checkout ' . '"' .  b:commit . '^"'
     else
         if !filereadable(b:fileName)
             if !isdirectory(b:filePath)
