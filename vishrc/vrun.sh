@@ -16,6 +16,13 @@ case $extension in
     sql)
         ~/loadrc/sqlrc/xsql.sh "$1" "$2"
         ;;
+    rsql)
+        host=$(git config deploy.host)
+        path=$(git config deploy.path)
+        rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
+        rfile=$(realpath --relative-to="$rootFolder" "$1")
+        ssh -nY "$host" "cd $path ; ~/loadrc/sqlrc/xsql.sh $rfile"
+        ;;
     findresult)
         sh "$1"
         ;;

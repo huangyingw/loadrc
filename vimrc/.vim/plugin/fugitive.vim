@@ -312,14 +312,14 @@ function! s:Gdi(...) abort
         let output = expand('%:p') . '.diff'
 
         if a:0 == 0
-            silent exec '!~/loadrc/gitrc/gdi.sh ' . '"HEAD" "' .  expand('%:p') . '" 2>&1 | tee ' . '"' .  output . '"'
+            silent exec '!~/loadrc/gitrc/gdi.sh ' . 'HEAD "' .  expand('%:p') . '" 2>&1 | tee ' . '"' .  output . '"'
         else
             let arg1 = (a:0 >= 1) ? a:1 : ''
             silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" "' .  expand('%:p') . '" 2>&1 | tee ' . '"' .  output . '"'
         endif
     else
         let arg1 = (a:0 >= 1) ? a:1 : ''
-        silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" 2>&1 | tee ' . '"' .  output . '"'
+        silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" HEAD 2>&1 | tee ' . '"' .  output . '"'
     endif
 
     if bufexists(output)
@@ -332,11 +332,13 @@ endfunction
 
 function! s:Gdio(...) abort
     let worktree = Cd2Worktree()
-    let output = 'gdio.diff'
+    let current_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
+    let local_branch = (a:0 >= 1) ? a:1 : current_branch
+    let output = local_branch . '.gdio.diff'
     let remote = substitute(system("git config gsync.remote"), '\n', '', '')
     let branch = substitute(system("git config gsync.branch"), '\n', '', '')
     exec '!~/loadrc/gitrc/gsync.sh'
-    silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  remote . '/' . branch . '" 2>&1 | tee ' . '"' .  output . '"'
+    silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  remote . '/' . branch . '" "' . local_branch . '" 2>&1 | tee ' . '"' .  output . '"'
 
     if bufexists(output)
         exe "bd!" . output
