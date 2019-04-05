@@ -92,6 +92,12 @@ function! SearchAgain()
     call OpenOrSwitch(b:result . '.findresult', 'vs')
 endfunction
 
+function! GetFirstColumnOfFile()
+    let bak_file = substitute(system('~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'), '\n', '', '')
+    silent exec '!~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'
+    call OpenOrSwitch(expand("%:p") . '.bak', 'vs')
+endfunction
+
 function! CSCSearch(num)
     " 0 Find this C symbol:
     " 1 Find this function definition:
@@ -317,6 +323,7 @@ nmap <C-k> :call KdiffAll()<CR><CR>
 nnoremap Q :call RememberQuit()<cr>
 nnoremap qq :call RememberQuit()<cr>
 nnoremap H :call ShowVITAG()<cr>
+nnoremap F :call GetFirstColumnOfFile()<cr>
 nnoremap T :vs $HOME/all.proj<CR><CR>
 nnoremap L :vs <C-R>"<CR><CR>
 map <F5> :call VRun()<cr>
