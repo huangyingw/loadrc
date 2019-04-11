@@ -113,7 +113,10 @@ function! CSCSearch(num)
     let b:result = GetEscapedResult(keyword)
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "' .  a:num . '" ' . '"' . b:result . '"'
     call OpenOrSwitch(b:result . '.findresult', 'vs')
-    call HighlightKeyword(keyword)
+
+    if a:num != 7
+        call HighlightKeyword(keyword)
+    endif
 endfunction
 
 function! SearchOpen()
