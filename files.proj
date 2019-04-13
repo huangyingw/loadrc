@@ -560,6 +560,7 @@
 "./run.rsh"
 "./set_host_configuration.sh"
 "./set_linux_configuration.sh"
+"./setup.cfg"
 "./setup.sh"
 "./sqlrc/.login"
 "./sqlrc/mysqlback.sh"
