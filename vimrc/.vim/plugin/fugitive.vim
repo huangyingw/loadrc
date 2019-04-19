@@ -335,6 +335,7 @@ function! s:Gdio(...) abort
     let current_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
     let local_branch = (a:0 >= 1) ? a:1 : current_branch
     let output = local_branch . '.gdio.diff'
+    let output = substitute(output, "/", "_", "g")
     let remote = substitute(system("git config gsync.remote"), '\n', '', '')
     let branch = substitute(system("git config gsync.branch"), '\n', '', '')
     exec '!~/loadrc/gitrc/gsync.sh'
