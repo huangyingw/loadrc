@@ -37,5 +37,5 @@ path=$(git config deploy.path)
     git add . && \
     git commit  --no-verify -am "$commit_message" && \
     git push -f && \
-    . ~/loadrc/imvurc/ghypo.sh "$targetBranch" && \
+    . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
     ~/loadrc/gitrc/gfix.sh
