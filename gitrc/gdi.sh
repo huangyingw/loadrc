@@ -1,9 +1,9 @@
 #!/bin/bash
 if [ -z "$1" ]
 then
-    git diff -w --cached HEAD
+    git diff -U0 --ignore-space-at-eol -b -w --ignore-blank-lines --cached HEAD
 else
-    COMMAND="git diff -w $1 $2"
+    COMMAND="git diff -U0 --ignore-space-at-eol -b -w --ignore-blank-lines $1 $2"
 
     for ss in $(git config --get-all gdif.ignore)
     do
