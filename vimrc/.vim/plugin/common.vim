@@ -287,7 +287,13 @@ endfunc
 
 function! Cd2Worktree()
     let worktree = GetWorktree()
-    exec "cd " . worktree
+
+    try
+        exec "cd " . fnameescape(worktree)
+    catch /./
+        echom 'Cought anything: ' . v:exception
+    endtry
+
     return worktree
 endfunc
 

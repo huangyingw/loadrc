@@ -181,7 +181,7 @@ filetype plugin on
 filetype plugin indent on
 
 function AddToGit()
-    if (expand('%:e') ==# 'findresult')
+    if (expand('%:e') ==# 'findresult' || expand('%:p') =~ '.*\.git/.*')
         return
     endif
      
@@ -192,8 +192,8 @@ function AddToGit()
     endif
 
     let worktree = Cd2Worktree()
-    let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
-    exec 'silent !~/loadrc/gitrc/autoadd.sh ' . '"' .  b:relativePath . '"'
+    let relativePath = substitute(system('realpath --relative-to="' . worktree . '" ' . expand('%:p')), '\n', '', '')
+    silent exec '!~/loadrc/gitrc/autoadd.sh ' . '"' .  relativePath . '"'
 endfunction
 
 function TrimEndLines()
