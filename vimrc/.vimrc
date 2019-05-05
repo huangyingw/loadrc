@@ -269,3 +269,6 @@ endfunction
 
 " configuration for fugitive
 autocmd FileType fugitive set bufhidden=
+
+" configuration for ncm2
+call ncm2#override_source('bufword', {'priority': 7})
