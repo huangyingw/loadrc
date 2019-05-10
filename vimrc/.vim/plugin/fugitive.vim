@@ -535,8 +535,6 @@ function! s:DiffClean() abort
         return
     endif
 
-    silent exec '!cp -fv ' . expand('%:p') . ' ' . expand('%:p') . '.bak'
-    silent exec 'g!/\c^[-|+]/d'
     silent exec 'g/\c^[-|+]$/d'
     silent exec '%s/^--- a\//--- \.\//g'
     silent exec '%s/^+++ b\//+++ \.\//g'
