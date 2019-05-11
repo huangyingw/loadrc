@@ -535,7 +535,6 @@ function! s:DiffClean() abort
         return
     endif
 
-    silent exec 'g/\c^[-|+]$/d'
     silent exec '%s/^--- a\//--- \.\//g'
     silent exec '%s/^+++ b\//+++ \.\//g'
     w
