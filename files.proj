@@ -346,6 +346,7 @@
 "./etc/ssh/sshd_config"
 "./etc/sudoers"
 "./ffmpegrc/concat.sh"
+"./ffmpegrc/mylist.txt"
 "./ffmpegrc/split.sh"
 "./get_host_configuration.sh"
 "./get_linux_configuration.sh"
