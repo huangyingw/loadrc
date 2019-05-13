@@ -272,3 +272,4 @@ autocmd FileType fugitive set bufhidden=
 
 " configuration for ncm2
 call ncm2#override_source('bufword', {'priority': 7})
+call ncm2#override_source('otherbuf', {'priority': 6})
