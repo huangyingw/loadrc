@@ -485,6 +485,7 @@
 "./hosts/vserver/var/lib/zerotier-one/identity.public"
 "./hosts/vserver/var/lib/zerotier-one/identity.secret"
 "./imvurc/ghypo.sh"
+"./imvurc/restart.sh"
 "./includefile.conf"
 "./includefile_template.conf"
 "./install_basic.sh"
