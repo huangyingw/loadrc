@@ -16,7 +16,7 @@ FAV=/home/parallels/server/media/volgrp/mirror/av/
 if [ -d "$FAV" ]
 then
     rm ~/fav/*
-    find "$FAV" -type f -iname 9\* -size +600M -exec ls -rt {} \+ | while read ss
+    find "$FAV" -type f -iname 9\* -size +300M -exec ls -rt {} \+ | while read ss
 do
     ftemp=`basename "$ss"`
     ln -s "$ss" ~/fav/"$ftemp"

@@ -182,3 +182,6 @@
 [submodule "vimrc/.vim/bundle/neco-vim"]
     path = vimrc/.vim/bundle/neco-vim
     url = git@github.com:Shougo/neco-vim.git
+[submodule "vimrc/.vim/bundle/ncm2-otherbuf"]
+	path = vimrc/.vim/bundle/ncm2-otherbuf
+	url = https://github.com/fgrsnau/ncm2-otherbuf.git
