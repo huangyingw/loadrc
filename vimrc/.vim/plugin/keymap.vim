@@ -130,7 +130,7 @@ function! ShowDiff()
 endfunction
 
 function! Prune()
-    if (expand('%:e') ==# 'findresult')
+    if (expand('%:e') ==# 'findresult' || expand('%:e') ==# 'bak')
         let line = getline('.')
         normal dd
         w
