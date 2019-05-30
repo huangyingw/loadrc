@@ -2,9 +2,11 @@
 ~/loadrc/gitrc/include_gitconfig.sh
 git remote update
 
-if [ -n $(git config gsync.remote) ]
-then
-    git pull $(git config gsync.remote) $(git config gsync.branch)
-else
-    git pull
-fi
+for ss in $(git config --get-all gsync.remote)
+do
+    remote_branch=$(echo "$ss" | sed  -e "s/\// /g")
+    COMMAND="git pull $remote_branch"
+    eval "$COMMAND"
+done
+
+git pull
