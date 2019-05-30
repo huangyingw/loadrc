@@ -47,10 +47,20 @@ case $extension in
             .
         ;;
     py)
-        SCRIPT=$(realpath "$1")
-        SCRIPTPATH=$(dirname "$SCRIPT")
-        cd "$SCRIPTPATH"
-        python "$1"
+        host=$(git config deploy.host)
+        path=$(git config deploy.path)
+
+        if [ "$host" != "localhost" ]
+        then
+            rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
+            rfile=$(realpath --relative-to="$rootFolder" "$1")
+            ssh -nY "$host" "cd $path ; . ~/loadrc/.loadrc ; python $rfile"
+        else
+            SCRIPT=$(realpath "$1")
+            SCRIPTPATH=$(dirname "$SCRIPT")
+            cd "$SCRIPTPATH"
+            python "$1"
+        fi
         ;;
     vim)
         source "$1"
