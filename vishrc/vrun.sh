@@ -50,7 +50,7 @@ case $extension in
         host=$(git config deploy.host)
         path=$(git config deploy.path)
 
-        if [ "$host" != "localhost" ]
+        if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
             rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
             rfile=$(realpath --relative-to="$rootFolder" "$1")
