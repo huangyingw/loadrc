@@ -12,7 +12,8 @@
     remote = gitlab
     remote = github
 [gsync]
-    remote = origin/master
+    remote = origin
+    branch = master
 [merge]
     allow = true
 [commit]
