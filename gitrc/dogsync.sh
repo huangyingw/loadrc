@@ -12,6 +12,7 @@ done
 if [ -n $(git config gsync.remote) ]
 then
     git pull $(git config gsync.remote) $(git config gsync.branch)
+    git fetch $(git config gsync.remote) $(git config gsync.branch):$(git config gsync.branch)
 else
     git pull
 fi
