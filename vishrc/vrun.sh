@@ -73,7 +73,7 @@ case $extension in
         ;;
 esac
 
-if [[ "$file" = *'.leetcode.java' ]] || [[ "$file" = *'.leetcode.py' ]]
+if [[ $(git config leetcode.submit) == "true" ]]  && ([[ "$file" = *'.java' ]] || [[ "$file" = *'.py' ]])
 then
     leetcode submit "$file"
 fi
