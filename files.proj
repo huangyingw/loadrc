@@ -435,6 +435,7 @@
 "./gitrc/include_gitconfig.sh"
 "./gitrc/postCommit.sh"
 "./gitrc/restore_deleted.sh"
+"./gitrc/retached.sh"
 "./gitrc/subfolder_2_repository.sh"
 "./gitrc/submodule_update.sh"
 "./gpurc/.gpurc"
