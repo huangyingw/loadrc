@@ -70,6 +70,7 @@
     ignore = includefile.conf
     ignore = prunefile.conf
     ignore = prunefix.conf
+    ignore = setup.cfg
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
