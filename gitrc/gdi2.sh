@@ -31,7 +31,6 @@ path=$(git config deploy.path)
     git branch "$targetBranch" $(git config gsync.remote)"/"$(git config gsync.branch) && \
     ~/loadrc/gitrc/gdi.sh "$targetBranch" "$currentBranch" 2>&1 | tee gdi.findresult && \
     git co "$targetBranch" && \
-    ~/loadrc/gitrc/gsync.sh && \
     git apply --reject --whitespace=fix gdi.findresult ; \
     ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
     git add . && \
