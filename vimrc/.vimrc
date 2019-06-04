@@ -181,7 +181,7 @@ filetype plugin on
 filetype plugin indent on
 
 function AddToGit()
-    if (expand('%:e') ==# 'findresult' || expand('%:p') =~ '.*\.git/.*')
+    if (expand('%:e') ==# 'findresult' || expand('%:p') =~ '.*\.git/.*' || expand('%:e') ==# 'diff')
         return
     endif
      
