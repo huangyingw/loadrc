@@ -28,6 +28,6 @@ export LANGUAGE="en_US:en"
 ##
 
 # MacPorts Installer addition on 2019-06-03_at_21:24:24: adding an appropriate PATH variable for use with MacPorts.
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+#export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # Finished adapting your PATH environment variable for use with MacPorts.
 
