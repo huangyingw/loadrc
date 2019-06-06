@@ -8,20 +8,24 @@ then
 fi
 
 extension=${file##*.}
+host=$(git config deploy.host)
+path=$(git config deploy.path)
 
 case $extension in
     hs)
         runghc "$1"
         ;;
     sql)
-        ~/loadrc/sqlrc/xsql.sh "$1" "$2"
+        if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+        then
+            rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
+            rfile=$(realpath --relative-to="$rootFolder" "$1")
+            ssh -nY "$host" "cd $path ; ~/loadrc/sqlrc/xsql.sh $rfile"
+        else
+            ~/loadrc/sqlrc/xsql.sh "$1" "$2"
+        fi
         ;;
     rsql)
-        host=$(git config deploy.host)
-        path=$(git config deploy.path)
-        rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
-        rfile=$(realpath --relative-to="$rootFolder" "$1")
-        ssh -nY "$host" "cd $path ; ~/loadrc/sqlrc/xsql.sh $rfile"
         ;;
     findresult)
         sh "$1"
@@ -36,8 +40,6 @@ case $extension in
         bash "$1"
         ;;
     rsh)
-        host=$(git config deploy.host)
-        path=$(git config deploy.path)
         rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
         rfile=$(realpath --relative-to="$rootFolder" "$1")
         ssh -nY "$host" "$path/$rfile"
@@ -47,9 +49,6 @@ case $extension in
             .
         ;;
     py)
-        host=$(git config deploy.host)
-        path=$(git config deploy.path)
-
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
             rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
