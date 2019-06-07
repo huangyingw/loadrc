@@ -10,9 +10,13 @@ else
     brew install \
         blueutil \
         coreutils
-    brew cask install kdiff3
+    brew cask install \
+        kdiff3
     brew link --overwrite neovim
 fi
+
+pip install \
+    pdftotext
 
 ./nxrc/install.sh
 ./enpass_install.sh
