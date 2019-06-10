@@ -178,7 +178,7 @@ function! GetWorktree()
 endfunction
 
 function! OpenOrSwitch(buffername, openMode)
-    let bnr = bufwinnr(a:buffername)
+    let bnr = bufwinnr('^' . a:buffername . '$')
 
     if bnr > 0
         exe bnr . "wincmd w"
