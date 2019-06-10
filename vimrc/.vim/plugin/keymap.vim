@@ -151,6 +151,7 @@ function! KdiffAll()
         return 0
     endif
 
+    only
     call asyncrun#stop('<bang>')
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
 endfunction
