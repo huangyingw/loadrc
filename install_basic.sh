@@ -9,7 +9,8 @@ then
 else
     brew install \
         blueutil \
-        coreutils
+        coreutils \
+        libtool
     brew cask install \
         kdiff3
     brew link --overwrite neovim
