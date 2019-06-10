@@ -93,6 +93,10 @@ function! SearchAgain()
 endfunction
 
 function! GetFirstColumnOfFile()
+    if (expand('%:e') ==# 'bak')
+        return 0
+    endif
+
     let bak_file = substitute(system('~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'), '\n', '', '')
     silent exec '!~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'
     call OpenOrSwitch(expand("%:p") . '.bak', 'vs')
@@ -141,10 +145,13 @@ function! Prune()
 endfunction
 
 function! KdiffAll()
+    call GetFirstColumnOfFile() 
+
     if &buftype ==# "terminal"
         return 0
     endif
 
+    only
     call asyncrun#stop('<bang>')
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
 endfunction
