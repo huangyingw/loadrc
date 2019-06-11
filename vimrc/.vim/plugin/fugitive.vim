@@ -310,6 +310,10 @@ function! s:Gdi(...) abort
     let arg1 = (a:0 >= 1) ? a:1 : ''
     silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" HEAD 2>&1 | tee ' . '"' .  output . '"'
 
+    if bufexists(output)
+        exe "bd!" . output
+    endif
+
     call OpenOrSwitch(output, 'vs')
     call s:DiffClean()
 endfunction
