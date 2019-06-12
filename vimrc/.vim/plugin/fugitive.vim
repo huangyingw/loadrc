@@ -310,7 +310,7 @@ function! s:Gdi(...) abort
     let arg1 = (a:0 >= 1) ? a:1 : ''
     silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" HEAD 2>&1 | tee ' . '"' .  output . '"'
 
-    if bufexists(output)
+    if bufwinnr('^' . output . '$') > 0
         exe "bd!" . output
     endif
 
@@ -328,7 +328,7 @@ function! s:Gdio(...) abort
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gsync.sh 2>&1 | tee gsync.findresult')
     silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  branch . '" "' . local_branch . '" 2>&1 | tee ' . '"' .  output . '"'
 
-    if bufexists(output)
+    if bufwinnr('^' . output . '$') > 0
         exe "bd!" . output
     endif
 
