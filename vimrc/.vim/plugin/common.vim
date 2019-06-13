@@ -248,14 +248,14 @@ function! RunShell(shell, ...)
     let silent = substitute(system('git config vrun.silent'), '\n', '', '')
     let async = substitute(system('git config vrun.async'), '\n', '', '')
 
-    if async ==? "false"
-        if silent ==? "false"
-            exec '!' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult'
-        else
-            silent exec '!' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult'
-        endif
-    else
+    if async ==? "true"
         call asyncrun#run('<bang>', '', 'bash ' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult')
+    else
+        if silent ==? "true"
+            silent exec '!' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult'
+        else
+            exec '!' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult'
+        endif
     endif
 endfunc
 
