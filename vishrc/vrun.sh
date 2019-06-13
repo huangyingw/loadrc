@@ -35,9 +35,6 @@ case $extension in
         bash "$1"
         ;;
     sh)
-        bash "$1"
-        ;;
-    sh)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
             rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
