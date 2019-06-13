@@ -10,6 +10,8 @@ fi
 extension=${file##*.}
 host=$(git config deploy.host)
 path=$(git config deploy.path)
+rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
+rfile=$(realpath --relative-to="$rootFolder" "$1")
 
 case $extension in
     hs)
@@ -18,8 +20,6 @@ case $extension in
     sql)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
-            rfile=$(realpath --relative-to="$rootFolder" "$1")
             ssh -nY "$host" "cd $path ; ~/loadrc/sqlrc/xsql.sh $rfile"
         else
             ~/loadrc/sqlrc/xsql.sh "$1" "$2"
@@ -31,14 +31,9 @@ case $extension in
     vdiff)
         sh "$1"
         ;;
-    ash)
-        bash "$1"
-        ;;
     sh)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
-            rfile=$(realpath --relative-to="$rootFolder" "$1")
             ssh -nY "$host" "$path/$rfile"
             rsync -aHv --force --progress \
                 --files-from=files.rev \
@@ -51,8 +46,6 @@ case $extension in
     py)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
-            rfile=$(realpath --relative-to="$rootFolder" "$1")
             ssh -nY "$host" "cd $path ; . ~/loadrc/.loadrc ; python $rfile"
         else
             SCRIPT=$(realpath "$1")
@@ -65,7 +58,12 @@ case $extension in
         source "$1"
         ;;
     yml)
-        docker-compose -f "$file" up -d
+        if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+        then
+            ssh -nY "$host" "docker-compose -f $path/$rfile up -d"
+        else
+            docker-compose -f "$file" up -d
+        fi
         ;;
     ymldebug)
         docker-compose -f "$file" up --build --force-recreate
