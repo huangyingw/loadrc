@@ -178,7 +178,8 @@ function! GetWorktree()
 endfunction
 
 function! OpenOrSwitch(buffername, openMode)
-    let bnr = bufwinnr('^' . a:buffername . '$')
+    let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
+    let bnr = bufwinnr(realpath)
 
     if bnr > 0
         exe bnr . "wincmd w"
