@@ -25,8 +25,6 @@ case $extension in
             ~/loadrc/sqlrc/xsql.sh "$1" "$2"
         fi
         ;;
-    rsql)
-        ;;
     findresult)
         sh "$1"
         ;;
@@ -39,14 +37,19 @@ case $extension in
     sh)
         bash "$1"
         ;;
-    rsh)
-        rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
-        rfile=$(realpath --relative-to="$rootFolder" "$1")
-        ssh -nY "$host" "$path/$rfile"
-        rsync -aHv --force --progress \
-            --files-from=files.rev \
-            "$host:$path/" \
-            .
+    sh)
+        if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+        then
+            rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
+            rfile=$(realpath --relative-to="$rootFolder" "$1")
+            ssh -nY "$host" "$path/$rfile"
+            rsync -aHv --force --progress \
+                --files-from=files.rev \
+                "$host:$path/" \
+                .
+        else
+            bash "$1"
+        fi
         ;;
     py)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
