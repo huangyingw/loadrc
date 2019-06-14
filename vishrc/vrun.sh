@@ -7,6 +7,12 @@ then
     exit 0
 fi
 
+if [[ $(git config leetcode.submit) == "true" ]]  && ([[ "$file" = *'.java' ]] || [[ "$file" = *'.py' ]])
+then
+    leetcode submit "$file"
+    exit 0
+fi
+
 extension=${file##*.}
 host=$(git config deploy.host)
 path=$(git config deploy.path)
@@ -69,8 +75,3 @@ case $extension in
         docker-compose -f "$file" up --build --force-recreate
         ;;
 esac
-
-if [[ $(git config leetcode.submit) == "true" ]]  && ([[ "$file" = *'.java' ]] || [[ "$file" = *'.py' ]])
-then
-    leetcode submit "$file"
-fi
