@@ -8,7 +8,6 @@ then
 
     find . -type f -size +100M -exec ls -t {} \+ > fav.log
     touch files.proj
-    . ~/loadrc/bashrc/cscope.sh
 fi
 
 FAV=/home/parallels/server/media/volgrp/mirror/av/

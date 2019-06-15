@@ -274,7 +274,7 @@ nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 nnoremap tt :Autoformat<CR>:w<CR><CR>
-nnoremap D :vs %:p<CR><CR>
+nnoremap D :only<CR>:vs %:p<CR><CR>
 " Quickly open current dir in current windows
 nnoremap <leader>d :call OpenProjectRoot()<cr>
 nnoremap <tab> %
