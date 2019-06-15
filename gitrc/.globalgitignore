@@ -14,6 +14,7 @@
 *.o
 *.orig
 *.pyc
+*.sort
 *.sql.result
 *.suo
 *.sv[a-z]
