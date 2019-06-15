@@ -1955,6 +1955,8 @@
 "./vishrc/lc_test.template"
 "./vishrc/prune.sh"
 "./vishrc/prune_test.sh"
+"./vishrc/sort_entries.sh"
+"./vishrc/sort_entries.test.sh"
 "./vishrc/vaa_test.sh"
 "./vishrc/vcommand.sh"
 "./vishrc/vdebug.sh"
