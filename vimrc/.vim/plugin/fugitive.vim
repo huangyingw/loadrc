@@ -62,6 +62,8 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete Jformat :exe
 command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete LcTest :execute s:LcTest()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete LogFilter :execute s:LogFilter(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete Prune :execute s:Prune()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete SortBySize :execute s:SortBySize()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete SortByTime :execute s:SortByTime()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete SvnApply :execute s:SvnApply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete SvnDiff :execute s:SvnDiff()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete SvnReset :execute s:SvnReset()
@@ -543,4 +545,14 @@ endfunction
 function! s:Gfix() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/gfix.sh'
+endfunction
+
+function! s:SortByTime() abort
+    let worktree = Cd2Worktree()
+    exec '!~/loadrc/vishrc/sort_entries.sh ' . '"' .  expand('%:p') . '"' . ' time'
+endfunction
+
+function! s:SortBySize() abort
+    let worktree = Cd2Worktree()
+    exec '!~/loadrc/vishrc/sort_entries.sh ' . '"' .  expand('%:p') . '"' . ' size'
 endfunction
