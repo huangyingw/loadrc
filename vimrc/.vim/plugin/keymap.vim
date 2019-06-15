@@ -59,7 +59,7 @@ function! PlayVideo()
     endif
 
     call asyncrun#stop('<bang>')
-    call RunShell('~/loadrc/vishrc/vlc.sh', expand("%:p"))
+    exec '!~/loadrc/vishrc/vlc.sh ' . '"' . expand('%:p:h') . '/' . getline('.') . '"'
 endfunction
 
 function! VDebug()

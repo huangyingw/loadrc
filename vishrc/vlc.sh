@@ -1,12 +1,7 @@
 #!/bin/bash -
-SCRIPT=$(realpath "$1")
-SCRIPTPATH=$(dirname "$SCRIPT")
-cd "$SCRIPTPATH"
-IFS=$'\r\n' GLOBIGNORE='*' command eval  'LINES=($(cat $1))'
-
 if [ $(uname) == "Darwin" ]
 then
-    /Applications/VLC.app/Contents/MacOS/VLC "${LINES[@]}"
+    /Applications/VLC.app/Contents/MacOS/VLC --macosx-continue-playback=2 "$1"
 else
-    vlc "${LINES[@]}"
+    smplayer -fullscreen "$1"
 fi
