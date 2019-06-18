@@ -179,7 +179,7 @@ endfunction
 
 function! OpenOrSwitch(buffername, openMode)
     let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
-    let bnr = bufwinnr(realpath)
+    let bnr = bufwinnr('^' . realpath . '$')
 
     if bnr > 0
         exe bnr . "wincmd w"
