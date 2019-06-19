@@ -54,4 +54,5 @@ prunefile.conf
 prunefix.conf
 run
 running.time
+setup.cfg
 ~$*
