@@ -119,6 +119,8 @@
 "./.git/modules/vimrc/.vim/bundle/vim-javascript-syntax/info/exclude"
 "./.git/modules/vimrc/.vim/bundle/vim-log-syntax/config"
 "./.git/modules/vimrc/.vim/bundle/vim-log-syntax/info/exclude"
+"./.git/modules/vimrc/.vim/bundle/vim-pandoc/config"
+"./.git/modules/vimrc/.vim/bundle/vim-pandoc/info/exclude"
 "./.git/modules/vimrc/.vim/bundle/vim-pdf/config"
 "./.git/modules/vimrc/.vim/bundle/vim-pdf/info/exclude"
 "./.git/modules/vimrc/.vim/bundle/vim-rails/config"
