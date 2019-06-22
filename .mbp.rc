@@ -1,0 +1,4 @@
+if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
+       then \
+       sudo systemsetup -setcomputersleep Never; \
+       fi

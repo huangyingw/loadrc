@@ -11,13 +11,14 @@ else
         blueutil \
         coreutils \
         libtool \
-        tig
+        tig \
+        tmux
     brew cask install \
         kdiff3
     brew link --overwrite neovim
 fi
 
-pip install \
+pip3 install \
     pdftotext
 
 ./nxrc/install.sh

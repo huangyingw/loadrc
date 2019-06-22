@@ -11,12 +11,13 @@
 52.26.142.204 awst2
 192.168.1.2 movie
 34.215.56.158 tinc-master
-10.1.10.213 work
+10.1.10.8 work
 #172.27.185.36 work
 #172.27.83.234 sb
 192.168.112.14 sb
 172.27.131.85 sandbox
-172.27.7.157 mbp
+10.1.10.231 mbp
+#172.27.7.157 mbp
 192.168.112.14 localhost.imvu.com
 10.1.10.174 mini
 #172.27.3.67 mini
@@ -36,10 +37,6 @@ fe00::0 ip6-localnet
 ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
-# BEGIN section for OpenVPN Client SSL sites
-127.94.0.1	client.openvpn.net
-127.94.0.2	openvpn-client.vpn.dmz.imvu.com
-# END section for OpenVPN Client SSL sites
 #
 
 
@@ -59,3 +56,7 @@ ff02::2 ip6-allrouters
 204.225.145.37 api.imvu.com
 204.225.145.37 client.api.imvu.com
 # END section for qa-web-pool-c
+# BEGIN section for OpenVPN Client SSL sites
+127.94.0.1	client.openvpn.net
+127.94.0.2	openvpn-client.vpn.dmz.imvu.com
+# END section for OpenVPN Client SSL sites

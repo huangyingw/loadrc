@@ -48,6 +48,7 @@ apt-get install -y \
     software-properties-common \
     ssh \
     sshfs \
+    tig \
     tmux \
     unrar \
     vim-gnome \
