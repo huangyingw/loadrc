@@ -145,6 +145,7 @@
 "./.kvmrc"
 "./.lint-sandbox.rc"
 "./.loadrc"
+"./.mbp.rc"
 "./.movie.mirror.check"
 "./.netrc"
 "./.osxrc"
