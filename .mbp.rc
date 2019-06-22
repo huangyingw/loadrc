@@ -1,0 +1,1 @@
+sudo systemsetup -setcomputersleep Never
