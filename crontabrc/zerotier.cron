@@ -1,2 +1,2 @@
-*/10 * * * * /root/loadrc/zerotierrc/zerotier_restart.sh
-*/10 * * * * /Users/huangyingw/loadrc/zerotierrc/zerotier_restart.sh
+*/10 * * * * /root/loadrc/zerotierrc/restart.sh
+*/10 * * * * /Users/huangyingw/loadrc/zerotierrc/restart.sh

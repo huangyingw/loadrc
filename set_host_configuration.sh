@@ -14,4 +14,4 @@ then
     "$HOSTTODOS"
 fi
 
-~/loadrc/zerotierrc/zerotier_restart.sh
+~/loadrc/zerotierrc/restart.sh
