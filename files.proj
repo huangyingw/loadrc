@@ -593,7 +593,6 @@
 "./timemachinerc/deletelocalsnapshots.sh"
 "./timemachinerc/listlocalsnapshots.sh"
 "./update.sh"
-"./vim_build.sh"
 "./vimrc/.vim/autoload/SQLUtilities.vim"
 "./vimrc/.vim/autoload/indexed_search.vim"
 "./vimrc/.vim/autoload/pathogen.vim"
