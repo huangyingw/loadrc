@@ -17,12 +17,13 @@ then
 else
     brew install \
         coreutils \
-        neovim
+        neovim \
+        python
     brew link --overwrite neovim
     #brew install --with-toolchain --with-clang llvm
 fi
 
-pip3 uninstall -y neovim pynvim
+pip3 uninstall -y pynvim
 pip3 install pynvim
 
 pip3 install jedi
