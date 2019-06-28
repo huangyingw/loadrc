@@ -16,4 +16,3 @@ while [  $COUNTER -lt 400 ]; do
     doCopy "$MAXSIZE"
     let COUNTER=COUNTER+10
 done
-~/loadrc/crontabrc/install.sh

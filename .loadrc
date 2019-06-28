@@ -12,7 +12,6 @@
 . $HOME/loadrc/.zerotierrc
 . $HOME/loadrc/openrc.sh
 . $HOME/loadrc/gpurc/.gpurc
-$HOME/loadrc/crontabrc/install.sh
 
 HOSTRC=$HOME/loadrc/."`hostname`".rc
 if [ -f "$HOSTRC" ]

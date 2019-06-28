@@ -30,3 +30,4 @@ pip install \
 
 ./zerotierrc/all.sh
 ./deploy_configurations.sh
+./crontabrc/install.sh
