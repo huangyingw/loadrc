@@ -19,6 +19,6 @@ then
     exit 1
 fi
 
-rsync -aHS --delete-during --force \
+rsync -aHSv --progress --delete-during --force \
     --exclude-from="$HOME"/loadrc/bashrc/osmirror_exclude \
     "${SOURCE}/" "${TARGET}/"
