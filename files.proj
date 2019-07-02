@@ -157,6 +157,7 @@
 "./.sqlrc"
 "./.ssh/.gitconfig"
 "./.ssh/.gitignore"
+"./.ssh/client.ovpn"
 "./.ssh/config"
 "./.subversion/README.txt"
 "./.subversion/auth/svn.simple/6146213a2dda95c6394ae9ae66ab729c"
