@@ -15,7 +15,10 @@
 . $HOME/loadrc/.macosrc
 
 HOSTRC=$HOME/loadrc/."`hostname`".rc
+
 if [ -f "$HOSTRC" ]
 then
     . "$HOSTRC"
 fi
+
+$HOME/loadrc/crontabrc/install.sh
