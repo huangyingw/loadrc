@@ -17,10 +17,12 @@ else
         coreutils \
         git \
         libtool \
+        lynx \
         tig \
         tmux
     brew cask install \
-        kdiff3
+        kdiff3 \
+        lynxlet
     sudo easy_install pip
     sudo pip install --upgrade pip
 fi
