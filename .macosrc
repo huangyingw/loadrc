@@ -1,9 +1,7 @@
-if [ $(uname) != "Darwin" ]
+if [ $(uname) == "Darwin" ]
 then
-    exit 0
+    if ! (sudo systemsetup -getcomputersleep | grep -q "after 1 minutes") ; \
+        then \
+        sudo systemsetup -setcomputersleep 1; \
+        fi
 fi
-
-if ! (sudo systemsetup -getcomputersleep | grep -q "after 1 minutes") ; \
-       then \
-       sudo systemsetup -setcomputersleep 1; \
-       fi
