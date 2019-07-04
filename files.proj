@@ -1534,7 +1534,6 @@
 "./vimrc/.vim/bundle/vim-pdf/doc/vim-pdf.txt"
 "./vimrc/.vim/bundle/vim-pdf/plugin/vim-pdf.vim"
 "./vimrc/.vim/bundle/vim-rails/.gitignore"
-"./vimrc/.vim/bundle/vim-rails/.netrwhist"
 "./vimrc/.vim/bundle/vim-rails/CONTRIBUTING.markdown"
 "./vimrc/.vim/bundle/vim-rails/README.markdown"
 "./vimrc/.vim/bundle/vim-rails/after/ftplugin/coffee/rails.vim"
