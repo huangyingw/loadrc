@@ -324,6 +324,7 @@
 "./crontabrc/install.sh"
 "./crontabrc/mldonkey_start.sh"
 "./crontabrc/mldonkey_stop.sh"
+"./crontabrc/restartfiles"
 "./crontabrc/zerotier.cron"
 "./cscope/.gitconfig"
 "./cscope/.gitignore"
