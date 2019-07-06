@@ -468,6 +468,7 @@
 "./hosts/mini/etc/NetworkManager/system-connections/Millennium\ Flats"
 "./hosts/mini/etc/default/isc-dhcp-server"
 "./hosts/mini/etc/dhcp/dhcpd.conf"
+"./hosts/mini/etc/hosts"
 "./hosts/mini/var/lib/zerotier-one/identity.public"
 "./hosts/mini/var/lib/zerotier-one/identity.secret"
 "./hosts/mldonkey/var/lib/zerotier-one/identity.public"
