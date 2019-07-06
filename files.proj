@@ -480,6 +480,7 @@
 "./hosts/sandbox/var/lib/zerotier-one/identity.secret"
 "./hosts/server/etc/NetworkManager/system-connections/Millennium\ Flats"
 "./hosts/server/etc/docker/daemon.json"
+"./hosts/server/etc/hosts"
 "./hosts/server/etc/network/interfaces"
 "./hosts/server/var/lib/zerotier-one/identity.public"
 "./hosts/server/var/lib/zerotier-one/identity.secret"
