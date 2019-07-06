@@ -3,13 +3,6 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-CRONRC=$HOME/loadrc/crontabrc/."`hostname`".cron
-
-if [ -f "$CRONRC" ]
-then
-    crontab "$CRONRC"
-fi
-
 echo2crontab() {
     RESTARTFILE="$1"
     if [ -f "$RESTARTFILE" ]
@@ -18,12 +11,22 @@ echo2crontab() {
     fi
 }
 
-crontab -l > crontab_file
+if [ $(uname) != "Darwin" ]
+then
+    CRONRC=$HOME/loadrc/crontabrc/."`hostname`".cron
 
-while read -r line || [[ -n "$line" ]]
-do
-    echo2crontab "$line"
-done < restartfiles
+    if [ -f "$CRONRC" ]
+    then
+        crontab "$CRONRC"
+    fi
 
-sort -u crontab_file -o crontab_file
-crontab crontab_file
+    crontab -l > crontab_file
+
+    while read -r line || [[ -n "$line" ]]
+    do
+        echo2crontab "$line"
+    done < restartfiles
+
+    sort -u crontab_file -o crontab_file
+    crontab crontab_file
+fi
