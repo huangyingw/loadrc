@@ -24,21 +24,15 @@ TARGET=files.proj.bak
 PRUNE_POSTFIX=prunefix.conf
 PRUNE_FILE=prunefile.conf
 INCLUDE_FILE=includefile.conf
+
 or="";
 
 while read suf
 do
     suf=$(echo "$suf" | sed 's/"//g')
-    prune_params+=( $or "-iname" "*.$suf" )
+    prune_params+=( $or "-wholename" "$suf" )
     or="-o"
 done < "$PRUNE_POSTFIX"
-
-while read suf
-do
-    suf=$(echo "$suf" | sed 's/"//g')
-    prune_files+=( $or "-wholename" "$suf" )
-    or="-o"
-done < "$PRUNE_FILE"
 
 or="";
 
@@ -49,17 +43,19 @@ do
     or="-o"
 done < "$INCLUDE_FILE"
 
-find . "(" "${prune_params[@]}" "${prune_files[@]}" ")" -a -prune -o -type f -print -exec file {} \; | grep text | cut -d: -f1 | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > ${TARGET} && \
+find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
+    comm -2 -3 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
+    cp -fv "$TARGET.tmp" "$TARGET" && \
     if [ ${#include_params[@]} -gt 0 ] ; \
     then \
         find . "(" "${include_params[@]}" ")" -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
     fi && \
-    sort -u ${TARGET} -o ${TARGET} && \
-    cscope -bq -i ${TARGET} -f cscope.out.bak && \
+    sort -u "$TARGET" -o "$TARGET" && \
+    cscope -bq -i "$TARGET" -f cscope.out.bak && \
     cp -fv cscope.out.bak cscope.out && \
     cp -fv cscope.out.bak.in cscope.out.in && \
     cp -fv cscope.out.bak.po cscope.out.po && \
-    cp -fv ${TARGET} files.proj && \
+    cp -fv "$TARGET" files.proj && \
     sed -i.bak 's/ /\\ /g' files.proj && \
     cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > files.proj.tmp && \
     echo > cscope.small.files && \
