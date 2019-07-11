@@ -14,6 +14,12 @@ function! ExFilter()
     w
 endfunction
 
+function! Vdelete()
+    call Filter2Findresult()
+    silent exec '%s/' . @/ . '//g'
+    w
+endfunction
+
 if !exists('g:VeryLiteral')
     let g:VeryLiteral = 0
 endif
@@ -311,6 +317,7 @@ vnoremap <silent>s :call GitSearch()<cr>
 vnoremap <silent>t :call SearchAgain()<cr>
 vnoremap <silent>g :call VFilter()<cr>
 vnoremap <silent>i :call ExFilter()<cr>
+vnoremap <silent>I :call Vdelete()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
 nmap <C-s> :call CSCSearch(0)<CR><CR>
 nnoremap <c-space> :call CSCSearch(4)<CR><CR>
