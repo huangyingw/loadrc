@@ -5,7 +5,7 @@ path=$(git config deploy.path)
 
 if [ "$host" == "localhost" ]
 then
-    return
+    exit 0
 fi
 
 if [[ -n "$host" ]] && [[ -n "$path" ]]
