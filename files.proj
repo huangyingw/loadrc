@@ -1518,6 +1518,7 @@
 "./vimrc/.vim/bundle/vim-fugitive/ftdetect/fugitive.vim"
 "./vimrc/.vim/bundle/vim-fugitive/plugin/fugitive.vim"
 "./vimrc/.vim/bundle/vim-fugitive/syntax/fugitive.vim"
+"./vimrc/.vim/bundle/vim-fugitive/syntax/fugitiveblame.vim"
 "./vimrc/.vim/bundle/vim-gradle/.gitignore"
 "./vimrc/.vim/bundle/vim-gradle/README.md"
 "./vimrc/.vim/bundle/vim-gradle/compiler/gradle.vim"
