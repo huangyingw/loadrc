@@ -24,6 +24,6 @@ apt-get install -y docker-ce docker-compose
 
 ./nvidia-docker_install.sh
 
-mkdir -p /media/volgrp/var/lib/docker/
+mkdir -p /media/nvme/var/lib/docker/
 /etc/init.d/docker stop \
-    && ~/loadrc/bashrc/mklnk.sh /var/lib/docker/ /media/volgrp/var/lib/docker/
+    && ~/loadrc/bashrc/mklnk.sh /var/lib/docker/ /media/nvme/var/lib/docker/
