@@ -5,7 +5,7 @@ cd "$SCRIPTPATH"
 
 if [ $(uname) != "Darwin" ]
 then
-    add-apt-repository -y ppa:neovim-ppa/unstable
+    add-apt-repository -y ppa:neovim-ppa/stable
     apt-get update
     apt-get upgrade -y
     apt-get install -y \
@@ -13,6 +13,7 @@ then
         neovim \
         python-dev \
         python-pip \
+        python3-dev \
         python3-pip
 else
     brew install \
@@ -23,7 +24,6 @@ else
     #brew install --with-toolchain --with-clang llvm
 fi
 
-pip3 uninstall -y pynvim
 pip3 install pynvim
 
 pip3 install jedi
