@@ -35,6 +35,7 @@ apt-get install -y \
     netcat \
     nodejs \
     npm \
+    openvpn \
     perl \
     pm-utils \
     pv \
