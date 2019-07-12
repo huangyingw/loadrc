@@ -500,6 +500,7 @@
 "./hosts/vserver/etc/network/interfaces"
 "./hosts/vserver/var/lib/zerotier-one/identity.public"
 "./hosts/vserver/var/lib/zerotier-one/identity.secret"
+"./imvurc/Vagrantfile"
 "./imvurc/ghypo.sh"
 "./imvurc/restart.sh"
 "./imvurc/sb_setup.sh"
