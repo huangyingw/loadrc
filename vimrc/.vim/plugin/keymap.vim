@@ -144,6 +144,7 @@ function! Prune()
     else
         silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"'
     endif
+    call UpdateProj() 
 endfunction
 
 function! KdiffAll()
