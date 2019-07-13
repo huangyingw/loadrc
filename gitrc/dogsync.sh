@@ -14,6 +14,5 @@ if [ -z $(git config gsync.remote) ]
 then
     git pull
 else
-    git fetch $(git config gsync.remote) $(git config gsync.branch):$(git config gsync.branch)
-    git merge $(git config gsync.branch) "$currentBranch"
+    git pull $(git config gsync.remote) $(git config gsync.branch)
 fi
