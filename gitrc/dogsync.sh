@@ -10,10 +10,10 @@ do
     eval "$COMMAND"
 done
 
-if [ -n $(git config gsync.remote) ]
+if [ -z $(git config gsync.remote) ]
 then
+    git pull
+else
     git fetch $(git config gsync.remote) $(git config gsync.branch):$(git config gsync.branch)
     git merge $(git config gsync.branch) "$currentBranch"
-else
-    git pull
 fi
