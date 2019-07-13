@@ -53,11 +53,11 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
     sort -u "$TARGET" -o "$TARGET" && \
     cp -fv "$TARGET" files.proj && \
     sed -i.bak 's/ /\\ /g' files.proj && \
+    cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > files.proj.tmp && \
+    echo > cscope.small.files && \
+    echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
     cscope -bq -i "$TARGET" -f cscope.out.bak && \
     cp -fv cscope.out.bak cscope.out && \
     cp -fv cscope.out.bak.in cscope.out.in && \
     cp -fv cscope.out.bak.po cscope.out.po && \
-    cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > files.proj.tmp && \
-    echo > cscope.small.files && \
-    echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
     sort -u ~/all.proj -o ~/all.proj
