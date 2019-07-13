@@ -46,3 +46,6 @@ Not \+authorized \+for \+request
 Error detected while processing function <SNR>24_auto_deploy_augroup[6]..asyncrun#run[102]..<SNR>44_run[63]..<SNR>AsyncRun_Job_Start:
 line  101:
 E903: Process failed to start: too many open files: "/bin/bash"
+
+cscope: No such file or directory
+cscope: cannot rename file ncscope.out.bak to file cscope.out.bak
