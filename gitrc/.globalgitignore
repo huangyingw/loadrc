@@ -56,3 +56,4 @@ run
 running.time
 setup.cfg
 ~$*
+.~lock.*#
