@@ -316,9 +316,9 @@ endif
 vnoremap <silent>f :call VimSearch()<cr>
 vnoremap <silent>s :call GitSearch()<cr>
 vnoremap <silent>t :call SearchAgain()<cr>
-nnoremap ng :call VFilter()<cr>
-nnoremap nf :call ExFilter()<cr>
-nnoremap nd :call Vdelete()<cr>
+nnoremap mg :call VFilter()<cr>
+nnoremap mf :call ExFilter()<cr>
+nnoremap md :call Vdelete()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
 nmap <C-s> :call CSCSearch(0)<CR><CR>
 nnoremap <c-space> :call CSCSearch(4)<CR><CR>
