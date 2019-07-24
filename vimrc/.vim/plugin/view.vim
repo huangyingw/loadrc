@@ -15,6 +15,7 @@ set statusline +=\ %m                "modified flag
 "set statusline +=%3*%y%*                "file type
 "set statusline +=%2*0x%04B\ %*          "character under cursor
 set cursorline                  " underline the current line, for quick orientation
+hi cursorline cterm=NONE ctermbg=darkred ctermfg=white
 " Split previously opened file ('#') in a split window
 set laststatus=2 "black status line at bottom of window
 if has("win32")
