@@ -569,6 +569,7 @@
 "./openrc.sh"
 "./osxrc/restart_bluetooth.sh"
 "./osxrc/restart_wifi.sh"
+"./pdfrc/all_2_txt.sh"
 "./perlrc/replace.pl"
 "./post_setup.sh"
 "./prunefile.conf"
