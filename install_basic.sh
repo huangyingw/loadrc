@@ -16,15 +16,18 @@ else
         blueutil \
         coreutils \
         git \
+        Caskroom/cask/xquartz \
         libtool \
         lynx \
         tig \
-        tmux
+        tmux \
+        xpdf
     brew cask install \
         kdiff3 \
         lynxlet
     sudo easy_install pip
     sudo pip install --upgrade pip
+
 fi
 
 pip install \
