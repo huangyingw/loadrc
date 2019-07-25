@@ -39,6 +39,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete Gme2 :execut
 command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete Gmet :execute s:Gmet()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete Gpl :execute s:Gpl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete Gps :execute s:Gps()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete Gres :execute s:Gres()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete Greview :execute s:Greview()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete Grsh :execute s:Grsh(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#Complete Grta :execute s:Grta(<f-args>)
@@ -462,6 +463,11 @@ endfunction
 function! s:Greview() abort
     let worktree = Cd2Worktree()
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/greview.sh')
+endfunction
+
+function! s:Gres() abort
+    let worktree = Cd2Worktree()
+    exec '!~/loadrc/gitrc/gres.sh'
 endfunction
 
 function! s:Dps() abort
