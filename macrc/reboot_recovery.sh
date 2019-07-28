@@ -1,3 +1,3 @@
 #!/bin/bash - 
-nvram "recovery-boot-mode=unused"
-reboot recovery
+sudo nvram "recovery-boot-mode=unused"
+sudo reboot recovery
