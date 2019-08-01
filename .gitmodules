@@ -185,3 +185,6 @@
 [submodule "vimrc/.vim/bundle/vim-pdf"]
 	path = vimrc/.vim/bundle/vim-pdf
 	url = https://github.com/makerj/vim-pdf.git
+[submodule "vimrc/.vim/bundle/vim-gtrans"]
+	path = vimrc/.vim/bundle/vim-gtrans
+	url = https://github.com/haya14busa/vim-gtrans.git
