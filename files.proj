@@ -611,6 +611,7 @@
 "./vimrc/.vim/bundle/Dockerfile.vim/ftdetect/Dockerfile.vim"
 "./vimrc/.vim/bundle/Dockerfile.vim/ftdetect/docker-compose.vim"
 "./vimrc/.vim/bundle/Dockerfile.vim/ftplugin/Dockerfile.vim"
+"./vimrc/.vim/bundle/Dockerfile.vim/ftplugin/docker-compose.vim"
 "./vimrc/.vim/bundle/Dockerfile.vim/indent/Dockerfile.vim"
 "./vimrc/.vim/bundle/Dockerfile.vim/snippets/Dockerfile.snippets"
 "./vimrc/.vim/bundle/Dockerfile.vim/snippets/docker-compose.snippets"
