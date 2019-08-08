@@ -4,7 +4,7 @@ set statusline=%r%h
 set statusline +=\ %.55F            "full path
 set statusline +=\ %{WordCount()}\ words,
 set statusline +=%=        " Switch to the right side
-set statusline +=\ %{strftime('%m/%d/%y\ %H:%M:%S',getftime(expand('%')))} " file last modified time 
+set statusline +=\ %{strftime('%m/%d/%y\ %H:%M:%S',getftime(expand('%')))} " file last modified time
 set statusline +=\ %l             "current line
 set statusline +=/%L               "total lines
 set statusline +=\ %v             "virtual column number
@@ -26,5 +26,7 @@ hi link ipaddr Identifier
 set completeopt-=preview
 syntax enable
 set background=dark
-set cursorline                  " underline the current line, for quick orientation
+set cursorline
 highlight cursorline cterm=NONE ctermbg=darkred ctermfg=white
+set cursorcolumn
+highlight cursorcolumn cterm=NONE ctermbg=darkred ctermfg=white
