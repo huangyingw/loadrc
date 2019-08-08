@@ -28,5 +28,5 @@ syntax enable
 set background=dark
 set cursorline
 highlight cursorline cterm=NONE ctermbg=darkred ctermfg=white
-set cursorcolumn
-highlight cursorcolumn cterm=NONE ctermbg=darkred ctermfg=white
+"set cursorcolumn
+"highlight cursorcolumn cterm=NONE ctermbg=darkred ctermfg=white
