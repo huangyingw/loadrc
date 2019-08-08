@@ -27,4 +27,4 @@ set completeopt-=preview
 syntax enable
 set background=dark
 set cursorline                  " underline the current line, for quick orientation
-"hi cursorline cterm=NONE ctermbg=darkred ctermfg=white
+highlight cursorline cterm=NONE ctermbg=darkred ctermfg=white
