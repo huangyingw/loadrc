@@ -115,15 +115,6 @@ set lazyredraw                  " don't update the display while executing macro
 set laststatus=2                " tell VIM to always put a status line in, even
 "    if there is only one window
 set cmdheight=1                 " use a status bar that is 2 rows high
-" }}}
-" Folding {{{
-" }}}
-" Edit the vimrc file
-" Keep search matches in the middle of the window and pulse the line when moving
-" to them.
-" nnoremap n n:call PulseCursorLine()<cr>
-" nnoremap N N:call PulseCursorLine()<cr>
-" Pulse ------------------------------------------------------------------- {{{
 
 
 " }}}
