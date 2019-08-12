@@ -457,6 +457,7 @@
 "./host.conf"
 "./hosts/imac/Library/Application\ Support/ZeroTier/One/identity.public"
 "./hosts/imac/Library/Application\ Support/ZeroTier/One/identity.secret"
+"./hosts/imac/Users/huangyingw/.bashrc"
 "./hosts/imac/etc/hosts"
 "./hosts/lint-sandbox/etc/hosts"
 "./hosts/lint-sandbox/etc/network/interfaces"
