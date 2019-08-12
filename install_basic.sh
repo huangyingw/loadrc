@@ -13,10 +13,11 @@ else
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew update
     brew install \
+        Caskroom/cask/xquartz \
         blueutil \
         coreutils \
         git \
-        Caskroom/cask/xquartz \
+        htop \
         libtool \
         lynx \
         tig \
