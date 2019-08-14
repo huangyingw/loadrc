@@ -459,6 +459,7 @@
 "./hosts/imac/Library/Application\ Support/ZeroTier/One/identity.secret"
 "./hosts/imac/Users/huangyingw/.bashrc"
 "./hosts/imac/etc/hosts"
+"./hosts/imac/etc/sudoers"
 "./hosts/lint-sandbox/etc/hosts"
 "./hosts/lint-sandbox/etc/network/interfaces"
 "./hosts/lint-sandbox/var/lib/zerotier-one/identity.public"
