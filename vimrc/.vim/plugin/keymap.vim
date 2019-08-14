@@ -82,7 +82,9 @@ function! VRun()
 
     let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
     call RunShell('~/loadrc/vishrc/vrun.sh', expand("%:p"), b:csdbpath)
-    call OpenOrSwitch(expand("%:p") . '.findresult', 'vs')
+    if expand("%:p") != 'gbil.log'
+        call OpenOrSwitch(expand("%:p") . '.findresult', 'vs')
+    endif
 endfunction
 
 function! SearchAgain()
