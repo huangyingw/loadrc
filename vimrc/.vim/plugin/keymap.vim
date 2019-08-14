@@ -143,11 +143,11 @@ function! Prune()
     else
         silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"'
     endif
-    call UpdateProj() 
+    call UpdateProj()
 endfunction
 
 function! KdiffAll()
-    call GetFirstColumnOfFile() 
+    call GetFirstColumnOfFile()
 
     if &buftype ==# "terminal"
         return 0
@@ -183,7 +183,7 @@ function! VimOpen()
     elseif (expand("%") ==# 'gbr.findresult')
         let b:commit = expand("<cword>")
         exec '!git checkout ' . '"' .  b:commit . '"'
-    elseif (expand("%") ==# 'gbil.findresult')
+    elseif (expand("%") ==# 'gbil.log')
         let b:commit = expand("<cword>")
         exec '!git checkout ' . '"' .  b:commit . '"'
     elseif (expand("%") ==# 'glg.findresult')
