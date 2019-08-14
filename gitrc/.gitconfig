@@ -68,6 +68,7 @@
     ignore = COMMIT_EDITMSG
     ignore = change
     ignore = files.proj
+    ignore = gbil.findresult
     ignore = includefile.conf
     ignore = prunefile.conf
     ignore = prunefix.conf
