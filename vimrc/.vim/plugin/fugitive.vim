@@ -210,27 +210,27 @@ endfunction
 
 function! s:Gbis() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gbis.sh')
+    exec '!~/loadrc/gitrc/gbis.sh'
 endfunction
 
 function! s:Gbidebug() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gbidebug.sh')
+    exec '!~/loadrc/gitrc/gbidebug.sh'
 endfunction
 
 function! s:Gbib() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gbib.sh')
+    exec '!~/loadrc/gitrc/gbib.sh'
 endfunction
 
 function! s:Gbig() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gbig.sh')
+    exec '!~/loadrc/gitrc/gbig.sh'
 endfunction
 
 function! s:Gbil() abort
     let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/gbil.sh'
+    exec '!~/loadrc/gitrc/gbil.sh'
     call OpenOrSwitch('gbil.findresult', 'vs')
 endfunction
 
