@@ -466,6 +466,7 @@
 "./hosts/lint-sandbox/var/lib/zerotier-one/identity.secret"
 "./hosts/mbp/Library/Application\ Support/ZeroTier/One/identity.public"
 "./hosts/mbp/Library/Application\ Support/ZeroTier/One/identity.secret"
+"./hosts/mbp/etc/sudoers"
 "./hosts/mini/etc/NetworkManager/system-connections/Millennium\ Flats"
 "./hosts/mini/etc/default/isc-dhcp-server"
 "./hosts/mini/etc/dhcp/dhcpd.conf"
