@@ -231,7 +231,7 @@ endfunction
 function! s:Gbil() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/gbil.sh'
-    call OpenOrSwitch('gbil.findresult', 'vs')
+    call OpenOrSwitch('gbil.log', 'vs')
 endfunction
 
 function! s:Gbr() abort
