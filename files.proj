@@ -138,6 +138,7 @@
 "./.hgignore"
 "./.hgrc"
 "./.imac.rc"
+"./.imacpro.rc"
 "./.kdiff3rc"
 "./.kvmrc"
 "./.lint-sandbox.rc"
