@@ -29,6 +29,7 @@
 .fuse_hidden*
 .gitconfig
 .svn
+.~lock.*#
 CVS
 build
 cscope.*
@@ -43,6 +44,7 @@ error
 fav.log
 files.proj
 find.cc
+gbil.log
 gfvd.already
 includefile.conf
 ncscope.in.out
@@ -56,4 +58,3 @@ run
 running.time
 setup.cfg
 ~$*
-.~lock.*#
