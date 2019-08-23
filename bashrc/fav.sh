@@ -6,7 +6,7 @@ if [ -d "$FAV" ]
 then
     cd "$FAV"
 
-    find . -type f -size +100M -exec ls -t {} \+ > fav.log
+    find . -type f -size +100M -exec ls -S {} \+ > fav.log
     touch files.proj
 fi
 
