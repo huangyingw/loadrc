@@ -1983,6 +1983,7 @@
 "./vimrc/.vim/plugin/dictionary.vim"
 "./vimrc/.vim/plugin/fugitive.vim"
 "./vimrc/.vim/plugin/keymap.vim"
+"./vimrc/.vim/plugin/netrw.vim"
 "./vimrc/.vim/plugin/nextval.vim"
 "./vimrc/.vim/plugin/repeat.vim"
 "./vimrc/.vim/plugin/restore_view.vim"
