@@ -112,6 +112,7 @@
 "./.git/modules/vimrc/.vim/bundle/vim-ghost/info/exclude"
 "./.git/modules/vimrc/.vim/bundle/vim-gradle/config"
 "./.git/modules/vimrc/.vim/bundle/vim-gradle/info/exclude"
+"./.git/modules/vimrc/.vim/bundle/vim-gtrans/config"
 "./.git/modules/vimrc/.vim/bundle/vim-javascript-syntax/config"
 "./.git/modules/vimrc/.vim/bundle/vim-javascript-syntax/info/exclude"
 "./.git/modules/vimrc/.vim/bundle/vim-log-syntax/config"
