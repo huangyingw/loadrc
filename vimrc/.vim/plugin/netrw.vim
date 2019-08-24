@@ -61,6 +61,8 @@ fun! LocalRename() range
     let mapsafecurdir = escape(b:netrw_curdir, map_escape)
     let oldname = ComposePath(mapsafecurdir, curword)
 
-    let newname = input("Moving " . oldname . " to : ", substitute(oldname, '/*$', '', 'e'))
-    call rename(oldname, newname)
+    if filereadable(oldname)
+        let newname = input("Moving " . oldname . " to : ", substitute(oldname, '/*$', '', 'e'))
+        call rename(oldname, newname)
+    endif
 endfun
