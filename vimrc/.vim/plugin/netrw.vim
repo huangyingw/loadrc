@@ -62,7 +62,7 @@ fun! LocalRename() range
     let oldname = ComposePath(mapsafecurdir, curword)
 
     if filereadable(oldname)
-        let newname = input("Moving " . oldname . " to : ", substitute(oldname, '/*$', '', 'e'))
+        let newname = input(substitute(oldname, '/*$', '', 'e'))
         call rename(oldname, newname)
     endif
 endfun
