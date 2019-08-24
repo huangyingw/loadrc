@@ -237,8 +237,8 @@ function! OpenProjectRoot()
     call OpenOrSwitch(b:csdbpath, 'vs')
 endfunction
 
-nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR><CR>
-nnoremap <leader>L :TlistClose<CR><CR>
+nnoremap <leader>l :TlistClose<CR>:TlistToggle<cr>
+nnoremap <leader>L :TlistClose<cr>
 nnoremap hh <c-w>h<c-w><Bar>
 nnoremap ll <c-w>l<c-w><Bar>
 nnoremap mm <c-w><Bar>
@@ -269,22 +269,22 @@ vnoremap <Space> za
 "onoremap <silent> <leader>f <C-C>za
 "vnoremap <silent> <leader>f zf
 nnoremap <silent> <leader>e :call VsMax($HOME . "/.bash_history") <CR>
-nnoremap <silent> <leader>f :call ShowRemember()<CR><CR>
-nnoremap <silent> <leader>v :so $MYVIMRC<CR><CR>
-nnoremap <leader>sh :execute "leftabove vs" bufname('#')<cr><CR>
-nnoremap <leader>sl :execute "rightbelow vs" bufname('#')<cr><CR>
+nnoremap <silent> <leader>f :call ShowRemember()<cr>
+nnoremap <silent> <leader>v :so $MYVIMRC<cr>
+nnoremap <leader>sh :execute "leftabove vs" bufname('#')<cr>
+nnoremap <leader>sl :execute "rightbelow vs" bufname('#')<cr>
 nnoremap W :call VsMax(".")<CR>
 " Quickly reload current file
 nnoremap E :mkview<CR>:e!<CR>
 " Quickly save current file
-nnoremap S :w<CR><CR>
+nnoremap S :w<cr>
 " Quickly save and exit
-nnoremap X :x<CR><CR>
+nnoremap X :x<cr>
 nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
-nnoremap tt :Autoformat<CR>:w<CR><CR>
-nnoremap D :only<CR>:vs %:p<CR><CR>
+nnoremap tt :Autoformat<CR>:w<cr>
+nnoremap D :only<CR>:vs %:p<cr>
 " Quickly open current dir in current windows
 nnoremap <leader>d :call OpenProjectRoot()<cr>
 nnoremap <tab> %
@@ -322,29 +322,29 @@ nnoremap mg :call VFilter()<cr>
 nnoremap mf :call ExFilter()<cr>
 nnoremap md :call Vdelete()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
-nmap <C-s> :call CSCSearch(0)<CR><CR>
-nnoremap <c-space> :call CSCSearch(4)<CR><CR>
-nmap <C-@> :call CSCSearch(4)<CR><CR>
-nmap <C-f> :call CSCSearch(7)<CR><CR>
-nmap <C-e> :call CSCSearch(1)<CR><CR>
-nmap <C-g> :call CSCSearch(3)<CR><CR>
-nnoremap <leader>d :!rm %:p<CR>:q<CR><CR>
-nmap <C-j> :call PlayVideo()<CR><CR>
-nmap <C-p> :call Prune()<CR><CR>
-nmap <C-k> :call KdiffAll()<CR><CR>
+nmap <C-s> :call CSCSearch(0)<cr>
+nnoremap <c-space> :call CSCSearch(4)<cr>
+nmap <C-@> :call CSCSearch(4)<cr>
+nmap <C-f> :call CSCSearch(7)<cr>
+nmap <C-e> :call CSCSearch(1)<cr>
+nmap <C-g> :call CSCSearch(3)<cr>
+nnoremap <leader>d :!rm %:p<CR>:q<cr>
+nmap <C-j> :call PlayVideo()<cr>
+nmap <C-p> :call Prune()<cr>
+nmap <C-k> :call KdiffAll()<cr>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr>
 nnoremap qq :call RememberQuit()<cr>
 nnoremap H :call ShowVITAG()<cr>
 nnoremap F :call GetFirstColumnOfFile()<cr>
-nnoremap T :vs $HOME/all.proj<CR><CR>
-nnoremap L :vs <C-R>"<CR><CR>
+nnoremap T :vs $HOME/all.proj<cr>
+nnoremap L :vs <C-R>"<cr>
 map <F5> :call VRun()<cr>
 map <F3> :call VDebug()<cr>
-" nnoremap gf gF<CR><CR>
-nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<CR><CR>
+" nnoremap gf gF<cr>
+nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
 map oo :call VimOpen()<cr>
-nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- "' . expand("%:p") . '"')<CR><CR>
+nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
 
 function! CompareTwoFiles()
