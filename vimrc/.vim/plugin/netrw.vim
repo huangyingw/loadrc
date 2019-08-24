@@ -4,6 +4,8 @@ fun! GetWord()
     let dirname = substitute(dirname, '\s\+$', '', 'e')
     let dirname = substitute(dirname, "@$", "", "")
     let dirname = substitute(dirname, "\*$", "", "")
+    let dirname = substitute(dirname, "^\"", "", "")
+    let dirname = substitute(dirname, "\"$", "", "")
     return dirname
 endfun
 
