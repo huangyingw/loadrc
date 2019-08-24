@@ -332,6 +332,7 @@ nnoremap <leader>d :!rm %:p<CR>:q<cr>
 nmap <C-j> :call PlayVideo()<cr>
 nmap <C-p> :call Prune()<cr>
 nmap <C-k> :call KdiffAll()<cr>
+nmap mr :call LocalRename()<cr>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr>
 nnoremap qq :call RememberQuit()<cr>
