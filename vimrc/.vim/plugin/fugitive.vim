@@ -329,6 +329,7 @@ function! s:Gdi(...) abort
         exe "bd!" . output
     endif
 
+    let worktree = Cd2Worktree()
     call OpenOrSwitch(output, 'vs')
     call s:DiffClean()
 endfunction
@@ -348,6 +349,7 @@ function! s:Gdio(...) abort
         exe "bd!" . output
     endif
 
+    let worktree = Cd2Worktree()
     call OpenOrSwitch(output, 'vs')
     call s:DiffClean()
 endfunction
