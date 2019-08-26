@@ -272,3 +272,11 @@ endfunc
 function! GetUnnamedRegister()
     return '"' . @" . '"'
 endfunc
+
+function! IsSkipFiletype()
+    if (&buftype ==# 'terminal') || (&filetype ==# 'gitcommit') || (&filetype ==# 'fugitive')
+        return 1
+    else
+        return 0
+    endif
+endfunc

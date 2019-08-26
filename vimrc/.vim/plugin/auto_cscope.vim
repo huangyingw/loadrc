@@ -1,5 +1,5 @@
 function! s:auto_cscope()
-    if (&buftype ==# 'terminal')  || (&filetype ==# 'gitcommit') || (&filetype ==# '') || (&filetype ==# 'fugitive') 
+    if (&buftype ==# 'terminal')  || (&filetype ==# 'gitcommit') || (&filetype ==# 'fugitive')
         return
     endif
 
