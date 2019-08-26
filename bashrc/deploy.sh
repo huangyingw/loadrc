@@ -11,5 +11,5 @@ fi
 if [[ -n "$host" ]] && [[ -n "$path" ]]
 then
     ssh -n "$host" "mkdir -p $path"
-    . ~/loadrc/bashrc/rsyncFiles.sh . "$host:$path"
+    . ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/rsyncFiles.sh
 fi
