@@ -226,12 +226,12 @@ function! RunShell(shell, ...)
 endfunc
 
 function! Filter2Findresult()
-    let csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
+    let worktree = Cd2Worktree()
     let keyword = @/
     let b:result = GetEscapedResult(keyword)
 
     if expand('%:e') != "findresult"
-        let buffername = csdbpath . '/' . b:result . '.vaa.findresult'
+        let buffername = b:result . '.vaa.findresult'
         silent exec '!rm ' . buffername
 
         if bufexists(buffername)
@@ -239,6 +239,7 @@ function! Filter2Findresult()
         endif
 
         silent exec 'w! ' . buffername
+        let worktree = Cd2Worktree()
         call OpenOrSwitch(buffername, 'vs')
     endif
 endfunc
