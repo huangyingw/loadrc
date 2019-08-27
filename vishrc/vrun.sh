@@ -45,33 +45,33 @@ case $extension in
                 --files-from=files.rev \
                 "$host:$path/" \
                 .
-                        else
-                            bash "$1"
-                        fi
-                        ;;
-                    py)
-                        if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
-                        then
-                            ssh -nY "$host" "cd $path ; . ~/loadrc/.loadrc ; python $rfile"
-                        else
-                            SCRIPT=$(realpath "$1")
-                            SCRIPTPATH=$(dirname "$SCRIPT")
-                            cd "$SCRIPTPATH"
-                            python "$1"
-                        fi
-                        ;;
-                    vim)
-                        source "$1"
-                        ;;
-                    yml)
-                        if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
-                        then
-                            ssh -nY "$host" "docker-compose -f $path/$rfile up -d"
-                        else
-                            docker-compose -f "$file" up -d
-                        fi
-                        ;;
-                    ymldebug)
-                        docker-compose -f "$file" up --build --force-recreate
-                        ;;
-                esac
+        else
+            bash "$1"
+        fi
+        ;;
+    py)
+        if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+        then
+            ssh -nY "$host" "cd $path ; . ~/loadrc/.loadrc ; python $rfile"
+        else
+            SCRIPT=$(realpath "$1")
+            SCRIPTPATH=$(dirname "$SCRIPT")
+            cd "$SCRIPTPATH"
+            python "$1"
+        fi
+        ;;
+    vim)
+        source "$1"
+        ;;
+    yml)
+        if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+        then
+            ssh -nY "$host" "docker-compose -f $path/$rfile up -d"
+        else
+            docker-compose -f "$file" up -d
+        fi
+        ;;
+    ymldebug)
+        docker-compose -f "$file" up --build --force-recreate
+        ;;
+esac
