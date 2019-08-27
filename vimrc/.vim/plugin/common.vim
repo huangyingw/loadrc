@@ -215,14 +215,15 @@ function! RunShell(shell, ...)
     let async = substitute(system('git config vrun.async'), '\n', '', '')
 
     if async ==? "true"
-        call asyncrun#run('<bang>', '', 'bash ' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult')
+        call asyncrun#run('<bang>', '', 'bash ' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult.bak')
     else
         if silent ==? "true"
-            silent exec '!' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult'
+            silent exec '!' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult.bak'
         else
-            exec '!' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult'
+            exec '!' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult.bak'
         endif
     endif
+    silent exec '!cp' . ' "' .  arg1 . '.findresult.bak' . '" "' .  arg1 . '.findresult' . '"'
 endfunc
 
 function! Filter2Findresult()
