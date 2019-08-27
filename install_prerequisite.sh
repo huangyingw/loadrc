@@ -18,6 +18,7 @@ apt-get install -y \
     curl \
     dkms \
     exuberant-ctags \
+    ffmpeg \
     gdebi-core \
     git \
     gparted \
