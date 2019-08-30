@@ -9,6 +9,9 @@ do
         output=$(echo "$line" | awk -F',' '{print $1}')
         start=$(echo "$line" | awk -F',' '{print $2}')
         end=$(echo "$line" | awk -F',' '{print $3}')
-        ffmpeg -n -ss "$start" -to "$end" -i "$input" "$output"
+        if [ ! -f "$output" ] 
+        then
+            ffmpeg -n -ss "$start" -to "$end" -i "$input" "$output"
+        fi
 done < "$ss"
 done
