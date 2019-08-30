@@ -9,12 +9,20 @@ function! RememberQuit()
 endfunction
 
 function! ExFilter()
+    if (expand("%") ==# 'fav.log.sort')
+        return
+    endif
+
     call Filter2Findresult()
     silent exec 'g/' . @/ . '/d'
     w
 endfunction
 
 function! Vdelete()
+    if (expand("%") ==# 'fav.log.sort')
+        return
+    endif
+
     call Filter2Findresult()
     silent exec '%s/' . @/ . '//g'
     w
@@ -44,6 +52,10 @@ function! HighlightKeyword(keyword)
 endfunction
 
 function! VFilter()
+    if (expand("%") ==# 'fav.log.sort')
+        return
+    endif
+
     call Filter2Findresult()
     silent exec 'g!/' . @/ . '/d'
     w
