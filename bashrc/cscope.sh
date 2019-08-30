@@ -55,6 +55,8 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
     sed -i.bak 's/ /\\ /g' files.proj && \
     find . -type f -size +100M -exec ls -S {} \+ > fav.log.bak && \
     cp -fv fav.log.bak fav.log && \
+    find . -type f -size +100M -exec ls -t {} \+ > fav.log.sort.bak && \
+    cp -fv fav.log.sort.bak fav.log.sort && \
     cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > files.proj.tmp && \
     echo > cscope.small.files && \
     echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
