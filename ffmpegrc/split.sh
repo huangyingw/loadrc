@@ -1,6 +1,6 @@
 #!/bin/bash -
 
-find . -type f -name *.ffmpeg.config | while read ss
+find . -type f -name \*.ffmpeg.config | while read ss
 do
     input=$(echo "$ss" | sed 's/\.ffmpeg.config//g')
 
