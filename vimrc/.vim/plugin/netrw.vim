@@ -64,5 +64,6 @@ fun! LocalRename() range
     if filereadable(oldname)
         let newname = input("", substitute(oldname, '/*$', '', 'e'))
         call rename(oldname, newname)
+        call UpdateProj()
     endif
 endfun
