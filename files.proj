@@ -1520,6 +1520,7 @@
 "./vimrc/.vim/bundle/vim-docker-compose-syntax/test.sh"
 "./vimrc/.vim/bundle/vim-fugitive/.gitattributes"
 "./vimrc/.vim/bundle/vim-fugitive/.gitconfig"
+"./vimrc/.vim/bundle/vim-fugitive/.github/FUNDING.yml"
 "./vimrc/.vim/bundle/vim-fugitive/.gitignore"
 "./vimrc/.vim/bundle/vim-fugitive/CONTRIBUTING.markdown"
 "./vimrc/.vim/bundle/vim-fugitive/README.markdown"
