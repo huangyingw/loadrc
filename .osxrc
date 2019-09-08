@@ -1,4 +1,0 @@
-#!/bin/bash
-sudo pmset -a sleep 60
-sudo pmset -a displaysleep 30
-alias restartBluetooth='$HOME/loadrc/osxrc/restart_bluetooth.sh'
