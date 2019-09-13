@@ -1,8 +1,4 @@
 function! s:auto_cscope()
-    if (&buftype ==# 'terminal')  || (&filetype ==# 'gitcommit') || (&filetype ==# 'fugitive')
-        return
-    endif
-
     call UpdateProj()
 endfunction
 
