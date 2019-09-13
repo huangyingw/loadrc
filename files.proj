@@ -1916,6 +1916,7 @@
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/moreverb.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/natbib.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/pdfpages.vim"
+"./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/pgfplots.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/pythontex.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/subfile.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/tabularx.vim"
