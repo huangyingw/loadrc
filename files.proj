@@ -1634,6 +1634,7 @@
 "./vimrc/.vim/bundle/vim-snipmate/t/tests.sh"
 "./vimrc/.vim/bundle/vimtex/.github/ISSUE_TEMPLATE/feature_request.md"
 "./vimrc/.vim/bundle/vimtex/.github/ISSUE_TEMPLATE/issue_report.md"
+"./vimrc/.vim/bundle/vimtex/.github/workflows/main.yml"
 "./vimrc/.vim/bundle/vimtex/.gitignore"
 "./vimrc/.vim/bundle/vimtex/.travis.yml"
 "./vimrc/.vim/bundle/vimtex/.vintrc.yaml"
