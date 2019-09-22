@@ -342,7 +342,7 @@ function! s:Gdio(...) abort
     let output = substitute(output, "/", "_", "g")
     let remote = substitute(system("git config gsync.remote"), '\n', '', '')
     let branch = substitute(system("git config gsync.branch"), '\n', '', '')
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gsync.sh 2>&1 | tee gsync.findresult')
+    exec '!~/loadrc/gitrc/gsync.sh 2>&1 | tee gsync.findresult'
     exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  branch . '" "' . local_branch . '" 2>&1 | tee ' . '"' .  output . '"'
 
     if bufwinnr('^' . output . '$') > 0
