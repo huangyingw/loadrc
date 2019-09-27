@@ -7,6 +7,7 @@ then
     cd "$FAV"
 
     find . -type f -size +100M -exec ls -S {} \+ > fav.log
+    find . -type f -size +10M -exec ls -t {} \+ > fav.log.sort
     touch files.proj
 fi
 
