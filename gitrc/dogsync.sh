@@ -15,5 +15,6 @@ then
     git pull
 else
     git fetch $(git config gsync.remote) $(git config gsync.branch):$(git config gsync.branch)
+    git fetch BareReps $(git config gsync.branch):$(git config gsync.branch)
     git merge $(git config gsync.branch) "$currentBranch"
 fi
