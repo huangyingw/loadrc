@@ -1,3 +1,3 @@
 #!/bin/bash -
-rsync -aHv --progress --include="*/" --include="*/6*" --exclude="*" /media/volgrp/mirror/av/ /media/volgrp/zarchive/av/
-rsync -aHv --progress --include="*/" --include="*/7*" --exclude="*" /media/volgrp/mirror/av/ /media/volgrp/zarchive/av/
+find /media/volgrp/mirror/av/ -type f -size +100M -name 6\* | while read ss; do dir=$(echo "$ss" | sed 's/\/mirror\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"; done
+find /media/volgrp/mirror/av/ -type f -size +100M -name 7\* | while read ss; do dir=$(echo "$ss" | sed 's/\/mirror\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"; done
