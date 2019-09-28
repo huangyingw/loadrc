@@ -1883,6 +1883,7 @@
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/misc.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/motion.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser.vim"
+"./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/bib.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/general.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/paths.vim"
