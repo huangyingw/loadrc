@@ -27,6 +27,7 @@
 .#*
 .DS_Store
 .cscopedb.lock
+.err
 .fuse_hidden*
 .gitconfig
 .svn
