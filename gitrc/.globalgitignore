@@ -4,6 +4,7 @@
 *.diff
 *.exe
 *.findresult
+*.fugitiveblame
 *.gch
 *.hg
 *.hi
