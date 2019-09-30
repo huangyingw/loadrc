@@ -216,7 +216,8 @@ function! VimOpen()
         call asyncrun#run('<bang>', '', 'bash ~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
     elseif (&filetype ==# 'fugitiveblame')
         let b:commit = expand("<cword>")
-        exec '!git checkout ' . '"' .  b:commit . '^"'
+        call Cd2Worktree(getcwd())
+        exec '!git checkout files.proj ; git checkout ' . '"' .  b:commit . '^"'
     else
         if !filereadable(b:fileName)
             if !isdirectory(b:filePath)

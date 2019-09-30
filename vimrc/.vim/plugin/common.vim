@@ -138,8 +138,9 @@ function! Find_in_parent(fln, flsrt, flstp)
     return "Nothing"
 endfunc
 
-function! GetWorktree()
-    return substitute(system("~/loadrc/gitrc/get_worktree.sh " . '"' . expand('%:p') . '"'), '\n', '', '')
+function! GetWorktree(...)
+    let current_dir = (a:0 >= 1) ? a:1 : expand('%:p')
+    return substitute(system("~/loadrc/gitrc/get_worktree.sh " . '"' . current_dir . '"'), '\n', '', '')
 endfunction
 
 function! OpenOrSwitch(buffername, openMode)
@@ -254,8 +255,9 @@ function! Cd2ProjectRoot(filename)
     endif
 endfunc
 
-function! Cd2Worktree()
-    let worktree = GetWorktree()
+function! Cd2Worktree(...)
+    let current_dir = (a:0 >= 1) ? a:1 : expand('%:p')
+    let worktree = GetWorktree(current_dir)
 
     try
         exec "cd " . fnameescape(worktree)
