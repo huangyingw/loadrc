@@ -1925,6 +1925,7 @@
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/tabularx.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/url.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/varioref.vim"
+"./vimrc/.vim/bundle/vimtex/autoload/vimtex/test.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/text_obj.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/toc.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/util.vim"
