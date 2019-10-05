@@ -3,13 +3,17 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
+cp -v ~/.bashrc ~/.bashrc.bak
+cp -v ~/.profile ~/.profile.bak
+
 if [ $(uname) != "Darwin" ]
 then
-    cp -v ~/.bashrc ~/.bashrc.bak
-    cp -v ~/.profile ~/.profile.bak
     ln -fs ~/loadrc/.bashrc ~/.bashrc
-    ln -fs ~/loadrc/.profile ~/.profile
+else
+    ln -fs ~/loadrc/macos/.bashrc ~/.bashrc
 fi
+
+ln -fs ~/loadrc/.profile ~/.profile
 
 mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 ln -fs "$SCRIPTPATH" ~/loadrc
