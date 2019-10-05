@@ -560,6 +560,7 @@
 "./leetcoderc/submit.sh"
 "./linux.conf"
 "./mac_sync.list"
+"./macos/.bashrc"
 "./macosrc/configure_mosh.sh"
 "./macrc/mac_sync.list"
 "./macrc/mac_sync.sh"
