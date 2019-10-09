@@ -27,6 +27,7 @@ ln -fs ~/loadrc/pythonrc/setup.cfg  ~/setup.cfg
 ln -fs ~/loadrc/.hgrc ~/.hgrc
 ln -fs ~/loadrc/.hgignore ~/.hgignore
 ln -fs ~/loadrc/Library/Preferences/org.videolan.vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
+ln -fs ~/loadrc/iterm2rc/movescreen.py ~/Library/ApplicationSupport/iTerm2/Scripts/movescreen/movescreen/movescreen.py
 #ln -fs ~/loadrc/.kdiff3rc ~/.kdiff3rc
 
 ./set_linux_configuration.sh
