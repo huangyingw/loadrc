@@ -5,7 +5,7 @@ import objc
 from AppKit import *
 # To install packages from PyPI, use this command, changing package_name to the package you
 # wish to install:
-#   "/Users/huangyingw/Library/ApplicationSupport/iTerm2/Scripts/myscript/iterm2env/versions/3.7.1/bin/pip3" install package_name
+#   "~/Library/ApplicationSupport/iTerm2/Scripts/movescreen/iterm2env/versions/3.7.2/bin/pip3" install package_name
 
 
 async def main(connection):
