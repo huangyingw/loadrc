@@ -207,7 +207,8 @@ function! VimOpen()
         exec '!git checkout ' . '"' .  b:commit . '"'
     elseif (expand("%") ==# 'gbil.log')
         let b:commit = expand("<cword>")
-        exec '!git checkout ' . '"' .  b:commit . '"'
+        call Cd2Worktree()
+        exec '!git checkout files.proj ; git checkout ' . '"' .  b:commit . '"' 
     elseif (expand("%") ==# 'glg.findresult')
         let b:commit = expand("<cword>")
         exec '!git checkout ' . '"' .  b:commit . '"'
