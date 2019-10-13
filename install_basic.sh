@@ -22,6 +22,7 @@ else
         lynx \
         tig \
         tmux \
+        openssl \
         xpdf
     brew cask install \
         kdiff3 \
