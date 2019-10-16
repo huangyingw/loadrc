@@ -3,6 +3,8 @@ file="$1"
 
 if [ $(basename "$file") == "gbil.log" ]
 then
+    cd "$2"
+    git checkout files.proj
     ~/loadrc/gitrc/gbir.sh
     exit 0
 fi
