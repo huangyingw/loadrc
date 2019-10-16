@@ -1,3 +1,2 @@
 #!/bin/bash -
-cd ~/imvu/stable
-. ~/loadrc/gitrc/gco.sh debug/dev.morph
+~/loadrc/gitrc/gco.sh cscope/autoload.dev
