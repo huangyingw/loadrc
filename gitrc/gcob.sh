@@ -17,5 +17,7 @@ else
     if [ -n "$remoteBranch" ]
     then
         git checkout -b "$branch" "$remoteBranch"
+    else
+        git checkout -b "$branch"
     fi
 fi
