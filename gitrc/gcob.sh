@@ -5,19 +5,17 @@ then
     exit 1
 fi
 
+branch="$1"
 git remote update
 
 if [ -n "$2" ]
 then
-    git checkout -b "$1" "$2"
+    git checkout -b "$branch" "$2"
 else
-    for remote in $(git remote)
-    do
-        if [ -n "$(git ls-remote --heads $remote $1)" ]
-        then
-            git checkout -b "$1" "$remote/$1"
-            exit 0
-        fi
-    done
-    git checkout -b "$1"
+    remoteBranch=$(~/loadrc/gitrc/get_remote_branch.sh "$branch")
+
+    if [ -n "$remoteBranch" ]
+    then
+        git checkout -b "$branch" "$remoteBranch"
+    fi
 fi
