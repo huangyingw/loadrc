@@ -397,6 +397,7 @@
 "./gitrc/gco.sh"
 "./gitrc/gco_test.sh"
 "./gitrc/gcob.sh"
+"./gitrc/gcob_test.sh"
 "./gitrc/gcof.sh"
 "./gitrc/gcom.sh"
 "./gitrc/gcp.sh"
