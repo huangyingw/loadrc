@@ -8,5 +8,7 @@ else
     ~/loadrc/gitrc/gclean.sh
     git remote update
     git checkout -b "$1" origin/"$1"
+    git checkout "$1"
+    git pull
     s/hypo
 fi
