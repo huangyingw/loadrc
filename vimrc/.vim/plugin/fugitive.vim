@@ -340,10 +340,8 @@ function! s:Gdio(...) abort
     let local_branch = (a:0 >= 1) ? a:1 : current_branch
     let output = local_branch . '.gdio.diff'
     let output = substitute(output, "/", "_", "g")
-    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
     let branch = substitute(system("git config gsync.branch"), '\n', '', '')
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gsync.sh 2>&1 | tee gsync.findresult')
-    exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  branch . '" "' . local_branch . '" 2>&1 | tee ' . '"' .  output . '"'
+    exec '!~/loadrc/gitrc/gdio.sh' . ' ' . '"' . local_branch . '"' . ' ' . '"' .  output . '"'
 
     if bufwinnr('^' . output . '$') > 0
         exe "bd!" . output
