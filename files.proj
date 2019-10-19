@@ -407,6 +407,7 @@
 "./gitrc/gdi.sh"
 "./gitrc/gdi2.sh"
 "./gitrc/gdif.sh"
+"./gitrc/gdio.sh"
 "./gitrc/getCommit_message.sh"
 "./gitrc/get_current_branch.sh"
 "./gitrc/get_git.sh"
