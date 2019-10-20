@@ -182,6 +182,7 @@
 [submodule "vimrc/.vim/bundle/ncm2-otherbuf"]
 	path = vimrc/.vim/bundle/ncm2-otherbuf
 	url = https://github.com/fgrsnau/ncm2-otherbuf.git
+    branch = master
 [submodule "vimrc/.vim/bundle/vim-pdf"]
 	path = vimrc/.vim/bundle/vim-pdf
 	url = https://github.com/makerj/vim-pdf.git

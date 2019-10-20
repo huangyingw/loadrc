@@ -14,7 +14,7 @@ deploy_configs() {
     if [ -f "$SOURCE" ]
     then
         cp -nv "$TARGET" "$TARGET".bak
-        cp -fv "$SOURCE" "$TARGET"
+        ln -fs "$SOURCE" "$TARGET"
     fi
 }
 

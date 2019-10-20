@@ -138,7 +138,6 @@ function! CSCSearch(num)
     let keyword = expand("<cword>")
     let b:result = GetEscapedResult(keyword)
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "' .  a:num . '" ' . '"' . b:result . '"'
-    call Cd2ProjectRoot('files.proj')
     call OpenOrSwitch(b:result . '.findresult', 'vs')
     call HighlightKeyword(keyword)
 endfunction
@@ -183,6 +182,7 @@ endfunction
 function! UpdateProj()
     call Cd2ProjectRoot("files.proj")
     call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/update_proj.sh')
+    call CHANGE_CURR_DIR() 
 endfunction
 
 function! VimOpen()
@@ -207,7 +207,8 @@ function! VimOpen()
         exec '!git checkout ' . '"' .  b:commit . '"'
     elseif (expand("%") ==# 'gbil.log')
         let b:commit = expand("<cword>")
-        exec '!git checkout ' . '"' .  b:commit . '"'
+        call Cd2Worktree()
+        exec '!git checkout files.proj ; git checkout ' . '"' .  b:commit . '"' 
     elseif (expand("%") ==# 'glg.findresult')
         let b:commit = expand("<cword>")
         exec '!git checkout ' . '"' .  b:commit . '"'
