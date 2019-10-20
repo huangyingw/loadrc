@@ -30,6 +30,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi2 :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdif :execute s:Gdif(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdifo :execute s:Gdifo(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdio :execute s:Gdio(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdit :execute s:Gdit()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gfix :execute s:Gfix()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gicb :execute s:Gicb()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gitk :execute s:Gitk(<f-args>)
@@ -334,13 +335,28 @@ function! s:Gdi(...) abort
     call s:DiffClean()
 endfunction
 
+function! s:Gdit() abort
+    let worktree = Cd2Worktree()
+    let current_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
+    let output = current_branch . '.gdit.diff'
+    let output = substitute(output, "/", "_", "g")
+    exec '!~/loadrc/gitrc/gdit.sh' . ' ' . '"' .  output . '"'
+
+    if bufwinnr('^' . output . '$') > 0
+        exe "bd!" . output
+    endif
+
+    let worktree = Cd2Worktree()
+    call OpenOrSwitch(output, 'vs')
+    call s:DiffClean()
+endfunction
+
 function! s:Gdio(...) abort
     let worktree = Cd2Worktree()
     let current_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
     let local_branch = (a:0 >= 1) ? a:1 : current_branch
     let output = local_branch . '.gdio.diff'
     let output = substitute(output, "/", "_", "g")
-    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
     exec '!~/loadrc/gitrc/gdio.sh' . ' ' . '"' . local_branch . '"' . ' ' . '"' .  output . '"'
 
     if bufwinnr('^' . output . '$') > 0
