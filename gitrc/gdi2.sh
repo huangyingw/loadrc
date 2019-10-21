@@ -28,11 +28,11 @@ path=$(git config deploy.path)
 git checkout -b "$targetBranch" "$(git config gsync.branch)" ; \
     git checkout files.proj ; \
     git checkout "$targetBranch" ; \
-    git merge "$(git config gsync.branch)" ; \
+    git rebase "$(git config gsync.branch)" ; \
     git apply --reject --whitespace=fix "$currentBranch.gdio.diff" ; \
     ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
     git add . && \
     git commit  --no-verify -am "$commit_message" && \
+    git pull --rebase ; \
     git push ; \
-    . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
-    ~/loadrc/gitrc/gfix.sh
+    . ~/loadrc/imvurc/ghypo.sh "$targetBranch"
