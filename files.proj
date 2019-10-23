@@ -1940,6 +1940,7 @@
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/view/zathura.vim"
 "./vimrc/.vim/bundle/vimtex/doc/tags"
 "./vimrc/.vim/bundle/vimtex/doc/vimtex.txt"
+"./vimrc/.vim/bundle/vimtex/docker/Dockerfile"
 "./vimrc/.vim/bundle/vimtex/ftplugin/bib.vim"
 "./vimrc/.vim/bundle/vimtex/ftplugin/tex.vim"
 "./vimrc/.vim/bundle/vimtex/indent/bib.vim"
