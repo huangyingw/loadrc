@@ -512,6 +512,8 @@
 "./hosts/vserver/var/lib/zerotier-one/identity.public"
 "./hosts/vserver/var/lib/zerotier-one/identity.secret"
 "./imvurc/Vagrantfile"
+"./imvurc/generate.sh"
+"./imvurc/generate_sh.template"
 "./imvurc/ghypo.sh"
 "./imvurc/restart.sh"
 "./imvurc/sb_setup.sh"
