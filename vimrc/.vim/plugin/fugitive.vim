@@ -313,7 +313,7 @@ function! s:Gdi(...) abort
     let output = 'gdi.diff'
 
     if expand('%:t') != 'index'
-        let output = expand('%:p') . '.diff'
+        let output = expand('%:t') . '.diff'
 
         if a:0 == 0
             silent exec '!~/loadrc/gitrc/gdi.sh ' . 'HEAD "' .  expand('%:p') . '" 2>&1 | tee ' . '"' .  output . '"'
