@@ -15,6 +15,12 @@ then
     exit 0
 fi
 
+if [[ "$file" = *'.test.php' ]] 
+then
+    ~/loadrc/imvurc/generate.sh "$file"
+    exit 0
+fi
+
 extension=${file##*.}
 host=$(git config deploy.host)
 path=$(git config deploy.path)
