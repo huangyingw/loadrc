@@ -24,15 +24,14 @@ fi
 
 host=$(git config deploy.host)
 path=$(git config deploy.path)
+local_master="$(git config gsync.branch)"
 
-git checkout -b "$targetBranch" "$(git config gsync.branch)" ; \
+git checkout -b "$targetBranch" "$local_master" ; \
     git checkout files.proj ; \
     git checkout "$targetBranch" ; \
-    git rebase "$(git config gsync.branch)" ; \
-    git apply --reject --whitespace=fix "$currentBranch.gdio.diff" ; \
+    git apply --reject --whitespace=fix "$currentBranch.gdit.diff" ; \
     ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
     git add . && \
     git commit  --no-verify -am "$commit_message" && \
-    git pull --rebase ; \
-    git push ; \
-    . ~/loadrc/imvurc/ghypo.sh "$targetBranch"
+    git pull ; \
+    git push
