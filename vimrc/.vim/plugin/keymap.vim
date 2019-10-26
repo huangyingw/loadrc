@@ -99,11 +99,12 @@ function! VRun()
         let b:to_run = b:to_run . '.sh'
     endif
 
-    call Cd2Worktree()
-    call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:file_name)
+    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
+    let b:output = b:csdbpath . '/' . b:file_name . '.findresult'
+    call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
 
     if b:to_run != 'gbil.log'
-        call OpenOrSwitch(b:file_name . '.findresult', 'vs')
+        call OpenOrSwitch(b:output, 'vs')
     endif
 endfunction
 
