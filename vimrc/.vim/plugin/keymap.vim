@@ -105,6 +105,8 @@ function! VRun()
 
     if b:to_run != 'gbil.log'
         call OpenOrSwitch(b:output, 'vs')
+    else
+        call OpenOrSwitch('gbil.log', 'vs')
     endif
 endfunction
 
