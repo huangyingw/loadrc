@@ -210,20 +210,20 @@ endfunc
 function! RunShell(shell, ...)
     let arg1 = (a:0 >= 1) ? a:1 : ''
     let arg2 = (a:0 >= 2) ? a:2 : ''
-    let arg3 = (a:0 >= 3) ? a:3 : ''
     let silent = substitute(system('git config vrun.silent'), '\n', '', '')
     let async = substitute(system('git config vrun.async'), '\n', '', '')
+    let run_string = a:shell . ' ' . '"' .  arg1 . '"' .  ' ' . '2>&1 | tee' . ' ' . arg2 . '.bak'
 
     if async ==? "true"
-        call asyncrun#run('<bang>', '', 'bash ' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult.bak')
+        call asyncrun#run('<bang>', '', 'bash' . ' ' . run_string)
     else
         if silent ==? "true"
-            silent exec '!' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult.bak'
+            silent exec '!' . run_string
         else
-            exec '!' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult.bak'
+            exec '!' . run_string
         endif
     endif
-    silent exec '!cp' . ' "' .  arg1 . '.findresult.bak' . '" "' .  arg1 . '.findresult' . '"'
+    silent exec '!cp' . ' ' . '"' .  arg2 . '.bak' . '"' . ' ' . '"' .  arg2 . '"'
 endfunc
 
 function! Filter2Findresult()
