@@ -11,6 +11,6 @@ git merge "$local_master" && \
 
 if [ $? -ne 0 ]
 then
-    echo -e "${red}most probably sth wrong in git merge... ${NC}"
+    echo -e "${red}most probably sth wrong in git merge... ${NC}" 2>&1 | tee "$output" 
     exit 1
 fi
