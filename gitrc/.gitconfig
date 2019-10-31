@@ -45,6 +45,7 @@
     excludesfile = "~/.globalgitignore"
     mergeoptions = --no-edit
     filemode = false
+	editor = nvim
 [color]
     ui = auto
 [giggle]
