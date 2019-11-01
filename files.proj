@@ -1854,6 +1854,7 @@
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/complete/xcolor"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/complete/xetex"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/complete/xifthen"
+"./vimrc/.vim/bundle/vimtex/autoload/vimtex/complete/xkeyval"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/complete/xltxtra"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/complete/xparse"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/complete/xspace"
