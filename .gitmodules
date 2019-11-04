@@ -189,7 +189,3 @@
 [submodule "vimrc/.vim/bundle/vim-gtrans"]
 	path = vimrc/.vim/bundle/vim-gtrans
 	url = https://github.com/haya14busa/vim-gtrans.git
-[submodule "vimrc/.vim/bundle/vim-plugin-autosess"]
-	path = vimrc/.vim/bundle/vim-plugin-autosess
-	url = git@github.com:huangyingw/vim-plugin-autosess.git
-    branch = dev
