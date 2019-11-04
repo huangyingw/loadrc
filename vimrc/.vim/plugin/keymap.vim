@@ -100,7 +100,7 @@ function! VRun()
     endif
 
     let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    let b:output = b:csdbpath . '/' . b:file_name . '.findresult'
+    let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
 
     if b:to_run != 'gbil.log'
