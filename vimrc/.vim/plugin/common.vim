@@ -212,7 +212,8 @@ function! RunShell(shell, ...)
     let arg2 = (a:0 >= 2) ? a:2 : ''
     let silent = substitute(system('git config vrun.silent'), '\n', '', '')
     let async = substitute(system('git config vrun.async'), '\n', '', '')
-    let run_string = a:shell . ' ' . '"' .  arg1 . '"' .  ' ' . '2>&1 | tee' . ' ' . arg2 . '.bak'
+    let temp_log = arg2 . '.findresult'
+    let run_string = a:shell . ' ' . '"' .  arg1 . '"' .  ' ' . '2>&1 | tee' . ' ' . temp_log
 
     if async ==? "true"
         call asyncrun#run('<bang>', '', 'bash' . ' ' . run_string)
@@ -223,7 +224,7 @@ function! RunShell(shell, ...)
             exec '!' . run_string
         endif
     endif
-    silent exec '!cp' . ' ' . '"' .  arg2 . '.bak' . '"' . ' ' . '"' .  arg2 . '"'
+    silent exec '!cp' . ' ' . '"' .  temp_log . '"' . ' ' . '"' .  arg2 . '"'
 endfunc
 
 function! Filter2Findresult()
