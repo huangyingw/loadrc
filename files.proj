@@ -1929,6 +1929,7 @@
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/pythontex.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/subfile.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/tabularx.vim"
+"./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/tikz.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/url.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/varioref.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/test.vim"
