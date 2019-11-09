@@ -566,6 +566,7 @@
 "./linux.conf"
 "./mac_sync.list"
 "./macos/.bashrc"
+"./macos/.zshrc"
 "./macosrc/configure_mosh.sh"
 "./macrc/mac_sync.list"
 "./macrc/mac_sync.sh"
