@@ -1,4 +1,3 @@
-#! /bin/bash
 folderForGit=$(realpath .)
 LIST=( -name \*.java -o -name \*.vala )
 

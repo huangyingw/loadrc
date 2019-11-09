@@ -1,5 +1,3 @@
-#! /bin/bash
-
 if [ -z "$1" ]
 then
     echo -e "${red}Please provide the target file name... ${NC}"

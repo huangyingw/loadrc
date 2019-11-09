@@ -1,4 +1,3 @@
-#! /bin/bash
 TARGET=exp
 if [ -n "$1" ]
 then 
