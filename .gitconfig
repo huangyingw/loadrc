@@ -30,6 +30,9 @@
 [branch "dev"]
     remote = origin
     merge = refs/heads/dev
+[branch "zsh"]
+    remote = origin
+    merge = refs/heads/zsh
 [branch "remove/nvim"]
     remote = origin
     merge = refs/heads/remove/nvim
