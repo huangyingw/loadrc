@@ -3,7 +3,6 @@ file="$1"
 
 if [ $(basename "$file") == "gbil.log" ]
 then
-    cd "$2"
     git checkout files.proj
     ~/loadrc/gitrc/gbir.sh
     exit 0
@@ -12,6 +11,12 @@ fi
 if [[ $(git config leetcode.submit) == "true" ]]  && ([[ "$file" = *'.java' ]] || [[ "$file" = *'.py' ]])
 then
     leetcode submit "$file"
+    exit 0
+fi
+
+if [[ "$file" = *'.test.php' ]] 
+then
+    ~/loadrc/imvurc/generate.sh "$file"
     exit 0
 fi
 

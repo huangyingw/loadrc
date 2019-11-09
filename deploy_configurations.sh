@@ -3,8 +3,8 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-cp -v ~/.bashrc ~/.bashrc.bak
-cp -v ~/.profile ~/.profile.bak
+cp -nv ~/.bashrc ~/.bashrc.bak
+cp -nv ~/.profile ~/.profile.bak
 
 if [ $(uname) != "Darwin" ]
 then

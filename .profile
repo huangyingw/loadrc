@@ -31,3 +31,5 @@ export LANGUAGE="en_US:en"
 #export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # Finished adapting your PATH environment variable for use with MacPorts.
 
+export PATH=/usr/local/bin:$PATH
+. $HOME/loadrc/.loadrc
