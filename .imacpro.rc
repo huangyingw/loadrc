@@ -1,8 +1,7 @@
-#!/bin/bash
 #alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
 #export PATH="$HOME/anaconda3/bin:$PATH"
 
-if [ $(uname) == "Darwin" ]
+if [ $(uname) = "Darwin" ]
 then
     if ! (sudo systemsetup -getcomputersleep | grep -q "after 1 minutes") ; \
         then \
