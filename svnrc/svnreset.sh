@@ -1,4 +1,3 @@
-#!/bin/bash -
 resultFile="svnreset.findresult"
 svn status | tee "$resultFile"
 

@@ -1,4 +1,3 @@
-#!/bin/bash -
 if [ -z "$1" ]
 then
     find . -type f -name files.proj -exec realpath {} \; | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj

@@ -1,4 +1,3 @@
-#!/bin/bash
 returnstring=""
 function IsSlash()
 {

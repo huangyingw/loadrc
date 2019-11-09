@@ -1,4 +1,3 @@
-#!/bin/bash
 resultFile="svnst.findresult"
 svn status | tee "$resultFile"
 

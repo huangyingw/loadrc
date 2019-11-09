@@ -1,4 +1,3 @@
-#!/bin/bash
 programDir=~/bin/Umlet
 
 if [ $# -eq 1 ]

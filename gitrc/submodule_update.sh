@@ -1,4 +1,3 @@
-#!/bin/bash -
 git submodule init
 git submodule sync
 git submodule foreach ~/loadrc/gitrc/gps.sh || : 

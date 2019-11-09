@@ -1,4 +1,3 @@
-#!/bin/bash
 ~/loadrc/gitrc/include_gitconfig.sh
 if [ "$(git config merge.allow)" != "true" ]
 then

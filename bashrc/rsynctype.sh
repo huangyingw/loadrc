@@ -1,4 +1,3 @@
-#!/bin/bash
 SOURCE=$1
 TARGET=$2
 FILE_TYPE=$HOME/loadrc/bashrc/file_type

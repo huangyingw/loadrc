@@ -1,4 +1,3 @@
-#!/bin/bash 
 SOURCE=$1
 TARGET=$2
 
@@ -9,4 +8,3 @@ fi
 
 rsync -aH --delete-after \
 "${SOURCE}" "${TARGET}"
-

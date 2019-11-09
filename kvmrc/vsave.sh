@@ -1,4 +1,3 @@
-#!/bin/bash
 $HOME/loadrc/kvmrc/vresume.sh
 if [ -z "$1" ]
 then

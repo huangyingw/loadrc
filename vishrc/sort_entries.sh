@@ -1,4 +1,3 @@
-#!/bin/bash -
 FILE="$1"
 PARAM="$2"
 

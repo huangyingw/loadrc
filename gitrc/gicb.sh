@@ -1,4 +1,3 @@
-#!/bin/bash
 
 git init \
     && $HOME/loadrc/gitrc/gcob.sh dev \

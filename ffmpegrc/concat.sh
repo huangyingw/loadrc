@@ -1,4 +1,3 @@
-#!/bin/bash -
 SCRIPT=$(realpath "$1")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"

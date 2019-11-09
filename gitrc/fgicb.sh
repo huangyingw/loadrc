@@ -1,4 +1,3 @@
-#!/bin/bash
 for file in `ls .`
 do
     cd $file

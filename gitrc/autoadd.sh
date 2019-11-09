@@ -1,4 +1,3 @@
-#!/bin/bash -
 fileName="$1"
 
 if [[ "$fileName" != *"../"* ]]

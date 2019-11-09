@@ -1,4 +1,3 @@
- #!/bin/bash
 
 # history_of_file
 #

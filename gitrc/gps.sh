@@ -1,4 +1,3 @@
-#!/bin/bash
 currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 ~/loadrc/gitrc/gpl.sh &
 ~/loadrc/gitrc/include_gitconfig.sh

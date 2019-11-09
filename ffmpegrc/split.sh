@@ -1,4 +1,3 @@
-#!/bin/bash -
 
 find . -type f -name \*.ffmpeg.config | while read ss
 do

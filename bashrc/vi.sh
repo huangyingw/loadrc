@@ -1,4 +1,3 @@
-#!/bin/bash
 if [ -z "$1" ]
 then
     projectFile=$(~/loadrc/bashrc/find_up.sh $PWD files.proj)

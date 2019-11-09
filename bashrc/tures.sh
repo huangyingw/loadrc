@@ -1,4 +1,3 @@
-#!/bin/bash
 if [ $(uname) == "Darwin" ]
 then
     echo -e "${red}It could only run in Linux... ${NC}"

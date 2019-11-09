@@ -1,4 +1,3 @@
-#!/bin/bash -
 local_branch="$1"
 output="$2"
 local_master="$(git config gsync.branch)"

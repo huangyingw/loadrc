@@ -1,4 +1,3 @@
-#!/bin/bash -
 ~/loadrc/gitrc/include_gitconfig.sh
 currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 git remote update
