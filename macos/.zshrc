@@ -135,6 +135,16 @@ fi
 #    . /etc/bash_completion
 #fi
 
+export HISTSIZE=2000
+export HISTFILE="$HOME/.bash_history"
+export SAVEHIST=$HISTSIZE
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+
+
+
+
+
 export PATH=/usr/local/bin:$PATH
 . $HOME/loadrc/.loadrc
 
