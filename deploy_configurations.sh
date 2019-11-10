@@ -15,7 +15,6 @@ fi
 ln -fs ~/loadrc/.profile ~/.profile
 
 mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
-ln -fs "$SCRIPTPATH" ~/loadrc
 ln -fs ~/loadrc/."`hostname`".theanorc  ~/.theanorc
 ln -fs ~/loadrc/.config/git/gitk  ~/.config/git/gitk
 #ln -fs ~/loadrc/.ssh ~/.ssh
