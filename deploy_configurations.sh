@@ -4,12 +4,14 @@ cd "$SCRIPTPATH"
 
 cp -nv ~/.bashrc ~/.bashrc.bak
 cp -nv ~/.profile ~/.profile.bak
+cp -nv ~/.zshrc ~/.zshrc.bak
 
-if [ $(uname) != "Darwin" ]
+if [ !$(uname) = "Darwin" ]
 then
     ln -fs ~/loadrc/.bashrc ~/.bashrc
 else
     ln -fs ~/loadrc/macos/.bashrc ~/.bashrc
+    ln -fs ~/loadrc/macos/.zshrc ~/.zshrc
 fi
 
 ln -fs ~/loadrc/.profile ~/.profile
