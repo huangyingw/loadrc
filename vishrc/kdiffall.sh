@@ -1,4 +1,3 @@
-#!/bin/bash -
 IFS=$'\r\n' GLOBIGNORE='*' command eval  'LINES=($(cat $1))'
 
 for index in "${!LINES[@]}"

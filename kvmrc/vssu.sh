@@ -1,4 +1,3 @@
-#!/bin/bash
 DOMAIN=$1
 SNAPSHOT=$2
 ~/loadrc/kvmrc/vssd.sh "$DOMAIN" "$SNAPSHOT"

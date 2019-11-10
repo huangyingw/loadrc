@@ -1,4 +1,3 @@
-#!/bin/bash -
 if [ ! -f .gitconfig ]
 then
     exit 0

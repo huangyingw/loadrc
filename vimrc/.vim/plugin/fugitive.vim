@@ -77,12 +77,12 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Tail :
 function! s:LogFilter(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/logFilter.sh ' . '"' .  expand('%:p') . '" "' .  arg1 . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/logFilter.sh ' . '"' .  expand('%:p') . '" "' .  arg1 . '"')
 endfunction
 
 function! s:Jformat(...) abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/jformat.sh ')
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/jformat.sh ')
 endfunction
 
 function! s:Gvd(...) abort
@@ -90,15 +90,15 @@ function! s:Gvd(...) abort
 
     if expand('%:t') != 'index'
         if a:0 == 0
-            call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gvd.sh ' . 'HEAD ' . '"' .  expand('%:p') . '"')
+            call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gvd.sh ' . 'HEAD ' . '"' .  expand('%:p') . '"')
         else
             let arg1 = (a:0 >= 1) ? a:1 : ''
-            call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gvd.sh ' . '"' .  arg1 . '" "' .  expand('%:p') . '"')
+            call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gvd.sh ' . '"' .  arg1 . '" "' .  expand('%:p') . '"')
         endif
     else
         let arg1 = (a:0 >= 1) ? a:1 : ''
         let arg2 = (a:0 >= 2) ? a:2 : ''
-        call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gvd.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gvd.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
     endif
 endfunction
 
@@ -108,9 +108,9 @@ function! s:Gvdo() abort
     let branch = substitute(system("git config gsync.branch"), '\n', '', '')
 
     if expand('%:t') != 'index'
-        call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gvd.sh ' . '"' .  remote . '/' . branch . '" "' .  expand('%:p') . '"')
+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gvd.sh ' . '"' .  remote . '/' . branch . '" "' .  expand('%:p') . '"')
     else
-        call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gvd.sh ' . '"' .  remote . '/' . branch . '"')
+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gvd.sh ' . '"' .  remote . '/' . branch . '"')
     endif
 endfunction
 
@@ -118,35 +118,35 @@ function! s:Fr(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
     let arg2 = (a:0 >= 2) ? a:2 : ''
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/fr.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fr.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
 endfunction
 
 function! s:Ga(args, ...) abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/ga.sh ' . '"' .  a:args . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/ga.sh ' . '"' .  a:args . '"')
 endfunction
 
 function! s:Gsave() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gsave.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsave.sh')
 endfunction
 
 function! s:Gst() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gst.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gst.sh')
 endfunction
 
 function! s:Gcp(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
     let arg2 = (a:0 >= 2) ? a:2 : ''
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gcp.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gcp.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
 endfunction
 
 function! s:BinaryGrep(...) abort
     call Cd2ProjectRoot("files.proj")
     let b:keyword = (a:0 >= 1) ? a:1 : ''
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/binaryGrep.sh ' . '"' .  b:keyword . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/binaryGrep.sh ' . '"' .  b:keyword . '"')
     let b:keyword = substitute(b:keyword, " ", "_", "g")
     let b:keyword = substitute(b:keyword, "/", "_", "g")
     call OpenOrSwitch(b:keyword . '.binaryGrep.findresult', 'vs')
@@ -154,13 +154,13 @@ endfunction
 
 function! s:Fnotinuse() abort
     call Cd2ProjectRoot("files.proj")
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/fnotinuse.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fnotinuse.sh')
     call OpenOrSwitch('fnotinuse.findresult', 'vs')
 endfunction
 
 function! s:Fcscope() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/fcscope.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fcscope.sh')
 endfunction
 
 function! s:Glf() abort
@@ -177,17 +177,17 @@ endfunction
 
 function! s:Gps() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gps.sh 2>&1 | tee gps.findresult')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gps.sh 2>&1 | tee gps.findresult')
 endfunction
 
 function! s:Gstp(args, ...) abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gstp.sh ' . '"' .  a:args . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gstp.sh ' . '"' .  a:args . '"')
 endfunction
 
 function! s:Gstv(args, ...) abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gstv.sh ' . '"' .  a:args . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gstv.sh ' . '"' .  a:args . '"')
 endfunction
 
 function! s:Gcof(...) abort
@@ -200,12 +200,12 @@ endfunction
 
 function! s:Gpl() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gpl.sh 2>&1 | tee gpl.findresult')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gpl.sh 2>&1 | tee gpl.findresult')
 endfunction
 
 function! s:Fsync() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/fsync.sh 2>&1 | tee fsync.findresult')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/fsync.sh 2>&1 | tee fsync.findresult')
     call OpenOrSwitch('fsync.findresult', 'vs')
 endfunction
 
@@ -259,7 +259,7 @@ endfunction
 
 function! s:Gsync() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gsync.sh 2>&1 | tee gsync.findresult')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsync.sh 2>&1 | tee gsync.findresult')
     call OpenOrSwitch('gsync.findresult', 'vs')
 endfunction
 
@@ -277,7 +277,7 @@ endfunction
 
 function! s:Gsti() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gsti.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsti.sh')
 endfunction
 
 function! s:Gstl() abort
@@ -288,7 +288,7 @@ endfunction
 
 function! s:Gstlv() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gstlv.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gstlv.sh')
 endfunction
 
 function! s:Gme2(args, ...) abort
@@ -299,12 +299,12 @@ endfunction
 
 function! s:G(args, ...) abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.findresult')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.findresult')
 endfunction
 
 function! s:Gdev() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gdev.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gdev.sh')
 endfunction
 
 function! s:Gdi(...) abort
@@ -399,7 +399,7 @@ endfunction
 
 function! s:Gicb() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gicb.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gicb.sh')
 endfunction
 
 function! s:Gitk(...) abort
@@ -439,14 +439,14 @@ endfunction
 function! s:Gco(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gco.sh ' . '"' .  arg1 . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gco.sh ' . '"' .  arg1 . '"')
 endfunction
 
 function! s:Gcob(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
     let arg2 = (a:0 >= 2) ? a:2 : ''
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gcob.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gcob.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
 endfunction
 
 function! s:Dodev() abort
@@ -456,7 +456,7 @@ endfunction
 
 function! s:Gcom(args, ...) abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"')
 endfunction
 
 function! s:Gshow(args, ...) abort
@@ -478,7 +478,7 @@ endfunction
 
 function! s:Greview() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/greview.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/greview.sh')
 endfunction
 
 function! s:Gres() abort
@@ -494,7 +494,7 @@ endfunction
 
 function! s:SvnUp() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/svnrc/svnup.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/svnrc/svnup.sh')
 endfunction
 
 function! s:SvnReset() abort
@@ -505,7 +505,7 @@ endfunction
 
 function! s:SvnRevert() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/svnrc/svnrevert.sh ' . '"' .  expand('%:p') . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/svnrc/svnrevert.sh ' . '"' .  expand('%:p') . '"')
 endfunction
 
 function! s:SvnSt() abort
@@ -516,12 +516,12 @@ endfunction
 
 function! s:SvnApply() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/svnrc/svnapply.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/svnrc/svnapply.sh')
 endfunction
 
 function! s:SvnDiff() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/svnrc/svndiff.sh ' . '"' .  expand('%:p') . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/svnrc/svndiff.sh ' . '"' .  expand('%:p') . '"')
 endfunction
 
 function! s:LcTest() abort
@@ -533,7 +533,7 @@ function! s:LcTest() abort
 endfunction
 
 function! s:Prune() abort
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
 endfunction
 
 function! s:Fr(find, replace) abort

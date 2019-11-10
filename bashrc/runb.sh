@@ -1,4 +1,3 @@
-#!/bin/bash
 make -B
 if [ -f "run.sh" ] 
 then

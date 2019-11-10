@@ -1,4 +1,3 @@
-#!/bin/bash -
 
 if [ $(hostname) != "lint-sandbox" ]
 then

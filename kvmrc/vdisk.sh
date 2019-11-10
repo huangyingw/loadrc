@@ -1,4 +1,3 @@
-#!/bin/bash
 TARGET=$(basename "$1")
 DIRECTORY=$(dirname "$1")
 

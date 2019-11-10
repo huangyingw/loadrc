@@ -1,4 +1,3 @@
-#!/bin/bash -
 
 if [ -z "$1" ]
 then
@@ -16,5 +15,5 @@ find "$1" -type f -iname \*.rar | \
             unrar x -r -pwww.zasv.com-联动印象 -o+ "$ss" && rm "$ss" ; \
             unrar x -r -pwww.zasv.com -o+ "$ss" && rm "$ss" ; \
             unrar x -r -p联动印象 -o+ "$ss" && rm "$ss" ; \
-            unrar x -r -pUploadByK@TSDM.NET.txt -o+ "$ss" && rm "$ss" ; \
+            unrar x -r -pUploadByK@TSDM.NET -o+ "$ss" && rm "$ss" ; \
     done

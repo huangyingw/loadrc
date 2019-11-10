@@ -1,4 +1,3 @@
-#!/bin/bash
 
 # With the addition of Keystone, to use an openstack cloud you should
 # authenticate against keystone, which returns a **Token** and **Service

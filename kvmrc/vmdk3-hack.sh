@@ -1,4 +1,3 @@
-#!/bin/bash
 VMDK=$1
 FULLSIZE=`stat -c%s "$VMDK"`
 VMDKFOOTER=$[$FULLSIZE - 0x400]

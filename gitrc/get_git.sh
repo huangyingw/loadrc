@@ -1,4 +1,3 @@
-#!/bin/bash -
 DIR=$(dirname "$1")
 cd "$DIR"
 

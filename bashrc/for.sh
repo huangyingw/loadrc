@@ -1,4 +1,3 @@
-#!/bin/bash
 for ss in `$1`
 do
     $2 $ss

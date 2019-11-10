@@ -1,4 +1,3 @@
-#! /bin/bash
 
 FAV=/media/volgrp/mirror/av/
 

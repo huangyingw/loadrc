@@ -1,4 +1,3 @@
-#!/bin/bash -
 file="$1"
 target="$1.sh"
 

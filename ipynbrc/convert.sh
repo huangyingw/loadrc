@@ -1,4 +1,3 @@
-#!/bin/bash -
 find . -type f -name *.ipynb | while read ss
 do                                                                      
     jupyter nbconvert --to=python --template=python.tpl "$ss" --output "$(basename $ss).py" 

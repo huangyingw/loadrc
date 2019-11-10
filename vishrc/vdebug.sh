@@ -1,4 +1,3 @@
-#!/bin/bash
 file=${1}
 if [ $(basename "$file") == "gbil.log" ]
 then

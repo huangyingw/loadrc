@@ -1,4 +1,3 @@
-#!/bin/bash -
 branch="$1"
 for remote in $(git remote)
 do

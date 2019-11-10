@@ -1,4 +1,3 @@
-#!/bin/bash -
 currentFile="$1"
 rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$currentFile" "prunefile.conf")
 prunefile="$rootFolder/prunefile.conf"

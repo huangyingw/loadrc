@@ -1,4 +1,3 @@
-#!/bin/bash
 function Find()
 {
   FILE_POSTFIX=$HOME/loadrc/bashrc/postfix

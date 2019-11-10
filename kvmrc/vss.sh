@@ -1,4 +1,3 @@
-#!/bin/bash
 ~/loadrc/kvmrc/uvmount.sh
 DOMAIN=$1
 $HOME/loadrc/kvmrc/vrestore.sh "$DOMAIN" \

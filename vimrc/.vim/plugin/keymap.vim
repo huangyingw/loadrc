@@ -156,7 +156,7 @@ endfunction
 
 function! ShowDiff()
     let b:commit = expand("<cword>")
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"')
 endfunction
 
 function! Prune()
@@ -180,12 +180,12 @@ function! KdiffAll()
 
     only
     call asyncrun#stop('<bang>')
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
 endfunction
 
 function! UpdateProj()
     call Cd2ProjectRoot("files.proj")
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/update_proj.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
     call CHANGE_CURR_DIR() 
 endfunction
 
@@ -218,7 +218,7 @@ function! VimOpen()
         exec '!git checkout ' . '"' .  b:commit . '"'
     elseif (expand("%") ==# 'dps.findresult')
         let b:commit = expand("<cword>")
-        call asyncrun#run('<bang>', '', 'bash ~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
+        call asyncrun#run('<bang>', '', '~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
     elseif (&filetype ==# 'fugitiveblame')
         let b:commit = expand("<cword>")
         call Cd2Worktree()
