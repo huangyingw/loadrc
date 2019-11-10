@@ -5,7 +5,7 @@ then
     exit 1
 fi
 
-if [[ "$1" == *"Dropbox"* ]]
+if [ "$1" == *"Dropbox"* ]
 then
     target=`echo $1 | sed -e "s|Dropbox/||"`
     echo ${target}

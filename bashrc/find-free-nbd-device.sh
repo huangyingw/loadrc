@@ -27,18 +27,18 @@ function nbd_used?() {
     local find=0 line=
     while read line
     do
-        [[ ${line} == "" ]] && continue
+        [ ${line} == "" ] && continue
 
         set ${line}
-        [[ "${1}" == "43" ]] || continue
+        [ "${1}" == "43" ] || continue
 
-        if [[ ${devpath} == /dev/${4} ]]
+        if [ ${devpath} == /dev/${4} ]
         then
             find=1
         fi
     done < /proc/partitions
 
-    [[ "${find}" == "1" ]]
+    [ "${find}" == "1" ]
 }
 
 function find_free_nbd_device() {

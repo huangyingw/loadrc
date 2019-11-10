@@ -1,6 +1,6 @@
 git branch -d "$1"
 
-if [[ $(git config --get-all push.remote) ]]
+if [ $(git config --get-all push.remote) ]
 then
     for ss in $(git config --get-all push.remote)
     do
