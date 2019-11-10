@@ -173,6 +173,7 @@
 "./.vserver.rc"
 "./.vserver.theanorc"
 "./.work.rc"
+"./.zshrc"
 "./Dockerfile"
 "./Library/Preferences/org.videolan.vlc/vlcrc"
 "./bashrc/HuangYings-MacBook-Pro.local.csc.properties"
