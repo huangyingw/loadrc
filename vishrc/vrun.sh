@@ -52,7 +52,7 @@ case $extension in
                 "$host:$path/" \
                 .
         else
-            bash "$1"
+            "$1"
         fi
         ;;
     py)
