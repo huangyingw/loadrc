@@ -9,7 +9,7 @@ get_configs() {
     cp -v "$SOURCE" "$TARGET"
 }
 
-while read -r line || [ -n "$line" ]
+while read -r line || [[ -n "$line" ]]
 do
     get_configs "$line"
 done < linux.conf

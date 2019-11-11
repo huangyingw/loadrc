@@ -7,7 +7,7 @@ fi
 
 raid_state=$(mdadm -D "$DEVICE" | awk '/State :/{print $3}')
 
-if [ "$raid_state" != "clean" ] && [ "$raid_state" != "active" ]
+if [[ "$raid_state" != "clean" ]] && [[ "$raid_state" != "active" ]]
 then
     echo dangerous
     echo dangerous

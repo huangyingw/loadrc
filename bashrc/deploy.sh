@@ -7,7 +7,7 @@ then
     exit 0
 fi
 
-if [ -n "$host" ] && [ -n "$path" ]
+if [[ -n "$host" ]] && [[ -n "$path" ]]
 then
     ssh -n "$host" "mkdir -p $path"
     . ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/rsyncFiles.sh

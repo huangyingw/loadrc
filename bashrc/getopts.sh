@@ -46,7 +46,7 @@ do
   esac
 done
 
-if [ -z $TEST ] || [ -z $SERVER ] || [ -z $PASSWD ]
+if [[ -z $TEST ]] || [[ -z $SERVER ]] || [[ -z $PASSWD ]]
 then
   usage
   exit 1

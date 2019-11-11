@@ -1,6 +1,6 @@
 fileName="$1"
 
-if [ "$fileName" != *"../"* ]
+if [[ "$fileName" != *"../"* ]]
 then
     filesProj=$(~/loadrc/bashrc/find_up.sh $(pwd) "files.proj")
 

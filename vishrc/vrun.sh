@@ -7,13 +7,13 @@ then
     exit 0
 fi
 
-if [ $(git config leetcode.submit) = "true" ]  && ([ "$file" = *'.java' ] || [ "$file" = *'.py' ])
+if [[ $(git config leetcode.submit) = "true" ]]  && ([[ "$file" = *'.java' ]] || [[ "$file" = *'.py' ]])
 then
     leetcode submit "$file"
     exit 0
 fi
 
-if [ "$file" = *'.test.php' ] 
+if [[ "$file" = *'.test.php' ]] 
 then
     ~/loadrc/imvurc/generate.sh "$file"
     exit 0
@@ -30,7 +30,7 @@ case $extension in
         runghc "$1"
         ;;
     sql)
-        if [ -n "$host" ] && [ "$host" != "localhost" ]
+        if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
             ssh -nY "$host" "cd $path ; ~/loadrc/sqlrc/xsql.sh $rfile"
         else
@@ -44,7 +44,7 @@ case $extension in
         sh "$1"
         ;;
     sh)
-        if [ -n "$host" ] && [ "$host" != "localhost" ]
+        if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
             ssh -nY "$host" ". ~/loadrc/.loadrc ; $path/$rfile"
             rsync -aHv --force --progress \
@@ -56,7 +56,7 @@ case $extension in
         fi
         ;;
     py)
-        if [ -n "$host" ] && [ "$host" != "localhost" ]
+        if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
             ssh -nY "$host" "cd $path ; . ~/loadrc/.loadrc ; python $rfile"
         else
@@ -70,7 +70,7 @@ case $extension in
         source "$1"
         ;;
     yml)
-        if [ -n "$host" ] && [ "$host" != "localhost" ]
+        if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
             ssh -nY "$host" "docker-compose -f $path/$rfile up -d"
         else

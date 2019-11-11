@@ -1,6 +1,6 @@
 currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 
-if [ "$currentBranch" != *".fix" ]
+if [[ "$currentBranch" != *".fix" ]]
 then
     echo -e "${red} should only run in *.fix branch... ${NC}"
     exit 1

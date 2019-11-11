@@ -22,7 +22,7 @@ then
     exit 1
 fi
 
-if [ "${TARGET}" != *":"* ] && [ ! -d "${TARGET}" ]
+if [[ "${TARGET}" != *":"* ]] && [[ ! -d "${TARGET}" ]]
 then
     mkdir -p "${TARGET}"
 fi
