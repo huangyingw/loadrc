@@ -6,7 +6,7 @@ else
 fi
 RESULT="$TARGETEDIR"/fgs.findresult
 function rec_dir() {
-    if [[ $2 -gt 11 ]]
+    if [ $2 -gt 11 ]
     then
         return
     fi

@@ -9,7 +9,7 @@ NEW_BRANCH="$1"
 
 git branch -m "$CURRENT_BRANCH" "$NEW_BRANCH"
 
-if [[ $(git config --get-all push.remote) ]]
+if [ $(git config --get-all push.remote) ]
 then
     for ss in $(git config --get-all push.remote)
     do

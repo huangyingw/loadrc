@@ -1,5 +1,5 @@
 portList="$HOME/Dropbox/loadrc/bashrc/portList"
-while read -r line || [[ -n "$line" ]]
+while read -r line || [ -n "$line" ]
 do
     while read port
     do
