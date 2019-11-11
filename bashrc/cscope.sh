@@ -43,7 +43,7 @@ do
 done < "$INCLUDE_FILE"
 
 find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
-    comm -2 -3 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
+    comm -2 -3 < (sort "$TARGET") < (sort "$PRUNE_FILE") > "$TARGET.tmp" && \
     cp -fv "$TARGET.tmp" "$TARGET" && \
     if [ ${#include_params[@]} -gt 0 ] ; \
     then \
