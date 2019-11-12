@@ -1,6 +1,6 @@
 #!/bin/zsh -
 cd $(~/loadrc/gitrc/get_git.sh $pwd)
-> COMMIT_EDITMSG
+: > COMMIT_EDITMSG
 cd -
 ~/loadrc/gitrc/gps.sh
 ~/loadrc/gitrc/gsync.sh
