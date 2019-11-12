@@ -1,3 +1,4 @@
+#! /bin/bash
 source=$1
 
 umount -fl /media/cdrom
