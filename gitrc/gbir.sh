@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/zsh -
 if [ ! -f gbil.log ]
 then
     echo -e "${red}Must run with gbil.log file... ${NC}"

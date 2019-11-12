@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 LOOK_FOR="$2"
 
 for i in `find "$1" -name "*jar"`

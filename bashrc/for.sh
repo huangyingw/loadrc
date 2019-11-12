@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 for ss in `$1`
 do
     $2 $ss

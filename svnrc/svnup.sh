@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 if !(git status . | grep -q 'nothing to commit')
 then

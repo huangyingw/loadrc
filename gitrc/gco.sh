@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 branch="$1"
 echo "branch --> $branch"
 

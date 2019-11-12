@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/bin/zsh
 git stash list | tee gstl.findresult

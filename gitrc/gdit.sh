@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/zsh -
 output="$1"
 current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
 target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')

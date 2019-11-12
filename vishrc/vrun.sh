@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 file="$1"
 
 if [ $(basename "$file") = "gbil.log" ]

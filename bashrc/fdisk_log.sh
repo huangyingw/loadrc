@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/zsh -
 logFile=~/loadrc/fdisk.log
 
 df -TH > "$logFile"

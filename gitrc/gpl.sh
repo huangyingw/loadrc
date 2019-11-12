@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 
 for ss in `git remote -v |awk '/\(fetch\)$/{print $1}'`

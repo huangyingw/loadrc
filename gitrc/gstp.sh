@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 if [ -z "$1" ]
 then
     git stash show -p stash@{0} | git apply && git stash drop stash@{0}

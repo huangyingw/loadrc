@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/zsh -
 
 path="$1"
 

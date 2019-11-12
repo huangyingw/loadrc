@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 DEVICE=`mdadm -D --scan|awk '{print $2}'`
 
 if [ -z "$DEVICE" ]

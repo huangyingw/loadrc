@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/zsh -
 my_array=()
 
 while IFS= read -r line; do

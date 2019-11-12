@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/zsh -
 branch="$1"
 for remote in $(git remote)
 do

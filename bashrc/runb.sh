@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 make -B
 if [ -f "run.sh" ] 
 then

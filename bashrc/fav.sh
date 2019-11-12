@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/zsh
 
 FAV=/media/volgrp/mirror/av/
 

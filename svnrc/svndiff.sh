@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 fullfile="$1"
 if [ $(basename "$fullfile") == "index" ]
 then

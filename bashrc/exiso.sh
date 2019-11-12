@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/zsh
 source=$1
 
 umount -fl /media/cdrom

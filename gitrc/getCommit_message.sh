@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/zsh -
 current_branch=$(~/loadrc/gitrc/get_current_branch.sh)
 commit_message=""
 

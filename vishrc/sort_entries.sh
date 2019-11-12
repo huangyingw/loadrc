@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/zsh -
 FILE="$1"
 PARAM="$2"
 

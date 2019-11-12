@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/zsh -
 
 if [ $(hostname) != "lint-sandbox" ]
 then
