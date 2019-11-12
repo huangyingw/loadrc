@@ -38,21 +38,21 @@ case $extension in
         fi
         ;;
     findresult)
-        sh "$1"
+       zsh "$1"
         ;;
     vdiff)
-        sh "$1"
+       zsh "$1"
         ;;
     sh)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            ssh -nY "$host" ". ~/loadrc/.loadrc ; $path/$rfile"
+            ssh -nY "$host" ". ~/loadrc/.loadrc ; zsh $path/$rfile"
             rsync -aHv --force --progress \
                 --files-from=files.rev \
                 "$host:$path/" \
                 .
         else
-            "$1"
+            zsh "$1"
         fi
         ;;
     py)
