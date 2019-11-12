@@ -1,3 +1,4 @@
+#!/bin/bash
 TARGET=.
 
 if [ -n "$1" ]

@@ -1,3 +1,4 @@
+#!/bin/bash -
 cd $(~/loadrc/gitrc/get_git.sh $pwd)
 > COMMIT_EDITMSG
 cd -

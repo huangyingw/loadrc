@@ -1,3 +1,4 @@
+#!/bin/bash
 git branch -d "$1"
 
 if [[ $(git config --get-all push.remote) ]]

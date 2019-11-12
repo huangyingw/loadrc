@@ -1,3 +1,4 @@
+#!/bin/bash -
 logFile=~/loadrc/fdisk.log
 
 df -TH > "$logFile"

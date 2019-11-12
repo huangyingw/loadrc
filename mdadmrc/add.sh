@@ -1,3 +1,4 @@
+#!/bin/bash -
 mdadm --manage /dev/md0 --run
 mdadm --manage /dev/md0 --add /dev/sdf1
 mdadm -v --grow --raid-devices=5 /dev/md0

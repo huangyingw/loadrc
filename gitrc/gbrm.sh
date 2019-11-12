@@ -1,3 +1,4 @@
+#!/bin/bash -
 if [ -z "$1" ]
 then
     echo -e "${red}please provide the new branch name... ${NC}"

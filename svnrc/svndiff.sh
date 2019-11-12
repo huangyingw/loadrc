@@ -1,3 +1,4 @@
+#!/bin/bash
 fullfile="$1"
 if [ $(basename "$fullfile") == "index" ]
 then

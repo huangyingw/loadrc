@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 if [ -z "$1" ]
 then
     TARGETEDIR=`realpath "$PWD"`

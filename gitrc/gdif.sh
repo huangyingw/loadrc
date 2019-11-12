@@ -1,3 +1,4 @@
+#!/bin/bash
 ~/loadrc/gitrc/include_gitconfig.sh
 
 if [ -n "$1" ]

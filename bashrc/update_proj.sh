@@ -1,3 +1,4 @@
+#!/bin/bash -
 
 start=$(date +%s)
 ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/cscope.sh

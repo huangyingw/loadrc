@@ -1,3 +1,4 @@
+#!/bin/bash -
 BINPATH=$(realpath $(which mosh-server))
 
 # Turn the firewall off

@@ -1,3 +1,4 @@
+#!/bin/bash
 # Argument = -t test -r server -p password -v
 
 usage()

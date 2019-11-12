@@ -1,3 +1,4 @@
+#!/bin/bash
 if [ -f "run.sh" ]
 then
     ./run.sh

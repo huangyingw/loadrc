@@ -1,3 +1,4 @@
+#!/bin/bash
 if [ -z "$1" ]
 then
     echo -e "${red}Please provide the file name in full ... ${NC}"

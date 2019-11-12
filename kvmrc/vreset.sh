@@ -1,3 +1,4 @@
+#!/bin/bash
 if [ -z "$1" ]
 then
     virsh list|awk '/running/{print $2}'|while read ss; do virsh destroy "$ss" ; virsh start "$ss"; done

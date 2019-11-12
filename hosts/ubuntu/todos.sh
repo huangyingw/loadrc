@@ -1,3 +1,4 @@
+#!/bin/bash -
 
 mkdir -p ~/.local/share/shotwell/data/
 ln -fs /media/psf/Dropbox/.local/share/shotwell/data/photo.db ~/.local/share/shotwell/data/photo.db

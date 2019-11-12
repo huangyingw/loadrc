@@ -1,3 +1,4 @@
+#!/bin/bash -
 my_array=()
 
 while IFS= read -r line; do

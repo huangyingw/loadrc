@@ -1,3 +1,4 @@
+#!/bin/bash
 if [ -z "$1" ]
 then
     git diff --ignore-space-at-eol -b -w --ignore-blank-lines --cached HEAD

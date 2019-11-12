@@ -1,3 +1,4 @@
+#!/bin/bash
 [ $# -eq 0 ]&&directorys=`pwd`||directorys=$@
 linkchk()
 {

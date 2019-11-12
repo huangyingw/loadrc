@@ -1,3 +1,4 @@
+#!/bin/bash
 CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
 
 if [ -z "$1" ]

@@ -1,3 +1,4 @@
+#!/bin/bash
 if [ -n "$1" ]
 then
     git diff --name-status stash@{"$1"}^!
