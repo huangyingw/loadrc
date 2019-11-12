@@ -1,3 +1,4 @@
+#!/bin/zsh
 if [ -z "$1" ]
 then
     echo -e "${red}Please provide the target file name... ${NC}"
@@ -22,7 +23,7 @@ then
         # The process is not running
         # Echo current PID into lock file
         echo $$ > "${LCK_FILE}"
-        zsh "$SCRIPT"
+        "$SCRIPT"
     else
         # the process IS running
         # handle it
