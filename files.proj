@@ -419,6 +419,7 @@
 "./gitrc/gicb.sh"
 "./gitrc/git_bisect_run.sh"
 "./gitrc/git_ready.sh"
+"./gitrc/git_ready.test.sh"
 "./gitrc/git_run_shell_command_for_each_commit.sh"
 "./gitrc/gitapply.sh"
 "./gitrc/glg.sh"
