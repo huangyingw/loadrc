@@ -1556,6 +1556,7 @@
 "./vimrc/.vim/bundle/vim-pdf/doc/tags"
 "./vimrc/.vim/bundle/vim-pdf/doc/vim-pdf.txt"
 "./vimrc/.vim/bundle/vim-pdf/plugin/vim-pdf.vim"
+"./vimrc/.vim/bundle/vim-rails/.github/FUNDING.yml"
 "./vimrc/.vim/bundle/vim-rails/.gitignore"
 "./vimrc/.vim/bundle/vim-rails/CONTRIBUTING.markdown"
 "./vimrc/.vim/bundle/vim-rails/README.markdown"
