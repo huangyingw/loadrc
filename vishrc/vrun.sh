@@ -47,7 +47,7 @@ case $extension in
     sh)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            ssh -nY "$host" ". ~/loadrc/.loadrc ; zsh $path/$rfile"
+            ssh -nY "$host" ". ~/loadrc/.loadrc ; $path/$rfile"
             rsync -aHv --force --progress \
                 --files-from=files.rev \
                 "$host:$path/" \
