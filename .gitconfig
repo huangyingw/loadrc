@@ -54,3 +54,5 @@
 [deploy]
     host = localhost
     path = ~/loadrc
+[gdif]
+    ignore = ./.zshrc
