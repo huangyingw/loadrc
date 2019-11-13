@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 . $HOME/loadrc/.androidrc
 . $HOME/loadrc/.dockerrc
 . $HOME/loadrc/.envrc
