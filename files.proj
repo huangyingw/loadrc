@@ -1914,6 +1914,7 @@
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/asymptote.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/beamer.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/biblatex.vim"
+"./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/cases.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/cleveref.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/csquotes.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/dot2texi.vim"
