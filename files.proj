@@ -320,6 +320,7 @@
 "./bashrc/watch_copy.sh"
 "./bashrc/whole_ures_ex"
 "./bashrc/wol.sh"
+"./bashrc/zsh.test.sh"
 "./chrome_install.sh"
 "./crontabrc/.mini.cron"
 "./crontabrc/.mldonkey.cron"
