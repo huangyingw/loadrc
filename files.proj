@@ -183,6 +183,7 @@
 "./bashrc/app_list"
 "./bashrc/apt-mirror.sh"
 "./bashrc/back.sh"
+"./bashrc/bash.test.sh"
 "./bashrc/best_find.sh"
 "./bashrc/binaryGrep.sh"
 "./bashrc/ca.sh"
