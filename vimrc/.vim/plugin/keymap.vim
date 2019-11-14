@@ -112,9 +112,11 @@ endfunction
 
 function! SearchAgain()
     call Cd2ProjectRoot('files.proj')
-    let keyword = @/
+    let keyword = substitute(@/, '\\c', '', '')
+    let keyword = substitute(keyword, '\\<', '', '')
+    let keyword = substitute(keyword, '\\>', '', '')
     let b:result = GetEscapedResult(keyword)
-    silent exec '!~/loadrc/vishrc/vsearch.sh ' . expand("%:p") . ' "' .  keyword . '"' . ' "w" ' . '"' . b:result . '"'
+    exec '!~/loadrc/vishrc/vsearch.sh ' . expand("%:p") . ' "' .  keyword . '"' . ' "w" ' . '"' . b:result . '"'
     call OpenOrSwitch(b:result . '.findresult', 'vs')
 endfunction
 
