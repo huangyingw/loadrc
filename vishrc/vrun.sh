@@ -22,7 +22,7 @@ fi
 
 extension=${file##*.}
 host=$(git config deploy.host)
-path=$(git config deploy.path)
+rpath=$(git config deploy.path)
 rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
 rfile=$(realpath --relative-to="$rootFolder" "$1")
 
@@ -33,7 +33,7 @@ case $extension in
     sql)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            ssh -nY "$host" "cd $path ; ~/loadrc/sqlrc/xsql.sh $rfile"
+            ssh -nY "$host" "cd $rpath ; ~/loadrc/sqlrc/xsql.sh $rfile"
         else
             ~/loadrc/sqlrc/xsql.sh "$1" "$2"
         fi
@@ -47,19 +47,19 @@ case $extension in
     sh)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            ssh -nY "$host" ". ~/loadrc/.loadrc ; $path/$rfile"
+            ssh -nY "$host" ". ~/loadrc/.loadrc ; $rpath/$rfile"
             rsync -aHv --force --progress \
                 --files-from=files.rev \
-                "$host:$path/" \
+                "$host:$rpath/" \
                 .
         else
-            zsh "$1"
+            "$1"
         fi
         ;;
     py)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            ssh -nY "$host" "cd $path ; . ~/loadrc/.loadrc ; python $rfile"
+            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; python $rfile"
         else
             SCRIPT=$(realpath "$1")
             SCRIPTPATH=$(dirname "$SCRIPT")
@@ -73,7 +73,7 @@ case $extension in
     yml)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            ssh -nY "$host" "docker-compose -f $path/$rfile up -d"
+            ssh -nY "$host" "docker-compose -f $rpath/$rfile up -d"
         else
             docker-compose -f "$file" up -d
         fi
