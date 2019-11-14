@@ -10,4 +10,9 @@ else
     git checkout -b "$1" origin/"$1"
     git checkout "$1"
     git pull
+
+    if [ $(~/loadrc/gitrc/git_ready.sh) ]
+    then
+        s/hypo
+    fi
 fi
