@@ -16,6 +16,7 @@ fi
 
 ln -fs ~/loadrc/.zshrc ~/.zshrc
 ln -fs ~/loadrc/.profile ~/.profile
+ln -fs ~/loadrc/oh-my-zsh ~/.oh-my-zsh
 
 mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 ln -fs ~/loadrc/."`hostname`".theanorc  ~/.theanorc
