@@ -189,3 +189,7 @@
 [submodule "vimrc/.vim/bundle/vim-gtrans"]
 	path = vimrc/.vim/bundle/vim-gtrans
 	url = https://github.com/haya14busa/vim-gtrans.git
+[submodule "oh-my-zsh"]
+	path = oh-my-zsh
+	url = git@github.com:huangyingw/oh-my-zsh.git
+	branch = dev
