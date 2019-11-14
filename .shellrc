@@ -1,3 +1,4 @@
+#!/bin/zsh
 #alias pm-suspend='$HOME/loadrc/bashrc/sleep.sh'
 #alias sshfs='sshfs -o allow_other,uid=1000,gid=1000'
 #alias tmux='$HOME/loadrc/bashrc/tmux.sh'
