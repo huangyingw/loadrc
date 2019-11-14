@@ -1,7 +1,6 @@
 #!/bin/bash - 
-retn_value=$(~/loadrc/gitrc/git_ready.sh)
 
-if [ "$retn_value" ] 
+if [ $(~/loadrc/gitrc/git_ready.sh) ] 
 then
     echo true
 else
