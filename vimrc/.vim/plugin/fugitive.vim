@@ -369,6 +369,10 @@ function! s:Gdio(...) abort
 endfunction
 
 function! s:Gdi2(...) abort
+    if (expand("%") !~ '.*fix.gdit.diff')
+        return
+    endif
+
     let worktree = Cd2Worktree()
     let output = 'gdi2.findresult'
     let arg1 = (a:0 >= 1) ? a:1 : ''
