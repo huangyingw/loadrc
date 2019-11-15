@@ -10,7 +10,7 @@ else
     echo "it is Linux"
 fi
 
-if [ $(uname) == "Darwin" ]
+if [ $(uname) = "Darwin" ]
 then
     echo "it is macos"
 else

@@ -1,5 +1,5 @@
 #! /bin/zsh
-if [ $(uname) == "Darwin" ]
+if [ $(uname) = "Darwin" ]
 then
     echo -e "${red}It could only run in Linux... ${NC}"
     exit 1

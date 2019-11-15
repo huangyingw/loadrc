@@ -3,7 +3,7 @@
 host=$(git config deploy.host)
 path=$(git config deploy.path)
 
-if [ "$host" == "localhost" ]
+if [ "$host" = "localhost" ]
 then
     exit 0
 fi
