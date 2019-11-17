@@ -20,9 +20,11 @@ else
         htop \
         libtool \
         lynx \
+        mosh \
+        openssl \
         tig \
         tmux \
-        openssl \
+        wakeonlan \
         xpdf
     brew cask install \
         kdiff3 \
