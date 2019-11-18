@@ -42,9 +42,9 @@
 [branch "RunShell"]
     remote = origin
     merge = refs/heads/RunShell
-[branch "async"]
+[branch "bash"]
     remote = origin
-    merge = refs/heads/async
+    merge = refs/heads/bash
 [vrun]
     silent = false
     async = false
