@@ -7,6 +7,7 @@ bashrc/output
 crontabrc/crontab_file
 gstv.ready
 kvmrc/.ropeproject/
+oh-my-zsh/
 vimrc/.vim/.netrwhist
 vimrc/.vim/autosess/
 vimrc/.vim/spell/en.utf-8.add.spl
