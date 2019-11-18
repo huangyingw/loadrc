@@ -600,6 +600,7 @@
 "./oh-my-zsh/CONTRIBUTING.md"
 "./oh-my-zsh/LICENSE.txt"
 "./oh-my-zsh/README.md"
+"./oh-my-zsh/cache/.zsh-update"
 "./oh-my-zsh/custom/example.zsh"
 "./oh-my-zsh/custom/plugins/example/example.plugin.zsh"
 "./oh-my-zsh/custom/themes/example.zsh-theme"
