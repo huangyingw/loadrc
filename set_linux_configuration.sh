@@ -13,8 +13,7 @@ deploy_configs() {
     SOURCE=~/loadrc/"$TARGET"
     if [ -f "$SOURCE" ]
     then
-        cp -nv "$TARGET" "$TARGET".bak
-        ln -fs "$SOURCE" "$TARGET"
+        ~/loadrc/bashrc/ln_fs.sh "$SOURCE" "$TARGET"
     fi
 }
 
