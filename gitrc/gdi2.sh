@@ -23,7 +23,7 @@ then
 fi
 
 host=$(git config deploy.host)
-path=$(git config deploy.path)
+rpath=$(git config deploy.path)
 local_master="$(git config gsync.branch)"
 
 git checkout -b "$targetBranch" "$local_master" ; \
