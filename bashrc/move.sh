@@ -1,12 +1,18 @@
 #!/bin/zsh
 
+if [ -z "$1" ] || [ -z "$2" ]
+then
+    echo -e "${red}Please provide both source and target parameters... ${NC}"
+    exit 1
+fi
+
 if [[ "$2" != *":"* ]] && [[ ! -d "$2" ]]
 then
     mkdir -p "$2"
 fi
 
-SOURCE=`realpath "$1"`
-TARGET=`realpath "$2"`
+SOURCE=$(realpath "$1")
+TARGET=$(realpath "$2")
 
 if [ "$SOURCE" != "$TARGET" ]
 then
