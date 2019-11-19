@@ -22,6 +22,7 @@ else
         lynx \
         mosh \
         openssl \
+        rename \
         tig \
         tmux \
         wakeonlan \
