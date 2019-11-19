@@ -21,6 +21,7 @@ else
         libtool \
         lynx \
         mosh \
+        node \
         openssl \
         rename \
         tig \
