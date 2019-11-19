@@ -38,7 +38,9 @@ fi
 
 pip install \
     pdftotext
-sudo -H pip install --upgrade autoflake
+sudo -H pip install --upgrade \
+    autoflake \
+    autopep8
 pip3 install git+https://github.com/gaborvecsei/pdf-split-merge.git
 
 ./zerotierrc/all.sh
