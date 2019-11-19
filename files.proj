@@ -284,7 +284,6 @@
 "./bashrc/rsynctype.sh"
 "./bashrc/run.sh"
 "./bashrc/runb.sh"
-"./bashrc/sMov.sh"
 "./bashrc/searchIP.sh"
 "./bashrc/selectCopy.sh"
 "./bashrc/selectMirror.sh"
