@@ -1,4 +1,4 @@
-#!/bin/zsh -
+#!/bin/bash
 
 apt-get update
 apt-get upgrade -y
@@ -57,7 +57,8 @@ apt-get install -y \
     w3m \
     w3m-img \
     wakeonlan \
-    wget
+    wget \
+    zsh
 modprobe wl
 update-initramfs -u
 locale-gen en_US.UTF-8
