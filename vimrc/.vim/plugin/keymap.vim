@@ -35,7 +35,7 @@ endif
 function! HighlightKeyword(keyword)
     let @@ = a:keyword
     if @@ =~? '^[0-9a-z,_]*$' || @@ =~? '^[0-9a-z ,_]*$' && g:VeryLiteral
-        let @/ = @@
+        let @/ = a:keyword
     else
         let pat = escape(@@, '\')
         if g:VeryLiteral
@@ -141,7 +141,7 @@ function! CSCSearch(num)
     " 7 Find this file:
     " 8 Find files #including this file:
     call Cd2ProjectRoot('files.proj')
-    let keyword = expand("<cword>")
+    let keyword = tolower(expand("<cword>"))
     let b:result = GetEscapedResult(keyword)
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "' .  a:num . '" ' . '"' . b:result . '"'
     call OpenOrSwitch(b:result . '.findresult', 'vs')
