@@ -33,9 +33,11 @@ if !exists('g:VeryLiteral')
 endif
 
 function! HighlightKeyword(keyword)
+    let old_reg = getreg('"')
+    let old_regtype = getregtype('"')
     let @@ = a:keyword
     if @@ =~? '^[0-9a-z,_]*$' || @@ =~? '^[0-9a-z ,_]*$' && g:VeryLiteral
-        let @/ = a:keyword
+        let @/ = '\c' . a:keyword
     else
         let pat = escape(@@, '\')
         if g:VeryLiteral
@@ -47,8 +49,10 @@ function! HighlightKeyword(keyword)
             let pat = substitute(pat, '\\!', '!', 'g')
             let pat = substitute(pat, '\\"', '"', 'g')
         endif
-        let @/ = '\V' . pat
+        let @/ = '\c' . pat
     endif
+  normal! gV
+  call setreg('"', old_reg, old_regtype)
 endfunction
 
 function! VFilter()
