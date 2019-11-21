@@ -268,3 +268,5 @@ call ncm2#override_source('otherbuf', {'priority': 6})
 " Automatically change the current directoryEdit
 " Sometimes it is helpful if your working directory is always the same as the file you are editing. To achieve this, put the following in your vimrc:
 " set autochdir
+
+let g:indexed_search_dont_move = 1

@@ -47,7 +47,7 @@ function! HighlightKeyword(keyword)
             let pat = substitute(pat, '\\!', '!', 'g')
             let pat = substitute(pat, '\\"', '"', 'g')
         endif
-        let @/ = '\V'.pat
+        let @/ = '\V' . pat
     endif
 endfunction
 
