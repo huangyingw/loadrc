@@ -7,5 +7,5 @@ if [[ "$3" == "w" ]]
 then
     xargs grep -inH -- "$keyword" < "$inputFile" > "$find_result"
 else
-    cscope -dL -f cscope.out -"$3""$2" > "$find_result"
+    cscope -CdL -f cscope.out -"$3""$keyword" > "$find_result"
 fi
