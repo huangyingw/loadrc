@@ -1,12 +1,12 @@
 #!/bin/zsh -
-IFS=$'\r\n' GLOBIGNORE='*' command eval  'LINES=($(cat $1))'
-
-for index in "${!LINES[@]}"
+IFS=$'\n' lines=($(cat $1))
+ 
+for index in {1..$#lines}
 do
-    for ((next = $index + 1; next < ${#LINES[@]}; next++));
+    for ((next = $index + 1; next < $#lines; next++));
     do
-        one=$(echo "${LINES[$index]}" | sed 's/"//g')
-        two=$(echo "${LINES[$next]}" | sed 's/"//g')
+        one=$(echo "${lines[$index]}" | sed 's/"//g')
+        two=$(echo "${lines[$next]}" | sed 's/"//g')
         kdiff3 "$one" "$two"
     done
 done
