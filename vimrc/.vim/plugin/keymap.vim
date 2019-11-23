@@ -103,7 +103,7 @@ function! VRun()
         let b:to_run = b:to_run . '.sh'
     endif
 
-    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
+    let b:csdbpath = Cd2ProjectRoot("files.proj")
     let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
 
