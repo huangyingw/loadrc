@@ -1,4 +1,4 @@
-#!/bin/zsh -
+#!/bin/zsh
 
 if [ -z "$1" ]
 then

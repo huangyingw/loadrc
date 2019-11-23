@@ -1,4 +1,4 @@
-#!/bin/zsh -
+#!/bin/zsh
 SOURCE=$1
 TARGET=$2
 

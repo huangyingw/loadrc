@@ -1,2 +1,2 @@
-#!/bin/zsh -
+#!/bin/zsh
 svn revert "$1"

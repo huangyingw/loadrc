@@ -1,4 +1,4 @@
-#!/bin/zsh -
+#!/bin/zsh
 KeepConnect() {
     ID="$1"
     while [[ $(blueutil --is-connected "$ID") != 1 ]]
