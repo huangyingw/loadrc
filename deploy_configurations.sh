@@ -33,4 +33,5 @@ mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 #~/loadrc/bashrc/ln_fs.sh ~/loadrc/.kdiff3rc ~/.kdiff3rc
 
 ./set_linux_configuration.sh
+./set_macos_configuration.sh
 ./set_host_configuration.sh
