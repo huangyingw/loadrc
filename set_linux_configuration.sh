@@ -10,7 +10,7 @@ fi
 
 deploy_configs() {
     TARGET="$1"
-    SOURCE=~/loadrc/"$TARGET"
+    SOURCE=~/loadrc/linux/"$TARGET"
     if [ -f "$SOURCE" ]
     then
         ~/loadrc/bashrc/ln_fs.sh "$SOURCE" "$TARGET"

@@ -5,7 +5,7 @@ cd "$SCRIPTPATH"
 
 get_configs() {
     SOURCE="$1"
-    TARGET=~/loadrc/"$SOURCE"
+    TARGET=~/loadrc/linux/"$SOURCE"
     mkdir -p "$(dirname $TARGET)"
     cp -v "$SOURCE" "$TARGET"
 }
