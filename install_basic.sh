@@ -27,6 +27,7 @@ else
         tig \
         tmux \
         wakeonlan \
+        watch \
         xpdf
     brew cask install \
         kdiff3 \
