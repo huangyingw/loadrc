@@ -1,4 +1,4 @@
-#!/bin/zsh -e
+#!/bin/zsh
 function iterate_dir(){
     for file in "$1"/*
     do

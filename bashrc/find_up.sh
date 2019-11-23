@@ -1,4 +1,4 @@
-#!/bin/zsh -
+#!/bin/zsh
 
 rpath="$1"
 

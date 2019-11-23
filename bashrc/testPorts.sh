@@ -1,4 +1,4 @@
-#!/bin/zsh -
+#!/bin/zsh
 portList="$HOME/Dropbox/loadrc/bashrc/portList"
 while read -r line || [[ -n "$line" ]]
 do

@@ -1,4 +1,4 @@
-#!/bin/zsh -
+#!/bin/zsh
 
 SOURCE=`realpath "$1"`
 TARGET=`realpath "$2"`

@@ -1,4 +1,4 @@
-#!/bin/zsh -
+#!/bin/zsh
 
 if [ "$1" = "files.proj" ]
 then

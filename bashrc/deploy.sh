@@ -1,4 +1,4 @@
-#!/bin/zsh -
+#!/bin/zsh
 
 host=$(git config deploy.host)
 rpath=$(git config deploy.path)

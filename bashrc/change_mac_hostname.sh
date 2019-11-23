@@ -1,4 +1,4 @@
-#!/bin/zsh -
+#!/bin/zsh
 if [ $(uname) != "Darwin" ]
 then
     exit 0
