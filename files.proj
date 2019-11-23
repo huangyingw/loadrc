@@ -570,7 +570,6 @@
 "./linux/etc/sudoers"
 "./mac_sync.list"
 "./macos.conf"
-"./macos/.bashrc"
 "./macos/etc/sudoers"
 "./macosrc/configure_mosh.sh"
 "./macrc/mac_sync.list"
