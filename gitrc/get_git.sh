@@ -1,4 +1,4 @@
-#!/bin/zsh -
+#!/bin/zsh
 DIR=$(dirname "$1")
 cd "$DIR"
 

@@ -1,4 +1,4 @@
-#!/bin/zsh - 
+#!/bin/zsh 
 
 if [ $(~/loadrc/gitrc/git_ready.sh) ] 
 then

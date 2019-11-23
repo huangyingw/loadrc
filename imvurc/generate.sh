@@ -1,4 +1,4 @@
-#!/bin/zsh -
+#!/bin/zsh
 file="$1"
 target="$1.sh"
 
