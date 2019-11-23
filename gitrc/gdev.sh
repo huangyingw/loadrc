@@ -1,4 +1,4 @@
-#!/bin/zsh -
+#!/bin/zsh
 touch files.proj \
     && git config --file .gitconfig commit.message n \
     && git config --file .gitconfig merge.allow true \

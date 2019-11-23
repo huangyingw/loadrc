@@ -1,2 +1,2 @@
-#!/bin/zsh -
+#!/bin/zsh
 docker ps > dps.findresult

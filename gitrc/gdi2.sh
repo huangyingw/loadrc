@@ -1,4 +1,4 @@
-#!/bin/zsh -
+#!/bin/zsh
 currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 
 if [[ "$currentBranch" != *".fix" ]]
