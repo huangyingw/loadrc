@@ -8,7 +8,7 @@ then
     exit 0
 fi
 
-if [[ $(git config leetcode.submit) = "true" ]]  && ([[ "$file" = *'.java' ]] || [[ "$file" = *'.py' ]])
+if [[ $(git config leetcode.submit) = "true" ]]  && ([[ "$file" = *'leetcode-cli/submissions'*'.java' ]] || [[ "$file" = *'leetcode-cli/submissions'*'.py' ]])
 then
     leetcode submit "$file"
     exit 0
