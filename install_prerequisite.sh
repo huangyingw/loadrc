@@ -26,6 +26,7 @@ apt-get install -y \
     inetutils-traceroute \
     iputils-ping \
     kdiff3 \
+    libsecret-1-dev \
     locales \
     manpages-fr-extra \
     manpages-pl \
