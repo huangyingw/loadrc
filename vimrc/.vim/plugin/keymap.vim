@@ -229,6 +229,7 @@ function! VimOpen()
         let b:commit = expand("<cword>")
         let filename = substitute(expand('%:p'), '.fugitiveblame', '', 'g')
         exec '!git checkout ' . '"' .  b:commit . '^"' . ' ' . filename
+        call OpenOrSwitch(filename, 'goto')
     else
         if !filereadable(b:fileName)
             if !isdirectory(b:filePath)
