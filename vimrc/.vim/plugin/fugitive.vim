@@ -566,6 +566,7 @@ function! s:DiffClean() abort
     silent exec '%s/^--- a\//--- \.\//g'
     silent exec '%s/^+++ b\//+++ \.\//g'
     w
+    only
 endfunction
 
 function! s:Gfix() abort
