@@ -14,6 +14,7 @@ else
     brew update
     brew install \
         Caskroom/cask/xquartz \
+        astyle \
         blueutil \
         coreutils \
         git \
