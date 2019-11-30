@@ -8,7 +8,7 @@ then
     exit 0
 fi
 
-if [[ "$file" = *'.leetcode.java' ]] || [[ "$file" = *'.leetcode.py' ]]
+if [[ "$file" = *'.leetcode.java' ]] || [[ "$file" = *'.leetcode.py' ]] || [[ "$file" = *'.leetcode.python3.py' ]]
 then
     leetcode submit "$file"
     exit 0
