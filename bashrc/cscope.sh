@@ -53,10 +53,8 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
     sort -u "$TARGET" -o "$TARGET" && \
     cp -fv "$TARGET" files.proj && \
     sed -i.bak 's/ /\\ /g' files.proj && \
-    find . -type f -size +10M -exec ls -S {} \+ > fav.log.bak && \
-    cp -fv fav.log.bak fav.log && \
-    find . -type f -size +10M -exec ls -t {} \+ > fav.log.sort.bak && \
-    cp -fv fav.log.sort.bak fav.log.sort && \
+    ~/loadrc/bashrc/fav.sh && \
+    ~/loadrc/bashrc/fdocs.sh && \
     cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > files.proj.tmp && \
     echo > cscope.small.files && \
     echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
