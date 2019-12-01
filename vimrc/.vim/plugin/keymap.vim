@@ -225,6 +225,8 @@ function! VimOpen()
     elseif (expand("%") ==# 'dps.findresult')
         let b:commit = expand("<cword>")
         call asyncrun#run('<bang>', '', '~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
+    elseif (expand("%") ==# 'fdocs.list')
+        exec '!open ' . '"' .  expand(expand("<cfile>")) . '"'
     elseif (&filetype ==# 'fugitiveblame')
         let b:commit = expand("<cword>")
         call Cd2Worktree()
