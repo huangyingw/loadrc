@@ -215,6 +215,7 @@
 "./bashrc/fc.sh"
 "./bashrc/fcscope.sh"
 "./bashrc/fdisk_log.sh"
+"./bashrc/fdocs.sh"
 "./bashrc/fflink.sh"
 "./bashrc/fgh.sh"
 "./bashrc/file_type"
