@@ -14,6 +14,6 @@ then
         or="-o"
     done < "$DocConfig"
 
-    find . "(" "${include_params[@]}" ")" -type f -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> "$TARGET"
+    find . "(" "${include_params[@]}" ")" -type f -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET"
     sort -u "$TARGET" -o "$TARGET"
 fi
