@@ -199,7 +199,7 @@ function! VimOpen()
     let b:fileName = expand(expand("<cfile>"))
     let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
 
-    if b:fileName =~? '\.\(pdf\|docx\)$'
+    if b:fileName =~? '\.\(pdf\|pptx\|doc\|docx\)$'
         exec '!open ' . '"' .  b:fileName . '"'
         return
     endif
