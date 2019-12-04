@@ -53,7 +53,7 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
     sort -u "$TARGET" -o "$TARGET" && \
     cp -fv "$TARGET" files.proj && \
     sed -i.bak 's/ /\\ /g' files.proj && \
-    ~/loadrc/bashrc/fav.sh && \
+    ~/loadrc/bashrc/fvideos.sh && \
     ~/loadrc/bashrc/fdocs.sh && \
     cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > files.proj.tmp && \
     echo > cscope.small.files && \

@@ -234,6 +234,7 @@
 "./bashrc/for.sh"
 "./bashrc/fpath.sh"
 "./bashrc/fr.sh"
+"./bashrc/fvideos.sh"
 "./bashrc/get_first_column_of_file.sh"
 "./bashrc/get_first_column_of_file_test.sh"
 "./bashrc/getopts.sh"
