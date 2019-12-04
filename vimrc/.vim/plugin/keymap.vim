@@ -198,6 +198,12 @@ endfunction
 function! VimOpen()
     let b:fileName = expand(expand("<cfile>"))
     let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
+
+    if b:fileName =~? '\.\(pdf\|docx\)$'
+        exec '!open ' . '"' .  b:fileName . '"'
+        return
+    endif
+
     if (expand("%") ==# 'index')
         let realFile = GetWorktree() . '/' . b:fileName . ''
         let indexFile = getcwd() . '/../' . b:fileName . '/.git/index'
