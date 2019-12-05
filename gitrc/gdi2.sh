@@ -35,4 +35,5 @@ git checkout -b "$targetBranch" "$local_master" ; \
     git commit  --no-verify -am "$commit_message" && \
     git pull ; \
     git push
-    . ~/loadrc/imvurc/ghypo.sh "$targetBranch"
+    . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
+        ~/loadrc/gitrc/gfix.sh
