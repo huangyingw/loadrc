@@ -2,6 +2,7 @@
 *.bak
 *.bin
 *.diff
+!*.fix.gdio.diff
 *.exe
 *.findresult
 *.fugitiveblame
