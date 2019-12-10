@@ -437,6 +437,7 @@
 "./gitrc/gsearch.sh"
 "./gitrc/gsh.sh"
 "./gitrc/gshow.sh"
+"./gitrc/gsquash.sh"
 "./gitrc/gst.sh"
 "./gitrc/gsta.sh"
 "./gitrc/gstf.sh"
