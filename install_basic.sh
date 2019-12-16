@@ -21,6 +21,7 @@ else
         htop \
         libtool \
         lynx \
+        minikube \
         mosh \
         node \
         openssl \
