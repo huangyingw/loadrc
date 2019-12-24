@@ -530,6 +530,7 @@
 "./install_prerequisite.sh"
 "./install_vagrant.sh"
 "./ipynbrc/convert.sh"
+"./ipynbrc/python.tpl"
 "./iterm2rc/movescreen.py"
 "./jdupes/.gitconfig"
 "./jdupes/.gitignore"
