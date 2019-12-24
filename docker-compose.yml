@@ -9,6 +9,8 @@ services:
         volumes:
             - ./var/logs/:/var/logs/
             - ./.bashrc:/root/.bashrc
+            - ./.zshrc:/root/.zshrc
+            - ./oh-my-zsh:/root/.oh-my-zsh
             - ./:/root/loadrc
             - ./vimrc/.vim:/root/.vim
             - ./vimrc/.vimrc:/root/.vimrc
