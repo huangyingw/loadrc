@@ -19,6 +19,7 @@ else
         coreutils \
         git \
         htop \
+        jupyterlab \
         libtool \
         lynx \
         minikube \
