@@ -79,3 +79,5 @@
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     required = true
+[diff "nodiff"]
+	command = /bin/echo
