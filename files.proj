@@ -132,6 +132,7 @@
 "./.git/modules/vimrc/.vim/bundle/vimtex/info/exclude"
 "./.git/modules/vimrc/.vim/bundle/vundle.vim/config"
 "./.git/modules/vimrc/.vim/bundle/vundle.vim/info/exclude"
+"./.gitattributes"
 "./.gitconfig"
 "./.gitconfig_sample"
 "./.gitignore"
