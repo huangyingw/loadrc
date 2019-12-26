@@ -80,4 +80,4 @@
     process = git-lfs filter-process
     required = true
 [diff "nodiff"]
-	command = /bin/echo
+	command = /usr/bin/true
