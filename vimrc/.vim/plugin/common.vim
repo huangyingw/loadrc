@@ -244,7 +244,7 @@ function! Filter2Findresult()
             exe "bd!" . buffername
         endif
 
-        silent exec 'w! ' . buffername
+        silent exec '!cp' . ' ' . '"' .  expand('%:p') . '"' . ' ' . '"' .  buffername . '"'
         let worktree = Cd2Worktree()
         call OpenOrSwitch(buffername, 'vs')
     endif
