@@ -34,7 +34,8 @@ else
         xpdf
     brew cask install \
         kdiff3 \
-        lynxlet
+        lynxlet \
+        wkhtmltopdf
     sudo easy_install pip
     sudo pip install --upgrade pip
 
