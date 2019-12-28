@@ -3,6 +3,7 @@
 find . -type f -name \*.ipynb | while read ss
 do
     jupyter nbconvert --to=python --template=~/loadrc/ipynbrc/python.tpl "$ss" --output "$(basename $ss).py"
+    jupyter nbconvert --to=html "$ss"
     sed -i"" '/^$/d' "$ss.py"
     sed -i"" '/^#$/d' "$ss.py"
     autopep8 --in-place "$ss.py"
