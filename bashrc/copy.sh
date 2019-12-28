@@ -15,4 +15,4 @@ then
 fi
 
 rsync -aHSv --progress --force \
-    "${SOURCE}" "${TARGET}" \
+    "${SOURCE}" "${TARGET}"
