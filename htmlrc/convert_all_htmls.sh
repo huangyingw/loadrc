@@ -5,5 +5,12 @@ cd "$SCRIPTPATH"
 
 find . -type f -name \*.html | while read ss
 do
-    wkhtmltopdf "$ss" $(echo $ss | sed 's/\.html$/\.pdf/g') && rm "$ss"
+    targetFile=$(echo $ss | sed 's/\.html$/\.pdf/g')
+
+    if [ ! -f "$targetFile" ]
+    then
+        wkhtmltopdf "$ss" "$targetFile" && rm "$ss"
+    else
+        rm "$ss"
+    fi
 done
