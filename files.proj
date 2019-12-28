@@ -515,6 +515,7 @@
 "./hosts/vserver/var/lib/zerotier-one/identity.public"
 "./hosts/vserver/var/lib/zerotier-one/identity.secret"
 "./htmlrc/convert_all_htmls.sh"
+"./htmlrc/convert_all_htmls_test.sh"
 "./imvurc/Vagrantfile"
 "./imvurc/generate.sh"
 "./imvurc/generate_sh.template"
