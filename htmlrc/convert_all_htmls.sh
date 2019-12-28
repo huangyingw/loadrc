@@ -1,9 +1,5 @@
 #!/bin/zsh
-SCRIPT=$(realpath "$1")
-SCRIPTPATH=$(dirname "$SCRIPT")
-cd "$SCRIPTPATH"
-
-find . -type f -name \*.html | while read ss
+find "$1" -type f -name \*.html | while read ss
 do
     targetFile=$(echo $ss | sed 's/\.html$/\.pdf/g')
 
