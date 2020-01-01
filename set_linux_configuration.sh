@@ -21,3 +21,4 @@ while read -r line || [ -n "$line" ]
 do
     deploy_configs "$line"
 done < linux.conf
+grub-mkconfig -o /boot/grub/grub.cfg
