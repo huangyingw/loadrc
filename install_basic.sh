@@ -8,7 +8,6 @@ then
     ./install_prerequisite.sh
     ./enpass_install.sh
     ./nxrc/install.sh
-    ./chrome_install.sh
 else
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew update
