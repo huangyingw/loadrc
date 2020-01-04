@@ -35,3 +35,5 @@ apt-get install -y \
     vim-gnome \
     virt-manager \
     virtinst
+~/loadrc/bashrc/mklnk.sh /var/lib/libvirt/ /media/nvme/var/lib/libvirt/
+~/loadrc/bashrc/mklnk.sh /etc/libvirt/ /media/nvme/etc/libvirt/
