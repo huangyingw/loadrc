@@ -302,6 +302,7 @@
 "./bashrc/tmirror.sh"
 "./bashrc/tmove.sh"
 "./bashrc/tmux.sh"
+"./bashrc/tosmirror.sh"
 "./bashrc/trim_lines.sh"
 "./bashrc/trsync_svn.sh"
 "./bashrc/tselectMirror.sh"
