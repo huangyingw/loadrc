@@ -543,6 +543,7 @@
 "./kvmrc/install.sh"
 "./kvmrc/usb_disk.xml"
 "./kvmrc/uvmount.sh"
+"./kvmrc/vclone.sh"
 "./kvmrc/vdestroy.sh"
 "./kvmrc/vdisk.sh"
 "./kvmrc/vmdk2qcow2.sh"
