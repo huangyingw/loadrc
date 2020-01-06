@@ -18,6 +18,7 @@ else
         coreutils \
         git \
         htop \
+        hub \
         jupyterlab \
         libtool \
         lynx \
