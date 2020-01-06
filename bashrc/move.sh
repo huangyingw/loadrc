@@ -16,8 +16,8 @@ TARGET=$(realpath "$2")
 
 if [ "$SOURCE" != "$TARGET" ]
 then
-    rsync --remove-source-files -aHSv --progress --force "$1" "$2" \
-        && ~/loadrc/bashrc/rmEmpty.sh "$1"
+    rsync --remove-source-files -aHSv --progress --force "$SOURCE/" "$TARGET/" \
+        && ~/loadrc/bashrc/rmEmpty.sh "$SOURCE/"
 else
     echo -e "${red}same dir --> ${SOURCE} ... ${NC}"
     echo -e "${red}please choose the different dir! ... ${NC}"

@@ -36,5 +36,6 @@ else
         && git add . \
         && git add -f files.proj \
         && $HOME/loadrc/gitrc/g.sh \
+        && hub create \
         && ~/loadrc/gitrc/gclb.sh
 fi
