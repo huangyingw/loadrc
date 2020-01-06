@@ -32,7 +32,7 @@ git checkout -b "$targetBranch" "$local_master" ; \
     git apply --reject --whitespace=fix "$currentBranch.gdit.diff" ; \
     ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
     git add . && \
-    git commit  --no-verify -am "$commit_message" && \
+    git commit  --no-verify -am "$commit_message" ; \
     git pull ; \
     git push
     . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
