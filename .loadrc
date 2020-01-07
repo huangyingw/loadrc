@@ -9,7 +9,6 @@
 . $HOME/loadrc/.shellrc
 . $HOME/loadrc/.sqlrc
 . $HOME/loadrc/.svnrc
-. $HOME/loadrc/.zerotierrc
 . $HOME/loadrc/openrc.sh
 . $HOME/loadrc/gpurc/.gpurc
 . $HOME/loadrc/.macosrc

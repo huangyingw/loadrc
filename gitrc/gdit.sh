@@ -7,6 +7,7 @@ remote_branch="$(git config gsync.branch)"
 
 git co "$target_branch"
 git merge "$remote/$remote_branch" && \
+    git push ; \
     git co "$current_branch" && \
     ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
 
