@@ -7,7 +7,7 @@ fi
 qcow2File="$1"
 ~/loadrc/kvmrc/uvmount.sh
 ~/loadrc/kvmrc/vmount.sh "$qcow2File"
-rsync -aHSv --progress --delete-before --force ~/loadrc/ /media/dev/nbd0p1/root/loadrc/
 rsync -aHSv --progress --delete-before --force ~/.ssh/ /media/dev/nbd0p1/root/.ssh/
-rsync -aHSv --progress --delete-before --force ~/loadrc/linux/etc/default/grub /media/dev/nbd0p1/etc/default/grub
+rsync -aHSv --progress ~/loadrc/.tmux.conf /media/dev/nbd0p1/root/
+rsync -aHSv --progress ~/loadrc/linux/etc/ssh/ /media/dev/nbd0p1/etc/ssh/
 ~/loadrc/kvmrc/uvmount.sh
