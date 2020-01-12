@@ -565,6 +565,7 @@
 "./kvmrc/vsscu.sh"
 "./kvmrc/vssd.sh"
 "./kvmrc/vssi.sh"
+"./kvmrc/vssl.sh"
 "./kvmrc/vssp.sh"
 "./kvmrc/vssr.sh"
 "./kvmrc/vssu.sh"
