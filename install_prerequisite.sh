@@ -27,6 +27,7 @@ apt-get install -y \
     iputils-ping \
     kdiff3 \
     libsecret-1-dev \
+    libsecret-tools \
     locales \
     manpages-fr-extra \
     manpages-pl \
