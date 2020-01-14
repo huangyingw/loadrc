@@ -614,6 +614,7 @@
 "./prunefix_template.conf"
 "./pythonrc/autopep8-ipynb.py"
 "./pythonrc/remove-unuses.sh"
+"./pythonrc/remove_comments.py"
 "./pythonrc/setup.cfg"
 "./pythonrc/setup.cfg.src"
 "./ruleref.list"
