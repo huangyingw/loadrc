@@ -11,7 +11,6 @@ def do_file(fname):
     mod = open(fname + ".strip", "w")
 
     prev_toktype = token.INDENT
-    first_line = None
     last_lineno = -1
     last_col = 0
 
@@ -38,6 +37,7 @@ def do_file(fname):
         prev_toktype = toktype
         last_col = ecol
         last_lineno = elineno
+
 
 if __name__ == '__main__':
     do_file(sys.argv[1])
