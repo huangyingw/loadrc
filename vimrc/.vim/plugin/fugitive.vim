@@ -403,8 +403,7 @@ endfunction
 
 function! s:Gicb() abort
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/gicb.sh ' . '2>&1 | tee gicb.findresult'
-    call OpenOrSwitch('gicb.findresult', 'vs')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gicb.sh')
 endfunction
 
 function! s:Gitk(...) abort
@@ -451,8 +450,7 @@ function! s:Gcob(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
     let arg2 = (a:0 >= 2) ? a:2 : ''
-    exec '!~/loadrc/gitrc/gcob.sh ' . '"' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee gcob.findresult'
-    call OpenOrSwitch('gcob.findresult', 'vs')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gcob.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
 endfunction
 
 function! s:Dodev() abort
@@ -462,8 +460,7 @@ endfunction
 
 function! s:Gcom(args, ...) abort
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '" 2>&1 | tee gcom.findresult'
-    call OpenOrSwitch('gcom.findresult', 'vs')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"')
 endfunction
 
 function! s:Gshow(args, ...) abort
