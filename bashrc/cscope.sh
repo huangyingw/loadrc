@@ -43,6 +43,7 @@ do
     or="-o"
 done < "$INCLUDE_FILE"
 
+export LC_ALL=C
 find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
     comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
     cp -fv "$TARGET.tmp" "$TARGET" && \
