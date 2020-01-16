@@ -70,6 +70,14 @@ case $extension in
     vim)
         source "$1"
         ;;
+    yaml)
+        if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+        then
+            ssh -nY "$host" "kubectl apply -f $rpath/$rfile"
+        else
+            kubectl apply -f "$file"
+        fi
+        ;;
     yml)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
