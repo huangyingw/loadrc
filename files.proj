@@ -527,6 +527,8 @@
 "./includefile.conf"
 "./includefile_template.conf"
 "./install_basic.sh"
+"./install_basic_linux.sh"
+"./install_basic_macos.sh"
 "./install_cscope.sh"
 "./install_flacon.sh"
 "./install_nvim.sh"
