@@ -5,7 +5,7 @@ cd "$SCRIPTPATH"
 
 deploy_configs() {
     TARGET="$1"
-    SOURCE=~/loadrc/"`hostname`$TARGET"
+    SOURCE=~/loadrc/hosts/"`hostname`$TARGET"
 
     if [ -f "$SOURCE" ]
     then
