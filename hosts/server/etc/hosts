@@ -1,7 +1,10 @@
 127.0.0.1       localhost
 127.0.1.1       server
 10.1.10.174 mini
-192.168.123.76  u1804
+192.168.123.77  u1804
+192.168.123.5  kvm_nat
+192.168.123.144  master-node
+192.168.123.116  slave-node
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
