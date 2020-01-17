@@ -300,6 +300,7 @@ endfunction
 function! s:G(args, ...) abort
     let worktree = Cd2Worktree()
     call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.findresult')
+    call OpenOrSwitch('g.findresult', 'vs')
 endfunction
 
 function! s:Gdev() abort
