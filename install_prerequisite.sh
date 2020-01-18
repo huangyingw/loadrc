@@ -61,6 +61,8 @@ apt-get install -y \
     wakeonlan \
     wget \
     zsh
+
 modprobe wl
 update-initramfs -u
 locale-gen en_US.UTF-8
+snap install hub --classic
