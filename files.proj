@@ -537,6 +537,7 @@
 "./jdupes/.gitconfig"
 "./jdupes/.gitignore"
 "./keys/.gitconfig"
+"./kvmrc/configure.sh"
 "./kvmrc/install.sh"
 "./kvmrc/usb_disk.xml"
 "./kvmrc/uvmount.sh"
