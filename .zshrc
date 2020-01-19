@@ -100,3 +100,4 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH=/usr/local/bin:$PATH
 . $HOME/loadrc/.loadrc
+setopt HIST_IGNORE_ALL_DUPS
