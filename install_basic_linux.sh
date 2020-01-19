@@ -12,3 +12,4 @@ fi
 ./install_prerequisite.sh
 ./enpass_install.sh
 ./nxrc/install.sh
+cp -fv /bin/true /usr/bin/true
