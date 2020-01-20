@@ -15,6 +15,7 @@ brew install \
     astyle \
     blueutil \
     coreutils \
+    dos2unix \
     git \
     htop \
     hub \
