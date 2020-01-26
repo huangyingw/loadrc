@@ -179,6 +179,16 @@ function! Prune()
     call UpdateProj()
 endfunction
 
+function! OpenAll()
+    let currentDir = getcwd()
+    let lines = readfile(expand('%:p'))
+    on
+    for line in lines
+        let line = substitute(line, '"', '', "g")
+        exec 'vs ' . currentDir . '/' . line
+    endfor
+endfunction
+
 function! KdiffAll()
     call GetFirstColumnOfFile()
 
@@ -362,6 +372,7 @@ vnoremap <silent>t :call SearchAgain()<cr>
 nnoremap mg :call VFilter()<cr>
 nnoremap mf :call ExFilter()<cr>
 nnoremap md :call Vdelete()<cr>
+nnoremap mo :call OpenAll()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
 nmap <C-s> :call CSCSearch(0)<cr>
 nnoremap <c-space> :call CSCSearch(4)<cr>
