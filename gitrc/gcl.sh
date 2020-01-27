@@ -25,9 +25,8 @@ else
         && git clone "$1" ${target} \
         && cp -v ~/loadrc/.gitconfig_sample ${target}/.gitconfig
     urlVar="$1"
-    projVar=$(echo "$urlVar" | sed 's/.*\///g;s/\.git//g')
     urlVar=$(echo "$urlVar" | sed 's/\//\\\//g')
-    sed -i.bak "s/urlVar/$urlVar/g;s/projVar/$projVar/g" ${target}/.gitconfig
+    sed -i.bak "s/urlVar/$urlVar/g;s/projVar/$target/g" ${target}/.gitconfig
 
     cd ${target} \
         && $HOME/loadrc/gitrc/gcob.sh dev \
