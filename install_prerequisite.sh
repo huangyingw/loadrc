@@ -22,6 +22,7 @@ apt-get install -y \
     gdebi-core \
     git \
     gparted \
+    hfsprogs \
     htop \
     inetutils-traceroute \
     iputils-ping \
