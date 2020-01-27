@@ -51,8 +51,8 @@ function! HighlightKeyword(keyword)
         endif
         let @/ = '\c' . pat
     endif
-  normal! gV
-  call setreg('"', old_reg, old_regtype)
+    normal! gV
+    call setreg('"', old_reg, old_regtype)
 endfunction
 
 function! VFilter()
@@ -179,6 +179,21 @@ function! Prune()
     call UpdateProj()
 endfunction
 
+function! OpenAll()
+    let currentDir = getcwd()
+    let lines = readfile(expand('%:p'))
+
+    if len(lines) > 10
+        return
+    endif
+
+    on
+    for line in lines
+        let line = substitute(line, '"', '', "g")
+        exec 'vs ' . currentDir . '/' . line
+    endfor
+endfunction
+
 function! KdiffAll()
     call GetFirstColumnOfFile()
 
@@ -194,7 +209,7 @@ endfunction
 function! UpdateProj()
     call Cd2ProjectRoot("files.proj")
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
-    call CHANGE_CURR_DIR() 
+    call CHANGE_CURR_DIR()
 endfunction
 
 function! VimOpen()
@@ -226,7 +241,7 @@ function! VimOpen()
     elseif (expand("%") ==# 'gbil.log')
         let b:commit = expand("<cword>")
         call Cd2Worktree()
-        exec '!git checkout files.proj ; git checkout ' . '"' .  b:commit . '"' 
+        exec '!git checkout files.proj ; git checkout ' . '"' .  b:commit . '"'
     elseif (expand("%") ==# 'glg.findresult')
         let b:commit = expand("<cword>")
         exec '!git checkout ' . '"' .  b:commit . '"'
@@ -362,6 +377,7 @@ vnoremap <silent>t :call SearchAgain()<cr>
 nnoremap mg :call VFilter()<cr>
 nnoremap mf :call ExFilter()<cr>
 nnoremap md :call Vdelete()<cr>
+nnoremap mo :call OpenAll()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
 nmap <C-s> :call CSCSearch(0)<cr>
 nnoremap <c-space> :call CSCSearch(4)<cr>
