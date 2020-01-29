@@ -8,12 +8,15 @@ SCRIPT=$(realpath "$0") && \
 
 pip install \
     pdftotext
+
 sudo -H pip install --upgrade \
     autoflake \
     autopep8
+
 pip3 install git+https://github.com/gaborvecsei/pdf-split-merge.git
 
 ./zerotierrc/all.sh
 ./deploy_configurations.sh
 ./crontabrc/install.sh
 ./install_gofish.sh
+./install_helm.sh
