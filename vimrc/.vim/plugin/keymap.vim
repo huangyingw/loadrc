@@ -180,6 +180,7 @@ function! Prune()
 endfunction
 
 function! OpenAll()
+    call GetFirstColumnOfFile()
     let currentDir = getcwd()
     let lines = readfile(expand('%:p'))
 
