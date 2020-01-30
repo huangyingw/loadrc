@@ -33,7 +33,7 @@ else
         && $HOME/loadrc/gitrc/gdev.sh \
         && $HOME/loadrc/bashrc/cscope.sh \
         && git add . \
-        && git add -f files.proj \
+        && git add -f files.proj .gitconfig \
         && $HOME/loadrc/gitrc/g.sh \
         && hub create \
         && ~/loadrc/gitrc/gclb.sh
