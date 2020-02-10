@@ -460,6 +460,8 @@ function! s:Dodev() abort
 endfunction
 
 function! s:KdiffFile() abort
+    only
+    call asyncrun#stop('<bang>')
     call asyncrun#run('<bang>', '', '~/loadrc/pythonrc/KdiffFile.py ' . '"' .  expand("%:p") . '"')
 endfunction
 
