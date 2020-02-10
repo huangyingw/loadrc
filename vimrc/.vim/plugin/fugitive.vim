@@ -62,6 +62,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvdo :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gwap :execute s:Gwap()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Jformat :execute s:Jformat()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest :execute s:LcTest()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject KdiffFile :execute s:KdiffFile()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
@@ -457,6 +458,13 @@ function! s:Dodev() abort
     let worktree = Cd2Worktree()
     call OpenOrSwitch('docker-compose.yml', 'vs')
 endfunction
+
+function! s:KdiffFile() abort
+    only
+    call asyncrun#stop('<bang>')
+    call asyncrun#run('<bang>', '', '~/loadrc/pythonrc/KdiffFile.py ' . '"' .  expand("%:p") . '"')
+endfunction
+
 
 function! s:Gcom(args, ...) abort
     let worktree = Cd2Worktree()
