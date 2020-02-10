@@ -614,6 +614,7 @@
 "./prunefile_template.conf"
 "./prunefix.conf"
 "./prunefix_template.conf"
+"./pythonrc/KdiffFile.py"
 "./pythonrc/autopep8-ipynb.py"
 "./pythonrc/remove-unuses.sh"
 "./pythonrc/remove_comments.py"
