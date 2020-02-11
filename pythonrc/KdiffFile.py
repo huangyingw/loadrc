@@ -4,11 +4,11 @@ import os
 import sys
 
 fileName = sys.argv[1]
-lines = [line.rstrip('\n') for line in open(fileName) if 'Accepted' in line and 'submissions' in line]
+lines = [line.rstrip('\n') for line in open(fileName) ]
 
 accepts = {}
 for line in lines:
-    num = re.findall(r'submissions\/(\d+)', line)[0]
+    num = re.findall(r'\/(\d+)', line)[0]
     accepts.setdefault(num, []).append(line)
 
 for k in sorted(accepts, key=lambda k: len(accepts[k]), reverse=True):
