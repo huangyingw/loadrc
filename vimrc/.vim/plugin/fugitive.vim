@@ -462,7 +462,7 @@ endfunction
 function! s:KdiffFile() abort
     only
     call asyncrun#stop('<bang>')
-    call asyncrun#run('<bang>', '', '~/loadrc/pythonrc/KdiffFile.py ' . '"' .  expand("%:p") . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/KdiffFile.py ' . '"' .  expand("%:p") . '"')
 endfunction
 
 
