@@ -1,6 +1,6 @@
 #! /bin/zsh
 
-FAV=/media/volgrp/mirror/av/
+FAV=/media/volgrp/mirror1/av/
 
 if [ -d "$FAV" ]
 then
@@ -11,7 +11,7 @@ then
     touch files.proj
 fi
 
-FAV=/home/parallels/server/media/volgrp/mirror/av/
+FAV=/home/parallels/server/media/volgrp/mirror1/av/
 
 if [ -d "$FAV" ]
 then
