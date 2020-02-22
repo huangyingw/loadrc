@@ -1364,6 +1364,7 @@
 "./vimrc/.vim/bundle/swift.vim/LICENSE"
 "./vimrc/.vim/bundle/swift.vim/README.md"
 "./vimrc/.vim/bundle/swift.vim/ale_linters/swift/swiftpm.vim"
+"./vimrc/.vim/bundle/swift.vim/compiler/swift.vim"
 "./vimrc/.vim/bundle/swift.vim/ctags/swift.cnf"
 "./vimrc/.vim/bundle/swift.vim/example/MainViewController.swift"
 "./vimrc/.vim/bundle/swift.vim/example/URL.swift"
