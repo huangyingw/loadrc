@@ -11,8 +11,11 @@ then
     mkdir -p "$2"
 fi
 
-SOURCE=$(realpath "$1")
-TARGET=$(realpath "$2")
+SOURCE="$1"
+realpath "$1" && SOURCE=$(realpath "$1")
+
+TARGET="$2"
+realpath "$2" && TARGET=$(realpath "$2")
 
 if [ -n "$SOURCE" ] && [ -n "$TARGET" ] && [ "$SOURCE" != "$TARGET" ]
 then
