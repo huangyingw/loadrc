@@ -60,6 +60,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gtg :e
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvd :execute s:Gvd(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvdo :execute s:Gvdo()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gwap :execute s:Gwap()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Hdi :execute s:Hdi()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Jformat :execute s:Jformat()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest :execute s:LcTest()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject KdiffFile :execute s:KdiffFile()
@@ -306,6 +307,19 @@ endfunction
 function! s:Gdev() abort
     let worktree = Cd2Worktree()
     call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gdev.sh')
+endfunction
+
+function! s:Hdi() abort
+    let worktree = Cd2Worktree()
+    let output = 'hdi.diff'
+
+    silent exec '!~/loadrc/hgrc/hdi.sh' . ' HEAD 2>&1 | tee ' . '"' .  output . '"'
+
+    if bufwinnr('^' . output . '$') > 0
+        exe "bd!" . output
+    endif
+
+    call OpenOrSwitch(output, 'vs')
 endfunction
 
 function! s:Gdi(...) abort

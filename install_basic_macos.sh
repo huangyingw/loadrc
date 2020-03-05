@@ -17,6 +17,7 @@ brew install \
     coreutils \
     dos2unix \
     git \
+    hg \
     htop \
     hub \
     jupyterlab \
