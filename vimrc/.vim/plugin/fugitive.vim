@@ -487,8 +487,9 @@ endfunction
 
 function! s:Gshow(args, ...) abort
     let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/gshow.sh ' . '"' .  a:args . '" 2>&1 | tee gshow.diff'
-    call OpenOrSwitch('gshow.diff', 'vs')
+    let output = a:args . '.diff'
+    silent exec '!~/loadrc/gitrc/gshow.sh ' . '"' .  a:args . '" 2>&1 | tee ' . output
+    call OpenOrSwitch(output, 'vs')
 endfunction
 
 function! s:Copy(...) abort
