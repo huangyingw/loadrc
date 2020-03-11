@@ -802,6 +802,7 @@
 "./vimrc/.vim/bundle/ncm2-look.vim/pythonx/ncm2_look.py"
 "./vimrc/.vim/bundle/ncm2-markdown-subscope/.gitignore"
 "./vimrc/.vim/bundle/ncm2-markdown-subscope/LICENSE"
+"./vimrc/.vim/bundle/ncm2-markdown-subscope/README.md"
 "./vimrc/.vim/bundle/ncm2-markdown-subscope/pythonx/ncm2_subscope_detector/markdown.py"
 "./vimrc/.vim/bundle/ncm2-match-highlight/.gitignore"
 "./vimrc/.vim/bundle/ncm2-match-highlight/LICENSE"
