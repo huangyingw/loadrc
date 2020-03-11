@@ -468,6 +468,7 @@
 "./host_links/imacpro/etc/hosts"
 "./host_links/lint-sandbox/etc/hosts"
 "./host_links/lint-sandbox/etc/network/interfaces"
+"./host_links/mbp/Users/huangyingw/.bashrc"
 "./host_links/mini/etc/NetworkManager/system-connections/Millennium\ Flats"
 "./host_links/mini/etc/default/isc-dhcp-server"
 "./host_links/mini/etc/dhcp/dhcpd.conf"
