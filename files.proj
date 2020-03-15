@@ -592,6 +592,7 @@
 "./macrc/mac_sync.list"
 "./macrc/mac_sync.sh"
 "./macrc/mac_sync_test.sh"
+"./macrc/mosh_firewall.sh"
 "./macrc/reboot_recovery.sh"
 "./mdadmrc/add.sh"
 "./mdadmrc/check_raid.sh"
