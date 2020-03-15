@@ -21,3 +21,5 @@ while read -r line || [ -n "$line" ]
 do
     deploy_configs "$line"
 done < macos.conf
+
+./macosrc/configure_mosh.sh
