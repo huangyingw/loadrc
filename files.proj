@@ -1985,6 +1985,8 @@
 "./vimrc/.vim/bundle/vimtex/compiler/bibertool.vim"
 "./vimrc/.vim/bundle/vimtex/compiler/chktex.vim"
 "./vimrc/.vim/bundle/vimtex/compiler/lacheck.vim"
+"./vimrc/.vim/bundle/vimtex/compiler/style-check.vim"
+"./vimrc/.vim/bundle/vimtex/compiler/textidote.vim"
 "./vimrc/.vim/bundle/vimtex/doc/tags"
 "./vimrc/.vim/bundle/vimtex/doc/targets-textobj-cheatsheet.md"
 "./vimrc/.vim/bundle/vimtex/doc/vimtex.txt"
