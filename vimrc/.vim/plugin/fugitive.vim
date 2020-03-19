@@ -60,6 +60,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gtg :e
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvd :execute s:Gvd(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvdo :execute s:Gvdo()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gwap :execute s:Gwap()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Hdi :execute s:Hdi()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Jformat :execute s:Jformat()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest :execute s:LcTest()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject KdiffFile :execute s:KdiffFile()
@@ -308,6 +309,19 @@ function! s:Gdev() abort
     call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gdev.sh')
 endfunction
 
+function! s:Hdi() abort
+    let worktree = Cd2Worktree()
+    let output = 'hdi.diff'
+
+    silent exec '!~/loadrc/hgrc/hdi.sh' . ' HEAD 2>&1 | tee ' . '"' .  output . '"'
+
+    if bufwinnr('^' . output . '$') > 0
+        exe "bd!" . output
+    endif
+
+    call OpenOrSwitch(output, 'vs')
+endfunction
+
 function! s:Gdi(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
@@ -473,8 +487,9 @@ endfunction
 
 function! s:Gshow(args, ...) abort
     let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/gshow.sh ' . '"' .  a:args . '" 2>&1 | tee gshow.diff'
-    call OpenOrSwitch('gshow.diff', 'vs')
+    let output = a:args . '.diff'
+    silent exec '!~/loadrc/gitrc/gshow.sh ' . '"' .  a:args . '" 2>&1 | tee ' . output
+    call OpenOrSwitch(output, 'vs')
 endfunction
 
 function! s:Copy(...) abort
