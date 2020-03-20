@@ -254,7 +254,7 @@ function! VimOpen()
     elseif (&filetype ==# 'fugitiveblame')
         let b:commit = expand("<cword>")
         call Cd2Worktree()
-        exec '!git checkout files.proj ; git checkout ' . '"' .  b:commit . '^"'
+        exec '!git checkout files.proj ; git diff --quiet && git diff HEAD --quiet &&  git checkout -f ' . '"' .  b:commit . '^"'
     else
         if !filereadable(b:fileName)
             if !isdirectory(b:filePath)
