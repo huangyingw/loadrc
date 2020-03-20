@@ -14,7 +14,7 @@ then
     exit 0
 fi
 
-if [[ "$file" = *'.test.php' ]] 
+if [[ "$file" = *'.php' ]] 
 then
     ~/loadrc/imvurc/generate.sh "$file"
     exit 0
