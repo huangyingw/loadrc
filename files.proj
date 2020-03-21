@@ -357,6 +357,7 @@
 "./enpass_install.sh"
 "./entrypoint.sh"
 "./error"
+"./fdocs.include"
 "./ffmpegrc/concat.sh"
 "./ffmpegrc/mylist.txt"
 "./ffmpegrc/split.sh"
