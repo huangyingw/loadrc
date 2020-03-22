@@ -65,7 +65,7 @@ fun! LocalRename() range
         let newname = input("", substitute(oldname, '/*$', '', 'e'))
         call rename(oldname, newname)
         let newname = substitute(newname, getcwd(), '.', 'e')
-        call setline('.', newname)
+        call setline('.', '"' . newname . '"')
         w
         call UpdateProj()
     endif

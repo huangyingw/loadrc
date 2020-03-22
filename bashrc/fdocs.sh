@@ -14,7 +14,10 @@ then
         include_params+=( $or "-wholename" "$suf" )
         or="-o"
     done < "$FdocsInclude"
+fi
 
+if [ -f "$FdocsExclude" ]
+then
     or="";
 
     while read suf
@@ -23,7 +26,7 @@ then
         exclude_params+=( $or "-wholename" "$suf" )
         or="-o"
     done < "$FdocsExclude"
-
-    find . "(" "${exclude_params[@]}" ")" -a -prune -o "(" "${include_params[@]}" ")" -type f -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" 
-    sort -u "$TARGET" -o "$TARGET"
 fi
+
+find . "(" "${exclude_params[@]}" ")" -a -prune -o "(" "${include_params[@]}" ")" -type f -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET"
+sort -u "$TARGET" -o "$TARGET"
