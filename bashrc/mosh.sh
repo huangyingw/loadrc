@@ -5,14 +5,10 @@ mkdir "$target"
 if ( ssh "$target" "uname" | grep -q Darwin )
 then
     server="/usr/local/bin/mosh-server"
+    tmuxAction='/usr/local/bin/tmux new-session -A -s main'
+    ssh "$target" "~/loadrc/macosrc/configure_mosh.sh"
 else
     server="/usr/bin/mosh-server"
-fi
-
-if ( ssh "$target" "uname" | grep -q Darwin )
-then
-    tmuxAction='/usr/local/bin/tmux new-session -A -s main'
-else
     tmuxAction='/usr/bin/tmux new-session -A -s main'
 fi
 
