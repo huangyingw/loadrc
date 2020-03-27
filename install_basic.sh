@@ -15,6 +15,10 @@ sudo -H pip install --upgrade \
 
 pip3 install git+https://github.com/gaborvecsei/pdf-split-merge.git
 
+npm -g install \
+    js-beautify \
+    csvtojson
+
 ./zerotierrc/all.sh
 ./deploy_configurations.sh
 ./crontabrc/install.sh
