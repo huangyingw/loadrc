@@ -1924,7 +1924,7 @@
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/misc.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/motion.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser.vim"
-"./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/aux.vim"
+"./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/auxiliary.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/bib.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/fls.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/tex.vim"
