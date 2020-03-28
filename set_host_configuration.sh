@@ -8,7 +8,7 @@ do \
     sudo ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/host_links\/`hostname`\///g")"; \
 done
 
-HOSTTODOS=~/loadrc/hosts/"`hostname`/todos.sh"
+HOSTTODOS=~/loadrc/host_links/"`hostname`/todos.sh"
 if [ -f "$HOSTTODOS" ]
 then
     "$HOSTTODOS"
