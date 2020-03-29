@@ -3,5 +3,6 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-./install_gofish.sh
-./install_helm.sh
+add-apt-repository  -y ppa:cpick/hub
+apt-get update -y
+apt-get install -y hub
