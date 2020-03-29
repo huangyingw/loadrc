@@ -19,3 +19,5 @@
     merge = refs/heads/master
 [commit]
     message = n
+[gdif]
+    ignore = *.gdio.diff
