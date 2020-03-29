@@ -14,12 +14,14 @@ then
         && cd ${target} \
         && $HOME/loadrc/bashrc/update_proj.sh
 else
-    target=$(echo $1 | sed -e "s|.git$||;s|^.*github.com.||;s|\/|-|")
-    remote=$(echo $1 | sed -e "s|.git$||;s|^.*github.com.||;s|\/.*||")
+    target=$(echo $1 | sed -e "s|.git$||;s|^.*github.com.||;s|^.*gitlab.com.||;s|\/|-|")
+    remote=$(echo $1 | sed -e "s|.git$||;s|^.*github.com.||;s|^.*gitlab.com.||;s|\/.*||")
+
     if [ -n "$2" ]
     then
         target="$2"
     fi
+
     mkdir -p ${target}
     echo ${target} \
         && git clone "$1" ${target} \
