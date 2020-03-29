@@ -66,4 +66,5 @@ apt-get install -y \
 modprobe wl
 update-initramfs -u
 locale-gen en_US.UTF-8
-snap install hub --classic
+
+./install_hub.sh
