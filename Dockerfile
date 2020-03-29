@@ -3,10 +3,8 @@ FROM ubuntu:18.04
 ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /root/loadrc
 
-COPY ./install_prerequisite.sh /root/loadrc/install_prerequisite.sh
+COPY ./*.sh /root/loadrc/
 COPY ./.ssh/id_* /root/.ssh/
-COPY ./install_nvim_pre.sh /root/loadrc/install_nvim_pre.sh
-COPY ./install_cscope.sh /root/loadrc/install_cscope.sh
 COPY ./entrypoint.sh /entrypoint.sh
 
 RUN /root/loadrc/install_prerequisite.sh
