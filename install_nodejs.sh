@@ -3,5 +3,7 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-apt install -y nodejs
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+. $HOME/loadrc/.nvmrc
+nvm install 4
+nvm use 4
