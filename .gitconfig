@@ -13,7 +13,7 @@
     remote = github
 [gsync]
     remote = origin
-    branch = master
+    branch = dev
 [merge]
     allow = true
 [commit]
