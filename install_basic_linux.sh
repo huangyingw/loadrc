@@ -10,6 +10,7 @@ then
 fi
 
 ./install_prerequisite.sh
+./install_nodejs.sh
 ./enpass_install.sh
 ./nxrc/install.sh
 cp -fv /bin/true /usr/bin/true

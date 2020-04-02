@@ -67,4 +67,3 @@ update-initramfs -u
 locale-gen en_US.UTF-8
 
 ./install_hub.sh
-./install_nodejs.sh
