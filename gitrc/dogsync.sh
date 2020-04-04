@@ -10,6 +10,8 @@ do
     eval "$COMMAND"
 done
 
+git checkout files.proj
+
 if [ -z $(git config gsync.remote) ]
 then
     git pull
