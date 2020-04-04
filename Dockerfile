@@ -7,11 +7,7 @@ COPY ./*.sh /root/loadrc/
 COPY ./.ssh/id_* /root/.ssh/
 COPY ./entrypoint.sh /entrypoint.sh
 
-RUN apt-get update    
-RUN apt-get install -y apt-utils debconf-utils dialog
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-RUN echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections
-
+RUN /root/loadrc/fix_resolvconf_in_docker.sh 
 RUN /root/loadrc/install_prerequisite.sh
 RUN chmod 400 /root/.ssh/id_rsa
 RUN /root/loadrc/install_nvim_pre.sh
