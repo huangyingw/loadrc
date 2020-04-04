@@ -18,7 +18,3 @@ apt-get install -y docker.io docker-compose
 systemctl enable docker
 
 ./nvidia-docker_install.sh
-
-mkdir -p /media/nvme/var/lib/docker/
-/etc/init.d/docker stop \
-    && ~/loadrc/bashrc/mklnk.sh /var/lib/docker/ /media/nvme/var/lib/docker/
