@@ -1,7 +1,4 @@
-#!/bin/zsh
-SCRIPT=$(realpath "$0")
-SCRIPTPATH=$(dirname "$SCRIPT")
-cd "$SCRIPTPATH"
+#!/bin/bash
 
 if [ $(uname) = "Darwin" ]
 then
