@@ -1,4 +1,5 @@
 #!/bin/zsh
+~/loadrc/gitrc/include_gitconfig.sh
 git remote update
 git checkout files.proj
 git pull
