@@ -12,9 +12,9 @@ done
 
 git checkout files.proj
 
-if [ -z $(git config gsync.remote) ]
+git pull
+if [ -n $(git config gsync.remote) ]
 then
-    git pull
-else
     git pull $(git config gsync.remote) $(git config gsync.branch)
 fi
+~/loadrc/gitrc/gps.sh
