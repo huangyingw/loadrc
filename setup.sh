@@ -14,5 +14,5 @@ SCRIPT=$(realpath "$0") && \
 ./submodule_setup.sh
 ./kvmrc/install.sh
 ./dockerrc/install.sh
-./kubernetesrc/install.sh
+#./kubernetesrc/install.sh
 ./post_setup.sh

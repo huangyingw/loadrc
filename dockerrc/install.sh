@@ -17,4 +17,4 @@ apt-get install -y \
 apt-get install -y docker.io docker-compose
 systemctl enable docker
 
-./nvidia-docker_install.sh
+#./nvidia-docker_install.sh
