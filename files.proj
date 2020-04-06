@@ -248,7 +248,6 @@
 "./bashrc/kdisk.sh"
 "./bashrc/kill_port.sh"
 "./bashrc/kill_top_processes.sh"
-"./bashrc/linuxmirror.sh"
 "./bashrc/ln_fs.sh"
 "./bashrc/logFilter.sh"
 "./bashrc/lsnic.sh"
