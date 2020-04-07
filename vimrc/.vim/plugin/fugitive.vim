@@ -41,13 +41,11 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gmet :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gres :execute s:Gres()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Greview :execute s:Greview()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtu :execute s:Grtu()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :execute s:Grtv()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :execute s:Gs()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gst :execute s:Gst()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsti :execute s:Gsti()
@@ -126,11 +124,6 @@ endfunction
 function! s:Ga(args, ...) abort
     let worktree = Cd2Worktree()
     call asyncrun#run('<bang>', '', '~/loadrc/gitrc/ga.sh ' . '"' .  a:args . '"')
-endfunction
-
-function! s:Gsave() abort
-    let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsave.sh')
 endfunction
 
 function! s:Gst() abort
@@ -501,11 +494,6 @@ endfunction
 
 function! s:Tail() abort
     exec '!tail -f ' . expand("%:p")
-endfunction
-
-function! s:Greview() abort
-    let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/greview.sh')
 endfunction
 
 function! s:Gres() abort
