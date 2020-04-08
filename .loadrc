@@ -12,6 +12,7 @@
 . $HOME/loadrc/openrc.sh
 . $HOME/loadrc/gpurc/.gpurc
 . $HOME/loadrc/.macosrc
+. $HOME/loadrc/.mindsrc
 
 HOSTRC=$HOME/loadrc/."`hostname`".rc
 
