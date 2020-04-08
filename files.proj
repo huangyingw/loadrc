@@ -324,6 +324,7 @@
 "./bashrc/wol.sh"
 "./bashrc/zsh.test.sh"
 "./chrome_install.sh"
+"./crontabrc/.mbp.cron"
 "./crontabrc/.mini.cron"
 "./crontabrc/.mldonkey.cron"
 "./crontabrc/.server.cron"
