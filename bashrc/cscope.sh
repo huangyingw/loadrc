@@ -62,5 +62,5 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
     cscope -bq -i "$TARGET" -f cscope.out.bak && \
     cp -fv cscope.out.bak cscope.out && \
     cp -fv cscope.out.bak.in cscope.out.in && \
-    cp -fv cscope.out.bak.po cscope.out.po && \
-    sort -u ~/all.proj -o ~/all.proj
+    cp -fv cscope.out.bak.po cscope.out.po
+sort -u ~/all.proj -o ~/all.proj
