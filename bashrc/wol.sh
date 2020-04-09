@@ -2,8 +2,9 @@
 target=$(echo "$1" | sed  -e "s/\/$//g")
 if [ -z "$1" ]
 then
-    wakeonlan -i 192.168.2.12 10:7b:44:f0:e7:2f #server
+    wakeonlan -i 192.168.2.2 10:7b:44:f0:e7:2f #server
     wakeonlan b0:ea:bc:09:20:c6 #server wifi
+    wakeonlan 10:7b:44:f0:e7:2f #server mother board Ethernet
     ping server
 elif [ "$target" = "mldonkey" ]
 then
