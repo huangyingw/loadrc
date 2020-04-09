@@ -6,6 +6,7 @@ then
     wakeonlan b0:ea:bc:09:20:c6 #server wifi
     wakeonlan 10:7b:44:f0:e7:2f #server mother board Ethernet
     wakeonlan 00:e0:4c:68:03:cd
+    wakeonlan 00:e0:4c:00:07:a8
     ping server
 elif [ "$target" = "mldonkey" ]
 then
