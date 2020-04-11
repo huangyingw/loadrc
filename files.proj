@@ -327,7 +327,6 @@
 "./crontabrc/.mbp.cron"
 "./crontabrc/.mini.cron"
 "./crontabrc/.mldonkey.cron"
-"./crontabrc/.server.cron"
 "./crontabrc/.vserver.cron"
 "./crontabrc/install.sh"
 "./crontabrc/mldonkey_start.sh"

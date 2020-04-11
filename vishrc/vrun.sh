@@ -23,26 +23,33 @@ fi
 extension=${file##*.}
 host=$(git config deploy.host)
 rpath=$(git config deploy.path)
-rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
-rfile=$(realpath --relative-to="$rootFolder" "$1")
+rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$file" "files.proj")
+rfile=$(realpath --relative-to="$rootFolder" "$file")
+rfolder=$(realpath --relative-to="$rootFolder" $(dirname "$file"))
+
+if [[ "$file" = *'Dockerfile' ]] 
+then
+    docker build -f "$rfile" "$rfolder"
+    exit 0
+fi
 
 case $extension in
     hs)
-        runghc "$1"
+        runghc "$file"
         ;;
     sql)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
             ssh -nY "$host" "cd $rpath ; ~/loadrc/sqlrc/xsql.sh $rfile"
         else
-            ~/loadrc/sqlrc/xsql.sh "$1" "$2"
+            ~/loadrc/sqlrc/xsql.sh "$file" "$2"
         fi
         ;;
     findresult)
-       zsh "$1"
+       zsh "$file"
         ;;
     vdiff)
-       zsh "$1"
+       zsh "$file"
         ;;
     sh)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
@@ -53,7 +60,7 @@ case $extension in
                 "$host:$rpath/" \
                 .
         else
-            "$1"
+            "$file"
         fi
         ;;
     py)
@@ -61,14 +68,14 @@ case $extension in
         then
             ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; python $rfile"
         else
-            SCRIPT=$(realpath "$1")
+            SCRIPT=$(realpath "$file")
             SCRIPTPATH=$(dirname "$SCRIPT")
             cd "$SCRIPTPATH"
-            python "$1"
+            python "$file"
         fi
         ;;
     vim)
-        source "$1"
+        source "$file"
         ;;
     yaml)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]

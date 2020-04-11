@@ -17,6 +17,7 @@ apt-get install -y \
     cscope \
     curl \
     dkms \
+    dos2unix \
     exuberant-ctags \
     ffmpeg \
     gdebi-core \
