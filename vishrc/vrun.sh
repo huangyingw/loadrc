@@ -20,6 +20,12 @@ then
     exit 0
 fi
 
+if [[ "$file" = *'Dockerfile' ]] 
+then
+    docker build .
+    exit 0
+fi
+
 extension=${file##*.}
 host=$(git config deploy.host)
 rpath=$(git config deploy.path)
