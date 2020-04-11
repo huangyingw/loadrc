@@ -21,6 +21,9 @@ brew install \
     htop \
     hub \
     jupyterlab \
+    kubeadm \
+    kubectl \
+    kubernetes-cli \
     libtool \
     lynx \
     minikube \
