@@ -1,8 +1,6 @@
 [user]
     name = Ying Huang
     email = huangyingw@gmail.com
-[merge]
-    tool = vimdiff
 [color]
     ui = auto
 [color "branch"]
@@ -14,14 +12,11 @@
     frag = magenta bold
     old = red bold
     new = green bold
+    whitespace = red reverse
 [color "status"]
     added = yellow
     changed = green
     untracked = cyan
-[color]
-    ui = true
-[color "diff"]
-    whitespace = red reverse
 [core]
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 [diff]
@@ -31,8 +26,6 @@
     bi = bisect
     ci = commit
     co = checkout
-    me = merge
-    mt = mergetool
     rs = reset --hard
     sm = submodule
     st = status
@@ -40,14 +33,12 @@
     tg = tag -l -n1
     vd = difftool
 [difftool]
-    prompt = true
+    prompt = false
 [core]
     excludesfile = "~/.globalgitignore"
     mergeoptions = --no-edit
     filemode = false
 	editor = nvim
-[color]
-    ui = auto
 [giggle]
     main-window-maximized = true
     main-window-geometry = 700x550+0+55
@@ -81,3 +72,13 @@
     required = true
 [diff "nodiff"]
 	command = /usr/bin/true
+# define command which will be used when "nvim" is set as a merge tool
+# https://www.grzegorowski.com/using-vim-or-neovim-nvim-as-a-git-mergetool
+[mergetool "nvim"]
+  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+# set "nvim" as tool for merging
+[merge]
+  tool = nvim
+# automatically launch merge tool without displaying a prompt
+[mergetool]
+  prompt = false
