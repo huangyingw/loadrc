@@ -300,10 +300,10 @@ endfunction
 
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<cr>
 nnoremap <leader>L :TlistClose<cr>
-nnoremap hh <c-w>h<c-w><Bar>
-nnoremap ll <c-w>l<c-w><Bar>
-nnoremap mm <c-w><Bar>
-nnoremap mn <c-w>=
+nnoremap hh <c-w>h
+nnoremap ll <c-w>l
+nnoremap mm :set winwidth=999999<cr><c-w><Bar>
+nnoremap mn :set winwidth=1<cr><c-w>=
 nnoremap ff <c-f>
 nnoremap vv <c-b>
 nnoremap <c-l> l
