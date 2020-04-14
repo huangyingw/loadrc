@@ -31,3 +31,8 @@ set cursorline
 "set cursorcolumn
 "highlight cursorcolumn cterm=NONE ctermbg=darkred ctermfg=white
 set winwidth=999999
+
+if &diff
+    " diff mode
+    set diffopt+=iwhite
+endif
