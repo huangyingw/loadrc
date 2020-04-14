@@ -427,3 +427,4 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
 
 " open tig with Project root path
 nnoremap <Leader>t :TigOpenProjectRootDir<CR>
+nnoremap <leader>T :TigOpenCurrentFile<CR> 
