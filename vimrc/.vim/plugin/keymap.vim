@@ -424,3 +424,6 @@ nnoremap <leader>3 :call CommTwoFiles()<cr>
 set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
 "    paste mode, where you can paste mass data
 "    that won't be autoindented
+
+" open tig with Project root path
+nnoremap <Leader>t :TigOpenProjectRootDir<CR>
