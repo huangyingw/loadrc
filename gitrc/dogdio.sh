@@ -11,3 +11,4 @@ remote="$(git config gsync.remote)"
 
 ~/loadrc/gitrc/gdi.sh "$remote/$local_master " "$local_branch" 2>&1 | tee "$output"  
 sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
+exit 0
