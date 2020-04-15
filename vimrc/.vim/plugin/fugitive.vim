@@ -36,8 +36,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gicb :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gitk :execute s:Gitk(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glf :execute s:Glf()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glg :execute s:Glg()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gme2 :execute s:Gme2(<q-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gmet :execute s:Gmet()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gme :exe fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", 'mergetool -y') 
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
@@ -384,11 +383,6 @@ function! s:Gtg() abort
     let worktree = Cd2Worktree()
     silent exec '!git tag -l -n1 2>&1 | tee gtg.findresult'
     call OpenOrSwitch('gtg.findresult', 'vs')
-endfunction
-
-function! s:Gmet() abort
-    let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'git mergetool')
 endfunction
 
 function! s:Gicb() abort
