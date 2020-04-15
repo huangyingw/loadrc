@@ -11,9 +11,6 @@
     remote = origin
     remote = gitlab
     remote = github
-[gsync]
-    remote = origin
-    branch = dev
 [merge]
     allow = true
 [commit]
