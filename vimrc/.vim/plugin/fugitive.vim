@@ -346,7 +346,7 @@ function! s:Gdio(...) abort
     let local_branch = (a:0 >= 1) ? a:1 : current_branch
     let output = local_branch . '.gdio.diff'
     let output = substitute(output, "/", "_", "g")
-    exec '!~/loadrc/gitrc/gdio.sh' . ' ' . '"' . local_branch . '"' . ' ' . '"' .  output . '"'
+    exec '!~/loadrc/gitrc/gdio.sh'
 
     if bufwinnr('^' . output . '$') > 0
         exe "bd!" . output
