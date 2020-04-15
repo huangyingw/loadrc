@@ -54,7 +54,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstp :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstv :execute s:Gstv(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsync :execute s:Gsync()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gtg :execute s:Gtg()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvd :execute s:Gvd(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvd :exe fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", 'difftool --cached -y')
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvdo :execute s:Gvdo()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gwap :execute s:Gwap()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Hdi :execute s:Hdi()
@@ -82,23 +82,6 @@ endfunction
 function! s:Jformat(...) abort
     let worktree = Cd2Worktree()
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/jformat.sh ')
-endfunction
-
-function! s:Gvd(...) abort
-    let worktree = Cd2Worktree()
-
-    if expand('%:t') != 'index'
-        if a:0 == 0
-            call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gvd.sh ' . 'HEAD ' . '"' .  expand('%:p') . '"')
-        else
-            let arg1 = (a:0 >= 1) ? a:1 : ''
-            call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gvd.sh ' . '"' .  arg1 . '" "' .  expand('%:p') . '"')
-        endif
-    else
-        let arg1 = (a:0 >= 1) ? a:1 : ''
-        let arg2 = (a:0 >= 2) ? a:2 : ''
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gvd.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
-    endif
 endfunction
 
 function! s:Gvdo() abort
