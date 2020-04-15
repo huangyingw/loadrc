@@ -38,7 +38,7 @@
     excludesfile = "~/.globalgitignore"
     mergeoptions = --no-edit
     filemode = false
-	editor = nvim
+    editor = nvim
 [giggle]
     main-window-maximized = true
     main-window-geometry = 700x550+0+55
@@ -71,14 +71,14 @@
     process = git-lfs filter-process
     required = true
 [diff "nodiff"]
-	command = /usr/bin/true
+    command = /usr/bin/true
 # define command which will be used when "nvim" is set as a merge tool
 # https://www.grzegorowski.com/using-vim-or-neovim-nvim-as-a-git-mergetool
 [mergetool "nvim"]
-  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+    cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 # set "nvim" as tool for merging
 [merge]
-  tool = nvim
+    tool = nvim
 # automatically launch merge tool without displaying a prompt
 [mergetool]
-  prompt = false
+    prompt = false
