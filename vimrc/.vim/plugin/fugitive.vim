@@ -354,7 +354,6 @@ function! s:Gdio(...) abort
 
     let worktree = Cd2Worktree()
     call OpenOrSwitch(output, 'vs')
-    call s:DiffClean()
 endfunction
 
 function! s:Gdi2(...) abort
