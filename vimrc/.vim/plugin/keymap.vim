@@ -197,6 +197,8 @@ function! OpenAll()
         let line = substitute(line, '"', '', "g")
         exec 'vs ' . currentDir . '/' . line
     endfor
+    set winwidth=1
+    wincmd =
 endfunction
 
 function! KdiffAll()
