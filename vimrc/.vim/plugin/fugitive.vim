@@ -57,7 +57,8 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gtg :e
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvd :exe fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", 'difftool --cached -y')
 "command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvd :exe fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", 'config difftool.vimdiff.cmd')
 "command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvd :exe fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", 'difftool --cached -x ' . '"' . 'vimdiff -R -f -d -c ' . '''wincmd l''' .  ' -c ' . '''cd $GIT_PREFIX''' .  ' -c ' . '''set diffopt-=internal''' . ' -c ' . '''set diffopt+=iwhite''' .  ' -c ' . '''windo set wrap''' . ' "' . '$LOCAL' . '"' . ' "' . '$REMOTE' . '""')
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvdo :execute s:Gvdo()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkd :execute s:Gkd(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkdo :execute s:Gkdo()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gwap :execute s:Gwap()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Hdi :execute s:Hdi()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Jformat :execute s:Jformat()
@@ -86,15 +87,32 @@ function! s:Jformat(...) abort
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/jformat.sh ')
 endfunction
 
-function! s:Gvdo() abort
+function! s:Gkd(...) abort
+    let worktree = Cd2Worktree()
+
+    if expand('%:t') != 'index'
+        if a:0 == 0
+            call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . 'HEAD ' . '"' .  expand('%:p') . '"')
+        else
+            let arg1 = (a:0 >= 1) ? a:1 : ''
+            call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  expand('%:p') . '"')
+        endif
+    else
+        let arg1 = (a:0 >= 1) ? a:1 : ''
+        let arg2 = (a:0 >= 2) ? a:2 : ''
+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
+    endif
+endfunction
+
+function! s:Gkdo() abort
     let worktree = Cd2Worktree()
     let remote = substitute(system("git config gsync.remote"), '\n', '', '')
     let branch = substitute(system("git config gsync.branch"), '\n', '', '')
 
     if expand('%:t') != 'index'
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gvd.sh ' . '"' .  remote . '/' . branch . '" "' .  expand('%:p') . '"')
+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '" "' .  expand('%:p') . '"')
     else
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gvd.sh ' . '"' .  remote . '/' . branch . '"')
+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '"')
     endif
 endfunction
 
