@@ -1,7 +1,9 @@
 #!/bin/zsh
 
-SOURCE=`realpath "$1"`
-TARGET=`realpath "$2"`
+SOURCE="$1"
+realpath "$1" && SOURCE=$(realpath "$1")
+TARGET="$2"
+realpath "$2" && TARGET=$(realpath "$2")
 
 if [ "$SOURCE" != "$TARGET" ]
 then
