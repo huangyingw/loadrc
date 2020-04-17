@@ -21,6 +21,11 @@
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 [diff]
     tool = vimdiff
+[difftool "vimdiff"]
+    cmd = vimdiff -R -f -d \
+        -c 'wincmd l' -c 'cd $GIT_PREFIX' \
+        -c 'set diffopt-=internal' -c 'set diffopt+=iwhite' -c 'windo set wrap' \
+        "$LOCAL" "$REMOTE"
 [alias]
     ad = add
     bi = bisect
