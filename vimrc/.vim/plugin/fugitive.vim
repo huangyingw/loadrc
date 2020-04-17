@@ -44,6 +44,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtu :execute s:Grtu()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :execute s:Grtv()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :execute s:Gs()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gst :execute s:Gst()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsti :execute s:Gsti()
@@ -107,6 +108,11 @@ endfunction
 function! s:Ga(args, ...) abort
     let worktree = Cd2Worktree()
     call asyncrun#run('<bang>', '', '~/loadrc/gitrc/ga.sh ' . '"' .  a:args . '"')
+endfunction
+
+function! s:Gsave() abort
+    let worktree = Cd2Worktree()
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsave.sh')
 endfunction
 
 function! s:Gst() abort
