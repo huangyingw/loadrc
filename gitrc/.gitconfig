@@ -24,7 +24,10 @@
 [difftool "vimdiff"]
     cmd = vimdiff -R -f -d \
         -c 'wincmd l' -c 'cd $GIT_PREFIX' \
-        -c 'set diffopt-=internal' -c 'set diffopt+=iwhite' -c 'windo set wrap' \
+        -c 'set diffopt-=internal' \
+        -c 'set diffopt+=iblank' \
+        -c 'set diffopt+=iwhiteall' \
+        -c 'windo set wrap' \
         "$LOCAL" "$REMOTE"
 [alias]
     ad = add
