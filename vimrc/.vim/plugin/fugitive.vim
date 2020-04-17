@@ -54,6 +54,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstv :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsync :execute s:Gsync()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gtg :execute s:Gtg()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvd :exe fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", 'difftool --cached -y')
+"command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvd :exe fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", 'config difftool.vimdiff.cmd')
 "command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvd :exe fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", 'difftool --cached -x ' . '"' . 'vimdiff -R -f -d -c ' . '''wincmd l''' .  ' -c ' . '''cd $GIT_PREFIX''' .  ' -c ' . '''set diffopt-=internal''' . ' -c ' . '''set diffopt+=iwhite''' .  ' -c ' . '''windo set wrap''' . ' "' . '$LOCAL' . '"' . ' "' . '$REMOTE' . '""')
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvdo :execute s:Gvdo()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gwap :execute s:Gwap()
