@@ -83,10 +83,16 @@
 # define command which will be used when "nvim" is set as a merge tool
 # https://www.grzegorowski.com/using-vim-or-neovim-nvim-as-a-git-mergetool
 [mergetool "nvim"]
-    cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+    cmd = nvim -f \
+        -c 'set winwidth=1' \
+        -c 'set diffopt-=internal' \
+        -c 'set diffopt+=iblank' \
+        -c 'set diffopt+=iwhiteall' \
+        -c 'windo set wrap' \
+        -c \"Gvdiffsplit!\" \"$MERGED\"
 # set "nvim" as tool for merging
 [merge]
-    tool = nvim
+	tool = nvim
 # automatically launch merge tool without displaying a prompt
 [mergetool]
     prompt = false
