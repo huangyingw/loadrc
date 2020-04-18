@@ -1,5 +1,6 @@
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject BinaryGrep :execute s:BinaryGrep(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Copy :execute s:Copy(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatMove :execute s:CatMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dodev :execute s:Dodev()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dps :execute s:Dps()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fcscope :execute s:Fcscope()
@@ -491,6 +492,12 @@ function! s:Copy(...) abort
     exec '!rm ' . newFile
     exec 'w ' . newFile
     call OpenOrSwitch(newFile, 'vs')
+endfunction
+
+function! s:CatMove(...) abort
+    if a:0 >= 1
+        exec '!~/loadrc/vishrc/cat_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
+    endif
 endfunction
 
 function! s:Tail() abort
