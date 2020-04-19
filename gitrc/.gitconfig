@@ -86,9 +86,10 @@
 [mergetool "nvim"]
     cmd = nvim -f \
         -c 'set winwidth=1' \
-        -c 'set diffopt-=internal' \
         -c 'set diffopt+=iblank' \
         -c 'set diffopt+=iwhiteall' \
+        -c 'set diffopt+=algorithm:patience' \
+        -c 'set diffopt+=indent-heuristic' \
         -c 'windo set wrap' \
         -c \"Gvdiffsplit!\" \"$MERGED\"
 # set "nvim" as tool for merging
