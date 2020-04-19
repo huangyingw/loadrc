@@ -33,8 +33,6 @@ set cursorline
 
 if &diff
     set winwidth=1
-    set diffopt-=internal
-    set diffopt+=iwhite
 else
     set winwidth=999999
 endif
