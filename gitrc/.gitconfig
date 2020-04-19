@@ -22,11 +22,12 @@
 [diff]
     tool = vimdiff
 [difftool "vimdiff"]
-    cmd = vimdiff -R -f -d \
+    cmd = nvim -R -f -d \
         -c 'wincmd l' -c 'cd $GIT_PREFIX' \
-        -c 'set diffopt-=internal' \
         -c 'set diffopt+=iblank' \
         -c 'set diffopt+=iwhiteall' \
+        -c 'set diffopt+=algorithm:patience' \
+        -c 'set diffopt+=indent-heuristic' \
         -c 'windo set wrap' \
         "$LOCAL" "$REMOTE"
 [alias]
