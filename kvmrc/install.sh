@@ -35,3 +35,5 @@ apt-get install -y \
     vim-gnome \
     virt-manager \
     virtinst
+
+./configure.sh
