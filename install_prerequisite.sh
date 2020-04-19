@@ -22,6 +22,7 @@ apt-get install -y \
     ffmpeg \
     gdebi-core \
     git \
+    git-gui \
     gparted \
     hfsprogs \
     htop \

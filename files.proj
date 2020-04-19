@@ -352,6 +352,7 @@
 "./docker-compose.yml"
 "./dockerrc/cdocker.sh"
 "./dockerrc/cleandocker.sh"
+"./dockerrc/configure.sh"
 "./dockerrc/dlogs.sh"
 "./dockerrc/dps.sh"
 "./dockerrc/edocker.sh"
