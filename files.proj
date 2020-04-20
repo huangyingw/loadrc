@@ -2812,6 +2812,7 @@
 "./vimrc/.vimrc"
 "./vishrc/.login"
 "./vishrc/cat_move.sh"
+"./vishrc/cat_run.sh"
 "./vishrc/foreach.sh"
 "./vishrc/kdiffall.sh"
 "./vishrc/kdiffall_test.list"
