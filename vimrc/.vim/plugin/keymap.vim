@@ -89,9 +89,27 @@ function! PlayVideo()
 endfunction
 
 function! VDebug()
-    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    call RunShell('~/loadrc/vishrc/vdebug.sh', expand("%:p"), b:csdbpath)
-    call OpenOrSwitch('"' . expand("%:p") . '"' . '.findresult', 'vs')
+    if g:asyncrun_status ==# 'running'
+        echom 'background job is still running'
+        return 0
+    endif
+
+    let b:file_name = expand('%:t')
+    let b:to_run = expand("%:p")
+
+    if filereadable(b:to_run . '.sh')
+        let b:to_run = b:to_run . '.sh'
+    endif
+
+    let b:csdbpath = Cd2ProjectRoot("files.proj")
+    let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
+    call RunShell('~/loadrc/vishrc/vdebug.sh', b:to_run, b:output)
+
+    if b:to_run != 'gbil.log'
+        call OpenOrSwitch(b:output, 'vs')
+    else
+        call OpenOrSwitch('gbil.log', 'vs')
+    endif
 endfunction
 
 function! VRun()
