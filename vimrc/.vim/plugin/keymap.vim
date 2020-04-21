@@ -1,10 +1,6 @@
 function! RememberQuit()
     let @"=expand("%:p")
 
-    if &diff || expand('%:p') =~# 'fugitive:' 
-        quit
-    endif
-
     if winbufnr(2) == -1 && &buftype !=# "terminal"
         return
     endif
