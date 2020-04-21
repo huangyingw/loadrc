@@ -57,3 +57,5 @@ Error detected while processing function 87:
 line   41:
 E121: Undefined variable: l:changed_win_bufs
 E15: Invalid expression: l:changed_win_bufs
+
+Cought anything: Vim(cd):E472: Command failed
