@@ -4,8 +4,11 @@ then
     exit 0
 fi
 
+~/loadrc/gitrc/gpl.sh
+
 local_branch="$(~/loadrc/gitrc/get_current_branch.sh)" 
 output="$local_branch.gdio.diff"
+output=$(echo "$output" | sed 's/\//_/g')
 local_master="$(git config gsync.branch)"
 remote="$(git config gsync.remote)"
 
