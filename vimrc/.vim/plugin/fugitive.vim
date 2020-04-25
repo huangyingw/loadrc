@@ -1,6 +1,7 @@
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject BinaryGrep :execute s:BinaryGrep(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatDu :execute s:CatDu(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatMove :execute s:CatMove(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatPlay :execute s:CatPlay(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRun :execute s:CatRun(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Copy :execute s:Copy(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dodev :execute s:Dodev()
@@ -488,6 +489,12 @@ function! s:Copy(...) abort
     exec '!rm ' . newFile
     exec 'w ' . newFile
     call OpenOrSwitch(newFile, 'vs')
+endfunction
+             
+function! s:CatPlay(...) abort
+    let b:output = expand("%:p") . '.runresult'
+    call RunShell('~/loadrc/vishrc/cat_play.sh', expand("%:p"), b:output) 
+    call OpenOrSwitch(b:output, 'vs')
 endfunction
 
 function! s:CatMove(...) abort
