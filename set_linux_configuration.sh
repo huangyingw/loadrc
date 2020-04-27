@@ -22,3 +22,4 @@ do
     deploy_configs "$line"
 done < linux.conf
 grub-mkconfig -o /boot/grub/grub.cfg
+gsettings set org.gnome.desktop.lockdown disable-lock-screen 'true'
