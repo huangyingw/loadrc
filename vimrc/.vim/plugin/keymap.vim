@@ -202,10 +202,6 @@ function! OpenAll()
     let currentDir = getcwd()
     let lines = readfile(expand('%:p'))
 
-    if len(lines) > 10
-        return
-    endif
-
     on
     for line in lines
         let line = substitute(line, '"', '', "g")
