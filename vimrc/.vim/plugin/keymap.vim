@@ -200,7 +200,8 @@ endfunction
 function! OpenAll()
     call GetFirstColumnOfFile()
     let currentDir = getcwd()
-    let lines = readfile(expand('%:p'))
+    let currentFile = expand('%:p')
+    let lines = readfile(currentFile)
 
     on
     for line in lines
@@ -209,6 +210,19 @@ function! OpenAll()
     endfor
     set winwidth=1
     wincmd =
+
+    let bnr = bufwinnr('^' . currentFile . '$')
+    exe bnr . "wincmd w"
+    q
+endfunction
+
+function! DiffAll()
+    if &diff
+        windo diffoff
+    else
+        windo diffthis
+        windo set wrap
+    endif
 endfunction
 
 function! KdiffAll()
@@ -361,7 +375,7 @@ nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 nnoremap tt :Autoformat<CR>:w<cr>
-nnoremap D :only<CR>:vs %:p<cr>
+nnoremap D :only<CR>:vs %:p<cr>:set winwidth=1<cr><c-w>=
 " Quickly open current dir in current windows
 nnoremap <leader>d :call OpenProjectRoot()<cr>
 nnoremap <tab> %
@@ -410,6 +424,7 @@ nnoremap <leader>d :!rm %:p<CR>:q<cr>
 nmap <C-j> :call PlayVideo()<cr>
 nmap <C-p> :call Prune()<cr>
 nmap <C-k> :call KdiffAll()<cr>
+nmap <C-d> :call DiffAll()<cr>
 nmap mr :call LocalRename()<cr>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr>
@@ -443,4 +458,4 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
 
 " open tig with Project root path
 nnoremap <Leader>t :TigOpenProjectRootDir<CR>
-nnoremap <leader>T :TigOpenCurrentFile<CR> 
+nnoremap <leader>T :TigOpenCurrentFile<CR>
