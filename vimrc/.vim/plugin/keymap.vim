@@ -221,6 +221,7 @@ function! DiffAll()
         windo diffoff
     else
         windo diffthis
+        windo set wrap
     endif
 endfunction
 
