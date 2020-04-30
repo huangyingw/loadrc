@@ -200,21 +200,6 @@ endfunction
 function! OpenAll()
     call GetFirstColumnOfFile()
     let currentDir = getcwd()
-    let lines = readfile(expand('%:p'))
-
-    on
-    for line in lines
-        let line = substitute(line, '"', '', "g")
-        exec 'vs ' . currentDir . '/' . line
-    endfor
-    set winwidth=1
-    wincmd =
-endfunction
-
-function! KdiffAll()
-    call GetFirstColumnOfFile()
-
-    let currentDir = getcwd()
     let currentFile = expand('%:p')
     let lines = readfile(currentFile)
 
@@ -226,10 +211,21 @@ function! KdiffAll()
     set winwidth=1
     wincmd =
 
-    if bufwinnr('^' . currentFile . '$') > 0
-        exe "bd!" . currentFile
+    let bnr = bufwinnr('^' . currentFile . '$')
+    exe bnr . "wincmd w"
+    q
+endfunction
+
+function! KdiffAll()
+    call GetFirstColumnOfFile()
+
+    if &buftype ==# "terminal"
+        return 0
     endif
-    windo diffthis 
+
+    only
+    call asyncrun#stop('<bang>')
+    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
 endfunction
 
 function! UpdateProj()
