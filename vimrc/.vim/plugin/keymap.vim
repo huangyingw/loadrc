@@ -214,13 +214,22 @@ endfunction
 function! KdiffAll()
     call GetFirstColumnOfFile()
 
-    if &buftype ==# "terminal"
-        return 0
-    endif
+    let currentDir = getcwd()
+    let currentFile = expand('%:p')
+    let lines = readfile(currentFile)
 
-    only
-    call asyncrun#stop('<bang>')
-    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
+    on
+    for line in lines
+        let line = substitute(line, '"', '', "g")
+        exec 'vs ' . currentDir . '/' . line
+    endfor
+    set winwidth=1
+    wincmd =
+
+    if bufwinnr('^' . currentFile . '$') > 0
+        exe "bd!" . currentFile
+    endif
+    windo diffthis 
 endfunction
 
 function! UpdateProj()
