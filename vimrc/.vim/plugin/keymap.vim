@@ -361,7 +361,7 @@ nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 nnoremap tt :Autoformat<CR>:w<cr>
-nnoremap D :only<CR>:vs %:p<cr>
+nnoremap D :only<CR>:vs %:p<cr>:set winwidth=1<cr><c-w>= 
 " Quickly open current dir in current windows
 nnoremap <leader>d :call OpenProjectRoot()<cr>
 nnoremap <tab> %
