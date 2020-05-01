@@ -221,6 +221,7 @@ function! DiffAll()
     if &diff
         windo diffoff
         syntax on
+        windo set nowrap
     else
         windo diffthis
         windo set wrap
