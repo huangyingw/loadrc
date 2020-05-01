@@ -220,9 +220,11 @@ endfunction
 function! DiffAll()
     if &diff
         windo diffoff
+        syntax on
     else
         windo diffthis
         windo set wrap
+        syntax off
     endif
 endfunction
 
