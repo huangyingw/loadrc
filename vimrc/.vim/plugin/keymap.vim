@@ -209,6 +209,7 @@ function! OpenAll()
         exec 'vs ' . currentDir . '/' . line
     endfor
     set winwidth=1
+    windo set nowrap
     wincmd =
 
     let bnr = bufwinnr('^' . currentFile . '$')
