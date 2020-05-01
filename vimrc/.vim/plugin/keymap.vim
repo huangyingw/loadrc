@@ -191,7 +191,6 @@ function! Prune()
         silent exec '!~/loadrc/vishrc/prune.sh ' . '"./' .  line . '"'
     else
         silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"'
-        exec '!git checkout ' . '"' .  expand('%:p') . '"'
         q
     endif
     call UpdateProj()
