@@ -30,7 +30,8 @@ GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
 git checkout -b "$targetBranch" "$local_master" ; \
     git checkout files.proj ; \
     git checkout "$targetBranch" ; \
-    git apply --reject --whitespace=fix "$GDITDIFF" && \
+    git apply --reject --whitespace=fix "$GDITDIFF" ; \
+    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
     git commit  --no-verify -am "$commit_message" ; \
     git pull ; \
     git push ; \
