@@ -225,6 +225,7 @@ function! DiffAll()
         windo diffthis
         windo set wrap
         syntax off
+        set winwidth=1
     endif
 endfunction
 
