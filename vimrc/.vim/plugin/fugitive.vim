@@ -253,7 +253,13 @@ function! s:Gbra() abort
 endfunction
 
 function! s:Gs() abort
-    let indexFolder = substitute(system("~/loadrc/gitrc/get_git.sh " . '"' . expand('%:p') . '"'), '\n', '', '')
+    if expand('%:p') =~ '^fugitive:/'
+        let indexFolder = substitute(expand('%:p'), '^fugitive:\/\/', '', 'g')
+        let indexFolder = substitute(indexFolder, '.git.*', '.git', 'g') 
+    else
+        let indexFolder = substitute(system("~/loadrc/gitrc/get_git.sh " . '"' . expand('%:p') . '"'), '\n', '', '')
+    endif
+
     call OpenOrSwitch(indexFolder . '/index', 'vs')
 endfunction
 
@@ -490,10 +496,10 @@ function! s:Copy(...) abort
     exec 'w ' . newFile
     call OpenOrSwitch(newFile, 'vs')
 endfunction
-             
+
 function! s:CatPlay(...) abort
     let b:output = expand("%:p") . '.runresult'
-    call RunShell('~/loadrc/vishrc/cat_play.sh', expand("%:p"), b:output) 
+    call RunShell('~/loadrc/vishrc/cat_play.sh', expand("%:p"), b:output)
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
@@ -505,13 +511,13 @@ endfunction
 
 function! s:CatDu(...) abort
     let b:output = expand("%:p") . '.runresult'
-    call RunShell('~/loadrc/vishrc/cat_du.sh', expand("%:p"), b:output) 
+    call RunShell('~/loadrc/vishrc/cat_du.sh', expand("%:p"), b:output)
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
 function! s:CatRun(...) abort
     let b:output = expand("%:p") . '.runresult'
-    call RunShell('~/loadrc/vishrc/cat_run.sh', expand("%:p"), b:output) 
+    call RunShell('~/loadrc/vishrc/cat_run.sh', expand("%:p"), b:output)
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
