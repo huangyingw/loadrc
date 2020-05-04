@@ -191,7 +191,7 @@ function! Prune()
         silent exec '!~/loadrc/vishrc/prune.sh ' . '"./' .  line . '"'
     else
         silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"'
-        q
+        call RememberQuit()
     endif
     call UpdateProj()
 endfunction
