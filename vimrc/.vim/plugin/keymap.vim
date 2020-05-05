@@ -220,10 +220,10 @@ function! DiffAll()
     if &diff
         windo diffoff
         syntax on
-        windo set nowrap
+        windo set wrap
     else
         windo diffthis
-        windo set wrap
+        windo set nowrap
         syntax off
         set winwidth=1
     endif
