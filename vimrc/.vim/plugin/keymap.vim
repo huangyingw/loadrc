@@ -15,7 +15,7 @@ function! ExFilter()
 
     call Filter2Findresult()
     silent exec 'g/' . @/ . '/d'
-    w
+    w!
 endfunction
 
 function! Vdelete()
@@ -25,7 +25,7 @@ function! Vdelete()
 
     call Filter2Findresult()
     silent exec '%s/' . @/ . '//g'
-    w
+    w!
 endfunction
 
 if !exists('g:VeryLiteral')
@@ -62,7 +62,7 @@ function! VFilter()
 
     call Filter2Findresult()
     silent exec 'g!/' . @/ . '/d'
-    w
+    w!
 endfunction
 
 function! ShowRemember()
