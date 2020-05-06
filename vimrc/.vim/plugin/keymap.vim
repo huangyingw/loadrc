@@ -218,14 +218,14 @@ endfunction
 
 function! DiffAll()
     if &diff
-        windo diffoff
         syntax on
+        windo diffoff
         windo set wrap
     else
+        set winwidth=1
+        syntax off
         windo diffthis
         windo set nowrap
-        syntax off
-        set winwidth=1
     endif
 endfunction
 
