@@ -445,17 +445,12 @@ map oo :call VimOpen()<cr>
 nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
 
-function! CompareTwoFiles()
-    call asyncrun#run('<bang>', '', 'kdiff3 "' . @" . '" "' . expand("%:p") . '"')
-endfunc
-
 function! CommTwoFiles()
     silent exec '!comm -2 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . @" . '".findresult'
     call OpenOrSwitch(@" . '.findresult', 'vs')
 endfunc
 
-nnoremap <leader>2 :call CompareTwoFiles()<cr>
-nnoremap <leader>3 :call CommTwoFiles()<cr>
+nnoremap <leader>2 :call CommTwoFiles()<cr>
 set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
 "    paste mode, where you can paste mass data
 "    that won't be autoindented
