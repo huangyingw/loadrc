@@ -498,8 +498,9 @@ function! s:Copy(...) abort
 endfunction
 
 function! s:CatPlay(...) abort
+    call asyncrun#stop('<bang>')
     let b:output = expand("%:p") . '.runresult'
-    call RunShell('~/loadrc/vishrc/cat_play.sh', expand("%:p"), b:output)
+    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output)
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
