@@ -342,12 +342,20 @@ function! MaxWin()
     call OpenOrSwitch(currentFile, 'vs')
 endfunction
 
+function! MinWin()
+    let currentFile = expand("%:p")
+    set winwidth=1
+    wincmd =
+    windo set nowrap
+    call OpenOrSwitch(currentFile, 'vs')
+endfunction
+
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<cr>
 nnoremap <leader>L :TlistClose<cr>
 nnoremap hh <c-w>h
 nnoremap ll <c-w>l
 nnoremap mm :call MaxWin()<cr> 
-nnoremap mn :set winwidth=1<cr>:wincmd =<cr>:windo set nowrap<cr>
+nnoremap mn :call MinWin()<cr> 
 nnoremap ff <c-f>
 nnoremap vv <c-b>
 nnoremap <c-l> l
