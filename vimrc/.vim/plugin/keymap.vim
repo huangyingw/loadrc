@@ -218,6 +218,7 @@ endfunction
 
 function! DiffAll()
     if &diff
+        set winwidth=999999
         syntax on
         windo diffoff
         windo set wrap
@@ -226,6 +227,7 @@ function! DiffAll()
         syntax off
         windo diffthis
         windo set nowrap
+        wincmd =
     endif
 endfunction
 
@@ -336,8 +338,8 @@ nnoremap <leader>l :TlistClose<CR>:TlistToggle<cr>
 nnoremap <leader>L :TlistClose<cr>
 nnoremap hh <c-w>h
 nnoremap ll <c-w>l
-nnoremap mm :set winwidth=999999<cr><c-w><Bar>
-nnoremap mn :set winwidth=1<cr><c-w>=
+nnoremap mm :set winwidth=999999<cr>:wincmd<Bar><cr>
+nnoremap mn :set winwidth=1<cr>:wincmd =<cr>
 nnoremap ff <c-f>
 nnoremap vv <c-b>
 nnoremap <c-l> l
