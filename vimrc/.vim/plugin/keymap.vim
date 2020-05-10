@@ -334,11 +334,19 @@ function! OpenProjectRoot()
     call OpenOrSwitch(b:csdbpath, 'vs')
 endfunction
 
+function! MaxWin()
+    let currentFile = expand("%:p")
+    set winwidth=999999
+    wincmd |
+    windo set wrap
+    call OpenOrSwitch(currentFile, 'vs')
+endfunction
+
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<cr>
 nnoremap <leader>L :TlistClose<cr>
 nnoremap hh <c-w>h
 nnoremap ll <c-w>l
-nnoremap mm :set winwidth=999999<cr>:wincmd<Bar><cr>:windo set wrap<cr> 
+nnoremap mm :call MaxWin()<cr> 
 nnoremap mn :set winwidth=1<cr>:wincmd =<cr>:windo set nowrap<cr>
 nnoremap ff <c-f>
 nnoremap vv <c-b>
