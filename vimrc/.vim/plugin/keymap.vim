@@ -217,6 +217,7 @@ function! OpenAll()
 endfunction
 
 function! DiffAll()
+    let currentFile = expand("%:p")
     if &diff
         set winwidth=999999
         syntax on
@@ -229,6 +230,7 @@ function! DiffAll()
         windo set nowrap
         wincmd =
     endif
+    call OpenOrSwitch(currentFile, 'vs')
 endfunction
 
 function! KdiffAll()
