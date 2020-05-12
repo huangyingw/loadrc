@@ -15,4 +15,3 @@ do
     mkdir -p /media/$ss
     mount $ss /media/$ss
 done
-df -TH
