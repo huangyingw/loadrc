@@ -173,6 +173,7 @@
 "./.subversion/svndiffwrapper.sh"
 "./.svnrc"
 "./.theanorc"
+"./.tigrc"
 "./.tmux.conf"
 "./.u1604.rc"
 "./.vserver.rc"
