@@ -79,7 +79,7 @@
         -c \"Gvdiffsplit!\" \"$MERGED\"
 # set "nvim" as tool for merging
 [merge]
-	tool = nvim
+    tool = kdiff3
 # automatically launch merge tool without displaying a prompt
 [mergetool]
     prompt = false
