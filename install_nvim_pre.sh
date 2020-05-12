@@ -12,7 +12,6 @@ then
         exuberant-ctags \
         neovim \
         python-dev \
-        python-pip \
         python3-dev \
         python3-pip
     pip3 install pynvim
