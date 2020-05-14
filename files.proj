@@ -484,6 +484,7 @@
 "./host_links/mini/etc/hosts"
 "./host_links/movie/etc/network/interfaces"
 "./host_links/server/etc/NetworkManager/system-connections/Millennium\ Flats"
+"./host_links/server/etc/NetworkManager/system-connections/eth0"
 "./host_links/server/etc/hosts"
 "./host_links/server/etc/network/interfaces"
 "./host_links/toshiba/etc/NetworkManager/system-connections/Millennium\ Flats"
