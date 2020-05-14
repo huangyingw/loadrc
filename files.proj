@@ -365,6 +365,7 @@
 "./enpass_install.sh"
 "./entrypoint.sh"
 "./error"
+"./eth0"
 "./fdocs.exclude"
 "./fdocs.include"
 "./fdocs.list"
