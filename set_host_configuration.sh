@@ -5,7 +5,7 @@ cd "$SCRIPTPATH"
 
 find host_links/`hostname`/ -type f | while read ss; \
 do \
-    sudo ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/host_links\/`hostname`\///g")"; \
+    ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/host_links\/`hostname`\///g")"; \
 done
 
 HOSTTODOS=~/loadrc/host_links/"`hostname`/todos.sh"
