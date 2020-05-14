@@ -11,7 +11,7 @@ mac-address=10:7b:44:f0:e7:2f
 mac-address-blacklist=
 
 [ipv4]
-address1=192.168.2.4/24
+address1=192.168.2.2/24
 dns-priority=100
 dns-search=
 method=manual
