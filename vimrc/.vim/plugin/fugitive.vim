@@ -115,13 +115,6 @@ function! s:Gkdo() abort
     endif
 endfunction
 
-function! s:Fr(...) abort
-    let worktree = Cd2Worktree()
-    let arg1 = (a:0 >= 1) ? a:1 : ''
-    let arg2 = (a:0 >= 2) ? a:2 : ''
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fr.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
-endfunction
-
 function! s:Ga(args, ...) abort
     let worktree = Cd2Worktree()
     call asyncrun#run('<bang>', '', '~/loadrc/gitrc/ga.sh ' . '"' .  a:args . '"')
