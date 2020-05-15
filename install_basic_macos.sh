@@ -16,6 +16,7 @@ brew install \
     blueutil \
     coreutils \
     dos2unix \
+    ffmpeg \
     git \
     git-gui \
     hg \

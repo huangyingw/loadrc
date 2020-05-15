@@ -1,10 +1,6 @@
 function! RememberQuit()
     let @"=expand("%:p")
 
-    if &diff || expand('%:p') =~# 'fugitive:' 
-        quit
-    endif
-
     if winbufnr(2) == -1 && &buftype !=# "terminal"
         return
     endif
@@ -19,7 +15,7 @@ function! ExFilter()
 
     call Filter2Findresult()
     silent exec 'g/' . @/ . '/d'
-    w
+    w!
 endfunction
 
 function! Vdelete()
@@ -29,7 +25,7 @@ function! Vdelete()
 
     call Filter2Findresult()
     silent exec '%s/' . @/ . '//g'
-    w
+    w!
 endfunction
 
 if !exists('g:VeryLiteral')
@@ -66,7 +62,7 @@ function! VFilter()
 
     call Filter2Findresult()
     silent exec 'g!/' . @/ . '/d'
-    w
+    w!
 endfunction
 
 function! ShowRemember()
@@ -89,9 +85,27 @@ function! PlayVideo()
 endfunction
 
 function! VDebug()
-    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    call RunShell('~/loadrc/vishrc/vdebug.sh', expand("%:p"), b:csdbpath)
-    call OpenOrSwitch('"' . expand("%:p") . '"' . '.findresult', 'vs')
+    if g:asyncrun_status ==# 'running'
+        echom 'background job is still running'
+        return 0
+    endif
+
+    let b:file_name = expand('%:t')
+    let b:to_run = expand("%:p")
+
+    if filereadable(b:to_run . '.sh')
+        let b:to_run = b:to_run . '.sh'
+    endif
+
+    let b:csdbpath = Cd2ProjectRoot("files.proj")
+    let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
+    call RunShell('~/loadrc/vishrc/vdebug.sh', b:to_run, b:output)
+
+    if b:to_run != 'gbil.log'
+        call OpenOrSwitch(b:output, 'vs')
+    else
+        call OpenOrSwitch('gbil.log', 'vs')
+    endif
 endfunction
 
 function! VRun()
@@ -177,8 +191,7 @@ function! Prune()
         silent exec '!~/loadrc/vishrc/prune.sh ' . '"./' .  line . '"'
     else
         silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"'
-        exec '!git checkout ' . '"' .  expand('%:p') . '"'
-        q
+        call RememberQuit()
     endif
     call UpdateProj()
 endfunction
@@ -186,11 +199,8 @@ endfunction
 function! OpenAll()
     call GetFirstColumnOfFile()
     let currentDir = getcwd()
-    let lines = readfile(expand('%:p'))
-
-    if len(lines) > 10
-        return
-    endif
+    let currentFile = expand('%:p')
+    let lines = readfile(currentFile)
 
     on
     for line in lines
@@ -198,7 +208,29 @@ function! OpenAll()
         exec 'vs ' . currentDir . '/' . line
     endfor
     set winwidth=1
+    windo set nowrap
     wincmd =
+
+    let bnr = bufwinnr('^' . currentFile . '$')
+    exe bnr . "wincmd w"
+    q
+endfunction
+
+function! DiffAll()
+    let currentFile = expand("%:p")
+    if &diff
+        set winwidth=999999
+        syntax on
+        windo diffoff
+        windo set wrap
+    else
+        set winwidth=1
+        syntax off
+        windo diffthis
+        windo set nowrap
+        wincmd =
+    endif
+    call OpenOrSwitch(currentFile, 'vs')
 endfunction
 
 function! KdiffAll()
@@ -304,12 +336,28 @@ function! OpenProjectRoot()
     call OpenOrSwitch(b:csdbpath, 'vs')
 endfunction
 
+function! MaxWin()
+    let currentFile = expand("%:p")
+    set winwidth=999999
+    wincmd |
+    windo set wrap
+    call OpenOrSwitch(currentFile, 'vs')
+endfunction
+
+function! MinWin()
+    let currentFile = expand("%:p")
+    set winwidth=1
+    wincmd =
+    windo set nowrap
+    call OpenOrSwitch(currentFile, 'vs')
+endfunction
+
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<cr>
 nnoremap <leader>L :TlistClose<cr>
 nnoremap hh <c-w>h
 nnoremap ll <c-w>l
-nnoremap mm :set winwidth=999999<cr><c-w><Bar>
-nnoremap mn :set winwidth=1<cr><c-w>=
+nnoremap mm :call MaxWin()<cr> 
+nnoremap mn :call MinWin()<cr> 
 nnoremap ff <c-f>
 nnoremap vv <c-b>
 nnoremap <c-l> l
@@ -351,7 +399,7 @@ nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 nnoremap tt :Autoformat<CR>:w<cr>
-nnoremap D :only<CR>:vs %:p<cr>
+nnoremap D :only<CR>:vs %:p<cr>:set winwidth=1<cr><c-w>=
 " Quickly open current dir in current windows
 nnoremap <leader>d :call OpenProjectRoot()<cr>
 nnoremap <tab> %
@@ -359,7 +407,7 @@ vnoremap <tab> %
 nnoremap M zM
 nnoremap R zR
 nmap <f2> :set number! number?<cr>
-nmap <leader>w :set wrap!<cr>
+nmap <leader>w :windo set wrap!<cr>
 " Convert slashes to backslashes for Windows.
 if has('win32')
     nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
@@ -400,6 +448,7 @@ nnoremap <leader>d :!rm %:p<CR>:q<cr>
 nmap <C-j> :call PlayVideo()<cr>
 nmap <C-p> :call Prune()<cr>
 nmap <C-k> :call KdiffAll()<cr>
+nmap <C-d> :call DiffAll()<cr>
 nmap mr :call LocalRename()<cr>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr>
@@ -416,21 +465,16 @@ map oo :call VimOpen()<cr>
 nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
 
-function! CompareTwoFiles()
-    call asyncrun#run('<bang>', '', 'kdiff3 "' . @" . '" "' . expand("%:p") . '"')
-endfunc
-
 function! CommTwoFiles()
     silent exec '!comm -2 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . @" . '".findresult'
     call OpenOrSwitch(@" . '.findresult', 'vs')
 endfunc
 
-nnoremap <leader>2 :call CompareTwoFiles()<cr>
-nnoremap <leader>3 :call CommTwoFiles()<cr>
+nnoremap <leader>2 :call CommTwoFiles()<cr>
 set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
 "    paste mode, where you can paste mass data
 "    that won't be autoindented
 
 " open tig with Project root path
 nnoremap <Leader>t :TigOpenProjectRootDir<CR>
-nnoremap <leader>T :TigOpenCurrentFile<CR> 
+nnoremap <leader>T :TigOpenCurrentFile<CR>

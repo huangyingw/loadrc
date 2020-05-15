@@ -1,6 +1,9 @@
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject BinaryGrep :execute s:BinaryGrep(<f-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Copy :execute s:Copy(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatDu :execute s:CatDu(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatMove :execute s:CatMove(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatPlay :execute s:CatPlay(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRun :execute s:CatRun(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Copy :execute s:Copy(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dodev :execute s:Dodev()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dps :execute s:Dps()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fcscope :execute s:Fcscope()
@@ -28,8 +31,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcp :e
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdev :execute s:Gdev()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi :execute s:Gdi(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi2 :execute s:Gdi2(<f-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdif :execute s:Gdif(<f-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdifo :execute s:Gdifo(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdio :execute s:Gdio(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdit :execute s:Gdit()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gfix :execute s:Gfix()
@@ -37,7 +38,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gicb :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gitk :execute s:Gitk(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glf :execute s:Glf()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glg :execute s:Glg()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gme :exe fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", 'mergetool') 
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gmet :execute s:Gmet()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
@@ -55,9 +56,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstp :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstv :execute s:Gstv(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsync :execute s:Gsync()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gtg :execute s:Gtg()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvd :exe fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", 'difftool --cached -y')
-"command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvd :exe fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", 'config difftool.vimdiff.cmd')
-"command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gvd :exe fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", 'difftool --cached -x ' . '"' . 'vimdiff -R -f -d -c ' . '''wincmd l''' .  ' -c ' . '''cd $GIT_PREFIX''' .  ' -c ' . '''set diffopt-=internal''' . ' -c ' . '''set diffopt+=iwhite''' .  ' -c ' . '''windo set wrap''' . ' "' . '$LOCAL' . '"' . ' "' . '$REMOTE' . '""')
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkd :execute s:Gkd(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkdo :execute s:Gkdo()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gwap :execute s:Gwap()
@@ -115,13 +113,6 @@ function! s:Gkdo() abort
     else
         call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '"')
     endif
-endfunction
-
-function! s:Fr(...) abort
-    let worktree = Cd2Worktree()
-    let arg1 = (a:0 >= 1) ? a:1 : ''
-    let arg2 = (a:0 >= 2) ? a:2 : ''
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fr.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
 endfunction
 
 function! s:Ga(args, ...) abort
@@ -256,7 +247,13 @@ function! s:Gbra() abort
 endfunction
 
 function! s:Gs() abort
-    let indexFolder = substitute(system("~/loadrc/gitrc/get_git.sh " . '"' . expand('%:p') . '"'), '\n', '', '')
+    if expand('%:p') =~ '^fugitive:/'
+        let indexFolder = substitute(expand('%:p'), '^fugitive:\/\/', '', 'g')
+        let indexFolder = substitute(indexFolder, '.git.*', '.git', 'g') 
+    else
+        let indexFolder = substitute(system("~/loadrc/gitrc/get_git.sh " . '"' . expand('%:p') . '"'), '\n', '', '')
+    endif
+
     call OpenOrSwitch(indexFolder . '/index', 'vs')
 endfunction
 
@@ -411,6 +408,11 @@ function! s:Gtg() abort
     call OpenOrSwitch('gtg.findresult', 'vs')
 endfunction
 
+function! s:Gmet() abort
+    let worktree = Cd2Worktree()
+    call asyncrun#run('<bang>', '', 'git mergetool')
+endfunction
+
 function! s:Gicb() abort
     let worktree = Cd2Worktree()
     call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gicb.sh')
@@ -494,10 +496,29 @@ function! s:Copy(...) abort
     call OpenOrSwitch(newFile, 'vs')
 endfunction
 
+function! s:CatPlay(...) abort
+    call asyncrun#stop('<bang>')
+    let b:output = expand("%:p") . '.runresult'
+    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output)
+    call OpenOrSwitch(b:output, 'vs')
+endfunction
+
 function! s:CatMove(...) abort
     if a:0 >= 1
         exec '!~/loadrc/vishrc/cat_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
     endif
+endfunction
+
+function! s:CatDu(...) abort
+    let b:output = expand("%:p") . '.runresult'
+    call RunShell('~/loadrc/vishrc/cat_du.sh', expand("%:p"), b:output)
+    call OpenOrSwitch(b:output, 'vs')
+endfunction
+
+function! s:CatRun(...) abort
+    let b:output = expand("%:p") . '.runresult'
+    call RunShell('~/loadrc/vishrc/cat_run.sh', expand("%:p"), b:output)
+    call OpenOrSwitch(b:output, 'vs')
 endfunction
 
 function! s:Tail() abort
@@ -556,7 +577,14 @@ endfunction
 
 function! s:Fr(find, replace) abort
     call Cd2ProjectRoot("files.proj")
-    silent exec '!~/loadrc/bashrc/fr.sh ' . '"' .  a:find . '"' . ' ' . '"' .  a:replace . '"'
+
+    if expand('%:t') != 'index'
+        let fileList = expand('%:p')
+    else
+        let fileList = "files.proj"
+    endif
+
+    exec '!~/loadrc/bashrc/fr.sh ' . '"' .  a:find . '"' . ' ' . '"' .  a:replace . '"' . ' ' . '"' .  fileList . '"' 
     call s:Gs()
 endfunction
 
@@ -580,6 +608,7 @@ function! s:DiffClean() abort
     silent exec '%s/^--- a\//--- \.\//g'
     silent exec '%s/^+++ b\//+++ \.\//g'
     w
+    only
 endfunction
 
 function! s:Gfix() abort

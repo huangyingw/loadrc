@@ -7,12 +7,6 @@
     current = yellow reverse
     local = yellow
     remote = green
-[color "diff"]
-    meta = yellow bold
-    frag = magenta bold
-    old = red bold
-    new = green bold
-    whitespace = red reverse
 [color "status"]
     added = yellow
     changed = green
@@ -23,12 +17,8 @@
     tool = nvimdiff
 [difftool "nvimdiff"]
     cmd = nvim -R -f -d \
+        -c 'set winwidth=1' \
         -c 'wincmd l' -c 'cd $GIT_PREFIX' \
-        -c 'set diffopt+=iblank' \
-        -c 'set diffopt+=iwhiteall' \
-        -c 'set diffopt+=algorithm:patience' \
-        -c 'set diffopt+=indent-heuristic' \
-        -c 'windo set wrap' \
         "$LOCAL" "$REMOTE"
 [alias]
     ad = add
@@ -86,15 +76,12 @@
 [mergetool "nvim"]
     cmd = nvim -f \
         -c 'set winwidth=1' \
-        -c 'set diffopt+=iblank' \
-        -c 'set diffopt+=iwhiteall' \
-        -c 'set diffopt+=algorithm:patience' \
-        -c 'set diffopt+=indent-heuristic' \
-        -c 'windo set wrap' \
         -c \"Gvdiffsplit!\" \"$MERGED\"
 # set "nvim" as tool for merging
 [merge]
-	tool = nvim
+    tool = kdiff3
 # automatically launch merge tool without displaying a prompt
 [mergetool]
     prompt = false
+[merge "ours"]
+	driver = true

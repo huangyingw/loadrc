@@ -37,9 +37,7 @@ set wmw=0
 set wmh=0
 " Editing behaviour {{{
 set showmode                    " always show what mode we're currently editing in
-" set nowrap                      " don't wrap lines
 
-set wrap
 set linebreak
 set textwidth=0
 set wrapmargin=0

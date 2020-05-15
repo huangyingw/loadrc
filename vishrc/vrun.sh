@@ -29,6 +29,7 @@ rfolder=$(realpath --relative-to="$rootFolder" $(dirname "$file"))
 
 if [[ "$file" = *'Dockerfile' ]] 
 then
+    cd "$rootFolder"
     docker build -f "$rfile" "$rfolder"
     exit 0
 fi
