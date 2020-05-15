@@ -83,3 +83,5 @@
 # automatically launch merge tool without displaying a prompt
 [mergetool]
     prompt = false
+[merge "ours"]
+	driver = true
