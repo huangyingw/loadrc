@@ -577,7 +577,14 @@ endfunction
 
 function! s:Fr(find, replace) abort
     call Cd2ProjectRoot("files.proj")
-    silent exec '!~/loadrc/bashrc/fr.sh ' . '"' .  a:find . '"' . ' ' . '"' .  a:replace . '"'
+
+    if expand('%:t') != 'index'
+        let fileList = expand('%:p')
+    else
+        let fileList = "files.proj"
+    endif
+
+    exec '!~/loadrc/bashrc/fr.sh ' . '"' .  a:find . '"' . ' ' . '"' .  a:replace . '"' . ' ' . '"' .  fileList . '"' 
     call s:Gs()
 endfunction
 
