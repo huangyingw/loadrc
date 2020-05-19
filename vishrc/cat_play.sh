@@ -6,6 +6,6 @@ do
     do
         ss=$(echo "$ss" | sed 's/"//g')
         echo "now playing $ss"
-        smplayer -fullscreen "$ss"
+        ~/loadrc/vishrc/vlc.sh "$ss"
     done < "$1"
 done
