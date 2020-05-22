@@ -9,6 +9,7 @@
 192.168.122.65 master-node
 192.168.122.136 slave-node
 192.168.122.244 zsh
+10.1.10.6 work
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
