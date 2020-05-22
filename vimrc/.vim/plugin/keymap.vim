@@ -467,7 +467,8 @@ nnoremap <leader>1 :let @"=expand("%:p")<CR>
 
 function! CommTwoFiles()
     silent exec '!comm -2 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . @" . '".findresult'
-    call OpenOrSwitch(@" . '.findresult', 'vs')
+    silent exec '!cp -fv "' . @" . '.findresult' . '"' . ' ' . '"' . @" . '"'
+    call OpenOrSwitch(@", 'vs')
 endfunc
 
 nnoremap <leader>2 :call CommTwoFiles()<cr>
