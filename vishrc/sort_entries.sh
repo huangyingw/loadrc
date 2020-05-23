@@ -10,7 +10,7 @@ IFS=$'\n'
 
 if [ "$PARAM" = "time" ]
 then
-    ls -tr $(cat "$FILE" | sed 's/^"//g;s/"$//g;s/\\ / /g') | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$FILE"
+    ls -t $(cat "$FILE" | sed 's/^"//g;s/"$//g;s/\\ / /g') | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$FILE"
 elif [ "$PARAM" = "size" ]
 then
     ls -S $(cat "$FILE" | sed 's/^"//g;s/"$//g;s/\\ / /g') | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$FILE" 
