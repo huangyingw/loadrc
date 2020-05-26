@@ -18,6 +18,17 @@ function! ExFilter()
     w!
 endfunction
 
+function! ExtractHighLight()
+    if (expand("%") ==# 'fav.log.sort')
+        return
+    endif
+
+    call Filter2Findresult()
+    silent exec '%s/.*\(' . @/ . '\).*/\1/g'
+    w!
+endfunction
+
+
 function! Vdelete()
     if (expand("%") ==# 'fav.log.sort')
         return
@@ -434,6 +445,7 @@ vnoremap <silent>f :call VimSearch()<cr>
 vnoremap <silent>s :call GitSearch()<cr>
 vnoremap <silent>t :call SearchAgain()<cr>
 nnoremap mg :call VFilter()<cr>
+nnoremap me :call ExtractHighLight()<cr>
 nnoremap mf :call ExFilter()<cr>
 nnoremap md :call Vdelete()<cr>
 nnoremap mo :call OpenAll()<cr>
