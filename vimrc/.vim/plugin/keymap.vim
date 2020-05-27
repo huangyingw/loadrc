@@ -403,13 +403,13 @@ nnoremap W :call VsMax(".")<CR>
 " Quickly reload current file
 nnoremap E :mkview<CR>:e!<CR>
 " Quickly save current file
-nnoremap S :w<cr>
+nnoremap S :w!<cr>
 " Quickly save and exit
 nnoremap X :x<cr>
 nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
-nnoremap tt :Autoformat<CR>:w<cr>
+nnoremap tt :Autoformat<CR>:w!<cr>
 nnoremap D :only<CR>:vs %:p<cr>:set winwidth=1<cr><c-w>=
 " Quickly open current dir in current windows
 nnoremap <leader>d :call OpenProjectRoot()<cr>
