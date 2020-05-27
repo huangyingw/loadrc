@@ -38,53 +38,6 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 #
 
-## BEGIN section for qa-web-pool-a
-#204.225.145.17 avatars.imvu.com
-#204.225.145.17 chat.imvu.com
-#204.225.145.17 chat-proxy.imvu.com
-#204.225.145.17 client-dynamic.imvu.com
-#204.225.145.17 imvu.com
-#204.225.145.17 imvu-customer-sandbox.com
-#204.225.145.17 m.imvu.com
-#204.225.145.17 secure.imvu.com
-#204.225.145.17 www.imvu.com
-#204.225.145.17 webasset.imvu.com
-#204.225.145.17 api.imvu.com
-#204.225.145.17 client.api.imvu.com
-## END section for qa-web-pool-a
-
-# BEGIN section for qa-web-pool-c
-#204.225.145.37 avatars.imvu.com
-#204.225.145.37 chat.imvu.com
-#204.225.145.37 chat-proxy.imvu.com
-#204.225.145.37 client-dynamic.imvu.com
-#204.225.145.37 imvu.com
-#204.225.145.37 imvu-customer-sandbox.com
-#204.225.145.37 m.imvu.com
-#204.225.145.37 secure.imvu.com
-#204.225.145.37 www.imvu.com
-#204.225.145.37 www-akm.imvu.com
-#204.225.145.37 webasset.imvu.com
-#204.225.145.37 webasset-akm.imvu.com
-#204.225.145.37 api.imvu.com
-#204.225.145.37 client.api.imvu.com
-# END section for qa-web-pool-c
-
-# BEGIN section for qa-web-pool-f
-204.225.145.115 avatars.imvu.com
-204.225.145.115 chat.imvu.com
-204.225.145.115 chat-proxy.imvu.com
-204.225.145.115 client-dynamic.imvu.com
-204.225.145.115 imvu.com
-204.225.145.115 imvu-customer-sandbox.com
-204.225.145.115 m.imvu.com
-204.225.145.115 secure.imvu.com
-204.225.145.115 www.imvu.com
-204.225.145.115 webasset.imvu.com
-204.225.145.115 api.imvu.com
-204.225.145.115 client.api.imvu.com
-# END section for qa-web-pool-f
-
 # Added by Docker Desktop
 # To allow the same kube context to work on the host and the container:
 127.0.0.1 kubernetes.docker.internal
