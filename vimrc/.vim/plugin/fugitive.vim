@@ -317,6 +317,7 @@ function! s:G(args, ...) abort
         syntax on
         windo diffoff
         windo set wrap
+        e
     endif
 endfunction
 
