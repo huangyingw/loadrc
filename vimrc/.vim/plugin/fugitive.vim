@@ -298,6 +298,10 @@ function! s:Gme2(args, ...) abort
 endfunction
 
 function! s:G(args, ...) abort
+    if &diff
+        exec '!git add %'
+    endif
+
     let worktree = Cd2Worktree()
     call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.findresult')
 endfunction
