@@ -346,19 +346,13 @@ function! OpenProjectRoot()
 endfunction
 
 function! MaxWin()
-    let currentFile = expand("%:p")
     set winwidth=999999
     wincmd |
-    windo set wrap
-    call OpenOrSwitch(currentFile, 'vs')
 endfunction
 
 function! MinWin()
-    let currentFile = expand("%:p")
     set winwidth=1
     wincmd =
-    windo set nowrap
-    call OpenOrSwitch(currentFile, 'vs')
 endfunction
 
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<cr>
