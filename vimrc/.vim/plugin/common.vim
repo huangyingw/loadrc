@@ -139,15 +139,7 @@ function! Find_in_parent(fln, flsrt, flstp)
 endfunc
 
 function! GetWorktree()
-    if expand('%:p') =~ '^fugitive:/'
-        let worktree = substitute(expand('%:p'), '^fugitive:\/\/', '', 'g') 
-        let worktree = substitute(worktree, '\.git\/modules\/', '', 'g') 
-        let worktree = substitute(worktree, '\/\/\d\+\/', '\/', 'g') 
-        let worktree = substitute(worktree, '\.git\/', '', 'g')
-        return substitute(system("~/loadrc/gitrc/get_worktree.sh " . '"' . worktree . '"'), '\n', '', '')
-    else
-        return substitute(system("~/loadrc/gitrc/get_worktree.sh " . '"' . expand('%:p') . '"'), '\n', '', '')
-    endif
+    return substitute(system("~/loadrc/gitrc/get_worktree.sh " . '"' . expand('%:p') . '"'), '\n', '', '')
 endfunction
 
 function! OpenOrSwitch(buffername, openMode)
