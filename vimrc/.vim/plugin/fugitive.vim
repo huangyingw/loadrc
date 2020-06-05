@@ -308,6 +308,10 @@ function! s:G(args, ...) abort
 
     let worktree = Cd2Worktree()
     call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.findresult')
+
+    if &diff
+        call s:Gs()
+    endif
 endfunction
 
 function! s:Gdev() abort
