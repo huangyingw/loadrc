@@ -249,7 +249,7 @@ endfunction
 function! s:Gs() abort
     if expand('%:p') =~ '^fugitive:/'
         let indexFolder = substitute(expand('%:p'), '^fugitive:\/\/', '', 'g')
-        let indexFolder = substitute(indexFolder, '.git.*', '.git', 'g') 
+        let indexFolder = substitute(indexFolder, '.git.*', '.git', 'g')
     else
         let indexFolder = substitute(system("~/loadrc/gitrc/get_git.sh " . '"' . expand('%:p') . '"'), '\n', '', '')
     endif
@@ -311,6 +311,12 @@ function! s:G(args, ...) abort
 
     if &diff
         call s:Gs()
+        on
+        set winwidth=999999
+        wincmd |
+        syntax on
+        windo diffoff
+        windo set wrap
     endif
 endfunction
 
@@ -596,7 +602,7 @@ function! s:Fr(find, replace) abort
         let fileList = "files.proj"
     endif
 
-    exec '!~/loadrc/bashrc/fr.sh ' . '"' .  a:find . '"' . ' ' . '"' .  a:replace . '"' . ' ' . '"' .  fileList . '"' 
+    exec '!~/loadrc/bashrc/fr.sh ' . '"' .  a:find . '"' . ' ' . '"' .  a:replace . '"' . ' ' . '"' .  fileList . '"'
     call s:Gs()
 endfunction
 
