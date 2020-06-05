@@ -299,7 +299,7 @@ endfunction
 
 function! s:G(args, ...) abort
     if &diff
-        exec '!git add %'
+        exec '!git reset HEAD ; git add %'
     endif
 
     let worktree = Cd2Worktree()
