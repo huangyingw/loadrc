@@ -1,0 +1,1 @@
+./vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim:4930:function! fugitive#Diffsplit(autodir, keepfocus, mods, arg, args) abort
