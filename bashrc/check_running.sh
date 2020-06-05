@@ -17,19 +17,9 @@ if [ -f "${LCK_FILE}" ]
 then
     MYPID=`head -n 1 "${LCK_FILE}"`
 
-    TEST_RUNNING=`ps -p ${MYPID} | grep ${MYPID}`
-
-    if [ -z "${TEST_RUNNING}" ]
-    then
-        # The process is not running
-        # Echo current PID into lock file
-        echo $$ > "${LCK_FILE}"
-        "$SCRIPT"
-    else
-        # the process IS running
-        # handle it
-        exit 1
-    fi
+    ~/loadrc/bashrc/wait_for_pid.sh "$MYPID"
+    echo $$ > "${LCK_FILE}"
+    "$SCRIPT"
 else
     echo $$ > "${LCK_FILE}"
 fi
