@@ -298,7 +298,7 @@ function! s:Gme2(args, ...) abort
 endfunction
 
 function! s:G(args, ...) abort
-    if &diff
+    if expand('%:p') !~ '^fugitive:/' && &diff
         exec '!git reset HEAD ; git add %'
     endif
 
