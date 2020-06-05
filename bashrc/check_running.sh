@@ -17,7 +17,9 @@ if [ -f "${LCK_FILE}" ]
 then
     MYPID=`head -n 1 "${LCK_FILE}"`
 
+    echo "I am waitting for pid --> $MYPID"
     ~/loadrc/bashrc/wait_for_pid.sh "$MYPID"
+    echo "I am running, pid --> $MYPID"
     echo $$ > "${LCK_FILE}"
     "$SCRIPT"
 else
