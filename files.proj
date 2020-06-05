@@ -634,6 +634,7 @@
 "./pythonrc/remove_comments.py"
 "./pythonrc/setup.cfg"
 "./pythonrc/setup.cfg.src"
+"./readme"
 "./ruleref.list"
 "./set_host_configuration.sh"
 "./set_linux_configuration.sh"
