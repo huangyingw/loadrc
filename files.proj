@@ -9,6 +9,7 @@
 "./.envrc"
 "./.git/config"
 "./.git/info/exclude"
+"./.git/mod"./.movie.mirror.check"
 "./.git/modules/.ssh/config"
 "./.git/modules/.ssh/info/exclude"
 "./.git/modules/cscope/config"
@@ -2842,3 +2843,4 @@
 "./zerotierrc/install.sh"
 "./zerotierrc/restart.sh"
 "./zerotierrc/zerotierrc.conf"
+ules/vimrc/.vim/bundle/Dockerfile.vim/config"
