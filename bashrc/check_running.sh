@@ -19,7 +19,7 @@ then
 
     echo "I am waitting for pid --> $MYPID"
     ~/loadrc/bashrc/wait_for_pid.sh "$MYPID"
-    echo "I am running, pid --> $MYPID"
+    echo "I am running, pid --> $$"
     echo $$ > "${LCK_FILE}"
     "$SCRIPT"
 else
