@@ -56,7 +56,6 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
     sed -i.bak 's/ /\\ /g' files.proj && \
     ~/loadrc/bashrc/fvideos.sh && \
     ~/loadrc/bashrc/fdocs.sh && \
-    cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > files.proj.tmp && \
     echo > cscope.small.files && \
     echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
     cscope -bq -i "$TARGET" -f cscope.out.bak && \
