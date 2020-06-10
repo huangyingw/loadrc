@@ -6,5 +6,5 @@ endfunction
 
 augroup auto_deploy_augroup
     au!
-    au BufWritePost,TextChanged * call <SID>auto_deploy_augroup()
+    au BufWinEnter,BufWinLeave,CursorMoved,CursorMovedI,BufWritePost,TextChanged * call <SID>auto_deploy_augroup()
 augroup END
