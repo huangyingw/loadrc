@@ -120,6 +120,11 @@ function! VDebug()
 endfunction
 
 function! VRun()
+    if &modified
+        echom 'Please check and save your file first!!!'
+        return 1
+    endif
+
     if g:asyncrun_status ==# 'running'
         echom 'background job is still running'
         return 0
