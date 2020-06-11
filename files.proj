@@ -387,7 +387,6 @@
 "./gitrc/find_deleted.sh"
 "./gitrc/find_files.sh"
 "./gitrc/find_files_test.sh"
-"./gitrc/fsync.sh"
 "./gitrc/g.sh"
 "./gitrc/ga.sh"
 "./gitrc/gbib.sh"
