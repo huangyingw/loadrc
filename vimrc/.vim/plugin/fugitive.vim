@@ -290,23 +290,23 @@ endfunction
 function! s:Gdi(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    let output = 'gdi.diff'
+    let b:output = 'gdi.diff'
 
     if expand('%:t') != 'index'
-        let output = expand('%:t') . '.diff'
+        let b:output = expand('%:t') . '.diff'
 
         if a:0 == 0
-            silent exec '!~/loadrc/gitrc/gdi.sh ' . 'HEAD "' .  expand('%:p') . '" 2>&1 | tee ' . '"' .  output . '"'
+            silent exec '!~/loadrc/gitrc/gdi.sh ' . 'HEAD "' .  expand('%:p') . '" 2>&1 | tee ' . '"' .  b:output . '"'
         else
             let arg1 = (a:0 >= 1) ? a:1 : ''
-            silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" "' .  expand('%:p') . '" 2>&1 | tee ' . '"' .  output . '"'
+            silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" "' .  expand('%:p') . '" 2>&1 | tee ' . '"' .  b:output . '"'
         endif
     else
         let arg1 = (a:0 >= 1) ? a:1 : ''
-        silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" HEAD 2>&1 | tee ' . '"' .  output . '"'
+        silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" HEAD 2>&1 | tee ' . '"' .  b:output . '"'
     endif
 
-    if bufwinnr('^' . output . '$') > 0
+    if bufwinnr('^' . b:output . '$') > 0
         exe "bd!" . output
     endif
 
@@ -318,11 +318,11 @@ endfunction
 function! s:Gdit() abort
     let worktree = Cd2Worktree()
     let current_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
-    let output = current_branch . '.gdit.diff'
-    let output = substitute(output, "/", "_", "g")
-    exec '!~/loadrc/gitrc/gdit.sh' . ' ' . '"' .  output . '"'
+    let b:output = current_branch . '.gdit.diff'
+    let b:output = substitute(output, "/", "_", "g")
+    exec '!~/loadrc/gitrc/gdit.sh' . ' ' . '"' .  b:output . '"'
 
-    if bufwinnr('^' . output . '$') > 0
+    if bufwinnr('^' . b:output . '$') > 0
         exe "bd!" . output
     endif
 
@@ -335,11 +335,11 @@ function! s:Gdio(...) abort
     let worktree = Cd2Worktree()
     let current_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
     let local_branch = (a:0 >= 1) ? a:1 : current_branch
-    let output = local_branch . '.gdio.diff'
-    let output = substitute(output, "/", "_", "g")
+    let b:output = local_branch . '.gdio.diff'
+    let b:output = substitute(output, "/", "_", "g")
     exec '!~/loadrc/gitrc/gdio.sh'
 
-    if bufwinnr('^' . output . '$') > 0
+    if bufwinnr('^' . b:output . '$') > 0
         exe "bd!" . output
     endif
 
@@ -353,9 +353,9 @@ function! s:Gdi2(...) abort
     endif
 
     let worktree = Cd2Worktree()
-    let output = 'gdi2.findresult'
+    let b:output = 'gdi2.findresult'
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    exec '!~/loadrc/gitrc/gdi2.sh 2>&1 | tee ' . '"' .  output . '"'
+    exec '!~/loadrc/gitrc/gdi2.sh 2>&1 | tee ' . '"' .  b:output . '"'
     call OpenOrSwitch(output, 'vs')
 endfunction
 
@@ -451,7 +451,7 @@ endfunction
 
 function! s:Gshow(args, ...) abort
     let worktree = Cd2Worktree()
-    let output = a:args . '.diff'
+    let b:output = a:args . '.diff'
     silent exec '!~/loadrc/gitrc/gshow.sh ' . '"' .  a:args . '" 2>&1 | tee ' . output
     call OpenOrSwitch(output, 'vs')
 endfunction
