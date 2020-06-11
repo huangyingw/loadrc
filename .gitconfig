@@ -7,6 +7,9 @@
 [remote "github"]
     url = git@github.com:huangyingw/loadrc.git
     fetch = +refs/heads/*:refs/remotes/github/*
+[gsync]
+    remote = origin
+    branch = dev
 [push]
     remote = origin
     remote = gitlab
