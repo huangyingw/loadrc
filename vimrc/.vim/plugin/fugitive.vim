@@ -45,9 +45,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :ex
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gst :execute s:Gst()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsti :execute s:Gsti()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstl :execute s:Gstl()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstlv :execute s:Gstlv()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsync :execute s:Gsync()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gtg :execute s:Gtg()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkd :execute s:Gkd(<f-args>)
@@ -223,8 +220,9 @@ endfunction
 
 function! s:Gsync() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsync.sh 2>&1 | tee gsync.findresult')
-    call OpenOrSwitch('gsync.findresult', 'vs')
+    let b:output = 'gsync.findresult'
+    call RunShell('~/loadrc/gitrc/gsync.sh', '', b:output, 'true')
+    call OpenOrSwitch(b:output, 'vs')
 endfunction
 
 function! s:Grta(...) abort
@@ -236,23 +234,7 @@ endfunction
 
 function! s:Grsh(args, ...) abort
     let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/grsh.sh ' . '"' .  a:args . '"'
-endfunction
-
-function! s:Gsti() abort
-    let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsti.sh')
-endfunction
-
-function! s:Gstl() abort
-    let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/gstl.sh'
-    call OpenOrSwitch('gstl.findresult', 'vs')
-endfunction
-
-function! s:Gstlv() abort
-    let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gstlv.sh')
+    call RunShell('~/loadrc/gitrc/grsh.sh', a:args, '', '')
 endfunction
 
 function! s:Gme2(args, ...) abort
