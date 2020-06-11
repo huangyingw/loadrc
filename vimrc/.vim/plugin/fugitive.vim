@@ -239,8 +239,9 @@ endfunction
 
 function! s:Gme2(args, ...) abort
     let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/gme2.sh ' . '"' .  a:args . '" 2>&1 | tee gme2.findresult'
-    call OpenOrSwitch(worktree . '/' . 'gme2.findresult', 'vs')
+    let b:output = 'gme2.findresult'
+    call RunShell('~/loadrc/gitrc/gme2.sh', a:args, '', '')
+    call OpenOrSwitch(b:output, 'vs')
 endfunction
 
 function! s:G(args, ...) abort
@@ -253,7 +254,8 @@ function! s:G(args, ...) abort
     endif
 
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.findresult')
+    let b:output = 'g.findresult'
+    call RunShell('~/loadrc/gitrc/g.sh', a:args, b:output, '')
 
     if &diff
         call s:Gs()
@@ -269,20 +271,20 @@ endfunction
 
 function! s:Gdev() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gdev.sh')
+    call RunShell('~/loadrc/gitrc/gdev.sh', '', '', '')
 endfunction
 
 function! s:Hdi() abort
     let worktree = Cd2Worktree()
-    let output = 'hdi.diff'
+    let b:output = 'hdi.diff'
 
-    silent exec '!~/loadrc/hgrc/hdi.sh' . ' HEAD 2>&1 | tee ' . '"' .  output . '"'
+    call RunShell('~/loadrc/hgrc/hdi.sh', '', b:output, '')
 
-    if bufwinnr('^' . output . '$') > 0
-        exe "bd!" . output
+    if bufwinnr('^' . b:output . '$') > 0
+        exe "bd!" . b:output
     endif
 
-    call OpenOrSwitch(output, 'vs')
+    call OpenOrSwitch(b:output, 'vs')
 endfunction
 
 function! s:Gdi(...) abort
