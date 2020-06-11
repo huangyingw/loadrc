@@ -1,3 +1,17 @@
+diff --git a/gitrc/.globalgitignore b/gitrc/.globalgitignore
+index a9a4f4a0..3a3f3dd2 100755
+--- ./gitrc/.globalgitignore
++++ ./gitrc/.globalgitignore
+@@ -2,8 +2,7 @@
+ *.bak
+ *.bin
+ *.diff
+-!*.fix.gdio.diff
+-!dev.gdio.diff
++!*.gdio.diff
+ *.exe
+ *.findresult
+ *.fugitiveblame
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
 index 87bbd96d..83ba03fd 100644
 --- ./vimrc/.vim/plugin/common.vim
