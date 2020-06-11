@@ -10,7 +10,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fcscop
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDeleted :execute s:FindDeleted()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fsync :execute s:Fsync()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject G :execute s:G(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Ga :execute s:Ga(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbib :execute s:Gbib()
@@ -38,7 +37,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gicb :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gitk :execute s:Gitk(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glf :execute s:Glf()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gmet :execute s:Gmet()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtu :execute s:Grtu()
@@ -167,58 +165,49 @@ function! s:Gcof(...) abort
     call OpenOrSwitch(expand('%:p') . '.bak', 'vs')
 endfunction
 
-function! s:Gpl() abort
-    let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gpl.sh 2>&1 | tee gpl.findresult')
-endfunction
-
-function! s:Fsync() abort
-    let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/fsync.sh 2>&1 | tee fsync.findresult')
-    call OpenOrSwitch('fsync.findresult', 'vs')
-endfunction
-
 function! s:Gbis() abort
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/gbis.sh'
+    call RunShell('~/loadrc/gitrc/gbis.sh', '', '', '')
 endfunction
 
 function! s:Gbidebug() abort
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/gbidebug.sh'
+    call RunShell('~/loadrc/gitrc/gbidebug.sh', '', '', '')
 endfunction
 
 function! s:Gbib() abort
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/gbib.sh'
+    call RunShell('~/loadrc/gitrc/gbib.sh', '', '', '')
 endfunction
 
 function! s:Gbig() abort
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/gbig.sh'
+    call RunShell('~/loadrc/gitrc/gbig.sh', '', '', '')
 endfunction
 
 function! s:Gbil() abort
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/gbil.sh'
+    call RunShell('~/loadrc/gitrc/gbil.sh', '', '', '')
     call OpenOrSwitch('gbil.log', 'vs')
 endfunction
 
 function! s:Gbr() abort
     let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/gbr.sh'
-    call OpenOrSwitch('gbr.findresult', 'vs')
+    let b:output = 'gbr.findresult'
+    call RunShell('~/loadrc/gitrc/gbr.sh', '', b:output, '')
+    call OpenOrSwitch(b:output, 'vs')
 endfunction
 
 function! s:Gclean() abort
     let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/gclean.sh'
+    call RunShell('~/loadrc/gitrc/gclean.sh', '', '', '')
 endfunction
 
 function! s:Gbra() abort
     let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/gbra.sh'
-    call OpenOrSwitch('gbra.findresult', 'vs')
+    let b:output = 'gbra.findresult'
+    call RunShell('~/loadrc/gitrc/gbra.sh', '', b:output, '')
+    call OpenOrSwitch(b:output, 'vs')
 endfunction
 
 function! s:Gs() abort
