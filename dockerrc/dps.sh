@@ -1,2 +1,2 @@
 #!/bin/zsh
-docker ps > dps.findresult
+docker ps
