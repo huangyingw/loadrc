@@ -110,7 +110,7 @@ function! VDebug()
 
     let b:csdbpath = Cd2ProjectRoot("files.proj")
     let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
-    call RunShell('~/loadrc/vishrc/vdebug.sh', b:to_run, b:output)
+    call RunShell('~/loadrc/vishrc/vdebug.sh', b:to_run, b:output, 'true') 
 
     if b:to_run != 'gbil.log'
         call OpenOrSwitch(b:output, 'vs')
@@ -139,7 +139,7 @@ function! VRun()
 
     let b:csdbpath = Cd2ProjectRoot("files.proj")
     let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
-    call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
+    call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output, 'true') 
 
     if b:to_run != 'gbil.log'
         call OpenOrSwitch(b:output, 'vs')
