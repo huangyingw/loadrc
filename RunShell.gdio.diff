@@ -20,6 +20,66 @@ index a9a4f4a0..3a3f3dd2 100755
  *.exe
  *.findresult
  *.fugitiveblame
+diff --git a/gitrc/fsync.sh b/gitrc/fsync.sh
+deleted file mode 100755
+index 9222f503..00000000
+--- ./gitrc/fsync.sh
++++ /dev/null
+@@ -1,38 +0,0 @@
+-#!/bin/zsh
+-if [ -z "$1" ]
+-then
+-    TARGETEDIR="$pwd"
+-else
+-    TARGETEDIR="$1"
+-fi
+-RESULT="$TARGETEDIR"/fgs.findresult
+-function rec_dir() {
+-    if [[ $2 -gt 11 ]]
+-    then
+-        return
+-    fi
+-    for file in `ls -al $1`
+-    do
+-        if [ -d "$1/$file" ] && [ "$file" != ".." ] && [ "$file" != "." ]
+-        then
+-            if [ -d "$1/$file/.git" ]
+-            then
+-                cd "$1/$file"
+-                if [ -n "$(git status --porcelain)" ]
+-                then
+-                    echo "$1/$file" >> "$RESULT"
+-                else
+-                    ~/loadrc/gitrc/gsync.sh
+-                fi
+-                cd - 1>/dev/null
+-            else
+-                if [ "$file" != ".git" ] && [ "$file" != ".." ] && [ "$file" != "." ]
+-                then
+-                    rec_dir "$1/$file" $(($2 + 1))
+-                fi
+-            fi
+-        fi
+-    done
+-}
+-rm "$RESULT"
+-rec_dir "$TARGETEDIR" 0
+diff --git a/gitrc/gbr.sh b/gitrc/gbr.sh
+index 3307cc1e..450962ef 100755
+--- ./gitrc/gbr.sh
++++ ./gitrc/gbr.sh
+@@ -1,2 +1,2 @@
+ #!/bin/zsh
+-git branch | tee gbr.findresult 
++git branch
+diff --git a/gitrc/gbra.sh b/gitrc/gbra.sh
+index 3edd6ef5..e0af3850 100755
+--- ./gitrc/gbra.sh
++++ ./gitrc/gbra.sh
+@@ -1,2 +1,2 @@
+ #!/bin/zsh
+-git branch -a | tee gbra.findresult
++git branch -a
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
 index c2a1b140..40406e03 160000
 --- ./vimrc/.vim/bundle/python-mode
@@ -69,21 +129,29 @@ index 87bbd96d..adddcfad 100644
  
  function! Filter2Findresult()
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index f339827f..346073f8 100644
+index f339827f..057bba7b 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -37,10 +37,8 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gfix :
+@@ -10,7 +10,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fcscop
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDeleted :execute s:FindDeleted()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
+-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fsync :execute s:Fsync()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject G :execute s:G(<q-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Ga :execute s:Ga(<q-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbib :execute s:Gbib()
+@@ -37,10 +36,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gfix :
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gicb :execute s:Gicb()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gitk :execute s:Gitk(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glf :execute s:Glf()
 -command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glg :execute s:Glg()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gmet :execute s:Gmet()
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
+-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 -command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtu :execute s:Grtu()
-@@ -52,8 +50,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gst :e
+@@ -52,8 +48,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gst :e
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsti :execute s:Gsti()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstl :execute s:Gstl()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstlv :execute s:Gstlv()
@@ -92,7 +160,7 @@ index f339827f..346073f8 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsync :execute s:Gsync()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gtg :execute s:Gtg()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkd :execute s:Gkd(<f-args>)
-@@ -163,27 +159,6 @@ function! s:Glf() abort
+@@ -163,27 +157,6 @@ function! s:Glf() abort
      call OpenOrSwitch('glf.findresult', 'vs')
  endfunction
  
@@ -120,7 +188,78 @@ index f339827f..346073f8 100644
  function! s:Gcof(...) abort
      let worktree = Cd2Worktree()
      let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
-@@ -516,14 +491,9 @@ function! s:Copy(...) abort
+@@ -192,58 +165,49 @@ function! s:Gcof(...) abort
+     call OpenOrSwitch(expand('%:p') . '.bak', 'vs')
+ endfunction
+ 
+-function! s:Gpl() abort
+-    let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gpl.sh 2>&1 | tee gpl.findresult')
+-endfunction
+-
+-function! s:Fsync() abort
+-    let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/fsync.sh 2>&1 | tee fsync.findresult')
+-    call OpenOrSwitch('fsync.findresult', 'vs')
+-endfunction
+-
+ function! s:Gbis() abort
+     let worktree = Cd2Worktree()
+-    exec '!~/loadrc/gitrc/gbis.sh'
++    call RunShell('~/loadrc/gitrc/gbis.sh', '', '', '')
+ endfunction
+ 
+ function! s:Gbidebug() abort
+     let worktree = Cd2Worktree()
+-    exec '!~/loadrc/gitrc/gbidebug.sh'
++    call RunShell('~/loadrc/gitrc/gbidebug.sh', '', '', '')
+ endfunction
+ 
+ function! s:Gbib() abort
+     let worktree = Cd2Worktree()
+-    exec '!~/loadrc/gitrc/gbib.sh'
++    call RunShell('~/loadrc/gitrc/gbib.sh', '', '', '')
+ endfunction
+ 
+ function! s:Gbig() abort
+     let worktree = Cd2Worktree()
+-    exec '!~/loadrc/gitrc/gbig.sh'
++    call RunShell('~/loadrc/gitrc/gbig.sh', '', '', '')
+ endfunction
+ 
+ function! s:Gbil() abort
+     let worktree = Cd2Worktree()
+-    exec '!~/loadrc/gitrc/gbil.sh'
++    call RunShell('~/loadrc/gitrc/gbil.sh', '', '', '')
+     call OpenOrSwitch('gbil.log', 'vs')
+ endfunction
+ 
+ function! s:Gbr() abort
+     let worktree = Cd2Worktree()
+-    silent exec '!~/loadrc/gitrc/gbr.sh'
+-    call OpenOrSwitch('gbr.findresult', 'vs')
++    let b:output = 'gbr.findresult'
++    call RunShell('~/loadrc/gitrc/gbr.sh', '', b:output, '')
++    call OpenOrSwitch(b:output, 'vs')
+ endfunction
+ 
+ function! s:Gclean() abort
+     let worktree = Cd2Worktree()
+-    silent exec '!~/loadrc/gitrc/gclean.sh'
++    call RunShell('~/loadrc/gitrc/gclean.sh', '', '', '')
+ endfunction
+ 
+ function! s:Gbra() abort
+     let worktree = Cd2Worktree()
+-    silent exec '!~/loadrc/gitrc/gbra.sh'
+-    call OpenOrSwitch('gbra.findresult', 'vs')
++    let b:output = 'gbra.findresult'
++    call RunShell('~/loadrc/gitrc/gbra.sh', '', b:output, '')
++    call OpenOrSwitch(b:output, 'vs')
+ endfunction
+ 
+ function! s:Gs() abort
+@@ -516,14 +480,9 @@ function! s:Copy(...) abort
  endfunction
  
  function! s:CatPlay(...) abort
@@ -136,7 +275,7 @@ index f339827f..346073f8 100644
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
-@@ -539,24 +509,14 @@ function! s:CatMove(...) abort
+@@ -539,24 +498,14 @@ function! s:CatMove(...) abort
  endfunction
  
  function! s:CatDu(...) abort
@@ -163,7 +302,7 @@ index f339827f..346073f8 100644
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
-@@ -566,8 +526,9 @@ endfunction
+@@ -566,8 +515,9 @@ endfunction
  
  function! s:Dps() abort
      let worktree = Cd2Worktree()
