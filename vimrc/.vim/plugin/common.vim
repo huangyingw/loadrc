@@ -220,7 +220,7 @@ function! RunShell(shell, param, output, async)
     let temp_log = output . '.findresult'
     let run_string = a:shell . ' ' . '"' .  param . '"' .  ' ' . '2>&1 | tee' . ' ' . temp_log
 
-    if async ==? "true"
+    if async ==? 'true'
         call asyncrun#run('<bang>', '', ' ' . run_string)
     else
         exec '!' . run_string
