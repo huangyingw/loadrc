@@ -1,3 +1,11 @@
+diff --git a/dockerrc/dps.sh b/dockerrc/dps.sh
+index 6c5385fa..be034a79 100755
+--- ./dockerrc/dps.sh
++++ ./dockerrc/dps.sh
+@@ -1,2 +1,2 @@
+ #!/bin/zsh
+-docker ps > dps.findresult
++docker ps
 diff --git a/gitrc/.globalgitignore b/gitrc/.globalgitignore
 index a9a4f4a0..3a3f3dd2 100755
 --- ./gitrc/.globalgitignore
@@ -13,10 +21,10 @@ index a9a4f4a0..3a3f3dd2 100755
  *.findresult
  *.fugitiveblame
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
-index 87bbd96d..83ba03fd 100644
+index 87bbd96d..adddcfad 100644
 --- ./vimrc/.vim/plugin/common.vim
 +++ ./vimrc/.vim/plugin/common.vim
-@@ -211,24 +211,17 @@ function! VsMax(fileName)
+@@ -211,24 +211,22 @@ function! VsMax(fileName)
      call OpenOrSwitch(a:fileName, 'vs')
  endfunc
  
@@ -27,11 +35,18 @@ index 87bbd96d..83ba03fd 100644
 -    let async = substitute(system('git config vrun.async'), '\n', '', '')
 -    let temp_log = arg2 . '.findresult'
 -    let run_string = a:shell . ' ' . '"' .  arg1 . '"' .  ' ' . '2>&1 | tee' . ' ' . temp_log
+-
+-    if async ==? "true"
 +function! RunShell(shell, param, output, async)
++    if &modified
++        echom 'Please check and save your file first!!!'
++        return 0
++    endif
++
 +    let temp_log = output . '.findresult'
 +    let run_string = a:shell . ' ' . '"' .  param . '"' .  ' ' . '2>&1 | tee' . ' ' . temp_log
- 
-     if async ==? "true"
++
++    if async ==? 'true'
          call asyncrun#run('<bang>', '', ' ' . run_string)
 -    else
 -        if silent ==? "true"
@@ -46,3 +61,97 @@ index 87bbd96d..83ba03fd 100644
  endfunc
  
  function! Filter2Findresult()
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index f339827f..242560ee 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -516,14 +516,9 @@ function! s:Copy(...) abort
+ endfunction
+ 
+ function! s:CatPlay(...) abort
+-    if &modified
+-        echom 'Please check and save your file first!!!'
+-        return 0
+-    endif
+-
+     call asyncrun#stop('<bang>')
+     let b:output = expand("%:p") . '.runresult'
+-    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output)
++    call RunShell('~/loadrc/vishrc/cat_play.sh', expand("%:p"), b:output, 'true')
+     call OpenOrSwitch(b:output, 'vs')
+ endfunction
+ 
+@@ -539,24 +534,14 @@ function! s:CatMove(...) abort
+ endfunction
+ 
+ function! s:CatDu(...) abort
+-    if &modified
+-        echom 'Please check and save your file first!!!'
+-        return 0
+-    endif
+-
+     let b:output = expand("%:p") . '.runresult'
+-    call RunShell('~/loadrc/vishrc/cat_du.sh', expand("%:p"), b:output)
++    call RunShell('~/loadrc/vishrc/cat_du.sh', expand("%:p"), b:output, 'true') 
+     call OpenOrSwitch(b:output, 'vs')
+ endfunction
+ 
+ function! s:CatRun(...) abort
+-    if &modified
+-        echom 'Please check and save your file first!!!'
+-        return 0
+-    endif
+-
+     let b:output = expand("%:p") . '.runresult'
+-    call RunShell('~/loadrc/vishrc/cat_run.sh', expand("%:p"), b:output)
++    call RunShell('~/loadrc/vishrc/cat_run.sh', expand("%:p"), b:output, 'true') 
+     call OpenOrSwitch(b:output, 'vs')
+ endfunction
+ 
+@@ -566,8 +551,9 @@ endfunction
+ 
+ function! s:Dps() abort
+     let worktree = Cd2Worktree()
+-    silent exec '!~/loadrc/dockerrc/dps.sh'
+-    call OpenOrSwitch('dps.findresult', 'vs')
++    let b:output = 'dps.findresult'
++    call RunShell('~/loadrc/dockerrc/dps.sh', '', b:output, '')
++    call OpenOrSwitch(b:output, 'vs')
+ endfunction
+ 
+ function! s:SvnUp() abort
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index fcfe1713..c6285abb 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -110,7 +110,7 @@ function! VDebug()
+ 
+     let b:csdbpath = Cd2ProjectRoot("files.proj")
+     let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
+-    call RunShell('~/loadrc/vishrc/vdebug.sh', b:to_run, b:output)
++    call RunShell('~/loadrc/vishrc/vdebug.sh', b:to_run, b:output, 'true') 
+ 
+     if b:to_run != 'gbil.log'
+         call OpenOrSwitch(b:output, 'vs')
+@@ -139,7 +139,7 @@ function! VRun()
+ 
+     let b:csdbpath = Cd2ProjectRoot("files.proj")
+     let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
+-    call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
++    call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output, 'true') 
+ 
+     if b:to_run != 'gbil.log'
+         call OpenOrSwitch(b:output, 'vs')
+@@ -163,9 +163,9 @@ function! GetFirstColumnOfFile()
+         return 0
+     endif
+ 
+-    let bak_file = substitute(system('~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'), '\n', '', '')
+-    silent exec '!~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'
+-    call OpenOrSwitch(expand("%:p") . '.bak', 'vs')
++    let b:output = expand("%:p") . '.bak'
++    call RunShell('~/loadrc/bashrc/get_first_column_of_file.sh', expand("%:p"), b:output, '') 
++    call OpenOrSwitch(b:output, 'vs')
+ endfunction
+ 
+ function! CSCSearch(num)
