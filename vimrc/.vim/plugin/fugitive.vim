@@ -518,11 +518,16 @@ endfunction
 function! s:CatPlay(...) abort
     call asyncrun#stop('<bang>')
     let b:output = expand("%:p") . '.runresult'
-    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output)
+    call RunShell('~/loadrc/vishrc/cat_play.sh', expand("%:p"), b:output, 'true')
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
 function! s:CatMove(...) abort
+    if &modified
+        echom 'Please check and save your file first!!!'
+        return 0
+    endif
+
     if a:0 >= 1
         exec '!~/loadrc/vishrc/cat_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
     endif
@@ -530,13 +535,13 @@ endfunction
 
 function! s:CatDu(...) abort
     let b:output = expand("%:p") . '.runresult'
-    call RunShell('~/loadrc/vishrc/cat_du.sh', expand("%:p"), b:output)
+    call RunShell('~/loadrc/vishrc/cat_du.sh', expand("%:p"), b:output, 'true') 
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
 function! s:CatRun(...) abort
     let b:output = expand("%:p") . '.runresult'
-    call RunShell('~/loadrc/vishrc/cat_run.sh', expand("%:p"), b:output)
+    call RunShell('~/loadrc/vishrc/cat_run.sh', expand("%:p"), b:output, 'true') 
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
@@ -546,8 +551,9 @@ endfunction
 
 function! s:Dps() abort
     let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/dockerrc/dps.sh'
-    call OpenOrSwitch('dps.findresult', 'vs')
+    let b:output = 'dps.findresult'
+    call RunShell('~/loadrc/dockerrc/dps.sh', '', b:output, '')
+    call OpenOrSwitch(b:output, 'vs')
 endfunction
 
 function! s:SvnUp() abort
