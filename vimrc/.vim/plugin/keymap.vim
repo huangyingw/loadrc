@@ -163,9 +163,9 @@ function! GetFirstColumnOfFile()
         return 0
     endif
 
-    let bak_file = substitute(system('~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'), '\n', '', '')
-    silent exec '!~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'
-    call OpenOrSwitch(expand("%:p") . '.bak', 'vs')
+    let b:output = expand("%:p") . '.bak'
+    call RunShell('~/loadrc/bashrc/get_first_column_of_file.sh', expand("%:p"), b:output, '') 
+    call OpenOrSwitch(b:output, 'vs')
 endfunction
 
 function! CSCSearch(num)
