@@ -45,9 +45,6 @@
 [branch "async"]
     remote = origin
     merge = refs/heads/async
-[vrun]
-    silent = false
-    async = false
 [deploy]
     host = localhost
     path = ~/loadrc
