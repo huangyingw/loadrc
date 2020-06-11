@@ -211,24 +211,17 @@ function! VsMax(fileName)
     call OpenOrSwitch(a:fileName, 'vs')
 endfunc
 
-function! RunShell(shell, ...)
-    let arg1 = (a:0 >= 1) ? a:1 : ''
-    let arg2 = (a:0 >= 2) ? a:2 : ''
-    let silent = substitute(system('git config vrun.silent'), '\n', '', '')
-    let async = substitute(system('git config vrun.async'), '\n', '', '')
-    let temp_log = arg2 . '.findresult'
-    let run_string = a:shell . ' ' . '"' .  arg1 . '"' .  ' ' . '2>&1 | tee' . ' ' . temp_log
+function! RunShell(shell, param, output, async)
+    let temp_log = output . '.findresult'
+    let run_string = a:shell . ' ' . '"' .  param . '"' .  ' ' . '2>&1 | tee' . ' ' . temp_log
 
     if async ==? "true"
         call asyncrun#run('<bang>', '', ' ' . run_string)
     else
-        if silent ==? "true"
-            silent exec '!' . run_string
-        else
-            exec '!' . run_string
-        endif
+        exec '!' . run_string
     endif
-    silent exec '!cp' . ' ' . '"' .  temp_log . '"' . ' ' . '"' .  arg2 . '"'
+
+    silent exec '!cp' . ' ' . '"' .  temp_log . '"' . ' ' . '"' .  output . '"'
 endfunc
 
 function! Filter2Findresult()
