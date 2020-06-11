@@ -20,6 +20,13 @@ index a9a4f4a0..3a3f3dd2 100755
  *.exe
  *.findresult
  *.fugitiveblame
+diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
+index c2a1b140..40406e03 160000
+--- ./vimrc/.vim/bundle/python-mode
++++ ./vimrc/.vim/bundle/python-mode
+@@ -1 +1 @@
+-Subproject commit c2a1b14045959245b4cc3beece1d87844dd07917
++Subproject commit 40406e03dd0fc91b906d3d566c318082c152c3ed
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
 index 87bbd96d..adddcfad 100644
 --- ./vimrc/.vim/plugin/common.vim
@@ -62,10 +69,58 @@ index 87bbd96d..adddcfad 100644
  
  function! Filter2Findresult()
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index f339827f..242560ee 100644
+index f339827f..346073f8 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -516,14 +516,9 @@ function! s:Copy(...) abort
+@@ -37,10 +37,8 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gfix :
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gicb :execute s:Gicb()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gitk :execute s:Gitk(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glf :execute s:Glf()
+-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glg :execute s:Glg()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gmet :execute s:Gmet()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
+-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtu :execute s:Grtu()
+@@ -52,8 +50,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gst :e
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsti :execute s:Gsti()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstl :execute s:Gstl()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstlv :execute s:Gstlv()
+-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstp :execute s:Gstp(<q-args>)
+-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstv :execute s:Gstv(<q-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsync :execute s:Gsync()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gtg :execute s:Gtg()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkd :execute s:Gkd(<f-args>)
+@@ -163,27 +159,6 @@ function! s:Glf() abort
+     call OpenOrSwitch('glf.findresult', 'vs')
+ endfunction
+ 
+-function! s:Glg() abort
+-    let worktree = Cd2Worktree()
+-    silent exec '!~/loadrc/gitrc/glg.sh'
+-    call OpenOrSwitch('glg.findresult', 'vs')
+-endfunction
+-
+-function! s:Gps() abort
+-    let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gps.sh 2>&1 | tee gps.findresult')
+-endfunction
+-
+-function! s:Gstp(args, ...) abort
+-    let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gstp.sh ' . '"' .  a:args . '"')
+-endfunction
+-
+-function! s:Gstv(args, ...) abort
+-    let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gstv.sh ' . '"' .  a:args . '"')
+-endfunction
+-
+ function! s:Gcof(...) abort
+     let worktree = Cd2Worktree()
+     let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
+@@ -516,14 +491,9 @@ function! s:Copy(...) abort
  endfunction
  
  function! s:CatPlay(...) abort
@@ -81,7 +136,7 @@ index f339827f..242560ee 100644
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
-@@ -539,24 +534,14 @@ function! s:CatMove(...) abort
+@@ -539,24 +509,14 @@ function! s:CatMove(...) abort
  endfunction
  
  function! s:CatDu(...) abort
@@ -108,7 +163,7 @@ index f339827f..242560ee 100644
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
-@@ -566,8 +551,9 @@ endfunction
+@@ -566,8 +526,9 @@ endfunction
  
  function! s:Dps() abort
      let worktree = Cd2Worktree()
