@@ -129,7 +129,7 @@ index 87bbd96d..adddcfad 100644
  
  function! Filter2Findresult()
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index f339827f..057bba7b 100644
+index f339827f..67d10199 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -10,7 +10,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fcscop
@@ -151,16 +151,19 @@ index f339827f..057bba7b 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtu :execute s:Grtu()
-@@ -52,8 +48,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gst :e
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsti :execute s:Gsti()
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstl :execute s:Gstl()
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstlv :execute s:Gstlv()
+@@ -49,11 +45,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :ex
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gst :execute s:Gst()
+-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsti :execute s:Gsti()
+-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstl :execute s:Gstl()
+-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstlv :execute s:Gstlv()
 -command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstp :execute s:Gstp(<q-args>)
 -command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstv :execute s:Gstv(<q-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsync :execute s:Gsync()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gtg :execute s:Gtg()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkd :execute s:Gkd(<f-args>)
-@@ -163,27 +157,6 @@ function! s:Glf() abort
+@@ -163,27 +154,6 @@ function! s:Glf() abort
      call OpenOrSwitch('glf.findresult', 'vs')
  endfunction
  
@@ -188,7 +191,7 @@ index f339827f..057bba7b 100644
  function! s:Gcof(...) abort
      let worktree = Cd2Worktree()
      let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
-@@ -192,58 +165,49 @@ function! s:Gcof(...) abort
+@@ -192,58 +162,49 @@ function! s:Gcof(...) abort
      call OpenOrSwitch(expand('%:p') . '.bak', 'vs')
  endfunction
  
@@ -259,7 +262,90 @@ index f339827f..057bba7b 100644
  endfunction
  
  function! s:Gs() abort
-@@ -516,14 +480,9 @@ function! s:Copy(...) abort
+@@ -259,8 +220,9 @@ endfunction
+ 
+ function! s:Gsync() abort
+     let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsync.sh 2>&1 | tee gsync.findresult')
+-    call OpenOrSwitch('gsync.findresult', 'vs')
++    let b:output = 'gsync.findresult'
++    call RunShell('~/loadrc/gitrc/gsync.sh', '', b:output, 'true')
++    call OpenOrSwitch(b:output, 'vs')
+ endfunction
+ 
+ function! s:Grta(...) abort
+@@ -272,29 +234,14 @@ endfunction
+ 
+ function! s:Grsh(args, ...) abort
+     let worktree = Cd2Worktree()
+-    silent exec '!~/loadrc/gitrc/grsh.sh ' . '"' .  a:args . '"'
+-endfunction
+-
+-function! s:Gsti() abort
+-    let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsti.sh')
+-endfunction
+-
+-function! s:Gstl() abort
+-    let worktree = Cd2Worktree()
+-    silent exec '!~/loadrc/gitrc/gstl.sh'
+-    call OpenOrSwitch('gstl.findresult', 'vs')
+-endfunction
+-
+-function! s:Gstlv() abort
+-    let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gstlv.sh')
++    call RunShell('~/loadrc/gitrc/grsh.sh', a:args, '', '')
+ endfunction
+ 
+ function! s:Gme2(args, ...) abort
+     let worktree = Cd2Worktree()
+-    silent exec '!~/loadrc/gitrc/gme2.sh ' . '"' .  a:args . '" 2>&1 | tee gme2.findresult'
+-    call OpenOrSwitch(worktree . '/' . 'gme2.findresult', 'vs')
++    let b:output = 'gme2.findresult'
++    call RunShell('~/loadrc/gitrc/gme2.sh', a:args, '', '')
++    call OpenOrSwitch(b:output, 'vs')
+ endfunction
+ 
+ function! s:G(args, ...) abort
+@@ -307,7 +254,8 @@ function! s:G(args, ...) abort
+     endif
+ 
+     let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.findresult')
++    let b:output = 'g.findresult'
++    call RunShell('~/loadrc/gitrc/g.sh', a:args, b:output, '')
+ 
+     if &diff
+         call s:Gs()
+@@ -323,20 +271,20 @@ endfunction
+ 
+ function! s:Gdev() abort
+     let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gdev.sh')
++    call RunShell('~/loadrc/gitrc/gdev.sh', '', '', '')
+ endfunction
+ 
+ function! s:Hdi() abort
+     let worktree = Cd2Worktree()
+-    let output = 'hdi.diff'
++    let b:output = 'hdi.diff'
+ 
+-    silent exec '!~/loadrc/hgrc/hdi.sh' . ' HEAD 2>&1 | tee ' . '"' .  output . '"'
++    call RunShell('~/loadrc/hgrc/hdi.sh', '', b:output, '')
+ 
+-    if bufwinnr('^' . output . '$') > 0
+-        exe "bd!" . output
++    if bufwinnr('^' . b:output . '$') > 0
++        exe "bd!" . b:output
+     endif
+ 
+-    call OpenOrSwitch(output, 'vs')
++    call OpenOrSwitch(b:output, 'vs')
+ endfunction
+ 
+ function! s:Gdi(...) abort
+@@ -516,14 +464,9 @@ function! s:Copy(...) abort
  endfunction
  
  function! s:CatPlay(...) abort
@@ -275,7 +361,7 @@ index f339827f..057bba7b 100644
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
-@@ -539,24 +498,14 @@ function! s:CatMove(...) abort
+@@ -539,24 +482,14 @@ function! s:CatMove(...) abort
  endfunction
  
  function! s:CatDu(...) abort
@@ -302,7 +388,7 @@ index f339827f..057bba7b 100644
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
-@@ -566,8 +515,9 @@ endfunction
+@@ -566,8 +499,9 @@ endfunction
  
  function! s:Dps() abort
      let worktree = Cd2Worktree()
