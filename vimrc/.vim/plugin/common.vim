@@ -212,6 +212,11 @@ function! VsMax(fileName)
 endfunc
 
 function! RunShell(shell, param, output, async)
+    if &modified
+        echom 'Please check and save your file first!!!'
+        return 0
+    endif
+
     let temp_log = output . '.findresult'
     let run_string = a:shell . ' ' . '"' .  param . '"' .  ' ' . '2>&1 | tee' . ' ' . temp_log
 

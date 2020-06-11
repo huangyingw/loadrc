@@ -516,11 +516,6 @@ function! s:Copy(...) abort
 endfunction
 
 function! s:CatPlay(...) abort
-    if &modified
-        echom 'Please check and save your file first!!!'
-        return 0
-    endif
-
     call asyncrun#stop('<bang>')
     let b:output = expand("%:p") . '.runresult'
     call asyncrun#run('<bang>', '', '~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output)
@@ -528,33 +523,18 @@ function! s:CatPlay(...) abort
 endfunction
 
 function! s:CatMove(...) abort
-    if &modified
-        echom 'Please check and save your file first!!!'
-        return 0
-    endif
-
     if a:0 >= 1
         exec '!~/loadrc/vishrc/cat_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
     endif
 endfunction
 
 function! s:CatDu(...) abort
-    if &modified
-        echom 'Please check and save your file first!!!'
-        return 0
-    endif
-
     let b:output = expand("%:p") . '.runresult'
     call RunShell('~/loadrc/vishrc/cat_du.sh', expand("%:p"), b:output)
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
 function! s:CatRun(...) abort
-    if &modified
-        echom 'Please check and save your file first!!!'
-        return 0
-    endif
-
     let b:output = expand("%:p") . '.runresult'
     call RunShell('~/loadrc/vishrc/cat_run.sh', expand("%:p"), b:output)
     call OpenOrSwitch(b:output, 'vs')
