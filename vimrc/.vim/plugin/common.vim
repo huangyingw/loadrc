@@ -217,16 +217,16 @@ function! RunShell(shell, param, output, async)
         return 0
     endif
 
-    let temp_log = output . '.findresult'
-    let run_string = a:shell . ' ' . '"' .  param . '"' .  ' ' . '2>&1 | tee' . ' ' . temp_log
+    let temp_log = a:output . '.findresult'
+    let run_string = a:shell . ' ' . '"' .  a:param . '"' .  ' ' . '2>&1 | tee' . ' ' . temp_log
 
-    if async ==? 'true'
+    if a:async ==? 'true'
         call asyncrun#run('<bang>', '', ' ' . run_string)
     else
         exec '!' . run_string
     endif
 
-    silent exec '!cp' . ' ' . '"' .  temp_log . '"' . ' ' . '"' .  output . '"'
+    silent exec '!cp' . ' ' . '"' .  temp_log . '"' . ' ' . '"' .  a:output . '"'
 endfunc
 
 function! Filter2Findresult()
