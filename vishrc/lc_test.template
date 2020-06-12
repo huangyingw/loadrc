@@ -3,7 +3,6 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-leetcode user -l
 leetcode test \
     filenameVar \
     -t '[1,null,2]'
