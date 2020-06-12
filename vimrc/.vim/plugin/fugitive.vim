@@ -6,7 +6,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRun
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Copy :execute s:Copy(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dodev :execute s:Dodev()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dps :execute s:Dps()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fcscope :execute s:Fcscope()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDeleted :execute s:FindDeleted()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
@@ -119,7 +118,7 @@ endfunction
 function! s:BinaryGrep(...) abort
     call Cd2ProjectRoot("files.proj")
     let b:keyword = (a:0 >= 1) ? a:1 : ''
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/binaryGrep.sh ' . '"' .  b:keyword . '"')
+    call RunShell('~/loadrc/bashrc/binaryGrep.sh', b:keyword, '', '')
     let b:keyword = substitute(b:keyword, " ", "_", "g")
     let b:keyword = substitute(b:keyword, "/", "_", "g")
     call OpenOrSwitch(b:keyword . '.binaryGrep.findresult', 'vs')
@@ -127,13 +126,8 @@ endfunction
 
 function! s:Fnotinuse() abort
     call Cd2ProjectRoot("files.proj")
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fnotinuse.sh')
+    call RunShell('~/loadrc/bashrc/fnotinuse.sh', '', '', '')
     call OpenOrSwitch('fnotinuse.findresult', 'vs')
-endfunction
-
-function! s:Fcscope() abort
-    let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fcscope.sh')
 endfunction
 
 function! s:Glf() abort
@@ -146,7 +140,7 @@ function! s:Gcof(...) abort
     let worktree = Cd2Worktree()
     let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    silent exec '!~/loadrc/gitrc/gcof.sh ' . '"' .  b:relativePath . '" "' .  arg1 . '"'
+    call RunShell('~/loadrc/gitrc/gcof.sh', b:relativePath . arg1, '', '')
     call OpenOrSwitch(expand('%:p') . '.bak', 'vs')
 endfunction
 
@@ -370,7 +364,7 @@ endfunction
 
 function! s:Gicb() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gicb.sh')
+    call RunShell('~/loadrc/gitrc/gicb.sh', '', '', 'true')
 endfunction
 
 function! s:Gitk(...) abort
@@ -410,7 +404,7 @@ endfunction
 function! s:Gco(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gco.sh ' . '"' .  arg1 . '"')
+    call RunShell('~/loadrc/gitrc/gco.sh', arg1, '', 'true') 
 endfunction
 
 function! s:Gcob(...) abort
