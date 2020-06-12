@@ -170,7 +170,67 @@ index f339827f..d56d2c88 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsync :execute s:Gsync()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gtg :execute s:Gtg()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkd :execute s:Gkd(<f-args>)
-@@ -163,27 +154,6 @@ function! s:Glf() abort
+@@ -83,7 +71,7 @@ endfunction
+ 
+ function! s:Jformat(...) abort
+     let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/jformat.sh ')
++    call RunShell('~/loadrc/bashrc/jformat.sh', '', '', 'true')
+ endfunction
+ 
+ function! s:Gkd(...) abort
+@@ -111,23 +99,13 @@ function! s:Gkdo() abort
+     if expand('%:t') != 'index'
+         call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '" "' .  expand('%:p') . '"')
+     else
+-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '"')
++        call RunShell('~/loadrc/gitrc/gkd.sh', remote . '/' . branch, '', 'true')
+     endif
+ endfunction
+ 
+-function! s:Ga(args, ...) abort
+-    let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/ga.sh ' . '"' .  a:args . '"')
+-endfunction
+-
+ function! s:Gsave() abort
+     let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsave.sh')
+-endfunction
+-
+-function! s:Gst() abort
+-    let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gst.sh')
++    call RunShell('~/loadrc/gitrc/gsave.sh', '', '', 'true')
+ endfunction
+ 
+ function! s:Gcp(...) abort
+@@ -140,7 +118,7 @@ endfunction
+ function! s:BinaryGrep(...) abort
+     call Cd2ProjectRoot("files.proj")
+     let b:keyword = (a:0 >= 1) ? a:1 : ''
+-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/binaryGrep.sh ' . '"' .  b:keyword . '"')
++    call RunShell('~/loadrc/bashrc/binaryGrep.sh', b:keyword, '', '')
+     let b:keyword = substitute(b:keyword, " ", "_", "g")
+     let b:keyword = substitute(b:keyword, "/", "_", "g")
+     call OpenOrSwitch(b:keyword . '.binaryGrep.findresult', 'vs')
+@@ -148,102 +126,67 @@ endfunction
+ 
+ function! s:Fnotinuse() abort
+     call Cd2ProjectRoot("files.proj")
+-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fnotinuse.sh')
++    call RunShell('~/loadrc/bashrc/fnotinuse.sh', '', '', '')
+     call OpenOrSwitch('fnotinuse.findresult', 'vs')
+ endfunction
+ 
+-function! s:Fcscope() abort
+-    let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fcscope.sh')
+-endfunction
+-
+ function! s:Glf() abort
+     let worktree = Cd2Worktree()
+     silent exec '!git ls-files | tee glf.findresult'
      call OpenOrSwitch('glf.findresult', 'vs')
  endfunction
  
