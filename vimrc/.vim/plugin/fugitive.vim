@@ -11,7 +11,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDe
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject G :execute s:G(<q-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Ga :execute s:Ga(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbib :execute s:Gbib()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbidebug :execute s:Gbidebug()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbig :execute s:Gbig()
@@ -44,7 +43,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :execute s:Gs()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gst :execute s:Gst()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsync :execute s:Gsync()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gtg :execute s:Gtg()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkd :execute s:Gkd(<f-args>)
@@ -74,7 +72,7 @@ endfunction
 
 function! s:Jformat(...) abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/jformat.sh ')
+    call RunShell('~/loadrc/bashrc/jformat.sh', '', '', 'true')
 endfunction
 
 function! s:Gkd(...) abort
@@ -100,25 +98,15 @@ function! s:Gkdo() abort
     let branch = substitute(system("git config gsync.branch"), '\n', '', '')
 
     if expand('%:t') != 'index'
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '" "' .  expand('%:p') . '"')
+        call RunShell('~/loadrc/gitrc/gkd.sh', remote . '/' . branch . '" "' .  expand('%:p'), '', 'true')
     else
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '"')
+        call RunShell('~/loadrc/gitrc/gkd.sh', remote . '/' . branch, '', 'true')
     endif
-endfunction
-
-function! s:Ga(args, ...) abort
-    let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/ga.sh ' . '"' .  a:args . '"')
 endfunction
 
 function! s:Gsave() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsave.sh')
-endfunction
-
-function! s:Gst() abort
-    let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gst.sh')
+    call RunShell('~/loadrc/gitrc/gsave.sh', '', '', 'true')
 endfunction
 
 function! s:Gcp(...) abort
