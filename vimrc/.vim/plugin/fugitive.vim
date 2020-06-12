@@ -97,7 +97,7 @@ function! s:Gkdo() abort
     let branch = substitute(system("git config gsync.branch"), '\n', '', '')
 
     if expand('%:t') != 'index'
-        call RunShell('~/loadrc/gitrc/gkd.sh', remote . '/' . branch . '" "' .  expand('%:p'), '', 'true')
+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '" "' .  expand('%:p') . '"')
     else
         call RunShell('~/loadrc/gitrc/gkd.sh', remote . '/' . branch, '', 'true')
     endif
@@ -237,7 +237,7 @@ function! s:G(args, ...) abort
 
     let worktree = Cd2Worktree()
     let b:output = 'g.findresult'
-    call RunShell('~/loadrc/gitrc/g.sh', a:args, b:output, '')
+    call RunShell('~/loadrc/gitrc/g.sh', a:args, b:output, 'true')
 
     if &diff
         call s:Gs()
