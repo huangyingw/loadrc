@@ -422,13 +422,13 @@ endfunction
 function! s:KdiffFile() abort
     only
     call asyncrun#stop('<bang>')
-    call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/KdiffFile.py ' . '"' .  expand("%:p") . '"')
+    call RunShell('~/loadrc/leetcoderc/KdiffFile.py', expand("%:p"), '', 'true')
 endfunction
 
 
 function! s:Gcom(args, ...) abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"')
+    call RunShell('~/loadrc/gitrc/gcom.sh', a:args, '', 'true')
 endfunction
 
 function! s:Gshow(args, ...) abort
