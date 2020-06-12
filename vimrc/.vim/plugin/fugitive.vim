@@ -506,12 +506,12 @@ endfunction
 
 function! s:SvnUp() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/svnrc/svnup.sh')
+    call RunShell('~/loadrc/svnrc/svnup.sh', '', '', 'true') 
 endfunction
 
 function! s:SvnReset() abort
     let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/svnrc/svnreset.sh'
+    call RunShell('~/loadrc/svnrc/svnreset.sh', '', '', '') 
     call OpenOrSwitch('svnreset.findresult', 'vs')
 endfunction
 
