@@ -88,7 +88,7 @@ index c2a1b140..40406e03 160000
 -Subproject commit c2a1b14045959245b4cc3beece1d87844dd07917
 +Subproject commit 40406e03dd0fc91b906d3d566c318082c152c3ed
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
-index 87bbd96d..adddcfad 100644
+index 87bbd96d..72d36e8b 100644
 --- ./vimrc/.vim/plugin/common.vim
 +++ ./vimrc/.vim/plugin/common.vim
 @@ -211,24 +211,22 @@ function! VsMax(fileName)
@@ -110,10 +110,10 @@ index 87bbd96d..adddcfad 100644
 +        return 0
 +    endif
 +
-+    let temp_log = output . '.findresult'
-+    let run_string = a:shell . ' ' . '"' .  param . '"' .  ' ' . '2>&1 | tee' . ' ' . temp_log
++    let temp_log = a:output . '.findresult'
++    let run_string = a:shell . ' ' . '"' .  a:param . '"' .  ' ' . '2>&1 | tee' . ' ' . temp_log
 +
-+    if async ==? 'true'
++    if a:async ==? 'true'
          call asyncrun#run('<bang>', '', ' ' . run_string)
 -    else
 -        if silent ==? "true"
@@ -124,7 +124,7 @@ index 87bbd96d..adddcfad 100644
 -    endif
 -    silent exec '!cp' . ' ' . '"' .  temp_log . '"' . ' ' . '"' .  arg2 . '"'
 +
-+    silent exec '!cp' . ' ' . '"' .  temp_log . '"' . ' ' . '"' .  output . '"'
++    silent exec '!cp' . ' ' . '"' .  temp_log . '"' . ' ' . '"' .  a:output . '"'
  endfunc
  
  function! Filter2Findresult()
