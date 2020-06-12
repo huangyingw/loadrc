@@ -345,14 +345,8 @@ function! s:Gdi(...) abort
     let output = 'gdi.diff'
 
     if expand('%:t') != 'index'
-        let output = expand('%:t') . '.diff'
-
-        if a:0 == 0
-            silent exec '!~/loadrc/gitrc/gdi.sh ' . 'HEAD "' .  expand('%:p') . '" 2>&1 | tee ' . '"' .  output . '"'
-        else
-            let arg1 = (a:0 >= 1) ? a:1 : ''
-            silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" "' .  expand('%:p') . '" 2>&1 | tee ' . '"' .  output . '"'
-        endif
+        call fugitive#Diffsplit(0, 1, "vert", '', [])
+        return 
     else
         let arg1 = (a:0 >= 1) ? a:1 : ''
         silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" HEAD 2>&1 | tee ' . '"' .  output . '"'
