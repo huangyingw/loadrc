@@ -517,38 +517,44 @@ endfunction
 
 function! s:SvnRevert() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/svnrc/svnrevert.sh ' . '"' .  expand('%:p') . '"')
+    call RunShell('~/loadrc/svnrc/svnrevert.sh', expand('%:p'), '', '') 
 endfunction
 
 function! s:SvnSt() abort
     let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/svnrc/svnst.sh'
+    call RunShell('~/loadrc/svnrc/svnst.sh', '', '', '') 
     call OpenOrSwitch('svnst.findresult', 'vs')
 endfunction
 
 function! s:SvnApply() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/svnrc/svnapply.sh')
+    call RunShell('~/loadrc/svnrc/svnapply.sh', '', '', '') 
 endfunction
 
 function! s:SvnDiff() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/svnrc/svndiff.sh ' . '"' .  expand('%:p') . '"')
+    call RunShell('~/loadrc/svnrc/svndiff.sh', expand('%:p'), '', '') 
 endfunction
 
 function! s:LcTest() abort
     if (expand("%") !~ '.*leetcode.*') || (expand("%") =~ '.*\.sh')
         return
     endif
-    silent exec '!~/loadrc/vishrc/lc_test.sh ' . '"' .  expand('%:p') . '"'
+
+    call RunShell('~/loadrc/vishrc/lc_test.sh', expand('%:p'), '', '') 
     call OpenOrSwitch(expand('%:p') . '.sh', 'vs')
 endfunction
 
 function! s:Prune() abort
-    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
+    call RunShell('~/loadrc/vishrc/prune.sh', expand('%:p'), '', '') 
 endfunction
 
 function! s:Fr(find, replace) abort
+    if &modified
+        echom 'Please check and save your file first!!!'
+        return 0
+    endif
+
     call Cd2ProjectRoot("files.proj")
 
     if expand('%:t') != 'index'
@@ -563,13 +569,14 @@ endfunction
 
 function! s:FindDeleted() abort
     call Cd2ProjectRoot("files.proj")
-    silent exec '!~/loadrc/gitrc/find_deleted.sh 2>&1 | tee find_deleted.findresult'
-    call OpenOrSwitch('find_deleted.findresult', 'vs')
+    let b:output = 'find_deleted.findresult'
+    call RunShell('~/loadrc/gitrc/find_deleted.sh', '', b:output, '') 
+    call OpenOrSwitch(b:output, 'vs')
 endfunction
 
 function! s:Gwap() abort
     let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/gwap.sh'
+    call RunShell('~/loadrc/gitrc/gwap.sh', '', '', '') 
     call s:Gs()
 endfunction
 
@@ -586,7 +593,7 @@ endfunction
 
 function! s:Gfix() abort
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/gfix.sh'
+    call RunShell('~/loadrc/gitrc/gfix.sh', '', '', '') 
 endfunction
 
 function! s:SortByTime() abort
