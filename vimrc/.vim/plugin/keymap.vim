@@ -350,7 +350,7 @@ function! OpenProjectRoot()
     call OpenOrSwitch(b:csdbpath, 'vs')
 endfunction
 
-function! MaxWin()
+function! SwitchWinSize()
     if &winwidth == 1
         set winwidth=999999
         wincmd |
@@ -360,17 +360,11 @@ function! MaxWin()
     endif
 endfunction
 
-function! MinWin()
-    set winwidth=1
-    wincmd =
-endfunction
-
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<cr>
 nnoremap <leader>L :TlistClose<cr>
 nnoremap hh <c-w>h
 nnoremap ll <c-w>l
-nnoremap mm :call MaxWin()<cr> 
-nnoremap mn :call MinWin()<cr> 
+nnoremap mm :call SwitchWinSize()<cr> 
 nnoremap ff <c-f>
 nnoremap vv <c-b>
 nnoremap <c-l> l
