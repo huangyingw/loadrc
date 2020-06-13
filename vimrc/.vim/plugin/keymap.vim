@@ -351,8 +351,13 @@ function! OpenProjectRoot()
 endfunction
 
 function! MaxWin()
-    set winwidth=999999
-    wincmd |
+    if &winwidth == 1
+        set winwidth=999999
+        wincmd |
+    else
+        set winwidth=1
+        wincmd =
+    endif
 endfunction
 
 function! MinWin()
