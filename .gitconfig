@@ -42,6 +42,9 @@
 [branch "RunShell"]
     remote = origin
     merge = refs/heads/RunShell
+[branch "ubuntu18.04"]
+    remote = origin
+    merge = refs/heads/ubuntu18.04
 [branch "async"]
     remote = origin
     merge = refs/heads/async
