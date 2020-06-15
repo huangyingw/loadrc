@@ -45,7 +45,7 @@ apt-get install -y \
     pm-utils \
     pv \
     pwgen \
-    python3-autopep8 \
+    python-autopep8 \
     python3-software-properties \
     resolvconf \
     rsync \
@@ -57,6 +57,7 @@ apt-get install -y \
     tig \
     tmux \
     unrar \
+    vim-gnome \
     w3m \
     w3m-img \
     wakeonlan \
