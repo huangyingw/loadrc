@@ -54,3 +54,6 @@
 [deploy]
     host = localhost
     path = ~/loadrc
+[gsync]
+    remote = origin
+    branch = dev
