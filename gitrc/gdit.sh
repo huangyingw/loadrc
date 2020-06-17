@@ -5,6 +5,7 @@ target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
 remote="$(git config gsync.remote)"
 remote_branch="$(git config gsync.branch)"
 
+git co files.proj
 git co "$target_branch"
 git merge "$remote/$remote_branch" && \
     git pull && \
