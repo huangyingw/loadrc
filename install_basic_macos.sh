@@ -1,7 +1,7 @@
 #!/bin/zsh
-SCRIPT=$(realpath "$0")
-SCRIPTPATH=$(dirname "$SCRIPT")
-cd "$SCRIPTPATH"
+SCRIPT=$(realpath "$0") && \
+    SCRIPTPATH=$(dirname "$SCRIPT") && \
+    cd "$SCRIPTPATH" || cd ~/loadrc/
 
 if [ $(uname) = "Linux" ]
 then
@@ -23,7 +23,6 @@ brew install \
     htop \
     hub \
     jupyterlab \
-    kubeadm \
     kubectl \
     kubernetes-cli \
     libtool \
