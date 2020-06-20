@@ -91,7 +91,6 @@ function! PlayVideo()
         return 0
     endif
 
-    call asyncrun#stop('<bang>')
     call asyncrun#run('<bang>', '', '~/loadrc/vishrc/vlc.sh ' . '"' . expand('%:p:h') . '/' . '"' .  getline('.'))
 endfunction
 
