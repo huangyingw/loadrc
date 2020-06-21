@@ -378,6 +378,13 @@ function! s:Gdit() abort
 endfunction
 
 function! s:Gdio(...) abort
+    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
+    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
+    if expand('%:t') != 'index'
+        call fugitive#Diffsplit(1, 0, '', remote . '/' . branch, [remote . '/' . branch])
+        return 
+    endif
+
     let worktree = Cd2Worktree()
     let current_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
     let local_branch = (a:0 >= 1) ? a:1 : current_branch
