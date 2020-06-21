@@ -345,7 +345,11 @@ function! s:Gdi(...) abort
     let output = 'gdi.diff'
 
     if expand('%:t') != 'index'
-        call fugitive#Diffsplit(0, 1, "vert", '', [])
+        if arg1 == ''
+            call fugitive#Diffsplit(0, 1, "vert", '', [])
+        else
+            call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
+        endif
         return 
     else
         let arg1 = (a:0 >= 1) ? a:1 : ''
