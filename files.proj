@@ -371,6 +371,7 @@
 "./error"
 "./fdocs.exclude"
 "./fdocs.include"
+"./fdocs.list"
 "./ffmpegrc/concat.sh"
 "./ffmpegrc/mylist.txt"
 "./ffmpegrc/split.sh"
