@@ -6,7 +6,7 @@ remote="$(git config gsync.remote)"
 remote_branch="$(git config gsync.branch)"
 
 git checkout files.proj
-git checkout "$target_branch"
+git checkout -b "$target_branch" "$remote/$remote_branch"
 git rebase "$remote/$remote_branch" && \
     git push "$remote" ; \
     git checkout "$current_branch" && \
