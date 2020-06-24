@@ -2,7 +2,7 @@
 
 if [ $(hostname) != "linb-sandbox" ]
 then
-    ssh -nY "$host" "cd $rpath ; ~/loadrc/imvurc/ghypo.sh $1"
+    ssh -nY "$host" "cd $rpath ; ~/loadrc/imvurc/spull.sh $1"
 else
     ~/loadrc/gitrc/grsh.sh
     ~/loadrc/gitrc/gclean.sh
@@ -12,9 +12,4 @@ else
     s/pull && \
         git pull --rebase && \
         git push
-
-    if [ $(~/loadrc/gitrc/git_ready.sh) ]
-    then
-        s/hypo
-    fi
 fi

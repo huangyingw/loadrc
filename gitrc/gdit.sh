@@ -7,7 +7,7 @@ remote_branch="$(git config gsync.branch)"
 
 git co files.proj
 git co "$target_branch"
-git rebase "$remote/$remote_branch" && \
+    . ~/loadrc/imvurc/spull.sh "$target_branch" ; \
     git pull --rebase && \
     git push ; \
     git co "$current_branch" && \
