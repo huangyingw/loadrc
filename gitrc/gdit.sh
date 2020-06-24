@@ -4,10 +4,12 @@ current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
 target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
 remote="$(git config gsync.remote)"
 remote_branch="$(git config gsync.branch)"
+local_master="$(git config gsync.branch)"
 
 git checkout files.proj
-git checkout -b "$target_branch" "$remote/$remote_branch"
-git rebase "$remote/$remote_branch" && \
+git checkout -b "$target_branch" "$local_master"
+git pull --ff-only && \
+    git rebase "$remote/$remote_branch" && \
     git push "$remote" ; \
     git checkout "$current_branch" && \
     ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
