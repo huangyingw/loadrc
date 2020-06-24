@@ -8,7 +8,7 @@ else
     ~/loadrc/gitrc/gclean.sh
     git remote update
     git checkout -b "$1" origin/"$1"
-    s/pull
+    git pull --rebase
 
     if [ $(~/loadrc/gitrc/git_ready.sh) ]
     then
