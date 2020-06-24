@@ -49,5 +49,5 @@
     silent = false
     async = false
 [deploy]
-    host = localhost
+    host = sb
     path = ~/loadrc
