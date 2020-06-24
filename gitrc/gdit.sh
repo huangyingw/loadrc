@@ -10,7 +10,7 @@ git checkout files.proj
 git checkout -b "$target_branch" "$local_master"
 git checkout "$target_branch"
 
-git pull --ff-only "$remote" "$target_branch" && \
+git pull --ff-only "$remote" "$target_branch" ; \
     git rebase "$remote/$remote_branch" && \
     git push "$remote" ; \
     git checkout "$current_branch" && \
