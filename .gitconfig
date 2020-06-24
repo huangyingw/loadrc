@@ -51,3 +51,6 @@
 [deploy]
     host = sb
     path = ~/loadrc
+[gsync]
+    remote = origin
+    branch = dev
