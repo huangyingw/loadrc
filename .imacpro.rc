@@ -4,8 +4,8 @@
 
 if [ $(uname) = "Darwin" ]
 then
-    if ! (sudo systemsetup -getcomputersleep | grep -q "after 1 minutes") ; \
+    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
         then \
-        sudo systemsetup -setcomputersleep 1; \
+        sudo systemsetup -setcomputersleep Never; \
         fi
 fi
