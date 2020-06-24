@@ -9,7 +9,9 @@ else
     git remote update
     git checkout -b "$1" origin/"$1"
     git checkout "$1"
-    git pull
+    s/pull && \
+        git pull --rebase && \
+        git push
 
     if [ $(~/loadrc/gitrc/git_ready.sh) ]
     then

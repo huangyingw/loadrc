@@ -34,7 +34,7 @@ git checkout -b "$targetBranch" "$local_master" ; \
     ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
     git add . && \
     git commit  --no-verify -am "$commit_message" ; \
-    git pull ; \
+    git pull --rebase ; \
     git push ; \
     . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
     ~/loadrc/gitrc/gfix.sh
