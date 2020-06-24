@@ -7,9 +7,8 @@ remote_branch="$(git config gsync.branch)"
 
 git co files.proj
 git co "$target_branch"
-    . ~/loadrc/imvurc/spull.sh "$target_branch" ; \
-    git pull --rebase && \
-    git push ; \
+git rebase "$remote/$remote_branch" && \
+    git push "$remote" ; \
     git co "$current_branch" && \
     ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
 
