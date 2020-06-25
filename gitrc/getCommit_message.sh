@@ -27,4 +27,9 @@ then
     commit_message=$(cat .git/MERGE_MSG | awk 'NR==1')
 fi
 
+if [ -f .git/SQUASH_MSG ]
+then
+    commit_message=$(cat .git/SQUASH_MSG)
+fi
+
 echo "$commit_message"
