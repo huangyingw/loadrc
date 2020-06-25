@@ -422,7 +422,6 @@
 "./gitrc/gdif.sh"
 "./gitrc/gdio.sh"
 "./gitrc/gdit.sh"
-"./gitrc/get_commit_message.sh"
 "./gitrc/get_current_branch.sh"
 "./gitrc/get_git.sh"
 "./gitrc/get_remote_branch.sh"
