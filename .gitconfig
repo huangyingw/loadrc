@@ -54,3 +54,5 @@
 [gsync]
     remote = origin
     branch = dev
+[gdif]
+    ignore = jdupes
