@@ -1,6 +1,6 @@
 #!/bin/zsh
 ~/loadrc/gitrc/include_gitconfig.sh
-commit_message=$(~/loadrc/gitrc/getCommit_message.sh "$1") 
+commit_message=$(~/loadrc/gitrc/get_commit_message.sh "$1") 
 
 if [ -n "$commit_message" ]
 then
