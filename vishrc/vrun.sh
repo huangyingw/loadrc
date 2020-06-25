@@ -67,12 +67,12 @@ case $extension in
     py)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; python $rfile"
+            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; python3 $rfile"
         else
             SCRIPT=$(realpath "$file")
             SCRIPTPATH=$(dirname "$SCRIPT")
             cd "$SCRIPTPATH"
-            python "$file"
+            python3 "$file"
         fi
         ;;
     vim)
