@@ -54,6 +54,8 @@
 [pull]
     default = current
 [gdif]
+    ignore = *.gdio.diff
+    ignore = *.gdit.diff
     ignore = .gitconfig
     ignore = .login
     ignore = COMMIT_EDITMSG
