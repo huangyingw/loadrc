@@ -1,0 +1,13 @@
+diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
+index 6d71ac21..fb26b258 100755
+--- ./gitrc/dogdio.sh
++++ ./gitrc/dogdio.sh
+@@ -4,8 +4,6 @@ then
+     exit 0
+ fi
+ 
+-~/loadrc/gitrc/gpl.sh
+-
+ local_branch="$(~/loadrc/gitrc/get_current_branch.sh)" 
+ output="$local_branch.gdio.diff"
+ output=$(echo "$output" | sed 's/\//_/g')
