@@ -32,13 +32,6 @@ index aee86c9d..76ff478a 100755
  ~/loadrc/gitrc/gpl.sh &
  ~/loadrc/gitrc/gps.sh &
 +~/loadrc/gitrc/dogdio.sh &
-diff --git a/oh-my-zsh b/oh-my-zsh
-index 90ee9fa3..7cb29e0e 160000
---- ./oh-my-zsh
-+++ ./oh-my-zsh
-@@ -1 +1 @@
--Subproject commit 90ee9fa325912f0d3b1c6ed6a56edc8b80f80894
-+Subproject commit 7cb29e0eaf572d3b9d254f12d53f73acc65a1fe3
 diff --git a/prunefile_template.conf b/prunefile_template.conf
 index fb57bfdc..2154bcb9 100644
 --- ./prunefile_template.conf
