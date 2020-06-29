@@ -347,6 +347,10 @@ function! s:Gdi(...) abort
     if expand('%:t') != 'index'
         if arg1 == ''
             call fugitive#Diffsplit(0, 1, "vert", '', [])
+        elseif tolower(arg1) == 'o'
+            let remote = substitute(system("git config gsync.remote"), '\n', '', '')
+            let branch = substitute(system("git config gsync.branch"), '\n', '', '')
+            call fugitive#Diffsplit(1, 0, '', remote . '/' . branch, [remote . '/' . branch])
         else
             call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
         endif
@@ -382,17 +386,18 @@ function! s:Gdit() abort
 endfunction
 
 function! s:Gdio(...) abort
-    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
-    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
-    if expand('%:t') != 'index'
-        call fugitive#Diffsplit(1, 0, '', remote . '/' . branch, [remote . '/' . branch])
-    else
-        let worktree = Cd2Worktree()
-        let local_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
-        let output = local_branch . '.gdio.diff'
-        let output = substitute(output, "/", "_", "g")
-        call OpenOrSwitch(output, 'vs')
+    let worktree = Cd2Worktree()
+    let current_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
+    let output = current_branch . '.gdio.diff'
+    let output = substitute(output, "/", "_", "g")
+    exec '!~/loadrc/gitrc/gdio.sh'
+
+    if bufwinnr('^' . output . '$') > 0
+        exe "bd!" . output
     endif
+
+    let worktree = Cd2Worktree()
+    call OpenOrSwitch(output, 'vs')
 endfunction
 
 function! s:Gdi2(...) abort
