@@ -1,3 +1,16 @@
+diff --git a/.gitrc b/.gitrc
+index af69691c..621cf604 100755
+--- ./.gitrc
++++ ./.gitrc
+@@ -28,6 +28,8 @@ alias gdev='$HOME/loadrc/gitrc/gdev.sh'
+ alias gdi2='$HOME/loadrc/gitrc/gdi2.sh'
+ alias gdi='$HOME/loadrc/gitrc/gdi.sh'
+ alias gdif='$HOME/loadrc/gitrc/gdif.sh'
++alias gdio='$HOME/loadrc/gitrc/gdio.sh'
++alias gdit='$HOME/loadrc/gitrc/gdit.sh'
+ alias gfe='git fetch'
+ alias gff='$HOME/loadrc/gitrc/gff.sh'
+ alias gfix='$HOME/loadrc/gitrc/gfix.sh'
 diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
 index e9c3e6c6..ba99cae7 100755
 --- ./bashrc/cscope.sh
@@ -32,6 +45,20 @@ index aee86c9d..76ff478a 100755
  ~/loadrc/gitrc/gpl.sh &
  ~/loadrc/gitrc/gps.sh &
 +~/loadrc/gitrc/dogdio.sh &
+diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
+index f9684f2e..6de01696 100755
+--- ./gitrc/gdit.sh
++++ ./gitrc/gdit.sh
+@@ -7,7 +7,8 @@ remote_branch="$(git config gsync.branch)"
+ 
+ git checkout files.proj
+ git checkout -b "$target_branch" "$remote_branch"
+-git merge "$remote/$remote_branch" && \
++git checkout -f "$target_branch"
++git merge -X theirs "$remote/$remote_branch" && \
+     git pull && \
+     git push ; \
+     git checkout "$current_branch" && \
 diff --git a/gitrc/gicb.sh b/gitrc/gicb.sh
 index bec88869..bd3c7b59 100755
 --- ./gitrc/gicb.sh
@@ -55,6 +82,22 @@ index 0ec0480c..5aa5d719 100755
  git pull
  currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
  
+diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
+index f72f4122..e8af707a 100755
+--- ./imvurc/ghypo.sh
++++ ./imvurc/ghypo.sh
+@@ -8,8 +8,9 @@ else
+     ~/loadrc/gitrc/gclean.sh
+     git remote update
+     git checkout -b "$1" origin/"$1"
+-    git checkout "$1"
+-    git pull
++    git checkout -f "$1"
++    git branch -u origin/"$1"
++    git merge -X theirs origin/"$1" 
+ 
+     if [ $(~/loadrc/gitrc/git_ready.sh) ]
+     then
 diff --git a/prunefile_template.conf b/prunefile_template.conf
 index fb57bfdc..2154bcb9 100644
 --- ./prunefile_template.conf
