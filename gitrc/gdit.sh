@@ -7,7 +7,8 @@ remote_branch="$(git config gsync.branch)"
 
 git checkout files.proj
 git checkout -b "$target_branch" "$remote_branch"
-git merge "$remote/$remote_branch" && \
+git checkout -f "$target_branch"
+git merge -X theirs "$remote/$remote_branch" && \
     git pull && \
     git push ; \
     git checkout "$current_branch" && \
