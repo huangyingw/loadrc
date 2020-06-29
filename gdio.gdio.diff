@@ -32,6 +32,29 @@ index aee86c9d..76ff478a 100755
  ~/loadrc/gitrc/gpl.sh &
  ~/loadrc/gitrc/gps.sh &
 +~/loadrc/gitrc/dogdio.sh &
+diff --git a/gitrc/gicb.sh b/gitrc/gicb.sh
+index bec88869..bd3c7b59 100755
+--- ./gitrc/gicb.sh
++++ ./gitrc/gicb.sh
+@@ -7,4 +7,5 @@ git init \
+     && git add . \
+     && git add -f files.proj \
+     && $HOME/loadrc/gitrc/g.sh \
++    && hub create \
+     && ~/loadrc/gitrc/gclb.sh
+diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
+index 0ec0480c..5aa5d719 100755
+--- ./gitrc/gpl.sh
++++ ./gitrc/gpl.sh
+@@ -1,7 +1,7 @@
+ #!/bin/zsh
+ ~/loadrc/gitrc/include_gitconfig.sh
+ git remote update
+-git checkout files.proj
++git checkout files.proj *.gdio.diff
+ git pull
+ currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
+ 
 diff --git a/prunefile_template.conf b/prunefile_template.conf
 index fb57bfdc..2154bcb9 100644
 --- ./prunefile_template.conf
