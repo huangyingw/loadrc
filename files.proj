@@ -475,6 +475,8 @@
 "./host_links/imac/Users/huangyingw/.bashrc"
 "./host_links/imac/etc/hosts"
 "./host_links/imacpro/Users/huangyingw/.bashrc"
+"./host_links/imacpro/Users/huangyingw/Library/Preferences/org.recoll.recoll.plist"
+"./host_links/imacpro/Users/huangyingw/Library/Preferences/recoll.plist"
 "./host_links/imacpro/etc/hosts"
 "./host_links/lint-sandbox/etc/hosts"
 "./host_links/lint-sandbox/etc/network/interfaces"
