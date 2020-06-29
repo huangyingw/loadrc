@@ -1,3 +1,15 @@
+diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
+index e9c3e6c6..ba99cae7 100755
+--- ./bashrc/cscope.sh
++++ ./bashrc/cscope.sh
+@@ -56,7 +56,6 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
+     sed -i.bak 's/ /\\ /g' files.proj && \
+     ~/loadrc/bashrc/fvideos.sh && \
+     ~/loadrc/bashrc/fdocs.sh && \
+-    echo > cscope.small.files && \
+     echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
+     cscope -bq -i "$TARGET" -f cscope.out.bak && \
+     cp -fv cscope.out.bak cscope.out && \
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
 index 6d71ac21..fb26b258 100755
 --- ./gitrc/dogdio.sh
@@ -20,6 +32,23 @@ index aee86c9d..76ff478a 100755
  ~/loadrc/gitrc/gpl.sh &
  ~/loadrc/gitrc/gps.sh &
 +~/loadrc/gitrc/dogdio.sh &
+diff --git a/oh-my-zsh b/oh-my-zsh
+index 90ee9fa3..7cb29e0e 160000
+--- ./oh-my-zsh
++++ ./oh-my-zsh
+@@ -1 +1 @@
+-Subproject commit 90ee9fa325912f0d3b1c6ed6a56edc8b80f80894
++Subproject commit 7cb29e0eaf572d3b9d254f12d53f73acc65a1fe3
+diff --git a/prunefile_template.conf b/prunefile_template.conf
+index fb57bfdc..2154bcb9 100644
+--- ./prunefile_template.conf
++++ ./prunefile_template.conf
+@@ -1,5 +1,4 @@
+ "./cscope"
+-"./cscope.small.files"
+ "./files.proj"
+ "./running.lck"
+ "./running.time"
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 index 895f4400..6334b8dc 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
