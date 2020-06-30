@@ -23,11 +23,32 @@ index e9c3e6c6..ba99cae7 100755
      echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
      cscope -bq -i "$TARGET" -f cscope.out.bak && \
      cp -fv cscope.out.bak cscope.out && \
+diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
+index a5b82acb..fc111f6c 100755
+--- ./gitrc/.gitconfig
++++ ./gitrc/.gitconfig
+@@ -36,7 +36,7 @@
+ [core]
+     excludesfile = "~/.globalgitignore"
+     mergeoptions = --no-edit
+-    filemode = false
++    filemode = true
+     editor = nvim
+ [giggle]
+     main-window-maximized = true
+@@ -61,6 +61,7 @@
+     ignore = COMMIT_EDITMSG
+     ignore = change
+     ignore = files.proj
++    ignore = files.rev
+     ignore = gbil.log
+     ignore = includefile.conf
+     ignore = prunefile.conf
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
-index 6d71ac21..fb26b258 100755
+index 6d71ac21..c36eb499 100755
 --- ./gitrc/dogdio.sh
 +++ ./gitrc/dogdio.sh
-@@ -4,8 +4,6 @@ then
+@@ -4,14 +4,12 @@ then
      exit 0
  fi
  
@@ -36,6 +57,13 @@ index 6d71ac21..fb26b258 100755
  local_branch="$(~/loadrc/gitrc/get_current_branch.sh)" 
  output="$local_branch.gdio.diff"
  output=$(echo "$output" | sed 's/\//_/g')
+ local_master="$(git config gsync.branch)"
+ remote="$(git config gsync.remote)"
+ 
+-~/loadrc/gitrc/gdi.sh "$remote/$local_master " "$local_branch" 2>&1 | tee "$output"  
++~/loadrc/gitrc/gdi.sh "$remote/$local_master " 2>&1 | tee "$output"  
+ sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
+ exit 0
 diff --git a/gitrc/dogsync.sh b/gitrc/dogsync.sh
 index aee86c9d..76ff478a 100755
 --- ./gitrc/dogsync.sh
@@ -142,3 +170,16 @@ index 895f4400..c3e993d7 100644
      let output = substitute(output, "/", "_", "g")
      exec '!~/loadrc/gitrc/gdio.sh'
  
+diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
+index 9e4d7b0f..555037d8 100755
+--- ./vishrc/vrun.sh
++++ ./vishrc/vrun.sh
+@@ -55,7 +55,7 @@ case $extension in
+     sh)
+         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+         then
+-            ssh -nY "$host" ". ~/loadrc/.loadrc ; $rpath/$rfile"
++            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
+             rsync -aHv --force --progress \
+                 --files-from=files.rev \
+                 "$host:$rpath/" \
