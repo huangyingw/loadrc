@@ -118,7 +118,7 @@
 ./bashrc/fpath.sh
 ./bashrc/fr.sh
 ./bashrc/fvideos.sh
-./bashrc/generate_files_from.sh
+./bashrc/generate_rsync_files.sh
 ./bashrc/get_first_column_of_file.sh
 ./bashrc/get_first_column_of_file_test.sh
 ./bashrc/getopts.sh
@@ -253,7 +253,6 @@
 ./ffmpegrc/mylist.txt
 ./ffmpegrc/split.sh
 ./fix_resolvconf_in_docker.sh
-./generate_files_from.test.sh
 ./gitrc/.gitconfig
 ./gitrc/.globalgitignore
 ./gitrc/autoadd.sh
