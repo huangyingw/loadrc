@@ -6,6 +6,7 @@ then
 fi
 
 branch="$1"
+currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 git remote update
 
 if [ -n "$2" ]
@@ -17,6 +18,7 @@ else
     if [ -n "$remoteBranch" ]
     then
         git checkout -b "$branch" "$remoteBranch"
+        git merge "$currentBranch"
     else
         git checkout -b "$branch"
     fi
