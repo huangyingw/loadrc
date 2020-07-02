@@ -5,7 +5,7 @@ target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
 remote="$(git config gsync.remote)"
 remote_branch="$(git config gsync.branch)"
 
-git checkout files.proj
+~/loadrc/gitrc/discard_unnecessaries.sh
 git checkout -b "$target_branch" "$remote/$target_branch"
 git checkout -b "$target_branch" "$remote/$remote_branch"
 git checkout -f "$target_branch"
