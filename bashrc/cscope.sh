@@ -61,4 +61,6 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
     cp -fv cscope.out.bak cscope.out && \
     cp -fv cscope.out.bak.in cscope.out.in && \
     cp -fv cscope.out.bak.po cscope.out.po
+
 sort -u ~/all.proj -o ~/all.proj
+~/loadrc/bashrc/generate_files_from.sh
