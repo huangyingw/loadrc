@@ -640,7 +640,6 @@
 "./pythonrc/setup.cfg"
 "./pythonrc/setup.cfg.src"
 "./readme"
-"./rsync.files"
 "./ruleref.list"
 "./set_host_configuration.sh"
 "./set_linux_configuration.sh"
