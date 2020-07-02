@@ -1,5 +1,6 @@
 #!/bin/zsh
-cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > rsync.files
+rsyncFiles=rsync.files.bak
+cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > "$rsyncFiles"
 PRUNE_POSTFIX=prunefix.rsync
 
 if [ ! -f "$PRUNE_POSTFIX" ]
@@ -12,7 +13,10 @@ or="";
 while read suf
 do
     suf=$(echo "$suf" | sed 's/"//g')
-    prune_params+=( $or "-wholename" "$suf" )
+    include_params+=( $or "-wholename" "$suf" )
     or="-o"
 done < "$PRUNE_POSTFIX"
-find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} +
+
+find . "(" "${include_params[@]}" ")" -type f -size -9000k > "$rsyncFiles".tmp && \
+    comm -23 <(sort "$rsyncFiles") <(sort "$rsyncFiles".tmp) > "$rsyncFiles" && \
+    cp -fv "$rsyncFiles" rsync.files
