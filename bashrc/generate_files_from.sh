@@ -17,6 +17,6 @@ do
     or="-o"
 done < "$PRUNE_POSTFIX"
 
-find . "(" "${include_params[@]}" ")" -type f -size -9000k > "$rsyncFiles".tmp && \
-    comm -23 <(sort "$rsyncFiles") <(sort "$rsyncFiles".tmp) > "$rsyncFiles" && \
-    cp -fv "$rsyncFiles" rsync.files
+find . "(" "${include_params[@]}" ")" -type f -size -9000k > "$rsyncFiles".diff && \
+    comm -23 <(sort "$rsyncFiles") <(sort "$rsyncFiles".diff) > "$rsyncFiles".tmp && \
+    cp -fv "$rsyncFiles".tmp rsync.files
