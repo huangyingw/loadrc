@@ -289,7 +289,6 @@
 ./gitrc/gcob.sh
 ./gitrc/gcob_test.sh
 ./gitrc/gcof.sh
-./gitrc/gcom.sh
 ./gitrc/gcp.sh
 ./gitrc/gctb.sh
 ./gitrc/gdev.sh
