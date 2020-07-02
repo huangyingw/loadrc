@@ -1,3 +1,14 @@
+diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
+index ba99cae7..aa199423 100755
+--- ./bashrc/cscope.sh
++++ ./bashrc/cscope.sh
+@@ -61,4 +61,6 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
+     cp -fv cscope.out.bak cscope.out && \
+     cp -fv cscope.out.bak.in cscope.out.in && \
+     cp -fv cscope.out.bak.po cscope.out.po
++
+ sort -u ~/all.proj -o ~/all.proj
++~/loadrc/bashrc/generate_files_from.sh
 diff --git a/bashrc/generate_files_from.sh b/bashrc/generate_files_from.sh
 new file mode 100755
 index 00000000..4bee2b38
