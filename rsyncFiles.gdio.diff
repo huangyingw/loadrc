@@ -1,5 +1,5 @@
 diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
-index ba99cae7..aa199423 100755
+index ba99cae7..b4e71473 100755
 --- ./bashrc/cscope.sh
 +++ ./bashrc/cscope.sh
 @@ -61,4 +61,6 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
@@ -8,12 +8,12 @@ index ba99cae7..aa199423 100755
      cp -fv cscope.out.bak.po cscope.out.po
 +
  sort -u ~/all.proj -o ~/all.proj
-+~/loadrc/bashrc/generate_files_from.sh
-diff --git a/bashrc/generate_files_from.sh b/bashrc/generate_files_from.sh
++~/loadrc/bashrc/generate_rsync_files.sh
+diff --git a/bashrc/generate_rsync_files.sh b/bashrc/generate_rsync_files.sh
 new file mode 100755
 index 00000000..4bee2b38
 --- /dev/null
-+++ ./bashrc/generate_files_from.sh
++++ ./bashrc/generate_rsync_files.sh
 @@ -0,0 +1,22 @@
 +#!/bin/zsh
 +rsyncFiles=rsync.files.bak
@@ -51,18 +51,6 @@ index 647be6cf..57ae30ab 100755
 +    --files-from rsync.files \
      . \
      "$host:$rpath"
-diff --git a/generate_files_from.test.sh b/generate_files_from.test.sh
-new file mode 100755
-index 00000000..36284323
---- /dev/null
-+++ ./generate_files_from.test.sh
-@@ -0,0 +1,6 @@
-+#!/bin/zsh
-+SCRIPT=$(realpath "$0")
-+SCRIPTPATH=$(dirname "$SCRIPT")
-+cd "$SCRIPTPATH"
-+
-+./bashrc/generate_files_from.sh
 diff --git a/gitrc/dogsync.sh b/gitrc/dogsync.sh
 index f1a0f55f..25554679 100755
 --- ./gitrc/dogsync.sh
