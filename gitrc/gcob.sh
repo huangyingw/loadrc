@@ -23,5 +23,6 @@ else
     fi
 fi
 
+~/loadrc/gitrc/discard_unnecessaries.sh
 git checkout "$branch"
 git merge "$currentBranch"
