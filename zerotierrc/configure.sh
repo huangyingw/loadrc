@@ -9,7 +9,7 @@ deploy_configs() {
 
     if [ -f "$SOURCE" ]
     then
-        sudo cp -fv "$SOURCE" "$TARGET"
+        cp -fv "$SOURCE" "$TARGET"
     fi
 }
 

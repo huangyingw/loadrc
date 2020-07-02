@@ -57,3 +57,6 @@
 [gsync]
     remote = origin
     branch = dev
+[gdif]
+    ignore = jdupes
+    ignore = oh-my-zsh

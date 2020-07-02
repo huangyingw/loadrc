@@ -21,13 +21,14 @@
 #192.168.2.1 mini
 #172.27.3.67 mini
 #172.27.23.235 mldonkey
-192.168.2.2 server
+192.168.3.2 server
 #172.27.59.214 server
 192.168.2.4 ubuntu
 172.27.93.135 u1604
 10.211.55.22 vmac
 10.211.55.5 macos
 10.1.10.231 mbp
+172.27.68.119 imac
 
 
 # The following lines are desirable for IPv6 capable hosts

@@ -345,7 +345,15 @@ function! s:Gdi(...) abort
     let output = 'gdi.diff'
 
     if expand('%:t') != 'index'
-        call fugitive#Diffsplit(0, 1, "vert", '', [])
+        if arg1 == ''
+            call fugitive#Diffsplit(0, 1, "vert", '', [])
+        elseif tolower(arg1) == 'o'
+            let remote = substitute(system("git config gsync.remote"), '\n', '', '')
+            let branch = substitute(system("git config gsync.branch"), '\n', '', '')
+            call fugitive#Diffsplit(1, 0, '', remote . '/' . branch, [remote . '/' . branch])
+        else
+            call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
+        endif
         return 
     else
         let arg1 = (a:0 >= 1) ? a:1 : ''
@@ -380,8 +388,7 @@ endfunction
 function! s:Gdio(...) abort
     let worktree = Cd2Worktree()
     let current_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
-    let local_branch = (a:0 >= 1) ? a:1 : current_branch
-    let output = local_branch . '.gdio.diff'
+    let output = current_branch . '.gdio.diff'
     let output = substitute(output, "/", "_", "g")
     exec '!~/loadrc/gitrc/gdio.sh'
 

@@ -5,11 +5,13 @@ target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
 remote="$(git config gsync.remote)"
 remote_branch="$(git config gsync.branch)"
 
-git co "$target_branch"
-git merge "$remote/$remote_branch" && \
+git checkout files.proj
+git checkout -b "$target_branch" "$remote_branch"
+git checkout -f "$target_branch"
+git merge -X theirs "$remote/$remote_branch" && \
     git pull && \
     git push ; \
-    git co "$current_branch" && \
+    git checkout "$current_branch" && \
     ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
 
 if [ $? -ne 0 ]

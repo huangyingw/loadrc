@@ -36,7 +36,7 @@
 [core]
     excludesfile = "~/.globalgitignore"
     mergeoptions = --no-edit
-    filemode = false
+    filemode = true
     editor = nvim
 [giggle]
     main-window-maximized = true
@@ -54,11 +54,14 @@
 [pull]
     default = current
 [gdif]
+    ignore = *.gdio.diff
+    ignore = *.gdit.diff
     ignore = .gitconfig
     ignore = .login
     ignore = COMMIT_EDITMSG
     ignore = change
     ignore = files.proj
+    ignore = files.rev
     ignore = gbil.log
     ignore = includefile.conf
     ignore = prunefile.conf
