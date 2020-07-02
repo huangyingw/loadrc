@@ -1,11 +1,12 @@
 diff --git a/bashrc/generate_files_from.sh b/bashrc/generate_files_from.sh
 new file mode 100755
-index 00000000..4a10d2cc
+index 00000000..3c0c7ef0
 --- /dev/null
 +++ ./bashrc/generate_files_from.sh
-@@ -0,0 +1,18 @@
+@@ -0,0 +1,22 @@
 +#!/bin/zsh
-+cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > rsync.files
++rsyncFiles=rsync.files.bak
++cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > "$rsyncFiles"
 +PRUNE_POSTFIX=prunefix.rsync
 +
 +if [ ! -f "$PRUNE_POSTFIX" ]
@@ -18,10 +19,13 @@ index 00000000..4a10d2cc
 +while read suf
 +do
 +    suf=$(echo "$suf" | sed 's/"//g')
-+    prune_params+=( $or "-wholename" "$suf" )
++    include_params+=( $or "-wholename" "$suf" )
 +    or="-o"
 +done < "$PRUNE_POSTFIX"
-+find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} +
++
++find . "(" "${include_params[@]}" ")" -type f -size -9000k > "$rsyncFiles".tmp && \
++    comm -23 <(sort "$rsyncFiles") <(sort "$rsyncFiles".tmp) > "$rsyncFiles" && \
++    cp -fv "$rsyncFiles" rsync.files
 diff --git a/bashrc/rsyncFiles.sh b/bashrc/rsyncFiles.sh
 index 647be6cf..57ae30ab 100755
 --- ./bashrc/rsyncFiles.sh
