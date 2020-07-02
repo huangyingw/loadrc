@@ -1,2 +1,5 @@
 #!/bin/zsh
-git checkout files.proj *.gdio.diff 
+git checkout \
+    *.gdio.diff \
+    files.proj \
+    rsync.files
