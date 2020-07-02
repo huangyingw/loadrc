@@ -18,8 +18,10 @@ else
     if [ -n "$remoteBranch" ]
     then
         git checkout -b "$branch" "$remoteBranch"
-        git merge "$currentBranch"
     else
         git checkout -b "$branch"
     fi
 fi
+
+git checkout "$branch"
+git merge "$currentBranch"
