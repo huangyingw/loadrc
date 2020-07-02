@@ -1,7 +1,7 @@
 #!/bin/zsh
 ~/loadrc/gitrc/include_gitconfig.sh
 git remote update
-git checkout files.proj *.gdio.diff
+~/loadrc/gitrc/discard_unnecessaries.sh
 git pull
 currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 
