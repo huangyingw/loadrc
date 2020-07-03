@@ -22,8 +22,5 @@ remote=$(git config gsync.remote)
 branch=$(git config gsync.branch)
 if [ -n "$remote" ]
 then
-    git pull "$remote" "$branch" &
-    '
-    git fetch origin master:master
-    '
+    git fetch "$remote" "$branch":"$branch" &
 fi
