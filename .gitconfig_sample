@@ -5,7 +5,7 @@
     url = git@github.com:huangyingw/repoVar.git
     fetch = +refs/heads/*:refs/remotes/github/*
 [push]
-    remote = github
+    remote = origin
 [gsync]
     remote = authorVar
     branch = master
