@@ -53,7 +53,7 @@
     path = ~/loadrc
 [gsync]
     remote = origin
-    branch = rsyncFiles
+    branch = dev
 [gdif]
     ignore = .ssh
     ignore = jdupes
