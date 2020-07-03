@@ -18,7 +18,12 @@ do
     eval "$COMMAND"
 done
 
-if [ -n $(git config gsync.remote) ]
+remote=$(git config gsync.remote)
+branch=$(git config gsync.branch)
+if [ -n "$remote" ]
 then
-    git pull $(git config gsync.remote) $(git config gsync.branch) &
+    git pull "$remote" "$branch" &
+    '
+    git fetch origin master:master
+    '
 fi
