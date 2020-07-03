@@ -23,4 +23,5 @@ branch=$(git config gsync.branch)
 if [ -n "$remote" ]
 then
     git fetch "$remote" "$branch":"$branch" &
+    git merge "$branch"
 fi
