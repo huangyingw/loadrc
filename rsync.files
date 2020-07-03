@@ -283,6 +283,7 @@
 ./gitrc/gbrs.sh
 ./gitrc/gcia.sh
 ./gitrc/gcl.sh
+./gitrc/gcl.test.sh
 ./gitrc/gclb.sh
 ./gitrc/gclean.sh
 ./gitrc/gco.sh
@@ -338,6 +339,8 @@
 ./gitrc/gvlg.sh
 ./gitrc/gwap.sh
 ./gitrc/include_gitconfig.sh
+./gitrc/parse_github.sh
+./gitrc/parse_github.test.sh
 ./gitrc/postCommit.sh
 ./gitrc/restore_deleted.sh
 ./gitrc/retached.sh
