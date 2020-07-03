@@ -1,4 +1,4 @@
 #!/bin/zsh
 
 cd ~/myproject/git/linux
-~/loadrc/gitrc/gcl.sh https://github.com/gluster/glusterfs.git
+~/loadrc/gitrc/gcl.sh git@github.com:gluster/glusterfs.git
