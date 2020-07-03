@@ -1,3 +1,5 @@
 #!/bin/zsh
-echo "$1" | sed 's/.*\/\([^\/]*\)\.git/\1/g' 
-echo "$1" | sed 's/.*[:/]\([^\/]*\)\/[^\/]*\.git/\1/g'
+repo=$(echo "$1" | sed 's/.*\/\([^\/]*\)\.git/\1/g') 
+author=$(echo "$1" | sed 's/.*[:/]\([^\/]*\)\/[^\/]*\.git/\1/g')
+echo "repo --> $repo"
+echo "author --> $author"
