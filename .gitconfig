@@ -53,10 +53,11 @@
     path = ~/loadrc
 [gsync]
     remote = origin
-    branch = dev
+    branch = rsyncFiles
 [gdif]
     ignore = .ssh
     ignore = jdupes
     ignore = oh-my-zsh
+    ignore = rsync.files
     ignore = vimrc/.vim/bundle/split-term.vim
     ignore = vimrc/.vim/bundle/vimtex
