@@ -258,6 +258,7 @@
 ./gitrc/autoadd.sh
 ./gitrc/checkGitStatus.sh
 ./gitrc/checkout_rejs.sh
+./gitrc/discard_unnecessaries.sh
 ./gitrc/dogdio.sh
 ./gitrc/dogsync.sh
 ./gitrc/fetch_all.sh
