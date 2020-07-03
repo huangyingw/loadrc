@@ -26,7 +26,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gco :execute s:Gco(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcob :execute s:Gcob(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcof :execute s:Gcof(<f-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcom :execute s:Gcom(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcp :execute s:Gcp(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdev :execute s:Gdev()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi :execute s:Gdi(<f-args>)
@@ -494,12 +493,6 @@ function! s:KdiffFile() abort
     only
     call asyncrun#stop('<bang>')
     call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/KdiffFile.py ' . '"' .  expand("%:p") . '"')
-endfunction
-
-
-function! s:Gcom(args, ...) abort
-    let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"')
 endfunction
 
 function! s:Gshow(args, ...) abort

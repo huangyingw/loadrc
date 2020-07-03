@@ -3,7 +3,7 @@ file="$1"
 
 if [ $(basename "$file") = "gbil.log" ]
 then
-    git checkout files.proj
+    ~/loadrc/gitrc/discard_unnecessaries.sh
     ~/loadrc/gitrc/gbir.sh
     exit 0
 fi

@@ -293,7 +293,7 @@ function! VimOpen()
     elseif (expand("%") ==# 'gbil.log')
         let b:commit = expand("<cword>")
         call Cd2Worktree()
-        exec '!git checkout files.proj ; git checkout ' . '"' .  b:commit . '"'
+        exec '!~/loadrc/gitrc/discard_unnecessaries.sh ; git checkout ' . '"' .  b:commit . '"'
     elseif (expand("%") ==# 'glg.findresult')
         let b:commit = expand("<cword>")
         exec '!git checkout ' . '"' .  b:commit . '"'
@@ -305,7 +305,7 @@ function! VimOpen()
     elseif (&filetype ==# 'fugitiveblame')
         let b:commit = expand("<cword>")
         call Cd2Worktree()
-        exec '!git checkout files.proj ; git diff --quiet && git diff HEAD --quiet &&  git checkout -f ' . '"' .  b:commit . '^"'
+        exec '!~/loadrc/gitrc/discard_unnecessaries.sh ; git diff --quiet && git diff HEAD --quiet &&  git checkout -f ' . '"' .  b:commit . '^"'
         ""call fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", "' . 'blame' . ' " . <q-args>)
         "let s:cmd = 'Blame'
         "exec 'command! -bang -nargs=? -range=-1 -complete=customlist,fugitive#' . s:cmd . 'Complete G' . tolower(s:cmd) 'exe fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", "' . tolower(s:cmd) . ' " . <q-args>)'
