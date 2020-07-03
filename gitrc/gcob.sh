@@ -6,6 +6,7 @@ then
 fi
 
 branch="$1"
+currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 git remote update
 
 if [ -n "$2" ]
@@ -21,3 +22,7 @@ else
         git checkout -b "$branch"
     fi
 fi
+
+~/loadrc/gitrc/discard_unnecessaries.sh
+git checkout "$branch"
+git merge "$currentBranch"

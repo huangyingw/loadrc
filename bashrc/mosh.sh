@@ -12,4 +12,7 @@ else
     tmuxAction='/usr/bin/tmux new-session -A -s mosh'
 fi
 
-mosh --server="$server" "$target" -- ${tmuxAction}
+while true
+do
+    mosh --server="$server" "$target" -- ${tmuxAction}
+done
