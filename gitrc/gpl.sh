@@ -1,8 +1,8 @@
 #!/bin/zsh
 ~/loadrc/gitrc/include_gitconfig.sh
-git remote update
-git checkout files.proj *.gdio.diff
-git pull
+git remote update &
+~/loadrc/gitrc/discard_unnecessaries.sh
+git pull &
 currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 
 for ss in `git remote -v |awk '/\(fetch\)$/{print $1}'`
@@ -18,7 +18,10 @@ do
     eval "$COMMAND"
 done
 
-if [ -n $(git config gsync.remote) ]
+remote=$(git config gsync.remote)
+branch=$(git config gsync.branch)
+if [ -n "$remote" ]
 then
-    git pull $(git config gsync.remote) $(git config gsync.branch) &
+    git fetch "$remote" "$branch":"$branch" &
+    git merge "$branch" &
 fi

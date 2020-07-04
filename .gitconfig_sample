@@ -1,18 +1,18 @@
-[remote "origin"]
+[remote "authorVar"]
     url = urlVar
-    fetch = +refs/heads/*:refs/remotes/origin/*
-[remote "github"]
-    url = git@github.com:huangyingw/projVar.git
+    fetch = +refs/heads/*:refs/remotes/authorVar/*
+[remote "origin"]
+    url = git@github.com:huangyingw/repoVar.git
     fetch = +refs/heads/*:refs/remotes/github/*
 [push]
-    remote = github
-[gsync]
     remote = origin
+[gsync]
+    remote = authorVar
     branch = master
 [merge]
     allow = true
 [branch "dev"]
-    remote = github
+    remote = origin
     merge = refs/heads/dev
 [branch "master"]
     remote = origin

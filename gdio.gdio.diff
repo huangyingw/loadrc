@@ -1,185 +1,31 @@
-diff --git a/.gitrc b/.gitrc
-index af69691c..621cf604 100755
---- ./.gitrc
-+++ ./.gitrc
-@@ -28,6 +28,8 @@ alias gdev='$HOME/loadrc/gitrc/gdev.sh'
- alias gdi2='$HOME/loadrc/gitrc/gdi2.sh'
- alias gdi='$HOME/loadrc/gitrc/gdi.sh'
- alias gdif='$HOME/loadrc/gitrc/gdif.sh'
-+alias gdio='$HOME/loadrc/gitrc/gdio.sh'
-+alias gdit='$HOME/loadrc/gitrc/gdit.sh'
- alias gfe='git fetch'
- alias gff='$HOME/loadrc/gitrc/gff.sh'
- alias gfix='$HOME/loadrc/gitrc/gfix.sh'
-diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
-index e9c3e6c6..ba99cae7 100755
---- ./bashrc/cscope.sh
-+++ ./bashrc/cscope.sh
-@@ -56,7 +56,6 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
-     sed -i.bak 's/ /\\ /g' files.proj && \
-     ~/loadrc/bashrc/fvideos.sh && \
-     ~/loadrc/bashrc/fdocs.sh && \
--    echo > cscope.small.files && \
-     echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
-     cscope -bq -i "$TARGET" -f cscope.out.bak && \
-     cp -fv cscope.out.bak cscope.out && \
-diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
-index a5b82acb..fc111f6c 100755
---- ./gitrc/.gitconfig
-+++ ./gitrc/.gitconfig
-@@ -36,7 +36,7 @@
- [core]
-     excludesfile = "~/.globalgitignore"
-     mergeoptions = --no-edit
--    filemode = false
-+    filemode = true
-     editor = nvim
- [giggle]
-     main-window-maximized = true
-@@ -61,6 +61,7 @@
-     ignore = COMMIT_EDITMSG
-     ignore = change
-     ignore = files.proj
-+    ignore = files.rev
-     ignore = gbil.log
-     ignore = includefile.conf
-     ignore = prunefile.conf
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
-index 6d71ac21..c36eb499 100755
+index c36eb499..6ff6dc9d 100755
 --- ./gitrc/dogdio.sh
 +++ ./gitrc/dogdio.sh
-@@ -4,14 +4,12 @@ then
-     exit 0
- fi
- 
--~/loadrc/gitrc/gpl.sh
--
- local_branch="$(~/loadrc/gitrc/get_current_branch.sh)" 
+@@ -8,8 +8,7 @@ local_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
  output="$local_branch.gdio.diff"
  output=$(echo "$output" | sed 's/\//_/g')
  local_master="$(git config gsync.branch)"
- remote="$(git config gsync.remote)"
+-remote="$(git config gsync.remote)"
  
--~/loadrc/gitrc/gdi.sh "$remote/$local_master " "$local_branch" 2>&1 | tee "$output"  
-+~/loadrc/gitrc/gdi.sh "$remote/$local_master " 2>&1 | tee "$output"  
+-~/loadrc/gitrc/gdi.sh "$remote/$local_master " 2>&1 | tee "$output"  
++~/loadrc/gitrc/gdi.sh "$local_master " 2>&1 | tee "$output"  
  sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
  exit 0
-diff --git a/gitrc/dogsync.sh b/gitrc/dogsync.sh
-index aee86c9d..76ff478a 100755
---- ./gitrc/dogsync.sh
-+++ ./gitrc/dogsync.sh
-@@ -1,3 +1,4 @@
- #!/bin/zsh
- ~/loadrc/gitrc/gpl.sh &
- ~/loadrc/gitrc/gps.sh &
-+~/loadrc/gitrc/dogdio.sh &
-diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
-index f9684f2e..6de01696 100755
---- ./gitrc/gdit.sh
-+++ ./gitrc/gdit.sh
-@@ -7,7 +7,8 @@ remote_branch="$(git config gsync.branch)"
- 
- git checkout files.proj
- git checkout -b "$target_branch" "$remote_branch"
--git merge "$remote/$remote_branch" && \
-+git checkout -f "$target_branch"
-+git merge -X theirs "$remote/$remote_branch" && \
-     git pull && \
-     git push ; \
-     git checkout "$current_branch" && \
-diff --git a/gitrc/gicb.sh b/gitrc/gicb.sh
-index bec88869..bd3c7b59 100755
---- ./gitrc/gicb.sh
-+++ ./gitrc/gicb.sh
-@@ -7,4 +7,5 @@ git init \
-     && git add . \
-     && git add -f files.proj \
-     && $HOME/loadrc/gitrc/g.sh \
-+    && hub create \
-     && ~/loadrc/gitrc/gclb.sh
 diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
-index 0ec0480c..5aa5d719 100755
+index db0026a7..8dde1901 100755
 --- ./gitrc/gpl.sh
 +++ ./gitrc/gpl.sh
-@@ -1,7 +1,7 @@
- #!/bin/zsh
- ~/loadrc/gitrc/include_gitconfig.sh
- git remote update
--git checkout files.proj
-+git checkout files.proj *.gdio.diff
- git pull
- currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
+@@ -18,7 +18,10 @@ do
+     eval "$COMMAND"
+ done
  
-diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
-index f72f4122..e8af707a 100755
---- ./imvurc/ghypo.sh
-+++ ./imvurc/ghypo.sh
-@@ -8,8 +8,9 @@ else
-     ~/loadrc/gitrc/gclean.sh
-     git remote update
-     git checkout -b "$1" origin/"$1"
--    git checkout "$1"
--    git pull
-+    git checkout -f "$1"
-+    git branch -u origin/"$1"
-+    git merge -X theirs origin/"$1" 
- 
-     if [ $(~/loadrc/gitrc/git_ready.sh) ]
-     then
-diff --git a/prunefile_template.conf b/prunefile_template.conf
-index fb57bfdc..2154bcb9 100644
---- ./prunefile_template.conf
-+++ ./prunefile_template.conf
-@@ -1,5 +1,4 @@
- "./cscope"
--"./cscope.small.files"
- "./files.proj"
- "./running.lck"
- "./running.time"
-diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index 895f4400..c3e993d7 100644
---- ./vimrc/.vim/plugin/fugitive.vim
-+++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -347,6 +347,10 @@ function! s:Gdi(...) abort
-     if expand('%:t') != 'index'
-         if arg1 == ''
-             call fugitive#Diffsplit(0, 1, "vert", '', [])
-+        elseif tolower(arg1) == 'o'
-+            let remote = substitute(system("git config gsync.remote"), '\n', '', '')
-+            let branch = substitute(system("git config gsync.branch"), '\n', '', '')
-+            call fugitive#Diffsplit(1, 0, '', remote . '/' . branch, [remote . '/' . branch])
-         else
-             call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
-         endif
-@@ -382,17 +386,9 @@ function! s:Gdit() abort
- endfunction
- 
- function! s:Gdio(...) abort
--    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
--    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
--    if expand('%:t') != 'index'
--        call fugitive#Diffsplit(1, 0, '', remote . '/' . branch, [remote . '/' . branch])
--        return 
--    endif
--
-     let worktree = Cd2Worktree()
-     let current_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
--    let local_branch = (a:0 >= 1) ? a:1 : current_branch
--    let output = local_branch . '.gdio.diff'
-+    let output = current_branch . '.gdio.diff'
-     let output = substitute(output, "/", "_", "g")
-     exec '!~/loadrc/gitrc/gdio.sh'
- 
-diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
-index 9e4d7b0f..555037d8 100755
---- ./vishrc/vrun.sh
-+++ ./vishrc/vrun.sh
-@@ -55,7 +55,7 @@ case $extension in
-     sh)
-         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
-         then
--            ssh -nY "$host" ". ~/loadrc/.loadrc ; $rpath/$rfile"
-+            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
-             rsync -aHv --force --progress \
-                 --files-from=files.rev \
-                 "$host:$rpath/" \
+-if [ -n $(git config gsync.remote) ]
++remote=$(git config gsync.remote)
++branch=$(git config gsync.branch)
++if [ -n "$remote" ]
+ then
+-    git pull $(git config gsync.remote) $(git config gsync.branch) &
++    git fetch "$remote" "$branch":"$branch" &
++    git merge "$branch"
+ fi
