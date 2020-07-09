@@ -7,8 +7,9 @@ local_master="$(git config gsync.branch)"
 
 ~/loadrc/gitrc/discard_unnecessaries.sh
 git checkout -b "$target_branch" "$remote/$target_branch"
-git checkout -b "$target_branch" "$remote/$local_master"
+git checkout -b "$target_branch" "$local_master"
 git checkout -f "$target_branch"
+git branch -u "$remote/$target_branch"
 git merge -X theirs "$local_master" && \
     git pull && \
     git push ; \
