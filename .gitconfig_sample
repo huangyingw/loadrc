@@ -3,7 +3,7 @@
     fetch = +refs/heads/*:refs/remotes/authorVar/*
 [remote "origin"]
     url = git@github.com:huangyingw/repoVar.git
-    fetch = +refs/heads/*:refs/remotes/github/*
+    fetch = +refs/heads/*:refs/remotes/origin/*
 [push]
     remote = origin
 [gsync]
