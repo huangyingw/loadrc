@@ -24,10 +24,8 @@ fi
 
 host=$(git config deploy.host)
 rpath=$(git config deploy.path)
-local_master="$(git config gsync.branch)"
 
 GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
-git checkout -b "$targetBranch" "$local_master" ; \
     ~/loadrc/gitrc/discard_unnecessaries.sh ; \
     git checkout -f "$targetBranch" ; \
     git apply --reject --whitespace=fix "$GDITDIFF" ; \
