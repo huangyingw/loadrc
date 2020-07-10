@@ -7,7 +7,7 @@ then
 fi
 
 . ~/loadrc/gitrc/parse_github.sh "$1"
-target="${author}-${repo}"
+target="${author}/${repo}"
 echo "target --> $target"
 
 git clone "$1" "$target" ; \
