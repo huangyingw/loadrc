@@ -24,12 +24,17 @@ index 9bf45787..9c0675e1 100755
  if [[ $(git config --get-all push.remote) ]]
  then
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index 1fd66786..8c589733 100755
+index 1fd66786..fb80774f 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
-@@ -29,7 +29,7 @@ local_master="$(git config gsync.branch)"
+@@ -24,12 +24,10 @@ fi
+ 
+ host=$(git config deploy.host)
+ rpath=$(git config deploy.path)
+-local_master="$(git config gsync.branch)"
+ 
  GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
- git checkout -b "$targetBranch" "$local_master" ; \
+-git checkout -b "$targetBranch" "$local_master" ; \
      ~/loadrc/gitrc/discard_unnecessaries.sh ; \
 -    git checkout "$targetBranch" ; \
 +    git checkout -f "$targetBranch" ; \
@@ -37,15 +42,24 @@ index 1fd66786..8c589733 100755
      ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
      git add . && \
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
-index 4958da0c..5462c78e 100755
+index 4958da0c..b9a02354 100755
 --- ./gitrc/gdit.sh
 +++ ./gitrc/gdit.sh
-@@ -9,7 +9,7 @@ remote_branch="$(git config gsync.branch)"
+@@ -3,13 +3,14 @@ output="$1"
+ current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
+ target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
+ remote="$(git config gsync.remote)"
+-remote_branch="$(git config gsync.branch)"
++local_master="$(git config gsync.branch)"
+ 
+ ~/loadrc/gitrc/discard_unnecessaries.sh
  git checkout -b "$target_branch" "$remote/$target_branch"
- git checkout -b "$target_branch" "$remote/$remote_branch"
+-git checkout -b "$target_branch" "$remote/$remote_branch"
++git checkout -b "$target_branch" "$local_master"
  git checkout -f "$target_branch"
 -git merge -X theirs "$remote/$remote_branch" && \
-+git merge -X theirs "$remote_branch" && \
++git branch -u "$remote/$target_branch"
++git merge -X theirs "$local_master" && \
      git pull && \
      git push ; \
      git checkout "$current_branch" && \
