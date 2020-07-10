@@ -61,6 +61,7 @@ case $extension in
                 "$host:$rpath/" \
                 .
         else
+            . ~/loadrc/.loadrc
             "$file"
         fi
         ;;
