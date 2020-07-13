@@ -1,3 +1,3 @@
 #!/bin/zsh
-~/loadrc/kvmrc/vsave.sh
+#~/loadrc/kvmrc/vsave.sh
 reboot
