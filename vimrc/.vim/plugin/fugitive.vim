@@ -309,14 +309,12 @@ function! s:G(args, ...) abort
     call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.findresult')
 
     if &diff
-        call s:Gs()
         on
         set winwidth=999999
         wincmd |
         syntax on
         windo diffoff
         windo set wrap
-        e
     endif
 endfunction
 
