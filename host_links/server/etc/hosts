@@ -3,7 +3,7 @@
 192.168.123.76  u1804
 192.168.123.88  u2004
 172.27.217.162 localhost.imvu.com
-10.1.10.8 mini
+192.168.31.140 mini
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
