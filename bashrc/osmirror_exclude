@@ -14,6 +14,7 @@ etc/hostname
 etc/hosts
 etc/libvirt
 etc/mdadm/mdadm.conf
+etc/network/interfaces
 media/dev
 media/nvme
 media/volgrp
