@@ -8,32 +8,13 @@ then
     exit 0
 fi
 
-apt-get install -y \
+apt-get update ; \
+    apt-get install -y \
     bridge-utils \
-    build-essential \
-    cpu-checker \
-    g++ make \
-    gcc \
-    git \
-    htop \
-    kdiff3 \
-    libvirt-bin \
-    mdadm \
-    mosh \
-    net-tools \
-    pm-utils \
-    python-dev \
-    python-pip \
+    libvirt-clients \
+    libvirt-daemon \
     qemu \
     qemu-kvm \
-    slurm \
-    software-properties-common \
-    ssh \
-    sshfs \
-    tmux \
-    ubuntu-vm-builder \
-    vim-gnome \
-    virt-manager \
-    virtinst
+    virt-manager
 
 ./configure.sh
