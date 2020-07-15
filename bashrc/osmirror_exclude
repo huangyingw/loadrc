@@ -17,7 +17,6 @@ etc/mdadm/mdadm.conf
 media/dev
 media/nvme
 media/volgrp
-usr/NX/etc/server.cfg
 var/lib/docker
 var/lib/libvirt
 var/lib/mldonkey
