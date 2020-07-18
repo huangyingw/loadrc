@@ -66,6 +66,7 @@
     ignore = includefile.conf
     ignore = prunefile.conf
     ignore = prunefix.conf
+    ignore = prunefix.rsync
     ignore = rsync.files
     ignore = setup.cfg
 [filter "lfs"]
