@@ -1,5 +1,5 @@
 #!/bin/zsh
-git branch -d "$1"
+git branch -D "$1"
 
 if [[ $(git config --get-all push.remote) ]]
 then
