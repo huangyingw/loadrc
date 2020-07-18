@@ -1,3 +1,24 @@
+diff --git a/.linb-sandbox.rc b/.linb-sandbox.rc
+new file mode 100644
+index 00000000..3b6234e9
+--- /dev/null
++++ ./.linb-sandbox.rc
+@@ -0,0 +1,2 @@
++# eval `ssh-agent -s`
++# ssh-add /home/cit/.ssh/github_id_rsa
+diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
+index b6e1f0ce..1c114033 100755
+--- ./gitrc/.gitconfig
++++ ./gitrc/.gitconfig
+@@ -66,6 +66,8 @@
+     ignore = includefile.conf
+     ignore = prunefile.conf
+     ignore = prunefix.conf
++    ignore = prunefix.rsync
++    ignore = rsync.files
+     ignore = setup.cfg
+ [filter "lfs"]
+     clean = git-lfs clean -- %f
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
 index 6ff6dc9d..7163d50e 100755
 --- ./gitrc/dogdio.sh
@@ -74,3 +95,22 @@ index 5f11a932..2fd1487b 100755
 -git checkout -b "$fix_branch" && \
 -    ~/loadrc/gitrc/gdev.sh "$currentBranch"
 +git checkout -b "$fix_branch"
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index bcb2b652..e1a9db77 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -309,14 +309,12 @@ function! s:G(args, ...) abort
+     call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.findresult')
+ 
+     if &diff
+-        call s:Gs()
+         on
+         set winwidth=999999
+         wincmd |
+         syntax on
+         windo diffoff
+         windo set wrap
+-        e
+     endif
+ endfunction
+ 
