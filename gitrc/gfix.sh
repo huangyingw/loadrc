@@ -15,5 +15,4 @@ then
     exit 0
 fi
 
-git checkout -b "$fix_branch" && \
-    ~/loadrc/gitrc/gdev.sh "$currentBranch"
+git checkout -b "$fix_branch"
