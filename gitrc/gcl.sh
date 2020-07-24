@@ -6,7 +6,7 @@ then
     exit 1
 fi
 
-. ~/loadrc/gitrc/parse_github.sh "$1"
+. ~/loadrc/gitrc/parse-github.sh "$1"
 target="${author}/${repo}"
 echo "target --> $target"
 
