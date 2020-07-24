@@ -3,7 +3,7 @@ SOURCE=$1
 TARGET=$2
 
 doCopy () {
-    rsync -aHv --progress --max-size="$1" --force \
+    rsync -aHv --progress --remove-source-files --max-size="$1" --force \
         --exclude \*.zip  \
         --exclude \*.rar  \
         "${SOURCE}" "${TARGET}"
