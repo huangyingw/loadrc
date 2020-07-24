@@ -9,7 +9,6 @@ doCopy () {
         "${SOURCE}" "${TARGET}"
 }
 
-crontab -r
 COUNTER=10
 while [[  $COUNTER -lt 400 ]]; do
     MAXSIZE="$COUNTER""m"
