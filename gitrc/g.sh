@@ -1,9 +1,7 @@
 #!/bin/zsh
 ~/loadrc/gitrc/include_gitconfig.sh
-commit_message=$(~/loadrc/gitrc/getCommit_message.sh "$1") 
+git commit --no-edit || \
+    git commit -m "$1" || \
+    git commit -m n
 
-if [ -n "$commit_message" ]
-then
-    git commit  --no-verify -m "$commit_message"
-fi
-. ~/loadrc/gitrc/postCommit.sh
+~/loadrc/gitrc/postCommit.sh

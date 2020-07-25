@@ -8,8 +8,9 @@ else
     ~/loadrc/gitrc/gclean.sh
     git remote update
     git checkout -b "$1" origin/"$1"
-    git checkout "$1"
-    git pull
+    git checkout -f "$1"
+    git branch -u origin/"$1"
+    git merge -X theirs origin/"$1" 
 
     if [ $(~/loadrc/gitrc/git_ready.sh) ]
     then

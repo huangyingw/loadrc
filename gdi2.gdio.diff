@@ -1,0 +1,116 @@
+diff --git a/.linb-sandbox.rc b/.linb-sandbox.rc
+new file mode 100644
+index 00000000..3b6234e9
+--- /dev/null
++++ ./.linb-sandbox.rc
+@@ -0,0 +1,2 @@
++# eval `ssh-agent -s`
++# ssh-add /home/cit/.ssh/github_id_rsa
+diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
+index b6e1f0ce..1c114033 100755
+--- ./gitrc/.gitconfig
++++ ./gitrc/.gitconfig
+@@ -66,6 +66,8 @@
+     ignore = includefile.conf
+     ignore = prunefile.conf
+     ignore = prunefix.conf
++    ignore = prunefix.rsync
++    ignore = rsync.files
+     ignore = setup.cfg
+ [filter "lfs"]
+     clean = git-lfs clean -- %f
+diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
+index 6ff6dc9d..7163d50e 100755
+--- ./gitrc/dogdio.sh
++++ ./gitrc/dogdio.sh
+@@ -8,7 +8,9 @@ local_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
+ output="$local_branch.gdio.diff"
+ output=$(echo "$output" | sed 's/\//_/g')
+ local_master="$(git config gsync.branch)"
++remote="$(git config gsync.remote)"
+ 
++git branch "$local_master" "$remote/$local_master"
+ ~/loadrc/gitrc/gdi.sh "$local_master" 2>&1 | tee "$output"  
+ sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
+ exit 0
+diff --git a/gitrc/gbrd.sh b/gitrc/gbrd.sh
+index 9bf45787..9c0675e1 100755
+--- ./gitrc/gbrd.sh
++++ ./gitrc/gbrd.sh
+@@ -1,5 +1,5 @@
+ #!/bin/zsh
+-git branch -d "$1"
++git branch -D "$1"
+ 
+ if [[ $(git config --get-all push.remote) ]]
+ then
+diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
+index 1fd66786..fb80774f 100755
+--- ./gitrc/gdi2.sh
++++ ./gitrc/gdi2.sh
+@@ -24,12 +24,10 @@ fi
+ 
+ host=$(git config deploy.host)
+ rpath=$(git config deploy.path)
+-local_master="$(git config gsync.branch)"
+ 
+ GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
+-git checkout -b "$targetBranch" "$local_master" ; \
+     ~/loadrc/gitrc/discard_unnecessaries.sh ; \
+-    git checkout "$targetBranch" ; \
++    git checkout -f "$targetBranch" ; \
+     git apply --reject --whitespace=fix "$GDITDIFF" ; \
+     ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
+     git add . && \
+diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
+index 4958da0c..b9a02354 100755
+--- ./gitrc/gdit.sh
++++ ./gitrc/gdit.sh
+@@ -3,13 +3,14 @@ output="$1"
+ current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
+ target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
+ remote="$(git config gsync.remote)"
+-remote_branch="$(git config gsync.branch)"
++local_master="$(git config gsync.branch)"
+ 
+ ~/loadrc/gitrc/discard_unnecessaries.sh
+ git checkout -b "$target_branch" "$remote/$target_branch"
+-git checkout -b "$target_branch" "$remote/$remote_branch"
++git checkout -b "$target_branch" "$local_master"
+ git checkout -f "$target_branch"
+-git merge -X theirs "$remote/$remote_branch" && \
++git branch -u "$remote/$target_branch"
++git merge -X theirs "$local_master" && \
+     git pull && \
+     git push ; \
+     git checkout "$current_branch" && \
+diff --git a/gitrc/gfix.sh b/gitrc/gfix.sh
+index 5f11a932..2fd1487b 100755
+--- ./gitrc/gfix.sh
++++ ./gitrc/gfix.sh
+@@ -15,5 +15,4 @@ then
+     exit 0
+ fi
+ 
+-git checkout -b "$fix_branch" && \
+-    ~/loadrc/gitrc/gdev.sh "$currentBranch"
++git checkout -b "$fix_branch"
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index bcb2b652..e1a9db77 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -309,14 +309,12 @@ function! s:G(args, ...) abort
+     call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.findresult')
+ 
+     if &diff
+-        call s:Gs()
+         on
+         set winwidth=999999
+         wincmd |
+         syntax on
+         windo diffoff
+         windo set wrap
+-        e
+     endif
+ endfunction
+ 

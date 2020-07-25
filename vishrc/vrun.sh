@@ -3,7 +3,7 @@ file="$1"
 
 if [ $(basename "$file") = "gbil.log" ]
 then
-    git checkout files.proj
+    ~/loadrc/gitrc/discard_unnecessaries.sh
     ~/loadrc/gitrc/gbir.sh
     exit 0
 fi
@@ -55,24 +55,25 @@ case $extension in
     sh)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            ssh -nY "$host" ". ~/loadrc/.loadrc ; $rpath/$rfile"
+            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
             rsync -aHv --force --progress \
                 --files-from=files.rev \
                 "$host:$rpath/" \
                 .
         else
+            . ~/loadrc/.loadrc
             "$file"
         fi
         ;;
     py)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; python $rfile"
+            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; python3 $rfile"
         else
             SCRIPT=$(realpath "$file")
             SCRIPTPATH=$(dirname "$SCRIPT")
             cd "$SCRIPTPATH"
-            python "$file"
+            python3 "$file"
         fi
         ;;
     vim)
