@@ -5,6 +5,9 @@
 172.27.217.162 localhost.imvu.com
 192.168.31.140 mini
 192.168.31.149 minds
+192.168.31.153 gluster00
+192.168.31.129 gluster01
+192.168.31.115 gluster02
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
