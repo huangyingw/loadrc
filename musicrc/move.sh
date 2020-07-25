@@ -10,7 +10,7 @@ doCopy () {
 }
 
 COUNTER=10
-while [[  $COUNTER -lt 400 ]]; do
+while [[  $COUNTER -lt 1900 ]]; do
     MAXSIZE="$COUNTER""m"
     doCopy "$MAXSIZE"
     let COUNTER=COUNTER+10
