@@ -342,8 +342,8 @@
 ./gitrc/gvlg.sh
 ./gitrc/gwap.sh
 ./gitrc/include_gitconfig.sh
-./gitrc/parse_github.sh
-./gitrc/parse_github.test.sh
+./gitrc/parse-github.sh
+./gitrc/parse-github.test.sh
 ./gitrc/postCommit.sh
 ./gitrc/restore_deleted.sh
 ./gitrc/retached.sh
@@ -470,8 +470,9 @@
 ./mdadmrc/create.sh
 ./mdadmrc/reactivate.sh
 ./mdadmrc/replace.sh
-./musicrc/copy.sh
 ./musicrc/copy_test.sh
+./musicrc/move.sh
+./musicrc/move.test.sh
 ./musicrc/unrar.sh
 ./musicrc/unrar_test.sh
 ./musicrc/unzip.sh
@@ -2622,6 +2623,7 @@
 ./vimrc/.vim/bundle/vimtex/indent/bib.vim
 ./vimrc/.vim/bundle/vimtex/indent/tex.vim
 ./vimrc/.vim/bundle/vimtex/rplugin/python3/denite/source/vimtex.py
+./vimrc/.vim/bundle/vimtex/test/tests/test-completion-bibtex/.gitignore
 ./vimrc/.vim/bundle/vundle.vim/.gitignore
 ./vimrc/.vim/bundle/vundle.vim/CONTRIBUTING.md
 ./vimrc/.vim/bundle/vundle.vim/LICENSE-MIT.txt
