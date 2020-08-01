@@ -15,7 +15,7 @@ git clone "$1" "$target" ; \
 
 urlVar="$1"
 urlVar=$(echo "$urlVar" | sed 's/\//\\\//g')
-sed -i.bak "s|urlVar|$urlVar|g;s|repoVar|$target|g;s|authorVar|$author|g" "$target"/.gitconfig
+sed -i.bak "s|urlVar|$urlVar|g;s|repoVar|$repo|g;s|authorVar|$author|g" "$target"/.gitconfig
 echo ".gitconfig --> $(realpath ${target}/.gitconfig)"
 
 cd "$target" && \
