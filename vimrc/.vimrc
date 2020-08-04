@@ -275,3 +275,5 @@ let g:buffergator_sort_regime = "mru"
 "         set wrap
 "     endif
 " endfunction
+
+let g:tex_flavor = 'latex'
