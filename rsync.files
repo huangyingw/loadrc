@@ -173,8 +173,8 @@
 ./bashrc/run.sh
 ./bashrc/runb.sh
 ./bashrc/searchIP.sh
-./bashrc/selectCopy.sh
 ./bashrc/selectMirror.sh
+./bashrc/select_copy.sh
 ./bashrc/select_random_files.sh
 ./bashrc/setup.sh
 ./bashrc/sleep.sh
@@ -371,6 +371,7 @@
 ./hosts/movie/var/lib/zerotier-one/identity.secret
 ./hosts/sandbox/var/lib/zerotier-one/identity.public
 ./hosts/sandbox/var/lib/zerotier-one/identity.secret
+./hosts/server/etc/netplan/00-installer-config.yaml
 ./hosts/server/var/lib/zerotier-one/identity.public
 ./hosts/server/var/lib/zerotier-one/identity.secret
 ./hosts/toshiba/var/lib/zerotier-one/identity.public
@@ -2542,6 +2543,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/matchparen.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/misc.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/motion.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/options.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/auxiliary.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/bib.vim
