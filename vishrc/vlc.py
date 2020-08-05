@@ -1,21 +1,10 @@
 #!/usr/bin/env python3
+from os import path
 import sys
 from pathlib import Path
 home = str(Path.home()) + '/'
-
-'''
-with open("/Users/huangyingw/Dropbox/loadrc.home/output.txt", "w") as text_file:
-    text_file.write("sys.argv[0] --> %s\n" % sys.argv[0])
-    text_file.write("sys.argv[1] --> %s\n" % sys.argv[1])
-    text_file.write("sys.argv[2] --> %s\n" % sys.argv[2])
-
-print sys.argv[0] # prints python_script.py
-print sys.argv[1] # prints var1
-print sys.argv[2] # prints var2
-'''
-# insert at 1, 0 is the script path (or '' in REPL)
-sys.path.insert(1, home + 'pythonrc/')
-
+sys.path.insert(1, home + 'loadrc/pythonrc/')
+from parse_vtt import parse_vtt_str
 
 with open(home + "loadrc/output.txt", "w") as text_file:
     text_file.write("sys.argv[0] --> %s\n" % sys.argv[0])
@@ -25,3 +14,11 @@ with open(home + "loadrc/output.txt", "w") as text_file:
     lineVar = sys.argv[2]
     text_file.write("fileVar --> %s\n" % fileVar)
     text_file.write("lineVar --> %s\n" % lineVar)
+    targetFile = fileVar + '/' + lineVar
+    text_file.write("targetFile --> %s\n" % targetFile)
+    if path.exists(targetFile):
+        text_file.write("path.exists --> \n")
+        start = parse_vtt_str(lineVar)
+        text_file.write("start --> %s\n" % start)
+    else:
+        text_file.write("path.exists not --> \n")
