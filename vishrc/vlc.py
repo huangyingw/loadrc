@@ -6,7 +6,7 @@ home = str(Path.home()) + '/'
 sys.path.insert(1, home + 'loadrc/pythonrc/')
 from parse_vtt import parse_vtt_str
 
-with open(home + "loadrc/output.txt", "w") as text_file:
+with open(home + "output.txt", "w") as text_file:
     text_file.write("sys.argv[0] --> %s\n" % sys.argv[0])
     text_file.write("sys.argv[1] --> %s\n" % sys.argv[1])
     text_file.write("sys.argv[2] --> %s\n" % sys.argv[2])
