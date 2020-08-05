@@ -1,5 +1,0 @@
-sys.argv[0] --> ./vlc.py
-sys.argv[1] --> /Users/huangyingw/Dropbox/learning/AI/fast.ai
-sys.argv[2] --> 02:11:12.620 --> 02:11:17.560
-fileVar --> /Users/huangyingw/Dropbox/learning/AI/fast.ai
-lineVar --> 02:11:12.620 --> 02:11:17.560
