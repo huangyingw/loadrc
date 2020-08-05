@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import datetime
 import re
 
@@ -13,3 +13,6 @@ a_timedelta = date_time - datetime.datetime(1900, 1, 1)
 seconds = a_timedelta.total_seconds()
 
 print(seconds)
+
+def parse_vtt_str(vttStr):
+    return 8
