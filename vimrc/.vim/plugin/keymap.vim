@@ -86,13 +86,15 @@ function! Filter()
     exec '%g!/' . b:keyword . '/d'
 endfunction
 
-function! PlayVideo()
+function! PlayVideo() abort
     if &buftype ==# "terminal"
         return 0
     endif
 
-    call asyncrun#stop('<bang>')
-    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/vlc.sh ' . '"' . expand('%:p:h') . '/' . '"' .  getline('.'))
+    " call asyncrun#stop('<bang>')
+    " exec '!~/loadrc/vishrc/vlc.py ' . '"' . expand('%:p:h') . '"' .  ' ' . '"' . getline('.') . '"'
+    " echom '~/loadrc/vishrc/vlc.py ' . '"' . expand('%:p:h') . '"' .  ' ' . '"' . getline('.') . '"'
+    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/vlc.py ' . '"' . expand('%:p:h') . '"' .  ' ' . '"' . getline('.') . '"')
 endfunction
 
 function! VDebug()
