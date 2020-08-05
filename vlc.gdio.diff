@@ -1,0 +1,160 @@
+diff --git a/error b/error
+index 3cae4633..467ed7fa 100644
+--- ./error
++++ ./error
+@@ -61,3 +61,7 @@ E15: Invalid expression: l:changed_win_bufs
+ Cought anything: Vim(cd):E472: Command failed
+ 
+ [ncm2_go@yarp] TypeError: expected str, bytes or os.PathLike object, not NoneType
++
++Error detected while processing function CSCSearch[12]..GetEscapedResult:
++line   15:
++E33: No previous substitute regular expression
+diff --git a/ffmpegrc/split.sh b/ffmpegrc/split.sh
+index d343a6af..3895bd05 100755
+--- ./ffmpegrc/split.sh
++++ ./ffmpegrc/split.sh
+@@ -9,9 +9,6 @@ do
+         output=$(echo "$line" | awk -F',' '{print $1}')
+         start=$(echo "$line" | awk -F',' '{print $2}')
+         end=$(echo "$line" | awk -F',' '{print $3}')
+-        if [ ! -f "$output" ] 
+-        then
+-            ffmpeg -n -ss "$start" -to "$end" -i "$input" "$output"
+-        fi
++        ffmpeg -y -ss "$start" -to "$end" -i "$input" -c copy "$output"
+ done < "$ss"
+ done
+diff --git a/output.txt b/output.txt
+new file mode 100644
+index 00000000..b7c16408
+--- /dev/null
++++ ./output.txt
+@@ -0,0 +1,8 @@
++sys.argv[0] --> ./vlc.py
++sys.argv[1] --> /Users/huangyingw/Dropbox/learning/AI/fast.ai
++sys.argv[2] --> Intro_to_Machine_Learning_-_Lesson_1.en.vtt
++fileVar --> /Users/huangyingw/Dropbox/learning/AI/fast.ai
++lineVar --> Intro_to_Machine_Learning_-_Lesson_1.en.vtt
++targetFile --> /Users/huangyingw/Dropbox/learning/AI/fast.ai/Intro_to_Machine_Learning_-_Lesson_1.en.vtt
++path.exists --> 
++start --> 8
+diff --git a/pythonrc/parse_vtt.py b/pythonrc/parse_vtt.py
+new file mode 100644
+index 00000000..628ad2d8
+--- /dev/null
++++ ./pythonrc/parse_vtt.py
+@@ -0,0 +1,18 @@
++#!/usr/bin/env python3
++import datetime
++import re
++
++time_string = "00:00:08.690 --> 00:00:08.700 align:start position:0%"
++
++r2 = re.findall(r"\d+:\d+:\d+(?=[^:]*-->)", time_string)
++print(r2)
++
++date_time = datetime.datetime.strptime(r2[0], "%H:%M:%S")
++
++a_timedelta = date_time - datetime.datetime(1900, 1, 1)
++seconds = a_timedelta.total_seconds()
++
++print(seconds)
++
++def parse_vtt_str(vttStr):
++    return 8
+diff --git a/pythonrc/time_string.py b/pythonrc/time_string.py
+new file mode 100644
+index 00000000..cec13115
+--- /dev/null
++++ ./pythonrc/time_string.py
+@@ -0,0 +1,12 @@
++#!/usr/bin/env python
++import datetime
++
++time_string = "01:01:09"
++date_time = datetime.datetime.strptime(time_string, "%H:%M:%S")
++
++print(date_time)
++
++a_timedelta = date_time - datetime.datetime(1900, 1, 1)
++seconds = a_timedelta.total_seconds()
++
++print(seconds)
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index 75de359f..bb24924b 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -92,7 +92,7 @@ function! PlayVideo()
+     endif
+ 
+     call asyncrun#stop('<bang>')
+-    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/vlc.sh ' . '"' . expand('%:p:h') . '/' . '"' .  getline('.'))
++    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/vlc.py ' . '"' . expand('%:p:h') . '"' .  ' ' . '"' . getline('.') . '"')
+ endfunction
+ 
+ function! VDebug()
+diff --git a/vishrc/vlc.py b/vishrc/vlc.py
+new file mode 100755
+index 00000000..0547c7ce
+--- /dev/null
++++ ./vishrc/vlc.py
+@@ -0,0 +1,24 @@
++#!/usr/bin/env python3
++from os import path
++import sys
++from pathlib import Path
++home = str(Path.home()) + '/'
++sys.path.insert(1, home + 'loadrc/pythonrc/')
++from parse_vtt import parse_vtt_str
++
++with open(home + "loadrc/output.txt", "w") as text_file:
++    text_file.write("sys.argv[0] --> %s\n" % sys.argv[0])
++    text_file.write("sys.argv[1] --> %s\n" % sys.argv[1])
++    text_file.write("sys.argv[2] --> %s\n" % sys.argv[2])
++    fileVar = sys.argv[1]
++    lineVar = sys.argv[2]
++    text_file.write("fileVar --> %s\n" % fileVar)
++    text_file.write("lineVar --> %s\n" % lineVar)
++    targetFile = fileVar + '/' + lineVar
++    text_file.write("targetFile --> %s\n" % targetFile)
++    if path.exists(targetFile):
++        text_file.write("path.exists --> \n")
++        start = parse_vtt_str(lineVar)
++        text_file.write("start --> %s\n" % start)
++    else:
++        text_file.write("path.exists not --> \n")
+diff --git a/vishrc/vlc.py.sh b/vishrc/vlc.py.sh
+new file mode 100755
+index 00000000..46467785
+--- /dev/null
++++ ./vishrc/vlc.py.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++./vlc.py "/Users/huangyingw/Dropbox/learning/AI/fast.ai" "Intro_to_Machine_Learning_-_Lesson_1.en.vtt"
+diff --git a/vishrc/vlc.sh b/vishrc/vlc.sh
+index 57af963a..880b8c75 100755
+--- ./vishrc/vlc.sh
++++ ./vishrc/vlc.sh
+@@ -5,9 +5,16 @@ then
+     exit
+ fi
+ 
++start=0
++
++if [ -n "$2" ]
++then
++    start="$2"
++fi
++
+ if [ $(uname) = "Darwin" ]
+ then
+-    /Applications/VLC.app/Contents/MacOS/VLC -f --macosx-continue-playback=2 "$1"
++    /Applications/VLC.app/Contents/MacOS/VLC --start-time="$start" -f --macosx-continue-playback=2 "$1"
+ else
+     #smplayer "$1"
+     smplayer -fullscreen "$1"
