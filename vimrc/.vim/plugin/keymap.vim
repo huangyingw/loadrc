@@ -92,7 +92,7 @@ function! PlayVideo()
     endif
 
     call asyncrun#stop('<bang>')
-    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/vlc.py ' . '"' . expand('%:p:h') . '"' .  ' ' . '"' . getline('.') . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/pythonrc/vlc.py ' . '"' . expand('%:p:h') . '"' .  ' ' . '"' . getline('.') . '"')
 endfunction
 
 function! VDebug()
