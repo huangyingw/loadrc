@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-import subprocess
 from handle_vtt import *
 from os import path
-import sys
 import platform
+import subprocess
+import sys
 
 
 fileVar = sys.argv[1]
