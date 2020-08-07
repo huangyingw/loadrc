@@ -4,8 +4,6 @@ from os import path
 import platform
 import subprocess
 import sys
-
-
 fileVar = sys.argv[1]
 lineVar = sys.argv[2]
 targetFile = path.dirname(fileVar) + '/' + lineVar
