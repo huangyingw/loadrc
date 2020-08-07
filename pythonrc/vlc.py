@@ -10,7 +10,8 @@ targetFile = path.dirname(fileVar) + '/' + lineVar
 
 
 def callvlc(targetFile, start=0):
-    subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
+    if targetFile:
+        subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
 
 
 if path.exists(targetFile):
