@@ -502,6 +502,8 @@
 ./pythonrc/setup.cfg
 ./pythonrc/setup.cfg.src
 ./pythonrc/time_string.py
+./pythonrc/vlc.py
+./pythonrc/vlc.py.sh
 ./readme
 ./ruleref.list
 ./set_host_configuration.sh
@@ -2710,8 +2712,6 @@
 ./vishrc/vaa_test.sh
 ./vishrc/vcommand.sh
 ./vishrc/vdebug.sh
-./vishrc/vlc.py
-./vishrc/vlc.py.sh
 ./vishrc/vlc.sh
 ./vishrc/vrun.sh
 ./vishrc/vsearch.sh
