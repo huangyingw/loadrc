@@ -501,7 +501,6 @@
 ./pythonrc/remove_comments.py
 ./pythonrc/setup.cfg
 ./pythonrc/setup.cfg.src
-./pythonrc/time_string.py
 ./pythonrc/vlc.py
 ./pythonrc/vlc.py.sh
 ./readme
