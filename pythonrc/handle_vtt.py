@@ -16,7 +16,7 @@ def find_vtt_video(filename):
     regex = r".+(?=\.en\.(vtt|srt)$)"
     matches = re.finditer(regex, filename, re.MULTILINE)
     for matchNum, match in enumerate(matches, start=1):
-        for postfix in ["mp4", "mkv"]:
+        for postfix in ["mp4", "mkv", "webm"]:
             targetFile = match.group() + "." + postfix
             if path.exists(targetFile):
                 return targetFile
