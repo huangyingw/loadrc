@@ -12,7 +12,10 @@ targetFile = path.dirname(fileVar) + '/' + lineVar
 def callvlc(targetFile, start=0):
     if targetFile:
         if platform.system() == 'Darwin':
-            subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
+            if start == 0:
+                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', targetFile])
+            else:
+                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
         else:
             subprocess.check_call(['smplayer', '-fullscreen', targetFile])
 
