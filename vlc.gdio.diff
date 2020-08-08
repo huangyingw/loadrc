@@ -68,10 +68,10 @@ index 00000000..23371749
 +    unittest.main()
 diff --git a/pythonrc/vlc.py b/pythonrc/vlc.py
 new file mode 100755
-index 00000000..926d54b1
+index 00000000..13a0cf4c
 --- /dev/null
 +++ ./pythonrc/vlc.py
-@@ -0,0 +1,25 @@
+@@ -0,0 +1,28 @@
 +#!/usr/bin/env python3
 +from handle_vtt import *
 +from os import path
@@ -86,7 +86,10 @@ index 00000000..926d54b1
 +def callvlc(targetFile, start=0):
 +    if targetFile:
 +        if platform.system() == 'Darwin':
-+            subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
++            if start == 0:
++                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', targetFile])
++            else:
++                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
 +        else:
 +            subprocess.check_call(['smplayer', '-fullscreen', targetFile])
 +
@@ -110,20 +113,6 @@ index 00000000..0ca202b1
 +
 +./vlc.py "/Users/huangyingw/Dropbox/learning/AI/fast.ai/fav.log" "Machine_Learning_1_-_Lesson_8.mkv"
 +./vlc.py "/Users/huangyingw/Dropbox/learning/AI/fast.ai/Intro_to_Machine_Learning_-_Lesson_1.en.vtt" "00:11:12.620 --> 02:11:17.560"
-diff --git a/vimrc/.vim/bundle/ncm2-jedi b/vimrc/.vim/bundle/ncm2-jedi
-index b28bf6d0..d378d3e8 160000
---- ./vimrc/.vim/bundle/ncm2-jedi
-+++ ./vimrc/.vim/bundle/ncm2-jedi
-@@ -1 +1 @@
--Subproject commit b28bf6d054051cc1c7a6b148323d3adb9baa4ed5
-+Subproject commit d378d3e80e15368c1714fd6c20dd461dc7db9796
-diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
-index c771a26c..52052311 160000
---- ./vimrc/.vim/bundle/tig-explorer.vim
-+++ ./vimrc/.vim/bundle/tig-explorer.vim
-@@ -1 +1 @@
--Subproject commit c771a26cd30408d6d8e7b680db1079314bafe544
-+Subproject commit 52052311b317117d0f0b8c1cc8d1760767f61277
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
 index 75de359f..2acf365e 100644
 --- ./vimrc/.vim/plugin/keymap.vim
