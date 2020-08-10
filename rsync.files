@@ -425,6 +425,7 @@
 ./kvmrc/vdestroy.sh
 ./kvmrc/vdisk.sh
 ./kvmrc/virt_resize.sh
+./kvmrc/virt_resize.test.sh
 ./kvmrc/vmdk2qcow2.sh
 ./kvmrc/vmdk3-hack.sh
 ./kvmrc/vmount.sh
