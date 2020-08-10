@@ -16,12 +16,14 @@
 ./.gitignore
 ./.gitmodules
 ./.gitrc
+./.gorc
 ./.hgignore
 ./.hgrc
 ./.imac.rc
 ./.imacpro.rc
 ./.kdiff3rc
 ./.kvmrc
+./.linb-sandbox.rc
 ./.lint-sandbox.rc
 ./.loadrc
 ./.macosrc
@@ -92,6 +94,7 @@
 ./bashrc/echo.sh
 ./bashrc/encrypt.sh
 ./bashrc/envSync.sh
+./bashrc/eval.test.sh
 ./bashrc/excludeFile
 ./bashrc/exiso.sh
 ./bashrc/fav.sh
@@ -170,8 +173,8 @@
 ./bashrc/run.sh
 ./bashrc/runb.sh
 ./bashrc/searchIP.sh
-./bashrc/selectCopy.sh
 ./bashrc/selectMirror.sh
+./bashrc/select_copy.sh
 ./bashrc/select_random_files.sh
 ./bashrc/setup.sh
 ./bashrc/sleep.sh
@@ -206,6 +209,7 @@
 ./bashrc/wait_for_pid.sh
 ./bashrc/wait_for_pid.test.sh
 ./bashrc/watch_copy.sh
+./bashrc/while_copy.sh
 ./bashrc/whole_ures_ex
 ./bashrc/wol.sh
 ./bashrc/zsh.test.sh
@@ -339,8 +343,8 @@
 ./gitrc/gvlg.sh
 ./gitrc/gwap.sh
 ./gitrc/include_gitconfig.sh
-./gitrc/parse_github.sh
-./gitrc/parse_github.test.sh
+./gitrc/parse-github.sh
+./gitrc/parse-github.test.sh
 ./gitrc/postCommit.sh
 ./gitrc/restore_deleted.sh
 ./gitrc/retached.sh
@@ -368,6 +372,7 @@
 ./hosts/movie/var/lib/zerotier-one/identity.secret
 ./hosts/sandbox/var/lib/zerotier-one/identity.public
 ./hosts/sandbox/var/lib/zerotier-one/identity.secret
+./hosts/server/etc/netplan/00-installer-config.yaml
 ./hosts/server/var/lib/zerotier-one/identity.public
 ./hosts/server/var/lib/zerotier-one/identity.secret
 ./hosts/toshiba/var/lib/zerotier-one/identity.public
@@ -419,6 +424,8 @@
 ./kvmrc/vclone.sh
 ./kvmrc/vdestroy.sh
 ./kvmrc/vdisk.sh
+./kvmrc/virt_resize.sh
+./kvmrc/virt_resize.test.sh
 ./kvmrc/vmdk2qcow2.sh
 ./kvmrc/vmdk3-hack.sh
 ./kvmrc/vmount.sh
@@ -447,7 +454,6 @@
 ./leetcoderc/KdiffFile.py
 ./leetcoderc/submit.sh
 ./linux.conf
-./linux/etc/NetworkManager/system-connections/dd-wrt
 ./linux/etc/crypttab
 ./linux/etc/default/grub
 ./linux/etc/resolvconf/resolv.conf.d/base
@@ -468,8 +474,9 @@
 ./mdadmrc/create.sh
 ./mdadmrc/reactivate.sh
 ./mdadmrc/replace.sh
-./musicrc/copy.sh
 ./musicrc/copy_test.sh
+./musicrc/move.sh
+./musicrc/move.test.sh
 ./musicrc/unrar.sh
 ./musicrc/unrar_test.sh
 ./musicrc/unzip.sh
@@ -514,6 +521,8 @@
 ./svnrc/svnuserlog.sh
 ./svnrc/svnvdiff.sh
 ./timemachinerc/deletelocalsnapshots.sh
+./timemachinerc/etc/netatalk/AppleVolumes.default
+./timemachinerc/etc/nsswitch.conf
 ./timemachinerc/listlocalsnapshots.sh
 ./update.sh
 ./vimrc/.vim/autoload/SQLUtilities.vim
@@ -682,6 +691,7 @@
 ./vimrc/.vim/bundle/ncm2-match-highlight/LICENSE
 ./vimrc/.vim/bundle/ncm2-match-highlight/README.md
 ./vimrc/.vim/bundle/ncm2-match-highlight/ncm2-plugin/match_highlight.py
+./vimrc/.vim/bundle/ncm2-neoinclude/LICENSE
 ./vimrc/.vim/bundle/ncm2-neoinclude/README.md
 ./vimrc/.vim/bundle/ncm2-neoinclude/autoload/ncm2_neoinclude.vim
 ./vimrc/.vim/bundle/ncm2-neoinclude/ncm2-plugin/ncm2_neoinclude.vim
@@ -722,6 +732,7 @@
 ./vimrc/.vim/bundle/ncm2-snipmate/pythonx/ncm2_lsp_snippet/LICENSE
 ./vimrc/.vim/bundle/ncm2-snipmate/pythonx/ncm2_lsp_snippet/parser.py
 ./vimrc/.vim/bundle/ncm2-snipmate/pythonx/ncm2_lsp_snippet/utils.py
+./vimrc/.vim/bundle/ncm2-syntax/LICENSE
 ./vimrc/.vim/bundle/ncm2-syntax/README.md
 ./vimrc/.vim/bundle/ncm2-syntax/autoload/ncm2_syntax.vim
 ./vimrc/.vim/bundle/ncm2-syntax/ncm2-plugin/ncm2_syntax.vim
@@ -743,6 +754,7 @@
 ./vimrc/.vim/bundle/ncm2-tmux/autoload/ncm2_tmux.vim
 ./vimrc/.vim/bundle/ncm2-tmux/ncm2-plugin/ncm2_tmux.vim
 ./vimrc/.vim/bundle/ncm2-tmux/pythonx/ncm2_tmux.py
+./vimrc/.vim/bundle/ncm2-vim/LICENSE
 ./vimrc/.vim/bundle/ncm2-vim/README.md
 ./vimrc/.vim/bundle/ncm2-vim/autoload/ncm2_vim.vim
 ./vimrc/.vim/bundle/ncm2-vim/ncm2-plugin/ncm2_vim.vim
@@ -2536,6 +2548,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/matchparen.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/misc.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/motion.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/options.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/auxiliary.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/bib.vim
@@ -2607,6 +2620,7 @@
 ./vimrc/.vim/bundle/vimtex/compiler/lacheck.vim
 ./vimrc/.vim/bundle/vimtex/compiler/style-check.vim
 ./vimrc/.vim/bundle/vimtex/compiler/textidote.vim
+./vimrc/.vim/bundle/vimtex/compiler/vlty.vim
 ./vimrc/.vim/bundle/vimtex/doc/tags
 ./vimrc/.vim/bundle/vimtex/doc/targets-textobj-cheatsheet.md
 ./vimrc/.vim/bundle/vimtex/doc/vimtex.txt
@@ -2615,7 +2629,9 @@
 ./vimrc/.vim/bundle/vimtex/ftplugin/tex.vim
 ./vimrc/.vim/bundle/vimtex/indent/bib.vim
 ./vimrc/.vim/bundle/vimtex/indent/tex.vim
+./vimrc/.vim/bundle/vimtex/plugin/vimtex.vim
 ./vimrc/.vim/bundle/vimtex/rplugin/python3/denite/source/vimtex.py
+./vimrc/.vim/bundle/vimtex/test/tests/test-completion-bibtex/.gitignore
 ./vimrc/.vim/bundle/vundle.vim/.gitignore
 ./vimrc/.vim/bundle/vundle.vim/CONTRIBUTING.md
 ./vimrc/.vim/bundle/vundle.vim/LICENSE-MIT.txt

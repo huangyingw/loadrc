@@ -297,6 +297,11 @@ function! s:Gme2(args, ...) abort
 endfunction
 
 function! s:G(args, ...) abort
+    if &modified
+        echom 'Please check and save your file first!!!'
+        return 0
+    endif
+
     if expand('%:p') =~ '^fugitive:/'
         return
     endif
