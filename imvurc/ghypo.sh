@@ -2,7 +2,7 @@
 
 if [ -z "$host" ]
 then
-    exit 0
+    return 
 fi
 
 if [ $(hostname) != "linb-sandbox" ]
