@@ -8,5 +8,4 @@ target="$1"
 size="$2"
 qemu-img create -f qcow2 -o preallocation=metadata "$target".tmp "$size" && \
     virt-resize "$target" "$target".tmp && \
-    mv -v "$target" "$target".bak && \
-    mv -v "$target".tmp "$target"
+    mv -fv "$target".tmp "$target"
