@@ -209,6 +209,7 @@
 ./bashrc/wait_for_pid.sh
 ./bashrc/wait_for_pid.test.sh
 ./bashrc/watch_copy.sh
+./bashrc/while_copy.sh
 ./bashrc/whole_ures_ex
 ./bashrc/wol.sh
 ./bashrc/zsh.test.sh
@@ -423,6 +424,8 @@
 ./kvmrc/vclone.sh
 ./kvmrc/vdestroy.sh
 ./kvmrc/vdisk.sh
+./kvmrc/virt_resize.sh
+./kvmrc/virt_resize.test.sh
 ./kvmrc/vmdk2qcow2.sh
 ./kvmrc/vmdk3-hack.sh
 ./kvmrc/vmount.sh
@@ -494,10 +497,14 @@
 ./prunefix.rsync
 ./prunefix_template.conf
 ./pythonrc/autopep8-ipynb.py
+./pythonrc/handle_vtt.py
+./pythonrc/handle_vtt_test.py
 ./pythonrc/remove-unuses.sh
 ./pythonrc/remove_comments.py
 ./pythonrc/setup.cfg
 ./pythonrc/setup.cfg.src
+./pythonrc/vlc.py
+./pythonrc/vlc.py.sh
 ./readme
 ./ruleref.list
 ./set_host_configuration.sh
@@ -518,6 +525,8 @@
 ./svnrc/svnuserlog.sh
 ./svnrc/svnvdiff.sh
 ./timemachinerc/deletelocalsnapshots.sh
+./timemachinerc/etc/netatalk/AppleVolumes.default
+./timemachinerc/etc/nsswitch.conf
 ./timemachinerc/listlocalsnapshots.sh
 ./update.sh
 ./vimrc/.vim/autoload/SQLUtilities.vim
@@ -2624,6 +2633,7 @@
 ./vimrc/.vim/bundle/vimtex/ftplugin/tex.vim
 ./vimrc/.vim/bundle/vimtex/indent/bib.vim
 ./vimrc/.vim/bundle/vimtex/indent/tex.vim
+./vimrc/.vim/bundle/vimtex/plugin/vimtex.vim
 ./vimrc/.vim/bundle/vimtex/rplugin/python3/denite/source/vimtex.py
 ./vimrc/.vim/bundle/vimtex/test/tests/test-completion-bibtex/.gitignore
 ./vimrc/.vim/bundle/vundle.vim/.gitignore

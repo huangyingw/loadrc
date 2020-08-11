@@ -61,3 +61,7 @@ E15: Invalid expression: l:changed_win_bufs
 Cought anything: Vim(cd):E472: Command failed
 
 [ncm2_go@yarp] TypeError: expected str, bytes or os.PathLike object, not NoneType
+
+Error detected while processing function CSCSearch[12]..GetEscapedResult:
+line   15:
+E33: No previous substitute regular expression
