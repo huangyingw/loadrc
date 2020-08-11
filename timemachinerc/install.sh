@@ -14,4 +14,8 @@ apt-get install -y \
 cp -fv ./etc/nsswitch.conf /etc/nsswitch.conf
 adduser tm
 chown -R tm /media/timemachine/
+
 cp -fv ./etc/netatalk/AppleVolumes.default /etc/netatalk/AppleVolumes.default
+
+/etc/init.d/netatalk restart
+/etc/init.d/avahi-daemon restart
