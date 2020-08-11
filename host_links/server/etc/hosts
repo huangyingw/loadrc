@@ -6,6 +6,7 @@
 192.168.31.140 mini
 192.168.31.149 minds
 192.168.31.99 mldonkey
+192.168.31.236 fastai
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
