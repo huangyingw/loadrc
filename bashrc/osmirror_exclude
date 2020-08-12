@@ -18,6 +18,7 @@ etc/netplan/00-installer-config.yaml
 media/dev
 media/nvme
 media/volgrp
+root/.fastai
 var/lib/docker
 var/lib/libvirt
 var/lib/mldonkey
