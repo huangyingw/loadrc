@@ -13,5 +13,3 @@ if [ -f "$HOSTTODOS" ]
 then
     "$HOSTTODOS"
 fi
-
-~/loadrc/zerotierrc/restart.sh
