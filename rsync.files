@@ -424,8 +424,6 @@
 ./kvmrc/vclone.sh
 ./kvmrc/vdestroy.sh
 ./kvmrc/vdisk.sh
-./kvmrc/virt_resize.sh
-./kvmrc/virt_resize.test.sh
 ./kvmrc/vmdk2qcow2.sh
 ./kvmrc/vmdk3-hack.sh
 ./kvmrc/vmount.sh
@@ -497,14 +495,10 @@
 ./prunefix.rsync
 ./prunefix_template.conf
 ./pythonrc/autopep8-ipynb.py
-./pythonrc/handle_vtt.py
-./pythonrc/handle_vtt_test.py
 ./pythonrc/remove-unuses.sh
 ./pythonrc/remove_comments.py
 ./pythonrc/setup.cfg
 ./pythonrc/setup.cfg.src
-./pythonrc/vlc.py
-./pythonrc/vlc.py.sh
 ./readme
 ./ruleref.list
 ./set_host_configuration.sh

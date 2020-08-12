@@ -1,2 +1,3 @@
 #!/bin/zsh
 alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
+export PATH="$HOME/anaconda3/bin:$PATH"

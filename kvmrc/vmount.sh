@@ -7,11 +7,11 @@ fi
 modprobe nbd max_part=8
 ~/loadrc/kvmrc/uvmount.sh
 qcow2File="$1"
+qemu-nbd --connect=/dev/nbd0 "$qcow2File"
 
-qemu-nbd --connect=/dev/nbd0 "$qcow2File" && \
-    for ss in $(fdisk /dev/nbd0 -l | awk '/nbd0p/{print $1}') ; \
-    do \
-        echo $ss ; \
-        mkdir -p /media/$ss ; \
-        mount $ss /media/$ss ; \
-    done
+for ss in $(fdisk /dev/nbd0 -l | awk '/nbd0p/{print $1}')
+do
+    echo $ss
+    mkdir -p /media/$ss
+    mount $ss /media/$ss
+done

@@ -92,10 +92,7 @@ function! PlayVideo()
     endif
 
     call asyncrun#stop('<bang>')
-    let line = getline('.')
-    let line = substitute(line, '^[^"]', '"' . line[0], '')
-    let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
-    call asyncrun#run('<bang>', '', '~/loadrc/pythonrc/vlc.py ' . '"' . expand("%:p") . '"' .  ' ' . line)
+    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/vlc.sh ' . '"' . expand('%:p:h') . '/' . '"' .  getline('.'))
 endfunction
 
 function! VDebug()

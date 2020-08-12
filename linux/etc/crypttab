@@ -9,4 +9,3 @@ usb_backup_crypt_4T      /dev/disk/by-uuid/4e0d72a2-2f98-4c11-becd-beaa21ec1957 
 usb_backup_crypt_5T_1      /dev/disk/by-uuid/5d5e3fde-814f-4018-a103-2789c84d43e2  /root/loadrc/keys/keyfile   luks
 zarchive      /dev/disk/by-uuid/653cc34e-f0e2-454c-8667-5f1824f3e8d9  /root/loadrc/keys/keyfile   luks
 vserver_crypt      /dev/disk/by-uuid/a4ff213e-f734-4c88-aba9-2ce733d0de76  /root/loadrc/keys/keyfile   luks
-timemachine      /dev/disk/by-uuid/03555f46-2ef9-4df2-aeaf-ad8b43f010ea  /root/loadrc/keys/keyfile   luks
