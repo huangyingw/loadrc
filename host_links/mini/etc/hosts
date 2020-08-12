@@ -9,7 +9,7 @@
 192.168.122.65 master-node
 192.168.122.136 slave-node
 192.168.122.244 zsh
-10.1.10.6 work
+192.168.31.118 work
 172.27.217.162 localhost.imvu.com
 192.168.31.148 server
 192.168.31.147 imacpro

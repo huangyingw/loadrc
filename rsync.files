@@ -36,7 +36,6 @@
 ./.pythonrc
 ./.scl-1yihuang-m.corporate.localrc
 ./.server.mirror.check
-./.server.rc
 ./.server.theanorc
 ./.shellrc
 ./.sqlrc
@@ -54,10 +53,8 @@
 ./.theanorc
 ./.tigrc
 ./.tmux.conf
-./.u1604.rc
 ./.vserver.rc
 ./.vserver.theanorc
-./.work.rc
 ./.zshrc
 ./Dockerfile
 ./Library/Preferences/org.videolan.vlc/vlcrc
@@ -495,10 +492,14 @@
 ./prunefix.rsync
 ./prunefix_template.conf
 ./pythonrc/autopep8-ipynb.py
+./pythonrc/handle_vtt.py
+./pythonrc/handle_vtt_test.py
 ./pythonrc/remove-unuses.sh
 ./pythonrc/remove_comments.py
 ./pythonrc/setup.cfg
 ./pythonrc/setup.cfg.src
+./pythonrc/vlc.py
+./pythonrc/vlc.py.sh
 ./readme
 ./ruleref.list
 ./set_host_configuration.sh
@@ -2533,6 +2534,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold/comments.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold/env_options.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold/envs.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold/items.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold/markers.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold/preamble.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold/sections.vim
