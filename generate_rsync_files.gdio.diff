@@ -15,9 +15,3 @@ index 7d7c91aa..d9adfb40 100755
 +else
 +    cp -fv "$rsyncFiles" rsync.files
 +fi
-diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
---- ./vimrc/.vim/bundle/vim-buffergator
-+++ ./vimrc/.vim/bundle/vim-buffergator
-@@ -1 +1 @@
--Subproject commit 6658fb7d238b0fcc04ee6543a495111ad49765ee
-+Subproject commit 6658fb7d238b0fcc04ee6543a495111ad49765ee-dirty
