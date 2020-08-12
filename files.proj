@@ -635,7 +635,6 @@
 "./prunefile.conf"
 "./prunefile_template.conf"
 "./prunefix.conf"
-"./prunefix.rsync"
 "./prunefix_template.conf"
 "./pythonrc/autopep8-ipynb.py"
 "./pythonrc/handle_vtt.py"
