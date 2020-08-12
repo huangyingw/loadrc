@@ -3,10 +3,7 @@ rsyncFiles=rsync.files.bak
 cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > "$rsyncFiles"
 PRUNE_POSTFIX=prunefix.rsync
 
-if [ ! -f "$PRUNE_POSTFIX" ]
-then
-    exit
-fi
+touch "$PRUNE_POSTFIX"
 
 or="";
 
