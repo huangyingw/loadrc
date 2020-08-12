@@ -3,4 +3,4 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-./move.sh /media/mirror2/mirror2/musics/ /media/sdcard/musics/
+./move.sh mini:/media/mirror2/mirror2/musics/ "/Volumes/NO NAME/musics"
