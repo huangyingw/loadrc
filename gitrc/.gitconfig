@@ -36,7 +36,7 @@
 [core]
     excludesfile = "~/.globalgitignore"
     mergeoptions = --no-edit
-    filemode = false
+    fileMode = true
     editor = nvim
 [giggle]
     main-window-maximized = true
@@ -66,6 +66,8 @@
     ignore = includefile.conf
     ignore = prunefile.conf
     ignore = prunefix.conf
+    ignore = prunefix.rsync
+    ignore = rsync.files
     ignore = setup.cfg
 [filter "lfs"]
     clean = git-lfs clean -- %f
