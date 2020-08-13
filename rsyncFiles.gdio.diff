@@ -23,3 +23,18 @@ index 57ae30ab..36367474 100755
 +    --files-from=files.rev \
 +    "$host:/" \
 +    .
+diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
+index 8d5a77f3..987db2c5 100755
+--- ./vishrc/vrun.sh
++++ ./vishrc/vrun.sh
+@@ -56,10 +56,6 @@ case $extension in
+         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+         then
+             ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
+-            rsync -aHv --force --progress \
+-                --files-from=files.rev \
+-                "$host:$rpath/" \
+-                .
+         else
+             . ~/loadrc/.loadrc
+             "$file"
