@@ -1,10 +1,4 @@
 #!/bin/zsh
-
-if [ -z "$host" ]
-then
-    return 
-fi
-
 if [ $(hostname) != "linb-sandbox" ]
 then
     ssh -nY "$host" "cd $rpath ; ~/loadrc/imvurc/ghypo.sh $1"
