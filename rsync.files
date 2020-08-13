@@ -496,7 +496,6 @@
 ./host_links/toshiba/etc/systemd/logind.conf
 ./host_links/ubuntu/etc/hosts
 ./host_links/ubuntu/etc/network/interfaces
-./host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini
 ./host_links/ubuntu/todos.sh
 ./host_links/vserver/etc/network/interfaces
 ./hosts/imac/Library/Application Support/ZeroTier/One/identity.public
