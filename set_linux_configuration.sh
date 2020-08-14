@@ -8,9 +8,9 @@ then
     exit 0
 fi
 
-find linux/ -type f | while read ss; \
+find linux_links/ -type f | while read ss; \
 do \
-    ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/linux\///g")"; \
+    ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/linux_links\///g")"; \
 done
 
 grub-mkconfig -o /boot/grub/grub.cfg
