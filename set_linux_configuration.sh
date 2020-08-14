@@ -13,5 +13,10 @@ do \
     ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/linux_links\///g")"; \
 done
 
+find linux/ -type f | while read ss; \
+do \
+    cp -fv --remove-destination "$ss" "/$(echo "$ss" | sed "s/linux\///g")"; \
+done
+
 grub-mkconfig -o /boot/grub/grub.cfg
 gsettings set org.gnome.desktop.lockdown disable-lock-screen 'true'
