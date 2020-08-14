@@ -1,3 +1,41 @@
+diff --git a/linux/etc/sudoers b/linux/etc/sudoers
+new file mode 100644
+index 00000000..87a57525
+--- /dev/null
++++ ./linux/etc/sudoers
+@@ -0,0 +1,32 @@
++#
++# This file MUST be edited with the 'visudo' command as root.
++#
++# Please consider adding local content in /etc/sudoers.d/ instead of
++# directly modifying this file.
++#
++# See the man page for details on how to write a sudoers file.
++#
++Defaults	env_reset
++Defaults	mail_badpass
++Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
++
++# Host alias specification
++
++# User alias specification
++
++# Cmnd alias specification
++
++# User privilege specification
++root	ALL=(ALL:ALL) ALL
++
++# Members of the admin group may gain root privileges
++%admin ALL=(ALL) ALL
++
++# Allow members of group sudo to execute any command
++%sudo	ALL=(ALL:ALL) ALL
++
++# See sudoers(5) for more information on "#include" directives:
++
++#includedir /etc/sudoers.d
++huangyingw     ALL=(ALL)       NOPASSWD: ALL
++admin     ALL=(ALL)       NOPASSWD: ALL
 diff --git a/linux/etc/crypttab b/linux_links/etc/crypttab
 similarity index 100%
 rename from linux/etc/crypttab
@@ -23,18 +61,22 @@ similarity index 100%
 rename from linux/etc/ssh/sshd_config
 rename to linux_links/etc/ssh/sshd_config
 diff --git a/set_linux_configuration.sh b/set_linux_configuration.sh
-index 028fa7e1..c10345b4 100755
+index 028fa7e1..ced4c25c 100755
 --- ./set_linux_configuration.sh
 +++ ./set_linux_configuration.sh
-@@ -8,9 +8,9 @@ then
+@@ -8,9 +8,14 @@ then
      exit 0
  fi
  
--find linux/ -type f | while read ss; \
 +find linux_links/ -type f | while read ss; \
++do \
++    ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/linux_links\///g")"; \
++done
++
+ find linux/ -type f | while read ss; \
  do \
 -    ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/linux\///g")"; \
-+    ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/linux_links\///g")"; \
++    cp -fv --remove-destination "$ss" "/$(echo "$ss" | sed "s/linux\///g")"; \
  done
  
  grub-mkconfig -o /boot/grub/grub.cfg
