@@ -1,0 +1,40 @@
+diff --git a/linux/etc/crypttab b/linux_links/etc/crypttab
+similarity index 100%
+rename from linux/etc/crypttab
+rename to linux_links/etc/crypttab
+diff --git a/linux/etc/default/grub b/linux_links/etc/default/grub
+similarity index 100%
+rename from linux/etc/default/grub
+rename to linux_links/etc/default/grub
+diff --git a/linux/etc/resolvconf/resolv.conf.d/base b/linux_links/etc/resolvconf/resolv.conf.d/base
+similarity index 100%
+rename from linux/etc/resolvconf/resolv.conf.d/base
+rename to linux_links/etc/resolvconf/resolv.conf.d/base
+diff --git a/linux/etc/resolvconf/resolv.conf.d/head b/linux_links/etc/resolvconf/resolv.conf.d/head
+similarity index 100%
+rename from linux/etc/resolvconf/resolv.conf.d/head
+rename to linux_links/etc/resolvconf/resolv.conf.d/head
+diff --git a/linux/etc/ssh/ssh_config b/linux_links/etc/ssh/ssh_config
+similarity index 100%
+rename from linux/etc/ssh/ssh_config
+rename to linux_links/etc/ssh/ssh_config
+diff --git a/linux/etc/ssh/sshd_config b/linux_links/etc/ssh/sshd_config
+similarity index 100%
+rename from linux/etc/ssh/sshd_config
+rename to linux_links/etc/ssh/sshd_config
+diff --git a/set_linux_configuration.sh b/set_linux_configuration.sh
+index 028fa7e1..c10345b4 100755
+--- ./set_linux_configuration.sh
++++ ./set_linux_configuration.sh
+@@ -8,9 +8,9 @@ then
+     exit 0
+ fi
+ 
+-find linux/ -type f | while read ss; \
++find linux_links/ -type f | while read ss; \
+ do \
+-    ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/linux\///g")"; \
++    ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/linux_links\///g")"; \
+ done
+ 
+ grub-mkconfig -o /boot/grub/grub.cfg
