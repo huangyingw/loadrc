@@ -1,3 +1,28 @@
+diff --git a/bashrc/ln_fs.sh b/bashrc/ln_fs.sh
+index 5b0750fc..8946ff3e 100755
+--- ./bashrc/ln_fs.sh
++++ ./bashrc/ln_fs.sh
+@@ -3,14 +3,18 @@
+ SOURCE="$1"
+ realpath "$1" && SOURCE=$(realpath "$1")
+ TARGET="$2"
+-realpath "$2" && TARGET=$(realpath "$2")
+ 
+ if [ "$SOURCE" != "$TARGET" ]
+ then
+-    cp -nv "$TARGET" "$TARGET".bak
+     if [ -L "$TARGET" ]
+     then
+         rm "$TARGET"
+     fi
++
++    if [ -f "$TARGET" ]
++    then
++        cp -nv "$TARGET" "$TARGET".bak
++    fi
++
+     ln -fs "$SOURCE" "$TARGET"
+ fi
 diff --git a/linux/etc/sudoers b/linux/etc/sudoers
 new file mode 100644
 index 00000000..87a57525
