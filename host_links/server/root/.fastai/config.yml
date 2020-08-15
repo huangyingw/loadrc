@@ -1,0 +1,3 @@
+data_archive_path: /media/nvme/fastai/data/
+data_path: /media/nvme/fastai/data/
+model_path: /media/nvme/fastai/models/

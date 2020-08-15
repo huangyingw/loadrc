@@ -3,10 +3,7 @@ rsyncFiles=rsync.files.bak
 cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > "$rsyncFiles"
 PRUNE_POSTFIX=prunefix.rsync
 
-if [ ! -f "$PRUNE_POSTFIX" ]
-then
-    exit
-fi
+touch "$PRUNE_POSTFIX"
 
 or="";
 
@@ -17,6 +14,12 @@ do
     or="-o"
 done < "$PRUNE_POSTFIX"
 
-find . "(" "${include_params[@]}" ")" -type f -size -9000k > "$rsyncFiles".diff && \
-    comm -23 <(sort "$rsyncFiles") <(sort "$rsyncFiles".diff) > "$rsyncFiles".tmp && \
-    cp -fv "$rsyncFiles".tmp rsync.files
+if [ ${#include_params[@]} -gt 0 ]
+then
+    find . "(" "${include_params[@]}" ")" -type f -size -9000k > "$rsyncFiles".diff && \
+        comm -23 <(sort "$rsyncFiles") <(sort "$rsyncFiles".diff) > "$rsyncFiles".tmp && \
+        cp -fv "$rsyncFiles".tmp rsync.files
+
+else
+    cp -fv "$rsyncFiles" rsync.files
+fi

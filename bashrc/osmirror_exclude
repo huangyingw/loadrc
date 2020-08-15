@@ -17,6 +17,8 @@ etc/mdadm/mdadm.conf
 media/dev
 media/nvme
 media/volgrp
+root/.fastai
+root/anaconda3
 var/lib/docker
 var/lib/libvirt
 var/lib/mldonkey
