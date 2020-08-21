@@ -1,2 +1,2 @@
 #!/bin/zsh
-split -l 1 --numeric-suffixes "$1" "$1"
+gsplit -l 1 --numeric-suffixes --additional-suffix=.json "$1" "$1"
