@@ -1,0 +1,20 @@
+diff --git a/bashrc/fvideos.sh b/bashrc/fvideos.sh
+index 7e762af8..12e76a72 100755
+--- ./bashrc/fvideos.sh
++++ ./bashrc/fvideos.sh
+@@ -1,6 +1,6 @@
+ #! /bin/zsh
+ 
+-find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > fav.log.bak ; \
++find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log.bak ; \
+     cp -fv fav.log.bak fav.log && \
+-    find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > fav.log.sort.bak ; \
++    find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log.sort.bak ; \
+     cp -fv fav.log.sort.bak fav.log.sort
+diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
+index 187742a3..858a379b 160000
+--- ./vimrc/.vim/bundle/vim-rails
++++ ./vimrc/.vim/bundle/vim-rails
+@@ -1 +1 @@
+-Subproject commit 187742a3c18d93e6968f024d7db0f4fc5548408e
++Subproject commit 858a379bcb389d67abdb7e0eb1b0a1fa78d8ba39
