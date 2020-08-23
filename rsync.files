@@ -303,6 +303,7 @@
 ./bashrc/sleep.sh
 ./bashrc/sload.sh
 ./bashrc/smount.sh
+./bashrc/split.sh
 ./bashrc/ssh.sh
 ./bashrc/tcopy.sh
 ./bashrc/testPorts.sh
