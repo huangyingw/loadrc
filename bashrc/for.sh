@@ -18,6 +18,13 @@ do
     echo "Welcome $c times"
 done
 
+a=0
+for d in `seq 1 2 7`
+do
+    ((a++))
+    echo $a
+done
+
 function copyFiles() {
    arr=("$@")
    for i in "${arr[@]}";
