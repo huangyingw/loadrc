@@ -63,3 +63,5 @@ run
 running.time
 setup.cfg
 ~$*
+prunefix.rsync
+rsync.files
