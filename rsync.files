@@ -281,6 +281,8 @@
 ./bashrc/osmirror_test.sh
 ./bashrc/portList
 ./bashrc/qrsync.sh
+./bashrc/random_string.sh
+./bashrc/random_string.test.sh
 ./bashrc/reboot.sh
 ./bashrc/recurse.sh
 ./bashrc/redo.sh
@@ -301,6 +303,7 @@
 ./bashrc/sleep.sh
 ./bashrc/sload.sh
 ./bashrc/smount.sh
+./bashrc/split.sh
 ./bashrc/ssh.sh
 ./bashrc/tcopy.sh
 ./bashrc/testPorts.sh
@@ -377,6 +380,7 @@
 ./ffmpegrc/concat.sh
 ./ffmpegrc/mylist.txt
 ./ffmpegrc/split.sh
+./files.rev
 ./fix_resolvconf_in_docker.sh
 ./gitrc/.gitconfig
 ./gitrc/.globalgitignore
@@ -496,6 +500,7 @@
 ./host_links/toshiba/etc/systemd/logind.conf
 ./host_links/ubuntu/etc/hosts
 ./host_links/ubuntu/etc/network/interfaces
+./host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini
 ./host_links/ubuntu/todos.sh
 ./host_links/vserver/etc/network/interfaces
 ./hosts/imac/Library/Application Support/ZeroTier/One/identity.public
