@@ -1,3 +1,41 @@
+diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
+index 5fc6e49e..7a7fcf5e 100755
+--- ./gitrc/gdif.sh
++++ ./gitrc/gdif.sh
+@@ -1,27 +1,13 @@
+ #!/bin/zsh
+-~/loadrc/gitrc/include_gitconfig.sh
+ 
+-if [ -n "$1" ]
+-then
+-    COMMAND="git diff --name-status $1"
++COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
+ 
+-    for ss in $(git config --get-all gdif.ignore)
++while read ss
+ do
+-        COMMAND="$COMMAND  ':(exclude)$ss'"
+-    done
+-
+-    eval "$COMMAND" | tee gdif.findresult
+-else
+-    if [ -z "$(git status --porcelain)" ]
++    if [ -f "$ss" ]
+     then
+-        git diff --name-status `git log --oneline|awk 'NR==2{print $1}'` | tee gdif.findresult
+-    else
+-        git diff --name-status HEAD | tee gdif.findresult
+-    fi
++        COMMAND="$COMMAND  '$ss'"
+     fi
++done < "$2"
+ 
+-branch=$(echo $1 | sed  -e "s/\//\\\\\//g")
+-sed -i.bak "s/\b[DMT]\b/git checkout $branch -- /g" gdif.findresult
+-sed -i.bak "s/\bA\b/git rm/g" gdif.findresult
+-sed -i.bak "s/^R[0-9]*/git mv/g" gdif.findresult
+-sort -u gdif.findresult -o gdif.findresult
++eval "$COMMAND"
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
 index 243b3741..bd5ad249 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
@@ -6,7 +44,7 @@ index 243b3741..bd5ad249 160000
 -Subproject commit 243b3741a56e6b5138749b5af98a796c7aabfeaf
 +Subproject commit bd5ad249713b80f2d6e817f316c738f99487392c
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index 2c71126b..bd483b3b 100644
+index 2c71126b..0417f4a9 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -30,6 +30,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcp :e
@@ -17,7 +55,7 @@ index 2c71126b..bd483b3b 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdio :execute s:Gdio(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdit :execute s:Gdit()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gfix :execute s:Gfix()
-@@ -461,19 +462,12 @@ function! s:Gbrd(...) abort
+@@ -461,19 +462,13 @@ function! s:Gbrd(...) abort
      exec '!~/loadrc/gitrc/gbrd.sh ' . '"' .  arg1 . '"'
  endfunction
  
@@ -37,6 +75,7 @@ index 2c71126b..bd483b3b 100644
 +    let output = arg1 . '.diff'
 +    exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '" "' .  expand("%:p") . '"' . ' 2>&1 | tee ' . output
 +    call OpenOrSwitch(output, 'vs')
++    call s:DiffClean()
  endfunction
  
  function! s:Gco(...) abort
