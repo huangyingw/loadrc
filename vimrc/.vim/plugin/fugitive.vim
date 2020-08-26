@@ -468,6 +468,7 @@ function! s:Gdif(...) abort
     let output = arg1 . '.diff'
     exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '" "' .  expand("%:p") . '"' . ' 2>&1 | tee ' . output
     call OpenOrSwitch(output, 'vs')
+    call s:DiffClean()
 endfunction
 
 function! s:Gco(...) abort
