@@ -489,8 +489,8 @@ function! CutCommon()
     silent exec '!cp -fv "' . expand("%:p") . '.findresult' . '"' . ' ' . '"' . expand("%:p") . '"'
 endfunc
 
-nnoremap <leader>2 :call CutFile2()<cr>
-nnoremap <leader>3 :call CutCommon()<cr>
+nnoremap <leader>2 :call CutCommon()<cr>
+nnoremap <leader>3 :call CutFile2()<cr>
 set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
 "    paste mode, where you can paste mass data
 "    that won't be autoindented
