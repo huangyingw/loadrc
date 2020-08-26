@@ -1,27 +1,13 @@
 #!/bin/zsh
-~/loadrc/gitrc/include_gitconfig.sh
 
-if [ -n "$1" ]
-then
-    COMMAND="git diff --name-status $1"
+COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
 
-    for ss in $(git config --get-all gdif.ignore)
-    do
-        COMMAND="$COMMAND  ':(exclude)$ss'"
-    done
-
-    eval "$COMMAND" | tee gdif.findresult
-else
-    if [ -z "$(git status --porcelain)" ]
+while read ss
+do
+    if [ -f "$ss" ]
     then
-        git diff --name-status `git log --oneline|awk 'NR==2{print $1}'` | tee gdif.findresult
-    else
-        git diff --name-status HEAD | tee gdif.findresult
+        COMMAND="$COMMAND  '$ss'"
     fi
-fi
+done < "$2"
 
-branch=$(echo $1 | sed  -e "s/\//\\\\\//g")
-sed -i.bak "s/\b[DMT]\b/git checkout $branch -- /g" gdif.findresult
-sed -i.bak "s/\bA\b/git rm/g" gdif.findresult
-sed -i.bak "s/^R[0-9]*/git mv/g" gdif.findresult
-sort -u gdif.findresult -o gdif.findresult
+eval "$COMMAND"
