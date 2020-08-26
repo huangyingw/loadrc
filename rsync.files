@@ -36,6 +36,7 @@
 ./.git/modules/vimrc/.vim/bundle/delimitMate/info/exclude
 ./.git/modules/vimrc/.vim/bundle/indentLine/config
 ./.git/modules/vimrc/.vim/bundle/indentLine/info/exclude
+./.git/modules/vimrc/.vim/bundle/nc"./.server.mirror.check
 ./.git/modules/vimrc/.vim/bundle/ncm2-bufword/config
 ./.git/modules/vimrc/.vim/bundle/ncm2-bufword/info/exclude
 ./.git/modules/vimrc/.vim/bundle/ncm2-cssomni/config
@@ -134,6 +135,7 @@
 ./.git/modules/vimrc/.vim/bundle/vimtex/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vundle.vim/config
 ./.git/modules/vimrc/.vim/bundle/vundle.vim/info/exclude
+./.git/modulesm2-syntax/info/exclude
 ./.gitattributes
 ./.gitconfig
 ./.gitconfig_sample
@@ -555,8 +557,7 @@
 ./install_nvim_pre.sh
 ./install_prerequisite.sh
 ./install_vagrant.sh
-./ipynbrc/convert.sh
-./ipynbrc/python.tpl
+./ipynbrc/jupytext.sh
 ./iterm2rc/movescreen.py
 ./jdupes/.gitconfig
 ./jdupes/.gitignore
@@ -619,6 +620,7 @@
 ./mdadmrc/create.sh
 ./mdadmrc/reactivate.sh
 ./mdadmrc/replace.sh
+./mini:/media/mirror1/tmirror.ready
 ./musicrc/copy_test.sh
 ./musicrc/move.sh
 ./musicrc/move.test.sh
@@ -673,7 +675,6 @@
 ./timemachinerc/etc/nsswitch.conf
 ./timemachinerc/listlocalsnapshots.sh
 ./update.sh
-./var/log/syslog
 ./vimrc/.vim/autoload/SQLUtilities.vim
 ./vimrc/.vim/autoload/indexed_search.vim
 ./vimrc/.vim/autoload/pathogen.vim
@@ -2870,3 +2871,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
+/vimrc/.vim/bundle/neco-vim/info/exclude
