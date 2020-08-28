@@ -476,13 +476,21 @@ map oo :call VimOpen()<cr>
 nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
 
-function! CommTwoFiles()
+function! CutFile2()
     silent exec '!comm -2 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . @" . '".findresult'
     silent exec '!cp -fv "' . @" . '.findresult' . '"' . ' ' . '"' . @" . '"'
     call OpenOrSwitch(@", 'vs')
 endfunc
 
-nnoremap <leader>2 :call CommTwoFiles()<cr>
+function! CutCommon()
+    silent exec '!comm -2 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . @" . '".findresult'
+    silent exec '!comm -1 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . expand("%:p") . '".findresult'
+    silent exec '!cp -fv "' . @" . '.findresult' . '"' . ' ' . '"' . @" . '"'
+    silent exec '!cp -fv "' . expand("%:p") . '.findresult' . '"' . ' ' . '"' . expand("%:p") . '"'
+endfunc
+
+nnoremap <leader>2 :call CutCommon()<cr>
+nnoremap <leader>3 :call CutFile2()<cr>
 set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
 "    paste mode, where you can paste mass data
 "    that won't be autoindented

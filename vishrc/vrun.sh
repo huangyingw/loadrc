@@ -56,10 +56,6 @@ case $extension in
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
             ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
-            rsync -aHv --force --progress \
-                --files-from=files.rev \
-                "$host:$rpath/" \
-                .
         else
             . ~/loadrc/.loadrc
             "$file"

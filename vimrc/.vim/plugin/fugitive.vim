@@ -30,6 +30,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcp :e
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdev :execute s:Gdev()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi :execute s:Gdi(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi2 :execute s:Gdi2(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdif :execute s:Gdif(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdio :execute s:Gdio(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdit :execute s:Gdit()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gfix :execute s:Gfix()
@@ -354,7 +355,7 @@ function! s:Gdi(...) abort
         elseif tolower(arg1) == 'o'
             let remote = substitute(system("git config gsync.remote"), '\n', '', '')
             let branch = substitute(system("git config gsync.branch"), '\n', '', '')
-            call fugitive#Diffsplit(1, 0, '', remote . '/' . branch, [remote . '/' . branch])
+            call fugitive#Diffsplit(1, 0, 'vert', remote . '/' . branch, [remote . '/' . branch])
         else
             call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
         endif
@@ -461,19 +462,13 @@ function! s:Gbrd(...) abort
     exec '!~/loadrc/gitrc/gbrd.sh ' . '"' .  arg1 . '"'
 endfunction
 
-function! s:Gdifo(...) abort
-    let worktree = Cd2Worktree()
-    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
-    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
-    silent exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  remote . '/' . branch . '"'
-    call OpenOrSwitch('gdif.findresult', 'vs')
-endfunction
-
 function! s:Gdif(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    silent exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '"'
-    call OpenOrSwitch('gdif.findresult', 'vs')
+    let output = arg1 . '.diff'
+    exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '" "' .  expand("%:p") . '"' . ' 2>&1 | tee ' . output
+    call OpenOrSwitch(output, 'vs')
+    call s:DiffClean()
 endfunction
 
 function! s:Gco(...) abort
