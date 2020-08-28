@@ -15,6 +15,7 @@
 192.168.31.147 imacpro
 172.27.68.119 imac
 172.27.118.58 vagrant
+192.168.31.99 mldonkey
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
