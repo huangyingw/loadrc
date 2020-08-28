@@ -673,7 +673,6 @@
 "./timemachinerc/etc/nsswitch.conf"
 "./timemachinerc/listlocalsnapshots.sh"
 "./update.sh"
-"./var/log/syslog"
 "./vimrc/.vim/autoload/SQLUtilities.vim"
 "./vimrc/.vim/autoload/indexed_search.vim"
 "./vimrc/.vim/autoload/pathogen.vim"
