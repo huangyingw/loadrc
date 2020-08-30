@@ -1,81 +1,29 @@
 diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
-index 5fc6e49e..7a7fcf5e 100755
+index 7a7fcf5e..0865ae41 100755
 --- ./gitrc/gdif.sh
 +++ ./gitrc/gdif.sh
-@@ -1,27 +1,13 @@
- #!/bin/zsh
--~/loadrc/gitrc/include_gitconfig.sh
+@@ -4,10 +4,7 @@ COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
  
--if [ -n "$1" ]
--then
--    COMMAND="git diff --name-status $1"
-+COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
- 
--    for ss in $(git config --get-all gdif.ignore)
-+while read ss
+ while read ss
  do
--        COMMAND="$COMMAND  ':(exclude)$ss'"
--    done
--
--    eval "$COMMAND" | tee gdif.findresult
--else
--    if [ -z "$(git status --porcelain)" ]
-+    if [ -f "$ss" ]
-     then
--        git diff --name-status `git log --oneline|awk 'NR==2{print $1}'` | tee gdif.findresult
--    else
--        git diff --name-status HEAD | tee gdif.findresult
+-    if [ -f "$ss" ]
+-    then
+-        COMMAND="$COMMAND  '$ss'"
 -    fi
-+        COMMAND="$COMMAND  '$ss'"
-     fi
-+done < "$2"
++    COMMAND="$COMMAND  -- '$ss'"
+ done < "$2"
  
--branch=$(echo $1 | sed  -e "s/\//\\\\\//g")
--sed -i.bak "s/\b[DMT]\b/git checkout $branch -- /g" gdif.findresult
--sed -i.bak "s/\bA\b/git rm/g" gdif.findresult
--sed -i.bak "s/^R[0-9]*/git mv/g" gdif.findresult
--sort -u gdif.findresult -o gdif.findresult
-+eval "$COMMAND"
-diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 243b3741..bd5ad249 160000
---- ./vimrc/.vim/bundle/vim-fugitive
-+++ ./vimrc/.vim/bundle/vim-fugitive
-@@ -1 +1 @@
--Subproject commit 243b3741a56e6b5138749b5af98a796c7aabfeaf
-+Subproject commit bd5ad249713b80f2d6e817f316c738f99487392c
+ eval "$COMMAND"
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index 2c71126b..0417f4a9 100644
+index a69bacbf..5d21be9a 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -30,6 +30,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcp :e
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdev :execute s:Gdev()
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi :execute s:Gdi(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi2 :execute s:Gdi2(<f-args>)
-+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdif :execute s:Gdif(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdio :execute s:Gdio(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdit :execute s:Gdit()
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gfix :execute s:Gfix()
-@@ -461,19 +462,13 @@ function! s:Gbrd(...) abort
-     exec '!~/loadrc/gitrc/gbrd.sh ' . '"' .  arg1 . '"'
- endfunction
- 
--function! s:Gdifo(...) abort
--    let worktree = Cd2Worktree()
--    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
--    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
--    silent exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  remote . '/' . branch . '"'
--    call OpenOrSwitch('gdif.findresult', 'vs')
--endfunction
--
+@@ -465,7 +465,7 @@ endfunction
  function! s:Gdif(...) abort
      let worktree = Cd2Worktree()
      let arg1 = (a:0 >= 1) ? a:1 : ''
--    silent exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '"'
--    call OpenOrSwitch('gdif.findresult', 'vs')
-+    let output = arg1 . '.diff'
-+    exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '" "' .  expand("%:p") . '"' . ' 2>&1 | tee ' . output
-+    call OpenOrSwitch(output, 'vs')
-+    call s:DiffClean()
- endfunction
- 
- function! s:Gco(...) abort
+-    let output = arg1 . '.diff'
++    let output = GetEscapedResult(arg1) . '.diff'
+     exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '" "' .  expand("%:p") . '"' . ' 2>&1 | tee ' . output
+     call OpenOrSwitch(output, 'vs')
+     call s:DiffClean()
