@@ -1,2 +1,2 @@
 #!/bin/zsh
-find . -type f -name \*.ipynb -exec jupytext --set-formats ipynb,py {} \;
+find . -type f -name \*.ipynb -exec jupytext --sync {} \;
