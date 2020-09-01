@@ -8,18 +8,14 @@ then
     exit 0
 fi
 
-deploy_configs() {
-    TARGET="$1"
-    SOURCE=~/loadrc/macos/"$TARGET"
-    if [ -f "$SOURCE" ]
-    then
-        sudo cp -fv "$SOURCE" "$TARGET"
-    fi
-}
+find macos_links/ -type f | while read ss; \
+do \
+    ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/macos_links\///g")"; \
+done
 
-while read -r line || [ -n "$line" ]
-do
-    deploy_configs "$line"
-done < macos.conf
+find macos/ -type f | while read ss; \
+do \
+    sudo cp -fv "$ss" "/$(echo "$ss" | sed "s/macos\///g")"; \
+done
 
 ./macosrc/configure_mosh.sh
