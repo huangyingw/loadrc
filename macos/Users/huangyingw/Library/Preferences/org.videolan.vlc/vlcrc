@@ -4077,13 +4077,13 @@ key-toggle-fullscreen=f
 #global-key-jump-medium=
 
 # Medium backwards jump (string)
-#key-jump-medium=Command+Shift+Left
+key-jump-medium=Down
 
 # Medium forward jump (string)
 #global-key-jump+medium=
 
 # Medium forward jump (string)
-#key-jump+medium=Command+Shift+Right
+key-jump+medium=Up
 
 # Long backwards jump (string)
 #global-key-jump-long=
