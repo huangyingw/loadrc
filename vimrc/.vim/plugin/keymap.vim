@@ -417,7 +417,7 @@ vnoremap <tab> %
 nnoremap M zM
 nnoremap R zR
 nmap <f2> :set number! number?<cr>
-nmap <leader>w :windo set wrap!<cr>
+nmap <leader>w :call WinDo('set wrap!') <cr>
 " Convert slashes to backslashes for Windows.
 if has('win32')
     nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
