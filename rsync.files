@@ -607,6 +607,7 @@
 ./linux_links/etc/ssh/sshd_config
 ./mac_sync.list
 ./macos.conf
+./macos/Users/huangyingw/Library/Preferences/org.videolan.vlc/vlcrc
 ./macos/etc/sudoers
 ./macosrc/configure_mosh.sh
 ./macrc/mac_sync.list
@@ -618,7 +619,6 @@
 ./mdadmrc/create.sh
 ./mdadmrc/reactivate.sh
 ./mdadmrc/replace.sh
-./mini:/media/mirror1/tmirror.ready
 ./musicrc/copy_test.sh
 ./musicrc/move.sh
 ./musicrc/move.test.sh
@@ -2458,6 +2458,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/health/vimtex.vim
 ./vimrc/.vim/bundle/vimtex/autoload/unite/sources/vimtex.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/bib.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/cache.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/cmd.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler.vim
