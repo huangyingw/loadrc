@@ -2836,6 +2836,7 @@
 "./vimrc/.vim/plugin/taglist.vim"
 "./vimrc/.vim/plugin/view.vim"
 "./vimrc/.vim/plugin/vsearch.vim"
+"./vimrc/.vim/plugin/windo.vim"
 "./vimrc/.vim/spell/en.utf-8.add"
 "./vimrc/.vim/syntax/json.vim"
 "./vimrc/.vim/syntax/python.vim"
