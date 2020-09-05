@@ -22,4 +22,5 @@ then
     sort -u "$loginFile" -o "$loginFile"
 fi
 
+cd "$(dirname "$file")"
 mysql -v -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
