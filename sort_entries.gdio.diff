@@ -1,3 +1,58 @@
+diff --git a/host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini b/host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini
+index 00483b80..aa1012c1 100644
+--- ./host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini
++++ ./host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini
+@@ -445,7 +445,7 @@ initial_sub_pos=100
+ initial_sub_scale=5
+ initial_sub_scale_ass=1
+ initial_volnorm=false
+-initial_volume=100
++initial_volume=200
+ initial_zoom_factor=1
+ preferred_audio_track=0
+ preferred_subtitle_track=0
+diff --git a/install_basic.sh b/install_basic.sh
+index 915853fb..8c58234e 100755
+--- ./install_basic.sh
++++ ./install_basic.sh
+@@ -7,11 +7,9 @@ SCRIPT=$(realpath "$0") && \
+ ./install_basic_macos.sh
+ 
+ pip install \
+-    pdftotext
+-
+-sudo -H pip install --upgrade \
+     autoflake \
+-    autopep8
++    autopep8 \
++    pdftotext
+ 
+ pip3 install git+https://github.com/gaborvecsei/pdf-split-merge.git
+ 
+diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
+index c4053da8..bfc662d1 160000
+--- ./vimrc/.vim/bundle/swift.vim
++++ ./vimrc/.vim/bundle/swift.vim
+@@ -1 +1 @@
+-Subproject commit c4053da88208cef5a32a5862694d36b73f6ce310
++Subproject commit bfc662d11b3a006815d0b6972c1c0c2ebbc3b16e
+diff --git a/vishrc/cat_move.sh b/vishrc/cat_move.sh
+index 08f4a3f9..81d72edb 100755
+--- ./vishrc/cat_move.sh
++++ ./vishrc/cat_move.sh
+@@ -1,7 +1,11 @@
+ #!/bin/zsh
++if [ ! -d "$2" ]
++then
++    mkdir -p "$2"
++fi
+ 
+ while read ss
+ do
+     ss=$(echo "$ss" | sed 's/"//g')
+-    mv -v "$ss" "$2"
++    mv -nv "$ss" "$2"
+ done < "$1"
 diff --git a/vishrc/sort_entries.sh b/vishrc/sort_entries.sh
 index 114840d1..b9bffe68 100755
 --- ./vishrc/sort_entries.sh
