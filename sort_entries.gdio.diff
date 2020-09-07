@@ -1,72 +1,18 @@
-diff --git a/host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini b/host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini
-index 00483b80..aa1012c1 100644
---- ./host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini
-+++ ./host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini
-@@ -445,7 +445,7 @@ initial_sub_pos=100
- initial_sub_scale=5
- initial_sub_scale_ass=1
- initial_volnorm=false
--initial_volume=100
-+initial_volume=200
- initial_zoom_factor=1
- preferred_audio_track=0
- preferred_subtitle_track=0
-diff --git a/install_basic.sh b/install_basic.sh
-index 915853fb..8c58234e 100755
---- ./install_basic.sh
-+++ ./install_basic.sh
-@@ -7,11 +7,9 @@ SCRIPT=$(realpath "$0") && \
- ./install_basic_macos.sh
- 
- pip install \
--    pdftotext
--
--sudo -H pip install --upgrade \
-     autoflake \
--    autopep8
-+    autopep8 \
-+    pdftotext
- 
- pip3 install git+https://github.com/gaborvecsei/pdf-split-merge.git
- 
-diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
-index c4053da8..bfc662d1 160000
---- ./vimrc/.vim/bundle/swift.vim
-+++ ./vimrc/.vim/bundle/swift.vim
-@@ -1 +1 @@
--Subproject commit c4053da88208cef5a32a5862694d36b73f6ce310
-+Subproject commit bfc662d11b3a006815d0b6972c1c0c2ebbc3b16e
-diff --git a/vishrc/cat_move.sh b/vishrc/cat_move.sh
-index 08f4a3f9..81d72edb 100755
---- ./vishrc/cat_move.sh
-+++ ./vishrc/cat_move.sh
-@@ -1,7 +1,11 @@
+diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
+index 850e667d..9498144a 100755
+--- ./ffmpegrc/concat.sh
++++ ./ffmpegrc/concat.sh
+@@ -1,6 +1,10 @@
  #!/bin/zsh
-+if [ ! -d "$2" ]
+ 
+ # https://stackoverflow.com/questions/1616577/surround-all-lines-in-a-text-file-with-quotes-something
+-input="$1"
+-output="$2"
+-ffmpeg -f concat -safe 0 -i "$input" -c copy -y "$output"
++listFile="mylist.txt"
++if [ -f "$listFile" ]
 +then
-+    mkdir -p "$2"
++    ffmpeg -f concat -safe 0 -i "$listFile" -c copy -y output.avi
++else
++    find . -type f | sed -e "s/'/'\\\\''/g;s/\(.*\)/file '\1'/" > "$listFile".bak
 +fi
- 
- while read ss
- do
-     ss=$(echo "$ss" | sed 's/"//g')
--    mv -v "$ss" "$2"
-+    mv -nv "$ss" "$2"
- done < "$1"
-diff --git a/vishrc/sort_entries.sh b/vishrc/sort_entries.sh
-index 114840d1..b9bffe68 100755
---- ./vishrc/sort_entries.sh
-+++ ./vishrc/sort_entries.sh
-@@ -10,8 +10,10 @@ IFS=$'\n'
- 
- if [ "$PARAM" = "time" ]
- then
--    ls -t $(cat "$FILE" | sed 's/^"//g;s/"$//g;s/\\ / /g') | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$FILE"
-+    ls -t $(cat "$FILE" | sed 's/^"//g;s/"$//g;s/\\ / /g') > "$FILE"
- elif [ "$PARAM" = "size" ]
- then
--    ls -S $(cat "$FILE" | sed 's/^"//g;s/"$//g;s/\\ / /g') | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$FILE" 
-+    ls -S $(cat "$FILE" | sed 's/^"//g;s/"$//g;s/\\ / /g') > "$FILE" 
- fi
-+
-+sed -i.bak 's/\(["\]\)/\\\1/g;s/.*/"&"/' "$FILE"  
