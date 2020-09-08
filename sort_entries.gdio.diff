@@ -1,18 +1,11 @@
-diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
-index 850e667d..9498144a 100755
---- ./ffmpegrc/concat.sh
-+++ ./ffmpegrc/concat.sh
-@@ -1,6 +1,10 @@
- #!/bin/zsh
- 
- # https://stackoverflow.com/questions/1616577/surround-all-lines-in-a-text-file-with-quotes-something
--input="$1"
--output="$2"
--ffmpeg -f concat -safe 0 -i "$input" -c copy -y "$output"
-+listFile="mylist.txt"
-+if [ -f "$listFile" ]
-+then
-+    ffmpeg -f concat -safe 0 -i "$listFile" -c copy -y output.avi
-+else
-+    find . -type f | sed -e "s/'/'\\\\''/g;s/\(.*\)/file '\1'/" > "$listFile".bak
-+fi
+diff --git a/host_links/mini/root/.fastai/config.yml b/host_links/mini/root/.fastai/config.yml
+new file mode 100644
+index 00000000..75b23cbb
+--- /dev/null
++++ ./host_links/mini/root/.fastai/config.yml
+@@ -0,0 +1,5 @@
++archive_path: /media/volgrp/fastai/archive/
++data_path: /media/volgrp/fastai/data/
++model_path: /media/volgrp/fastai/models/
++storage_path: /tmp
++version: 2
