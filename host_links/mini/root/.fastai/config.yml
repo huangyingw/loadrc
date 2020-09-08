@@ -1,5 +1,5 @@
-archive_path: /media/nvme/fastai/archive
-data_path: /media/nvme/fastai/data/
-model_path: /media/nvme/fastai/models/
+archive_path: /media/volgrp/fastai/archive/
+data_path: /media/volgrp/fastai/data/
+model_path: /media/volgrp/fastai/models/
 storage_path: /tmp
 version: 2
