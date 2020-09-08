@@ -1,0 +1,5 @@
+archive_path: /media/nvme/fastai/archive
+data_path: /media/nvme/fastai/data/
+model_path: /media/nvme/fastai/models/
+storage_path: /tmp
+version: 2
