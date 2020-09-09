@@ -10,13 +10,13 @@ or="";
 while read suf
 do
     suf=$(echo "$suf" | sed 's/"//g')
-    include_params+=( $or "-wholename" "$suf" )
+    prune_params+=( $or "-wholename" "$suf" )
     or="-o"
 done < "$PRUNE_POSTFIX"
 
-if [ ${#include_params[@]} -gt 0 ]
+if [ ${#prune_params[@]} -gt 0 ]
 then
-    find . "(" "${include_params[@]}" ")" -type f -size -9000k > "$rsyncFiles".diff && \
+    find . "(" "${prune_params[@]}" ")" -type f -size -9000k > "$rsyncFiles".diff && \
         comm -23 <(sort "$rsyncFiles") <(sort "$rsyncFiles".diff) > "$rsyncFiles".tmp && \
         cp -fv "$rsyncFiles".tmp rsync.files
 
