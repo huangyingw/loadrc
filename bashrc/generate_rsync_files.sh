@@ -24,15 +24,17 @@ do
     or="-o"
 done < "$INCLUDE_FILE"
 
-if [ ${#include_params[@]} -gt 0 ] ; \
-then \
-    find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${rsyncFiles} ; \
-    fi && \
-    if [ ${#prune_params[@]} -gt 0 ] ; \
-    then \
-        find . "(" "${prune_params[@]}" ")" -type f -size -9000k > "$rsyncFiles".diff && \
-        comm -23 <(sort "$rsyncFiles") <(sort "$rsyncFiles".diff) > "$rsyncFiles".tmp && \
-        cp -fv "$rsyncFiles".tmp rsync.files ; \
-    else \
-        cp -fv "$rsyncFiles" rsync.files ; \
-    fi
+if [ ${#prune_params[@]} -gt 0 ]
+then
+    find . "(" "${prune_params[@]}" ")" -type f -size -9000k > "$rsyncFiles".diff && \
+    comm -23 <(sort "$rsyncFiles") <(sort "$rsyncFiles".diff) > "$rsyncFiles".tmp && \
+    cp -fv "$rsyncFiles".tmp rsync.files
+else \
+    cp -fv "$rsyncFiles" rsync.files
+fi
+
+if [ ${#include_params[@]} -gt 0 ]
+then
+    find . "(" "${include_params[@]}" ")" -type f | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> rsync.files && \
+    sort -u rsync.files -o rsync.files ; \
+fi
