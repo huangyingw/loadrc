@@ -27,7 +27,7 @@ INCLUDE_FILE=includefile.conf
 
 or="";
 
-while read suf
+[ -f "$PRUNE_POSTFIX" ] && while read suf
 do
     suf=$(echo "$suf" | sed 's/"//g')
     prune_params+=( $or "-wholename" "$suf" )
@@ -36,7 +36,7 @@ done < "$PRUNE_POSTFIX"
 
 or="";
 
-while read suf
+[ -f "$INCLUDE_FILE" ] && while read suf
 do
     suf=$(echo "$suf" | sed 's/"//g')
     include_params+=( $or "-wholename" "$suf" )
