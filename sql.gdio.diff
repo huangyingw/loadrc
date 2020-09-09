@@ -1,0 +1,30 @@
+diff --git a/sqlrc/xsql.sh b/sqlrc/xsql.sh
+index 53d44937..0aae8085 100755
+--- ./sqlrc/xsql.sh
++++ ./sqlrc/xsql.sh
+@@ -22,4 +22,5 @@ then
+     sort -u "$loginFile" -o "$loginFile"
+ fi
+ 
++cd "$(dirname "$file")"
+ mysql -v -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
+diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
+index c4053da8..bfc662d1 160000
+--- ./vimrc/.vim/bundle/swift.vim
++++ ./vimrc/.vim/bundle/swift.vim
+@@ -1 +1 @@
+-Subproject commit c4053da88208cef5a32a5862694d36b73f6ce310
++Subproject commit bfc662d11b3a006815d0b6972c1c0c2ebbc3b16e
+diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
+index 987db2c5..40ad6d8a 100755
+--- ./vishrc/vrun.sh
++++ ./vishrc/vrun.sh
+@@ -41,7 +41,7 @@ case $extension in
+     sql)
+         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+         then
+-            ssh -nY "$host" "cd $rpath ; ~/loadrc/sqlrc/xsql.sh $rfile"
++            ssh -nY "$host" "~/loadrc/sqlrc/xsql.sh $rpath/$rfile $rpath"
+         else
+             ~/loadrc/sqlrc/xsql.sh "$file" "$2"
+         fi
