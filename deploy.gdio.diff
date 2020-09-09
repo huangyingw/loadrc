@@ -71,3 +71,15 @@ index d9adfb40..48c37384 100755
 +        fi && \
          cp -fv "$rsyncFiles" rsync.files
 -fi
+diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
+index cd98c7f1..a0a7e0e3 100755
+--- ./gitrc/.gitconfig
++++ ./gitrc/.gitconfig
+@@ -64,6 +64,7 @@
+     ignore = files.rev
+     ignore = gbil.log
+     ignore = includefile.conf
++    ignore = includefile.rsync
+     ignore = prunefile.conf
+     ignore = prunefix.conf
+     ignore = prunefix.rsync
