@@ -7,6 +7,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Copy :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dodev :execute s:Dodev()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dps :execute s:Dps()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fcscope :execute s:Fcscope()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fdisklog :execute s:Fdisklog()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDeleted :execute s:FindDeleted()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
@@ -155,6 +156,13 @@ endfunction
 function! s:Fcscope() abort
     let worktree = Cd2Worktree()
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fcscope.sh')
+endfunction
+
+
+function! s:Fdisklog() abort
+    let worktree = Cd2Worktree()
+    exec '!~/loadrc/bashrc/fdisk_log.sh'
+    call OpenOrSwitch('~/loadrc/fdisk.log', 'vs')
 endfunction
 
 function! s:Glf() abort

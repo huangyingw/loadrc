@@ -490,6 +490,7 @@
 ./host_links/mini/etc/default/isc-dhcp-server
 ./host_links/mini/etc/dhcp/dhcpd.conf
 ./host_links/mini/etc/hosts
+./host_links/mini/root/.fastai/config.yml
 ./host_links/movie/etc/network/interfaces
 ./host_links/server/etc/NetworkManager/system-connections/Millennium Flats
 ./host_links/server/etc/NetworkManager/system-connections/eth0
