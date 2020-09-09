@@ -15,6 +15,7 @@
 *.ncb
 *.o
 *.orig
+*.pth
 *.pyc
 *.runresult
 *.sort
