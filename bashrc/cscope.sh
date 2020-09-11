@@ -27,7 +27,7 @@ INCLUDE_FILE=includefile.conf
 
 or="";
 
-while read suf
+[ -f "$PRUNE_POSTFIX" ] && while read suf
 do
     suf=$(echo "$suf" | sed 's/"//g')
     prune_params+=( $or "-wholename" "$suf" )
@@ -36,7 +36,7 @@ done < "$PRUNE_POSTFIX"
 
 or="";
 
-while read suf
+[ -f "$INCLUDE_FILE" ] && while read suf
 do
     suf=$(echo "$suf" | sed 's/"//g')
     include_params+=( $or "-wholename" "$suf" )
@@ -47,9 +47,9 @@ export LC_ALL=C
 find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
     comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
     cp -fv "$TARGET.tmp" "$TARGET" && \
-    if [ ${#include_params[@]} -gt 0 ] ; \
-    then \
-        find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
+if [ ${#include_params[@]} -gt 0 ] ; \
+then \
+    find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
     fi && \
     sort -u "$TARGET" -o "$TARGET" && \
     cp -fv "$TARGET" files.proj && \
