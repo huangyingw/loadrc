@@ -149,6 +149,8 @@ function! VRun()
     else
         call OpenOrSwitch('gbil.log', 'vs')
     endif
+
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
 endfunction
 
 function! SearchAgain()
