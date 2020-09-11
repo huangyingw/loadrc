@@ -1,0 +1,23 @@
+diff --git a/sqlrc/xsql.sh b/sqlrc/xsql.sh
+index 53d44937..0aae8085 100755
+--- ./sqlrc/xsql.sh
++++ ./sqlrc/xsql.sh
+@@ -22,4 +22,5 @@ then
+     sort -u "$loginFile" -o "$loginFile"
+ fi
+ 
++cd "$(dirname "$file")"
+ mysql -v -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
+diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
+index 987db2c5..40ad6d8a 100755
+--- ./vishrc/vrun.sh
++++ ./vishrc/vrun.sh
+@@ -41,7 +41,7 @@ case $extension in
+     sql)
+         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+         then
+-            ssh -nY "$host" "cd $rpath ; ~/loadrc/sqlrc/xsql.sh $rfile"
++            ssh -nY "$host" "~/loadrc/sqlrc/xsql.sh $rpath/$rfile $rpath"
+         else
+             ~/loadrc/sqlrc/xsql.sh "$file" "$2"
+         fi
