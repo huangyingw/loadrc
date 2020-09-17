@@ -18,6 +18,7 @@ media/dev
 media/nvme
 media/volgrp
 root/.fastai
+root/.kaggle
 root/anaconda3
 var/lib/docker
 var/lib/libvirt
