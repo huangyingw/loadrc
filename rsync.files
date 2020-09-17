@@ -690,6 +690,7 @@
 ./vimrc/.vim/bundle/Dockerfile.vim/snippets/docker-compose.snippets
 ./vimrc/.vim/bundle/Dockerfile.vim/syntax/Dockerfile.vim
 ./vimrc/.vim/bundle/Dockerfile.vim/syntax/docker-compose.vim
+./vimrc/.vim/bundle/LargeFile/.gitconfig
 ./vimrc/.vim/bundle/LargeFile/README
 ./vimrc/.vim/bundle/LargeFile/doc/LargeFile.txt
 ./vimrc/.vim/bundle/LargeFile/doc/tags
@@ -944,7 +945,7 @@
 ./vimrc/.vim/bundle/neco-syntax/doc/necosyntax.txt
 ./vimrc/.vim/bundle/neco-syntax/doc/tags
 ./vimrc/.vim/bundle/neco-syntax/plugin/necosyntax.vim
-./vimrc/.vim/bundle/neco-syntax/rplugin/python3/deoplete/sources/syntax.py
+./vimrc/.vim/bundle/neco-syntax/rplugin/python3/deoplete/source/syntax.py
 ./vimrc/.vim/bundle/neco-syntax/test/necosyntax.vim
 ./vimrc/.vim/bundle/neco-vim/.gitignore
 ./vimrc/.vim/bundle/neco-vim/LICENSE
@@ -955,7 +956,7 @@
 ./vimrc/.vim/bundle/neco-vim/doc/necovim.txt
 ./vimrc/.vim/bundle/neco-vim/doc/tags
 ./vimrc/.vim/bundle/neco-vim/plugin/necovim.vim
-./vimrc/.vim/bundle/neco-vim/rplugin/python3/deoplete/sources/vim.py
+./vimrc/.vim/bundle/neco-vim/rplugin/python3/deoplete/source/vim.py
 ./vimrc/.vim/bundle/neoinclude.vim/.gitignore
 ./vimrc/.vim/bundle/neoinclude.vim/LICENSE
 ./vimrc/.vim/bundle/neoinclude.vim/autoload/cm/sources/neoinclude.vim
@@ -968,7 +969,7 @@
 ./vimrc/.vim/bundle/neoinclude.vim/doc/neoinclude.txt
 ./vimrc/.vim/bundle/neoinclude.vim/doc/tags
 ./vimrc/.vim/bundle/neoinclude.vim/plugin/neoinclude.vim
-./vimrc/.vim/bundle/neoinclude.vim/rplugin/python3/deoplete/sources/file_include.py
+./vimrc/.vim/bundle/neoinclude.vim/rplugin/python3/deoplete/source/file_include.py
 ./vimrc/.vim/bundle/nvim-yarp/.gitignore
 ./vimrc/.vim/bundle/nvim-yarp/LICENSE
 ./vimrc/.vim/bundle/nvim-yarp/README.md
@@ -2737,6 +2738,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/glossaries_extra.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/gnuplottex.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/hyperref.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/ieeetrantools.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/listings.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/luacode.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/markdown.vim
