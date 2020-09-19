@@ -9,5 +9,3 @@ do
     ss=$(echo "$ss" | sed 's/"//g')
     mv -nv "$ss" "$2"
 done < "$1"
-
-~/loadrc/bashrc/update_proj.sh
