@@ -538,6 +538,8 @@ function! s:CatMove(...) abort
     if a:0 >= 1
         exec '!~/loadrc/vishrc/cat_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
     endif
+
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
 endfunction
 
 function! s:CatDu(...) abort
