@@ -398,6 +398,7 @@
 ./gitrc/fsync.sh
 ./gitrc/g.sh
 ./gitrc/ga.sh
+./gitrc/gbak.sh
 ./gitrc/gbib.sh
 ./gitrc/gbidebug.sh
 ./gitrc/gbig.sh
@@ -2672,6 +2673,8 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/complete/xy
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/complete/yathesis
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/complete/yfonts
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/context.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/context/cite.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/debug.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/delim.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/doc.vim
@@ -2706,6 +2709,23 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/fls.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/tex.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/beamer_frame.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/bibliography.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/include.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/include_biblatex.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/include_bibtex.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/include_graphics.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/include_vimtex.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/index.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/labels.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/parts.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/preamble.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/section.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/table_of_contents.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/titlepage.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/todo_comments.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/todo_fixme.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/todo_notes.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/vimcomplete.bst
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/paths.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/pos.vim
@@ -2737,6 +2757,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/glossaries_extra.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/gnuplottex.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/hyperref.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/ieeetrantools.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/listings.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/luacode.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/markdown.vim
@@ -2759,6 +2780,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/text_obj/envtargets.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/text_obj/targets.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/toc.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/ui.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/util.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/view.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/view/common.vim
