@@ -14,6 +14,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :ex
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fsync :execute s:Fsync()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject G :execute s:G(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Ga :execute s:Ga(<q-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbak :execute s:Gbak()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbib :execute s:Gbib()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbidebug :execute s:Gbidebug()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbig :execute s:Gbig()
@@ -219,6 +220,11 @@ endfunction
 function! s:Gbidebug() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/gbidebug.sh'
+endfunction
+
+function! s:Gbak() abort
+    let worktree = Cd2Worktree()
+    exec '!~/loadrc/gitrc/gbak.sh'
 endfunction
 
 function! s:Gbib() abort
