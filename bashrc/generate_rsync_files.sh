@@ -32,7 +32,7 @@ then \
     fi && \
     if [ ${#include_params[@]} -gt 0 ] ; \
     then \
-        find . "(" "${include_params[@]}" ")" -type f | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> "$rsyncFiles" && \
+        find . "(" "${include_params[@]}" ")" -type f | sed 's/\(["'\''\]\)/\\\1/g' >> "$rsyncFiles" && \
         sort -u "$rsyncFiles" -o "$rsyncFiles" ; \
         fi && \
         cp -fv "$rsyncFiles" rsync.files
