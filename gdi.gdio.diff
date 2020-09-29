@@ -1,10 +1,17 @@
-diff --git a/gitrc/gdi.sh b/gitrc/gdi.sh
-index 9bd04ebf..4799a9c8 100755
---- ./gitrc/gdi.sh
-+++ ./gitrc/gdi.sh
+diff --git cscope cscope
+index f6658a2c..0eae6d29 160000
+--- cscope
++++ cscope
+@@ -1 +1 @@
+-Subproject commit f6658a2c0ae8aefaf394a42ab5beab425f23b137
++Subproject commit 0eae6d290417099fdd4e5134bd4e9ce74b572a78
+diff --git gitrc/gdi.sh gitrc/gdi.sh
+index 9bd04ebf..b091aaac 100755
+--- gitrc/gdi.sh
++++ gitrc/gdi.sh
 @@ -1,14 +1,15 @@
  #!/bin/zsh
-+COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines"
++COMMAND="git diff --no-prefix --ignore-space-at-eol -b -w --ignore-blank-lines"
 +
  if [ -z "$1" ]
  then
@@ -22,17 +29,112 @@ index 9bd04ebf..4799a9c8 100755
 -    eval "$COMMAND"
  fi
 +eval "$COMMAND"
-diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 19199343..37cab30b 160000
---- ./vimrc/.vim/bundle/vim-fugitive
-+++ ./vimrc/.vim/bundle/vim-fugitive
+diff --git vimrc/.vim/bundle/bash-support.vim vimrc/.vim/bundle/bash-support.vim
+index 2edefa5a..b8262bbe 160000
+--- vimrc/.vim/bundle/bash-support.vim
++++ vimrc/.vim/bundle/bash-support.vim
+@@ -1 +1 @@
+-Subproject commit 2edefa5a648cf3a278e3247d795dcc642594e5ef
++Subproject commit b8262bbec284978c9da332797399f004e13ebd61-dirty
+diff --git vimrc/.vim/bundle/python-mode vimrc/.vim/bundle/python-mode
+index c2a1b140..3932b85b 160000
+--- vimrc/.vim/bundle/python-mode
++++ vimrc/.vim/bundle/python-mode
+@@ -1 +1 @@
+-Subproject commit c2a1b14045959245b4cc3beece1d87844dd07917
++Subproject commit 3932b85b1396bf1be9ee2a7348e8eeb6055b87db-dirty
+diff --git vimrc/.vim/bundle/vim-anyfold vimrc/.vim/bundle/vim-anyfold
+index 08afed64..3a938f7b 160000
+--- vimrc/.vim/bundle/vim-anyfold
++++ vimrc/.vim/bundle/vim-anyfold
+@@ -1 +1 @@
+-Subproject commit 08afed649474044072e413f019ac87d5cee77815
++Subproject commit 3a938f7b1cea87ae5cd639c1b0b137cedb56faef-dirty
+diff --git vimrc/.vim/bundle/vim-autoformat vimrc/.vim/bundle/vim-autoformat
+index 05cde207..fa23b253 160000
+--- vimrc/.vim/bundle/vim-autoformat
++++ vimrc/.vim/bundle/vim-autoformat
+@@ -1 +1 @@
+-Subproject commit 05cde20768f0eda9c652f93bae7189dc57c21e2a
++Subproject commit fa23b2534a4dcd9d9f26713bfc0dc3a692e569e6-dirty
+diff --git vimrc/.vim/bundle/vim-buffergator vimrc/.vim/bundle/vim-buffergator
+index 6658fb7d..72a3b68e 160000
+--- vimrc/.vim/bundle/vim-buffergator
++++ vimrc/.vim/bundle/vim-buffergator
+@@ -1 +1 @@
+-Subproject commit 6658fb7d238b0fcc04ee6543a495111ad49765ee
++Subproject commit 72a3b68e57c44bb8eaf6b2d0073fac3e96cae032-dirty
+diff --git vimrc/.vim/bundle/vim-fugitive vimrc/.vim/bundle/vim-fugitive
+index 19199343..e0f15287 160000
+--- vimrc/.vim/bundle/vim-fugitive
++++ vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 19199343a89638c68abd5bd5a59fb3d36997674e
-+Subproject commit 37cab30bd3d07490b62b676567a9b90435faa5b7
-diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
-index ba666bb2..525aea43 160000
---- ./vimrc/.vim/bundle/vim-javascript-syntax
-+++ ./vimrc/.vim/bundle/vim-javascript-syntax
++Subproject commit e0f15287a57feccd0a1c4a0db75b638be31609c4-dirty
+diff --git vimrc/.vim/bundle/vim-javascript-syntax vimrc/.vim/bundle/vim-javascript-syntax
+index ba666bb2..ecf96f2d 160000
+--- vimrc/.vim/bundle/vim-javascript-syntax
++++ vimrc/.vim/bundle/vim-javascript-syntax
 @@ -1 +1 @@
 -Subproject commit ba666bb2d2aba49200c0133b9303958fc0f4fe9a
-+Subproject commit 525aea4320f22a2bf8aefe87861852bb701551d4
++Subproject commit ecf96f2dcd417a752a43073b4c75a0531e777597-dirty
+diff --git vimrc/.vim/bundle/vim-log-syntax vimrc/.vim/bundle/vim-log-syntax
+index 172fb19b..55d1eee9 160000
+--- vimrc/.vim/bundle/vim-log-syntax
++++ vimrc/.vim/bundle/vim-log-syntax
+@@ -1 +1 @@
+-Subproject commit 172fb19bbb2283f9098b2adadbba4a7b13283e11
++Subproject commit 55d1eee90828f8cd997976e37e67a35e8109b0a1-dirty
+diff --git vimrc/.vim/bundle/vim-rails vimrc/.vim/bundle/vim-rails
+index 3cc34304..2c42236c 160000
+--- vimrc/.vim/bundle/vim-rails
++++ vimrc/.vim/bundle/vim-rails
+@@ -1 +1 @@
+-Subproject commit 3cc34304643abf8d28d2482e74119d0d5f4b5302
++Subproject commit 2c42236cf38c0842dd490095ffd6b1540cad2e29
+diff --git vimrc/.vim/plugin/fugitive.vim vimrc/.vim/plugin/fugitive.vim
+index 3380c0a7..f027d7f5 100644
+--- vimrc/.vim/plugin/fugitive.vim
++++ vimrc/.vim/plugin/fugitive.vim
+@@ -385,7 +385,6 @@ function! s:Gdi(...) abort
+ 
+     let worktree = Cd2Worktree()
+     call OpenOrSwitch(output, 'vs')
+-    call s:DiffClean()
+ endfunction
+ 
+ function! s:Gdit() abort
+@@ -401,7 +400,6 @@ function! s:Gdit() abort
+ 
+     let worktree = Cd2Worktree()
+     call OpenOrSwitch(output, 'vs')
+-    call s:DiffClean()
+ endfunction
+ 
+ function! s:Gdio(...) abort
+@@ -482,7 +480,6 @@ function! s:Gdif(...) abort
+     let output = GetEscapedResult(arg1) . '.diff'
+     exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '" "' .  expand("%:p") . '"' . ' 2>&1 | tee ' . output
+     call OpenOrSwitch(output, 'vs')
+-    call s:DiffClean()
+ endfunction
+ 
+ function! s:Gco(...) abort
+@@ -649,17 +646,6 @@ function! s:Gwap() abort
+     call s:Gs()
+ endfunction
+ 
+-function! s:DiffClean() abort
+-    if expand('%:e') != "diff"
+-        return
+-    endif
+-
+-    silent exec '%s/^--- a\//--- \.\//g'
+-    silent exec '%s/^+++ b\//+++ \.\//g'
+-    w
+-    only
+-endfunction
+-
+ function! s:Gfix() abort
+     let worktree = Cd2Worktree()
+     exec '!~/loadrc/gitrc/gfix.sh'
