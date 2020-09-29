@@ -2804,6 +2804,7 @@
 "./vimrc/.vim/bundle/vimtex/indent/tex.vim"
 "./vimrc/.vim/bundle/vimtex/plugin/vimtex.vim"
 "./vimrc/.vim/bundle/vimtex/rplugin/python3/denite/source/vimtex.py"
+"./vimrc/.vim/bundle/vimtex/syntax/tex.vim"
 "./vimrc/.vim/bundle/vimtex/test/tests/test-completion-bibtex/.gitignore"
 "./vimrc/.vim/bundle/vundle.vim/.gitignore"
 "./vimrc/.vim/bundle/vundle.vim/CONTRIBUTING.md"
