@@ -1,5 +1,5 @@
 #!/bin/zsh
-COMMAND="git diff --no-prefix --ignore-space-at-eol -b -w --ignore-blank-lines"
+COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines"
 
 if [ -z "$1" ]
 then
