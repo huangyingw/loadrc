@@ -385,7 +385,6 @@ function! s:Gdi(...) abort
 
     let worktree = Cd2Worktree()
     call OpenOrSwitch(output, 'vs')
-    call s:DiffClean()
 endfunction
 
 function! s:Gdit() abort
@@ -401,7 +400,6 @@ function! s:Gdit() abort
 
     let worktree = Cd2Worktree()
     call OpenOrSwitch(output, 'vs')
-    call s:DiffClean()
 endfunction
 
 function! s:Gdio(...) abort
@@ -482,7 +480,6 @@ function! s:Gdif(...) abort
     let output = GetEscapedResult(arg1) . '.diff'
     exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '" "' .  expand("%:p") . '"' . ' 2>&1 | tee ' . output
     call OpenOrSwitch(output, 'vs')
-    call s:DiffClean()
 endfunction
 
 function! s:Gco(...) abort
@@ -647,17 +644,6 @@ function! s:Gwap() abort
     let worktree = Cd2Worktree()
     silent exec '!~/loadrc/gitrc/gwap.sh'
     call s:Gs()
-endfunction
-
-function! s:DiffClean() abort
-    if expand('%:e') != "diff"
-        return
-    endif
-
-    silent exec '%s/^--- a\//--- \.\//g'
-    silent exec '%s/^+++ b\//+++ \.\//g'
-    w
-    only
 endfunction
 
 function! s:Gfix() abort
