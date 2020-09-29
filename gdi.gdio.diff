@@ -1,0 +1,38 @@
+diff --git a/gitrc/gdi.sh b/gitrc/gdi.sh
+index 9bd04ebf..4799a9c8 100755
+--- ./gitrc/gdi.sh
++++ ./gitrc/gdi.sh
+@@ -1,14 +1,15 @@
+ #!/bin/zsh
++COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines"
++
+ if [ -z "$1" ]
+ then
+-    git diff --ignore-space-at-eol -b -w --ignore-blank-lines --cached HEAD
++    COMMAND="$COMMAND --cached HEAD"
+ else
+-    COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines $1 $2"
++    COMMAND="$COMMAND $1 $2"
+ 
+     for ss in $(git config --get-all gdif.ignore)
+     do
+         COMMAND="$COMMAND  ':(exclude)$ss'"
+     done
+-
+-    eval "$COMMAND"
+ fi
++eval "$COMMAND"
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 19199343..37cab30b 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 19199343a89638c68abd5bd5a59fb3d36997674e
++Subproject commit 37cab30bd3d07490b62b676567a9b90435faa5b7
+diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
+index ba666bb2..525aea43 160000
+--- ./vimrc/.vim/bundle/vim-javascript-syntax
++++ ./vimrc/.vim/bundle/vim-javascript-syntax
+@@ -1 +1 @@
+-Subproject commit ba666bb2d2aba49200c0133b9303958fc0f4fe9a
++Subproject commit 525aea4320f22a2bf8aefe87861852bb701551d4
