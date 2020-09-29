@@ -29,62 +29,74 @@ index 9bd04ebf..b091aaac 100755
 -    eval "$COMMAND"
  fi
 +eval "$COMMAND"
+diff --git gitrc/gdif.sh gitrc/gdif.sh
+index 0865ae41..10543369 100755
+--- gitrc/gdif.sh
++++ gitrc/gdif.sh
+@@ -1,6 +1,6 @@
+ #!/bin/zsh
+ 
+-COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
++COMMAND="git diff --no-prefix --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
+ 
+ while read ss
+ do
 diff --git vimrc/.vim/bundle/bash-support.vim vimrc/.vim/bundle/bash-support.vim
 index 2edefa5a..b8262bbe 160000
 --- vimrc/.vim/bundle/bash-support.vim
 +++ vimrc/.vim/bundle/bash-support.vim
 @@ -1 +1 @@
 -Subproject commit 2edefa5a648cf3a278e3247d795dcc642594e5ef
-+Subproject commit b8262bbec284978c9da332797399f004e13ebd61-dirty
++Subproject commit b8262bbec284978c9da332797399f004e13ebd61
 diff --git vimrc/.vim/bundle/python-mode vimrc/.vim/bundle/python-mode
 index c2a1b140..3932b85b 160000
 --- vimrc/.vim/bundle/python-mode
 +++ vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit c2a1b14045959245b4cc3beece1d87844dd07917
-+Subproject commit 3932b85b1396bf1be9ee2a7348e8eeb6055b87db-dirty
++Subproject commit 3932b85b1396bf1be9ee2a7348e8eeb6055b87db
 diff --git vimrc/.vim/bundle/vim-anyfold vimrc/.vim/bundle/vim-anyfold
 index 08afed64..3a938f7b 160000
 --- vimrc/.vim/bundle/vim-anyfold
 +++ vimrc/.vim/bundle/vim-anyfold
 @@ -1 +1 @@
 -Subproject commit 08afed649474044072e413f019ac87d5cee77815
-+Subproject commit 3a938f7b1cea87ae5cd639c1b0b137cedb56faef-dirty
++Subproject commit 3a938f7b1cea87ae5cd639c1b0b137cedb56faef
 diff --git vimrc/.vim/bundle/vim-autoformat vimrc/.vim/bundle/vim-autoformat
 index 05cde207..fa23b253 160000
 --- vimrc/.vim/bundle/vim-autoformat
 +++ vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit 05cde20768f0eda9c652f93bae7189dc57c21e2a
-+Subproject commit fa23b2534a4dcd9d9f26713bfc0dc3a692e569e6-dirty
++Subproject commit fa23b2534a4dcd9d9f26713bfc0dc3a692e569e6
 diff --git vimrc/.vim/bundle/vim-buffergator vimrc/.vim/bundle/vim-buffergator
 index 6658fb7d..72a3b68e 160000
 --- vimrc/.vim/bundle/vim-buffergator
 +++ vimrc/.vim/bundle/vim-buffergator
 @@ -1 +1 @@
 -Subproject commit 6658fb7d238b0fcc04ee6543a495111ad49765ee
-+Subproject commit 72a3b68e57c44bb8eaf6b2d0073fac3e96cae032-dirty
++Subproject commit 72a3b68e57c44bb8eaf6b2d0073fac3e96cae032
 diff --git vimrc/.vim/bundle/vim-fugitive vimrc/.vim/bundle/vim-fugitive
 index 19199343..e0f15287 160000
 --- vimrc/.vim/bundle/vim-fugitive
 +++ vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 19199343a89638c68abd5bd5a59fb3d36997674e
-+Subproject commit e0f15287a57feccd0a1c4a0db75b638be31609c4-dirty
++Subproject commit e0f15287a57feccd0a1c4a0db75b638be31609c4
 diff --git vimrc/.vim/bundle/vim-javascript-syntax vimrc/.vim/bundle/vim-javascript-syntax
 index ba666bb2..ecf96f2d 160000
 --- vimrc/.vim/bundle/vim-javascript-syntax
 +++ vimrc/.vim/bundle/vim-javascript-syntax
 @@ -1 +1 @@
 -Subproject commit ba666bb2d2aba49200c0133b9303958fc0f4fe9a
-+Subproject commit ecf96f2dcd417a752a43073b4c75a0531e777597-dirty
++Subproject commit ecf96f2dcd417a752a43073b4c75a0531e777597
 diff --git vimrc/.vim/bundle/vim-log-syntax vimrc/.vim/bundle/vim-log-syntax
 index 172fb19b..55d1eee9 160000
 --- vimrc/.vim/bundle/vim-log-syntax
 +++ vimrc/.vim/bundle/vim-log-syntax
 @@ -1 +1 @@
 -Subproject commit 172fb19bbb2283f9098b2adadbba4a7b13283e11
-+Subproject commit 55d1eee90828f8cd997976e37e67a35e8109b0a1-dirty
++Subproject commit 55d1eee90828f8cd997976e37e67a35e8109b0a1
 diff --git vimrc/.vim/bundle/vim-rails vimrc/.vim/bundle/vim-rails
 index 3cc34304..2c42236c 160000
 --- vimrc/.vim/bundle/vim-rails
