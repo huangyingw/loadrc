@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
+COMMAND="git diff --no-prefix --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
 
 while read ss
 do
