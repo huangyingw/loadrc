@@ -48,4 +48,4 @@ brew cask install \
 sudo easy_install pip
 sudo pip install --upgrade pip
 
-./install_nx.sh
+#./install_nx.sh
