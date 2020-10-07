@@ -19,4 +19,4 @@ then \
     then \
         ~/loadrc/bashrc/sleep.sh ; \
         fi ; \
-        nvim ~/loadrc/jdupes.log
+    nvim ~/loadrc/jdupes.log
