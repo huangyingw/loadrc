@@ -28,9 +28,8 @@ rpath=$(git config deploy.path)
 GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
     ~/loadrc/gitrc/discard_unnecessaries.sh ; \
     git checkout -f "$targetBranch" ; \
-    git apply --reject --whitespace=fix "$GDITDIFF" ; \
+    git apply --index --reject --whitespace=fix "$GDITDIFF" ; \
     ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
-    git add . && \
     git commit  --no-verify -am "$commit_message" ; \
     git pull ; \
     git push ; \
