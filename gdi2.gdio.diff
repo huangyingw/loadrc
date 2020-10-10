@@ -25,13 +25,6 @@ index 10543369..0865ae41 100755
  
  while read ss
  do
-diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index 8d23e01b..945b12e9 160000
---- ./vimrc/.vim/bundle/vim-autoformat
-+++ ./vimrc/.vim/bundle/vim-autoformat
-@@ -1 +1 @@
--Subproject commit 8d23e01bc6a21f40acbd1ea6d357ae3490d4c607
-+Subproject commit 945b12e9a0ef3fd3659d19b842253192367a8d14
 diff --git a/vimrc/.vim/bundle/vim-log-syntax b/vimrc/.vim/bundle/vim-log-syntax
 --- ./vimrc/.vim/bundle/vim-log-syntax
 +++ ./vimrc/.vim/bundle/vim-log-syntax
