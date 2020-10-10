@@ -447,6 +447,7 @@
 ./gitrc/gme2.sh
 ./gitrc/gpl.sh
 ./gitrc/gps.sh
+./gitrc/gres.sh
 ./gitrc/grm.sh
 ./gitrc/grsh.sh
 ./gitrc/gs.sh
@@ -555,6 +556,7 @@
 ./install_nvim.sh
 ./install_nvim_post.sh
 ./install_nvim_pre.sh
+./install_nx.sh
 ./install_prerequisite.sh
 ./install_vagrant.sh
 ./ipynbrc/jupytext.sh
@@ -601,6 +603,7 @@
 ./leetcoderc/submit.sh
 ./linux.conf
 ./linux/etc/sudoers
+./linux/usr/lib/systemd/system/NetworkManager-wait-online.service
 ./linux_links/etc/crypttab
 ./linux_links/etc/default/grub
 ./linux_links/etc/resolvconf/resolv.conf.d/base
@@ -2741,7 +2744,8 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/scratch.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/state.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax.vim
-./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/load.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/after.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/core.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/misc.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/amsmath.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/array.vim
@@ -2774,6 +2778,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/url.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/varioref.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/wiki.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/packages.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/test.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/text_obj.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/text_obj/cmdtargets.vim
