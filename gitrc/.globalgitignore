@@ -3,6 +3,7 @@
 *.bin
 *.diff
 !*.gdio.diff
+*.dmg
 *.exe
 *.findresult
 *.fugitiveblame
