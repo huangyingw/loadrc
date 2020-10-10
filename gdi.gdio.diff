@@ -1,152 +1,75 @@
-diff --git a/cscope b/cscope
-index f6658a2c..99d8112a 160000
---- ./cscope
-+++ ./cscope
-@@ -1 +1 @@
--Subproject commit f6658a2c0ae8aefaf394a42ab5beab425f23b137
-+Subproject commit 99d8112a6e003830440b91cf490147b3b747c435
-diff --git a/gitrc/gdi.sh b/gitrc/gdi.sh
-index 9bd04ebf..4799a9c8 100755
---- ./gitrc/gdi.sh
-+++ ./gitrc/gdi.sh
-@@ -1,14 +1,15 @@
- #!/bin/zsh
-+COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines"
-+
- if [ -z "$1" ]
- then
--    git diff --ignore-space-at-eol -b -w --ignore-blank-lines --cached HEAD
-+    COMMAND="$COMMAND --cached HEAD"
- else
--    COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines $1 $2"
-+    COMMAND="$COMMAND $1 $2"
- 
-     for ss in $(git config --get-all gdif.ignore)
-     do
-         COMMAND="$COMMAND  ':(exclude)$ss'"
-     done
--
--    eval "$COMMAND"
- fi
-+eval "$COMMAND"
+diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
+index fb80774f..dbcf937b 100755
+--- ./gitrc/gdi2.sh
++++ ./gitrc/gdi2.sh
+@@ -28,9 +28,8 @@ rpath=$(git config deploy.path)
+ GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
+     ~/loadrc/gitrc/discard_unnecessaries.sh ; \
+     git checkout -f "$targetBranch" ; \
+-    git apply --reject --whitespace=fix "$GDITDIFF" ; \
++    git apply --index --reject --whitespace=fix "$GDITDIFF" ; \
+     ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
+-    git add . && \
+     git commit  --no-verify -am "$commit_message" ; \
+     git pull ; \
+     git push ; \
 diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
-index 0865ae41..10543369 100755
+index 10543369..0865ae41 100755
 --- ./gitrc/gdif.sh
 +++ ./gitrc/gdif.sh
 @@ -1,6 +1,6 @@
  #!/bin/zsh
  
--COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
-+COMMAND="git diff --no-prefix --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
+-COMMAND="git diff --no-prefix --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
++COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
  
  while read ss
  do
-diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
-index 2edefa5a..2db0324c 160000
---- ./vimrc/.vim/bundle/bash-support.vim
-+++ ./vimrc/.vim/bundle/bash-support.vim
-@@ -1 +1 @@
--Subproject commit 2edefa5a648cf3a278e3247d795dcc642594e5ef
-+Subproject commit 2db0324cbaaf115b4a2a2888e7845e405b35eba6
-diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index c2a1b140..e3e5cb5e 160000
---- ./vimrc/.vim/bundle/python-mode
-+++ ./vimrc/.vim/bundle/python-mode
-@@ -1 +1 @@
--Subproject commit c2a1b14045959245b4cc3beece1d87844dd07917
-+Subproject commit e3e5cb5e0dc1125632a2c33dfceee1ccccf6a5a2
 diff --git a/vimrc/.vim/bundle/vim-anyfold b/vimrc/.vim/bundle/vim-anyfold
-index 08afed64..662a25ea 160000
+index 4579327e..662a25ea 160000
 --- ./vimrc/.vim/bundle/vim-anyfold
 +++ ./vimrc/.vim/bundle/vim-anyfold
 @@ -1 +1 @@
--Subproject commit 08afed649474044072e413f019ac87d5cee77815
+-Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 662a25ea7f07ab2bcd816a54770dc724149e4e1a
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index 05cde207..eb53a833 160000
+index 8d23e01b..eb53a833 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
--Subproject commit 05cde20768f0eda9c652f93bae7189dc57c21e2a
+-Subproject commit 8d23e01bc6a21f40acbd1ea6d357ae3490d4c607
 +Subproject commit eb53a83353295179cf7774ca57c7cac9651f0afc
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
-index 6658fb7d..7178f722 160000
+index 8d2ff564..7178f722 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
 +++ ./vimrc/.vim/bundle/vim-buffergator
 @@ -1 +1 @@
--Subproject commit 6658fb7d238b0fcc04ee6543a495111ad49765ee
+-Subproject commit 8d2ff5644ea3bcfccc36b75d66c6ffd287922b1f
 +Subproject commit 7178f7221b6923ec3063820c7dc583a25fc60fda
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 19199343..edcf19d8 160000
+index 2954fe26..edcf19d8 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
--Subproject commit 19199343a89638c68abd5bd5a59fb3d36997674e
+-Subproject commit 2954fe260004b8b2734daee63a43d2d6bb725884
 +Subproject commit edcf19d82f3c46d15394d08d1b434135ddcb8596
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
-index ba666bb2..b814218e 160000
+index d64ef4d1..b814218e 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
 +++ ./vimrc/.vim/bundle/vim-javascript-syntax
 @@ -1 +1 @@
--Subproject commit ba666bb2d2aba49200c0133b9303958fc0f4fe9a
+-Subproject commit d64ef4d1f9dbb1f141feab28d58ab6ee0e4ac769
 +Subproject commit b814218eb0c31a7f49cf7b1121b32d11a6f4543d
 diff --git a/vimrc/.vim/bundle/vim-log-syntax b/vimrc/.vim/bundle/vim-log-syntax
-index 172fb19b..e2dcef43 160000
 --- ./vimrc/.vim/bundle/vim-log-syntax
 +++ ./vimrc/.vim/bundle/vim-log-syntax
 @@ -1 +1 @@
--Subproject commit 172fb19bbb2283f9098b2adadbba4a7b13283e11
-+Subproject commit e2dcef439e50fec752177fc1aa46b57114e31698
-diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3cc34304..2c42236c 160000
---- ./vimrc/.vim/bundle/vim-rails
-+++ ./vimrc/.vim/bundle/vim-rails
+-Subproject commit e2dcef439e50fec752177fc1aa46b57114e31698
++Subproject commit e2dcef439e50fec752177fc1aa46b57114e31698-dirty
+diff --git a/vimrc/.vim/bundle/vim-snipmate b/vimrc/.vim/bundle/vim-snipmate
+index 68eebf9d..b80367fe 160000
+--- ./vimrc/.vim/bundle/vim-snipmate
++++ ./vimrc/.vim/bundle/vim-snipmate
 @@ -1 +1 @@
--Subproject commit 3cc34304643abf8d28d2482e74119d0d5f4b5302
-+Subproject commit 2c42236cf38c0842dd490095ffd6b1540cad2e29
-diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index 3380c0a7..f027d7f5 100644
---- ./vimrc/.vim/plugin/fugitive.vim
-+++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -385,7 +385,6 @@ function! s:Gdi(...) abort
- 
-     let worktree = Cd2Worktree()
-     call OpenOrSwitch(output, 'vs')
--    call s:DiffClean()
- endfunction
- 
- function! s:Gdit() abort
-@@ -401,7 +400,6 @@ function! s:Gdit() abort
- 
-     let worktree = Cd2Worktree()
-     call OpenOrSwitch(output, 'vs')
--    call s:DiffClean()
- endfunction
- 
- function! s:Gdio(...) abort
-@@ -482,7 +480,6 @@ function! s:Gdif(...) abort
-     let output = GetEscapedResult(arg1) . '.diff'
-     exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '" "' .  expand("%:p") . '"' . ' 2>&1 | tee ' . output
-     call OpenOrSwitch(output, 'vs')
--    call s:DiffClean()
- endfunction
- 
- function! s:Gco(...) abort
-@@ -649,17 +646,6 @@ function! s:Gwap() abort
-     call s:Gs()
- endfunction
- 
--function! s:DiffClean() abort
--    if expand('%:e') != "diff"
--        return
--    endif
--
--    silent exec '%s/^--- a\//--- \.\//g'
--    silent exec '%s/^+++ b\//+++ \.\//g'
--    w
--    only
--endfunction
--
- function! s:Gfix() abort
-     let worktree = Cd2Worktree()
-     exec '!~/loadrc/gitrc/gfix.sh'
+-Subproject commit 68eebf9dabe5c1d1964e78dda188765f224bab34
++Subproject commit b80367fefc2188c9d6c4a9eb1830360b09e13476
