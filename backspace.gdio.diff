@@ -1,0 +1,19 @@
+diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
+index 23d11aa9..1d4a909f 160000
+--- ./vimrc/.vim/bundle/bash-support.vim
++++ ./vimrc/.vim/bundle/bash-support.vim
+@@ -1 +1 @@
+-Subproject commit 23d11aa9ea25d16be8b2ffc736bf914208685096
++Subproject commit 1d4a909f46698906b16d711aeb260663f4c4794a
+diff --git a/vimrc/.vimrc b/vimrc/.vimrc
+index e30afa61..e0b2d631 100644
+--- ./vimrc/.vimrc
++++ ./vimrc/.vimrc
+@@ -47,7 +47,6 @@ set softtabstop=4               " when hitting <BS>, pretend like a tab is remov
+ set expandtab                   " expand tabs by default (overloadable per file type later)
+ set shiftwidth=4                " number of spaces to use for autoindenting
+ set shiftround                  " use multiple of shiftwidth when indenting with '<' and '>'
+-set backspace=indent,eol,start  " allow backspacing over everything in insert mode
+ set autoindent                  " always set autoindenting on
+ set copyindent                  " copy the previous indentation on autoindenting
+ set number                      " always show line numbers
