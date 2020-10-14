@@ -63,4 +63,4 @@ then \
     cp -fv cscope.out.bak.po cscope.out.po
 
 sort -u ~/all.proj -o ~/all.proj
-~/loadrc/bashrc/generate_rsync_files.sh
+./generate_rsync_files.sh
