@@ -57,7 +57,7 @@ then \
     ~/loadrc/bashrc/fvideos.sh && \
     ~/loadrc/bashrc/fdocs.sh && \
     echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
-    cscope -bq -i "$TARGET" -f cscope.out.bak && \
+    cscope -bq -i files.proj -f cscope.out.bak && \
     cp -fv cscope.out.bak cscope.out && \
     cp -fv cscope.out.bak.in cscope.out.in && \
     cp -fv cscope.out.bak.po cscope.out.po
