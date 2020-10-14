@@ -54,7 +54,5 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
         sort -u "$TARGET" -o "$TARGET" && \
         cp -fv "$TARGET" files.proj && \
         sed -i.bak 's/ /\\ /g' files.proj && \
-        ~/loadrc/bashrc/fvideos.sh && \
-        ~/loadrc/bashrc/fdocs.sh && \
         echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
         sort -u ~/all.proj -o ~/all.proj
