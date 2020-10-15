@@ -20,7 +20,7 @@ cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
 cp -nv ~/loadrc/prunefile_template.conf ./prunefile.conf
 cp -nv ~/loadrc/includefile_template.conf ./includefile.conf
 cp -nv ~/loadrc/setup.cfg ./setup.cfg
-TARGET="generate_files_proj_$(~/loadrc/bashrc/random_string.sh 20)"
+TARGET="$(~/loadrc/bashrc/random_string.sh 20).bak"
 PRUNE_POSTFIX=prunefix.conf
 PRUNE_FILE=prunefile.conf
 INCLUDE_FILE=includefile.conf
