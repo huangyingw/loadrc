@@ -567,6 +567,7 @@
 ./kubernetesrc/install.sh
 ./kubernetesrc/install_gofish.sh
 ./kubernetesrc/install_helm.sh
+./kubernetesrc/install_kubectl.sh
 ./kvmrc/configure.sh
 ./kvmrc/install.sh
 ./kvmrc/usb_disk.xml
@@ -2296,6 +2297,7 @@
 ./vimrc/.vim/bundle/vim-anyfold/plugin/anyfold.vim
 ./vimrc/.vim/bundle/vim-autoformat/.gitattributes
 ./vimrc/.vim/bundle/vim-autoformat/.gitconfig
+./vimrc/.vim/bundle/vim-autoformat/.github/ISSUE_TEMPLATE.md
 ./vimrc/.vim/bundle/vim-autoformat/.gitignore
 ./vimrc/.vim/bundle/vim-autoformat/LICENSE
 ./vimrc/.vim/bundle/vim-autoformat/README.md
@@ -2311,6 +2313,7 @@
 ./vimrc/.vim/bundle/vim-autoformat/samples/perl.pl
 ./vimrc/.vim/bundle/vim-autoformat/samples/python.py
 ./vimrc/.vim/bundle/vim-autoformat/samples/ruby.rb
+./vimrc/.vim/bundle/vim-autoformat/samples/sample.css
 ./vimrc/.vim/bundle/vim-autoformat/samples/test.json
 ./vimrc/.vim/bundle/vim-autoformat/samples/test.sql
 ./vimrc/.vim/bundle/vim-autoformat/samples/xhtml.xhtml
