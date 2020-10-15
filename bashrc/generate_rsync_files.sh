@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-rsyncFiles="generate_rsync_files_$(~/loadrc/bashrc/random_string.sh 20)"
+rsyncFiles="$(~/loadrc/bashrc/random_string.sh 20).bak"
 cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > "$rsyncFiles"
 PRUNE_POSTFIX=prunefix.rsync
 INCLUDE_FILE=includefile.rsync
