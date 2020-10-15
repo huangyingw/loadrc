@@ -1,13 +1,16 @@
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
 new file mode 100755
-index 00000000..21a42a07
+index 00000000..c11b4960
 --- /dev/null
 +++ ./bashrc/do_update_proj.sh
-@@ -0,0 +1,4 @@
+@@ -0,0 +1,7 @@
 +#!/bin/zsh
-+./generate_files_proj.sh &
-+./cscope.sh &
-+./generate_rsync_files.sh &
++
++~/loadrc/bashrc/generate_files_proj.sh
++~/loadrc/bashrc/fvideos.sh &
++~/loadrc/bashrc/fdocs.sh &
++~/loadrc/bashrc/cscope.sh &
++~/loadrc/bashrc/generate_rsync_files.sh &
 diff --git a/bashrc/fcscope.sh b/bashrc/fcscope.sh
 index 4ca69982..ca4becd7 100755
 --- ./bashrc/fcscope.sh
@@ -20,17 +23,18 @@ index 4ca69982..ca4becd7 100755
 +  ~/loadrc/bashrc/do_update_proj.sh $(dirname "${cscope}")
  done
 diff --git a/bashrc/cscope.sh b/bashrc/generate_files_proj.sh
-old mode 100755
-new mode 100644
 similarity index 62%
 rename from bashrc/cscope.sh
 rename to bashrc/generate_files_proj.sh
-index 53723ae8..6ad92d5a
+index 53723ae8..b454795d 100755
 --- ./bashrc/cscope.sh
 +++ ./bashrc/generate_files_proj.sh
-@@ -57,10 +57,4 @@ then \
-         ~/loadrc/bashrc/fvideos.sh && \
-         ~/loadrc/bashrc/fdocs.sh && \
+@@ -54,13 +54,5 @@ then \
+         sort -u "$TARGET" -o "$TARGET" && \
+         cp -fv "$TARGET" files.proj && \
+         sed -i.bak 's/ /\\ /g' files.proj && \
+-    ~/loadrc/bashrc/fvideos.sh && \
+-    ~/loadrc/bashrc/fdocs.sh && \
          echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
 -    cscope -bq -i "$TARGET" -f cscope.out.bak && \
 -    cp -fv cscope.out.bak cscope.out && \
