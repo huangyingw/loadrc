@@ -20,7 +20,7 @@ cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
 cp -nv ~/loadrc/prunefile_template.conf ./prunefile.conf
 cp -nv ~/loadrc/includefile_template.conf ./includefile.conf
 cp -nv ~/loadrc/setup.cfg ./setup.cfg
-TARGET=files.proj.bak
+TARGET="$(~/loadrc/bashrc/random_string.sh 20).bak"
 PRUNE_POSTFIX=prunefix.conf
 PRUNE_FILE=prunefile.conf
 INCLUDE_FILE=includefile.conf
@@ -54,5 +54,6 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
         sort -u "$TARGET" -o "$TARGET" && \
         sed -i.bak 's/ /\\ /g' "$TARGET" && \
         cp -fv "$TARGET" files.proj && \
+        rm "$TARGET" "$TARGET.tmp" "$TARGET.bak" && \
         echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
         sort -u ~/all.proj -o ~/all.proj
