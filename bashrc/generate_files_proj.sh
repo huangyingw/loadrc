@@ -52,7 +52,7 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
         find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
         fi && \
         sort -u "$TARGET" -o "$TARGET" && \
+        sed -i.bak 's/ /\\ /g' "$TARGET" && \
         cp -fv "$TARGET" files.proj && \
-        sed -i.bak 's/ /\\ /g' files.proj && \
         echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
         sort -u ~/all.proj -o ~/all.proj
