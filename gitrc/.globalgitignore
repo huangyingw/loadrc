@@ -3,6 +3,7 @@
 *.bin
 *.diff
 !*.gdio.diff
+*.dmg
 *.exe
 *.findresult
 *.fugitiveblame
@@ -15,6 +16,7 @@
 *.ncb
 *.o
 *.orig
+*.pth
 *.pyc
 *.runresult
 *.sort
@@ -63,3 +65,5 @@ run
 running.time
 setup.cfg
 ~$*
+prunefix.rsync
+rsync.files

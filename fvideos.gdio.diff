@@ -1,0 +1,101 @@
+diff --git a/bashrc/fav.sh b/bashrc/fav.sh
+index ef45e9be..87df8df9 100755
+--- ./bashrc/fav.sh
++++ ./bashrc/fav.sh
+@@ -6,7 +6,7 @@ if [ -d "$FAV" ]
+ then
+     cd "$FAV"
+ 
+-    find . -type f -size +10M -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > fav.log 
+-    find . -type f -size +10M -exec ls -t {} \+ | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > fav.log.sort
++    find . -type f -size +10M -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log 
++    find . -type f -size +10M -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log.sort
+     touch files.proj
+ fi
+diff --git a/bashrc/fvideos.sh b/bashrc/fvideos.sh
+index 7e762af8..12e76a72 100755
+--- ./bashrc/fvideos.sh
++++ ./bashrc/fvideos.sh
+@@ -1,6 +1,6 @@
+ #! /bin/zsh
+ 
+-find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > fav.log.bak ; \
++find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log.bak ; \
+     cp -fv fav.log.bak fav.log && \
+-    find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > fav.log.sort.bak ; \
++    find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log.sort.bak ; \
+     cp -fv fav.log.sort.bak fav.log.sort
+diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
+index 4221f506..c65de94c 100644
+--- ./host_links/server/etc/hosts
++++ ./host_links/server/etc/hosts
+@@ -6,6 +6,7 @@
+ 192.168.31.140 mini
+ 192.168.31.149 minds
+ 192.168.31.99 mldonkey
++192.168.31.147 imacpro
+ 
+ # The following lines are desirable for IPv6 capable hosts
+ ::1     ip6-localhost ip6-loopback
+diff --git a/host_links/server/root/.fastai/config.yml b/host_links/server/root/.fastai/config.yml
+index 59ca9969..94546083 100644
+--- ./host_links/server/root/.fastai/config.yml
++++ ./host_links/server/root/.fastai/config.yml
+@@ -1,3 +1,5 @@
+-data_archive_path: /media/nvme/fastai/data/
++archive_path: /media/nvme/fastai/archive
+ data_path: /media/nvme/fastai/data/
+ model_path: /media/nvme/fastai/models/
++storage_path: /tmp
++version: 2
+diff --git a/ipynbrc/convert.sh b/ipynbrc/convert.sh
+deleted file mode 100755
+index f407ee3a..00000000
+--- ./ipynbrc/convert.sh
++++ /dev/null
+@@ -1,11 +0,0 @@
+-#!/bin/zsh
+-
+-find . -type f -name \*.ipynb | while read ss
+-do
+-    jupyter nbconvert --to=python --template=~/loadrc/ipynbrc/python.tpl "$ss" --output "$(basename $ss).py"
+-    jupyter nbconvert --to=html "$ss"
+-    sed -i"" '/^$/d' "$ss.py"
+-    sed -i"" '/^#$/d' "$ss.py"
+-    autopep8 --in-place "$ss.py"
+-    cp -nv "$ss.py" "$(echo $ss.py | sed 's/\.ipynb//g')"
+-done
+diff --git a/ipynbrc/jupytext.sh b/ipynbrc/jupytext.sh
+new file mode 100755
+index 00000000..13c588ff
+--- /dev/null
++++ ./ipynbrc/jupytext.sh
+@@ -0,0 +1,2 @@
++#!/bin/zsh
++find . -type f -name \*.ipynb -exec jupytext --set-formats ipynb,py {} \;
+diff --git a/ipynbrc/python.tpl b/ipynbrc/python.tpl
+deleted file mode 100644
+index 354ec2d4..00000000
+--- ./ipynbrc/python.tpl
++++ /dev/null
+@@ -1,13 +0,0 @@
+-{%- extends 'null.tpl' -%}
+-
+-{% block header %}
+-# coding: utf-8
+-{% endblock header %}
+-
+-{% block input %}
+-{{ cell.source | ipython2python }}
+-{% endblock input %}
+-
+-{% block markdowncell scoped %}
+-{{ cell.source | comment_lines }}
+-{% endblock markdowncell %}
+diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
+index 187742a3..858a379b 160000
+--- ./vimrc/.vim/bundle/vim-rails
++++ ./vimrc/.vim/bundle/vim-rails
+@@ -1 +1 @@
+-Subproject commit 187742a3c18d93e6968f024d7db0f4fc5548408e
++Subproject commit 858a379bcb389d67abdb7e0eb1b0a1fa78d8ba39

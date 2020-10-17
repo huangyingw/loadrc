@@ -41,7 +41,7 @@ case $extension in
     sql)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            ssh -nY "$host" "cd $rpath ; ~/loadrc/sqlrc/xsql.sh $rfile"
+            ssh -nY "$host" "~/loadrc/sqlrc/xsql.sh $rpath/$rfile $rpath"
         else
             ~/loadrc/sqlrc/xsql.sh "$file" "$2"
         fi
@@ -56,10 +56,6 @@ case $extension in
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
             ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
-            rsync -aHv --force --progress \
-                --files-from=files.rev \
-                "$host:$rpath/" \
-                .
         else
             . ~/loadrc/.loadrc
             "$file"

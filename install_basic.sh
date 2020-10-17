@@ -7,17 +7,16 @@ SCRIPT=$(realpath "$0") && \
 ./install_basic_macos.sh
 
 pip install \
-    pdftotext
-
-sudo -H pip install --upgrade \
     autoflake \
-    autopep8
+    autopep8 \
+    pdftotext
 
 pip3 install git+https://github.com/gaborvecsei/pdf-split-merge.git
 
 npm -g install \
+    csvtojson \
     js-beautify \
-    csvtojson
+    json2csv
 
 ./zerotierrc/all.sh
 ./deploy_configurations.sh

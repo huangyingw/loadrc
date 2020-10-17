@@ -92,7 +92,10 @@ function! PlayVideo()
     endif
 
     call asyncrun#stop('<bang>')
-    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/vlc.sh ' . '"' . expand('%:p:h') . '/' . '"' .  getline('.'))
+    let line = getline('.')
+    let line = substitute(line, '^[^"]', '"' . line[0], '')
+    let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
+    call asyncrun#run('<bang>', '', '~/loadrc/pythonrc/vlc.py ' . '"' . expand("%:p") . '"' .  ' ' . line)
 endfunction
 
 function! VDebug()
@@ -146,6 +149,9 @@ function! VRun()
     else
         call OpenOrSwitch('gbil.log', 'vs')
     endif
+
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
 endfunction
 
 function! SearchAgain()
@@ -414,7 +420,7 @@ vnoremap <tab> %
 nnoremap M zM
 nnoremap R zR
 nmap <f2> :set number! number?<cr>
-nmap <leader>w :windo set wrap!<cr>
+nmap <leader>w :call WinDo('set wrap!') <cr>
 " Convert slashes to backslashes for Windows.
 if has('win32')
     nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
@@ -473,13 +479,21 @@ map oo :call VimOpen()<cr>
 nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
 
-function! CommTwoFiles()
+function! CutFile2()
     silent exec '!comm -2 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . @" . '".findresult'
     silent exec '!cp -fv "' . @" . '.findresult' . '"' . ' ' . '"' . @" . '"'
     call OpenOrSwitch(@", 'vs')
 endfunc
 
-nnoremap <leader>2 :call CommTwoFiles()<cr>
+function! CutCommon()
+    silent exec '!comm -2 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . @" . '".findresult'
+    silent exec '!comm -1 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . expand("%:p") . '".findresult'
+    silent exec '!cp -fv "' . @" . '.findresult' . '"' . ' ' . '"' . @" . '"'
+    silent exec '!cp -fv "' . expand("%:p") . '.findresult' . '"' . ' ' . '"' . expand("%:p") . '"'
+endfunc
+
+nnoremap <leader>2 :call CutCommon()<cr>
+nnoremap <leader>3 :call CutFile2()<cr>
 set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
 "    paste mode, where you can paste mass data
 "    that won't be autoindented

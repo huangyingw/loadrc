@@ -1,0 +1,107 @@
+diff --git a/bashrc/ln_fs.sh b/bashrc/ln_fs.sh
+index 5b0750fc..8946ff3e 100755
+--- ./bashrc/ln_fs.sh
++++ ./bashrc/ln_fs.sh
+@@ -3,14 +3,18 @@
+ SOURCE="$1"
+ realpath "$1" && SOURCE=$(realpath "$1")
+ TARGET="$2"
+-realpath "$2" && TARGET=$(realpath "$2")
+ 
+ if [ "$SOURCE" != "$TARGET" ]
+ then
+-    cp -nv "$TARGET" "$TARGET".bak
+     if [ -L "$TARGET" ]
+     then
+         rm "$TARGET"
+     fi
++
++    if [ -f "$TARGET" ]
++    then
++        cp -nv "$TARGET" "$TARGET".bak
++    fi
++
+     ln -fs "$SOURCE" "$TARGET"
+ fi
+diff --git a/linux/etc/sudoers b/linux/etc/sudoers
+new file mode 100644
+index 00000000..87a57525
+--- /dev/null
++++ ./linux/etc/sudoers
+@@ -0,0 +1,32 @@
++#
++# This file MUST be edited with the 'visudo' command as root.
++#
++# Please consider adding local content in /etc/sudoers.d/ instead of
++# directly modifying this file.
++#
++# See the man page for details on how to write a sudoers file.
++#
++Defaults	env_reset
++Defaults	mail_badpass
++Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
++
++# Host alias specification
++
++# User alias specification
++
++# Cmnd alias specification
++
++# User privilege specification
++root	ALL=(ALL:ALL) ALL
++
++# Members of the admin group may gain root privileges
++%admin ALL=(ALL) ALL
++
++# Allow members of group sudo to execute any command
++%sudo	ALL=(ALL:ALL) ALL
++
++# See sudoers(5) for more information on "#include" directives:
++
++#includedir /etc/sudoers.d
++huangyingw     ALL=(ALL)       NOPASSWD: ALL
++admin     ALL=(ALL)       NOPASSWD: ALL
+diff --git a/linux/etc/crypttab b/linux_links/etc/crypttab
+similarity index 100%
+rename from linux/etc/crypttab
+rename to linux_links/etc/crypttab
+diff --git a/linux/etc/default/grub b/linux_links/etc/default/grub
+similarity index 100%
+rename from linux/etc/default/grub
+rename to linux_links/etc/default/grub
+diff --git a/linux/etc/resolvconf/resolv.conf.d/base b/linux_links/etc/resolvconf/resolv.conf.d/base
+similarity index 100%
+rename from linux/etc/resolvconf/resolv.conf.d/base
+rename to linux_links/etc/resolvconf/resolv.conf.d/base
+diff --git a/linux/etc/resolvconf/resolv.conf.d/head b/linux_links/etc/resolvconf/resolv.conf.d/head
+similarity index 100%
+rename from linux/etc/resolvconf/resolv.conf.d/head
+rename to linux_links/etc/resolvconf/resolv.conf.d/head
+diff --git a/linux/etc/ssh/ssh_config b/linux_links/etc/ssh/ssh_config
+similarity index 100%
+rename from linux/etc/ssh/ssh_config
+rename to linux_links/etc/ssh/ssh_config
+diff --git a/linux/etc/ssh/sshd_config b/linux_links/etc/ssh/sshd_config
+similarity index 100%
+rename from linux/etc/ssh/sshd_config
+rename to linux_links/etc/ssh/sshd_config
+diff --git a/set_linux_configuration.sh b/set_linux_configuration.sh
+index 028fa7e1..ced4c25c 100755
+--- ./set_linux_configuration.sh
++++ ./set_linux_configuration.sh
+@@ -8,9 +8,14 @@ then
+     exit 0
+ fi
+ 
++find linux_links/ -type f | while read ss; \
++do \
++    ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/linux_links\///g")"; \
++done
++
+ find linux/ -type f | while read ss; \
+ do \
+-    ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/linux\///g")"; \
++    cp -fv --remove-destination "$ss" "/$(echo "$ss" | sed "s/linux\///g")"; \
+ done
+ 
+ grub-mkconfig -o /boot/grub/grub.cfg

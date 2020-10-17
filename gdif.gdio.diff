@@ -1,0 +1,29 @@
+diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
+index 7a7fcf5e..0865ae41 100755
+--- ./gitrc/gdif.sh
++++ ./gitrc/gdif.sh
+@@ -4,10 +4,7 @@ COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
+ 
+ while read ss
+ do
+-    if [ -f "$ss" ]
+-    then
+-        COMMAND="$COMMAND  '$ss'"
+-    fi
++    COMMAND="$COMMAND  -- '$ss'"
+ done < "$2"
+ 
+ eval "$COMMAND"
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index a69bacbf..5d21be9a 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -465,7 +465,7 @@ endfunction
+ function! s:Gdif(...) abort
+     let worktree = Cd2Worktree()
+     let arg1 = (a:0 >= 1) ? a:1 : ''
+-    let output = arg1 . '.diff'
++    let output = GetEscapedResult(arg1) . '.diff'
+     exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '" "' .  expand("%:p") . '"' . ' 2>&1 | tee ' . output
+     call OpenOrSwitch(output, 'vs')
+     call s:DiffClean()

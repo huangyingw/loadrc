@@ -7,6 +7,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Copy :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dodev :execute s:Dodev()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dps :execute s:Dps()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fcscope :execute s:Fcscope()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fdisklog :execute s:Fdisklog()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDeleted :execute s:FindDeleted()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
@@ -30,6 +31,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcp :e
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdev :execute s:Gdev()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi :execute s:Gdi(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi2 :execute s:Gdi2(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdif :execute s:Gdif(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdio :execute s:Gdio(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdit :execute s:Gdit()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gfix :execute s:Gfix()
@@ -40,6 +42,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glg :e
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gmet :execute s:Gmet()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gres :execute s:Gres()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtu :execute s:Grtu()
@@ -154,6 +157,13 @@ endfunction
 function! s:Fcscope() abort
     let worktree = Cd2Worktree()
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fcscope.sh')
+endfunction
+
+
+function! s:Fdisklog() abort
+    let worktree = Cd2Worktree()
+    exec '!~/loadrc/bashrc/fdisk_log.sh'
+    call OpenOrSwitch('~/loadrc/fdisk.log', 'vs')
 endfunction
 
 function! s:Glf() abort
@@ -297,6 +307,11 @@ function! s:Gme2(args, ...) abort
 endfunction
 
 function! s:G(args, ...) abort
+    if &modified
+        echom 'Please check and save your file first!!!'
+        return 0
+    endif
+
     if expand('%:p') =~ '^fugitive:/'
         return
     endif
@@ -309,12 +324,14 @@ function! s:G(args, ...) abort
     call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.findresult')
 
     if &diff
+        call s:Gs()
         on
         set winwidth=999999
         wincmd |
         syntax on
         windo diffoff
         windo set wrap
+        e
     endif
 endfunction
 
@@ -347,7 +364,7 @@ function! s:Gdi(...) abort
         elseif tolower(arg1) == 'o'
             let remote = substitute(system("git config gsync.remote"), '\n', '', '')
             let branch = substitute(system("git config gsync.branch"), '\n', '', '')
-            call fugitive#Diffsplit(1, 0, '', remote . '/' . branch, [remote . '/' . branch])
+            call fugitive#Diffsplit(1, 0, 'vert', remote . '/' . branch, [remote . '/' . branch])
         else
             call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
         endif
@@ -363,7 +380,6 @@ function! s:Gdi(...) abort
 
     let worktree = Cd2Worktree()
     call OpenOrSwitch(output, 'vs')
-    call s:DiffClean()
 endfunction
 
 function! s:Gdit() abort
@@ -379,7 +395,6 @@ function! s:Gdit() abort
 
     let worktree = Cd2Worktree()
     call OpenOrSwitch(output, 'vs')
-    call s:DiffClean()
 endfunction
 
 function! s:Gdio(...) abort
@@ -454,19 +469,12 @@ function! s:Gbrd(...) abort
     exec '!~/loadrc/gitrc/gbrd.sh ' . '"' .  arg1 . '"'
 endfunction
 
-function! s:Gdifo(...) abort
-    let worktree = Cd2Worktree()
-    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
-    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
-    silent exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  remote . '/' . branch . '"'
-    call OpenOrSwitch('gdif.findresult', 'vs')
-endfunction
-
 function! s:Gdif(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    silent exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '"'
-    call OpenOrSwitch('gdif.findresult', 'vs')
+    let output = GetEscapedResult(arg1) . '.diff'
+    exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '" "' .  expand("%:p") . '"' . ' 2>&1 | tee ' . output
+    call OpenOrSwitch(output, 'vs')
 endfunction
 
 function! s:Gco(...) abort
@@ -528,6 +536,8 @@ function! s:CatMove(...) abort
     if a:0 >= 1
         exec '!~/loadrc/vishrc/cat_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
     endif
+
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
 endfunction
 
 function! s:CatDu(...) abort
@@ -554,6 +564,11 @@ endfunction
 
 function! s:Tail() abort
     exec '!tail -f ' . expand("%:p")
+endfunction
+
+function! s:Gres() abort
+    let worktree = Cd2Worktree()
+    exec '!~/loadrc/gitrc/gres.sh'
 endfunction
 
 function! s:Dps() abort
@@ -629,17 +644,6 @@ function! s:Gwap() abort
     let worktree = Cd2Worktree()
     silent exec '!~/loadrc/gitrc/gwap.sh'
     call s:Gs()
-endfunction
-
-function! s:DiffClean() abort
-    if expand('%:e') != "diff"
-        return
-    endif
-
-    silent exec '%s/^--- a\//--- \.\//g'
-    silent exec '%s/^+++ b\//+++ \.\//g'
-    w
-    only
 endfunction
 
 function! s:Gfix() abort

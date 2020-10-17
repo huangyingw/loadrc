@@ -13,4 +13,6 @@ fi
 ./install_nodejs.sh
 ./enpass_install.sh
 ./nxrc/install.sh
+./kubernetesrc/install.sh
 cp -fv /bin/true /usr/bin/true
+systemctl disable NetworkManager-wait-online.service
