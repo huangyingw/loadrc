@@ -1,3 +1,10 @@
+diff --git a/bashrc/apt-mirror.sh.lck b/bashrc/apt-mirror.sh.lck
+deleted file mode 100644
+index 665a4eff..00000000
+--- ./bashrc/apt-mirror.sh.lck
++++ /dev/null
+@@ -1 +0,0 @@
+-13284
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
 index e30afa61..e0b2d631 100644
 --- ./vimrc/.vimrc
