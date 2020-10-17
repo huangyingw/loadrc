@@ -1,0 +1,81 @@
+diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
+new file mode 100755
+index 00000000..c11b4960
+--- /dev/null
++++ ./bashrc/do_update_proj.sh
+@@ -0,0 +1,7 @@
++#!/bin/zsh
++
++~/loadrc/bashrc/generate_files_proj.sh
++~/loadrc/bashrc/fvideos.sh &
++~/loadrc/bashrc/fdocs.sh &
++~/loadrc/bashrc/cscope.sh &
++~/loadrc/bashrc/generate_rsync_files.sh &
+diff --git a/bashrc/fcscope.sh b/bashrc/fcscope.sh
+index 4ca69982..ca4becd7 100755
+--- ./bashrc/fcscope.sh
++++ ./bashrc/fcscope.sh
+@@ -3,5 +3,5 @@ cscopes=($(find . -type f -name files.proj))
+ for cscope in "${cscopes[@]}"
+ do
+   echo "${cscope}"
+-  ~/loadrc/bashrc/cscope.sh $(dirname "${cscope}")
++  ~/loadrc/bashrc/do_update_proj.sh $(dirname "${cscope}")
+ done
+diff --git a/bashrc/cscope.sh b/bashrc/generate_files_proj.sh
+similarity index 62%
+rename from bashrc/cscope.sh
+rename to bashrc/generate_files_proj.sh
+index 53723ae8..b454795d 100755
+--- ./bashrc/cscope.sh
++++ ./bashrc/generate_files_proj.sh
+@@ -54,13 +54,5 @@ then \
+         sort -u "$TARGET" -o "$TARGET" && \
+         cp -fv "$TARGET" files.proj && \
+         sed -i.bak 's/ /\\ /g' files.proj && \
+-    ~/loadrc/bashrc/fvideos.sh && \
+-    ~/loadrc/bashrc/fdocs.sh && \
+         echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
+-    cscope -bq -i "$TARGET" -f cscope.out.bak && \
+-    cp -fv cscope.out.bak cscope.out && \
+-    cp -fv cscope.out.bak.in cscope.out.in && \
+-    cp -fv cscope.out.bak.po cscope.out.po
+-
+         sort -u ~/all.proj -o ~/all.proj
+-~/loadrc/bashrc/generate_rsync_files.sh
+diff --git a/bashrc/update_proj.sh b/bashrc/update_proj.sh
+index b816b9d8..64e842dc 100755
+--- ./bashrc/update_proj.sh
++++ ./bashrc/update_proj.sh
+@@ -1,3 +1,3 @@
+ #!/bin/zsh
+ . ~/loadrc/bashrc/find_up_goto.sh "files.proj"
+-~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/cscope.sh
++~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_update_proj.sh
+diff --git a/gitrc/gcl.sh b/gitrc/gcl.sh
+index 693a3f6c..e118a4de 100755
+--- ./gitrc/gcl.sh
++++ ./gitrc/gcl.sh
+@@ -22,7 +22,7 @@ cd "$target" && \
+     git remote remove origin ; \
+     $HOME/loadrc/gitrc/gcob.sh dev && \
+     $HOME/loadrc/gitrc/gdev.sh && \
+-    $HOME/loadrc/bashrc/cscope.sh && \
++    $HOME/loadrc/bashrc/do_update_proj.sh && \
+     git add . && \
+     git add -f files.proj .gitconfig && \
+     $HOME/loadrc/gitrc/g.sh && \
+diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
+index 23d11aa9..1d4a909f 160000
+--- ./vimrc/.vim/bundle/bash-support.vim
++++ ./vimrc/.vim/bundle/bash-support.vim
+@@ -1 +1 @@
+-Subproject commit 23d11aa9ea25d16be8b2ffc736bf914208685096
++Subproject commit 1d4a909f46698906b16d711aeb260663f4c4794a
+diff --git a/vimrc/.vim/bundle/vim-log-syntax b/vimrc/.vim/bundle/vim-log-syntax
+index e2dcef43..a4be2e97 160000
+--- ./vimrc/.vim/bundle/vim-log-syntax
++++ ./vimrc/.vim/bundle/vim-log-syntax
+@@ -1 +1 @@
+-Subproject commit e2dcef439e50fec752177fc1aa46b57114e31698
++Subproject commit a4be2e979887358b6d12cf29ffaeecacb24aa87b
