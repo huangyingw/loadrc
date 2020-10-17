@@ -1,0 +1,7 @@
+./vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim:4930:function! fugitive#Diffsplit(autodir, keepfocus, mods, arg, args) abort
+
+My maps to achieve this:
+
+nnoremap <Leader>gh :Gsdiff<CR>:windo set wrap<CR>
+nnoremap <Leader>gv :Gvdiff<CR>:windo set wrap<CR>
+My default settting is set wrap, so the idea was to recover the setting after using Gsdiff and Gvdiff

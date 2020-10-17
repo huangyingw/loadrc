@@ -1,6 +1,7 @@
 #### Start script to automate building of Ubuntu mirror #####
 ## THE NEXT LINE IS NEEDED THE REST OF THE LINES STARTING WITH A # CAN BE DELETED
 
+#!/bin/zsh
 
 ## Setting variables with explanations.
 

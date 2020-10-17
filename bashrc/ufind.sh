@@ -1,3 +1,4 @@
+#!/bin/zsh
 function Find()
 {
   FILE_POSTFIX=$HOME/loadrc/bashrc/postfix

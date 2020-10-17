@@ -1,3 +1,4 @@
+#!/bin/zsh
 recurse()
 {
     # since the example runs slowly, the following

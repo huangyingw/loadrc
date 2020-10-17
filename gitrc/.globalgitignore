@@ -2,6 +2,8 @@
 *.bak
 *.bin
 *.diff
+!*.gdio.diff
+*.dmg
 *.exe
 *.findresult
 *.fugitiveblame
@@ -14,6 +16,7 @@
 *.ncb
 *.o
 *.orig
+*.pth
 *.pyc
 *.runresult
 *.sort
@@ -45,6 +48,7 @@ doc/tags
 doc/tags-ja
 error
 fav.log
+fdocs.list
 files.proj
 find.cc
 gbil.log
@@ -61,3 +65,5 @@ run
 running.time
 setup.cfg
 ~$*
+prunefix.rsync
+rsync.files

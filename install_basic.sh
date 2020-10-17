@@ -1,39 +1,22 @@
-SCRIPT=$(realpath "$0")
-SCRIPTPATH=$(dirname "$SCRIPT")
-cd "$SCRIPTPATH"
+#!/bin/zsh
+SCRIPT=$(realpath "$0") && \
+    SCRIPTPATH=$(dirname "$SCRIPT") && \
+    cd "$SCRIPTPATH" || cd ~/loadrc/
 
-if [ $(uname) != "Darwin" ]
-then
-    ./install_prerequisite.sh
-    ./enpass_install.sh
-    ./nxrc/install.sh
-    ./chrome_install.sh
-else
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew update
-    brew install \
-        Caskroom/cask/xquartz \
-        blueutil \
-        coreutils \
-        git \
-        htop \
-        libtool \
-        lynx \
-        tig \
-        tmux \
-        openssl \
-        xpdf
-    brew cask install \
-        kdiff3 \
-        lynxlet
-    sudo easy_install pip
-    sudo pip install --upgrade pip
-
-fi
+./install_basic_linux.sh
+./install_basic_macos.sh
 
 pip install \
+    autoflake \
+    autopep8 \
     pdftotext
+
 pip3 install git+https://github.com/gaborvecsei/pdf-split-merge.git
+
+npm -g install \
+    csvtojson \
+    js-beautify \
+    json2csv
 
 ./zerotierrc/all.sh
 ./deploy_configurations.sh

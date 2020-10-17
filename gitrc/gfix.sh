@@ -1,3 +1,4 @@
+#!/bin/zsh
 currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 
 if ( echo "$currentBranch" | grep -q 'fix$' )
@@ -10,9 +11,9 @@ fix_branch=`git branch |awk '/^\*/{print $2}'`.fix
 
 if ( git branch|grep -q "$fix_branch" )
 then
+    ~/loadrc/gitrc/discard_unnecessaries.sh
     git checkout "$fix_branch"
     exit 0
 fi
 
-git checkout -b "$fix_branch" && \
-    ~/loadrc/gitrc/gdev.sh "$currentBranch"
+git checkout -b "$fix_branch"

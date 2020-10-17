@@ -1,3 +1,4 @@
+#!/bin/zsh
 if [ -n "$1" ]
 then
     if [ -n "$2" ]

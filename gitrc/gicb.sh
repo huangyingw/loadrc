@@ -1,3 +1,4 @@
+#!/bin/zsh
 
 git init \
     && $HOME/loadrc/gitrc/gcob.sh dev \
@@ -6,4 +7,5 @@ git init \
     && git add . \
     && git add -f files.proj \
     && $HOME/loadrc/gitrc/g.sh \
+    && hub create \
     && ~/loadrc/gitrc/gclb.sh

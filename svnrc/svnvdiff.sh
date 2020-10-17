@@ -1,3 +1,4 @@
+#!/bin/zsh
 svn status | tee svn.vdiff
 
 while read ss

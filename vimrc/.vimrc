@@ -37,9 +37,7 @@ set wmw=0
 set wmh=0
 " Editing behaviour {{{
 set showmode                    " always show what mode we're currently editing in
-" set nowrap                      " don't wrap lines
 
-set wrap
 set linebreak
 set textwidth=0
 set wrapmargin=0
@@ -109,7 +107,6 @@ set viewoptions=cursor,folds,slash,unix
 " let g:skipview_files = ['*\.vim']
 " }}}
 " Editor layout {{{
-set termencoding=utf-8
 set encoding=utf-8
 set lazyredraw                  " don't update the display while executing macros
 set laststatus=2                " tell VIM to always put a status line in, even
@@ -216,7 +213,6 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 if !has('nvim')
     set viminfo+=n~/.local/share/vim/viminfo
 endif
-set winwidth=999999
 "
 " configuration for cscope_dynamic
 let cscopedb_auto_files=0
@@ -268,3 +264,16 @@ call ncm2#override_source('otherbuf', {'priority': 6})
 " Automatically change the current directoryEdit
 " Sometimes it is helpful if your working directory is always the same as the file you are editing. To achieve this, put the following in your vimrc:
 " set autochdir
+
+let g:indexed_search_dont_move = 1
+let g:buffergator_sort_regime = "mru"
+
+" autocmd OptionSet diff call s:ToggleOnDiff()
+" 
+" function! s:ToggleOnDiff()
+"     if &diff
+"         set wrap
+"     endif
+" endfunction
+
+let g:tex_flavor = 'latex'

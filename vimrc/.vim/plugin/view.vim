@@ -30,3 +30,14 @@ set cursorline
 "highlight cursorline cterm=NONE ctermbg=darkred ctermfg=NONE
 "set cursorcolumn
 "highlight cursorcolumn cterm=NONE ctermbg=darkred ctermfg=white
+
+if &diff
+    set winwidth=1
+else
+    set winwidth=999999
+endif
+
+set diffopt+=iwhiteall
+set diffopt+=algorithm:patience
+set diffopt+=indent-heuristic
+set wrap

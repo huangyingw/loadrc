@@ -1,3 +1,4 @@
+#!/bin/zsh
 resultFile="svnreset.findresult"
 svn status | tee "$resultFile"
 

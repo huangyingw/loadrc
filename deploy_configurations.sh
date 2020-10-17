@@ -1,32 +1,37 @@
+#!/bin/zsh
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
 cp -nv ~/.bashrc ~/.bashrc.bak
 cp -nv ~/.profile ~/.profile.bak
+cp -nv ~/.zshrc ~/.zshrc.bak
 
-if [ $(uname) != "Darwin" ]
+if [ $(uname) = "Darwin" ]
 then
-    ln -fs ~/loadrc/.bashrc ~/.bashrc
+    ~/loadrc/bashrc/ln_fs.sh ~/loadrc/macos/.bashrc ~/.bashrc
 else
-    ln -fs ~/loadrc/macos/.bashrc ~/.bashrc
+    ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.bashrc ~/.bashrc
 fi
 
-ln -fs ~/loadrc/.profile ~/.profile
+~/loadrc/bashrc/ln_fs.sh ~/loadrc/.zshrc ~/.zshrc
+~/loadrc/bashrc/ln_fs.sh ~/loadrc/.profile ~/.profile
+~/loadrc/bashrc/ln_fs.sh ~/loadrc/oh-my-zsh ~/.oh-my-zsh
 
 mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
-ln -fs ~/loadrc/."`hostname`".theanorc  ~/.theanorc
-ln -fs ~/loadrc/.config/git/gitk  ~/.config/git/gitk
-#ln -fs ~/loadrc/.ssh ~/.ssh
-ln -fs ~/loadrc/.tmux.conf ~/.tmux.conf
-ln -fs ~/loadrc/gitrc/.gitconfig ~/.gitconfig
-ln -fs ~/loadrc/gitrc/.globalgitignore ~/.globalgitignore
-ln -fs ~/loadrc/pythonrc/setup.cfg  ~/setup.cfg
-ln -fs ~/loadrc/.hgrc ~/.hgrc
-ln -fs ~/loadrc/.hgignore ~/.hgignore
-ln -fs ~/loadrc/Library/Preferences/org.videolan.vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
-ln -fs ~/loadrc/iterm2rc/movescreen.py ~/Library/ApplicationSupport/iTerm2/Scripts/movescreen/movescreen/movescreen.py
-#ln -fs ~/loadrc/.kdiff3rc ~/.kdiff3rc
+~/loadrc/bashrc/ln_fs.sh ~/loadrc/."`hostname`".theanorc  ~/.theanorc
+~/loadrc/bashrc/ln_fs.sh ~/loadrc/.config/git/gitk  ~/.config/git/gitk
+#~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
+~/loadrc/bashrc/ln_fs.sh ~/loadrc/.tmux.conf ~/.tmux.conf
+~/loadrc/bashrc/ln_fs.sh ~/loadrc/gitrc/.gitconfig ~/.gitconfig
+~/loadrc/bashrc/ln_fs.sh ~/loadrc/gitrc/.globalgitignore ~/.globalgitignore
+~/loadrc/bashrc/ln_fs.sh ~/loadrc/pythonrc/setup.cfg  ~/setup.cfg
+~/loadrc/bashrc/ln_fs.sh ~/loadrc/.hgrc ~/.hgrc
+~/loadrc/bashrc/ln_fs.sh ~/loadrc/.hgignore ~/.hgignore
+~/loadrc/bashrc/ln_fs.sh ~/loadrc/Library/Preferences/org.videolan.vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
+~/loadrc/bashrc/ln_fs.sh ~/loadrc/iterm2rc/movescreen.py ~/Library/ApplicationSupport/iTerm2/Scripts/movescreen/movescreen/movescreen.py
+#~/loadrc/bashrc/ln_fs.sh ~/loadrc/.kdiff3rc ~/.kdiff3rc
 
 ./set_linux_configuration.sh
+./set_macos_configuration.sh
 ./set_host_configuration.sh

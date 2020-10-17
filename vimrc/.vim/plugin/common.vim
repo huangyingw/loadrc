@@ -197,9 +197,13 @@ function! GetEscapedResult(keywordStr)
     let result = substitute(result, '\\', '', 'g')
     let result = substitute(result, '\$', '', 'g')
     let result = substitute(result, '#', '', 'g')
-    let result = substitute(result, '!', '\\!', 'g')
+    let result = substitute(result, '!', '', 'g')
     let result = substitute(result, "<", "", "g")
     let result = substitute(result, ">", "", "g")
+    let result = substitute(result, "\~", "", "g")
+    let result = substitute(result, "*", "", "g")
+    let result = substitute(result, "%", "", "g")
+    let result = substitute(result, ":", "", "g")
     return result
 endfunc
 
@@ -240,7 +244,7 @@ function! Filter2Findresult()
             exe "bd!" . buffername
         endif
 
-        silent exec 'w! ' . buffername
+        silent exec '!cp' . ' ' . '"' .  expand('%:p') . '"' . ' ' . '"' .  buffername . '"'
         let worktree = Cd2Worktree()
         call OpenOrSwitch(buffername, 'vs')
     endif

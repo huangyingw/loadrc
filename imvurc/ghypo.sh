@@ -1,12 +1,21 @@
-
-if [ $(hostname) != "lint-sandbox" ]
+#!/bin/zsh
+if [ $(hostname) != "linb-sandbox" ]
 then
-    ssh -nY "$host" "cd $path ; ~/loadrc/imvurc/ghypo.sh $1"
+    if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+    then
+        ssh -nY "$host" "cd $rpath ; ~/loadrc/imvurc/ghypo.sh $1"
+    fi
 else
     ~/loadrc/gitrc/grsh.sh
     ~/loadrc/gitrc/gclean.sh
     git remote update
     git checkout -b "$1" origin/"$1"
-    git checkout "$1"
-    git pull
+    git checkout -f "$1"
+    git branch -u origin/"$1"
+    git merge -X theirs origin/"$1" 
+
+    if [ $(~/loadrc/gitrc/git_ready.sh) ]
+    then
+        s/hypo
+    fi
 fi

@@ -1,0 +1,80 @@
+diff --git a/.gitconfig_sample b/.gitconfig_sample
+index b624ae22..ed3be508 100644
+--- ./.gitconfig_sample
++++ ./.gitconfig_sample
+@@ -17,7 +17,5 @@
+ [branch "master"]
+     remote = origin
+     merge = refs/heads/master
+-[commit]
+-    message = n
+ [gdif]
+     ignore = *.gdio.diff
+diff --git a/gitrc/g.sh b/gitrc/g.sh
+index fd998ddd..d40405e9 100755
+--- ./gitrc/g.sh
++++ ./gitrc/g.sh
+@@ -1,9 +1,6 @@
+ #!/bin/zsh
+ ~/loadrc/gitrc/include_gitconfig.sh
+-commit_message=$(~/loadrc/gitrc/get_commit_message.sh "$1") 
++git commit --no-edit || \
++    git commit -m n
+ 
+-if [ -n "$commit_message" ]
+-then
+-    git commit  --no-verify -m "$commit_message"
+-fi
+-. ~/loadrc/gitrc/postCommit.sh
++~/loadrc/gitrc/postCommit.sh
+diff --git a/gitrc/get_commit_message.sh b/gitrc/get_commit_message.sh
+deleted file mode 100755
+index bd251d1e..00000000
+--- ./gitrc/get_commit_message.sh
++++ /dev/null
+@@ -1,35 +0,0 @@
+-#!/bin/zsh
+-current_branch=$(~/loadrc/gitrc/get_current_branch.sh)
+-commit_message=""
+-
+-if [ -z "$(git status --porcelain)" ]
+-then
+-    commit_message="n"
+-fi
+-
+-~/loadrc/gitrc/include_gitconfig.sh
+-commit_message=$(git config commit.message)
+-
+-if [ -n "$1" ]
+-then
+-    commit_message="$1"
+-fi
+-
+-cd $(~/loadrc/gitrc/get_git.sh $pwd)/../
+-
+-if [ -n "$(cat .git/COMMIT_EDITMSG)" ]
+-then
+-    commit_message=$(cat .git/COMMIT_EDITMSG)
+-fi
+-
+-if [ -f .git/MERGE_MSG ]
+-then
+-    commit_message=$(cat .git/MERGE_MSG | awk 'NR==1')
+-fi
+-
+-if [ -f .git/SQUASH_MSG ]
+-then
+-    commit_message=$(cat .git/SQUASH_MSG)
+-fi
+-
+-echo "$commit_message"
+diff --git a/gitrc/postCommit.sh b/gitrc/postCommit.sh
+index 601f35af..3bd9b5b1 100755
+--- ./gitrc/postCommit.sh
++++ ./gitrc/postCommit.sh
+@@ -1,5 +1,2 @@
+ #!/bin/zsh
+-cd $(~/loadrc/gitrc/get_git.sh $pwd)
+-: > COMMIT_EDITMSG
+-cd -
+ ~/loadrc/gitrc/gsync.sh

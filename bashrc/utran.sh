@@ -1,3 +1,4 @@
+#!/bin/zsh 
 SOURCE=/media/volgrp/slink/media/`hostname`/ 
 TARGET=/
 if [ -n "$1" ]

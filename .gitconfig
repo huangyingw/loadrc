@@ -11,9 +11,6 @@
     remote = origin
     remote = gitlab
     remote = github
-[gsync]
-    remote = origin
-    branch = master
 [merge]
     allow = true
 [commit]
@@ -30,6 +27,9 @@
 [branch "dev"]
     remote = origin
     merge = refs/heads/dev
+[branch "zsh"]
+    remote = origin
+    merge = refs/heads/zsh
 [branch "remove/nvim"]
     remote = origin
     merge = refs/heads/remove/nvim
@@ -51,3 +51,19 @@
 [deploy]
     host = localhost
     path = ~/loadrc
+[branch "findresult"]
+    remote = origin
+    merge = refs/heads/findresult
+[gsync]
+    remote = origin
+    branch = dev
+[gdif]
+    ignore = .ssh
+    ignore = jdupes
+    ignore = oh-my-zsh
+    ignore = rsync.files
+    ignore = vimrc/.vim/bundle/split-term.vim
+    ignore = vimrc/.vim/bundle/vimtex
+[branch "gdi2"]
+    remote = origin
+    merge = refs/heads/gdi2

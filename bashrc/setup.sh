@@ -1,3 +1,4 @@
+#!/bin/zsh
 APPLIST=$HOME/loadrc/bashrc/app_list
 app_list=();
 

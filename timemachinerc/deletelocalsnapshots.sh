@@ -1,1 +1,2 @@
-sudo tmutil deletelocalsnapshots 2018-03-01-002010
+#!/bin/zsh
+tmutil listlocalsnapshots / | grep -oE '\w{4}-\w{2}-[0-9]{2}-[0-9]{6}' | while read ss; do sudo tmutil deletelocalsnapshots "$ss"; done

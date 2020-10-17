@@ -1,2 +1,4 @@
-git checkout files.proj ; git bisect good
+#!/bin/zsh
+~/loadrc/gitrc/discard_unnecessaries.sh
+git bisect good
 git bisect log | tee gbil.log

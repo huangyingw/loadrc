@@ -1,3 +1,4 @@
+#!/bin/zsh
 currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 
 if [[ "$currentBranch" != *".fix" ]]
@@ -22,16 +23,15 @@ then
 fi
 
 host=$(git config deploy.host)
-path=$(git config deploy.path)
-local_master="$(git config gsync.branch)"
+rpath=$(git config deploy.path)
 
-git checkout -b "$targetBranch" "$local_master" ; \
-    git checkout files.proj ; \
-    git checkout "$targetBranch" ; \
-    git apply --reject --whitespace=fix "$currentBranch.gdit.diff" ; \
+GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
+    ~/loadrc/gitrc/discard_unnecessaries.sh ; \
+    git checkout -f "$targetBranch" ; \
+    git apply --index --reject --whitespace=fix "$GDITDIFF" ; \
     ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
-    git add . && \
-    git commit  --no-verify -am "$commit_message" && \
+    git commit  --no-verify -am "$commit_message" ; \
     git pull ; \
-    git push
-    . ~/loadrc/imvurc/ghypo.sh "$targetBranch"
+    git push ; \
+    . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
+    ~/loadrc/gitrc/gfix.sh

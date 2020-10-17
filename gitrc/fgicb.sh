@@ -1,3 +1,4 @@
+#!/bin/zsh
 for file in `ls .`
 do
     cd $file

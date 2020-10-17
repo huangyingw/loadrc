@@ -1,3 +1,4 @@
+#!/bin/zsh
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
@@ -7,17 +8,15 @@ then
     exit 0
 fi
 
-deploy_configs() {
-    TARGET="$1"
-    SOURCE=~/loadrc/"$TARGET"
-    if [ -f "$SOURCE" ]
-    then
-        cp -nv "$TARGET" "$TARGET".bak
-        ln -fs "$SOURCE" "$TARGET"
-    fi
-}
+find linux_links/ -type f | while read ss; \
+do \
+    ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/linux_links\///g")"; \
+done
 
-while read -r line || [[ -n "$line" ]]
-do
-    deploy_configs "$line"
-done < linux.conf
+find linux/ -type f | while read ss; \
+do \
+    cp -fv --remove-destination "$ss" "/$(echo "$ss" | sed "s/linux\///g")"; \
+done
+
+grub-mkconfig -o /boot/grub/grub.cfg
+gsettings set org.gnome.desktop.lockdown disable-lock-screen 'true'

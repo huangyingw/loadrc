@@ -1,0 +1,6 @@
+export MINDSROOT=~/myproject/git/ossn/Minds/minds/
+
+alias minds=$MINDSROOT/local/local
+alias minds-front-build=$MINDSROOT/local/front-build
+alias minds-ssr-build=$MINDSROOT/local/ssr-build
+alias minds-ssr-serve=$MINDSROOT/local/ssr-serve

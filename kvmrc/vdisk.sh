@@ -1,3 +1,4 @@
+#!/bin/zsh
 TARGET=$(basename "$1")
 DIRECTORY=$(dirname "$1")
 

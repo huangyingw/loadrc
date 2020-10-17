@@ -1,3 +1,4 @@
+#!/bin/zsh
 
 if [ -z "$1" ]
 then
@@ -26,7 +27,7 @@ INCLUDE_FILE=includefile.conf
 
 or="";
 
-while read suf
+[ -f "$PRUNE_POSTFIX" ] && while read suf
 do
     suf=$(echo "$suf" | sed 's/"//g')
     prune_params+=( $or "-wholename" "$suf" )
@@ -35,32 +36,31 @@ done < "$PRUNE_POSTFIX"
 
 or="";
 
-while read suf
+[ -f "$INCLUDE_FILE" ] && while read suf
 do
     suf=$(echo "$suf" | sed 's/"//g')
     include_params+=( $or "-wholename" "$suf" )
     or="-o"
 done < "$INCLUDE_FILE"
 
+export LC_ALL=C
 find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
-    comm -2 -3 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
+    comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
     cp -fv "$TARGET.tmp" "$TARGET" && \
-    if [ ${#include_params[@]} -gt 0 ] ; \
-    then \
-        find . "(" "${include_params[@]}" ")" -type f -size -9000k -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
+if [ ${#include_params[@]} -gt 0 ] ; \
+then \
+    find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
     fi && \
     sort -u "$TARGET" -o "$TARGET" && \
     cp -fv "$TARGET" files.proj && \
     sed -i.bak 's/ /\\ /g' files.proj && \
-    find . -type f -size +10M -exec ls -S {} \+ > fav.log.bak && \
-    cp -fv fav.log.bak fav.log && \
-    find . -type f -size +10M -exec ls -t {} \+ > fav.log.sort.bak && \
-    cp -fv fav.log.sort.bak fav.log.sort && \
-    cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > files.proj.tmp && \
-    echo > cscope.small.files && \
+    ~/loadrc/bashrc/fvideos.sh && \
+    ~/loadrc/bashrc/fdocs.sh && \
     echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
     cscope -bq -i "$TARGET" -f cscope.out.bak && \
     cp -fv cscope.out.bak cscope.out && \
     cp -fv cscope.out.bak.in cscope.out.in && \
-    cp -fv cscope.out.bak.po cscope.out.po && \
-    sort -u ~/all.proj -o ~/all.proj
+    cp -fv cscope.out.bak.po cscope.out.po
+
+sort -u ~/all.proj -o ~/all.proj
+~/loadrc/bashrc/generate_rsync_files.sh

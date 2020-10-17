@@ -1,3 +1,4 @@
+#!/bin/zsh
 ~/loadrc/gitrc/checkGitStatus.sh
 if [ $? -ne 0 ]
 then

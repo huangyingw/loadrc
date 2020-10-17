@@ -1,3 +1,4 @@
+#! /bin/zsh
 
 RSYNCSOURCE=rsync://mirrors.sohu.com/ubuntu/
 #RSYNCSOURCE=rsync://debian.nctu.edu.tw/ubuntu/

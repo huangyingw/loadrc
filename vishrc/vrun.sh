@@ -1,19 +1,20 @@
+#!/bin/zsh
 file="$1"
 
-if [ $(basename "$file") == "gbil.log" ]
+if [ $(basename "$file") = "gbil.log" ]
 then
-    git checkout files.proj
+    ~/loadrc/gitrc/discard_unnecessaries.sh
     ~/loadrc/gitrc/gbir.sh
     exit 0
 fi
 
-if [[ $(git config leetcode.submit) == "true" ]]  && ([[ "$file" = *'.java' ]] || [[ "$file" = *'.py' ]])
+if [[ "$file" = *'.leetcode.java' ]] || [[ "$file" = *'.leetcode.py' ]] || [[ "$file" = *'.leetcode.python3.py' ]]
 then
     leetcode submit "$file"
     exit 0
 fi
 
-if [[ "$file" = *'.test.php' ]] 
+if [[ "$file" = *'.php' ]] 
 then
     ~/loadrc/imvurc/generate.sh "$file"
     exit 0
@@ -21,58 +22,71 @@ fi
 
 extension=${file##*.}
 host=$(git config deploy.host)
-path=$(git config deploy.path)
-rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$1" "files.proj")
-rfile=$(realpath --relative-to="$rootFolder" "$1")
+rpath=$(git config deploy.path)
+rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$file" "files.proj")
+rfile=$(realpath --relative-to="$rootFolder" "$file")
+rfolder=$(realpath --relative-to="$rootFolder" $(dirname "$file"))
+
+if [[ "$file" = *'Dockerfile' ]] 
+then
+    cd "$rootFolder"
+    docker build -f "$rfile" "$rfolder"
+    exit 0
+fi
 
 case $extension in
     hs)
-        runghc "$1"
+        runghc "$file"
         ;;
     sql)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            ssh -nY "$host" "cd $path ; ~/loadrc/sqlrc/xsql.sh $rfile"
+            ssh -nY "$host" "~/loadrc/sqlrc/xsql.sh $rpath/$rfile $rpath"
         else
-            ~/loadrc/sqlrc/xsql.sh "$1" "$2"
+            ~/loadrc/sqlrc/xsql.sh "$file" "$2"
         fi
         ;;
     findresult)
-        sh "$1"
+       zsh "$file"
         ;;
     vdiff)
-        sh "$1"
+       zsh "$file"
         ;;
     sh)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            ssh -nY "$host" ". ~/loadrc/.loadrc ; $path/$rfile"
-            rsync -aHv --force --progress \
-                --files-from=files.rev \
-                "$host:$path/" \
-                .
+            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
         else
-            "$1"
+            . ~/loadrc/.loadrc
+            "$file"
         fi
         ;;
     py)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            ssh -nY "$host" "cd $path ; . ~/loadrc/.loadrc ; python $rfile"
+            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; python3 $rfile"
         else
-            SCRIPT=$(realpath "$1")
+            SCRIPT=$(realpath "$file")
             SCRIPTPATH=$(dirname "$SCRIPT")
             cd "$SCRIPTPATH"
-            python "$1"
+            python3 "$file"
         fi
         ;;
     vim)
-        source "$1"
+        source "$file"
+        ;;
+    yaml)
+        if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+        then
+            ssh -nY "$host" "kubectl apply -f $rpath/$rfile"
+        else
+            kubectl apply -f "$file"
+        fi
         ;;
     yml)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            ssh -nY "$host" "docker-compose -f $path/$rfile up -d"
+            ssh -nY "$host" "docker-compose -f $rpath/$rfile up -d"
         else
             docker-compose -f "$file" up -d
         fi

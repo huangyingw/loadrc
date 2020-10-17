@@ -1,3 +1,4 @@
+#!/bin/zsh
 if [ -n "$1" ]
 then
     git status "$1" 2>&1 | tee gs.findresult

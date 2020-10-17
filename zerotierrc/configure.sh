@@ -1,14 +1,15 @@
+#!/bin/zsh
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
 deploy_configs() {
     TARGET="$1"
-    SOURCE=~/loadrc/"`hostname`$TARGET"
+    SOURCE=~/loadrc/hosts/"`hostname`$TARGET"
 
     if [ -f "$SOURCE" ]
     then
-        sudo cp -fv "$SOURCE" "$TARGET"
+        cp -fv --remove-destination "$SOURCE" "$TARGET"
     fi
 }
 

@@ -1,3 +1,4 @@
+#!/bin/zsh
 resultFile="svnst.findresult"
 svn status | tee "$resultFile"
 

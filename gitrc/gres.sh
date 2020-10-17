@@ -1,3 +1,4 @@
+#!/bin/zsh
 
 conflictArr=($(git status | awk '/both .+:/{print $3}'))
 

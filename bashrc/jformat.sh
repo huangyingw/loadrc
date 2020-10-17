@@ -1,3 +1,4 @@
+#! /bin/zsh
 folderForGit=$(realpath .)
 LIST=( -name \*.java -o -name \*.vala )
 

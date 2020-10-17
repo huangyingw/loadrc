@@ -1,3 +1,4 @@
+#!/bin/zsh
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
@@ -11,18 +12,17 @@ then
         exuberant-ctags \
         neovim \
         python-dev \
-        python-pip \
         python3-dev \
         python3-pip
+    pip3 install pynvim
+    pip3 install jedi
 else
     brew install \
         coreutils \
         neovim \
         python
-    brew link --overwrite neovim
+    brew reinstall python
+    sudo pip3 install --upgrade neovim 
+    sudo pip3 install pynvim jedi 
     #brew install --with-toolchain --with-clang llvm
 fi
-
-pip3 install pynvim
-
-pip3 install jedi

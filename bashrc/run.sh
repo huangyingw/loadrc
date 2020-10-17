@@ -1,3 +1,4 @@
+#!/bin/zsh
 if [ -f "run.sh" ]
 then
     ./run.sh

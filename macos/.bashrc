@@ -1,2 +1,1 @@
-export PATH=/usr/local/bin:$PATH
-. $HOME/loadrc/.loadrc
+/Users/huangyingw/Dropbox/loadrc.home/hosts/imacpro/Users/huangyingw/.bashrc

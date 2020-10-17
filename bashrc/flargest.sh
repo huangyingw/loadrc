@@ -1,3 +1,4 @@
+#!/bin/zsh
 if [ -z "$1" ]
 then
     find . -type f -exec du -sk {} \; | sort -n

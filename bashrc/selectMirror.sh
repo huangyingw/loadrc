@@ -1,3 +1,4 @@
+#!/bin/zsh 
 
 if [ "$#" -lt 2 ]
 then

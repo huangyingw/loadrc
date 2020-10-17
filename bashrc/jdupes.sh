@@ -1,3 +1,4 @@
+#!/bin/zsh
 
 if [ -z "$1" ]
 then
@@ -12,10 +13,10 @@ crontab -r
 if [ -f ${MIRRORCHECK} ] ; \
 then \
     ~/loadrc/bashrc/move67.sh ; \
-fi && \
-jdupes -1dNr "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
-if [ -f ${MIRRORCHECK} ] ; \
-then \
-    ~/loadrc/bashrc/sleep.sh ; \
-fi ; \
-nvim ~/loadrc/jdupes.log
+    fi && \
+    jdupes -1dNr -X size-:100k -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
+    if [ -f ${MIRRORCHECK} ] ; \
+    then \
+        ~/loadrc/bashrc/sleep.sh ; \
+        fi ; \
+        nvim ~/loadrc/jdupes.log

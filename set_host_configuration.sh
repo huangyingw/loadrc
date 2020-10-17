@@ -1,16 +1,15 @@
+#!/bin/zsh
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-find hosts/`hostname`/ -type f | while read ss; \
+find host_links/`hostname`/ -type f | while read ss; \
 do \
-    sudo cp -fv "$ss" "/$(echo "$ss" | sed "s/hosts\/`hostname`\///g")"; \
+    ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/host_links\/`hostname`\///g")"; \
 done
 
-HOSTTODOS=~/loadrc/hosts/"`hostname`/todos.sh"
+HOSTTODOS=~/loadrc/host_links/"`hostname`/todos.sh"
 if [ -f "$HOSTTODOS" ]
 then
     "$HOSTTODOS"
 fi
-
-~/loadrc/zerotierrc/restart.sh

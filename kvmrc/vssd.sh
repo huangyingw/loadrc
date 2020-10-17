@@ -1,3 +1,4 @@
+#!/bin/zsh
 DOMAIN=$1
 SNAPSHOT=$2
 virsh destroy "$DOMAIN" \

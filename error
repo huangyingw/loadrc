@@ -52,3 +52,12 @@ cscope: cannot rename file ncscope.out.bak to file cscope.out.bak
 
 Error detected while processing BufReadCmd Autocommands for "index{,.lock}":
 fugitive: error: key does not contain a section: GIT_INDEX_FILE^@fatal: unable to parse command-line config
+
+Error detected while processing function 87:
+line   41:
+E121: Undefined variable: l:changed_win_bufs
+E15: Invalid expression: l:changed_win_bufs
+
+Cought anything: Vim(cd):E472: Command failed
+
+[ncm2_go@yarp] TypeError: expected str, bytes or os.PathLike object, not NoneType

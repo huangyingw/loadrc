@@ -1,14 +1,15 @@
+#!/bin/zsh
 
 host=$(git config deploy.host)
-path=$(git config deploy.path)
+rpath=$(git config deploy.path)
 
-if [ "$host" == "localhost" ]
+if [ "$host" = "localhost" ]
 then
     exit 0
 fi
 
-if [[ -n "$host" ]] && [[ -n "$path" ]]
+if [[ -n "$host" ]] && [[ -n "$rpath" ]]
 then
-    ssh -n "$host" "mkdir -p $path"
+    ssh -n "$host" "mkdir -p $rpath"
     . ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/rsyncFiles.sh
 fi

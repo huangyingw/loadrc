@@ -1,12 +1,13 @@
+#!/bin/zsh
 
-path="$1"
+rpath="$1"
 
-while [[ "$path" != "" && ! -e "$path/$2" ]]
+while [[ !"$rpath" = "" && ! -e "$rpath/$2" ]]
 do
-    path=${path%/*}
+    rpath=${rpath%/*}
 done
 
-if [ -f "$path/$2" ]
+if [ -f "$rpath/$2" ]
 then
-    echo "$path/$2"
+    echo "$rpath/$2"
 fi

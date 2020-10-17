@@ -1,0 +1,64 @@
+diff --git a/bashrc/random_string.sh b/bashrc/random_string.sh
+new file mode 100755
+index 00000000..1417fb90
+--- /dev/null
++++ ./bashrc/random_string.sh
+@@ -0,0 +1,4 @@
++#!/bin/zsh
++
++len="$1"
++cat /dev/random | LC_ALL=C tr -dc A-Za-z0-9 | head -c "$len"
+diff --git a/bashrc/random_string.test.sh b/bashrc/random_string.test.sh
+new file mode 100755
+index 00000000..8be5ef5b
+--- /dev/null
++++ ./bashrc/random_string.test.sh
+@@ -0,0 +1,8 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++  
++./random_string.sh 100
++echo
++./random_string.sh 100100
+diff --git a/bashrc/rsyncFiles.sh b/bashrc/rsyncFiles.sh
+index 57ae30ab..36367474 100755
+--- ./bashrc/rsyncFiles.sh
++++ ./bashrc/rsyncFiles.sh
+@@ -6,3 +6,8 @@ rsync -aHv --force --progress \
+     --files-from rsync.files \
+     . \
+     "$host:$rpath"
++
++rsync -aHv --force --progress \
++    --files-from=files.rev \
++    "$host:/" \
++    .
+diff --git a/gitrc/gfix.sh b/gitrc/gfix.sh
+index 2fd1487b..144b00c5 100755
+--- ./gitrc/gfix.sh
++++ ./gitrc/gfix.sh
+@@ -11,6 +11,7 @@ fix_branch=`git branch |awk '/^\*/{print $2}'`.fix
+ 
+ if ( git branch|grep -q "$fix_branch" )
+ then
++    ~/loadrc/gitrc/discard_unnecessaries.sh
+     git checkout "$fix_branch"
+     exit 0
+ fi
+diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
+index 8d5a77f3..987db2c5 100755
+--- ./vishrc/vrun.sh
++++ ./vishrc/vrun.sh
+@@ -56,10 +56,6 @@ case $extension in
+         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+         then
+             ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
+-            rsync -aHv --force --progress \
+-                --files-from=files.rev \
+-                "$host:$rpath/" \
+-                .
+         else
+             . ~/loadrc/.loadrc
+             "$file"

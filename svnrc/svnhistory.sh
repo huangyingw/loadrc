@@ -1,3 +1,4 @@
+ #!/bin/zsh
 
 # history_of_file
 #
