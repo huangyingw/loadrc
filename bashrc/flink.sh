@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 TARGET=.
 
 if [ -n "$1" ]

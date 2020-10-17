@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/zsh
 TARGET=exp
 if [ -n "$1" ]
 then 

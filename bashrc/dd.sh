@@ -1,2 +1,2 @@
-#!/bin/bash - 
-dd if=/dev/sda | pv | dd of=/dev/nvme0n1
+#!/bin/zsh 
+dd if=/dev/nbd0 | pv | dd of=/dev/nbd0

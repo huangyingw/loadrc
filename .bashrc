@@ -149,4 +149,5 @@ fi
 #    . /etc/bash_completion
 #fi
 
+export PATH=/usr/local/bin:$PATH
 . $HOME/loadrc/.loadrc

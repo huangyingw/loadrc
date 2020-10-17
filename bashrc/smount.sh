@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 if [ -z "$1" ]
 then
     echo -e "${red}please provide the host name... ${NC}"
@@ -7,7 +7,7 @@ fi
 
 remoteServer=$(echo "$1" | sed  -e "s/\/$//g")
 
-if [ $(uname) == "Linux" ]
+if [ $(uname) = "Linux" ]
 then
     umount -l ~/"$remoteServer"
     mkdir -p ~/"$remoteServer"

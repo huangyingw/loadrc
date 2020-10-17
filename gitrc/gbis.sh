@@ -1,3 +1,3 @@
-#!/bin/bash - 
+#!/bin/zsh
 git bisect skip
-git bisect log | tee gbil.findresult
+git bisect log | tee gbil.log

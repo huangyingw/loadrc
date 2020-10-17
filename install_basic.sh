@@ -1,21 +1,23 @@
-#!/bin/bash -
-SCRIPT=$(realpath "$0")
-SCRIPTPATH=$(dirname "$SCRIPT")
-cd "$SCRIPTPATH"
+#!/bin/zsh
+SCRIPT=$(realpath "$0") && \
+    SCRIPTPATH=$(dirname "$SCRIPT") && \
+    cd "$SCRIPTPATH" || cd ~/loadrc/
 
-if [ $(uname) != "Darwin" ]
-then
-    ./install_prerequisite.sh
-else
-    brew install \
-        blueutil \
-        coreutils
-    brew cask install kdiff3
-    brew link --overwrite neovim
-fi
+./install_basic_linux.sh
+./install_basic_macos.sh
 
-./nxrc/install.sh
-./enpass_install.sh
-./chrome_install.sh
-./zerotierrc/zerotier_install.sh
+pip install \
+    autoflake \
+    autopep8 \
+    pdftotext
+
+pip3 install git+https://github.com/gaborvecsei/pdf-split-merge.git
+
+npm -g install \
+    csvtojson \
+    js-beautify \
+    json2csv
+
+./zerotierrc/all.sh
 ./deploy_configurations.sh
+./crontabrc/install.sh

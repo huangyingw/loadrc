@@ -1,5 +1,5 @@
-#!/bin/bash -
-if [ ! -f gbil.findresult ]
+#!/bin/zsh
+if [ ! -f gbil.log ]
 then
-    echo git bisect start > gbil.findresult
+    echo git bisect start > gbil.log
 fi

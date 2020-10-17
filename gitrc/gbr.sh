@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/bin/zsh
 git branch | tee gbr.findresult 

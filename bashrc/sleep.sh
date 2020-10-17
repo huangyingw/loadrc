@@ -1,5 +1,5 @@
-#!/bin/bash
-if [ $(uname) == "Darwin" ]
+#!/bin/zsh
+if [ $(uname) = "Darwin" ]
 then
     pmset sleepnow
 else

@@ -22,3 +22,14 @@ if [ -d "$HOME/bin" ] ; then
 fi
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"
+
+##
+# Your previous /Users/huangyingw/.profile file was backed up as /Users/huangyingw/.profile.macports-saved_2019-06-03_at_21:24:24
+##
+
+# MacPorts Installer addition on 2019-06-03_at_21:24:24: adding an appropriate PATH variable for use with MacPorts.
+#export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+# Finished adapting your PATH environment variable for use with MacPorts.
+
+export PATH=/usr/local/bin:$PATH
+. $HOME/loadrc/.loadrc

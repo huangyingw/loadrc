@@ -1,4 +1,4 @@
-#!/bin/bash - 
+#!/bin/zsh 
 cscopes=($(find . -type f -name files.proj))
 for cscope in "${cscopes[@]}"
 do

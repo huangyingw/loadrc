@@ -1,10 +1,10 @@
-#!/bin/bash -
-SCRIPT=$(realpath "$0")
-SCRIPTPATH=$(dirname "$SCRIPT")
-cd "$SCRIPTPATH"
+#!/bin/zsh
+SCRIPT=$(realpath "$0") && \
+    SCRIPTPATH=$(dirname "$SCRIPT") && \
+    cd "$SCRIPTPATH" || cd ~/loadrc/
 
-~/loadrc/gitrc/gpl.sh
 ./install_basic.sh
+~/loadrc/gitrc/gpl.sh
 ./install_nvim.sh
 ./gpurc/install.sh
 ./install_vagrant.sh

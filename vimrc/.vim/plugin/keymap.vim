@@ -9,9 +9,34 @@ function! RememberQuit()
 endfunction
 
 function! ExFilter()
+    if (expand("%") ==# 'fav.log.sort')
+        return
+    endif
+
     call Filter2Findresult()
     silent exec 'g/' . @/ . '/d'
-    w
+    w!
+endfunction
+
+function! ExtractHighLight()
+    if (expand("%") ==# 'fav.log.sort')
+        return
+    endif
+
+    call Filter2Findresult()
+    silent exec '%s/.*\(' . @/ . '\).*/\1/g'
+    w!
+endfunction
+
+
+function! Vdelete()
+    if (expand("%") ==# 'fav.log.sort')
+        return
+    endif
+
+    call Filter2Findresult()
+    silent exec '%s/' . @/ . '//g'
+    w!
 endfunction
 
 if !exists('g:VeryLiteral')
@@ -19,9 +44,11 @@ if !exists('g:VeryLiteral')
 endif
 
 function! HighlightKeyword(keyword)
+    let old_reg = getreg('"')
+    let old_regtype = getregtype('"')
     let @@ = a:keyword
     if @@ =~? '^[0-9a-z,_]*$' || @@ =~? '^[0-9a-z ,_]*$' && g:VeryLiteral
-        let @/ = @@
+        let @/ = '\c' . a:keyword
     else
         let pat = escape(@@, '\')
         if g:VeryLiteral
@@ -33,14 +60,20 @@ function! HighlightKeyword(keyword)
             let pat = substitute(pat, '\\!', '!', 'g')
             let pat = substitute(pat, '\\"', '"', 'g')
         endif
-        let @/ = '\V'.pat
+        let @/ = '\c' . pat
     endif
+    normal! gV
+    call setreg('"', old_reg, old_regtype)
 endfunction
 
 function! VFilter()
+    if (expand("%") ==# 'fav.log.sort')
+        return
+    endif
+
     call Filter2Findresult()
     silent exec 'g!/' . @/ . '/d'
-    w
+    w!
 endfunction
 
 function! ShowRemember()
@@ -59,40 +92,83 @@ function! PlayVideo()
     endif
 
     call asyncrun#stop('<bang>')
-    call RunShell('~/loadrc/vishrc/vlc.sh', expand("%:p"))
+    let line = getline('.')
+    let line = substitute(line, '^[^"]', '"' . line[0], '')
+    let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
+    call asyncrun#run('<bang>', '', '~/loadrc/pythonrc/vlc.py ' . '"' . expand("%:p") . '"' .  ' ' . line)
 endfunction
 
 function! VDebug()
-    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    call RunShell('~/loadrc/vishrc/vdebug.sh', expand("%:p"), b:csdbpath)
-    call OpenOrSwitch('"' . expand("%:p") . '"' . '.findresult', 'vs')
-endfunction
-
-function! VRun()
     if g:asyncrun_status ==# 'running'
         echom 'background job is still running'
         return 0
     endif
 
-    if filereadable(expand("%:p") . '.sh')
-        call OpenOrSwitch(expand("%:p") . '.sh', 'vs')
+    let b:file_name = expand('%:t')
+    let b:to_run = expand("%:p")
+
+    if filereadable(b:to_run . '.sh')
+        let b:to_run = b:to_run . '.sh'
+    endif
+
+    let b:csdbpath = Cd2ProjectRoot("files.proj")
+    let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
+    call RunShell('~/loadrc/vishrc/vdebug.sh', b:to_run, b:output)
+
+    if b:to_run != 'gbil.log'
+        call OpenOrSwitch(b:output, 'vs')
+    else
+        call OpenOrSwitch('gbil.log', 'vs')
+    endif
+endfunction
+
+function! VRun()
+    if &modified
+        echom 'Please check and save your file first!!!'
+        return 1
+    endif
+
+    if g:asyncrun_status ==# 'running'
+        echom 'background job is still running'
         return 0
     endif
 
-    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    call RunShell('~/loadrc/vishrc/vrun.sh', expand("%:p"), b:csdbpath)
-    call OpenOrSwitch(expand("%:p") . '.findresult', 'vs')
+    let b:file_name = expand('%:t')
+    let b:to_run = expand("%:p")
+
+    if filereadable(b:to_run . '.sh')
+        let b:to_run = b:to_run . '.sh'
+    endif
+
+    let b:csdbpath = Cd2ProjectRoot("files.proj")
+    let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
+    call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
+
+    if b:to_run != 'gbil.log'
+        call OpenOrSwitch(b:output, 'vs')
+    else
+        call OpenOrSwitch('gbil.log', 'vs')
+    endif
+
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
 endfunction
 
 function! SearchAgain()
     call Cd2ProjectRoot('files.proj')
-    let keyword = @/
+    let keyword = substitute(@/, '\\c', '', '')
+    let keyword = substitute(keyword, '\\<', '', '')
+    let keyword = substitute(keyword, '\\>', '', '')
     let b:result = GetEscapedResult(keyword)
-    silent exec '!~/loadrc/vishrc/vsearch.sh ' . expand("%:p") . ' "' .  keyword . '"' . ' "w" ' . '"' . b:result . '"'
+    exec '!~/loadrc/vishrc/vsearch.sh ' . expand("%:p") . ' "' .  keyword . '"' . ' "w" ' . '"' . b:result . '"'
     call OpenOrSwitch(b:result . '.findresult', 'vs')
 endfunction
 
 function! GetFirstColumnOfFile()
+    if (expand('%:e') ==# 'bak')
+        return 0
+    endif
+
     let bak_file = substitute(system('~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'), '\n', '', '')
     silent exec '!~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'
     call OpenOrSwitch(expand("%:p") . '.bak', 'vs')
@@ -109,7 +185,7 @@ function! CSCSearch(num)
     " 7 Find this file:
     " 8 Find files #including this file:
     call Cd2ProjectRoot('files.proj')
-    let keyword = expand("<cword>")
+    let keyword = tolower(expand("<cword>"))
     let b:result = GetEscapedResult(keyword)
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "' .  a:num . '" ' . '"' . b:result . '"'
     call OpenOrSwitch(b:result . '.findresult', 'vs')
@@ -126,37 +202,84 @@ endfunction
 
 function! ShowDiff()
     let b:commit = expand("<cword>")
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"')
 endfunction
 
 function! Prune()
-    if (expand('%:e') ==# 'findresult')
+    if (expand('%:e') ==# 'findresult' || expand('%:e') ==# 'bak')
         let line = getline('.')
         normal dd
         w
-        silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  line . '"'
+        silent exec '!~/loadrc/vishrc/prune.sh ' . '"./' .  line . '"'
     else
         silent exec '!~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"'
+        call RememberQuit()
     endif
+    call UpdateProj()
+endfunction
+
+function! OpenAll()
+    call GetFirstColumnOfFile()
+    let currentDir = getcwd()
+    let currentFile = expand('%:p')
+    let lines = readfile(currentFile)
+
+    on
+    for line in lines
+        let line = substitute(line, '"', '', "g")
+        exec 'vs ' . currentDir . '/' . line
+    endfor
+    set winwidth=1
+    windo set nowrap
+    wincmd =
+
+    let bnr = bufwinnr('^' . currentFile . '$')
+    exe bnr . "wincmd w"
+    q
+endfunction
+
+function! DiffAll()
+    let currentFile = expand("%:p")
+    if &diff
+        syntax on
+        windo diffoff
+    else
+        set winwidth=1
+        syntax off
+        windo diffthis
+        windo set nowrap
+        wincmd =
+    endif
+    call OpenOrSwitch(currentFile, 'vs')
 endfunction
 
 function! KdiffAll()
+    call GetFirstColumnOfFile()
+
     if &buftype ==# "terminal"
         return 0
     endif
 
+    only
     call asyncrun#stop('<bang>')
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
+    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
 endfunction
 
 function! UpdateProj()
     call Cd2ProjectRoot("files.proj")
-    call asyncrun#run('<bang>', '', 'bash ~/loadrc/bashrc/update_proj.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+    call CHANGE_CURR_DIR()
 endfunction
 
 function! VimOpen()
     let b:fileName = expand(expand("<cfile>"))
     let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
+
+    if b:fileName =~? '\.\(pdf\|pptx\|doc\|docx\)$'
+        exec '!open ' . '"' .  b:fileName . '"'
+        return
+    endif
+
     if (expand("%") ==# 'index')
         let realFile = GetWorktree() . '/' . b:fileName . ''
         let indexFile = getcwd() . '/../' . b:fileName . '/.git/index'
@@ -174,18 +297,26 @@ function! VimOpen()
     elseif (expand("%") ==# 'gbr.findresult')
         let b:commit = expand("<cword>")
         exec '!git checkout ' . '"' .  b:commit . '"'
-    elseif (expand("%") ==# 'gbil.findresult')
+    elseif (expand("%") ==# 'gbil.log')
         let b:commit = expand("<cword>")
-        exec '!git checkout ' . '"' .  b:commit . '"'
+        call Cd2Worktree()
+        exec '!~/loadrc/gitrc/discard_unnecessaries.sh ; git checkout ' . '"' .  b:commit . '"'
     elseif (expand("%") ==# 'glg.findresult')
         let b:commit = expand("<cword>")
         exec '!git checkout ' . '"' .  b:commit . '"'
     elseif (expand("%") ==# 'dps.findresult')
         let b:commit = expand("<cword>")
-        call asyncrun#run('<bang>', '', 'bash ~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
+        call asyncrun#run('<bang>', '', '~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
+    elseif (expand("%") ==# 'fdocs.list')
+        exec '!open ' . '"' .  expand(expand("<cfile>")) . '"'
     elseif (&filetype ==# 'fugitiveblame')
         let b:commit = expand("<cword>")
-        exec '!git checkout ' . '"' .  b:commit . '^"'
+        call Cd2Worktree()
+        exec '!~/loadrc/gitrc/discard_unnecessaries.sh ; git diff --quiet && git diff HEAD --quiet &&  git checkout -f ' . '"' .  b:commit . '^"'
+        ""call fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", "' . 'blame' . ' " . <q-args>)
+        "let s:cmd = 'Blame'
+        "exec 'command! -bang -nargs=? -range=-1 -complete=customlist,fugitive#' . s:cmd . 'Complete G' . tolower(s:cmd) 'exe fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", "' . tolower(s:cmd) . ' " . <q-args>)'
+        ""call fugitive#Gblame()
     else
         if !filereadable(b:fileName)
             if !isdirectory(b:filePath)
@@ -225,12 +356,21 @@ function! OpenProjectRoot()
     call OpenOrSwitch(b:csdbpath, 'vs')
 endfunction
 
-nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR><CR>
-nnoremap <leader>L :TlistClose<CR><CR>
-nnoremap hh <c-w>h<c-w><Bar>
-nnoremap ll <c-w>l<c-w><Bar>
-nnoremap mm <c-w><Bar>
-nnoremap mn <c-w>=
+function! SwitchWinSize()
+    if &winwidth == 1
+        set winwidth=999999
+        wincmd |
+    else
+        set winwidth=1
+        wincmd =
+    endif
+endfunction
+
+nnoremap <leader>l :TlistClose<CR>:TlistToggle<cr>
+nnoremap <leader>L :TlistClose<cr>
+nnoremap hh <c-w>h
+nnoremap ll <c-w>l
+nnoremap mm :call SwitchWinSize()<cr> 
 nnoremap ff <c-f>
 nnoremap vv <c-b>
 nnoremap <c-l> l
@@ -257,22 +397,22 @@ vnoremap <Space> za
 "onoremap <silent> <leader>f <C-C>za
 "vnoremap <silent> <leader>f zf
 nnoremap <silent> <leader>e :call VsMax($HOME . "/.bash_history") <CR>
-nnoremap <silent> <leader>f :call ShowRemember()<CR><CR>
-nnoremap <silent> <leader>v :so $MYVIMRC<CR><CR>
-nnoremap <leader>sh :execute "leftabove vs" bufname('#')<cr><CR>
-nnoremap <leader>sl :execute "rightbelow vs" bufname('#')<cr><CR>
+nnoremap <silent> <leader>f :call ShowRemember()<cr>
+nnoremap <silent> <leader>v :so $MYVIMRC<cr>
+nnoremap <leader>sh :execute "leftabove vs" bufname('#')<cr>
+nnoremap <leader>sl :execute "rightbelow vs" bufname('#')<cr>
 nnoremap W :call VsMax(".")<CR>
 " Quickly reload current file
 nnoremap E :mkview<CR>:e!<CR>
 " Quickly save current file
-nnoremap S :w<CR><CR>
+nnoremap S :w!<cr>
 " Quickly save and exit
-nnoremap X :x<CR><CR>
+nnoremap X :x<cr>
 nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
-nnoremap tt :Autoformat<CR>:w<CR><CR>
-nnoremap D :vs %:p<CR><CR>
+nnoremap tt :Autoformat<CR>:w!<cr>
+nnoremap D :only<CR>:vs %:p<cr>:set winwidth=1<cr><c-w>=
 " Quickly open current dir in current windows
 nnoremap <leader>d :call OpenProjectRoot()<cr>
 nnoremap <tab> %
@@ -280,7 +420,7 @@ vnoremap <tab> %
 nnoremap M zM
 nnoremap R zR
 nmap <f2> :set number! number?<cr>
-nmap <leader>w :set wrap!<cr>
+nmap <leader>w :call WinDo('set wrap!') <cr>
 " Convert slashes to backslashes for Windows.
 if has('win32')
     nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
@@ -306,46 +446,58 @@ endif
 vnoremap <silent>f :call VimSearch()<cr>
 vnoremap <silent>s :call GitSearch()<cr>
 vnoremap <silent>t :call SearchAgain()<cr>
-vnoremap <silent>g :call VFilter()<cr>
-vnoremap <silent>i :call ExFilter()<cr>
+nnoremap mg :call VFilter()<cr>
+nnoremap me :call ExtractHighLight()<cr>
+nnoremap mf :call ExFilter()<cr>
+nnoremap md :call Vdelete()<cr>
+nnoremap mo :call OpenAll()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
-nmap <C-s> :call CSCSearch(0)<CR><CR>
-nnoremap <c-space> :call CSCSearch(4)<CR><CR>
-nmap <C-@> :call CSCSearch(4)<CR><CR>
-nmap <C-f> :call CSCSearch(7)<CR><CR>
-nmap <C-e> :call CSCSearch(1)<CR><CR>
-nmap <C-g> :call CSCSearch(3)<CR><CR>
-nnoremap <leader>d :!rm %:p<CR>:q<CR><CR>
-nmap <C-j> :call PlayVideo()<CR><CR>
-nmap <C-p> :call Prune()<CR><CR>
-nmap <C-k> :call KdiffAll()<CR><CR>
+nmap <C-s> :call CSCSearch(0)<cr>
+nnoremap <c-space> :call CSCSearch(4)<cr>
+nmap <C-@> :call CSCSearch(4)<cr>
+nmap <C-f> :call CSCSearch(7)<cr>
+nmap <C-e> :call CSCSearch(1)<cr>
+nmap <C-g> :call CSCSearch(3)<cr>
+nnoremap <leader>d :!rm %:p<CR>:q<cr>
+nmap <C-j> :call PlayVideo()<cr>
+nmap <C-p> :call Prune()<cr>
+nmap <C-k> :call KdiffAll()<cr>
+nmap <C-d> :call DiffAll()<cr>
+nmap mr :call LocalRename()<cr>
 " Quickly close the current window
 nnoremap Q :call RememberQuit()<cr>
 nnoremap qq :call RememberQuit()<cr>
 nnoremap H :call ShowVITAG()<cr>
 nnoremap F :call GetFirstColumnOfFile()<cr>
-nnoremap T :vs $HOME/all.proj<CR><CR>
-nnoremap L :vs <C-R>"<CR><CR>
+nnoremap T :vs $HOME/all.proj<cr>
+nnoremap L :vs <C-R>"<cr>
 map <F5> :call VRun()<cr>
 map <F3> :call VDebug()<cr>
-" nnoremap gf gF<CR><CR>
-nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<CR><CR>
+" nnoremap gf gF<cr>
+nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
 map oo :call VimOpen()<cr>
-nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- "' . expand("%:p") . '"')<CR><CR>
+nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
 nnoremap <leader>1 :let @"=expand("%:p")<CR>
 
-function! CompareTwoFiles()
-    call asyncrun#run('<bang>', '', 'kdiff3 "' . @" . '" "' . expand("%:p") . '"')
-endfunc
-
-function! CommTwoFiles()
+function! CutFile2()
     silent exec '!comm -2 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . @" . '".findresult'
-    call OpenOrSwitch(@" . '.findresult', 'vs')
+    silent exec '!cp -fv "' . @" . '.findresult' . '"' . ' ' . '"' . @" . '"'
+    call OpenOrSwitch(@", 'vs')
 endfunc
 
-nnoremap <leader>2 :call CompareTwoFiles()<cr>
-nnoremap <leader>3 :call CommTwoFiles()<cr>
-nnoremap <leader>c :call UpdateProj()<cr>
+function! CutCommon()
+    silent exec '!comm -2 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . @" . '".findresult'
+    silent exec '!comm -1 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . expand("%:p") . '".findresult'
+    silent exec '!cp -fv "' . @" . '.findresult' . '"' . ' ' . '"' . @" . '"'
+    silent exec '!cp -fv "' . expand("%:p") . '.findresult' . '"' . ' ' . '"' . expand("%:p") . '"'
+endfunc
+
+nnoremap <leader>2 :call CutCommon()<cr>
+nnoremap <leader>3 :call CutFile2()<cr>
 set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
 "    paste mode, where you can paste mass data
 "    that won't be autoindented
+
+" open tig with Project root path
+nnoremap <Leader>t :TigOpenProjectRootDir<CR>
+nnoremap <leader>T :TigOpenCurrentFile<CR>

@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/zsh
 if [ ! -f .gitconfig ]
 then
     exit 0

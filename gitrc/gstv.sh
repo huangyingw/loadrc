@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 if [ -n "$1" ]
 then
     git difftool -y stash@{"$1"}^!

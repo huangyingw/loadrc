@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 programDir=~/bin/Umlet
 
 if [ $# -eq 1 ]

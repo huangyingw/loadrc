@@ -1,6 +1,7 @@
-#!/bin/bash
-for ss in $(git st|grep .*\.rej$) ; \
+#!/bin/zsh
+for ss in $(git status | grep \.rej$) ; \
 do \
-    git checkout "$1" $(echo "$ss" | sed 's/\.rej$//g') && \
-    rm "$ss" ; \
+    targetFile=$(echo "$ss" | sed 's/\.rej$//g')
+    git checkout "$1" "$targetFile" && \
+    rm "$ss"
 done

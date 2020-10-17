@@ -59,41 +59,6 @@ function! RemoveNextDoubleChar(char)
     end
 endfunction
 
-function! PulseCursorLine()
-    let current_window = winnr()
-
-    windo set nocursorline
-    execute current_window . 'wincmd w'
-
-    setlocal cursorline
-
-    redir => old_hi
-    silent execute 'hi CursorLine'
-    redir END
-    let old_hi = split(old_hi, '\n')[0]
-    let old_hi = substitute(old_hi, 'xxx', '', '')
-
-    hi CursorLine guibg=#3a3a3a
-    redraw
-    sleep 20m
-
-    hi CursorLine guibg=#4a4a4a
-    redraw
-    sleep 30m
-
-    hi CursorLine guibg=#3a3a3a
-    redraw
-    sleep 30m
-
-    hi CursorLine guibg=#2a2a2a
-    redraw
-    sleep 20m
-
-    execute 'hi ' . old_hi
-
-    windo set cursorline
-    execute current_window . 'wincmd w'
-endfunction
 " 获取当前路径，将$HOME转化为~
 function! CurDir()
     let curdir = substitute(getcwd(), $HOME, "~", "g")
@@ -178,10 +143,12 @@ function! GetWorktree()
 endfunction
 
 function! OpenOrSwitch(buffername, openMode)
-    let bnr = bufwinnr(a:buffername)
+    let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
+    let bnr = bufwinnr('^' . realpath . '$')
 
     if bnr > 0
         exe bnr . "wincmd w"
+        exec 'e'
     elseif a:openMode ==? "goto"
         silent exec 'e ' . a:buffername
     else
@@ -230,9 +197,13 @@ function! GetEscapedResult(keywordStr)
     let result = substitute(result, '\\', '', 'g')
     let result = substitute(result, '\$', '', 'g')
     let result = substitute(result, '#', '', 'g')
-    let result = substitute(result, '!', '\\!', 'g')
+    let result = substitute(result, '!', '', 'g')
     let result = substitute(result, "<", "", "g")
     let result = substitute(result, ">", "", "g")
+    let result = substitute(result, "\~", "", "g")
+    let result = substitute(result, "*", "", "g")
+    let result = substitute(result, "%", "", "g")
+    let result = substitute(result, ":", "", "g")
     return result
 endfunc
 
@@ -243,35 +214,38 @@ endfunc
 function! RunShell(shell, ...)
     let arg1 = (a:0 >= 1) ? a:1 : ''
     let arg2 = (a:0 >= 2) ? a:2 : ''
-    let arg3 = (a:0 >= 3) ? a:3 : ''
     let silent = substitute(system('git config vrun.silent'), '\n', '', '')
     let async = substitute(system('git config vrun.async'), '\n', '', '')
+    let temp_log = arg2 . '.findresult'
+    let run_string = a:shell . ' ' . '"' .  arg1 . '"' .  ' ' . '2>&1 | tee' . ' ' . temp_log
 
-    if async ==? "false"
-        if silent ==? "false"
-            exec '!' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult'
-        else
-            silent exec '!' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult'
-        endif
+    if async ==? "true"
+        call asyncrun#run('<bang>', '', ' ' . run_string)
     else
-        call asyncrun#run('<bang>', '', 'bash ' . a:shell . ' "' .  arg1 . '" "' .  arg2 . '" 2>&1 | tee ' . arg1 . '.findresult')
+        if silent ==? "true"
+            silent exec '!' . run_string
+        else
+            exec '!' . run_string
+        endif
     endif
+    silent exec '!cp' . ' ' . '"' .  temp_log . '"' . ' ' . '"' .  arg2 . '"'
 endfunc
 
 function! Filter2Findresult()
-    let csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
+    let worktree = Cd2Worktree()
     let keyword = @/
     let b:result = GetEscapedResult(keyword)
 
     if expand('%:e') != "findresult"
-        let buffername = csdbpath . '/' . b:result . '.vaa.findresult'
+        let buffername = b:result . '.vaa.findresult'
         silent exec '!rm ' . buffername
 
         if bufexists(buffername)
             exe "bd!" . buffername
         endif
 
-        silent exec 'w! ' . buffername
+        silent exec '!cp' . ' ' . '"' .  expand('%:p') . '"' . ' ' . '"' .  buffername . '"'
+        let worktree = Cd2Worktree()
         call OpenOrSwitch(buffername, 'vs')
     endif
 endfunc
@@ -287,7 +261,13 @@ endfunc
 
 function! Cd2Worktree()
     let worktree = GetWorktree()
-    exec "cd " . worktree
+
+    try
+        exec "cd " . fnameescape(worktree)
+    catch /./
+        echom 'Cought anything: ' . v:exception
+    endtry
+
     return worktree
 endfunc
 

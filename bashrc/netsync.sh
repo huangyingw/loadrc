@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 if [ -z "$1" ]
 then
     echo -e "${red}please specify the source server ... ${NC}"

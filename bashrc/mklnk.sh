@@ -1,10 +1,12 @@
-#!/bin/bash
-SOURCE=$1
-TARGET=$2
+#!/bin/zsh
+SOURCE="$1"
+realpath "$1" && SOURCE=$(realpath "$1")
+TARGET="$2"
+realpath "$2" && TARGET=$(realpath "$2")
 
-if [ -L ${1%/} ] || [ -L ${2%/} ]
+if [ "$SOURCE" = "$TARGET" ]
 then
-    echo -e "${red}please not use simbo link ! ... ${NC}"
+    echo -e "${red} source and target are identical ... ${NC}"
     exit 1
 fi
 
@@ -14,7 +16,5 @@ then
     exit 1
 fi
 
-LNSOURCE=`echo $SOURCE | sed 's/\/$//'`
-
 ~/loadrc/bashrc/move.sh "$SOURCE" "$TARGET"
-ln -fs "$TARGET" "$LNSOURCE"
+~/loadrc/bashrc/ln_fs.sh "$TARGET" "$SOURCE"

@@ -1,4 +1,4 @@
- #!/bin/bash
+ #!/bin/zsh
 
 # history_of_file
 #

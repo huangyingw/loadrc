@@ -1,9 +1,9 @@
-#!/bin/bash -
+#!/bin/zsh
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-if [ $(uname) == "Darwin" ]
+if [ $(uname) = "Darwin" ]
 then
     exit 0
 fi
@@ -14,16 +14,9 @@ apt-get install -y \
     curl \
     software-properties-common
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-add-apt-repository \
-    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-    $(lsb_release -cs) \
-    stable"
-apt-get update
-apt-get install -y docker-ce docker-compose
+apt-get install -y docker.io docker-compose
+systemctl enable docker
 
-./nvidia-docker_install.sh
+#./nvidia-docker_install.sh
 
-mkdir -p /media/volgrp/var/lib/docker/
-/etc/init.d/docker stop \
-    && ~/loadrc/bashrc/mklnk.sh /var/lib/docker/ /media/volgrp/var/lib/docker/
+./configure.sh

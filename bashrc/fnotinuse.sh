@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/zsh
 find_result=fnotinuse.findresult
 echo > "$find_result"
 cscope_db_file="/export/home1/username/cscope_db/""${pwd##*/}"

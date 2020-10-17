@@ -1,0 +1,31 @@
+diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
+index c36eb499..6ff6dc9d 100755
+--- ./gitrc/dogdio.sh
++++ ./gitrc/dogdio.sh
+@@ -8,8 +8,7 @@ local_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
+ output="$local_branch.gdio.diff"
+ output=$(echo "$output" | sed 's/\//_/g')
+ local_master="$(git config gsync.branch)"
+-remote="$(git config gsync.remote)"
+ 
+-~/loadrc/gitrc/gdi.sh "$remote/$local_master " 2>&1 | tee "$output"  
++~/loadrc/gitrc/gdi.sh "$local_master " 2>&1 | tee "$output"  
+ sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
+ exit 0
+diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
+index db0026a7..8dde1901 100755
+--- ./gitrc/gpl.sh
++++ ./gitrc/gpl.sh
+@@ -18,7 +18,10 @@ do
+     eval "$COMMAND"
+ done
+ 
+-if [ -n $(git config gsync.remote) ]
++remote=$(git config gsync.remote)
++branch=$(git config gsync.branch)
++if [ -n "$remote" ]
+ then
+-    git pull $(git config gsync.remote) $(git config gsync.branch) &
++    git fetch "$remote" "$branch":"$branch" &
++    git merge "$branch"
+ fi

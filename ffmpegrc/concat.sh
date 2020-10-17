@@ -1,9 +1,10 @@
-#!/bin/bash -
-SCRIPT=$(realpath "$1")
-SCRIPTPATH=$(dirname "$SCRIPT")
-cd "$SCRIPTPATH"
+#!/bin/zsh
 
+# https://stackoverflow.com/questions/1616577/surround-all-lines-in-a-text-file-with-quotes-something
 listFile="mylist.txt"
-find . -type f | sed 's/\(["'\''\]\)/\\\1/g;s/.*/file '&'/' > "$listFile" && \
-    nvim "$listFile" && \
-    ffmpeg -f concat -safe 0 -i "$listFile" -c copy output.avi
+if [ -f "$listFile" ]
+then
+    ffmpeg -f concat -safe 0 -i "$listFile" -c copy -y output.avi
+else
+    find . -type f | sed -e "s/'/'\\\\''/g;s/\(.*\)/file '\1'/" > "$listFile".bak
+fi

@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/zsh
 if [ -z "$1" ]
 then
-    host=`virsh list|awk '/running/{print $2}'`
+    host=`virsh list --state-running`
 else
     host="$1"
 fi

@@ -1,11 +1,13 @@
-#!/bin/bash
+#!/bin/zsh
 file=${1}
-if [ $(basename "$file") == "gbil.findresult" ]
+if [ $(basename "$file") = "gbil.log" ]
 then
     ~/loadrc/gitrc/gbir.sh
     exit 0
 fi
+
 extension=${file##*.}
+
 case $extension in
     sql)
         ~/loadrc/sqlrc/xsql.sh ${1} ${2} 2>&1 | tee ${1}.findresult

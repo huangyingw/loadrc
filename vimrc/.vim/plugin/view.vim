@@ -4,7 +4,7 @@ set statusline=%r%h
 set statusline +=\ %.55F            "full path
 set statusline +=\ %{WordCount()}\ words,
 set statusline +=%=        " Switch to the right side
-set statusline +=\ %{strftime('%m/%d/%y\ %H:%M:%S',getftime(expand('%')))} " file last modified time 
+set statusline +=\ %{strftime('%m/%d/%y\ %H:%M:%S',getftime(expand('%')))} " file last modified time
 set statusline +=\ %l             "current line
 set statusline +=/%L               "total lines
 set statusline +=\ %v             "virtual column number
@@ -14,7 +14,6 @@ set statusline +=\ %m                "modified flag
 "set statusline +=%5*%{&ff}%*            "file format
 "set statusline +=%3*%y%*                "file type
 "set statusline +=%2*0x%04B\ %*          "character under cursor
-set cursorline                  " underline the current line, for quick orientation
 " Split previously opened file ('#') in a split window
 set laststatus=2 "black status line at bottom of window
 if has("win32")
@@ -27,3 +26,18 @@ hi link ipaddr Identifier
 set completeopt-=preview
 syntax enable
 set background=dark
+set cursorline
+"highlight cursorline cterm=NONE ctermbg=darkred ctermfg=NONE
+"set cursorcolumn
+"highlight cursorcolumn cterm=NONE ctermbg=darkred ctermfg=white
+
+if &diff
+    set winwidth=1
+else
+    set winwidth=999999
+endif
+
+set diffopt+=iwhiteall
+set diffopt+=algorithm:patience
+set diffopt+=indent-heuristic
+set wrap

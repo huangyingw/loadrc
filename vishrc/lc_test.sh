@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/zsh
 fileName="$1"
 
 if [ -f "$fileName.sh" ]

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Return an errorcode of 0 on successful merge, 1 if unresolved conflicts
 # remain in the result.  Any other errorcode will be treated as fatal.

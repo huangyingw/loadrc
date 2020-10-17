@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/zsh
 currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 
 if [[ "$currentBranch" != *".fix" ]]
@@ -23,19 +23,15 @@ then
 fi
 
 host=$(git config deploy.host)
-path=$(git config deploy.path)
+rpath=$(git config deploy.path)
 
-~/loadrc/gitrc/gsync.sh && \
-    git remote update && \
-    git branch -D "$targetBranch" ; \
-    git branch "$targetBranch" $(git config gsync.remote)"/"$(git config gsync.branch) && \
-    ~/loadrc/gitrc/gdi.sh "$targetBranch" "$currentBranch" 2>&1 | tee gdi.findresult && \
-    git co "$targetBranch" && \
-    ~/loadrc/gitrc/gsync.sh && \
-    git apply --reject --whitespace=fix gdi.findresult ; \
+GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
+    ~/loadrc/gitrc/discard_unnecessaries.sh ; \
+    git checkout -f "$targetBranch" ; \
+    git apply --index --reject --whitespace=fix "$GDITDIFF" ; \
     ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
-    git add . && \
-    git commit  --no-verify -am "$commit_message" && \
-    git push -f && \
+    git commit  --no-verify -am "$commit_message" ; \
+    git pull ; \
+    git push ; \
     . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
     ~/loadrc/gitrc/gfix.sh

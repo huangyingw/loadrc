@@ -1,4 +1,4 @@
-#!/bin/bash - 
+#!/bin/zsh 
 targetFile="$1"
 keyWord="$2"
 sed -i.bak '/'"$keyWord"'/,$!d' $targetFile

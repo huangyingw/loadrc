@@ -1,6 +1,6 @@
-#!/bin/bash -
+#!/bin/zsh
 
-if [ "$1" == "files.proj" ]
+if [ "$1" = "files.proj" ]
 then
     echo "files.proj"
     exit

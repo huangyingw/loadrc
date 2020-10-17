@@ -1,6 +1,13 @@
-#!/bin/bash -
-cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > files.proj.tmp && \
-    rsync -aHv --force --progress \
-    --files-from files.proj.tmp \
-    "$1" \
-    "$2"
+#!/bin/zsh
+host=$(git config deploy.host)
+rpath=$(git config deploy.path)
+
+rsync -aHv --force --progress \
+    --files-from rsync.files \
+    . \
+    "$host:$rpath"
+
+rsync -aHv --force --progress \
+    --files-from=files.rev \
+    "$host:/" \
+    .

@@ -1,0 +1,1 @@
+/Users/huangyingw/Dropbox/loadrc.home/hosts/imacpro/Users/huangyingw/.bashrc

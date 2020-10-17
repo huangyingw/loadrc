@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/bin/zsh
 chmod -R 777 .

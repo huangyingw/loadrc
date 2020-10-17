@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/zsh
 TARGET=/media/volgrp/media/`hostname`/
 if [ -n "$1" ]
 then 

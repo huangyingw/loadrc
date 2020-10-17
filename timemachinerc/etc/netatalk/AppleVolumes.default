@@ -1,0 +1,2 @@
+:DEFAULT: options:upriv,usedots
+/media/timemachine/tm "tm's Time Machine" options:tm volsizelimit:300000 allow:tm

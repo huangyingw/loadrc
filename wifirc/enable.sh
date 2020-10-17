@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/zsh
 if [ $(uname) != "Darwin" ]
 then
     PHY=$(iw list | awk '/Wiphy/{print $2}')
