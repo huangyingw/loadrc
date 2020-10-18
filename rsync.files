@@ -560,6 +560,7 @@
 ./install_prerequisite.sh
 ./install_vagrant.sh
 ./ipynbrc/jupytext.sh
+./ipynbrc/jupytext.test.sh
 ./iterm2rc/movescreen.py
 ./jdupes/.gitconfig
 ./jdupes/.gitignore
