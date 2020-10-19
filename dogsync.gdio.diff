@@ -13,3 +13,29 @@ index 25554679..6e5ba70f 100755
  ~/loadrc/gitrc/gpl.sh
  ~/loadrc/gitrc/gps.sh
  ~/loadrc/gitrc/dogdio.sh
+diff --git a/ipynbrc/jupytext.sh b/ipynbrc/jupytext.sh
+index 31e2a1ce..f572191c 100755
+--- ./ipynbrc/jupytext.sh
++++ ./ipynbrc/jupytext.sh
+@@ -6,4 +6,11 @@ then
+     TARGET="$1"
+ fi
+ 
+-find "$TARGET" -type f -name \*.ipynb -exec jupytext --sync {} \;
++find "$TARGET" -type f -name \*.ipynb | while read ss
++do
++    pyfile=$(echo "$ss" | sed 's/\.ipynb$/\.py/g')
++    rm "$pyfile"
++    jupytext --sync "$ss"
++    autopep8 --in-place "$pyfile"
++    sed -i.bak '/!pip install/d' "$pyfile"
++done
+diff --git a/ipynbrc/jupytext.test.sh b/ipynbrc/jupytext.test.sh
+new file mode 100755
+index 00000000..2b0b11ae
+--- /dev/null
++++ ./ipynbrc/jupytext.test.sh
+@@ -0,0 +1,3 @@
++#!/bin/zsh
++cd ~/myproject/git/AI/fastai/fastbook/
++~/loadrc/ipynbrc/jupytext.sh
