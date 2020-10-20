@@ -1,0 +1,14 @@
+diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
+index c65de94c..885df571 100644
+--- ./host_links/server/etc/hosts
++++ ./host_links/server/etc/hosts
+@@ -5,6 +5,9 @@
+ 172.27.217.162 localhost.imvu.com
+ 192.168.31.140 mini
+ 192.168.31.149 minds
++192.168.31.153 gluster00
++192.168.31.129 gluster01
++192.168.31.115 gluster02
+ 192.168.31.99 mldonkey
+ 192.168.31.147 imacpro
+ 

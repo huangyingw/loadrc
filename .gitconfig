@@ -51,6 +51,9 @@
 [deploy]
     host = localhost
     path = ~/loadrc
+[branch "findresult"]
+    remote = origin
+    merge = refs/heads/findresult
 [gsync]
     remote = origin
     branch = dev

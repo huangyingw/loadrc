@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 ~/loadrc/gitrc/include_gitconfig.sh
 git remote update &
 ~/loadrc/gitrc/discard_unnecessaries.sh

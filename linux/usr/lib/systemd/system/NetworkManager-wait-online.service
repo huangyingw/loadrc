@@ -7,7 +7,7 @@ Before=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/nm-online -s -q --timeout=30
+ExecStart=/usr/bin/nm-online -s -q --timeout=10
 RemainAfterExit=yes
 
 [Install]
