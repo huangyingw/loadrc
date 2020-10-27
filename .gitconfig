@@ -67,3 +67,5 @@
 [branch "gdi2"]
     remote = origin
     merge = refs/heads/gdi2
+[pull]
+    from = origin/dev
