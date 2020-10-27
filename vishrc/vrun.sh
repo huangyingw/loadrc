@@ -57,9 +57,11 @@ case $extension in
         then
             ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
         else
-            . ~/loadrc/.loadrc
             "$file"
         fi
+        ;;
+    lsh)
+        "$file"
         ;;
     py)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
