@@ -40,4 +40,8 @@ rsync -aHSv --progress --delete-before --force \
     if [ -f "${ready_file}" ] ; \
     then \
         rm "${ready_file}" ; \
+    fi && \
+    if [ -f "${MIRRORCHECK}" ] ; \
+    then \
+        ~/loadrc/bashrc/sleep.sh ; \
     fi
