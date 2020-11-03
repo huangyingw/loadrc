@@ -73,4 +73,3 @@ alias gvd='$HOME/loadrc/gitrc/gvd.sh'
 alias gvlg='$HOME/loadrc/gitrc/gvlg.sh'
 alias gwap='$HOME/loadrc/gitrc/gwap.sh'
 export GIT_MERGE_AUTOEDIT=no
-export PATH=~/myproject/git/tools/depot_tools:"$PATH"
