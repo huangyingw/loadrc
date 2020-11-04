@@ -1,0 +1,25 @@
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 50a56971..4ec9ac11 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 50a569711ddf2faeeee8346c0d941ad9145aaf2a
++Subproject commit 4ec9ac11b318fa45abf0e51c64955eb03d850ec8
+diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
+index 40ad6d8a..f7654a88 100755
+--- ./vishrc/vrun.sh
++++ ./vishrc/vrun.sh
+@@ -57,10 +57,12 @@ case $extension in
+         then
+             ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
+         else
+-            . ~/loadrc/.loadrc
+             "$file"
+         fi
+         ;;
++    lsh)
++        "$file"
++        ;;
+     py)
+         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+         then
