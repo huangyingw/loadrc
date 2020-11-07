@@ -1,40 +1,97 @@
-diff --git a/vimrc/.vim/bundle/neco-syntax b/vimrc/.vim/bundle/neco-syntax
-index 6c3862ac..f8d7b748 160000
---- ./vimrc/.vim/bundle/neco-syntax
-+++ ./vimrc/.vim/bundle/neco-syntax
-@@ -1 +1 @@
--Subproject commit 6c3862ac82d2c917fa8b4126832de7d3a909f1fe
-+Subproject commit f8d7b748b022aac8ce73458574da5616f1c5fb65
-diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 4fbc3f5f..e7b5a73c 160000
---- ./vimrc/.vim/bundle/neco-vim
-+++ ./vimrc/.vim/bundle/neco-vim
-@@ -1 +1 @@
--Subproject commit 4fbc3f5f3a2b2d5299c388e2f1ffef04fcaf87ba
-+Subproject commit e7b5a73cba668a351b0953063b6e18e1dc1773b2
-diff --git a/vimrc/.vim/bundle/neoinclude.vim b/vimrc/.vim/bundle/neoinclude.vim
-index 5125e73d..954cfc9d 160000
---- ./vimrc/.vim/bundle/neoinclude.vim
-+++ ./vimrc/.vim/bundle/neoinclude.vim
-@@ -1 +1 @@
--Subproject commit 5125e73de0a8b4f2c399e4896e21be1b8f7b3d39
-+Subproject commit 954cfc9dfdb303f2c2fa867b9cf949dd74512628
-diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
-index 52052311..a9442837 160000
---- ./vimrc/.vim/bundle/tig-explorer.vim
-+++ ./vimrc/.vim/bundle/tig-explorer.vim
-@@ -1 +1 @@
--Subproject commit 52052311b317117d0f0b8c1cc8d1760767f61277
-+Subproject commit a9442837ffed280a5d092da069ccf1ab241f7485
-diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 4913f0d5..7f6cbd82 100644
---- ./vimrc/.vim/plugin/keymap.vim
-+++ ./vimrc/.vim/plugin/keymap.vim
-@@ -151,6 +151,7 @@ function! VRun()
-     endif
+diff --git a/host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini b/host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini
+index e2a8f550..0fe40cc4 100644
+--- ./host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini
++++ ./host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini
+@@ -147,7 +147,7 @@ favorites_menu=
+ first_steps=
+ flip=
+ forward1="Right, Ctrl+Shift+F"
+-forward2=Up
++forward2="H, Up"
+ forward3="J, PgUp"
+ frame_back_step=","
+ frame_step=.
+@@ -192,7 +192,7 @@ next_chapter=@@
+ next_osd=O
+ next_radio=Shift+H
+ next_subtitle=
+-next_tv=H
++next_tv=
+ next_video=
+ next_wheel_function=
+ normal_speed=Backspace
+@@ -254,7 +254,7 @@ postprocessing=
+ prev_bookmark=Ctrl+B
+ prev_chapter=!
+ previous_radio=Shift+L
+-previous_tv=L
++previous_tv=
+ quick_access_menu=
+ quit=N
+ radio_menu=
+@@ -266,7 +266,7 @@ reset_zoom=Shift+E
+ restore\hide=
+ reverse_channels=
+ rewind1="Left, Ctrl+Shift+B"
+-rewind2=Down
++rewind2="Down, L"
+ rewind3="K, PgDown"
+ right_channel=
+ rotate_clockwise=
+diff --git a/macos/Users/huangyingw/Library/Preferences/org.videolan.vlc/vlcrc b/macos/Users/huangyingw/Library/Preferences/org.videolan.vlc/vlcrc
+index 342f83c4..8d5879d6 100644
+--- ./macos/Users/huangyingw/Library/Preferences/org.videolan.vlc/vlcrc
++++ ./macos/Users/huangyingw/Library/Preferences/org.videolan.vlc/vlcrc
+@@ -1,5 +1,5 @@
+ ﻿###
+-###  vlc 3.0.11
++###  vlc 3.0.11.1
+ ###
  
-     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
- endfunction
+ ###
+@@ -522,7 +522,7 @@ macosx-continue-playback=1
+ #sout-avi-subject=
  
- function! SearchAgain()
+ # Encoder (string)
+-#sout-avi-encoder=VLC Media Player - 3.0.11 Vetinari
++#sout-avi-encoder=VLC Media Player - 3.0.11.1 Vetinari
+ 
+ # Keywords (string)
+ #sout-avi-keywords=
+@@ -4089,13 +4089,13 @@ key-jump+medium=Up
+ #global-key-jump-long=
+ 
+ # Long backwards jump (string)
+-#key-jump-long=Command+Shift+Alt+Left
++key-jump-long=k
+ 
+ # Long forward jump (string)
+ #global-key-jump+long=
+ 
+ # Long forward jump (string)
+-#key-jump+long=Command+Shift+Alt+Right
++key-jump+long=j
+ 
+ # Next frame (string)
+ #global-key-frame-next=
+@@ -4191,7 +4191,7 @@ key-quit=n
+ #global-key-subdelay-up=
+ 
+ # Subtitle delay up (string)
+-#key-subdelay-up=j
++key-subdelay-up=
+ 
+ # Subtitle delay down (string)
+ #global-key-subdelay-down=
+diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
+index 40ad6d8a..a0cd0268 100755
+--- ./vishrc/vrun.sh
++++ ./vishrc/vrun.sh
+@@ -57,7 +57,6 @@ case $extension in
+         then
+             ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
+         else
+-            . ~/loadrc/.loadrc
+             "$file"
+         fi
+         ;;
