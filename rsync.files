@@ -482,6 +482,7 @@
 ./gpurc/etc/pm/sleep.d/nvidia-reload
 ./gpurc/install.sh
 ./gpurc/install_driver.sh
+./gpurc/restart.sh
 ./hgrc/hdi.sh
 ./host_links/imac/Users/huangyingw/.bashrc
 ./host_links/imacpro/Users/huangyingw/.bashrc
@@ -559,6 +560,7 @@
 ./install_nx.sh
 ./install_prerequisite.sh
 ./install_vagrant.sh
+./ipynbrc/generate_ipynb.sh
 ./ipynbrc/jupytext.sh
 ./ipynbrc/jupytext.test.sh
 ./iterm2rc/movescreen.py
