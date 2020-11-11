@@ -1,0 +1,14 @@
+diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
+index 40ad6d8a..1ad765d3 100755
+--- ./vishrc/vrun.sh
++++ ./vishrc/vrun.sh
+@@ -61,6 +61,9 @@ case $extension in
+             "$file"
+         fi
+         ;;
++    lsh)
++        "$file"
++        ;;
+     py)
+         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+         then
