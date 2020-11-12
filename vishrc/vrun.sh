@@ -60,6 +60,9 @@ case $extension in
             "$file"
         fi
         ;;
+    lsh)
+        "$file"
+        ;;
     py)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
