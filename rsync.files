@@ -338,6 +338,7 @@
 ./bashrc/wol.sh
 ./bashrc/zsh.test.sh
 ./chrome_install.sh
+./config/iTerm/com.googlecode.iterm2.plist
 ./crontabrc/.mbp.cron
 ./crontabrc/.mini.cron
 ./crontabrc/.mldonkey.cron
