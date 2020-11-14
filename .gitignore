@@ -1,5 +1,6 @@
 *.list
 *.log
+*.pkg
 .passwd
 bashrc/.bash_history
 bashrc/copy_files.log
