@@ -1,0 +1,12 @@
+diff --git a/zerotierrc/install.sh b/zerotierrc/install.sh
+index 349a4798..f1295fbc 100755
+--- ./zerotierrc/install.sh
++++ ./zerotierrc/install.sh
+@@ -7,4 +7,7 @@ if [ $(uname) != "Darwin" ]
+ then
+     curl -s https://install.zerotier.com/ | bash
+     zerotier-cli join 93afae5963560e41
++else
++    wget -nc https://download.zerotier.com/dist/ZeroTier%20One.pkg -P ./installer/
++    sudo installer -package ./installer/ZeroTier\ One.pkg -target /
+ fi
