@@ -3,26 +3,6 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-deploy_configs() {
-    TARGET="$1"
-    SOURCE=~/loadrc/hosts/"`hostname`$TARGET"
-
-    if [ -L "$TARGET" ]
-    then
-        sudo rm "$TARGET"
-    fi
-
-    if [ -f "$SOURCE" ]
-    then
-        sudo cp -fv "$SOURCE" "$TARGET"
-    fi
-}
-
-while read -r line || [[ -n "$line" ]]
-do
-    deploy_configs "$line"
-done < zerotierrc.conf
-
 echo2crontab() {
     RESTARTFILE="$1"
     if [ -f "$RESTARTFILE" ]
