@@ -1,34 +1,45 @@
-diff --git a/.gitignore b/.gitignore
-index b98a32ce..8f92760e 100644
---- ./.gitignore
-+++ ./.gitignore
-@@ -1,5 +1,6 @@
- *.list
- *.log
-+*.pkg
- .passwd
- bashrc/.bash_history
- bashrc/copy_files.log
+diff --git a/set_host_configuration.sh b/set_host_configuration.sh
+index f5bc08ef..4e92027e 100755
+--- ./set_host_configuration.sh
++++ ./set_host_configuration.sh
+@@ -8,6 +8,11 @@ do \
+     ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/host_links\/`hostname`\///g")"; \
+ done
+ 
++find hosts/`hostname`/ -type f | while read ss; \
++do \
++    sudo cp -fv "$ss" "/$(echo "$ss" | sed "s/hosts\/`hostname`\///g")"; \
++done
++
+ HOSTTODOS=~/loadrc/host_links/"`hostname`/todos.sh"
+ if [ -f "$HOSTTODOS" ]
+ then
 diff --git a/zerotierrc/configure.sh b/zerotierrc/configure.sh
-index 82ddf92f..724c11b3 100755
+index 82ddf92f..00684eb6 100755
 --- ./zerotierrc/configure.sh
 +++ ./zerotierrc/configure.sh
-@@ -7,9 +7,14 @@ deploy_configs() {
-     TARGET="$1"
-     SOURCE=~/loadrc/hosts/"`hostname`$TARGET"
+@@ -3,21 +3,6 @@ SCRIPT=$(realpath "$0")
+ SCRIPTPATH=$(dirname "$SCRIPT")
+ cd "$SCRIPTPATH"
  
-+    if [ -L "$TARGET" ]
-+    then
-+        sudo rm "$TARGET"
-+    fi
-+
-     if [ -f "$SOURCE" ]
-     then
+-deploy_configs() {
+-    TARGET="$1"
+-    SOURCE=~/loadrc/hosts/"`hostname`$TARGET"
+-
+-    if [ -f "$SOURCE" ]
+-    then
 -        cp -fv --remove-destination "$SOURCE" "$TARGET"
-+        sudo cp -fv "$SOURCE" "$TARGET"
-     fi
- }
- 
+-    fi
+-}
+-
+-while read -r line || [[ -n "$line" ]]
+-do
+-    deploy_configs "$line"
+-done < zerotierrc.conf
+-
+ echo2crontab() {
+     RESTARTFILE="$1"
+     if [ -f "$RESTARTFILE" ]
 diff --git a/zerotierrc/install.sh b/zerotierrc/install.sh
 index 349a4798..f1295fbc 100755
 --- ./zerotierrc/install.sh
