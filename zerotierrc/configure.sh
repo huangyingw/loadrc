@@ -7,9 +7,14 @@ deploy_configs() {
     TARGET="$1"
     SOURCE=~/loadrc/hosts/"`hostname`$TARGET"
 
+    if [ -L "$TARGET" ]
+    then
+        sudo rm "$TARGET"
+    fi
+
     if [ -f "$SOURCE" ]
     then
-        cp -fv --remove-destination "$SOURCE" "$TARGET"
+        sudo cp -fv "$SOURCE" "$TARGET"
     fi
 }
 
