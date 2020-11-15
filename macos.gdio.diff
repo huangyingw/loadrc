@@ -9,6 +9,26 @@ index b98a32ce..8f92760e 100644
  .passwd
  bashrc/.bash_history
  bashrc/copy_files.log
+diff --git a/zerotierrc/configure.sh b/zerotierrc/configure.sh
+index 82ddf92f..724c11b3 100755
+--- ./zerotierrc/configure.sh
++++ ./zerotierrc/configure.sh
+@@ -7,9 +7,14 @@ deploy_configs() {
+     TARGET="$1"
+     SOURCE=~/loadrc/hosts/"`hostname`$TARGET"
+ 
++    if [ -L "$TARGET" ]
++    then
++        sudo rm "$TARGET"
++    fi
++
+     if [ -f "$SOURCE" ]
+     then
+-        cp -fv --remove-destination "$SOURCE" "$TARGET"
++        sudo cp -fv "$SOURCE" "$TARGET"
+     fi
+ }
+ 
 diff --git a/zerotierrc/install.sh b/zerotierrc/install.sh
 index 349a4798..f1295fbc 100755
 --- ./zerotierrc/install.sh
