@@ -512,6 +512,7 @@
 "./hosts/imac/Library/Application\ Support/ZeroTier/One/identity.secret"
 "./hosts/imacpro/Library/Application\ Support/ZeroTier/One/identity.public"
 "./hosts/imacpro/Library/Application\ Support/ZeroTier/One/identity.secret"
+"./hosts/imacpro/Users/huangyingw/.config/karabiner/karabiner.json"
 "./hosts/lint-sandbox/var/lib/zerotier-one/identity.public"
 "./hosts/lint-sandbox/var/lib/zerotier-one/identity.secret"
 "./hosts/mbp/Library/Application\ Support/ZeroTier/One/identity.public"
