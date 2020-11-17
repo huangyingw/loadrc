@@ -3,6 +3,6 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-sudo add-apt-repository -y ppa:flacon
-sudo apt-get update
-sudo apt-get install -y flacon
+add-apt-repository -y ppa:flacon
+apt-get update
+apt-get install -y flacon
