@@ -22,7 +22,7 @@ else
         neovim \
         python
     brew reinstall python
-    sudo pip3 install --upgrade neovim 
-    sudo pip3 install pynvim jedi 
+    pip3 install --upgrade neovim 
+    pip3 install pynvim jedi 
     #brew install --with-toolchain --with-clang llvm
 fi
