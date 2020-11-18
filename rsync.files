@@ -512,7 +512,6 @@
 ./hosts/imac/Library/Application Support/ZeroTier/One/identity.secret
 ./hosts/imacpro/Library/Application Support/ZeroTier/One/identity.public
 ./hosts/imacpro/Library/Application Support/ZeroTier/One/identity.secret
-./hosts/imacpro/Users/huangyingw/.config/karabiner/karabiner.json
 ./hosts/lint-sandbox/var/lib/zerotier-one/identity.public
 ./hosts/lint-sandbox/var/lib/zerotier-one/identity.secret
 ./hosts/mbp/Library/Application Support/ZeroTier/One/identity.public
@@ -618,6 +617,7 @@
 ./linux_links/etc/ssh/sshd_config
 ./mac_sync.list
 ./macos.conf
+./macos/Users/huangyingw/.config/karabiner/karabiner.json
 ./macos/Users/huangyingw/Library/Preferences/org.videolan.vlc/vlcrc
 ./macos/etc/sudoers
 ./macosrc/configure_mosh.sh
