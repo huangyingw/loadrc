@@ -1,3 +1,148 @@
+diff --git a/dockerrc/nvidia-docker_install.sh b/dockerrc/nvidia-docker_install.sh
+index 6e4aad1b..3a3032b9 100755
+--- ./dockerrc/nvidia-docker_install.sh
++++ ./dockerrc/nvidia-docker_install.sh
+@@ -5,19 +5,21 @@ cd "$SCRIPTPATH"
+ 
+ # If you have nvidia-docker 1.0 installed: we need to remove it and all existing GPU containers
+ docker volume ls -q -f driver=nvidia-docker | xargs -r -I{} -n1 docker ps -q -a -f volume={} | xargs -r docker rm -f
+-sudo apt-get purge -y nvidia-docker
++apt-get purge -y nvidia-docker
+ 
+ # Add the package repositories
+ curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | \
+-  sudo apt-key add -
++    apt-key add -
++
+ distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | \
+-  sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+-sudo apt-get update
++    tee /etc/apt/sources.list.d/nvidia-docker.list
++
++apt-get update
+ 
+ # Install nvidia-docker2 and reload the Docker daemon configuration
+-sudo apt-get install -y nvidia-docker2
+-sudo pkill -SIGHUP dockerd
++apt-get install -y nvidia-docker2
++pkill -SIGHUP dockerd
+ 
+ # Test nvidia-smi with the latest official CUDA image
+ docker run --runtime=nvidia --rm nvidia/cuda:9.0-base nvidia-smi
+diff --git a/install_flacon.sh b/install_flacon.sh
+index cc789063..a7f294f9 100755
+--- ./install_flacon.sh
++++ ./install_flacon.sh
+@@ -3,6 +3,6 @@ SCRIPT=$(realpath "$0")
+ SCRIPTPATH=$(dirname "$SCRIPT")
+ cd "$SCRIPTPATH"
+ 
+-sudo add-apt-repository -y ppa:flacon
+-sudo apt-get update
+-sudo apt-get install -y flacon
++add-apt-repository -y ppa:flacon
++apt-get update
++apt-get install -y flacon
+diff --git a/install_nvim_pre.sh b/install_nvim_pre.sh
+index 2bc75c67..9c7e402e 100755
+--- ./install_nvim_pre.sh
++++ ./install_nvim_pre.sh
+@@ -22,7 +22,7 @@ else
+         neovim \
+         python
+     brew reinstall python
+-    sudo pip3 install --upgrade neovim 
+-    sudo pip3 install pynvim jedi 
++    pip3 install --upgrade neovim 
++    pip3 install pynvim jedi 
+     #brew install --with-toolchain --with-clang llvm
+ fi
+diff --git a/hosts/imacpro/Users/huangyingw/.config/karabiner/karabiner.json b/macos/Users/huangyingw/.config/karabiner/karabiner.json
+similarity index 100%
+rename from hosts/imacpro/Users/huangyingw/.config/karabiner/karabiner.json
+rename to macos/Users/huangyingw/.config/karabiner/karabiner.json
+diff --git a/macos/etc/sudoers b/macos/etc/sudoers
+index 1148febe..1b3f975a 100644
+--- ./macos/etc/sudoers
++++ ./macos/etc/sudoers
+@@ -1,19 +1,13 @@
+-# sudoers file.
++#
++# Sample /etc/sudoers file.
+ #
+ # This file MUST be edited with the 'visudo' command as root.
+-# Failure to use 'visudo' may result in syntax or file permission errors
+-# that prevent sudo from running.
+ #
+ # See the sudoers man page for the details on how to write a sudoers file.
+-#
+ 
+-# Host alias specification
+-
+-# User alias specification
+-
+-# Cmnd alias specification
+-
+-# Defaults specification
++##
++# Override built-in defaults
++##
+ Defaults	env_reset
+ Defaults	env_keep += "BLOCKSIZE"
+ Defaults	env_keep += "COLORFGBG COLORTERM"
+@@ -28,20 +22,41 @@ Defaults	env_keep += "DISPLAY XAUTHORIZATION XAUTHORITY"
+ Defaults	env_keep += "EDITOR VISUAL"
+ Defaults	env_keep += "HOME MAIL"
+ 
++Defaults	lecture_file = "/etc/sudo_lecture"
++
++##
++# User alias specification
++##
++# User_Alias	FULLTIMERS = millert, mikef, dowdy
++
++##
+ # Runas alias specification
++##
++# Runas_Alias	OP = root, operator
+ 
+-# User privilege specification
+-root	ALL=(ALL) ALL
+-%admin	ALL=(ALL) ALL
++##
++# Host alias specification
++##
++# Host_Alias	CUNETS = 128.138.0.0/255.255.0.0
++# Host_Alias	CSNETS = 128.138.243.0, 128.138.204.0/24, 128.138.242.0
++# Host_Alias	SERVERS = master, mail, www, ns
++# Host_Alias	CDROM = orion, perseus, hercules
+ 
+-# Uncomment to allow people in group wheel to run all commands
+-# %wheel	ALL=(ALL) ALL
++##
++# Cmnd alias specification
++##
++# Cmnd_Alias	PAGERS = /usr/bin/more, /usr/bin/pg, /usr/bin/less
++
++##
++# User specification
++##
+ 
+-# Same thing without a password
+-# %wheel	ALL=(ALL) NOPASSWD: ALL
++# root and users in group wheel can run anything on any machine as any user
++root		ALL = (ALL) ALL
++%admin		ALL = (ALL) ALL
+ 
+-# Samples
+-# %users  ALL=/sbin/mount /cdrom,/sbin/umount /cdrom
+-# %users  localhost=/sbin/shutdown -h now
++## Read drop-in files from /private/etc/sudoers.d
++## (the '#' here does not indicate a comment)
++#includedir /private/etc/sudoers.d
+ huangyingw     ALL=(ALL)       NOPASSWD: ALL
+ admin     ALL=(ALL)       NOPASSWD: ALL
 diff --git a/set_host_configuration.sh b/set_host_configuration.sh
 index f5bc08ef..4e92027e 100755
 --- ./set_host_configuration.sh
@@ -15,31 +160,25 @@ index f5bc08ef..4e92027e 100755
  if [ -f "$HOSTTODOS" ]
  then
 diff --git a/zerotierrc/configure.sh b/zerotierrc/configure.sh
-index 82ddf92f..00684eb6 100755
+index 82ddf92f..724c11b3 100755
 --- ./zerotierrc/configure.sh
 +++ ./zerotierrc/configure.sh
-@@ -3,21 +3,6 @@ SCRIPT=$(realpath "$0")
- SCRIPTPATH=$(dirname "$SCRIPT")
- cd "$SCRIPTPATH"
+@@ -7,9 +7,14 @@ deploy_configs() {
+     TARGET="$1"
+     SOURCE=~/loadrc/hosts/"`hostname`$TARGET"
  
--deploy_configs() {
--    TARGET="$1"
--    SOURCE=~/loadrc/hosts/"`hostname`$TARGET"
--
--    if [ -f "$SOURCE" ]
--    then
++    if [ -L "$TARGET" ]
++    then
++        sudo rm "$TARGET"
++    fi
++
+     if [ -f "$SOURCE" ]
+     then
 -        cp -fv --remove-destination "$SOURCE" "$TARGET"
--    fi
--}
--
--while read -r line || [[ -n "$line" ]]
--do
--    deploy_configs "$line"
--done < zerotierrc.conf
--
- echo2crontab() {
-     RESTARTFILE="$1"
-     if [ -f "$RESTARTFILE" ]
++        sudo cp -fv "$SOURCE" "$TARGET"
+     fi
+ }
+ 
 diff --git a/zerotierrc/install.sh b/zerotierrc/install.sh
 index 349a4798..f1295fbc 100755
 --- ./zerotierrc/install.sh
