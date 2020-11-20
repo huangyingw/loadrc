@@ -32,6 +32,7 @@ brew install \
     node \
     openssl \
     rename \
+    sshfs \
     tig \
     tmux \
     wakeonlan \
@@ -43,6 +44,7 @@ brew cask install \
     kdiff3 \
     libreoffice \
     lynxlet \
+    osxfuse \
     wkhtmltopdf
 
 sudo easy_install pip
