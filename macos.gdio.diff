@@ -30,6 +30,35 @@ index 6e4aad1b..3a3032b9 100755
  
  # Test nvidia-smi with the latest official CUDA image
  docker run --runtime=nvidia --rm nvidia/cuda:9.0-base nvidia-smi
+diff --git a/install_basic_macos.sh b/install_basic_macos.sh
+index 260d1c88..2ca0dba0 100755
+--- ./install_basic_macos.sh
++++ ./install_basic_macos.sh
+@@ -8,7 +8,7 @@ then
+     exit 0
+ fi
+ 
+-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
++/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+ brew update
+ brew install \
+     Caskroom/cask/xquartz \
+@@ -32,6 +32,7 @@ brew install \
+     node \
+     openssl \
+     rename \
++    sshfs \
+     tig \
+     tmux \
+     wakeonlan \
+@@ -43,6 +44,7 @@ brew cask install \
+     kdiff3 \
+     libreoffice \
+     lynxlet \
++    osxfuse \
+     wkhtmltopdf
+ 
+ sudo easy_install pip
 diff --git a/install_flacon.sh b/install_flacon.sh
 index cc789063..a7f294f9 100755
 --- ./install_flacon.sh
