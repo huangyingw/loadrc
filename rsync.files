@@ -338,6 +338,7 @@
 ./bashrc/wol.sh
 ./bashrc/zsh.test.sh
 ./chrome_install.sh
+./config/iTerm/com.googlecode.iterm2.plist
 ./crontabrc/.mbp.cron
 ./crontabrc/.mini.cron
 ./crontabrc/.mldonkey.cron
@@ -511,6 +512,7 @@
 ./hosts/imac/Library/Application Support/ZeroTier/One/identity.secret
 ./hosts/imacpro/Library/Application Support/ZeroTier/One/identity.public
 ./hosts/imacpro/Library/Application Support/ZeroTier/One/identity.secret
+./hosts/imacpro/Users/huangyingw/.config/karabiner/karabiner.json
 ./hosts/lint-sandbox/var/lib/zerotier-one/identity.public
 ./hosts/lint-sandbox/var/lib/zerotier-one/identity.secret
 ./hosts/mbp/Library/Application Support/ZeroTier/One/identity.public
