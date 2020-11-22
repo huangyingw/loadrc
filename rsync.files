@@ -483,6 +483,7 @@
 ./gpurc/etc/pm/sleep.d/nvidia-reload
 ./gpurc/install.sh
 ./gpurc/install_driver.sh
+./gpurc/kill_nvidia.sh
 ./gpurc/restart.sh
 ./hgrc/hdi.sh
 ./host_links/imac/Users/huangyingw/.bashrc
