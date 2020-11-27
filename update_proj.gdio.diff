@@ -7,3 +7,17 @@ index b816b9d8..6bf1ff3a 100755
 -. ~/loadrc/bashrc/find_up_goto.sh "files.proj"
 +~/loadrc/bashrc/find_up_goto.sh "files.proj"
  ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/cscope.sh
+diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
+index 9662ef8f..a03953d4 160000
+--- ./vimrc/.vim/bundle/indentLine
++++ ./vimrc/.vim/bundle/indentLine
+@@ -1 +1 @@
+-Subproject commit 9662ef8f0443211b11fd87919343d12179bca548
++Subproject commit a03953d4e89ebc372674f88303c5d4933709fea6
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index bb9b8394..4fa2506d 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit bb9b8394df0d23c136aee1305f6ee4bf0e20b709
++Subproject commit 4fa2506dadc2f667ba84d739151961f53678f529
