@@ -64,3 +64,6 @@
 [branch "gdi2"]
     remote = origin
     merge = refs/heads/gdi2
+[branch "gdif"]
+    remote = origin
+    merge = refs/heads/gdif
