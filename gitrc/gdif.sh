@@ -1,6 +1,7 @@
 #!/bin/zsh
 
-COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
+COMMAND=$(~/loadrc/gitrc/git_diff_command.sh)
+COMMAND="$COMMAND HEAD $1"
 
 while read ss
 do
