@@ -64,6 +64,7 @@
     ignore = files.rev
     ignore = gbil.log
     ignore = includefile.conf
+    ignore = includefile.rsync
     ignore = prunefile.conf
     ignore = prunefix.conf
     ignore = prunefix.rsync

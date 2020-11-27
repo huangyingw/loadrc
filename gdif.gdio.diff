@@ -1,81 +1,57 @@
+diff --git a/bashrc/update_proj.sh b/bashrc/update_proj.sh
+index b816b9d8..6bf1ff3a 100755
+--- ./bashrc/update_proj.sh
++++ ./bashrc/update_proj.sh
+@@ -1,3 +1,3 @@
+ #!/bin/zsh
+-. ~/loadrc/bashrc/find_up_goto.sh "files.proj"
++~/loadrc/bashrc/find_up_goto.sh "files.proj"
+ ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/cscope.sh
+diff --git a/gitrc/gdi.sh b/gitrc/gdi.sh
+index 4799a9c8..b720ac69 100755
+--- ./gitrc/gdi.sh
++++ ./gitrc/gdi.sh
+@@ -1,5 +1,6 @@
+ #!/bin/zsh
+-COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines"
++
++COMMAND=$(~/loadrc/gitrc/git_diff_command.sh)
+ 
+ if [ -z "$1" ]
+ then
 diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
-index 5fc6e49e..7a7fcf5e 100755
+index 0865ae41..62a3d1c6 100755
 --- ./gitrc/gdif.sh
 +++ ./gitrc/gdif.sh
-@@ -1,27 +1,13 @@
+@@ -1,6 +1,7 @@
  #!/bin/zsh
--~/loadrc/gitrc/include_gitconfig.sh
  
--if [ -n "$1" ]
--then
--    COMMAND="git diff --name-status $1"
-+COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
+-COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
++COMMAND=$(~/loadrc/gitrc/git_diff_command.sh)
++COMMAND="$COMMAND HEAD $1"
  
--    for ss in $(git config --get-all gdif.ignore)
-+while read ss
+ while read ss
  do
--        COMMAND="$COMMAND  ':(exclude)$ss'"
--    done
--
--    eval "$COMMAND" | tee gdif.findresult
--else
--    if [ -z "$(git status --porcelain)" ]
-+    if [ -f "$ss" ]
-     then
--        git diff --name-status `git log --oneline|awk 'NR==2{print $1}'` | tee gdif.findresult
--    else
--        git diff --name-status HEAD | tee gdif.findresult
--    fi
-+        COMMAND="$COMMAND  '$ss'"
-     fi
-+done < "$2"
- 
--branch=$(echo $1 | sed  -e "s/\//\\\\\//g")
--sed -i.bak "s/\b[DMT]\b/git checkout $branch -- /g" gdif.findresult
--sed -i.bak "s/\bA\b/git rm/g" gdif.findresult
--sed -i.bak "s/^R[0-9]*/git mv/g" gdif.findresult
--sort -u gdif.findresult -o gdif.findresult
-+eval "$COMMAND"
+diff --git a/gitrc/git_diff_command.sh b/gitrc/git_diff_command.sh
+new file mode 100755
+index 00000000..601480d6
+--- /dev/null
++++ ./gitrc/git_diff_command.sh
+@@ -0,0 +1,3 @@
++#!/bin/zsh
++
++echo "git diff --ignore-space-at-eol -b -w --ignore-blank-lines"
+diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
+index 9662ef8f..a03953d4 160000
+--- ./vimrc/.vim/bundle/indentLine
++++ ./vimrc/.vim/bundle/indentLine
+@@ -1 +1 @@
+-Subproject commit 9662ef8f0443211b11fd87919343d12179bca548
++Subproject commit a03953d4e89ebc372674f88303c5d4933709fea6
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 243b3741..bd5ad249 160000
+index bb9b8394..4fa2506d 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
--Subproject commit 243b3741a56e6b5138749b5af98a796c7aabfeaf
-+Subproject commit bd5ad249713b80f2d6e817f316c738f99487392c
-diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index 2c71126b..0417f4a9 100644
---- ./vimrc/.vim/plugin/fugitive.vim
-+++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -30,6 +30,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcp :e
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdev :execute s:Gdev()
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi :execute s:Gdi(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi2 :execute s:Gdi2(<f-args>)
-+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdif :execute s:Gdif(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdio :execute s:Gdio(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdit :execute s:Gdit()
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gfix :execute s:Gfix()
-@@ -461,19 +462,13 @@ function! s:Gbrd(...) abort
-     exec '!~/loadrc/gitrc/gbrd.sh ' . '"' .  arg1 . '"'
- endfunction
- 
--function! s:Gdifo(...) abort
--    let worktree = Cd2Worktree()
--    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
--    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
--    silent exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  remote . '/' . branch . '"'
--    call OpenOrSwitch('gdif.findresult', 'vs')
--endfunction
--
- function! s:Gdif(...) abort
-     let worktree = Cd2Worktree()
-     let arg1 = (a:0 >= 1) ? a:1 : ''
--    silent exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '"'
--    call OpenOrSwitch('gdif.findresult', 'vs')
-+    let output = arg1 . '.diff'
-+    exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '" "' .  expand("%:p") . '"' . ' 2>&1 | tee ' . output
-+    call OpenOrSwitch(output, 'vs')
-+    call s:DiffClean()
- endfunction
- 
- function! s:Gco(...) abort
+-Subproject commit bb9b8394df0d23c136aee1305f6ee4bf0e20b709
++Subproject commit 4fa2506dadc2f667ba84d739151961f53678f529

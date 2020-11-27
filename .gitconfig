@@ -11,10 +11,6 @@
     remote = origin
     remote = gitlab
     remote = github
-[merge]
-    allow = true
-[commit]
-    message = n
 [branch "cscope/cscope_dynamic"]
     remote = origin
     merge = refs/heads/cscope/cscope_dynamic
@@ -45,12 +41,12 @@
 [branch "async"]
     remote = origin
     merge = refs/heads/async
-[vrun]
-    silent = false
-    async = false
 [deploy]
     host = localhost
     path = ~/loadrc
+[branch "findresult"]
+    remote = origin
+    merge = refs/heads/findresult
 [gsync]
     remote = origin
     branch = dev
@@ -67,3 +63,5 @@
 [branch "gdif"]
     remote = origin
     merge = refs/heads/gdif
+[pull]
+    from = origin/dev

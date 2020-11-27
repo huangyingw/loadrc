@@ -149,6 +149,9 @@ function! VRun()
     else
         call OpenOrSwitch('gbil.log', 'vs')
     endif
+
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
 endfunction
 
 function! SearchAgain()
@@ -417,7 +420,7 @@ vnoremap <tab> %
 nnoremap M zM
 nnoremap R zR
 nmap <f2> :set number! number?<cr>
-nmap <leader>w :windo set wrap!<cr>
+nmap <leader>w :call WinDo('set wrap!') <cr>
 " Convert slashes to backslashes for Windows.
 if has('win32')
     nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>

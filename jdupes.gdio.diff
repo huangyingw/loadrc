@@ -1,0 +1,32 @@
+diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
+index e9a931b2..38417d83 100755
+--- ./bashrc/jdupes.sh
++++ ./bashrc/jdupes.sh
+@@ -14,7 +14,7 @@ if [ -f ${MIRRORCHECK} ] ; \
+ then \
+     ~/loadrc/bashrc/move67.sh ; \
+     fi && \
+-jdupes -1dNr "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
++    jdupes -1dNr -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
+     if [ -f ${MIRRORCHECK} ] ; \
+     then \
+         ~/loadrc/bashrc/sleep.sh ; \
+diff --git a/bashrc/mosh.sh b/bashrc/mosh.sh
+index 983cf396..2727f361 100755
+--- ./bashrc/mosh.sh
++++ ./bashrc/mosh.sh
+@@ -6,7 +6,6 @@ if ( ssh "$target" "uname" | grep -q Darwin )
+ then
+     MOSHSERVER="/usr/local/bin/mosh-server"
+     tmuxAction='/usr/local/bin/tmux new-session -A -s mosh'
+-    ssh "$target" "~/loadrc/macosrc/configure_mosh.sh"
+ else
+     MOSHSERVER="/usr/bin/mosh-server"
+     tmuxAction='/usr/bin/tmux new-session -A -s mosh'
+@@ -14,5 +13,6 @@ fi
+ 
+ while true
+ do
++    ssh "$target" "~/loadrc/macosrc/configure_mosh.sh" &
+     mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
+ done

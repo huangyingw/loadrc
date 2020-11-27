@@ -14,3 +14,4 @@ then
     echo dangerous
     echo dangerous
 fi
+# watch cat /proc/mdstat

@@ -338,6 +338,7 @@
 ./bashrc/wol.sh
 ./bashrc/zsh.test.sh
 ./chrome_install.sh
+./config/iTerm/com.googlecode.iterm2.plist
 ./crontabrc/.mbp.cron
 ./crontabrc/.mini.cron
 ./crontabrc/.mldonkey.cron
@@ -398,6 +399,7 @@
 ./gitrc/fsync.sh
 ./gitrc/g.sh
 ./gitrc/ga.sh
+./gitrc/gbak.sh
 ./gitrc/gbib.sh
 ./gitrc/gbidebug.sh
 ./gitrc/gbig.sh
@@ -446,6 +448,7 @@
 ./gitrc/gme2.sh
 ./gitrc/gpl.sh
 ./gitrc/gps.sh
+./gitrc/gres.sh
 ./gitrc/grm.sh
 ./gitrc/grsh.sh
 ./gitrc/gs.sh
@@ -480,6 +483,8 @@
 ./gpurc/etc/pm/sleep.d/nvidia-reload
 ./gpurc/install.sh
 ./gpurc/install_driver.sh
+./gpurc/kill_nvidia.sh
+./gpurc/restart.sh
 ./hgrc/hdi.sh
 ./host_links/imac/Users/huangyingw/.bashrc
 ./host_links/imacpro/Users/huangyingw/.bashrc
@@ -490,6 +495,7 @@
 ./host_links/mini/etc/default/isc-dhcp-server
 ./host_links/mini/etc/dhcp/dhcpd.conf
 ./host_links/mini/etc/hosts
+./host_links/mini/root/.fastai/config.yml
 ./host_links/movie/etc/network/interfaces
 ./host_links/server/etc/NetworkManager/system-connections/Millennium Flats
 ./host_links/server/etc/NetworkManager/system-connections/eth0
@@ -507,6 +513,7 @@
 ./hosts/imac/Library/Application Support/ZeroTier/One/identity.secret
 ./hosts/imacpro/Library/Application Support/ZeroTier/One/identity.public
 ./hosts/imacpro/Library/Application Support/ZeroTier/One/identity.secret
+./hosts/imacpro/Users/huangyingw/.config/karabiner/karabiner.json
 ./hosts/lint-sandbox/var/lib/zerotier-one/identity.public
 ./hosts/lint-sandbox/var/lib/zerotier-one/identity.secret
 ./hosts/mbp/Library/Application Support/ZeroTier/One/identity.public
@@ -553,10 +560,12 @@
 ./install_nvim.sh
 ./install_nvim_post.sh
 ./install_nvim_pre.sh
+./install_nx.sh
 ./install_prerequisite.sh
 ./install_vagrant.sh
-./ipynbrc/convert.sh
-./ipynbrc/python.tpl
+./ipynbrc/generate_ipynb.sh
+./ipynbrc/jupytext.sh
+./ipynbrc/jupytext.test.sh
 ./iterm2rc/movescreen.py
 ./jdupes/.gitconfig
 ./jdupes/.gitignore
@@ -564,6 +573,7 @@
 ./kubernetesrc/install.sh
 ./kubernetesrc/install_gofish.sh
 ./kubernetesrc/install_helm.sh
+./kubernetesrc/install_kubectl.sh
 ./kvmrc/configure.sh
 ./kvmrc/install.sh
 ./kvmrc/usb_disk.xml
@@ -600,6 +610,7 @@
 ./leetcoderc/submit.sh
 ./linux.conf
 ./linux/etc/sudoers
+./linux/usr/lib/systemd/system/NetworkManager-wait-online.service
 ./linux_links/etc/crypttab
 ./linux_links/etc/default/grub
 ./linux_links/etc/resolvconf/resolv.conf.d/base
@@ -608,6 +619,7 @@
 ./linux_links/etc/ssh/sshd_config
 ./mac_sync.list
 ./macos.conf
+./macos/Users/huangyingw/Library/Preferences/org.videolan.vlc/vlcrc
 ./macos/etc/sudoers
 ./macosrc/configure_mosh.sh
 ./macrc/mac_sync.list
@@ -673,7 +685,6 @@
 ./timemachinerc/etc/nsswitch.conf
 ./timemachinerc/listlocalsnapshots.sh
 ./update.sh
-./var/log/syslog
 ./vimrc/.vim/autoload/SQLUtilities.vim
 ./vimrc/.vim/autoload/indexed_search.vim
 ./vimrc/.vim/autoload/pathogen.vim
@@ -944,7 +955,7 @@
 ./vimrc/.vim/bundle/neco-syntax/doc/necosyntax.txt
 ./vimrc/.vim/bundle/neco-syntax/doc/tags
 ./vimrc/.vim/bundle/neco-syntax/plugin/necosyntax.vim
-./vimrc/.vim/bundle/neco-syntax/rplugin/python3/deoplete/sources/syntax.py
+./vimrc/.vim/bundle/neco-syntax/rplugin/python3/deoplete/source/syntax.py
 ./vimrc/.vim/bundle/neco-syntax/test/necosyntax.vim
 ./vimrc/.vim/bundle/neco-vim/.gitignore
 ./vimrc/.vim/bundle/neco-vim/LICENSE
@@ -955,7 +966,7 @@
 ./vimrc/.vim/bundle/neco-vim/doc/necovim.txt
 ./vimrc/.vim/bundle/neco-vim/doc/tags
 ./vimrc/.vim/bundle/neco-vim/plugin/necovim.vim
-./vimrc/.vim/bundle/neco-vim/rplugin/python3/deoplete/sources/vim.py
+./vimrc/.vim/bundle/neco-vim/rplugin/python3/deoplete/source/vim.py
 ./vimrc/.vim/bundle/neoinclude.vim/.gitignore
 ./vimrc/.vim/bundle/neoinclude.vim/LICENSE
 ./vimrc/.vim/bundle/neoinclude.vim/autoload/cm/sources/neoinclude.vim
@@ -968,7 +979,7 @@
 ./vimrc/.vim/bundle/neoinclude.vim/doc/neoinclude.txt
 ./vimrc/.vim/bundle/neoinclude.vim/doc/tags
 ./vimrc/.vim/bundle/neoinclude.vim/plugin/neoinclude.vim
-./vimrc/.vim/bundle/neoinclude.vim/rplugin/python3/deoplete/sources/file_include.py
+./vimrc/.vim/bundle/neoinclude.vim/rplugin/python3/deoplete/source/file_include.py
 ./vimrc/.vim/bundle/nvim-yarp/.gitignore
 ./vimrc/.vim/bundle/nvim-yarp/LICENSE
 ./vimrc/.vim/bundle/nvim-yarp/README.md
@@ -2292,6 +2303,7 @@
 ./vimrc/.vim/bundle/vim-anyfold/plugin/anyfold.vim
 ./vimrc/.vim/bundle/vim-autoformat/.gitattributes
 ./vimrc/.vim/bundle/vim-autoformat/.gitconfig
+./vimrc/.vim/bundle/vim-autoformat/.github/ISSUE_TEMPLATE.md
 ./vimrc/.vim/bundle/vim-autoformat/.gitignore
 ./vimrc/.vim/bundle/vim-autoformat/LICENSE
 ./vimrc/.vim/bundle/vim-autoformat/README.md
@@ -2307,6 +2319,7 @@
 ./vimrc/.vim/bundle/vim-autoformat/samples/perl.pl
 ./vimrc/.vim/bundle/vim-autoformat/samples/python.py
 ./vimrc/.vim/bundle/vim-autoformat/samples/ruby.rb
+./vimrc/.vim/bundle/vim-autoformat/samples/sample.css
 ./vimrc/.vim/bundle/vim-autoformat/samples/test.json
 ./vimrc/.vim/bundle/vim-autoformat/samples/test.sql
 ./vimrc/.vim/bundle/vim-autoformat/samples/xhtml.xhtml
@@ -2455,10 +2468,10 @@
 ./vimrc/.vim/bundle/vimtex/LICENSE.md
 ./vimrc/.vim/bundle/vimtex/README.md
 ./vimrc/.vim/bundle/vimtex/after/ftplugin/tex.vim
-./vimrc/.vim/bundle/vimtex/after/syntax/tex.vim
 ./vimrc/.vim/bundle/vimtex/autoload/health/vimtex.vim
 ./vimrc/.vim/bundle/vimtex/autoload/unite/sources/vimtex.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/bib.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/cache.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/cmd.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler.vim
@@ -2671,6 +2684,8 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/complete/xy
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/complete/yathesis
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/complete/yfonts
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/context.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/context/cite.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/debug.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/delim.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/doc.vim
@@ -2705,6 +2720,23 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/fls.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/tex.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/beamer_frame.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/bibliography.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/include.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/include_biblatex.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/include_bibtex.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/include_graphics.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/include_vimtex.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/index.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/labels.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/parts.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/preamble.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/section.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/table_of_contents.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/titlepage.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/todo_comments.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/todo_fixme.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/toc/todo_notes.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/vimcomplete.bst
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/paths.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/pos.vim
@@ -2720,15 +2752,18 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/scratch.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/state.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax.vim
-./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/load.vim
-./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/misc.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/core.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/nested.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/amsmath.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/array.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/asymptote.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/babel.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/beamer.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/biblatex.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/booktabs.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/breqn.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/cases.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/circuitikz.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/cleveref.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/csquotes.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/dot2texi.vim
@@ -2736,6 +2771,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/glossaries_extra.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/gnuplottex.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/hyperref.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/ieeetrantools.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/listings.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/luacode.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/markdown.vim
@@ -2752,12 +2788,14 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/url.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/varioref.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/wiki.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/packages.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/test.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/text_obj.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/text_obj/cmdtargets.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/text_obj/envtargets.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/text_obj/targets.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/toc.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/ui.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/util.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/view.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/view/common.vim
@@ -2775,12 +2813,13 @@
 ./vimrc/.vim/bundle/vimtex/doc/targets-textobj-cheatsheet.md
 ./vimrc/.vim/bundle/vimtex/doc/vimtex.txt
 ./vimrc/.vim/bundle/vimtex/docker/Dockerfile
+./vimrc/.vim/bundle/vimtex/ftdetect/tex.vim
 ./vimrc/.vim/bundle/vimtex/ftplugin/bib.vim
 ./vimrc/.vim/bundle/vimtex/ftplugin/tex.vim
 ./vimrc/.vim/bundle/vimtex/indent/bib.vim
 ./vimrc/.vim/bundle/vimtex/indent/tex.vim
-./vimrc/.vim/bundle/vimtex/plugin/vimtex.vim
 ./vimrc/.vim/bundle/vimtex/rplugin/python3/denite/source/vimtex.py
+./vimrc/.vim/bundle/vimtex/syntax/tex.vim
 ./vimrc/.vim/bundle/vimtex/test/tests/test-completion-bibtex/.gitignore
 ./vimrc/.vim/bundle/vundle.vim/.gitignore
 ./vimrc/.vim/bundle/vundle.vim/CONTRIBUTING.md
@@ -2836,6 +2875,7 @@
 ./vimrc/.vim/plugin/taglist.vim
 ./vimrc/.vim/plugin/view.vim
 ./vimrc/.vim/plugin/vsearch.vim
+./vimrc/.vim/plugin/windo.vim
 ./vimrc/.vim/spell/en.utf-8.add
 ./vimrc/.vim/syntax/json.vim
 ./vimrc/.vim/syntax/python.vim
