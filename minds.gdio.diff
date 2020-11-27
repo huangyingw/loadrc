@@ -1,0 +1,22 @@
+diff --git a/.loadrc b/.loadrc
+index 17e45232..828bb777 100755
+--- ./.loadrc
++++ ./.loadrc
+@@ -14,6 +14,7 @@
+ . $HOME/loadrc/.macosrc
+ . $HOME/loadrc/.mindsrc
+ . $HOME/loadrc/.gorc
++. $HOME/loadrc/.mindsrc
+ 
+ HOSTRC=$HOME/loadrc/."`hostname`".rc
+ 
+diff --git a/.mindsrc b/.mindsrc
+index da99e119..6175f2df 100644
+--- ./.mindsrc
++++ ./.mindsrc
+@@ -1,4 +1,4 @@
+-export MINDSROOT=~/myproject/git/ossn/Minds/minds/
++export MINDSROOT=~/minds/
+ 
+ alias minds=$MINDSROOT/local/local
+ alias minds-front-build=$MINDSROOT/local/front-build
