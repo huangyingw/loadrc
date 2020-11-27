@@ -1,4 +1,4 @@
-export MINDSROOT=~/myproject/git/ossn/Minds/minds/
+export MINDSROOT=~/minds/
 
 alias minds=$MINDSROOT/local/local
 alias minds-front-build=$MINDSROOT/local/front-build
