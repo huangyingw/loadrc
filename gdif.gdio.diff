@@ -59,6 +59,28 @@ index 0865ae41..b0247ec4 100755
 +done < "$file"
  
  eval "$COMMAND"
+diff --git a/gitrc/get_worktree.sh b/gitrc/get_worktree.sh
+index b7869c54..c80bdd7f 100755
+--- ./gitrc/get_worktree.sh
++++ ./gitrc/get_worktree.sh
+@@ -4,7 +4,7 @@ cd "$DIR"
+ 
+ if [ -f config ]
+ then
+-    workTree=$(cat config | awk '/worktree/{print $3}')
++    workTree=$(cat config | awk '/worktree =/{print $3}')
+     if [ -z "$workTree" ]
+     then
+         . ~/loadrc/bashrc/find_up_goto.sh .git
+diff --git a/gitrc/get_worktree.test.sh b/gitrc/get_worktree.test.sh
+new file mode 100755
+index 00000000..309e9c7c
+--- /dev/null
++++ ./gitrc/get_worktree.test.sh
+@@ -0,0 +1,3 @@
++#!/bin/zsh
++
++~/loadrc/gitrc/get_worktree.sh ~/loadrc/.git/index
 diff --git a/gitrc/git_diff_command.sh b/gitrc/git_diff_command.sh
 new file mode 100755
 index 00000000..601480d6
@@ -68,13 +90,6 @@ index 00000000..601480d6
 +#!/bin/zsh
 +
 +echo "git diff --ignore-space-at-eol -b -w --ignore-blank-lines"
-diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
-index ffd0b1da..d64ef4d1 160000
---- ./vimrc/.vim/bundle/vim-javascript-syntax
-+++ ./vimrc/.vim/bundle/vim-javascript-syntax
-@@ -1 +1 @@
--Subproject commit ffd0b1da4fdd57c30bc7828af94252a3637ffa10
-+Subproject commit d64ef4d1f9dbb1f141feab28d58ab6ee0e4ac769
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 index 02e6d18f..0fbd14c3 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
