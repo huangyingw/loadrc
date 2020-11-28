@@ -476,6 +476,12 @@ function! s:Gdif(...) abort
     let branch = substitute(system("git config gsync.branch"), '\n', '', '')
     let branch = (a:0 >= 1) ? a:1 : remote . '/' . branch
     let reverse = (a:0 >= 2) ? a:2 : ''
+
+    if branch ==# '-r'
+        let branch = remote . '/' . substitute(system("git config gsync.branch"), '\n', '', '')
+        let reverse = '-r'
+    endif
+
     let output = GetEscapedResult(branch) . '.diff'
     exec '!~/loadrc/gitrc/gdif.sh ' . '-b "' .  branch . '" -f "' .  expand("%:p") . '" ' . reverse .  ' 2>&1 | tee ' . output
     call OpenOrSwitch(output, 'vs')
