@@ -91,10 +91,10 @@ index 00000000..601480d6
 +
 +echo "git diff --ignore-space-at-eol -b -w --ignore-blank-lines"
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index 02e6d18f..0fbd14c3 100644
+index 02e6d18f..66887e96 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -474,9 +474,10 @@ function! s:Gdif(...) abort
+@@ -474,9 +474,16 @@ function! s:Gdif(...) abort
      let worktree = Cd2Worktree()
      let remote = substitute(system("git config gsync.remote"), '\n', '', '')
      let branch = substitute(system("git config gsync.branch"), '\n', '', '')
@@ -103,6 +103,12 @@ index 02e6d18f..0fbd14c3 100644
 -    exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '" "' .  expand("%:p") . '"' . ' 2>&1 | tee ' . output
 +    let branch = (a:0 >= 1) ? a:1 : remote . '/' . branch
 +    let reverse = (a:0 >= 2) ? a:2 : ''
++
++    if branch ==# '-r'
++        let branch = remote . '/' . substitute(system("git config gsync.branch"), '\n', '', '')
++        let reverse = '-r'
++    endif
++
 +    let output = GetEscapedResult(branch) . '.diff'
 +    exec '!~/loadrc/gitrc/gdif.sh ' . '-b "' .  branch . '" -f "' .  expand("%:p") . '" ' . reverse .  ' 2>&1 | tee ' . output
      call OpenOrSwitch(output, 'vs')
