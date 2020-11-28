@@ -435,6 +435,7 @@
 "./gitrc/get_git.sh"
 "./gitrc/get_remote_branch.sh"
 "./gitrc/get_worktree.sh"
+"./gitrc/get_worktree.test.sh"
 "./gitrc/gff.sh"
 "./gitrc/gfix.sh"
 "./gitrc/gicb.sh"
