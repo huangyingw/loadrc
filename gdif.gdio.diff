@@ -20,18 +20,45 @@ index 4799a9c8..b720ac69 100755
  if [ -z "$1" ]
  then
 diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
-index 0865ae41..62a3d1c6 100755
+index 0865ae41..b0247ec4 100755
 --- ./gitrc/gdif.sh
 +++ ./gitrc/gdif.sh
-@@ -1,6 +1,7 @@
+@@ -1,10 +1,33 @@
  #!/bin/zsh
  
 -COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
++while [[ "$#" -gt 0 ]]
++do
++    case $1 in
++        -r | --reverse)
++            local reverse="true"
++            ;;
++        -b | --branch)
++            local branch="$2"
++            ;;
++        -f | --file)
++            local file="$2"
++            ;;
++    esac
++    shift
++done
++
 +COMMAND=$(~/loadrc/gitrc/git_diff_command.sh)
-+COMMAND="$COMMAND HEAD $1"
++
++if [[ "$reverse" == "true" ]]
++then
++    COMMAND="$COMMAND HEAD $branch"
++else
++    COMMAND="$COMMAND $branch"
++fi
  
  while read ss
  do
+     COMMAND="$COMMAND  -- '$ss'"
+-done < "$2"
++done < "$file"
+ 
+ eval "$COMMAND"
 diff --git a/gitrc/git_diff_command.sh b/gitrc/git_diff_command.sh
 new file mode 100755
 index 00000000..601480d6
@@ -41,17 +68,28 @@ index 00000000..601480d6
 +#!/bin/zsh
 +
 +echo "git diff --ignore-space-at-eol -b -w --ignore-blank-lines"
-diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
-index 9662ef8f..a03953d4 160000
---- ./vimrc/.vim/bundle/indentLine
-+++ ./vimrc/.vim/bundle/indentLine
+diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
+index ffd0b1da..d64ef4d1 160000
+--- ./vimrc/.vim/bundle/vim-javascript-syntax
++++ ./vimrc/.vim/bundle/vim-javascript-syntax
 @@ -1 +1 @@
--Subproject commit 9662ef8f0443211b11fd87919343d12179bca548
-+Subproject commit a03953d4e89ebc372674f88303c5d4933709fea6
-diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index bb9b8394..4fa2506d 160000
---- ./vimrc/.vim/bundle/vim-fugitive
-+++ ./vimrc/.vim/bundle/vim-fugitive
-@@ -1 +1 @@
--Subproject commit bb9b8394df0d23c136aee1305f6ee4bf0e20b709
-+Subproject commit 4fa2506dadc2f667ba84d739151961f53678f529
+-Subproject commit ffd0b1da4fdd57c30bc7828af94252a3637ffa10
++Subproject commit d64ef4d1f9dbb1f141feab28d58ab6ee0e4ac769
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index 02e6d18f..0fbd14c3 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -474,9 +474,10 @@ function! s:Gdif(...) abort
+     let worktree = Cd2Worktree()
+     let remote = substitute(system("git config gsync.remote"), '\n', '', '')
+     let branch = substitute(system("git config gsync.branch"), '\n', '', '')
+-    let arg1 = (a:0 >= 1) ? a:1 : remote . '/' . branch
+-    let output = GetEscapedResult(arg1) . '.diff'
+-    exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '" "' .  expand("%:p") . '"' . ' 2>&1 | tee ' . output
++    let branch = (a:0 >= 1) ? a:1 : remote . '/' . branch
++    let reverse = (a:0 >= 2) ? a:2 : ''
++    let output = GetEscapedResult(branch) . '.diff'
++    exec '!~/loadrc/gitrc/gdif.sh ' . '-b "' .  branch . '" -f "' .  expand("%:p") . '" ' . reverse .  ' 2>&1 | tee ' . output
+     call OpenOrSwitch(output, 'vs')
+ endfunction
+ 
