@@ -1,0 +1,22 @@
+diff --git a/gitrc/get_worktree.sh b/gitrc/get_worktree.sh
+index b7869c54..c80bdd7f 100755
+--- ./gitrc/get_worktree.sh
++++ ./gitrc/get_worktree.sh
+@@ -4,7 +4,7 @@ cd "$DIR"
+ 
+ if [ -f config ]
+ then
+-    workTree=$(cat config | awk '/worktree/{print $3}')
++    workTree=$(cat config | awk '/worktree =/{print $3}')
+     if [ -z "$workTree" ]
+     then
+         . ~/loadrc/bashrc/find_up_goto.sh .git
+diff --git a/gitrc/get_worktree.test.sh b/gitrc/get_worktree.test.sh
+new file mode 100755
+index 00000000..309e9c7c
+--- /dev/null
++++ ./gitrc/get_worktree.test.sh
+@@ -0,0 +1,3 @@
++#!/bin/zsh
++
++~/loadrc/gitrc/get_worktree.sh ~/loadrc/.git/index
