@@ -140,7 +140,12 @@ function! VRun()
         let b:to_run = b:to_run . '.sh'
     endif
 
-    let b:csdbpath = Cd2ProjectRoot("files.proj")
+    if b:file_name ==# 'gbil.log'
+        let b:csdbpath = Cd2Worktree()
+    else
+        let b:csdbpath = Cd2ProjectRoot("files.proj")
+    endif
+
     let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
 
