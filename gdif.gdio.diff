@@ -90,6 +90,13 @@ index 00000000..601480d6
 +#!/bin/zsh
 +
 +echo "git diff --ignore-space-at-eol -b -w --ignore-blank-lines"
+diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
+index a9442837..86974bce 160000
+--- ./vimrc/.vim/bundle/tig-explorer.vim
++++ ./vimrc/.vim/bundle/tig-explorer.vim
+@@ -1 +1 @@
+-Subproject commit a9442837ffed280a5d092da069ccf1ab241f7485
++Subproject commit 86974bce79945d94aa3a57ede13d71c295921973
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 index 02e6d18f..66887e96 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
