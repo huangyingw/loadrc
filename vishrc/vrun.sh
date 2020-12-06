@@ -57,7 +57,6 @@ case $extension in
         then
             ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
         else
-            . ~/loadrc/.loadrc
             "$file"
         fi
         ;;
