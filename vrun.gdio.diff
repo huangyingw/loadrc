@@ -1,43 +1,3 @@
-diff --git a/host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini b/host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini
-index e2a8f550..0fe40cc4 100644
---- ./host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini
-+++ ./host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini
-@@ -147,7 +147,7 @@ favorites_menu=
- first_steps=
- flip=
- forward1="Right, Ctrl+Shift+F"
--forward2=Up
-+forward2="H, Up"
- forward3="J, PgUp"
- frame_back_step=","
- frame_step=.
-@@ -192,7 +192,7 @@ next_chapter=@@
- next_osd=O
- next_radio=Shift+H
- next_subtitle=
--next_tv=H
-+next_tv=
- next_video=
- next_wheel_function=
- normal_speed=Backspace
-@@ -254,7 +254,7 @@ postprocessing=
- prev_bookmark=Ctrl+B
- prev_chapter=!
- previous_radio=Shift+L
--previous_tv=L
-+previous_tv=
- quick_access_menu=
- quit=N
- radio_menu=
-@@ -266,7 +266,7 @@ reset_zoom=Shift+E
- restore\hide=
- reverse_channels=
- rewind1="Left, Ctrl+Shift+B"
--rewind2=Down
-+rewind2="Down, L"
- rewind3="K, PgDown"
- right_channel=
- rotate_clockwise=
 diff --git a/macos/Users/huangyingw/Library/Preferences/org.videolan.vlc/vlcrc b/macos/Users/huangyingw/Library/Preferences/org.videolan.vlc/vlcrc
 index 342f83c4..8d5879d6 100644
 --- ./macos/Users/huangyingw/Library/Preferences/org.videolan.vlc/vlcrc
@@ -83,8 +43,21 @@ index 342f83c4..8d5879d6 100644
  
  # Subtitle delay down (string)
  #global-key-subdelay-down=
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index 7f6cbd82..93e550e6 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -140,7 +140,7 @@ function! VRun()
+         let b:to_run = b:to_run . '.sh'
+     endif
+ 
+-    let b:csdbpath = Cd2ProjectRoot("files.proj")
++    let b:csdbpath = Cd2Worktree()
+     let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
+     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
+ 
 diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
-index 40ad6d8a..a0cd0268 100755
+index 1ad765d3..f7654a88 100755
 --- ./vishrc/vrun.sh
 +++ ./vishrc/vrun.sh
 @@ -57,7 +57,6 @@ case $extension in
