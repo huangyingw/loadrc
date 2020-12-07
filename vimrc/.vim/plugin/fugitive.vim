@@ -33,6 +33,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi :e
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi2 :execute s:Gdi2(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdif :execute s:Gdif(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdio :execute s:Gdio(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GenerateIpynb :execute s:GenerateIpynb()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdit :execute s:Gdit()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gfix :execute s:Gfix()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gicb :execute s:Gicb()
@@ -471,9 +472,18 @@ endfunction
 
 function! s:Gdif(...) abort
     let worktree = Cd2Worktree()
-    let arg1 = (a:0 >= 1) ? a:1 : ''
-    let output = GetEscapedResult(arg1) . '.diff'
-    exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '" "' .  expand("%:p") . '"' . ' 2>&1 | tee ' . output
+    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
+    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
+    let branch = (a:0 >= 1) ? a:1 : remote . '/' . branch
+    let reverse = (a:0 >= 2) ? a:2 : ''
+
+    if branch ==# '-r'
+        let branch = remote . '/' . substitute(system("git config gsync.branch"), '\n', '', '')
+        let reverse = '-r'
+    endif
+
+    let output = GetEscapedResult(branch) . '.diff'
+    exec '!~/loadrc/gitrc/gdif.sh ' . '-b "' .  branch . '" -f "' .  expand("%:p") . '" ' . reverse .  ' 2>&1 | tee ' . output
     call OpenOrSwitch(output, 'vs')
 endfunction
 
@@ -659,4 +669,10 @@ endfunction
 function! s:SortBySize() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/vishrc/sort_entries.sh ' . '"' .  expand('%:p') . '"' . ' size'
+endfunction
+
+function! s:GenerateIpynb() abort
+    let worktree = Cd2Worktree()
+    exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
+    w
 endfunction

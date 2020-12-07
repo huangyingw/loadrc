@@ -340,6 +340,7 @@
 ./bashrc/wol.sh
 ./bashrc/zsh.test.sh
 ./chrome_install.sh
+./config/iTerm/com.googlecode.iterm2.plist
 ./crontabrc/.mbp.cron
 ./crontabrc/.mini.cron
 ./crontabrc/.mldonkey.cron
@@ -436,10 +437,12 @@
 ./gitrc/get_git.sh
 ./gitrc/get_remote_branch.sh
 ./gitrc/get_worktree.sh
+./gitrc/get_worktree.test.sh
 ./gitrc/gff.sh
 ./gitrc/gfix.sh
 ./gitrc/gicb.sh
 ./gitrc/git_bisect_run.sh
+./gitrc/git_diff_command.sh
 ./gitrc/git_ready.sh
 ./gitrc/git_ready.test.sh
 ./gitrc/git_run_shell_command_for_each_commit.sh
@@ -484,6 +487,8 @@
 ./gpurc/etc/pm/sleep.d/nvidia-reload
 ./gpurc/install.sh
 ./gpurc/install_driver.sh
+./gpurc/kill_nvidia.sh
+./gpurc/restart.sh
 ./hgrc/hdi.sh
 ./host_links/imac/Users/huangyingw/.bashrc
 ./host_links/imacpro/Users/huangyingw/.bashrc
@@ -512,6 +517,7 @@
 ./hosts/imac/Library/Application Support/ZeroTier/One/identity.secret
 ./hosts/imacpro/Library/Application Support/ZeroTier/One/identity.public
 ./hosts/imacpro/Library/Application Support/ZeroTier/One/identity.secret
+./hosts/imacpro/Users/huangyingw/.config/karabiner/karabiner.json
 ./hosts/lint-sandbox/var/lib/zerotier-one/identity.public
 ./hosts/lint-sandbox/var/lib/zerotier-one/identity.secret
 ./hosts/mbp/Library/Application Support/ZeroTier/One/identity.public
@@ -561,7 +567,9 @@
 ./install_nx.sh
 ./install_prerequisite.sh
 ./install_vagrant.sh
+./ipynbrc/generate_ipynb.sh
 ./ipynbrc/jupytext.sh
+./ipynbrc/jupytext.test.sh
 ./iterm2rc/movescreen.py
 ./jdupes/.gitconfig
 ./jdupes/.gitignore
@@ -2464,7 +2472,6 @@
 ./vimrc/.vim/bundle/vimtex/LICENSE.md
 ./vimrc/.vim/bundle/vimtex/README.md
 ./vimrc/.vim/bundle/vimtex/after/ftplugin/tex.vim
-./vimrc/.vim/bundle/vimtex/after/syntax/tex.vim
 ./vimrc/.vim/bundle/vimtex/autoload/health/vimtex.vim
 ./vimrc/.vim/bundle/vimtex/autoload/unite/sources/vimtex.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex.vim
@@ -2749,16 +2756,18 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/scratch.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/state.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax.vim
-./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/after.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/core.vim
-./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/misc.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/nested.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/amsmath.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/array.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/asymptote.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/babel.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/beamer.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/biblatex.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/booktabs.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/breqn.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/cases.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/circuitikz.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/cleveref.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/csquotes.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/dot2texi.vim
@@ -2808,11 +2817,11 @@
 ./vimrc/.vim/bundle/vimtex/doc/targets-textobj-cheatsheet.md
 ./vimrc/.vim/bundle/vimtex/doc/vimtex.txt
 ./vimrc/.vim/bundle/vimtex/docker/Dockerfile
+./vimrc/.vim/bundle/vimtex/ftdetect/tex.vim
 ./vimrc/.vim/bundle/vimtex/ftplugin/bib.vim
 ./vimrc/.vim/bundle/vimtex/ftplugin/tex.vim
 ./vimrc/.vim/bundle/vimtex/indent/bib.vim
 ./vimrc/.vim/bundle/vimtex/indent/tex.vim
-./vimrc/.vim/bundle/vimtex/plugin/vimtex.vim
 ./vimrc/.vim/bundle/vimtex/rplugin/python3/denite/source/vimtex.py
 ./vimrc/.vim/bundle/vimtex/syntax/tex.vim
 ./vimrc/.vim/bundle/vimtex/test/tests/test-completion-bibtex/.gitignore

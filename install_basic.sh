@@ -9,6 +9,7 @@ SCRIPT=$(realpath "$0") && \
 pip install \
     autoflake \
     autopep8 \
+    ipynb-py-convert \
     pdftotext
 
 pip3 install git+https://github.com/gaborvecsei/pdf-split-merge.git
