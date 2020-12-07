@@ -89,12 +89,12 @@ index 4477b6da..e250a890 100755
 +
 +rm "$rsyncFiles" "$rsyncFiles.diff" "$rsyncFiles.tmp" "$rsyncFiles.bak"
 diff --git a/bashrc/update_proj.sh b/bashrc/update_proj.sh
-index b816b9d8..7625531d 100755
+index 6bf1ff3a..e655b2f5 100755
 --- ./bashrc/update_proj.sh
 +++ ./bashrc/update_proj.sh
 @@ -1,3 +1,3 @@
  #!/bin/zsh
- . ~/loadrc/bashrc/find_up_goto.sh "files.proj"
+ ~/loadrc/bashrc/find_up_goto.sh "files.proj"
 -~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/cscope.sh
 +~/loadrc/bashrc/do_update_proj.sh
 diff --git a/gitrc/gcl.sh b/gitrc/gcl.sh
@@ -110,17 +110,3 @@ index 693a3f6c..e118a4de 100755
      git add . && \
      git add -f files.proj .gitconfig && \
      $HOME/loadrc/gitrc/g.sh && \
-diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
-index 23d11aa9..1d4a909f 160000
---- ./vimrc/.vim/bundle/bash-support.vim
-+++ ./vimrc/.vim/bundle/bash-support.vim
-@@ -1 +1 @@
--Subproject commit 23d11aa9ea25d16be8b2ffc736bf914208685096
-+Subproject commit 1d4a909f46698906b16d711aeb260663f4c4794a
-diff --git a/vimrc/.vim/bundle/vim-log-syntax b/vimrc/.vim/bundle/vim-log-syntax
-index e2dcef43..a4be2e97 160000
---- ./vimrc/.vim/bundle/vim-log-syntax
-+++ ./vimrc/.vim/bundle/vim-log-syntax
-@@ -1 +1 @@
--Subproject commit e2dcef439e50fec752177fc1aa46b57114e31698
-+Subproject commit a4be2e979887358b6d12cf29ffaeecacb24aa87b
