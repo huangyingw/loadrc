@@ -1,0 +1,13 @@
+diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
+index ae4f6881..ea2bc967 100755
+--- ./imvurc/ghypo.sh
++++ ./imvurc/ghypo.sh
+@@ -8,6 +8,8 @@ then
+ else
+     ~/loadrc/gitrc/grsh.sh
+     ~/loadrc/gitrc/gclean.sh
++    git checkout -f master
++    git branch -D "$1"
+     git remote update
+     git checkout -b "$1" origin/"$1"
+     git checkout -f "$1"
