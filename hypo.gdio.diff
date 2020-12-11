@@ -11,3 +11,10 @@ index ae4f6881..ea2bc967 100755
      git remote update
      git checkout -b "$1" origin/"$1"
      git checkout -f "$1"
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 4fa2506d..9e4b3e01 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 4fa2506dadc2f667ba84d739151961f53678f529
++Subproject commit 9e4b3e01fa522ed86698006340f67632cbe9d6c1-dirty
