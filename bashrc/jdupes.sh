@@ -22,3 +22,5 @@ then \
         ~/loadrc/bashrc/sleep.sh ; \
         fi ; \
         nvim ~/loadrc/jdupes.log
+
+echo check > /sys/block/md0/md/sync_action
