@@ -8,6 +8,8 @@ then
 else
     ~/loadrc/gitrc/grsh.sh
     ~/loadrc/gitrc/gclean.sh
+    git checkout -f master
+    git branch -D "$1"
     git remote update
     git checkout -b "$1" origin/"$1"
     git checkout -f "$1"
