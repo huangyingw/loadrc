@@ -37,6 +37,7 @@ else
     set winwidth=999999
 endif
 
+set diffopt+=iblank
 set diffopt+=iwhiteall
 set diffopt+=algorithm:patience
 set diffopt+=indent-heuristic
