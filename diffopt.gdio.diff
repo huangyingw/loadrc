@@ -1,3 +1,17 @@
+diff --git a/vimrc/.vim/bundle/delimitMate b/vimrc/.vim/bundle/delimitMate
+index 537a1da0..16687aec 160000
+--- ./vimrc/.vim/bundle/delimitMate
++++ ./vimrc/.vim/bundle/delimitMate
+@@ -1 +1 @@
+-Subproject commit 537a1da0fa5eeb88640425c37e545af933c56e1b
++Subproject commit 16687aec24d803bc76cae2d7bfe2b73b1cdda4ef
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index e59786b1..800c6288 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit e59786b1403c4e02dec4e8f0d3a8ae5110347ead
++Subproject commit 800c62880868fca64fdb707b4c893e86d1bea7e5
 diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
 index 41afb6c6..10c8eeb3 100644
 --- ./vimrc/.vim/plugin/view.vim
