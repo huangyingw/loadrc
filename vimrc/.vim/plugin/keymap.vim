@@ -370,7 +370,7 @@ nnoremap <leader>l :TlistClose<CR>:TlistToggle<cr>
 nnoremap <leader>L :TlistClose<cr>
 nnoremap hh <c-w>h
 nnoremap ll <c-w>l
-nnoremap mm :call SwitchWinSize()<cr> 
+nnoremap mn :call SwitchWinSize()<cr> 
 nnoremap ff <c-f>
 nnoremap vv <c-b>
 nnoremap <c-l> l
