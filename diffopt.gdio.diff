@@ -1,17 +1,20 @@
-diff --git a/vimrc/.vim/bundle/delimitMate b/vimrc/.vim/bundle/delimitMate
-index 537a1da0..16687aec 160000
---- ./vimrc/.vim/bundle/delimitMate
-+++ ./vimrc/.vim/bundle/delimitMate
+diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
+index ccc72429..0527d6b9 100755
+--- ./bashrc/jdupes.sh
++++ ./bashrc/jdupes.sh
+@@ -22,5 +22,3 @@ then \
+         ~/loadrc/bashrc/sleep.sh ; \
+         fi ; \
+         nvim ~/loadrc/jdupes.log
+-
+-echo check > /sys/block/md0/md/sync_action
+diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
+index 7d49f7b4..3de17695 160000
+--- ./vimrc/.vim/bundle/ncm2
++++ ./vimrc/.vim/bundle/ncm2
 @@ -1 +1 @@
--Subproject commit 537a1da0fa5eeb88640425c37e545af933c56e1b
-+Subproject commit 16687aec24d803bc76cae2d7bfe2b73b1cdda4ef
-diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index e59786b1..800c6288 160000
---- ./vimrc/.vim/bundle/vim-fugitive
-+++ ./vimrc/.vim/bundle/vim-fugitive
-@@ -1 +1 @@
--Subproject commit e59786b1403c4e02dec4e8f0d3a8ae5110347ead
-+Subproject commit 800c62880868fca64fdb707b4c893e86d1bea7e5
+-Subproject commit 7d49f7b473db732878091f2f8c68bc47b015559b
++Subproject commit 3de17695c58f309642c5148b21d47fac61937a96
 diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
 index 41afb6c6..10c8eeb3 100644
 --- ./vimrc/.vim/plugin/view.vim
