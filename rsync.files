@@ -2865,6 +2865,7 @@
 ./vimrc/.vim/plugin/WordCount.vim
 ./vimrc/.vim/plugin/auto_cscope.vim
 ./vimrc/.vim/plugin/auto_deploy.vim
+./vimrc/.vim/plugin/buffergator.vim
 ./vimrc/.vim/plugin/bundle.vim
 ./vimrc/.vim/plugin/common.vim
 ./vimrc/.vim/plugin/copypath.vim
