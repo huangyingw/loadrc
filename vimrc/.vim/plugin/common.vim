@@ -8,7 +8,6 @@ function! CHANGE_CURR_DIR()
     try
         exec "cd " . fnameescape(_dir)
     catch /.*/
-        echom 'Cought anything: ' . v:exception
     endtry
 
     unlet _dir
