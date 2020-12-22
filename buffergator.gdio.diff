@@ -25,14 +25,22 @@ index 00000000..676d1e68
 +let g:buffergator_suppress_keymaps = 1
 +nnoremap <silent> mm :BuffergatorOpen<CR>
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
-index 87bbd96d..4498083f 100644
+index 87bbd96d..e79dcd57 100644
 --- ./vimrc/.vim/plugin/common.vim
 +++ ./vimrc/.vim/plugin/common.vim
-@@ -8,7 +8,6 @@ function! CHANGE_CURR_DIR()
+@@ -1,14 +1,10 @@
+ function! CHANGE_CURR_DIR()
+-    if (&filetype ==# 'fugitiveblame')
+-        return
+-    endif
+-
+     let _dir = expand("%:p:h")
+ 
      try
          exec "cd " . fnameescape(_dir)
      catch /.*/
 -        echom 'Cought anything: ' . v:exception
++        return
      endtry
  
      unlet _dir
@@ -50,7 +58,7 @@ index 7f6cbd82..f95eb227 100644
  nnoremap vv <c-b>
  nnoremap <c-l> l
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
-index e0b2d631..df6dbac0 100644
+index e0b2d631..be66a22b 100644
 --- ./vimrc/.vimrc
 +++ ./vimrc/.vimrc
 @@ -265,7 +265,6 @@ call ncm2#override_source('otherbuf', {'priority': 6})
@@ -61,3 +69,10 @@ index e0b2d631..df6dbac0 100644
  
  " autocmd OptionSet diff call s:ToggleOnDiff()
  " 
+@@ -276,3 +275,6 @@ let g:buffergator_sort_regime = "mru"
+ " endfunction
+ 
+ let g:tex_flavor = 'latex'
++
++" add @ to cfile handle
++set isfname+=@-@
