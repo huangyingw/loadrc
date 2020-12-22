@@ -275,3 +275,6 @@ let g:indexed_search_dont_move = 1
 " endfunction
 
 let g:tex_flavor = 'latex'
+
+" add @ to cfile handle
+set isfname+=@-@
