@@ -47,25 +47,6 @@ export LC_ALL=C
 find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
     comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
     cp -fv "$TARGET.tmp" "$TARGET" && \
-<<<<<<< HEAD:bashrc/cscope.sh
-if [ ${#include_params[@]} -gt 0 ] ; \
-then \
-    find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
-    fi && \
-    sort -u "$TARGET" -o "$TARGET" && \
-    sed -i.bak 's/ /\\ /g' "$TARGET" && \
-    cp -fv "$TARGET" files.proj && \
-    echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
-    ~/loadrc/bashrc/fvideos.sh && \
-    ~/loadrc/bashrc/fdocs.sh && \
-    cscope -bq -i "$TARGET" -f cscope.out.bak && \
-    cp -fv cscope.out.bak cscope.out && \
-    cp -fv cscope.out.bak.in cscope.out.in && \
-    cp -fv cscope.out.bak.po cscope.out.po
-
-sort -u ~/all.proj -o ~/all.proj
-~/loadrc/bashrc/generate_rsync_files.sh
-=======
     if [ ${#include_params[@]} -gt 0 ] ; \
     then \
         find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
@@ -77,4 +58,3 @@ sort -u ~/all.proj -o ~/all.proj
         sort -u ~/all.proj -o ~/all.proj
 
 rm "$TARGET" "$TARGET.tmp" "$TARGET.bak"
->>>>>>> c398a36a4060f11241d44c8cb0e0840da1be6b08:bashrc/generate_files_proj.sh
