@@ -204,6 +204,7 @@
 ./bashrc/copy_ignore_existing.sh
 ./bashrc/create_folders.sh
 ./bashrc/cscope.sh
+./bashrc/cscope_old.sh
 ./bashrc/csr.sh
 ./bashrc/dcopy.sh
 ./bashrc/dd.sh
@@ -326,6 +327,7 @@
 ./bashrc/umlet.sh
 ./bashrc/umletc.sh
 ./bashrc/update_proj.sh
+./bashrc/update_proj_old.sh
 ./bashrc/ures.sh
 ./bashrc/ures_ex
 ./bashrc/usync.sh
@@ -2918,3 +2920,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
+cscope.gdio.diff
