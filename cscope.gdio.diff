@@ -96,7 +96,7 @@ index 4ca69982..ca4becd7 100755
  done
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
 new file mode 100755
-index 00000000..b39507ab
+index 00000000..5f5f2924
 --- /dev/null
 +++ ./bashrc/generate_files_proj.sh
 @@ -0,0 +1,60 @@
@@ -122,7 +122,7 @@ index 00000000..b39507ab
 +cp -nv ~/loadrc/prunefile_template.conf ./prunefile.conf
 +cp -nv ~/loadrc/includefile_template.conf ./includefile.conf
 +cp -nv ~/loadrc/setup.cfg ./setup.cfg
-+TARGET="$(~/loadrc/bashrc/random_string.sh 20).bak"
++TARGET=files.proj.bak
 +PRUNE_POSTFIX=prunefix.conf
 +PRUNE_FILE=prunefile.conf
 +INCLUDE_FILE=includefile.conf
@@ -146,6 +146,7 @@ index 00000000..b39507ab
 +done < "$INCLUDE_FILE"
 +
 +export LC_ALL=C
++
 +find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
 +    comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
 +    cp -fv "$TARGET.tmp" "$TARGET" && \
@@ -153,25 +154,16 @@ index 00000000..b39507ab
 +    then \
 +        find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
 +        fi && \
++        echo "$(git rev-parse --abbrev-ref HEAD).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
 +        sort -u "$TARGET" -o "$TARGET" && \
 +        sed -i.bak 's/ /\\ /g' "$TARGET" && \
 +        cp -fv "$TARGET" files.proj && \
 +        echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
 +        sort -u ~/all.proj -o ~/all.proj
-+
-+rm "$TARGET" "$TARGET.tmp" "$TARGET.bak"
 diff --git a/bashrc/generate_rsync_files.sh b/bashrc/generate_rsync_files.sh
-index 4477b6da..e250a890 100755
+index 4477b6da..d5360ed8 100755
 --- ./bashrc/generate_rsync_files.sh
 +++ ./bashrc/generate_rsync_files.sh
-@@ -1,5 +1,6 @@
- #!/bin/zsh
--rsyncFiles=rsync.files.bak
-+
-+rsyncFiles="$(~/loadrc/bashrc/random_string.sh 20).bak"
- cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > "$rsyncFiles"
- PRUNE_POSTFIX=prunefix.rsync
- INCLUDE_FILE=includefile.rsync
 @@ -26,9 +27,9 @@ done < "$INCLUDE_FILE"
  
  if [ ${#prune_params[@]} -gt 0 ] ; \
@@ -185,12 +177,6 @@ index 4477b6da..e250a890 100755
      fi && \
      if [ ${#include_params[@]} -gt 0 ] ; \
      then \
-@@ -36,3 +37,5 @@ then \
-         sort -u "$rsyncFiles" -o "$rsyncFiles" ; \
-         fi && \
-         cp -fv "$rsyncFiles" rsync.files
-+
-+rm "$rsyncFiles" "$rsyncFiles.diff" "$rsyncFiles.tmp" "$rsyncFiles.bak"
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
 index ccc72429..0527d6b9 100755
 --- ./bashrc/jdupes.sh
@@ -223,13 +209,6 @@ index 693a3f6c..e118a4de 100755
      git add . && \
      git add -f files.proj .gitconfig && \
      $HOME/loadrc/gitrc/g.sh && \
-diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
-index 7d49f7b4..3de17695 160000
---- ./vimrc/.vim/bundle/ncm2
-+++ ./vimrc/.vim/bundle/ncm2
-@@ -1 +1 @@
--Subproject commit 7d49f7b473db732878091f2f8c68bc47b015559b
-+Subproject commit 3de17695c58f309642c5148b21d47fac61937a96
 diff --git a/vimrc/.vim/plugin/buffergator.vim b/vimrc/.vim/plugin/buffergator.vim
 new file mode 100644
 index 00000000..676d1e68
