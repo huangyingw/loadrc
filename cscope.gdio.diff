@@ -210,6 +210,13 @@ index 693a3f6c..e118a4de 100755
      git add . && \
      git add -f files.proj .gitconfig && \
      $HOME/loadrc/gitrc/g.sh && \
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index e59786b1..294129b8 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit e59786b1403c4e02dec4e8f0d3a8ae5110347ead
++Subproject commit 294129b809f85ec56a89fe2b25c7b726fc372dcf
 diff --git a/vimrc/.vim/plugin/buffergator.vim b/vimrc/.vim/plugin/buffergator.vim
 new file mode 100644
 index 00000000..676d1e68
