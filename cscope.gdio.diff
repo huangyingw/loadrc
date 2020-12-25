@@ -1,3 +1,75 @@
+diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
+index 53723ae8..1a76de03 100755
+--- ./bashrc/cscope.sh
++++ ./bashrc/cscope.sh
+@@ -1,66 +1,6 @@
+ #!/bin/zsh
+ 
+-if [ -z "$1" ]
+-then
+-    TARGETEDIR=`realpath "$PWD"`
+-else
+-    TARGETEDIR=`realpath "$1"`
+-fi
+-
+-cd "$TARGETEDIR"
+-
+-if [ ! -f files.proj ]
+-then
+-    echo -e "${red}No files.proj file here, will not build the index ... ${NC}"
+-    exit 1
+-fi
+-
+-TARGETEDIR=`realpath "$PWD"`
+-cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
+-cp -nv ~/loadrc/prunefile_template.conf ./prunefile.conf
+-cp -nv ~/loadrc/includefile_template.conf ./includefile.conf
+-cp -nv ~/loadrc/setup.cfg ./setup.cfg
+-TARGET=files.proj.bak
+-PRUNE_POSTFIX=prunefix.conf
+-PRUNE_FILE=prunefile.conf
+-INCLUDE_FILE=includefile.conf
+-
+-or="";
+-
+-[ -f "$PRUNE_POSTFIX" ] && while read suf
+-do
+-    suf=$(echo "$suf" | sed 's/"//g')
+-    prune_params+=( $or "-wholename" "$suf" )
+-    or="-o"
+-done < "$PRUNE_POSTFIX"
+-
+-or="";
+-
+-[ -f "$INCLUDE_FILE" ] && while read suf
+-do
+-    suf=$(echo "$suf" | sed 's/"//g')
+-    include_params+=( $or "-wholename" "$suf" )
+-    or="-o"
+-done < "$INCLUDE_FILE"
+-
+-export LC_ALL=C
+-find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
+-    comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
+-    cp -fv "$TARGET.tmp" "$TARGET" && \
+-if [ ${#include_params[@]} -gt 0 ] ; \
+-then \
+-    find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
+-    fi && \
+-    sort -u "$TARGET" -o "$TARGET" && \
+-    cp -fv "$TARGET" files.proj && \
+-    sed -i.bak 's/ /\\ /g' files.proj && \
+-    ~/loadrc/bashrc/fvideos.sh && \
+-    ~/loadrc/bashrc/fdocs.sh && \
+-    echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
+-    cscope -bq -i "$TARGET" -f cscope.out.bak && \
++cscope -bq -i files.proj -f cscope.out.bak && \
+     cp -fv cscope.out.bak cscope.out && \
+     cp -fv cscope.out.bak.in cscope.out.in && \
+     cp -fv cscope.out.bak.po cscope.out.po
+-
+-sort -u ~/all.proj -o ~/all.proj
+-~/loadrc/bashrc/generate_rsync_files.sh
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
 new file mode 100755
 index 00000000..d52a0eef
@@ -22,39 +94,70 @@ index 4ca69982..ca4becd7 100755
 -  ~/loadrc/bashrc/cscope.sh $(dirname "${cscope}")
 +  ~/loadrc/bashrc/do_update_proj.sh $(dirname "${cscope}")
  done
-diff --git a/bashrc/cscope.sh b/bashrc/generate_files_proj.sh
-similarity index 61%
-rename from bashrc/cscope.sh
-rename to bashrc/generate_files_proj.sh
-index 53723ae8..b39507ab 100755
---- ./bashrc/cscope.sh
+diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
+new file mode 100755
+index 00000000..b39507ab
+--- /dev/null
 +++ ./bashrc/generate_files_proj.sh
-@@ -20,7 +20,7 @@ cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
- cp -nv ~/loadrc/prunefile_template.conf ./prunefile.conf
- cp -nv ~/loadrc/includefile_template.conf ./includefile.conf
- cp -nv ~/loadrc/setup.cfg ./setup.cfg
--TARGET=files.proj.bak
+@@ -0,0 +1,60 @@
++#!/bin/zsh
++
++if [ -z "$1" ]
++then
++    TARGETEDIR=`realpath "$PWD"`
++else
++    TARGETEDIR=`realpath "$1"`
++fi
++
++cd "$TARGETEDIR"
++
++if [ ! -f files.proj ]
++then
++    echo -e "${red}No files.proj file here, will not build the index ... ${NC}"
++    exit 1
++fi
++
++TARGETEDIR=`realpath "$PWD"`
++cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
++cp -nv ~/loadrc/prunefile_template.conf ./prunefile.conf
++cp -nv ~/loadrc/includefile_template.conf ./includefile.conf
++cp -nv ~/loadrc/setup.cfg ./setup.cfg
 +TARGET="$(~/loadrc/bashrc/random_string.sh 20).bak"
- PRUNE_POSTFIX=prunefix.conf
- PRUNE_FILE=prunefile.conf
- INCLUDE_FILE=includefile.conf
-@@ -52,15 +52,9 @@ then \
-         find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
-         fi && \
-         sort -u "$TARGET" -o "$TARGET" && \
++PRUNE_POSTFIX=prunefix.conf
++PRUNE_FILE=prunefile.conf
++INCLUDE_FILE=includefile.conf
++
++or="";
++
++[ -f "$PRUNE_POSTFIX" ] && while read suf
++do
++    suf=$(echo "$suf" | sed 's/"//g')
++    prune_params+=( $or "-wholename" "$suf" )
++    or="-o"
++done < "$PRUNE_POSTFIX"
++
++or="";
++
++[ -f "$INCLUDE_FILE" ] && while read suf
++do
++    suf=$(echo "$suf" | sed 's/"//g')
++    include_params+=( $or "-wholename" "$suf" )
++    or="-o"
++done < "$INCLUDE_FILE"
++
++export LC_ALL=C
++find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
++    comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
++    cp -fv "$TARGET.tmp" "$TARGET" && \
++    if [ ${#include_params[@]} -gt 0 ] ; \
++    then \
++        find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
++        fi && \
++        sort -u "$TARGET" -o "$TARGET" && \
 +        sed -i.bak 's/ /\\ /g' "$TARGET" && \
-         cp -fv "$TARGET" files.proj && \
--    sed -i.bak 's/ /\\ /g' files.proj && \
--    ~/loadrc/bashrc/fvideos.sh && \
--    ~/loadrc/bashrc/fdocs.sh && \
-         echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
--    cscope -bq -i "$TARGET" -f cscope.out.bak && \
--    cp -fv cscope.out.bak cscope.out && \
--    cp -fv cscope.out.bak.in cscope.out.in && \
--    cp -fv cscope.out.bak.po cscope.out.po
--
-         sort -u ~/all.proj -o ~/all.proj
--~/loadrc/bashrc/generate_rsync_files.sh
++        cp -fv "$TARGET" files.proj && \
++        echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
++        sort -u ~/all.proj -o ~/all.proj
 +
 +rm "$TARGET" "$TARGET.tmp" "$TARGET.bak"
 diff --git a/bashrc/generate_rsync_files.sh b/bashrc/generate_rsync_files.sh
@@ -88,6 +191,16 @@ index 4477b6da..e250a890 100755
          cp -fv "$rsyncFiles" rsync.files
 +
 +rm "$rsyncFiles" "$rsyncFiles.diff" "$rsyncFiles.tmp" "$rsyncFiles.bak"
+diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
+index ccc72429..0527d6b9 100755
+--- ./bashrc/jdupes.sh
++++ ./bashrc/jdupes.sh
+@@ -22,5 +22,3 @@ then \
+         ~/loadrc/bashrc/sleep.sh ; \
+         fi ; \
+         nvim ~/loadrc/jdupes.log
+-
+-echo check > /sys/block/md0/md/sync_action
 diff --git a/bashrc/update_proj.sh b/bashrc/update_proj.sh
 index 6bf1ff3a..e655b2f5 100755
 --- ./bashrc/update_proj.sh
@@ -110,3 +223,93 @@ index 693a3f6c..e118a4de 100755
      git add . && \
      git add -f files.proj .gitconfig && \
      $HOME/loadrc/gitrc/g.sh && \
+diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
+index 7d49f7b4..3de17695 160000
+--- ./vimrc/.vim/bundle/ncm2
++++ ./vimrc/.vim/bundle/ncm2
+@@ -1 +1 @@
+-Subproject commit 7d49f7b473db732878091f2f8c68bc47b015559b
++Subproject commit 3de17695c58f309642c5148b21d47fac61937a96
+diff --git a/vimrc/.vim/plugin/buffergator.vim b/vimrc/.vim/plugin/buffergator.vim
+new file mode 100644
+index 00000000..676d1e68
+--- /dev/null
++++ ./vimrc/.vim/plugin/buffergator.vim
+@@ -0,0 +1,3 @@
++let g:buffergator_sort_regime = "mru"
++let g:buffergator_suppress_keymaps = 1
++nnoremap <silent> mm :BuffergatorOpen<CR>
+diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
+index 87bbd96d..e79dcd57 100644
+--- ./vimrc/.vim/plugin/common.vim
++++ ./vimrc/.vim/plugin/common.vim
+@@ -1,14 +1,10 @@
+ function! CHANGE_CURR_DIR()
+-    if (&filetype ==# 'fugitiveblame')
+-        return
+-    endif
+-
+     let _dir = expand("%:p:h")
+ 
+     try
+         exec "cd " . fnameescape(_dir)
+     catch /.*/
+-        echom 'Cought anything: ' . v:exception
++        return
+     endtry
+ 
+     unlet _dir
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index 66887e96..99198791 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -645,7 +645,7 @@ function! s:Fr(find, replace) abort
+ endfunction
+ 
+ function! s:FindDeleted() abort
+-    call Cd2ProjectRoot("files.proj")
++    call Cd2Worktree()
+     silent exec '!~/loadrc/gitrc/find_deleted.sh 2>&1 | tee find_deleted.findresult'
+     call OpenOrSwitch('find_deleted.findresult', 'vs')
+ endfunction
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index 7f6cbd82..0671295a 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -140,7 +140,7 @@ function! VRun()
+         let b:to_run = b:to_run . '.sh'
+     endif
+ 
+-    let b:csdbpath = Cd2ProjectRoot("files.proj")
++    let b:csdbpath = Cd2Worktree()
+     let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
+     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
+ 
+@@ -370,7 +370,7 @@ nnoremap <leader>l :TlistClose<CR>:TlistToggle<cr>
+ nnoremap <leader>L :TlistClose<cr>
+ nnoremap hh <c-w>h
+ nnoremap ll <c-w>l
+-nnoremap mm :call SwitchWinSize()<cr> 
++nnoremap mn :call SwitchWinSize()<cr> 
+ nnoremap ff <c-f>
+ nnoremap vv <c-b>
+ nnoremap <c-l> l
+diff --git a/vimrc/.vimrc b/vimrc/.vimrc
+index e0b2d631..be66a22b 100644
+--- ./vimrc/.vimrc
++++ ./vimrc/.vimrc
+@@ -265,7 +265,6 @@ call ncm2#override_source('otherbuf', {'priority': 6})
+ " set autochdir
+ 
+ let g:indexed_search_dont_move = 1
+-let g:buffergator_sort_regime = "mru"
+ 
+ " autocmd OptionSet diff call s:ToggleOnDiff()
+ " 
+@@ -276,3 +275,6 @@ let g:buffergator_sort_regime = "mru"
+ " endfunction
+ 
+ let g:tex_flavor = 'latex'
++
++" add @ to cfile handle
++set isfname+=@-@
