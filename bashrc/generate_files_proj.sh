@@ -44,6 +44,7 @@ do
 done < "$INCLUDE_FILE"
 
 export LC_ALL=C
+
 find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
     comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
     cp -fv "$TARGET.tmp" "$TARGET" && \
@@ -51,6 +52,7 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
     then \
         find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
         fi && \
+        echo "$(git rev-parse --abbrev-ref HEAD).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
         sort -u "$TARGET" -o "$TARGET" && \
         sed -i.bak 's/ /\\ /g' "$TARGET" && \
         cp -fv "$TARGET" files.proj && \
