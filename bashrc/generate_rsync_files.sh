@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-rsyncFiles="$(~/loadrc/bashrc/random_string.sh 20).bak"
+rsyncFiles=rsync.files.bak
 cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > "$rsyncFiles"
 PRUNE_POSTFIX=prunefix.rsync
 INCLUDE_FILE=includefile.rsync
@@ -37,5 +37,3 @@ then \
         sort -u "$rsyncFiles" -o "$rsyncFiles" ; \
         fi && \
         cp -fv "$rsyncFiles" rsync.files
-
-rm "$rsyncFiles" "$rsyncFiles.diff" "$rsyncFiles.tmp" "$rsyncFiles.bak"
