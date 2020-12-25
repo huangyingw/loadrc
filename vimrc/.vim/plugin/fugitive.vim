@@ -645,7 +645,7 @@ function! s:Fr(find, replace) abort
 endfunction
 
 function! s:FindDeleted() abort
-    call Cd2ProjectRoot("files.proj")
+    call Cd2Worktree()
     silent exec '!~/loadrc/gitrc/find_deleted.sh 2>&1 | tee find_deleted.findresult'
     call OpenOrSwitch('find_deleted.findresult', 'vs')
 endfunction
