@@ -51,6 +51,8 @@
     remote = origin
     branch = dev
 [gdif]
+    ignore = ./bashrc/cscope_old.sh
+    ignore = ./bashrc/update_proj_old.sh
     ignore = .ssh
     ignore = jdupes
     ignore = oh-my-zsh
