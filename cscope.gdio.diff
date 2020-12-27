@@ -239,12 +239,12 @@ index 693a3f6c..e118a4de 100755
      git add -f files.proj .gitconfig && \
      $HOME/loadrc/gitrc/g.sh && \
 diff --git a/vimrc/.vim/plugin/auto_cscope.vim b/vimrc/.vim/plugin/auto_cscope.vim
-index 38806d87..2f7e4571 100644
+index 38806d87..bbe09820 100644
 --- ./vimrc/.vim/plugin/auto_cscope.vim
 +++ ./vimrc/.vim/plugin/auto_cscope.vim
 @@ -1,4 +1,8 @@
  function! s:auto_cscope()
-+    if (&buftype ==# 'terminal')  || (&filetype ==# 'gitcommit') || (&filetype ==# 'fugitive')
++    if &buftype ==# 'terminal'
 +        return
 +    endif
 +
