@@ -1,8 +1,8 @@
 diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
-index 53723ae8..1a76de03 100755
+index 53723ae8..ead60269 100755
 --- ./bashrc/cscope.sh
 +++ ./bashrc/cscope.sh
-@@ -1,66 +1,6 @@
+@@ -1,66 +1,7 @@
  #!/bin/zsh
  
 -if [ -z "$1" ]
@@ -63,13 +63,17 @@ index 53723ae8..1a76de03 100755
 -    ~/loadrc/bashrc/fdocs.sh && \
 -    echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
 -    cscope -bq -i "$TARGET" -f cscope.out.bak && \
-+cscope -bq -i files.proj -f cscope.out.bak && \
-     cp -fv cscope.out.bak cscope.out && \
-     cp -fv cscope.out.bak.in cscope.out.in && \
-     cp -fv cscope.out.bak.po cscope.out.po
+-    cp -fv cscope.out.bak cscope.out && \
+-    cp -fv cscope.out.bak.in cscope.out.in && \
+-    cp -fv cscope.out.bak.po cscope.out.po
 -
 -sort -u ~/all.proj -o ~/all.proj
 -~/loadrc/bashrc/generate_rsync_files.sh
++CSCOPEFILE="cscopefile.bak"
++cscope -bq -i files.proj -f "$CSCOPEFILE" && \
++    cp -fv "$CSCOPEFILE" cscope.out && \
++    cp -fv "$CSCOPEFILE".in cscope.out.in && \
++    cp -fv "$CSCOPEFILE".po cscope.out.po
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
 new file mode 100755
 index 00000000..527cff9c
@@ -177,16 +181,6 @@ index 4477b6da..d5360ed8 100755
      fi && \
      if [ ${#include_params[@]} -gt 0 ] ; \
      then \
-diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
-index ccc72429..0527d6b9 100755
---- ./bashrc/jdupes.sh
-+++ ./bashrc/jdupes.sh
-@@ -22,5 +22,3 @@ then \
-         ~/loadrc/bashrc/sleep.sh ; \
-         fi ; \
-         nvim ~/loadrc/jdupes.log
--
--echo check > /sys/block/md0/md/sync_action
 diff --git a/bashrc/update_proj.sh b/bashrc/update_proj.sh
 index 6bf1ff3a..6e3d549b 100755
 --- ./bashrc/update_proj.sh
@@ -197,6 +191,18 @@ index 6bf1ff3a..6e3d549b 100755
 -~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/cscope.sh
 +. ~/loadrc/bashrc/find_up_goto.sh "files.proj"
 +. ~/loadrc/bashrc/do_update_proj.sh
+diff --git a/gitrc/.globalgitignore b/gitrc/.globalgitignore
+index 199ff569..b7fbfa31 100755
+--- ./gitrc/.globalgitignore
++++ ./gitrc/.globalgitignore
+@@ -39,6 +39,7 @@
+ CVS
+ build
+ cscope.*
++cscopefile.*
+ cscope.in.out
+ cscope.out
+ cscope.out.files
 diff --git a/gitrc/gcl.sh b/gitrc/gcl.sh
 index 693a3f6c..e118a4de 100755
 --- ./gitrc/gcl.sh
@@ -210,86 +216,16 @@ index 693a3f6c..e118a4de 100755
      git add . && \
      git add -f files.proj .gitconfig && \
      $HOME/loadrc/gitrc/g.sh && \
-diff --git a/vimrc/.vim/plugin/buffergator.vim b/vimrc/.vim/plugin/buffergator.vim
-new file mode 100644
-index 00000000..676d1e68
---- /dev/null
-+++ ./vimrc/.vim/plugin/buffergator.vim
-@@ -0,0 +1,3 @@
-+let g:buffergator_sort_regime = "mru"
-+let g:buffergator_suppress_keymaps = 1
-+nnoremap <silent> mm :BuffergatorOpen<CR>
-diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
-index 87bbd96d..e79dcd57 100644
---- ./vimrc/.vim/plugin/common.vim
-+++ ./vimrc/.vim/plugin/common.vim
-@@ -1,14 +1,10 @@
- function! CHANGE_CURR_DIR()
--    if (&filetype ==# 'fugitiveblame')
--        return
--    endif
--
-     let _dir = expand("%:p:h")
- 
-     try
-         exec "cd " . fnameescape(_dir)
-     catch /.*/
--        echom 'Cought anything: ' . v:exception
+diff --git a/vimrc/.vim/plugin/auto_cscope.vim b/vimrc/.vim/plugin/auto_cscope.vim
+index 38806d87..2f7e4571 100644
+--- ./vimrc/.vim/plugin/auto_cscope.vim
++++ ./vimrc/.vim/plugin/auto_cscope.vim
+@@ -1,4 +1,8 @@
+ function! s:auto_cscope()
++    if (&buftype ==# 'terminal')  || (&filetype ==# 'gitcommit') || (&filetype ==# 'fugitive')
 +        return
-     endtry
- 
-     unlet _dir
-diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index 66887e96..99198791 100644
---- ./vimrc/.vim/plugin/fugitive.vim
-+++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -645,7 +645,7 @@ function! s:Fr(find, replace) abort
- endfunction
- 
- function! s:FindDeleted() abort
--    call Cd2ProjectRoot("files.proj")
-+    call Cd2Worktree()
-     silent exec '!~/loadrc/gitrc/find_deleted.sh 2>&1 | tee find_deleted.findresult'
-     call OpenOrSwitch('find_deleted.findresult', 'vs')
- endfunction
-diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 7f6cbd82..0671295a 100644
---- ./vimrc/.vim/plugin/keymap.vim
-+++ ./vimrc/.vim/plugin/keymap.vim
-@@ -140,7 +140,7 @@ function! VRun()
-         let b:to_run = b:to_run . '.sh'
-     endif
- 
--    let b:csdbpath = Cd2ProjectRoot("files.proj")
-+    let b:csdbpath = Cd2Worktree()
-     let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
-     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
- 
-@@ -370,7 +370,7 @@ nnoremap <leader>l :TlistClose<CR>:TlistToggle<cr>
- nnoremap <leader>L :TlistClose<cr>
- nnoremap hh <c-w>h
- nnoremap ll <c-w>l
--nnoremap mm :call SwitchWinSize()<cr> 
-+nnoremap mn :call SwitchWinSize()<cr> 
- nnoremap ff <c-f>
- nnoremap vv <c-b>
- nnoremap <c-l> l
-diff --git a/vimrc/.vimrc b/vimrc/.vimrc
-index e0b2d631..be66a22b 100644
---- ./vimrc/.vimrc
-+++ ./vimrc/.vimrc
-@@ -265,7 +265,6 @@ call ncm2#override_source('otherbuf', {'priority': 6})
- " set autochdir
- 
- let g:indexed_search_dont_move = 1
--let g:buffergator_sort_regime = "mru"
- 
- " autocmd OptionSet diff call s:ToggleOnDiff()
- " 
-@@ -276,3 +275,6 @@ let g:buffergator_sort_regime = "mru"
- " endfunction
- 
- let g:tex_flavor = 'latex'
++    endif
 +
-+" add @ to cfile handle
-+set isfname+=@-@
+     call UpdateProj()
+ endfunction
+ 
