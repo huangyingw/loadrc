@@ -98,45 +98,6 @@ index 4ca69982..ca4becd7 100755
 -  ~/loadrc/bashrc/cscope.sh $(dirname "${cscope}")
 +  ~/loadrc/bashrc/do_update_proj.sh $(dirname "${cscope}")
  done
-diff --git a/bashrc/fdocs.sh b/bashrc/fdocs.sh
-index 070ed80e..bee84cf0 100755
---- ./bashrc/fdocs.sh
-+++ ./bashrc/fdocs.sh
-@@ -2,7 +2,7 @@
- 
- FdocsInclude="fdocs.include"
- FdocsExclude="fdocs.exclude"
--TARGET="fdocs.list"
-+TARGET="fdocs.list.bak"
- 
- if [ ! -f "$FdocsInclude" ] || [ ! -f "$FdocsExclude" ]
- then
-@@ -27,5 +27,6 @@ do
-     or="-o"
- done < "$FdocsExclude"
- 
--find . "(" "${exclude_params[@]}" ")" -a -prune -o "(" "${include_params[@]}" ")" -type f -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET"
--sort -u "$TARGET" -o "$TARGET"
-+find . "(" "${exclude_params[@]}" ")" -a -prune -o "(" "${include_params[@]}" ")" -type f -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
-+    sort -u "$TARGET" -o "$TARGET" && \
-+    cp -fv "$TARGET" fdocs.list
-diff --git a/bashrc/fvideos.sh b/bashrc/fvideos.sh
-index 12e76a72..b1f8fc12 100755
---- ./bashrc/fvideos.sh
-+++ ./bashrc/fvideos.sh
-@@ -1,6 +1,8 @@
- #! /bin/zsh
- 
--find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log.bak ; \
--    cp -fv fav.log.bak fav.log && \
--    find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log.sort.bak ; \
--    cp -fv fav.log.sort.bak fav.log.sort
-+FAVLOG="fav.log.bak"
-+FAVLOGSORT="fav.log.sort.bak"
-+find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" ; \
-+    cp -fv "$FAVLOG" fav.log && \
-+    find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" ; \
-+    cp -fv "$FAVLOGSORT" fav.log.sort
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
 new file mode 100755
 index 00000000..5f5f2924
@@ -230,18 +191,6 @@ index 6bf1ff3a..6e3d549b 100755
 -~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/cscope.sh
 +. ~/loadrc/bashrc/find_up_goto.sh "files.proj"
 +. ~/loadrc/bashrc/do_update_proj.sh
-diff --git a/gitrc/.globalgitignore b/gitrc/.globalgitignore
-index 199ff569..b7fbfa31 100755
---- ./gitrc/.globalgitignore
-+++ ./gitrc/.globalgitignore
-@@ -39,6 +39,7 @@
- CVS
- build
- cscope.*
-+cscopefile.*
- cscope.in.out
- cscope.out
- cscope.out.files
 diff --git a/gitrc/gcl.sh b/gitrc/gcl.sh
 index 693a3f6c..e118a4de 100755
 --- ./gitrc/gcl.sh
@@ -255,16 +204,3 @@ index 693a3f6c..e118a4de 100755
      git add . && \
      git add -f files.proj .gitconfig && \
      $HOME/loadrc/gitrc/g.sh && \
-diff --git a/vimrc/.vim/plugin/auto_cscope.vim b/vimrc/.vim/plugin/auto_cscope.vim
-index 38806d87..bbe09820 100644
---- ./vimrc/.vim/plugin/auto_cscope.vim
-+++ ./vimrc/.vim/plugin/auto_cscope.vim
-@@ -1,4 +1,8 @@
- function! s:auto_cscope()
-+    if &buftype ==# 'terminal'
-+        return
-+    endif
-+
-     call UpdateProj()
- endfunction
- 
