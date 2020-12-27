@@ -120,6 +120,23 @@ index 070ed80e..bee84cf0 100755
 +find . "(" "${exclude_params[@]}" ")" -a -prune -o "(" "${include_params[@]}" ")" -type f -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
 +    sort -u "$TARGET" -o "$TARGET" && \
 +    cp -fv "$TARGET" fdocs.list
+diff --git a/bashrc/fvideos.sh b/bashrc/fvideos.sh
+index 12e76a72..b1f8fc12 100755
+--- ./bashrc/fvideos.sh
++++ ./bashrc/fvideos.sh
+@@ -1,6 +1,8 @@
+ #! /bin/zsh
+ 
+-find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log.bak ; \
+-    cp -fv fav.log.bak fav.log && \
+-    find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log.sort.bak ; \
+-    cp -fv fav.log.sort.bak fav.log.sort
++FAVLOG="fav.log.bak"
++FAVLOGSORT="fav.log.sort.bak"
++find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" ; \
++    cp -fv "$FAVLOG" fav.log && \
++    find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" ; \
++    cp -fv "$FAVLOGSORT" fav.log.sort
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
 new file mode 100755
 index 00000000..5f5f2924
