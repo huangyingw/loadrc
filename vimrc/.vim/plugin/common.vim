@@ -1,14 +1,10 @@
 function! CHANGE_CURR_DIR()
-    if (&filetype ==# 'fugitiveblame')
-        return
-    endif
-
     let _dir = expand("%:p:h")
 
     try
         exec "cd " . fnameescape(_dir)
     catch /.*/
-        echom 'Cought anything: ' . v:exception
+        return
     endtry
 
     unlet _dir
