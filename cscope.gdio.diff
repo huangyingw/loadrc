@@ -98,6 +98,28 @@ index 4ca69982..ca4becd7 100755
 -  ~/loadrc/bashrc/cscope.sh $(dirname "${cscope}")
 +  ~/loadrc/bashrc/do_update_proj.sh $(dirname "${cscope}")
  done
+diff --git a/bashrc/fdocs.sh b/bashrc/fdocs.sh
+index 070ed80e..bee84cf0 100755
+--- ./bashrc/fdocs.sh
++++ ./bashrc/fdocs.sh
+@@ -2,7 +2,7 @@
+ 
+ FdocsInclude="fdocs.include"
+ FdocsExclude="fdocs.exclude"
+-TARGET="fdocs.list"
++TARGET="fdocs.list.bak"
+ 
+ if [ ! -f "$FdocsInclude" ] || [ ! -f "$FdocsExclude" ]
+ then
+@@ -27,5 +27,6 @@ do
+     or="-o"
+ done < "$FdocsExclude"
+ 
+-find . "(" "${exclude_params[@]}" ")" -a -prune -o "(" "${include_params[@]}" ")" -type f -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET"
+-sort -u "$TARGET" -o "$TARGET"
++find . "(" "${exclude_params[@]}" ")" -a -prune -o "(" "${include_params[@]}" ")" -type f -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
++    sort -u "$TARGET" -o "$TARGET" && \
++    cp -fv "$TARGET" fdocs.list
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
 new file mode 100755
 index 00000000..5f5f2924
