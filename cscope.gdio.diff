@@ -191,6 +191,15 @@ index 6bf1ff3a..6e3d549b 100755
 -~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/cscope.sh
 +. ~/loadrc/bashrc/find_up_goto.sh "files.proj"
 +. ~/loadrc/bashrc/do_update_proj.sh
+diff --git a/gitrc/.globalgitignore b/gitrc/.globalgitignore
+index b7fbfa31..124d3757 100755
+--- ./gitrc/.globalgitignore
++++ ./gitrc/.globalgitignore
+@@ -68,3 +68,4 @@ setup.cfg
+ ~$*
+ prunefix.rsync
+ rsync.files
++ncscopefile.*
 diff --git a/gitrc/gcl.sh b/gitrc/gcl.sh
 index 693a3f6c..e118a4de 100755
 --- ./gitrc/gcl.sh
