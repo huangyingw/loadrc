@@ -4497,7 +4497,7 @@ key-audiodelay-down=
 #medium-jump-size=60
 
 # Long jump length (integer)
-#long-jump-size=300
+long-jump-size=600
 
 # Set playlist bookmark 1 (string)
 #global-key-set-bookmark1=
