@@ -625,7 +625,6 @@
 ./linux_links/etc/ssh/sshd_config
 ./mac_sync.list
 ./macos.conf
-./macos/Users/huangyingw/Library/Preferences/org.videolan.vlc/vlcrc
 ./macos/etc/sudoers
 ./macosrc/configure_mosh.sh
 ./macrc/mac_sync.list
