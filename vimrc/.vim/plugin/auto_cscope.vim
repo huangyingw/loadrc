@@ -1,8 +1,4 @@
 function! s:auto_cscope()
-    if &buftype ==# 'terminal'
-        return
-    endif
-
     call UpdateProj()
 endfunction
 

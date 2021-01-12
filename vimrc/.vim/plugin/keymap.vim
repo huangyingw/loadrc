@@ -189,6 +189,7 @@ function! CSCSearch(num)
     let b:result = GetEscapedResult(keyword)
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "' .  a:num . '" ' . '"' . b:result . '"'
     call OpenOrSwitch(b:result . '.findresult', 'vs')
+    set winwidth=999999
     call HighlightKeyword(keyword)
 endfunction
 
