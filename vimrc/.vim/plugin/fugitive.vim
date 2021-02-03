@@ -664,7 +664,7 @@ endfunction
 
 function! s:Split() abort
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/bashrc/split.sh ' . '"' .  expand('%:p') . '"'
+    exec '!~/loadrc/bashrc/split.sh ' . '"' .  expand('%:t') . '"'
 endfunction
 
 function! s:SortByTime() abort
