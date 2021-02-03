@@ -1,0 +1,35 @@
+diff --git a/bashrc/split.sh b/bashrc/split.sh
+index f16a3c75..36cf626d 100755
+--- ./bashrc/split.sh
++++ ./bashrc/split.sh
+@@ -1,2 +1,4 @@
+ #!/bin/zsh
+ gsplit -l 1 --numeric-suffixes --additional-suffix=.json "$1" "$1"
++export LC_ALL=C
++find . -type f -name "$1*.json" -exec js-beautify -r {} \; 
+diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
+index 0e0e4250..c8e4b6d0 100644
+--- ./vimrc/.vim/plugin/common.vim
++++ ./vimrc/.vim/plugin/common.vim
+@@ -206,6 +206,8 @@ function! GetEscapedResult(keywordStr)
+     let result = substitute(result, "*", "", "g")
+     let result = substitute(result, "%", "", "g")
+     let result = substitute(result, ":", "", "g")
++    let result = substitute(result, "[", "_", "g")
++    let result = substitute(result, "]", "_", "g")
+     return result
+ endfunc
+ 
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index 4f84ec90..557ecb77 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -664,7 +664,7 @@ endfunction
+ 
+ function! s:Split() abort
+     let worktree = Cd2Worktree()
+-    exec '!~/loadrc/bashrc/split.sh ' . '"' .  expand('%:p') . '"'
++    exec '!~/loadrc/bashrc/split.sh ' . '"' .  expand('%:t') . '"'
+ endfunction
+ 
+ function! s:SortByTime() abort
