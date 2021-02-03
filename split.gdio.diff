@@ -6,6 +6,19 @@ index f16a3c75..fad1758a 100755
  #!/bin/zsh
  gsplit -l 1 --numeric-suffixes --additional-suffix=.json "$1" "$1"
 +find . -type f -name "$1*.json" -exec js-beautify -r {} \; 
+diff --git a/gitrc/discard_unnecessaries.sh b/gitrc/discard_unnecessaries.sh
+index 7e8bfedd..dbf809a0 100755
+--- ./gitrc/discard_unnecessaries.sh
++++ ./gitrc/discard_unnecessaries.sh
+@@ -1,5 +1,4 @@
+ #!/bin/zsh
+-git checkout \
+-    *.gdio.diff \
+-    files.proj \
+-    rsync.files
++git checkout *.gdio.diff
++git checkout files.proj
++git checkout rsync.files
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
 index 0e0e4250..c8e4b6d0 100644
 --- ./vimrc/.vim/plugin/common.vim
