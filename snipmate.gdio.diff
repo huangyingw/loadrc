@@ -1,0 +1,57 @@
+diff --git a/.gitmodules b/.gitmodules
+index a84e299a..054b6589 100644
+--- ./.gitmodules
++++ ./.gitmodules
+@@ -189,10 +189,6 @@
+     path = vimrc/.vim/bundle/vim-addon-mw-utils
+     url = git@github.com:marcweber/vim-addon-mw-utils.git
+     branch = master
+-[submodule "vimrc/.vim/bundle/vim-snipmate"]
+-    path = vimrc/.vim/bundle/vim-snipmate
+-    url = git@github.com:garbas/vim-snipmate.git
+-    branch = master
+ [submodule "vimrc/.vim/bundle/neco-syntax"]
+     path = vimrc/.vim/bundle/neco-syntax
+     url = git@github.com:Shougo/neco-syntax.git
+diff --git a/bashrc/fvideos.sh b/bashrc/fvideos.sh
+index 03d4d427..38fb060b 100755
+--- ./bashrc/fvideos.sh
++++ ./bashrc/fvideos.sh
+@@ -2,6 +2,7 @@
+ 
+ FAVLOG="fav.log.bak"
+ FAVLOGSORT="fav.log.sort.bak"
++export LC_ALL=C
+ find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
+     cp -fv "$FAVLOG" fav.log && \
+     find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
+diff --git a/error b/error
+index 2c5a88c9..c0e586ef 100644
+--- ./error
++++ ./error
+@@ -62,3 +62,5 @@ Cought anything: Vim(cd):E472: Command failed
+ 
+ [ncm2_go@yarp] TypeError: expected str, bytes or os.PathLike object, not NoneType
+ [ncm2_pyclang_proc@yarp] try_notify cache_add failed, job is dead
++
++The legacy SnipMate parser is deprecated. Please see :h SnipMate-deprecate.
+diff --git a/gitrc/discard_unnecessaries.sh b/gitrc/discard_unnecessaries.sh
+index 7e8bfedd..dbf809a0 100755
+--- ./gitrc/discard_unnecessaries.sh
++++ ./gitrc/discard_unnecessaries.sh
+@@ -1,5 +1,4 @@
+ #!/bin/zsh
+-git checkout \
+-    *.gdio.diff \
+-    files.proj \
+-    rsync.files
++git checkout *.gdio.diff
++git checkout files.proj
++git checkout rsync.files
+diff --git a/vimrc/.vim/bundle/vim-snipmate b/vimrc/.vim/bundle/vim-snipmate
+deleted file mode 160000
+index cbec960a..00000000
+--- ./vimrc/.vim/bundle/vim-snipmate
++++ /dev/null
+@@ -1 +0,0 @@
+-Subproject commit cbec960ab558b20281c0634b9b1a45fb16aaf638
