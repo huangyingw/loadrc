@@ -35,19 +35,6 @@ index 2c5a88c9..c0e586ef 100644
  [ncm2_pyclang_proc@yarp] try_notify cache_add failed, job is dead
 +
 +The legacy SnipMate parser is deprecated. Please see :h SnipMate-deprecate.
-diff --git a/gitrc/discard_unnecessaries.sh b/gitrc/discard_unnecessaries.sh
-index 7e8bfedd..dbf809a0 100755
---- ./gitrc/discard_unnecessaries.sh
-+++ ./gitrc/discard_unnecessaries.sh
-@@ -1,5 +1,4 @@
- #!/bin/zsh
--git checkout \
--    *.gdio.diff \
--    files.proj \
--    rsync.files
-+git checkout *.gdio.diff
-+git checkout files.proj
-+git checkout rsync.files
 diff --git a/vimrc/.vim/bundle/vim-snipmate b/vimrc/.vim/bundle/vim-snipmate
 deleted file mode 160000
 index cbec960a..00000000
