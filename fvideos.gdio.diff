@@ -10,3 +10,26 @@ index 03d4d427..38fb060b 100755
  find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
      cp -fv "$FAVLOG" fav.log && \
      find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
+diff --git a/error b/error
+index 2c5a88c9..c0e586ef 100644
+--- ./error
++++ ./error
+@@ -62,3 +62,5 @@ Cought anything: Vim(cd):E472: Command failed
+ 
+ [ncm2_go@yarp] TypeError: expected str, bytes or os.PathLike object, not NoneType
+ [ncm2_pyclang_proc@yarp] try_notify cache_add failed, job is dead
++
++The legacy SnipMate parser is deprecated. Please see :h SnipMate-deprecate.
+diff --git a/gitrc/discard_unnecessaries.sh b/gitrc/discard_unnecessaries.sh
+index 7e8bfedd..dbf809a0 100755
+--- ./gitrc/discard_unnecessaries.sh
++++ ./gitrc/discard_unnecessaries.sh
+@@ -1,5 +1,4 @@
+ #!/bin/zsh
+-git checkout \
+-    *.gdio.diff \
+-    files.proj \
+-    rsync.files
++git checkout *.gdio.diff
++git checkout files.proj
++git checkout rsync.files
