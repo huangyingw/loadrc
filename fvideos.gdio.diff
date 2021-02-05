@@ -33,6 +33,19 @@ index 2c5a88c9..c0e586ef 100644
  [ncm2_pyclang_proc@yarp] try_notify cache_add failed, job is dead
 +
 +The legacy SnipMate parser is deprecated. Please see :h SnipMate-deprecate.
+diff --git a/install_basic_macos.sh b/install_basic_macos.sh
+index 260d1c88..ba79a071 100755
+--- ./install_basic_macos.sh
++++ ./install_basic_macos.sh
+@@ -22,6 +22,8 @@ brew install \
+     hg \
+     htop \
+     hub \
++    iperf \
++    iperf3 \
+     jupyterlab \
+     kubectl \
+     kubernetes-cli \
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
 index 20e3534e..298b6bc4 100755
 --- ./install_prerequisite.sh
