@@ -11,7 +11,7 @@ index 03d4d427..38fb060b 100755
      cp -fv "$FAVLOG" fav.log && \
      find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
-index 0527d6b9..b348c7ed 100755
+index 0527d6b9..3590d937 100755
 --- ./bashrc/jdupes.sh
 +++ ./bashrc/jdupes.sh
 @@ -16,7 +16,7 @@ if [ -f ${MIRRORCHECK} ] ; \
@@ -19,7 +19,7 @@ index 0527d6b9..b348c7ed 100755
      ~/loadrc/bashrc/move67.sh ; \
      fi && \
 -    jdupes -1dNr -X size-:100k -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
-+    jdupes -1dNr -X size-:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
++    jdupes -1dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
      if [ -f ${MIRRORCHECK} ] ; \
      then \
          ~/loadrc/bashrc/sleep.sh ; \
