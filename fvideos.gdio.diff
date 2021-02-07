@@ -20,3 +20,42 @@ index 2c5a88c9..c0e586ef 100644
  [ncm2_pyclang_proc@yarp] try_notify cache_add failed, job is dead
 +
 +The legacy SnipMate parser is deprecated. Please see :h SnipMate-deprecate.
+diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
+index aa7dd6d1..dc81ef04 100644
+--- ./host_links/mini/etc/hosts
++++ ./host_links/mini/etc/hosts
+@@ -11,7 +11,7 @@
+ 192.168.122.244 zsh
+ 192.168.31.118 work
+ 172.27.217.162 localhost.imvu.com
+-192.168.31.31 server
++192.168.31.30 server
+ 192.168.31.147 imacpro
+ 172.27.68.119 imac
+ 172.27.118.58 vagrant
+diff --git a/install_basic_macos.sh b/install_basic_macos.sh
+index 260d1c88..ba79a071 100755
+--- ./install_basic_macos.sh
++++ ./install_basic_macos.sh
+@@ -22,6 +22,8 @@ brew install \
+     hg \
+     htop \
+     hub \
++    iperf \
++    iperf3 \
+     jupyterlab \
+     kubectl \
+     kubernetes-cli \
+diff --git a/install_prerequisite.sh b/install_prerequisite.sh
+index 20e3534e..298b6bc4 100755
+--- ./install_prerequisite.sh
++++ ./install_prerequisite.sh
+@@ -27,6 +27,8 @@ apt-get install -y \
+     hfsprogs \
+     htop \
+     inetutils-traceroute \
++    iperf \
++    iperf3 \
+     iputils-ping \
+     kdiff3 \
+     libsecret-1-dev \
