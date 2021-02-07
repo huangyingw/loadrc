@@ -10,6 +10,19 @@ index 03d4d427..38fb060b 100755
  find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
      cp -fv "$FAVLOG" fav.log && \
      find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
+diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
+index 0527d6b9..3590d937 100755
+--- ./bashrc/jdupes.sh
++++ ./bashrc/jdupes.sh
+@@ -16,7 +16,7 @@ if [ -f ${MIRRORCHECK} ] ; \
+ then \
+     ~/loadrc/bashrc/move67.sh ; \
+     fi && \
+-    jdupes -1dNr -X size-:100k -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
++    jdupes -1dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
+     if [ -f ${MIRRORCHECK} ] ; \
+     then \
+         ~/loadrc/bashrc/sleep.sh ; \
 diff --git a/error b/error
 index 2c5a88c9..c0e586ef 100644
 --- ./error
@@ -46,3 +59,10 @@ index 20e3534e..298b6bc4 100755
      iputils-ping \
      kdiff3 \
      libsecret-1-dev \
+diff --git a/vimrc/.vim/bundle/Dockerfile.vim b/vimrc/.vim/bundle/Dockerfile.vim
+index 03848056..2386923a 160000
+--- ./vimrc/.vim/bundle/Dockerfile.vim
++++ ./vimrc/.vim/bundle/Dockerfile.vim
+@@ -1 +1 @@
+-Subproject commit 038480563ce04c5b5e233c5ff6044db2a0760625
++Subproject commit 2386923a8c30d0c4f06f27eef2a025752423ea86
