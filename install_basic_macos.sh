@@ -22,6 +22,8 @@ brew install \
     hg \
     htop \
     hub \
+    iperf \
+    iperf3 \
     jupyterlab \
     kubectl \
     kubernetes-cli \

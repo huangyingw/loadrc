@@ -1,101 +1,68 @@
-diff --git a/bashrc/fav.sh b/bashrc/fav.sh
-index ef45e9be..87df8df9 100755
---- ./bashrc/fav.sh
-+++ ./bashrc/fav.sh
-@@ -6,7 +6,7 @@ if [ -d "$FAV" ]
- then
-     cd "$FAV"
- 
--    find . -type f -size +10M -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > fav.log 
--    find . -type f -size +10M -exec ls -t {} \+ | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > fav.log.sort
-+    find . -type f -size +10M -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log 
-+    find . -type f -size +10M -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log.sort
-     touch files.proj
- fi
 diff --git a/bashrc/fvideos.sh b/bashrc/fvideos.sh
-index 7e762af8..12e76a72 100755
+index 03d4d427..38fb060b 100755
 --- ./bashrc/fvideos.sh
 +++ ./bashrc/fvideos.sh
-@@ -1,6 +1,6 @@
- #! /bin/zsh
+@@ -2,6 +2,7 @@
  
--find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > fav.log.bak ; \
-+find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log.bak ; \
-     cp -fv fav.log.bak fav.log && \
--    find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > fav.log.sort.bak ; \
-+    find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log.sort.bak ; \
-     cp -fv fav.log.sort.bak fav.log.sort
-diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
-index 4221f506..c65de94c 100644
---- ./host_links/server/etc/hosts
-+++ ./host_links/server/etc/hosts
-@@ -6,6 +6,7 @@
- 192.168.31.140 mini
- 192.168.31.149 minds
- 192.168.31.99 mldonkey
-+192.168.31.147 imacpro
+ FAVLOG="fav.log.bak"
+ FAVLOGSORT="fav.log.sort.bak"
++export LC_ALL=C
+ find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
+     cp -fv "$FAVLOG" fav.log && \
+     find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
+diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
+index 0527d6b9..3590d937 100755
+--- ./bashrc/jdupes.sh
++++ ./bashrc/jdupes.sh
+@@ -16,7 +16,7 @@ if [ -f ${MIRRORCHECK} ] ; \
+ then \
+     ~/loadrc/bashrc/move67.sh ; \
+     fi && \
+-    jdupes -1dNr -X size-:100k -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
++    jdupes -1dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
+     if [ -f ${MIRRORCHECK} ] ; \
+     then \
+         ~/loadrc/bashrc/sleep.sh ; \
+diff --git a/error b/error
+index 2c5a88c9..c0e586ef 100644
+--- ./error
++++ ./error
+@@ -62,3 +62,5 @@ Cought anything: Vim(cd):E472: Command failed
  
- # The following lines are desirable for IPv6 capable hosts
- ::1     ip6-localhost ip6-loopback
-diff --git a/host_links/server/root/.fastai/config.yml b/host_links/server/root/.fastai/config.yml
-index 59ca9969..94546083 100644
---- ./host_links/server/root/.fastai/config.yml
-+++ ./host_links/server/root/.fastai/config.yml
-@@ -1,3 +1,5 @@
--data_archive_path: /media/nvme/fastai/data/
-+archive_path: /media/nvme/fastai/archive
- data_path: /media/nvme/fastai/data/
- model_path: /media/nvme/fastai/models/
-+storage_path: /tmp
-+version: 2
-diff --git a/ipynbrc/convert.sh b/ipynbrc/convert.sh
-deleted file mode 100755
-index f407ee3a..00000000
---- ./ipynbrc/convert.sh
-+++ /dev/null
-@@ -1,11 +0,0 @@
--#!/bin/zsh
--
--find . -type f -name \*.ipynb | while read ss
--do
--    jupyter nbconvert --to=python --template=~/loadrc/ipynbrc/python.tpl "$ss" --output "$(basename $ss).py"
--    jupyter nbconvert --to=html "$ss"
--    sed -i"" '/^$/d' "$ss.py"
--    sed -i"" '/^#$/d' "$ss.py"
--    autopep8 --in-place "$ss.py"
--    cp -nv "$ss.py" "$(echo $ss.py | sed 's/\.ipynb//g')"
--done
-diff --git a/ipynbrc/jupytext.sh b/ipynbrc/jupytext.sh
-new file mode 100755
-index 00000000..13c588ff
---- /dev/null
-+++ ./ipynbrc/jupytext.sh
-@@ -0,0 +1,2 @@
-+#!/bin/zsh
-+find . -type f -name \*.ipynb -exec jupytext --set-formats ipynb,py {} \;
-diff --git a/ipynbrc/python.tpl b/ipynbrc/python.tpl
-deleted file mode 100644
-index 354ec2d4..00000000
---- ./ipynbrc/python.tpl
-+++ /dev/null
-@@ -1,13 +0,0 @@
--{%- extends 'null.tpl' -%}
--
--{% block header %}
--# coding: utf-8
--{% endblock header %}
--
--{% block input %}
--{{ cell.source | ipython2python }}
--{% endblock input %}
--
--{% block markdowncell scoped %}
--{{ cell.source | comment_lines }}
--{% endblock markdowncell %}
-diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 187742a3..858a379b 160000
---- ./vimrc/.vim/bundle/vim-rails
-+++ ./vimrc/.vim/bundle/vim-rails
+ [ncm2_go@yarp] TypeError: expected str, bytes or os.PathLike object, not NoneType
+ [ncm2_pyclang_proc@yarp] try_notify cache_add failed, job is dead
++
++The legacy SnipMate parser is deprecated. Please see :h SnipMate-deprecate.
+diff --git a/install_basic_macos.sh b/install_basic_macos.sh
+index 260d1c88..ba79a071 100755
+--- ./install_basic_macos.sh
++++ ./install_basic_macos.sh
+@@ -22,6 +22,8 @@ brew install \
+     hg \
+     htop \
+     hub \
++    iperf \
++    iperf3 \
+     jupyterlab \
+     kubectl \
+     kubernetes-cli \
+diff --git a/install_prerequisite.sh b/install_prerequisite.sh
+index 20e3534e..298b6bc4 100755
+--- ./install_prerequisite.sh
++++ ./install_prerequisite.sh
+@@ -27,6 +27,8 @@ apt-get install -y \
+     hfsprogs \
+     htop \
+     inetutils-traceroute \
++    iperf \
++    iperf3 \
+     iputils-ping \
+     kdiff3 \
+     libsecret-1-dev \
+diff --git a/vimrc/.vim/bundle/Dockerfile.vim b/vimrc/.vim/bundle/Dockerfile.vim
+index 03848056..2386923a 160000
+--- ./vimrc/.vim/bundle/Dockerfile.vim
++++ ./vimrc/.vim/bundle/Dockerfile.vim
 @@ -1 +1 @@
--Subproject commit 187742a3c18d93e6968f024d7db0f4fc5548408e
-+Subproject commit 858a379bcb389d67abdb7e0eb1b0a1fa78d8ba39
+-Subproject commit 038480563ce04c5b5e233c5ff6044db2a0760625
++Subproject commit 2386923a8c30d0c4f06f27eef2a025752423ea86

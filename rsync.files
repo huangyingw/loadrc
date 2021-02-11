@@ -2482,6 +2482,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/cmd.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler/arara.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler/generic.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler/latexmk.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler/latexrun.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler/tectonic.vim
