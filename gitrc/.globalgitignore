@@ -39,6 +39,7 @@
 CVS
 build
 cscope.*
+cscopefile.*
 cscope.in.out
 cscope.out
 cscope.out.files
@@ -67,3 +68,4 @@ setup.cfg
 ~$*
 prunefix.rsync
 rsync.files
+ncscopefile.*

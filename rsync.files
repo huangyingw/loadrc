@@ -204,6 +204,7 @@
 ./bashrc/copy_ignore_existing.sh
 ./bashrc/create_folders.sh
 ./bashrc/cscope.sh
+./bashrc/cscope_old.sh
 ./bashrc/csr.sh
 ./bashrc/dcopy.sh
 ./bashrc/dd.sh
@@ -212,6 +213,7 @@
 ./bashrc/delete_files_with_string.sh
 ./bashrc/deploy.sh
 ./bashrc/deployLoadrc.sh
+./bashrc/do_update_proj.sh
 ./bashrc/echo.sh
 ./bashrc/encrypt.sh
 ./bashrc/envSync.sh
@@ -242,6 +244,7 @@
 ./bashrc/fpath.sh
 ./bashrc/fr.sh
 ./bashrc/fvideos.sh
+./bashrc/generate_files_proj.sh
 ./bashrc/generate_rsync_files.sh
 ./bashrc/get_first_column_of_file.sh
 ./bashrc/get_first_column_of_file_test.sh
@@ -324,6 +327,7 @@
 ./bashrc/umlet.sh
 ./bashrc/umletc.sh
 ./bashrc/update_proj.sh
+./bashrc/update_proj_old.sh
 ./bashrc/ures.sh
 ./bashrc/ures_ex
 ./bashrc/usync.sh
@@ -621,7 +625,6 @@
 ./linux_links/etc/ssh/sshd_config
 ./mac_sync.list
 ./macos.conf
-./macos/Users/huangyingw/Library/Preferences/org.videolan.vlc/vlcrc
 ./macos/etc/sudoers
 ./macosrc/configure_mosh.sh
 ./macrc/mac_sync.list
@@ -798,6 +801,7 @@
 ./vimrc/.vim/bundle/delimitMate/test/expand_space.vim
 ./vimrc/.vim/bundle/delimitMate/test/first_buffer_no_ft.vim
 ./vimrc/.vim/bundle/indentLine/.gitattributes
+./vimrc/.vim/bundle/indentLine/.github/FUNDING.yml
 ./vimrc/.vim/bundle/indentLine/.gitignore
 ./vimrc/.vim/bundle/indentLine/LICENSE
 ./vimrc/.vim/bundle/indentLine/README.md
@@ -2478,6 +2482,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/cmd.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler/arara.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler/generic.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler/latexmk.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler/latexrun.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler/tectonic.vim
@@ -2769,6 +2774,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/cleveref.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/csquotes.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/dot2texi.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/geometry.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/glossaries.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/glossaries_extra.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/gnuplottex.vim
@@ -2784,8 +2790,10 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/pdfpages.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/pgfplots.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/pythontex.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/siunitx.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/subfile.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/tabularx.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/tcolorbox.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/tikz.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/url.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/varioref.vim
@@ -2822,7 +2830,7 @@
 ./vimrc/.vim/bundle/vimtex/indent/tex.vim
 ./vimrc/.vim/bundle/vimtex/rplugin/python3/denite/source/vimtex.py
 ./vimrc/.vim/bundle/vimtex/syntax/tex.vim
-./vimrc/.vim/bundle/vimtex/test/tests/test-completion-bibtex/.gitignore
+./vimrc/.vim/bundle/vimtex/test/test-completion-bibtex/.gitignore
 ./vimrc/.vim/bundle/vundle.vim/.gitignore
 ./vimrc/.vim/bundle/vundle.vim/CONTRIBUTING.md
 ./vimrc/.vim/bundle/vundle.vim/LICENSE-MIT.txt
@@ -2862,6 +2870,7 @@
 ./vimrc/.vim/plugin/WordCount.vim
 ./vimrc/.vim/plugin/auto_cscope.vim
 ./vimrc/.vim/plugin/auto_deploy.vim
+./vimrc/.vim/plugin/buffergator.vim
 ./vimrc/.vim/plugin/bundle.vim
 ./vimrc/.vim/plugin/common.vim
 ./vimrc/.vim/plugin/copypath.vim
@@ -2912,3 +2921,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
+do_update_proj.gdio.diff

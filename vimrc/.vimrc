@@ -265,7 +265,6 @@ call ncm2#override_source('otherbuf', {'priority': 6})
 " set autochdir
 
 let g:indexed_search_dont_move = 1
-let g:buffergator_sort_regime = "mru"
 
 " autocmd OptionSet diff call s:ToggleOnDiff()
 " 
@@ -276,3 +275,6 @@ let g:buffergator_sort_regime = "mru"
 " endfunction
 
 let g:tex_flavor = 'latex'
+
+" add @ to cfile handle
+set isfname+=@-@

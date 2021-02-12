@@ -1,0 +1,13 @@
+diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
+index cbbd6cc8..9a6e19c8 100755
+--- ./bashrc/do_update_proj.sh
++++ ./bashrc/do_update_proj.sh
+@@ -1,7 +1,7 @@
+ #!/bin/zsh
+ 
+ ~/loadrc/bashrc/generate_files_proj.sh
++~/loadrc/bashrc/generate_rsync_files.sh
+ ~/loadrc/bashrc/fvideos.sh
+ ~/loadrc/bashrc/fdocs.sh
+ ~/loadrc/bashrc/cscope.sh
+-~/loadrc/bashrc/generate_rsync_files.sh

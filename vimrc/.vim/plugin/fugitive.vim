@@ -70,6 +70,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFil
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Split :execute s:Split()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SvnApply :execute s:SvnApply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SvnDiff :execute s:SvnDiff()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SvnReset :execute s:SvnReset()
@@ -645,7 +646,7 @@ function! s:Fr(find, replace) abort
 endfunction
 
 function! s:FindDeleted() abort
-    call Cd2ProjectRoot("files.proj")
+    call Cd2Worktree()
     silent exec '!~/loadrc/gitrc/find_deleted.sh 2>&1 | tee find_deleted.findresult'
     call OpenOrSwitch('find_deleted.findresult', 'vs')
 endfunction
@@ -659,6 +660,11 @@ endfunction
 function! s:Gfix() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/gfix.sh'
+endfunction
+
+function! s:Split() abort
+    let worktree = Cd2Worktree()
+    exec '!~/loadrc/bashrc/split.sh ' . '"' .  expand('%:t') . '"'
 endfunction
 
 function! s:SortByTime() abort

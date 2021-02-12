@@ -27,6 +27,8 @@ apt-get install -y \
     hfsprogs \
     htop \
     inetutils-traceroute \
+    iperf \
+    iperf3 \
     iputils-ping \
     kdiff3 \
     libsecret-1-dev \
