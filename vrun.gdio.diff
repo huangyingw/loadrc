@@ -32,10 +32,20 @@ index 90e8d986..e8cff84f 160000
 -Subproject commit 90e8d986e5341db18361a7dee3e621c93d633080
 +Subproject commit e8cff84f1bd2fa551a229289042357c700661c4d
 diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
-index 1ad765d3..f7654a88 100755
+index 1ad765d3..c56304f2 100755
 --- ./vishrc/vrun.sh
 +++ ./vishrc/vrun.sh
-@@ -57,7 +57,6 @@ case $extension in
+@@ -46,6 +46,9 @@ case $extension in
+             ~/loadrc/sqlrc/xsql.sh "$file" "$2"
+         fi
+         ;;
++    bak)
++       zsh "$file"
++        ;;
+     findresult)
+        zsh "$file"
+         ;;
+@@ -57,7 +60,6 @@ case $extension in
          then
              ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
          else
