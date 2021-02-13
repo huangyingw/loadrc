@@ -267,6 +267,14 @@ index d5360ed8..9adaee95 100755
 -        fi && \
 -        cp -fv "$rsyncFiles" rsync.files
 +~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_generate_rsync_files.sh
+diff --git a/bashrc/update_proj.sh b/bashrc/update_proj.sh
+index 1c2673c0..3904b208 100755
+--- ./bashrc/update_proj.sh
++++ ./bashrc/update_proj.sh
+@@ -1,2 +1,2 @@
+ #!/bin/zsh
+-~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_update_proj.sh
++~/loadrc/bashrc/do_update_proj.sh
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
 index e8cff84f..921a29f0 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
