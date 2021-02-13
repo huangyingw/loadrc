@@ -4089,13 +4089,13 @@ key-jump+medium=Up
 #global-key-jump-long=
 
 # Long backwards jump (string)
-#key-jump-long=Command+Shift+Alt+Left
+key-jump-long=K
 
 # Long forward jump (string)
 #global-key-jump+long=
 
 # Long forward jump (string)
-#key-jump+long=Command+Shift+Alt+Right
+key-jump+long=J
 
 # Next frame (string)
 #global-key-frame-next=
@@ -4497,7 +4497,7 @@ key-audiodelay-down=
 #medium-jump-size=60
 
 # Long jump length (integer)
-#long-jump-size=300
+long-jump-size=600
 
 # Set playlist bookmark 1 (string)
 #global-key-set-bookmark1=

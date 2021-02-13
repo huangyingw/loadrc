@@ -162,7 +162,13 @@ function! Windowdir()
         let unislash = getcwd()
     else
         let unislash = fnamemodify(bufname(winbufnr(0)), ':p:h')
+
+        if unislash =~ '^fugitive:/'
+            let unislash = substitute(unislash, '^fugitive:\/\/', '', 'g')
+            let unislash = substitute(unislash, '.git.*', '', 'g') 
+        endif
     endif
+
     return tr(unislash, '\', '/')
 endfunc
 
@@ -200,6 +206,8 @@ function! GetEscapedResult(keywordStr)
     let result = substitute(result, "*", "", "g")
     let result = substitute(result, "%", "", "g")
     let result = substitute(result, ":", "", "g")
+    let result = substitute(result, "[", "_", "g")
+    let result = substitute(result, "]", "_", "g")
     return result
 endfunc
 
