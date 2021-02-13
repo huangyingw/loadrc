@@ -1,2 +1,2 @@
 #!/bin/zsh
-~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_update_proj.sh
+~/loadrc/bashrc/do_update_proj.sh
