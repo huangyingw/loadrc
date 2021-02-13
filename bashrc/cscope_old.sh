@@ -55,7 +55,6 @@ then \
     sort -u "$TARGET" -o "$TARGET" && \
     sed -i.bak 's/ /\\ /g' "$TARGET" && \
     cp -fv "$TARGET" files.proj && \
-    sed -i.bak 's/ /\\ /g' files.proj && \
     ~/loadrc/bashrc/fvideos.sh && \
     ~/loadrc/bashrc/fdocs.sh && \
     echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
