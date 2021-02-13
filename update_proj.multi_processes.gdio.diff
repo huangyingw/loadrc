@@ -1,3 +1,67 @@
+diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
+index ead60269..a1a89c27 100755
+--- ./bashrc/cscope.sh
++++ ./bashrc/cscope.sh
+@@ -1,7 +1,3 @@
+ #!/bin/zsh
+ 
+-CSCOPEFILE="cscopefile.bak"
+-cscope -bq -i files.proj -f "$CSCOPEFILE" && \
+-    cp -fv "$CSCOPEFILE" cscope.out && \
+-    cp -fv "$CSCOPEFILE".in cscope.out.in && \
+-    cp -fv "$CSCOPEFILE".po cscope.out.po
++~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_cscope.sh
+diff --git a/bashrc/do_cscope.sh b/bashrc/do_cscope.sh
+new file mode 100755
+index 00000000..ead60269
+--- /dev/null
++++ ./bashrc/do_cscope.sh
+@@ -0,0 +1,7 @@
++#!/bin/zsh
++
++CSCOPEFILE="cscopefile.bak"
++cscope -bq -i files.proj -f "$CSCOPEFILE" && \
++    cp -fv "$CSCOPEFILE" cscope.out && \
++    cp -fv "$CSCOPEFILE".in cscope.out.in && \
++    cp -fv "$CSCOPEFILE".po cscope.out.po
+diff --git a/bashrc/do_fdocs.sh b/bashrc/do_fdocs.sh
+new file mode 100755
+index 00000000..bee84cf0
+--- /dev/null
++++ ./bashrc/do_fdocs.sh
+@@ -0,0 +1,32 @@
++#! /bin/zsh
++
++FdocsInclude="fdocs.include"
++FdocsExclude="fdocs.exclude"
++TARGET="fdocs.list.bak"
++
++if [ ! -f "$FdocsInclude" ] || [ ! -f "$FdocsExclude" ]
++then
++    exit 0
++fi
++
++or="";
++
++while read suf
++do
++    suf=$(echo "$suf" | sed 's/"//g')
++    include_params+=( $or "-wholename" "$suf" )
++    or="-o"
++done < "$FdocsInclude"
++
++or="";
++
++while read suf
++do
++    suf=$(echo "$suf" | sed 's/"//g')
++    exclude_params+=( $or "-wholename" "$suf" )
++    or="-o"
++done < "$FdocsExclude"
++
++find . "(" "${exclude_params[@]}" ")" -a -prune -o "(" "${include_params[@]}" ")" -type f -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
++    sort -u "$TARGET" -o "$TARGET" && \
++    cp -fv "$TARGET" fdocs.list
 diff --git a/bashrc/do_fvideos.sh b/bashrc/do_fvideos.sh
 new file mode 100755
 index 00000000..38fb060b
@@ -148,8 +212,46 @@ index ca4becd7..b248a3d2 100755
 -  ~/loadrc/bashrc/do_update_proj.sh $(dirname "${cscope}")
 +  ~/loadrc/bashrc/update_proj.sh $(dirname "${cscope}")
  done
+diff --git a/bashrc/fdocs.sh b/bashrc/fdocs.sh
+index bee84cf0..9e655786 100755
+--- ./bashrc/fdocs.sh
++++ ./bashrc/fdocs.sh
+@@ -1,32 +1,3 @@
+ #! /bin/zsh
+ 
+-FdocsInclude="fdocs.include"
+-FdocsExclude="fdocs.exclude"
+-TARGET="fdocs.list.bak"
+-
+-if [ ! -f "$FdocsInclude" ] || [ ! -f "$FdocsExclude" ]
+-then
+-    exit 0
+-fi
+-
+-or="";
+-
+-while read suf
+-do
+-    suf=$(echo "$suf" | sed 's/"//g')
+-    include_params+=( $or "-wholename" "$suf" )
+-    or="-o"
+-done < "$FdocsInclude"
+-
+-or="";
+-
+-while read suf
+-do
+-    suf=$(echo "$suf" | sed 's/"//g')
+-    exclude_params+=( $or "-wholename" "$suf" )
+-    or="-o"
+-done < "$FdocsExclude"
+-
+-find . "(" "${exclude_params[@]}" ")" -a -prune -o "(" "${include_params[@]}" ")" -type f -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
+-    sort -u "$TARGET" -o "$TARGET" && \
+-    cp -fv "$TARGET" fdocs.list
++~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_fdocs.sh
 diff --git a/bashrc/fvideos.sh b/bashrc/fvideos.sh
-index 38fb060b..4f493b52 100755
+index 38fb060b..136824ee 100755
 --- ./bashrc/fvideos.sh
 +++ ./bashrc/fvideos.sh
 @@ -1,9 +1,3 @@
@@ -162,7 +264,7 @@ index 38fb060b..4f493b52 100755
 -    cp -fv "$FAVLOG" fav.log && \
 -    find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
 -    cp -fv "$FAVLOGSORT" fav.log.sort
-+~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_fvideos.sh &
++~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_fvideos.sh
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
 index 5f5f2924..03ba14ed 100755
 --- ./bashrc/generate_files_proj.sh
