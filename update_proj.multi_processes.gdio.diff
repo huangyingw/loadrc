@@ -402,10 +402,3 @@ index e118a4de..31f3ecba 100755
      git add . && \
      git add -f files.proj .gitconfig && \
      $HOME/loadrc/gitrc/g.sh && \
-diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index e8cff84f..921a29f0 160000
---- ./vimrc/.vim/bundle/vim-fugitive
-+++ ./vimrc/.vim/bundle/vim-fugitive
-@@ -1 +1 @@
--Subproject commit e8cff84f1bd2fa551a229289042357c700661c4d
-+Subproject commit 921a29f0857afcff0c42262df4d640d0629d8a64
