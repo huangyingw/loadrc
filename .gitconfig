@@ -65,6 +65,9 @@
 [branch "fvideos"]
     remote = origin
     merge = refs/heads/fvideos
+[branch "update_proj.multi_processes"]
+    remote = origin
+    merge = refs/heads/update_proj.multi_processes
 [branch "gdif"]
     remote = origin
     merge = refs/heads/gdif
