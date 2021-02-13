@@ -51,9 +51,10 @@ if [ ${#include_params[@]} -gt 0 ] ; \
 then \
     find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
     fi && \
+    echo "$(git rev-parse --abbrev-ref HEAD).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
     sort -u "$TARGET" -o "$TARGET" && \
+    sed -i.bak 's/ /\\ /g' "$TARGET" && \
     cp -fv "$TARGET" files.proj && \
-    sed -i.bak 's/ /\\ /g' files.proj && \
     ~/loadrc/bashrc/fvideos.sh && \
     ~/loadrc/bashrc/fdocs.sh && \
     echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
@@ -63,4 +64,4 @@ then \
     cp -fv cscope.out.bak.po cscope.out.po
 
 sort -u ~/all.proj -o ~/all.proj
-~/loadrc/bashrc/generate_rsync_files.sh
+~/loadrc/bashrc/do_generate_rsync_files.sh

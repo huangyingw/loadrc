@@ -1,26 +1,34 @@
 diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
-index ead60269..a1a89c27 100755
+index 9c24d246..170d19f8 100755
 --- ./bashrc/cscope.sh
 +++ ./bashrc/cscope.sh
-@@ -1,7 +1,3 @@
+@@ -1,11 +1,3 @@
  #!/bin/zsh
  
+-SOURCEFILE="cscopesourcefile.bak"
 -CSCOPEFILE="cscopefile.bak"
--cscope -bq -i files.proj -f "$CSCOPEFILE" && \
+-
+-cp -fv files.proj "$SOURCEFILE" && \
+-    sed -i.bak 's/\\ / /g' "$SOURCEFILE" && \
+-    cscope -bq -i "$SOURCEFILE" -f "$CSCOPEFILE" && \
 -    cp -fv "$CSCOPEFILE" cscope.out && \
 -    cp -fv "$CSCOPEFILE".in cscope.out.in && \
 -    cp -fv "$CSCOPEFILE".po cscope.out.po
-+~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_cscope.sh
++. ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_cscope.sh
 diff --git a/bashrc/do_cscope.sh b/bashrc/do_cscope.sh
 new file mode 100755
-index 00000000..ead60269
+index 00000000..9c24d246
 --- /dev/null
 +++ ./bashrc/do_cscope.sh
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,11 @@
 +#!/bin/zsh
 +
++SOURCEFILE="cscopesourcefile.bak"
 +CSCOPEFILE="cscopefile.bak"
-+cscope -bq -i files.proj -f "$CSCOPEFILE" && \
++
++cp -fv files.proj "$SOURCEFILE" && \
++    sed -i.bak 's/\\ / /g' "$SOURCEFILE" && \
++    cscope -bq -i "$SOURCEFILE" -f "$CSCOPEFILE" && \
 +    cp -fv "$CSCOPEFILE" cscope.out && \
 +    cp -fv "$CSCOPEFILE".in cscope.out.in && \
 +    cp -fv "$CSCOPEFILE".po cscope.out.po
@@ -190,17 +198,17 @@ index 00000000..d5360ed8
 +        cp -fv "$rsyncFiles" rsync.files
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
 deleted file mode 100755
-index cbbd6cc8..00000000
+index 9a6e19c8..00000000
 --- ./bashrc/do_update_proj.sh
 +++ /dev/null
 @@ -1,7 +0,0 @@
 -#!/bin/zsh
 -
 -~/loadrc/bashrc/generate_files_proj.sh
+-~/loadrc/bashrc/generate_rsync_files.sh
 -~/loadrc/bashrc/fvideos.sh
 -~/loadrc/bashrc/fdocs.sh
 -~/loadrc/bashrc/cscope.sh
--~/loadrc/bashrc/generate_rsync_files.sh
 diff --git a/bashrc/fcscope.sh b/bashrc/fcscope.sh
 index ca4becd7..b248a3d2 100755
 --- ./bashrc/fcscope.sh
@@ -213,7 +221,7 @@ index ca4becd7..b248a3d2 100755
 +  ~/loadrc/bashrc/update_proj.sh $(dirname "${cscope}")
  done
 diff --git a/bashrc/fdocs.sh b/bashrc/fdocs.sh
-index bee84cf0..9e655786 100755
+index bee84cf0..587de63b 100755
 --- ./bashrc/fdocs.sh
 +++ ./bashrc/fdocs.sh
 @@ -1,32 +1,3 @@
@@ -249,9 +257,9 @@ index bee84cf0..9e655786 100755
 -find . "(" "${exclude_params[@]}" ")" -a -prune -o "(" "${include_params[@]}" ")" -type f -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
 -    sort -u "$TARGET" -o "$TARGET" && \
 -    cp -fv "$TARGET" fdocs.list
-+~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_fdocs.sh
++. ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_fdocs.sh
 diff --git a/bashrc/fvideos.sh b/bashrc/fvideos.sh
-index 38fb060b..136824ee 100755
+index 38fb060b..5ca8f847 100755
 --- ./bashrc/fvideos.sh
 +++ ./bashrc/fvideos.sh
 @@ -1,9 +1,3 @@
@@ -264,9 +272,9 @@ index 38fb060b..136824ee 100755
 -    cp -fv "$FAVLOG" fav.log && \
 -    find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
 -    cp -fv "$FAVLOGSORT" fav.log.sort
-+~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_fvideos.sh
++. ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_fvideos.sh
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
-index 5f5f2924..03ba14ed 100755
+index 5f5f2924..6b9ab80d 100755
 --- ./bashrc/generate_files_proj.sh
 +++ ./bashrc/generate_files_proj.sh
 @@ -1,60 +1,3 @@
@@ -330,9 +338,9 @@ index 5f5f2924..03ba14ed 100755
 -        cp -fv "$TARGET" files.proj && \
 -        echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
 -        sort -u ~/all.proj -o ~/all.proj
-+~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_generate_files_proj.sh
++. ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_generate_files_proj.sh
 diff --git a/bashrc/generate_rsync_files.sh b/bashrc/generate_rsync_files.sh
-index d5360ed8..9adaee95 100755
+index d5360ed8..1ef12294 100755
 --- ./bashrc/generate_rsync_files.sh
 +++ ./bashrc/generate_rsync_files.sh
 @@ -1,39 +1,3 @@
@@ -375,20 +383,21 @@ index d5360ed8..9adaee95 100755
 -        sort -u "$rsyncFiles" -o "$rsyncFiles" ; \
 -        fi && \
 -        cp -fv "$rsyncFiles" rsync.files
-+~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_generate_rsync_files.sh
++. ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_generate_rsync_files.sh
 diff --git a/bashrc/update_proj.sh b/bashrc/update_proj.sh
-index 1c2673c0..7616cc61 100755
+index 1c2673c0..b1801d03 100755
 --- ./bashrc/update_proj.sh
 +++ ./bashrc/update_proj.sh
-@@ -1,2 +1,7 @@
+@@ -1,2 +1,8 @@
  #!/bin/zsh
 -~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_update_proj.sh
 +
-+~/loadrc/bashrc/generate_files_proj.sh &
-+~/loadrc/bashrc/generate_rsync_files.sh &
-+~/loadrc/bashrc/fvideos.sh &
-+~/loadrc/bashrc/fdocs.sh &
-+~/loadrc/bashrc/cscope.sh &
++. ~/loadrc/bashrc/find_up_goto.sh "files.proj"
++. ~/loadrc/bashrc/generate_files_proj.sh &
++. ~/loadrc/bashrc/generate_rsync_files.sh &
++. ~/loadrc/bashrc/fvideos.sh &
++. ~/loadrc/bashrc/fdocs.sh &
++. ~/loadrc/bashrc/cscope.sh &
 diff --git a/gitrc/gcl.sh b/gitrc/gcl.sh
 index e118a4de..31f3ecba 100755
 --- ./gitrc/gcl.sh
@@ -402,10 +411,3 @@ index e118a4de..31f3ecba 100755
      git add . && \
      git add -f files.proj .gitconfig && \
      $HOME/loadrc/gitrc/g.sh && \
-diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index e8cff84f..921a29f0 160000
---- ./vimrc/.vim/bundle/vim-fugitive
-+++ ./vimrc/.vim/bundle/vim-fugitive
-@@ -1 +1 @@
--Subproject commit e8cff84f1bd2fa551a229289042357c700661c4d
-+Subproject commit 921a29f0857afcff0c42262df4d640d0629d8a64
