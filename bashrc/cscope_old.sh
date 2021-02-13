@@ -51,6 +51,7 @@ if [ ${#include_params[@]} -gt 0 ] ; \
 then \
     find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
     fi && \
+    echo "$(git rev-parse --abbrev-ref HEAD).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
     sort -u "$TARGET" -o "$TARGET" && \
     cp -fv "$TARGET" files.proj && \
     sed -i.bak 's/ /\\ /g' files.proj && \
