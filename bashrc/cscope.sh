@@ -1,7 +1,3 @@
 #!/bin/zsh
 
-CSCOPEFILE="cscopefile.bak"
-cscope -bq -i files.proj -f "$CSCOPEFILE" && \
-    cp -fv "$CSCOPEFILE" cscope.out && \
-    cp -fv "$CSCOPEFILE".in cscope.out.in && \
-    cp -fv "$CSCOPEFILE".po cscope.out.po
+~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_cscope.sh
