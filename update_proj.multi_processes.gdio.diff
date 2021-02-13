@@ -1,0 +1,156 @@
+diff --git a/bashrc/do_generate_files_proj.sh b/bashrc/do_generate_files_proj.sh
+new file mode 100755
+index 00000000..5f5f2924
+--- /dev/null
++++ ./bashrc/do_generate_files_proj.sh
+@@ -0,0 +1,60 @@
++#!/bin/zsh
++
++if [ -z "$1" ]
++then
++    TARGETEDIR=`realpath "$PWD"`
++else
++    TARGETEDIR=`realpath "$1"`
++fi
++
++cd "$TARGETEDIR"
++
++if [ ! -f files.proj ]
++then
++    echo -e "${red}No files.proj file here, will not build the index ... ${NC}"
++    exit 1
++fi
++
++TARGETEDIR=`realpath "$PWD"`
++cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
++cp -nv ~/loadrc/prunefile_template.conf ./prunefile.conf
++cp -nv ~/loadrc/includefile_template.conf ./includefile.conf
++cp -nv ~/loadrc/setup.cfg ./setup.cfg
++TARGET=files.proj.bak
++PRUNE_POSTFIX=prunefix.conf
++PRUNE_FILE=prunefile.conf
++INCLUDE_FILE=includefile.conf
++
++or="";
++
++[ -f "$PRUNE_POSTFIX" ] && while read suf
++do
++    suf=$(echo "$suf" | sed 's/"//g')
++    prune_params+=( $or "-wholename" "$suf" )
++    or="-o"
++done < "$PRUNE_POSTFIX"
++
++or="";
++
++[ -f "$INCLUDE_FILE" ] && while read suf
++do
++    suf=$(echo "$suf" | sed 's/"//g')
++    include_params+=( $or "-wholename" "$suf" )
++    or="-o"
++done < "$INCLUDE_FILE"
++
++export LC_ALL=C
++
++find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
++    comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
++    cp -fv "$TARGET.tmp" "$TARGET" && \
++    if [ ${#include_params[@]} -gt 0 ] ; \
++    then \
++        find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
++        fi && \
++        echo "$(git rev-parse --abbrev-ref HEAD).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
++        sort -u "$TARGET" -o "$TARGET" && \
++        sed -i.bak 's/ /\\ /g' "$TARGET" && \
++        cp -fv "$TARGET" files.proj && \
++        echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
++        sort -u ~/all.proj -o ~/all.proj
+diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
+index cbbd6cc8..7616cc61 100755
+--- ./bashrc/do_update_proj.sh
++++ ./bashrc/do_update_proj.sh
+@@ -1,7 +1,7 @@
+ #!/bin/zsh
+ 
+-~/loadrc/bashrc/generate_files_proj.sh
+-~/loadrc/bashrc/fvideos.sh
+-~/loadrc/bashrc/fdocs.sh
+-~/loadrc/bashrc/cscope.sh
+-~/loadrc/bashrc/generate_rsync_files.sh
++~/loadrc/bashrc/generate_files_proj.sh &
++~/loadrc/bashrc/generate_rsync_files.sh &
++~/loadrc/bashrc/fvideos.sh &
++~/loadrc/bashrc/fdocs.sh &
++~/loadrc/bashrc/cscope.sh &
+diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
+index 5f5f2924..4c0cdd3e 100755
+--- ./bashrc/generate_files_proj.sh
++++ ./bashrc/generate_files_proj.sh
+@@ -1,60 +1,3 @@
+ #!/bin/zsh
+ 
+-if [ -z "$1" ]
+-then
+-    TARGETEDIR=`realpath "$PWD"`
+-else
+-    TARGETEDIR=`realpath "$1"`
+-fi
+-
+-cd "$TARGETEDIR"
+-
+-if [ ! -f files.proj ]
+-then
+-    echo -e "${red}No files.proj file here, will not build the index ... ${NC}"
+-    exit 1
+-fi
+-
+-TARGETEDIR=`realpath "$PWD"`
+-cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
+-cp -nv ~/loadrc/prunefile_template.conf ./prunefile.conf
+-cp -nv ~/loadrc/includefile_template.conf ./includefile.conf
+-cp -nv ~/loadrc/setup.cfg ./setup.cfg
+-TARGET=files.proj.bak
+-PRUNE_POSTFIX=prunefix.conf
+-PRUNE_FILE=prunefile.conf
+-INCLUDE_FILE=includefile.conf
+-
+-or="";
+-
+-[ -f "$PRUNE_POSTFIX" ] && while read suf
+-do
+-    suf=$(echo "$suf" | sed 's/"//g')
+-    prune_params+=( $or "-wholename" "$suf" )
+-    or="-o"
+-done < "$PRUNE_POSTFIX"
+-
+-or="";
+-
+-[ -f "$INCLUDE_FILE" ] && while read suf
+-do
+-    suf=$(echo "$suf" | sed 's/"//g')
+-    include_params+=( $or "-wholename" "$suf" )
+-    or="-o"
+-done < "$INCLUDE_FILE"
+-
+-export LC_ALL=C
+-
+-find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
+-    comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
+-    cp -fv "$TARGET.tmp" "$TARGET" && \
+-    if [ ${#include_params[@]} -gt 0 ] ; \
+-    then \
+-        find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
+-        fi && \
+-        echo "$(git rev-parse --abbrev-ref HEAD).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
+-        sort -u "$TARGET" -o "$TARGET" && \
+-        sed -i.bak 's/ /\\ /g' "$TARGET" && \
+-        cp -fv "$TARGET" files.proj && \
+-        echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
+-        sort -u ~/all.proj -o ~/all.proj
++~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/generate_files_proj.sh
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index e8cff84f..921a29f0 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit e8cff84f1bd2fa551a229289042357c700661c4d
++Subproject commit 921a29f0857afcff0c42262df4d640d0629d8a64
