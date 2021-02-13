@@ -216,7 +216,6 @@
 "./bashrc/do_fvideos.sh"
 "./bashrc/do_generate_files_proj.sh"
 "./bashrc/do_generate_rsync_files.sh"
-"./bashrc/do_update_proj.sh"
 "./bashrc/echo.sh"
 "./bashrc/encrypt.sh"
 "./bashrc/envSync.sh"
