@@ -1,3 +1,3 @@
 #! /bin/zsh
 
-. ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_fdocs.sh
+~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_fdocs.sh
