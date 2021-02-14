@@ -411,10 +411,32 @@ index e118a4de..31f3ecba 100755
      git add . && \
      git add -f files.proj .gitconfig && \
      $HOME/loadrc/gitrc/g.sh && \
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index 557ecb77..429ad5d0 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -548,7 +548,7 @@ function! s:CatMove(...) abort
+         exec '!~/loadrc/vishrc/cat_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
+     endif
+ 
+-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
++    all UpdateProj() 
+ endfunction
+ 
+ function! s:CatDu(...) abort
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 6e912403..d8e9838d 100644
+index 6e912403..eeb709e9 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
+@@ -150,7 +150,7 @@ function! VRun()
+         call OpenOrSwitch('gbil.log', 'vs')
+     endif
+ 
+-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
++    all UpdateProj() 
+     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
+ endfunction
+ 
 @@ -268,7 +268,11 @@ endfunction
  
  function! UpdateProj()
