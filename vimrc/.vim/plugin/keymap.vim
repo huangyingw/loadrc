@@ -150,7 +150,7 @@ function! VRun()
         call OpenOrSwitch('gbil.log', 'vs')
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+    all UpdateProj() 
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
 endfunction
 
