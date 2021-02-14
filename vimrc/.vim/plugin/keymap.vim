@@ -268,7 +268,11 @@ endfunction
 
 function! UpdateProj()
     call Cd2ProjectRoot("files.proj")
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/generate_files_proj.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/generate_rsync_files.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fvideos.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fdocs.sh')
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/cscope.sh')
     call CHANGE_CURR_DIR()
 endfunction
 
