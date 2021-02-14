@@ -548,7 +548,7 @@ function! s:CatMove(...) abort
         exec '!~/loadrc/vishrc/cat_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
     endif
 
-    all UpdateProj() 
+    call UpdateProj() 
 endfunction
 
 function! s:CatDu(...) abort
