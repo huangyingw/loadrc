@@ -9,7 +9,7 @@ fi
 SOURCE=$1
 TARGET=$2
 
-ready_file="${TARGET}"/"tmirror.ready"
+ready_file="$SOURCE"/"tmirror.ready"
 MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
 
 if [ -f ${MIRRORCHECK} ] && [ ! -f ${ready_file} ]
