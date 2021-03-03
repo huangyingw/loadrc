@@ -130,6 +130,8 @@
 ./.git/modules/vimrc/.vim/bundle/vim-scala/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-snipmate/config
 ./.git/modules/vimrc/.vim/bundle/vim-snipmate/info/exclude
+./.git/modules/vimrc/.vim/bundle/vim-swift/config
+./.git/modules/vimrc/.vim/bundle/vim-swift/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vimtex/config
 ./.git/modules/vimrc/.vim/bundle/vimtex/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vundle.vim/config
@@ -2151,21 +2153,6 @@
 ./vimrc/.vim/bundle/split-term.vim/package.json
 ./vimrc/.vim/bundle/split-term.vim/plugin/split-term.vim
 ./vimrc/.vim/bundle/split-term.vim/readme.md
-./vimrc/.vim/bundle/swift.vim/LICENSE
-./vimrc/.vim/bundle/swift.vim/README.md
-./vimrc/.vim/bundle/swift.vim/ale_linters/swift/swiftpm.vim
-./vimrc/.vim/bundle/swift.vim/compiler/swift.vim
-./vimrc/.vim/bundle/swift.vim/ctags/swift.cnf
-./vimrc/.vim/bundle/swift.vim/example/MainViewController.swift
-./vimrc/.vim/bundle/swift.vim/example/URL.swift
-./vimrc/.vim/bundle/swift.vim/example/example.swift
-./vimrc/.vim/bundle/swift.vim/ftdetect/swift.vim
-./vimrc/.vim/bundle/swift.vim/ftplugin/swift.vim
-./vimrc/.vim/bundle/swift.vim/indent/swift.vim
-./vimrc/.vim/bundle/swift.vim/plugin/swift.vim
-./vimrc/.vim/bundle/swift.vim/syntax/swift.vim
-./vimrc/.vim/bundle/swift.vim/syntax_checkers/swift/swiftlint.vim
-./vimrc/.vim/bundle/swift.vim/syntax_checkers/swift/swiftpm.vim
 ./vimrc/.vim/bundle/taglist-plus/README.md
 ./vimrc/.vim/bundle/taglist-plus/doc/taglist-plus.txt
 ./vimrc/.vim/bundle/taglist-plus/doc/tags
@@ -2465,6 +2452,10 @@
 ./vimrc/.vim/bundle/vim-snipmate/t/jumping.vim
 ./vimrc/.vim/bundle/vim-snipmate/t/parser.vim
 ./vimrc/.vim/bundle/vim-snipmate/t/tests.sh
+./vimrc/.vim/bundle/vim-swift/LICENSE
+./vimrc/.vim/bundle/vim-swift/README.md
+./vimrc/.vim/bundle/vim-swift/ftdetect/swift.vim
+./vimrc/.vim/bundle/vim-swift/syntax/swift.vim
 ./vimrc/.vim/bundle/vimtex/.github/ISSUE_TEMPLATE/feature_request.md
 ./vimrc/.vim/bundle/vimtex/.github/ISSUE_TEMPLATE/issue_report.md
 ./vimrc/.vim/bundle/vimtex/.github/workflows/main.yml
@@ -2921,4 +2912,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-dev.gdio.diff
+swift.gdio.diff
