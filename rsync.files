@@ -2860,6 +2860,7 @@
 ./vimrc/.vim/doc/tags
 ./vimrc/.vim/file_line.vim
 ./vimrc/.vim/ftdetect/json.vim
+./vimrc/.vim/ftdetect/swift.vim
 ./vimrc/.vim/ftplugin/java.vim
 ./vimrc/.vim/ftplugin/json.vim
 ./vimrc/.vim/ftplugin/org.eclipse.jdt.core.prefs
