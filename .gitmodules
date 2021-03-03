@@ -2,10 +2,6 @@
     path = keys
     url = git@bitbucket.org:huangyingw/keys.git
     branch = dev
-[submodule "vimrc/.vim/bundle/swift.vim"]
-    path = vimrc/.vim/bundle/swift.vim
-    url = git@github.com:keith/swift.vim.git 
-    branch = master
 [submodule "vimrc/.vim/bundle/indentLine"]
     path = vimrc/.vim/bundle/indentLine
     url = git@github.com:Yggdroot/indentLine.git 
@@ -239,3 +235,6 @@
 [submodule "vimrc/.vim/bundle/bclose.vim"]
 	path = vimrc/.vim/bundle/bclose.vim
 	url = git@github.com:rbgrouleff/bclose.vim.git
+[submodule "vimrc/.vim/bundle/vim-swift"]
+	path = vimrc/.vim/bundle/vim-swift
+	url = git@github.com:arzg/vim-swift.git
