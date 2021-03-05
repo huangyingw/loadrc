@@ -6,5 +6,5 @@ if [ -f "$listFile" ]
 then
     ffmpeg -f concat -safe 0 -i "$listFile" -c copy -y output.avi
 else
-    find . -type f | sed -e "s/'/'\\\\''/g;s/\(.*\)/file '\1'/" > "$listFile".bak
+    find . -type f | sed -e "s/'/'\\\\''/g;s/\(.*\)/file '\1'/" > "$listFile"
 fi
