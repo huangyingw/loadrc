@@ -17,10 +17,14 @@ index 7c49d05c..c278d081 100755
      relative_path=$(realpath --relative-to="$rootFolder" "$file")
      relative_path=$(echo "$relative_path" | sed 's/\//\\\//g')
      sed -i.bak "s/relative_path_var/$relative_path/g" "$target"
-diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index da3b1d57..489b5697 160000
---- ./vimrc/.vim/bundle/vim-fugitive
-+++ ./vimrc/.vim/bundle/vim-fugitive
-@@ -1 +1 @@
--Subproject commit da3b1d57c57e96b3e107500cec675e4e2eba0373
-+Subproject commit 489b56976f054cb883907bf6395b19c40e195eb8
+diff --git a/vishrc/cat_run.sh b/vishrc/cat_run.sh
+index 6cdef0d2..ddda55fe 100755
+--- ./vishrc/cat_run.sh
++++ ./vishrc/cat_run.sh
+@@ -2,5 +2,6 @@
+ 
+ while read ss
+ do
++    ss=$(echo "$ss" | sed 's/"//g;s/^\.\///g')
+     ~/loadrc/vishrc/vrun.sh "$ss" &
+ done < "$1"
