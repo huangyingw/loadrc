@@ -1,5 +1,5 @@
 diff --git a/bashrc/mirror.sh b/bashrc/mirror.sh
-index 55391857..2b9829e6 100755
+index 55391857..e07b4653 100755
 --- ./bashrc/mirror.sh
 +++ ./bashrc/mirror.sh
 @@ -9,7 +9,7 @@ fi
@@ -11,6 +11,20 @@ index 55391857..2b9829e6 100755
  MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
  
  if [ -f ${MIRRORCHECK} ] && [ ! -f ${ready_file} ]
+@@ -35,12 +35,9 @@ then
+     mkdir -p "${TARGET}"
+ fi
+ 
++rm "$ready_file"
+ rsync -aHSv --progress --delete-before --force \
+     "${SOURCE}/" "${TARGET}/" && \
+-    if [ -f "${ready_file}" ] ; \
+-    then \
+-        rm "${ready_file}" ; \
+-    fi && \
+     if [ -f "${MIRRORCHECK}" ] ; \
+     then \
+         ~/loadrc/bashrc/sleep.sh ; \
 diff --git a/bashrc/tmirror.sh b/bashrc/tmirror.sh
 index 8516054e..889052d7 100755
 --- ./bashrc/tmirror.sh
