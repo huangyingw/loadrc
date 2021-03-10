@@ -35,12 +35,9 @@ then
     mkdir -p "${TARGET}"
 fi
 
+rm "$ready_file"
 rsync -aHSv --progress --delete-before --force \
     "${SOURCE}/" "${TARGET}/" && \
-    if [ -f "${ready_file}" ] ; \
-    then \
-        rm "${ready_file}" ; \
-    fi && \
     if [ -f "${MIRRORCHECK}" ] ; \
     then \
         ~/loadrc/bashrc/sleep.sh ; \
