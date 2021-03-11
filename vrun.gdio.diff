@@ -11,13 +11,6 @@ index 885df571..50886663 100644
  192.168.31.153 gluster00
  192.168.31.129 gluster01
  192.168.31.115 gluster02
-diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 75ca0e46..da3b1d57 160000
---- ./vimrc/.vim/bundle/vim-fugitive
-+++ ./vimrc/.vim/bundle/vim-fugitive
-@@ -1 +1 @@
--Subproject commit 75ca0e466f8ebd2ca18acb8d977b583694256306
-+Subproject commit da3b1d57c57e96b3e107500cec675e4e2eba0373
 diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
 index 1ad765d3..c56304f2 100755
 --- ./vishrc/vrun.sh
