@@ -2772,6 +2772,7 @@
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/cases.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/circuitikz.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/cleveref.vim"
+"./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/comment.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/csquotes.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/dot2texi.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/geometry.vim"
