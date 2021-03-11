@@ -70,3 +70,6 @@
     merge = refs/heads/gdif
 [pull]
     from = origin/dev
+[branch "mirror"]
+    remote = origin
+    merge = refs/heads/mirror

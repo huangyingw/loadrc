@@ -9,7 +9,7 @@ fi
 SOURCE=$1
 TARGET=$2
 
-ready_file="${TARGET}"/"tmirror.ready"
+ready_file="$SOURCE"/"tmirror.ready"
 MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
 
 if [ -f ${MIRRORCHECK} ] && [ ! -f ${ready_file} ]
@@ -35,12 +35,9 @@ then
     mkdir -p "${TARGET}"
 fi
 
+rm "$ready_file"
 rsync -aHSv --progress --delete-before --force \
     "${SOURCE}/" "${TARGET}/" && \
-    if [ -f "${ready_file}" ] ; \
-    then \
-        rm "${ready_file}" ; \
-    fi && \
     if [ -f "${MIRRORCHECK}" ] ; \
     then \
         ~/loadrc/bashrc/sleep.sh ; \
