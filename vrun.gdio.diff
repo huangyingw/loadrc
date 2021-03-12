@@ -1,40 +1,35 @@
-diff --git a/vimrc/.vim/bundle/neco-syntax b/vimrc/.vim/bundle/neco-syntax
-index 6c3862ac..f8d7b748 160000
---- ./vimrc/.vim/bundle/neco-syntax
-+++ ./vimrc/.vim/bundle/neco-syntax
-@@ -1 +1 @@
--Subproject commit 6c3862ac82d2c917fa8b4126832de7d3a909f1fe
-+Subproject commit f8d7b748b022aac8ce73458574da5616f1c5fb65
-diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 4fbc3f5f..e7b5a73c 160000
---- ./vimrc/.vim/bundle/neco-vim
-+++ ./vimrc/.vim/bundle/neco-vim
-@@ -1 +1 @@
--Subproject commit 4fbc3f5f3a2b2d5299c388e2f1ffef04fcaf87ba
-+Subproject commit e7b5a73cba668a351b0953063b6e18e1dc1773b2
-diff --git a/vimrc/.vim/bundle/neoinclude.vim b/vimrc/.vim/bundle/neoinclude.vim
-index 5125e73d..954cfc9d 160000
---- ./vimrc/.vim/bundle/neoinclude.vim
-+++ ./vimrc/.vim/bundle/neoinclude.vim
-@@ -1 +1 @@
--Subproject commit 5125e73de0a8b4f2c399e4896e21be1b8f7b3d39
-+Subproject commit 954cfc9dfdb303f2c2fa867b9cf949dd74512628
-diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
-index 52052311..a9442837 160000
---- ./vimrc/.vim/bundle/tig-explorer.vim
-+++ ./vimrc/.vim/bundle/tig-explorer.vim
-@@ -1 +1 @@
--Subproject commit 52052311b317117d0f0b8c1cc8d1760767f61277
-+Subproject commit a9442837ffed280a5d092da069ccf1ab241f7485
-diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 4913f0d5..7f6cbd82 100644
---- ./vimrc/.vim/plugin/keymap.vim
-+++ ./vimrc/.vim/plugin/keymap.vim
-@@ -151,6 +151,7 @@ function! VRun()
-     endif
- 
-     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
- endfunction
- 
- function! SearchAgain()
+diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
+index 885df571..50886663 100644
+--- ./host_links/server/etc/hosts
++++ ./host_links/server/etc/hosts
+@@ -4,7 +4,7 @@
+ 192.168.31.111 u2004
+ 172.27.217.162 localhost.imvu.com
+ 192.168.31.140 mini
+-192.168.31.149 minds
++192.168.123.132 minds
+ 192.168.31.153 gluster00
+ 192.168.31.129 gluster01
+ 192.168.31.115 gluster02
+diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
+index 1ad765d3..c56304f2 100755
+--- ./vishrc/vrun.sh
++++ ./vishrc/vrun.sh
+@@ -46,6 +46,9 @@ case $extension in
+             ~/loadrc/sqlrc/xsql.sh "$file" "$2"
+         fi
+         ;;
++    bak)
++       zsh "$file"
++        ;;
+     findresult)
+        zsh "$file"
+         ;;
+@@ -57,7 +60,6 @@ case $extension in
+         then
+             ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
+         else
+-            . ~/loadrc/.loadrc
+             "$file"
+         fi
+         ;;
