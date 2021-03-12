@@ -46,6 +46,9 @@ case $extension in
             ~/loadrc/sqlrc/xsql.sh "$file" "$2"
         fi
         ;;
+    bak)
+       zsh "$file"
+        ;;
     findresult)
        zsh "$file"
         ;;
@@ -57,7 +60,6 @@ case $extension in
         then
             ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
         else
-            . ~/loadrc/.loadrc
             "$file"
         fi
         ;;
