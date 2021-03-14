@@ -480,6 +480,7 @@
 "./gitrc/parse-github.sh"
 "./gitrc/parse-github.test.sh"
 "./gitrc/postCommit.sh"
+"./gitrc/reapply.sh"
 "./gitrc/restore_deleted.sh"
 "./gitrc/retached.sh"
 "./gitrc/subfolder_2_repository.sh"
