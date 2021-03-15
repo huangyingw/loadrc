@@ -8,7 +8,7 @@ index 0b291d09..7d9e0081 100755
  git apply --reject --whitespace=fix "$DIFF"
 +~/loadrc/gitrc/gdio.sh
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index e6d0ed1a..8489843a 100644
+index e6d0ed1a..02de6653 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -664,8 +664,15 @@ function! s:Gfix() abort
