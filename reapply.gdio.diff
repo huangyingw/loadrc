@@ -8,11 +8,18 @@ index 0b291d09..7d9e0081 100755
  git apply --reject --whitespace=fix "$DIFF"
 +~/loadrc/gitrc/gdio.sh
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index e6d0ed1a..2b8c1ae2 100644
+index e6d0ed1a..8489843a 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -666,6 +666,8 @@ endfunction
+@@ -664,8 +664,15 @@ function! s:Gfix() abort
+ endfunction
+ 
  function! s:Reapply() abort
++    if (expand("%") !~ '.*gdio.diff')
++        echom 'Please only run on *gdio.diff!!!'
++        return 0
++    endif
++
      let worktree = Cd2Worktree()
      exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
 +    e
