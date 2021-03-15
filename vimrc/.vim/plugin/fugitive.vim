@@ -665,7 +665,7 @@ endfunction
 
 function! s:Reapply() abort
     if (expand("%") !~ '.*gdio.diff')
-        echom 'Please only running on *gdio.diff!!!'
+        echom 'Please only run on *gdio.diff!!!'
         return 0
     endif
 
