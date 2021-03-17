@@ -33,3 +33,10 @@ index b372cebc..8f762c40 100755
 +    git fetch "$remote" "$branch":"$branch"
 +    git merge "$branch"
  fi
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 40d0826e..389353e8 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 40d0826e59b390162a3fb19825dbd553e53f5260
++Subproject commit 389353e896645b6adc06b95a16fdd2e095a527e4-dirty
