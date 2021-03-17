@@ -2472,6 +2472,7 @@
 ./vimrc/.vim/bundle/vimtex/.gitignore
 ./vimrc/.vim/bundle/vimtex/.vintrc.yaml
 ./vimrc/.vim/bundle/vimtex/CONTRIBUTING.md
+./vimrc/.vim/bundle/vimtex/DOCUMENTATION.md
 ./vimrc/.vim/bundle/vimtex/LICENSE.md
 ./vimrc/.vim/bundle/vimtex/README.md
 ./vimrc/.vim/bundle/vimtex/after/ftplugin/tex.vim
