@@ -130,8 +130,6 @@
 ./.git/modules/vimrc/.vim/bundle/vim-scala/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-snipmate/config
 ./.git/modules/vimrc/.vim/bundle/vim-snipmate/info/exclude
-./.git/modules/vimrc/.vim/bundle/vim-swift/config
-./.git/modules/vimrc/.vim/bundle/vim-swift/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vimtex/config
 ./.git/modules/vimrc/.vim/bundle/vimtex/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vundle.vim/config
@@ -2927,4 +2925,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-swift.gdio.diff
+dev.gdio.diff
