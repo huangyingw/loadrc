@@ -2922,4 +2922,4 @@
 "./zerotierrc/install.sh"
 "./zerotierrc/restart.sh"
 "./zerotierrc/zerotierrc.conf"
-"mirror.gdio.diff"
+"dev.gdio.diff"
