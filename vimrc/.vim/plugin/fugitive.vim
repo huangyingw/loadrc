@@ -68,6 +68,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject KdiffFile :execute s:KdiffFile()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Split :execute s:Split()
@@ -660,6 +661,11 @@ endfunction
 function! s:Gfix() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/gfix.sh'
+endfunction
+
+function! s:Reapply() abort
+    let worktree = Cd2Worktree()
+    exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
 endfunction
 
 function! s:Split() abort

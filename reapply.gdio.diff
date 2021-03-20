@@ -1,0 +1,35 @@
+diff --git a/gitrc/reapply.sh b/gitrc/reapply.sh
+new file mode 100755
+index 00000000..0b291d09
+--- /dev/null
++++ ./gitrc/reapply.sh
+@@ -0,0 +1,5 @@
++#!/bin/zsh
++DIFF="$1"
++git apply --reverse "$DIFF" 
++git checkout -- "$DIFF"
++git apply --reject --whitespace=fix "$DIFF"
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index 557ecb77..e6d0ed1a 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -68,6 +68,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject KdiffFile :execute s:KdiffFile()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Split :execute s:Split()
+@@ -662,6 +663,11 @@ function! s:Gfix() abort
+     exec '!~/loadrc/gitrc/gfix.sh'
+ endfunction
+ 
++function! s:Reapply() abort
++    let worktree = Cd2Worktree()
++    exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
++endfunction
++
+ function! s:Split() abort
+     let worktree = Cd2Worktree()
+     exec '!~/loadrc/bashrc/split.sh ' . '"' .  expand('%:t') . '"'

@@ -1,0 +1,42 @@
+diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
+index b372cebc..8f762c40 100755
+--- ./gitrc/gpl.sh
++++ ./gitrc/gpl.sh
+@@ -1,15 +1,15 @@
+ #!/bin/zsh
+ 
+ ~/loadrc/gitrc/include_gitconfig.sh
+-git remote update &
++git remote update
+ ~/loadrc/gitrc/discard_unnecessaries.sh
+-git pull &
++git pull
+ currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
+ 
+ for ss in `git remote -v |awk '/\(fetch\)$/{print $1}'`
+ do
+-    git pull $ss $currentBranch &
+-    git remote prune $ss &
++    git pull $ss $currentBranch
++    git remote prune $ss
+ done
+ 
+ for ss in $(git config --get-all pull.from)
+@@ -23,7 +23,7 @@ remote=$(git config gsync.remote)
+ branch=$(git config gsync.branch)
+ if [ -n "$remote" ]
+ then
+-    git branch "$branch" "$remote"/"$branch" &
+-    git fetch "$remote" "$branch":"$branch" &
+-    git merge "$branch" &
++    git branch "$branch" "$remote"/"$branch"
++    git fetch "$remote" "$branch":"$branch"
++    git merge "$branch"
+ fi
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 40d0826e..ae9598fb 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 40d0826e59b390162a3fb19825dbd553e53f5260
++Subproject commit ae9598fbe7fc7dc88b3258f7a791efd580630041
