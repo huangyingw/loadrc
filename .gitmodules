@@ -4,11 +4,11 @@
     branch = dev
 [submodule "vimrc/.vim/bundle/swift.vim"]
     path = vimrc/.vim/bundle/swift.vim
-    url = git@github.com:keith/swift.vim.git
+    url = git@github.com:keith/swift.vim.git 
     branch = master
 [submodule "vimrc/.vim/bundle/indentLine"]
     path = vimrc/.vim/bundle/indentLine
-    url = git@github.com:Yggdroot/indentLine.git
+    url = git@github.com:Yggdroot/indentLine.git 
     branch = master
 [submodule "vimrc/.vim/bundle/bash-support.vim"]
     path = vimrc/.vim/bundle/bash-support.vim
@@ -16,7 +16,7 @@
     branch = dev
 [submodule "vimrc/.vim/bundle/vim-docker-compose-syntax"]
     path = vimrc/.vim/bundle/vim-docker-compose-syntax
-    url = git@github.com:NLKNguyen/vim-docker-compose-syntax.git
+    url = git@github.com:NLKNguyen/vim-docker-compose-syntax.git 
     branch = master
 [submodule "vimrc/.vim/bundle/python-mode"]
     path = vimrc/.vim/bundle/python-mode
@@ -24,7 +24,7 @@
     branch = dev
 [submodule "vimrc/.vim/bundle/Dockerfile.vim"]
     path = vimrc/.vim/bundle/Dockerfile.vim
-    url = git@github.com:ekalinin/Dockerfile.vim.git
+    url = git@github.com:ekalinin/Dockerfile.vim.git 
     branch = master
 [submodule "vimrc/.vim/bundle/vim-autoformat"]
     path = vimrc/.vim/bundle/vim-autoformat
@@ -32,7 +32,7 @@
     branch = dev
 [submodule "vimrc/.vim/bundle/vim-gradle"]
     path = vimrc/.vim/bundle/vim-gradle
-    url = git@github.com:tfnico/vim-gradle.git
+    url = git@github.com:tfnico/vim-gradle.git 
     branch = master
 [submodule "vimrc/.vim/bundle/vim-javascript-syntax"]
     path = vimrc/.vim/bundle/vim-javascript-syntax
@@ -44,15 +44,15 @@
     branch = dev
 [submodule "vimrc/.vim/bundle/vim-rails"]
     path = vimrc/.vim/bundle/vim-rails
-    url = git@github.com:tpope/vim-rails.git
+    url = git@github.com:tpope/vim-rails.git 
     branch = master
 [submodule "vimrc/.vim/bundle/vim-scala"]
     path = vimrc/.vim/bundle/vim-scala
-    url = git@github.com:derekwyatt/vim-scala.git
+    url = git@github.com:derekwyatt/vim-scala.git 
     branch = master
 [submodule "vimrc/.vim/bundle/vundle.vim"]
     path = vimrc/.vim/bundle/vundle.vim
-    url = git@github.com:VundleVim/Vundle.vim.git
+    url = git@github.com:VundleVim/Vundle.vim.git 
     branch = master
 [submodule ".ssh"]
     path = .ssh
@@ -75,7 +75,7 @@
     branch = dev
 [submodule "vimrc/.vim/bundle/vala.vim"]
     path = vimrc/.vim/bundle/vala.vim
-    url = git@github.com:arrufat/vala.vim.git
+    url = git@github.com:arrufat/vala.vim.git 
     branch = master
 [submodule "vimrc/.vim/bundle/asyncrun.vim"]
     path = vimrc/.vim/bundle/asyncrun.vim
@@ -222,20 +222,20 @@
     url = git@github.com:Shougo/neco-vim.git
     branch = master
 [submodule "vimrc/.vim/bundle/ncm2-otherbuf"]
-    path = vimrc/.vim/bundle/ncm2-otherbuf
-    url = https://github.com/fgrsnau/ncm2-otherbuf.git
+	path = vimrc/.vim/bundle/ncm2-otherbuf
+	url = https://github.com/fgrsnau/ncm2-otherbuf.git
     branch = master
 [submodule "vimrc/.vim/bundle/vim-pdf"]
-    path = vimrc/.vim/bundle/vim-pdf
-    url = https://github.com/makerj/vim-pdf.git
+	path = vimrc/.vim/bundle/vim-pdf
+	url = https://github.com/makerj/vim-pdf.git
     branch = master
 [submodule "oh-my-zsh"]
-    path = oh-my-zsh
-    url = git@github.com:huangyingw/oh-my-zsh.git
-    branch = dev
+	path = oh-my-zsh
+	url = git@github.com:huangyingw/oh-my-zsh.git
+	branch = dev
 [submodule "vimrc/.vim/bundle/tig-explorer.vim"]
-    path = vimrc/.vim/bundle/tig-explorer.vim
-    url = git@github.com:iberianpig/tig-explorer.vim.git
+	path = vimrc/.vim/bundle/tig-explorer.vim
+	url = git@github.com:iberianpig/tig-explorer.vim.git
 [submodule "vimrc/.vim/bundle/bclose.vim"]
-    path = vimrc/.vim/bundle/bclose.vim
-    url = git@github.com:rbgrouleff/bclose.vim.git
+	path = vimrc/.vim/bundle/bclose.vim
+	url = git@github.com:rbgrouleff/bclose.vim.git
