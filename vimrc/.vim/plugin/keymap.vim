@@ -313,7 +313,7 @@ function! VimOpen()
     elseif (&filetype ==# 'fugitiveblame')
         let b:commit = expand("<cword>")
         call Cd2Worktree()
-        exec '!~/loadrc/gitrc/discard_unnecessaries.sh ; git diff --quiet && git diff HEAD --quiet &&  git checkout -f ' . '"' .  b:commit . '^"'
+        exec '!~/loadrc/gitrc/fugitiveblame.sh ' . '"' .  b:commit . '"'
         ""call fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", "' . 'blame' . ' " . <q-args>)
         "let s:cmd = 'Blame'
         "exec 'command! -bang -nargs=? -range=-1 -complete=customlist,fugitive#' . s:cmd . 'Complete G' . tolower(s:cmd) 'exe fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", "' . tolower(s:cmd) . ' " . <q-args>)'
