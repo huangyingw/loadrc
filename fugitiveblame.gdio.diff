@@ -1,3 +1,16 @@
+diff --git a/gitrc/fugitiveblame.sh b/gitrc/fugitiveblame.sh
+new file mode 100644
+index 00000000..a43b2a89
+--- /dev/null
++++ ./gitrc/fugitiveblame.sh
+@@ -0,0 +1,7 @@
++#!/bin/zsh
++COMMIT="$1"
++git bisect start
++~/loadrc/gitrc/discard_unnecessaries.sh
++git diff --quiet && \
++    git diff HEAD --quiet && \
++    git checkout -f "$COMMIT^"
 diff --git a/vimrc/.vim/bundle/tmux-complete.vim b/vimrc/.vim/bundle/tmux-complete.vim
 index 7237d8d8..87f6f96c 160000
 --- ./vimrc/.vim/bundle/tmux-complete.vim
@@ -13,12 +26,12 @@ index 2ae4ab5f..0a135541 160000
 -Subproject commit 2ae4ab5ff3972121dbe56512f4d48db1a11efab2
 +Subproject commit 0a1355414431cb3f027a62e7d982ab739f5385f7
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index e6ced47b..efe4e8f5 160000
+index e6ced47b..3d958724 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit e6ced47b01ef2aef33bc1134f6b7e589e9860cda
-+Subproject commit efe4e8f56c6714373003b54569637d98129c06fe
++Subproject commit 3d958724507b5fdab62c2f8d80e5a7d96513d08b
 diff --git a/vimrc/.vim/plugin/auto_cscope.vim b/vimrc/.vim/plugin/auto_cscope.vim
 index 38806d87..bbe09820 100644
 --- ./vimrc/.vim/plugin/auto_cscope.vim
@@ -45,3 +58,16 @@ index 52ba2bd3..8b9c3418 100644
      call Cd2ProjectRoot('files.proj')
      call asyncrun#run('<bang>', '', '~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
      call CHANGE_CURR_DIR() 
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index 6e912403..63edad7a 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -313,7 +313,7 @@ function! VimOpen()
+     elseif (&filetype ==# 'fugitiveblame')
+         let b:commit = expand("<cword>")
+         call Cd2Worktree()
+-        exec '!~/loadrc/gitrc/discard_unnecessaries.sh ; git diff --quiet && git diff HEAD --quiet &&  git checkout -f ' . '"' .  b:commit . '^"'
++        exec '!~/loadrc/gitrc/fugitiveblame.sh ' . '"' .  b:commit . '"'
+         ""call fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", "' . 'blame' . ' " . <q-args>)
+         "let s:cmd = 'Blame'
+         "exec 'command! -bang -nargs=? -range=-1 -complete=customlist,fugitive#' . s:cmd . 'Complete G' . tolower(s:cmd) 'exe fugitive#Command(<line1>, <count>, +"<range>", <bang>0, "<mods>", "' . tolower(s:cmd) . ' " . <q-args>)'
