@@ -1,0 +1,33 @@
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index e6ced47b..5813cd1b 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit e6ced47b01ef2aef33bc1134f6b7e589e9860cda
++Subproject commit 5813cd1b5b263e1a2f6d0210688010a41a0ce251
+diff --git a/vimrc/.vim/plugin/auto_cscope.vim b/vimrc/.vim/plugin/auto_cscope.vim
+index 38806d87..bbe09820 100644
+--- ./vimrc/.vim/plugin/auto_cscope.vim
++++ ./vimrc/.vim/plugin/auto_cscope.vim
+@@ -1,4 +1,8 @@
+ function! s:auto_cscope()
++    if &buftype ==# 'terminal'
++        return
++    endif
++
+     call UpdateProj()
+ endfunction
+ 
+diff --git a/vimrc/.vim/plugin/auto_deploy.vim b/vimrc/.vim/plugin/auto_deploy.vim
+index 52ba2bd3..8b9c3418 100644
+--- ./vimrc/.vim/plugin/auto_deploy.vim
++++ ./vimrc/.vim/plugin/auto_deploy.vim
+@@ -1,4 +1,8 @@
+ function! s:auto_deploy_augroup()
++    if &buftype ==# 'terminal'
++        return
++    endif
++
+     call Cd2ProjectRoot('files.proj')
+     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
+     call CHANGE_CURR_DIR() 
