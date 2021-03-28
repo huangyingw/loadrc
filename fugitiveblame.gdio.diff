@@ -1,10 +1,24 @@
+diff --git a/vimrc/.vim/bundle/tmux-complete.vim b/vimrc/.vim/bundle/tmux-complete.vim
+index 7237d8d8..87f6f96c 160000
+--- ./vimrc/.vim/bundle/tmux-complete.vim
++++ ./vimrc/.vim/bundle/tmux-complete.vim
+@@ -1 +1 @@
+-Subproject commit 7237d8d8d60af7916e3b546a9f4f396df95a1b21
++Subproject commit 87f6f96c73b599554d1d7f313413d7f9d0336096
+diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
+index 2ae4ab5f..0a135541 160000
+--- ./vimrc/.vim/bundle/vim-autoformat
++++ ./vimrc/.vim/bundle/vim-autoformat
+@@ -1 +1 @@
+-Subproject commit 2ae4ab5ff3972121dbe56512f4d48db1a11efab2
++Subproject commit 0a1355414431cb3f027a62e7d982ab739f5385f7
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index e6ced47b..5813cd1b 160000
+index e6ced47b..efe4e8f5 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit e6ced47b01ef2aef33bc1134f6b7e589e9860cda
-+Subproject commit 5813cd1b5b263e1a2f6d0210688010a41a0ce251
++Subproject commit efe4e8f56c6714373003b54569637d98129c06fe
 diff --git a/vimrc/.vim/plugin/auto_cscope.vim b/vimrc/.vim/plugin/auto_cscope.vim
 index 38806d87..bbe09820 100644
 --- ./vimrc/.vim/plugin/auto_cscope.vim
