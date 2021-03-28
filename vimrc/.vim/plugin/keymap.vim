@@ -301,7 +301,7 @@ function! VimOpen()
     elseif (expand("%") ==# 'gbil.log')
         let b:commit = expand("<cword>")
         call Cd2Worktree()
-        exec '!~/loadrc/gitrc/discard_unnecessaries.sh ; git checkout ' . '"' .  b:commit . '"'
+        exec '!git bisect start ; ~/loadrc/gitrc/discard_unnecessaries.sh ; git checkout ' . '"' .  b:commit . '"'
     elseif (expand("%") ==# 'glg.findresult')
         let b:commit = expand("<cword>")
         exec '!git checkout ' . '"' .  b:commit . '"'
