@@ -59,9 +59,18 @@ index 52ba2bd3..8b9c3418 100644
      call asyncrun#run('<bang>', '', '~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
      call CHANGE_CURR_DIR() 
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 6e912403..63edad7a 100644
+index 6e912403..fc295fcd 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
+@@ -301,7 +301,7 @@ function! VimOpen()
+     elseif (expand("%") ==# 'gbil.log')
+         let b:commit = expand("<cword>")
+         call Cd2Worktree()
+-        exec '!~/loadrc/gitrc/discard_unnecessaries.sh ; git checkout ' . '"' .  b:commit . '"'
++        exec '!git bisect start ; ~/loadrc/gitrc/discard_unnecessaries.sh ; git checkout ' . '"' .  b:commit . '"'
+     elseif (expand("%") ==# 'glg.findresult')
+         let b:commit = expand("<cword>")
+         exec '!git checkout ' . '"' .  b:commit . '"'
 @@ -313,7 +313,7 @@ function! VimOpen()
      elseif (&filetype ==# 'fugitiveblame')
          let b:commit = expand("<cword>")
