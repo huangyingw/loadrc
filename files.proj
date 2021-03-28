@@ -2925,4 +2925,4 @@
 "./zerotierrc/install.sh"
 "./zerotierrc/restart.sh"
 "./zerotierrc/zerotierrc.conf"
-"terminal.gdio.diff"
+"fugitiveblame.gdio.diff"
