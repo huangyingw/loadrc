@@ -1,11 +1,11 @@
 diff --git a/etc/netatalk/afp.conf b/etc/netatalk/afp.conf
 new file mode 100644
-index 00000000..18e72b5e
+index 00000000..73b495da
 --- /dev/null
 +++ ./etc/netatalk/afp.conf
 @@ -0,0 +1,3 @@
 +[Time Machine]
-+    path = /srv/netatalk/time-machine
++    path = target_dir_var
 +    time machine = yes
 diff --git a/install_basic_linux.sh b/install_basic_linux.sh
 index 0b7a87e8..23be74d2 100755
@@ -21,20 +21,23 @@ index 0b7a87e8..23be74d2 100755
  ./kubernetesrc/install.sh
 diff --git a/install_time_machine.sh b/install_time_machine.sh
 new file mode 100755
-index 00000000..97ba196d
+index 00000000..4af77eea
 --- /dev/null
 +++ ./install_time_machine.sh
-@@ -0,0 +1,13 @@
+@@ -0,0 +1,16 @@
 +#!/bin/zsh
 +SCRIPT=$(realpath "$0")
 +SCRIPTPATH=$(dirname "$SCRIPT")
 +cd "$SCRIPTPATH"
 +
++TARGET_DIR="/media/mldonkey/time-machine"
++TARGET_DIR_FOR_SED=$(echo "$TARGET_DIR" | sed 's/\//\\\//g')
 +apt install -y netatalk avahi-daemon
 +cp -fv ./etc/netatalk/afp.conf /etc/netatalk/afp.conf
++sed -i.bak "s/target_dir_var/$TARGET_DIR_FOR_SED/g" /etc/netatalk/afp.conf
 +
-+mkdir -p /srv/netatalk/time-machine
-+chown nobody:nogroup /srv/netatalk/time-machine
-+chmod -R 777 /srv/netatalk/time-machine
++mkdir -p "$TARGET_DIR"
++chown nobody:nogroup "$TARGET_DIR"
++chmod -R 777 "$TARGET_DIR"
 +
 +service netatalk restart
