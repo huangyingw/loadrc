@@ -1,0 +1,41 @@
+diff --git a/etc/netatalk/afp.conf b/etc/netatalk/afp.conf
+new file mode 100644
+index 00000000..18e72b5e
+--- /dev/null
++++ ./etc/netatalk/afp.conf
+@@ -0,0 +1,3 @@
++[Time Machine]
++    path = /srv/netatalk/time-machine
++    time machine = yes
+diff --git a/install_basic_linux.sh b/install_basic_linux.sh
+index 0b7a87e8..23be74d2 100755
+--- ./install_basic_linux.sh
++++ ./install_basic_linux.sh
+@@ -11,6 +11,7 @@ fi
+ 
+ ./install_prerequisite.sh
+ ./install_nodejs.sh
++./install_time_machine.sh
+ ./enpass_install.sh
+ ./nxrc/install.sh
+ ./kubernetesrc/install.sh
+diff --git a/install_time_machine.sh b/install_time_machine.sh
+new file mode 100755
+index 00000000..c6ba4974
+--- /dev/null
++++ ./install_time_machine.sh
+@@ -0,0 +1,7 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++apt install -y netatalk avahi-daemon
++cp -fv ./etc/netatalk/afp.conf /etc/netatalk/afp.conf
+diff --git a/vimrc/.vim/bundle/tmux-complete.vim b/vimrc/.vim/bundle/tmux-complete.vim
+index 87f6f96c..7237d8d8 160000
+--- ./vimrc/.vim/bundle/tmux-complete.vim
++++ ./vimrc/.vim/bundle/tmux-complete.vim
+@@ -1 +1 @@
+-Subproject commit 87f6f96c73b599554d1d7f313413d7f9d0336096
++Subproject commit 7237d8d8d60af7916e3b546a9f4f396df95a1b21
