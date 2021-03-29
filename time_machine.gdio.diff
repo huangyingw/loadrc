@@ -38,10 +38,3 @@ index 00000000..97ba196d
 +chmod -R 777 /srv/netatalk/time-machine
 +
 +service netatalk restart
-diff --git a/vimrc/.vim/bundle/tmux-complete.vim b/vimrc/.vim/bundle/tmux-complete.vim
-index 87f6f96c..7237d8d8 160000
---- ./vimrc/.vim/bundle/tmux-complete.vim
-+++ ./vimrc/.vim/bundle/tmux-complete.vim
-@@ -1 +1 @@
--Subproject commit 87f6f96c73b599554d1d7f313413d7f9d0336096
-+Subproject commit 7237d8d8d60af7916e3b546a9f4f396df95a1b21
