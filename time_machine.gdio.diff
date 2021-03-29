@@ -21,10 +21,10 @@ index 0b7a87e8..23be74d2 100755
  ./kubernetesrc/install.sh
 diff --git a/install_time_machine.sh b/install_time_machine.sh
 new file mode 100755
-index 00000000..c6ba4974
+index 00000000..97ba196d
 --- /dev/null
 +++ ./install_time_machine.sh
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,13 @@
 +#!/bin/zsh
 +SCRIPT=$(realpath "$0")
 +SCRIPTPATH=$(dirname "$SCRIPT")
@@ -32,6 +32,12 @@ index 00000000..c6ba4974
 +
 +apt install -y netatalk avahi-daemon
 +cp -fv ./etc/netatalk/afp.conf /etc/netatalk/afp.conf
++
++mkdir -p /srv/netatalk/time-machine
++chown nobody:nogroup /srv/netatalk/time-machine
++chmod -R 777 /srv/netatalk/time-machine
++
++service netatalk restart
 diff --git a/vimrc/.vim/bundle/tmux-complete.vim b/vimrc/.vim/bundle/tmux-complete.vim
 index 87f6f96c..7237d8d8 160000
 --- ./vimrc/.vim/bundle/tmux-complete.vim
