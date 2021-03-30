@@ -379,6 +379,7 @@
 ./enpass_install.sh
 ./entrypoint.sh
 ./error
+./etc/netatalk/afp.conf
 ./fdocs.exclude
 ./fdocs.include
 ./fdocs.list
@@ -569,6 +570,7 @@
 ./install_nvim_pre.sh
 ./install_nx.sh
 ./install_prerequisite.sh
+./install_time_machine.sh
 ./install_vagrant.sh
 ./ipynbrc/generate_ipynb.sh
 ./ipynbrc/jupytext.sh
@@ -2929,4 +2931,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-dev.gdio.diff
+time_machine.gdio.diff
