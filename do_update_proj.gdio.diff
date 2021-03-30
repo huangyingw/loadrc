@@ -70,12 +70,12 @@ index eadc0bd0..191dd600 100644
  vserver_crypt      /dev/disk/by-uuid/a4ff213e-f734-4c88-aba9-2ce733d0de76  /root/loadrc/keys/keyfile   luks
  usb_backup_crypt_8T      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 3d958724..ec0680ec 160000
+index 3d958724..c3f285a1 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 3d958724507b5fdab62c2f8d80e5a7d96513d08b
-+Subproject commit ec0680ecb4025aee452b3e58b605d03396eff406
++Subproject commit c3f285a1772fdccd60624f77981adc750017e676
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
 index ee53e830..9c3c831a 160000
 --- ./vimrc/.vim/bundle/vim-rails
