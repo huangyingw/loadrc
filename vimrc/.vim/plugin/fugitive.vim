@@ -664,8 +664,15 @@ function! s:Gfix() abort
 endfunction
 
 function! s:Reapply() abort
+    if (expand("%") !~ '.*gdio.diff')
+        echom 'Please only run on *gdio.diff!!!'
+        return 0
+    endif
+
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
+    call s:Gs()
+    call s:Gdi()
 endfunction
 
 function! s:Split() abort

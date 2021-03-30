@@ -1,0 +1,29 @@
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 3d958724..c3f285a1 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 3d958724507b5fdab62c2f8d80e5a7d96513d08b
++Subproject commit c3f285a1772fdccd60624f77981adc750017e676
+diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
+index ee53e830..9c3c831a 160000
+--- ./vimrc/.vim/bundle/vim-rails
++++ ./vimrc/.vim/bundle/vim-rails
+@@ -1 +1 @@
+-Subproject commit ee53e8303be8a28234ea97109b4e1ce716f0f2ad
++Subproject commit 9c3c831a089c7b4dcc4ebd8b8c73f366f754c976
+diff --git a/vimrc/.vim/plugin/auto_deploy.vim b/vimrc/.vim/plugin/auto_deploy.vim
+index 52ba2bd3..181f7aa9 100644
+--- ./vimrc/.vim/plugin/auto_deploy.vim
++++ ./vimrc/.vim/plugin/auto_deploy.vim
+@@ -1,5 +1,10 @@
+ function! s:auto_deploy_augroup()
+     call Cd2ProjectRoot('files.proj')
++
++    if !filereadable('files.proj')
++        return
++    endif
++
+     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
+     call CHANGE_CURR_DIR() 
+ endfunction
