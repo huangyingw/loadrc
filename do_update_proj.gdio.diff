@@ -75,7 +75,7 @@ index 3d958724..ec0680ec 160000
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 3d958724507b5fdab62c2f8d80e5a7d96513d08b
-+Subproject commit ec0680ecb4025aee452b3e58b605d03396eff406-dirty
++Subproject commit ec0680ecb4025aee452b3e58b605d03396eff406
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
 index ee53e830..9c3c831a 160000
 --- ./vimrc/.vim/bundle/vim-rails
