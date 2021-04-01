@@ -56,6 +56,8 @@ async def main(connection):
 
     async def move_current_tab_by_n_screens(delta):
         tab_to_move = app.current_terminal_window.current_tab
+        current_window = app.current_terminal_window
+        current_window.async_set_fullscreen(False)
         window_with_tab_to_move = app.get_window_for_tab(tab_to_move.tab_id)
         i = app.terminal_windows.index(window_with_tab_to_move)
         print("Window has index {}".format(i))
