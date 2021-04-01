@@ -1,0 +1,18 @@
+diff --git a/iterm2rc/movescreen.py b/iterm2rc/movescreen.py
+index 7e9f9b4f..a55d8067 100644
+--- ./iterm2rc/movescreen.py
++++ ./iterm2rc/movescreen.py
+@@ -88,7 +88,6 @@ async def main(connection):
+             iterm2.Point(nsframe.origin.x, nsframe.origin.y),
+             iterm2.Size(nsframe.size.width, nsframe.size.height))
+         await window.async_set_frame(frame)
+-        await window.async_set_fullscreen(True)
+ 
+     @iterm2.RPC
+     async def move_current_tab_to_next_screen():
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 49993e115740e5748a8a7de65445d59309c5a086
++Subproject commit 49993e115740e5748a8a7de65445d59309c5a086-dirty
