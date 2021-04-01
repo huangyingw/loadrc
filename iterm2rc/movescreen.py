@@ -85,10 +85,9 @@ async def main(connection):
         await window.async_set_fullscreen(False)
         nsframe = NSScreen.screens()[desiredScreenIndex].frame()
         frame = iterm2.Frame(
-                iterm2.Point(nsframe.origin.x, nsframe.origin.y),
-                iterm2.Size(nsframe.size.width, nsframe.size.height))
+            iterm2.Point(nsframe.origin.x, nsframe.origin.y),
+            iterm2.Size(nsframe.size.width, nsframe.size.height))
         await window.async_set_frame(frame)
-        await window.async_set_fullscreen(True)
 
     @iterm2.RPC
     async def move_current_tab_to_next_screen():
