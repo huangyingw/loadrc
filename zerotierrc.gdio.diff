@@ -1,0 +1,27 @@
+diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
+index 22eeb49c..50138101 160000
+--- ./vimrc/.vim/bundle/vim-autoformat
++++ ./vimrc/.vim/bundle/vim-autoformat
+@@ -1 +1 @@
+-Subproject commit 22eeb49c0aec9c19cd2de4a2d78a3354619ad4bc
++Subproject commit 501381019d878f1978c32ceb2d484eed543fb7fd-dirty
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 92bd094c..8b9e0a46 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 92bd094c40cda34e5a97452b8aecce1345254ef6
++Subproject commit 8b9e0a4633f09b4dfb0da103bed4913c136a96d6-dirty
+diff --git a/zerotierrc/configure.sh b/zerotierrc/configure.sh
+index 82ddf92f..1552060a 100755
+--- ./zerotierrc/configure.sh
++++ ./zerotierrc/configure.sh
+@@ -9,7 +9,7 @@ deploy_configs() {
+ 
+     if [ -f "$SOURCE" ]
+     then
+-        cp -fv --remove-destination "$SOURCE" "$TARGET"
++        sudo cp -fv "$SOURCE" "$TARGET"
+     fi
+ }
+ 
