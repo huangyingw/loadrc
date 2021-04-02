@@ -23,6 +23,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbr :e
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbra :execute s:Gbra()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbrd :execute s:Gbrd(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbrm :execute s:Gbrm(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbrs :execute s:Gbrs()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean :execute s:Gclean()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gco :execute s:Gco(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcob :execute s:Gcob(<f-args>)
@@ -256,6 +257,12 @@ function! s:Gbra() abort
     let worktree = Cd2Worktree()
     silent exec '!~/loadrc/gitrc/gbra.sh'
     call OpenOrSwitch('gbra.findresult', 'vs')
+endfunction
+
+function! s:Gbrs() abort
+    let worktree = Cd2Worktree()
+    silent exec '!~/loadrc/gitrc/gbrs.sh'
+    call OpenOrSwitch('gbrs.findresult', 'vs')
 endfunction
 
 function! s:Gs() abort
