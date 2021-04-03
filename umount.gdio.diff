@@ -1,3 +1,15 @@
+diff --git a/.shellrc b/.shellrc
+index 131be90e..40f8ba93 100755
+--- ./.shellrc
++++ ./.shellrc
+@@ -100,6 +100,7 @@ alias ubak='$HOME/loadrc/bashrc/ubak.sh'
+ alias ufind='$HOME/loadrc/bashrc/ufind.sh'
+ alias umlet='$HOME/loadrc/bashrc/umlet.sh'
+ alias umletc='$HOME/loadrc/bashrc/umletc.sh'
++alias umount='$HOME/loadrc/bashrc/umount.sh'
+ alias updateProj='$HOME/loadrc/bashrc/update_proj.sh'
+ alias ures='$HOME/loadrc/bashrc/ures.sh'
+ alias usync='$HOME/loadrc/bashrc/usync.sh'
 diff --git a/bashrc/rsleep.sh b/bashrc/rsleep.sh
 index e36482ad..8ad694f7 100755
 --- ./bashrc/rsleep.sh
@@ -36,7 +48,7 @@ index be41d325..8f22cb80 100755
      df -H
  fi
 diff --git a/bashrc/umount.sh b/bashrc/umount.sh
-new file mode 100644
+new file mode 100755
 index 00000000..9c27a8c5
 --- /dev/null
 +++ ./bashrc/umount.sh
