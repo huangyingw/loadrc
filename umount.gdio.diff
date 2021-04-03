@@ -1,0 +1,63 @@
+diff --git a/bashrc/rsleep.sh b/bashrc/rsleep.sh
+index e36482ad..8ad694f7 100755
+--- ./bashrc/rsleep.sh
++++ ./bashrc/rsleep.sh
+@@ -1,7 +1,9 @@
+ #!/bin/zsh
+ target=$(echo "$1" | sed  -e "s/\/$//g")
++
+ if [ -z "$1" ]
+ then
+-    ssh movie "~/loadrc/bashrc/sleep.sh"
++    ssh server "~/loadrc/bashrc/sleep.sh"
+ fi
++
+ ssh "$target" "~/loadrc/bashrc/sleep.sh"
+diff --git a/bashrc/smount.sh b/bashrc/smount.sh
+index be41d325..8f22cb80 100755
+--- ./bashrc/smount.sh
++++ ./bashrc/smount.sh
+@@ -6,16 +6,15 @@ then
+ fi
+ 
+ remoteServer=$(echo "$1" | sed  -e "s/\/$//g")
++mkdir -p ~/"$remoteServer"
+ 
+ if [ $(uname) = "Linux" ]
+ then
+     umount -l ~/"$remoteServer"
+-    mkdir -p ~/"$remoteServer"
+     sshfs "$remoteServer":/ ~/"$remoteServer"
+     df -TH
+ else
+     diskutil unmountDisk force ~/"$remoteServer"
+-    mkdir -p ~/"$remoteServer"
+     sshfs "$remoteServer":/ ~/"$remoteServer"
+     df -H
+ fi
+diff --git a/bashrc/umount.sh b/bashrc/umount.sh
+new file mode 100644
+index 00000000..9c27a8c5
+--- /dev/null
++++ ./bashrc/umount.sh
+@@ -0,0 +1,20 @@
++#!/bin/zsh
++
++if [ -z "$1" ]
++then
++    echo -e "${red}please provide the host name... ${NC}"
++    exit 1
++fi
++
++remoteServer=$(echo "$1" | sed  -e "s/\/$//g")
++
++if [ $(uname) = "Linux" ]
++then
++    umount -l ~/"$remoteServer"
++    ~/loadrc/bashrc/rsleep.sh "$remoteServer"
++    df -TH
++else
++    diskutil unmountDisk force ~/"$remoteServer"
++    ~/loadrc/bashrc/rsleep.sh "$remoteServer"
++    df -H
++fi
