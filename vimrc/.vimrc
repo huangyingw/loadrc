@@ -145,8 +145,6 @@ augroup resCur
     autocmd BufWinEnter * call ResCur()
 augroup END
 
-:command -nargs=1 FF :vertical scscope find f <q-args>
-
 " http://vim.wikia.com/wiki/Copy_filename_to_clipboard
 " Convert slashes to backslashes for Windows.
 " nnoremap fh <c-w>R
