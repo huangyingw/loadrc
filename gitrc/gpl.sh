@@ -21,9 +21,8 @@ done
 
 remote=$(git config gsync.remote)
 branch=$(git config gsync.branch)
+
 if [ -n "$remote" ]
 then
-    git branch "$branch" "$remote"/"$branch" &
-    git fetch "$remote" "$branch":"$branch" &
-    git merge "$branch" &
+    git merge "$remote"/"$branch"
 fi
