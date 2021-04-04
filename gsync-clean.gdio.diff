@@ -1,0 +1,55 @@
+diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
+index 7163d50e..aafec0d4 100755
+--- ./gitrc/dogdio.sh
++++ ./gitrc/dogdio.sh
+@@ -10,7 +10,6 @@ output=$(echo "$output" | sed 's/\//_/g')
+ local_master="$(git config gsync.branch)"
+ remote="$(git config gsync.remote)"
+ 
+-git branch "$local_master" "$remote/$local_master"
+-~/loadrc/gitrc/gdi.sh "$local_master" 2>&1 | tee "$output"  
++~/loadrc/gitrc/gdi.sh "$remote/$local_master" 2>&1 | tee "$output"  
+ sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
+ exit 0
+diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
+index b9a02354..700d6af6 100755
+--- ./gitrc/gdit.sh
++++ ./gitrc/gdit.sh
+@@ -3,14 +3,14 @@ output="$1"
+ current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
+ target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
+ remote="$(git config gsync.remote)"
+-local_master="$(git config gsync.branch)"
++remote_branch="$(git config gsync.branch)"
+ 
+ ~/loadrc/gitrc/discard_unnecessaries.sh
+ git checkout -b "$target_branch" "$remote/$target_branch"
+-git checkout -b "$target_branch" "$local_master"
++git checkout -b "$target_branch" "$remote/$remote_branch"
+ git checkout -f "$target_branch"
+ git branch -u "$remote/$target_branch"
+-git merge -X theirs "$local_master" && \
++git merge -X theirs "$remote/$remote_branch" && \
+     git pull && \
+     git push ; \
+     git checkout "$current_branch" && \
+diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
+index b372cebc..d4b57b31 100755
+--- ./gitrc/gpl.sh
++++ ./gitrc/gpl.sh
+@@ -23,7 +23,5 @@ remote=$(git config gsync.remote)
+ branch=$(git config gsync.branch)
+ if [ -n "$remote" ]
+ then
+-    git branch "$branch" "$remote"/"$branch" &
+-    git fetch "$remote" "$branch":"$branch" &
+-    git merge "$branch" &
++    git merge "$remote"/"$branch"
+ fi
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 92bd094c..31fc10da 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 92bd094c40cda34e5a97452b8aecce1345254ef6
++Subproject commit 31fc10dafefbd6458dfe871a53158559ac15aae2
