@@ -31,7 +31,6 @@ brew install \
     lynx \
     minikube \
     mosh \
-    node \
     openssl \
     rename \
     tig \
