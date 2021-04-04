@@ -343,6 +343,7 @@ function! s:G(args, ...) abort
         windo set wrap
         e
     endif
+    source $MYVIMRC
 endfunction
 
 function! s:Gdev() abort
