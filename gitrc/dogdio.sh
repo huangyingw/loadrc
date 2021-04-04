@@ -10,7 +10,6 @@ output=$(echo "$output" | sed 's/\//_/g')
 local_master="$(git config gsync.branch)"
 remote="$(git config gsync.remote)"
 
-git branch "$local_master" "$remote/$local_master"
-~/loadrc/gitrc/gdi.sh "$local_master" 2>&1 | tee "$output"  
+~/loadrc/gitrc/gdi.sh "$remote/$local_master" 2>&1 | tee "$output"  
 sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
 exit 0
