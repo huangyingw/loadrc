@@ -1,0 +1,19 @@
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 92bd094c..31fc10da 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 92bd094c40cda34e5a97452b8aecce1345254ef6
++Subproject commit 31fc10dafefbd6458dfe871a53158559ac15aae2
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index 58aec787..14f97b5f 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -343,6 +343,7 @@ function! s:G(args, ...) abort
+         windo set wrap
+         e
+     endif
++    source $MYVIMRC
+ endfunction
+ 
+ function! s:Gdev() abort
