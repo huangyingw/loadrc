@@ -2935,4 +2935,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-gsync-clean.gdio.diff
+term.gdio.diff
