@@ -77,13 +77,6 @@ index b372cebc..a2a0c539 100755
 -    git merge "$branch" &
 +    git merge "$remote"/"$remote_branch"
  fi
-diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 7807991f..ec066763 160000
---- ./vimrc/.vim/bundle/vim-fugitive
-+++ ./vimrc/.vim/bundle/vim-fugitive
-@@ -1 +1 @@
--Subproject commit 7807991f8cafa8c4653ce3b5dece8411e7ab42ce
-+Subproject commit ec0667634f8cf570df50de7242b34fa4f7d4583e
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
 index c8e4b6d0..00796bc9 100644
 --- ./vimrc/.vim/plugin/common.vim
