@@ -3,6 +3,10 @@ similarity index 99%
 rename from bashrc/selectMirror.sh
 rename to bashrc/selectmirror.sh
 index ece92b65..02ec584d 100755
+diff --git a/bashrc/tselectMirror.sh b/bashrc/tselectmirror.sh
+similarity index 100%
+rename from bashrc/tselectMirror.sh
+rename to bashrc/tselectmirror.sh
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
 index 7163d50e..4f8edfc6 100755
 --- ./gitrc/dogdio.sh
