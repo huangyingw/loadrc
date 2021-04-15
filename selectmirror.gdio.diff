@@ -1,3 +1,25 @@
+diff --git a/.shellrc b/.shellrc
+index 40f8ba93..52d99984 100755
+--- ./.shellrc
++++ ./.shellrc
+@@ -72,7 +72,7 @@ alias rsync_svn='$HOME/loadrc/bashrc/rsync_svn.sh'
+ alias rsynctype='$HOME/loadrc/bashrc/rsynctype.sh'
+ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
+ alias selectCopy='$HOME/loadrc/bashrc/select_copy.sh'
+-alias selectMirror='$HOME/loadrc/bashrc/selectMirror.sh'
++alias selectmirror='$HOME/loadrc/bashrc/selectmirror.sh'
+ alias sleep='$HOME/loadrc/bashrc/sleep.sh'
+ alias sload='$HOME/loadrc/bashrc/sload.sh'
+ alias smount='$HOME/loadrc/bashrc/smount.sh'
+@@ -90,7 +90,7 @@ alias tmov='$HOME/loadrc/bashrc/tmove.sh'
+ alias tnetsync='$HOME/loadrc/bashrc/tnetsync.sh'
+ alias tosmirror='$HOME/loadrc/bashrc/tosmirror.sh'
+ alias trsync_svn='$HOME/loadrc/bashrc/trsync_svn.sh'
+-alias tselectMirror='$HOME/loadrc/bashrc/tselectMirror.sh'
++alias tselectmirror='$HOME/loadrc/bashrc/tselectmirror.sh'
+ alias tubak='$HOME/loadrc/bashrc/tubak.sh'
+ alias tures='$HOME/loadrc/bashrc/tures.sh'
+ alias tusync='$HOME/loadrc/bashrc/tusync.sh'
 diff --git a/bashrc/mirror.sh b/bashrc/mirror.sh
 index e07b4653..889ade9a 100755
 --- ./bashrc/mirror.sh
