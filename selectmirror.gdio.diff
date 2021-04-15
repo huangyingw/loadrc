@@ -1,12 +1,93 @@
-diff --git a/bashrc/selectMirror.sh b/bashrc/selectmirror.sh
-similarity index 99%
-rename from bashrc/selectMirror.sh
-rename to bashrc/selectmirror.sh
-index ece92b65..02ec584d 100755
-diff --git a/bashrc/tselectMirror.sh b/bashrc/tselectmirror.sh
-similarity index 100%
-rename from bashrc/tselectMirror.sh
-rename to bashrc/tselectmirror.sh
+diff --git a/bashrc/mirror.sh b/bashrc/mirror.sh
+index e07b4653..889ade9a 100755
+--- ./bashrc/mirror.sh
++++ ./bashrc/mirror.sh
+@@ -12,7 +12,7 @@ TARGET=$2
+ ready_file="$SOURCE"/"tmirror.ready"
+ MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
+ 
+-if [ -f ${MIRRORCHECK} ] && [ ! -f ${ready_file} ]
++if [ ! -f ${ready_file} ]
+ then
+     echo -e "${red}tmirror must be run before mirror ... ${NC}"
+     exit 1
+diff --git a/bashrc/selectMirror.sh b/bashrc/selectMirror.sh
+deleted file mode 100755
+index ece92b65..00000000
+--- ./bashrc/selectMirror.sh
++++ /dev/null
+@@ -1,10 +0,0 @@
+-#!/bin/zsh 
+-
+-if [ "$#" -lt 2 ]
+-then
+-  echo -e "${red}Please specify enough parameter ... ${NC}"
+-  exit 1
+-fi
+-SOURCE="$1"
+-TARGET="$2"
+-rsync -aHv --exclude-from=excludeFile --delete-during --force "$SOURCE"/  "$TARGET"/ | tee selectMirror.findresult
+diff --git a/bashrc/selectmirror.sh b/bashrc/selectmirror.sh
+new file mode 100755
+index 00000000..01c61e8a
+--- /dev/null
++++ ./bashrc/selectmirror.sh
+@@ -0,0 +1,20 @@
++#!/bin/zsh 
++
++if [ "$#" -lt 2 ]
++then
++  echo -e "${red}Please specify enough parameter ... ${NC}"
++  exit 1
++fi
++
++SOURCE="$1"
++TARGET="$2"
++
++ready_file="$SOURCE/tselectmirror.ready"
++
++if [ ! -f ${ready_file} ]
++then
++    echo -e "${red}tmirror must be run before mirror ... ${NC}"
++    exit 1
++fi
++
++rsync -aHv --exclude-from="$SOURCE"/excludeFile --delete-during --force "$SOURCE"/  "$TARGET"/
+diff --git a/bashrc/tselectMirror.sh b/bashrc/tselectMirror.sh
+deleted file mode 100755
+index a3d11f44..00000000
+--- ./bashrc/tselectMirror.sh
++++ /dev/null
+@@ -1,10 +0,0 @@
+-#!/bin/zsh 
+-
+-if [ "$#" -lt 2 ]
+-then
+-  echo -e "${red}Please specify enough parameter ... ${NC}"
+-  exit 1
+-fi
+-SOURCE="$1"
+-TARGET="$2"
+-rsync -aHvn --exclude-from=excludeFile --delete-during --force "$SOURCE"/  "$TARGET"/ | tee tselectMirror.findresult
+diff --git a/bashrc/tselectmirror.sh b/bashrc/tselectmirror.sh
+new file mode 100755
+index 00000000..0a70e635
+--- /dev/null
++++ ./bashrc/tselectmirror.sh
+@@ -0,0 +1,13 @@
++#!/bin/zsh 
++
++if [ "$#" -lt 2 ]
++then
++  echo -e "${red}Please specify enough parameter ... ${NC}"
++  exit 1
++fi
++
++SOURCE="$1"
++TARGET="$2"
++ready_file="$SOURCE/tselectmirror.ready"
++
++rsync -aHvn --exclude-from="$SOURCE"/excludeFile --delete-during --force "$SOURCE"/  "$TARGET"/  > "$ready_file" 
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
 index 7163d50e..4f8edfc6 100755
 --- ./gitrc/dogdio.sh
