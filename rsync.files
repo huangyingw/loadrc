@@ -283,6 +283,7 @@
 ./bashrc/osmirror_exclude
 ./bashrc/osmirror_test.sh
 ./bashrc/portList
+./bashrc/post.sh
 ./bashrc/qrsync.sh
 ./bashrc/random_string.sh
 ./bashrc/random_string.test.sh
