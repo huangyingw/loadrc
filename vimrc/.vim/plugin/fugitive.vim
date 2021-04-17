@@ -373,8 +373,8 @@ function! s:Gdi(...) abort
             call fugitive#Diffsplit(0, 1, "vert", '', [])
         elseif tolower(arg1) == 'o'
             let remote = substitute(system("git config gsync.remote"), '\n', '', '')
-            let branch = substitute(system("git config gsync.branch"), '\n', '', '')
-            call fugitive#Diffsplit(1, 0, 'vert', remote . '/' . branch, [remote . '/' . branch])
+            let remote_branch = substitute(system("git config gsync.branch"), '\n', '', '')
+            call fugitive#Diffsplit(1, 0, 'vert', remote . '/' . remote_branch, [remote . '/' . remote_branch])
         else
             call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
         endif

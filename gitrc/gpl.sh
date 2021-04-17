@@ -14,16 +14,15 @@ done
 
 for ss in $(git config --get-all pull.from)
 do
-    remote_branch=$(echo "$ss" | sed  -e "s/\// /g")
-    COMMAND="git pull $remote_branch &"
+    pull_from=$(echo "$ss" | sed  -e "s/\// /g")
+    COMMAND="git pull $pull_from &"
     eval "$COMMAND"
 done
 
 remote=$(git config gsync.remote)
-branch=$(git config gsync.branch)
+remote_branch=$(git config gsync.branch)
+
 if [ -n "$remote" ]
 then
-    git branch "$branch" "$remote"/"$branch" &
-    git fetch "$remote" "$branch":"$branch" &
-    git merge "$branch" &
+    git merge "$remote"/"$remote_branch"
 fi
