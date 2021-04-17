@@ -11,4 +11,3 @@ fi
 
 rsync -aHinv --delete-before --force \
     "$SOURCE" "$TARGET" > "$ready_file"
-nvim "$ready_file"
