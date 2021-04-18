@@ -9,5 +9,5 @@ then
     mkdir -p "$TARGET"
 fi
 
-rsync -aHinv --delete-before --force \
+rsync -aHSvn --delete-before --force \
     "$SOURCE" "$TARGET" > "$ready_file"
