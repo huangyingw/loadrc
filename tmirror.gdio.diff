@@ -1,0 +1,153 @@
+diff --git a/.shellrc b/.shellrc
+index 40f8ba93..52d99984 100755
+--- ./.shellrc
++++ ./.shellrc
+@@ -72,7 +72,7 @@ alias rsync_svn='$HOME/loadrc/bashrc/rsync_svn.sh'
+ alias rsynctype='$HOME/loadrc/bashrc/rsynctype.sh'
+ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
+ alias selectCopy='$HOME/loadrc/bashrc/select_copy.sh'
+-alias selectMirror='$HOME/loadrc/bashrc/selectMirror.sh'
++alias selectmirror='$HOME/loadrc/bashrc/selectmirror.sh'
+ alias sleep='$HOME/loadrc/bashrc/sleep.sh'
+ alias sload='$HOME/loadrc/bashrc/sload.sh'
+ alias smount='$HOME/loadrc/bashrc/smount.sh'
+@@ -90,7 +90,7 @@ alias tmov='$HOME/loadrc/bashrc/tmove.sh'
+ alias tnetsync='$HOME/loadrc/bashrc/tnetsync.sh'
+ alias tosmirror='$HOME/loadrc/bashrc/tosmirror.sh'
+ alias trsync_svn='$HOME/loadrc/bashrc/trsync_svn.sh'
+-alias tselectMirror='$HOME/loadrc/bashrc/tselectMirror.sh'
++alias tselectmirror='$HOME/loadrc/bashrc/tselectmirror.sh'
+ alias tubak='$HOME/loadrc/bashrc/tubak.sh'
+ alias tures='$HOME/loadrc/bashrc/tures.sh'
+ alias tusync='$HOME/loadrc/bashrc/tusync.sh'
+diff --git a/bashrc/mirror.sh b/bashrc/mirror.sh
+index e07b4653..889ade9a 100755
+--- ./bashrc/mirror.sh
++++ ./bashrc/mirror.sh
+@@ -12,7 +12,7 @@ TARGET=$2
+ ready_file="$SOURCE"/"tmirror.ready"
+ MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
+ 
+-if [ -f ${MIRRORCHECK} ] && [ ! -f ${ready_file} ]
++if [ ! -f ${ready_file} ]
+ then
+     echo -e "${red}tmirror must be run before mirror ... ${NC}"
+     exit 1
+diff --git a/bashrc/selectMirror.sh b/bashrc/selectMirror.sh
+deleted file mode 100755
+index ece92b65..00000000
+--- ./bashrc/selectMirror.sh
++++ /dev/null
+@@ -1,10 +0,0 @@
+-#!/bin/zsh 
+-
+-if [ "$#" -lt 2 ]
+-then
+-  echo -e "${red}Please specify enough parameter ... ${NC}"
+-  exit 1
+-fi
+-SOURCE="$1"
+-TARGET="$2"
+-rsync -aHv --exclude-from=excludeFile --delete-during --force "$SOURCE"/  "$TARGET"/ | tee selectMirror.findresult
+diff --git a/bashrc/selectmirror.sh b/bashrc/selectmirror.sh
+new file mode 100755
+index 00000000..01c61e8a
+--- /dev/null
++++ ./bashrc/selectmirror.sh
+@@ -0,0 +1,20 @@
++#!/bin/zsh 
++
++if [ "$#" -lt 2 ]
++then
++  echo -e "${red}Please specify enough parameter ... ${NC}"
++  exit 1
++fi
++
++SOURCE="$1"
++TARGET="$2"
++
++ready_file="$SOURCE/tselectmirror.ready"
++
++if [ ! -f ${ready_file} ]
++then
++    echo -e "${red}tmirror must be run before mirror ... ${NC}"
++    exit 1
++fi
++
++rsync -aHv --exclude-from="$SOURCE"/excludeFile --delete-during --force "$SOURCE"/  "$TARGET"/
+diff --git a/bashrc/tmirror.sh b/bashrc/tmirror.sh
+index 889052d7..ba0e5c68 100755
+--- ./bashrc/tmirror.sh
++++ ./bashrc/tmirror.sh
+@@ -9,6 +9,5 @@ then
+     mkdir -p "$TARGET"
+ fi
+ 
+-rsync -aHinv --delete-before --force \
++rsync -aHSvn --delete-before --force \
+     "$SOURCE" "$TARGET" > "$ready_file"
+-nvim "$ready_file"
+diff --git a/bashrc/tselectMirror.sh b/bashrc/tselectMirror.sh
+deleted file mode 100755
+index a3d11f44..00000000
+--- ./bashrc/tselectMirror.sh
++++ /dev/null
+@@ -1,10 +0,0 @@
+-#!/bin/zsh 
+-
+-if [ "$#" -lt 2 ]
+-then
+-  echo -e "${red}Please specify enough parameter ... ${NC}"
+-  exit 1
+-fi
+-SOURCE="$1"
+-TARGET="$2"
+-rsync -aHvn --exclude-from=excludeFile --delete-during --force "$SOURCE"/  "$TARGET"/ | tee tselectMirror.findresult
+diff --git a/bashrc/tselectmirror.sh b/bashrc/tselectmirror.sh
+new file mode 100755
+index 00000000..0a70e635
+--- /dev/null
++++ ./bashrc/tselectmirror.sh
+@@ -0,0 +1,13 @@
++#!/bin/zsh 
++
++if [ "$#" -lt 2 ]
++then
++  echo -e "${red}Please specify enough parameter ... ${NC}"
++  exit 1
++fi
++
++SOURCE="$1"
++TARGET="$2"
++ready_file="$SOURCE/tselectmirror.ready"
++
++rsync -aHvn --exclude-from="$SOURCE"/excludeFile --delete-during --force "$SOURCE"/  "$TARGET"/  > "$ready_file" 
+diff --git a/install_basic.sh b/install_basic.sh
+index 1ea84863..4e0529f9 100755
+--- ./install_basic.sh
++++ ./install_basic.sh
+@@ -10,7 +10,8 @@ pip install \
+     autoflake \
+     autopep8 \
+     ipynb-py-convert \
+-    pdftotext
++    pdftotext \
++    proxybroker
+ 
+ pip3 install git+https://github.com/gaborvecsei/pdf-split-merge.git
+ 
+diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
+index c8e4b6d0..00796bc9 100644
+--- ./vimrc/.vim/plugin/common.vim
++++ ./vimrc/.vim/plugin/common.vim
+@@ -163,6 +163,10 @@ function! Windowdir()
+     else
+         let unislash = fnamemodify(bufname(winbufnr(0)), ':p:h')
+ 
++        if unislash =~ '^term://'
++            let unislash = getcwd()
++        endif
++
+         if unislash =~ '^fugitive:/'
+             let unislash = substitute(unislash, '^fugitive:\/\/', '', 'g')
+             let unislash = substitute(unislash, '.git.*', '', 'g') 
