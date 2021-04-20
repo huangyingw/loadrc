@@ -2,7 +2,7 @@
 
 ~/loadrc/gitrc/include_gitconfig.sh
 git remote update &
-~/loadrc/gitrc/discard_unnecessaries.sh
+git checkout *.gdio.diff
 git pull &
 currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 
