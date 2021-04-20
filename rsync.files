@@ -2936,4 +2936,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-selectmirror.gdio.diff
+dev.gdio.diff
