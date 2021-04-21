@@ -256,7 +256,7 @@ endfunction
 function! s:Gbra() abort
     let worktree = Cd2Worktree()
     silent exec '!~/loadrc/gitrc/gbra.sh'
-    call OpenOrSwitch('gbra.findresult', 'vs')
+    call OpenOrSwitch('gbra.log', 'vs')
 endfunction
 
 function! s:Gbrs() abort
