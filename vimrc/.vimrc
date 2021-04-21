@@ -276,3 +276,4 @@ let g:tex_flavor = 'latex'
 
 " add @ to cfile handle
 set isfname+=@-@
+set history=10000
