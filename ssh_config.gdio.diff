@@ -1,0 +1,8 @@
+diff --git a/linux_links/etc/ssh/ssh_config b/linux/etc/ssh/ssh_config
+similarity index 100%
+rename from linux_links/etc/ssh/ssh_config
+rename to linux/etc/ssh/ssh_config
+diff --git a/linux_links/etc/ssh/sshd_config b/linux/etc/ssh/sshd_config
+similarity index 100%
+rename from linux_links/etc/ssh/sshd_config
+rename to linux/etc/ssh/sshd_config
