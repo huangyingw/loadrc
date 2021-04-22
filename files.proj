@@ -579,7 +579,6 @@
 "./ipynbrc/jupytext.sh"
 "./ipynbrc/jupytext.test.sh"
 "./iterm2rc/movescreen.py"
-"./jdupes/.gitconfig"
 "./jdupes/.gitignore"
 "./keys/.gitconfig"
 "./kubernetesrc/install.sh"
