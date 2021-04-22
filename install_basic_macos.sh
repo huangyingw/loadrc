@@ -24,6 +24,7 @@ brew install \
     hub \
     iperf \
     iperf3 \
+    jq \
     jupyterlab \
     kubectl \
     kubernetes-cli \
@@ -35,6 +36,7 @@ brew install \
     rename \
     tig \
     tmux \
+    w3m \
     wakeonlan \
     watch \
     wget \
