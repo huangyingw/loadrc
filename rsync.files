@@ -620,14 +620,14 @@
 ./leetcoderc/KdiffFile.py
 ./leetcoderc/submit.sh
 ./linux.conf
+./linux/etc/ssh/ssh_config
+./linux/etc/ssh/sshd_config
 ./linux/etc/sudoers
 ./linux/usr/lib/systemd/system/NetworkManager-wait-online.service
 ./linux_links/etc/crypttab
 ./linux_links/etc/default/grub
 ./linux_links/etc/resolvconf/resolv.conf.d/base
 ./linux_links/etc/resolvconf/resolv.conf.d/head
-./linux_links/etc/ssh/ssh_config
-./linux_links/etc/ssh/sshd_config
 ./mac_sync.list
 ./macos.conf
 ./macos/etc/sudoers
@@ -2935,4 +2935,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-dev.gdio.diff
+ssh_config.gdio.diff
