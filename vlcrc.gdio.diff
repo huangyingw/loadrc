@@ -78,3 +78,10 @@ index adb3ad5a..30134b49 100644
  [svcdsub] # Philips OGT (SVCD subtitle) decoder
  
  [ci_filters] # Mac OS X hardware video filters
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 768e6b6e..dba38728 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 768e6b6ec2b17273bd0cb943ece3451a5ff4bd2b
++Subproject commit dba38728e665c37417c6d37d62d1329b421973c7
