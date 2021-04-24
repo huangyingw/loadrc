@@ -78,6 +78,19 @@ index adb3ad5a..30134b49 100644
  [svcdsub] # Philips OGT (SVCD subtitle) decoder
  
  [ci_filters] # Mac OS X hardware video filters
+diff --git a/deploy_configurations.sh b/deploy_configurations.sh
+index 8f62534c..fe78c517 100755
+--- ./deploy_configurations.sh
++++ ./deploy_configurations.sh
+@@ -28,7 +28,7 @@ mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/pythonrc/setup.cfg  ~/setup.cfg
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.hgrc ~/.hgrc
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.hgignore ~/.hgignore
+-~/loadrc/bashrc/ln_fs.sh ~/loadrc/Library/Preferences/org.videolan.vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
++# cp -fv ~/loadrc/bashrc/ln_fs.sh ~/loadrc/Library/Preferences/org.videolan.vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/iterm2rc/movescreen.py ~/Library/ApplicationSupport/iTerm2/Scripts/movescreen/movescreen/movescreen.py
+ #~/loadrc/bashrc/ln_fs.sh ~/loadrc/.kdiff3rc ~/.kdiff3rc
+ 
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
 index 768e6b6e..dba38728 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
