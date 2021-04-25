@@ -4,5 +4,5 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
 gofish install helm
-helm repo add stable https://kubernetes-charts.storage.googleapis.com
-helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com
+helm repo add stable https://charts.helm.sh/stable
+helm repo add incubator https://charts.helm.sh/incubator
