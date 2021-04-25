@@ -91,7 +91,6 @@ function! PlayVideo()
         return 0
     endif
 
-    call asyncrun#stop('<bang>')
     let line = getline('.')
     let line = substitute(line, '^[^"]', '"' . line[0], '')
     let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
