@@ -1,0 +1,33 @@
+diff --git a/gitrc/gbrs.sh b/gitrc/gbrs.sh
+index 9b35c0c4..a214d316 100755
+--- ./gitrc/gbrs.sh
++++ ./gitrc/gbrs.sh
+@@ -1,2 +1,2 @@
+ #!/bin/zsh
+-git branch --contains "$1"
++git branch --sort=-committerdate | tee gbrs.findresult 
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index e969fa0e..58aec787 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -23,6 +23,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbr :e
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbra :execute s:Gbra()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbrd :execute s:Gbrd(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbrm :execute s:Gbrm(<f-args>)
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbrs :execute s:Gbrs()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean :execute s:Gclean()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gco :execute s:Gco(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcob :execute s:Gcob(<f-args>)
+@@ -258,6 +259,12 @@ function! s:Gbra() abort
+     call OpenOrSwitch('gbra.findresult', 'vs')
+ endfunction
+ 
++function! s:Gbrs() abort
++    let worktree = Cd2Worktree()
++    silent exec '!~/loadrc/gitrc/gbrs.sh'
++    call OpenOrSwitch('gbrs.findresult', 'vs')
++endfunction
++
+ function! s:Gs() abort
+     if expand('%:p') =~ '^fugitive:/'
+         let indexFolder = substitute(expand('%:p'), '^fugitive:\/\/', '', 'g')

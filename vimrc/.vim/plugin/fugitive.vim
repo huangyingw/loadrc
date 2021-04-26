@@ -23,6 +23,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbr :e
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbra :execute s:Gbra()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbrd :execute s:Gbrd(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbrm :execute s:Gbrm(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbrs :execute s:Gbrs()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean :execute s:Gclean()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gco :execute s:Gco(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcob :execute s:Gcob(<f-args>)
@@ -68,6 +69,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject KdiffFile :execute s:KdiffFile()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Split :execute s:Split()
@@ -254,7 +256,13 @@ endfunction
 function! s:Gbra() abort
     let worktree = Cd2Worktree()
     silent exec '!~/loadrc/gitrc/gbra.sh'
-    call OpenOrSwitch('gbra.findresult', 'vs')
+    call OpenOrSwitch('gbra.log', 'vs')
+endfunction
+
+function! s:Gbrs() abort
+    let worktree = Cd2Worktree()
+    silent exec '!~/loadrc/gitrc/gbrs.sh'
+    call OpenOrSwitch('gbrs.findresult', 'vs')
 endfunction
 
 function! s:Gs() abort
@@ -365,8 +373,8 @@ function! s:Gdi(...) abort
             call fugitive#Diffsplit(0, 1, "vert", '', [])
         elseif tolower(arg1) == 'o'
             let remote = substitute(system("git config gsync.remote"), '\n', '', '')
-            let branch = substitute(system("git config gsync.branch"), '\n', '', '')
-            call fugitive#Diffsplit(1, 0, 'vert', remote . '/' . branch, [remote . '/' . branch])
+            let remote_branch = substitute(system("git config gsync.branch"), '\n', '', '')
+            call fugitive#Diffsplit(1, 0, 'vert', remote . '/' . remote_branch, [remote . '/' . remote_branch])
         else
             call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
         endif
@@ -660,6 +668,18 @@ endfunction
 function! s:Gfix() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/gfix.sh'
+endfunction
+
+function! s:Reapply() abort
+    if (expand("%") !~ '.*gdio.diff')
+        echom 'Please only run on *gdio.diff!!!'
+        return 0
+    endif
+
+    let worktree = Cd2Worktree()
+    exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
+    call s:Gs()
+    call s:Gdi()
 endfunction
 
 function! s:Split() abort

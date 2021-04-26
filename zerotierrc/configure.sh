@@ -9,7 +9,7 @@ deploy_configs() {
 
     if [ -f "$SOURCE" ]
     then
-        cp -fv --remove-destination "$SOURCE" "$TARGET"
+        sudo cp -fv "$SOURCE" "$TARGET"
     fi
 }
 

@@ -12,7 +12,7 @@ TARGET=$2
 ready_file="$SOURCE"/"tmirror.ready"
 MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
 
-if [ -f ${MIRRORCHECK} ] && [ ! -f ${ready_file} ]
+if [ ! -f ${ready_file} ]
 then
     echo -e "${red}tmirror must be run before mirror ... ${NC}"
     exit 1
