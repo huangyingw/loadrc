@@ -1,5 +1,6 @@
 #!/bin/zsh
-file="$1"
+
+file=$(realpath "$1")
 target="$1.sh"
 
 if [ ! -f "$target" ]

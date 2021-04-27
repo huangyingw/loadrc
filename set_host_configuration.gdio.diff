@@ -1,0 +1,16 @@
+diff --git a/set_host_configuration.sh b/set_host_configuration.sh
+index f5bc08ef..4e92027e 100755
+--- ./set_host_configuration.sh
++++ ./set_host_configuration.sh
+@@ -8,6 +8,11 @@ do \
+     ~/loadrc/bashrc/ln_fs.sh "$ss" "/$(echo "$ss" | sed "s/host_links\/`hostname`\///g")"; \
+ done
+ 
++find hosts/`hostname`/ -type f | while read ss; \
++do \
++    sudo cp -fv "$ss" "/$(echo "$ss" | sed "s/hosts\/`hostname`\///g")"; \
++done
++
+ HOSTTODOS=~/loadrc/host_links/"`hostname`/todos.sh"
+ if [ -f "$HOSTTODOS" ]
+ then

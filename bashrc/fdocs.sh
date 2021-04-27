@@ -2,7 +2,7 @@
 
 FdocsInclude="fdocs.include"
 FdocsExclude="fdocs.exclude"
-TARGET="fdocs.list"
+TARGET="fdocs.list.bak"
 
 if [ ! -f "$FdocsInclude" ] || [ ! -f "$FdocsExclude" ]
 then
@@ -27,5 +27,6 @@ do
     or="-o"
 done < "$FdocsExclude"
 
-find . "(" "${exclude_params[@]}" ")" -a -prune -o "(" "${include_params[@]}" ")" -type f -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET"
-sort -u "$TARGET" -o "$TARGET"
+find . "(" "${exclude_params[@]}" ")" -a -prune -o "(" "${include_params[@]}" ")" -type f -print | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
+    sort -u "$TARGET" -o "$TARGET" && \
+    cp -fv "$TARGET" fdocs.list

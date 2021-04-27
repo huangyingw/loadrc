@@ -5,3 +5,5 @@ My maps to achieve this:
 nnoremap <Leader>gh :Gsdiff<CR>:windo set wrap<CR>
 nnoremap <Leader>gv :Gvdiff<CR>:windo set wrap<CR>
 My default settting is set wrap, so the idea was to recover the setting after using Gsdiff and Gvdiff
+
+./vimrc/.vim/bundle/nvim-yarp/autoload/yarp/core.vim:104:        call self.error('try_notify ' . a:method . ' failed, job is dead')

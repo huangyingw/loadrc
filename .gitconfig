@@ -51,6 +51,8 @@
     remote = origin
     branch = dev
 [gdif]
+    ignore = ./bashrc/cscope_old.sh
+    ignore = ./bashrc/update_proj_old.sh
     ignore = .ssh
     ignore = jdupes
     ignore = oh-my-zsh
@@ -60,8 +62,17 @@
 [branch "gdi2"]
     remote = origin
     merge = refs/heads/gdi2
+[branch "fvideos"]
+    remote = origin
+    merge = refs/heads/fvideos
 [branch "gdif"]
     remote = origin
     merge = refs/heads/gdif
 [pull]
     from = origin/dev
+[branch "mirror"]
+    remote = origin
+    merge = refs/heads/mirror
+[branch "term"]
+    remote = origin
+    merge = refs/heads/term

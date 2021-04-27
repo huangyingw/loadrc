@@ -1,0 +1,48 @@
+diff --git a/bashrc/mirror.sh b/bashrc/mirror.sh
+index 55391857..e07b4653 100755
+--- ./bashrc/mirror.sh
++++ ./bashrc/mirror.sh
+@@ -9,7 +9,7 @@ fi
+ SOURCE=$1
+ TARGET=$2
+ 
+-ready_file="${TARGET}"/"tmirror.ready"
++ready_file="$SOURCE"/"tmirror.ready"
+ MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
+ 
+ if [ -f ${MIRRORCHECK} ] && [ ! -f ${ready_file} ]
+@@ -35,12 +35,9 @@ then
+     mkdir -p "${TARGET}"
+ fi
+ 
++rm "$ready_file"
+ rsync -aHSv --progress --delete-before --force \
+     "${SOURCE}/" "${TARGET}/" && \
+-    if [ -f "${ready_file}" ] ; \
+-    then \
+-        rm "${ready_file}" ; \
+-    fi && \
+     if [ -f "${MIRRORCHECK}" ] ; \
+     then \
+         ~/loadrc/bashrc/sleep.sh ; \
+diff --git a/bashrc/tmirror.sh b/bashrc/tmirror.sh
+index 8516054e..889052d7 100755
+--- ./bashrc/tmirror.sh
++++ ./bashrc/tmirror.sh
+@@ -2,7 +2,8 @@
+ SOURCE=$1
+ TARGET=$2
+ 
+-ready_file="$TARGET"/"tmirror.ready"
++ready_file="$SOURCE"/"tmirror.ready"
++
+ if [ ! -d "$TARGET" ]
+ then
+     mkdir -p "$TARGET"
+@@ -10,5 +11,4 @@ fi
+ 
+ rsync -aHinv --delete-before --force \
+     "$SOURCE" "$TARGET" > "$ready_file"
+-cp -fv "$ready_file" ~/loadrc/tmirror.ready
+-nvim ~/loadrc/tmirror.ready 
++nvim "$ready_file"

@@ -11,6 +11,7 @@ fi
 
 ./install_prerequisite.sh
 ./install_nodejs.sh
+./install_time_machine.sh
 ./enpass_install.sh
 ./nxrc/install.sh
 ./kubernetesrc/install.sh

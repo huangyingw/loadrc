@@ -1,0 +1,21 @@
+diff --git a/gitrc/.globalgitignore b/gitrc/.globalgitignore
+index 124d3757..b7d59f68 100755
+--- ./gitrc/.globalgitignore
++++ ./gitrc/.globalgitignore
+@@ -69,3 +69,4 @@ setup.cfg
+ prunefix.rsync
+ rsync.files
+ ncscopefile.*
++gbra.log
+diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
+index aa7dd6d1..892fab7b 100644
+--- ./host_links/mini/etc/hosts
++++ ./host_links/mini/etc/hosts
+@@ -16,6 +16,7 @@
+ 172.27.68.119 imac
+ 172.27.118.58 vagrant
+ 192.168.31.99 mldonkey
++192.168.123.203 u2004
+ 
+ # The following lines are desirable for IPv6 capable hosts
+ ::1     ip6-localhost ip6-loopback

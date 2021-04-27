@@ -140,7 +140,7 @@ function! VRun()
         let b:to_run = b:to_run . '.sh'
     endif
 
-    let b:csdbpath = Cd2ProjectRoot("files.proj")
+    let b:csdbpath = Cd2Worktree()
     let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
 
@@ -189,6 +189,7 @@ function! CSCSearch(num)
     let b:result = GetEscapedResult(keyword)
     silent exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "' .  a:num . '" ' . '"' . b:result . '"'
     call OpenOrSwitch(b:result . '.findresult', 'vs')
+    set winwidth=999999
     call HighlightKeyword(keyword)
 endfunction
 
@@ -370,7 +371,7 @@ nnoremap <leader>l :TlistClose<CR>:TlistToggle<cr>
 nnoremap <leader>L :TlistClose<cr>
 nnoremap hh <c-w>h
 nnoremap ll <c-w>l
-nnoremap mm :call SwitchWinSize()<cr> 
+nnoremap mn :call SwitchWinSize()<cr> 
 nnoremap ff <c-f>
 nnoremap vv <c-b>
 nnoremap <c-l> l

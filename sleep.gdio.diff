@@ -1,0 +1,15 @@
+diff --git a/bashrc/sleep.sh b/bashrc/sleep.sh
+index 7bda798e..4f4f20d8 100755
+--- ./bashrc/sleep.sh
++++ ./bashrc/sleep.sh
+@@ -1,7 +1,9 @@
+ #!/bin/zsh
++
+ if [ $(uname) = "Darwin" ]
+ then
+-    pmset sleepnow
++    pmset displaysleepnow
++    #pmset sleepnow
+ else
+     ~/loadrc/gpurc/kill_nvidia.sh
+     pm-suspend

@@ -22,6 +22,9 @@ brew install \
     hg \
     htop \
     hub \
+    iperf \
+    iperf3 \
+    jq \
     jupyterlab \
     kubectl \
     kubernetes-cli \
@@ -29,11 +32,11 @@ brew install \
     lynx \
     minikube \
     mosh \
-    node \
     openssl \
     rename \
     tig \
     tmux \
+    w3m \
     wakeonlan \
     watch \
     wget \

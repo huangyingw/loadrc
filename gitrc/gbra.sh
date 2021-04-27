@@ -1,2 +1,3 @@
 #!/bin/zsh
-git branch -a | tee gbra.findresult
+git remote update
+git branch -a --no-merged | tee gbra.log
