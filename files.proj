@@ -653,6 +653,7 @@
 "./oh-my-zsh/.gitignore"
 "./oh-my-zsh/custom/plugins/zsh-nvm/.gitignore"
 "./oh-my-zsh/plugins/chucknorris/.gitignore"
+"./oh-my-zsh/plugins/deno/.gitignore"
 "./oh-my-zsh/plugins/hitchhiker/.gitignore"
 "./openrc.sh"
 "./osxrc/restart_bluetooth.sh"
@@ -2936,4 +2937,4 @@
 "./zerotierrc/install.sh"
 "./zerotierrc/restart.sh"
 "./zerotierrc/zerotierrc.conf"
-"dev.gdio.diff"
+"vrun.gdio.diff"
