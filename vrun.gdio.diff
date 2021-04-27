@@ -1,35 +1,68 @@
-diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
-index 885df571..50886663 100644
---- ./host_links/server/etc/hosts
-+++ ./host_links/server/etc/hosts
-@@ -4,7 +4,7 @@
- 192.168.31.111 u2004
- 172.27.217.162 localhost.imvu.com
- 192.168.31.140 mini
--192.168.31.149 minds
-+192.168.123.132 minds
- 192.168.31.153 gluster00
- 192.168.31.129 gluster01
- 192.168.31.115 gluster02
-diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
-index 1ad765d3..c56304f2 100755
---- ./vishrc/vrun.sh
-+++ ./vishrc/vrun.sh
-@@ -46,6 +46,9 @@ case $extension in
-             ~/loadrc/sqlrc/xsql.sh "$file" "$2"
-         fi
-         ;;
-+    bak)
-+       zsh "$file"
-+        ;;
-     findresult)
-        zsh "$file"
-         ;;
-@@ -57,7 +60,6 @@ case $extension in
-         then
-             ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
-         else
--            . ~/loadrc/.loadrc
-             "$file"
-         fi
-         ;;
+diff --git a/bashrc/post.sh b/bashrc/post.sh
+index 6877e701..cfd7548a 100644
+--- ./bashrc/post.sh
++++ ./bashrc/post.sh
+@@ -9,6 +9,7 @@ curl \
+     -d "preview_image=$(cat /Users/yhuang/imvu_code/website1/test_images/test20x50.png | base64)" \
+     https://api.imvu.com/product/product-53328306 > product-53328306-test20x50-post.json
+ 
++# recomment Content-Type: application/json version, to avoid some weird issue of losing '+', '=' characters.
+ curl \
+     -H "x-imvu-sauce: xxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
+     -H "Cookie: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
+diff --git a/error b/error
+index c0e586ef..2ab3ca3d 100644
+--- ./error
++++ ./error
+@@ -64,3 +64,4 @@ Cought anything: Vim(cd):E472: Command failed
+ [ncm2_pyclang_proc@yarp] try_notify cache_add failed, job is dead
+ 
+ The legacy SnipMate parser is deprecated. Please see :h SnipMate-deprecate.
++[ncm2_tmux@yarp] subprocess.TimeoutExpired: Command '['tmux', 'display-message', '-p', '#{session_id}']' timed out after 5 seconds
+diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
+index a0a7e0e3..ca91dbaf 100755
+--- ./gitrc/.gitconfig
++++ ./gitrc/.gitconfig
+@@ -54,8 +54,7 @@
+ [pull]
+     default = current
+ [gdif]
+-    ignore = *.gdio.diff
+-    ignore = *.gdit.diff
++    ignore = *.diff
+     ignore = .gitconfig
+     ignore = .login
+     ignore = COMMIT_EDITMSG
+diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
+index 8c6b7954..dd722f8d 160000
+--- ./vimrc/.vim/bundle/vim-autoformat
++++ ./vimrc/.vim/bundle/vim-autoformat
+@@ -1 +1 @@
+-Subproject commit 8c6b79542fa875400bb03d82c8feed0d5fffc5d9
++Subproject commit dd722f8d5d94145bef6e397ee514e751169fba32
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 768e6b6e..ff450cc6 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 768e6b6ec2b17273bd0cb943ece3451a5ff4bd2b
++Subproject commit ff450cc69fd0561dbaef1eac803b47df028c4d34
+diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
+index 9c3c831a..c171b868 160000
+--- ./vimrc/.vim/bundle/vim-rails
++++ ./vimrc/.vim/bundle/vim-rails
+@@ -1 +1 @@
+-Subproject commit 9c3c831a089c7b4dcc4ebd8b8c73f366f754c976
++Subproject commit c171b86845a64d9ed3f5b9b4040f1164be37f115
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index 6e912403..d2f222d9 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -142,6 +142,7 @@ function! VRun()
+ 
+     let b:csdbpath = Cd2Worktree()
+     let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
++    silent exec '!~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult'
+     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
+ 
+     if b:to_run != 'gbil.log'

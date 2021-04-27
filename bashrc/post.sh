@@ -9,6 +9,7 @@ curl \
     -d "preview_image=$(cat /Users/yhuang/imvu_code/website1/test_images/test20x50.png | base64)" \
     https://api.imvu.com/product/product-53328306 > product-53328306-test20x50-post.json
 
+# recomment Content-Type: application/json version, to avoid some weird issue of losing '+', '=' characters.
 curl \
     -H "x-imvu-sauce: xxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
     -H "Cookie: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
