@@ -579,7 +579,6 @@
 ./ipynbrc/jupytext.sh
 ./ipynbrc/jupytext.test.sh
 ./iterm2rc/movescreen.py
-./jdupes/.gitconfig
 ./jdupes/.gitignore
 ./keys/.gitconfig
 ./kubernetesrc/install.sh
@@ -653,6 +652,7 @@
 ./oh-my-zsh/.gitignore
 ./oh-my-zsh/custom/plugins/zsh-nvm/.gitignore
 ./oh-my-zsh/plugins/chucknorris/.gitignore
+./oh-my-zsh/plugins/deno/.gitignore
 ./oh-my-zsh/plugins/hitchhiker/.gitignore
 ./openrc.sh
 ./osxrc/restart_bluetooth.sh
