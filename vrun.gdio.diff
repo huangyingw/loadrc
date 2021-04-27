@@ -34,12 +34,12 @@ index a0a7e0e3..ca91dbaf 100755
      ignore = .login
      ignore = COMMIT_EDITMSG
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index 8c6b7954..87508529 160000
+index 8c6b7954..dd722f8d 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit 8c6b79542fa875400bb03d82c8feed0d5fffc5d9
-+Subproject commit 87508529f43a7d74f2d1e685a05bda324f88c908-dirty
++Subproject commit dd722f8d5d94145bef6e397ee514e751169fba32
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
 index 768e6b6e..ff450cc6 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
