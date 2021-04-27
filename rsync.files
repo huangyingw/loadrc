@@ -579,7 +579,6 @@
 ./ipynbrc/jupytext.sh
 ./ipynbrc/jupytext.test.sh
 ./iterm2rc/movescreen.py
-./jdupes/.gitconfig
 ./jdupes/.gitignore
 ./keys/.gitconfig
 ./kubernetesrc/install.sh
@@ -2938,4 +2937,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-vmsetup.gdio.diff
+dev.gdio.diff
