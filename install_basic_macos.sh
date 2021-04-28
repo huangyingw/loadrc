@@ -34,6 +34,7 @@ brew install \
     node \
     openssl \
     rename \
+    sshfs \
     tig \
     tmux \
     wakeonlan \
