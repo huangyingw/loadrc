@@ -1,2 +1,2 @@
 #!/bin/zsh
-git branch --contains "$1"
+git branch --sort=-committerdate | tee gbrs.findresult 

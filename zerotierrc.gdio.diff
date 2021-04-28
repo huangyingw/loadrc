@@ -1,0 +1,13 @@
+diff --git a/zerotierrc/configure.sh b/zerotierrc/configure.sh
+index 82ddf92f..1552060a 100755
+--- ./zerotierrc/configure.sh
++++ ./zerotierrc/configure.sh
+@@ -9,7 +9,7 @@ deploy_configs() {
+ 
+     if [ -f "$SOURCE" ]
+     then
+-        cp -fv --remove-destination "$SOURCE" "$TARGET"
++        sudo cp -fv "$SOURCE" "$TARGET"
+     fi
+ }
+ 

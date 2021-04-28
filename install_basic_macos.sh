@@ -24,6 +24,7 @@ brew install \
     hub \
     iperf \
     iperf3 \
+    jq \
     jupyterlab \
     kubectl \
     kubernetes-cli \
@@ -31,12 +32,12 @@ brew install \
     lynx \
     minikube \
     mosh \
-    node \
     openssl \
     rename \
     sshfs \
     tig \
     tmux \
+    w3m \
     wakeonlan \
     watch \
     wget \
@@ -47,6 +48,8 @@ brew cask install \
     libreoffice \
     lynxlet \
     wkhtmltopdf
+
+brew install --cask osxfuse
 
 sudo easy_install pip
 sudo pip install --upgrade pip

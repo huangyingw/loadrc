@@ -1,0 +1,13 @@
+diff --git a/install_basic_macos.sh b/install_basic_macos.sh
+index f3e2e567..8e3569d5 100755
+--- ./install_basic_macos.sh
++++ ./install_basic_macos.sh
+@@ -48,6 +48,8 @@ brew cask install \
+     lynxlet \
+     wkhtmltopdf
+ 
++brew install --cask osxfuse
++
+ sudo easy_install pip
+ sudo pip install --upgrade pip
+ 
