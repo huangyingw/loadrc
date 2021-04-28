@@ -10,6 +10,7 @@ fi
 
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
+brew install --cask osxfuse
 brew install \
     Caskroom/cask/xquartz \
     astyle \
@@ -48,8 +49,6 @@ brew cask install \
     libreoffice \
     lynxlet \
     wkhtmltopdf
-
-brew install --cask osxfuse
 
 sudo easy_install pip
 sudo pip install --upgrade pip
