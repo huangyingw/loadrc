@@ -21,9 +21,3 @@ index 601480d6..e2e8aa4b 100755
  
 -echo "git diff --ignore-space-at-eol -b -w --ignore-blank-lines"
 +echo "git diff --ignore-space-at-eol -b -w --ignore-blank-lines --binary"
-diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
---- ./vimrc/.vim/bundle/bash-support.vim
-+++ ./vimrc/.vim/bundle/bash-support.vim
-@@ -1 +1 @@
--Subproject commit 1d4a909f46698906b16d711aeb260663f4c4794a
-+Subproject commit 1d4a909f46698906b16d711aeb260663f4c4794a-dirty
