@@ -48,6 +48,8 @@ brew cask install \
     lynxlet \
     wkhtmltopdf
 
+brew install --cask osxfuse
+
 sudo easy_install pip
 sudo pip install --upgrade pip
 
