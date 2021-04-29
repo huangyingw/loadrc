@@ -2937,4 +2937,4 @@
 "./zerotierrc/install.sh"
 "./zerotierrc/restart.sh"
 "./zerotierrc/zerotierrc.conf"
-"vlcrc.gdio.diff"
+"dev.gdio.diff"
