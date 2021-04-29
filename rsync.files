@@ -598,6 +598,7 @@
 ./kvmrc/vmount.sh
 ./kvmrc/vmount_test.sh
 ./kvmrc/vmsetup.sh
+./kvmrc/vmsetup_test.sh
 ./kvmrc/vreset.sh
 ./kvmrc/vrestore.sh
 ./kvmrc/vresume.sh
