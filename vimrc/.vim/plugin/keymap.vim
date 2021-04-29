@@ -91,7 +91,6 @@ function! PlayVideo()
         return 0
     endif
 
-    call asyncrun#stop('<bang>')
     let line = getline('.')
     let line = substitute(line, '^[^"]', '"' . line[0], '')
     let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
@@ -142,6 +141,7 @@ function! VRun()
 
     let b:csdbpath = Cd2Worktree()
     let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
+    silent exec '!~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult'
     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
 
     if b:to_run != 'gbil.log'

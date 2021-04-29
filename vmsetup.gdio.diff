@@ -1,0 +1,50 @@
+diff --git a/kvmrc/uvmount.sh b/kvmrc/uvmount.sh
+index 4ccd45a3..57e99ab9 100755
+--- ./kvmrc/uvmount.sh
++++ ./kvmrc/uvmount.sh
+@@ -4,4 +4,3 @@ do
+     umount $ss
+ done
+ qemu-nbd --disconnect /dev/nbd0
+-df -TH
+diff --git a/kvmrc/vmsetup.sh b/kvmrc/vmsetup.sh
+index 1c1712b5..566fe22b 100755
+--- ./kvmrc/vmsetup.sh
++++ ./kvmrc/vmsetup.sh
+@@ -11,8 +11,10 @@ nbd0p=$(df -TH | awk '/\/dev\/nbd0.*ext4/{print $7}')
+ 
+ if [ -n "$nbd0p" ]
+ then
++    mkdir -p "$nbd0p"/root/loadrc/ 
+     rsync -aHSv --progress --delete-before --force ~/.ssh/ "$nbd0p"/root/.ssh/
+     rsync -aHSv --progress ~/loadrc/.tmux.conf "$nbd0p"/root/
++    rsync -aHSv --progress ~/loadrc/ "$nbd0p"/root/loadrc/
+     rsync -aHSv --progress ~/loadrc/linux/etc/ssh/ "$nbd0p"/etc/ssh/
+ fi
+ 
+diff --git a/kvmrc/vmsetup_test.sh b/kvmrc/vmsetup_test.sh
+new file mode 100755
+index 00000000..2dc7c50d
+--- /dev/null
++++ ./kvmrc/vmsetup_test.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++./vmsetup.sh /var/lib/libvirt/images/u2004.qcow2
+diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
+index 8c6b7954..bf8e2a98 160000
+--- ./vimrc/.vim/bundle/vim-autoformat
++++ ./vimrc/.vim/bundle/vim-autoformat
+@@ -1 +1 @@
+-Subproject commit 8c6b79542fa875400bb03d82c8feed0d5fffc5d9
++Subproject commit bf8e2a98fa0eef2afb1b72b5af0495e6e6998e9a
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 768e6b6e..ff450cc6 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 768e6b6ec2b17273bd0cb943ece3451a5ff4bd2b
++Subproject commit ff450cc69fd0561dbaef1eac803b47df028c4d34
