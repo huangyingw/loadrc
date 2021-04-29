@@ -679,7 +679,6 @@ function! s:Reapply() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
     call s:Gs()
-    call s:Gdi()
 endfunction
 
 function! s:Split() abort
