@@ -1,59 +1,12 @@
-diff --git a/gitrc/gbil.log b/gitrc/gbil.log
-new file mode 100644
-index 00000000..dc550f9c
---- /dev/null
-+++ ./gitrc/gbil.log
-@@ -0,0 +1,23 @@
-+git bisect start
-+# good: [915a52c76e343eb039dbd08d7ace5867fde42004] n
-+git bisect good 915a52c76e343eb039dbd08d7ace5867fde42004
-+# bad: [a9d3a7df8173fc7bc7cae9330d3652f5f1fd1840] n
-+git bisect bad a9d3a7df8173fc7bc7cae9330d3652f5f1fd1840
-+# bad: [a9d3a7df8173fc7bc7cae9330d3652f5f1fd1840] n
-+git bisect bad a9d3a7df8173fc7bc7cae9330d3652f5f1fd1840
-+# good: [b552a70922ad991cfdce6f1a8f3eb5f869b4fd58] n
-+git bisect good b552a70922ad991cfdce6f1a8f3eb5f869b4fd58
-+# skip: [2502ad38d7ee27e02c3b193386aab3e741db1ff5] Merge branch 'master' into WEB-13701_ProductsTaxonomy_Spike
-+git bisect skip 2502ad38d7ee27e02c3b193386aab3e741db1ff5
-+# skip: [946074bef4672b00036712847eab5822b4cb87ad] WEB-13701 - Made a few chanes for clean-up after reviewing the whole diff.
-+git bisect skip 946074bef4672b00036712847eab5822b4cb87ad
-+# skip: [9d508d1d22a496bc238eb6acd86a95dfd0ec2a56] Try double-decoding because things are dumb.
-+git bisect skip 9d508d1d22a496bc238eb6acd86a95dfd0ec2a56
-+# skip: [e71ccc3c7f4e80ae957245e807986eef7a6ffd49] Merge branch 'master' into WEB-13701_ProductsTaxonomy_Spike
-+git bisect skip e71ccc3c7f4e80ae957245e807986eef7a6ffd49
-+# skip: [6cdfe7e5cbaca58791a1212727862a2ab7f74f99] WEB-13701 - Implementation complete.  A test was written, but may need more.  Need to try this on a QA Web.
-+git bisect skip 6cdfe7e5cbaca58791a1212727862a2ab7f74f99
-+# skip: [3494d0ee7b29e920c5467337fe47bf6441cf6edd] WEB-13701 - I some some problems in my own peer review.  Correcting them in this commit.
-+git bisect skip 3494d0ee7b29e920c5467337fe47bf6441cf6edd
-+# skip: [590bd4007003b97eda3f737558b5b364a504e0c2] Ban URLs from display names.
-+git bisect skip 590bd4007003b97eda3f737558b5b364a504e0c2
 diff --git a/gitrc/reapply.sh b/gitrc/reapply.sh
-index 0b291d09..978f4284 100755
+index 978f4284..fc600652 100755
 --- ./gitrc/reapply.sh
 +++ ./gitrc/reapply.sh
-@@ -3,3 +3,5 @@ DIFF="$1"
- git apply --reverse "$DIFF" 
+@@ -1,6 +1,6 @@
+ #!/bin/zsh
+ DIFF="$1"
+-git apply --reverse "$DIFF" 
++git apply --reverse "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" 
  git checkout -- "$DIFF"
  git apply --reject --whitespace=fix "$DIFF"
-+~/loadrc/gitrc/gdio.sh
-+git add "$DIFF"
-diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index e6d0ed1a..e969fa0e 100644
---- ./vimrc/.vim/plugin/fugitive.vim
-+++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -664,8 +664,15 @@ function! s:Gfix() abort
- endfunction
- 
- function! s:Reapply() abort
-+    if (expand("%") !~ '.*gdio.diff')
-+        echom 'Please only run on *gdio.diff!!!'
-+        return 0
-+    endif
-+
-     let worktree = Cd2Worktree()
-     exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
-+    call s:Gs()
-+    call s:Gdi()
- endfunction
- 
- function! s:Split() abort
+ ~/loadrc/gitrc/gdio.sh
