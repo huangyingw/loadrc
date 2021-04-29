@@ -145,8 +145,6 @@ augroup resCur
     autocmd BufWinEnter * call ResCur()
 augroup END
 
-:command -nargs=1 FF :vertical scscope find f <q-args>
-
 " http://vim.wikia.com/wiki/Copy_filename_to_clipboard
 " Convert slashes to backslashes for Windows.
 " nnoremap fh <c-w>R
@@ -278,3 +276,4 @@ let g:tex_flavor = 'latex'
 
 " add @ to cfile handle
 set isfname+=@-@
+set history=10000

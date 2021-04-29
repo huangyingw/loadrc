@@ -1,0 +1,24 @@
+diff --git a/bashrc/umount.sh b/bashrc/umount.sh
+index 9c27a8c5..968ae478 100755
+--- ./bashrc/umount.sh
++++ ./bashrc/umount.sh
+@@ -11,10 +11,10 @@ remoteServer=$(echo "$1" | sed  -e "s/\/$//g")
+ if [ $(uname) = "Linux" ]
+ then
+     umount -l ~/"$remoteServer"
+-    ~/loadrc/bashrc/rsleep.sh "$remoteServer"
++    ~/loadrc/bashrc/rsleep.sh "$remoteServer" &
+     df -TH
+ else
+     diskutil unmountDisk force ~/"$remoteServer"
+-    ~/loadrc/bashrc/rsleep.sh "$remoteServer"
++    ~/loadrc/bashrc/rsleep.sh "$remoteServer" &
+     df -H
+ fi
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 012fdba1..7807991f 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 012fdba13ed104eaa59dda0b8d2cb46fdcc60bc7
++Subproject commit 7807991f8cafa8c4653ce3b5dece8411e7ab42ce

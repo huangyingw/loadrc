@@ -69,3 +69,4 @@ setup.cfg
 prunefix.rsync
 rsync.files
 ncscopefile.*
+gbra.log
