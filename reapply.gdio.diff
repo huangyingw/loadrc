@@ -1,12 +1,16 @@
 diff --git a/gitrc/reapply.sh b/gitrc/reapply.sh
-index 978f4284..fc600652 100755
+index 978f4284..1e7415c5 100755
 --- ./gitrc/reapply.sh
 +++ ./gitrc/reapply.sh
-@@ -1,6 +1,6 @@
+@@ -1,7 +1,8 @@
  #!/bin/zsh
  DIFF="$1"
 -git apply --reverse "$DIFF" 
-+git apply --reverse "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" 
- git checkout -- "$DIFF"
+-git checkout -- "$DIFF"
++CURRET_BRANCH_DIFF="$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff"
++git apply --reverse "$CURRET_BRANCH_DIFF" 
++git checkout -- "$CURRET_BRANCH_DIFF"
  git apply --reject --whitespace=fix "$DIFF"
  ~/loadrc/gitrc/gdio.sh
+-git add "$DIFF"
++git add "$CURRET_BRANCH_DIFF"
