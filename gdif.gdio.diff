@@ -1,130 +1,14 @@
-diff --git a/bashrc/update_proj.sh b/bashrc/update_proj.sh
-index b816b9d8..6bf1ff3a 100755
---- ./bashrc/update_proj.sh
-+++ ./bashrc/update_proj.sh
-@@ -1,3 +1,3 @@
- #!/bin/zsh
--. ~/loadrc/bashrc/find_up_goto.sh "files.proj"
-+~/loadrc/bashrc/find_up_goto.sh "files.proj"
- ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/cscope.sh
-diff --git a/gitrc/gdi.sh b/gitrc/gdi.sh
-index 4799a9c8..b720ac69 100755
---- ./gitrc/gdi.sh
-+++ ./gitrc/gdi.sh
-@@ -1,5 +1,6 @@
- #!/bin/zsh
--COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines"
-+
-+COMMAND=$(~/loadrc/gitrc/git_diff_command.sh)
- 
- if [ -z "$1" ]
- then
-diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
-index 0865ae41..b0247ec4 100755
---- ./gitrc/gdif.sh
-+++ ./gitrc/gdif.sh
-@@ -1,10 +1,33 @@
- #!/bin/zsh
- 
--COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
-+while [[ "$#" -gt 0 ]]
-+do
-+    case $1 in
-+        -r | --reverse)
-+            local reverse="true"
-+            ;;
-+        -b | --branch)
-+            local branch="$2"
-+            ;;
-+        -f | --file)
-+            local file="$2"
-+            ;;
-+    esac
-+    shift
-+done
-+
-+COMMAND=$(~/loadrc/gitrc/git_diff_command.sh)
-+
-+if [[ "$reverse" == "true" ]]
-+then
-+    COMMAND="$COMMAND HEAD $branch"
-+else
-+    COMMAND="$COMMAND $branch"
-+fi
- 
- while read ss
- do
-     COMMAND="$COMMAND  -- '$ss'"
--done < "$2"
-+done < "$file"
- 
- eval "$COMMAND"
-diff --git a/gitrc/get_worktree.sh b/gitrc/get_worktree.sh
-index b7869c54..c80bdd7f 100755
---- ./gitrc/get_worktree.sh
-+++ ./gitrc/get_worktree.sh
-@@ -4,7 +4,7 @@ cd "$DIR"
- 
- if [ -f config ]
- then
--    workTree=$(cat config | awk '/worktree/{print $3}')
-+    workTree=$(cat config | awk '/worktree =/{print $3}')
-     if [ -z "$workTree" ]
-     then
-         . ~/loadrc/bashrc/find_up_goto.sh .git
-diff --git a/gitrc/get_worktree.test.sh b/gitrc/get_worktree.test.sh
-new file mode 100755
-index 00000000..309e9c7c
---- /dev/null
-+++ ./gitrc/get_worktree.test.sh
-@@ -0,0 +1,3 @@
-+#!/bin/zsh
-+
-+~/loadrc/gitrc/get_worktree.sh ~/loadrc/.git/index
-diff --git a/gitrc/git_diff_command.sh b/gitrc/git_diff_command.sh
-new file mode 100755
-index 00000000..601480d6
---- /dev/null
-+++ ./gitrc/git_diff_command.sh
-@@ -0,0 +1,3 @@
-+#!/bin/zsh
-+
-+echo "git diff --ignore-space-at-eol -b -w --ignore-blank-lines"
-diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
-index a9442837..86974bce 160000
---- ./vimrc/.vim/bundle/tig-explorer.vim
-+++ ./vimrc/.vim/bundle/tig-explorer.vim
-@@ -1 +1 @@
--Subproject commit a9442837ffed280a5d092da069ccf1ab241f7485
-+Subproject commit 86974bce79945d94aa3a57ede13d71c295921973
-diff --git a/vimrc/.vim/bundle/vim-log-syntax b/vimrc/.vim/bundle/vim-log-syntax
-index a4be2e97..2f38eef5 160000
---- ./vimrc/.vim/bundle/vim-log-syntax
-+++ ./vimrc/.vim/bundle/vim-log-syntax
-@@ -1 +1 @@
--Subproject commit a4be2e979887358b6d12cf29ffaeecacb24aa87b
-+Subproject commit 2f38eef548f37f784f685c7a102132acf9eb1cfa
-diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index 02e6d18f..66887e96 100644
---- ./vimrc/.vim/plugin/fugitive.vim
-+++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -474,9 +474,16 @@ function! s:Gdif(...) abort
-     let worktree = Cd2Worktree()
-     let remote = substitute(system("git config gsync.remote"), '\n', '', '')
-     let branch = substitute(system("git config gsync.branch"), '\n', '', '')
--    let arg1 = (a:0 >= 1) ? a:1 : remote . '/' . branch
--    let output = GetEscapedResult(arg1) . '.diff'
--    exec '!~/loadrc/gitrc/gdif.sh ' . '"' .  arg1 . '" "' .  expand("%:p") . '"' . ' 2>&1 | tee ' . output
-+    let branch = (a:0 >= 1) ? a:1 : remote . '/' . branch
-+    let reverse = (a:0 >= 2) ? a:2 : ''
-+
-+    if branch ==# '-r'
-+        let branch = remote . '/' . substitute(system("git config gsync.branch"), '\n', '', '')
-+        let reverse = '-r'
-+    endif
-+
-+    let output = GetEscapedResult(branch) . '.diff'
-+    exec '!~/loadrc/gitrc/gdif.sh ' . '-b "' .  branch . '" -f "' .  expand("%:p") . '" ' . reverse .  ' 2>&1 | tee ' . output
-     call OpenOrSwitch(output, 'vs')
- endfunction
- 
+diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
+index a0a7e0e3..ca91dbaf 100755
+--- ./gitrc/.gitconfig
++++ ./gitrc/.gitconfig
+@@ -54,8 +54,7 @@
+ [pull]
+     default = current
+ [gdif]
+-    ignore = *.gdio.diff
+-    ignore = *.gdit.diff
++    ignore = *.diff
+     ignore = .gitconfig
+     ignore = .login
+     ignore = COMMIT_EDITMSG
