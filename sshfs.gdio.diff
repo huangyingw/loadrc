@@ -1,5 +1,98 @@
+diff --git a/Library/Preferences/org.videolan.vlc/vlcrc b/Library/Preferences/org.videolan.vlc/vlcrc
+index adb3ad5a..30134b49 100644
+--- ./Library/Preferences/org.videolan.vlc/vlcrc
++++ ./Library/Preferences/org.videolan.vlc/vlcrc
+@@ -1,5 +1,5 @@
+ ﻿###
+-###  vlc 3.0.11
++###  vlc 3.0.12
+ ###
+ 
+ ###
+@@ -381,6 +381,35 @@ macosx-continue-playback=1
+ # Verbosity (integer)
+ #log-verbose=-1
+ 
++[rist] # RIST input
++
++# RIST maximum packet size (bytes) (integer)
++#packet-size=1472
++
++# RIST demux/decode maximum jitter (default is 5ms) (integer)
++#maximum-jitter=5
++
++# RIST latency (ms) (integer)
++#latency=1000
++
++# RIST nack retry interval (ms) (integer)
++#retry-interval=132
++
++# RIST reorder buffer (ms) (integer)
++#reorder-buffer=70
++
++# RIST maximum retry count (integer)
++#max-retries=10
++
++# RIST nack type, 0 = range, 1 = bitmask. Default is range (integer)
++#nack-type=0
++
++# Disable NACK output packets (boolean)
++#disable-nacks=0
++
++# Do not check for a valid rtcp message from the encoder (boolean)
++#mcast-blind-nacks=0
++
+ [audiobargraph_v] # Audio Bar Graph Video sub source
+ 
+ # X coordinate (integer)
+@@ -522,7 +551,7 @@ macosx-continue-playback=1
+ #sout-avi-subject=
+ 
+ # Encoder (string)
+-#sout-avi-encoder=VLC Media Player - 3.0.11 Vetinari
++#sout-avi-encoder=VLC Media Player - 3.0.12 Vetinari
+ 
+ # Keywords (string)
+ #sout-avi-keywords=
+@@ -1111,6 +1140,23 @@ macosx-continue-playback=1
+ # Sync on Intra Frame (boolean)
+ #packetizer-mpegvideo-sync-iframe=0
+ 
++[access_output_rist] # RIST stream output
++
++# RIST target packet size (bytes) (integer)
++#sout-rist-packet-size=1328
++
++# RIST data output caching size (ms) (integer)
++#sout-rist-caching=50
++
++# RIST retry-buffer queue size (ms) (integer)
++#sout-rist-buffer-size=0
++
++# SSRC used in RTP output (default is random, i.e. 0) (integer)
++#sout-rist-ssrc=0
++
++# Stream name (string)
++#sout-rist-stream-name=
++
+ [svcdsub] # Philips OGT (SVCD subtitle) decoder
+ 
+ [ci_filters] # Mac OS X hardware video filters
+diff --git a/deploy_configurations.sh b/deploy_configurations.sh
+index 8f62534c..fe78c517 100755
+--- ./deploy_configurations.sh
++++ ./deploy_configurations.sh
+@@ -28,7 +28,7 @@ mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/pythonrc/setup.cfg  ~/setup.cfg
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.hgrc ~/.hgrc
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.hgignore ~/.hgignore
+-~/loadrc/bashrc/ln_fs.sh ~/loadrc/Library/Preferences/org.videolan.vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
++# cp -fv ~/loadrc/bashrc/ln_fs.sh ~/loadrc/Library/Preferences/org.videolan.vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/iterm2rc/movescreen.py ~/Library/ApplicationSupport/iTerm2/Scripts/movescreen/movescreen/movescreen.py
+ #~/loadrc/bashrc/ln_fs.sh ~/loadrc/.kdiff3rc ~/.kdiff3rc
+ 
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 8e3569d5..fbe6a6da 100755
+index 8e3569d5..215ba516 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
 @@ -10,6 +10,8 @@ fi
@@ -11,7 +104,7 @@ index 8e3569d5..fbe6a6da 100755
  brew install \
      Caskroom/cask/xquartz \
      astyle \
-@@ -34,6 +36,7 @@ brew install \
+@@ -34,13 +36,13 @@ brew install \
      mosh \
      openssl \
      rename \
@@ -19,7 +112,15 @@ index 8e3569d5..fbe6a6da 100755
      tig \
      tmux \
      w3m \
-@@ -48,8 +51,6 @@ brew cask install \
+     wakeonlan \
+     watch \
+-    wget \
+-    xpdf
++    wget
+ 
+ brew cask install \
+     kdiff3 \
+@@ -48,8 +50,6 @@ brew cask install \
      lynxlet \
      wkhtmltopdf
  
@@ -28,3 +129,15 @@ index 8e3569d5..fbe6a6da 100755
  sudo easy_install pip
  sudo pip install --upgrade pip
  
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index d2f222d9..f58203cb 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -91,7 +91,6 @@ function! PlayVideo()
+         return 0
+     endif
+ 
+-    call asyncrun#stop('<bang>')
+     let line = getline('.')
+     let line = substitute(line, '^[^"]', '"' . line[0], '')
+     let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
