@@ -141,6 +141,7 @@ function! VRun()
 
     let b:csdbpath = Cd2Worktree()
     let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
+    silent exec '!~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult'
     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
 
     if b:to_run != 'gbil.log'
