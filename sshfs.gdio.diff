@@ -1,0 +1,30 @@
+diff --git a/install_basic_macos.sh b/install_basic_macos.sh
+index 8e3569d5..fbe6a6da 100755
+--- ./install_basic_macos.sh
++++ ./install_basic_macos.sh
+@@ -10,6 +10,8 @@ fi
+ 
+ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+ brew update
++brew upgrade
++brew install --cask osxfuse
+ brew install \
+     Caskroom/cask/xquartz \
+     astyle \
+@@ -34,6 +36,7 @@ brew install \
+     mosh \
+     openssl \
+     rename \
++    sshfs \
+     tig \
+     tmux \
+     w3m \
+@@ -48,8 +51,6 @@ brew cask install \
+     lynxlet \
+     wkhtmltopdf
+ 
+-brew install --cask osxfuse
+-
+ sudo easy_install pip
+ sudo pip install --upgrade pip
+ 
