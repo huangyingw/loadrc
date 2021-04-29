@@ -18,3 +18,15 @@ index 978f4284..d1ffbd95 100755
 +then
 +    git add "$CURRET_BRANCH_DIFF"
 +fi
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index e30c0539..bff6d354 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -679,7 +679,6 @@ function! s:Reapply() abort
+     let worktree = Cd2Worktree()
+     exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
+     call s:Gs()
+-    call s:Gdi()
+ endfunction
+ 
+ function! s:Split() abort
