@@ -342,9 +342,9 @@ endfunction
 function! VCopy()
     normal! gvy<CR>
     let newFile = expand("%:p") . '.bak'
-    exec 'w ' . newFile
-    call OpenOrSwitch(newFile, 'vs')
-    normal! gvp<CR>
+    exec 'vs ' . newFile
+    normal! 1,$d<CR>
+    " execute "normal! i" . @@
 endfunction
 
 function! VimSearch()
