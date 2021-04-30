@@ -37,16 +37,17 @@ index 00000000..39462a11
 +~/loadrc/gitrc/reapply.sh "$BRANCH_DIFF"
 diff --git a/gitrc/apply_branch_test.sh b/gitrc/apply_branch_test.sh
 new file mode 100755
-index 00000000..a0e136b0
+index 00000000..c349f1e9
 --- /dev/null
 +++ ./gitrc/apply_branch_test.sh
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,8 @@
 +#!/bin/zsh
 +SCRIPT=$(realpath "$0")
 +SCRIPTPATH=$(dirname "$SCRIPT")
 +cd "$SCRIPTPATH"
 +
 +cd ../
++~/loadrc/gitrc/apply_branch.sh github/generate_files_proj
 +~/loadrc/gitrc/apply_branch.sh remotes/github/generate_files_proj
 diff --git a/gitrc/git_diff_command.sh b/gitrc/git_diff_command.sh
 index 601480d6..e2e8aa4b 100755
@@ -87,10 +88,31 @@ index 2154bcb9..8e34f2fa 100644
  .err
 +"./gbra.log"
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index e30c0539..bff6d354 100644
+index e30c0539..bfd7f71e 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -679,7 +679,6 @@ function! s:Reapply() abort
+@@ -52,6 +52,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :execute s:Gs()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject ApplyBranch :execute s:ApplyBranch(<q-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gst :execute s:Gst()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsti :execute s:Gsti()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstl :execute s:Gstl()
+@@ -520,6 +521,12 @@ function! s:KdiffFile() abort
+     call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/KdiffFile.py ' . '"' .  expand("%:p") . '"')
+ endfunction
+ 
++function! s:ApplyBranch(args, ...) abort
++    let worktree = Cd2Worktree()
++    silent exec '!~/loadrc/gitrc/apply_branch.sh ' . '"' .  a:args . '"'
++    call s:Gs()
++endfunction
++
+ function! s:Gshow(args, ...) abort
+     let worktree = Cd2Worktree()
+     let output = a:args . '.diff'
+@@ -679,7 +686,6 @@ function! s:Reapply() abort
      let worktree = Cd2Worktree()
      exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
      call s:Gs()
