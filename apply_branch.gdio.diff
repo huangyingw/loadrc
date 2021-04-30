@@ -37,18 +37,17 @@ index 00000000..39462a11
 +~/loadrc/gitrc/reapply.sh "$BRANCH_DIFF"
 diff --git a/gitrc/apply_branch_test.sh b/gitrc/apply_branch_test.sh
 new file mode 100755
-index 00000000..a76e3a43
+index 00000000..a0e136b0
 --- /dev/null
 +++ ./gitrc/apply_branch_test.sh
-@@ -0,0 +1,8 @@
+@@ -0,0 +1,7 @@
 +#!/bin/zsh
 +SCRIPT=$(realpath "$0")
 +SCRIPTPATH=$(dirname "$SCRIPT")
 +cd "$SCRIPTPATH"
 +
-+# ./apply_branch.sh  hypo
-+./apply_branch.sh remotes/github/generate_files_proj
-+# ./apply_branch.sh remotes/github/yhuang/RunShell
++cd ../
++~/loadrc/gitrc/apply_branch.sh remotes/github/generate_files_proj
 diff --git a/gitrc/git_diff_command.sh b/gitrc/git_diff_command.sh
 index 601480d6..e2e8aa4b 100755
 --- ./gitrc/git_diff_command.sh
