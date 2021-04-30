@@ -52,6 +52,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :execute s:Gs()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject ApplyBranch :execute s:ApplyBranch(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gst :execute s:Gst()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsti :execute s:Gsti()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstl :execute s:Gstl()
@@ -520,6 +521,12 @@ function! s:KdiffFile() abort
     call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/KdiffFile.py ' . '"' .  expand("%:p") . '"')
 endfunction
 
+function! s:ApplyBranch(args, ...) abort
+    let worktree = Cd2Worktree()
+    silent exec '!~/loadrc/gitrc/apply_branch.sh ' . '"' .  a:args . '"'
+    call s:Gs()
+endfunction
+
 function! s:Gshow(args, ...) abort
     let worktree = Cd2Worktree()
     let output = a:args . '.diff'
@@ -679,7 +686,6 @@ function! s:Reapply() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
     call s:Gs()
-    call s:Gdi()
 endfunction
 
 function! s:Split() abort

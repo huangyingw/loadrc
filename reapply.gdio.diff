@@ -1,59 +1,219 @@
-diff --git a/gitrc/gbil.log b/gitrc/gbil.log
-new file mode 100644
-index 00000000..dc550f9c
---- /dev/null
-+++ ./gitrc/gbil.log
-@@ -0,0 +1,23 @@
-+git bisect start
-+# good: [915a52c76e343eb039dbd08d7ace5867fde42004] n
-+git bisect good 915a52c76e343eb039dbd08d7ace5867fde42004
-+# bad: [a9d3a7df8173fc7bc7cae9330d3652f5f1fd1840] n
-+git bisect bad a9d3a7df8173fc7bc7cae9330d3652f5f1fd1840
-+# bad: [a9d3a7df8173fc7bc7cae9330d3652f5f1fd1840] n
-+git bisect bad a9d3a7df8173fc7bc7cae9330d3652f5f1fd1840
-+# good: [b552a70922ad991cfdce6f1a8f3eb5f869b4fd58] n
-+git bisect good b552a70922ad991cfdce6f1a8f3eb5f869b4fd58
-+# skip: [2502ad38d7ee27e02c3b193386aab3e741db1ff5] Merge branch 'master' into WEB-13701_ProductsTaxonomy_Spike
-+git bisect skip 2502ad38d7ee27e02c3b193386aab3e741db1ff5
-+# skip: [946074bef4672b00036712847eab5822b4cb87ad] WEB-13701 - Made a few chanes for clean-up after reviewing the whole diff.
-+git bisect skip 946074bef4672b00036712847eab5822b4cb87ad
-+# skip: [9d508d1d22a496bc238eb6acd86a95dfd0ec2a56] Try double-decoding because things are dumb.
-+git bisect skip 9d508d1d22a496bc238eb6acd86a95dfd0ec2a56
-+# skip: [e71ccc3c7f4e80ae957245e807986eef7a6ffd49] Merge branch 'master' into WEB-13701_ProductsTaxonomy_Spike
-+git bisect skip e71ccc3c7f4e80ae957245e807986eef7a6ffd49
-+# skip: [6cdfe7e5cbaca58791a1212727862a2ab7f74f99] WEB-13701 - Implementation complete.  A test was written, but may need more.  Need to try this on a QA Web.
-+git bisect skip 6cdfe7e5cbaca58791a1212727862a2ab7f74f99
-+# skip: [3494d0ee7b29e920c5467337fe47bf6441cf6edd] WEB-13701 - I some some problems in my own peer review.  Correcting them in this commit.
-+git bisect skip 3494d0ee7b29e920c5467337fe47bf6441cf6edd
-+# skip: [590bd4007003b97eda3f737558b5b364a504e0c2] Ban URLs from display names.
-+git bisect skip 590bd4007003b97eda3f737558b5b364a504e0c2
+diff --git a/Library/Preferences/org.videolan.vlc/vlcrc b/Library/Preferences/org.videolan.vlc/vlcrc
+index 30134b49..adb3ad5a 100644
+--- ./Library/Preferences/org.videolan.vlc/vlcrc
++++ ./Library/Preferences/org.videolan.vlc/vlcrc
+@@ -1,5 +1,5 @@
+ ﻿###
+-###  vlc 3.0.12
++###  vlc 3.0.11
+ ###
+ 
+ ###
+@@ -381,35 +381,6 @@ macosx-continue-playback=1
+ # Verbosity (integer)
+ #log-verbose=-1
+ 
+-[rist] # RIST input
+-
+-# RIST maximum packet size (bytes) (integer)
+-#packet-size=1472
+-
+-# RIST demux/decode maximum jitter (default is 5ms) (integer)
+-#maximum-jitter=5
+-
+-# RIST latency (ms) (integer)
+-#latency=1000
+-
+-# RIST nack retry interval (ms) (integer)
+-#retry-interval=132
+-
+-# RIST reorder buffer (ms) (integer)
+-#reorder-buffer=70
+-
+-# RIST maximum retry count (integer)
+-#max-retries=10
+-
+-# RIST nack type, 0 = range, 1 = bitmask. Default is range (integer)
+-#nack-type=0
+-
+-# Disable NACK output packets (boolean)
+-#disable-nacks=0
+-
+-# Do not check for a valid rtcp message from the encoder (boolean)
+-#mcast-blind-nacks=0
+-
+ [audiobargraph_v] # Audio Bar Graph Video sub source
+ 
+ # X coordinate (integer)
+@@ -551,7 +522,7 @@ macosx-continue-playback=1
+ #sout-avi-subject=
+ 
+ # Encoder (string)
+-#sout-avi-encoder=VLC Media Player - 3.0.12 Vetinari
++#sout-avi-encoder=VLC Media Player - 3.0.11 Vetinari
+ 
+ # Keywords (string)
+ #sout-avi-keywords=
+@@ -1140,23 +1111,6 @@ macosx-continue-playback=1
+ # Sync on Intra Frame (boolean)
+ #packetizer-mpegvideo-sync-iframe=0
+ 
+-[access_output_rist] # RIST stream output
+-
+-# RIST target packet size (bytes) (integer)
+-#sout-rist-packet-size=1328
+-
+-# RIST data output caching size (ms) (integer)
+-#sout-rist-caching=50
+-
+-# RIST retry-buffer queue size (ms) (integer)
+-#sout-rist-buffer-size=0
+-
+-# SSRC used in RTP output (default is random, i.e. 0) (integer)
+-#sout-rist-ssrc=0
+-
+-# Stream name (string)
+-#sout-rist-stream-name=
+-
+ [svcdsub] # Philips OGT (SVCD subtitle) decoder
+ 
+ [ci_filters] # Mac OS X hardware video filters
+diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
+index 5f5f2924..83e2c748 100755
+--- ./bashrc/generate_files_proj.sh
++++ ./bashrc/generate_files_proj.sh
+@@ -52,7 +52,7 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
+     then \
+         find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
+         fi && \
+-        echo "$(git rev-parse --abbrev-ref HEAD).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
++        echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
+         sort -u "$TARGET" -o "$TARGET" && \
+         sed -i.bak 's/ /\\ /g' "$TARGET" && \
+         cp -fv "$TARGET" files.proj && \
+diff --git a/bashrc/post.sh b/bashrc/post.sh
+index cfd7548a..6877e701 100644
+--- ./bashrc/post.sh
++++ ./bashrc/post.sh
+@@ -9,7 +9,6 @@ curl \
+     -d "preview_image=$(cat /Users/yhuang/imvu_code/website1/test_images/test20x50.png | base64)" \
+     https://api.imvu.com/product/product-53328306 > product-53328306-test20x50-post.json
+ 
+-# recomment Content-Type: application/json version, to avoid some weird issue of losing '+', '=' characters.
+ curl \
+     -H "x-imvu-sauce: xxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
+     -H "Cookie: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
+diff --git a/deploy_configurations.sh b/deploy_configurations.sh
+index fe78c517..8f62534c 100755
+--- ./deploy_configurations.sh
++++ ./deploy_configurations.sh
+@@ -28,7 +28,7 @@ mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/pythonrc/setup.cfg  ~/setup.cfg
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.hgrc ~/.hgrc
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.hgignore ~/.hgignore
+-# cp -fv ~/loadrc/bashrc/ln_fs.sh ~/loadrc/Library/Preferences/org.videolan.vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
++~/loadrc/bashrc/ln_fs.sh ~/loadrc/Library/Preferences/org.videolan.vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/iterm2rc/movescreen.py ~/Library/ApplicationSupport/iTerm2/Scripts/movescreen/movescreen/movescreen.py
+ #~/loadrc/bashrc/ln_fs.sh ~/loadrc/.kdiff3rc ~/.kdiff3rc
+ 
+diff --git a/error b/error
+index 072c359e..c0e586ef 100644
+--- ./error
++++ ./error
+@@ -64,5 +64,3 @@ Cought anything: Vim(cd):E472: Command failed
+ [ncm2_pyclang_proc@yarp] try_notify cache_add failed, job is dead
+ 
+ The legacy SnipMate parser is deprecated. Please see :h SnipMate-deprecate.
+-[ncm2_tmux@yarp] subprocess.TimeoutExpired: Command '['tmux', 'display-message', '-p', '#{session_id}']' timed out after 5 seconds
+-vimrc/.vim/bundle/ncm2-tmux/pythonx/ncm2_tmux.py:18:        proc = Popen(args=['tmux', 'display-message', '-p', '#{session_id}'],
 diff --git a/gitrc/reapply.sh b/gitrc/reapply.sh
-index 0b291d09..978f4284 100755
+index 978f4284..fc600652 100755
 --- ./gitrc/reapply.sh
 +++ ./gitrc/reapply.sh
-@@ -3,3 +3,5 @@ DIFF="$1"
- git apply --reverse "$DIFF" 
+@@ -1,6 +1,6 @@
+ #!/bin/zsh
+ DIFF="$1"
+-git apply --reverse "$DIFF" 
++git apply --reverse "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" 
  git checkout -- "$DIFF"
  git apply --reject --whitespace=fix "$DIFF"
-+~/loadrc/gitrc/gdio.sh
-+git add "$DIFF"
-diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index e6d0ed1a..e969fa0e 100644
---- ./vimrc/.vim/plugin/fugitive.vim
-+++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -664,8 +664,15 @@ function! s:Gfix() abort
- endfunction
+ ~/loadrc/gitrc/gdio.sh
+diff --git a/install_basic_macos.sh b/install_basic_macos.sh
+index 641d3914..f3e2e567 100755
+--- ./install_basic_macos.sh
++++ ./install_basic_macos.sh
+@@ -39,7 +39,8 @@ brew install \
+     w3m \
+     wakeonlan \
+     watch \
+-    wget
++    wget \
++    xpdf
  
- function! s:Reapply() abort
-+    if (expand("%") !~ '.*gdio.diff')
-+        echom 'Please only run on *gdio.diff!!!'
-+        return 0
-+    endif
-+
-     let worktree = Cd2Worktree()
-     exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
-+    call s:Gs()
-+    call s:Gdi()
- endfunction
+ brew cask install \
+     kdiff3 \
+@@ -47,8 +48,6 @@ brew cask install \
+     lynxlet \
+     wkhtmltopdf
  
- function! s:Split() abort
+-brew install --cask osxfuse
+-
+ sudo easy_install pip
+ sudo pip install --upgrade pip
+ 
+diff --git a/kvmrc/uvmount.sh b/kvmrc/uvmount.sh
+index 57e99ab9..4ccd45a3 100755
+--- ./kvmrc/uvmount.sh
++++ ./kvmrc/uvmount.sh
+@@ -4,3 +4,4 @@ do
+     umount $ss
+ done
+ qemu-nbd --disconnect /dev/nbd0
++df -TH
+diff --git a/kvmrc/vmsetup.sh b/kvmrc/vmsetup.sh
+index 566fe22b..1c1712b5 100755
+--- ./kvmrc/vmsetup.sh
++++ ./kvmrc/vmsetup.sh
+@@ -11,10 +11,8 @@ nbd0p=$(df -TH | awk '/\/dev\/nbd0.*ext4/{print $7}')
+ 
+ if [ -n "$nbd0p" ]
+ then
+-    mkdir -p "$nbd0p"/root/loadrc/ 
+     rsync -aHSv --progress --delete-before --force ~/.ssh/ "$nbd0p"/root/.ssh/
+     rsync -aHSv --progress ~/loadrc/.tmux.conf "$nbd0p"/root/
+-    rsync -aHSv --progress ~/loadrc/ "$nbd0p"/root/loadrc/
+     rsync -aHSv --progress ~/loadrc/linux/etc/ssh/ "$nbd0p"/etc/ssh/
+ fi
+ 
+diff --git a/kvmrc/vmsetup_test.sh b/kvmrc/vmsetup_test.sh
+deleted file mode 100755
+index 2dc7c50d..00000000
+--- ./kvmrc/vmsetup_test.sh
++++ /dev/null
+@@ -1,6 +0,0 @@
+-#!/bin/zsh
+-SCRIPT=$(realpath "$0")
+-SCRIPTPATH=$(dirname "$SCRIPT")
+-cd "$SCRIPTPATH"
+-
+-./vmsetup.sh /var/lib/libvirt/images/u2004.qcow2
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index f58203cb..6e912403 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -91,6 +91,7 @@ function! PlayVideo()
+         return 0
+     endif
+ 
++    call asyncrun#stop('<bang>')
+     let line = getline('.')
+     let line = substitute(line, '^[^"]', '"' . line[0], '')
+     let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
+@@ -141,7 +142,6 @@ function! VRun()
+ 
+     let b:csdbpath = Cd2Worktree()
+     let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
+-    silent exec '!~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult'
+     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
+ 
+     if b:to_run != 'gbil.log'
