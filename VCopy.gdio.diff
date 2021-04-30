@@ -1,0 +1,27 @@
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index f58203cb..e8641a4a 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -339,6 +339,14 @@ function! GitSearch()
+     call HighlightKeyword(keyword)
+ endfunction
+ 
++function! VCopy()
++    normal! gvy<CR>
++    let newFile = expand("%:p") . '.bak'
++    exec 'w ' . newFile
++    call OpenOrSwitch(newFile, 'vs')
++    normal! gvp<CR>
++endfunction
++
+ function! VimSearch()
+     normal! gvy<CR>
+     call Cd2ProjectRoot('files.proj')
+@@ -445,6 +453,7 @@ else
+ endif
+ " nnoremap F :echom expand('%:p')<cr>
+ vnoremap <silent>f :call VimSearch()<cr>
++vnoremap <silent>c :call VCopy()<cr>
+ vnoremap <silent>s :call GitSearch()<cr>
+ vnoremap <silent>t :call SearchAgain()<cr>
+ nnoremap mg :call VFilter()<cr>
