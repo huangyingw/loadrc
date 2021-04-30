@@ -10,6 +10,8 @@ fi
 
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
+brew upgrade
+brew install --cask osxfuse
 brew install \
     Caskroom/cask/xquartz \
     astyle \
@@ -34,21 +36,19 @@ brew install \
     mosh \
     openssl \
     rename \
+    sshfs \
     tig \
     tmux \
     w3m \
     wakeonlan \
     watch \
-    wget \
-    xpdf
+    wget
 
 brew cask install \
     kdiff3 \
     libreoffice \
     lynxlet \
     wkhtmltopdf
-
-brew install --cask osxfuse
 
 sudo easy_install pip
 sudo pip install --upgrade pip
