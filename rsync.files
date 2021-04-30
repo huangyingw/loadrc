@@ -392,6 +392,8 @@
 ./fix_resolvconf_in_docker.sh
 ./gitrc/.gitconfig
 ./gitrc/.globalgitignore
+./gitrc/apply_branch.sh
+./gitrc/apply_branch_test.sh
 ./gitrc/autoadd.sh
 ./gitrc/checkGitStatus.sh
 ./gitrc/checkout_rejs.sh
