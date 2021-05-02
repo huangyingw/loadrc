@@ -1,0 +1,14 @@
+diff --git a/crontabrc/.imacpro.cron b/crontabrc/.imacpro.cron
+new file mode 100644
+index 00000000..1a2e5908
+--- /dev/null
++++ ./crontabrc/.imacpro.cron
+@@ -0,0 +1 @@
++0 8 * * * /Users/huangyingw/loadrc/crontabrc/setup_cron.sh
+diff --git a/crontabrc/setup_cron.sh b/crontabrc/setup_cron.sh
+new file mode 100644
+index 00000000..f7df9c27
+--- /dev/null
++++ ./crontabrc/setup_cron.sh
+@@ -0,0 +1 @@
++#!/bin/zsh
