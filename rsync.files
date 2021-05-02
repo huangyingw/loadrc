@@ -345,6 +345,7 @@
 ./bashrc/zsh.test.sh
 ./chrome_install.sh
 ./config/iTerm/com.googlecode.iterm2.plist
+./crontabrc/.imacpro.cron
 ./crontabrc/.mbp.cron
 ./crontabrc/.mini.cron
 ./crontabrc/.mldonkey.cron
@@ -353,6 +354,7 @@
 ./crontabrc/mldonkey_start.sh
 ./crontabrc/mldonkey_stop.sh
 ./crontabrc/restartfiles
+./crontabrc/setup_cron.sh
 ./crontabrc/zerotier.cron
 ./cscope/.gitconfig
 ./cscope/.gitignore
@@ -2940,4 +2942,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-dev.gdio.diff
+setup_cron.gdio.diff
