@@ -1,1 +1,1 @@
-0 8 * * * /Users/huangyingw/loadrc/crontabrc/setup_cron.sh
+* * * * * /Users/huangyingw/loadrc/crontabrc/setup_cron.sh
