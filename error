@@ -66,3 +66,4 @@ Cought anything: Vim(cd):E472: Command failed
 The legacy SnipMate parser is deprecated. Please see :h SnipMate-deprecate.
 [ncm2_tmux@yarp] subprocess.TimeoutExpired: Command '['tmux', 'display-message', '-p', '#{session_id}']' timed out after 5 seconds
 vimrc/.vim/bundle/ncm2-tmux/pythonx/ncm2_tmux.py:18:        proc = Popen(args=['tmux', 'display-message', '-p', '#{session_id}'],
+[ncm2_tmux_complete@yarp] subprocess.CalledProcessError: Command '['sh', '-c', "sh ...xcomplete' -p '^.' -s 'words' -l '-a' -c '' -g ''"]' died with <Signals.SIGKILL: 9>.
