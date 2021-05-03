@@ -657,6 +657,7 @@
 ./oh-my-zsh/custom/plugins/zsh-nvm/.gitignore
 ./oh-my-zsh/plugins/chucknorris/.gitignore
 ./oh-my-zsh/plugins/deno/.gitignore
+./oh-my-zsh/plugins/gh/.gitignore
 ./oh-my-zsh/plugins/hitchhiker/.gitignore
 ./openrc.sh
 ./osxrc/restart_bluetooth.sh
