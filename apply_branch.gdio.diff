@@ -19,3 +19,10 @@ index a687efd9..28171289 100755
 +    git show "$1":"$targetFile" > "$targetFile" && \
          rm "$ss"
  done
+diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
+index bfc662d1..74af6626 160000
+--- ./vimrc/.vim/bundle/swift.vim
++++ ./vimrc/.vim/bundle/swift.vim
+@@ -1 +1 @@
+-Subproject commit bfc662d11b3a006815d0b6972c1c0c2ebbc3b16e
++Subproject commit 74af6626f63e331b60524d20dd69c9c5d03dc90c
