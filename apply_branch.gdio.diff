@@ -1,11 +1,3 @@
-diff --git a/.AF052336.rc b/.AF052336.rc
-new file mode 100644
-index 00000000..90ce3cd4
---- /dev/null
-+++ ./.AF052336.rc
-@@ -0,0 +1,2 @@
-+eval `ssh-agent -s`
-+ssh-add /Users/yhuang/.ssh/github_id_rsa
 diff --git a/gitrc/apply_branch.sh b/gitrc/apply_branch.sh
 index 39462a11..7573f457 100755
 --- ./gitrc/apply_branch.sh
