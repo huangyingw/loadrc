@@ -1,3 +1,11 @@
+diff --git a/.AF052336.rc b/.AF052336.rc
+new file mode 100644
+index 00000000..90ce3cd4
+--- /dev/null
++++ ./.AF052336.rc
+@@ -0,0 +1,2 @@
++eval `ssh-agent -s`
++ssh-add /Users/yhuang/.ssh/github_id_rsa
 diff --git a/gitrc/apply_branch.sh b/gitrc/apply_branch.sh
 index 39462a11..7573f457 100755
 --- ./gitrc/apply_branch.sh
@@ -7,10 +15,3 @@ index 39462a11..7573f457 100755
  
  ~/loadrc/gitrc/reapply.sh "$BRANCH_DIFF"
 +~/loadrc/gitrc/checkout_rejs.sh "$BRANCH"
-diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
-index bfc662d1..74af6626 160000
---- ./vimrc/.vim/bundle/swift.vim
-+++ ./vimrc/.vim/bundle/swift.vim
-@@ -1 +1 @@
--Subproject commit bfc662d11b3a006815d0b6972c1c0c2ebbc3b16e
-+Subproject commit 74af6626f63e331b60524d20dd69c9c5d03dc90c
