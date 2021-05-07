@@ -15,3 +15,4 @@ then
 fi
 
 ~/loadrc/gitrc/reapply.sh "$BRANCH_DIFF"
+~/loadrc/gitrc/checkout_rejs.sh "$BRANCH"
