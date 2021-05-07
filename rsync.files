@@ -2801,6 +2801,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/luacode.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/markdown.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/mathtools.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/mhequ.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/minted.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/moreverb.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/natbib.vim
