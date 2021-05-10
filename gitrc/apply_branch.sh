@@ -15,4 +15,10 @@ then
 fi
 
 ~/loadrc/gitrc/reapply.sh "$BRANCH_DIFF"
-~/loadrc/gitrc/checkout_rejs.sh "$BRANCH"
+
+for ss in $(git status | grep \.rej$) ; \
+do \
+    targetFile=$(echo "$ss" | sed 's/\.rej$//g')
+    git checkout "$BRANCH" "$targetFile" && \
+        rm "$ss"
+done
