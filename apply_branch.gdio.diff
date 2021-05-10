@@ -1,9 +1,16 @@
 diff --git a/gitrc/apply_branch.sh b/gitrc/apply_branch.sh
-index 39462a11..7573f457 100755
+index 7573f457..2fd5484c 100755
 --- ./gitrc/apply_branch.sh
 +++ ./gitrc/apply_branch.sh
-@@ -15,3 +15,4 @@ then
+@@ -15,4 +15,10 @@ then
  fi
  
  ~/loadrc/gitrc/reapply.sh "$BRANCH_DIFF"
-+~/loadrc/gitrc/checkout_rejs.sh "$BRANCH"
+-~/loadrc/gitrc/checkout_rejs.sh "$BRANCH"
++
++for ss in $(git status | grep \.rej$) ; \
++do \
++    targetFile=$(echo "$ss" | sed 's/\.rej$//g')
++    git show "$BRANCH":"$targetFile" > "$targetFile" && \
++        rm "$ss"
++done
