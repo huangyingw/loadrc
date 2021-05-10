@@ -19,6 +19,6 @@ fi
 for ss in $(git status | grep \.rej$) ; \
 do \
     targetFile=$(echo "$ss" | sed 's/\.rej$//g')
-    git checkout "$BRANCH" "$targetFile" && \
+    git show "$BRANCH":"$targetFile" > "$targetFile" && \
         rm "$ss"
 done
