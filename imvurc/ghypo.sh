@@ -19,5 +19,6 @@ else
     if [ $(~/loadrc/gitrc/git_ready.sh) ]
     then
         s/hypo
+        s/hypo --buildbot=hypo2
     fi
 fi
