@@ -1,0 +1,27 @@
+diff --git a/gitrc/apply_branch.sh b/gitrc/apply_branch.sh
+index 7573f457..2fd5484c 100755
+--- ./gitrc/apply_branch.sh
++++ ./gitrc/apply_branch.sh
+@@ -15,4 +15,10 @@ then
+ fi
+ 
+ ~/loadrc/gitrc/reapply.sh "$BRANCH_DIFF"
+-~/loadrc/gitrc/checkout_rejs.sh "$BRANCH"
++
++for ss in $(git status | grep \.rej$) ; \
++do \
++    targetFile=$(echo "$ss" | sed 's/\.rej$//g')
++    git show "$BRANCH":"$targetFile" > "$targetFile" && \
++        rm "$ss"
++done
+diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
+index ea2bc967..3885ff95 100755
+--- ./imvurc/ghypo.sh
++++ ./imvurc/ghypo.sh
+@@ -19,5 +19,6 @@ else
+     if [ $(~/loadrc/gitrc/git_ready.sh) ]
+     then
+         s/hypo
++        s/hypo --buildbot=hypo2
+     fi
+ fi
