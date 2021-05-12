@@ -145,7 +145,7 @@ function! VRun()
     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
 
     if (expand("%") =~ '.*leetcode.*') 
-        call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/post_submit.sh ' . '"' .  b:file_name . '"' . ' 2>&1 | tee post_submit.findresult')
+        call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/post_submit.sh ' . '"' .  b:file_name . '"' . ' 2>&1 | tee post_submit.log')
     endif
 
     if b:to_run != 'gbil.log'
