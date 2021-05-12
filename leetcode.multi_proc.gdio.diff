@@ -13,16 +13,14 @@ index 6ee8b3bf..638490ac 100755
          # handle it
 diff --git a/leetcoderc/handle.sh b/leetcoderc/handle.sh
 new file mode 100755
-index 00000000..4814aa5c
+index 00000000..62440732
 --- /dev/null
 +++ ./leetcoderc/handle.sh
-@@ -0,0 +1,6 @@
+@@ -0,0 +1,4 @@
 +#!/bin/zsh
 +FILE="$1"
 +
 +~/loadrc/leetcoderc/submit.sh "$FILE"
-+NUM=$(echo "$FILE" | sed 's/.*\/\([0-9]*\)\..*/\1/g') 
-+~/loadrc/leetcoderc/post_submit.sh "$NUM" &
 diff --git a/leetcoderc/handle_test.sh b/leetcoderc/handle_test.sh
 new file mode 100755
 index 00000000..11541bd8
@@ -36,15 +34,16 @@ index 00000000..11541bd8
 +
 +./handle.sh /Users/huangyingw/leetcode-cli/submissions/1.two-sum.260837994.Accepted.leetcode.py
 diff --git a/leetcoderc/post_submit.sh b/leetcoderc/post_submit.sh
-new file mode 100644
-index 00000000..dc1baf48
+new file mode 100755
+index 00000000..dce52a5a
 --- /dev/null
 +++ ./leetcoderc/post_submit.sh
-@@ -0,0 +1,6 @@
+@@ -0,0 +1,7 @@
 +#!/bin/zsh
-+NUM="$1"
++FILE="$1"
++NUM=$(echo "$FILE" | sed 's/^\([0-9]*\)\..*/\1/g') 
 +
-+~/loadrc/bashrc/check_running.sh ~/loadrc/leetcoderc/submission.sh "$NUM"
++~/loadrc/leetcoderc/submission.sh "$NUM"
 +~/loadrc/leetcoderc/restore.sh "$NUM"
 +~/loadrc/leetcoderc/remove_dup.sh "$NUM"
 diff --git a/leetcoderc/remove_dup.sh b/leetcoderc/remove_dup.sh
@@ -126,6 +125,21 @@ index 00000000..8653a009
 +do
 +    leetcode submit -d "$ss"
 +done
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index f58203cb..f39a1be6 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -144,6 +144,10 @@ function! VRun()
+     silent exec '!~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult'
+     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
+ 
++    if (expand("%") =~ '.*leetcode.*') 
++        call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/post_submit.sh ' . '"' .  b:file_name . '"')
++    endif
++
+     if b:to_run != 'gbil.log'
+         call OpenOrSwitch(b:output, 'vs')
+     else
 diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
 index c56304f2..e14de500 100755
 --- ./vishrc/vrun.sh
