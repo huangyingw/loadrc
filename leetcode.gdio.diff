@@ -1,12 +1,49 @@
+diff --git a/bashrc/check_running.sh b/bashrc/check_running.sh
+index 6ee8b3bf..638490ac 100755
+--- ./bashrc/check_running.sh
++++ ./bashrc/check_running.sh
+@@ -24,7 +24,7 @@ then
+         # The process is not running
+         # Echo current PID into lock file
+         echo $$ > "${LCK_FILE}"
+-        "$SCRIPT"
++        "$SCRIPT" "$2" "$3"
+     else
+         # the process IS running
+         # handle it
 diff --git a/leetcoderc/handle.sh b/leetcoderc/handle.sh
-new file mode 100644
-index 00000000..a98f9bd6
+new file mode 100755
+index 00000000..6397777b
 --- /dev/null
 +++ ./leetcoderc/handle.sh
-@@ -0,0 +1,3 @@
+@@ -0,0 +1,6 @@
 +#!/bin/zsh
 +FILE="$1"
++
 +~/loadrc/leetcoderc/submit.sh "$FILE"
++NUM=$(echo "$FILE" | sed 's/.*\/\([0-9]*\)\..*/\1/g') 
++~/loadrc/bashrc/check_running.sh ~/loadrc/leetcoderc/submission.sh "$NUM"
+diff --git a/leetcoderc/handle_test.sh b/leetcoderc/handle_test.sh
+new file mode 100755
+index 00000000..11541bd8
+--- /dev/null
++++ ./leetcoderc/handle_test.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++./handle.sh /Users/huangyingw/leetcode-cli/submissions/1.two-sum.260837994.Accepted.leetcode.py
+diff --git a/leetcoderc/submission.sh b/leetcoderc/submission.sh
+new file mode 100644
+index 00000000..97637784
+--- /dev/null
++++ ./leetcoderc/submission.sh
+@@ -0,0 +1,3 @@
++#!/bin/zsh
++NUM="$1"
++leetcode submission "$NUM" -o downloads
 diff --git a/leetcoderc/submit.sh b/leetcoderc/submit.sh
 old mode 100755
 new mode 100644
