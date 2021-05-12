@@ -625,6 +625,9 @@
 ./leetcoderc/KdiffFile.py
 ./leetcoderc/handle.sh
 ./leetcoderc/handle_test.sh
+./leetcoderc/remove_dup.sh
+./leetcoderc/remove_gabages.sh
+./leetcoderc/restore.sh
 ./leetcoderc/submission.sh
 ./leetcoderc/submit.sh
 ./leetcoderc/submit_delete.sh
