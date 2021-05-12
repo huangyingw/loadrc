@@ -10,7 +10,7 @@ fi
 
 if [[ "$file" = *'.leetcode.java' ]] || [[ "$file" = *'.leetcode.py' ]] || [[ "$file" = *'.leetcode.python3.py' ]]
 then
-    leetcode submit "$file"
+    ~/loadrc/leetcoderc/handle.sh "$file"
     exit 0
 fi
 
