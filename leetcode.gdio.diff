@@ -13,16 +13,17 @@ index 6ee8b3bf..638490ac 100755
          # handle it
 diff --git a/leetcoderc/handle.sh b/leetcoderc/handle.sh
 new file mode 100755
-index 00000000..6397777b
+index 00000000..486f1f06
 --- /dev/null
 +++ ./leetcoderc/handle.sh
-@@ -0,0 +1,6 @@
+@@ -0,0 +1,7 @@
 +#!/bin/zsh
 +FILE="$1"
 +
 +~/loadrc/leetcoderc/submit.sh "$FILE"
 +NUM=$(echo "$FILE" | sed 's/.*\/\([0-9]*\)\..*/\1/g') 
 +~/loadrc/bashrc/check_running.sh ~/loadrc/leetcoderc/submission.sh "$NUM"
++~/loadrc/leetcoderc/restore.sh "$NUM"
 diff --git a/leetcoderc/handle_test.sh b/leetcoderc/handle_test.sh
 new file mode 100755
 index 00000000..11541bd8
@@ -35,15 +36,29 @@ index 00000000..11541bd8
 +cd "$SCRIPTPATH"
 +
 +./handle.sh /Users/huangyingw/leetcode-cli/submissions/1.two-sum.260837994.Accepted.leetcode.py
-diff --git a/leetcoderc/submission.sh b/leetcoderc/submission.sh
+diff --git a/leetcoderc/restore.sh b/leetcoderc/restore.sh
 new file mode 100755
-index 00000000..42d6a7e9
+index 00000000..328d9be3
 --- /dev/null
-+++ ./leetcoderc/submission.sh
-@@ -0,0 +1,3 @@
++++ ./leetcoderc/restore.sh
+@@ -0,0 +1,7 @@
 +#!/bin/zsh
 +NUM="$1"
-+leetcode submission "$NUM" -o ../downloads
++
++rsync -aHv --progress \
++    --ignore-existing \
++    ../downloads/"$NUM"/ \
++    ./"$NUM"/
+diff --git a/leetcoderc/submission.sh b/leetcoderc/submission.sh
+new file mode 100755
+index 00000000..b6e0c3e8
+--- /dev/null
++++ ./leetcoderc/submission.sh
+@@ -0,0 +1,4 @@
++#!/bin/zsh
++NUM="$1"
++mkdir -p ../downloads/"$NUM"/ 
++leetcode submission "$NUM" -o ../downloads/"$NUM"/
 diff --git a/leetcoderc/submit.sh b/leetcoderc/submit.sh
 index 8653a009..df611c8a 100755
 --- ./leetcoderc/submit.sh
