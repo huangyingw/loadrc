@@ -625,6 +625,7 @@
 "./leetcoderc/KdiffFile.py"
 "./leetcoderc/handle.sh"
 "./leetcoderc/handle_test.sh"
+"./leetcoderc/post_submit.sh"
 "./leetcoderc/remove_dup.sh"
 "./leetcoderc/remove_gabages.sh"
 "./leetcoderc/restore.sh"
@@ -2950,4 +2951,4 @@
 "./zerotierrc/install.sh"
 "./zerotierrc/restart.sh"
 "./zerotierrc/zerotierrc.conf"
-"leetcode.gdio.diff"
+"leetcode.multi_proc.gdio.diff"
