@@ -1,3 +1,4 @@
 #!/bin/zsh
 NUM="$1"
-leetcode submission "$NUM" -o ../downloads
+mkdir -p ../downloads/"$NUM"/ 
+leetcode submission "$NUM" -o ../downloads/"$NUM"/
