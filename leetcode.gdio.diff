@@ -1,0 +1,49 @@
+diff --git a/leetcoderc/handle.sh b/leetcoderc/handle.sh
+new file mode 100644
+index 00000000..a98f9bd6
+--- /dev/null
++++ ./leetcoderc/handle.sh
+@@ -0,0 +1,3 @@
++#!/bin/zsh
++FILE="$1"
++~/loadrc/leetcoderc/submit.sh "$FILE"
+diff --git a/leetcoderc/submit.sh b/leetcoderc/submit.sh
+old mode 100755
+new mode 100644
+index 8653a009..df611c8a
+--- ./leetcoderc/submit.sh
++++ ./leetcoderc/submit.sh
+@@ -1,6 +1,3 @@
+ #!/bin/zsh
+-find ~/.lc -type f -name problems.json -delete
+-find ~/myproject/git/interview/leetcode_solutions/ -type f -name "[0-9]*.py" | while read ss
+-do
+-    leetcode submit -d "$ss"
+-done
++FILE="$1"
++leetcode submit "$FILE"
+diff --git a/leetcoderc/submit_delete.sh b/leetcoderc/submit_delete.sh
+new file mode 100755
+index 00000000..8653a009
+--- /dev/null
++++ ./leetcoderc/submit_delete.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++find ~/.lc -type f -name problems.json -delete
++find ~/myproject/git/interview/leetcode_solutions/ -type f -name "[0-9]*.py" | while read ss
++do
++    leetcode submit -d "$ss"
++done
+diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
+index c56304f2..e14de500 100755
+--- ./vishrc/vrun.sh
++++ ./vishrc/vrun.sh
+@@ -10,7 +10,7 @@ fi
+ 
+ if [[ "$file" = *'.leetcode.java' ]] || [[ "$file" = *'.leetcode.py' ]] || [[ "$file" = *'.leetcode.python3.py' ]]
+ then
+-    leetcode submit "$file"
++    ~/loadrc/leetcoderc/handle.sh "$file"
+     exit 0
+ fi
+ 
