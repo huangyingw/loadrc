@@ -1,6 +1,6 @@
 #!/bin/zsh
 FILE="$1"
-# ~/loadrc/leetcoderc/submit.sh "$FILE"
+
+~/loadrc/leetcoderc/submit.sh "$FILE"
 NUM=$(echo "$FILE" | sed 's/.*\/\([0-9]*\)\..*/\1/g') 
-echo "NUM --> $NUM"
-leetcode submission "$NUM" -o downloads
+~/loadrc/bashrc/check_running.sh ~/loadrc/leetcoderc/submission.sh "$NUM"
