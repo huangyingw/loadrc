@@ -126,7 +126,7 @@ index 00000000..8653a009
 +    leetcode submit -d "$ss"
 +done
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index f58203cb..f39a1be6 100644
+index f58203cb..569ced8d 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -144,6 +144,10 @@ function! VRun()
@@ -134,7 +134,7 @@ index f58203cb..f39a1be6 100644
      call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
  
 +    if (expand("%") =~ '.*leetcode.*') 
-+        call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/post_submit.sh ' . '"' .  b:file_name . '"')
++        call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/post_submit.sh ' . '"' .  b:file_name . '"' . ' 2>&1 | tee post_submit.log')
 +    endif
 +
      if b:to_run != 'gbil.log'
