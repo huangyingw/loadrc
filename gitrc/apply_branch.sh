@@ -1,4 +1,12 @@
 #!/bin/zsh
+
+~/loadrc/gitrc/checkGitStatus.sh
+
+if [ $? -ne 0 ]
+then
+  exit 1
+fi
+
 BRANCH="$1"
 BRANCH=$(echo "$BRANCH" | sed 's/remotes\///g')
 BRANCH_DIFF=$(echo "$BRANCH" | sed 's/[^\/]*\///g')
@@ -15,4 +23,10 @@ then
 fi
 
 ~/loadrc/gitrc/reapply.sh "$BRANCH_DIFF"
-~/loadrc/gitrc/checkout_rejs.sh "$BRANCH"
+
+for ss in $(git status | grep \.rej$) ; \
+do \
+    targetFile=$(echo "$ss" | sed 's/\.rej$//g')
+    git show "$BRANCH":"$targetFile" > "$targetFile" && \
+        rm "$ss"
+done
