@@ -155,7 +155,6 @@ function! VRun()
     endif
 
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
 endfunction
 
 function! SearchAgain()
