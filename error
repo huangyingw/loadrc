@@ -68,3 +68,4 @@ The legacy SnipMate parser is deprecated. Please see :h SnipMate-deprecate.
 vimrc/.vim/bundle/ncm2-tmux/pythonx/ncm2_tmux.py:18:        proc = Popen(args=['tmux', 'display-message', '-p', '#{session_id}'],
 [ncm2_tmux_complete@yarp] subprocess.CalledProcessError: Command '['sh', '-c', "sh ...xcomplete' -p '^.' -s 'words' -l '-a' -c '' -g ''"]' died with <Signals.SIGKILL: 9>.
 [ncm2_tern@yarp] Job is dead. cmd=['/usr/local/opt/python@3.9/bin/python3.9', '-u',...', '/var/folders/7z/251_ly552l9glm39cnj9zxrh0000gn/T/nvimGXqrxd/0', 13, 'ncm2_tern']
+[ncm2_tmux_complete@yarp] subprocess.CalledProcessError: Command '['sh', '-c', "sh ...xcomplete' -p '^.' -s 'words' -l '-a' -c '' -g ''"]' died with <Signals.SIGKILL: 9>.
