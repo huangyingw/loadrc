@@ -8,6 +8,18 @@ index 1e5eaeaa..2fafbd7d 100755
  ~/loadrc/bashrc/move.sh "$SOURCE" "$TARGET"
 +~/loadrc/bashrc/rmEmpty.sh "$SOURCE"
  ~/loadrc/bashrc/ln_fs.sh "$TARGET" "$SOURCE"
+diff --git a/bashrc/osmirror_exclude b/bashrc/osmirror_exclude
+index 5b16c128..cd9fe5f8 100644
+--- ./bashrc/osmirror_exclude
++++ ./bashrc/osmirror_exclude
+@@ -14,6 +14,7 @@ etc/hostname
+ etc/hosts
+ etc/libvirt
+ etc/mdadm/mdadm.conf
++home/huangyingw/snap/
+ media/dev
+ media/nvme
+ media/volgrp
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 new file mode 100755
 index 00000000..8929ce87
