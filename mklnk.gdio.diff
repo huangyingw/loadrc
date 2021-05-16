@@ -1,0 +1,146 @@
+diff --git a/bashrc/mklnk.sh b/bashrc/mklnk.sh
+index 1e5eaeaa..2fafbd7d 100755
+--- ./bashrc/mklnk.sh
++++ ./bashrc/mklnk.sh
+@@ -17,4 +17,5 @@ then
+ fi
+ 
+ ~/loadrc/bashrc/move.sh "$SOURCE" "$TARGET"
++~/loadrc/bashrc/rmEmpty.sh "$SOURCE"
+ ~/loadrc/bashrc/ln_fs.sh "$TARGET" "$SOURCE"
+diff --git a/gitrc/apply_branch.sh b/gitrc/apply_branch.sh
+index 15190e93..2fd5484c 100755
+--- ./gitrc/apply_branch.sh
++++ ./gitrc/apply_branch.sh
+@@ -1,12 +1,4 @@
+ #!/bin/zsh
+-
+-~/loadrc/gitrc/checkGitStatus.sh
+-
+-if [ $? -ne 0 ]
+-then
+-  exit 1
+-fi
+-
+ BRANCH="$1"
+ BRANCH=$(echo "$BRANCH" | sed 's/remotes\///g')
+ BRANCH_DIFF=$(echo "$BRANCH" | sed 's/[^\/]*\///g')
+diff --git a/leetcoderc/handle.sh b/leetcoderc/handle.sh
+deleted file mode 100755
+index 62440732..00000000
+--- ./leetcoderc/handle.sh
++++ /dev/null
+@@ -1,4 +0,0 @@
+-#!/bin/zsh
+-FILE="$1"
+-
+-~/loadrc/leetcoderc/submit.sh "$FILE"
+diff --git a/leetcoderc/handle_test.sh b/leetcoderc/handle_test.sh
+deleted file mode 100755
+index 11541bd8..00000000
+--- ./leetcoderc/handle_test.sh
++++ /dev/null
+@@ -1,6 +0,0 @@
+-#!/bin/zsh
+-SCRIPT=$(realpath "$0")
+-SCRIPTPATH=$(dirname "$SCRIPT")
+-cd "$SCRIPTPATH"
+-
+-./handle.sh /Users/huangyingw/leetcode-cli/submissions/1.two-sum.260837994.Accepted.leetcode.py
+diff --git a/leetcoderc/post_submit.sh b/leetcoderc/post_submit.sh
+deleted file mode 100755
+index 63212f85..00000000
+--- ./leetcoderc/post_submit.sh
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#!/bin/zsh
+-FILE="$1"
+-NUM=$(echo "$FILE" | sed 's/^\([0-9]*\)\..*/\1/g')
+-
+-~/loadrc/leetcoderc/submission.sh "$NUM"
+-~/loadrc/leetcoderc/restore.sh "$NUM"
+-~/loadrc/leetcoderc/remove_dup.sh "$NUM"
+diff --git a/leetcoderc/remove_dup.sh b/leetcoderc/remove_dup.sh
+deleted file mode 100755
+index 5ba1dea0..00000000
+--- ./leetcoderc/remove_dup.sh
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#!/bin/zsh
+-NUM="$1"
+-cd "$NUM"
+-
+-~/loadrc/leetcoderc/remove_gabages.sh
+-find . -type f \( -name \*.orig -o -name \*.bak \) -delete
+-jdupes -1dNr .
+diff --git a/leetcoderc/remove_gabages.sh b/leetcoderc/remove_gabages.sh
+deleted file mode 100755
+index ce8158ac..00000000
+--- ./leetcoderc/remove_gabages.sh
++++ /dev/null
+@@ -1,12 +0,0 @@
+-#!/bin/zsh
+-
+-find . -type f -name \*.py | while read ss
+-do
+-    autopep8 --in-place "$ss"
+-    if $(~/loadrc/pythonrc/remove_comments.py "$ss")
+-    then
+-        mv -fv "$ss.strip" "$ss"
+-        sed -i.bak '/print.*(/d;/^_author_/d;/__main__/d;/ = Solution()/d;/^_project_/d;/\bprint\b/d;s/#--//g;s/##//g;s/ \/= /\/\/=/g;s/ \/ /\/\//g;/^$/d;/^\s*$/d' "$ss"
+-        autopep8 --in-place "$ss"
+-    fi
+-done
+diff --git a/leetcoderc/restore.sh b/leetcoderc/restore.sh
+deleted file mode 100755
+index 328d9be3..00000000
+--- ./leetcoderc/restore.sh
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#!/bin/zsh
+-NUM="$1"
+-
+-rsync -aHv --progress \
+-    --ignore-existing \
+-    ../downloads/"$NUM"/ \
+-    ./"$NUM"/
+diff --git a/leetcoderc/submission.sh b/leetcoderc/submission.sh
+deleted file mode 100755
+index acc46cef..00000000
+--- ./leetcoderc/submission.sh
++++ /dev/null
+@@ -1,4 +0,0 @@
+-#!/bin/zsh
+-NUM="$1"
+-mkdir -p ../downloads/"$NUM"/
+-leetcode submission "$NUM" -o ../downloads/"$NUM"/
+diff --git a/leetcoderc/submit_delete.sh b/leetcoderc/submit_delete.sh
+deleted file mode 100755
+index 8653a009..00000000
+--- ./leetcoderc/submit_delete.sh
++++ /dev/null
+@@ -1,6 +0,0 @@
+-#!/bin/zsh
+-find ~/.lc -type f -name problems.json -delete
+-find ~/myproject/git/interview/leetcode_solutions/ -type f -name "[0-9]*.py" | while read ss
+-do
+-    leetcode submit -d "$ss"
+-done
+diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
+new file mode 100755
+index 00000000..8929ce87
+--- /dev/null
++++ ./wifirc/autoconnect.sh
+@@ -0,0 +1,12 @@
++#!/bin/bash
++
++# find the uuid by nmcli con show 
++# and put this script, which is owned by root and executable, in the folder: /etc/NetworkManager/dispatcher.d
++
++if [ "$CONNECTION_UUID" = "df31faf5-3440-49ec-be88-9e040176663e" ]
++then
++    if [ "$2" = "down" ]; then
++        sleep 10
++        nmcli con up uuid $CONNECTION_UUID
++    fi
++fi
