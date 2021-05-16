@@ -22,14 +22,20 @@ index 5b16c128..cd9fe5f8 100644
  media/volgrp
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 new file mode 100755
-index 00000000..8929ce87
+index 00000000..60e018a5
 --- /dev/null
 +++ ./wifirc/autoconnect.sh
-@@ -0,0 +1,12 @@
+@@ -0,0 +1,18 @@
 +#!/bin/bash
 +
-+# find the uuid by nmcli con show 
++# find the uuid by nmcli con show
 +# and put this script, which is owned by root and executable, in the folder: /etc/NetworkManager/dispatcher.d
++
++# the following command to get the wifi device:
++# for dev in `ls /sys/class/net`; do
++#     [ -d "/sys/class/net/$dev/wireless" ] && echo "$dev"
++# done
++
 +
 +if [ "$CONNECTION_UUID" = "df31faf5-3440-49ec-be88-9e040176663e" ]
 +then
