@@ -2935,6 +2935,7 @@
 ./vishrc/vlc.sh
 ./vishrc/vrun.sh
 ./vishrc/vsearch.sh
+./wifirc/autoconnect.sh
 ./wifirc/enable.sh
 ./wifirc/show.sh
 ./work.local.astylerc
@@ -2943,4 +2944,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-dev.gdio.diff
+mklnk.gdio.diff
