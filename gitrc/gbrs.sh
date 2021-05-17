@@ -1,2 +1,3 @@
 #!/bin/zsh
-git branch --sort=-committerdate | tee gbrs.findresult 
+git remote update
+git branch -a --no-merged --sort=-committerdate | tee gbrs.findresult 
