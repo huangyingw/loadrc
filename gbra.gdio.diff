@@ -1,3 +1,15 @@
+diff --git a/.gitrc b/.gitrc
+index 31ff4791..8e753cb1 100755
+--- ./.gitrc
++++ ./.gitrc
+@@ -11,7 +11,6 @@ alias gbr='$HOME/loadrc/gitrc/gbr.sh'
+ alias gbra='$HOME/loadrc/gitrc/gbra.sh'
+ alias gbrd='$HOME/loadrc/gitrc/gbrd.sh'
+ alias gbrm='$HOME/loadrc/gitrc/gbrm.sh'
+-alias gbrs='$HOME/loadrc/gitrc/gbrs.sh'
+ alias gch='git cherry'
+ alias gchp='git cherry-pick'
+ alias gcia='$HOME/loadrc/gitrc/gcia.sh'
 diff --git a/gitrc/gbra.sh b/gitrc/gbra.sh
 index 21140baa..75f7a5e1 100755
 --- ./gitrc/gbra.sh
