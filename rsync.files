@@ -2950,4 +2950,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-gbra.gdio.diff
+dogdio.gdio.diff
