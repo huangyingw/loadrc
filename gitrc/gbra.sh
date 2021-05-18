@@ -1,3 +1,3 @@
 #!/bin/zsh
 git remote update
-git branch -a --no-merged --sort=-committerdate | tee gbra.log
+git branch --sort=-committerdate -a --no-merged | tee gbra.log
