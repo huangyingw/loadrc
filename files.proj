@@ -422,7 +422,6 @@
 "./gitrc/gbra.sh"
 "./gitrc/gbrd.sh"
 "./gitrc/gbrm.sh"
-"./gitrc/gbrs.sh"
 "./gitrc/gcia.sh"
 "./gitrc/gcl.sh"
 "./gitrc/gcl.test.sh"
