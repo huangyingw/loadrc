@@ -15,7 +15,7 @@ git merge -X theirs "$remote/$remote_branch" && \
     git push ; \
     git checkout "$current_branch" && \
     ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
-    dos2unix "$output" 
+    dos2unix "$output"
 
 if [ $? -ne 0 ]
 then
