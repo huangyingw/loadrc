@@ -17,5 +17,4 @@ then
 fi
 
 ~/loadrc/bashrc/move.sh "$SOURCE" "$TARGET"
-~/loadrc/bashrc/rmEmpty.sh "$SOURCE"
 ~/loadrc/bashrc/ln_fs.sh "$TARGET" "$SOURCE"
