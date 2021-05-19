@@ -21,14 +21,15 @@ index 4f8edfc6..c32f5329 100755
 +dos2unix "$output" 
  exit 0
 diff --git a/gitrc/gbra.sh b/gitrc/gbra.sh
-index 21140baa..989af814 100755
+index 21140baa..7acdcb66 100755
 --- ./gitrc/gbra.sh
 +++ ./gitrc/gbra.sh
-@@ -1,3 +1,3 @@
+@@ -1,3 +1,4 @@
  #!/bin/zsh
  git remote update
 -git branch -a --no-merged | tee gbra.log
 +git branch --sort=-committerdate -a --no-merged | tee gbra.log
++sed -i.bak 's/[[:space:]]*remotes\///g;s/[[:space:]]*//g' gbra.log  
 diff --git a/gitrc/gbrs.sh b/gitrc/gbrs.sh
 deleted file mode 100755
 index ab7198aa..00000000
