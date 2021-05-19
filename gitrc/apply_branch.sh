@@ -1,4 +1,12 @@
 #!/bin/zsh
+
+~/loadrc/gitrc/checkGitStatus.sh
+
+if [ $? -ne 0 ]
+then
+  exit 1
+fi
+
 BRANCH="$1"
 BRANCH=$(echo "$BRANCH" | sed 's/remotes\///g')
 BRANCH_DIFF=$(echo "$BRANCH" | sed 's/[^\/]*\///g')
