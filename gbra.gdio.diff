@@ -20,16 +20,6 @@ index 4f8edfc6..c32f5329 100755
  sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
 +dos2unix "$output" 
  exit 0
-diff --git a/gitrc/gbra.sh b/gitrc/gbra.sh
-index 21140baa..7acdcb66 100755
---- ./gitrc/gbra.sh
-+++ ./gitrc/gbra.sh
-@@ -1,3 +1,4 @@
- #!/bin/zsh
- git remote update
--git branch -a --no-merged | tee gbra.log
-+git branch --sort=-committerdate -a --no-merged | tee gbra.log
-+sed -i.bak 's/[[:space:]]*remotes\///g;s/[[:space:]]*//g' gbra.log  
 diff --git a/gitrc/gbrs.sh b/gitrc/gbrs.sh
 deleted file mode 100755
 index ab7198aa..00000000
@@ -51,6 +41,13 @@ index 700d6af6..8e39a3ec 100755
  
  if [ $? -ne 0 ]
  then
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index ffc1c04f..f2f44f65 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit ffc1c04f455c2ecd203ebac0731d4e9a214cbcaa
++Subproject commit f2f44f65ada0a750b06951ff53ece163e39575ac
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 index 690f08ac..d5874fe5 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
