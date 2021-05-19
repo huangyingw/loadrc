@@ -1,13 +1,3 @@
-diff --git a/bashrc/mklnk.sh b/bashrc/mklnk.sh
-index 1e5eaeaa..2fafbd7d 100755
---- ./bashrc/mklnk.sh
-+++ ./bashrc/mklnk.sh
-@@ -17,4 +17,5 @@ then
- fi
- 
- ~/loadrc/bashrc/move.sh "$SOURCE" "$TARGET"
-+~/loadrc/bashrc/rmEmpty.sh "$SOURCE"
- ~/loadrc/bashrc/ln_fs.sh "$TARGET" "$SOURCE"
 diff --git a/bashrc/osmirror_exclude b/bashrc/osmirror_exclude
 index 5b16c128..cd9fe5f8 100644
 --- ./bashrc/osmirror_exclude
@@ -22,20 +12,14 @@ index 5b16c128..cd9fe5f8 100644
  media/volgrp
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 new file mode 100755
-index 00000000..60e018a5
+index 00000000..8929ce87
 --- /dev/null
 +++ ./wifirc/autoconnect.sh
-@@ -0,0 +1,18 @@
+@@ -0,0 +1,12 @@
 +#!/bin/bash
 +
-+# find the uuid by nmcli con show
++# find the uuid by nmcli con show 
 +# and put this script, which is owned by root and executable, in the folder: /etc/NetworkManager/dispatcher.d
-+
-+# the following command to get the wifi device:
-+# for dev in `ls /sys/class/net`; do
-+#     [ -d "/sys/class/net/$dev/wireless" ] && echo "$dev"
-+# done
-+
 +
 +if [ "$CONNECTION_UUID" = "df31faf5-3440-49ec-be88-9e040176663e" ]
 +then
