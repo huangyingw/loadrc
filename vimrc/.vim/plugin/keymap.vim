@@ -144,7 +144,7 @@ function! VRun()
     silent exec '!~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult'
     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
 
-    if (expand("%") =~ '.*leetcode.*')
+    if (expand("%") =~ '.*leetcode.*') 
         call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/post_submit.sh ' . '"' .  b:file_name . '"' . ' 2>&1 | tee post_submit.log')
     endif
 
