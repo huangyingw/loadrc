@@ -1,0 +1,131 @@
+diff --git a/bashrc/check_running.sh b/bashrc/check_running.sh
+index 6ee8b3bf..638490ac 100755
+--- ./bashrc/check_running.sh
++++ ./bashrc/check_running.sh
+@@ -24,7 +24,7 @@ then
+         # The process is not running
+         # Echo current PID into lock file
+         echo $$ > "${LCK_FILE}"
+-        "$SCRIPT"
++        "$SCRIPT" "$2" "$3"
+     else
+         # the process IS running
+         # handle it
+diff --git a/leetcoderc/handle.sh b/leetcoderc/handle.sh
+new file mode 100755
+index 00000000..567ab9ad
+--- /dev/null
++++ ./leetcoderc/handle.sh
+@@ -0,0 +1,8 @@
++#!/bin/zsh
++FILE="$1"
++
++~/loadrc/leetcoderc/submit.sh "$FILE"
++NUM=$(echo "$FILE" | sed 's/.*\/\([0-9]*\)\..*/\1/g') 
++~/loadrc/bashrc/check_running.sh ~/loadrc/leetcoderc/submission.sh "$NUM"
++~/loadrc/leetcoderc/restore.sh "$NUM"
++~/loadrc/leetcoderc/remove_dup.sh "$NUM"
+diff --git a/leetcoderc/handle_test.sh b/leetcoderc/handle_test.sh
+new file mode 100755
+index 00000000..11541bd8
+--- /dev/null
++++ ./leetcoderc/handle_test.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++./handle.sh /Users/huangyingw/leetcode-cli/submissions/1.two-sum.260837994.Accepted.leetcode.py
+diff --git a/leetcoderc/remove_dup.sh b/leetcoderc/remove_dup.sh
+new file mode 100755
+index 00000000..5ba1dea0
+--- /dev/null
++++ ./leetcoderc/remove_dup.sh
+@@ -0,0 +1,7 @@
++#!/bin/zsh
++NUM="$1"
++cd "$NUM"
++
++~/loadrc/leetcoderc/remove_gabages.sh
++find . -type f \( -name \*.orig -o -name \*.bak \) -delete
++jdupes -1dNr .
+diff --git a/leetcoderc/remove_gabages.sh b/leetcoderc/remove_gabages.sh
+new file mode 100755
+index 00000000..ce8158ac
+--- /dev/null
++++ ./leetcoderc/remove_gabages.sh
+@@ -0,0 +1,12 @@
++#!/bin/zsh
++
++find . -type f -name \*.py | while read ss
++do
++    autopep8 --in-place "$ss"
++    if $(~/loadrc/pythonrc/remove_comments.py "$ss")
++    then
++        mv -fv "$ss.strip" "$ss"
++        sed -i.bak '/print.*(/d;/^_author_/d;/__main__/d;/ = Solution()/d;/^_project_/d;/\bprint\b/d;s/#--//g;s/##//g;s/ \/= /\/\/=/g;s/ \/ /\/\//g;/^$/d;/^\s*$/d' "$ss"
++        autopep8 --in-place "$ss"
++    fi
++done
+diff --git a/leetcoderc/restore.sh b/leetcoderc/restore.sh
+new file mode 100755
+index 00000000..328d9be3
+--- /dev/null
++++ ./leetcoderc/restore.sh
+@@ -0,0 +1,7 @@
++#!/bin/zsh
++NUM="$1"
++
++rsync -aHv --progress \
++    --ignore-existing \
++    ../downloads/"$NUM"/ \
++    ./"$NUM"/
+diff --git a/leetcoderc/submission.sh b/leetcoderc/submission.sh
+new file mode 100755
+index 00000000..b6e0c3e8
+--- /dev/null
++++ ./leetcoderc/submission.sh
+@@ -0,0 +1,4 @@
++#!/bin/zsh
++NUM="$1"
++mkdir -p ../downloads/"$NUM"/ 
++leetcode submission "$NUM" -o ../downloads/"$NUM"/
+diff --git a/leetcoderc/submit.sh b/leetcoderc/submit.sh
+index 8653a009..df611c8a 100755
+--- ./leetcoderc/submit.sh
++++ ./leetcoderc/submit.sh
+@@ -1,6 +1,3 @@
+ #!/bin/zsh
+-find ~/.lc -type f -name problems.json -delete
+-find ~/myproject/git/interview/leetcode_solutions/ -type f -name "[0-9]*.py" | while read ss
+-do
+-    leetcode submit -d "$ss"
+-done
++FILE="$1"
++leetcode submit "$FILE"
+diff --git a/leetcoderc/submit_delete.sh b/leetcoderc/submit_delete.sh
+new file mode 100755
+index 00000000..8653a009
+--- /dev/null
++++ ./leetcoderc/submit_delete.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++find ~/.lc -type f -name problems.json -delete
++find ~/myproject/git/interview/leetcode_solutions/ -type f -name "[0-9]*.py" | while read ss
++do
++    leetcode submit -d "$ss"
++done
+diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
+index c56304f2..e14de500 100755
+--- ./vishrc/vrun.sh
++++ ./vishrc/vrun.sh
+@@ -10,7 +10,7 @@ fi
+ 
+ if [[ "$file" = *'.leetcode.java' ]] || [[ "$file" = *'.leetcode.py' ]] || [[ "$file" = *'.leetcode.python3.py' ]]
+ then
+-    leetcode submit "$file"
++    ~/loadrc/leetcoderc/handle.sh "$file"
+     exit 0
+ fi
+ 
