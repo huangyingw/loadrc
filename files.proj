@@ -2942,6 +2942,7 @@
 "./vishrc/vlc.sh"
 "./vishrc/vrun.sh"
 "./vishrc/vsearch.sh"
+"./wifirc/autoconnect.sh"
 "./wifirc/enable.sh"
 "./wifirc/show.sh"
 "./work.local.astylerc"
