@@ -346,6 +346,7 @@
 "./bashrc/zsh.test.sh"
 "./chrome_install.sh"
 "./config/iTerm/com.googlecode.iterm2.plist"
+"./configure_gitk.sh"
 "./crontabrc/.mbp.cron"
 "./crontabrc/.mini.cron"
 "./crontabrc/.mldonkey.cron"
@@ -2951,4 +2952,4 @@
 "./zerotierrc/install.sh"
 "./zerotierrc/restart.sh"
 "./zerotierrc/zerotierrc.conf"
-"dev.gdio.diff"
+"gitk.gdio.diff"
