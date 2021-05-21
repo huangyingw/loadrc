@@ -1,0 +1,70 @@
+diff --git a/bashrc/move.sh b/bashrc/move.sh
+index 84be1e2f..fa3eff73 100755
+--- ./bashrc/move.sh
++++ ./bashrc/move.sh
+@@ -19,8 +19,7 @@ realpath "$2" && TARGET=$(realpath "$2")
+ 
+ if [ -n "$SOURCE" ] && [ -n "$TARGET" ] && [ "$SOURCE" != "$TARGET" ]
+ then
+-    rsync --remove-source-files -aHSv --progress --force "$SOURCE/" "$TARGET/" ; \
+-        ~/loadrc/bashrc/rmEmpty.sh "$SOURCE/"
++    rsync --remove-source-files -aHSv --progress --force "$SOURCE/" "$TARGET/"
+ else
+     echo -e "${red}same dir --> ${SOURCE} ... ${NC}"
+     echo -e "${red}please choose the different dir! ... ${NC}"
+diff --git a/bashrc/osmirror_exclude b/bashrc/osmirror_exclude
+index cd9fe5f8..5b16c128 100644
+--- ./bashrc/osmirror_exclude
++++ ./bashrc/osmirror_exclude
+@@ -14,7 +14,6 @@ etc/hostname
+ etc/hosts
+ etc/libvirt
+ etc/mdadm/mdadm.conf
+-home/huangyingw/snap/
+ media/dev
+ media/nvme
+ media/volgrp
+diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
+index 8d2ff564..87060211 160000
+--- ./vimrc/.vim/bundle/vim-buffergator
++++ ./vimrc/.vim/bundle/vim-buffergator
+@@ -1 +1 @@
+-Subproject commit 8d2ff5644ea3bcfccc36b75d66c6ffd287922b1f
++Subproject commit 8706021133931d88cc38eafc01d4055d9c9bda9e
+diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
+index 00796bc9..66850f7b 100644
+--- ./vimrc/.vim/plugin/common.vim
++++ ./vimrc/.vim/plugin/common.vim
+@@ -148,7 +148,7 @@ function! OpenOrSwitch(buffername, openMode)
+     elseif a:openMode ==? "goto"
+         silent exec 'e ' . a:buffername
+     else
+-        silent exec 'vs ' . a:buffername
++        silent exec 'topleft vs ' . a:buffername
+     endif
+ endfunction
+ 
+diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
+deleted file mode 100755
+index 60e018a5..00000000
+--- ./wifirc/autoconnect.sh
++++ /dev/null
+@@ -1,18 +0,0 @@
+-#!/bin/bash
+-
+-# find the uuid by nmcli con show
+-# and put this script, which is owned by root and executable, in the folder: /etc/NetworkManager/dispatcher.d
+-
+-# the following command to get the wifi device:
+-# for dev in `ls /sys/class/net`; do
+-#     [ -d "/sys/class/net/$dev/wireless" ] && echo "$dev"
+-# done
+-
+-
+-if [ "$CONNECTION_UUID" = "df31faf5-3440-49ec-be88-9e040176663e" ]
+-then
+-    if [ "$2" = "down" ]; then
+-        sleep 10
+-        nmcli con up uuid $CONNECTION_UUID
+-    fi
+-fi
