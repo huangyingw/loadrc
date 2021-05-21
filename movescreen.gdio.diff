@@ -1,19 +1,41 @@
 diff --git a/iterm2rc/movescreen.py b/iterm2rc/movescreen.py
-index 7e9f9b4f..a55d8067 100644
+index 7e9f9b4f..6d3e51b0 100644
 --- ./iterm2rc/movescreen.py
 +++ ./iterm2rc/movescreen.py
-@@ -88,7 +88,6 @@ async def main(connection):
+@@ -57,6 +57,7 @@ async def main(connection):
+     async def move_current_tab_by_n_screens(delta):
+         tab_to_move = app.current_terminal_window.current_tab
+         window_with_tab_to_move = app.get_window_for_tab(tab_to_move.tab_id)
++        await window_with_tab_to_move.async_set_fullscreen(False)
+         i = app.terminal_windows.index(window_with_tab_to_move)
+         print("Window has index {}".format(i))
+         n = len(app.terminal_windows)
+@@ -88,7 +89,7 @@ async def main(connection):
              iterm2.Point(nsframe.origin.x, nsframe.origin.y),
              iterm2.Size(nsframe.size.width, nsframe.size.height))
          await window.async_set_frame(frame)
 -        await window.async_set_fullscreen(True)
++        await window.async_set_fullscreen(False)
  
      @iterm2.RPC
      async def move_current_tab_to_next_screen():
-diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 49993e11..8b9e0a46 160000
---- ./vimrc/.vim/bundle/vim-fugitive
-+++ ./vimrc/.vim/bundle/vim-fugitive
+diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
+index 8d2ff564..87060211 160000
+--- ./vimrc/.vim/bundle/vim-buffergator
++++ ./vimrc/.vim/bundle/vim-buffergator
 @@ -1 +1 @@
--Subproject commit 49993e115740e5748a8a7de65445d59309c5a086
-+Subproject commit 8b9e0a4633f09b4dfb0da103bed4913c136a96d6
+-Subproject commit 8d2ff5644ea3bcfccc36b75d66c6ffd287922b1f
++Subproject commit 8706021133931d88cc38eafc01d4055d9c9bda9e
+diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
+index 00796bc9..66850f7b 100644
+--- ./vimrc/.vim/plugin/common.vim
++++ ./vimrc/.vim/plugin/common.vim
+@@ -148,7 +148,7 @@ function! OpenOrSwitch(buffername, openMode)
+     elseif a:openMode ==? "goto"
+         silent exec 'e ' . a:buffername
+     else
+-        silent exec 'vs ' . a:buffername
++        silent exec 'topleft vs ' . a:buffername
+     endif
+ endfunction
+ 
