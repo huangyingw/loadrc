@@ -56,9 +56,8 @@ async def main(connection):
 
     async def move_current_tab_by_n_screens(delta):
         tab_to_move = app.current_terminal_window.current_tab
-        current_window = app.current_terminal_window
-        current_window.async_set_fullscreen(False)
         window_with_tab_to_move = app.get_window_for_tab(tab_to_move.tab_id)
+        await window_with_tab_to_move.async_set_fullscreen(False)
         i = app.terminal_windows.index(window_with_tab_to_move)
         print("Window has index {}".format(i))
         n = len(app.terminal_windows)
@@ -90,6 +89,7 @@ async def main(connection):
             iterm2.Point(nsframe.origin.x, nsframe.origin.y),
             iterm2.Size(nsframe.size.width, nsframe.size.height))
         await window.async_set_frame(frame)
+        await window.async_set_fullscreen(False)
 
     @iterm2.RPC
     async def move_current_tab_to_next_screen():
