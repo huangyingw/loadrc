@@ -73,3 +73,6 @@
 [branch "mirror"]
     remote = origin
     merge = refs/heads/mirror
+[branch "term"]
+    remote = origin
+    merge = refs/heads/term

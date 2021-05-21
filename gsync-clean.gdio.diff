@@ -1,0 +1,101 @@
+diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
+index 7163d50e..4f8edfc6 100755
+--- ./gitrc/dogdio.sh
++++ ./gitrc/dogdio.sh
+@@ -7,10 +7,9 @@ fi
+ local_branch="$(~/loadrc/gitrc/get_current_branch.sh)" 
+ output="$local_branch.gdio.diff"
+ output=$(echo "$output" | sed 's/\//_/g')
+-local_master="$(git config gsync.branch)"
++remote_branch="$(git config gsync.branch)"
+ remote="$(git config gsync.remote)"
+ 
+-git branch "$local_master" "$remote/$local_master"
+-~/loadrc/gitrc/gdi.sh "$local_master" 2>&1 | tee "$output"  
++~/loadrc/gitrc/gdi.sh "$remote/$remote_branch" 2>&1 | tee "$output"  
+ sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
+ exit 0
+diff --git a/gitrc/gbak.sh b/gitrc/gbak.sh
+index 92880a50..0be60d68 100755
+--- ./gitrc/gbak.sh
++++ ./gitrc/gbak.sh
+@@ -1,6 +1,7 @@
+ #!/bin/zsh
+ current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
+ target_branch=$(echo "$current_branch" | sed 's/\.fix$//g').bak
+-local_master="$(git config gsync.branch)"
++remote="$(git config gsync.remote)"
++remote_branch="$(git config gsync.branch)"
+ ~/loadrc/gitrc/gbrd.sh "$target_branch"
+-git checkout -b "$target_branch" "$local_master"
++git checkout -b "$target_branch" "$remote/$remote_branch"
+diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
+index b9a02354..700d6af6 100755
+--- ./gitrc/gdit.sh
++++ ./gitrc/gdit.sh
+@@ -3,14 +3,14 @@ output="$1"
+ current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
+ target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
+ remote="$(git config gsync.remote)"
+-local_master="$(git config gsync.branch)"
++remote_branch="$(git config gsync.branch)"
+ 
+ ~/loadrc/gitrc/discard_unnecessaries.sh
+ git checkout -b "$target_branch" "$remote/$target_branch"
+-git checkout -b "$target_branch" "$local_master"
++git checkout -b "$target_branch" "$remote/$remote_branch"
+ git checkout -f "$target_branch"
+ git branch -u "$remote/$target_branch"
+-git merge -X theirs "$local_master" && \
++git merge -X theirs "$remote/$remote_branch" && \
+     git pull && \
+     git push ; \
+     git checkout "$current_branch" && \
+diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
+index b372cebc..a2a0c539 100755
+--- ./gitrc/gpl.sh
++++ ./gitrc/gpl.sh
+@@ -14,16 +14,15 @@ done
+ 
+ for ss in $(git config --get-all pull.from)
+ do
+-    remote_branch=$(echo "$ss" | sed  -e "s/\// /g")
+-    COMMAND="git pull $remote_branch &"
++    pull_from=$(echo "$ss" | sed  -e "s/\// /g")
++    COMMAND="git pull $pull_from &"
+     eval "$COMMAND"
+ done
+ 
+ remote=$(git config gsync.remote)
+-branch=$(git config gsync.branch)
++remote_branch=$(git config gsync.branch)
++
+ if [ -n "$remote" ]
+ then
+-    git branch "$branch" "$remote"/"$branch" &
+-    git fetch "$remote" "$branch":"$branch" &
+-    git merge "$branch" &
++    git merge "$remote"/"$remote_branch"
+ fi
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index ec066763..dc659a1f 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit ec0667634f8cf570df50de7242b34fa4f7d4583e
++Subproject commit dc659a1fb9a46e33e457dcd8fafe935b4de4f36b
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index 58aec787..14496516 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -373,8 +373,8 @@ function! s:Gdi(...) abort
+             call fugitive#Diffsplit(0, 1, "vert", '', [])
+         elseif tolower(arg1) == 'o'
+             let remote = substitute(system("git config gsync.remote"), '\n', '', '')
+-            let branch = substitute(system("git config gsync.branch"), '\n', '', '')
+-            call fugitive#Diffsplit(1, 0, 'vert', remote . '/' . branch, [remote . '/' . branch])
++            let remote_branch = substitute(system("git config gsync.branch"), '\n', '', '')
++            call fugitive#Diffsplit(1, 0, 'vert', remote . '/' . remote_branch, [remote . '/' . remote_branch])
+         else
+             call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
+         endif

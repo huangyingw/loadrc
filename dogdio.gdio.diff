@@ -1,0 +1,65 @@
+diff --git a/.gitrc b/.gitrc
+index 31ff4791..8e753cb1 100755
+--- ./.gitrc
++++ ./.gitrc
+@@ -11,7 +11,6 @@ alias gbr='$HOME/loadrc/gitrc/gbr.sh'
+ alias gbra='$HOME/loadrc/gitrc/gbra.sh'
+ alias gbrd='$HOME/loadrc/gitrc/gbrd.sh'
+ alias gbrm='$HOME/loadrc/gitrc/gbrm.sh'
+-alias gbrs='$HOME/loadrc/gitrc/gbrs.sh'
+ alias gch='git cherry'
+ alias gchp='git cherry-pick'
+ alias gcia='$HOME/loadrc/gitrc/gcia.sh'
+diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
+index 4f8edfc6..c32f5329 100755
+--- ./gitrc/dogdio.sh
++++ ./gitrc/dogdio.sh
+@@ -12,4 +12,5 @@ remote="$(git config gsync.remote)"
+ 
+ ~/loadrc/gitrc/gdi.sh "$remote/$remote_branch" 2>&1 | tee "$output"  
+ sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
++dos2unix "$output" 
+ exit 0
+diff --git a/gitrc/gbra.sh b/gitrc/gbra.sh
+index 21140baa..75f7a5e1 100755
+--- ./gitrc/gbra.sh
++++ ./gitrc/gbra.sh
+@@ -1,3 +1,3 @@
+ #!/bin/zsh
+ git remote update
+-git branch -a --no-merged | tee gbra.log
++git branch -a --no-merged --sort=-committerdate | tee gbra.log
+diff --git a/gitrc/gbrs.sh b/gitrc/gbrs.sh
+deleted file mode 100755
+index ab7198aa..00000000
+--- ./gitrc/gbrs.sh
++++ /dev/null
+@@ -1,3 +0,0 @@
+-#!/bin/zsh
+-git remote update
+-git branch -a --no-merged --sort=-committerdate | tee gbrs.log
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index 690f08ac..d5874fe5 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -23,7 +23,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbr :e
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbra :execute s:Gbra()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbrd :execute s:Gbrd(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbrm :execute s:Gbrm(<f-args>)
+-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbrs :execute s:Gbrs()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean :execute s:Gclean()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gco :execute s:Gco(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcob :execute s:Gcob(<f-args>)
+@@ -260,12 +259,6 @@ function! s:Gbra() abort
+     call OpenOrSwitch('gbra.log', 'vs')
+ endfunction
+ 
+-function! s:Gbrs() abort
+-    let worktree = Cd2Worktree()
+-    silent exec '!~/loadrc/gitrc/gbrs.sh'
+-    call OpenOrSwitch('gbrs.log', 'vs')
+-endfunction
+-
+ function! s:Gs() abort
+     if expand('%:p') =~ '^fugitive:/'
+         let indexFolder = substitute(expand('%:p'), '^fugitive:\/\/', '', 'g')

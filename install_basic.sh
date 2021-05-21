@@ -5,12 +5,14 @@ SCRIPT=$(realpath "$0") && \
 
 ./install_basic_linux.sh
 ./install_basic_macos.sh
+./configure_gitk.sh
 
 pip install \
     autoflake \
     autopep8 \
     ipynb-py-convert \
-    pdftotext
+    pdftotext \
+    proxybroker
 
 pip3 install git+https://github.com/gaborvecsei/pdf-split-merge.git
 

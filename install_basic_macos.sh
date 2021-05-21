@@ -10,6 +10,8 @@ fi
 
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
+brew upgrade
+brew install --cask osxfuse
 brew install \
     Caskroom/cask/xquartz \
     astyle \
@@ -24,6 +26,7 @@ brew install \
     hub \
     iperf \
     iperf3 \
+    jq \
     jupyterlab \
     kubectl \
     kubernetes-cli \
@@ -31,15 +34,15 @@ brew install \
     lynx \
     minikube \
     mosh \
-    node \
     openssl \
     rename \
+    sshfs \
     tig \
     tmux \
+    w3m \
     wakeonlan \
     watch \
-    wget \
-    xpdf
+    wget
 
 brew cask install \
     kdiff3 \

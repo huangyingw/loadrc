@@ -1,0 +1,24 @@
+diff --git a/.imacpro.rc b/.imacpro.rc
+index a0d25e95..6331a414 100755
+--- ./.imacpro.rc
++++ ./.imacpro.rc
+@@ -3,8 +3,8 @@
+ 
+ if [ $(uname) = "Darwin" ]
+ then
+-    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
++    if ! (sudo systemsetup -getcomputersleep | grep -q "after 10 minutes") ; \
+         then \
+-        sudo systemsetup -setcomputersleep Never; \
++        sudo systemsetup -setcomputersleep 10; \
+         fi
+ fi
+diff --git a/error b/error
+index 2ab3ca3d..072c359e 100644
+--- ./error
++++ ./error
+@@ -65,3 +65,4 @@ Cought anything: Vim(cd):E472: Command failed
+ 
+ The legacy SnipMate parser is deprecated. Please see :h SnipMate-deprecate.
+ [ncm2_tmux@yarp] subprocess.TimeoutExpired: Command '['tmux', 'display-message', '-p', '#{session_id}']' timed out after 5 seconds
++vimrc/.vim/bundle/ncm2-tmux/pythonx/ncm2_tmux.py:18:        proc = Popen(args=['tmux', 'display-message', '-p', '#{session_id}'],

@@ -51,6 +51,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :execute s:Gs()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject ApplyBranch :execute s:ApplyBranch(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gst :execute s:Gst()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsti :execute s:Gsti()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstl :execute s:Gstl()
@@ -255,7 +256,7 @@ endfunction
 function! s:Gbra() abort
     let worktree = Cd2Worktree()
     silent exec '!~/loadrc/gitrc/gbra.sh'
-    call OpenOrSwitch('gbra.findresult', 'vs')
+    call OpenOrSwitch('gbra.log', 'vs')
 endfunction
 
 function! s:Gs() abort
@@ -366,8 +367,8 @@ function! s:Gdi(...) abort
             call fugitive#Diffsplit(0, 1, "vert", '', [])
         elseif tolower(arg1) == 'o'
             let remote = substitute(system("git config gsync.remote"), '\n', '', '')
-            let branch = substitute(system("git config gsync.branch"), '\n', '', '')
-            call fugitive#Diffsplit(1, 0, 'vert', remote . '/' . branch, [remote . '/' . branch])
+            let remote_branch = substitute(system("git config gsync.branch"), '\n', '', '')
+            call fugitive#Diffsplit(1, 0, 'vert', remote . '/' . remote_branch, [remote . '/' . remote_branch])
         else
             call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
         endif
@@ -511,6 +512,12 @@ function! s:KdiffFile() abort
     only
     call asyncrun#stop('<bang>')
     call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/KdiffFile.py ' . '"' .  expand("%:p") . '"')
+endfunction
+
+function! s:ApplyBranch(args, ...) abort
+    let worktree = Cd2Worktree()
+    silent exec '!~/loadrc/gitrc/apply_branch.sh ' . '"' .  a:args . '"'
+    call s:Gs()
 endfunction
 
 function! s:Gshow(args, ...) abort
@@ -672,7 +679,6 @@ function! s:Reapply() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
     call s:Gs()
-    call s:Gdi()
 endfunction
 
 function! s:Split() abort
