@@ -5,6 +5,7 @@ SCRIPT=$(realpath "$0") && \
 
 ./install_basic_linux.sh
 ./install_basic_macos.sh
+./configure_gitk.sh
 
 pip install \
     autoflake \
