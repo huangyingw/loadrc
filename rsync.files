@@ -505,18 +505,14 @@
 ./host_links/lint-sandbox/etc/hosts
 ./host_links/lint-sandbox/etc/network/interfaces
 ./host_links/mbp/Users/huangyingw/.bashrc
-./host_links/mini/etc/NetworkManager/system-connections/Millennium Flats
 ./host_links/mini/etc/default/isc-dhcp-server
 ./host_links/mini/etc/dhcp/dhcpd.conf
 ./host_links/mini/etc/hosts
 ./host_links/mini/root/.fastai/config.yml
 ./host_links/movie/etc/network/interfaces
-./host_links/server/etc/NetworkManager/system-connections/Millennium Flats
-./host_links/server/etc/NetworkManager/system-connections/eth0
 ./host_links/server/etc/hosts
 ./host_links/server/etc/network/interfaces
 ./host_links/server/root/.fastai/config.yml
-./host_links/toshiba/etc/NetworkManager/system-connections/Millennium Flats
 ./host_links/toshiba/etc/systemd/logind.conf
 ./host_links/ubuntu/etc/hosts
 ./host_links/ubuntu/etc/network/interfaces
@@ -706,6 +702,7 @@
 ./svnrc/svnup.sh
 ./svnrc/svnuserlog.sh
 ./svnrc/svnvdiff.sh
+./swith-2-zsh.sh
 ./timemachinerc/deletelocalsnapshots.sh
 ./timemachinerc/etc/netatalk/AppleVolumes.default
 ./timemachinerc/etc/nsswitch.conf
@@ -2952,4 +2949,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-topleft.gdio.diff
+oh-my-zsh.gdio.diff
