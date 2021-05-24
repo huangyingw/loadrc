@@ -247,7 +247,7 @@ function! Filter2Findresult()
     let b:result = GetEscapedResult(keyword)
 
     if expand('%:e') != "findresult"
-        let buffername = b:result . '.vaa.findresult'
+        let buffername = b:result . '.findresult'
         silent exec '!rm ' . buffername
 
         if bufexists(buffername)
