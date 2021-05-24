@@ -15,7 +15,7 @@ index 8d2ff564..87060211 160000
 -Subproject commit 8d2ff5644ea3bcfccc36b75d66c6ffd287922b1f
 +Subproject commit 8706021133931d88cc38eafc01d4055d9c9bda9e
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
-index 00796bc9..151dd277 100644
+index 00796bc9..463c2f25 100644
 --- ./vimrc/.vim/plugin/common.vim
 +++ ./vimrc/.vim/plugin/common.vim
 @@ -148,7 +148,7 @@ function! OpenOrSwitch(buffername, openMode)
@@ -36,3 +36,12 @@ index 00796bc9..151dd277 100644
      let result = substitute(result, '\"', '', 'g')
      let result = substitute(result, '\,', '', 'g')
      let result = substitute(result, '\\', '', 'g')
+@@ -245,7 +247,7 @@ function! Filter2Findresult()
+     let b:result = GetEscapedResult(keyword)
+ 
+     if expand('%:e') != "findresult"
+-        let buffername = b:result . '.vaa.findresult'
++        let buffername = b:result . '.findresult'
+         silent exec '!rm ' . buffername
+ 
+         if bufexists(buffername)
