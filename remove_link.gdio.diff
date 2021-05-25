@@ -12,6 +12,16 @@ index f2fc63a9..00000000
 -mkdir -p /media/nvme/var/lib/docker/
 -service docker stop
 -~/loadrc/bashrc/mklnk.sh /var/lib/docker/ /media/nvme/var/lib/docker/
+diff --git a/dockerrc/install.sh b/dockerrc/install.sh
+index aadad036..19dfb0d4 100755
+--- ./dockerrc/install.sh
++++ ./dockerrc/install.sh
+@@ -18,5 +18,3 @@ apt-get install -y docker.io docker-compose
+ systemctl enable docker
+ 
+ #./nvidia-docker_install.sh
+-
+-./configure.sh
 diff --git a/kvmrc/configure.sh b/kvmrc/configure.sh
 deleted file mode 100755
 index 926a191a..00000000
@@ -27,3 +37,20 @@ index 926a191a..00000000
 -mkdir -p /media/nvme/etc/libvirt/
 -~/loadrc/bashrc/mklnk.sh /var/lib/libvirt/ /media/nvme/var/lib/libvirt/
 -~/loadrc/bashrc/mklnk.sh /etc/libvirt/ /media/nvme/etc/libvirt/
+diff --git a/kvmrc/install.sh b/kvmrc/install.sh
+index 9dbff559..14f88047 100755
+--- ./kvmrc/install.sh
++++ ./kvmrc/install.sh
+@@ -16,5 +16,3 @@ apt-get update ; \
+     qemu \
+     qemu-kvm \
+     virt-manager
+-
+-./configure.sh
+diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
+index 8d2ff564..87060211 160000
+--- ./vimrc/.vim/bundle/vim-buffergator
++++ ./vimrc/.vim/bundle/vim-buffergator
+@@ -1 +1 @@
+-Subproject commit 8d2ff5644ea3bcfccc36b75d66c6ffd287922b1f
++Subproject commit 8706021133931d88cc38eafc01d4055d9c9bda9e
