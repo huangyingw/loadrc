@@ -16,5 +16,3 @@ apt-get update ; \
     qemu \
     qemu-kvm \
     virt-manager
-
-./configure.sh
