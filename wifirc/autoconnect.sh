@@ -9,7 +9,7 @@
 # done
 
 
-if [ "$CONNECTION_UUID" = "df31faf5-3440-49ec-be88-9e040176663e" ]
+if [ "$CONNECTION_UUID" = "1c853a09-cf79-4a54-86fa-9efb5e447ea8" ]
 then
     if [ "$2" = "down" ]; then
         sleep 10
