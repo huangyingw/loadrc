@@ -196,3 +196,16 @@ index 00796bc9..66850f7b 100644
      endif
  endfunction
  
+diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
+index 60e018a5..e8d338a2 100755
+--- ./wifirc/autoconnect.sh
++++ ./wifirc/autoconnect.sh
+@@ -9,7 +9,7 @@
+ # done
+ 
+ 
+-if [ "$CONNECTION_UUID" = "df31faf5-3440-49ec-be88-9e040176663e" ]
++if [ "$CONNECTION_UUID" = "1c853a09-cf79-4a54-86fa-9efb5e447ea8" ]
+ then
+     if [ "$2" = "down" ]; then
+         sleep 10
