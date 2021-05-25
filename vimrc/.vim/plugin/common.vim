@@ -214,6 +214,8 @@ function! GetEscapedResult(keywordStr)
     let result = substitute(result, ":", "", "g")
     let result = substitute(result, "[", "_", "g")
     let result = substitute(result, "]", "_", "g")
+    let result = substitute(result, "+", "_", "g")
+    let result = substitute(result, "-", "_", "g")
     return result
 endfunc
 
