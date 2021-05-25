@@ -176,6 +176,13 @@ index 00000000..541ae968
 +    chsh -s "$ZSH"
 +    reboot
 +fi
+diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
+index b4c543a2..ab6402f1 160000
+--- ./vimrc/.vim/bundle/vim-autoformat
++++ ./vimrc/.vim/bundle/vim-autoformat
+@@ -1 +1 @@
+-Subproject commit b4c543a26cef8e3dbb339813eb1d491c43be39cb
++Subproject commit ab6402f1a5e2704c353ab8d3de6e333603005fd4
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index 8d2ff564..87060211 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
