@@ -504,14 +504,18 @@
 ./host_links/lint-sandbox/etc/hosts
 ./host_links/lint-sandbox/etc/network/interfaces
 ./host_links/mbp/Users/huangyingw/.bashrc
+./host_links/mini/etc/NetworkManager/system-connections/Millennium Flats
 ./host_links/mini/etc/default/isc-dhcp-server
 ./host_links/mini/etc/dhcp/dhcpd.conf
 ./host_links/mini/etc/hosts
 ./host_links/mini/root/.fastai/config.yml
 ./host_links/movie/etc/network/interfaces
+./host_links/server/etc/NetworkManager/system-connections/Millennium Flats
+./host_links/server/etc/NetworkManager/system-connections/eth0
 ./host_links/server/etc/hosts
 ./host_links/server/etc/network/interfaces
 ./host_links/server/root/.fastai/config.yml
+./host_links/toshiba/etc/NetworkManager/system-connections/Millennium Flats
 ./host_links/toshiba/etc/systemd/logind.conf
 ./host_links/ubuntu/etc/hosts
 ./host_links/ubuntu/etc/network/interfaces
@@ -700,7 +704,6 @@
 ./svnrc/svnup.sh
 ./svnrc/svnuserlog.sh
 ./svnrc/svnvdiff.sh
-./swith-2-zsh.sh
 ./timemachinerc/deletelocalsnapshots.sh
 ./timemachinerc/etc/netatalk/AppleVolumes.default
 ./timemachinerc/etc/nsswitch.conf
@@ -2277,22 +2280,6 @@
 ./vimrc/.vim/bundle/tlib_vim/spec/tlib/url.vim
 ./vimrc/.vim/bundle/tlib_vim/spec/tlib/var.vim
 ./vimrc/.vim/bundle/tlib_vim/test/tlib.vim
-./vimrc/.vim/bundle/tmux-complete.vim/.gitignore
-./vimrc/.vim/bundle/tmux-complete.vim/MIT-LICENSE
-./vimrc/.vim/bundle/tmux-complete.vim/README.md
-./vimrc/.vim/bundle/tmux-complete.vim/autoload/asyncomplete/sources/tmuxcomplete.vim
-./vimrc/.vim/bundle/tmux-complete.vim/autoload/coc/source/tmuxcomplete.vim
-./vimrc/.vim/bundle/tmux-complete.vim/autoload/ncm2/sources/tmuxcomplete.vim
-./vimrc/.vim/bundle/tmux-complete.vim/autoload/neocomplcache/sources/tmuxcomplete.vim
-./vimrc/.vim/bundle/tmux-complete.vim/autoload/neocomplete/sources/tmuxcomplete.vim
-./vimrc/.vim/bundle/tmux-complete.vim/autoload/tmuxcomplete.vim
-./vimrc/.vim/bundle/tmux-complete.vim/autoload/tmuxcomplete/async.vim
-./vimrc/.vim/bundle/tmux-complete.vim/autoload/unite/sources/tmuxcomplete.vim
-./vimrc/.vim/bundle/tmux-complete.vim/lua/compe_tmux/init.lua
-./vimrc/.vim/bundle/tmux-complete.vim/plugin/tmuxcomplete.vim
-./vimrc/.vim/bundle/tmux-complete.vim/pythonx/ncm2_tmux_complete.py
-./vimrc/.vim/bundle/tmux-complete.vim/rplugin/python3/deoplete/sources/tmuxcomplete.py
-./vimrc/.vim/bundle/tmux-complete.vim/sh/tmuxcomplete
 ./vimrc/.vim/bundle/vala.vim/LICENSE
 ./vimrc/.vim/bundle/vala.vim/README.md
 ./vimrc/.vim/bundle/vala.vim/UltiSnips/vala.snippets
@@ -2947,4 +2934,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-dev.gdio.diff
+GetEscapedResult.gdio.diff
