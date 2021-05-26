@@ -214,6 +214,8 @@ function! GetEscapedResult(keywordStr)
     let result = substitute(result, ":", "", "g")
     let result = substitute(result, "[", "_", "g")
     let result = substitute(result, "]", "_", "g")
+    let result = substitute(result, "+", "_", "g")
+    let result = substitute(result, "-", "_", "g")
     return result
 endfunc
 
@@ -247,7 +249,7 @@ function! Filter2Findresult()
     let b:result = GetEscapedResult(keyword)
 
     if expand('%:e') != "findresult"
-        let buffername = b:result . '.vaa.findresult'
+        let buffername = b:result . '.findresult'
         silent exec '!rm ' . buffername
 
         if bufexists(buffername)
