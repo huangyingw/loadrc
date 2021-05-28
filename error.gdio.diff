@@ -1,0 +1,60 @@
+diff --git a/.gitmodules b/.gitmodules
+index ccedb042..189c289f 100644
+--- ./.gitmodules
++++ ./.gitmodules
+@@ -121,10 +121,6 @@
+     path = vimrc/.vim/bundle/ncm2-neoinclude
+     url = https://github.com/ncm2/ncm2-neoinclude
+     branch = master
+-[submodule "vimrc/.vim/bundle/tmux-complete.vim"]
+-    path = vimrc/.vim/bundle/tmux-complete.vim
+-    url = https://github.com/wellle/tmux-complete.vim.git
+-    branch = master
+ [submodule "vimrc/.vim/bundle/ncm2-cssomni"]
+     path = vimrc/.vim/bundle/ncm2-cssomni
+     url = https://github.com/ncm2/ncm2-cssomni
+diff --git a/error b/error
+index 03ac2d1f..ceecba51 100644
+--- ./error
++++ ./error
+@@ -69,3 +69,4 @@ vimrc/.vim/bundle/ncm2-tmux/pythonx/ncm2_tmux.py:18:        proc = Popen(args=['
+ [ncm2_tmux_complete@yarp] subprocess.CalledProcessError: Command '['sh', '-c', "sh ...xcomplete' -p '^.' -s 'words' -l '-a' -c '' -g ''"]' died with <Signals.SIGKILL: 9>.
+ [ncm2_tern@yarp] Job is dead. cmd=['/usr/local/opt/python@3.9/bin/python3.9', '-u',...', '/var/folders/7z/251_ly552l9glm39cnj9zxrh0000gn/T/nvimGXqrxd/0', 13, 'ncm2_tern']
+ [ncm2_tmux_complete@yarp] subprocess.CalledProcessError: Command '['sh', '-c', "sh ...xcomplete' -p '^.' -s 'words' -l '-a' -c '' -g ''"]' died with <Signals.SIGKILL: 9>.
++[ncm2_tmux_complete@yarp] subprocess.CalledProcessError: Command '['sh', '-c', "sh '/Users/huangyingw/loadrc/vimrc/.vim/bundle/tmux-complete.vim/sh/tmuxcomplete' -p '^.' -s
+diff --git a/vimrc/.vim/bundle/tmux-complete.vim b/vimrc/.vim/bundle/tmux-complete.vim
+deleted file mode 160000
+index 87f6f96c..00000000
+--- ./vimrc/.vim/bundle/tmux-complete.vim
++++ /dev/null
+@@ -1 +0,0 @@
+-Subproject commit 87f6f96c73b599554d1d7f313413d7f9d0336096
+diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
+index 8d2ff564..87060211 160000
+--- ./vimrc/.vim/bundle/vim-buffergator
++++ ./vimrc/.vim/bundle/vim-buffergator
+@@ -1 +1 @@
+-Subproject commit 8d2ff5644ea3bcfccc36b75d66c6ffd287922b1f
++Subproject commit 8706021133931d88cc38eafc01d4055d9c9bda9e
+diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
+index 00796bc9..151dd277 100644
+--- ./vimrc/.vim/plugin/common.vim
++++ ./vimrc/.vim/plugin/common.vim
+@@ -148,7 +148,7 @@ function! OpenOrSwitch(buffername, openMode)
+     elseif a:openMode ==? "goto"
+         silent exec 'e ' . a:buffername
+     else
+-        silent exec 'vs ' . a:buffername
++        silent exec 'topleft vs ' . a:buffername
+     endif
+ endfunction
+ 
+@@ -198,6 +198,8 @@ function! GetEscapedResult(keywordStr)
+     let result = substitute(result, "|", "", "g")
+     let result = substitute(result, "(", "", "g")
+     let result = substitute(result, ")", "", "g")
++    let result = substitute(result, '\\c', '', 'g')
++    let result = substitute(result, '\\V', '', 'g')
+     let result = substitute(result, '\"', '', 'g')
+     let result = substitute(result, '\,', '', 'g')
+     let result = substitute(result, '\\', '', 'g')
