@@ -20,3 +20,10 @@ index 00000000..87f6f96c
 +++ ./vimrc/.vim/bundle/tmux-complete.vim
 @@ -0,0 +1 @@
 +Subproject commit 87f6f96c73b599554d1d7f313413d7f9d0336096
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index f2f44f65..d28288da 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit f2f44f65ada0a750b06951ff53ece163e39575ac
++Subproject commit d28288dada2797f265b8c2079620c11c06046d13
