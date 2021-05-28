@@ -1,0 +1,22 @@
+diff --git a/.gitmodules b/.gitmodules
+index ccedb042..189c289f 100644
+--- ./.gitmodules
++++ ./.gitmodules
+@@ -121,10 +121,6 @@
+     path = vimrc/.vim/bundle/ncm2-neoinclude
+     url = https://github.com/ncm2/ncm2-neoinclude
+     branch = master
+-[submodule "vimrc/.vim/bundle/tmux-complete.vim"]
+-    path = vimrc/.vim/bundle/tmux-complete.vim
+-    url = https://github.com/wellle/tmux-complete.vim.git
+-    branch = master
+ [submodule "vimrc/.vim/bundle/ncm2-cssomni"]
+     path = vimrc/.vim/bundle/ncm2-cssomni
+     url = https://github.com/ncm2/ncm2-cssomni
+diff --git a/vimrc/.vim/bundle/tmux-complete.vim b/vimrc/.vim/bundle/tmux-complete.vim
+deleted file mode 160000
+index 87f6f96c..00000000
+--- ./vimrc/.vim/bundle/tmux-complete.vim
++++ /dev/null
+@@ -1 +0,0 @@
+-Subproject commit 87f6f96c73b599554d1d7f313413d7f9d0336096
