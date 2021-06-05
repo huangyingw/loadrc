@@ -51,10 +51,10 @@ index cbec960a..ed3c5426 160000
 -Subproject commit cbec960ab558b20281c0634b9b1a45fb16aaf638
 +Subproject commit ed3c5426a20bf1c06d7980946ada34fd9f93320e
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
-index e8d338a2..69440158 100755
+index e8d338a2..430298e0 100755
 --- ./wifirc/autoconnect.sh
 +++ ./wifirc/autoconnect.sh
-@@ -4,10 +4,14 @@
+@@ -4,12 +4,16 @@
  # and put this script, which is owned by root and executable, in the folder: /etc/NetworkManager/dispatcher.d
  
  # the following command to get the wifi device:
@@ -67,8 +67,11 @@ index e8d338a2..69440158 100755
 +        [ -d "/sys/class/net/$dev/wireless" ] && echo "$dev"
 +    done
 +) 
-+
-+TARGET_ID=$(nmcli connection show | grep $DEV | sed 's/.*[^0-9a-z]\(\([0-9a-z]*-\)\{4\}[0-9a-z]*\).*/\1/g')
  
- if [ "$CONNECTION_UUID" = "1c853a09-cf79-4a54-86fa-9efb5e447ea8" ]
+-if [ "$CONNECTION_UUID" = "1c853a09-cf79-4a54-86fa-9efb5e447ea8" ]
++TARGET_ID=$(nmcli connection show | grep $DEV | sed 's/.*[^0-9a-z]\(\([0-9a-z]*-\)\{4\}[0-9a-z]*\).*/\1/g')
++
++if [ "$CONNECTION_UUID" = "$TARGET_ID" ]
  then
+     if [ "$2" = "down" ]; then
+         sleep 10
