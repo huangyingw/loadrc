@@ -11,8 +11,7 @@ DEV=$(
     done
 ) 
 
-TARGET_ID=$(nmcli connection show | grep $DEV | sed 's/.*[^0-9a-z]\([0-9a-z]*-[0-9a-z]*-[0-9a-z]*-[0-9a-z]*-[0-9a-z]*\).*/\1/g')
-
+TARGET_ID=$(nmcli connection show | grep $DEV | sed 's/.*[^0-9a-z]\(\([0-9a-z]*-\)\{4\}[0-9a-z]*\).*/\1/g')
 
 if [ "$CONNECTION_UUID" = "1c853a09-cf79-4a54-86fa-9efb5e447ea8" ]
 then
