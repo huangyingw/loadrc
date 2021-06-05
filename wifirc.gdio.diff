@@ -36,6 +36,13 @@ index 4af77eea..3022d17c 100755
 -chmod -R 777 "$TARGET_DIR"
  
  service netatalk restart
+diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
+index ab6402f1..bdc4ef18 160000
+--- ./vimrc/.vim/bundle/vim-autoformat
++++ ./vimrc/.vim/bundle/vim-autoformat
+@@ -1 +1 @@
+-Subproject commit ab6402f1a5e2704c353ab8d3de6e333603005fd4
++Subproject commit bdc4ef1862f0e8b57d9fe7bfbfe6451ff814f20c
 diff --git a/vimrc/.vim/bundle/vim-snipmate b/vimrc/.vim/bundle/vim-snipmate
 index cbec960a..ed3c5426 160000
 --- ./vimrc/.vim/bundle/vim-snipmate
