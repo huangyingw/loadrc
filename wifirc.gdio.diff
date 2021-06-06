@@ -16,6 +16,16 @@ index 73b495da..46d444a3 100644
 +[netatalk]
      path = target_dir_var
      time machine = yes
+diff --git a/install_basic_linux.sh b/install_basic_linux.sh
+index 23be74d2..34269226 100755
+--- ./install_basic_linux.sh
++++ ./install_basic_linux.sh
+@@ -16,4 +16,5 @@ fi
+ ./nxrc/install.sh
+ ./kubernetesrc/install.sh
+ cp -fv /bin/true /usr/bin/true
++cp -fv ./wifirc/autoconnect.sh /etc/NetworkManager/dispatcher.d/
+ systemctl disable NetworkManager-wait-online.service
 diff --git a/install_time_machine.sh b/install_time_machine.sh
 index 4af77eea..97ce30fe 100755
 --- ./install_time_machine.sh
@@ -36,20 +46,6 @@ index 4af77eea..97ce30fe 100755
 -chmod -R 777 "$TARGET_DIR"
  
  service netatalk restart
-diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index ab6402f1..bdc4ef18 160000
---- ./vimrc/.vim/bundle/vim-autoformat
-+++ ./vimrc/.vim/bundle/vim-autoformat
-@@ -1 +1 @@
--Subproject commit ab6402f1a5e2704c353ab8d3de6e333603005fd4
-+Subproject commit bdc4ef1862f0e8b57d9fe7bfbfe6451ff814f20c
-diff --git a/vimrc/.vim/bundle/vim-snipmate b/vimrc/.vim/bundle/vim-snipmate
-index cbec960a..ed3c5426 160000
---- ./vimrc/.vim/bundle/vim-snipmate
-+++ ./vimrc/.vim/bundle/vim-snipmate
-@@ -1 +1 @@
--Subproject commit cbec960ab558b20281c0634b9b1a45fb16aaf638
-+Subproject commit ed3c5426a20bf1c06d7980946ada34fd9f93320e
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 index e8d338a2..430298e0 100755
 --- ./wifirc/autoconnect.sh
