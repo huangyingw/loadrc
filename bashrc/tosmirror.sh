@@ -22,4 +22,3 @@ fi
 rsync -aHSvn --progress --delete-during --force \
     --exclude-from="$HOME"/loadrc/bashrc/osmirror_exclude \
     "${SOURCE}/" "${TARGET}/" > ~/loadrc/tosmirror.ready
-nvim ~/loadrc/tosmirror.ready  

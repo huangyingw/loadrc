@@ -21,7 +21,7 @@ fi
 mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/."`hostname`".theanorc  ~/.theanorc
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.config/git/gitk  ~/.config/git/gitk
-#~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
+# ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.tmux.conf ~/.tmux.conf
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/gitrc/.gitconfig ~/.gitconfig
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/gitrc/.globalgitignore ~/.globalgitignore
@@ -30,7 +30,7 @@ mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.hgignore ~/.hgignore
 # cp -fv ~/loadrc/bashrc/ln_fs.sh ~/loadrc/Library/Preferences/org.videolan.vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/iterm2rc/movescreen.py ~/Library/ApplicationSupport/iTerm2/Scripts/movescreen/movescreen/movescreen.py
-#~/loadrc/bashrc/ln_fs.sh ~/loadrc/.kdiff3rc ~/.kdiff3rc
+# ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.kdiff3rc ~/.kdiff3rc
 
 ./set_linux_configuration.sh
 ./set_macos_configuration.sh

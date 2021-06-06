@@ -121,10 +121,6 @@
     path = vimrc/.vim/bundle/ncm2-neoinclude
     url = https://github.com/ncm2/ncm2-neoinclude
     branch = master
-[submodule "vimrc/.vim/bundle/tmux-complete.vim"]
-    path = vimrc/.vim/bundle/tmux-complete.vim
-    url = https://github.com/wellle/tmux-complete.vim.git
-    branch = master
 [submodule "vimrc/.vim/bundle/ncm2-cssomni"]
     path = vimrc/.vim/bundle/ncm2-cssomni
     url = https://github.com/ncm2/ncm2-cssomni
