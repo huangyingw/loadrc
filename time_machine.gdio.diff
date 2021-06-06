@@ -36,10 +36,3 @@ index 4af77eea..3022d17c 100755
 -chmod -R 777 "$TARGET_DIR"
  
  service netatalk restart
-diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
-index cfac13ef..8d2ff564 160000
---- ./vimrc/.vim/bundle/vim-buffergator
-+++ ./vimrc/.vim/bundle/vim-buffergator
-@@ -1 +1 @@
--Subproject commit cfac13efd7832866c134e6fa1b213940e8c0c4d7
-+Subproject commit 8d2ff5644ea3bcfccc36b75d66c6ffd287922b1f
