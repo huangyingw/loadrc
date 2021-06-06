@@ -17,7 +17,7 @@ index 73b495da..46d444a3 100644
      path = target_dir_var
      time machine = yes
 diff --git a/install_time_machine.sh b/install_time_machine.sh
-index 4af77eea..3022d17c 100755
+index 4af77eea..97ce30fe 100755
 --- ./install_time_machine.sh
 +++ ./install_time_machine.sh
 @@ -3,14 +3,12 @@ SCRIPT=$(realpath "$0")
@@ -25,7 +25,7 @@ index 4af77eea..3022d17c 100755
  cd "$SCRIPTPATH"
  
 -TARGET_DIR="/media/mldonkey/time-machine"
-+TARGET_DIR="/"
++TARGET_DIR="/media/volgrp/"
  TARGET_DIR_FOR_SED=$(echo "$TARGET_DIR" | sed 's/\//\\\//g')
  apt install -y netatalk avahi-daemon
  cp -fv ./etc/netatalk/afp.conf /etc/netatalk/afp.conf
