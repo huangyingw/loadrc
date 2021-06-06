@@ -16,4 +16,5 @@ fi
 ./nxrc/install.sh
 ./kubernetesrc/install.sh
 cp -fv /bin/true /usr/bin/true
+cp -fv ./wifirc/autoconnect.sh /etc/NetworkManager/dispatcher.d/
 systemctl disable NetworkManager-wait-online.service
