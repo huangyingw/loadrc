@@ -125,10 +125,6 @@
     path = vimrc/.vim/bundle/ncm2-cssomni
     url = https://github.com/ncm2/ncm2-cssomni
     branch = master
-[submodule "vimrc/.vim/bundle/ncm2-tern"]
-    path = vimrc/.vim/bundle/ncm2-tern
-    url = https://github.com/ncm2/ncm2-tern
-    branch = master
 [submodule "vimrc/.vim/bundle/ncm2-jedi"]
     path = vimrc/.vim/bundle/ncm2-jedi
     url = https://github.com/ncm2/ncm2-jedi

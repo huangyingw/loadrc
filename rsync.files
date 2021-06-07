@@ -191,7 +191,6 @@
 ./bashrc/bash.test.sh
 ./bashrc/best_find.sh
 ./bashrc/binaryGrep.sh
-./bashrc/ca.sh
 ./bashrc/catRSA.sh
 ./bashrc/change_mac_hostname.sh
 ./bashrc/change_mac_hostname_test.sh
@@ -433,7 +432,6 @@
 ./gitrc/gcob_test.sh
 ./gitrc/gcof.sh
 ./gitrc/gcp.sh
-./gitrc/gctb.sh
 ./gitrc/gdev.sh
 ./gitrc/gdev_test.sh
 ./gitrc/gdi.sh
