@@ -2922,4 +2922,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-dev.gdio.diff
+postCommit.gdio.diff
