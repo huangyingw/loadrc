@@ -1,0 +1,18 @@
+diff --git a/.gitmodules b/.gitmodules
+index e17f9887..f697aa49 100644
+--- ./.gitmodules
++++ ./.gitmodules
+@@ -231,3 +231,6 @@
+ [submodule "vimrc/.vim/bundle/bclose.vim"]
+     path = vimrc/.vim/bundle/bclose.vim
+     url = git@github.com:rbgrouleff/bclose.vim.git
++[submodule "vimrc/.vim/bundle/vim-pbcopy"]
++	path = vimrc/.vim/bundle/vim-pbcopy
++	url = https://github.com/ahw/vim-pbcopy.git
+diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
+new file mode 160000
+index 00000000..184d233e
+--- /dev/null
++++ ./vimrc/.vim/bundle/vim-pbcopy
+@@ -0,0 +1 @@
++Subproject commit 184d233ef2b43601456e5685b87c8c5fb8e621d9
