@@ -231,3 +231,6 @@
 [submodule "vimrc/.vim/bundle/bclose.vim"]
     path = vimrc/.vim/bundle/bclose.vim
     url = git@github.com:rbgrouleff/bclose.vim.git
+[submodule "vimrc/.vim/bundle/vim-pbcopy"]
+	path = vimrc/.vim/bundle/vim-pbcopy
+	url = https://github.com/ahw/vim-pbcopy.git
