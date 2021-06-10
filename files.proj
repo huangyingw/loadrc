@@ -2372,6 +2372,7 @@
 "./vimrc/.vim/bundle/vim-log-syntax/README"
 "./vimrc/.vim/bundle/vim-log-syntax/ftdetect/log.vim"
 "./vimrc/.vim/bundle/vim-log-syntax/syntax/log.vim"
+"./vimrc/.vim/bundle/vim-pbcopy/.gitconfig"
 "./vimrc/.vim/bundle/vim-pbcopy/LICENSE"
 "./vimrc/.vim/bundle/vim-pbcopy/README.md"
 "./vimrc/.vim/bundle/vim-pbcopy/plugin/pbcopy.vim"
