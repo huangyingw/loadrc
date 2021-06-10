@@ -42,7 +42,8 @@ brew install \
     w3m \
     wakeonlan \
     watch \
-    wget
+    wget \
+    xclip
 
 brew cask install \
     kdiff3 \
