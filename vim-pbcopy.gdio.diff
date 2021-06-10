@@ -9,6 +9,27 @@ index e17f9887..f697aa49 100644
 +[submodule "vimrc/.vim/bundle/vim-pbcopy"]
 +	path = vimrc/.vim/bundle/vim-pbcopy
 +	url = https://github.com/ahw/vim-pbcopy.git
+diff --git a/.imacpro.rc b/.imacpro.rc
+index a0d25e95..c8d58c45 100755
+--- ./.imacpro.rc
++++ ./.imacpro.rc
+@@ -8,3 +8,4 @@ then
+         sudo systemsetup -setcomputersleep Never; \
+         fi
+ fi
++brew services start clipper
+diff --git a/install_basic_macos.sh b/install_basic_macos.sh
+index 62d92acb..270f3cb2 100755
+--- ./install_basic_macos.sh
++++ ./install_basic_macos.sh
+@@ -16,6 +16,7 @@ brew install \
+     Caskroom/cask/xquartz \
+     astyle \
+     blueutil \
++    clipper \
+     coreutils \
+     dos2unix \
+     ffmpeg \
 diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
 new file mode 160000
 index 00000000..184d233e
