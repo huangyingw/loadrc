@@ -6,10 +6,3 @@ index 3bd9b5b1..08477d81 100755
  #!/bin/zsh
  ~/loadrc/gitrc/gsync.sh
 +~/loadrc/bashrc/update_proj.sh
-diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..a420d644 160000
---- ./vimrc/.vim/bundle/vim-autoformat
-+++ ./vimrc/.vim/bundle/vim-autoformat
-@@ -1 +1 @@
--Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit a420d644a4077d725147bafa057700f4dc22c111-dirty
