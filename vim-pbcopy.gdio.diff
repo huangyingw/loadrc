@@ -1,5 +1,5 @@
 diff --git a/.gitmodules b/.gitmodules
-index e17f9887..f697aa49 100644
+index e17f9887..7a86e108 100644
 --- ./.gitmodules
 +++ ./.gitmodules
 @@ -231,3 +231,6 @@
@@ -8,7 +8,7 @@ index e17f9887..f697aa49 100644
      url = git@github.com:rbgrouleff/bclose.vim.git
 +[submodule "vimrc/.vim/bundle/vim-pbcopy"]
 +	path = vimrc/.vim/bundle/vim-pbcopy
-+	url = https://github.com/ahw/vim-pbcopy.git
++	url = git@github.com:huangyingw/vim-pbcopy.git 
 diff --git a/.imacpro.rc b/.imacpro.rc
 index a0d25e95..c8d58c45 100755
 --- ./.imacpro.rc
@@ -32,8 +32,17 @@ index 62d92acb..270f3cb2 100755
      ffmpeg \
 diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
 new file mode 160000
-index 00000000..184d233e
+index 00000000..627c194f
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-pbcopy
 @@ -0,0 +1 @@
-+Subproject commit 184d233ef2b43601456e5685b87c8c5fb8e621d9
++Subproject commit 627c194f6eb0b07468c6b31cb8e7449e47db0507
+diff --git a/vimrc/.vimrc b/vimrc/.vimrc
+index 777cb3ad..55fa3eb2 100644
+--- ./vimrc/.vimrc
++++ ./vimrc/.vimrc
+@@ -277,3 +277,4 @@ let g:tex_flavor = 'latex'
+ " add @ to cfile handle
+ set isfname+=@-@
+ set history=10000
++let g:vim_pbcopy_remote_cmd = "nc localhost 8377"
