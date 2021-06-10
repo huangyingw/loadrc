@@ -16,6 +16,7 @@ brew install \
     Caskroom/cask/xquartz \
     astyle \
     blueutil \
+    clipper \
     coreutils \
     dos2unix \
     ffmpeg \
