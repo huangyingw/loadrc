@@ -18,19 +18,43 @@ index a0d25e95..c8d58c45 100755
          fi
  fi
 +brew services start clipper
+diff --git a/gitrc/checkout_rejs.sh b/gitrc/checkout_rejs.sh
+index d81f6f38..ddbfb613 100755
+--- ./gitrc/checkout_rejs.sh
++++ ./gitrc/checkout_rejs.sh
+@@ -2,6 +3,7 @@
+ for ss in $(git status | grep \.rej$) ; \
+ do \
+     targetFile=$(echo "$ss" | sed 's/\.rej$//g')
+-    git checkout "$1" "$targetFile" && \
+-        rm "$ss"
++    git show "$1":"$targetFile" > "$ss"
+ done
++
++git show "$1":COMMIT_EDITMSG > COMMIT_EDITMSG
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index dbcf937b..15f8d957 100755
+index dbcf937b..5200ed8a 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
-@@ -28,7 +28,7 @@ rpath=$(git config deploy.path)
+@@ -28,10 +28,15 @@ rpath=$(git config deploy.path)
  GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
-     ~/loadrc/gitrc/discard_unnecessaries.sh ; \
+ ~/loadrc/gitrc/discard_unnecessaries.sh ; \
      git checkout -f "$targetBranch" ; \
 -    git apply --index --reject --whitespace=fix "$GDITDIFF" ; \
+-    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
+-    git commit  --no-verify -am "$commit_message" ; \
 +    git apply --index --reject --whitespace=fix "$GDITDIFF" && \
-     ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
-     git commit  --no-verify -am "$commit_message" ; \
++    git commit  --no-verify -am "$commit_message" && \
      git pull ; \
+     git push ; \
+     . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
+     ~/loadrc/gitrc/gfix.sh
++
++retVal=$?
++if [ $retVal -ne 0 ]
++then
++    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch"
++fi
 diff --git a/gitrc/postCommit.sh b/gitrc/postCommit.sh
 index 3bd9b5b1..08477d81 100755
 --- ./gitrc/postCommit.sh
