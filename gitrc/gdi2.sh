@@ -26,6 +26,14 @@ host=$(git config deploy.host)
 rpath=$(git config deploy.path)
 
 GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
+
+if [ -z $(cat $GDITDIFF) ]
+then
+    . ~/loadrc/imvurc/ghypo.sh "$targetBranch"
+    ~/loadrc/gitrc/gfix.sh
+    exit 0
+fi
+
 ~/loadrc/gitrc/discard_unnecessaries.sh ; \
     git checkout -f "$targetBranch" ; \
     git apply --index --reject --whitespace=fix "$GDITDIFF"
@@ -40,12 +48,4 @@ else
         git push ; \
         . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
         ~/loadrc/gitrc/gfix.sh
-
-    exit 0
-fi
-
-if [ -z $(cat $GDITDIFF) ]
-then
-    . ~/loadrc/imvurc/ghypo.sh "$targetBranch"
-    ~/loadrc/gitrc/gfix.sh
 fi
