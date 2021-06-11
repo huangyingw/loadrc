@@ -40,4 +40,12 @@ else
         git push ; \
         . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
         ~/loadrc/gitrc/gfix.sh
+
+    exit 0
+fi
+
+if [ -z $(cat $GDITDIFF) ]
+then
+    . ~/loadrc/imvurc/ghypo.sh "$targetBranch"
+    ~/loadrc/gitrc/gfix.sh
 fi
