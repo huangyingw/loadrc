@@ -1,0 +1,7 @@
+diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
+index dbe8b1e2..bdc4ef18 160000
+--- ./vimrc/.vim/bundle/vim-autoformat
++++ ./vimrc/.vim/bundle/vim-autoformat
+@@ -1 +1 @@
+-Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
++Subproject commit bdc4ef1862f0e8b57d9fe7bfbfe6451ff814f20c
