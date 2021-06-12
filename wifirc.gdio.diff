@@ -16,6 +16,16 @@ index 73b495da..46d444a3 100644
 +[netatalk]
      path = target_dir_var
      time machine = yes
+diff --git a/install_basic_linux.sh b/install_basic_linux.sh
+index 23be74d2..34269226 100755
+--- ./install_basic_linux.sh
++++ ./install_basic_linux.sh
+@@ -16,4 +16,5 @@ fi
+ ./nxrc/install.sh
+ ./kubernetesrc/install.sh
+ cp -fv /bin/true /usr/bin/true
++cp -fv ./wifirc/autoconnect.sh /etc/NetworkManager/dispatcher.d/
+ systemctl disable NetworkManager-wait-online.service
 diff --git a/install_time_machine.sh b/install_time_machine.sh
 index 4af77eea..97ce30fe 100755
 --- ./install_time_machine.sh
@@ -36,3 +46,28 @@ index 4af77eea..97ce30fe 100755
 -chmod -R 777 "$TARGET_DIR"
  
  service netatalk restart
+diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
+index e8d338a2..430298e0 100755
+--- ./wifirc/autoconnect.sh
++++ ./wifirc/autoconnect.sh
+@@ -4,12 +4,16 @@
+ # and put this script, which is owned by root and executable, in the folder: /etc/NetworkManager/dispatcher.d
+ 
+ # the following command to get the wifi device:
+-# for dev in `ls /sys/class/net`; do
+-#     [ -d "/sys/class/net/$dev/wireless" ] && echo "$dev"
+-# done
+ 
++DEV=$(
++    for dev in `ls /sys/class/net`; do
++        [ -d "/sys/class/net/$dev/wireless" ] && echo "$dev"
++    done
++) 
+ 
+-if [ "$CONNECTION_UUID" = "1c853a09-cf79-4a54-86fa-9efb5e447ea8" ]
++TARGET_ID=$(nmcli connection show | grep $DEV | sed 's/.*[^0-9a-z]\(\([0-9a-z]*-\)\{4\}[0-9a-z]*\).*/\1/g')
++
++if [ "$CONNECTION_UUID" = "$TARGET_ID" ]
+ then
+     if [ "$2" = "down" ]; then
+         sleep 10

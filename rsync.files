@@ -191,7 +191,6 @@
 ./bashrc/bash.test.sh
 ./bashrc/best_find.sh
 ./bashrc/binaryGrep.sh
-./bashrc/ca.sh
 ./bashrc/catRSA.sh
 ./bashrc/change_mac_hostname.sh
 ./bashrc/change_mac_hostname_test.sh
@@ -433,7 +432,6 @@
 ./gitrc/gcob_test.sh
 ./gitrc/gcof.sh
 ./gitrc/gcp.sh
-./gitrc/gctb.sh
 ./gitrc/gdev.sh
 ./gitrc/gdev_test.sh
 ./gitrc/gdi.sh
@@ -923,13 +921,6 @@
 ./vimrc/.vim/bundle/ncm2-tagprefix/autoload/ncm2_tagprefix.vim
 ./vimrc/.vim/bundle/ncm2-tagprefix/ncm2-plugin/ncm2_tagprefix.vim
 ./vimrc/.vim/bundle/ncm2-tagprefix/pythonx/ncm2_tagprefix.py
-./vimrc/.vim/bundle/ncm2-tern/.gitignore
-./vimrc/.vim/bundle/ncm2-tern/LICENSE
-./vimrc/.vim/bundle/ncm2-tern/README.md
-./vimrc/.vim/bundle/ncm2-tern/autoload/ncm2_tern.vim
-./vimrc/.vim/bundle/ncm2-tern/ncm2-plugin/ncm2_tern.vim
-./vimrc/.vim/bundle/ncm2-tern/package.json
-./vimrc/.vim/bundle/ncm2-tern/pythonx/ncm2_tern.py
 ./vimrc/.vim/bundle/ncm2-tmux/.gitignore
 ./vimrc/.vim/bundle/ncm2-tmux/LICENSE
 ./vimrc/.vim/bundle/ncm2-tmux/README.md
