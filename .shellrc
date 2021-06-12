@@ -73,6 +73,7 @@ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
 alias selectCopy='$HOME/loadrc/bashrc/select_copy.sh'
 alias selectmirror='$HOME/loadrc/bashrc/selectmirror.sh'
 alias sleep='$HOME/loadrc/bashrc/sleep.sh'
+alias smount='$HOME/loadrc/bashrc/smount.sh'
 alias split='$HOME/loadrc/bashrc/split.sh'
 alias ssh='$HOME/loadrc/bashrc/ssh.sh'
 alias sshmount='$HOME/loadrc/bashrc/sshmount.sh'
