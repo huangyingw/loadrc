@@ -1,0 +1,38 @@
+diff --git a/.shellrc b/.shellrc
+index 52d99984..1495b9c2 100755
+--- ./.shellrc
++++ ./.shellrc
+@@ -75,7 +75,6 @@ alias selectCopy='$HOME/loadrc/bashrc/select_copy.sh'
+ alias selectmirror='$HOME/loadrc/bashrc/selectmirror.sh'
+ alias sleep='$HOME/loadrc/bashrc/sleep.sh'
+ alias sload='$HOME/loadrc/bashrc/sload.sh'
+-alias smount='$HOME/loadrc/bashrc/smount.sh'
+ alias split='$HOME/loadrc/bashrc/split.sh'
+ alias ssh='$HOME/loadrc/bashrc/ssh.sh'
+ alias sshmount='$HOME/loadrc/bashrc/sshmount.sh'
+diff --git a/bashrc/smount.sh b/bashrc/smount.sh
+deleted file mode 100755
+index 8f22cb80..00000000
+--- ./bashrc/smount.sh
++++ /dev/null
+@@ -1,20 +0,0 @@
+-#!/bin/zsh
+-if [ -z "$1" ]
+-then
+-    echo -e "${red}please provide the host name... ${NC}"
+-    exit 1
+-fi
+-
+-remoteServer=$(echo "$1" | sed  -e "s/\/$//g")
+-mkdir -p ~/"$remoteServer"
+-
+-if [ $(uname) = "Linux" ]
+-then
+-    umount -l ~/"$remoteServer"
+-    sshfs "$remoteServer":/ ~/"$remoteServer"
+-    df -TH
+-else
+-    diskutil unmountDisk force ~/"$remoteServer"
+-    sshfs "$remoteServer":/ ~/"$remoteServer"
+-    df -H
+-fi
