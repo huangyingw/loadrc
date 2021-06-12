@@ -306,6 +306,7 @@
 ./bashrc/selectmirror.sh
 ./bashrc/setup.sh
 ./bashrc/sleep.sh
+./bashrc/smount.sh
 ./bashrc/split.sh
 ./bashrc/ssh.sh
 ./bashrc/tcopy.sh
