@@ -9,6 +9,7 @@
 */prunefix.conf
 boot/grub/grub.cfg
 etc/crypttab
+etc/exports
 etc/fstab
 etc/hostname
 etc/hosts
