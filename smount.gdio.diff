@@ -1,5 +1,5 @@
 diff --git a/.shellrc b/.shellrc
-index 52d99984..f5157037 100755
+index 52d99984..2c0a38b6 100755
 --- ./.shellrc
 +++ ./.shellrc
 @@ -1,6 +1,5 @@
@@ -9,15 +9,14 @@ index 52d99984..f5157037 100755
  #alias tmux='$HOME/loadrc/bashrc/tmux.sh'
  alias apf='$HOME/loadrc/bashrc/apf.sh'
  alias api='apt-get install -y'
-@@ -74,8 +73,6 @@ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
+@@ -74,7 +73,6 @@ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
  alias selectCopy='$HOME/loadrc/bashrc/select_copy.sh'
  alias selectmirror='$HOME/loadrc/bashrc/selectmirror.sh'
  alias sleep='$HOME/loadrc/bashrc/sleep.sh'
 -alias sload='$HOME/loadrc/bashrc/sload.sh'
--alias smount='$HOME/loadrc/bashrc/smount.sh'
+ alias smount='$HOME/loadrc/bashrc/smount.sh'
  alias split='$HOME/loadrc/bashrc/split.sh'
  alias ssh='$HOME/loadrc/bashrc/ssh.sh'
- alias sshmount='$HOME/loadrc/bashrc/sshmount.sh'
 diff --git a/bashrc/mount_samba.sh b/bashrc/mount_samba.sh
 deleted file mode 100755
 index fba69a67..00000000
