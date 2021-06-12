@@ -10,11 +10,9 @@ mkdir -p ~/"$remoteServer"
 
 if [ $(uname) = "Linux" ]
 then
-    umount -l ~/"$remoteServer"
-    sshfs "$remoteServer":/ ~/"$remoteServer"
+    mount "$remoteServer":/media/volgrp/ ~/"$remoteServer"
     df -TH
 else
-    diskutil unmountDisk force ~/"$remoteServer"
-    sshfs "$remoteServer":/ ~/"$remoteServer"
+    sudo mount -o nolocks -o resvport "$remoteServer":/media/volgrp/ ~/"$remoteServer"
     df -H
 fi
