@@ -1,15 +1,31 @@
 diff --git a/.shellrc b/.shellrc
-index 52d99984..1495b9c2 100755
+index 52d99984..e277066d 100755
 --- ./.shellrc
 +++ ./.shellrc
-@@ -75,7 +75,6 @@ alias selectCopy='$HOME/loadrc/bashrc/select_copy.sh'
+@@ -74,8 +74,6 @@ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
+ alias selectCopy='$HOME/loadrc/bashrc/select_copy.sh'
  alias selectmirror='$HOME/loadrc/bashrc/selectmirror.sh'
  alias sleep='$HOME/loadrc/bashrc/sleep.sh'
- alias sload='$HOME/loadrc/bashrc/sload.sh'
+-alias sload='$HOME/loadrc/bashrc/sload.sh'
 -alias smount='$HOME/loadrc/bashrc/smount.sh'
  alias split='$HOME/loadrc/bashrc/split.sh'
  alias ssh='$HOME/loadrc/bashrc/ssh.sh'
  alias sshmount='$HOME/loadrc/bashrc/sshmount.sh'
+diff --git a/bashrc/sload.sh b/bashrc/sload.sh
+deleted file mode 100755
+index 1d01bc62..00000000
+--- ./bashrc/sload.sh
++++ /dev/null
+@@ -1,9 +0,0 @@
+-#!/bin/zsh 
+-if ping -c 1 macpro &> /dev/null
+-then
+-  sshfs -o nonempty huangyingw@macpro:~/Dropbox/loadrc/ ~/loadrc/
+-  df -TH
+-  . $HOME/loadrc/.loadrc
+-else
+-  . $HOME/loadrc/.loadrc
+-fi
 diff --git a/bashrc/smount.sh b/bashrc/smount.sh
 deleted file mode 100755
 index 8f22cb80..00000000
@@ -36,3 +52,15 @@ index 8f22cb80..00000000
 -    sshfs "$remoteServer":/ ~/"$remoteServer"
 -    df -H
 -fi
+diff --git a/install_basic_macos.sh b/install_basic_macos.sh
+index 270f3cb2..fb1e2f26 100755
+--- ./install_basic_macos.sh
++++ ./install_basic_macos.sh
+@@ -37,7 +37,6 @@ brew install \
+     mosh \
+     openssl \
+     rename \
+-    sshfs \
+     tig \
+     tmux \
+     w3m \
