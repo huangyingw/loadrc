@@ -1,8 +1,15 @@
 diff --git a/.shellrc b/.shellrc
-index 52d99984..e277066d 100755
+index 52d99984..f5157037 100755
 --- ./.shellrc
 +++ ./.shellrc
-@@ -74,8 +74,6 @@ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
+@@ -1,6 +1,5 @@
+ #!/bin/zsh
+ #alias pm-suspend='$HOME/loadrc/bashrc/sleep.sh'
+-#alias sshfs='sshfs -o allow_other,uid=1000,gid=1000'
+ #alias tmux='$HOME/loadrc/bashrc/tmux.sh'
+ alias apf='$HOME/loadrc/bashrc/apf.sh'
+ alias api='apt-get install -y'
+@@ -74,8 +73,6 @@ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
  alias selectCopy='$HOME/loadrc/bashrc/select_copy.sh'
  alias selectmirror='$HOME/loadrc/bashrc/selectmirror.sh'
  alias sleep='$HOME/loadrc/bashrc/sleep.sh'
@@ -11,6 +18,18 @@ index 52d99984..e277066d 100755
  alias split='$HOME/loadrc/bashrc/split.sh'
  alias ssh='$HOME/loadrc/bashrc/ssh.sh'
  alias sshmount='$HOME/loadrc/bashrc/sshmount.sh'
+diff --git a/bashrc/mount_samba.sh b/bashrc/mount_samba.sh
+deleted file mode 100755
+index fba69a67..00000000
+--- ./bashrc/mount_samba.sh
++++ /dev/null
+@@ -1,6 +0,0 @@
+-#!/bin/zsh
+-sshfs -o idmap=user huangyingw@ubuntu:/media/ /media/samba/
+-if [ $? -ne 0 ]
+-then
+-    sshfs -o idmap=user huangyingw@vdonkey:/media/ /media/samba/
+-fi
 diff --git a/bashrc/sload.sh b/bashrc/sload.sh
 deleted file mode 100755
 index 1d01bc62..00000000
