@@ -233,4 +233,4 @@
     url = git@github.com:rbgrouleff/bclose.vim.git
 [submodule "vimrc/.vim/bundle/vim-pbcopy"]
 	path = vimrc/.vim/bundle/vim-pbcopy
-	url = git@github.com:huangyingw/vim-pbcopy.git
+	url = git@github.com:huangyingw/vim-pbcopy.git 
