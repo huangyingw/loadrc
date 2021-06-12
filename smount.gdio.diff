@@ -46,31 +46,23 @@ index 1d01bc62..00000000
 -  . $HOME/loadrc/.loadrc
 -fi
 diff --git a/bashrc/smount.sh b/bashrc/smount.sh
-deleted file mode 100755
-index 8f22cb80..00000000
+index 8f22cb80..4cc616bb 100755
 --- ./bashrc/smount.sh
-+++ /dev/null
-@@ -1,20 +0,0 @@
--#!/bin/zsh
--if [ -z "$1" ]
--then
--    echo -e "${red}please provide the host name... ${NC}"
--    exit 1
--fi
--
--remoteServer=$(echo "$1" | sed  -e "s/\/$//g")
--mkdir -p ~/"$remoteServer"
--
--if [ $(uname) = "Linux" ]
--then
++++ ./bashrc/smount.sh
+@@ -10,11 +10,9 @@ mkdir -p ~/"$remoteServer"
+ 
+ if [ $(uname) = "Linux" ]
+ then
 -    umount -l ~/"$remoteServer"
 -    sshfs "$remoteServer":/ ~/"$remoteServer"
--    df -TH
--else
++    mount "$remoteServer":/media/volgrp/ ~/"$remoteServer"
+     df -TH
+ else
 -    diskutil unmountDisk force ~/"$remoteServer"
 -    sshfs "$remoteServer":/ ~/"$remoteServer"
--    df -H
--fi
++    sudo mount -o nolocks -o resvport "$remoteServer":/media/volgrp/ ~/"$remoteServer"
+     df -H
+ fi
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
 index 270f3cb2..fb1e2f26 100755
 --- ./install_basic_macos.sh
