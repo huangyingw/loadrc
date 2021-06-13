@@ -141,6 +141,80 @@ index 8f22cb80..4cc616bb 100755
 +    sudo mount -o nolocks -o resvport "$remoteServer":/media/volgrp/ ~/"$remoteServer"
      df -H
  fi
+diff --git a/gitrc/checkout_rejs.sh b/gitrc/checkout_rejs.sh
+index d81f6f38..ddbfb613 100755
+--- ./gitrc/checkout_rejs.sh
++++ ./gitrc/checkout_rejs.sh
+@@ -2,6 +3,7 @@
+ for ss in $(git status | grep \.rej$) ; \
+ do \
+     targetFile=$(echo "$ss" | sed 's/\.rej$//g')
+-    git checkout "$1" "$targetFile" && \
+-        rm "$ss"
++    git show "$1":"$targetFile" > "$ss"
+ done
++
++git show "$1":COMMIT_EDITMSG > COMMIT_EDITMSG
+diff --git a/gitrc/g.sh b/gitrc/g.sh
+index 8de34e76..3c402327 100755
+--- ./gitrc/g.sh
++++ ./gitrc/g.sh
+@@ -1,7 +1,19 @@
+ #!/bin/zsh
+ ~/loadrc/gitrc/include_gitconfig.sh
++
++commit_message="n"
++
++if [ -f COMMIT_EDITMSG ]
++then
++    commit_message=$(cat COMMIT_EDITMSG)
++fi
++
++if [ -n "$1" ]
++then
++    commit_message="$1"
++fi
++
+ git commit --no-edit || \
+-    git commit -m "$1" || \
+-    git commit -m n
++    git commit -m "$commit_message"
+ 
+ ~/loadrc/gitrc/postCommit.sh
+diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
+index dbcf937b..a905beda 100755
+--- ./gitrc/gdi2.sh
++++ ./gitrc/gdi2.sh
+@@ -26,12 +26,26 @@ host=$(git config deploy.host)
+ rpath=$(git config deploy.path)
+ 
+ GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
++
++if [ -z $(cat $GDITDIFF) ]
++then
++    . ~/loadrc/imvurc/ghypo.sh "$targetBranch"
++    ~/loadrc/gitrc/gfix.sh
++    exit 0
++fi
++
+ ~/loadrc/gitrc/discard_unnecessaries.sh ; \
+     git checkout -f "$targetBranch" ; \
+-    git apply --index --reject --whitespace=fix "$GDITDIFF" ; \
+-    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
+-    git commit  --no-verify -am "$commit_message" ; \
++    git apply --index --reject --whitespace=fix "$GDITDIFF"
++
++retVal=$?
++if [ $retVal -ne 0 ]
++then
++    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch"
++else
++    git commit  --no-verify -am "$commit_message" && \
+         git pull ; \
+         git push ; \
+         . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
+         ~/loadrc/gitrc/gfix.sh
++fi
 diff --git a/gitrc/git_diff_command.sh b/gitrc/git_diff_command.sh
 index e2e8aa4b..704a0384 100755
 --- ./gitrc/git_diff_command.sh
@@ -202,3 +276,13 @@ index 41afb6c6..56af3e53 100644
  set diffopt+=algorithm:patience
  set diffopt+=indent-heuristic
  set wrap
+diff --git a/vimrc/.vimrc b/vimrc/.vimrc
+index 55fa3eb2..5c2c9909 100644
+--- ./vimrc/.vimrc
++++ ./vimrc/.vimrc
+@@ -277,4 +277,4 @@ let g:tex_flavor = 'latex'
+ " add @ to cfile handle
+ set isfname+=@-@
+ set history=10000
+-let g:vim_pbcopy_remote_cmd = "nc localhost 8377"
++let g:vim_pbcopy_remote_cmd = "nc localhost 2224"
