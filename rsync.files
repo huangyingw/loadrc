@@ -272,7 +272,6 @@
 ./bashrc/mklnk.sh
 ./bashrc/mldonkey.csc.properties
 ./bashrc/mosh.sh
-./bashrc/mount_samba.sh
 ./bashrc/move.sh
 ./bashrc/move67.sh
 ./bashrc/netbak.sh
@@ -307,7 +306,6 @@
 ./bashrc/selectmirror.sh
 ./bashrc/setup.sh
 ./bashrc/sleep.sh
-./bashrc/sload.sh
 ./bashrc/smount.sh
 ./bashrc/split.sh
 ./bashrc/ssh.sh
