@@ -37,7 +37,6 @@ brew install \
     mosh \
     openssl \
     rename \
-    sshfs \
     tig \
     tmux \
     w3m \
