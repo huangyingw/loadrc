@@ -264,6 +264,25 @@ index 00000000..8ff26b41
 +launchctl load ~/Library/LaunchAgents/pbpaste.plist
 +launchctl start ~/Library/LaunchAgents/pbcopy.plist
 +launchctl start ~/Library/LaunchAgents/pbpaste.plist
+diff --git a/uninstall_bidirectional_clipboard.sh b/uninstall_bidirectional_clipboard.sh
+new file mode 100755
+index 00000000..3be79dc7
+--- /dev/null
++++ ./uninstall_bidirectional_clipboard.sh
+@@ -0,0 +1,13 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0") && \
++    SCRIPTPATH=$(dirname "$SCRIPT") && \
++    cd "$SCRIPTPATH" || cd ~/loadrc/
++
++launchctl stop ~/Library/LaunchAgents/pbcopy.plist
++launchctl stop ~/Library/LaunchAgents/pbpaste.plist
++
++launchctl unload ~/Library/LaunchAgents/pbcopy.plist
++launchctl unload ~/Library/LaunchAgents/pbpaste.plist
++
++rm ~/Library/LaunchAgents/pbcopy.plist
++rm ~/Library/LaunchAgents/pbpaste.plist
 diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
 index 41afb6c6..56af3e53 100644
 --- ./vimrc/.vim/plugin/view.vim
