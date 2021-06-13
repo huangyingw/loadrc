@@ -706,6 +706,7 @@
 ./timemachinerc/etc/netatalk/AppleVolumes.default
 ./timemachinerc/etc/nsswitch.conf
 ./timemachinerc/listlocalsnapshots.sh
+./uninstall_bidirectional_clipboard.sh
 ./update.sh
 ./vimrc/.vim/autoload/SQLUtilities.vim
 ./vimrc/.vim/autoload/indexed_search.vim
