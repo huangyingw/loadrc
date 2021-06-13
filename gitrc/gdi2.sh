@@ -26,12 +26,26 @@ host=$(git config deploy.host)
 rpath=$(git config deploy.path)
 
 GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
-    ~/loadrc/gitrc/discard_unnecessaries.sh ; \
-    git checkout -f "$targetBranch" ; \
-    git apply --index --reject --whitespace=fix "$GDITDIFF" ; \
-    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
-    git commit  --no-verify -am "$commit_message" ; \
-    git pull ; \
-    git push ; \
-    . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
+
+if [ -z $(cat $GDITDIFF) ]
+then
+    . ~/loadrc/imvurc/ghypo.sh "$targetBranch"
     ~/loadrc/gitrc/gfix.sh
+    exit 0
+fi
+
+~/loadrc/gitrc/discard_unnecessaries.sh ; \
+    git checkout -f "$targetBranch" ; \
+    git apply --index --reject --whitespace=fix "$GDITDIFF"
+
+retVal=$?
+if [ $retVal -ne 0 ]
+then
+    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch"
+else
+    git commit  --no-verify -am "$commit_message" && \
+        git pull ; \
+        git push ; \
+        . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
+        ~/loadrc/gitrc/gfix.sh
+fi

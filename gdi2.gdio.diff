@@ -1,33 +1,176 @@
+diff --git a/.shellrc b/.shellrc
+index 52d99984..2c0a38b6 100755
+--- ./.shellrc
++++ ./.shellrc
+@@ -1,6 +1,5 @@
+ #!/bin/zsh
+ #alias pm-suspend='$HOME/loadrc/bashrc/sleep.sh'
+-#alias sshfs='sshfs -o allow_other,uid=1000,gid=1000'
+ #alias tmux='$HOME/loadrc/bashrc/tmux.sh'
+ alias apf='$HOME/loadrc/bashrc/apf.sh'
+ alias api='apt-get install -y'
+@@ -74,7 +73,6 @@ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
+ alias selectCopy='$HOME/loadrc/bashrc/select_copy.sh'
+ alias selectmirror='$HOME/loadrc/bashrc/selectmirror.sh'
+ alias sleep='$HOME/loadrc/bashrc/sleep.sh'
+-alias sload='$HOME/loadrc/bashrc/sload.sh'
+ alias smount='$HOME/loadrc/bashrc/smount.sh'
+ alias split='$HOME/loadrc/bashrc/split.sh'
+ alias ssh='$HOME/loadrc/bashrc/ssh.sh'
+diff --git a/bashrc/mount_samba.sh b/bashrc/mount_samba.sh
+deleted file mode 100755
+index fba69a67..00000000
+--- ./bashrc/mount_samba.sh
++++ /dev/null
+@@ -1,6 +0,0 @@
+-#!/bin/zsh
+-sshfs -o idmap=user huangyingw@ubuntu:/media/ /media/samba/
+-if [ $? -ne 0 ]
+-then
+-    sshfs -o idmap=user huangyingw@vdonkey:/media/ /media/samba/
+-fi
+diff --git a/bashrc/sload.sh b/bashrc/sload.sh
+deleted file mode 100755
+index 1d01bc62..00000000
+--- ./bashrc/sload.sh
++++ /dev/null
+@@ -1,9 +0,0 @@
+-#!/bin/zsh 
+-if ping -c 1 macpro &> /dev/null
+-then
+-  sshfs -o nonempty huangyingw@macpro:~/Dropbox/loadrc/ ~/loadrc/
+-  df -TH
+-  . $HOME/loadrc/.loadrc
+-else
+-  . $HOME/loadrc/.loadrc
+-fi
+diff --git a/bashrc/smount.sh b/bashrc/smount.sh
+index 8f22cb80..4cc616bb 100755
+--- ./bashrc/smount.sh
++++ ./bashrc/smount.sh
+@@ -10,11 +10,9 @@ mkdir -p ~/"$remoteServer"
+ 
+ if [ $(uname) = "Linux" ]
+ then
+-    umount -l ~/"$remoteServer"
+-    sshfs "$remoteServer":/ ~/"$remoteServer"
++    mount "$remoteServer":/media/volgrp/ ~/"$remoteServer"
+     df -TH
+ else
+-    diskutil unmountDisk force ~/"$remoteServer"
+-    sshfs "$remoteServer":/ ~/"$remoteServer"
++    sudo mount -o nolocks -o resvport "$remoteServer":/media/volgrp/ ~/"$remoteServer"
+     df -H
+ fi
+diff --git a/gitrc/checkout_rejs.sh b/gitrc/checkout_rejs.sh
+index d81f6f38..ddbfb613 100755
+--- ./gitrc/checkout_rejs.sh
++++ ./gitrc/checkout_rejs.sh
+@@ -2,6 +3,7 @@
+ for ss in $(git status | grep \.rej$) ; \
+ do \
+     targetFile=$(echo "$ss" | sed 's/\.rej$//g')
+-    git checkout "$1" "$targetFile" && \
+-        rm "$ss"
++    git show "$1":"$targetFile" > "$ss"
+ done
++
++git show "$1":COMMIT_EDITMSG > COMMIT_EDITMSG
+diff --git a/gitrc/g.sh b/gitrc/g.sh
+index 8de34e76..3c402327 100755
+--- ./gitrc/g.sh
++++ ./gitrc/g.sh
+@@ -1,7 +1,19 @@
+ #!/bin/zsh
+ ~/loadrc/gitrc/include_gitconfig.sh
++
++commit_message="n"
++
++if [ -f COMMIT_EDITMSG ]
++then
++    commit_message=$(cat COMMIT_EDITMSG)
++fi
++
++if [ -n "$1" ]
++then
++    commit_message="$1"
++fi
++
+ git commit --no-edit || \
+-    git commit -m "$1" || \
+-    git commit -m n
++    git commit -m "$commit_message"
+ 
+ ~/loadrc/gitrc/postCommit.sh
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index fb80774f..dbcf937b 100755
+index dbcf937b..a905beda 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
-@@ -28,9 +28,8 @@ rpath=$(git config deploy.path)
+@@ -26,12 +26,26 @@ host=$(git config deploy.host)
+ rpath=$(git config deploy.path)
+ 
  GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
-     ~/loadrc/gitrc/discard_unnecessaries.sh ; \
++
++if [ -z $(cat $GDITDIFF) ]
++then
++    . ~/loadrc/imvurc/ghypo.sh "$targetBranch"
++    ~/loadrc/gitrc/gfix.sh
++    exit 0
++fi
++
+ ~/loadrc/gitrc/discard_unnecessaries.sh ; \
      git checkout -f "$targetBranch" ; \
--    git apply --reject --whitespace=fix "$GDITDIFF" ; \
-+    git apply --index --reject --whitespace=fix "$GDITDIFF" ; \
-     ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
--    git add . && \
-     git commit  --no-verify -am "$commit_message" ; \
-     git pull ; \
-     git push ; \
-diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
-index 10543369..0865ae41 100755
---- ./gitrc/gdif.sh
-+++ ./gitrc/gdif.sh
-@@ -1,6 +1,6 @@
+-    git apply --index --reject --whitespace=fix "$GDITDIFF" ; \
+-    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
+-    git commit  --no-verify -am "$commit_message" ; \
++    git apply --index --reject --whitespace=fix "$GDITDIFF"
++
++retVal=$?
++if [ $retVal -ne 0 ]
++then
++    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch"
++else
++    git commit  --no-verify -am "$commit_message" && \
+         git pull ; \
+         git push ; \
+         . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
+         ~/loadrc/gitrc/gfix.sh
++fi
+diff --git a/gitrc/git_diff_command.sh b/gitrc/git_diff_command.sh
+index e2e8aa4b..704a0384 100755
+--- ./gitrc/git_diff_command.sh
++++ ./gitrc/git_diff_command.sh
+@@ -1,3 +1,8 @@
  #!/bin/zsh
  
--COMMAND="git diff --no-prefix --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
-+COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
+-echo "git diff --ignore-space-at-eol -b -w --ignore-blank-lines --binary"
++echo git diff \
++    --ignore-space-at-eol \
++    --ignore-space-change \
++    --ignore-all-space \
++    --ignore-blank-lines \
++    --binary
+diff --git a/install_basic_macos.sh b/install_basic_macos.sh
+index 270f3cb2..fb1e2f26 100755
+--- ./install_basic_macos.sh
++++ ./install_basic_macos.sh
+@@ -37,7 +37,6 @@ brew install \
+     mosh \
+     openssl \
+     rename \
+-    sshfs \
+     tig \
+     tmux \
+     w3m \
+diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
+index 41afb6c6..56af3e53 100644
+--- ./vimrc/.vim/plugin/view.vim
++++ ./vimrc/.vim/plugin/view.vim
+@@ -38,6 +38,7 @@ else
+ endif
  
- while read ss
- do
-diff --git a/vimrc/.vim/bundle/vim-log-syntax b/vimrc/.vim/bundle/vim-log-syntax
---- ./vimrc/.vim/bundle/vim-log-syntax
-+++ ./vimrc/.vim/bundle/vim-log-syntax
-@@ -1 +1 @@
--Subproject commit e2dcef439e50fec752177fc1aa46b57114e31698
-+Subproject commit e2dcef439e50fec752177fc1aa46b57114e31698-dirty
+ set diffopt+=iwhiteall
++set diffopt+=iblank
+ set diffopt+=algorithm:patience
+ set diffopt+=indent-heuristic
+ set wrap
