@@ -88,3 +88,15 @@ index 270f3cb2..fb1e2f26 100755
      tig \
      tmux \
      w3m \
+diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
+index 41afb6c6..56af3e53 100644
+--- ./vimrc/.vim/plugin/view.vim
++++ ./vimrc/.vim/plugin/view.vim
+@@ -38,6 +38,7 @@ else
+ endif
+ 
+ set diffopt+=iwhiteall
++set diffopt+=iblank
+ set diffopt+=algorithm:patience
+ set diffopt+=indent-heuristic
+ set wrap
