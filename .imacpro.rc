@@ -8,4 +8,3 @@ then
         sudo systemsetup -setcomputersleep Never; \
         fi
 fi
-brew services start clipper
