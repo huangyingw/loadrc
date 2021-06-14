@@ -29,6 +29,8 @@ GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
 
 if [ -z $(cat $GDITDIFF) ]
 then
+    git pull
+    git push
     . ~/loadrc/imvurc/ghypo.sh "$targetBranch"
     ~/loadrc/gitrc/gfix.sh
     exit 0
