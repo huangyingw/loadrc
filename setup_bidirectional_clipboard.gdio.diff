@@ -283,6 +283,13 @@ index 00000000..3be79dc7
 +
 +rm ~/Library/LaunchAgents/pbcopy.plist
 +rm ~/Library/LaunchAgents/pbpaste.plist
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 52406f8a..8190c220 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 52406f8a968c85f4bd6370b899cdf204ab5a8241
++Subproject commit 8190c220ae59cd39186f9a118092cbca413ae4d7
 diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
 index 41afb6c6..56af3e53 100644
 --- ./vimrc/.vim/plugin/view.vim
@@ -296,7 +303,7 @@ index 41afb6c6..56af3e53 100644
  set diffopt+=indent-heuristic
  set wrap
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
-index 55fa3eb2..5c2c9909 100644
+index 55fa3eb2..538ce84a 100644
 --- ./vimrc/.vimrc
 +++ ./vimrc/.vimrc
 @@ -277,4 +277,4 @@ let g:tex_flavor = 'latex'
@@ -304,4 +311,4 @@ index 55fa3eb2..5c2c9909 100644
  set isfname+=@-@
  set history=10000
 -let g:vim_pbcopy_remote_cmd = "nc localhost 8377"
-+let g:vim_pbcopy_remote_cmd = "nc localhost 2224"
++let g:vim_pbcopy_remote_cmd = "nc -N localhost 2224"
