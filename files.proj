@@ -2765,6 +2765,7 @@
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/core.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/nested.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/amsmath.vim"
+"./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/amssymb.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/array.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/asymptote.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/babel.vim"
