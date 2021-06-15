@@ -18,6 +18,14 @@ index a0d25e95..c8d58c45 100755
          fi
  fi
 +brew services start clipper
+diff --git a/gitrc/postCommit.sh b/gitrc/postCommit.sh
+index 3bd9b5b1..08477d81 100755
+--- ./gitrc/postCommit.sh
++++ ./gitrc/postCommit.sh
+@@ -1,2 +1,3 @@
+ #!/bin/zsh
+ ~/loadrc/gitrc/gsync.sh
++~/loadrc/bashrc/update_proj.sh
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
 index 62d92acb..270f3cb2 100755
 --- ./install_basic_macos.sh
@@ -32,11 +40,11 @@ index 62d92acb..270f3cb2 100755
      ffmpeg \
 diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
 new file mode 160000
-index 00000000..627c194f
+index 00000000..0cdceedf
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-pbcopy
 @@ -0,0 +1 @@
-+Subproject commit 627c194f6eb0b07468c6b31cb8e7449e47db0507
++Subproject commit 0cdceedf47d200a3570dce50300270e7d6d1c43f
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
 index 777cb3ad..55fa3eb2 100644
 --- ./vimrc/.vimrc
