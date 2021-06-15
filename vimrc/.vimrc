@@ -277,4 +277,9 @@ let g:tex_flavor = 'latex'
 " add @ to cfile handle
 set isfname+=@-@
 set history=10000
-let g:vim_pbcopy_remote_cmd = "nc -N localhost 2224"
+
+if has('mac') || system('uname') =~# 'Darwin'
+    let g:vim_pbcopy_remote_cmd = "nc localhost 2224"
+else
+    let g:vim_pbcopy_remote_cmd = "nc -N localhost 2224"
+endif
