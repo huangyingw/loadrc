@@ -207,10 +207,10 @@ index 8de34e76..3c402327 100755
  
  ~/loadrc/gitrc/postCommit.sh
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index dbcf937b..a905beda 100755
+index dbcf937b..2b769ee7 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
-@@ -26,12 +26,26 @@ host=$(git config deploy.host)
+@@ -26,12 +26,25 @@ host=$(git config deploy.host)
  rpath=$(git config deploy.path)
  
  GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
@@ -218,7 +218,6 @@ index dbcf937b..a905beda 100755
 +if [ -z $(cat $GDITDIFF) ]
 +then
 +    . ~/loadrc/imvurc/ghypo.sh "$targetBranch"
-+    ~/loadrc/gitrc/gfix.sh
 +    exit 0
 +fi
 +
