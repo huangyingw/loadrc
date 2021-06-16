@@ -41,6 +41,7 @@ apt-get install -y \
     mplayer \
     net-tools \
     netcat \
+    nfs-kernel-server \
     npm \
     openvpn \
     perl \
