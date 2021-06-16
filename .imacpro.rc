@@ -6,4 +6,4 @@ then
     sudo systemsetup -setcomputersleep Never
 fi
 
-./setup_bidirectional_clipboard.sh
+~/loadrc/setup_bidirectional_clipboard.sh
