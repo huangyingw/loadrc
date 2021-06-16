@@ -11,10 +11,9 @@ else
     tmuxAction='/usr/bin/tmux new-session -A -s mosh'
 fi
 
-ssh -fnN -R 2224:localhost:2224 "$target" &
-
 while true
 do
+    ssh -fnN -R 2224:localhost:2224 "$target" &
     ssh "$target" "~/loadrc/macosrc/configure_mosh.sh" &
     mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
 done
