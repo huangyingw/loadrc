@@ -1,12 +1,23 @@
 diff --git a/.imacpro.rc b/.imacpro.rc
-index c8d58c45..a0d25e95 100755
+index c8d58c45..922db5fe 100755
 --- ./.imacpro.rc
 +++ ./.imacpro.rc
-@@ -8,4 +8,3 @@ then
-         sudo systemsetup -setcomputersleep Never; \
-         fi
+@@ -1,11 +1,9 @@
+ #!/bin/zsh
+ #alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
+ 
+-if [ $(uname) = "Darwin" ]
++if ! (sudo systemsetup -getcomputersleep | grep -q Never)
+ then
+-    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
+-        then \
+-        sudo systemsetup -setcomputersleep Never; \
++    sudo systemsetup -setcomputersleep Never
  fi
+-fi
 -brew services start clipper
++
++~/loadrc/setup_bidirectional_clipboard.sh
 diff --git a/.shellrc b/.shellrc
 index 52d99984..2c0a38b6 100755
 --- ./.shellrc
@@ -265,7 +276,7 @@ index 425c9192..cd5a304e 100644
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 270f3cb2..2a580830 100755
+index 270f3cb2..fb1e2f26 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
 @@ -37,7 +37,6 @@ brew install \
@@ -276,11 +287,6 @@ index 270f3cb2..2a580830 100755
      tig \
      tmux \
      w3m \
-@@ -56,3 +55,4 @@ sudo easy_install pip
- sudo pip install --upgrade pip
- 
- #./install_nx.sh
-+./setup_bidirectional_clipboard.sh
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
 index 298b6bc4..e055978f 100755
 --- ./install_prerequisite.sh
@@ -295,14 +301,19 @@ index 298b6bc4..e055978f 100755
      perl \
 diff --git a/setup_bidirectional_clipboard.sh b/setup_bidirectional_clipboard.sh
 new file mode 100755
-index 00000000..8ff26b41
+index 00000000..1b847f32
 --- /dev/null
 +++ ./setup_bidirectional_clipboard.sh
-@@ -0,0 +1,12 @@
+@@ -0,0 +1,17 @@
 +#!/bin/zsh
 +SCRIPT=$(realpath "$0") && \
 +    SCRIPTPATH=$(dirname "$SCRIPT") && \
 +    cd "$SCRIPTPATH" || cd ~/loadrc/
++
++if [ -f ~/Library/LaunchAgents/pbcopy.plist  ]
++then
++    exit 0    
++fi
 +
 +cp -fv ./Library/LaunchAgents/pbcopy.plist ~/Library/LaunchAgents/pbcopy.plist
 +cp -fv ./Library/LaunchAgents/pbpaste.plist ~/Library/LaunchAgents/pbpaste.plist
