@@ -1,5 +1,5 @@
 diff --git a/.imacpro.rc b/.imacpro.rc
-index c8d58c45..7b2a32ea 100755
+index c8d58c45..922db5fe 100755
 --- ./.imacpro.rc
 +++ ./.imacpro.rc
 @@ -1,11 +1,9 @@
@@ -17,7 +17,7 @@ index c8d58c45..7b2a32ea 100755
 -fi
 -brew services start clipper
 +
-+./setup_bidirectional_clipboard.sh
++~/loadrc/setup_bidirectional_clipboard.sh
 diff --git a/.shellrc b/.shellrc
 index 52d99984..2c0a38b6 100755
 --- ./.shellrc
@@ -108,18 +108,17 @@ index 00000000..392c21db
 +    </dict>
 +</plist>
 diff --git a/bashrc/mosh.sh b/bashrc/mosh.sh
-index 2727f361..dba7cefa 100755
+index 2727f361..d62867f4 100755
 --- ./bashrc/mosh.sh
 +++ ./bashrc/mosh.sh
-@@ -11,6 +11,8 @@ else
-     tmuxAction='/usr/bin/tmux new-session -A -s mosh'
- fi
+@@ -13,6 +13,7 @@ fi
  
-+ssh -fnN -R 2224:localhost:2224 "$target" &
-+
  while true
  do
++    ssh -fnN -R 2224:localhost:2224 "$target" &
      ssh "$target" "~/loadrc/macosrc/configure_mosh.sh" &
+     mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
+ done
 diff --git a/bashrc/mount_samba.sh b/bashrc/mount_samba.sh
 deleted file mode 100755
 index fba69a67..00000000
