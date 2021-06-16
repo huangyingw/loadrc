@@ -1,12 +1,23 @@
 diff --git a/.imacpro.rc b/.imacpro.rc
-index c8d58c45..a0d25e95 100755
+index c8d58c45..7b2a32ea 100755
 --- ./.imacpro.rc
 +++ ./.imacpro.rc
-@@ -8,4 +8,3 @@ then
-         sudo systemsetup -setcomputersleep Never; \
-         fi
+@@ -1,11 +1,9 @@
+ #!/bin/zsh
+ #alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
+ 
+-if [ $(uname) = "Darwin" ]
++if ! (sudo systemsetup -getcomputersleep | grep -q Never)
+ then
+-    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
+-        then \
+-        sudo systemsetup -setcomputersleep Never; \
++    sudo systemsetup -setcomputersleep Never
  fi
+-fi
 -brew services start clipper
++
++./setup_bidirectional_clipboard.sh
 diff --git a/.shellrc b/.shellrc
 index 52d99984..2c0a38b6 100755
 --- ./.shellrc
@@ -230,7 +241,7 @@ index e2e8aa4b..704a0384 100755
 +    --ignore-blank-lines \
 +    --binary
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 270f3cb2..2a580830 100755
+index 270f3cb2..fb1e2f26 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
 @@ -37,7 +37,6 @@ brew install \
@@ -241,11 +252,6 @@ index 270f3cb2..2a580830 100755
      tig \
      tmux \
      w3m \
-@@ -56,3 +55,4 @@ sudo easy_install pip
- sudo pip install --upgrade pip
- 
- #./install_nx.sh
-+./setup_bidirectional_clipboard.sh
 diff --git a/setup_bidirectional_clipboard.sh b/setup_bidirectional_clipboard.sh
 new file mode 100755
 index 00000000..1b847f32
