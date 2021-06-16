@@ -55,4 +55,3 @@ sudo easy_install pip
 sudo pip install --upgrade pip
 
 #./install_nx.sh
-./setup_bidirectional_clipboard.sh
