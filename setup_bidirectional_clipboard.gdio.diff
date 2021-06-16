@@ -107,6 +107,19 @@ index 00000000..392c21db
 +	</dict>
 +    </dict>
 +</plist>
+diff --git a/bashrc/mosh.sh b/bashrc/mosh.sh
+index 2727f361..dba7cefa 100755
+--- ./bashrc/mosh.sh
++++ ./bashrc/mosh.sh
+@@ -11,6 +11,8 @@ else
+     tmuxAction='/usr/bin/tmux new-session -A -s mosh'
+ fi
+ 
++ssh -fnN -R 2224:localhost:2224 "$target" &
++
+ while true
+ do
+     ssh "$target" "~/loadrc/macosrc/configure_mosh.sh" &
 diff --git a/bashrc/mount_samba.sh b/bashrc/mount_samba.sh
 deleted file mode 100755
 index fba69a67..00000000
@@ -119,6 +132,18 @@ index fba69a67..00000000
 -then
 -    sshfs -o idmap=user huangyingw@vdonkey:/media/ /media/samba/
 -fi
+diff --git a/bashrc/osmirror_exclude b/bashrc/osmirror_exclude
+index cd9fe5f8..d00ebc3a 100644
+--- ./bashrc/osmirror_exclude
++++ ./bashrc/osmirror_exclude
+@@ -9,6 +9,7 @@
+ */prunefix.conf
+ boot/grub/grub.cfg
+ etc/crypttab
++etc/exports
+ etc/fstab
+ etc/hostname
+ etc/hosts
 diff --git a/bashrc/sload.sh b/bashrc/sload.sh
 deleted file mode 100755
 index 1d01bc62..00000000
@@ -240,6 +265,18 @@ index e2e8aa4b..704a0384 100755
 +    --ignore-all-space \
 +    --ignore-blank-lines \
 +    --binary
+diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
+index 425c9192..cd5a304e 100644
+--- ./host_links/mini/etc/hosts
++++ ./host_links/mini/etc/hosts
+@@ -18,6 +18,7 @@
+ 192.168.31.99 mldonkey
+ 192.168.123.203 u2004
+ 10.211.55.5 macos
++192.168.123.177 ubuntu20.04
+ 
+ # The following lines are desirable for IPv6 capable hosts
+ ::1     ip6-localhost ip6-loopback
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
 index 270f3cb2..fb1e2f26 100755
 --- ./install_basic_macos.sh
@@ -252,6 +289,18 @@ index 270f3cb2..fb1e2f26 100755
      tig \
      tmux \
      w3m \
+diff --git a/install_prerequisite.sh b/install_prerequisite.sh
+index 298b6bc4..e055978f 100755
+--- ./install_prerequisite.sh
++++ ./install_prerequisite.sh
+@@ -41,6 +41,7 @@ apt-get install -y \
+     mplayer \
+     net-tools \
+     netcat \
++    nfs-kernel-server \
+     npm \
+     openvpn \
+     perl \
 diff --git a/setup_bidirectional_clipboard.sh b/setup_bidirectional_clipboard.sh
 new file mode 100755
 index 00000000..1b847f32
