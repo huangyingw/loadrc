@@ -248,14 +248,19 @@ index 270f3cb2..2a580830 100755
 +./setup_bidirectional_clipboard.sh
 diff --git a/setup_bidirectional_clipboard.sh b/setup_bidirectional_clipboard.sh
 new file mode 100755
-index 00000000..8ff26b41
+index 00000000..1b847f32
 --- /dev/null
 +++ ./setup_bidirectional_clipboard.sh
-@@ -0,0 +1,12 @@
+@@ -0,0 +1,17 @@
 +#!/bin/zsh
 +SCRIPT=$(realpath "$0") && \
 +    SCRIPTPATH=$(dirname "$SCRIPT") && \
 +    cd "$SCRIPTPATH" || cd ~/loadrc/
++
++if [ -f ~/Library/LaunchAgents/pbcopy.plist  ]
++then
++    exit 0    
++fi
 +
 +cp -fv ./Library/LaunchAgents/pbcopy.plist ~/Library/LaunchAgents/pbcopy.plist
 +cp -fv ./Library/LaunchAgents/pbpaste.plist ~/Library/LaunchAgents/pbpaste.plist
