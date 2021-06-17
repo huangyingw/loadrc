@@ -1,0 +1,417 @@
+diff --git a/.imacpro.rc b/.imacpro.rc
+index c8d58c45..922db5fe 100755
+--- ./.imacpro.rc
++++ ./.imacpro.rc
+@@ -1,11 +1,9 @@
+ #!/bin/zsh
+ #alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
+ 
+-if [ $(uname) = "Darwin" ]
++if ! (sudo systemsetup -getcomputersleep | grep -q Never)
+ then
+-    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
+-        then \
+-        sudo systemsetup -setcomputersleep Never; \
++    sudo systemsetup -setcomputersleep Never
+ fi
+-fi
+-brew services start clipper
++
++~/loadrc/setup_bidirectional_clipboard.sh
+diff --git a/.shellrc b/.shellrc
+index 52d99984..2c0a38b6 100755
+--- ./.shellrc
++++ ./.shellrc
+@@ -1,6 +1,5 @@
+ #!/bin/zsh
+ #alias pm-suspend='$HOME/loadrc/bashrc/sleep.sh'
+-#alias sshfs='sshfs -o allow_other,uid=1000,gid=1000'
+ #alias tmux='$HOME/loadrc/bashrc/tmux.sh'
+ alias apf='$HOME/loadrc/bashrc/apf.sh'
+ alias api='apt-get install -y'
+@@ -74,7 +73,6 @@ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
+ alias selectCopy='$HOME/loadrc/bashrc/select_copy.sh'
+ alias selectmirror='$HOME/loadrc/bashrc/selectmirror.sh'
+ alias sleep='$HOME/loadrc/bashrc/sleep.sh'
+-alias sload='$HOME/loadrc/bashrc/sload.sh'
+ alias smount='$HOME/loadrc/bashrc/smount.sh'
+ alias split='$HOME/loadrc/bashrc/split.sh'
+ alias ssh='$HOME/loadrc/bashrc/ssh.sh'
+diff --git a/Library/LaunchAgents/pbcopy.plist b/Library/LaunchAgents/pbcopy.plist
+new file mode 100644
+index 00000000..f7b23edf
+--- /dev/null
++++ ./Library/LaunchAgents/pbcopy.plist
+@@ -0,0 +1,29 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
++<plist version="1.0">
++    <dict>
++	<key>Label</key>
++	<string>localhost.pbcopy</string>
++	<key>ProgramArguments</key>
++	<array>
++	    <string>/bin/sh</string>
++	    <string>-c</string>
++	    <string>LC_CTYPE=en_US.UTF-8 pbcopy</string>
++	</array>
++	<key>Sockets</key>
++	<dict>
++	    <key>Listeners</key>
++	    <dict>
++		<key>SockNodeName</key>
++		<string>127.0.0.1</string>
++		<key>SockServiceName</key>
++		<string>2224</string>
++	    </dict>
++	</dict>
++	<key>inetdCompatibility</key>
++	<dict>
++	    <key>Wait</key>
++	    <false/>
++	</dict>
++    </dict>
++</plist>
+diff --git a/Library/LaunchAgents/pbpaste.plist b/Library/LaunchAgents/pbpaste.plist
+new file mode 100644
+index 00000000..392c21db
+--- /dev/null
++++ ./Library/LaunchAgents/pbpaste.plist
+@@ -0,0 +1,29 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
++<plist version="1.0">
++    <dict>
++	<key>Label</key>
++	<string>localhost.pbpaste</string>
++	<key>ProgramArguments</key>
++	<array>
++	    <string>/bin/sh</string>
++	    <string>-c</string>
++	    <string>LC_CTYPE=en_US.UTF-8 pbpaste</string>
++	</array>
++	<key>Sockets</key>
++	<dict>
++	    <key>Listeners</key>
++	    <dict>
++		<key>SockNodeName</key>
++		<string>127.0.0.1</string>
++		<key>SockServiceName</key>
++		<string>2225</string>
++	    </dict>
++	</dict>
++	<key>inetdCompatibility</key>
++	<dict>
++	    <key>Wait</key>
++	    <false/>
++	</dict>
++    </dict>
++</plist>
+diff --git a/bashrc/mosh.sh b/bashrc/mosh.sh
+index 2727f361..d62867f4 100755
+--- ./bashrc/mosh.sh
++++ ./bashrc/mosh.sh
+@@ -13,6 +13,7 @@ fi
+ 
+ while true
+ do
++    ssh -fnN -R 2224:localhost:2224 "$target" &
+     ssh "$target" "~/loadrc/macosrc/configure_mosh.sh" &
+     mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
+ done
+diff --git a/bashrc/mount_samba.sh b/bashrc/mount_samba.sh
+deleted file mode 100755
+index fba69a67..00000000
+--- ./bashrc/mount_samba.sh
++++ /dev/null
+@@ -1,6 +0,0 @@
+-#!/bin/zsh
+-sshfs -o idmap=user huangyingw@ubuntu:/media/ /media/samba/
+-if [ $? -ne 0 ]
+-then
+-    sshfs -o idmap=user huangyingw@vdonkey:/media/ /media/samba/
+-fi
+diff --git a/bashrc/osmirror_exclude b/bashrc/osmirror_exclude
+index cd9fe5f8..d00ebc3a 100644
+--- ./bashrc/osmirror_exclude
++++ ./bashrc/osmirror_exclude
+@@ -9,6 +9,7 @@
+ */prunefix.conf
+ boot/grub/grub.cfg
+ etc/crypttab
++etc/exports
+ etc/fstab
+ etc/hostname
+ etc/hosts
+diff --git a/bashrc/setup.sh b/bashrc/setup.sh
+deleted file mode 100755
+index a7a35d8f..00000000
+--- ./bashrc/setup.sh
++++ /dev/null
+@@ -1,10 +0,0 @@
+-#!/bin/zsh
+-APPLIST=$HOME/loadrc/bashrc/app_list
+-app_list=();
+-
+-while read suf
+-do
+-    app_list+=("$suf")
+-done < "$APPLIST"
+-
+-apt-get install "${app_list[@]}" --force-yes -y
+diff --git a/bashrc/sload.sh b/bashrc/sload.sh
+deleted file mode 100755
+index 1d01bc62..00000000
+--- ./bashrc/sload.sh
++++ /dev/null
+@@ -1,9 +0,0 @@
+-#!/bin/zsh 
+-if ping -c 1 macpro &> /dev/null
+-then
+-  sshfs -o nonempty huangyingw@macpro:~/Dropbox/loadrc/ ~/loadrc/
+-  df -TH
+-  . $HOME/loadrc/.loadrc
+-else
+-  . $HOME/loadrc/.loadrc
+-fi
+diff --git a/bashrc/smount.sh b/bashrc/smount.sh
+index 8f22cb80..4cc616bb 100755
+--- ./bashrc/smount.sh
++++ ./bashrc/smount.sh
+@@ -10,11 +10,9 @@ mkdir -p ~/"$remoteServer"
+ 
+ if [ $(uname) = "Linux" ]
+ then
+-    umount -l ~/"$remoteServer"
+-    sshfs "$remoteServer":/ ~/"$remoteServer"
++    mount "$remoteServer":/media/volgrp/ ~/"$remoteServer"
+     df -TH
+ else
+-    diskutil unmountDisk force ~/"$remoteServer"
+-    sshfs "$remoteServer":/ ~/"$remoteServer"
++    sudo mount -o nolocks -o resvport "$remoteServer":/media/volgrp/ ~/"$remoteServer"
+     df -H
+ fi
+diff --git a/gitrc/checkout_rejs.sh b/gitrc/checkout_rejs.sh
+index d81f6f38..ddbfb613 100755
+--- ./gitrc/checkout_rejs.sh
++++ ./gitrc/checkout_rejs.sh
+@@ -2,6 +3,7 @@
+ for ss in $(git status | grep \.rej$) ; \
+ do \
+     targetFile=$(echo "$ss" | sed 's/\.rej$//g')
+-    git checkout "$1" "$targetFile" && \
+-        rm "$ss"
++    git show "$1":"$targetFile" > "$ss"
+ done
++
++git show "$1":COMMIT_EDITMSG > COMMIT_EDITMSG
+diff --git a/gitrc/g.sh b/gitrc/g.sh
+index 8de34e76..3c402327 100755
+--- ./gitrc/g.sh
++++ ./gitrc/g.sh
+@@ -1,7 +1,19 @@
+ #!/bin/zsh
+ ~/loadrc/gitrc/include_gitconfig.sh
++
++commit_message="n"
++
++if [ -f COMMIT_EDITMSG ]
++then
++    commit_message=$(cat COMMIT_EDITMSG)
++fi
++
++if [ -n "$1" ]
++then
++    commit_message="$1"
++fi
++
+ git commit --no-edit || \
+-    git commit -m "$1" || \
+-    git commit -m n
++    git commit -m "$commit_message"
+ 
+ ~/loadrc/gitrc/postCommit.sh
+diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
+index dbcf937b..2b769ee7 100755
+--- ./gitrc/gdi2.sh
++++ ./gitrc/gdi2.sh
+@@ -26,12 +26,25 @@ host=$(git config deploy.host)
+ rpath=$(git config deploy.path)
+ 
+ GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
++
++if [ -z $(cat $GDITDIFF) ]
++then
++    . ~/loadrc/imvurc/ghypo.sh "$targetBranch"
++    exit 0
++fi
++
+ ~/loadrc/gitrc/discard_unnecessaries.sh ; \
+     git checkout -f "$targetBranch" ; \
+-    git apply --index --reject --whitespace=fix "$GDITDIFF" ; \
+-    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
+-    git commit  --no-verify -am "$commit_message" ; \
++    git apply --index --reject --whitespace=fix "$GDITDIFF"
++
++retVal=$?
++if [ $retVal -ne 0 ]
++then
++    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch"
++else
++    git commit  --no-verify -am "$commit_message" && \
+         git pull ; \
+         git push ; \
+         . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
+         ~/loadrc/gitrc/gfix.sh
++fi
+diff --git a/gitrc/git_diff_command.sh b/gitrc/git_diff_command.sh
+index e2e8aa4b..704a0384 100755
+--- ./gitrc/git_diff_command.sh
++++ ./gitrc/git_diff_command.sh
+@@ -1,3 +1,8 @@
+ #!/bin/zsh
+ 
+-echo "git diff --ignore-space-at-eol -b -w --ignore-blank-lines --binary"
++echo git diff \
++    --ignore-space-at-eol \
++    --ignore-space-change \
++    --ignore-all-space \
++    --ignore-blank-lines \
++    --binary
+diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
+index 425c9192..cd5a304e 100644
+--- ./host_links/mini/etc/hosts
++++ ./host_links/mini/etc/hosts
+@@ -18,6 +18,7 @@
+ 192.168.31.99 mldonkey
+ 192.168.123.203 u2004
+ 10.211.55.5 macos
++192.168.123.177 ubuntu20.04
+ 
+ # The following lines are desirable for IPv6 capable hosts
+ ::1     ip6-localhost ip6-loopback
+diff --git a/install_basic_linux.sh b/install_basic_linux.sh
+index 34269226..7370103f 100755
+--- ./install_basic_linux.sh
++++ ./install_basic_linux.sh
+@@ -10,6 +10,7 @@ then
+ fi
+ 
+ ./install_prerequisite.sh
++./install_gh.sh
+ ./install_nodejs.sh
+ ./install_time_machine.sh
+ ./enpass_install.sh
+diff --git a/install_basic_macos.sh b/install_basic_macos.sh
+index 270f3cb2..fb1e2f26 100755
+--- ./install_basic_macos.sh
++++ ./install_basic_macos.sh
+@@ -37,7 +37,6 @@ brew install \
+     mosh \
+     openssl \
+     rename \
+-    sshfs \
+     tig \
+     tmux \
+     w3m \
+diff --git a/install_gh.sh b/install_gh.sh
+new file mode 100755
+index 00000000..c3363697
+--- /dev/null
++++ ./install_gh.sh
+@@ -0,0 +1,6 @@
++#!/bin/bash
++
++curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg |  gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
++echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" |  tee /etc/apt/sources.list.d/github-cli.list > /dev/null
++apt update
++apt install gh
+diff --git a/install_prerequisite.sh b/install_prerequisite.sh
+index 298b6bc4..e055978f 100755
+--- ./install_prerequisite.sh
++++ ./install_prerequisite.sh
+@@ -41,6 +41,7 @@ apt-get install -y \
+     mplayer \
+     net-tools \
+     netcat \
++    nfs-kernel-server \
+     npm \
+     openvpn \
+     perl \
+diff --git a/setup_bidirectional_clipboard.sh b/setup_bidirectional_clipboard.sh
+new file mode 100755
+index 00000000..1b847f32
+--- /dev/null
++++ ./setup_bidirectional_clipboard.sh
+@@ -0,0 +1,17 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0") && \
++    SCRIPTPATH=$(dirname "$SCRIPT") && \
++    cd "$SCRIPTPATH" || cd ~/loadrc/
++
++if [ -f ~/Library/LaunchAgents/pbcopy.plist  ]
++then
++    exit 0    
++fi
++
++cp -fv ./Library/LaunchAgents/pbcopy.plist ~/Library/LaunchAgents/pbcopy.plist
++cp -fv ./Library/LaunchAgents/pbpaste.plist ~/Library/LaunchAgents/pbpaste.plist
++
++launchctl load ~/Library/LaunchAgents/pbcopy.plist
++launchctl load ~/Library/LaunchAgents/pbpaste.plist
++launchctl start ~/Library/LaunchAgents/pbcopy.plist
++launchctl start ~/Library/LaunchAgents/pbpaste.plist
+diff --git a/uninstall_bidirectional_clipboard.sh b/uninstall_bidirectional_clipboard.sh
+new file mode 100755
+index 00000000..3be79dc7
+--- /dev/null
++++ ./uninstall_bidirectional_clipboard.sh
+@@ -0,0 +1,13 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0") && \
++    SCRIPTPATH=$(dirname "$SCRIPT") && \
++    cd "$SCRIPTPATH" || cd ~/loadrc/
++
++launchctl stop ~/Library/LaunchAgents/pbcopy.plist
++launchctl stop ~/Library/LaunchAgents/pbpaste.plist
++
++launchctl unload ~/Library/LaunchAgents/pbcopy.plist
++launchctl unload ~/Library/LaunchAgents/pbpaste.plist
++
++rm ~/Library/LaunchAgents/pbcopy.plist
++rm ~/Library/LaunchAgents/pbpaste.plist
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 52406f8a..8190c220 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 52406f8a968c85f4bd6370b899cdf204ab5a8241
++Subproject commit 8190c220ae59cd39186f9a118092cbca413ae4d7
+diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
+index 41afb6c6..56af3e53 100644
+--- ./vimrc/.vim/plugin/view.vim
++++ ./vimrc/.vim/plugin/view.vim
+@@ -38,6 +38,7 @@ else
+ endif
+ 
+ set diffopt+=iwhiteall
++set diffopt+=iblank
+ set diffopt+=algorithm:patience
+ set diffopt+=indent-heuristic
+ set wrap
+diff --git a/vimrc/.vimrc b/vimrc/.vimrc
+index 55fa3eb2..c938eb8a 100644
+--- ./vimrc/.vimrc
++++ ./vimrc/.vimrc
+@@ -277,4 +277,9 @@ let g:tex_flavor = 'latex'
+ " add @ to cfile handle
+ set isfname+=@-@
+ set history=10000
+-let g:vim_pbcopy_remote_cmd = "nc localhost 8377"
++
++if has('mac') || system('uname') =~# 'Darwin'
++    let g:vim_pbcopy_remote_cmd = "nc localhost 2224"
++else
++    let g:vim_pbcopy_remote_cmd = "nc -N localhost 2224"
++endif
