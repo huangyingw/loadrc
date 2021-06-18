@@ -10,9 +10,9 @@ mkdir -p ~/"$remoteServer"
 
 if [ $(uname) = "Linux" ]
 then
-    mount "$remoteServer":/media/volgrp/ ~/"$remoteServer"
+    mount "$remoteServer":/media/ ~/"$remoteServer"
     df -TH
 else
-    sudo mount -o nolocks -o resvport "$remoteServer":/media/volgrp/ ~/"$remoteServer"
+    sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/"$remoteServer"
     df -H
 fi

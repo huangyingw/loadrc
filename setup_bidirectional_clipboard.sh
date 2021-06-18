@@ -5,7 +5,7 @@ SCRIPT=$(realpath "$0") && \
 
 if [ -f ~/Library/LaunchAgents/pbcopy.plist  ]
 then
-    exit 0    
+    exit 0
 fi
 
 cp -fv ./Library/LaunchAgents/pbcopy.plist ~/Library/LaunchAgents/pbcopy.plist
