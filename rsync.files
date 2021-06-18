@@ -184,6 +184,8 @@
 ./.vserver.theanorc
 ./.zshrc
 ./Dockerfile
+./Library/LaunchAgents/pbcopy.plist
+./Library/LaunchAgents/pbpaste.plist
 ./Library/Preferences/org.videolan.vlc/vlcrc
 ./bashrc/HuangYings-MacBook-Pro.local.csc.properties
 ./bashrc/apf.sh
@@ -272,7 +274,6 @@
 ./bashrc/mklnk.sh
 ./bashrc/mldonkey.csc.properties
 ./bashrc/mosh.sh
-./bashrc/mount_samba.sh
 ./bashrc/move.sh
 ./bashrc/move67.sh
 ./bashrc/netbak.sh
@@ -307,7 +308,6 @@
 ./bashrc/selectmirror.sh
 ./bashrc/setup.sh
 ./bashrc/sleep.sh
-./bashrc/sload.sh
 ./bashrc/smount.sh
 ./bashrc/split.sh
 ./bashrc/ssh.sh
@@ -687,6 +687,7 @@
 ./set_linux_configuration.sh
 ./set_macos_configuration.sh
 ./setup.sh
+./setup_bidirectional_clipboard.sh
 ./sqlrc/.login
 ./sqlrc/mysqlback.sh
 ./sqlrc/xsql.sh
@@ -705,6 +706,7 @@
 ./timemachinerc/etc/netatalk/AppleVolumes.default
 ./timemachinerc/etc/nsswitch.conf
 ./timemachinerc/listlocalsnapshots.sh
+./uninstall_bidirectional_clipboard.sh
 ./update.sh
 ./vimrc/.vim/autoload/SQLUtilities.vim
 ./vimrc/.vim/autoload/indexed_search.vim
