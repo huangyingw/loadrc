@@ -306,7 +306,6 @@
 "./bashrc/select_copy.sh"
 "./bashrc/select_random_files.sh"
 "./bashrc/selectmirror.sh"
-"./bashrc/setup.sh"
 "./bashrc/sleep.sh"
 "./bashrc/smount.sh"
 "./bashrc/split.sh"
