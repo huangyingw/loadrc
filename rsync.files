@@ -127,6 +127,8 @@
 ./.git/modules/vimrc/.vim/bundle/vim-pbcopy/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-pdf/config
 ./.git/modules/vimrc/.vim/bundle/vim-pdf/info/exclude
+./.git/modules/vimrc/.vim/bundle/vim-phpfmt/config
+./.git/modules/vimrc/.vim/bundle/vim-phpfmt/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-rails/config
 ./.git/modules/vimrc/.vim/bundle/vim-rails/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-scala/config
@@ -2382,6 +2384,19 @@
 ./vimrc/.vim/bundle/vim-pdf/doc/tags
 ./vimrc/.vim/bundle/vim-pdf/doc/vim-pdf.txt
 ./vimrc/.vim/bundle/vim-pdf/plugin/vim-pdf.vim
+./vimrc/.vim/bundle/vim-phpfmt/.gitconfig
+./vimrc/.vim/bundle/vim-phpfmt/LICENSE
+./vimrc/.vim/bundle/vim-phpfmt/README.md
+./vimrc/.vim/bundle/vim-phpfmt/assetserver.test.php
+./vimrc/.vim/bundle/vim-phpfmt/assetserver_controller.php
+./vimrc/.vim/bundle/vim-phpfmt/autoload/phpfmt/fmt.vim
+./vimrc/.vim/bundle/vim-phpfmt/autoload/phpfmt/log.vim
+./vimrc/.vim/bundle/vim-phpfmt/plugin/phpfmt.vim
+./vimrc/.vim/bundle/vim-phpfmt/product_debug_service.test.php
+./vimrc/.vim/bundle/vim-phpfmt/ruleset.xml
+./vimrc/.vim/bundle/vim-phpfmt/test.bad.php
+./vimrc/.vim/bundle/vim-phpfmt/test.php
+./vimrc/.vim/bundle/vim-phpfmt/test.sh
 ./vimrc/.vim/bundle/vim-rails/.github/FUNDING.yml
 ./vimrc/.vim/bundle/vim-rails/.gitignore
 ./vimrc/.vim/bundle/vim-rails/CONTRIBUTING.markdown
@@ -2930,4 +2945,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-dev.gdio.diff
+vim-phpfmt.gdio.diff
