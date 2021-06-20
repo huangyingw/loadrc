@@ -12,8 +12,8 @@ index 7a86e108..4c43973e 100644
 +    branch = dev
 diff --git a/vimrc/.vim/bundle/vim-phpfmt b/vimrc/.vim/bundle/vim-phpfmt
 new file mode 160000
-index 00000000..67785844
+index 00000000..c2ced174
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-phpfmt
 @@ -0,0 +1 @@
-+Subproject commit 677858448062f76c5539d3cdcee0aa0ec7e1c331
++Subproject commit c2ced17465bde669b5bd4297251d2005f382e758
