@@ -17,3 +17,16 @@ index 00000000..c2ced174
 +++ ./vimrc/.vim/bundle/vim-phpfmt
 @@ -0,0 +1 @@
 +Subproject commit c2ced17465bde669b5bd4297251d2005f382e758
+diff --git a/vimrc/.vimrc b/vimrc/.vimrc
+index c938eb8a..550ff564 100644
+--- ./vimrc/.vimrc
++++ ./vimrc/.vimrc
+@@ -203,7 +203,7 @@ else
+     set clipboard=unnamed
+ endif
+ let g:phpfmt_autosave = 1
+-let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
++let g:phpfmt_standard = 'PSR2' 
+ 
+ let g:ycm_autoclose_preview_window_after_completion = 1
+ 
