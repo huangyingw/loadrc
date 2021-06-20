@@ -234,3 +234,7 @@
 [submodule "vimrc/.vim/bundle/vim-pbcopy"]
 	path = vimrc/.vim/bundle/vim-pbcopy
 	url = git@github.com:huangyingw/vim-pbcopy.git 
+[submodule "vimrc/.vim/bundle/vim-phpfmt"]
+    path = vimrc/.vim/bundle/vim-phpfmt
+    url = git@bitbucket.org:huangyingw/vim-phpfmt.git
+    branch = dev
