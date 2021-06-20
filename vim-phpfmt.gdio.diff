@@ -1,0 +1,19 @@
+diff --git a/.gitmodules b/.gitmodules
+index 7a86e108..4c43973e 100644
+--- ./.gitmodules
++++ ./.gitmodules
+@@ -234,3 +234,7 @@
+ [submodule "vimrc/.vim/bundle/vim-pbcopy"]
+     path = vimrc/.vim/bundle/vim-pbcopy
+     url = git@github.com:huangyingw/vim-pbcopy.git
++[submodule "vimrc/.vim/bundle/vim-phpfmt"]
++    path = vimrc/.vim/bundle/vim-phpfmt
++    url = git@bitbucket.org:huangyingw/vim-phpfmt.git
++    branch = dev
+diff --git a/vimrc/.vim/bundle/vim-phpfmt b/vimrc/.vim/bundle/vim-phpfmt
+new file mode 160000
+index 00000000..67785844
+--- /dev/null
++++ ./vimrc/.vim/bundle/vim-phpfmt
+@@ -0,0 +1 @@
++Subproject commit 677858448062f76c5539d3cdcee0aa0ec7e1c331
