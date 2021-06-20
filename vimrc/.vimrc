@@ -203,7 +203,7 @@ else
     set clipboard=unnamed
 endif
 let g:phpfmt_autosave = 1
-let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
+let g:phpfmt_standard = 'PSR2' 
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 
