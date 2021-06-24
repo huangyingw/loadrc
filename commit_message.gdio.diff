@@ -24,9 +24,9 @@ index 3c402327..2477da66 100755
      git commit -m "$commit_message"
  
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..e3589389 160000
+index dbe8b1e2..5bb65f40 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit e35893897f0f15324dd7ea2924067b228008f3ed-dirty
++Subproject commit 5bb65f409e3fd1222e9fbba59c17ded0b458595f
