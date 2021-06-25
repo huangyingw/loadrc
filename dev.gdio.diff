@@ -1,0 +1,7 @@
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 41871cba..8190c220 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 41871cba2fb35e62a7254df43cd112a2a7279998
++Subproject commit 8190c220ae59cd39186f9a118092cbca413ae4d7
