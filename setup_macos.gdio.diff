@@ -1,0 +1,23 @@
+diff --git a/bashrc/change_mac_hostname_test.sh b/bashrc/change_mac_hostname_test.sh
+index 8c8e1dc4..b2000bce 100755
+--- ./bashrc/change_mac_hostname_test.sh
++++ ./bashrc/change_mac_hostname_test.sh
+@@ -3,4 +3,4 @@ SCRIPT=$(realpath "$0")
+ SCRIPTPATH=$(dirname "$SCRIPT")
+ cd "$SCRIPTPATH"
+ 
+-./change_mac_hostname.sh mbp
++./change_mac_hostname.sh macmini
+diff --git a/install_basic_macos.sh b/install_basic_macos.sh
+index fb1e2f26..ee21364b 100755
+--- ./install_basic_macos.sh
++++ ./install_basic_macos.sh
+@@ -9,6 +9,8 @@ then
+ fi
+ 
+ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
++echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
++eval "$(/opt/homebrew/bin/brew shellenv)"
+ brew update
+ brew upgrade
+ brew install --cask osxfuse
