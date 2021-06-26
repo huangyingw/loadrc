@@ -259,10 +259,10 @@ index 82bc6cb7..9e6a5b04 100644
 -export PATH=/usr/local/bin:$PATH
  . $HOME/loadrc/.loadrc
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index fb1e2f26..4909da79 100755
+index fb1e2f26..a26c9986 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
-@@ -8,7 +8,8 @@ then
+@@ -8,10 +8,10 @@ then
      exit 0
  fi
  
@@ -271,7 +271,10 @@ index fb1e2f26..4909da79 100755
 +git -C $(brew --repository homebrew/core) checkout master
  brew update
  brew upgrade
- brew install --cask osxfuse
+-brew install --cask osxfuse
+ brew install \
+     Caskroom/cask/xquartz \
+     astyle \
 diff --git a/macosrc/configure_mosh.sh b/macosrc/configure_mosh.sh
 index bb27cd34..a45fa3fe 100755
 --- ./macosrc/configure_mosh.sh
