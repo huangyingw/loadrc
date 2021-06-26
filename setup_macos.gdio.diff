@@ -50,6 +50,18 @@ index 7042dce9..6b78b3a0 100755
 -
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.loadrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
+diff --git a/install_prerequisite.sh b/install_prerequisite.sh
+index e055978f..e2824b9e 100755
+--- ./install_prerequisite.sh
++++ ./install_prerequisite.sh
+@@ -8,7 +8,6 @@ apt-get install -y \
+     astyle \
+     automake \
+     autotools-dev \
+-    bcmwl-kernel-source \
+     binutils \
+     build-essential \
+     cmake \
 diff --git a/macosrc/configure_mosh.sh b/macosrc/configure_mosh.sh
 index bb27cd34..a45fa3fe 100755
 --- ./macosrc/configure_mosh.sh
