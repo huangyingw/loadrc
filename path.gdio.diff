@@ -293,6 +293,13 @@ index dbe8b1e2..5bb65f40 160000
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
 +Subproject commit 5bb65f409e3fd1222e9fbba59c17ded0b458595f
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 41871cba..17ceb981 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 41871cba2fb35e62a7254df43cd112a2a7279998
++Subproject commit 17ceb981ac27663a704beaf9a59eea259bab46e3
 diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
 index e14de500..14ffa5a3 100755
 --- ./vishrc/vrun.sh
