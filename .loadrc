@@ -1,4 +1,5 @@
 #!/bin/zsh
+. $HOME/loadrc/.pathrc
 . $HOME/loadrc/.androidrc
 . $HOME/loadrc/.dockerrc
 . $HOME/loadrc/.envrc
