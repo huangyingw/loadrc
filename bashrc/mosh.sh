@@ -4,8 +4,8 @@ mkdir "$target"
 
 if ( ssh "$target" "uname" | grep -q Darwin )
 then
-    MOSHSERVER="/usr/local/bin/mosh-server"
-    tmuxAction='/usr/local/bin/tmux new-session -A -s mosh'
+    MOSHSERVER=$(ssh "$target" ". ~/loadrc/.loadrc ; which mosh-server")
+    tmuxAction="$(ssh "$target" ". ~/loadrc/.loadrc ; which tmux") new-session -A -s mosh"
 else
     MOSHSERVER="/usr/bin/mosh-server"
     tmuxAction='/usr/bin/tmux new-session -A -s mosh'
