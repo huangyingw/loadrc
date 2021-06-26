@@ -5,6 +5,7 @@ export PATH="$HOME/bin:$PATH"
 export PATH="/Applications/NoMachine.app/Contents/MacOS:$PATH"
 export PATH="/Applications/kdiff3.app/Contents/MacOS:$PATH"
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+export PATH="/users/alpine/.node_modules_global/bin:$PATH"
 export PATH="/usr/local/bin:/opt/local/sbin:$PATH"
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
