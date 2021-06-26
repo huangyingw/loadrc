@@ -19,21 +19,43 @@ index 17e45232..bd41d7ab 100755
  . $HOME/loadrc/.envrc
 diff --git a/.pathrc b/.pathrc
 new file mode 100644
-index 00000000..75068b27
+index 00000000..3f6630b0
 --- /dev/null
 +++ ./.pathrc
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,15 @@
 +export PATH="$HOME/Android/sdk/platform-tools:$PATH"
 +export PATH="$HOME/Android/sdk/tools:$PATH"
 +export PATH="$HOME/anaconda3/bin:$PATH"
++export PATH="$HOME/bin:$PATH"
 +export PATH="/Applications/NoMachine.app/Contents/MacOS:$PATH"
 +export PATH="/Applications/kdiff3.app/Contents/MacOS:$PATH"
++export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
++export PATH="/users/alpine/.node_modules_global/bin:$PATH"
 +export PATH="/usr/local/bin:/opt/local/sbin:$PATH"
++export PATH=$HOME/bin:/usr/local/bin:$PATH
 +export PATH=$PATH:/usr/local/go/bin
 +export PATH=/opt/homebrew/bin:$PATH
 +export PATH=/usr/local/bin:$PATH
 +export PATH=/usr/local/cuda/bin:$PATH
 +export PATH=~/bin:$PATH
+diff --git a/.profile b/.profile
+index 10952fbd..78bebcb4 100755
+--- ./.profile
++++ ./.profile
+@@ -23,13 +23,5 @@ fi
+ export LANG="en_US.utf8"
+ export LANGUAGE="en_US:en"
+ 
+-##
+-# Your previous /Users/huangyingw/.profile file was backed up as /Users/huangyingw/.profile.macports-saved_2019-06-03_at_21:24:24
+-##
+-
+-# MacPorts Installer addition on 2019-06-03_at_21:24:24: adding an appropriate PATH variable for use with MacPorts.
+-#export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+-# Finished adapting your PATH environment variable for use with MacPorts.
+-
+ export PATH=/usr/local/bin:$PATH
+ . $HOME/loadrc/.loadrc
 diff --git a/.scl-1yihuang-m.corporate.localrc b/.scl-1yihuang-m.corporate.localrc
 deleted file mode 100755
 index 13bad558..00000000
