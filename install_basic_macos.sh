@@ -8,7 +8,8 @@ then
     exit 0
 fi
 
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+git -C $(brew --repository homebrew/core) checkout master
 brew update
 brew upgrade
 brew install --cask osxfuse
