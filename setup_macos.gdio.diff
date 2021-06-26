@@ -1,23 +1,70 @@
-diff --git a/bashrc/change_mac_hostname_test.sh b/bashrc/change_mac_hostname_test.sh
-index 8c8e1dc4..b2000bce 100755
---- ./bashrc/change_mac_hostname_test.sh
-+++ ./bashrc/change_mac_hostname_test.sh
-@@ -3,4 +3,4 @@ SCRIPT=$(realpath "$0")
- SCRIPTPATH=$(dirname "$SCRIPT")
- cd "$SCRIPTPATH"
+diff --git a/.envrc b/.envrc
+index 47a567de..50f5b8e2 100755
+--- ./.envrc
++++ ./.envrc
+@@ -27,3 +27,4 @@ export red='\033[0;31m'
+ export PATH="$HOME/anaconda3/bin:$PATH"
+ export PATH=/usr/local/bin:$PATH
+ export PATH=~/bin:$PATH
++export PATH=/opt/homebrew/bin:$PATH
+diff --git a/bashrc/mosh.sh b/bashrc/mosh.sh
+index d62867f4..b3ad0742 100755
+--- ./bashrc/mosh.sh
++++ ./bashrc/mosh.sh
+@@ -2,18 +2,12 @@
+ target=$(echo "$1" | sed  -e "s/\/$//g")
+ mkdir "$target"
  
--./change_mac_hostname.sh mbp
-+./change_mac_hostname.sh macmini
-diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index fb1e2f26..ee21364b 100755
---- ./install_basic_macos.sh
-+++ ./install_basic_macos.sh
-@@ -9,6 +9,8 @@ then
- fi
+-if ( ssh "$target" "uname" | grep -q Darwin )
+-then
+-    MOSHSERVER="/usr/local/bin/mosh-server"
+-    tmuxAction='/usr/local/bin/tmux new-session -A -s mosh'
+-else
+-    MOSHSERVER="/usr/bin/mosh-server"
+-    tmuxAction='/usr/bin/tmux new-session -A -s mosh'
+-fi
++MOSHSERVER=$(ssh "$target" ". ~/loadrc/.loadrc ; which mosh-server")
++tmuxAction="$(ssh "$target" ". ~/loadrc/.loadrc ; which tmux") new-session -A -s mosh"
  
- /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-+eval "$(/opt/homebrew/bin/brew shellenv)"
- brew update
- brew upgrade
- brew install --cask osxfuse
+ while true
+ do
+     ssh -fnN -R 2224:localhost:2224 "$target" &
+-    ssh "$target" "~/loadrc/macosrc/configure_mosh.sh" &
++    ssh "$target" ". ~/loadrc/.loadrc ; ~/loadrc/macosrc/configure_mosh.sh" &
+     mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
+ done
+diff --git a/bashrc/ssh.sh b/bashrc/ssh.sh
+index 7042dce9..6b78b3a0 100755
+--- ./bashrc/ssh.sh
++++ ./bashrc/ssh.sh
+@@ -1,11 +1,4 @@
+ #! /bin/zsh
+ target=$(echo "$1" | sed  -e "s/\/$//g")
+-
+-if ( ssh "$target" "uname" | grep -q Darwin )
+-then
+-    tmuxAction='/usr/local/bin/tmux new-session -A -s ssh'
+-else
+-    tmuxAction='/usr/bin/tmux new-session -A -s ssh'
+-fi
+-
++tmuxAction="$(ssh "$target" ". ~/loadrc/.loadrc ; which tmux") new-session -A -s ssh"
+ ssh -Y "$target" -t -- ${tmuxAction}
+diff --git a/macosrc/configure_mosh.sh b/macosrc/configure_mosh.sh
+index bb27cd34..a45fa3fe 100755
+--- ./macosrc/configure_mosh.sh
++++ ./macosrc/configure_mosh.sh
+@@ -1,5 +1,5 @@
+ #!/bin/zsh
+-BINPATH=$(/usr/local/bin/realpath $(which mosh-server))
++BINPATH=$(realpath $(which mosh-server))
+ 
+ # Turn the firewall off
+ sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
+diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
+index dbe8b1e2..5bb65f40 160000
+--- ./vimrc/.vim/bundle/vim-autoformat
++++ ./vimrc/.vim/bundle/vim-autoformat
+@@ -1 +1 @@
+-Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
++Subproject commit 5bb65f409e3fd1222e9fbba59c17ded0b458595f
