@@ -23,5 +23,4 @@ fi
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"
 
-export PATH=/usr/local/bin:$PATH
 . $HOME/loadrc/.loadrc
