@@ -3,6 +3,7 @@ export PATH="$HOME/Android/sdk/tools:$PATH"
 export PATH="$HOME/anaconda3/bin:$PATH"
 export PATH="/Applications/NoMachine.app/Contents/MacOS:$PATH"
 export PATH="/Applications/kdiff3.app/Contents/MacOS:$PATH"
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export PATH="/usr/local/bin:/opt/local/sbin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=/opt/homebrew/bin:$PATH
