@@ -12,7 +12,6 @@ fi
 git -C $(brew --repository homebrew/core) checkout master
 brew update
 brew upgrade
-brew install --cask osxfuse
 brew install \
     Caskroom/cask/xquartz \
     astyle \
