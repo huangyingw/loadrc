@@ -35,15 +35,16 @@ index a51724b9..82a595f3 100644
  export GOPATH=$HOME/go
 -export PATH=$PATH:/usr/local/go/bin
 diff --git a/.loadrc b/.loadrc
-index 17e45232..bd41d7ab 100755
+index 17e45232..14ec11eb 100755
 --- ./.loadrc
 +++ ./.loadrc
-@@ -1,4 +1,5 @@
+@@ -1,5 +1,5 @@
  #!/bin/zsh
+-. $HOME/loadrc/.androidrc
 +. $HOME/loadrc/.pathrc
- . $HOME/loadrc/.androidrc
  . $HOME/loadrc/.dockerrc
  . $HOME/loadrc/.envrc
+ . $HOME/loadrc/.gitrc
 diff --git a/.macosrc b/.macosrc
 index de211c97..1298e4e5 100644
 --- ./.macosrc
@@ -185,7 +186,7 @@ index c7c0b3ff..7a159ed1 100644
  . $HOME/loadrc/.loadrc
  setopt HIST_IGNORE_ALL_DUPS
 diff --git a/bashrc/mosh.sh b/bashrc/mosh.sh
-index d62867f4..b3ad0742 100755
+index d62867f4..d966e0c8 100755
 --- ./bashrc/mosh.sh
 +++ ./bashrc/mosh.sh
 @@ -2,18 +2,12 @@
@@ -200,18 +201,18 @@ index d62867f4..b3ad0742 100755
 -    MOSHSERVER="/usr/bin/mosh-server"
 -    tmuxAction='/usr/bin/tmux new-session -A -s mosh'
 -fi
-+MOSHSERVER=$(ssh "$target" ". ~/loadrc/.loadrc ; which mosh-server")
-+tmuxAction="$(ssh "$target" ". ~/loadrc/.loadrc ; which tmux") new-session -A -s mosh"
++MOSHSERVER=$(ssh "$target" ". ~/loadrc/.pathrc ; which mosh-server")
++tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s mosh"
  
  while true
  do
      ssh -fnN -R 2224:localhost:2224 "$target" &
 -    ssh "$target" "~/loadrc/macosrc/configure_mosh.sh" &
-+    ssh "$target" ". ~/loadrc/.loadrc ; ~/loadrc/macosrc/configure_mosh.sh" &
++    ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
      mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
  done
 diff --git a/bashrc/ssh.sh b/bashrc/ssh.sh
-index 7042dce9..6b78b3a0 100755
+index 7042dce9..0e670bd9 100755
 --- ./bashrc/ssh.sh
 +++ ./bashrc/ssh.sh
 @@ -1,11 +1,4 @@
@@ -225,7 +226,7 @@ index 7042dce9..6b78b3a0 100755
 -    tmuxAction='/usr/bin/tmux new-session -A -s ssh'
 -fi
 -
-+tmuxAction="$(ssh "$target" ". ~/loadrc/.loadrc ; which tmux") new-session -A -s ssh"
++tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
 diff --git a/gpurc/.gpurc b/gpurc/.gpurc
 index 8be8d98c..6026d401 100644
@@ -257,6 +258,20 @@ index 82bc6cb7..9e6a5b04 100644
 @@ -1,2 +1 @@
 -export PATH=/usr/local/bin:$PATH
  . $HOME/loadrc/.loadrc
+diff --git a/install_basic_macos.sh b/install_basic_macos.sh
+index fb1e2f26..4909da79 100755
+--- ./install_basic_macos.sh
++++ ./install_basic_macos.sh
+@@ -8,7 +8,8 @@ then
+     exit 0
+ fi
+ 
+-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
++/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
++git -C $(brew --repository homebrew/core) checkout master
+ brew update
+ brew upgrade
+ brew install --cask osxfuse
 diff --git a/macosrc/configure_mosh.sh b/macosrc/configure_mosh.sh
 index bb27cd34..a45fa3fe 100755
 --- ./macosrc/configure_mosh.sh
@@ -275,3 +290,25 @@ index dbe8b1e2..5bb65f40 160000
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
 +Subproject commit 5bb65f409e3fd1222e9fbba59c17ded0b458595f
+diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
+index e14de500..14ffa5a3 100755
+--- ./vishrc/vrun.sh
++++ ./vishrc/vrun.sh
+@@ -58,7 +58,7 @@ case $extension in
+     sh)
+         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+         then
+-            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
++            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.pathrc ; $rpath/$rfile"
+         else
+             "$file"
+         fi
+@@ -69,7 +69,7 @@ case $extension in
+     py)
+         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+         then
+-            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; python3 $rfile"
++            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.pathrc ; python3 $rfile"
+         else
+             SCRIPT=$(realpath "$file")
+             SCRIPTPATH=$(dirname "$SCRIPT")
