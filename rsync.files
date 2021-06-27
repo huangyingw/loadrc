@@ -3,7 +3,6 @@
 ./.AF052336.rc
 ./.MacPro.rc
 ./.MacPro.theanorc
-./.androidrc
 ./.bashrc
 ./.config/git/gitk
 ./.config/nvim/init.vim
@@ -159,9 +158,9 @@
 ./.movie.mirror.check
 ./.netrc
 ./.p4rc
+./.pathrc
 ./.profile
 ./.pythonrc
-./.scl-1yihuang-m.corporate.localrc
 ./.server.mirror.check
 ./.server.theanorc
 ./.shellrc
@@ -498,11 +497,8 @@
 ./gpurc/kill_nvidia.sh
 ./gpurc/restart.sh
 ./hgrc/hdi.sh
-./host_links/imac/Users/huangyingw/.bashrc
-./host_links/imacpro/Users/huangyingw/.bashrc
 ./host_links/lint-sandbox/etc/hosts
 ./host_links/lint-sandbox/etc/network/interfaces
-./host_links/mbp/Users/huangyingw/.bashrc
 ./host_links/mini/etc/default/isc-dhcp-server
 ./host_links/mini/etc/dhcp/dhcpd.conf
 ./host_links/mini/etc/hosts
@@ -2930,4 +2926,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-dev.gdio.diff
+uniq_path.gdio.diff

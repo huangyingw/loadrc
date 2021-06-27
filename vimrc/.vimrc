@@ -28,7 +28,6 @@ inoremap { {}<LEFT>
 "set nopaste
 xnoremap p pgvy
 au! BufRead,BufNewFile *.hta  setfiletype html
-" let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 " Mapping ESC in insert mode and command mode to double j
 imap jj <C-[>
 " cmap jj  <C-[]]
