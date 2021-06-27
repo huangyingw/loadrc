@@ -1,0 +1,32 @@
+diff --git a/gitrc/g.sh b/gitrc/g.sh
+index 3c402327..2477da66 100755
+--- ./gitrc/g.sh
++++ ./gitrc/g.sh
+@@ -1,8 +1,6 @@
+ #!/bin/zsh
+ ~/loadrc/gitrc/include_gitconfig.sh
+ 
+-commit_message="n"
+-
+ if [ -f COMMIT_EDITMSG ]
+ then
+     commit_message=$(cat COMMIT_EDITMSG)
+@@ -13,6 +11,11 @@ then
+     commit_message="$1"
+ fi
+ 
++if [ -z "$commit_message" ]
++then
++    commit_message="n"
++fi
++
+ git commit --no-edit || \
+     git commit -m "$commit_message"
+ 
+diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
+index dbe8b1e2..5bb65f40 160000
+--- ./vimrc/.vim/bundle/vim-autoformat
++++ ./vimrc/.vim/bundle/vim-autoformat
+@@ -1 +1 @@
+-Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
++Subproject commit 5bb65f409e3fd1222e9fbba59c17ded0b458595f
