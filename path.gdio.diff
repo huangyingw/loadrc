@@ -286,13 +286,6 @@ index bb27cd34..a45fa3fe 100755
  
  # Turn the firewall off
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
-diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..5bb65f40 160000
---- ./vimrc/.vim/bundle/vim-autoformat
-+++ ./vimrc/.vim/bundle/vim-autoformat
-@@ -1 +1 @@
--Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit 5bb65f409e3fd1222e9fbba59c17ded0b458595f
 diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
 index e14de500..14ffa5a3 100755
 --- ./vishrc/vrun.sh
