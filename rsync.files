@@ -2926,4 +2926,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-uniq_path.gdio.diff
+mosh.gdio.diff
