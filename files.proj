@@ -431,6 +431,7 @@
 "./gitrc/gcob.sh"
 "./gitrc/gcob_test.sh"
 "./gitrc/gcof.sh"
+"./gitrc/gcom.sh"
 "./gitrc/gcp.sh"
 "./gitrc/gdev.sh"
 "./gitrc/gdev_test.sh"
@@ -2926,4 +2927,4 @@
 "./zerotierrc/install.sh"
 "./zerotierrc/restart.sh"
 "./zerotierrc/zerotierrc.conf"
-"uniq_path.gdio.diff"
+"gcom.gdio.diff"
