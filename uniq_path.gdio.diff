@@ -237,26 +237,29 @@ index 8be8d98c..6026d401 100644
 -export PATH="/usr/local/bin:/opt/local/sbin:$PATH"
 -export PATH=/usr/local/cuda/bin:$PATH
 diff --git a/host_links/imac/Users/huangyingw/.bashrc b/host_links/imac/Users/huangyingw/.bashrc
-index 82bc6cb7..9e6a5b04 100644
+deleted file mode 100644
+index 82bc6cb7..00000000
 --- ./host_links/imac/Users/huangyingw/.bashrc
-+++ ./host_links/imac/Users/huangyingw/.bashrc
-@@ -1,2 +1 @@
++++ /dev/null
+@@ -1,2 +0,0 @@
 -export PATH=/usr/local/bin:$PATH
- . $HOME/loadrc/.loadrc
+-. $HOME/loadrc/.loadrc
 diff --git a/host_links/imacpro/Users/huangyingw/.bashrc b/host_links/imacpro/Users/huangyingw/.bashrc
-index 82bc6cb7..9e6a5b04 100644
+deleted file mode 100644
+index 82bc6cb7..00000000
 --- ./host_links/imacpro/Users/huangyingw/.bashrc
-+++ ./host_links/imacpro/Users/huangyingw/.bashrc
-@@ -1,2 +1 @@
++++ /dev/null
+@@ -1,2 +0,0 @@
 -export PATH=/usr/local/bin:$PATH
- . $HOME/loadrc/.loadrc
+-. $HOME/loadrc/.loadrc
 diff --git a/host_links/mbp/Users/huangyingw/.bashrc b/host_links/mbp/Users/huangyingw/.bashrc
-index 82bc6cb7..9e6a5b04 100644
+deleted file mode 100644
+index 82bc6cb7..00000000
 --- ./host_links/mbp/Users/huangyingw/.bashrc
-+++ ./host_links/mbp/Users/huangyingw/.bashrc
-@@ -1,2 +1 @@
++++ /dev/null
+@@ -1,2 +0,0 @@
 -export PATH=/usr/local/bin:$PATH
- . $HOME/loadrc/.loadrc
+-. $HOME/loadrc/.loadrc
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
 index fb1e2f26..a26c9986 100755
 --- ./install_basic_macos.sh
