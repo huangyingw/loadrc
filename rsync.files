@@ -497,11 +497,8 @@
 ./gpurc/kill_nvidia.sh
 ./gpurc/restart.sh
 ./hgrc/hdi.sh
-./host_links/imac/Users/huangyingw/.bashrc
-./host_links/imacpro/Users/huangyingw/.bashrc
 ./host_links/lint-sandbox/etc/hosts
 ./host_links/lint-sandbox/etc/network/interfaces
-./host_links/mbp/Users/huangyingw/.bashrc
 ./host_links/mini/etc/default/isc-dhcp-server
 ./host_links/mini/etc/dhcp/dhcpd.conf
 ./host_links/mini/etc/hosts
