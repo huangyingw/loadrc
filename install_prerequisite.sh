@@ -8,7 +8,6 @@ apt-get install -y \
     astyle \
     automake \
     autotools-dev \
-    bcmwl-kernel-source \
     binutils \
     build-essential \
     cmake \
