@@ -18,5 +18,3 @@ fi
 
 export LANG="en_US.utf8"
 export LANGUAGE="en_US:en"
-
-. $HOME/loadrc/.loadrc
