@@ -58,25 +58,23 @@ index de211c97..1298e4e5 100644
  fi
 diff --git a/.pathrc b/.pathrc
 new file mode 100644
-index 00000000..3f6630b0
+index 00000000..bacd86ff
 --- /dev/null
 +++ ./.pathrc
-@@ -0,0 +1,15 @@
+@@ -0,0 +1,13 @@
 +export PATH="$HOME/Android/sdk/platform-tools:$PATH"
 +export PATH="$HOME/Android/sdk/tools:$PATH"
 +export PATH="$HOME/anaconda3/bin:$PATH"
 +export PATH="$HOME/bin:$PATH"
 +export PATH="/Applications/NoMachine.app/Contents/MacOS:$PATH"
 +export PATH="/Applications/kdiff3.app/Contents/MacOS:$PATH"
-+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
++export PATH="/opt/local/bin:$PATH"
++export PATH="/opt/local/sbin:$PATH"
 +export PATH="/users/alpine/.node_modules_global/bin:$PATH"
-+export PATH="/usr/local/bin:/opt/local/sbin:$PATH"
-+export PATH=$HOME/bin:/usr/local/bin:$PATH
-+export PATH=$PATH:/usr/local/go/bin
++export PATH=/usr/local/go/bin:$PATH
 +export PATH=/opt/homebrew/bin:$PATH
 +export PATH=/usr/local/bin:$PATH
 +export PATH=/usr/local/cuda/bin:$PATH
-+export PATH=~/bin:$PATH
 diff --git a/.profile b/.profile
 index 10952fbd..0f771965 100755
 --- ./.profile
@@ -286,13 +284,6 @@ index bb27cd34..a45fa3fe 100755
  
  # Turn the firewall off
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
-diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..5bb65f40 160000
---- ./vimrc/.vim/bundle/vim-autoformat
-+++ ./vimrc/.vim/bundle/vim-autoformat
-@@ -1 +1 @@
--Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit 5bb65f409e3fd1222e9fbba59c17ded0b458595f
 diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
 index e14de500..14ffa5a3 100755
 --- ./vishrc/vrun.sh
