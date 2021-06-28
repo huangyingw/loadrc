@@ -431,6 +431,7 @@
 "./gitrc/gcob.sh"
 "./gitrc/gcob_test.sh"
 "./gitrc/gcof.sh"
+"./gitrc/gcom.sh"
 "./gitrc/gcp.sh"
 "./gitrc/gdev.sh"
 "./gitrc/gdev_test.sh"
