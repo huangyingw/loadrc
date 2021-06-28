@@ -15,5 +15,5 @@ while true
 do
     ssh -fnN -R 2224:localhost:2224 "$target" &
     ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
-    mosh --server="$MOSHSERVER" "$target" -- "$tmuxAction"
+    mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
 done
