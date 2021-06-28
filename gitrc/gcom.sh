@@ -6,6 +6,8 @@ then
     exit 1
 fi
 
+~/loadrc/gitrc/discard_unnecessaries.sh
+CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
 git checkout -b "$1" || \
-    ~/loadrc/gitrc/gme2.sh "$1" && \
-    git checkout "$1"
+    git checkout "$1" &&
+    git merge "$CURRENT_BRANCH"
