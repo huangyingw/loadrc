@@ -288,6 +288,18 @@ index bb27cd34..a45fa3fe 100755
  
  # Turn the firewall off
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
+diff --git a/vimrc/.vimrc b/vimrc/.vimrc
+index c938eb8a..130e1969 100644
+--- ./vimrc/.vimrc
++++ ./vimrc/.vimrc
+@@ -28,7 +28,6 @@ inoremap { {}<LEFT>
+ "set nopaste
+ xnoremap p pgvy
+ au! BufRead,BufNewFile *.hta  setfiletype html
+-" let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
+ " Mapping ESC in insert mode and command mode to double j
+ imap jj <C-[>
+ " cmap jj  <C-[]]
 diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
 index e14de500..14ffa5a3 100755
 --- ./vishrc/vrun.sh
