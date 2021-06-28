@@ -197,7 +197,7 @@ index c7c0b3ff..7a159ed1 100644
  . $HOME/loadrc/.loadrc
  setopt HIST_IGNORE_ALL_DUPS
 diff --git a/bashrc/mosh.sh b/bashrc/mosh.sh
-index d62867f4..45b35f57 100755
+index d62867f4..bb6e35fe 100755
 --- ./bashrc/mosh.sh
 +++ ./bashrc/mosh.sh
 @@ -2,18 +2,18 @@
@@ -223,9 +223,8 @@ index d62867f4..45b35f57 100755
  do
      ssh -fnN -R 2224:localhost:2224 "$target" &
 -    ssh "$target" "~/loadrc/macosrc/configure_mosh.sh" &
--    mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
 +    ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
-+    mosh --server="$MOSHSERVER" "$target" -- "$tmuxAction"
+     mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
  done
 diff --git a/bashrc/ssh.sh b/bashrc/ssh.sh
 index 7042dce9..0e670bd9 100755
@@ -246,10 +245,10 @@ index 7042dce9..0e670bd9 100755
  ssh -Y "$target" -t -- ${tmuxAction}
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 new file mode 100755
-index 00000000..165eaf6d
+index 00000000..81d1a1ea
 --- /dev/null
 +++ ./gitrc/gcom.sh
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,13 @@
 +#!/bin/zsh
 +
 +if [ -z "$1" ]
@@ -258,9 +257,27 @@ index 00000000..165eaf6d
 +    exit 1
 +fi
 +
++~/loadrc/gitrc/discard_unnecessaries.sh
++CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
 +git checkout -b "$1" || \
-+    ~/loadrc/gitrc/gme2.sh "$1" && \
-+    git checkout "$1"
++    git checkout "$1" &&
++    git merge "$CURRENT_BRANCH"
+diff --git a/gitrc/gme2.sh b/gitrc/gme2.sh
+index 20dd9aa3..0f505a1e 100755
+--- ./gitrc/gme2.sh
++++ ./gitrc/gme2.sh
+@@ -1,5 +1,4 @@
+ #!/bin/zsh
+-CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
+ 
+ if [ -z "$1" ]
+ then
+@@ -7,4 +6,5 @@ then
+     exit 1
+ fi
+ 
++CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
+ git fetch . "$CURRENT_BRANCH":"$1"
 diff --git a/gpurc/.gpurc b/gpurc/.gpurc
 index 8be8d98c..6026d401 100644
 --- ./gpurc/.gpurc
