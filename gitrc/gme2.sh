@@ -1,5 +1,4 @@
 #!/bin/zsh
-CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
 
 if [ -z "$1" ]
 then
@@ -7,4 +6,5 @@ then
     exit 1
 fi
 
+CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
 git fetch . "$CURRENT_BRANCH":"$1"
