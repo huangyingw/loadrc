@@ -13,7 +13,7 @@ BRANCH_DIFF="$BRANCH"
 
 for remote in $(git remote)
 do
-    BRANCH_DIFF=$(echo "$BRANCH_DIFF" | sed "s/$remote\///g")
+    BRANCH_DIFF=$(echo "$BRANCH_DIFF" | sed "s/^$remote\///g")
 done
 
 BRANCH_DIFF=$(echo "$BRANCH_DIFF" | sed 's/\//_/g')
