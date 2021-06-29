@@ -517,7 +517,7 @@ endfunction
 
 function! s:ApplyBranch(args, ...) abort
     let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/apply_branch.sh ' . '"' .  a:args . '"'
+    exec '!~/loadrc/gitrc/apply_branch.sh ' . '"' .  a:args . '"'
     call s:Gs()
 endfunction
 
