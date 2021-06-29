@@ -9,14 +9,14 @@ fi
 
 BRANCH="$1"
 BRANCH=$(echo "$BRANCH" | sed 's/remotes\///g')
+BRANCH_DIFF="$BRANCH"
 
 for remote in $(git remote)
 do
-    BRANCH=$(echo "$BRANCH" | sed "s/$remote\///g")
+    BRANCH_DIFF=$(echo "$BRANCH_DIFF" | sed "s/$remote\///g")
 done
 
-
-BRANCH_DIFF=$(echo "$BRANCH" | sed 's/\//_/g')
+BRANCH_DIFF=$(echo "$BRANCH_DIFF" | sed 's/\//_/g')
 BRANCH_DIFF="$BRANCH_DIFF.gdio.diff"
 echo "BRANCH --> $BRANCH"
 echo "BRANCH_DIFF --> $BRANCH_DIFF"
