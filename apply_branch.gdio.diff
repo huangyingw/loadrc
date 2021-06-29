@@ -244,7 +244,7 @@ index 7042dce9..0e670bd9 100755
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
 diff --git a/gitrc/apply_branch.sh b/gitrc/apply_branch.sh
-index 15190e93..f387591d 100755
+index 15190e93..24705790 100755
 --- ./gitrc/apply_branch.sh
 +++ ./gitrc/apply_branch.sh
 @@ -9,7 +9,14 @@ fi
@@ -252,14 +252,14 @@ index 15190e93..f387591d 100755
  BRANCH="$1"
  BRANCH=$(echo "$BRANCH" | sed 's/remotes\///g')
 -BRANCH_DIFF=$(echo "$BRANCH" | sed 's/[^\/]*\///g')
++BRANCH_DIFF="$BRANCH"
 +
 +for remote in $(git remote)
 +do
-+    BRANCH=$(echo "$BRANCH" | sed "s/$remote\///g")
++    BRANCH_DIFF=$(echo "$BRANCH_DIFF" | sed "s/$remote\///g")
 +done
 +
-+
-+BRANCH_DIFF=$(echo "$BRANCH" | sed 's/\//_/g')
++BRANCH_DIFF=$(echo "$BRANCH_DIFF" | sed 's/\//_/g')
  BRANCH_DIFF="$BRANCH_DIFF.gdio.diff"
  echo "BRANCH --> $BRANCH"
  echo "BRANCH_DIFF --> $BRANCH_DIFF"
