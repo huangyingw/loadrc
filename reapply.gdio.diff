@@ -341,6 +341,25 @@ index fa900e00..9cd20920 100755
      eval "$COMMAND"
  done
  
+diff --git a/gitrc/reapply.sh b/gitrc/reapply.sh
+index d1ffbd95..7d9e0081 100755
+--- ./gitrc/reapply.sh
++++ ./gitrc/reapply.sh
+@@ -1,12 +1,6 @@
+ #!/bin/zsh
+ DIFF="$1"
+-CURRET_BRANCH_DIFF="$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff"
+-git apply --reverse "$CURRET_BRANCH_DIFF" 
+-git checkout -- "$CURRET_BRANCH_DIFF"
++git apply --reverse "$DIFF" 
++git checkout -- "$DIFF"
+ git apply --reject --whitespace=fix "$DIFF"
+ ~/loadrc/gitrc/gdio.sh
+-
+-if [ "$CURRET_BRANCH_DIFF" = "$DIFF" ]
+-then
+-    git add "$CURRET_BRANCH_DIFF"
+-fi
 diff --git a/gpurc/.gpurc b/gpurc/.gpurc
 index 8be8d98c..6026d401 100644
 --- ./gpurc/.gpurc
