@@ -1,8 +1,9 @@
 #!/bin/zsh
 
 echo git diff \
-    --ignore-space-at-eol \
-    --ignore-space-change \
+    --binary \
     --ignore-all-space \
     --ignore-blank-lines \
-    --binary
+    --ignore-cr-at-eol \
+    --ignore-space-at-eol \
+    --ignore-space-change
