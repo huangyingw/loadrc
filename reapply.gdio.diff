@@ -294,6 +294,23 @@ index 00000000..556cdc79
 +then
 +    git stash pop stash@{0}
 +fi
+diff --git a/gitrc/git_diff_command.sh b/gitrc/git_diff_command.sh
+index 704a0384..603f6518 100755
+--- ./gitrc/git_diff_command.sh
++++ ./gitrc/git_diff_command.sh
+@@ -1,8 +1,9 @@
+ #!/bin/zsh
+ 
+ echo git diff \
+-    --ignore-space-at-eol \
+-    --ignore-space-change \
++    --binary \
+     --ignore-all-space \
+     --ignore-blank-lines \
+-    --binary
++    --ignore-cr-at-eol \
++    --ignore-space-at-eol \
++    --ignore-space-change
 diff --git a/gitrc/gme2.sh b/gitrc/gme2.sh
 index 20dd9aa3..0f505a1e 100755
 --- ./gitrc/gme2.sh
