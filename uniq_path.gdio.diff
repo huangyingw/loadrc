@@ -28,18 +28,6 @@ index 47a567de..cbf2b86e 100755
 -export PATH="$HOME/anaconda3/bin:$PATH"
 -export PATH=/usr/local/bin:$PATH
 -export PATH=~/bin:$PATH
-diff --git a/.gitrc b/.gitrc
-index 8e753cb1..033bffac 100755
---- ./.gitrc
-+++ ./.gitrc
-@@ -21,6 +21,7 @@ alias gclean='git clean -fd'
- alias gco='$HOME/loadrc/gitrc/gco.sh'
- alias gcob='$HOME/loadrc/gitrc/gcob.sh'
- alias gcof='$HOME/loadrc/gitrc/gcof.sh'
-+alias gcom='$HOME/loadrc/gitrc/gcom.sh'
- alias gctb='$HOME/loadrc/gitrc/gctb.sh'
- alias gdev='$HOME/loadrc/gitrc/gdev.sh'
- alias gdi2='$HOME/loadrc/gitrc/gdi2.sh'
 diff --git a/.gorc b/.gorc
 index a51724b9..82a595f3 100644
 --- ./.gorc
@@ -197,27 +185,23 @@ index c7c0b3ff..7a159ed1 100644
  . $HOME/loadrc/.loadrc
  setopt HIST_IGNORE_ALL_DUPS
 diff --git a/bashrc/mosh.sh b/bashrc/mosh.sh
-index d62867f4..bb6e35fe 100755
+index d62867f4..d966e0c8 100755
 --- ./bashrc/mosh.sh
 +++ ./bashrc/mosh.sh
-@@ -2,18 +2,18 @@
+@@ -2,18 +2,12 @@
  target=$(echo "$1" | sed  -e "s/\/$//g")
  mkdir "$target"
  
 -if ( ssh "$target" "uname" | grep -q Darwin )
-+MOSHSERVER=$(ssh "$target" ". ~/loadrc/.pathrc ; which mosh-server")
-+tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s mosh"
-+
-+if ( nc -vz "$target" 22 2>&1 | grep -q succeeded ) && [ -z "$MOSHSERVER" ] || [ -z "$tmuxAction" ]
- then
+-then
 -    MOSHSERVER="/usr/local/bin/mosh-server"
 -    tmuxAction='/usr/local/bin/tmux new-session -A -s mosh'
 -else
 -    MOSHSERVER="/usr/bin/mosh-server"
 -    tmuxAction='/usr/bin/tmux new-session -A -s mosh'
-+    echo -e "${red}please check connection, mosh and tmux setting of $target first... ${NC}"
-+    exit 1
- fi
+-fi
++MOSHSERVER=$(ssh "$target" ". ~/loadrc/.pathrc ; which mosh-server")
++tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s mosh"
  
  while true
  do
@@ -243,41 +227,6 @@ index 7042dce9..0e670bd9 100755
 -
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
-diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
-new file mode 100755
-index 00000000..81d1a1ea
---- /dev/null
-+++ ./gitrc/gcom.sh
-@@ -0,0 +1,13 @@
-+#!/bin/zsh
-+
-+if [ -z "$1" ]
-+then
-+    echo -e "${red}Please provide target_branch... ${NC}"
-+    exit 1
-+fi
-+
-+~/loadrc/gitrc/discard_unnecessaries.sh
-+CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
-+git checkout -b "$1" || \
-+    git checkout "$1" &&
-+    git merge "$CURRENT_BRANCH"
-diff --git a/gitrc/gme2.sh b/gitrc/gme2.sh
-index 20dd9aa3..0f505a1e 100755
---- ./gitrc/gme2.sh
-+++ ./gitrc/gme2.sh
-@@ -1,5 +1,4 @@
- #!/bin/zsh
--CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
- 
- if [ -z "$1" ]
- then
-@@ -7,4 +6,5 @@ then
-     exit 1
- fi
- 
-+CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
- git fetch . "$CURRENT_BRANCH":"$1"
 diff --git a/gpurc/.gpurc b/gpurc/.gpurc
 index 8be8d98c..6026d401 100644
 --- ./gpurc/.gpurc
@@ -339,30 +288,6 @@ index bb27cd34..a45fa3fe 100755
  
  # Turn the firewall off
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
-diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..ec36ed53 100644
---- ./vimrc/.vim/plugin/fugitive.vim
-+++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -27,6 +27,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gco :execute s:Gco(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcob :execute s:Gcob(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcof :execute s:Gcof(<f-args>)
-+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcom :execute s:Gcom(<q-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcp :execute s:Gcp(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdev :execute s:Gdev()
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi :execute s:Gdi(<f-args>)
-@@ -520,6 +521,11 @@ function! s:ApplyBranch(args, ...) abort
-     call s:Gs()
- endfunction
- 
-+function! s:Gcom(args, ...) abort
-+    let worktree = Cd2Worktree()
-+    exec '!~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"'
-+endfunction
-+
- function! s:Gshow(args, ...) abort
-     let worktree = Cd2Worktree()
-     let output = a:args . '.diff'
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
 index c938eb8a..130e1969 100644
 --- ./vimrc/.vimrc

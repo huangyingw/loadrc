@@ -243,12 +243,32 @@ index 7042dce9..0e670bd9 100755
 -
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
+diff --git a/gitrc/apply_branch.sh b/gitrc/apply_branch.sh
+index 15190e93..dd1a9659 100755
+--- ./gitrc/apply_branch.sh
++++ ./gitrc/apply_branch.sh
+@@ -9,7 +9,14 @@ fi
+ 
+ BRANCH="$1"
+ BRANCH=$(echo "$BRANCH" | sed 's/remotes\///g')
+-BRANCH_DIFF=$(echo "$BRANCH" | sed 's/[^\/]*\///g')
++BRANCH_DIFF="$BRANCH"
++
++for remote in $(git remote)
++do
++    BRANCH_DIFF=$(echo "$BRANCH_DIFF" | sed "s/^$remote\///g")
++done
++
++BRANCH_DIFF=$(echo "$BRANCH_DIFF" | sed 's/\//_/g')
+ BRANCH_DIFF="$BRANCH_DIFF.gdio.diff"
+ echo "BRANCH --> $BRANCH"
+ echo "BRANCH_DIFF --> $BRANCH_DIFF"
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 new file mode 100755
-index 00000000..81d1a1ea
+index 00000000..556cdc79
 --- /dev/null
 +++ ./gitrc/gcom.sh
-@@ -0,0 +1,13 @@
+@@ -0,0 +1,25 @@
 +#!/bin/zsh
 +
 +if [ -z "$1" ]
@@ -257,11 +277,23 @@ index 00000000..81d1a1ea
 +    exit 1
 +fi
 +
++clean=$(git status --porcelain)
++
++if [ -n "$clean" ]
++then
++    git stash
++fi
++
 +~/loadrc/gitrc/discard_unnecessaries.sh
 +CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
 +git checkout -b "$1" || \
 +    git checkout "$1" &&
 +    git merge "$CURRENT_BRANCH"
++
++if [ -n "$clean" ]
++then
++    git stash pop stash@{0}
++fi
 diff --git a/gitrc/gme2.sh b/gitrc/gme2.sh
 index 20dd9aa3..0f505a1e 100755
 --- ./gitrc/gme2.sh
@@ -278,6 +310,20 @@ index 20dd9aa3..0f505a1e 100755
  
 +CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
  git fetch . "$CURRENT_BRANCH":"$1"
+diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
+index fa900e00..9cd20920 100755
+--- ./gitrc/gpl.sh
++++ ./gitrc/gpl.sh
+@@ -14,8 +14,7 @@ done
+ 
+ for ss in $(git config --get-all pull.from)
+ do
+-    pull_from=$(echo "$ss" | sed  -e "s/\// /g")
+-    COMMAND="git pull $pull_from &"
++    COMMAND="git merge $ss &"
+     eval "$COMMAND"
+ done
+ 
 diff --git a/gpurc/.gpurc b/gpurc/.gpurc
 index 8be8d98c..6026d401 100644
 --- ./gpurc/.gpurc
@@ -340,7 +386,7 @@ index bb27cd34..a45fa3fe 100755
  # Turn the firewall off
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..ec36ed53 100644
+index d5874fe5..459abc6c 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -27,6 +27,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean
@@ -351,7 +397,12 @@ index d5874fe5..ec36ed53 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcp :execute s:Gcp(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdev :execute s:Gdev()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi :execute s:Gdi(<f-args>)
-@@ -520,6 +521,11 @@ function! s:ApplyBranch(args, ...) abort
+@@ -516,10 +517,15 @@ endfunction
+ 
+ function! s:ApplyBranch(args, ...) abort
+     let worktree = Cd2Worktree()
+-    silent exec '!~/loadrc/gitrc/apply_branch.sh ' . '"' .  a:args . '"'
++    exec '!~/loadrc/gitrc/apply_branch.sh ' . '"' .  a:args . '"'
      call s:Gs()
  endfunction
  
