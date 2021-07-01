@@ -91,6 +91,7 @@ function! PlayVideo()
         return 0
     endif
 
+    call asyncrun#stop('<bang>')
     let line = getline('.')
     let line = substitute(line, '^[^"]', '"' . line[0], '')
     let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
@@ -144,10 +145,6 @@ function! VRun()
     silent exec '!~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult'
     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
 
-    if (expand("%") =~ '.*leetcode.*') 
-        call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/post_submit.sh ' . '"' .  b:file_name . '"' . ' 2>&1 | tee post_submit.log')
-    endif
-
     if b:to_run != 'gbil.log'
         call OpenOrSwitch(b:output, 'vs')
     else
@@ -155,6 +152,7 @@ function! VRun()
     endif
 
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
 endfunction
 
 function! SearchAgain()

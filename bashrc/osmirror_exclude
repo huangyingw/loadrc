@@ -9,13 +9,11 @@
 */prunefix.conf
 boot/grub/grub.cfg
 etc/crypttab
-etc/exports
 etc/fstab
 etc/hostname
 etc/hosts
 etc/libvirt
 etc/mdadm/mdadm.conf
-home/huangyingw/snap/
 media/dev
 media/nvme
 media/volgrp

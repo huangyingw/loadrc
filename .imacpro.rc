@@ -1,9 +1,10 @@
 #!/bin/zsh
 #alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
 
-if ! (sudo systemsetup -getcomputersleep | grep -q Never)
+if [ $(uname) = "Darwin" ]
 then
-    sudo systemsetup -setcomputersleep Never
+    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
+        then \
+        sudo systemsetup -setcomputersleep Never; \
+        fi
 fi
-
-~/loadrc/setup_bidirectional_clipboard.sh

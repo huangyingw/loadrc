@@ -8,15 +8,12 @@ then
     exit 0
 fi
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-git -C $(brew --repository homebrew/core) checkout master
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
-brew upgrade
 brew install \
     Caskroom/cask/xquartz \
     astyle \
     blueutil \
-    clipper \
     coreutils \
     dos2unix \
     ffmpeg \
@@ -43,13 +40,15 @@ brew install \
     wakeonlan \
     watch \
     wget \
-    xclip
+    xpdf
 
 brew cask install \
     kdiff3 \
     libreoffice \
     lynxlet \
     wkhtmltopdf
+
+brew install --cask osxfuse
 
 sudo easy_install pip
 sudo pip install --upgrade pip

@@ -121,9 +121,17 @@
     path = vimrc/.vim/bundle/ncm2-neoinclude
     url = https://github.com/ncm2/ncm2-neoinclude
     branch = master
+[submodule "vimrc/.vim/bundle/tmux-complete.vim"]
+    path = vimrc/.vim/bundle/tmux-complete.vim
+    url = https://github.com/wellle/tmux-complete.vim.git
+    branch = master
 [submodule "vimrc/.vim/bundle/ncm2-cssomni"]
     path = vimrc/.vim/bundle/ncm2-cssomni
     url = https://github.com/ncm2/ncm2-cssomni
+    branch = master
+[submodule "vimrc/.vim/bundle/ncm2-tern"]
+    path = vimrc/.vim/bundle/ncm2-tern
+    url = https://github.com/ncm2/ncm2-tern
     branch = master
 [submodule "vimrc/.vim/bundle/ncm2-jedi"]
     path = vimrc/.vim/bundle/ncm2-jedi
@@ -231,6 +239,3 @@
 [submodule "vimrc/.vim/bundle/bclose.vim"]
     path = vimrc/.vim/bundle/bclose.vim
     url = git@github.com:rbgrouleff/bclose.vim.git
-[submodule "vimrc/.vim/bundle/vim-pbcopy"]
-	path = vimrc/.vim/bundle/vim-pbcopy
-	url = git@github.com:huangyingw/vim-pbcopy.git 

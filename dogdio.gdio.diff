@@ -1,10 +1,20 @@
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
-index c32f5329..4f8edfc6 100755
+index 7163d50e..aafec0d4 100755
 --- ./gitrc/dogdio.sh
 +++ ./gitrc/dogdio.sh
-@@ -12,5 +12,4 @@ remote="$(git config gsync.remote)"
+@@ -10,7 +10,6 @@ output=$(echo "$output" | sed 's/\//_/g')
+ local_master="$(git config gsync.branch)"
+ remote="$(git config gsync.remote)"
  
- ~/loadrc/gitrc/gdi.sh "$remote/$remote_branch" 2>&1 | tee "$output"  
+-git branch "$local_master" "$remote/$local_master"
+-~/loadrc/gitrc/gdi.sh "$local_master" 2>&1 | tee "$output"  
++~/loadrc/gitrc/gdi.sh "$remote/$local_master" 2>&1 | tee "$output"  
  sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
--dos2unix "$output" 
  exit 0
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 92bd094c..31fc10da 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 92bd094c40cda34e5a97452b8aecce1345254ef6
++Subproject commit 31fc10dafefbd6458dfe871a53158559ac15aae2

@@ -148,7 +148,7 @@ function! OpenOrSwitch(buffername, openMode)
     elseif a:openMode ==? "goto"
         silent exec 'e ' . a:buffername
     else
-        silent exec 'topleft vs ' . a:buffername
+        silent exec 'vs ' . a:buffername
     endif
 endfunction
 
@@ -198,8 +198,6 @@ function! GetEscapedResult(keywordStr)
     let result = substitute(result, "|", "", "g")
     let result = substitute(result, "(", "", "g")
     let result = substitute(result, ")", "", "g")
-    let result = substitute(result, '\\c', '', 'g')
-    let result = substitute(result, '\\V', '', 'g')
     let result = substitute(result, '\"', '', 'g')
     let result = substitute(result, '\,', '', 'g')
     let result = substitute(result, '\\', '', 'g')
@@ -214,8 +212,6 @@ function! GetEscapedResult(keywordStr)
     let result = substitute(result, ":", "", "g")
     let result = substitute(result, "[", "_", "g")
     let result = substitute(result, "]", "_", "g")
-    let result = substitute(result, "+", "_", "g")
-    let result = substitute(result, "-", "_", "g")
     return result
 endfunc
 
@@ -249,7 +245,7 @@ function! Filter2Findresult()
     let b:result = GetEscapedResult(keyword)
 
     if expand('%:e') != "findresult"
-        let buffername = b:result . '.findresult'
+        let buffername = b:result . '.vaa.findresult'
         silent exec '!rm ' . buffername
 
         if bufexists(buffername)

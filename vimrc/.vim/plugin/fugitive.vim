@@ -23,11 +23,11 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbr :e
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbra :execute s:Gbra()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbrd :execute s:Gbrd(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbrm :execute s:Gbrm(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbrs :execute s:Gbrs()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean :execute s:Gclean()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gco :execute s:Gco(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcob :execute s:Gcob(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcof :execute s:Gcof(<f-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcom :execute s:Gcom(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcp :execute s:Gcp(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdev :execute s:Gdev()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi :execute s:Gdi(<f-args>)
@@ -52,7 +52,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :execute s:Gs()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject ApplyBranch :execute s:ApplyBranch(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gst :execute s:Gst()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsti :execute s:Gsti()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstl :execute s:Gstl()
@@ -258,6 +257,12 @@ function! s:Gbra() abort
     let worktree = Cd2Worktree()
     silent exec '!~/loadrc/gitrc/gbra.sh'
     call OpenOrSwitch('gbra.log', 'vs')
+endfunction
+
+function! s:Gbrs() abort
+    let worktree = Cd2Worktree()
+    silent exec '!~/loadrc/gitrc/gbrs.sh'
+    call OpenOrSwitch('gbrs.findresult', 'vs')
 endfunction
 
 function! s:Gs() abort
@@ -515,17 +520,6 @@ function! s:KdiffFile() abort
     call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/KdiffFile.py ' . '"' .  expand("%:p") . '"')
 endfunction
 
-function! s:ApplyBranch(args, ...) abort
-    let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/apply_branch.sh ' . '"' .  a:args . '"'
-    call s:Gs()
-endfunction
-
-function! s:Gcom(args, ...) abort
-    let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"'
-endfunction
-
 function! s:Gshow(args, ...) abort
     let worktree = Cd2Worktree()
     let output = a:args . '.diff'
@@ -677,7 +671,7 @@ function! s:Gfix() abort
 endfunction
 
 function! s:Reapply() abort
-    if (expand("%") !~ '.*.diff')
+    if (expand("%") !~ '.*gdio.diff')
         echom 'Please only run on *gdio.diff!!!'
         return 0
     endif
@@ -685,6 +679,7 @@ function! s:Reapply() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
     call s:Gs()
+    call s:Gdi()
 endfunction
 
 function! s:Split() abort

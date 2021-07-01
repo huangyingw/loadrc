@@ -8,6 +8,7 @@ apt-get install -y \
     astyle \
     automake \
     autotools-dev \
+    bcmwl-kernel-source \
     binutils \
     build-essential \
     cmake \
@@ -40,7 +41,6 @@ apt-get install -y \
     mplayer \
     net-tools \
     netcat \
-    nfs-kernel-server \
     npm \
     openvpn \
     perl \

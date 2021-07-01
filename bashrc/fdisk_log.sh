@@ -4,7 +4,7 @@ logFile=~/loadrc/fdisk.log
 df -TH > "$logFile"
 fdisk -l >> "$logFile"
 cat /etc/fstab >> "$logFile"
-cat ~/loadrc/linux_links/etc/crypttab >> "$logFile"
+cat ~/loadrc/linux/etc/crypttab >> "$logFile"
 DEVICE=`mdadm -D --scan|awk '{print $2}'`
 mdadm -D "$DEVICE" >> "$logFile"
 blkid >> "$logFile"

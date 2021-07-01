@@ -70,4 +70,3 @@ prunefix.rsync
 rsync.files
 ncscopefile.*
 gbra.log
-*.js_eslint_tmp_*.js

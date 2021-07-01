@@ -1,6 +1,5 @@
 #!/bin/zsh
 branch="$1"
-
 for remote in $(git remote)
 do
     if [ -n "$(git ls-remote --heads $remote $1)" ]

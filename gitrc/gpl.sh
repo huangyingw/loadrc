@@ -14,7 +14,8 @@ done
 
 for ss in $(git config --get-all pull.from)
 do
-    COMMAND="git merge $ss &"
+    pull_from=$(echo "$ss" | sed  -e "s/\// /g")
+    COMMAND="git pull $pull_from &"
     eval "$COMMAND"
 done
 
