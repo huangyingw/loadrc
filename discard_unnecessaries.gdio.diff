@@ -1,0 +1,97 @@
+diff --git a/gitrc/checkout_rejs.sh b/gitrc/checkout_rejs.sh
+index ddbfb613..5b7555ad 100755
+--- ./gitrc/checkout_rejs.sh
++++ ./gitrc/checkout_rejs.sh
+@@ -3,7 +3,13 @@
+ for ss in $(git status | grep \.rej$) ; \
+ do \
+     targetFile=$(echo "$ss" | sed 's/\.rej$//g')
++    if [ "$2" = "f" ]
++    then
++        git checkout "$1" "$targetFile" && \
++            rm "$ss"
++    else
+         git show "$1":"$targetFile" > "$ss"
++    fi
+ done
+ 
+ git show "$1":COMMIT_EDITMSG > COMMIT_EDITMSG
+diff --git a/gitrc/discard_unnecessaries.sh b/gitrc/discard_unnecessaries.sh
+index dbf809a0..0b350068 100755
+--- ./gitrc/discard_unnecessaries.sh
++++ ./gitrc/discard_unnecessaries.sh
+@@ -1,4 +1,5 @@
+ #!/bin/zsh
+-git checkout *.gdio.diff
++local_branch="$(~/loadrc/gitrc/get_current_branch.sh)" 
++git checkout "$local_branch.gdio.diff"
+ git checkout files.proj
+ git checkout rsync.files
+diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
+index 2b769ee7..6754ec3c 100755
+--- ./gitrc/gdi2.sh
++++ ./gitrc/gdi2.sh
+@@ -38,10 +39,11 @@ fi
+     git apply --index --reject --whitespace=fix "$GDITDIFF"
+ 
+ retVal=$?
++
+ if [ $retVal -ne 0 ]
+ then
+-    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch"
+-else
++    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" "$1"
++elif [ $retVal -eq 0 ] || [ "$1" = "f" ]
+     git commit  --no-verify -am "$commit_message" && \
+         git pull ; \
+         git push ; \
+diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
+index 9cd20920..4f53bd55 100755
+--- ./gitrc/gpl.sh
++++ ./gitrc/gpl.sh
+@@ -2,7 +2,7 @@
+ 
+ ~/loadrc/gitrc/include_gitconfig.sh
+ git remote update &
+-git checkout *.gdio.diff
++~/loadrc/gitrc/discard_unnecessaries.sh
+ git pull &
+ currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
+ 
+diff --git a/vimrc/.vim/plugin/diff-options.vim b/vimrc/.vim/plugin/diff-options.vim
+new file mode 100644
+index 00000000..a154e243
+--- /dev/null
++++ ./vimrc/.vim/plugin/diff-options.vim
+@@ -0,0 +1,4 @@
++set diffopt+=iwhiteall
++set diffopt+=iblank
++set diffopt+=algorithm:patience
++set diffopt+=indent-heuristic
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index cac3f5f2..f53036fd 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -425,7 +425,7 @@ function! s:Gdi2(...) abort
+     let worktree = Cd2Worktree()
+     let output = 'gdi2.findresult'
+     let arg1 = (a:0 >= 1) ? a:1 : ''
+-    exec '!~/loadrc/gitrc/gdi2.sh 2>&1 | tee ' . '"' .  output . '"'
++    exec '!~/loadrc/gitrc/gdi2.sh ' . '"' .  arg1 . '"' . ' 2>&1 | tee ' . '"' .  output . '"'
+     call OpenOrSwitch(output, 'vs')
+ endfunction
+ 
+diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
+index 9ee20986..55b41320 100644
+--- ./vimrc/.vim/plugin/view.vim
++++ ./vimrc/.vim/plugin/view.vim
+@@ -37,9 +37,5 @@ else
+     set winwidth=999999
+ endif
+ 
+-set diffopt+=iwhiteall
+-set diffopt+=iblank
+-set diffopt+=algorithm:patience
+-set diffopt+=indent-heuristic
+ set wrap
+ "set iskeyword-=_
