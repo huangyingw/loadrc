@@ -42,8 +42,8 @@ retVal=$?
 
 if [ $retVal -ne 0 ]
 then
-    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" "$2"
-elif [ $retVal -eq 0 ] || [ "$2" = "f" ]
+    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" "$1"
+elif [ $retVal -eq 0 ] || [ "$1" = "f" ]
     git commit  --no-verify -am "$commit_message" && \
         git pull ; \
         git push ; \
