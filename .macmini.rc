@@ -1,0 +1,7 @@
+#!/bin/zsh
+#alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
+
+if ! (sudo systemsetup -getcomputersleep | grep -q Never)
+then
+    sudo systemsetup -setcomputersleep Never
+fi
