@@ -44,6 +44,19 @@ index 00000000..a154e243
 +set diffopt+=iblank
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index cac3f5f2..6f4624fd 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -425,7 +425,7 @@ function! s:Gdi2(...) abort
+     let worktree = Cd2Worktree()
+     let output = 'gdi2.findresult'
+     let arg1 = (a:0 >= 1) ? a:1 : ''
+-    exec '!~/loadrc/gitrc/gdi2.sh 2>&1 | tee ' . '"' .  output . '"'
++    exec '!~/loadrc/gitrc/gdi2.sh ' . '"' .  arg1 . '"' . '2>&1 | tee ' . '"' .  output . '"'
+     call OpenOrSwitch(output, 'vs')
+ endfunction
+ 
 diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
 index 9ee20986..55b41320 100644
 --- ./vimrc/.vim/plugin/view.vim
