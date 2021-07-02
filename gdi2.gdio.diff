@@ -34,6 +34,19 @@ index 2b769ee7..6754ec3c 100755
      git commit  --no-verify -am "$commit_message" && \
          git pull ; \
          git push ; \
+diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
+index 9cd20920..4f53bd55 100755
+--- ./gitrc/gpl.sh
++++ ./gitrc/gpl.sh
+@@ -2,7 +2,7 @@
+ 
+ ~/loadrc/gitrc/include_gitconfig.sh
+ git remote update &
+-git checkout *.gdio.diff
++~/loadrc/gitrc/discard_unnecessaries.sh
+ git pull &
+ currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
+ 
 diff --git a/vimrc/.vim/plugin/diff-options.vim b/vimrc/.vim/plugin/diff-options.vim
 new file mode 100644
 index 00000000..a154e243
@@ -45,7 +58,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index cac3f5f2..6f4624fd 100644
+index cac3f5f2..f53036fd 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -425,7 +425,7 @@ function! s:Gdi2(...) abort
@@ -53,7 +66,7 @@ index cac3f5f2..6f4624fd 100644
      let output = 'gdi2.findresult'
      let arg1 = (a:0 >= 1) ? a:1 : ''
 -    exec '!~/loadrc/gitrc/gdi2.sh 2>&1 | tee ' . '"' .  output . '"'
-+    exec '!~/loadrc/gitrc/gdi2.sh ' . '"' .  arg1 . '"' . '2>&1 | tee ' . '"' .  output . '"'
++    exec '!~/loadrc/gitrc/gdi2.sh ' . '"' .  arg1 . '"' . ' 2>&1 | tee ' . '"' .  output . '"'
      call OpenOrSwitch(output, 'vs')
  endfunction
  
