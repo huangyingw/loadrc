@@ -425,7 +425,7 @@ function! s:Gdi2(...) abort
     let worktree = Cd2Worktree()
     let output = 'gdi2.findresult'
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    exec '!~/loadrc/gitrc/gdi2.sh ' . '"' .  arg1 . '"' . '2>&1 | tee ' . '"' .  output . '"'
+    exec '!~/loadrc/gitrc/gdi2.sh ' . '"' .  arg1 . '"' . ' 2>&1 | tee ' . '"' .  output . '"'
     call OpenOrSwitch(output, 'vs')
 endfunction
 
