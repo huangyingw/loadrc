@@ -4,3 +4,4 @@ function! PopulatePasteBufferFromOSX()
 endfunction
 
 nnoremap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
+vmap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
