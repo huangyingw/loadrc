@@ -8,6 +8,7 @@ then
 fi
 
 commit_message=$(cat COMMIT_EDITMSG)
+
 if [ -z "$commit_message" ]
 then
     echo -e "${red}Must provide the commit message ... ${NC}"
