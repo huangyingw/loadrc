@@ -7,6 +7,8 @@ then
   exit 1
 fi
 
+git remote update
+
 BRANCH="$1"
 BRANCH=$(echo "$BRANCH" | sed 's/remotes\///g')
 BRANCH_DIFF="$BRANCH"
