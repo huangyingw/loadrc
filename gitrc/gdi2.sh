@@ -38,10 +38,14 @@ fi
     git apply --index --reject --whitespace=fix "$GDITDIFF"
 
 retVal=$?
+
 if [ $retVal -ne 0 ]
 then
-    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch"
-else
+    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" "$1"
+fi
+
+if [ $retVal -eq 0 ] || [ "$1" = "f" ]
+then
     git commit  --no-verify -am "$commit_message" && \
         git pull ; \
         git push ; \
