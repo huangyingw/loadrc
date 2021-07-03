@@ -1,16 +1,3 @@
-diff --git a/.macmini.rc b/.macmini.rc
-deleted file mode 100644
-index 61ca121c..00000000
---- ./.macmini.rc
-+++ /dev/null
-@@ -1,7 +0,0 @@
--#!/bin/zsh
--#alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
--
--if ! (sudo systemsetup -getcomputersleep | grep -q Never)
--then
--    sudo systemsetup -setcomputersleep Never
--fi
 diff --git a/gitrc/checkout_rejs.sh b/gitrc/checkout_rejs.sh
 index ddbfb613..5b7555ad 100755
 --- ./gitrc/checkout_rejs.sh
@@ -29,11 +16,25 @@ index ddbfb613..5b7555ad 100755
  done
  
  git show "$1":COMMIT_EDITMSG > COMMIT_EDITMSG
+diff --git a/gitrc/discard_unnecessaries.sh b/gitrc/discard_unnecessaries.sh
+index dbf809a0..5e7bd4cf 100755
+--- ./gitrc/discard_unnecessaries.sh
++++ ./gitrc/discard_unnecessaries.sh
+@@ -1,4 +1,6 @@
+ #!/bin/zsh
+-git checkout *.gdio.diff
+-git checkout files.proj
+-git checkout rsync.files
++local_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
++git checkout \
++    "$local_branch.gdio.diff" \
++    files.proj \
++    rsync.files
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index 2b769ee7..6754ec3c 100755
+index 2b769ee7..d4909739 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
-@@ -38,10 +39,11 @@ fi
+@@ -38,10 +39,14 @@ fi
      git apply --index --reject --whitespace=fix "$GDITDIFF"
  
  retVal=$?
@@ -43,10 +44,33 @@ index 2b769ee7..6754ec3c 100755
 -    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch"
 -else
 +    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" "$1"
-+elif [ $retVal -eq 0 ] || [ "$1" = "f" ]
++fi
++
++if [ $retVal -eq 0 ] || [ "$1" = "f" ]
++then
      git commit  --no-verify -am "$commit_message" && \
          git pull ; \
          git push ; \
+diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
+index 9cd20920..4f53bd55 100755
+--- ./gitrc/gpl.sh
++++ ./gitrc/gpl.sh
+@@ -2,7 +2,7 @@
+ 
+ ~/loadrc/gitrc/include_gitconfig.sh
+ git remote update &
+-git checkout *.gdio.diff
++~/loadrc/gitrc/discard_unnecessaries.sh
+ git pull &
+ currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
+ 
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 17ceb981..f8075454 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 17ceb981ac27663a704beaf9a59eea259bab46e3
++Subproject commit f80754548336307bac5a83dd71bdb3a9ed933b40
 diff --git a/vimrc/.vim/plugin/diff-options.vim b/vimrc/.vim/plugin/diff-options.vim
 new file mode 100644
 index 00000000..a154e243
