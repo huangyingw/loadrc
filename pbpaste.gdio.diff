@@ -174,15 +174,13 @@ index cac3f5f2..f53036fd 100644
  
 diff --git a/vimrc/.vim/plugin/pbpaste.vim b/vimrc/.vim/plugin/pbpaste.vim
 new file mode 100644
-index 00000000..f21d88a8
+index 00000000..f967dbf3
 --- /dev/null
 +++ ./vimrc/.vim/plugin/pbpaste.vim
-@@ -0,0 +1,8 @@
+@@ -0,0 +1,6 @@
 +function! PopulatePasteBufferFromOSX()
-+  " let @+ = system('nc localhost 2225')
 +  let @+ = system('pbpaste-remote')
-+  echom @+
-+  echo "done"
++  normal! "+p
 +endfunction
 +
 +nnoremap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
