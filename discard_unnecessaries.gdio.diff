@@ -186,16 +186,17 @@ index cac3f5f2..f53036fd 100644
  
 diff --git a/vimrc/.vim/plugin/pbpaste.vim b/vimrc/.vim/plugin/pbpaste.vim
 new file mode 100644
-index 00000000..f967dbf3
+index 00000000..40f455b1
 --- /dev/null
 +++ ./vimrc/.vim/plugin/pbpaste.vim
-@@ -0,0 +1,6 @@
+@@ -0,0 +1,7 @@
 +function! PopulatePasteBufferFromOSX()
 +  let @+ = system('pbpaste-remote')
 +  normal! "+p
 +endfunction
 +
 +nnoremap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
++vmap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
 diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
 index 9ee20986..a7bd3f54 100644
 --- ./vimrc/.vim/plugin/view.vim
