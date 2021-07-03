@@ -47,6 +47,19 @@ index 2b769ee7..6754ec3c 100755
      git commit  --no-verify -am "$commit_message" && \
          git pull ; \
          git push ; \
+diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
+index 9cd20920..4f53bd55 100755
+--- ./gitrc/gpl.sh
++++ ./gitrc/gpl.sh
+@@ -2,7 +2,7 @@
+ 
+ ~/loadrc/gitrc/include_gitconfig.sh
+ git remote update &
+-git checkout *.gdio.diff
++~/loadrc/gitrc/discard_unnecessaries.sh
+ git pull &
+ currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
+ 
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
 index 17ceb981..c47b7798 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
