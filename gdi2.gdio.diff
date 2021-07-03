@@ -47,6 +47,13 @@ index 2b769ee7..6754ec3c 100755
      git commit  --no-verify -am "$commit_message" && \
          git pull ; \
          git push ; \
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 17ceb981..c47b7798 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 17ceb981ac27663a704beaf9a59eea259bab46e3
++Subproject commit c47b7798f50e7d0a6b4bd388e98b7347ae99dd08
 diff --git a/vimrc/.vim/plugin/diff-options.vim b/vimrc/.vim/plugin/diff-options.vim
 new file mode 100644
 index 00000000..a154e243
