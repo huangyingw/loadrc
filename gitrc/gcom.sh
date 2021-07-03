@@ -23,5 +23,3 @@ if [ -n "$clean" ]
 then
     git stash pop stash@{0}
 fi
-
-~/loadrc/gitrc/gdio.sh

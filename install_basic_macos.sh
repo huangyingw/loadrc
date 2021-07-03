@@ -13,10 +13,6 @@ git -C $(brew --repository homebrew/core) checkout master
 brew update
 brew upgrade
 brew install \
-    mosh \
-    tmux
-
-brew install \
     Caskroom/cask/xquartz \
     astyle \
     blueutil \
@@ -38,9 +34,11 @@ brew install \
     libtool \
     lynx \
     minikube \
+    mosh \
     openssl \
     rename \
     tig \
+    tmux \
     w3m \
     wakeonlan \
     watch \
