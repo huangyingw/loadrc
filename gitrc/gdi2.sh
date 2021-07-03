@@ -8,6 +8,7 @@ then
 fi
 
 commit_message=$(cat COMMIT_EDITMSG)
+
 if [ -z "$commit_message" ]
 then
     echo -e "${red}Must provide the commit message ... ${NC}"
@@ -38,10 +39,11 @@ fi
     git apply --index --reject --whitespace=fix "$GDITDIFF"
 
 retVal=$?
+
 if [ $retVal -ne 0 ]
 then
-    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch"
-else
+    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" "$1"
+elif [ $retVal -eq 0 ] || [ "$1" = "f" ]
     git commit  --no-verify -am "$commit_message" && \
         git pull ; \
         git push ; \
