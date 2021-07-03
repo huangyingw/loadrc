@@ -72,10 +72,10 @@ index 83a83235..556cdc79 100755
 -
 -~/loadrc/gitrc/gdio.sh
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index 2b769ee7..6754ec3c 100755
+index 2b769ee7..d4909739 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
-@@ -38,10 +39,11 @@ fi
+@@ -38,10 +39,14 @@ fi
      git apply --index --reject --whitespace=fix "$GDITDIFF"
  
  retVal=$?
@@ -85,7 +85,10 @@ index 2b769ee7..6754ec3c 100755
 -    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch"
 -else
 +    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" "$1"
-+elif [ $retVal -eq 0 ] || [ "$1" = "f" ]
++fi
++
++if [ $retVal -eq 0 ] || [ "$1" = "f" ]
++then
      git commit  --no-verify -am "$commit_message" && \
          git pull ; \
          git push ; \
