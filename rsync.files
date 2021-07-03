@@ -155,6 +155,7 @@
 ./.macosrc
 ./.mbp.rc
 ./.mindsrc
+./.mini.rc
 ./.movie.mirror.check
 ./.netrc
 ./.p4rc
@@ -661,6 +662,7 @@
 ./openrc.sh
 ./osxrc/restart_bluetooth.sh
 ./osxrc/restart_wifi.sh
+./pbpaste-remote
 ./pdfrc/all_2_txt.sh
 ./perlrc/replace.pl
 ./post_setup.sh
@@ -684,6 +686,7 @@
 ./set_macos_configuration.sh
 ./setup.sh
 ./setup_bidirectional_clipboard.sh
+./setup_pbpaste-remote.sh
 ./sqlrc/.login
 ./sqlrc/mysqlback.sh
 ./sqlrc/xsql.sh
@@ -2885,6 +2888,7 @@
 ./vimrc/.vim/plugin/keymap.vim
 ./vimrc/.vim/plugin/netrw.vim
 ./vimrc/.vim/plugin/nextval.vim
+./vimrc/.vim/plugin/pbpaste.vim
 ./vimrc/.vim/plugin/repeat.vim
 ./vimrc/.vim/plugin/restore_view.vim
 ./vimrc/.vim/plugin/spell.vim
@@ -2928,4 +2932,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-gdi2.gdio.diff
+discard_unnecessaries.gdio.diff
