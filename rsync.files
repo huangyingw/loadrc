@@ -2933,4 +2933,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-gdi2.gdio.diff
+dev.gdio.diff
