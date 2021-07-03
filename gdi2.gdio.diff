@@ -1,0 +1,13 @@
+diff --git a/gitrc/apply_branch.sh b/gitrc/apply_branch.sh
+index dd1a9659..b05c70a7 100755
+--- ./gitrc/apply_branch.sh
++++ ./gitrc/apply_branch.sh
+@@ -7,6 +7,8 @@ then
+   exit 1
+ fi
+ 
++git remote update
++
+ BRANCH="$1"
+ BRANCH=$(echo "$BRANCH" | sed 's/remotes\///g')
+ BRANCH_DIFF="$BRANCH"
