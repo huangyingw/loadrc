@@ -11,6 +11,26 @@ index 61ca121c..00000000
 -then
 -    sudo systemsetup -setcomputersleep Never
 -fi
+diff --git a/.mini.rc b/.mini.rc
+new file mode 100755
+index 00000000..3d146d68
+--- /dev/null
++++ ./.mini.rc
+@@ -0,0 +1,2 @@
++#!/bin/zsh
++~/loadrc/setup_pbpaste-remote.sh
+diff --git a/bashrc/mosh.sh b/bashrc/mosh.sh
+index bb6e35fe..5ad03da2 100755
+--- ./bashrc/mosh.sh
++++ ./bashrc/mosh.sh
+@@ -14,6 +14,7 @@ fi
+ while true
+ do
+     ssh -fnN -R 2224:localhost:2224 "$target" &
++    ssh -fnN -R 2225:localhost:2225 "$target" &
+     ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
+     mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
+ done
 diff --git a/gitrc/checkout_rejs.sh b/gitrc/checkout_rejs.sh
 index ddbfb613..5b7555ad 100755
 --- ./gitrc/checkout_rejs.sh
@@ -29,6 +49,28 @@ index ddbfb613..5b7555ad 100755
  done
  
  git show "$1":COMMIT_EDITMSG > COMMIT_EDITMSG
+diff --git a/gitrc/discard_unnecessaries.sh b/gitrc/discard_unnecessaries.sh
+index dbf809a0..4a553c76 100755
+--- ./gitrc/discard_unnecessaries.sh
++++ ./gitrc/discard_unnecessaries.sh
+@@ -1,4 +1,4 @@
+ #!/bin/zsh
+-git checkout *.gdio.diff
+-git checkout files.proj
+-git checkout rsync.files
++git checkout \
++    files.proj \
++    rsync.files
+diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
+index 83a83235..556cdc79 100755
+--- ./gitrc/gcom.sh
++++ ./gitrc/gcom.sh
+@@ -23,5 +23,3 @@ if [ -n "$clean" ]
+ then
+     git stash pop stash@{0}
+ fi
+-
+-~/loadrc/gitrc/gdio.sh
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
 index 2b769ee7..6754ec3c 100755
 --- ./gitrc/gdi2.sh
@@ -47,6 +89,71 @@ index 2b769ee7..6754ec3c 100755
      git commit  --no-verify -am "$commit_message" && \
          git pull ; \
          git push ; \
+diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
+index 9cd20920..4f53bd55 100755
+--- ./gitrc/gpl.sh
++++ ./gitrc/gpl.sh
+@@ -2,7 +2,7 @@
+ 
+ ~/loadrc/gitrc/include_gitconfig.sh
+ git remote update &
+-git checkout *.gdio.diff
++~/loadrc/gitrc/discard_unnecessaries.sh
+ git pull &
+ currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
+ 
+diff --git a/install_basic_macos.sh b/install_basic_macos.sh
+index 94af8469..a26c9986 100755
+--- ./install_basic_macos.sh
++++ ./install_basic_macos.sh
+@@ -12,10 +12,6 @@ fi
+ git -C $(brew --repository homebrew/core) checkout master
+ brew update
+ brew upgrade
+-brew install \
+-    mosh \
+-    tmux
+-
+ brew install \
+     Caskroom/cask/xquartz \
+     astyle \
+@@ -38,9 +34,11 @@ brew install \
+     libtool \
+     lynx \
+     minikube \
++    mosh \
+     openssl \
+     rename \
+     tig \
++    tmux \
+     w3m \
+     wakeonlan \
+     watch \
+diff --git a/pbpaste-remote b/pbpaste-remote
+new file mode 100755
+index 00000000..80d3b345
+--- /dev/null
++++ ./pbpaste-remote
+@@ -0,0 +1,2 @@
++#!/bin/sh
++nc localhost 2225
+diff --git a/setup_pbpaste-remote.sh b/setup_pbpaste-remote.sh
+new file mode 100755
+index 00000000..5351f6c9
+--- /dev/null
++++ ./setup_pbpaste-remote.sh
+@@ -0,0 +1,11 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0") && \
++    SCRIPTPATH=$(dirname "$SCRIPT") && \
++    cd "$SCRIPTPATH" || cd ~/loadrc/
++
++if [ -f ~/bin/pbpaste-remote ]
++then
++    exit 0
++fi
++
++cp -fv ./pbpaste-remote ~/bin/pbpaste-remote
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
 index 17ceb981..c2611960 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
@@ -77,11 +184,24 @@ index cac3f5f2..f53036fd 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
+diff --git a/vimrc/.vim/plugin/pbpaste.vim b/vimrc/.vim/plugin/pbpaste.vim
+new file mode 100644
+index 00000000..40f455b1
+--- /dev/null
++++ ./vimrc/.vim/plugin/pbpaste.vim
+@@ -0,0 +1,7 @@
++function! PopulatePasteBufferFromOSX()
++  let @+ = system('pbpaste-remote')
++  normal! "+p
++endfunction
++
++nnoremap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
++vmap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
 diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
-index 9ee20986..55b41320 100644
+index 9ee20986..a7bd3f54 100644
 --- ./vimrc/.vim/plugin/view.vim
 +++ ./vimrc/.vim/plugin/view.vim
-@@ -37,9 +37,5 @@ else
+@@ -37,9 +37,4 @@ else
      set winwidth=999999
  endif
  
@@ -90,4 +210,4 @@ index 9ee20986..55b41320 100644
 -set diffopt+=algorithm:patience
 -set diffopt+=indent-heuristic
  set wrap
- "set iskeyword-=_
+-"set iskeyword-=_
