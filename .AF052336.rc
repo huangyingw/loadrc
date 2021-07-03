@@ -1,2 +1,3 @@
 eval `ssh-agent -s`
 ssh-add /Users/yhuang/.ssh/github_id_rsa
+~/loadrc/setup_pbpaste-remote.sh
