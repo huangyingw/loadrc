@@ -65,12 +65,12 @@ index 9cd20920..4f53bd55 100755
  currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
  
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 17ceb981..f8075454 160000
+index 17ceb981..c47b7798 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 17ceb981ac27663a704beaf9a59eea259bab46e3
-+Subproject commit f80754548336307bac5a83dd71bdb3a9ed933b40
++Subproject commit c47b7798f50e7d0a6b4bd388e98b7347ae99dd08
 diff --git a/vimrc/.vim/plugin/diff-options.vim b/vimrc/.vim/plugin/diff-options.vim
 new file mode 100644
 index 00000000..a154e243
