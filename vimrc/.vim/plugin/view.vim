@@ -38,3 +38,4 @@ else
 endif
 
 set wrap
+"set iskeyword-=_
