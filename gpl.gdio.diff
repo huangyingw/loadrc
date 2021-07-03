@@ -1,412 +1,93 @@
-diff --git a/.androidrc b/.androidrc
+diff --git a/.macmini.rc b/.macmini.rc
 deleted file mode 100644
-index 263407f8..00000000
---- ./.androidrc
+index 61ca121c..00000000
+--- ./.macmini.rc
 +++ /dev/null
-@@ -1,2 +0,0 @@
--export PATH="$HOME/Android/sdk/tools:$PATH"
--export PATH="$HOME/Android/sdk/platform-tools:$PATH"
-diff --git a/.bashrc b/.bashrc
-index a327085e..812c6e14 100644
---- ./.bashrc
-+++ ./.bashrc
-@@ -148,6 +148,3 @@ fi
- #if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
- #    . /etc/bash_completion
- #fi
+@@ -1,7 +0,0 @@
+-#!/bin/zsh
+-#alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
 -
--export PATH=/usr/local/bin:$PATH
--. $HOME/loadrc/.loadrc
-diff --git a/.envrc b/.envrc
-index 47a567de..cbf2b86e 100755
---- ./.envrc
-+++ ./.envrc
-@@ -24,6 +24,3 @@ export LSCOLORS=Exfxcxdxbxegedabagacad
- export NC='\033[0;0m' # No Color
- export green='\033[0;32m'
- export red='\033[0;31m'
--export PATH="$HOME/anaconda3/bin:$PATH"
--export PATH=/usr/local/bin:$PATH
--export PATH=~/bin:$PATH
-diff --git a/.gitrc b/.gitrc
-index 8e753cb1..033bffac 100755
---- ./.gitrc
-+++ ./.gitrc
-@@ -21,6 +21,7 @@ alias gclean='git clean -fd'
- alias gco='$HOME/loadrc/gitrc/gco.sh'
- alias gcob='$HOME/loadrc/gitrc/gcob.sh'
- alias gcof='$HOME/loadrc/gitrc/gcof.sh'
-+alias gcom='$HOME/loadrc/gitrc/gcom.sh'
- alias gctb='$HOME/loadrc/gitrc/gctb.sh'
- alias gdev='$HOME/loadrc/gitrc/gdev.sh'
- alias gdi2='$HOME/loadrc/gitrc/gdi2.sh'
-diff --git a/.gorc b/.gorc
-index a51724b9..82a595f3 100644
---- ./.gorc
-+++ ./.gorc
-@@ -1,2 +1 @@
- export GOPATH=$HOME/go
--export PATH=$PATH:/usr/local/go/bin
-diff --git a/.loadrc b/.loadrc
-index 17e45232..14ec11eb 100755
---- ./.loadrc
-+++ ./.loadrc
-@@ -1,5 +1,5 @@
- #!/bin/zsh
--. $HOME/loadrc/.androidrc
-+. $HOME/loadrc/.pathrc
- . $HOME/loadrc/.dockerrc
- . $HOME/loadrc/.envrc
- . $HOME/loadrc/.gitrc
-diff --git a/.macosrc b/.macosrc
-index de211c97..1298e4e5 100644
---- ./.macosrc
-+++ ./.macosrc
-@@ -1,6 +1,4 @@
- if [ $(uname) = "Darwin" ]
- then
-     alias restartBluetooth='$HOME/loadrc/osxrc/restart_bluetooth.sh'
--    export PATH="/Applications/kdiff3.app/Contents/MacOS:$PATH"
--    export PATH="/Applications/NoMachine.app/Contents/MacOS:$PATH"
- fi
-diff --git a/.pathrc b/.pathrc
-new file mode 100644
-index 00000000..a4b516a8
---- /dev/null
-+++ ./.pathrc
-@@ -0,0 +1,13 @@
-+export PATH=$HOME/Android/sdk/platform-tools:$PATH
-+export PATH=$HOME/Android/sdk/tools:$PATH
-+export PATH=$HOME/anaconda3/bin:$PATH
-+export PATH=$HOME/bin:$PATH
-+export PATH=/Applications/NoMachine.app/Contents/MacOS:$PATH
-+export PATH=/Applications/kdiff3.app/Contents/MacOS:$PATH
-+export PATH=/opt/homebrew/bin:$PATH
-+export PATH=/opt/local/bin:$PATH
-+export PATH=/opt/local/sbin:$PATH
-+export PATH=/users/alpine/.node_modules_global/bin:$PATH
-+export PATH=/usr/local/bin:$PATH
-+export PATH=/usr/local/cuda/bin:$PATH
-+export PATH=/usr/local/go/bin:$PATH
-diff --git a/.profile b/.profile
-index 10952fbd..c0ecb98c 100755
---- ./.profile
-+++ ./.profile
-@@ -16,20 +16,5 @@ if [ -n "$BASH_VERSION" ]; then
-     fi
- fi
- 
--# set PATH so it includes user's private bin if it exists
--if [ -d "$HOME/bin" ] ; then
--    PATH="$HOME/bin:$PATH"
--fi
- export LANG="en_US.utf8"
- export LANGUAGE="en_US:en"
--
--##
--# Your previous /Users/huangyingw/.profile file was backed up as /Users/huangyingw/.profile.macports-saved_2019-06-03_at_21:24:24
--##
--
--# MacPorts Installer addition on 2019-06-03_at_21:24:24: adding an appropriate PATH variable for use with MacPorts.
--#export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
--# Finished adapting your PATH environment variable for use with MacPorts.
--
--export PATH=/usr/local/bin:$PATH
--. $HOME/loadrc/.loadrc
-diff --git a/.scl-1yihuang-m.corporate.localrc b/.scl-1yihuang-m.corporate.localrc
-deleted file mode 100755
-index 13bad558..00000000
---- ./.scl-1yihuang-m.corporate.localrc
-+++ /dev/null
-@@ -1,60 +0,0 @@
--########
--# TOMCAT
--export TOMCAT_HOME=/Users/yihuang/bin/apache-tomcat-7.0.55
--export PATH=${TOMCAT_HOME}/bin:${PATH}
--
--######
--# JAVA
--export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/
--export PATH=${JAVA_HOME}/bin:${PATH}
--export PATH=/opt/subversion/bin:${PATH}
--
--#######
--# MAVEN
--export M2_HOME=/Users/yihuang/bin/apache-maven-3.2.3/
--export PATH=${M2_HOME}/bin:${PATH}
--
--export MANPATH=${JAVA_HOME}/man:${MANPATH}
--
--#######
--# MYSQL
--export MYSQL_HOME=/usr/local/mysql
--export PATH=${MYSQL_HOME}/bin:${PATH}
--
--
--########
--# GRADLE
--export GRADLE_HOME=/Users/yihuang/bin/gradle-1.12
--export PATH=${GRADLE_HOME}/bin:${PATH}
--
--
--###########
--# LIQUIBASE
--export LIQUIBASE_HOME=/Users/yihuang/bin/liquibase-3.2.0
--export PATH=${LIQUIBASE_HOME}:${PATH}
--
--
--#######
--#MONGOD
--
--export SVN_EDITOR=/usr/bin/vim
--
--######
--# PATH
--export MY_HOME=/Users/yihuang
--export PATH=${MY_HOME}/bin:${PATH}
--export PATH=$HOME/local/bin:$PATH
--
--#################
--# COLOR DIRECTORY
--export CLICOLOR=1
--export LSCOLORS=ExFxCxDxBxegedabagacad
--
--#######
--# ALIAS
--#alias ls='ls -lAF --color=tty'
--#alias ls='ls -la'
--alias updatedb='sudo /usr/libexec/locate.updatedb'
--alias runmongo='mongod --fork --logpath /var/log/mongodb.log'
--
--export PATH=/usr/local/Cellar/ctags/5.8/bin:${PATH}
-diff --git a/.zshrc b/.zshrc
-index c7c0b3ff..7a159ed1 100644
---- ./.zshrc
-+++ ./.zshrc
-@@ -1,5 +1,4 @@
- # If you come from bash you might have to change your $PATH.
--# export PATH=$HOME/bin:/usr/local/bin:$PATH
- 
- # Path to your oh-my-zsh installation.
- export ZSH=$HOME/.oh-my-zsh
-@@ -98,6 +97,5 @@ source $ZSH/oh-my-zsh.sh
- # alias zshconfig="mate ~/.zshrc"
- # alias ohmyzsh="mate ~/.oh-my-zsh"
- 
--export PATH=/usr/local/bin:$PATH
- . $HOME/loadrc/.loadrc
- setopt HIST_IGNORE_ALL_DUPS
-diff --git a/bashrc/mosh.sh b/bashrc/mosh.sh
-index d62867f4..bb6e35fe 100755
---- ./bashrc/mosh.sh
-+++ ./bashrc/mosh.sh
-@@ -2,18 +2,18 @@
- target=$(echo "$1" | sed  -e "s/\/$//g")
- mkdir "$target"
- 
--if ( ssh "$target" "uname" | grep -q Darwin )
-+MOSHSERVER=$(ssh "$target" ". ~/loadrc/.pathrc ; which mosh-server")
-+tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s mosh"
-+
-+if ( nc -vz "$target" 22 2>&1 | grep -q succeeded ) && [ -z "$MOSHSERVER" ] || [ -z "$tmuxAction" ]
- then
--    MOSHSERVER="/usr/local/bin/mosh-server"
--    tmuxAction='/usr/local/bin/tmux new-session -A -s mosh'
--else
--    MOSHSERVER="/usr/bin/mosh-server"
--    tmuxAction='/usr/bin/tmux new-session -A -s mosh'
-+    echo -e "${red}please check connection, mosh and tmux setting of $target first... ${NC}"
-+    exit 1
- fi
- 
- while true
- do
-     ssh -fnN -R 2224:localhost:2224 "$target" &
--    ssh "$target" "~/loadrc/macosrc/configure_mosh.sh" &
-+    ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
-     mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
- done
-diff --git a/bashrc/ssh.sh b/bashrc/ssh.sh
-index 7042dce9..0e670bd9 100755
---- ./bashrc/ssh.sh
-+++ ./bashrc/ssh.sh
-@@ -1,11 +1,4 @@
- #! /bin/zsh
- target=$(echo "$1" | sed  -e "s/\/$//g")
--
--if ( ssh "$target" "uname" | grep -q Darwin )
+-if ! (sudo systemsetup -getcomputersleep | grep -q Never)
 -then
--    tmuxAction='/usr/local/bin/tmux new-session -A -s ssh'
--else
--    tmuxAction='/usr/bin/tmux new-session -A -s ssh'
+-    sudo systemsetup -setcomputersleep Never
 -fi
--
-+tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
- ssh -Y "$target" -t -- ${tmuxAction}
-diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
-new file mode 100755
-index 00000000..81d1a1ea
---- /dev/null
-+++ ./gitrc/gcom.sh
-@@ -0,0 +1,13 @@
-+#!/bin/zsh
-+
-+if [ -z "$1" ]
-+then
-+    echo -e "${red}Please provide target_branch... ${NC}"
-+    exit 1
-+fi
-+
-+~/loadrc/gitrc/discard_unnecessaries.sh
-+CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
-+git checkout -b "$1" || \
-+    git checkout "$1" &&
-+    git merge "$CURRENT_BRANCH"
-diff --git a/gitrc/gme2.sh b/gitrc/gme2.sh
-index 20dd9aa3..0f505a1e 100755
---- ./gitrc/gme2.sh
-+++ ./gitrc/gme2.sh
-@@ -1,5 +1,4 @@
- #!/bin/zsh
--CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
- 
- if [ -z "$1" ]
- then
-@@ -7,4 +6,5 @@ then
-     exit 1
- fi
- 
-+CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
- git fetch . "$CURRENT_BRANCH":"$1"
-diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
-index fa900e00..d6ce0729 100755
---- ./gitrc/gpl.sh
-+++ ./gitrc/gpl.sh
-@@ -15,7 +15,7 @@ done
- for ss in $(git config --get-all pull.from)
- do
-     pull_from=$(echo "$ss" | sed  -e "s/\// /g")
--    COMMAND="git pull $pull_from &"
-+    COMMAND="git merge $pull_from &"
-     eval "$COMMAND"
+diff --git a/gitrc/checkout_rejs.sh b/gitrc/checkout_rejs.sh
+index ddbfb613..5b7555ad 100755
+--- ./gitrc/checkout_rejs.sh
++++ ./gitrc/checkout_rejs.sh
+@@ -3,7 +3,13 @@
+ for ss in $(git status | grep \.rej$) ; \
+ do \
+     targetFile=$(echo "$ss" | sed 's/\.rej$//g')
++    if [ "$2" = "f" ]
++    then
++        git checkout "$1" "$targetFile" && \
++            rm "$ss"
++    else
+         git show "$1":"$targetFile" > "$ss"
++    fi
  done
  
-diff --git a/gpurc/.gpurc b/gpurc/.gpurc
-index 8be8d98c..6026d401 100644
---- ./gpurc/.gpurc
-+++ ./gpurc/.gpurc
-@@ -1,4 +1,2 @@
- export CUDA_HOME=/usr/local/cuda
- export LD_LIBRARY_PATH=/usr/local/cuda-9.1/lib64:$LD_LIBRARY_PATH
--export PATH="/usr/local/bin:/opt/local/sbin:$PATH"
--export PATH=/usr/local/cuda/bin:$PATH
-diff --git a/host_links/imac/Users/huangyingw/.bashrc b/host_links/imac/Users/huangyingw/.bashrc
-deleted file mode 100644
-index 82bc6cb7..00000000
---- ./host_links/imac/Users/huangyingw/.bashrc
-+++ /dev/null
-@@ -1,2 +0,0 @@
--export PATH=/usr/local/bin:$PATH
--. $HOME/loadrc/.loadrc
-diff --git a/host_links/imacpro/Users/huangyingw/.bashrc b/host_links/imacpro/Users/huangyingw/.bashrc
-deleted file mode 100644
-index 82bc6cb7..00000000
---- ./host_links/imacpro/Users/huangyingw/.bashrc
-+++ /dev/null
-@@ -1,2 +0,0 @@
--export PATH=/usr/local/bin:$PATH
--. $HOME/loadrc/.loadrc
-diff --git a/host_links/mbp/Users/huangyingw/.bashrc b/host_links/mbp/Users/huangyingw/.bashrc
-deleted file mode 100644
-index 82bc6cb7..00000000
---- ./host_links/mbp/Users/huangyingw/.bashrc
-+++ /dev/null
-@@ -1,2 +0,0 @@
--export PATH=/usr/local/bin:$PATH
--. $HOME/loadrc/.loadrc
-diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index fb1e2f26..a26c9986 100755
---- ./install_basic_macos.sh
-+++ ./install_basic_macos.sh
-@@ -8,10 +8,10 @@ then
-     exit 0
- fi
+ git show "$1":COMMIT_EDITMSG > COMMIT_EDITMSG
+diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
+index 2b769ee7..6754ec3c 100755
+--- ./gitrc/gdi2.sh
++++ ./gitrc/gdi2.sh
+@@ -38,10 +39,11 @@ fi
+     git apply --index --reject --whitespace=fix "$GDITDIFF"
  
--/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-+git -C $(brew --repository homebrew/core) checkout master
- brew update
- brew upgrade
--brew install --cask osxfuse
- brew install \
-     Caskroom/cask/xquartz \
-     astyle \
-diff --git a/macosrc/configure_mosh.sh b/macosrc/configure_mosh.sh
-index bb27cd34..a45fa3fe 100755
---- ./macosrc/configure_mosh.sh
-+++ ./macosrc/configure_mosh.sh
-@@ -1,5 +1,5 @@
- #!/bin/zsh
--BINPATH=$(/usr/local/bin/realpath $(which mosh-server))
-+BINPATH=$(realpath $(which mosh-server))
- 
- # Turn the firewall off
- sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
+ retVal=$?
++
+ if [ $retVal -ne 0 ]
+ then
+-    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch"
+-else
++    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" "$1"
++elif [ $retVal -eq 0 ] || [ "$1" = "f" ]
+     git commit  --no-verify -am "$commit_message" && \
+         git pull ; \
+         git push ; \
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 17ceb981..c47b7798 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 17ceb981ac27663a704beaf9a59eea259bab46e3
++Subproject commit c47b7798f50e7d0a6b4bd388e98b7347ae99dd08
+diff --git a/vimrc/.vim/plugin/diff-options.vim b/vimrc/.vim/plugin/diff-options.vim
+new file mode 100644
+index 00000000..a154e243
+--- /dev/null
++++ ./vimrc/.vim/plugin/diff-options.vim
+@@ -0,0 +1,4 @@
++set diffopt+=iwhiteall
++set diffopt+=iblank
++set diffopt+=algorithm:patience
++set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..ec36ed53 100644
+index cac3f5f2..f53036fd 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -27,6 +27,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gco :execute s:Gco(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcob :execute s:Gcob(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcof :execute s:Gcof(<f-args>)
-+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcom :execute s:Gcom(<q-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcp :execute s:Gcp(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdev :execute s:Gdev()
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi :execute s:Gdi(<f-args>)
-@@ -520,6 +521,11 @@ function! s:ApplyBranch(args, ...) abort
-     call s:Gs()
+@@ -425,7 +425,7 @@ function! s:Gdi2(...) abort
+     let worktree = Cd2Worktree()
+     let output = 'gdi2.findresult'
+     let arg1 = (a:0 >= 1) ? a:1 : ''
+-    exec '!~/loadrc/gitrc/gdi2.sh 2>&1 | tee ' . '"' .  output . '"'
++    exec '!~/loadrc/gitrc/gdi2.sh ' . '"' .  arg1 . '"' . ' 2>&1 | tee ' . '"' .  output . '"'
+     call OpenOrSwitch(output, 'vs')
  endfunction
  
-+function! s:Gcom(args, ...) abort
-+    let worktree = Cd2Worktree()
-+    exec '!~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"'
-+endfunction
-+
- function! s:Gshow(args, ...) abort
-     let worktree = Cd2Worktree()
-     let output = a:args . '.diff'
-diff --git a/vimrc/.vimrc b/vimrc/.vimrc
-index c938eb8a..130e1969 100644
---- ./vimrc/.vimrc
-+++ ./vimrc/.vimrc
-@@ -28,7 +28,6 @@ inoremap { {}<LEFT>
- "set nopaste
- xnoremap p pgvy
- au! BufRead,BufNewFile *.hta  setfiletype html
--" let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
- " Mapping ESC in insert mode and command mode to double j
- imap jj <C-[>
- " cmap jj  <C-[]]
-diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
-index e14de500..14ffa5a3 100755
---- ./vishrc/vrun.sh
-+++ ./vishrc/vrun.sh
-@@ -58,7 +58,7 @@ case $extension in
-     sh)
-         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
-         then
--            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; $rpath/$rfile"
-+            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.pathrc ; $rpath/$rfile"
-         else
-             "$file"
-         fi
-@@ -69,7 +69,7 @@ case $extension in
-     py)
-         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
-         then
--            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.loadrc ; python3 $rfile"
-+            ssh -nY "$host" "cd $rpath ; . ~/loadrc/.pathrc ; python3 $rfile"
-         else
-             SCRIPT=$(realpath "$file")
-             SCRIPTPATH=$(dirname "$SCRIPT")
+diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
+index 9ee20986..55b41320 100644
+--- ./vimrc/.vim/plugin/view.vim
++++ ./vimrc/.vim/plugin/view.vim
+@@ -37,9 +37,5 @@ else
+     set winwidth=999999
+ endif
+ 
+-set diffopt+=iwhiteall
+-set diffopt+=iblank
+-set diffopt+=algorithm:patience
+-set diffopt+=indent-heuristic
+ set wrap
+ "set iskeyword-=_
