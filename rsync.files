@@ -152,6 +152,7 @@
 ./.linb-sandbox.rc
 ./.lint-sandbox.rc
 ./.loadrc
+./.macmini.rc
 ./.macosrc
 ./.mbp.rc
 ./.mindsrc
