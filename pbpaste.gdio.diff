@@ -1,0 +1,119 @@
+diff --git a/.macmini.rc b/.macmini.rc
+deleted file mode 100644
+index 61ca121c..00000000
+--- ./.macmini.rc
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#!/bin/zsh
+-#alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
+-
+-if ! (sudo systemsetup -getcomputersleep | grep -q Never)
+-then
+-    sudo systemsetup -setcomputersleep Never
+-fi
+diff --git a/.mini.rc b/.mini.rc
+new file mode 100755
+index 00000000..3d146d68
+--- /dev/null
++++ ./.mini.rc
+@@ -0,0 +1,2 @@
++#!/bin/zsh
++~/loadrc/setup_pbpaste-remote.sh
+diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
+index 83a83235..556cdc79 100755
+--- ./gitrc/gcom.sh
++++ ./gitrc/gcom.sh
+@@ -23,5 +23,3 @@ if [ -n "$clean" ]
+ then
+     git stash pop stash@{0}
+ fi
+-
+-~/loadrc/gitrc/gdio.sh
+diff --git a/install_basic_macos.sh b/install_basic_macos.sh
+index 94af8469..a26c9986 100755
+--- ./install_basic_macos.sh
++++ ./install_basic_macos.sh
+@@ -12,10 +12,6 @@ fi
+ git -C $(brew --repository homebrew/core) checkout master
+ brew update
+ brew upgrade
+-brew install \
+-    mosh \
+-    tmux
+-
+ brew install \
+     Caskroom/cask/xquartz \
+     astyle \
+@@ -38,9 +34,11 @@ brew install \
+     libtool \
+     lynx \
+     minikube \
++    mosh \
+     openssl \
+     rename \
+     tig \
++    tmux \
+     w3m \
+     wakeonlan \
+     watch \
+diff --git a/install_time_machine.sh b/install_time_machine.sh
+index 97ce30fe..ee6a1792 100755
+--- ./install_time_machine.sh
++++ ./install_time_machine.sh
+@@ -3,7 +3,7 @@ SCRIPT=$(realpath "$0")
+ SCRIPTPATH=$(dirname "$SCRIPT")
+ cd "$SCRIPTPATH"
+ 
+-TARGET_DIR="/media/volgrp/"
++TARGET_DIR="/media/zarchive/time_machine/"
+ TARGET_DIR_FOR_SED=$(echo "$TARGET_DIR" | sed 's/\//\\\//g')
+ apt install -y netatalk avahi-daemon
+ cp -fv ./etc/netatalk/afp.conf /etc/netatalk/afp.conf
+diff --git a/pbpaste-remote b/pbpaste-remote
+new file mode 100755
+index 00000000..80d3b345
+--- /dev/null
++++ ./pbpaste-remote
+@@ -0,0 +1,2 @@
++#!/bin/sh
++nc localhost 2225
+diff --git a/setup_pbpaste-remote.sh b/setup_pbpaste-remote.sh
+new file mode 100755
+index 00000000..5351f6c9
+--- /dev/null
++++ ./setup_pbpaste-remote.sh
+@@ -0,0 +1,11 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0") && \
++    SCRIPTPATH=$(dirname "$SCRIPT") && \
++    cd "$SCRIPTPATH" || cd ~/loadrc/
++
++if [ -f ~/bin/pbpaste-remote ]
++then
++    exit 0
++fi
++
++cp -fv ./pbpaste-remote ~/bin/pbpaste-remote
+diff --git a/vimrc/.vim/plugin/pbpaste.vim b/vimrc/.vim/plugin/pbpaste.vim
+new file mode 100644
+index 00000000..f21d88a8
+--- /dev/null
++++ ./vimrc/.vim/plugin/pbpaste.vim
+@@ -0,0 +1,8 @@
++function! PopulatePasteBufferFromOSX()
++  " let @+ = system('nc localhost 2225')
++  let @+ = system('pbpaste-remote')
++  echom @+
++  echo "done"
++endfunction
++
++nnoremap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
+diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
+index 9ee20986..56af3e53 100644
+--- ./vimrc/.vim/plugin/view.vim
++++ ./vimrc/.vim/plugin/view.vim
+@@ -42,4 +42,3 @@ set diffopt+=iblank
+ set diffopt+=algorithm:patience
+ set diffopt+=indent-heuristic
+ set wrap
+-"set iskeyword-=_
