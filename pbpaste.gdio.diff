@@ -1,15 +1,20 @@
 diff --git a/vimrc/.vim/plugin/pbpaste.vim b/vimrc/.vim/plugin/pbpaste.vim
-index 40f455b1..c6303a7a 100644
+index 40f455b1..80fa0585 100644
 --- ./vimrc/.vim/plugin/pbpaste.vim
 +++ ./vimrc/.vim/plugin/pbpaste.vim
-@@ -1,7 +1,8 @@
- function! PopulatePasteBufferFromOSX()
-   let @+ = system('pbpaste-remote')
--  normal! "+p
-+  normal! gvp
-+  
+@@ -1,7 +1,12 @@
+-function! PopulatePasteBufferFromOSX()
++function! PopulatePasteBufferFromOSX(mode)
+     let @+ = system('pbpaste-remote')
++    if a:mode== 'v'
++        normal! gvp
++    else
+         normal! "+p
++    endif
++
  endfunction
-   
- nnoremap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
+ 
+-nnoremap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
 -vmap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
-+vnoremap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
++nnoremap <silent> cp :call PopulatePasteBufferFromOSX('n')<cr>
++vnoremap <silent> cp :call PopulatePasteBufferFromOSX('v')<cr>
