@@ -1,6 +1,6 @@
-function! PopulatePasteBufferFromOSX(cmd)
+function! PopulatePasteBufferFromOSX(mode)
     let @+ = system('pbpaste-remote')
-    if a:cmd == 'v'
+    if a:mode== 'v'
         normal! gvp
     else
         normal! "+p
