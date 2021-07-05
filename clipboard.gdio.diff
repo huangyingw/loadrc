@@ -15,6 +15,20 @@ index 5963196d..c603a656 100644
 +line    8:
 +E15: Invalid expression: match(&clipboard, '\v(unnamed|unnamedplus)') >= 0 && get(s:selections[a:reg].data, 0, []) == clipboard_data
 +regis
+diff --git a/install_nodejs.sh b/install_nodejs.sh
+index c3036dee..34cb2b71 100755
+--- ./install_nodejs.sh
++++ ./install_nodejs.sh
+@@ -5,3 +5,9 @@ cd "$SCRIPTPATH"
+ 
+ . ~/.zshrc
+ nvm install node
++OTHER_NODE="/usr/local/bin/node"
++ 
++if [ -f "$OTHER_NODE" ]
++then
++    mv -v "$OTHER_NODE" "$OTHER_NODE".bak
++fi
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
 index 5fd4a230..e7a9c2f4 100644
 --- ./vimrc/.vim/plugin/keymap.vim
