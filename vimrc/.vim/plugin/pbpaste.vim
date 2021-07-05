@@ -1,5 +1,10 @@
 function! PopulatePasteBufferFromOSX(mode)
-    let @+ = system('pbpaste-remote')
+    if &clipboard == 'unnamed'
+        let @* = system('pbpaste-remote')
+    else
+        let @@ = system('pbpaste-remote')
+    endif
+
     if a:mode== 'v'
         normal! gvp
     else
