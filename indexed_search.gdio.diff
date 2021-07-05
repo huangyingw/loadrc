@@ -53,6 +53,13 @@ index f55fb435..4879da5a 100644
 +
 +nnoremap <F3> :set hlsearch!<CR>
 +
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 90de61d3..3285118f 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 90de61d38a2186dd9649d493a121aefdf41de321
++Subproject commit 3285118fca0a92bb44e212550dc0f4ae9c59f1f5-dirty
 diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
 new file mode 100644
 index 00000000..fb7420ef
