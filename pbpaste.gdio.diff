@@ -55,23 +55,23 @@ index 5fd4a230..e7a9c2f4 100644
  endfunction
  
 diff --git a/vimrc/.vim/plugin/pbpaste.vim b/vimrc/.vim/plugin/pbpaste.vim
-index 40f455b1..0b731e2e 100644
+index 40f455b1..df39432d 100644
 --- ./vimrc/.vim/plugin/pbpaste.vim
 +++ ./vimrc/.vim/plugin/pbpaste.vim
 @@ -1,7 +1,17 @@
 -function! PopulatePasteBufferFromOSX()
--  let @+ = system('pbpaste-remote')
 +function! PopulatePasteBufferFromOSX(mode)
 +    if &clipboard == 'unnamed'
 +        let @* = system('pbpaste-remote')
 +    else
-+        let @@ = system('pbpaste-remote')
+         let @+ = system('pbpaste-remote')
+-  normal! "+p
 +    endif
 +
 +    if a:mode== 'v'
 +        normal! gvp
 +    else
-         normal! "+p
++        normal! gp
 +    endif
 +
  endfunction
