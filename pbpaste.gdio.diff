@@ -1,0 +1,101 @@
+diff --git a/error b/error
+index 5963196d..c603a656 100644
+--- ./error
++++ ./error
+@@ -72,3 +72,12 @@ vimrc/.vim/bundle/ncm2-tmux/pythonx/ncm2_tmux.py:18:        proc = Popen(args=['
+ [ncm2_tmux_complete@yarp] subprocess.CalledProcessError: Command '['sh', '-c', "sh '/Users/huangyingw/loadrc/vimrc/.vim/bundle/tmux-complete.vim/sh/tmuxcomplete' -p '^.' -s
+ [ncm2_tern@yarp] Job is dead. cmd=['/usr/local/opt/python@3.9/bin/python...ders/zn/6zwn3dz13v3fdjtrsh9g_dv9ymvzkm/T/nvimUC0moc/0', 13, 'ncm2_tern']
+ [ncm2_jedi@yarp] Job is dead. cmd=['/root/anaconda3/bin/python3', '-u', '/root/.vim/bundle/nvim-yarp/pythonx/yarp.py', '/tmp/nvimEcygXB/0', 6, 'ncm2_jedi']
++
++Error detected while processing function provider#clipboard#Call[6]..6:
++line    8:
++E691: Can only compare List with List
++Press ENTER or type command to continue
++Error detected while processing function provider#clipboard#Call[6]..6:
++line    8:
++E15: Invalid expression: match(&clipboard, '\v(unnamed|unnamedplus)') >= 0 && get(s:selections[a:reg].data, 0, []) == clipboard_data
++regis
+diff --git a/install_nodejs.sh b/install_nodejs.sh
+index c3036dee..34cb2b71 100755
+--- ./install_nodejs.sh
++++ ./install_nodejs.sh
+@@ -5,3 +5,9 @@ cd "$SCRIPTPATH"
+ 
+ . ~/.zshrc
+ nvm install node
++OTHER_NODE="/usr/local/bin/node"
++ 
++if [ -f "$OTHER_NODE" ]
++then
++    mv -v "$OTHER_NODE" "$OTHER_NODE".bak
++fi
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 90de61d3..fa135eed 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 90de61d38a2186dd9649d493a121aefdf41de321
++Subproject commit fa135eedb1bda52582c711f484ea78f8604e4c98-dirty
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index 5fd4a230..e7a9c2f4 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -77,7 +77,12 @@ function! VFilter()
+ endfunction
+ 
+ function! ShowRemember()
+-    let @+=expand('%:p')
++    if &clipboard == 'unnamed'
++        let @* =expand('%:p')
++    else
++        let @@ =expand('%:p')
++    endif
++
+     echom expand('%:p')
+ endfunction
+ 
+diff --git a/vimrc/.vim/plugin/pbpaste.vim b/vimrc/.vim/plugin/pbpaste.vim
+index 40f455b1..0b731e2e 100644
+--- ./vimrc/.vim/plugin/pbpaste.vim
++++ ./vimrc/.vim/plugin/pbpaste.vim
+@@ -1,7 +1,17 @@
+-function! PopulatePasteBufferFromOSX()
+-  let @+ = system('pbpaste-remote')
++function! PopulatePasteBufferFromOSX(mode)
++    if &clipboard == 'unnamed'
++        let @* = system('pbpaste-remote')
++    else
++        let @@ = system('pbpaste-remote')
++    endif
++
++    if a:mode== 'v'
++        normal! gvp
++    else
+         normal! "+p
++    endif
++
+ endfunction
+ 
+-nnoremap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
+-vmap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
++nnoremap <silent> cp :call PopulatePasteBufferFromOSX('n')<cr>
++vnoremap <silent> cp :call PopulatePasteBufferFromOSX('v')<cr>
+diff --git a/vimrc/.vimrc b/vimrc/.vimrc
+index 130e1969..b99571ab 100644
+--- ./vimrc/.vimrc
++++ ./vimrc/.vimrc
+@@ -195,12 +195,8 @@ au BufWritePre * call AddToGit()
+ let g:pymode_rope = 0
+ "To have a space (ASCII 32) considered as a valid character for a file name
+ ":set isfname+=32
+-let os = substitute(system('uname'), "\n", "", "")
+-if os == "Linux"
+-    set clipboard=unnamedplus
+-else
+-    set clipboard=unnamed
+-endif
++
++
+ let g:phpfmt_autosave = 1
+ let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
+ 
