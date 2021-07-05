@@ -12,6 +12,13 @@ index c3036dee..34cb2b71 100755
 +then
 +    mv -v "$OTHER_NODE" "$OTHER_NODE".bak
 +fi
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index c2611960..78b11613 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit c26119605885fcc878023b2faa8dcdb2cde89761
++Subproject commit 78b1161306e0ce4a090a33b68c0a219526ebac5e-dirty
 diff --git a/vimrc/.vim/plugin/pbpaste.vim b/vimrc/.vim/plugin/pbpaste.vim
 index 40f455b1..80fa0585 100644
 --- ./vimrc/.vim/plugin/pbpaste.vim
