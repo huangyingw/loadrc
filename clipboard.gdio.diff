@@ -29,13 +29,6 @@ index c3036dee..34cb2b71 100755
 +then
 +    mv -v "$OTHER_NODE" "$OTHER_NODE".bak
 +fi
-diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 90de61d3..78b11613 160000
---- ./vimrc/.vim/bundle/vim-fugitive
-+++ ./vimrc/.vim/bundle/vim-fugitive
-@@ -1 +1 @@
--Subproject commit 90de61d38a2186dd9649d493a121aefdf41de321
-+Subproject commit 78b1161306e0ce4a090a33b68c0a219526ebac5e-dirty
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
 index 5fd4a230..e7a9c2f4 100644
 --- ./vimrc/.vim/plugin/keymap.vim
