@@ -1,3 +1,10 @@
+diff --git a/.macos.rc b/.macos.rc
+new file mode 100644
+index 00000000..9e7032fd
+--- /dev/null
++++ ./.macos.rc
+@@ -0,0 +1 @@
++~/loadrc/setup_pbpaste-remote.sh
 diff --git a/error b/error
 index 5963196d..c603a656 100644
 --- ./error
