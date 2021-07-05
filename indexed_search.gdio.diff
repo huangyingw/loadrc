@@ -29,6 +29,37 @@ index c3036dee..34cb2b71 100755
 +then
 +    mv -v "$OTHER_NODE" "$OTHER_NODE".bak
 +fi
+diff --git a/readme b/readme
+index f55fb435..4879da5a 100644
+--- ./readme
++++ ./readme
+@@ -7,3 +7,19 @@ nnoremap <Leader>gv :Gvdiff<CR>:windo set wrap<CR>
+ My default settting is set wrap, so the idea was to recover the setting after using Gsdiff and Gvdiff
+ 
+ ./vimrc/.vim/bundle/nvim-yarp/autoload/yarp/core.vim:104:        call self.error('try_notify ' . a:method . ' failed, job is dead')
++
++
++To turn off highlighting until the next search:
++
++:noh
++
++Or turn off highlighting completely:
++
++set nohlsearch
++
++Or, to toggle it:
++
++set hlsearch!
++
++nnoremap <F3> :set hlsearch!<CR>
++
+diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
+new file mode 100644
+index 00000000..fb7420ef
+--- /dev/null
++++ ./vimrc/.vim/plugin/clipboard.vim
+@@ -0,0 +1 @@
++set clipboard+=unnamedplus
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
 index 5fd4a230..e7a9c2f4 100644
 --- ./vimrc/.vim/plugin/keymap.vim
@@ -48,18 +79,17 @@ index 5fd4a230..e7a9c2f4 100644
  endfunction
  
 diff --git a/vimrc/.vim/plugin/pbpaste.vim b/vimrc/.vim/plugin/pbpaste.vim
-index 40f455b1..d0dbd370 100644
+index 40f455b1..df39432d 100644
 --- ./vimrc/.vim/plugin/pbpaste.vim
 +++ ./vimrc/.vim/plugin/pbpaste.vim
 @@ -1,7 +1,17 @@
 -function! PopulatePasteBufferFromOSX()
--  let @+ = system('pbpaste-remote')
--  normal! "+p
 +function! PopulatePasteBufferFromOSX(mode)
 +    if &clipboard == 'unnamed'
 +        let @* = system('pbpaste-remote')
 +    else
-+        let @@ = system('pbpaste-remote')
+         let @+ = system('pbpaste-remote')
+-  normal! "+p
 +    endif
 +
 +    if a:mode== 'v'
@@ -75,10 +105,10 @@ index 40f455b1..d0dbd370 100644
 +nnoremap <silent> cp :call PopulatePasteBufferFromOSX('n')<cr>
 +vnoremap <silent> cp :call PopulatePasteBufferFromOSX('v')<cr>
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
-index 130e1969..b99571ab 100644
+index 130e1969..6cb746a0 100644
 --- ./vimrc/.vimrc
 +++ ./vimrc/.vimrc
-@@ -195,12 +195,8 @@ au BufWritePre * call AddToGit()
+@@ -195,12 +195,7 @@ au BufWritePre * call AddToGit()
  let g:pymode_rope = 0
  "To have a space (ASCII 32) considered as a valid character for a file name
  ":set isfname+=32
@@ -88,7 +118,6 @@ index 130e1969..b99571ab 100644
 -else
 -    set clipboard=unnamed
 -endif
-+
 +
  let g:phpfmt_autosave = 1
  let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
