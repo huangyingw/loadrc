@@ -60,10 +60,10 @@ index 40f455b1..0b731e2e 100644
 +nnoremap <silent> cp :call PopulatePasteBufferFromOSX('n')<cr>
 +vnoremap <silent> cp :call PopulatePasteBufferFromOSX('v')<cr>
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
-index 130e1969..e30405b0 100644
+index 130e1969..b99571ab 100644
 --- ./vimrc/.vimrc
 +++ ./vimrc/.vimrc
-@@ -195,12 +195,14 @@ au BufWritePre * call AddToGit()
+@@ -195,12 +195,8 @@ au BufWritePre * call AddToGit()
  let g:pymode_rope = 0
  "To have a space (ASCII 32) considered as a valid character for a file name
  ":set isfname+=32
@@ -74,12 +74,6 @@ index 130e1969..e30405b0 100644
 -    set clipboard=unnamed
 -endif
 +
-+"let os = substitute(system('uname'), "\n", "", "")
-+"if os == "Linux"
-+"    set clipboard=unnamedplus
-+"else
-+"    set clipboard=unnamed
-+"endif
 +
  let g:phpfmt_autosave = 1
  let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
