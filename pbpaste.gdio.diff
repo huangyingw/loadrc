@@ -30,12 +30,12 @@ index c3036dee..34cb2b71 100755
 +    mv -v "$OTHER_NODE" "$OTHER_NODE".bak
 +fi
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 90de61d3..fa135eed 160000
+index 90de61d3..3285118f 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 90de61d38a2186dd9649d493a121aefdf41de321
-+Subproject commit fa135eedb1bda52582c711f484ea78f8604e4c98-dirty
++Subproject commit 3285118fca0a92bb44e212550dc0f4ae9c59f1f5
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
 index 5fd4a230..e7a9c2f4 100644
 --- ./vimrc/.vim/plugin/keymap.vim
@@ -80,22 +80,3 @@ index 40f455b1..0b731e2e 100644
 -vmap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
 +nnoremap <silent> cp :call PopulatePasteBufferFromOSX('n')<cr>
 +vnoremap <silent> cp :call PopulatePasteBufferFromOSX('v')<cr>
-diff --git a/vimrc/.vimrc b/vimrc/.vimrc
-index 130e1969..b99571ab 100644
---- ./vimrc/.vimrc
-+++ ./vimrc/.vimrc
-@@ -195,12 +195,8 @@ au BufWritePre * call AddToGit()
- let g:pymode_rope = 0
- "To have a space (ASCII 32) considered as a valid character for a file name
- ":set isfname+=32
--let os = substitute(system('uname'), "\n", "", "")
--if os == "Linux"
--    set clipboard=unnamedplus
--else
--    set clipboard=unnamed
--endif
-+
-+
- let g:phpfmt_autosave = 1
- let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
- 
