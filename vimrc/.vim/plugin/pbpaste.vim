@@ -8,7 +8,7 @@ function! PopulatePasteBufferFromOSX(mode)
     if a:mode== 'v'
         normal! gvp
     else
-        normal! "+p
+        normal! gp
     endif
 
 endfunction
