@@ -196,7 +196,6 @@ let g:pymode_rope = 0
 "To have a space (ASCII 32) considered as a valid character for a file name
 ":set isfname+=32
 
-
 let g:phpfmt_autosave = 1
 let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
 
