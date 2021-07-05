@@ -2701,6 +2701,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/echo.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/env.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold/bib.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold/cmd_addplot.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold/cmd_multi.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold/cmd_single.vim
@@ -2881,6 +2882,7 @@
 ./vimrc/.vim/plugin/auto_deploy.vim
 ./vimrc/.vim/plugin/buffergator.vim
 ./vimrc/.vim/plugin/bundle.vim
+./vimrc/.vim/plugin/clipboard.vim
 ./vimrc/.vim/plugin/common.vim
 ./vimrc/.vim/plugin/copypath.vim
 ./vimrc/.vim/plugin/dictionary.vim
@@ -2933,4 +2935,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-dev.gdio.diff
+clipboard.gdio.diff
