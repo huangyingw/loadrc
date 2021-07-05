@@ -2701,6 +2701,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/echo.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/env.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold/bib.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold/cmd_addplot.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold/cmd_multi.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/fold/cmd_single.vim
@@ -2933,4 +2934,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-dev.gdio.diff
+pbpaste.gdio.diff
