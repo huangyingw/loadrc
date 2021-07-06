@@ -455,6 +455,7 @@ endif
 vnoremap <silent>f :call VimSearch()<cr>
 vnoremap <silent>s :call GitSearch()<cr>
 vnoremap <silent>t :call SearchAgain()<cr>
+nnoremap mc :set hlsearch!<cr>
 nnoremap mg :call VFilter()<cr>
 nnoremap me :call ExtractHighLight()<cr>
 nnoremap mf :call ExFilter()<cr>
