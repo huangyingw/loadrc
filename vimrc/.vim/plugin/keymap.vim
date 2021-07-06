@@ -77,12 +77,7 @@ function! VFilter()
 endfunction
 
 function! ShowRemember()
-    if &clipboard == 'unnamed'
-        let @* =expand('%:p')
-    else
-        let @@ =expand('%:p')
-    endif
-
+    let @+=expand('%:p')
     echom expand('%:p')
 endfunction
 
