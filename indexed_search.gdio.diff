@@ -29,6 +29,30 @@ index c3036dee..09b82d56 100755
 +then
 +    mv -v "$OTHER_NODE" "$OTHER_NODE".bak
 +fi
+diff --git a/readme b/readme
+index f55fb435..4879da5a 100644
+--- ./readme
++++ ./readme
+@@ -7,3 +7,19 @@ nnoremap <Leader>gv :Gvdiff<CR>:windo set wrap<CR>
+ My default settting is set wrap, so the idea was to recover the setting after using Gsdiff and Gvdiff
+ 
+ ./vimrc/.vim/bundle/nvim-yarp/autoload/yarp/core.vim:104:        call self.error('try_notify ' . a:method . ' failed, job is dead')
++
++
++To turn off highlighting until the next search:
++
++:noh
++
++Or turn off highlighting completely:
++
++set nohlsearch
++
++Or, to toggle it:
++
++set hlsearch!
++
++nnoremap <F3> :set hlsearch!<CR>
++
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
 index 90de61d3..3285118f 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
