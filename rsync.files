@@ -155,6 +155,7 @@
 ./.lint-sandbox.rc
 ./.loadrc
 ./.macmini.rc
+./.macos.rc
 ./.macosrc
 ./.mbp.rc
 ./.mindsrc
