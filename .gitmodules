@@ -234,3 +234,6 @@
 [submodule "vimrc/.vim/bundle/vim-pbcopy"]
 	path = vimrc/.vim/bundle/vim-pbcopy
 	url = git@github.com:huangyingw/vim-pbcopy.git 
+[submodule "neovim"]
+	path = neovim
+	url = git@github.com:huangyingw/neovim.git
