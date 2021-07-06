@@ -9,10 +9,20 @@ index 7a86e108..97844484 100644
 +[submodule "neovim"]
 +	path = neovim
 +	url = git@github.com:huangyingw/neovim.git
+diff --git a/install_nvim_pre.sh b/install_nvim_pre.sh
+index 2bc75c67..ab07848c 100755
+--- ./install_nvim_pre.sh
++++ ./install_nvim_pre.sh
+@@ -26,3 +26,5 @@ else
+     sudo pip3 install pynvim jedi 
+     #brew install --with-toolchain --with-clang llvm
+ fi
++
++./neovim/install.sh
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..48bb62bc
+index 00000000..601b41fe
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 48bb62bcdf6fa44b918b14e5e414d6b9eef3d550
++Subproject commit 601b41fee4665bedb75a6a34393dc6ab0b1350c5
