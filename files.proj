@@ -2935,4 +2935,4 @@
 "./zerotierrc/install.sh"
 "./zerotierrc/restart.sh"
 "./zerotierrc/zerotierrc.conf"
-"clipboard.gdio.diff"
+"indexed_search.gdio.diff"
