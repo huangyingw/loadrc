@@ -21,8 +21,8 @@ index 2bc75c67..ab07848c 100755
 +./neovim/install.sh
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..601b41fe
+index 00000000..ba2df6ca
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 601b41fee4665bedb75a6a34393dc6ab0b1350c5
++Subproject commit ba2df6cabd159a6fa09942dd5587b0f249898699
