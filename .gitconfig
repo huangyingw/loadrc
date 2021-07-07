@@ -54,8 +54,10 @@
     ignore = ./bashrc/cscope_old.sh
     ignore = ./bashrc/update_proj_old.sh
     ignore = .ssh
+    ignore = error
     ignore = jdupes
     ignore = oh-my-zsh
+    ignore = readme
     ignore = rsync.files
     ignore = vimrc/.vim/bundle/split-term.vim
     ignore = vimrc/.vim/bundle/vimtex

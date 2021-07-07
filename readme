@@ -7,3 +7,18 @@ nnoremap <Leader>gv :Gvdiff<CR>:windo set wrap<CR>
 My default settting is set wrap, so the idea was to recover the setting after using Gsdiff and Gvdiff
 
 ./vimrc/.vim/bundle/nvim-yarp/autoload/yarp/core.vim:104:        call self.error('try_notify ' . a:method . ' failed, job is dead')
+
+Error detected while processing function provider#clipboard#Call[6]..6:
+line    8:
+E691: Can only compare List with List
+Error detected while processing function provider#clipboard#Call[6]..6:
+line    8:
+E15: Invalid expression: match(&clipboard, '\v(unnamed|unnamedplus)') >= 0 && get(s:selections[a:reg].data, 0, []) ==# clipboard_data
+clipboard: provider returned invalid data
+
+./neovim/src/nvim/eval.c:10617:        EMSG(_("E691: Can only compare List with List"));
+Linux clipboard unnamedplus
+
+./neovim/runtime/autoload/provider/clipboard.vim:161:  if match(&clipboard, '\v(unnamed|unnamedplus)') >= 0 && get(s:selections[a:reg].data, 0, []) ==# clipboard_data
+/usr/local/share/nvim/runtime/autoload/provider/clipboard.vim
+./neovim/src/nvim/ops.c:6105:    EMSG("clipboard: provider returned invalid data");
