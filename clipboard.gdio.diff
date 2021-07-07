@@ -17,3 +17,73 @@ index 83e2c748..71ea722d 100755
          echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
          sort -u "$TARGET" -o "$TARGET" && \
          sed -i.bak 's/ /\\ /g' "$TARGET" && \
+diff --git a/error b/error
+index c603a656..46717a88 100644
+--- ./error
++++ ./error
+@@ -76,8 +77,7 @@ vimrc/.vim/bundle/ncm2-tmux/pythonx/ncm2_tmux.py:18:        proc = Popen(args=['
+ Error detected while processing function provider#clipboard#Call[6]..6:
+ line    8:
+ E691: Can only compare List with List
+-Press ENTER or type command to continue
+ Error detected while processing function provider#clipboard#Call[6]..6:
+ line    8:
+-E15: Invalid expression: match(&clipboard, '\v(unnamed|unnamedplus)') >= 0 && get(s:selections[a:reg].data, 0, []) == clipboard_data
+-regis
++E15: Invalid expression: match(&clipboard, '\v(unnamed|unnamedplus)') >= 0 && get(s:selections[a:reg].data, 0, []) ==# clipboard_data
++clipboard: provider returned invalid data
+diff --git a/readme b/readme
+index f55fb435..fb3a226a 100644
+--- ./readme
++++ ./readme
+@@ -7,3 +7,18 @@ nnoremap <Leader>gv :Gvdiff<CR>:windo set wrap<CR>
+ My default settting is set wrap, so the idea was to recover the setting after using Gsdiff and Gvdiff
+ 
+ ./vimrc/.vim/bundle/nvim-yarp/autoload/yarp/core.vim:104:        call self.error('try_notify ' . a:method . ' failed, job is dead')
++
++Error detected while processing function provider#clipboard#Call[6]..6:
++line    8:
++E691: Can only compare List with List
++Error detected while processing function provider#clipboard#Call[6]..6:
++line    8:
++E15: Invalid expression: match(&clipboard, '\v(unnamed|unnamedplus)') >= 0 && get(s:selections[a:reg].data, 0, []) ==# clipboard_data
++clipboard: provider returned invalid data
++
++./neovim/src/nvim/eval.c:10617:        EMSG(_("E691: Can only compare List with List"));
++Linux clipboard unnamedplus
++
++./neovim/runtime/autoload/provider/clipboard.vim:161:  if match(&clipboard, '\v(unnamed|unnamedplus)') >= 0 && get(s:selections[a:reg].data, 0, []) ==# clipboard_data
++/usr/local/share/nvim/runtime/autoload/provider/clipboard.vim
++./neovim/src/nvim/ops.c:6105:    EMSG("clipboard: provider returned invalid data");
+diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
+new file mode 100644
+index 00000000..372ba702
+--- /dev/null
++++ ./vimrc/.vim/plugin/clipboard.vim
+@@ -0,0 +1,7 @@
++let os = substitute(system('uname'), "\n", "", "")
++
++if os == "Linux"
++    set clipboard=unnamedplus
++else
++set clipboard=unnamed
++endif
+diff --git a/vimrc/.vimrc b/vimrc/.vimrc
+index 0ffc578b..6cb746a0 100644
+--- ./vimrc/.vimrc
++++ ./vimrc/.vimrc
+@@ -196,14 +196,6 @@ let g:pymode_rope = 0
+ "To have a space (ASCII 32) considered as a valid character for a file name
+ ":set isfname+=32
+ 
+-let os = substitute(system('uname'), "\n", "", "")
+-
+-if os == "Linux"
+-    set clipboard=unnamedplus
+-else
+-    set clipboard=unnamed
+-endif
+-
+ let g:phpfmt_autosave = 1
+ let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
+ 
