@@ -19,7 +19,7 @@ index 83e2c748..71ea722d 100755
          sed -i.bak 's/ /\\ /g' "$TARGET" && \
 diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
 new file mode 100644
-index 00000000..372ba702
+index 00000000..6ccf639b
 --- /dev/null
 +++ ./vimrc/.vim/plugin/clipboard.vim
 @@ -0,0 +1,7 @@
@@ -28,7 +28,7 @@ index 00000000..372ba702
 +if os == "Linux"
 +    set clipboard=unnamedplus
 +else
-+set clipboard=unnamed
++    set clipboard=unnamed
 +endif
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
 index 0ffc578b..6cb746a0 100644
