@@ -17,6 +17,13 @@ index 83e2c748..71ea722d 100755
          echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
          sort -u "$TARGET" -o "$TARGET" && \
          sed -i.bak 's/ /\\ /g' "$TARGET" && \
+diff --git a/neovim b/neovim
+index ba2df6ca..0d954611 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit ba2df6cabd159a6fa09942dd5587b0f249898699
++Subproject commit 0d95461192f49df7f010a0178560fe0a445243d9
 diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
 new file mode 100644
 index 00000000..6ccf639b
