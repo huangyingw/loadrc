@@ -112,13 +112,12 @@ endfunction
 
 function! s:Gkdo() abort
     let worktree = Cd2Worktree()
-    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
-    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
+    let target = substitute(system("git config gsync.target"), '\n', '', '')
 
     if expand('%:t') != 'index'
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '" "' .  expand('%:p') . '"')
+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '" "' .  expand('%:p') . '"')
     else
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '"')
+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '"')
     endif
 endfunction
 
