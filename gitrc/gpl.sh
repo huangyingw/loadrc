@@ -18,10 +18,9 @@ do
     eval "$COMMAND"
 done
 
-remote=$(git config gsync.remote)
-remote_branch=$(git config gsync.branch)
+target=$(git config gsync.target)
 
-if [ -n "$remote" ]
+if [ -n "$target" ]
 then
-    git merge "$remote"/"$remote_branch"
+    git merge "$target"
 fi
