@@ -18,9 +18,9 @@ fi
 
 targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
 
-if [ -z $(git config gsync.remote) ]
+if [ -z $(git config gsync.target) ]
 then
-    echo -e "${red}gsync.remote is not configured ... ${NC}"
+    echo -e "${red}gsync.target is not configured ... ${NC}"
 fi
 
 host=$(git config deploy.host)
