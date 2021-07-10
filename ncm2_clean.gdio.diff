@@ -1,3 +1,18 @@
+diff --git a/.gitmodules b/.gitmodules
+index 97844484..f74cb003 100644
+--- ./.gitmodules
++++ ./.gitmodules
+@@ -133,10 +133,6 @@
+     path = vimrc/.vim/bundle/ncm2-racer
+     url = https://github.com/ncm2/ncm2-racer
+     branch = master
+-[submodule "vimrc/.vim/bundle/ncm2-pyclang"]
+-    path = vimrc/.vim/bundle/ncm2-pyclang
+-    url = https://github.com/ncm2/ncm2-pyclang
+-    branch = master
+ [submodule "vimrc/.vim/bundle/vimtex"]
+     path = vimrc/.vim/bundle/vimtex
+     url = https://github.com/lervag/vimtex
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
 index 83e2c748..71ea722d 100755
 --- ./bashrc/generate_files_proj.sh
@@ -17,6 +32,13 @@ index 83e2c748..71ea722d 100755
          echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
          sort -u "$TARGET" -o "$TARGET" && \
          sed -i.bak 's/ /\\ /g' "$TARGET" && \
+diff --git a/neovim b/neovim
+index ba2df6ca..369df5c1 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit ba2df6cabd159a6fa09942dd5587b0f249898699
++Subproject commit 369df5c1e57bab976cf9626ec73d633682d2f83e
 diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
 new file mode 100644
 index 00000000..6ccf639b
