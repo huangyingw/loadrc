@@ -96,6 +96,27 @@ index d4909739..2e325ba5 100755
  fi
  
  host=$(git config deploy.host)
+diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
+index 700d6af6..6c65a66c 100755
+--- ./gitrc/gdit.sh
++++ ./gitrc/gdit.sh
+@@ -3,14 +3,13 @@ output="$1"
+ current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
+ target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
+ remote="$(git config gsync.remote)"
+-remote_branch="$(git config gsync.branch)"
++target="$(git config gsync.target)"
+ 
+ ~/loadrc/gitrc/discard_unnecessaries.sh
+ git checkout -b "$target_branch" "$remote/$target_branch"
+-git checkout -b "$target_branch" "$remote/$remote_branch"
+ git checkout -f "$target_branch"
+ git branch -u "$remote/$target_branch"
+-git merge -X theirs "$remote/$remote_branch" && \
++git merge -X theirs "$target" && \
+     git pull && \
+     git push ; \
+     git checkout "$current_branch" && \
 diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
 index 4f53bd55..9aab14ed 100755
 --- ./gitrc/gpl.sh
