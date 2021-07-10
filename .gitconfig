@@ -48,8 +48,7 @@
     remote = origin
     merge = refs/heads/findresult
 [gsync]
-    remote = origin
-    branch = dev
+    target = origin/dev
 [gdif]
     ignore = ./bashrc/cscope_old.sh
     ignore = ./bashrc/update_proj_old.sh
