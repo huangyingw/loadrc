@@ -1,0 +1,37 @@
+diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
+index 83e2c748..71ea722d 100755
+--- ./bashrc/generate_files_proj.sh
++++ ./bashrc/generate_files_proj.sh
+@@ -46,12 +46,12 @@ done < "$INCLUDE_FILE"
+ export LC_ALL=C
+ 
+ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
+-    comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
+-    cp -fv "$TARGET.tmp" "$TARGET" && \
+     if [ ${#include_params[@]} -gt 0 ] ; \
+     then \
+         find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
+         fi && \
++        comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
++        cp -fv "$TARGET.tmp" "$TARGET" && \
+         echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
+         sort -u "$TARGET" -o "$TARGET" && \
+         sed -i.bak 's/ /\\ /g' "$TARGET" && \
+diff --git a/gitrc/gbrd.sh b/gitrc/gbrd.sh
+index ff263b6d..305c2262 100755
+--- ./gitrc/gbrd.sh
++++ ./gitrc/gbrd.sh
+@@ -3,5 +3,5 @@ git branch -D "$1"
+ 
+ for ss in $(git remote)
+ do
+-    git push "$ss" --delete "$1"
++    git push "$ss" --delete "$1" || true
+ done
+diff --git a/neovim b/neovim
+index a572698e..17e63742 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit a572698e96d1a4a1a3c2654a150a0827a7157741
++Subproject commit 17e637429a231b69b1fd457493e2d4b086ee4f69
