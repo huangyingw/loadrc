@@ -80,6 +80,40 @@ index ff263b6d..305c2262 100755
 -    git push "$ss" --delete "$1"
 +    git push "$ss" --delete "$1" || true
  done
+diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
+index d4909739..2e325ba5 100755
+--- ./gitrc/gdi2.sh
++++ ./gitrc/gdi2.sh
+@@ -18,9 +18,9 @@ fi
+ 
+ targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
+ 
+-if [ -z $(git config gsync.remote) ]
++if [ -z $(git config gsync.target) ]
+ then
+-    echo -e "${red}gsync.remote is not configured ... ${NC}"
++    echo -e "${red}gsync.target is not configured ... ${NC}"
+ fi
+ 
+ host=$(git config deploy.host)
+diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
+index 4f53bd55..9aab14ed 100755
+--- ./gitrc/gpl.sh
++++ ./gitrc/gpl.sh
+@@ -18,10 +18,9 @@ do
+     eval "$COMMAND"
+ done
+ 
+-remote=$(git config gsync.remote)
+-remote_branch=$(git config gsync.branch)
++target=$(git config gsync.target)
+ 
+-if [ -n "$remote" ]
++if [ -n "$target" ]
+ then
+-    git merge "$remote"/"$remote_branch"
++    git merge "$target"
+ fi
 diff --git a/neovim b/neovim
 index a572698e..369df5c1 160000
 --- ./neovim
