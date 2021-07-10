@@ -474,18 +474,17 @@ endfunction
 
 function! s:Gdif(...) abort
     let worktree = Cd2Worktree()
-    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
-    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
-    let branch = (a:0 >= 1) ? a:1 : remote . '/' . branch
+    let target = substitute(system("git config gsync.target"), '\n', '', '')
+    let target = (a:0 >= 1) ? a:1 : target
     let reverse = (a:0 >= 2) ? a:2 : ''
 
-    if branch ==# '-r'
-        let branch = remote . '/' . substitute(system("git config gsync.branch"), '\n', '', '')
+    if target ==# '-r'
+        let target = substitute(system("git config gsync.target"), '\n', '', '')
         let reverse = '-r'
     endif
 
-    let output = GetEscapedResult(branch) . '.diff'
-    exec '!~/loadrc/gitrc/gdif.sh ' . '-b "' .  branch . '" -f "' .  expand("%:p") . '" ' . reverse .  ' 2>&1 | tee ' . output
+    let output = GetEscapedResult(target) . '.diff'
+    exec '!~/loadrc/gitrc/gdif.sh ' . '-b "' .  target . '" -f "' .  expand("%:p") . '" ' . reverse .  ' 2>&1 | tee ' . output
     call OpenOrSwitch(output, 'vs')
 endfunction
 
