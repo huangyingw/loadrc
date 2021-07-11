@@ -32,6 +32,13 @@ index 83e2c748..71ea722d 100755
          echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
          sort -u "$TARGET" -o "$TARGET" && \
          sed -i.bak 's/ /\\ /g' "$TARGET" && \
+diff --git a/cscope b/cscope
+index 18a46b20..f500e2ef 160000
+--- ./cscope
++++ ./cscope
+@@ -1 +1 @@
+-Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
++Subproject commit f500e2ef259f05f2b91819af4bded69b6d2d3436
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
 index 4f8edfc6..12e3635f 100755
 --- ./gitrc/dogdio.sh
@@ -150,12 +157,12 @@ index 0c22efb1..00000000
 @@ -1 +0,0 @@
 -Subproject commit 0c22efb1b919573f69ec237e7a8ab7ca1c1ecc03
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 4d8a1306..4396b5bb 160000
+index 4d8a1306..3285118f 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 4d8a13065d55254cf5708b0cfeac8424e4bb9f51
-+Subproject commit 4396b5bb350c8989532cbb786fa9899da6500fa6
++Subproject commit 3285118fca0a92bb44e212550dc0f4ae9c59f1f5
 diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
 new file mode 100644
 index 00000000..6ccf639b
