@@ -413,7 +413,6 @@
 "./gitrc/fsync.sh"
 "./gitrc/g.sh"
 "./gitrc/ga.sh"
-"./gitrc/gbak.sh"
 "./gitrc/gbib.sh"
 "./gitrc/gbidebug.sh"
 "./gitrc/gbig.sh"
@@ -2929,4 +2928,4 @@
 "./zerotierrc/install.sh"
 "./zerotierrc/restart.sh"
 "./zerotierrc/zerotierrc.conf"
-"gbrd.gdio.diff"
+"gsync.gdio.diff"
