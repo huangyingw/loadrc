@@ -1,0 +1,277 @@
+diff --git a/.gitmodules b/.gitmodules
+index 97844484..f74cb003 100644
+--- ./.gitmodules
++++ ./.gitmodules
+@@ -133,10 +133,6 @@
+     path = vimrc/.vim/bundle/ncm2-racer
+     url = https://github.com/ncm2/ncm2-racer
+     branch = master
+-[submodule "vimrc/.vim/bundle/ncm2-pyclang"]
+-    path = vimrc/.vim/bundle/ncm2-pyclang
+-    url = https://github.com/ncm2/ncm2-pyclang
+-    branch = master
+ [submodule "vimrc/.vim/bundle/vimtex"]
+     path = vimrc/.vim/bundle/vimtex
+     url = https://github.com/lervag/vimtex
+diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
+index 83e2c748..71ea722d 100755
+--- ./bashrc/generate_files_proj.sh
++++ ./bashrc/generate_files_proj.sh
+@@ -46,12 +46,12 @@ done < "$INCLUDE_FILE"
+ export LC_ALL=C
+ 
+ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
+-    comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
+-    cp -fv "$TARGET.tmp" "$TARGET" && \
+     if [ ${#include_params[@]} -gt 0 ] ; \
+     then \
+         find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
+         fi && \
++        comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
++        cp -fv "$TARGET.tmp" "$TARGET" && \
+         echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
+         sort -u "$TARGET" -o "$TARGET" && \
+         sed -i.bak 's/ /\\ /g' "$TARGET" && \
+diff --git a/cscope b/cscope
+index 18a46b20..f500e2ef 160000
+--- ./cscope
++++ ./cscope
+@@ -1 +1 @@
+-Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
++Subproject commit f500e2ef259f05f2b91819af4bded69b6d2d3436
+diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
+index 4f8edfc6..12e3635f 100755
+--- ./gitrc/dogdio.sh
++++ ./gitrc/dogdio.sh
+@@ -1,5 +1,6 @@
+ #!/bin/zsh
+-if [ -z $(git config gsync.remote) ] || [ -z $(git config gsync.branch) ] 
++
++if [ -z $(git config gsync.target) ]
+ then
+     exit 0
+ fi
+@@ -7,9 +8,8 @@ fi
+ local_branch="$(~/loadrc/gitrc/get_current_branch.sh)" 
+ output="$local_branch.gdio.diff"
+ output=$(echo "$output" | sed 's/\//_/g')
+-remote_branch="$(git config gsync.branch)"
+-remote="$(git config gsync.remote)"
++target="$(git config gsync.target)"
+ 
+-~/loadrc/gitrc/gdi.sh "$remote/$remote_branch" 2>&1 | tee "$output"  
++~/loadrc/gitrc/gdi.sh "$target" 2>&1 | tee "$output"  
+ sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
+ exit 0
+diff --git a/gitrc/gbak.sh b/gitrc/gbak.sh
+deleted file mode 100755
+index 0be60d68..00000000
+--- ./gitrc/gbak.sh
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#!/bin/zsh
+-current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
+-target_branch=$(echo "$current_branch" | sed 's/\.fix$//g').bak
+-remote="$(git config gsync.remote)"
+-remote_branch="$(git config gsync.branch)"
+-~/loadrc/gitrc/gbrd.sh "$target_branch"
+-git checkout -b "$target_branch" "$remote/$remote_branch"
+diff --git a/gitrc/gbrd.sh b/gitrc/gbrd.sh
+index ff263b6d..305c2262 100755
+--- ./gitrc/gbrd.sh
++++ ./gitrc/gbrd.sh
+@@ -3,5 +3,5 @@ git branch -D "$1"
+ 
+ for ss in $(git remote)
+ do
+-    git push "$ss" --delete "$1"
++    git push "$ss" --delete "$1" || true
+ done
+diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
+index d4909739..2e325ba5 100755
+--- ./gitrc/gdi2.sh
++++ ./gitrc/gdi2.sh
+@@ -18,9 +18,9 @@ fi
+ 
+ targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
+ 
+-if [ -z $(git config gsync.remote) ]
++if [ -z $(git config gsync.target) ]
+ then
+-    echo -e "${red}gsync.remote is not configured ... ${NC}"
++    echo -e "${red}gsync.target is not configured ... ${NC}"
+ fi
+ 
+ host=$(git config deploy.host)
+diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
+index 700d6af6..6c65a66c 100755
+--- ./gitrc/gdit.sh
++++ ./gitrc/gdit.sh
+@@ -3,14 +3,13 @@ output="$1"
+ current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
+ target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
+ remote="$(git config gsync.remote)"
+-remote_branch="$(git config gsync.branch)"
++target="$(git config gsync.target)"
+ 
+ ~/loadrc/gitrc/discard_unnecessaries.sh
+ git checkout -b "$target_branch" "$remote/$target_branch"
+-git checkout -b "$target_branch" "$remote/$remote_branch"
+ git checkout -f "$target_branch"
+ git branch -u "$remote/$target_branch"
+-git merge -X theirs "$remote/$remote_branch" && \
++git merge -X theirs "$target" && \
+     git pull && \
+     git push ; \
+     git checkout "$current_branch" && \
+diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
+index 4f53bd55..9aab14ed 100755
+--- ./gitrc/gpl.sh
++++ ./gitrc/gpl.sh
+@@ -18,10 +18,9 @@ do
+     eval "$COMMAND"
+ done
+ 
+-remote=$(git config gsync.remote)
+-remote_branch=$(git config gsync.branch)
++target=$(git config gsync.target)
+ 
+-if [ -n "$remote" ]
++if [ -n "$target" ]
+ then
+-    git merge "$remote"/"$remote_branch"
++    git merge "$target"
+ fi
+diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
+index ea2bc967..4aacf3b0 100755
+--- ./imvurc/ghypo.sh
++++ ./imvurc/ghypo.sh
+@@ -1,4 +1,10 @@
+ #!/bin/zsh
++
++if [[ "$(git config remote.origin.url)" != *'website.git' ]]
++then
++    echo -e "${red}ghypo only run for imvu website repo... ${NC}" 
++fi
++
+ if [ $(hostname) != "linb-sandbox" ]
+ then
+     if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+diff --git a/neovim b/neovim
+index a572698e..cbbbf24f 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit a572698e96d1a4a1a3c2654a150a0827a7157741
++Subproject commit cbbbf24fd04ab68381795dd586382ecf07f39609
+diff --git a/vimrc/.vim/bundle/ncm2-pyclang b/vimrc/.vim/bundle/ncm2-pyclang
+deleted file mode 160000
+index 0c22efb1..00000000
+--- ./vimrc/.vim/bundle/ncm2-pyclang
++++ /dev/null
+@@ -1 +0,0 @@
+-Subproject commit 0c22efb1b919573f69ec237e7a8ab7ca1c1ecc03
+diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
+index 2d520bdf..a726c729 160000
+--- ./vimrc/.vim/bundle/tig-explorer.vim
++++ ./vimrc/.vim/bundle/tig-explorer.vim
+@@ -1 +1 @@
+-Subproject commit 2d520bdf9d2f3838ad3f8f381dd514307a1c90ee
++Subproject commit a726c7299324731825edefef87fa61ef41bd77fb
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 4d8a1306..4396b5bb 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 4d8a13065d55254cf5708b0cfeac8424e4bb9f51
++Subproject commit 4396b5bb350c8989532cbb786fa9899da6500fa6
+diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
+new file mode 100644
+index 00000000..6ccf639b
+--- /dev/null
++++ ./vimrc/.vim/plugin/clipboard.vim
+@@ -0,0 +1,7 @@
++let os = substitute(system('uname'), "\n", "", "")
++
++if os == "Linux"
++    set clipboard=unnamedplus
++else
++    set clipboard=unnamed
++endif
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index f53036fd..cd6d7554 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -112,13 +112,12 @@ endfunction
+ 
+ function! s:Gkdo() abort
+     let worktree = Cd2Worktree()
+-    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
+-    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
++    let target = substitute(system("git config gsync.target"), '\n', '', '')
+ 
+     if expand('%:t') != 'index'
+-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '" "' .  expand('%:p') . '"')
++        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '" "' .  expand('%:p') . '"')
+     else
+-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '"')
++        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '"')
+     endif
+ endfunction
+ 
+@@ -367,9 +366,8 @@ function! s:Gdi(...) abort
+         if arg1 == ''
+             call fugitive#Diffsplit(0, 1, "vert", '', [])
+         elseif tolower(arg1) == 'o'
+-            let remote = substitute(system("git config gsync.remote"), '\n', '', '')
+-            let remote_branch = substitute(system("git config gsync.branch"), '\n', '', '')
+-            call fugitive#Diffsplit(1, 0, 'vert', remote . '/' . remote_branch, [remote . '/' . remote_branch])
++            let target = substitute(system("git config gsync.target"), '\n', '', '')
++            call fugitive#Diffsplit(1, 0, 'vert', target, [target])
+         else
+             call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
+         endif
+@@ -476,18 +474,17 @@ endfunction
+ 
+ function! s:Gdif(...) abort
+     let worktree = Cd2Worktree()
+-    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
+-    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
+-    let branch = (a:0 >= 1) ? a:1 : remote . '/' . branch
++    let target = substitute(system("git config gsync.target"), '\n', '', '')
++    let target = (a:0 >= 1) ? a:1 : target
+     let reverse = (a:0 >= 2) ? a:2 : ''
+ 
+-    if branch ==# '-r'
+-        let branch = remote . '/' . substitute(system("git config gsync.branch"), '\n', '', '')
++    if target ==# '-r'
++        let target = substitute(system("git config gsync.target"), '\n', '', '')
+         let reverse = '-r'
+     endif
+ 
+-    let output = GetEscapedResult(branch) . '.diff'
+-    exec '!~/loadrc/gitrc/gdif.sh ' . '-b "' .  branch . '" -f "' .  expand("%:p") . '" ' . reverse .  ' 2>&1 | tee ' . output
++    let output = GetEscapedResult(target) . '.diff'
++    exec '!~/loadrc/gitrc/gdif.sh ' . '-b "' .  target . '" -f "' .  expand("%:p") . '" ' . reverse .  ' 2>&1 | tee ' . output
+     call OpenOrSwitch(output, 'vs')
+ endfunction
+ 
+diff --git a/vimrc/.vimrc b/vimrc/.vimrc
+index 0ffc578b..6cb746a0 100644
+--- ./vimrc/.vimrc
++++ ./vimrc/.vimrc
+@@ -196,14 +196,6 @@ let g:pymode_rope = 0
+ "To have a space (ASCII 32) considered as a valid character for a file name
+ ":set isfname+=32
+ 
+-let os = substitute(system('uname'), "\n", "", "")
+-
+-if os == "Linux"
+-    set clipboard=unnamedplus
+-else
+-    set clipboard=unnamed
+-endif
+-
+ let g:phpfmt_autosave = 1
+ let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
+ 
