@@ -143,15 +143,16 @@ index 4f53bd55..9aab14ed 100755
 +    git merge "$target"
  fi
 diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
-index ea2bc967..4aacf3b0 100755
+index ea2bc967..f04e3bfa 100755
 --- ./imvurc/ghypo.sh
 +++ ./imvurc/ghypo.sh
-@@ -1,4 +1,10 @@
+@@ -1,4 +1,11 @@
  #!/bin/zsh
 +
 +if [[ "$(git config remote.origin.url)" != *'website.git' ]]
 +then
 +    echo -e "${red}ghypo only run for imvu website repo... ${NC}" 
++    exit 1
 +fi
 +
  if [ $(hostname) != "linb-sandbox" ]
