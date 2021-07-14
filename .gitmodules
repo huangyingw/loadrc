@@ -133,10 +133,6 @@
     path = vimrc/.vim/bundle/ncm2-racer
     url = https://github.com/ncm2/ncm2-racer
     branch = master
-[submodule "vimrc/.vim/bundle/ncm2-pyclang"]
-    path = vimrc/.vim/bundle/ncm2-pyclang
-    url = https://github.com/ncm2/ncm2-pyclang
-    branch = master
 [submodule "vimrc/.vim/bundle/vimtex"]
     path = vimrc/.vim/bundle/vimtex
     url = https://github.com/lervag/vimtex
