@@ -1,8 +1,6 @@
 #!/bin/bash
 
 apt-get update
-apt-get upgrade -y
-apt-get purge -y totem totem-plugins
 apt-get install -y \
     mosh \
     ssh \
@@ -10,6 +8,8 @@ apt-get install -y \
 
 ./set_linux_configuration.sh
 
+apt-get upgrade -y
+apt-get purge -y totem totem-plugins
 apt-get install -y \
     aptitude \
     astyle \
