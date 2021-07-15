@@ -1,0 +1,24 @@
+diff --git a/vimrc/.vim/plugin/diff-options.vim b/vimrc/.vim/plugin/diff-options.vim
+new file mode 100644
+index 00000000..a154e243
+--- /dev/null
++++ ./vimrc/.vim/plugin/diff-options.vim
+@@ -0,0 +1,4 @@
++set diffopt+=iwhiteall
++set diffopt+=iblank
++set diffopt+=algorithm:patience
++set diffopt+=indent-heuristic
+diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
+index 9ee20986..55b41320 100644
+--- ./vimrc/.vim/plugin/view.vim
++++ ./vimrc/.vim/plugin/view.vim
+@@ -37,9 +37,5 @@ else
+     set winwidth=999999
+ endif
+ 
+-set diffopt+=iwhiteall
+-set diffopt+=iblank
+-set diffopt+=algorithm:patience
+-set diffopt+=indent-heuristic
+ set wrap
+ "set iskeyword-=_
