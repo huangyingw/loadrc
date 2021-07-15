@@ -171,3 +171,17 @@ index f53036fd..cd6d7554 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index af437c98..d0ab8688 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -450,7 +450,8 @@ endif
+ vnoremap <silent>f :call VimSearch()<cr>
+ vnoremap <silent>s :call GitSearch()<cr>
+ vnoremap <silent>t :call SearchAgain()<cr>
+-nnoremap mc :set hlsearch!<cr>
++nnoremap mc :set cursorline!<cr>
++" nnoremap mc :set hlsearch!<cr>
+ nnoremap mg :call VFilter()<cr>
+ nnoremap me :call ExtractHighLight()<cr>
+ nnoremap mf :call ExFilter()<cr>
