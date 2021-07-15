@@ -4,6 +4,13 @@ apt-get update
 apt-get upgrade -y
 apt-get purge -y totem totem-plugins
 apt-get install -y \
+    mosh \
+    ssh \
+    tmux
+
+./set_linux_configuration.sh
+
+apt-get install -y \
     aptitude \
     astyle \
     automake \
@@ -36,7 +43,6 @@ apt-get install -y \
     manpages-fr-extra \
     manpages-pl \
     mdadm \
-    mosh \
     mplayer \
     net-tools \
     netcat \
@@ -54,10 +60,8 @@ apt-get install -y \
     slurm \
     smplayer \
     software-properties-common \
-    ssh \
     sshfs \
     tig \
-    tmux \
     unrar \
     w3m \
     w3m-img \
