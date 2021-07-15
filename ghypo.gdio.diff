@@ -113,6 +113,13 @@ index ea2bc967..f04e3bfa 100755
  if [ $(hostname) != "linb-sandbox" ]
  then
      if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index d914c2c4..306bf10d 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit d914c2c48e517db85b81f40f9db339834a214d93
++Subproject commit 306bf10d07129dfffe2a5e47f3ff035e6ddb8c42
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 index f53036fd..cd6d7554 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
