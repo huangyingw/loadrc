@@ -2945,4 +2945,4 @@
 "./zerotierrc/install.sh"
 "./zerotierrc/restart.sh"
 "./zerotierrc/zerotierrc.conf"
-"ghypo.gdio.diff"
+"gsync.gdio.diff"
