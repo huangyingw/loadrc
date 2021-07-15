@@ -5,4 +5,5 @@ echo git diff \
     --ignore-all-space \
     --ignore-blank-lines \
     --ignore-cr-at-eol \
-    --ignore-space-at-eol
+    --ignore-space-at-eol \
+    --ignore-space-change
