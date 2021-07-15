@@ -1,4 +1,11 @@
 #!/bin/zsh
+
+if [[ "$(git config remote.origin.url)" != *'website.git' ]]
+then
+    echo -e "${red}ghypo only run for imvu website repo... ${NC}" 
+    exit 1
+fi
+
 if [ $(hostname) != "linb-sandbox" ]
 then
     if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]

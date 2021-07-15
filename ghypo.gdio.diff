@@ -17,16 +17,6 @@ index 83e2c748..71ea722d 100755
          echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
          sort -u "$TARGET" -o "$TARGET" && \
          sed -i.bak 's/ /\\ /g' "$TARGET" && \
-diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
-index ca91dbaf..eda62d25 100755
---- ./gitrc/.gitconfig
-+++ ./gitrc/.gitconfig
-@@ -90,3 +90,5 @@
-     prompt = false
- [merge "ours"]
- 	driver = true
-+[credential "https://github.com"]
-+	helper = !gh auth git-credential
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
 index 4f8edfc6..12e3635f 100755
 --- ./gitrc/dogdio.sh
@@ -123,80 +113,13 @@ index ea2bc967..f04e3bfa 100755
  if [ $(hostname) != "linb-sandbox" ]
  then
      if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
-diff --git a/install_basic_linux.sh b/install_basic_linux.sh
-index 34269226..7370103f 100755
---- ./install_basic_linux.sh
-+++ ./install_basic_linux.sh
-@@ -10,6 +10,7 @@ then
- fi
- 
- ./install_prerequisite.sh
-+./install_gh.sh
- ./install_nodejs.sh
- ./install_time_machine.sh
- ./enpass_install.sh
-diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 94af8469..ac4412e5 100755
---- ./install_basic_macos.sh
-+++ ./install_basic_macos.sh
-@@ -16,6 +16,8 @@ brew install \
-     mosh \
-     tmux
- 
-+./deploy_configurations.sh
-+
- brew install \
-     Caskroom/cask/xquartz \
-     astyle \
-diff --git a/install_gh.sh b/install_gh.sh
-new file mode 100755
-index 00000000..c3363697
---- /dev/null
-+++ ./install_gh.sh
-@@ -0,0 +1,6 @@
-+#!/bin/bash
-+
-+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg |  gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
-+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" |  tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-+apt update
-+apt install gh
-diff --git a/install_prerequisite.sh b/install_prerequisite.sh
-index e2824b9e..49656e55 100755
---- ./install_prerequisite.sh
-+++ ./install_prerequisite.sh
-@@ -1,6 +1,13 @@
- #!/bin/bash
- 
- apt-get update
-+apt-get install -y \
-+    mosh \
-+    ssh \
-+    tmux
-+
-+./deploy_configurations.sh
-+
- apt-get upgrade -y
- apt-get purge -y totem totem-plugins
- apt-get install -y \
-@@ -36,7 +43,6 @@ apt-get install -y \
-     manpages-fr-extra \
-     manpages-pl \
-     mdadm \
--    mosh \
-     mplayer \
-     net-tools \
-     netcat \
-@@ -54,10 +60,8 @@ apt-get install -y \
-     slurm \
-     smplayer \
-     software-properties-common \
--    ssh \
-     sshfs \
-     tig \
--    tmux \
-     unrar \
-     w3m \
-     w3m-img \
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index d914c2c4..306bf10d 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit d914c2c48e517db85b81f40f9db339834a214d93
++Subproject commit 306bf10d07129dfffe2a5e47f3ff035e6ddb8c42
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 index f53036fd..cd6d7554 100644
 --- ./vimrc/.vim/plugin/fugitive.vim

@@ -6,7 +6,7 @@ remote="$(git config gsync.remote)"
 target="$(git config gsync.target)"
 
 ~/loadrc/gitrc/discard_unnecessaries.sh
-git checkout -b "$target_branch" "$remote/$target_branch"
+git checkout -b "$target_branch" "$target"
 git checkout -f "$target_branch"
 git branch -u "$remote/$target_branch"
 git merge -X theirs "$target" && \
