@@ -58,7 +58,7 @@ index d4909739..2e325ba5 100755
  
  host=$(git config deploy.host)
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
-index 700d6af6..ad9a7f1a 100755
+index 700d6af6..6c65a66c 100755
 --- ./gitrc/gdit.sh
 +++ ./gitrc/gdit.sh
 @@ -3,14 +3,13 @@ output="$1"
@@ -69,9 +69,8 @@ index 700d6af6..ad9a7f1a 100755
 +target="$(git config gsync.target)"
  
  ~/loadrc/gitrc/discard_unnecessaries.sh
--git checkout -b "$target_branch" "$remote/$target_branch"
+ git checkout -b "$target_branch" "$remote/$target_branch"
 -git checkout -b "$target_branch" "$remote/$remote_branch"
-+git checkout -b "$target_branch" "$target"
  git checkout -f "$target_branch"
  git branch -u "$remote/$target_branch"
 -git merge -X theirs "$remote/$remote_branch" && \
@@ -98,16 +97,15 @@ index 4f53bd55..9aab14ed 100755
 +    git merge "$target"
  fi
 diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
-index ea2bc967..f04e3bfa 100755
+index ea2bc967..4aacf3b0 100755
 --- ./imvurc/ghypo.sh
 +++ ./imvurc/ghypo.sh
-@@ -1,4 +1,11 @@
+@@ -1,4 +1,10 @@
  #!/bin/zsh
 +
 +if [[ "$(git config remote.origin.url)" != *'website.git' ]]
 +then
 +    echo -e "${red}ghypo only run for imvu website repo... ${NC}" 
-+    exit 1
 +fi
 +
  if [ $(hostname) != "linb-sandbox" ]
@@ -171,17 +169,3 @@ index f53036fd..cd6d7554 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index af437c98..d0ab8688 100644
---- ./vimrc/.vim/plugin/keymap.vim
-+++ ./vimrc/.vim/plugin/keymap.vim
-@@ -450,7 +450,8 @@ endif
- vnoremap <silent>f :call VimSearch()<cr>
- vnoremap <silent>s :call GitSearch()<cr>
- vnoremap <silent>t :call SearchAgain()<cr>
--nnoremap mc :set hlsearch!<cr>
-+nnoremap mc :set cursorline!<cr>
-+" nnoremap mc :set hlsearch!<cr>
- nnoremap mg :call VFilter()<cr>
- nnoremap me :call ExtractHighLight()<cr>
- nnoremap mf :call ExFilter()<cr>
