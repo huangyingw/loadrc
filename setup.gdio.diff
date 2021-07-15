@@ -1,0 +1,187 @@
+diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
+index 83e2c748..71ea722d 100755
+--- ./bashrc/generate_files_proj.sh
++++ ./bashrc/generate_files_proj.sh
+@@ -46,12 +46,12 @@ done < "$INCLUDE_FILE"
+ export LC_ALL=C
+ 
+ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
+-    comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
+-    cp -fv "$TARGET.tmp" "$TARGET" && \
+     if [ ${#include_params[@]} -gt 0 ] ; \
+     then \
+         find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
+         fi && \
++        comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
++        cp -fv "$TARGET.tmp" "$TARGET" && \
+         echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
+         sort -u "$TARGET" -o "$TARGET" && \
+         sed -i.bak 's/ /\\ /g' "$TARGET" && \
+diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
+index 4f8edfc6..12e3635f 100755
+--- ./gitrc/dogdio.sh
++++ ./gitrc/dogdio.sh
+@@ -1,5 +1,6 @@
+ #!/bin/zsh
+-if [ -z $(git config gsync.remote) ] || [ -z $(git config gsync.branch) ] 
++
++if [ -z $(git config gsync.target) ]
+ then
+     exit 0
+ fi
+@@ -7,9 +8,8 @@ fi
+ local_branch="$(~/loadrc/gitrc/get_current_branch.sh)" 
+ output="$local_branch.gdio.diff"
+ output=$(echo "$output" | sed 's/\//_/g')
+-remote_branch="$(git config gsync.branch)"
+-remote="$(git config gsync.remote)"
++target="$(git config gsync.target)"
+ 
+-~/loadrc/gitrc/gdi.sh "$remote/$remote_branch" 2>&1 | tee "$output"  
++~/loadrc/gitrc/gdi.sh "$target" 2>&1 | tee "$output"  
+ sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
+ exit 0
+diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
+index d4909739..2e325ba5 100755
+--- ./gitrc/gdi2.sh
++++ ./gitrc/gdi2.sh
+@@ -18,9 +18,9 @@ fi
+ 
+ targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
+ 
+-if [ -z $(git config gsync.remote) ]
++if [ -z $(git config gsync.target) ]
+ then
+-    echo -e "${red}gsync.remote is not configured ... ${NC}"
++    echo -e "${red}gsync.target is not configured ... ${NC}"
+ fi
+ 
+ host=$(git config deploy.host)
+diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
+index 700d6af6..ad9a7f1a 100755
+--- ./gitrc/gdit.sh
++++ ./gitrc/gdit.sh
+@@ -3,14 +3,13 @@ output="$1"
+ current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
+ target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
+ remote="$(git config gsync.remote)"
+-remote_branch="$(git config gsync.branch)"
++target="$(git config gsync.target)"
+ 
+ ~/loadrc/gitrc/discard_unnecessaries.sh
+-git checkout -b "$target_branch" "$remote/$target_branch"
+-git checkout -b "$target_branch" "$remote/$remote_branch"
++git checkout -b "$target_branch" "$target"
+ git checkout -f "$target_branch"
+ git branch -u "$remote/$target_branch"
+-git merge -X theirs "$remote/$remote_branch" && \
++git merge -X theirs "$target" && \
+     git pull && \
+     git push ; \
+     git checkout "$current_branch" && \
+diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
+index 4f53bd55..9aab14ed 100755
+--- ./gitrc/gpl.sh
++++ ./gitrc/gpl.sh
+@@ -18,10 +18,9 @@ do
+     eval "$COMMAND"
+ done
+ 
+-remote=$(git config gsync.remote)
+-remote_branch=$(git config gsync.branch)
++target=$(git config gsync.target)
+ 
+-if [ -n "$remote" ]
++if [ -n "$target" ]
+ then
+-    git merge "$remote"/"$remote_branch"
++    git merge "$target"
+ fi
+diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
+index ea2bc967..f04e3bfa 100755
+--- ./imvurc/ghypo.sh
++++ ./imvurc/ghypo.sh
+@@ -1,4 +1,11 @@
+ #!/bin/zsh
++
++if [[ "$(git config remote.origin.url)" != *'website.git' ]]
++then
++    echo -e "${red}ghypo only run for imvu website repo... ${NC}" 
++    exit 1
++fi
++
+ if [ $(hostname) != "linb-sandbox" ]
+ then
+     if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index f53036fd..cd6d7554 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -112,13 +112,12 @@ endfunction
+ 
+ function! s:Gkdo() abort
+     let worktree = Cd2Worktree()
+-    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
+-    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
++    let target = substitute(system("git config gsync.target"), '\n', '', '')
+ 
+     if expand('%:t') != 'index'
+-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '" "' .  expand('%:p') . '"')
++        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '" "' .  expand('%:p') . '"')
+     else
+-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '"')
++        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '"')
+     endif
+ endfunction
+ 
+@@ -367,9 +366,8 @@ function! s:Gdi(...) abort
+         if arg1 == ''
+             call fugitive#Diffsplit(0, 1, "vert", '', [])
+         elseif tolower(arg1) == 'o'
+-            let remote = substitute(system("git config gsync.remote"), '\n', '', '')
+-            let remote_branch = substitute(system("git config gsync.branch"), '\n', '', '')
+-            call fugitive#Diffsplit(1, 0, 'vert', remote . '/' . remote_branch, [remote . '/' . remote_branch])
++            let target = substitute(system("git config gsync.target"), '\n', '', '')
++            call fugitive#Diffsplit(1, 0, 'vert', target, [target])
+         else
+             call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
+         endif
+@@ -476,18 +474,17 @@ endfunction
+ 
+ function! s:Gdif(...) abort
+     let worktree = Cd2Worktree()
+-    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
+-    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
+-    let branch = (a:0 >= 1) ? a:1 : remote . '/' . branch
++    let target = substitute(system("git config gsync.target"), '\n', '', '')
++    let target = (a:0 >= 1) ? a:1 : target
+     let reverse = (a:0 >= 2) ? a:2 : ''
+ 
+-    if branch ==# '-r'
+-        let branch = remote . '/' . substitute(system("git config gsync.branch"), '\n', '', '')
++    if target ==# '-r'
++        let target = substitute(system("git config gsync.target"), '\n', '', '')
+         let reverse = '-r'
+     endif
+ 
+-    let output = GetEscapedResult(branch) . '.diff'
+-    exec '!~/loadrc/gitrc/gdif.sh ' . '-b "' .  branch . '" -f "' .  expand("%:p") . '" ' . reverse .  ' 2>&1 | tee ' . output
++    let output = GetEscapedResult(target) . '.diff'
++    exec '!~/loadrc/gitrc/gdif.sh ' . '-b "' .  target . '" -f "' .  expand("%:p") . '" ' . reverse .  ' 2>&1 | tee ' . output
+     call OpenOrSwitch(output, 'vs')
+ endfunction
+ 
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index af437c98..d0ab8688 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -450,7 +450,8 @@ endif
+ vnoremap <silent>f :call VimSearch()<cr>
+ vnoremap <silent>s :call GitSearch()<cr>
+ vnoremap <silent>t :call SearchAgain()<cr>
+-nnoremap mc :set hlsearch!<cr>
++nnoremap mc :set cursorline!<cr>
++" nnoremap mc :set hlsearch!<cr>
+ nnoremap mg :call VFilter()<cr>
+ nnoremap me :call ExtractHighLight()<cr>
+ nnoremap mf :call ExFilter()<cr>
