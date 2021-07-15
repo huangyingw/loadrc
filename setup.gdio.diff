@@ -17,6 +17,16 @@ index 83e2c748..71ea722d 100755
          echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
          sort -u "$TARGET" -o "$TARGET" && \
          sed -i.bak 's/ /\\ /g' "$TARGET" && \
+diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
+index ca91dbaf..eda62d25 100755
+--- ./gitrc/.gitconfig
++++ ./gitrc/.gitconfig
+@@ -90,3 +90,5 @@
+     prompt = false
+ [merge "ours"]
+ 	driver = true
++[credential "https://github.com"]
++	helper = !gh auth git-credential
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
 index 4f8edfc6..12e3635f 100755
 --- ./gitrc/dogdio.sh
@@ -113,6 +123,30 @@ index ea2bc967..f04e3bfa 100755
  if [ $(hostname) != "linb-sandbox" ]
  then
      if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
+diff --git a/install_basic_linux.sh b/install_basic_linux.sh
+index 34269226..7370103f 100755
+--- ./install_basic_linux.sh
++++ ./install_basic_linux.sh
+@@ -10,6 +10,7 @@ then
+ fi
+ 
+ ./install_prerequisite.sh
++./install_gh.sh
+ ./install_nodejs.sh
+ ./install_time_machine.sh
+ ./enpass_install.sh
+diff --git a/install_gh.sh b/install_gh.sh
+new file mode 100755
+index 00000000..c3363697
+--- /dev/null
++++ ./install_gh.sh
+@@ -0,0 +1,6 @@
++#!/bin/bash
++
++curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg |  gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
++echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" |  tee /etc/apt/sources.list.d/github-cli.list > /dev/null
++apt update
++apt install gh
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 index f53036fd..cd6d7554 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
