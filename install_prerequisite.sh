@@ -6,7 +6,7 @@ apt-get install -y \
     ssh \
     tmux
 
-./set_linux_configuration.sh
+./deploy_configurations.sh
 
 apt-get upgrade -y
 apt-get purge -y totem totem-plugins
