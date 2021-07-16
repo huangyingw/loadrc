@@ -112,13 +112,12 @@ endfunction
 
 function! s:Gkdo() abort
     let worktree = Cd2Worktree()
-    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
-    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
+    let target = substitute(system("git config gsync.target"), '\n', '', '')
 
     if expand('%:t') != 'index'
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '" "' .  expand('%:p') . '"')
+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '" "' .  expand('%:p') . '"')
     else
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '"')
+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '"')
     endif
 endfunction
 
@@ -367,9 +366,8 @@ function! s:Gdi(...) abort
         if arg1 == ''
             call fugitive#Diffsplit(0, 1, "vert", '', [])
         elseif tolower(arg1) == 'o'
-            let remote = substitute(system("git config gsync.remote"), '\n', '', '')
-            let remote_branch = substitute(system("git config gsync.branch"), '\n', '', '')
-            call fugitive#Diffsplit(1, 0, 'vert', remote . '/' . remote_branch, [remote . '/' . remote_branch])
+            let target = substitute(system("git config gsync.target"), '\n', '', '')
+            call fugitive#Diffsplit(1, 0, 'vert', target, [target])
         else
             call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
         endif
@@ -476,18 +474,17 @@ endfunction
 
 function! s:Gdif(...) abort
     let worktree = Cd2Worktree()
-    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
-    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
-    let branch = (a:0 >= 1) ? a:1 : remote . '/' . branch
+    let target = substitute(system("git config gsync.target"), '\n', '', '')
+    let target = (a:0 >= 1) ? a:1 : target
     let reverse = (a:0 >= 2) ? a:2 : ''
 
-    if branch ==# '-r'
-        let branch = remote . '/' . substitute(system("git config gsync.branch"), '\n', '', '')
+    if target ==# '-r'
+        let target = substitute(system("git config gsync.target"), '\n', '', '')
         let reverse = '-r'
     endif
 
-    let output = GetEscapedResult(branch) . '.diff'
-    exec '!~/loadrc/gitrc/gdif.sh ' . '-b "' .  branch . '" -f "' .  expand("%:p") . '" ' . reverse .  ' 2>&1 | tee ' . output
+    let output = GetEscapedResult(target) . '.diff'
+    exec '!~/loadrc/gitrc/gdif.sh ' . '-b "' .  target . '" -f "' .  expand("%:p") . '" ' . reverse .  ' 2>&1 | tee ' . output
     call OpenOrSwitch(output, 'vs')
 endfunction
 
