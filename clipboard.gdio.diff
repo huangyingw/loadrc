@@ -1,0 +1,58 @@
+diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
+index 83e2c748..71ea722d 100755
+--- ./bashrc/generate_files_proj.sh
++++ ./bashrc/generate_files_proj.sh
+@@ -46,12 +46,12 @@ done < "$INCLUDE_FILE"
+ export LC_ALL=C
+ 
+ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
+-    comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
+-    cp -fv "$TARGET.tmp" "$TARGET" && \
+     if [ ${#include_params[@]} -gt 0 ] ; \
+     then \
+         find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
+         fi && \
++        comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
++        cp -fv "$TARGET.tmp" "$TARGET" && \
+         echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
+         sort -u "$TARGET" -o "$TARGET" && \
+         sed -i.bak 's/ /\\ /g' "$TARGET" && \
+diff --git a/neovim b/neovim
+index ba2df6ca..0d954611 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit ba2df6cabd159a6fa09942dd5587b0f249898699
++Subproject commit 0d95461192f49df7f010a0178560fe0a445243d9
+diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
+new file mode 100644
+index 00000000..6ccf639b
+--- /dev/null
++++ ./vimrc/.vim/plugin/clipboard.vim
+@@ -0,0 +1,7 @@
++let os = substitute(system('uname'), "\n", "", "")
++
++if os == "Linux"
++    set clipboard=unnamedplus
++else
++    set clipboard=unnamed
++endif
+diff --git a/vimrc/.vimrc b/vimrc/.vimrc
+index 0ffc578b..6cb746a0 100644
+--- ./vimrc/.vimrc
++++ ./vimrc/.vimrc
+@@ -196,14 +196,6 @@ let g:pymode_rope = 0
+ "To have a space (ASCII 32) considered as a valid character for a file name
+ ":set isfname+=32
+ 
+-let os = substitute(system('uname'), "\n", "", "")
+-
+-if os == "Linux"
+-    set clipboard=unnamedplus
+-else
+-    set clipboard=unnamed
+-endif
+-
+ let g:phpfmt_autosave = 1
+ let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
+ 

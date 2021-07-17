@@ -2,7 +2,7 @@
 
 ~/loadrc/gitrc/include_gitconfig.sh
 git remote update &
-git checkout *.gdio.diff
+~/loadrc/gitrc/discard_unnecessaries.sh
 git pull &
 currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 
@@ -14,15 +14,13 @@ done
 
 for ss in $(git config --get-all pull.from)
 do
-    pull_from=$(echo "$ss" | sed  -e "s/\// /g")
-    COMMAND="git pull $pull_from &"
+    COMMAND="git merge $ss &"
     eval "$COMMAND"
 done
 
-remote=$(git config gsync.remote)
-remote_branch=$(git config gsync.branch)
+target=$(git config gsync.target)
 
-if [ -n "$remote" ]
+if [ -n "$target" ]
 then
-    git merge "$remote"/"$remote_branch"
+    git merge "$target"
 fi

@@ -1,6 +1,4 @@
 if [ $(uname) = "Darwin" ]
 then
     alias restartBluetooth='$HOME/loadrc/osxrc/restart_bluetooth.sh'
-    export PATH="/Applications/kdiff3.app/Contents/MacOS:$PATH"
-    export PATH="/Applications/NoMachine.app/Contents/MacOS:$PATH"
 fi

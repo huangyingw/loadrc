@@ -1,5 +1,5 @@
 #!/bin/zsh
-BINPATH=$(/usr/local/bin/realpath $(which mosh-server))
+BINPATH=$(realpath $(which mosh-server))
 
 # Turn the firewall off
 sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off

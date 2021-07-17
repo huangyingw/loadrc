@@ -8,14 +8,21 @@ then
     exit 0
 fi
 
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+git -C $(brew --repository homebrew/core) checkout master
 brew update
 brew upgrade
-brew install --cask osxfuse
+brew install \
+    mosh \
+    tmux
+
+./deploy_configurations.sh
+
 brew install \
     Caskroom/cask/xquartz \
     astyle \
     blueutil \
+    clipper \
     coreutils \
     dos2unix \
     ffmpeg \
@@ -33,16 +40,14 @@ brew install \
     libtool \
     lynx \
     minikube \
-    mosh \
     openssl \
     rename \
-    sshfs \
     tig \
-    tmux \
     w3m \
     wakeonlan \
     watch \
-    wget
+    wget \
+    xclip
 
 brew cask install \
     kdiff3 \

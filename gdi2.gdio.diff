@@ -1,33 +1,13 @@
-diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index fb80774f..dbcf937b 100755
---- ./gitrc/gdi2.sh
-+++ ./gitrc/gdi2.sh
-@@ -28,9 +28,8 @@ rpath=$(git config deploy.path)
- GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
-     ~/loadrc/gitrc/discard_unnecessaries.sh ; \
-     git checkout -f "$targetBranch" ; \
--    git apply --reject --whitespace=fix "$GDITDIFF" ; \
-+    git apply --index --reject --whitespace=fix "$GDITDIFF" ; \
-     ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
--    git add . && \
-     git commit  --no-verify -am "$commit_message" ; \
-     git pull ; \
-     git push ; \
-diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
-index 10543369..0865ae41 100755
---- ./gitrc/gdif.sh
-+++ ./gitrc/gdif.sh
-@@ -1,6 +1,6 @@
- #!/bin/zsh
+diff --git a/gitrc/apply_branch.sh b/gitrc/apply_branch.sh
+index dd1a9659..b05c70a7 100755
+--- ./gitrc/apply_branch.sh
++++ ./gitrc/apply_branch.sh
+@@ -7,6 +7,8 @@ then
+   exit 1
+ fi
  
--COMMAND="git diff --no-prefix --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
-+COMMAND="git diff --ignore-space-at-eol -b -w --ignore-blank-lines HEAD $1"
- 
- while read ss
- do
-diff --git a/vimrc/.vim/bundle/vim-log-syntax b/vimrc/.vim/bundle/vim-log-syntax
---- ./vimrc/.vim/bundle/vim-log-syntax
-+++ ./vimrc/.vim/bundle/vim-log-syntax
-@@ -1 +1 @@
--Subproject commit e2dcef439e50fec752177fc1aa46b57114e31698
-+Subproject commit e2dcef439e50fec752177fc1aa46b57114e31698-dirty
++git remote update
++
+ BRANCH="$1"
+ BRANCH=$(echo "$BRANCH" | sed 's/remotes\///g')
+ BRANCH_DIFF="$BRANCH"

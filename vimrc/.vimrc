@@ -28,7 +28,6 @@ inoremap { {}<LEFT>
 "set nopaste
 xnoremap p pgvy
 au! BufRead,BufNewFile *.hta  setfiletype html
-" let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 " Mapping ESC in insert mode and command mode to double j
 imap jj <C-[>
 " cmap jj  <C-[]]
@@ -196,12 +195,7 @@ au BufWritePre * call AddToGit()
 let g:pymode_rope = 0
 "To have a space (ASCII 32) considered as a valid character for a file name
 ":set isfname+=32
-let os = substitute(system('uname'), "\n", "", "")
-if os == "Linux"
-    set clipboard=unnamedplus
-else
-    set clipboard=unnamed
-endif
+
 let g:phpfmt_autosave = 1
 let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
 
@@ -277,3 +271,9 @@ let g:tex_flavor = 'latex'
 " add @ to cfile handle
 set isfname+=@-@
 set history=10000
+
+if has('mac') || system('uname') =~# 'Darwin'
+    let g:vim_pbcopy_remote_cmd = "nc localhost 2224"
+else
+    let g:vim_pbcopy_remote_cmd = "nc -N localhost 2224"
+endif

@@ -1,6 +1,13 @@
 #!/bin/bash
 
 apt-get update
+apt-get install -y \
+    mosh \
+    ssh \
+    tmux
+
+./deploy_configurations.sh
+
 apt-get upgrade -y
 apt-get purge -y totem totem-plugins
 apt-get install -y \
@@ -8,7 +15,6 @@ apt-get install -y \
     astyle \
     automake \
     autotools-dev \
-    bcmwl-kernel-source \
     binutils \
     build-essential \
     cmake \
@@ -37,10 +43,10 @@ apt-get install -y \
     manpages-fr-extra \
     manpages-pl \
     mdadm \
-    mosh \
     mplayer \
     net-tools \
     netcat \
+    nfs-kernel-server \
     npm \
     openvpn \
     perl \
@@ -54,10 +60,8 @@ apt-get install -y \
     slurm \
     smplayer \
     software-properties-common \
-    ssh \
     sshfs \
     tig \
-    tmux \
     unrar \
     w3m \
     w3m-img \

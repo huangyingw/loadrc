@@ -1,0 +1,8 @@
+diff --git a/gitrc/postCommit.sh b/gitrc/postCommit.sh
+index 3bd9b5b1..08477d81 100755
+--- ./gitrc/postCommit.sh
++++ ./gitrc/postCommit.sh
+@@ -1,2 +1,3 @@
+ #!/bin/zsh
+ ~/loadrc/gitrc/gsync.sh
++~/loadrc/bashrc/update_proj.sh

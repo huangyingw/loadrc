@@ -37,7 +37,5 @@ else
     set winwidth=999999
 endif
 
-set diffopt+=iwhiteall
-set diffopt+=algorithm:patience
-set diffopt+=indent-heuristic
 set wrap
+"set iskeyword-=_

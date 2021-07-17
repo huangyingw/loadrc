@@ -125,10 +125,6 @@
     path = vimrc/.vim/bundle/ncm2-cssomni
     url = https://github.com/ncm2/ncm2-cssomni
     branch = master
-[submodule "vimrc/.vim/bundle/ncm2-tern"]
-    path = vimrc/.vim/bundle/ncm2-tern
-    url = https://github.com/ncm2/ncm2-tern
-    branch = master
 [submodule "vimrc/.vim/bundle/ncm2-jedi"]
     path = vimrc/.vim/bundle/ncm2-jedi
     url = https://github.com/ncm2/ncm2-jedi
@@ -136,10 +132,6 @@
 [submodule "vimrc/.vim/bundle/ncm2-racer"]
     path = vimrc/.vim/bundle/ncm2-racer
     url = https://github.com/ncm2/ncm2-racer
-    branch = master
-[submodule "vimrc/.vim/bundle/ncm2-pyclang"]
-    path = vimrc/.vim/bundle/ncm2-pyclang
-    url = https://github.com/ncm2/ncm2-pyclang
     branch = master
 [submodule "vimrc/.vim/bundle/vimtex"]
     path = vimrc/.vim/bundle/vimtex
@@ -235,3 +227,9 @@
 [submodule "vimrc/.vim/bundle/bclose.vim"]
     path = vimrc/.vim/bundle/bclose.vim
     url = git@github.com:rbgrouleff/bclose.vim.git
+[submodule "vimrc/.vim/bundle/vim-pbcopy"]
+	path = vimrc/.vim/bundle/vim-pbcopy
+	url = git@github.com:huangyingw/vim-pbcopy.git 
+[submodule "neovim"]
+	path = neovim
+	url = git@github.com:huangyingw/neovim.git

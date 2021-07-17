@@ -27,6 +27,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gco :execute s:Gco(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcob :execute s:Gcob(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcof :execute s:Gcof(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcom :execute s:Gcom(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcp :execute s:Gcp(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdev :execute s:Gdev()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdi :execute s:Gdi(<f-args>)
@@ -111,13 +112,12 @@ endfunction
 
 function! s:Gkdo() abort
     let worktree = Cd2Worktree()
-    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
-    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
+    let target = substitute(system("git config gsync.target"), '\n', '', '')
 
     if expand('%:t') != 'index'
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '" "' .  expand('%:p') . '"')
+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '" "' .  expand('%:p') . '"')
     else
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  remote . '/' . branch . '"')
+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '"')
     endif
 endfunction
 
@@ -366,9 +366,8 @@ function! s:Gdi(...) abort
         if arg1 == ''
             call fugitive#Diffsplit(0, 1, "vert", '', [])
         elseif tolower(arg1) == 'o'
-            let remote = substitute(system("git config gsync.remote"), '\n', '', '')
-            let remote_branch = substitute(system("git config gsync.branch"), '\n', '', '')
-            call fugitive#Diffsplit(1, 0, 'vert', remote . '/' . remote_branch, [remote . '/' . remote_branch])
+            let target = substitute(system("git config gsync.target"), '\n', '', '')
+            call fugitive#Diffsplit(1, 0, 'vert', target, [target])
         else
             call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
         endif
@@ -424,7 +423,7 @@ function! s:Gdi2(...) abort
     let worktree = Cd2Worktree()
     let output = 'gdi2.findresult'
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    exec '!~/loadrc/gitrc/gdi2.sh 2>&1 | tee ' . '"' .  output . '"'
+    exec '!~/loadrc/gitrc/gdi2.sh ' . '"' .  arg1 . '"' . ' 2>&1 | tee ' . '"' .  output . '"'
     call OpenOrSwitch(output, 'vs')
 endfunction
 
@@ -475,18 +474,17 @@ endfunction
 
 function! s:Gdif(...) abort
     let worktree = Cd2Worktree()
-    let remote = substitute(system("git config gsync.remote"), '\n', '', '')
-    let branch = substitute(system("git config gsync.branch"), '\n', '', '')
-    let branch = (a:0 >= 1) ? a:1 : remote . '/' . branch
+    let target = substitute(system("git config gsync.target"), '\n', '', '')
+    let target = (a:0 >= 1) ? a:1 : target
     let reverse = (a:0 >= 2) ? a:2 : ''
 
-    if branch ==# '-r'
-        let branch = remote . '/' . substitute(system("git config gsync.branch"), '\n', '', '')
+    if target ==# '-r'
+        let target = substitute(system("git config gsync.target"), '\n', '', '')
         let reverse = '-r'
     endif
 
-    let output = GetEscapedResult(branch) . '.diff'
-    exec '!~/loadrc/gitrc/gdif.sh ' . '-b "' .  branch . '" -f "' .  expand("%:p") . '" ' . reverse .  ' 2>&1 | tee ' . output
+    let output = GetEscapedResult(target) . '.diff'
+    exec '!~/loadrc/gitrc/gdif.sh ' . '-b "' .  target . '" -f "' .  expand("%:p") . '" ' . reverse .  ' 2>&1 | tee ' . output
     call OpenOrSwitch(output, 'vs')
 endfunction
 
@@ -516,8 +514,13 @@ endfunction
 
 function! s:ApplyBranch(args, ...) abort
     let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/apply_branch.sh ' . '"' .  a:args . '"'
+    exec '!~/loadrc/gitrc/apply_branch.sh ' . '"' .  a:args . '"'
     call s:Gs()
+endfunction
+
+function! s:Gcom(args, ...) abort
+    let worktree = Cd2Worktree()
+    exec '!~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"'
 endfunction
 
 function! s:Gshow(args, ...) abort
@@ -671,7 +674,7 @@ function! s:Gfix() abort
 endfunction
 
 function! s:Reapply() abort
-    if (expand("%") !~ '.*gdio.diff')
+    if (expand("%") !~ '.*.diff')
         echom 'Please only run on *gdio.diff!!!'
         return 0
     endif
