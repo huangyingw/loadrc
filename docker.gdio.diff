@@ -25,8 +25,23 @@ index 49656e55..b4469c8f 100755
  ./deploy_configurations.sh
  
 diff --git a/neovim b/neovim
+index cbbbf24f..fb2dbb91 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit cbbbf24fd04ab68381795dd586382ecf07f39609
-+Subproject commit cbbbf24fd04ab68381795dd586382ecf07f39609-dirty
++Subproject commit fb2dbb917235871a6bb0d4f49017dda60a91fa0d
+diff --git a/vimrc/.vim/bundle/tlib_vim b/vimrc/.vim/bundle/tlib_vim
+index a071b6d4..70c4e222 160000
+--- ./vimrc/.vim/bundle/tlib_vim
++++ ./vimrc/.vim/bundle/tlib_vim
+@@ -1 +1 @@
+-Subproject commit a071b6d41b20069a3520e0d101194a752968973b
++Subproject commit 70c4e222464020edc2809c932b488daaf891eeef
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 5892c774..17974649 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 5892c7748b0bafc68e9be9d2ce940b2e6e54939e
++Subproject commit 17974649e6f186c473e303aca3ad9dc7f223efea-dirty
