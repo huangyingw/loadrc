@@ -16,6 +16,8 @@ brew install \
     mosh \
     tmux
 
+./deploy_configurations.sh
+
 brew install \
     Caskroom/cask/xquartz \
     astyle \

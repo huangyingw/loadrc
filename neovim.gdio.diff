@@ -1,0 +1,28 @@
+diff --git a/.gitmodules b/.gitmodules
+index 7a86e108..97844484 100644
+--- ./.gitmodules
++++ ./.gitmodules
+@@ -234,3 +234,6 @@
+ [submodule "vimrc/.vim/bundle/vim-pbcopy"]
+ 	path = vimrc/.vim/bundle/vim-pbcopy
+ 	url = git@github.com:huangyingw/vim-pbcopy.git 
++[submodule "neovim"]
++	path = neovim
++	url = git@github.com:huangyingw/neovim.git
+diff --git a/install_nvim_pre.sh b/install_nvim_pre.sh
+index 2bc75c67..ab07848c 100755
+--- ./install_nvim_pre.sh
++++ ./install_nvim_pre.sh
+@@ -26,3 +26,5 @@ else
+     sudo pip3 install pynvim jedi 
+     #brew install --with-toolchain --with-clang llvm
+ fi
++
++./neovim/install.sh
+diff --git a/neovim b/neovim
+new file mode 160000
+index 00000000..ba2df6ca
+--- /dev/null
++++ ./neovim
+@@ -0,0 +1 @@
++Subproject commit ba2df6cabd159a6fa09942dd5587b0f249898699

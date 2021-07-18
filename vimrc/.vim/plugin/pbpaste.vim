@@ -1,7 +1,17 @@
-function! PopulatePasteBufferFromOSX()
-  let @+ = system('pbpaste-remote')
-  normal! "+p
+function! PopulatePasteBufferFromOSX(mode)
+    if &clipboard == 'unnamed'
+        let @* = system('pbpaste-remote')
+    else
+        let @+ = system('pbpaste-remote')
+    endif
+
+    if a:mode== 'v'
+        normal! gvp
+    else
+        normal! gp
+    endif
+
 endfunction
 
-nnoremap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
-vmap <silent> cp :call PopulatePasteBufferFromOSX()<cr>
+nnoremap <silent> cp :call PopulatePasteBufferFromOSX('n')<cr>
+vnoremap <silent> cp :call PopulatePasteBufferFromOSX('v')<cr>

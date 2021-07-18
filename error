@@ -72,3 +72,12 @@ vimrc/.vim/bundle/ncm2-tmux/pythonx/ncm2_tmux.py:18:        proc = Popen(args=['
 [ncm2_tmux_complete@yarp] subprocess.CalledProcessError: Command '['sh', '-c', "sh '/Users/huangyingw/loadrc/vimrc/.vim/bundle/tmux-complete.vim/sh/tmuxcomplete' -p '^.' -s
 [ncm2_tern@yarp] Job is dead. cmd=['/usr/local/opt/python@3.9/bin/python...ders/zn/6zwn3dz13v3fdjtrsh9g_dv9ymvzkm/T/nvimUC0moc/0', 13, 'ncm2_tern']
 [ncm2_jedi@yarp] Job is dead. cmd=['/root/anaconda3/bin/python3', '-u', '/root/.vim/bundle/nvim-yarp/pythonx/yarp.py', '/tmp/nvimEcygXB/0', 6, 'ncm2_jedi']
+
+
+Error detected while processing function provider#clipboard#Call[6]..6:
+line    8:
+E691: Can only compare List with List
+Error detected while processing function provider#clipboard#Call[6]..6:
+line    8:
+E15: Invalid expression: match(&clipboard, '\v(unnamed|unnamedplus)') >= 0 && get(s:selections[a:reg].data, 0, []) ==# clipboard_data
+clipboard: provider returned invalid data

@@ -18,9 +18,41 @@ index 83e2c748..71ea722d 100755
          sort -u "$TARGET" -o "$TARGET" && \
          sed -i.bak 's/ /\\ /g' "$TARGET" && \
 diff --git a/neovim b/neovim
-index a572698e..17e63742 160000
+index ba2df6ca..0d954611 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
--Subproject commit a572698e96d1a4a1a3c2654a150a0827a7157741
-+Subproject commit 17e637429a231b69b1fd457493e2d4b086ee4f69
+-Subproject commit ba2df6cabd159a6fa09942dd5587b0f249898699
++Subproject commit 0d95461192f49df7f010a0178560fe0a445243d9
+diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
+new file mode 100644
+index 00000000..6ccf639b
+--- /dev/null
++++ ./vimrc/.vim/plugin/clipboard.vim
+@@ -0,0 +1,7 @@
++let os = substitute(system('uname'), "\n", "", "")
++
++if os == "Linux"
++    set clipboard=unnamedplus
++else
++    set clipboard=unnamed
++endif
+diff --git a/vimrc/.vimrc b/vimrc/.vimrc
+index 0ffc578b..6cb746a0 100644
+--- ./vimrc/.vimrc
++++ ./vimrc/.vimrc
+@@ -196,14 +196,6 @@ let g:pymode_rope = 0
+ "To have a space (ASCII 32) considered as a valid character for a file name
+ ":set isfname+=32
+ 
+-let os = substitute(system('uname'), "\n", "", "")
+-
+-if os == "Linux"
+-    set clipboard=unnamedplus
+-else
+-    set clipboard=unnamed
+-endif
+-
+ let g:phpfmt_autosave = 1
+ let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
+ 

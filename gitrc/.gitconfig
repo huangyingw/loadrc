@@ -90,3 +90,5 @@
     prompt = false
 [merge "ours"]
 	driver = true
+[credential "https://github.com"]
+	helper = !gh auth git-credential

@@ -1,0 +1,98 @@
+diff --git a/.gitmodules b/.gitmodules
+index 97844484..f74cb003 100644
+--- ./.gitmodules
++++ ./.gitmodules
+@@ -133,10 +133,6 @@
+     path = vimrc/.vim/bundle/ncm2-racer
+     url = https://github.com/ncm2/ncm2-racer
+     branch = master
+-[submodule "vimrc/.vim/bundle/ncm2-pyclang"]
+-    path = vimrc/.vim/bundle/ncm2-pyclang
+-    url = https://github.com/ncm2/ncm2-pyclang
+-    branch = master
+ [submodule "vimrc/.vim/bundle/vimtex"]
+     path = vimrc/.vim/bundle/vimtex
+     url = https://github.com/lervag/vimtex
+diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
+index 83e2c748..71ea722d 100755
+--- ./bashrc/generate_files_proj.sh
++++ ./bashrc/generate_files_proj.sh
+@@ -46,12 +46,12 @@ done < "$INCLUDE_FILE"
+ export LC_ALL=C
+ 
+ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
+-    comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
+-    cp -fv "$TARGET.tmp" "$TARGET" && \
+     if [ ${#include_params[@]} -gt 0 ] ; \
+     then \
+         find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
+         fi && \
++        comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
++        cp -fv "$TARGET.tmp" "$TARGET" && \
+         echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
+         sort -u "$TARGET" -o "$TARGET" && \
+         sed -i.bak 's/ /\\ /g' "$TARGET" && \
+diff --git a/gitrc/gbrd.sh b/gitrc/gbrd.sh
+index ff263b6d..305c2262 100755
+--- ./gitrc/gbrd.sh
++++ ./gitrc/gbrd.sh
+@@ -3,5 +3,5 @@ git branch -D "$1"
+ 
+ for ss in $(git remote)
+ do
+-    git push "$ss" --delete "$1"
++    git push "$ss" --delete "$1" || true
+ done
+diff --git a/neovim b/neovim
+index a572698e..369df5c1 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit a572698e96d1a4a1a3c2654a150a0827a7157741
++Subproject commit 369df5c1e57bab976cf9626ec73d633682d2f83e
+diff --git a/vimrc/.vim/bundle/ncm2-pyclang b/vimrc/.vim/bundle/ncm2-pyclang
+deleted file mode 160000
+index 0c22efb1..00000000
+--- ./vimrc/.vim/bundle/ncm2-pyclang
++++ /dev/null
+@@ -1 +0,0 @@
+-Subproject commit 0c22efb1b919573f69ec237e7a8ab7ca1c1ecc03
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 4d8a1306..4396b5bb 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 4d8a13065d55254cf5708b0cfeac8424e4bb9f51
++Subproject commit 4396b5bb350c8989532cbb786fa9899da6500fa6
+diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
+new file mode 100644
+index 00000000..6ccf639b
+--- /dev/null
++++ ./vimrc/.vim/plugin/clipboard.vim
+@@ -0,0 +1,7 @@
++let os = substitute(system('uname'), "\n", "", "")
++
++if os == "Linux"
++    set clipboard=unnamedplus
++else
++    set clipboard=unnamed
++endif
+diff --git a/vimrc/.vimrc b/vimrc/.vimrc
+index 0ffc578b..6cb746a0 100644
+--- ./vimrc/.vimrc
++++ ./vimrc/.vimrc
+@@ -196,14 +196,6 @@ let g:pymode_rope = 0
+ "To have a space (ASCII 32) considered as a valid character for a file name
+ ":set isfname+=32
+ 
+-let os = substitute(system('uname'), "\n", "", "")
+-
+-if os == "Linux"
+-    set clipboard=unnamedplus
+-else
+-    set clipboard=unnamed
+-endif
+-
+ let g:phpfmt_autosave = 1
+ let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
+ 

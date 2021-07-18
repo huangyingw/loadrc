@@ -1,0 +1,14 @@
+diff --git a/install_nodejs.sh b/install_nodejs.sh
+index c3036dee..34cb2b71 100755
+--- ./install_nodejs.sh
++++ ./install_nodejs.sh
+@@ -5,3 +5,9 @@ cd "$SCRIPTPATH"
+ 
+ . ~/.zshrc
+ nvm install node
++OTHER_NODE="/usr/local/bin/node"
++ 
++if [ -f "$OTHER_NODE" ]
++then
++    mv -v "$OTHER_NODE" "$OTHER_NODE".bak
++fi
