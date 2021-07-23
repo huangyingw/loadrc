@@ -233,3 +233,6 @@
 [submodule "neovim"]
 	path = neovim
 	url = git@github.com:huangyingw/neovim.git
+[submodule "vimrc/.vim/bundle/orgmode.nvim"]
+	path = vimrc/.vim/bundle/orgmode.nvim
+	url = git@github.com:kristijanhusak/orgmode.nvim.git
