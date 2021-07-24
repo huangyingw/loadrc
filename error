@@ -81,3 +81,9 @@ Error detected while processing function provider#clipboard#Call[6]..6:
 line    8:
 E15: Invalid expression: match(&clipboard, '\v(unnamed|unnamedplus)') >= 0 && get(s:selections[a:reg].data, 0, []) ==# clipboard_data
 clipboard: provider returned invalid data
+
+Error detected while processing /Users/huangyingw/.config/nvim/init.vim:
+line    4:
+E5108: Error executing lua /Users/huangyingw/.config/nvim/lua/plugins.lua:1: attempt to call global 'use' (a nil value)
+The legacy SnipMate parser is deprecated. Please see :h SnipMate-deprecate.
+E325: ATTENTION
