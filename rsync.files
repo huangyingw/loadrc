@@ -167,6 +167,7 @@
 ./.profile
 ./.pythonrc
 ./.server.mirror.check
+./.server.rc
 ./.server.theanorc
 ./.shellrc
 ./.sqlrc
@@ -184,6 +185,7 @@
 ./.theanorc
 ./.tigrc
 ./.tmux.conf
+./.ubuntu.rc
 ./.vserver.rc
 ./.vserver.theanorc
 ./.zshrc
@@ -457,6 +459,7 @@
 ./gitrc/git_ready.sh
 ./gitrc/git_ready.test.sh
 ./gitrc/git_run_shell_command_for_each_commit.sh
+./gitrc/git_submodules_branch.sh
 ./gitrc/gitapply.sh
 ./gitrc/gkd.sh
 ./gitrc/glg.sh
@@ -663,6 +666,7 @@
 ./oh-my-zsh/custom/plugins/zsh-nvm/.gitignore
 ./oh-my-zsh/plugins/chucknorris/.gitignore
 ./oh-my-zsh/plugins/deno/.gitignore
+./oh-my-zsh/plugins/fnm/.gitignore
 ./oh-my-zsh/plugins/gh/.gitignore
 ./oh-my-zsh/plugins/hitchhiker/.gitignore
 ./openrc.sh
