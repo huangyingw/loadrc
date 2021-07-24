@@ -185,6 +185,7 @@
 "./.theanorc"
 "./.tigrc"
 "./.tmux.conf"
+"./.ubuntu.rc"
 "./.vserver.rc"
 "./.vserver.theanorc"
 "./.zshrc"
