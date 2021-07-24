@@ -4,6 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /root/loadrc
 
 COPY ./*.sh /root/loadrc/
+COPY ./neovim/*.sh /root/loadrc/neovim/
 COPY ./.ssh/id_* /root/.ssh/
 COPY ./entrypoint.sh /entrypoint.sh
 
