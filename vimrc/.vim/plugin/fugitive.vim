@@ -55,6 +55,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :execute s:Gs()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsubbr :execute s:Gsubbr()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gst :execute s:Gst()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsti :execute s:Gsti()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstl :execute s:Gstl()
@@ -527,6 +528,13 @@ function! s:Gshow(args, ...) abort
     let worktree = Cd2Worktree()
     let output = a:args . '.diff'
     silent exec '!~/loadrc/gitrc/gshow.sh ' . '"' .  a:args . '" 2>&1 | tee ' . output
+    call OpenOrSwitch(output, 'vs')
+endfunction
+
+function! s:Gsubbr() abort
+    let worktree = Cd2Worktree()
+    let output = 'git_submodules_branch.log'
+    silent exec '!~/loadrc/gitrc/git_submodules_branch.sh 2>&1 | tee ' . output
     call OpenOrSwitch(output, 'vs')
 endfunction
 
