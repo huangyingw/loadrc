@@ -1,0 +1,48 @@
+diff --git a/.config/nvim/init.vim b/.config/nvim/init.vim
+index f182e5b2..63ce3c0f 100644
+--- ./.config/nvim/init.vim
++++ ./.config/nvim/init.vim
+@@ -1,3 +1,4 @@
+ set runtimepath^=~/.vim runtimepath+=~/.vim/after
+ let &packpath = &runtimepath
+ source ~/.vimrc
++lua require('plugins')
+diff --git a/.gitmodules b/.gitmodules
+index f74cb003..cf669a0c 100644
+--- ./.gitmodules
++++ ./.gitmodules
+@@ -233,3 +233,6 @@
+ [submodule "neovim"]
+ 	path = neovim
+ 	url = git@github.com:huangyingw/neovim.git
++[submodule "vimrc/.vim/bundle/orgmode.nvim"]
++	path = vimrc/.vim/bundle/orgmode.nvim
++	url = git@github.com:kristijanhusak/orgmode.nvim.git
+diff --git a/neovim b/neovim
+index cbbbf24f..fb2dbb91 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit cbbbf24fd04ab68381795dd586382ecf07f39609
++Subproject commit fb2dbb917235871a6bb0d4f49017dda60a91fa0d
+diff --git a/vimrc/.vim/bundle/tlib_vim b/vimrc/.vim/bundle/tlib_vim
+index a071b6d4..70c4e222 160000
+--- ./vimrc/.vim/bundle/tlib_vim
++++ ./vimrc/.vim/bundle/tlib_vim
+@@ -1 +1 @@
+-Subproject commit a071b6d41b20069a3520e0d101194a752968973b
++Subproject commit 70c4e222464020edc2809c932b488daaf891eeef
+diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
+index c323dc37..c395bf31 160000
+--- ./vimrc/.vim/bundle/vim-autoformat
++++ ./vimrc/.vim/bundle/vim-autoformat
+@@ -1 +1 @@
+-Subproject commit c323dc3740fb2cda58e1997223fc1c8c6af67c63
++Subproject commit c395bf31769baf4ccaf4d6e255038c375a1672bb
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 5892c774..b8d60632 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 5892c7748b0bafc68e9be9d2ce940b2e6e54939e
++Subproject commit b8d60632dfa2bb3b487f7185257221e19cf0ed6c-dirty
