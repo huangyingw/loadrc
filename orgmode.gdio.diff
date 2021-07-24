@@ -32,10 +32,3 @@ index 00000000..385dd9ae
 +++ ./vimrc/.vim/bundle/orgmode.nvim
 @@ -0,0 +1 @@
 +Subproject commit 385dd9ae82dd0eadb02ed6e07df133670edb2271
-diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index e25881c6..b8d60632 160000
---- ./vimrc/.vim/bundle/vim-fugitive
-+++ ./vimrc/.vim/bundle/vim-fugitive
-@@ -1 +1 @@
--Subproject commit e25881c6abcb2f802d242fe419e5b50ceeacf922
-+Subproject commit b8d60632dfa2bb3b487f7185257221e19cf0ed6c-dirty
