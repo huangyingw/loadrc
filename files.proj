@@ -659,7 +659,6 @@
 "./musicrc/unzip.sh"
 "./neovim/.gitconfig"
 "./neovim/.gitignore"
-"./neovim/gbil.log"
 "./nxrc/install.sh"
 "./oh-my-zsh/.gitconfig"
 "./oh-my-zsh/.gitignore"
