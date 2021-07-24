@@ -531,6 +531,13 @@ function! s:Gshow(args, ...) abort
     call OpenOrSwitch(output, 'vs')
 endfunction
 
+function! s:Gsubbr() abort
+    let worktree = Cd2Worktree()
+    let output = 'git_submodules_branch.log'
+    silent exec '!~/loadrc/gitrc/git_submodules_branch.sh 2>&1 | tee ' . output
+    call OpenOrSwitch(output, 'vs')
+endfunction
+
 function! s:Copy(...) abort
     let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
     exec '!rm ' . newFile
