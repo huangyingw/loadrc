@@ -1,0 +1,10 @@
+diff --git a/leetcoderc/restore.sh b/leetcoderc/restore.sh
+index 328d9be3..b4aaeb9c 100755
+--- ./leetcoderc/restore.sh
++++ ./leetcoderc/restore.sh
+@@ -4,4 +4,4 @@ NUM="$1"
+ rsync -aHv --progress \
+     --ignore-existing \
+     ../downloads/"$NUM"/ \
+-    ./"$NUM"/
++    ../submissions/"$NUM"/
