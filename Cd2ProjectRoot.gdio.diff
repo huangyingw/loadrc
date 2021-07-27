@@ -49,19 +49,12 @@ index 49656e55..b4469c8f 100755
  
  ./deploy_configurations.sh
  
-diff --git a/neovim b/neovim
-index 5931cffd..2cf74f03 160000
---- ./neovim
-+++ ./neovim
-@@ -1 +1 @@
--Subproject commit 5931cffd46149d011ff40a49758ed8afcf47f9d7
-+Subproject commit 2cf74f03eb3e91446a4e5c40e235fbe57d93508d
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index e25881c6..3de2fdd3 160000
+index 3eff5c1c..3de2fdd3 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
--Subproject commit e25881c6abcb2f802d242fe419e5b50ceeacf922
+-Subproject commit 3eff5c1cae206602509181d7c742904b215269ab
 +Subproject commit 3de2fdd3834a7bc86585190eed9754e0d7505f16
 diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
 index 7d7359a3..27d015ae 100644
