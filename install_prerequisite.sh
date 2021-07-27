@@ -4,7 +4,8 @@ apt-get update
 apt-get install -y \
     mosh \
     ssh \
-    tmux
+    tmux \
+    zsh
 
 ./deploy_configurations.sh
 

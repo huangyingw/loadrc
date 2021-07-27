@@ -263,7 +263,7 @@ function! Filter2Findresult()
 endfunc
 
 function! Cd2ProjectRoot(filename)
-    let csdbpath = Find_in_parent(a:filename, Windowdir(), "/")
+    let csdbpath = Find_in_parent(a:filename, getcwd(), "/")
 
     if csdbpath != "Nothing"
         exec "cd " . csdbpath

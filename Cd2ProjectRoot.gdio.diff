@@ -1,0 +1,88 @@
+diff --git a/Dockerfile b/Dockerfile
+index 08e0c80b..cd9bdf55 100644
+--- ./Dockerfile
++++ ./Dockerfile
+@@ -4,6 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
+ WORKDIR /root/loadrc
+ 
+ COPY ./*.sh /root/loadrc/
++COPY ./neovim/*.sh /root/loadrc/neovim/
+ COPY ./.ssh/id_* /root/.ssh/
+ COPY ./entrypoint.sh /entrypoint.sh
+ 
+diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
+index 71ea722d..2c184654 100755
+--- ./bashrc/generate_files_proj.sh
++++ ./bashrc/generate_files_proj.sh
+@@ -15,6 +15,8 @@ then
+     exit 1
+ fi
+ 
++mkdir -p .git
++
+ TARGETEDIR=`realpath "$PWD"`
+ cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
+ cp -nv ~/loadrc/prunefile_template.conf ./prunefile.conf
+diff --git a/bashrc/remove_path.sh b/bashrc/remove_path.sh
+new file mode 100644
+index 00000000..10e89a8a
+--- /dev/null
++++ ./bashrc/remove_path.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++export PATH=$(echo $PATH | tr ":" "\n" | grep -v "anaconda3" | tr "\n" ":")
+diff --git a/install_prerequisite.sh b/install_prerequisite.sh
+index 49656e55..b4469c8f 100755
+--- ./install_prerequisite.sh
++++ ./install_prerequisite.sh
+@@ -4,7 +4,8 @@ apt-get update
+ apt-get install -y \
+     mosh \
+     ssh \
+-    tmux
++    tmux \
++    zsh
+ 
+ ./deploy_configurations.sh
+ 
+diff --git a/neovim b/neovim
+index 5931cffd..2cf74f03 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit 5931cffd46149d011ff40a49758ed8afcf47f9d7
++Subproject commit 2cf74f03eb3e91446a4e5c40e235fbe57d93508d
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index e25881c6..3de2fdd3 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit e25881c6abcb2f802d242fe419e5b50ceeacf922
++Subproject commit 3de2fdd3834a7bc86585190eed9754e0d7505f16
+diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
+index 7d7359a3..27d015ae 100644
+--- ./vimrc/.vim/plugin/ShowVITAG.vim
++++ ./vimrc/.vim/plugin/ShowVITAG.vim
+@@ -1,4 +1,5 @@
+ function! ShowVITAG()
++    call Cd2Worktree()
+     call Cd2ProjectRoot("files.proj")
+     call OpenOrSwitch('files.proj', 'vs')
+ endfunction
+diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
+index 63869eb8..9745884a 100644
+--- ./vimrc/.vim/plugin/common.vim
++++ ./vimrc/.vim/plugin/common.vim
+@@ -263,7 +263,7 @@ function! Filter2Findresult()
+ endfunc
+ 
+ function! Cd2ProjectRoot(filename)
+-    let csdbpath = Find_in_parent(a:filename, Windowdir(), "/")
++    let csdbpath = Find_in_parent(a:filename, getcwd(), "/")
+ 
+     if csdbpath != "Nothing"
+         exec "cd " . csdbpath
