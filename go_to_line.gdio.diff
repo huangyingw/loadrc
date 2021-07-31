@@ -79,11 +79,11 @@ index 328d9be3..b4aaeb9c 100755
 +    ../submissions/"$NUM"/
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
-index 00000000..0a6ab17e
+index 00000000..48e25d90
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-fetch
 @@ -0,0 +1 @@
-+Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21-dirty
++Subproject commit 48e25d90c59d360186376f34013a6b0a8425b53d
 diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
 index 7d7359a3..27d015ae 100644
 --- ./vimrc/.vim/plugin/ShowVITAG.vim
