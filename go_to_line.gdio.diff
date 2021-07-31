@@ -1,3 +1,14 @@
+diff --git a/.gitmodules b/.gitmodules
+index f74cb003..984b9375 100644
+--- ./.gitmodules
++++ ./.gitmodules
+@@ -233,3 +233,6 @@
+ [submodule "neovim"]
+ 	path = neovim
+ 	url = git@github.com:huangyingw/neovim.git
++[submodule "vimrc/.vim/bundle/vim-fetch"]
++	path = vimrc/.vim/bundle/vim-fetch
++	url = git@github.com:wsdjeg/vim-fetch.git
 diff --git a/Dockerfile b/Dockerfile
 index 08e0c80b..cd9bdf55 100644
 --- ./Dockerfile
@@ -66,6 +77,13 @@ index 328d9be3..b4aaeb9c 100755
      ../downloads/"$NUM"/ \
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
+diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
+new file mode 160000
+index 00000000..0a6ab17e
+--- /dev/null
++++ ./vimrc/.vim/bundle/vim-fetch
+@@ -0,0 +1 @@
++Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21-dirty
 diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
 index 7d7359a3..27d015ae 100644
 --- ./vimrc/.vim/plugin/ShowVITAG.vim
@@ -89,3 +107,16 @@ index 63869eb8..9745884a 100644
  
      if csdbpath != "Nothing"
          exec "cd " . csdbpath
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index d0ab8688..7b48be95 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -480,7 +480,7 @@ nnoremap L :vs <C-R>"<cr>
+ map <F5> :call VRun()<cr>
+ map <F3> :call VDebug()<cr>
+ " nnoremap gf gF<cr>
+-nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
++" nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
+ map oo :call VimOpen()<cr>
+ nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
+ nnoremap <leader>1 :let @"=expand("%:p")<CR>
