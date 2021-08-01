@@ -77,6 +77,13 @@ index 328d9be3..b4aaeb9c 100755
      ../downloads/"$NUM"/ \
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
+diff --git a/neovim b/neovim
+index 98bb5c89..d21265b3 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit 98bb5c891d54f57de00205c730229bf8b8439894
++Subproject commit d21265b39f867332b89298b70bcc967cae25f0b3
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
