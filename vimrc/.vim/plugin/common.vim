@@ -141,14 +141,18 @@ endfunction
 function! OpenOrSwitch(buffername, openMode)
     let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
     let bnr = bufwinnr('^' . realpath . '$')
+    let l:cfile = expand('<cfile>')
+    let l:line   = getline(line('.'))
+    let l:pattern = '\m\%(:\d\+\)\{1,2}\%(:.*\)\?'
+    let l:match = matchstr(l:line, l:pattern)
 
     if bnr > 0
         exe bnr . "wincmd w"
         exec 'e'
     elseif a:openMode ==? "goto"
-        silent exec 'e ' . a:buffername
+        silent exec 'e ' . a:buffername . l:match
     else
-        silent exec 'topleft vs ' . a:buffername
+        silent exec 'topleft vs ' . a:buffername . l:match
     endif
 endfunction
 
