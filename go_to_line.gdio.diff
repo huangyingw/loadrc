@@ -47,12 +47,12 @@ index 00000000..10e89a8a
 +
 +export PATH=$(echo $PATH | tr ":" "\n" | grep -v "anaconda3" | tr "\n" ":")
 diff --git a/cscope b/cscope
-index 55f601b2..a5182077 160000
+index 55f601b2..cee5ee1e 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 55f601b2519f45a5ee38b63d0d727f2f867eb33e
-+Subproject commit a518207768a8fe87118083d20f43b3e753c0d482
++Subproject commit cee5ee1e09979528535ebefdd1d873e9d9b4dbc6
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
 index 49656e55..b4469c8f 100755
 --- ./install_prerequisite.sh
@@ -79,11 +79,11 @@ index 328d9be3..b4aaeb9c 100755
 +    ../submissions/"$NUM"/
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
-index 00000000..48e25d90
+index 00000000..dffc90dc
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-fetch
 @@ -0,0 +1 @@
-+Subproject commit 48e25d90c59d360186376f34013a6b0a8425b53d
++Subproject commit dffc90dc322757c242498d878466ca97e6bbfd8a
 diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
 index 7d7359a3..27d015ae 100644
 --- ./vimrc/.vim/plugin/ShowVITAG.vim
@@ -95,10 +95,31 @@ index 7d7359a3..27d015ae 100644
      call OpenOrSwitch('files.proj', 'vs')
  endfunction
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
-index 63869eb8..9745884a 100644
+index 63869eb8..786a0283 100644
 --- ./vimrc/.vim/plugin/common.vim
 +++ ./vimrc/.vim/plugin/common.vim
-@@ -263,7 +263,7 @@ function! Filter2Findresult()
+@@ -141,14 +141,17 @@ endfunction
+ function! OpenOrSwitch(buffername, openMode)
+     let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
+     let bnr = bufwinnr('^' . realpath . '$')
++    let l:line   = getline(line('.'))
++    let l:pattern = '\m\%(:\d\+\)\{1,2}\%(:.*\)\?'
++    let l:line_num= matchstr(l:line, l:pattern)
+ 
+     if bnr > 0
+         exe bnr . "wincmd w"
+-        exec 'e'
++        exec 'e' . '+' . l:line_num
+     elseif a:openMode ==? "goto"
+-        silent exec 'e ' . a:buffername
++        silent exec 'e ' . a:buffername . l:line_num
+     else
+-        silent exec 'topleft vs ' . a:buffername
++        silent exec 'topleft vs ' . a:buffername . l:line_num
+     endif
+ endfunction
+ 
+@@ -263,7 +266,7 @@ function! Filter2Findresult()
  endfunc
  
  function! Cd2ProjectRoot(filename)
@@ -107,16 +128,3 @@ index 63869eb8..9745884a 100644
  
      if csdbpath != "Nothing"
          exec "cd " . csdbpath
-diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index d0ab8688..7b48be95 100644
---- ./vimrc/.vim/plugin/keymap.vim
-+++ ./vimrc/.vim/plugin/keymap.vim
-@@ -480,7 +480,7 @@ nnoremap L :vs <C-R>"<cr>
- map <F5> :call VRun()<cr>
- map <F3> :call VDebug()<cr>
- " nnoremap gf gF<cr>
--nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
-+" nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
- map oo :call VimOpen()<cr>
- nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
- nnoremap <leader>1 :let @"=expand("%:p")<CR>
