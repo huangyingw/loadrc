@@ -46,6 +46,13 @@ index 00000000..10e89a8a
 +cd "$SCRIPTPATH"
 +
 +export PATH=$(echo $PATH | tr ":" "\n" | grep -v "anaconda3" | tr "\n" ":")
+diff --git a/cscope b/cscope
+index 55f601b2..cee5ee1e 160000
+--- ./cscope
++++ ./cscope
+@@ -1 +1 @@
+-Subproject commit 55f601b2519f45a5ee38b63d0d727f2f867eb33e
++Subproject commit cee5ee1e09979528535ebefdd1d873e9d9b4dbc6
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
 index 49656e55..b4469c8f 100755
 --- ./install_prerequisite.sh
