@@ -135,3 +135,20 @@ index 63869eb8..786a0283 100644
  
      if csdbpath != "Nothing"
          exec "cd " . csdbpath
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index d0ab8688..dd7ec810 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -507,3 +507,12 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
+ " open tig with Project root path
+ nnoremap <Leader>t :TigOpenProjectRootDir<CR>
+ nnoremap <leader>T :TigOpenCurrentFile<CR>
++nnoremap <silent> cl :call CopyLineInfo()<cr> 
++
++function! CopyLineInfo()
++    let b:csdbpath = Cd2ProjectRoot("files.proj")
++    let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
++    let content = relativePath . ':' . line('.') . ' ' . getline(line('.'))
++    let @+=content
++endfunction
++
