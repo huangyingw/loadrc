@@ -78,12 +78,12 @@ index 328d9be3..b4aaeb9c 100755
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
 diff --git a/neovim b/neovim
-index 98bb5c89..d21265b3 160000
+index 98bb5c89..8766930f 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 98bb5c891d54f57de00205c730229bf8b8439894
-+Subproject commit d21265b39f867332b89298b70bcc967cae25f0b3
++Subproject commit 8766930f616d4dc0b2f34c1ab4943590d4b30b2f
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
@@ -102,7 +102,7 @@ index 7d7359a3..27d015ae 100644
      call OpenOrSwitch('files.proj', 'vs')
  endfunction
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
-index 63869eb8..786a0283 100644
+index 63869eb8..a2f9a636 100644
 --- ./vimrc/.vim/plugin/common.vim
 +++ ./vimrc/.vim/plugin/common.vim
 @@ -141,14 +141,17 @@ endfunction
