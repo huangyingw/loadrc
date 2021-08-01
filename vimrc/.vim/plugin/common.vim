@@ -142,7 +142,7 @@ function! OpenOrSwitch(buffername, openMode)
     let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
     let bnr = bufwinnr('^' . realpath . '$')
     let l:line   = getline(line('.'))
-    let l:pattern = '\m\%(:\d\+\)\{1,2}\%(:.*\)\?'
+    let l:pattern = '\m\%(:\d\+\)\{1,2}'
     let l:line_num= matchstr(l:line, l:pattern)
 
     if bnr > 0
