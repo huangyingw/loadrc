@@ -148,7 +148,7 @@ function! OpenOrSwitch(buffername, openMode)
 
     if bnr > 0
         exe bnr . "wincmd w"
-        exec 'e'
+        exec 'e' . '+' . l:match
     elseif a:openMode ==? "goto"
         silent exec 'e ' . a:buffername . l:match
     else
