@@ -115,8 +115,11 @@ index 63869eb8..5ba1b10b 100644
  
      if bnr > 0
          exe bnr . "wincmd w"
--        exec 'e'
++        if l:line_num != ''
 +            exec 'e' . '+' . l:line_num
++        else
+             exec 'e'
++        endif
      elseif a:openMode ==? "goto"
 -        silent exec 'e ' . a:buffername
 +        silent exec 'e ' . a:buffername . l:line_num
@@ -143,7 +146,7 @@ index d0ab8688..78fb9e11 100644
  " open tig with Project root path
  nnoremap <Leader>t :TigOpenProjectRootDir<CR>
  nnoremap <leader>T :TigOpenCurrentFile<CR>
-+nnoremap <silent> cl :call CopyLineInfo()<cr> 
++nnoremap <silent> ml :call CopyLineInfo()<cr> 
 +
 +function! CopyLineInfo()
 +    let b:csdbpath = Cd2ProjectRoot("files.proj")
