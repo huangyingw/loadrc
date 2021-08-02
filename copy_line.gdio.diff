@@ -110,7 +110,7 @@ index 63869eb8..a2f9a636 100644
      let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
      let bnr = bufwinnr('^' . realpath . '$')
 +    let l:line   = getline(line('.'))
-+    let l:pattern = '\m\%(:\d\+\)\{1,2}\%(:.*\)\?'
++    let l:pattern = '\m\%(:\d\+\)\{1,2}'
 +    let l:line_num= matchstr(l:line, l:pattern)
  
      if bnr > 0
@@ -143,7 +143,7 @@ index d0ab8688..78fb9e11 100644
  " open tig with Project root path
  nnoremap <Leader>t :TigOpenProjectRootDir<CR>
  nnoremap <leader>T :TigOpenCurrentFile<CR>
-+nnoremap <silent> cl :call CopyLineInfo()<cr> 
++nnoremap <silent> ml :call CopyLineInfo()<cr> 
 +
 +function! CopyLineInfo()
 +    let b:csdbpath = Cd2ProjectRoot("files.proj")
