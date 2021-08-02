@@ -78,12 +78,12 @@ index 328d9be3..b4aaeb9c 100755
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
 diff --git a/neovim b/neovim
-index 98bb5c89..8766930f 160000
+index 98bb5c89..d969383f 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 98bb5c891d54f57de00205c730229bf8b8439894
-+Subproject commit 8766930f616d4dc0b2f34c1ab4943590d4b30b2f
++Subproject commit d969383fe313f6988f3d4e175c2fade60db564ed
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
@@ -102,10 +102,10 @@ index 7d7359a3..27d015ae 100644
      call OpenOrSwitch('files.proj', 'vs')
  endfunction
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
-index 63869eb8..a2f9a636 100644
+index 63869eb8..5ba1b10b 100644
 --- ./vimrc/.vim/plugin/common.vim
 +++ ./vimrc/.vim/plugin/common.vim
-@@ -141,14 +141,17 @@ endfunction
+@@ -141,14 +141,21 @@ endfunction
  function! OpenOrSwitch(buffername, openMode)
      let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
      let bnr = bufwinnr('^' . realpath . '$')
@@ -116,7 +116,7 @@ index 63869eb8..a2f9a636 100644
      if bnr > 0
          exe bnr . "wincmd w"
 -        exec 'e'
-+        exec 'e' . '+' . l:line_num
++            exec 'e' . '+' . l:line_num
      elseif a:openMode ==? "goto"
 -        silent exec 'e ' . a:buffername
 +        silent exec 'e ' . a:buffername . l:line_num
@@ -126,7 +126,7 @@ index 63869eb8..a2f9a636 100644
      endif
  endfunction
  
-@@ -263,7 +266,7 @@ function! Filter2Findresult()
+@@ -263,7 +270,7 @@ function! Filter2Findresult()
  endfunc
  
  function! Cd2ProjectRoot(filename)
@@ -136,7 +136,7 @@ index 63869eb8..a2f9a636 100644
      if csdbpath != "Nothing"
          exec "cd " . csdbpath
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index d0ab8688..dd7ec810 100644
+index d0ab8688..78fb9e11 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -507,3 +507,12 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
