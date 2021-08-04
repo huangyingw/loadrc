@@ -53,20 +53,52 @@ index 55f601b2..59b12b1a 160000
 @@ -1 +1 @@
 -Subproject commit 55f601b2519f45a5ee38b63d0d727f2f867eb33e
 +Subproject commit 59b12b1a8ded4b02262376e44732f3594405eafd
+diff --git a/install_basic.sh b/install_basic.sh
+index aeaf8ba1..c5237240 100755
+--- ./install_basic.sh
++++ ./install_basic.sh
+@@ -1,4 +1,4 @@
+-#!/bin/zsh
++#!/bin/bash
+ SCRIPT=$(realpath "$0") && \
+     SCRIPTPATH=$(dirname "$SCRIPT") && \
+     cd "$SCRIPTPATH" || cd ~/loadrc/
+diff --git a/install_basic_linux.sh b/install_basic_linux.sh
+index 7370103f..b7a0ec3b 100755
+--- ./install_basic_linux.sh
++++ ./install_basic_linux.sh
+@@ -1,4 +1,4 @@
+-#!/bin/zsh
++#!/bin/bash
+ SCRIPT=$(realpath "$0")
+ SCRIPTPATH=$(dirname "$SCRIPT")
+ cd "$SCRIPTPATH"
+@@ -9,6 +9,7 @@ then
+     exit 0
+ fi
+ 
++./setup_remote.sh
+ ./install_prerequisite.sh
+ ./install_gh.sh
+ ./install_nodejs.sh
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
-index 49656e55..b4469c8f 100755
+index 49656e55..97c1ee82 100755
 --- ./install_prerequisite.sh
 +++ ./install_prerequisite.sh
-@@ -4,7 +4,8 @@ apt-get update
- apt-get install -y \
-     mosh \
-     ssh \
+@@ -1,13 +1,5 @@
+ #!/bin/bash
+ 
+-apt-get update
+-apt-get install -y \
+-    mosh \
+-    ssh \
 -    tmux
-+    tmux \
-+    zsh
- 
- ./deploy_configurations.sh
- 
+-
+-./deploy_configurations.sh
+-
+ apt-get upgrade -y
+ apt-get purge -y totem totem-plugins
+ apt-get install -y \
 diff --git a/leetcoderc/restore.sh b/leetcoderc/restore.sh
 index 328d9be3..b4aaeb9c 100755
 --- ./leetcoderc/restore.sh
@@ -84,6 +116,33 @@ index 98bb5c89..b89cd4b1 160000
 @@ -1 +1 @@
 -Subproject commit 98bb5c891d54f57de00205c730229bf8b8439894
 +Subproject commit b89cd4b16173c26cdd6a575e599653be3a9a5f72
+diff --git a/setup.sh b/setup.sh
+index cc9fd3f1..608329fd 100755
+--- ./setup.sh
++++ ./setup.sh
+@@ -1,4 +1,4 @@
+-#!/bin/zsh
++#!/bin/bash
+ SCRIPT=$(realpath "$0") && \
+     SCRIPTPATH=$(dirname "$SCRIPT") && \
+     cd "$SCRIPTPATH" || cd ~/loadrc/
+diff --git a/setup_remote.sh b/setup_remote.sh
+new file mode 100755
+index 00000000..f0de7a8b
+--- /dev/null
++++ ./setup_remote.sh
+@@ -0,0 +1,11 @@
++#!/bin/bash
++
++apt-get update
++apt-get install -y \
++    mosh \
++    ssh \
++    tmux \
++    zsh
++
++./deploy_configurations.sh
++./swith-2-zsh.sh
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
 index 2b1dca6c..fb97a987 160000
 --- ./vimrc/.vim/bundle/neco-vim
