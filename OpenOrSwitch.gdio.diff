@@ -78,12 +78,19 @@ index 328d9be3..b4aaeb9c 100755
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
 diff --git a/neovim b/neovim
-index 98bb5c89..d969383f 160000
+index 98bb5c89..b89cd4b1 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 98bb5c891d54f57de00205c730229bf8b8439894
-+Subproject commit d969383fe313f6988f3d4e175c2fade60db564ed
++Subproject commit b89cd4b16173c26cdd6a575e599653be3a9a5f72
+diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
+index 2b1dca6c..fb97a987 160000
+--- ./vimrc/.vim/bundle/neco-vim
++++ ./vimrc/.vim/bundle/neco-vim
+@@ -1 +1 @@
+-Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
++Subproject commit fb97a98717450fca16e5d2f8db667f7df227ba3c
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
