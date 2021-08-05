@@ -63,12 +63,12 @@ index 00000000..10e89a8a
 +
 +export PATH=$(echo $PATH | tr ":" "\n" | grep -v "anaconda3" | tr "\n" ":")
 diff --git a/cscope b/cscope
-index 55f601b2..59b12b1a 160000
+index 55f601b2..c8258369 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 55f601b2519f45a5ee38b63d0d727f2f867eb33e
-+Subproject commit 59b12b1a8ded4b02262376e44732f3594405eafd-dirty
++Subproject commit c8258369e51db3fe64d4feb374dcf1cfee79ba6a
 diff --git a/install_basic.sh b/install_basic.sh
 index aeaf8ba1..c5237240 100755
 --- ./install_basic.sh
@@ -126,12 +126,12 @@ index 328d9be3..b4aaeb9c 100755
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
 diff --git a/neovim b/neovim
-index 98bb5c89..b89cd4b1 160000
+index 98bb5c89..54998927 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 98bb5c891d54f57de00205c730229bf8b8439894
-+Subproject commit b89cd4b16173c26cdd6a575e599653be3a9a5f72
++Subproject commit 54998927313345f3d65ea2d91d28ac3d71496917
 diff --git a/setup.sh b/setup.sh
 index cc9fd3f1..608329fd 100755
 --- ./setup.sh
@@ -160,12 +160,19 @@ index 00000000..f0de7a8b
 +./deploy_configurations.sh
 +./swith-2-zsh.sh
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..fb97a987 160000
+index 2b1dca6c..ec50b3cb 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit fb97a98717450fca16e5d2f8db667f7df227ba3c
++Subproject commit ec50b3cbb4537625c2aaba7601232a53ccd779aa
+diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
+index 7ef452b4..e83ca052 160000
+--- ./vimrc/.vim/bundle/swift.vim
++++ ./vimrc/.vim/bundle/swift.vim
+@@ -1 +1 @@
+-Subproject commit 7ef452b47f14a2bfed26324793777cf12d2a8d78
++Subproject commit e83ca052e88805b8b20bc2558e7995461665e306
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
@@ -174,12 +181,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 9befe3f0..d5dee38c 160000
+index 9befe3f0..7b0b8fb5 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 9befe3f0a9264593748b9feaef12900ee5ec2b96
-+Subproject commit d5dee38ca8ad03e33a44ef95fed7ad630a17b0fa
++Subproject commit 7b0b8fb54c39cf0027c356832b5b55283746eef6
 diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
 index 7d7359a3..27d015ae 100644
 --- ./vimrc/.vim/plugin/ShowVITAG.vim
@@ -227,6 +234,31 @@ index 63869eb8..5ba1b10b 100644
  
      if csdbpath != "Nothing"
          exec "cd " . csdbpath
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index 743b1b47..f746d9d6 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -645,7 +645,10 @@ function! s:Prune() abort
+     call asyncrun#run('<bang>', '', '~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
+ endfunction
+ 
+-function! s:Fr(find, replace) abort
++function! s:Fr(...) abort
++    let find = (a:0 >= 1) ? a:1 : ''
++    let replace = (a:0 >= 2) ? a:2 : ''
++    let word_only = (a:0 >= 3) ? a:3 : ''
+     call Cd2ProjectRoot("files.proj")
+ 
+     if expand('%:t') != 'index'
+@@ -654,7 +657,7 @@ function! s:Fr(find, replace) abort
+         let fileList = "files.proj"
+     endif
+ 
+-    exec '!~/loadrc/bashrc/fr.sh ' . '"' .  a:find . '"' . ' ' . '"' .  a:replace . '"' . ' ' . '"' .  fileList . '"'
++    exec '!~/loadrc/bashrc/fr.sh ' . '"' .  find . '"' . ' ' . '"' .  replace . '"' . ' ' . '"' .  fileList . '"' . ' ' . '"' .  word_only . '"' 
+     call s:Gs()
+ endfunction
+ 
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
 index d0ab8688..78fb9e11 100644
 --- ./vimrc/.vim/plugin/keymap.vim
