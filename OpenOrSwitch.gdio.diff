@@ -95,12 +95,19 @@ index 328d9be3..b4aaeb9c 100755
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
 diff --git a/neovim b/neovim
-index 98bb5c89..3e715b8d 160000
+index 98bb5c89..82f3b589 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 98bb5c891d54f57de00205c730229bf8b8439894
-+Subproject commit 3e715b8dfdfb9505be333a3060aa2499fe42ea00
++Subproject commit 82f3b58961e3165c62892af27969e24c84147d16
+diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
+index 2b1dca6c..fb97a987 160000
+--- ./vimrc/.vim/bundle/neco-vim
++++ ./vimrc/.vim/bundle/neco-vim
+@@ -1 +1 @@
+-Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
++Subproject commit fb97a98717450fca16e5d2f8db667f7df227ba3c
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
@@ -108,6 +115,13 @@ index 00000000..0a6ab17e
 +++ ./vimrc/.vim/bundle/vim-fetch
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 9befe3f0..d5dee38c 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 9befe3f0a9264593748b9feaef12900ee5ec2b96
++Subproject commit d5dee38ca8ad03e33a44ef95fed7ad630a17b0fa
 diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
 index 7d7359a3..27d015ae 100644
 --- ./vimrc/.vim/plugin/ShowVITAG.vim
