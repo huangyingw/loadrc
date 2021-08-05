@@ -9,6 +9,23 @@ index f74cb003..984b9375 100644
 +[submodule "vimrc/.vim/bundle/vim-fetch"]
 +	path = vimrc/.vim/bundle/vim-fetch
 +	url = git@github.com:wsdjeg/vim-fetch.git
+diff --git a/.mbp.rc b/.mbp.rc
+index 514389f0..9e7032fd 100755
+--- ./.mbp.rc
++++ ./.mbp.rc
+@@ -1,11 +1 @@
+-#!/bin/zsh
+-#alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
+-alias restartBluetooth='$HOME/loadrc/osxrc/restart_bluetooth.sh'
+-
+-if [ $(uname) = "Darwin" ]
+-then
+-    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
+-        then \
+-        sudo systemsetup -setcomputersleep Never; \
+-        fi
+-fi
++~/loadrc/setup_pbpaste-remote.sh
 diff --git a/Dockerfile b/Dockerfile
 index 08e0c80b..cd9bdf55 100644
 --- ./Dockerfile
@@ -78,19 +95,12 @@ index 328d9be3..b4aaeb9c 100755
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
 diff --git a/neovim b/neovim
-index 98bb5c89..b89cd4b1 160000
+index 98bb5c89..3e715b8d 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 98bb5c891d54f57de00205c730229bf8b8439894
-+Subproject commit b89cd4b16173c26cdd6a575e599653be3a9a5f72
-diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..fb97a987 160000
---- ./vimrc/.vim/bundle/neco-vim
-+++ ./vimrc/.vim/bundle/neco-vim
-@@ -1 +1 @@
--Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit fb97a98717450fca16e5d2f8db667f7df227ba3c
++Subproject commit 3e715b8dfdfb9505be333a3060aa2499fe42ea00
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
