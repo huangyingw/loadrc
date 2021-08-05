@@ -110,12 +110,12 @@ index 328d9be3..b4aaeb9c 100755
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
 diff --git a/neovim b/neovim
-index 98bb5c89..b89cd4b1 160000
+index 98bb5c89..82f3b589 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 98bb5c891d54f57de00205c730229bf8b8439894
-+Subproject commit b89cd4b16173c26cdd6a575e599653be3a9a5f72
++Subproject commit 82f3b58961e3165c62892af27969e24c84147d16
 diff --git a/setup.sh b/setup.sh
 index cc9fd3f1..608329fd 100755
 --- ./setup.sh
