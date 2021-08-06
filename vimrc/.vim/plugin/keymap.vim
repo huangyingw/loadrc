@@ -515,3 +515,4 @@ function! CopyLineInfo()
     let content = relativePath . ':' . line('.') . ' ' . getline(line('.'))
     let @+=content
 endfunction
+
