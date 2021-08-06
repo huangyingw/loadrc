@@ -1,0 +1,154 @@
+diff --git a/.gitmodules b/.gitmodules
+index f74cb003..984b9375 100644
+--- ./.gitmodules
++++ ./.gitmodules
+@@ -233,3 +233,6 @@
+ [submodule "neovim"]
+ 	path = neovim
+ 	url = git@github.com:huangyingw/neovim.git
++[submodule "vimrc/.vim/bundle/vim-fetch"]
++	path = vimrc/.vim/bundle/vim-fetch
++	url = git@github.com:wsdjeg/vim-fetch.git
+diff --git a/Dockerfile b/Dockerfile
+index 08e0c80b..cd9bdf55 100644
+--- ./Dockerfile
++++ ./Dockerfile
+@@ -4,6 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
+ WORKDIR /root/loadrc
+ 
+ COPY ./*.sh /root/loadrc/
++COPY ./neovim/*.sh /root/loadrc/neovim/
+ COPY ./.ssh/id_* /root/.ssh/
+ COPY ./entrypoint.sh /entrypoint.sh
+ 
+diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
+index 71ea722d..2c184654 100755
+--- ./bashrc/generate_files_proj.sh
++++ ./bashrc/generate_files_proj.sh
+@@ -15,6 +15,8 @@ then
+     exit 1
+ fi
+ 
++mkdir -p .git
++
+ TARGETEDIR=`realpath "$PWD"`
+ cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
+ cp -nv ~/loadrc/prunefile_template.conf ./prunefile.conf
+diff --git a/bashrc/remove_path.sh b/bashrc/remove_path.sh
+new file mode 100644
+index 00000000..10e89a8a
+--- /dev/null
++++ ./bashrc/remove_path.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++export PATH=$(echo $PATH | tr ":" "\n" | grep -v "anaconda3" | tr "\n" ":")
+diff --git a/cscope b/cscope
+index 55f601b2..cee5ee1e 160000
+--- ./cscope
++++ ./cscope
+@@ -1 +1 @@
+-Subproject commit 55f601b2519f45a5ee38b63d0d727f2f867eb33e
++Subproject commit cee5ee1e09979528535ebefdd1d873e9d9b4dbc6
+diff --git a/install_prerequisite.sh b/install_prerequisite.sh
+index 49656e55..b4469c8f 100755
+--- ./install_prerequisite.sh
++++ ./install_prerequisite.sh
+@@ -4,7 +4,8 @@ apt-get update
+ apt-get install -y \
+     mosh \
+     ssh \
+-    tmux
++    tmux \
++    zsh
+ 
+ ./deploy_configurations.sh
+ 
+diff --git a/leetcoderc/restore.sh b/leetcoderc/restore.sh
+index 328d9be3..b4aaeb9c 100755
+--- ./leetcoderc/restore.sh
++++ ./leetcoderc/restore.sh
+@@ -4,4 +4,4 @@ NUM="$1"
+ rsync -aHv --progress \
+     --ignore-existing \
+     ../downloads/"$NUM"/ \
+-    ./"$NUM"/
++    ../submissions/"$NUM"/
+diff --git a/neovim b/neovim
+index 98bb5c89..d969383f 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit 98bb5c891d54f57de00205c730229bf8b8439894
++Subproject commit d969383fe313f6988f3d4e175c2fade60db564ed
+diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
+new file mode 160000
+index 00000000..0a6ab17e
+--- /dev/null
++++ ./vimrc/.vim/bundle/vim-fetch
+@@ -0,0 +1 @@
++Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
+diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
+index 7d7359a3..27d015ae 100644
+--- ./vimrc/.vim/plugin/ShowVITAG.vim
++++ ./vimrc/.vim/plugin/ShowVITAG.vim
+@@ -1,4 +1,5 @@
+ function! ShowVITAG()
++    call Cd2Worktree()
+     call Cd2ProjectRoot("files.proj")
+     call OpenOrSwitch('files.proj', 'vs')
+ endfunction
+diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
+index 63869eb8..a2f9a636 100644
+--- ./vimrc/.vim/plugin/common.vim
++++ ./vimrc/.vim/plugin/common.vim
+@@ -141,14 +141,17 @@ endfunction
+ function! OpenOrSwitch(buffername, openMode)
+     let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
+     let bnr = bufwinnr('^' . realpath . '$')
++    let l:line   = getline(line('.'))
++    let l:pattern = '\m\%(:\d\+\)\{1,2}'
++    let l:line_num= matchstr(l:line, l:pattern)
+ 
+     if bnr > 0
+         exe bnr . "wincmd w"
+-        exec 'e'
++        exec 'e' . '+' . l:line_num
+     elseif a:openMode ==? "goto"
+-        silent exec 'e ' . a:buffername
++        silent exec 'e ' . a:buffername . l:line_num
+     else
+-        silent exec 'topleft vs ' . a:buffername
++        silent exec 'topleft vs ' . a:buffername . l:line_num
+     endif
+ endfunction
+ 
+@@ -263,7 +266,7 @@ function! Filter2Findresult()
+ endfunc
+ 
+ function! Cd2ProjectRoot(filename)
+-    let csdbpath = Find_in_parent(a:filename, Windowdir(), "/")
++    let csdbpath = Find_in_parent(a:filename, getcwd(), "/")
+ 
+     if csdbpath != "Nothing"
+         exec "cd " . csdbpath
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index d0ab8688..78fb9e11 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -507,3 +507,12 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
+ " open tig with Project root path
+ nnoremap <Leader>t :TigOpenProjectRootDir<CR>
+ nnoremap <leader>T :TigOpenCurrentFile<CR>
++nnoremap <silent> ml :call CopyLineInfo()<cr> 
++
++function! CopyLineInfo()
++    let b:csdbpath = Cd2ProjectRoot("files.proj")
++    let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
++    let content = relativePath . ':' . line('.') . ' ' . getline(line('.'))
++    let @+=content
++endfunction
++
