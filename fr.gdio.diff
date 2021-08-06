@@ -97,13 +97,6 @@ index 00000000..10e89a8a
 +cd "$SCRIPTPATH"
 +
 +export PATH=$(echo $PATH | tr ":" "\n" | grep -v "anaconda3" | tr "\n" ":")
-diff --git a/cscope b/cscope
-index 55f601b2..c8258369 160000
---- ./cscope
-+++ ./cscope
-@@ -1 +1 @@
--Subproject commit 55f601b2519f45a5ee38b63d0d727f2f867eb33e
-+Subproject commit c8258369e51db3fe64d4feb374dcf1cfee79ba6a
 diff --git a/install_basic.sh b/install_basic.sh
 index aeaf8ba1..c5237240 100755
 --- ./install_basic.sh
@@ -160,13 +153,6 @@ index 328d9be3..b4aaeb9c 100755
      ../downloads/"$NUM"/ \
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
-diff --git a/neovim b/neovim
-index 98bb5c89..ca4947a4 160000
---- ./neovim
-+++ ./neovim
-@@ -1 +1 @@
--Subproject commit 98bb5c891d54f57de00205c730229bf8b8439894
-+Subproject commit ca4947a47c3b5ce9b045b1cc6e3bc3c77758c57d
 diff --git a/setup.sh b/setup.sh
 index cc9fd3f1..608329fd 100755
 --- ./setup.sh
@@ -194,20 +180,6 @@ index 00000000..f0de7a8b
 +
 +./deploy_configurations.sh
 +./swith-2-zsh.sh
-diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..ec50b3cb 160000
---- ./vimrc/.vim/bundle/neco-vim
-+++ ./vimrc/.vim/bundle/neco-vim
-@@ -1 +1 @@
--Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit ec50b3cbb4537625c2aaba7601232a53ccd779aa
-diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
-index 7ef452b4..e83ca052 160000
---- ./vimrc/.vim/bundle/swift.vim
-+++ ./vimrc/.vim/bundle/swift.vim
-@@ -1 +1 @@
--Subproject commit 7ef452b47f14a2bfed26324793777cf12d2a8d78
-+Subproject commit e83ca052e88805b8b20bc2558e7995461665e306
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
@@ -215,13 +187,6 @@ index 00000000..0a6ab17e
 +++ ./vimrc/.vim/bundle/vim-fetch
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
-diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 9befe3f0..7b0b8fb5 160000
---- ./vimrc/.vim/bundle/vim-fugitive
-+++ ./vimrc/.vim/bundle/vim-fugitive
-@@ -1 +1 @@
--Subproject commit 9befe3f0a9264593748b9feaef12900ee5ec2b96
-+Subproject commit 7b0b8fb54c39cf0027c356832b5b55283746eef6
 diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
 index 7d7359a3..27d015ae 100644
 --- ./vimrc/.vim/plugin/ShowVITAG.vim
