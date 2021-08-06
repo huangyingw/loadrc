@@ -55,7 +55,6 @@
     default = current
 [gdif]
     ignore = *.diff
-    ignore = *.sh
     ignore = .gitconfig
     ignore = .login
     ignore = COMMIT_EDITMSG
