@@ -22,10 +22,10 @@ index 08e0c80b..cd9bdf55 100644
  COPY ./entrypoint.sh /entrypoint.sh
  
 diff --git a/bashrc/fr.sh b/bashrc/fr.sh
-index f58a2ee7..8775dc89 100755
+index f58a2ee7..dcc8f356 100755
 --- ./bashrc/fr.sh
 +++ ./bashrc/fr.sh
-@@ -1,4 +1,11 @@
+@@ -1,4 +1,16 @@
  #!/bin/zsh
 +
  FIND=$(echo $1 | sed 's/\//\\\//g')
@@ -33,7 +33,12 @@ index f58a2ee7..8775dc89 100755
 +
 +if [[ "$4" == "w" ]]
 +then
-+    xargs sed -i.bak "s/[[:<:]]${FIND}[[:>:]]/${REPLACE}/g" < "$3"
++    if [ $(uname) = "Darwin" ]
++    then
++        xargs sed -i.bak "s/[[:<:]]${FIND}[[:>:]]/${REPLACE}/g" < "$3"
++    else
++        xargs sed -i.bak "s/\b${FIND}\b/${REPLACE}/g" < "$3"
++    fi
 +else
      xargs sed -i.bak  "s/${FIND}/${REPLACE}/g" < "$3"
 +fi
@@ -160,19 +165,12 @@ index 00000000..f0de7a8b
 +./deploy_configurations.sh
 +./swith-2-zsh.sh
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..ec50b3cb 160000
+index 2b1dca6c..fb97a987 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit ec50b3cbb4537625c2aaba7601232a53ccd779aa
-diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
-index 7ef452b4..e83ca052 160000
---- ./vimrc/.vim/bundle/swift.vim
-+++ ./vimrc/.vim/bundle/swift.vim
-@@ -1 +1 @@
--Subproject commit 7ef452b47f14a2bfed26324793777cf12d2a8d78
-+Subproject commit e83ca052e88805b8b20bc2558e7995461665e306
++Subproject commit fb97a98717450fca16e5d2f8db667f7df227ba3c
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
