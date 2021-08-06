@@ -131,12 +131,12 @@ index 328d9be3..b4aaeb9c 100755
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
 diff --git a/neovim b/neovim
-index 98bb5c89..54998927 160000
+index 98bb5c89..ca4947a4 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 98bb5c891d54f57de00205c730229bf8b8439894
-+Subproject commit 54998927313345f3d65ea2d91d28ac3d71496917
++Subproject commit ca4947a47c3b5ce9b045b1cc6e3bc3c77758c57d
 diff --git a/setup.sh b/setup.sh
 index cc9fd3f1..608329fd 100755
 --- ./setup.sh
@@ -165,12 +165,19 @@ index 00000000..f0de7a8b
 +./deploy_configurations.sh
 +./swith-2-zsh.sh
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..fb97a987 160000
+index 2b1dca6c..ec50b3cb 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit fb97a98717450fca16e5d2f8db667f7df227ba3c
++Subproject commit ec50b3cbb4537625c2aaba7601232a53ccd779aa
+diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
+index 7ef452b4..e83ca052 160000
+--- ./vimrc/.vim/bundle/swift.vim
++++ ./vimrc/.vim/bundle/swift.vim
+@@ -1 +1 @@
+-Subproject commit 7ef452b47f14a2bfed26324793777cf12d2a8d78
++Subproject commit e83ca052e88805b8b20bc2558e7995461665e306
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
