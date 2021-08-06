@@ -141,14 +141,21 @@ endfunction
 function! OpenOrSwitch(buffername, openMode)
     let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
     let bnr = bufwinnr('^' . realpath . '$')
+    let l:line   = getline(line('.'))
+    let l:pattern = '\m\%(:\d\+\)\{1,2}'
+    let l:line_num= matchstr(l:line, l:pattern)
 
     if bnr > 0
         exe bnr . "wincmd w"
-        exec 'e'
+        if l:line_num != ''
+            exec 'e' . '+' . l:line_num
+        else
+            exec 'e'
+        endif
     elseif a:openMode ==? "goto"
-        silent exec 'e ' . a:buffername
+        silent exec 'e ' . a:buffername . l:line_num
     else
-        silent exec 'topleft vs ' . a:buffername
+        silent exec 'topleft vs ' . a:buffername . l:line_num
     endif
 endfunction
 
@@ -263,7 +270,7 @@ function! Filter2Findresult()
 endfunc
 
 function! Cd2ProjectRoot(filename)
-    let csdbpath = Find_in_parent(a:filename, Windowdir(), "/")
+    let csdbpath = Find_in_parent(a:filename, getcwd(), "/")
 
     if csdbpath != "Nothing"
         exec "cd " . csdbpath
