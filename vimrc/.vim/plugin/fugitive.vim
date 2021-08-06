@@ -657,7 +657,7 @@ function! s:Fr(...) abort
         let fileList = "files.proj"
     endif
 
-    exec '!~/loadrc/bashrc/fr.sh ' . '"' .  find . '"' . ' ' . '"' .  replace . '"' . ' ' . '"' .  fileList . '"' . ' ' . '"' .  word_only . '"'
+    exec '!~/loadrc/bashrc/fr.sh ' . '"' .  find . '"' . ' ' . '"' .  replace . '"' . ' ' . '"' .  fileList . '"' . ' ' . '"' .  word_only . '"' 
     call s:Gs()
 endfunction
 
