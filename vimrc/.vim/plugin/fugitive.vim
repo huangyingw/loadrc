@@ -645,7 +645,10 @@ function! s:Prune() abort
     call asyncrun#run('<bang>', '', '~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
 endfunction
 
-function! s:Fr(find, replace) abort
+function! s:Fr(...) abort
+    let find = (a:0 >= 1) ? a:1 : ''
+    let replace = (a:0 >= 2) ? a:2 : ''
+    let word_only = (a:0 >= 3) ? a:3 : ''
     call Cd2ProjectRoot("files.proj")
 
     if expand('%:t') != 'index'
@@ -654,7 +657,7 @@ function! s:Fr(find, replace) abort
         let fileList = "files.proj"
     endif
 
-    exec '!~/loadrc/bashrc/fr.sh ' . '"' .  a:find . '"' . ' ' . '"' .  a:replace . '"' . ' ' . '"' .  fileList . '"'
+    exec '!~/loadrc/bashrc/fr.sh ' . '"' .  find . '"' . ' ' . '"' .  replace . '"' . ' ' . '"' .  fileList . '"' . ' ' . '"' .  word_only . '"'
     call s:Gs()
 endfunction
 
