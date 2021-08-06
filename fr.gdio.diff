@@ -1,3 +1,16 @@
+diff --git a/.gitconfig_sample b/.gitconfig_sample
+index 5ed35a81..639febb9 100644
+--- ./.gitconfig_sample
++++ ./.gitconfig_sample
+@@ -8,7 +8,7 @@
+     remote = origin
+ [gsync]
+     remote = authorVar
+-    branch = master
++    target = authorVar/master
+ [merge]
+     allow = true
+ [branch "dev"]
 diff --git a/.gitmodules b/.gitmodules
 index f74cb003..984b9375 100644
 --- ./.gitmodules
@@ -9,6 +22,23 @@ index f74cb003..984b9375 100644
 +[submodule "vimrc/.vim/bundle/vim-fetch"]
 +	path = vimrc/.vim/bundle/vim-fetch
 +	url = git@github.com:wsdjeg/vim-fetch.git
+diff --git a/.mbp.rc b/.mbp.rc
+index 514389f0..9e7032fd 100755
+--- ./.mbp.rc
++++ ./.mbp.rc
+@@ -1,11 +1 @@
+-#!/bin/zsh
+-#alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
+-alias restartBluetooth='$HOME/loadrc/osxrc/restart_bluetooth.sh'
+-
+-if [ $(uname) = "Darwin" ]
+-then
+-    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
+-        then \
+-        sudo systemsetup -setcomputersleep Never; \
+-        fi
+-fi
++~/loadrc/setup_pbpaste-remote.sh
 diff --git a/Dockerfile b/Dockerfile
 index 08e0c80b..cd9bdf55 100644
 --- ./Dockerfile
