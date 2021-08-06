@@ -1,13 +1,5 @@
 #!/bin/bash
 
-apt-get update
-apt-get install -y \
-    mosh \
-    ssh \
-    tmux
-
-./deploy_configurations.sh
-
 apt-get upgrade -y
 apt-get purge -y totem totem-plugins
 apt-get install -y \
