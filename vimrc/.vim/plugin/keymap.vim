@@ -507,3 +507,11 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
 " open tig with Project root path
 nnoremap <Leader>t :TigOpenProjectRootDir<CR>
 nnoremap <leader>T :TigOpenCurrentFile<CR>
+nnoremap <silent> ml :call CopyLineInfo()<cr>
+
+function! CopyLineInfo()
+    let b:csdbpath = Cd2ProjectRoot("files.proj")
+    let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
+    let content = relativePath . ':' . line('.') . ' ' . getline(line('.'))
+    let @+=content
+endfunction
