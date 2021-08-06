@@ -301,6 +301,7 @@
 ./bashrc/reboot.sh
 ./bashrc/recurse.sh
 ./bashrc/redo.sh
+./bashrc/remove_path.sh
 ./bashrc/replace_spaces_in_file_names.sh
 ./bashrc/rmEmpty.sh
 ./bashrc/rsleep.sh
@@ -698,6 +699,7 @@
 ./setup.sh
 ./setup_bidirectional_clipboard.sh
 ./setup_pbpaste-remote.sh
+./setup_remote.sh
 ./sqlrc/.login
 ./sqlrc/mysqlback.sh
 ./sqlrc/xsql.sh
