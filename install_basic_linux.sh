@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
@@ -9,6 +9,7 @@ then
     exit 0
 fi
 
+./setup_remote.sh
 ./install_prerequisite.sh
 ./install_gh.sh
 ./install_nodejs.sh
