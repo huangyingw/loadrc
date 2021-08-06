@@ -116,6 +116,8 @@
 ./.git/modules/vimrc/.vim/bundle/vim-buffergator/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-docker-compose-syntax/config
 ./.git/modules/vimrc/.vim/bundle/vim-docker-compose-syntax/info/exclude
+./.git/modules/vimrc/.vim/bundle/vim-fetch/config
+./.git/modules/vimrc/.vim/bundle/vim-fetch/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-fugitive/config
 ./.git/modules/vimrc/.vim/bundle/vim-fugitive/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-gradle/config
@@ -977,8 +979,10 @@
 ./vimrc/.vim/bundle/neco-vim/autoload/necovim.vim
 ./vimrc/.vim/bundle/neco-vim/autoload/necovim/helper.vim
 ./vimrc/.vim/bundle/neco-vim/autoload/neocomplete/sources/vim.vim
+./vimrc/.vim/bundle/neco-vim/denops/ddc/sources/necovim.ts
 ./vimrc/.vim/bundle/neco-vim/doc/necovim.txt
 ./vimrc/.vim/bundle/neco-vim/doc/tags
+./vimrc/.vim/bundle/neco-vim/plugin/ddc/necovim.vim
 ./vimrc/.vim/bundle/neco-vim/plugin/necovim.vim
 ./vimrc/.vim/bundle/neco-vim/rplugin/python3/deoplete/source/vim.py
 ./vimrc/.vim/bundle/neoinclude.vim/.gitignore
