@@ -96,7 +96,7 @@ index 98bb5c89..5dba584c 160000
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 98bb5c891d54f57de00205c730229bf8b8439894
-+Subproject commit 5dba584c0d5a2f31d63487c4c078c760168c9ff5-dirty
++Subproject commit 5dba584c0d5a2f31d63487c4c078c760168c9ff5
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
 index 2b1dca6c..ec50b3cb 160000
 --- ./vimrc/.vim/bundle/neco-vim
