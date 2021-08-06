@@ -8,7 +8,7 @@
     remote = origin
 [gsync]
     remote = authorVar
-    branch = master
+    target = authorVar/master
 [merge]
     allow = true
 [branch "dev"]

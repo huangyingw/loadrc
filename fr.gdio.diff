@@ -1,3 +1,16 @@
+diff --git a/.gitconfig_sample b/.gitconfig_sample
+index 5ed35a81..639febb9 100644
+--- ./.gitconfig_sample
++++ ./.gitconfig_sample
+@@ -8,7 +8,7 @@
+     remote = origin
+ [gsync]
+     remote = authorVar
+-    branch = master
++    target = authorVar/master
+ [merge]
+     allow = true
+ [branch "dev"]
 diff --git a/.gitmodules b/.gitmodules
 index f74cb003..984b9375 100644
 --- ./.gitmodules
@@ -9,6 +22,23 @@ index f74cb003..984b9375 100644
 +[submodule "vimrc/.vim/bundle/vim-fetch"]
 +	path = vimrc/.vim/bundle/vim-fetch
 +	url = git@github.com:wsdjeg/vim-fetch.git
+diff --git a/.mbp.rc b/.mbp.rc
+index 514389f0..9e7032fd 100755
+--- ./.mbp.rc
++++ ./.mbp.rc
+@@ -1,11 +1 @@
+-#!/bin/zsh
+-#alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
+-alias restartBluetooth='$HOME/loadrc/osxrc/restart_bluetooth.sh'
+-
+-if [ $(uname) = "Darwin" ]
+-then
+-    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
+-        then \
+-        sudo systemsetup -setcomputersleep Never; \
+-        fi
+-fi
++~/loadrc/setup_pbpaste-remote.sh
 diff --git a/Dockerfile b/Dockerfile
 index 08e0c80b..cd9bdf55 100644
 --- ./Dockerfile
@@ -67,13 +97,6 @@ index 00000000..10e89a8a
 +cd "$SCRIPTPATH"
 +
 +export PATH=$(echo $PATH | tr ":" "\n" | grep -v "anaconda3" | tr "\n" ":")
-diff --git a/cscope b/cscope
-index 55f601b2..c8258369 160000
---- ./cscope
-+++ ./cscope
-@@ -1 +1 @@
--Subproject commit 55f601b2519f45a5ee38b63d0d727f2f867eb33e
-+Subproject commit c8258369e51db3fe64d4feb374dcf1cfee79ba6a
 diff --git a/install_basic.sh b/install_basic.sh
 index aeaf8ba1..c5237240 100755
 --- ./install_basic.sh
@@ -130,13 +153,6 @@ index 328d9be3..b4aaeb9c 100755
      ../downloads/"$NUM"/ \
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
-diff --git a/neovim b/neovim
-index 98bb5c89..54998927 160000
---- ./neovim
-+++ ./neovim
-@@ -1 +1 @@
--Subproject commit 98bb5c891d54f57de00205c730229bf8b8439894
-+Subproject commit 54998927313345f3d65ea2d91d28ac3d71496917
 diff --git a/setup.sh b/setup.sh
 index cc9fd3f1..608329fd 100755
 --- ./setup.sh
@@ -164,13 +180,6 @@ index 00000000..f0de7a8b
 +
 +./deploy_configurations.sh
 +./swith-2-zsh.sh
-diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..fb97a987 160000
---- ./vimrc/.vim/bundle/neco-vim
-+++ ./vimrc/.vim/bundle/neco-vim
-@@ -1 +1 @@
--Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit fb97a98717450fca16e5d2f8db667f7df227ba3c
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
@@ -178,13 +187,6 @@ index 00000000..0a6ab17e
 +++ ./vimrc/.vim/bundle/vim-fetch
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
-diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 9befe3f0..7b0b8fb5 160000
---- ./vimrc/.vim/bundle/vim-fugitive
-+++ ./vimrc/.vim/bundle/vim-fugitive
-@@ -1 +1 @@
--Subproject commit 9befe3f0a9264593748b9feaef12900ee5ec2b96
-+Subproject commit 7b0b8fb54c39cf0027c356832b5b55283746eef6
 diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
 index 7d7359a3..27d015ae 100644
 --- ./vimrc/.vim/plugin/ShowVITAG.vim
