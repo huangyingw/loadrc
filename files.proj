@@ -2355,7 +2355,6 @@
 "./vimrc/.vim/bundle/vim-fetch/README.md"
 "./vimrc/.vim/bundle/vim-fetch/autoload/fetch.vim"
 "./vimrc/.vim/bundle/vim-fetch/autoload/stay/integrate/fetch.vim"
-"./vimrc/.vim/bundle/vim-fetch/doc/tags"
 "./vimrc/.vim/bundle/vim-fetch/doc/vim-fetch.txt"
 "./vimrc/.vim/bundle/vim-fetch/plugin/fetch.vim"
 "./vimrc/.vim/bundle/vim-fetch/test/vimrc"
