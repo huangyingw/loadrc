@@ -1,10 +1,39 @@
+diff --git a/.gitconfig_sample b/.gitconfig_sample
+index 639febb9..0ea38ff6 100644
+--- ./.gitconfig_sample
++++ ./.gitconfig_sample
+@@ -8,7 +8,7 @@
+     remote = origin
+ [gsync]
+     remote = authorVar
+-    target = authorVar/master
++    target = authorVar/branchVar
+ [merge]
+     allow = true
+ [branch "dev"]
+diff --git a/gitrc/gcl.sh b/gitrc/gcl.sh
+index e118a4de..e1f58816 100755
+--- ./gitrc/gcl.sh
++++ ./gitrc/gcl.sh
+@@ -18,7 +18,10 @@ urlVar=$(echo "$urlVar" | sed 's/\//\\\//g')
+ sed -i.bak "s|urlVar|$urlVar|g;s|repoVar|${author}_${repo}|g;s|authorVar|$author|g" "$target"/.gitconfig
+ echo ".gitconfig --> $(realpath ${target}/.gitconfig)"
+ 
+-cd "$target" && \
++cd "$target"
++CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
++sed -i.bak "s|branchVar|$CURRENT_BRANCH|g" .gitconfig
++
+ git remote remove origin ; \
+     $HOME/loadrc/gitrc/gcob.sh dev && \
+     $HOME/loadrc/gitrc/gdev.sh && \
 diff --git a/neovim b/neovim
-index 03e622e5..70c0b531 160000
+index 03e622e5..2652732b 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 03e622e58686d209978eddf625a5f1ab7b69d491
-+Subproject commit 70c0b5314cbb6a96b2f38a1b4b293e056eba82c4
++Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
 index ec50b3cb..ba9b6535 160000
 --- ./vimrc/.vim/bundle/neco-vim
