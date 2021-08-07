@@ -2898,7 +2898,6 @@
 "./vimrc/.vim/plugin/bundle.vim"
 "./vimrc/.vim/plugin/clipboard.vim"
 "./vimrc/.vim/plugin/common.vim"
-"./vimrc/.vim/plugin/copypath.vim"
 "./vimrc/.vim/plugin/dictionary.vim"
 "./vimrc/.vim/plugin/diff-options.vim"
 "./vimrc/.vim/plugin/fugitive.vim"
@@ -2949,4 +2948,4 @@
 "./zerotierrc/install.sh"
 "./zerotierrc/restart.sh"
 "./zerotierrc/zerotierrc.conf"
-"dev.gdio.diff"
+"copypath.gdio.diff"
