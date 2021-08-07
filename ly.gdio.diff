@@ -1,10 +1,10 @@
 diff --git a/neovim b/neovim
-index 03e622e5..277694e5 160000
+index 03e622e5..70c0b531 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 03e622e58686d209978eddf625a5f1ab7b69d491
-+Subproject commit 277694e5e1777ff9ce35fc914cfaccdc27e26236-dirty
++Subproject commit 70c0b5314cbb6a96b2f38a1b4b293e056eba82c4
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
 index ec50b3cb..ba9b6535 160000
 --- ./vimrc/.vim/bundle/neco-vim
@@ -18,7 +18,7 @@ index 7b0b8fb5..a8d0cbeb 160000
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 7b0b8fb54c39cf0027c356832b5b55283746eef6
-+Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c-dirty
++Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
 index 78fb9e11..ecd31b60 100644
 --- ./vimrc/.vim/plugin/keymap.vim
