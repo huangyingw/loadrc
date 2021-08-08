@@ -514,6 +514,6 @@ function! CopyLineInfo()
     let b:csdbpath = Cd2ProjectRoot("files.proj")
     let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
     let content = relativePath . ':' . line('.') . ' ' . @"
-    let @+=content
+    let @*=content
 endfunction
 
