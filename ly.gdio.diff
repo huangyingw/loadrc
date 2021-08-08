@@ -1,3 +1,32 @@
+diff --git a/.gitconfig_sample b/.gitconfig_sample
+index 639febb9..0ea38ff6 100644
+--- ./.gitconfig_sample
++++ ./.gitconfig_sample
+@@ -8,7 +8,7 @@
+     remote = origin
+ [gsync]
+     remote = authorVar
+-    target = authorVar/master
++    target = authorVar/branchVar
+ [merge]
+     allow = true
+ [branch "dev"]
+diff --git a/gitrc/gcl.sh b/gitrc/gcl.sh
+index e118a4de..e1f58816 100755
+--- ./gitrc/gcl.sh
++++ ./gitrc/gcl.sh
+@@ -18,7 +18,10 @@ urlVar=$(echo "$urlVar" | sed 's/\//\\\//g')
+ sed -i.bak "s|urlVar|$urlVar|g;s|repoVar|${author}_${repo}|g;s|authorVar|$author|g" "$target"/.gitconfig
+ echo ".gitconfig --> $(realpath ${target}/.gitconfig)"
+ 
+-cd "$target" && \
++cd "$target"
++CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
++sed -i.bak "s|branchVar|$CURRENT_BRANCH|g" .gitconfig
++
+ git remote remove origin ; \
+     $HOME/loadrc/gitrc/gcob.sh dev && \
+     $HOME/loadrc/gitrc/gdev.sh && \
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
 index a8d0cbeb..6b7caf0e 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
@@ -5,11 +34,105 @@ index a8d0cbeb..6b7caf0e 160000
 @@ -1 +1 @@
 -Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
 +Subproject commit 6b7caf0e186cc0070a54a93833c43cd345945e81
+diff --git a/vimrc/.vim/plugin/copypath.vim b/vimrc/.vim/plugin/copypath.vim
+deleted file mode 100755
+index 65740cb6..00000000
+--- ./vimrc/.vim/plugin/copypath.vim
++++ /dev/null
+@@ -1,88 +0,0 @@
+-" copypath.vim : Copy current editing file path to clipboard.
+-"
+-" Name Of File: copypath.vim
+-" Maintainer:   omi taku <mail@nanasi.jp>
+-" URL:          http://nanasi.jp/
+-" Script URL:   http://www.vim.org/scripts/script.php?script_id=1456
+-" Last Change:  2009/12/16
+-" Version:      1.0
+-"
+-" Installation:
+-"    1. Unzip copypath.zip ,
+-"       and extract there to your vim runtimepath directory ,
+-"       $HOME/vimfiles/plugin or $HOME/.vim/plugin directory directory.
+-"
+-"       Refer to ':help add-plugin', ':help add-global-plugin' and ':help runtimepath'
+-"       for more details about Vim plugins.
+-"
+-"    2. Restart Vim.
+-"    3. To run this script, Vim needs to be compiled with "+clipboard" option.
+-"
+-" Usage:
+-"    This script adds two new command ":CopyPath" and ":CopyFileName".
+-"    You can use the ":CopyPath" command to copy file path to clipboard,
+-"    and you can use the ":CopyFileName" command to copy file name to clipboard.
+-"
+-"    :CopyPath
+-"        copy current editing file full path to clipboard.
+-"        And, if you set g:copypath_copy_to_unnamed_register option to 1 then,
+-"        copy file full path to unnamed register too.
+-"        Default, not copy to unnamed register.
+-"
+-"    :CopyFileName
+-"        copy current editing file name to clipboard.
+-"        And, if you set g:copypath_copy_to_unnamed_register option to 1 then,
+-"        copy file name to unnamed register too.
+-"        Default, not copy to unnamed register.
+-"
+-" Configuration:
+-"    g:copypath_copy_to_unnamed_register
+-"       set this option value to 1 then, copy file path and name to unnamed register too.
+-"   >
+-"       let g:copypath_copy_to_unnamed_register = 1
+-"   <
+-"
+-" Note:
+-"    o  To run this script, Vim needs to be compiled with "+clipboard" option.
+-"
+-" History:
+-"    1.0     o  change uploading archive file format to zip format.
+-"    0.2     o  unnamed register copy option is added.
+-"    0.1.2   o  document is updated.
+-"    0.1.1   o  fix bug.
+-"    0.1     o  Initial upload.
+-
+-
+-" if plugin is already loaded then, not load plugin.
+-if exists("g:loaded_copypath")
+-    finish
+-endif
+-let g:loaded_copypath = 1
+-
+-" if option is set then use open.
+-if !exists('g:copypath_copy_to_unnamed_register')
+-    let g:copypath_copy_to_unnamed_register = 0
+-endif
+-
+-function CopyPath()
+-    let @+=expand('%:p')
+-    " copy unnamed register.
+-    if g:copypath_copy_to_unnamed_register
+-        let @"=expand('%:p')
+-    endif
+-endfunction
+-
+-function CopyFileName()
+-    let @+=expand('%:t')
+-    " copy unnamed register.
+-    if g:copypath_copy_to_unnamed_register
+-        let @"=expand('%:t')
+-    endif
+-endfunction
+-
+-command! -nargs=0 CopyPath     call CopyPath()
+-command! -nargs=0 CopyFileName call CopyFileName()
+-
+-finish
+-
+-" vim: set ts=4 sts=4 sw=4 et nowrap :
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 78fb9e11..b39393e6 100644
+index 78fb9e11..2f614bf3 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
-@@ -507,12 +507,13 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
+@@ -507,12 +507,19 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
  " open tig with Project root path
  nnoremap <Leader>t :TigOpenProjectRootDir<CR>
  nnoremap <leader>T :TigOpenCurrentFile<CR>
@@ -21,8 +144,13 @@ index 78fb9e11..b39393e6 100644
      let b:csdbpath = Cd2ProjectRoot("files.proj")
      let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
 -    let content = relativePath . ':' . line('.') . ' ' . getline(line('.'))
--    let @+=content
 +    let content = relativePath . ':' . line('.') . ' ' . @"
-+    let @*=content
++    let os = substitute(system('uname'), "\n", "", "")
++
++    if os == "Linux"
+         let @+=content
++    else
++        let @*=content
++    endif
  endfunction
  
