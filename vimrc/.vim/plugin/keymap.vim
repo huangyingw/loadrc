@@ -515,6 +515,6 @@ function! CopyLineInfo()
     let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
     let content = relativePath . ':' . line('.') . ' ' . @"
     let os = substitute(system('uname'), "\n", "", "")
-    let @*=content
+    let @"=content
 endfunction
 
