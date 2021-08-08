@@ -149,10 +149,10 @@ index 65740cb6..00000000
 -
 -" vim: set ts=4 sts=4 sw=4 et nowrap :
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 78fb9e11..6aa0230d 100644
+index 78fb9e11..fda211ae 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
-@@ -510,9 +510,11 @@ nnoremap <leader>T :TigOpenCurrentFile<CR>
+@@ -510,9 +510,10 @@ nnoremap <leader>T :TigOpenCurrentFile<CR>
  nnoremap <silent> ml :call CopyLineInfo()<cr> 
  
  function! CopyLineInfo()
@@ -162,7 +162,6 @@ index 78fb9e11..6aa0230d 100644
 -    let content = relativePath . ':' . line('.') . ' ' . getline(line('.'))
 -    let @+=content
 +    let content = relativePath . ':' . line('.') . ' ' . @"
-+    let os = substitute(system('uname'), "\n", "", "")
 +    let @"=content
  endfunction
  
