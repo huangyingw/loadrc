@@ -28,12 +28,12 @@ index e118a4de..e1f58816 100755
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
 diff --git a/neovim b/neovim
-index 2652732b..2c857013 160000
+index 2652732b..613bee83 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
-+Subproject commit 2c857013df5adda8d59a632d9f6aaf352e145499
++Subproject commit 613bee833e9ceaa1afb7c79faf5a6630b1dab547
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
 index a8d0cbeb..42512026 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
