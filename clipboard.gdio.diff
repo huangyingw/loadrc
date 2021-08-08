@@ -27,13 +27,33 @@ index e118a4de..e1f58816 100755
  git remote remove origin ; \
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
+diff --git a/neovim b/neovim
+index 2652732b..2c857013 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
++Subproject commit 2c857013df5adda8d59a632d9f6aaf352e145499
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index a8d0cbeb..6b7caf0e 160000
+index a8d0cbeb..42512026 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
-+Subproject commit 6b7caf0e186cc0070a54a93833c43cd345945e81
++Subproject commit 425120268c5e4589dd628b1f71401ec98512baf9
+diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
+deleted file mode 100644
+index 6ccf639b..00000000
+--- ./vimrc/.vim/plugin/clipboard.vim
++++ /dev/null
+@@ -1,7 +0,0 @@
+-let os = substitute(system('uname'), "\n", "", "")
+-
+-if os == "Linux"
+-    set clipboard=unnamedplus
+-else
+-    set clipboard=unnamed
+-endif
 diff --git a/vimrc/.vim/plugin/copypath.vim b/vimrc/.vim/plugin/copypath.vim
 deleted file mode 100755
 index 65740cb6..00000000
@@ -129,28 +149,20 @@ index 65740cb6..00000000
 -
 -" vim: set ts=4 sts=4 sw=4 et nowrap :
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 78fb9e11..2f614bf3 100644
+index 78fb9e11..6aa0230d 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
-@@ -507,12 +507,19 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
- " open tig with Project root path
- nnoremap <Leader>t :TigOpenProjectRootDir<CR>
- nnoremap <leader>T :TigOpenCurrentFile<CR>
--nnoremap <silent> ml :call CopyLineInfo()<cr> 
-+nnoremap <silent> ly :call CopyLineInfo()<cr> 
+@@ -510,9 +510,11 @@ nnoremap <leader>T :TigOpenCurrentFile<CR>
+ nnoremap <silent> ml :call CopyLineInfo()<cr> 
  
  function! CopyLineInfo()
 +    normal yy
      let b:csdbpath = Cd2ProjectRoot("files.proj")
      let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
 -    let content = relativePath . ':' . line('.') . ' ' . getline(line('.'))
+-    let @+=content
 +    let content = relativePath . ':' . line('.') . ' ' . @"
 +    let os = substitute(system('uname'), "\n", "", "")
-+
-+    if os == "Linux"
-         let @+=content
-+    else
-+        let @*=content
-+    endif
++    let @"=content
  endfunction
  
