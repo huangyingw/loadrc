@@ -515,11 +515,6 @@ function! CopyLineInfo()
     let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
     let content = relativePath . ':' . line('.') . ' ' . @"
     let os = substitute(system('uname'), "\n", "", "")
-
-    if os == "Linux"
-        let @+=content
-    else
-        let @*=content
-    endif
+    let @*=content
 endfunction
 
