@@ -77,7 +77,7 @@ function! VFilter()
 endfunction
 
 function! ShowRemember()
-    let @+=expand('%:p')
+    let @"=expand('%:p')
     echom expand('%:p')
 endfunction
 
