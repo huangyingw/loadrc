@@ -1,5 +1,5 @@
 function! RememberQuit()
-    let @"=expand("%:p")
+    let @" = expand("%:p")
 
     if winbufnr(2) == -1 && &buftype !=# "terminal"
         return
@@ -77,7 +77,7 @@ function! VFilter()
 endfunction
 
 function! ShowRemember()
-    let @"=expand('%:p')
+    let @" = expand('%:p')
     echom expand('%:p')
 endfunction
 
@@ -353,13 +353,6 @@ function! VimSearch()
     call HighlightKeyword(keyword)
 endfunction
 
-function! OpenProjectRoot()
-    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    let @+=b:csdbpath
-    echom b:csdbpath
-    call OpenOrSwitch(b:csdbpath, 'vs')
-endfunction
-
 function! SwitchWinSize()
     if &winwidth == 1
         set winwidth=999999
@@ -418,7 +411,6 @@ nnoremap <leader>P "+P
 nnoremap tt :Autoformat<CR>:w!<cr>
 nnoremap D :only<CR>:vs %:p<cr>:set winwidth=1<cr><c-w>=
 " Quickly open current dir in current windows
-nnoremap <leader>d :call OpenProjectRoot()<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 nnoremap M zM
@@ -514,6 +506,6 @@ function! CopyLineInfo()
     let b:csdbpath = Cd2ProjectRoot("files.proj")
     let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
     let content = relativePath . ':' . line('.') . ' ' . @"
-    let @"=content
+    let @" = content
 endfunction
 
