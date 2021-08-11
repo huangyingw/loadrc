@@ -417,27 +417,7 @@ nnoremap M zM
 nnoremap R zR
 nmap <f2> :set number! number?<cr>
 nmap <leader>w :call WinDo('set wrap!') <cr>
-" Convert slashes to backslashes for Windows.
-if has('win32')
-    nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
-    nmap <leader>cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
 
-    " This will copy the path in 8.3 short format, for DOS and Windows 9x
-    nmap <leader>c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
-else
-    nmap <leader>cs :let @*=expand("%")<CR>
-    nmap <leader>cl :let @*=expand("%:p")<CR>
-endif
-if has('win32')
-    nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
-    nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
-
-    " This will copy the path in 8.3 short format, for DOS and Windows 9x
-    nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
-else
-    nmap fs :let @"=expand("%")<CR>
-    nmap <leader>p :let @"=expand("%:p")<CR>
-endif
 " nnoremap F :echom expand('%:p')<cr>
 vnoremap <silent>f :call VimSearch()<cr>
 vnoremap <silent>s :call GitSearch()<cr>
