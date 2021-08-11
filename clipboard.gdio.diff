@@ -28,19 +28,19 @@ index e118a4de..e1f58816 100755
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
 diff --git a/neovim b/neovim
-index 2652732b..613bee83 160000
+index 2652732b..ead7890a 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
-+Subproject commit 613bee833e9ceaa1afb7c79faf5a6630b1dab547
++Subproject commit ead7890a376585c8c12f5c748bb5f1f2d52511b0
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index a8d0cbeb..42512026 160000
+index a8d0cbeb..dea740bc 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
-+Subproject commit 425120268c5e4589dd628b1f71401ec98512baf9
++Subproject commit dea740bc53bf8e3ee69d011b24ac24f923c69970
 diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
 deleted file mode 100644
 index 6ccf639b..00000000
@@ -149,9 +149,18 @@ index 65740cb6..00000000
 -
 -" vim: set ts=4 sts=4 sw=4 et nowrap :
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 78fb9e11..fda211ae 100644
+index 78fb9e11..728f6a8e 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
+@@ -77,7 +77,7 @@ function! VFilter()
+ endfunction
+ 
+ function! ShowRemember()
+-    let @+=expand('%:p')
++    let @"=expand('%:p')
+     echom expand('%:p')
+ endfunction
+ 
 @@ -510,9 +510,10 @@ nnoremap <leader>T :TigOpenCurrentFile<CR>
  nnoremap <silent> ml :call CopyLineInfo()<cr> 
  
