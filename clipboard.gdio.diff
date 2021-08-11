@@ -34,6 +34,13 @@ index 2652732b..ead7890a 160000
 @@ -1 +1 @@
 -Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
 +Subproject commit ead7890a376585c8c12f5c748bb5f1f2d52511b0
+diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
+index ba9b6535..6cbf6f06 160000
+--- ./vimrc/.vim/bundle/neco-vim
++++ ./vimrc/.vim/bundle/neco-vim
+@@ -1 +1 @@
+-Subproject commit ba9b6535381690fc6773d682fc046d8ddd2a863a
++Subproject commit 6cbf6f0610e3c194366fc938b4a0ad572ad476e9
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
 index a8d0cbeb..dea740bc 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
