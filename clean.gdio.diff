@@ -28,12 +28,12 @@ index e118a4de..e1f58816 100755
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
 diff --git a/neovim b/neovim
-index 2652732b..ead7890a 160000
+index 2652732b..a43d11a2 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
-+Subproject commit ead7890a376585c8c12f5c748bb5f1f2d52511b0
++Subproject commit a43d11a242d26ca5e4d6cd9613f9993a9f69d569
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
 index ba9b6535..6cbf6f06 160000
 --- ./vimrc/.vim/bundle/neco-vim
@@ -42,12 +42,12 @@ index ba9b6535..6cbf6f06 160000
 -Subproject commit ba9b6535381690fc6773d682fc046d8ddd2a863a
 +Subproject commit 6cbf6f0610e3c194366fc938b4a0ad572ad476e9
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index a8d0cbeb..dea740bc 160000
+index a8d0cbeb..5d446053 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
-+Subproject commit dea740bc53bf8e3ee69d011b24ac24f923c69970
++Subproject commit 5d446053be0353e46e15c1ddeb13985e708d4c3d
 diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
 deleted file mode 100644
 index 6ccf639b..00000000
