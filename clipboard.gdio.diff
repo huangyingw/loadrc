@@ -28,12 +28,12 @@ index e118a4de..e1f58816 100755
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
 diff --git a/neovim b/neovim
-index 2652732b..ead7890a 160000
+index 2652732b..18f9bd55 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
-+Subproject commit ead7890a376585c8c12f5c748bb5f1f2d52511b0
++Subproject commit 18f9bd55dc1a8ecf830482b7c1f0761f45b3c6f2
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
 index ba9b6535..6cbf6f06 160000
 --- ./vimrc/.vim/bundle/neco-vim
@@ -41,26 +41,27 @@ index ba9b6535..6cbf6f06 160000
 @@ -1 +1 @@
 -Subproject commit ba9b6535381690fc6773d682fc046d8ddd2a863a
 +Subproject commit 6cbf6f0610e3c194366fc938b4a0ad572ad476e9
+diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
+index 3c03dc48..f4ec3e57 160000
+--- ./vimrc/.vim/bundle/tig-explorer.vim
++++ ./vimrc/.vim/bundle/tig-explorer.vim
+@@ -1 +1 @@
+-Subproject commit 3c03dc4828b3d52fa34843661f70bc02c44f6431
++Subproject commit f4ec3e57ccad1b9a28b8607c4a56a0affc686583
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index a8d0cbeb..dea740bc 160000
+index a8d0cbeb..69975503 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
-+Subproject commit dea740bc53bf8e3ee69d011b24ac24f923c69970
-diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
-deleted file mode 100644
-index 6ccf639b..00000000
---- ./vimrc/.vim/plugin/clipboard.vim
-+++ /dev/null
-@@ -1,7 +0,0 @@
--let os = substitute(system('uname'), "\n", "", "")
--
--if os == "Linux"
--    set clipboard=unnamedplus
--else
--    set clipboard=unnamed
--endif
++Subproject commit 699755033c7035db70595034ebadf438d31ad7fc
+diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
+index bbdfea4b..7657218f 160000
+--- ./vimrc/.vim/bundle/vim-scala
++++ ./vimrc/.vim/bundle/vim-scala
+@@ -1 +1 @@
+-Subproject commit bbdfea4b98fdb8866a8a6060ec1294643cfeb413
++Subproject commit 7657218f14837395a4e6759f15289bad6febd1b4
 diff --git a/vimrc/.vim/plugin/copypath.vim b/vimrc/.vim/plugin/copypath.vim
 deleted file mode 100755
 index 65740cb6..00000000
@@ -156,7 +157,7 @@ index 65740cb6..00000000
 -
 -" vim: set ts=4 sts=4 sw=4 et nowrap :
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 78fb9e11..182664a7 100644
+index 78fb9e11..490aaa00 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -77,7 +77,7 @@ function! VFilter()
@@ -182,7 +183,7 @@ index 78fb9e11..182664a7 100644
  function! SwitchWinSize()
      if &winwidth == 1
          set winwidth=999999
-@@ -418,7 +411,6 @@ nnoremap <leader>P "+P
+@@ -418,34 +411,13 @@ nnoremap <leader>P "+P
  nnoremap tt :Autoformat<CR>:w!<cr>
  nnoremap D :only<CR>:vs %:p<cr>:set winwidth=1<cr><c-w>=
  " Quickly open current dir in current windows
@@ -190,7 +191,34 @@ index 78fb9e11..182664a7 100644
  nnoremap <tab> %
  vnoremap <tab> %
  nnoremap M zM
-@@ -510,9 +502,10 @@ nnoremap <leader>T :TigOpenCurrentFile<CR>
+ nnoremap R zR
+ nmap <f2> :set number! number?<cr>
+ nmap <leader>w :call WinDo('set wrap!') <cr>
+-" Convert slashes to backslashes for Windows.
+-if has('win32')
+-    nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
+-    nmap <leader>cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+ 
+-    " This will copy the path in 8.3 short format, for DOS and Windows 9x
+-    nmap <leader>c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
+-else
+-    nmap <leader>cs :let @*=expand("%")<CR>
+-    nmap <leader>cl :let @*=expand("%:p")<CR>
+-endif
+-if has('win32')
+-    nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
+-    nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+-
+-    " This will copy the path in 8.3 short format, for DOS and Windows 9x
+-    nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
+-else
+-    nmap fs :let @"=expand("%")<CR>
+-    nmap <leader>p :let @"=expand("%:p")<CR>
+-endif
+ " nnoremap F :echom expand('%:p')<cr>
+ vnoremap <silent>f :call VimSearch()<cr>
+ vnoremap <silent>s :call GitSearch()<cr>
+@@ -510,9 +482,10 @@ nnoremap <leader>T :TigOpenCurrentFile<CR>
  nnoremap <silent> ml :call CopyLineInfo()<cr> 
  
  function! CopyLineInfo()
