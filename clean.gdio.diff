@@ -47,7 +47,7 @@ index a8d0cbeb..5d446053 160000
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
-+Subproject commit 5d446053be0353e46e15c1ddeb13985e708d4c3d-dirty
++Subproject commit 5d446053be0353e46e15c1ddeb13985e708d4c3d
 diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
 deleted file mode 100644
 index 6ccf639b..00000000
