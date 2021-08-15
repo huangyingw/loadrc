@@ -11,12 +11,6 @@ index 639febb9..0ea38ff6 100644
  [merge]
      allow = true
  [branch "dev"]
-diff --git a/cscope b/cscope
---- ./cscope
-+++ ./cscope
-@@ -1 +1 @@
--Subproject commit c8258369e51db3fe64d4feb374dcf1cfee79ba6a
-+Subproject commit c8258369e51db3fe64d4feb374dcf1cfee79ba6a-dirty
 diff --git a/gitrc/gcl.sh b/gitrc/gcl.sh
 index e118a4de..e1f58816 100755
 --- ./gitrc/gcl.sh
@@ -34,12 +28,12 @@ index e118a4de..e1f58816 100755
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
 diff --git a/neovim b/neovim
-index 2652732b..18f9bd55 160000
+index 2652732b..417af3f6 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
-+Subproject commit 18f9bd55dc1a8ecf830482b7c1f0761f45b3c6f2-dirty
++Subproject commit 417af3f681e87c06deea8214a1f7dd9f4f46d328
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
 index ba9b6535..6cbf6f06 160000
 --- ./vimrc/.vim/bundle/neco-vim
@@ -55,18 +49,19 @@ index 3c03dc48..f4ec3e57 160000
 -Subproject commit 3c03dc4828b3d52fa34843661f70bc02c44f6431
 +Subproject commit f4ec3e57ccad1b9a28b8607c4a56a0affc686583
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index a8d0cbeb..69975503 160000
+index a8d0cbeb..61166f51 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
-+Subproject commit 699755033c7035db70595034ebadf438d31ad7fc-dirty
++Subproject commit 61166f512b5bb7a2652d5ad244e0a48b18acd3ac
 diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
+index 02757c74..d6adab9d 160000
 --- ./vimrc/.vim/bundle/vim-pbcopy
 +++ ./vimrc/.vim/bundle/vim-pbcopy
 @@ -1 +1 @@
 -Subproject commit 02757c74d00c053e32ddd441c8186aaad92b7b9e
-+Subproject commit 02757c74d00c053e32ddd441c8186aaad92b7b9e-dirty
++Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
