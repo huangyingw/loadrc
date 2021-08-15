@@ -79,6 +79,7 @@ endfunction
 function! ShowRemember()
     let @" = expand('%:p')
     echom expand('%:p')
+    call SendTextToPbCopy(expand('%:p'))
 endfunction
 
 function! Filter()
