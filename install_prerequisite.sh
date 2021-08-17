@@ -4,6 +4,7 @@ apt-get upgrade -y
 apt-get purge -y totem totem-plugins
 apt-get install -y \
     aptitude \
+    aria2 \
     astyle \
     automake \
     autotools-dev \
@@ -54,6 +55,7 @@ apt-get install -y \
     software-properties-common \
     sshfs \
     tig \
+    transmission-cli \
     unrar \
     w3m \
     w3m-img \
