@@ -279,8 +279,6 @@ index 78fb9e11..9a974dbd 100644
 +    wincmd =
 +
 +    if (is_rej == 1)
-+        syntax off
-+        windo diffthis
-+        windo set nowrap
++        call DiffAll()
 +    endif
 +endfunction
