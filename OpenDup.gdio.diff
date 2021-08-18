@@ -1,0 +1,286 @@
+diff --git a/.gitconfig_sample b/.gitconfig_sample
+index 639febb9..0ea38ff6 100644
+--- ./.gitconfig_sample
++++ ./.gitconfig_sample
+@@ -8,7 +8,7 @@
+     remote = origin
+ [gsync]
+     remote = authorVar
+-    target = authorVar/master
++    target = authorVar/branchVar
+ [merge]
+     allow = true
+ [branch "dev"]
+diff --git a/gitrc/gcl.sh b/gitrc/gcl.sh
+index e118a4de..e1f58816 100755
+--- ./gitrc/gcl.sh
++++ ./gitrc/gcl.sh
+@@ -18,7 +18,10 @@ urlVar=$(echo "$urlVar" | sed 's/\//\\\//g')
+ sed -i.bak "s|urlVar|$urlVar|g;s|repoVar|${author}_${repo}|g;s|authorVar|$author|g" "$target"/.gitconfig
+ echo ".gitconfig --> $(realpath ${target}/.gitconfig)"
+ 
+-cd "$target" && \
++cd "$target"
++CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
++sed -i.bak "s|branchVar|$CURRENT_BRANCH|g" .gitconfig
++
+ git remote remove origin ; \
+     $HOME/loadrc/gitrc/gcob.sh dev && \
+     $HOME/loadrc/gitrc/gdev.sh && \
+diff --git a/install_prerequisite.sh b/install_prerequisite.sh
+index 97c1ee82..6ba0ecb1 100755
+--- ./install_prerequisite.sh
++++ ./install_prerequisite.sh
+@@ -4,6 +4,7 @@ apt-get upgrade -y
+ apt-get purge -y totem totem-plugins
+ apt-get install -y \
+     aptitude \
++    aria2 \
+     astyle \
+     automake \
+     autotools-dev \
+@@ -54,6 +55,7 @@ apt-get install -y \
+     software-properties-common \
+     sshfs \
+     tig \
++    transmission-cli \
+     unrar \
+     w3m \
+     w3m-img \
+diff --git a/neovim b/neovim
+index 2652732b..a4fefdb1 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
++Subproject commit a4fefdb194c2b7e82ed0a7031c976a91d280853b
+diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
+index ba9b6535..6cbf6f06 160000
+--- ./vimrc/.vim/bundle/neco-vim
++++ ./vimrc/.vim/bundle/neco-vim
+@@ -1 +1 @@
+-Subproject commit ba9b6535381690fc6773d682fc046d8ddd2a863a
++Subproject commit 6cbf6f0610e3c194366fc938b4a0ad572ad476e9
+diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
+index 3c03dc48..f4ec3e57 160000
+--- ./vimrc/.vim/bundle/tig-explorer.vim
++++ ./vimrc/.vim/bundle/tig-explorer.vim
+@@ -1 +1 @@
+-Subproject commit 3c03dc4828b3d52fa34843661f70bc02c44f6431
++Subproject commit f4ec3e57ccad1b9a28b8607c4a56a0affc686583
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index a8d0cbeb..04248d86 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
++Subproject commit 04248d865e87c3fb0e9451c15a6f211338915374-dirty
+diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
+index 02757c74..d6adab9d 160000
+--- ./vimrc/.vim/bundle/vim-pbcopy
++++ ./vimrc/.vim/bundle/vim-pbcopy
+@@ -1 +1 @@
+-Subproject commit 02757c74d00c053e32ddd441c8186aaad92b7b9e
++Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
+diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
+index bbdfea4b..7657218f 160000
+--- ./vimrc/.vim/bundle/vim-scala
++++ ./vimrc/.vim/bundle/vim-scala
+@@ -1 +1 @@
+-Subproject commit bbdfea4b98fdb8866a8a6060ec1294643cfeb413
++Subproject commit 7657218f14837395a4e6759f15289bad6febd1b4
+diff --git a/vimrc/.vim/plugin/copypath.vim b/vimrc/.vim/plugin/copypath.vim
+deleted file mode 100755
+index 65740cb6..00000000
+--- ./vimrc/.vim/plugin/copypath.vim
++++ /dev/null
+@@ -1,88 +0,0 @@
+-" copypath.vim : Copy current editing file path to clipboard.
+-"
+-" Name Of File: copypath.vim
+-" Maintainer:   omi taku <mail@nanasi.jp>
+-" URL:          http://nanasi.jp/
+-" Script URL:   http://www.vim.org/scripts/script.php?script_id=1456
+-" Last Change:  2009/12/16
+-" Version:      1.0
+-"
+-" Installation:
+-"    1. Unzip copypath.zip ,
+-"       and extract there to your vim runtimepath directory ,
+-"       $HOME/vimfiles/plugin or $HOME/.vim/plugin directory directory.
+-"
+-"       Refer to ':help add-plugin', ':help add-global-plugin' and ':help runtimepath'
+-"       for more details about Vim plugins.
+-"
+-"    2. Restart Vim.
+-"    3. To run this script, Vim needs to be compiled with "+clipboard" option.
+-"
+-" Usage:
+-"    This script adds two new command ":CopyPath" and ":CopyFileName".
+-"    You can use the ":CopyPath" command to copy file path to clipboard,
+-"    and you can use the ":CopyFileName" command to copy file name to clipboard.
+-"
+-"    :CopyPath
+-"        copy current editing file full path to clipboard.
+-"        And, if you set g:copypath_copy_to_unnamed_register option to 1 then,
+-"        copy file full path to unnamed register too.
+-"        Default, not copy to unnamed register.
+-"
+-"    :CopyFileName
+-"        copy current editing file name to clipboard.
+-"        And, if you set g:copypath_copy_to_unnamed_register option to 1 then,
+-"        copy file name to unnamed register too.
+-"        Default, not copy to unnamed register.
+-"
+-" Configuration:
+-"    g:copypath_copy_to_unnamed_register
+-"       set this option value to 1 then, copy file path and name to unnamed register too.
+-"   >
+-"       let g:copypath_copy_to_unnamed_register = 1
+-"   <
+-"
+-" Note:
+-"    o  To run this script, Vim needs to be compiled with "+clipboard" option.
+-"
+-" History:
+-"    1.0     o  change uploading archive file format to zip format.
+-"    0.2     o  unnamed register copy option is added.
+-"    0.1.2   o  document is updated.
+-"    0.1.1   o  fix bug.
+-"    0.1     o  Initial upload.
+-
+-
+-" if plugin is already loaded then, not load plugin.
+-if exists("g:loaded_copypath")
+-    finish
+-endif
+-let g:loaded_copypath = 1
+-
+-" if option is set then use open.
+-if !exists('g:copypath_copy_to_unnamed_register')
+-    let g:copypath_copy_to_unnamed_register = 0
+-endif
+-
+-function CopyPath()
+-    let @+=expand('%:p')
+-    " copy unnamed register.
+-    if g:copypath_copy_to_unnamed_register
+-        let @"=expand('%:p')
+-    endif
+-endfunction
+-
+-function CopyFileName()
+-    let @+=expand('%:t')
+-    " copy unnamed register.
+-    if g:copypath_copy_to_unnamed_register
+-        let @"=expand('%:t')
+-    endif
+-endfunction
+-
+-command! -nargs=0 CopyPath     call CopyPath()
+-command! -nargs=0 CopyFileName call CopyFileName()
+-
+-finish
+-
+-" vim: set ts=4 sts=4 sw=4 et nowrap :
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index 78fb9e11..2fc4ff7d 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -77,8 +77,9 @@ function! VFilter()
+ endfunction
+ 
+ function! ShowRemember()
+-    let @+=expand('%:p')
++    let @" = expand('%:p')
+     echom expand('%:p')
++    call SendTextToPbCopy(expand('%:p'))
+ endfunction
+ 
+ function! Filter()
+@@ -353,13 +354,6 @@ function! VimSearch()
+     call HighlightKeyword(keyword)
+ endfunction
+ 
+-function! OpenProjectRoot()
+-    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
+-    let @+=b:csdbpath
+-    echom b:csdbpath
+-    call OpenOrSwitch(b:csdbpath, 'vs')
+-endfunction
+-
+ function! SwitchWinSize()
+     if &winwidth == 1
+         set winwidth=999999
+@@ -416,36 +410,15 @@ nnoremap <leader>Y "+yy
+ nnoremap <leader>p "+p
+ nnoremap <leader>P "+P
+ nnoremap tt :Autoformat<CR>:w!<cr>
+-nnoremap D :only<CR>:vs %:p<cr>:set winwidth=1<cr><c-w>=
++nnoremap D :call OpenDup()<CR>
+ " Quickly open current dir in current windows
+-nnoremap <leader>d :call OpenProjectRoot()<cr>
+ nnoremap <tab> %
+ vnoremap <tab> %
+ nnoremap M zM
+ nnoremap R zR
+ nmap <f2> :set number! number?<cr>
+ nmap <leader>w :call WinDo('set wrap!') <cr>
+-" Convert slashes to backslashes for Windows.
+-if has('win32')
+-    nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
+-    nmap <leader>cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+-
+-    " This will copy the path in 8.3 short format, for DOS and Windows 9x
+-    nmap <leader>c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
+-else
+-    nmap <leader>cs :let @*=expand("%")<CR>
+-    nmap <leader>cl :let @*=expand("%:p")<CR>
+-endif
+-if has('win32')
+-    nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
+-    nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+ 
+-    " This will copy the path in 8.3 short format, for DOS and Windows 9x
+-    nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
+-else
+-    nmap fs :let @"=expand("%")<CR>
+-    nmap <leader>p :let @"=expand("%:p")<CR>
+-endif
+ " nnoremap F :echom expand('%:p')<cr>
+ vnoremap <silent>f :call VimSearch()<cr>
+ vnoremap <silent>s :call GitSearch()<cr>
+@@ -510,9 +483,31 @@ nnoremap <leader>T :TigOpenCurrentFile<CR>
+ nnoremap <silent> ml :call CopyLineInfo()<cr> 
+ 
+ function! CopyLineInfo()
++    normal yy
+     let b:csdbpath = Cd2ProjectRoot("files.proj")
+     let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
+-    let content = relativePath . ':' . line('.') . ' ' . getline(line('.'))
+-    let @+=content
++    let content = relativePath . ':' . line('.') . ' ' . @"
++    let @" = content
+ endfunction
+ 
++function! OpenDup()
++    only
++    let is_rej = 0
++
++    if (expand('%:e') ==# 'rej')
++        let is_rej = 1
++        let to_open = substitute(expand('%:p'), '\.rej', '', '')
++        silent exec 'vs ' . to_open
++    else
++        vs %:p
++    endif
++
++    set winwidth=1
++    wincmd =
++
++    if (is_rej == 1)
++        syntax off
++        windo diffthis
++        windo set nowrap
++    endif
++endfunction
