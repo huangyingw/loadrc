@@ -506,8 +506,6 @@ function! OpenDup()
     wincmd =
 
     if (is_rej == 1)
-        syntax off
-        windo diffthis
-        windo set nowrap
+        call DiffAll()
     endif
 endfunction
