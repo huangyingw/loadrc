@@ -48,19 +48,19 @@ index 97c1ee82..6ba0ecb1 100755
      w3m \
      w3m-img \
 diff --git a/neovim b/neovim
-index 2652732b..a4fefdb1 160000
+index 2652732b..c7e7930c 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
-+Subproject commit a4fefdb194c2b7e82ed0a7031c976a91d280853b
++Subproject commit c7e7930cd77ca2297e860d6ec2144a9086516b04
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index ba9b6535..6cbf6f06 160000
+index ba9b6535..3cd2576c 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit ba9b6535381690fc6773d682fc046d8ddd2a863a
-+Subproject commit 6cbf6f0610e3c194366fc938b4a0ad572ad476e9
++Subproject commit 3cd2576c320c043fdae294d4cae92ce83addc7d3
 diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
 index 3c03dc48..f4ec3e57 160000
 --- ./vimrc/.vim/bundle/tig-explorer.vim
@@ -69,12 +69,12 @@ index 3c03dc48..f4ec3e57 160000
 -Subproject commit 3c03dc4828b3d52fa34843661f70bc02c44f6431
 +Subproject commit f4ec3e57ccad1b9a28b8607c4a56a0affc686583
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index a8d0cbeb..04248d86 160000
+index a8d0cbeb..39dbfeee 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
-+Subproject commit 04248d865e87c3fb0e9451c15a6f211338915374-dirty
++Subproject commit 39dbfeee9588052919847982b386f85e0f4da467
 diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
 index 02757c74..d6adab9d 160000
 --- ./vimrc/.vim/bundle/vim-pbcopy
@@ -184,7 +184,7 @@ index 65740cb6..00000000
 -
 -" vim: set ts=4 sts=4 sw=4 et nowrap :
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 78fb9e11..2fc4ff7d 100644
+index 78fb9e11..9a974dbd 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -77,8 +77,9 @@ function! VFilter()
@@ -250,7 +250,7 @@ index 78fb9e11..2fc4ff7d 100644
  " nnoremap F :echom expand('%:p')<cr>
  vnoremap <silent>f :call VimSearch()<cr>
  vnoremap <silent>s :call GitSearch()<cr>
-@@ -510,9 +483,31 @@ nnoremap <leader>T :TigOpenCurrentFile<CR>
+@@ -510,9 +483,29 @@ nnoremap <leader>T :TigOpenCurrentFile<CR>
  nnoremap <silent> ml :call CopyLineInfo()<cr> 
  
  function! CopyLineInfo()
