@@ -410,7 +410,7 @@ nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 nnoremap tt :Autoformat<CR>:w!<cr>
-nnoremap D :only<CR>:vs %:p<cr>:set winwidth=1<cr><c-w>=
+nnoremap D :call OpenDup()<CR>
 " Quickly open current dir in current windows
 nnoremap <tab> %
 vnoremap <tab> %
@@ -490,3 +490,22 @@ function! CopyLineInfo()
     let @" = content
 endfunction
 
+function! OpenDup()
+    only
+    let is_rej = 0
+
+    if (expand('%:e') ==# 'rej')
+        let is_rej = 1
+        let to_open = substitute(expand('%:p'), '\.rej', '', '')
+        silent exec 'vs ' . to_open
+    else
+        vs %:p
+    endif
+
+    set winwidth=1
+    wincmd =
+
+    if (is_rej == 1)
+        call DiffAll()
+    endif
+endfunction
