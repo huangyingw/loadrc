@@ -56,6 +56,8 @@ apt-get install -y \
     sshfs \
     tig \
     transmission-cli \
+    transmission-common \
+    transmission-daemon \
     unrar \
     w3m \
     w3m-img \
