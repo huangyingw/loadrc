@@ -29,3 +29,7 @@ vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim:6446     let tempname = Get
 vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim:6509             exe 'silent keepalt' mods 'split' s:fnameescape(temp)
 
 vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim:6559         exe 'silent keepalt' (a:bang ? s:Mods(mods) . 'split' : s:Mods(mods, 'leftabove') . 'vsplit') s:fnameescape(temp)
+
+Gblame
+Gblame has been removed in favor of :Git blame
+./vimrc/.vim/bundle/vim-fugitive/plugin/fugitive.vim:492:          \ 'echoerr ":G' . tolower(s:cmd) . ' has been removed in favor of :Git ' . tolower(s:cmd) . '"'
