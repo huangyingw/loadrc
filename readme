@@ -22,3 +22,10 @@ Linux clipboard unnamedplus
 ./neovim/runtime/autoload/provider/clipboard.vim:161:  if match(&clipboard, '\v(unnamed|unnamedplus)') >= 0 && get(s:selections[a:reg].data, 0, []) ==# clipboard_data
 /usr/local/share/nvim/runtime/autoload/provider/clipboard.vim
 ./neovim/src/nvim/ops.c:6105:    EMSG("clipboard: provider returned invalid data");
+Git blame
+
+vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim:6364 function! s:BlameSubcommand(line1, count, range, bang, mods, options) abort
+vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim:6446     let tempname = GetWorktree() . '/'
+vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim:6509             exe 'silent keepalt' mods 'split' s:fnameescape(temp)
+
+vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim:6559         exe 'silent keepalt' (a:bang ? s:Mods(mods) . 'split' : s:Mods(mods, 'leftabove') . 'vsplit') s:fnameescape(temp)
