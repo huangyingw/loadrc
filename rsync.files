@@ -667,6 +667,7 @@
 ./oh-my-zsh/.gitignore
 ./oh-my-zsh/custom/plugins/zsh-nvm/.gitignore
 ./oh-my-zsh/plugins/chucknorris/.gitignore
+./oh-my-zsh/plugins/colemak/.gitignore
 ./oh-my-zsh/plugins/deno/.gitignore
 ./oh-my-zsh/plugins/fnm/.gitignore
 ./oh-my-zsh/plugins/gh/.gitignore
@@ -2355,6 +2356,7 @@
 ./vimrc/.vim/bundle/vim-fetch/README.md
 ./vimrc/.vim/bundle/vim-fetch/autoload/fetch.vim
 ./vimrc/.vim/bundle/vim-fetch/autoload/stay/integrate/fetch.vim
+./vimrc/.vim/bundle/vim-fetch/doc/tags
 ./vimrc/.vim/bundle/vim-fetch/doc/vim-fetch.txt
 ./vimrc/.vim/bundle/vim-fetch/plugin/fetch.vim
 ./vimrc/.vim/bundle/vim-fetch/test/vimrc
@@ -2480,7 +2482,8 @@
 ./vimrc/.vim/bundle/vim-snipmate/t/parser.vim
 ./vimrc/.vim/bundle/vim-snipmate/t/tests.sh
 ./vimrc/.vim/bundle/vimtex/.github/ISSUE_TEMPLATE/feature_request.md
-./vimrc/.vim/bundle/vimtex/.github/ISSUE_TEMPLATE/issue_report.md
+./vimrc/.vim/bundle/vimtex/.github/ISSUE_TEMPLATE/issue_report.md.disabled
+./vimrc/.vim/bundle/vimtex/.github/ISSUE_TEMPLATE/issue_report.yml
 ./vimrc/.vim/bundle/vimtex/.github/workflows/main.yml
 ./vimrc/.vim/bundle/vimtex/.gitignore
 ./vimrc/.vim/bundle/vimtex/.vintrc.yaml
@@ -2496,6 +2499,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/cache.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/cmd.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler/_template.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler/arara.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler/generic.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/compiler/latexmk.vim
@@ -2775,6 +2779,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/re.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/scratch.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/state.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/state/class.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/core.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/nested.vim
@@ -2948,4 +2953,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-ly.gdio.diff
+OpenDup.gdio.diff
