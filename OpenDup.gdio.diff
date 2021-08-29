@@ -103,12 +103,12 @@ index 3c03dc48..f4ec3e57 160000
 -Subproject commit 3c03dc4828b3d52fa34843661f70bc02c44f6431
 +Subproject commit f4ec3e57ccad1b9a28b8607c4a56a0affc686583
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index a8d0cbeb..36eca600 160000
+index a8d0cbeb..a3d712cb 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
-+Subproject commit 36eca6009d8f3bd8442e39608cfaabfd805f048e
++Subproject commit a3d712cb610fe8e7704c778f21db9dbb3ec26117
 diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
 index 02757c74..d6adab9d 160000
 --- ./vimrc/.vim/bundle/vim-pbcopy
@@ -224,6 +224,16 @@ index 65740cb6..00000000
 -finish
 -
 -" vim: set ts=4 sts=4 sw=4 et nowrap :
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index f746d9d6..029b616a 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -709,3 +709,5 @@ function! s:GenerateIpynb() abort
+     exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
+     w
+ endfunction
++
++let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
 index 78fb9e11..9a974dbd 100644
 --- ./vimrc/.vim/plugin/keymap.vim
