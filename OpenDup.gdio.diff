@@ -82,12 +82,12 @@ index 97c1ee82..f055c7a2 100755
      w3m \
      w3m-img \
 diff --git a/neovim b/neovim
-index 2652732b..6241c015 160000
+index 2652732b..1de67557 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
-+Subproject commit 6241c015fd71d7c5a21480f0c3d85b875731f252
++Subproject commit 1de675577ad82da7883b3c765a5e7d0260fa8cb6
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
 index ba9b6535..31e5725a 160000
 --- ./vimrc/.vim/bundle/neco-vim
