@@ -224,6 +224,16 @@ index 65740cb6..00000000
 -finish
 -
 -" vim: set ts=4 sts=4 sw=4 et nowrap :
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index f746d9d6..029b616a 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -709,3 +709,5 @@ function! s:GenerateIpynb() abort
+     exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
+     w
+ endfunction
++
++let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
 index 78fb9e11..9a974dbd 100644
 --- ./vimrc/.vim/plugin/keymap.vim
