@@ -103,12 +103,12 @@ index 3c03dc48..f4ec3e57 160000
 -Subproject commit 3c03dc4828b3d52fa34843661f70bc02c44f6431
 +Subproject commit f4ec3e57ccad1b9a28b8607c4a56a0affc686583
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index a8d0cbeb..a3d712cb 160000
+index a8d0cbeb..f54caed0 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
-+Subproject commit a3d712cb610fe8e7704c778f21db9dbb3ec26117
++Subproject commit f54caed06777d1797b0fcda05165ee0b0a02b1d9
 diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
 index 02757c74..d6adab9d 160000
 --- ./vimrc/.vim/bundle/vim-pbcopy
