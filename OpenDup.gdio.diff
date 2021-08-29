@@ -11,6 +11,38 @@ index 639febb9..0ea38ff6 100644
  [merge]
      allow = true
  [branch "dev"]
+diff --git a/.shellrc b/.shellrc
+index 2c0a38b6..ea3a676b 100755
+--- ./.shellrc
++++ ./.shellrc
+@@ -98,7 +98,6 @@ alias ubak='$HOME/loadrc/bashrc/ubak.sh'
+ alias ufind='$HOME/loadrc/bashrc/ufind.sh'
+ alias umlet='$HOME/loadrc/bashrc/umlet.sh'
+ alias umletc='$HOME/loadrc/bashrc/umletc.sh'
+-alias umount='$HOME/loadrc/bashrc/umount.sh'
+ alias updateProj='$HOME/loadrc/bashrc/update_proj.sh'
+ alias ures='$HOME/loadrc/bashrc/ures.sh'
+ alias usync='$HOME/loadrc/bashrc/usync.sh'
+diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
+index e2137142..005dcff1 100755
+--- ./bashrc/jdupes.sh
++++ ./bashrc/jdupes.sh
+@@ -20,5 +20,4 @@ then \
+     if [ -f ${MIRRORCHECK} ] ; \
+     then \
+         ~/loadrc/bashrc/sleep.sh ; \
+-        fi ; \
+-        nvim ~/loadrc/jdupes.log
++    fi
+diff --git a/bashrc/move67.sh b/bashrc/move67.sh
+index 22da4353..04171a45 100755
+--- ./bashrc/move67.sh
++++ ./bashrc/move67.sh
+@@ -1,3 +1,4 @@
+ #!/bin/zsh
+ find /media/volgrp/mirror1/av/ -type f -size +100M -name 6\* | while read ss; do dir=$(echo "$ss" | sed 's/\/mirror1\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"; done
+ find /media/volgrp/mirror1/av/ -type f -size +100M -name 7\* | while read ss; do dir=$(echo "$ss" | sed 's/\/mirror1\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"; done
++find /media/volgrp/mirror1/av/ -type f -size +100M -name 8\* | while read ss; do dir=$(echo "$ss" | sed 's/\/mirror1\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"; done
 diff --git a/gitrc/gcl.sh b/gitrc/gcl.sh
 index e118a4de..e1f58816 100755
 --- ./gitrc/gcl.sh
@@ -28,7 +60,7 @@ index e118a4de..e1f58816 100755
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
-index 97c1ee82..6ba0ecb1 100755
+index 97c1ee82..f055c7a2 100755
 --- ./install_prerequisite.sh
 +++ ./install_prerequisite.sh
 @@ -4,6 +4,7 @@ apt-get upgrade -y
@@ -39,28 +71,30 @@ index 97c1ee82..6ba0ecb1 100755
      astyle \
      automake \
      autotools-dev \
-@@ -54,6 +55,7 @@ apt-get install -y \
+@@ -54,6 +55,9 @@ apt-get install -y \
      software-properties-common \
      sshfs \
      tig \
 +    transmission-cli \
++    transmission-common \
++    transmission-daemon \
      unrar \
      w3m \
      w3m-img \
 diff --git a/neovim b/neovim
-index 2652732b..9da7ce9f 160000
+index 2652732b..6241c015 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
-+Subproject commit 9da7ce9f5e32da450b7dedc5c2f32a74150fa6c2
++Subproject commit 6241c015fd71d7c5a21480f0c3d85b875731f252
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index ba9b6535..5acaca6d 160000
+index ba9b6535..31e5725a 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit ba9b6535381690fc6773d682fc046d8ddd2a863a
-+Subproject commit 5acaca6d173e1566b207c5477f06e7e49efe1a76
++Subproject commit 31e5725ab5666396921d86bcec2f0b6ea0028ce7
 diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
 index 3c03dc48..f4ec3e57 160000
 --- ./vimrc/.vim/bundle/tig-explorer.vim
@@ -69,12 +103,12 @@ index 3c03dc48..f4ec3e57 160000
 -Subproject commit 3c03dc4828b3d52fa34843661f70bc02c44f6431
 +Subproject commit f4ec3e57ccad1b9a28b8607c4a56a0affc686583
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index a8d0cbeb..45f7aeb1 160000
+index a8d0cbeb..36eca600 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
-+Subproject commit 45f7aeb1afee61f07eb82a205a07e6aab04233b8
++Subproject commit 36eca6009d8f3bd8442e39608cfaabfd805f048e
 diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
 index 02757c74..d6adab9d 160000
 --- ./vimrc/.vim/bundle/vim-pbcopy
@@ -82,6 +116,13 @@ index 02757c74..d6adab9d 160000
 @@ -1 +1 @@
 -Subproject commit 02757c74d00c053e32ddd441c8186aaad92b7b9e
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
+diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
+index 3b379635..03a5c3e8 160000
+--- ./vimrc/.vim/bundle/vim-rails
++++ ./vimrc/.vim/bundle/vim-rails
+@@ -1 +1 @@
+-Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
++Subproject commit 03a5c3e85411db1488cdfd1029d2a91f9327c8a2
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
