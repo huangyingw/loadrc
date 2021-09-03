@@ -39,3 +39,6 @@ endif
 
 set wrap
 "set iskeyword-=_
+"
+highlight nonascii guibg=Red ctermbg=1 term=standout
+au BufReadPost * syntax match nonascii "[^\u0000-\u007F]"
