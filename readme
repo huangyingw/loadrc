@@ -29,3 +29,6 @@ Gblame has been removed in favor of :Git blame
 
 Gblame is deprecated in favor of :Git blame
 ./vimrc/.vim/bundle/vim-fugitive/plugin/fugitive.vim:488:          \ 'echohl WarningMSG|echomsg ":G' . tolower(s:cmd) . ' is deprecated in favor of :Git ' . tolower(s:cmd) . '"|echohl NONE|'
+
+	
+<9f>
