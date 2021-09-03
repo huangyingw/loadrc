@@ -82,12 +82,12 @@ index 97c1ee82..f055c7a2 100755
      w3m \
      w3m-img \
 diff --git a/neovim b/neovim
-index 2652732b..1de67557 160000
+index 2652732b..78279e5d 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
-+Subproject commit 1de675577ad82da7883b3c765a5e7d0260fa8cb6
++Subproject commit 78279e5d65ea434e55e74c3ec2a96f7c49a1e781
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
 index ba9b6535..31e5725a 160000
 --- ./vimrc/.vim/bundle/neco-vim
@@ -103,12 +103,12 @@ index 3c03dc48..f4ec3e57 160000
 -Subproject commit 3c03dc4828b3d52fa34843661f70bc02c44f6431
 +Subproject commit f4ec3e57ccad1b9a28b8607c4a56a0affc686583
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index a8d0cbeb..f54caed0 160000
+index a8d0cbeb..62b3d918 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
-+Subproject commit f54caed06777d1797b0fcda05165ee0b0a02b1d9
++Subproject commit 62b3d918430f565ce4ea4ee35f538bd28f3a90dc
 diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
 index 02757c74..d6adab9d 160000
 --- ./vimrc/.vim/bundle/vim-pbcopy
