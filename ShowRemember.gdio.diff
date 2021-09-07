@@ -27,33 +27,13 @@ index e118a4de..e1f58816 100755
  git remote remove origin ; \
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
-diff --git a/install_prerequisite.sh b/install_prerequisite.sh
-index 97c1ee82..6ba0ecb1 100755
---- ./install_prerequisite.sh
-+++ ./install_prerequisite.sh
-@@ -4,6 +4,7 @@ apt-get upgrade -y
- apt-get purge -y totem totem-plugins
- apt-get install -y \
-     aptitude \
-+    aria2 \
-     astyle \
-     automake \
-     autotools-dev \
-@@ -54,6 +55,7 @@ apt-get install -y \
-     software-properties-common \
-     sshfs \
-     tig \
-+    transmission-cli \
-     unrar \
-     w3m \
-     w3m-img \
 diff --git a/neovim b/neovim
-index 2652732b..a4fefdb1 160000
+index 2652732b..417af3f6 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
-+Subproject commit a4fefdb194c2b7e82ed0a7031c976a91d280853b
++Subproject commit 417af3f681e87c06deea8214a1f7dd9f4f46d328
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
 index ba9b6535..6cbf6f06 160000
 --- ./vimrc/.vim/bundle/neco-vim
@@ -69,12 +49,12 @@ index 3c03dc48..f4ec3e57 160000
 -Subproject commit 3c03dc4828b3d52fa34843661f70bc02c44f6431
 +Subproject commit f4ec3e57ccad1b9a28b8607c4a56a0affc686583
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index a8d0cbeb..04248d86 160000
+index a8d0cbeb..61166f51 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
-+Subproject commit 04248d865e87c3fb0e9451c15a6f211338915374
++Subproject commit 61166f512b5bb7a2652d5ad244e0a48b18acd3ac
 diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
 index 02757c74..d6adab9d 160000
 --- ./vimrc/.vim/bundle/vim-pbcopy
@@ -260,3 +240,18 @@ index 78fb9e11..59510303 100644
 +    let @" = content
  endfunction
  
+diff --git a/vimrc/.vim/plugin/pbpaste.vim b/vimrc/.vim/plugin/pbpaste.vim
+index df39432d..8ad57466 100644
+--- ./vimrc/.vim/plugin/pbpaste.vim
++++ ./vimrc/.vim/plugin/pbpaste.vim
+@@ -1,9 +1,5 @@
+ function! PopulatePasteBufferFromOSX(mode)
+-    if &clipboard == 'unnamed'
+-        let @* = system('pbpaste-remote')
+-    else
+-        let @+ = system('pbpaste-remote')
+-    endif
++    let @" = system('pbpaste-remote')
+ 
+     if a:mode== 'v'
+         normal! gvp

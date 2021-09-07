@@ -27,68 +27,27 @@ index e118a4de..e1f58816 100755
  git remote remove origin ; \
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
-diff --git a/install_prerequisite.sh b/install_prerequisite.sh
-index 97c1ee82..6ba0ecb1 100755
---- ./install_prerequisite.sh
-+++ ./install_prerequisite.sh
-@@ -4,6 +4,7 @@ apt-get upgrade -y
- apt-get purge -y totem totem-plugins
- apt-get install -y \
-     aptitude \
-+    aria2 \
-     astyle \
-     automake \
-     autotools-dev \
-@@ -54,6 +55,7 @@ apt-get install -y \
-     software-properties-common \
-     sshfs \
-     tig \
-+    transmission-cli \
-     unrar \
-     w3m \
-     w3m-img \
 diff --git a/neovim b/neovim
-index 2652732b..a4fefdb1 160000
+index 03e622e5..2652732b 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
--Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
-+Subproject commit a4fefdb194c2b7e82ed0a7031c976a91d280853b
+-Subproject commit 03e622e58686d209978eddf625a5f1ab7b69d491
++Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index ba9b6535..6cbf6f06 160000
+index ec50b3cb..ba9b6535 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
--Subproject commit ba9b6535381690fc6773d682fc046d8ddd2a863a
-+Subproject commit 6cbf6f0610e3c194366fc938b4a0ad572ad476e9
-diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
-index 3c03dc48..f4ec3e57 160000
---- ./vimrc/.vim/bundle/tig-explorer.vim
-+++ ./vimrc/.vim/bundle/tig-explorer.vim
-@@ -1 +1 @@
--Subproject commit 3c03dc4828b3d52fa34843661f70bc02c44f6431
-+Subproject commit f4ec3e57ccad1b9a28b8607c4a56a0affc686583
+-Subproject commit ec50b3cbb4537625c2aaba7601232a53ccd779aa
++Subproject commit ba9b6535381690fc6773d682fc046d8ddd2a863a
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index a8d0cbeb..04248d86 160000
+index 7b0b8fb5..a8d0cbeb 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
--Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
-+Subproject commit 04248d865e87c3fb0e9451c15a6f211338915374
-diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
-index 02757c74..d6adab9d 160000
---- ./vimrc/.vim/bundle/vim-pbcopy
-+++ ./vimrc/.vim/bundle/vim-pbcopy
-@@ -1 +1 @@
--Subproject commit 02757c74d00c053e32ddd441c8186aaad92b7b9e
-+Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
-diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
-index bbdfea4b..7657218f 160000
---- ./vimrc/.vim/bundle/vim-scala
-+++ ./vimrc/.vim/bundle/vim-scala
-@@ -1 +1 @@
--Subproject commit bbdfea4b98fdb8866a8a6060ec1294643cfeb413
-+Subproject commit 7657218f14837395a4e6759f15289bad6febd1b4
+-Subproject commit 7b0b8fb54c39cf0027c356832b5b55283746eef6
++Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
 diff --git a/vimrc/.vim/plugin/copypath.vim b/vimrc/.vim/plugin/copypath.vim
 deleted file mode 100755
 index 65740cb6..00000000
@@ -184,79 +143,22 @@ index 65740cb6..00000000
 -
 -" vim: set ts=4 sts=4 sw=4 et nowrap :
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 78fb9e11..59510303 100644
+index 78fb9e11..ecd31b60 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
-@@ -77,8 +77,9 @@ function! VFilter()
- endfunction
- 
- function! ShowRemember()
--    let @+=expand('%:p')
-+    let @" = expand('%:p')
-     echom expand('%:p')
-+    call SendTextToPbCopy(expand('%:p'))
- endfunction
- 
- function! Filter()
-@@ -353,13 +354,6 @@ function! VimSearch()
-     call HighlightKeyword(keyword)
- endfunction
- 
--function! OpenProjectRoot()
--    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
--    let @+=b:csdbpath
--    echom b:csdbpath
--    call OpenOrSwitch(b:csdbpath, 'vs')
--endfunction
--
- function! SwitchWinSize()
-     if &winwidth == 1
-         set winwidth=999999
-@@ -418,34 +412,13 @@ nnoremap <leader>P "+P
- nnoremap tt :Autoformat<CR>:w!<cr>
- nnoremap D :only<CR>:vs %:p<cr>:set winwidth=1<cr><c-w>=
- " Quickly open current dir in current windows
--nnoremap <leader>d :call OpenProjectRoot()<cr>
- nnoremap <tab> %
- vnoremap <tab> %
- nnoremap M zM
- nnoremap R zR
- nmap <f2> :set number! number?<cr>
- nmap <leader>w :call WinDo('set wrap!') <cr>
--" Convert slashes to backslashes for Windows.
--if has('win32')
--    nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
--    nmap <leader>cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
- 
--    " This will copy the path in 8.3 short format, for DOS and Windows 9x
--    nmap <leader>c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
--else
--    nmap <leader>cs :let @*=expand("%")<CR>
--    nmap <leader>cl :let @*=expand("%:p")<CR>
--endif
--if has('win32')
--    nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
--    nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
--
--    " This will copy the path in 8.3 short format, for DOS and Windows 9x
--    nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
--else
--    nmap fs :let @"=expand("%")<CR>
--    nmap <leader>p :let @"=expand("%:p")<CR>
--endif
- " nnoremap F :echom expand('%:p')<cr>
- vnoremap <silent>f :call VimSearch()<cr>
- vnoremap <silent>s :call GitSearch()<cr>
-@@ -510,9 +483,10 @@ nnoremap <leader>T :TigOpenCurrentFile<CR>
- nnoremap <silent> ml :call CopyLineInfo()<cr> 
+@@ -507,12 +507,13 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
+ " open tig with Project root path
+ nnoremap <Leader>t :TigOpenProjectRootDir<CR>
+ nnoremap <leader>T :TigOpenCurrentFile<CR>
+-nnoremap <silent> ml :call CopyLineInfo()<cr> 
++nnoremap <silent> ly :call CopyLineInfo()<cr> 
  
  function! CopyLineInfo()
 +    normal yy
      let b:csdbpath = Cd2ProjectRoot("files.proj")
      let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
 -    let content = relativePath . ':' . line('.') . ' ' . getline(line('.'))
--    let @+=content
 +    let content = relativePath . ':' . line('.') . ' ' . @"
-+    let @" = content
+     let @+=content
  endfunction
  
