@@ -18,8 +18,11 @@ urlVar=$(echo "$urlVar" | sed 's/\//\\\//g')
 sed -i.bak "s|urlVar|$urlVar|g;s|repoVar|${author}_${repo}|g;s|authorVar|$author|g" "$target"/.gitconfig
 echo ".gitconfig --> $(realpath ${target}/.gitconfig)"
 
-cd "$target" && \
-    git remote remove origin ; \
+cd "$target"
+CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
+sed -i.bak "s|branchVar|$CURRENT_BRANCH|g" .gitconfig
+
+git remote remove origin ; \
     $HOME/loadrc/gitrc/gcob.sh dev && \
     $HOME/loadrc/gitrc/gdev.sh && \
     $HOME/loadrc/bashrc/do_update_proj.sh && \
