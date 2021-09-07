@@ -43,6 +43,18 @@ index 22da4353..04171a45 100755
  find /media/volgrp/mirror1/av/ -type f -size +100M -name 6\* | while read ss; do dir=$(echo "$ss" | sed 's/\/mirror1\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"; done
  find /media/volgrp/mirror1/av/ -type f -size +100M -name 7\* | while read ss; do dir=$(echo "$ss" | sed 's/\/mirror1\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"; done
 +find /media/volgrp/mirror1/av/ -type f -size +100M -name 8\* | while read ss; do dir=$(echo "$ss" | sed 's/\/mirror1\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"; done
+diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
+index 58429e06..e4443088 100755
+--- ./ffmpegrc/concat.sh
++++ ./ffmpegrc/concat.sh
+@@ -5,6 +5,7 @@ listFile="mylist.txt"
+ if [ -f "$listFile" ]
+ then
+     ffmpeg -f concat -safe 0 -i "$listFile" -c copy -y output.avi
++    rm "$listFile"
+ else
+     find . -type f | sed -e "s/'/'\\\\''/g;s/\(.*\)/file '\1'/" > "$listFile"
+ fi
 diff --git a/gitrc/gcl.sh b/gitrc/gcl.sh
 index e118a4de..e1f58816 100755
 --- ./gitrc/gcl.sh
@@ -110,12 +122,12 @@ index 3c03dc48..f4ec3e57 160000
 -Subproject commit 3c03dc4828b3d52fa34843661f70bc02c44f6431
 +Subproject commit f4ec3e57ccad1b9a28b8607c4a56a0affc686583
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index a8d0cbeb..9e3f66ff 160000
+index a8d0cbeb..7ae55d18 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit a8d0cbebf04cfe557abefbd0604a0613f518052c
-+Subproject commit 9e3f66ff0e4f484771957cc1ec5afbdc8905e110
++Subproject commit 7ae55d189e70735b7acd26ad79d6ba94ca11cbc3-dirty
 diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
 index 02757c74..d6adab9d 160000
 --- ./vimrc/.vim/bundle/vim-pbcopy
