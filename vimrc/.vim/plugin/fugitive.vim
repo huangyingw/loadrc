@@ -709,5 +709,3 @@ function! s:GenerateIpynb() abort
     exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
     w
 endfunction
-
-let g:fugitive_legacy_commands = 1
