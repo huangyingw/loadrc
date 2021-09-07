@@ -77,8 +77,9 @@ function! VFilter()
 endfunction
 
 function! ShowRemember()
-    let @+=expand('%:p')
+    let @" = expand('%:p')
     echom expand('%:p')
+    call SendTextToPbCopy(expand('%:p'))
 endfunction
 
 function! Filter()
@@ -353,13 +354,6 @@ function! VimSearch()
     call HighlightKeyword(keyword)
 endfunction
 
-function! OpenProjectRoot()
-    let b:csdbpath = Find_in_parent("files.proj", Windowdir(), "/")
-    let @+=b:csdbpath
-    echom b:csdbpath
-    call OpenOrSwitch(b:csdbpath, 'vs')
-endfunction
-
 function! SwitchWinSize()
     if &winwidth == 1
         set winwidth=999999
@@ -416,36 +410,15 @@ nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 nnoremap tt :Autoformat<CR>:w!<cr>
-nnoremap D :only<CR>:vs %:p<cr>:set winwidth=1<cr><c-w>=
+nnoremap D :call OpenDup()<CR>
 " Quickly open current dir in current windows
-nnoremap <leader>d :call OpenProjectRoot()<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 nnoremap M zM
 nnoremap R zR
 nmap <f2> :set number! number?<cr>
 nmap <leader>w :call WinDo('set wrap!') <cr>
-" Convert slashes to backslashes for Windows.
-if has('win32')
-    nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
-    nmap <leader>cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
 
-    " This will copy the path in 8.3 short format, for DOS and Windows 9x
-    nmap <leader>c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
-else
-    nmap <leader>cs :let @*=expand("%")<CR>
-    nmap <leader>cl :let @*=expand("%:p")<CR>
-endif
-if has('win32')
-    nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
-    nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
-
-    " This will copy the path in 8.3 short format, for DOS and Windows 9x
-    nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
-else
-    nmap fs :let @"=expand("%")<CR>
-    nmap <leader>p :let @"=expand("%:p")<CR>
-endif
 " nnoremap F :echom expand('%:p')<cr>
 vnoremap <silent>f :call VimSearch()<cr>
 vnoremap <silent>s :call GitSearch()<cr>
@@ -510,9 +483,29 @@ nnoremap <leader>T :TigOpenCurrentFile<CR>
 nnoremap <silent> ml :call CopyLineInfo()<cr> 
 
 function! CopyLineInfo()
+    normal yy
     let b:csdbpath = Cd2ProjectRoot("files.proj")
     let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
-    let content = relativePath . ':' . line('.') . ' ' . getline(line('.'))
-    let @+=content
+    let content = relativePath . ':' . line('.') . ' ' . @"
+    let @" = content
 endfunction
 
+function! OpenDup()
+    only
+    let is_rej = 0
+
+    if (expand('%:e') ==# 'rej')
+        let is_rej = 1
+        let to_open = substitute(expand('%:p'), '\.rej', '', '')
+        silent exec 'vs ' . to_open
+    else
+        vs %:p
+    endif
+
+    set winwidth=1
+    wincmd =
+
+    if (is_rej == 1)
+        call DiffAll()
+    endif
+endfunction
