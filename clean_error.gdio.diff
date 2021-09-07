@@ -82,12 +82,19 @@ index 97c1ee82..f055c7a2 100755
      w3m \
      w3m-img \
 diff --git a/neovim b/neovim
-index 2652732b..65996e72 160000
+index 2652732b..c4a3338f 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 2652732b7ee66c0a47d0dc0be3100700dbdab61b
-+Subproject commit 65996e72b9991504fe29124f1ff4de3cc7c63c9b
++Subproject commit c4a3338f1632ce4f39767faf6b1185a8930ae049
+diff --git a/vimrc/.vim/bundle/Dockerfile.vim b/vimrc/.vim/bundle/Dockerfile.vim
+index 86d744c6..2a31e6bc 160000
+--- ./vimrc/.vim/bundle/Dockerfile.vim
++++ ./vimrc/.vim/bundle/Dockerfile.vim
+@@ -1 +1 @@
+-Subproject commit 86d744c6e4731d0014ef469f019a305e2d7baac0
++Subproject commit 2a31e6bcea5977209c05c728c4253d82fd873c82
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
 index ba9b6535..31e5725a 160000
 --- ./vimrc/.vim/bundle/neco-vim
