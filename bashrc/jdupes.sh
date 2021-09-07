@@ -20,5 +20,4 @@ then \
     if [ -f ${MIRRORCHECK} ] ; \
     then \
         ~/loadrc/bashrc/sleep.sh ; \
-        fi ; \
-        nvim ~/loadrc/jdupes.log
+    fi
