@@ -1,5 +1,5 @@
 function! RememberQuit()
-    let @"=expand("%:p")
+    let @" = expand("%:p")
 
     if winbufnr(2) == -1 && &buftype !=# "terminal"
         return
@@ -456,7 +456,7 @@ map <F3> :call VDebug()<cr>
 nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
 map oo :call VimOpen()<cr>
 nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
-nnoremap <leader>1 :let @"=expand("%:p")<CR>
+nnoremap <leader>1 :let @" = expand("%:p")<CR>
 
 function! CutFile2()
     silent exec '!comm -2 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . @" . '".findresult'
