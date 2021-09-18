@@ -1,0 +1,16 @@
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index 029b616a..42dfdc56 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -538,6 +538,11 @@ function! s:Gsubbr() abort
+ endfunction
+ 
+ function! s:Copy(...) abort
++    if &modified
++        echom 'Please check and save your file first!!!'
++        return 0
++    endif
++
+     let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
+     exec '!rm ' . newFile
+     exec 'w ' . newFile
