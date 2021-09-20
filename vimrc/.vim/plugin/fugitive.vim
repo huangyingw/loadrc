@@ -561,6 +561,19 @@ function! s:CatPlay(...) abort
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
+function! s:CatRsync(...) abort
+    if &modified
+        echom 'Please check and save your file first!!!'
+        return 0
+    endif
+
+    if a:0 >= 1
+        exec '!~/loadrc/vishrc/cat_rsync.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
+    endif
+
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+endfunction
+
 function! s:CatMove(...) abort
     if &modified
         echom 'Please check and save your file first!!!'
