@@ -3,7 +3,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Binary
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatDu :execute s:CatDu(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatMove :execute s:CatMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatPlay :execute s:CatPlay(<f-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRsync :execute s:CatRsync(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRun :execute s:CatRun(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Copy :execute s:Copy(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dodev :execute s:Dodev()
@@ -560,19 +559,6 @@ function! s:CatPlay(...) abort
     let b:output = expand("%:p") . '.runresult'
     call asyncrun#run('<bang>', '', '~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output)
     call OpenOrSwitch(b:output, 'vs')
-endfunction
-
-function! s:CatRsync(...) abort
-    if &modified
-        echom 'Please check and save your file first!!!'
-        return 0
-    endif
-
-    if a:0 >= 1
-        exec '!~/loadrc/vishrc/cat_rsync.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
-    endif
-
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
 endfunction
 
 function! s:CatMove(...) abort
