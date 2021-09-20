@@ -11,12 +11,19 @@ index f04e3bfa..82761ec4 100755
      fi
  fi
 diff --git a/neovim b/neovim
-index b0ed4793..6d2da678 160000
+index b0ed4793..7b7f99ea 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit b0ed4793be6df3e1f951fd1874fbc5b3e266c91b
-+Subproject commit 6d2da6780b544b1df5a6dd81d067930f83fe8cf1
++Subproject commit 7b7f99eaad34e60c3e4cbcdbf0e7fd2bd0663d02
+diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
+index 31e5725a..cd666d51 160000
+--- ./vimrc/.vim/bundle/neco-vim
++++ ./vimrc/.vim/bundle/neco-vim
+@@ -1 +1 @@
+-Subproject commit 31e5725ab5666396921d86bcec2f0b6ea0028ce7
++Subproject commit cd666d51cb4d03e509039fd35e5744bbf9db431b
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index e83ca052..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -30,7 +37,7 @@ index c395bf31..1bb095f1 160000
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit c395bf31769baf4ccaf4d6e255038c375a1672bb
-+Subproject commit 1bb095f1cd592b5e381f89ae875c8689530f1eb0-dirty
++Subproject commit 1bb095f1cd592b5e381f89ae875c8689530f1eb0
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
 index 76b1a4eb..99696636 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
@@ -38,3 +45,52 @@ index 76b1a4eb..99696636 160000
 @@ -1 +1 @@
 -Subproject commit 76b1a4ebcb7ec8aba88fd3072649f13b1a783585
 +Subproject commit 99696636e580121a6006051a93d52079e73424a1-dirty
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index 029b616a..42dfdc56 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -538,6 +538,11 @@ function! s:Gsubbr() abort
+ endfunction
+ 
+ function! s:Copy(...) abort
++    if &modified
++        echom 'Please check and save your file first!!!'
++        return 0
++    endif
++
+     let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
+     exec '!rm ' . newFile
+     exec 'w ' . newFile
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index 9a974dbd..12788667 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -77,8 +77,16 @@ function! VFilter()
+ endfunction
+ 
+ function! ShowRemember()
+-    let @" = expand('%:p')
+-    echom expand('%:p')
++    let b:csdbpath = Cd2ProjectRoot("files.proj")
++    let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
++
++    if &clipboard == 'unnamed'
++        let @* = relativePath
++    else
++        let @+ = relativePath
++    endif
++
++    echom relativePath
+     call SendTextToPbCopy(expand('%:p'))
+ endfunction
+ 
+diff --git a/vishrc/cat_rsync.sh b/vishrc/cat_rsync.sh
+new file mode 100644
+index 00000000..4b220cfb
+--- /dev/null
++++ ./vishrc/cat_rsync.sh
+@@ -0,0 +1,4 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
