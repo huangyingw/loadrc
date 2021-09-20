@@ -1,3 +1,17 @@
+diff --git a/bashrc/select_move.sh b/bashrc/select_move.sh
+new file mode 100644
+index 00000000..29fd5336
+--- /dev/null
++++ ./bashrc/select_move.sh
+@@ -0,0 +1,8 @@
++#!/bin/zsh
++
++cat "$1" | sed 's/^"//g;s/"$//g;s/\\ / /g' > "$1".tmp
++rsync -aHv --force --progress \
++    --remove-source-files \
++    --files-from "$1".tmp \
++    "$2" \
++    "$3"
 diff --git a/neovim b/neovim
 index b0ed4793..6d2da678 160000
 --- ./neovim
@@ -27,10 +41,18 @@ index 76b1a4eb..688e9756 160000
 -Subproject commit 76b1a4ebcb7ec8aba88fd3072649f13b1a783585
 +Subproject commit 688e9756dd38c94ab9655236b57a52c37bdd926e
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index 029b616a..0939731d 100644
+index 029b616a..37024822 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -538,6 +538,11 @@ function! s:Gsubbr() abort
+@@ -3,6 +3,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Binary
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatDu :execute s:CatDu(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatMove :execute s:CatMove(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatPlay :execute s:CatPlay(<f-args>)
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRsync :execute s:CatRsync(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRun :execute s:CatRun(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Copy :execute s:Copy(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dodev :execute s:Dodev()
+@@ -538,6 +539,11 @@ function! s:Gsubbr() abort
  endfunction
  
  function! s:Copy(...) abort
@@ -42,7 +64,7 @@ index 029b616a..0939731d 100644
      let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
      exec '!rm ' . newFile
      exec 'w ' . newFile
-@@ -556,6 +561,19 @@ function! s:CatPlay(...) abort
+@@ -556,6 +562,19 @@ function! s:CatPlay(...) abort
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
@@ -87,11 +109,10 @@ index 9a974dbd..12788667 100644
  
 diff --git a/vishrc/cat_rsync.sh b/vishrc/cat_rsync.sh
 new file mode 100644
-index 00000000..4b220cfb
+index 00000000..731744fa
 --- /dev/null
 +++ ./vishrc/cat_rsync.sh
-@@ -0,0 +1,4 @@
+@@ -0,0 +1,3 @@
 +#!/bin/zsh
-+SCRIPT=$(realpath "$0")
-+SCRIPTPATH=$(dirname "$SCRIPT")
-+cd "$SCRIPTPATH"
++
++~/loadrc/bashrc/select_move.sh "$1" "." "$2"
