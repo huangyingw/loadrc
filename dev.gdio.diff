@@ -1,0 +1,6 @@
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 76b1a4ebcb7ec8aba88fd3072649f13b1a783585
++Subproject commit 76b1a4ebcb7ec8aba88fd3072649f13b1a783585-dirty
