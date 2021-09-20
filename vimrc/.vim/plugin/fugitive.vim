@@ -538,6 +538,11 @@ function! s:Gsubbr() abort
 endfunction
 
 function! s:Copy(...) abort
+    if &modified
+        echom 'Please check and save your file first!!!'
+        return 0
+    endif
+
     let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
     exec '!rm ' . newFile
     exec 'w ' . newFile
