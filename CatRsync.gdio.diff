@@ -18,7 +18,14 @@ index b0ed4793..391abcc2 160000
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit b0ed4793be6df3e1f951fd1874fbc5b3e266c91b
-+Subproject commit 391abcc2e88d33c55b0fcbc9edf32348a42ba280
++Subproject commit 391abcc2e88d33c55b0fcbc9edf32348a42ba280-dirty
+diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
+index 31e5725a..cd666d51 160000
+--- ./vimrc/.vim/bundle/neco-vim
++++ ./vimrc/.vim/bundle/neco-vim
+@@ -1 +1 @@
+-Subproject commit 31e5725ab5666396921d86bcec2f0b6ea0028ce7
++Subproject commit cd666d51cb4d03e509039fd35e5744bbf9db431b
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index e83ca052..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -44,15 +51,7 @@ diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 index 029b616a..42dfdc56 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -3,6 +3,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Binary
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatDu :execute s:CatDu(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatMove :execute s:CatMove(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatPlay :execute s:CatPlay(<f-args>)
-+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRsync :execute s:CatRsync(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRun :execute s:CatRun(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Copy :execute s:Copy(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dodev :execute s:Dodev()
-@@ -538,6 +539,11 @@ function! s:Gsubbr() abort
+@@ -538,6 +538,11 @@ function! s:Gsubbr() abort
  endfunction
  
  function! s:Copy(...) abort
@@ -64,26 +63,6 @@ index 029b616a..42dfdc56 100644
      let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
      exec '!rm ' . newFile
      exec 'w ' . newFile
-@@ -556,6 +562,19 @@ function! s:CatPlay(...) abort
-     call OpenOrSwitch(b:output, 'vs')
- endfunction
- 
-+function! s:CatRsync(...) abort
-+    if &modified
-+        echom 'Please check and save your file first!!!'
-+        return 0
-+    endif
-+
-+    if a:0 >= 1
-+        exec '!~/loadrc/vishrc/cat_rsync.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
-+    endif
-+
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
-+endfunction
-+
- function! s:CatMove(...) abort
-     if &modified
-         echom 'Please check and save your file first!!!'
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
 index 9a974dbd..12788667 100644
 --- ./vimrc/.vim/plugin/keymap.vim
@@ -107,12 +86,3 @@ index 9a974dbd..12788667 100644
      call SendTextToPbCopy(expand('%:p'))
  endfunction
  
-diff --git a/vishrc/cat_rsync.sh b/vishrc/cat_rsync.sh
-new file mode 100644
-index 00000000..731744fa
---- /dev/null
-+++ ./vishrc/cat_rsync.sh
-@@ -0,0 +1,3 @@
-+#!/bin/zsh
-+
-+~/loadrc/bashrc/select_move.sh "$1" "." "$2"
