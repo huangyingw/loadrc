@@ -3,6 +3,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Binary
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatDu :execute s:CatDu(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatMove :execute s:CatMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatPlay :execute s:CatPlay(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRate :execute s:CatRate(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRun :execute s:CatRun(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Copy :execute s:Copy(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dodev :execute s:Dodev()
@@ -569,6 +570,19 @@ function! s:CatMove(...) abort
 
     if a:0 >= 1
         exec '!~/loadrc/vishrc/cat_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
+    endif
+
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+endfunction
+
+function! s:CatRate(...) abort
+    if &modified
+        echom 'Please check and save your file first!!!'
+        return 0
+    endif
+
+    if a:0 >= 1
+        exec '!~/loadrc/vishrc/cat_rate.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
     endif
 
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
