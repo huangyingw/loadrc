@@ -32,13 +32,33 @@ index f04e3bfa..bd703fed 100755
 +        #s/hypo --buildbot=hypo2 
      fi
  fi
+diff --git a/install_prerequisite.sh b/install_prerequisite.sh
+index f055c7a2..cd4e7524 100755
+--- ./install_prerequisite.sh
++++ ./install_prerequisite.sh
+@@ -29,6 +29,7 @@ apt-get install -y \
+     iperf \
+     iperf3 \
+     iputils-ping \
++    jq \
+     kdiff3 \
+     libsecret-1-dev \
+     libsecret-tools \
+@@ -36,6 +37,7 @@ apt-get install -y \
+     manpages-fr-extra \
+     manpages-pl \
+     mdadm \
++    moreutils \
+     mplayer \
+     net-tools \
+     netcat \
 diff --git a/neovim b/neovim
-index b0ed4793..e57dd23d 160000
+index b0ed4793..5b9dc8f8 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit b0ed4793be6df3e1f951fd1874fbc5b3e266c91b
-+Subproject commit e57dd23df401637a48325f39bc655c8bff30dadd
++Subproject commit 5b9dc8f8f802bda44e091bc20845274019b25e05-dirty
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
 index 31e5725a..cd666d51 160000
 --- ./vimrc/.vim/bundle/neco-vim
@@ -68,10 +88,18 @@ index 76b1a4eb..9aa4231b 160000
 -Subproject commit 76b1a4ebcb7ec8aba88fd3072649f13b1a783585
 +Subproject commit 9aa4231b1120af08e263fc88210bd4a731585463
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index 029b616a..42dfdc56 100644
+index 029b616a..b750ffe4 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -538,6 +538,11 @@ function! s:Gsubbr() abort
+@@ -3,6 +3,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Binary
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatDu :execute s:CatDu(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatMove :execute s:CatMove(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatPlay :execute s:CatPlay(<f-args>)
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRate :execute s:CatRate(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRun :execute s:CatRun(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Copy :execute s:Copy(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dodev :execute s:Dodev()
+@@ -538,6 +539,11 @@ function! s:Gsubbr() abort
  endfunction
  
  function! s:Copy(...) abort
@@ -83,6 +111,26 @@ index 029b616a..42dfdc56 100644
      let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
      exec '!rm ' . newFile
      exec 'w ' . newFile
+@@ -569,6 +575,19 @@ function! s:CatMove(...) abort
+     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+ endfunction
+ 
++function! s:CatRate(...) abort
++    if &modified
++        echom 'Please check and save your file first!!!'
++        return 0
++    endif
++
++    if a:0 >= 1
++        exec '!~/loadrc/vishrc/cat_rate.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
++    endif
++
++    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
++endfunction
++
+ function! s:CatDu(...) abort
+     if &modified
+         echom 'Please check and save your file first!!!'
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
 index 9a974dbd..12788667 100644
 --- ./vimrc/.vim/plugin/keymap.vim
@@ -106,3 +154,16 @@ index 9a974dbd..12788667 100644
      call SendTextToPbCopy(expand('%:p'))
  endfunction
  
+diff --git a/vishrc/cat_rate.sh b/vishrc/cat_rate.sh
+new file mode 100755
+index 00000000..be77ae24
+--- /dev/null
++++ ./vishrc/cat_rate.sh
+@@ -0,0 +1,7 @@
++#!/bin/zsh
++
++while read ss
++do
++    target=$(echo "$ss" | sed "s/\/[6-9]\s\([^\/]*$\)/\/\1/g;s/\/\([^\/]*$\)/\/$2 \1/g;s/  \+/ /g")
++    mv -nv "$ss" "$target"
++done < "$1"

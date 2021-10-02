@@ -25,3 +25,4 @@ then
 fi
 
 ~/loadrc/gitrc/gdio.sh
+git checkout "$CURRENT_BRANCH.gdio.diff"

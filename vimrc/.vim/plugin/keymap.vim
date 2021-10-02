@@ -77,8 +77,16 @@ function! VFilter()
 endfunction
 
 function! ShowRemember()
-    let @" = expand('%:p')
-    echom expand('%:p')
+    let b:csdbpath = Cd2ProjectRoot("files.proj")
+    let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
+
+    if &clipboard == 'unnamed'
+        let @* = relativePath
+    else
+        let @+ = relativePath
+    endif
+
+    echom relativePath
     call SendTextToPbCopy(expand('%:p'))
 endfunction
 
