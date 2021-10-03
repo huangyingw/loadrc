@@ -1,0 +1,20 @@
+diff --git a/bashrc/move67.sh b/bashrc/move67.sh
+index 04171a45..8c944b52 100755
+--- ./bashrc/move67.sh
++++ ./bashrc/move67.sh
+@@ -1,4 +1,12 @@
+ #!/bin/zsh
+-find /media/volgrp/mirror1/av/ -type f -size +100M -name 6\* | while read ss; do dir=$(echo "$ss" | sed 's/\/mirror1\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"; done
+-find /media/volgrp/mirror1/av/ -type f -size +100M -name 7\* | while read ss; do dir=$(echo "$ss" | sed 's/\/mirror1\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"; done
+-find /media/volgrp/mirror1/av/ -type f -size +100M -name 8\* | while read ss; do dir=$(echo "$ss" | sed 's/\/mirror1\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"; done
++function move_zarchive()
++{
++    num=$1
++    find /media/volgrp/mirror1/av/ -type f -size +100M -name $num\* | while read ss; do dir=$(echo "$ss" | sed 's/\/mirror1\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"; done
++}
++
++for (( c=6; c<=8; c++ ))
++do
++    echo "Welcome $c times"
++    move_zarchive "$c"
++done
