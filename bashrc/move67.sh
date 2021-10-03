@@ -10,6 +10,5 @@ function move_zarchive()
 
 for (( c=6; c<=8; c++ ))
 do
-    echo "Welcome $c times"
     move_zarchive "$c"
 done
