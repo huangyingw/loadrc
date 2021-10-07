@@ -12,34 +12,6 @@ index 00000000..29fd5336
 +    --files-from "$1".tmp \
 +    "$2" \
 +    "$3"
-diff --git a/bashrc/sleep.sh b/bashrc/sleep.sh
-index c204bfd7..4f4f20d8 100755
---- ./bashrc/sleep.sh
-+++ ./bashrc/sleep.sh
-@@ -5,6 +5,6 @@ then
-     pmset displaysleepnow
-     #pmset sleepnow
- else
--    #~/loadrc/gpurc/kill_nvidia.sh
-+    ~/loadrc/gpurc/kill_nvidia.sh
-     pm-suspend
- fi
-diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
-index 1485bd04..e4443088 100755
---- ./ffmpegrc/concat.sh
-+++ ./ffmpegrc/concat.sh
-@@ -2,10 +2,9 @@
- 
- # https://stackoverflow.com/questions/1616577/surround-all-lines-in-a-text-file-with-quotes-something
- listFile="mylist.txt"
--
- if [ -f "$listFile" ]
- then
--    ffmpeg -f concat -safe 0 -i "$listFile" -c copy -c:a aac -y output.avi
-+    ffmpeg -f concat -safe 0 -i "$listFile" -c copy -y output.avi
-     rm "$listFile"
- else
-     find . -type f | sed -e "s/'/'\\\\''/g;s/\(.*\)/file '\1'/" > "$listFile"
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 index 83a83235..e8b5bfa5 100755
 --- ./gitrc/gcom.sh
@@ -49,6 +21,20 @@ index 83a83235..e8b5bfa5 100755
  
  ~/loadrc/gitrc/gdio.sh
 +git checkout "$CURRENT_BRANCH.gdio.diff"
+diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
+index 2e325ba5..88dedbbc 100755
+--- ./gitrc/gdi2.sh
++++ ./gitrc/gdi2.sh
+@@ -25,6 +25,9 @@ fi
+ 
+ host=$(git config deploy.host)
+ rpath=$(git config deploy.path)
++remote="$(git config gsync.remote)"
++
++git push "$remote" "$targetBranch"
+ 
+ GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
+ 
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
 index ad9a7f1a..c3c54016 100755
 --- ./gitrc/gdit.sh
@@ -73,19 +59,26 @@ index f04e3bfa..bd703fed 100755
      fi
  fi
 diff --git a/neovim b/neovim
-index 657531e3..02f94f97 160000
+index 657531e3..1f1ce6de 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 657531e380d492eb2f1e011cb63a1cbfebd71f18
-+Subproject commit 02f94f97fdde428525a36ada4a534149de40f59f-dirty
++Subproject commit 1f1ce6de22aaa816c2c54f262677f08bc059c205
+diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
+index 1bb095f1..851da664 160000
+--- ./vimrc/.vim/bundle/vim-autoformat
++++ ./vimrc/.vim/bundle/vim-autoformat
+@@ -1 +1 @@
+-Subproject commit 1bb095f1cd592b5e381f89ae875c8689530f1eb0
++Subproject commit 851da66404ced21c22e8ee421efe5b431b89921f-dirty
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 05667154..02f0ad48 160000
+index 05667154..09fe235b 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 0566715473d62ada1a29728a51a9be6ff952e314
-+Subproject commit 02f0ad487bd6da1444dd345ee44726af267433b4
++Subproject commit 09fe235bd275734b3ed5d0d00c9ca88ec3997600-dirty
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 index 029b616a..42dfdc56 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
