@@ -11,7 +11,6 @@ git checkout -f "$target_branch"
 git branch -u "$remote/$target_branch"
 git merge -X theirs "$target" && \
     git pull && \
-    git push ; \
     git checkout "$current_branch" && \
     ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
 
