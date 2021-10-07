@@ -33,12 +33,12 @@ index f04e3bfa..bd703fed 100755
      fi
  fi
 diff --git a/neovim b/neovim
-index b0ed4793..e57dd23d 160000
+index b0ed4793..0a922221 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit b0ed4793be6df3e1f951fd1874fbc5b3e266c91b
-+Subproject commit e57dd23df401637a48325f39bc655c8bff30dadd
++Subproject commit 0a9222214fd51ddb2ed18b18bebba1a25e04a729
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
 index 31e5725a..cd666d51 160000
 --- ./vimrc/.vim/bundle/neco-vim
@@ -61,12 +61,12 @@ index c395bf31..1bb095f1 160000
 -Subproject commit c395bf31769baf4ccaf4d6e255038c375a1672bb
 +Subproject commit 1bb095f1cd592b5e381f89ae875c8689530f1eb0
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 76b1a4eb..9aa4231b 160000
+index 76b1a4eb..02f0ad48 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 76b1a4ebcb7ec8aba88fd3072649f13b1a783585
-+Subproject commit 9aa4231b1120af08e263fc88210bd4a731585463
++Subproject commit 02f0ad487bd6da1444dd345ee44726af267433b4
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 index 029b616a..42dfdc56 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
