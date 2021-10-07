@@ -1,0 +1,127 @@
+diff --git a/bashrc/select_move.sh b/bashrc/select_move.sh
+new file mode 100755
+index 00000000..29fd5336
+--- /dev/null
++++ ./bashrc/select_move.sh
+@@ -0,0 +1,8 @@
++#!/bin/zsh
++
++cat "$1" | sed 's/^"//g;s/"$//g;s/\\ / /g' > "$1".tmp
++rsync -aHv --force --progress \
++    --remove-source-files \
++    --files-from "$1".tmp \
++    "$2" \
++    "$3"
+diff --git a/bashrc/sleep.sh b/bashrc/sleep.sh
+index c204bfd7..4f4f20d8 100755
+--- ./bashrc/sleep.sh
++++ ./bashrc/sleep.sh
+@@ -5,6 +5,6 @@ then
+     pmset displaysleepnow
+     #pmset sleepnow
+ else
+-    #~/loadrc/gpurc/kill_nvidia.sh
++    ~/loadrc/gpurc/kill_nvidia.sh
+     pm-suspend
+ fi
+diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
+index 1485bd04..e4443088 100755
+--- ./ffmpegrc/concat.sh
++++ ./ffmpegrc/concat.sh
+@@ -2,10 +2,9 @@
+ 
+ # https://stackoverflow.com/questions/1616577/surround-all-lines-in-a-text-file-with-quotes-something
+ listFile="mylist.txt"
+-
+ if [ -f "$listFile" ]
+ then
+-    ffmpeg -f concat -safe 0 -i "$listFile" -c copy -c:a aac -y output.avi
++    ffmpeg -f concat -safe 0 -i "$listFile" -c copy -y output.avi
+     rm "$listFile"
+ else
+     find . -type f | sed -e "s/'/'\\\\''/g;s/\(.*\)/file '\1'/" > "$listFile"
+diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
+index 83a83235..e8b5bfa5 100755
+--- ./gitrc/gcom.sh
++++ ./gitrc/gcom.sh
+@@ -25,3 +25,4 @@ then
+ fi
+ 
+ ~/loadrc/gitrc/gdio.sh
++git checkout "$CURRENT_BRANCH.gdio.diff"
+diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
+index ad9a7f1a..c3c54016 100755
+--- ./gitrc/gdit.sh
++++ ./gitrc/gdit.sh
+@@ -11,7 +11,6 @@ git checkout -f "$target_branch"
+ git branch -u "$remote/$target_branch"
+ git merge -X theirs "$target" && \
+     git pull && \
+-    git push ; \
+     git checkout "$current_branch" && \
+     ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
+ 
+diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
+index f04e3bfa..bd703fed 100755
+--- ./imvurc/ghypo.sh
++++ ./imvurc/ghypo.sh
+@@ -26,5 +26,6 @@ else
+     if [ $(~/loadrc/gitrc/git_ready.sh) ]
+     then
+         s/hypo
++        #s/hypo --buildbot=hypo2 
+     fi
+ fi
+diff --git a/neovim b/neovim
+index 657531e3..02f94f97 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit 657531e380d492eb2f1e011cb63a1cbfebd71f18
++Subproject commit 02f94f97fdde428525a36ada4a534149de40f59f-dirty
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 05667154..02f0ad48 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 0566715473d62ada1a29728a51a9be6ff952e314
++Subproject commit 02f0ad487bd6da1444dd345ee44726af267433b4
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index 029b616a..42dfdc56 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -538,6 +538,11 @@ function! s:Gsubbr() abort
+ endfunction
+ 
+ function! s:Copy(...) abort
++    if &modified
++        echom 'Please check and save your file first!!!'
++        return 0
++    endif
++
+     let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
+     exec '!rm ' . newFile
+     exec 'w ' . newFile
+diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
+index 9a974dbd..12788667 100644
+--- ./vimrc/.vim/plugin/keymap.vim
++++ ./vimrc/.vim/plugin/keymap.vim
+@@ -77,8 +77,16 @@ function! VFilter()
+ endfunction
+ 
+ function! ShowRemember()
+-    let @" = expand('%:p')
+-    echom expand('%:p')
++    let b:csdbpath = Cd2ProjectRoot("files.proj")
++    let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
++
++    if &clipboard == 'unnamed'
++        let @* = relativePath
++    else
++        let @+ = relativePath
++    endif
++
++    echom relativePath
+     call SendTextToPbCopy(expand('%:p'))
+ endfunction
+ 
