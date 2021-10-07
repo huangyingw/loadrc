@@ -25,6 +25,9 @@ fi
 
 host=$(git config deploy.host)
 rpath=$(git config deploy.path)
+remote="$(git config gsync.remote)"
+
+git push "$remote" "$targetBranch"
 
 GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
 
