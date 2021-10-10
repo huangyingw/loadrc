@@ -474,10 +474,6 @@ endfunc
 
 function! CutCommon()
     silent exec '!~/loadrc/bashrc/cutcommon.sh ' . '"' .  @" . '"'  . ' ' . '"' .  expand("%:p") . '"'  
-    " silent exec '!comm -2 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . @" . '".findresult'
-    " silent exec '!comm -1 -3 <(sort "' . @" . '") <(sort "' . expand("%:p") . '") > "' . expand("%:p") . '".findresult'
-    " silent exec '!cp -fv "' . @" . '.findresult' . '"' . ' ' . '"' . @" . '"'
-    " silent exec '!cp -fv "' . expand("%:p") . '.findresult' . '"' . ' ' . '"' . expand("%:p") . '"'
 endfunc
 
 nnoremap <leader>2 :call CutCommon()<cr>
