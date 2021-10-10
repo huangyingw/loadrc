@@ -473,7 +473,7 @@ function! CutFile2()
 endfunc
 
 function! CutCommon()
-    silent exec '!~/loadrc/bashrc/cutcommon.sh ' . '"' .  @" . '"'  . ' ' . '"' .  expand("%:p") . '"'  
+    exec '!~/loadrc/bashrc/cutcommon.sh ' . '"' .  @" . '"'  . ' ' . '"' .  expand("%:p") . '"'  
 endfunc
 
 nnoremap <leader>2 :call CutCommon()<cr>
