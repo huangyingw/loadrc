@@ -52,6 +52,34 @@ index f055c7a2..cd4e7524 100755
      mplayer \
      net-tools \
      netcat \
+diff --git a/neovim b/neovim
+index 657531e3..1441bdde 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit 657531e380d492eb2f1e011cb63a1cbfebd71f18
++Subproject commit 1441bdde8a4fe28031e1f85dd25adc2a721d3e94
+diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
+index 3de17695..d2d8cc43 160000
+--- ./vimrc/.vim/bundle/ncm2
++++ ./vimrc/.vim/bundle/ncm2
+@@ -1 +1 @@
+-Subproject commit 3de17695c58f309642c5148b21d47fac61937a96
++Subproject commit d2d8cc430232f385d8468f44da8635febb9a92ad
+diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
+index 1bb095f1..fb49cea4 160000
+--- ./vimrc/.vim/bundle/vim-autoformat
++++ ./vimrc/.vim/bundle/vim-autoformat
+@@ -1 +1 @@
+-Subproject commit 1bb095f1cd592b5e381f89ae875c8689530f1eb0
++Subproject commit fb49cea4932191a61ee541fa7ae1492ec6023d36
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 05667154..4df402c7 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 0566715473d62ada1a29728a51a9be6ff952e314
++Subproject commit 4df402c79236515bef110da033e322904360aaaf
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 index 029b616a..b750ffe4 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
