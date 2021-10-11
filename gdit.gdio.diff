@@ -59,26 +59,33 @@ index f04e3bfa..bd703fed 100755
      fi
  fi
 diff --git a/neovim b/neovim
-index 657531e3..1f1ce6de 160000
+index 657531e3..b5c09465 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 657531e380d492eb2f1e011cb63a1cbfebd71f18
-+Subproject commit 1f1ce6de22aaa816c2c54f262677f08bc059c205
++Subproject commit b5c09465eb83da5cd1cb33ed6cbc9b4b5fad2199
+diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
+index 3de17695..d2d8cc43 160000
+--- ./vimrc/.vim/bundle/ncm2
++++ ./vimrc/.vim/bundle/ncm2
+@@ -1 +1 @@
+-Subproject commit 3de17695c58f309642c5148b21d47fac61937a96
++Subproject commit d2d8cc430232f385d8468f44da8635febb9a92ad
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index 1bb095f1..851da664 160000
+index 1bb095f1..fb49cea4 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit 1bb095f1cd592b5e381f89ae875c8689530f1eb0
-+Subproject commit 851da66404ced21c22e8ee421efe5b431b89921f-dirty
++Subproject commit fb49cea4932191a61ee541fa7ae1492ec6023d36
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 05667154..09fe235b 160000
+index 05667154..4df402c7 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 0566715473d62ada1a29728a51a9be6ff952e314
-+Subproject commit 09fe235bd275734b3ed5d0d00c9ca88ec3997600-dirty
++Subproject commit 4df402c79236515bef110da033e322904360aaaf
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 index 029b616a..42dfdc56 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
