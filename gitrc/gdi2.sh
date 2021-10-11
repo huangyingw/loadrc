@@ -39,6 +39,7 @@ fi
 
 ~/loadrc/gitrc/discard_unnecessaries.sh ; \
     git checkout -f "$targetBranch" ; \
+    git push --set-upstream "$remote" "$targetBranch" ; \
     git apply --index --reject --whitespace=fix "$GDITDIFF"
 
 retVal=$?
@@ -52,7 +53,6 @@ if [ $retVal -eq 0 ] || [ "$1" = "f" ]
 then
     git commit  --no-verify -am "$commit_message" && \
         git pull ; \
-        git push ; \
         . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
         ~/loadrc/gitrc/gfix.sh
 fi
