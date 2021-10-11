@@ -22,7 +22,7 @@ index 83a83235..e8b5bfa5 100755
  ~/loadrc/gitrc/gdio.sh
 +git checkout "$CURRENT_BRANCH.gdio.diff"
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index 2e325ba5..88dedbbc 100755
+index 2e325ba5..522d2718 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
 @@ -25,6 +25,9 @@ fi
@@ -35,19 +35,42 @@ index 2e325ba5..88dedbbc 100755
  
  GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
  
+@@ -36,6 +39,7 @@ fi
+ 
+ ~/loadrc/gitrc/discard_unnecessaries.sh ; \
+     git checkout -f "$targetBranch" ; \
++    git push --set-upstream "$remote" "$targetBranch" ; \
+     git apply --index --reject --whitespace=fix "$GDITDIFF"
+ 
+ retVal=$?
+@@ -49,7 +53,6 @@ if [ $retVal -eq 0 ] || [ "$1" = "f" ]
+ then
+     git commit  --no-verify -am "$commit_message" && \
+         git pull ; \
+-        git push ; \
+         . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
+         ~/loadrc/gitrc/gfix.sh
+ fi
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
-index ad9a7f1a..02d50a52 100755
+index ad9a7f1a..14903e47 100755
 --- ./gitrc/gdit.sh
 +++ ./gitrc/gdit.sh
-@@ -11,10 +11,11 @@ git checkout -f "$target_branch"
- git branch -u "$remote/$target_branch"
- git merge -X theirs "$target" && \
-     git pull && \
+@@ -6,15 +6,12 @@ remote="$(git config gsync.remote)"
+ target="$(git config gsync.target)"
+ 
+ ~/loadrc/gitrc/discard_unnecessaries.sh
+-git checkout -b "$target_branch" "$target"
+-git checkout -f "$target_branch"
+-git branch -u "$remote/$target_branch"
+-git merge -X theirs "$target" && \
+-    git pull && \
 -    git push ; \
-     git checkout "$current_branch" && \
+-    git checkout "$current_branch" && \
++git branch "$target_branch" "$target"
++    git fetch "$remote" "$target_branch":"$target_branch" ; \
++    git fetch "$remote" "$target":"$target_branch" && \
      ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
  
-+git fetch
 +
  if [ $? -ne 0 ]
  then
@@ -64,12 +87,12 @@ index f04e3bfa..bd703fed 100755
      fi
  fi
 diff --git a/neovim b/neovim
-index 657531e3..b5c09465 160000
+index 657531e3..f16cce94 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 657531e380d492eb2f1e011cb63a1cbfebd71f18
-+Subproject commit b5c09465eb83da5cd1cb33ed6cbc9b4b5fad2199
++Subproject commit f16cce94d86633caaf03a926644bd6ab106dfd5b
 diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
 index 3de17695..d2d8cc43 160000
 --- ./vimrc/.vim/bundle/ncm2
