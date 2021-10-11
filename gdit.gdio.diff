@@ -59,12 +59,12 @@ index f04e3bfa..bd703fed 100755
      fi
  fi
 diff --git a/neovim b/neovim
-index 657531e3..b5c09465 160000
+index 657531e3..f16cce94 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
 -Subproject commit 657531e380d492eb2f1e011cb63a1cbfebd71f18
-+Subproject commit b5c09465eb83da5cd1cb33ed6cbc9b4b5fad2199
++Subproject commit f16cce94d86633caaf03a926644bd6ab106dfd5b
 diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
 index 3de17695..d2d8cc43 160000
 --- ./vimrc/.vim/bundle/ncm2
