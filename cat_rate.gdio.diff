@@ -53,33 +53,40 @@ index f055c7a2..cd4e7524 100755
      net-tools \
      netcat \
 diff --git a/neovim b/neovim
-index 657531e3..1441bdde 160000
+index b0ed4793..5b9dc8f8 160000
 --- ./neovim
 +++ ./neovim
 @@ -1 +1 @@
--Subproject commit 657531e380d492eb2f1e011cb63a1cbfebd71f18
-+Subproject commit 1441bdde8a4fe28031e1f85dd25adc2a721d3e94
-diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
-index 3de17695..d2d8cc43 160000
---- ./vimrc/.vim/bundle/ncm2
-+++ ./vimrc/.vim/bundle/ncm2
+-Subproject commit b0ed4793be6df3e1f951fd1874fbc5b3e266c91b
++Subproject commit 5b9dc8f8f802bda44e091bc20845274019b25e05-dirty
+diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
+index 31e5725a..cd666d51 160000
+--- ./vimrc/.vim/bundle/neco-vim
++++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
--Subproject commit 3de17695c58f309642c5148b21d47fac61937a96
-+Subproject commit d2d8cc430232f385d8468f44da8635febb9a92ad
+-Subproject commit 31e5725ab5666396921d86bcec2f0b6ea0028ce7
++Subproject commit cd666d51cb4d03e509039fd35e5744bbf9db431b
+diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
+index e83ca052..3278cf3b 160000
+--- ./vimrc/.vim/bundle/swift.vim
++++ ./vimrc/.vim/bundle/swift.vim
+@@ -1 +1 @@
+-Subproject commit e83ca052e88805b8b20bc2558e7995461665e306
++Subproject commit 3278cf3b0522e6f08eaf11275fedce619beffe9a
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index 1bb095f1..fb49cea4 160000
+index c395bf31..1bb095f1 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
--Subproject commit 1bb095f1cd592b5e381f89ae875c8689530f1eb0
-+Subproject commit fb49cea4932191a61ee541fa7ae1492ec6023d36
+-Subproject commit c395bf31769baf4ccaf4d6e255038c375a1672bb
++Subproject commit 1bb095f1cd592b5e381f89ae875c8689530f1eb0
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 05667154..4df402c7 160000
+index 76b1a4eb..040d8912 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
--Subproject commit 0566715473d62ada1a29728a51a9be6ff952e314
-+Subproject commit 4df402c79236515bef110da033e322904360aaaf
+-Subproject commit 76b1a4ebcb7ec8aba88fd3072649f13b1a783585
++Subproject commit 040d89120c4910586828b42963307061567f9431-dirty
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 index 029b616a..b750ffe4 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
@@ -147,23 +154,6 @@ index 9a974dbd..12788667 100644
      call SendTextToPbCopy(expand('%:p'))
  endfunction
  
-diff --git a/vishrc/cat_play.sh b/vishrc/cat_play.sh
-index 2d79a034..71bd07af 100755
---- ./vishrc/cat_play.sh
-+++ ./vishrc/cat_play.sh
-@@ -1,7 +1,5 @@
- #!/bin/zsh
- 
--while true
--do
- while read ss
- do
-     ss=$(echo "$ss" | sed 's/"//g')
-@@ -9,4 +7,3 @@ do
-     echo "$ss"
-     ~/loadrc/vishrc/vlc.sh "$ss"
- done < "$1"
--done
 diff --git a/vishrc/cat_rate.sh b/vishrc/cat_rate.sh
 new file mode 100755
 index 00000000..5ace0203
