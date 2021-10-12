@@ -979,7 +979,7 @@
 "./vimrc/.vim/bundle/neco-vim/autoload/necovim.vim"
 "./vimrc/.vim/bundle/neco-vim/autoload/necovim/helper.vim"
 "./vimrc/.vim/bundle/neco-vim/autoload/neocomplete/sources/vim.vim"
-"./vimrc/.vim/bundle/neco-vim/denops/ddc-sources/necovim.ts"
+"./vimrc/.vim/bundle/neco-vim/denops/@ddc-sources/necovim.ts"
 "./vimrc/.vim/bundle/neco-vim/doc/necovim.txt"
 "./vimrc/.vim/bundle/neco-vim/doc/tags"
 "./vimrc/.vim/bundle/neco-vim/plugin/necovim.vim"
