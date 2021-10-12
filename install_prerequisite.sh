@@ -29,6 +29,7 @@ apt-get install -y \
     iperf \
     iperf3 \
     iputils-ping \
+    jq \
     kdiff3 \
     libsecret-1-dev \
     libsecret-tools \
@@ -36,6 +37,7 @@ apt-get install -y \
     manpages-fr-extra \
     manpages-pl \
     mdadm \
+    moreutils \
     mplayer \
     net-tools \
     netcat \
