@@ -27,7 +27,7 @@ host=$(git config deploy.host)
 rpath=$(git config deploy.path)
 remote="$(git config gsync.remote)"
 
-git push "$remote" "$targetBranch"
+git push
 
 GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
 
@@ -53,6 +53,7 @@ if [ $retVal -eq 0 ] || [ "$1" = "f" ]
 then
     git commit  --no-verify -am "$commit_message" && \
         git pull ; \
+        git push ; \
         . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
         ~/loadrc/gitrc/gfix.sh
 fi
