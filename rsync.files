@@ -218,6 +218,7 @@
 ./bashrc/cscope.sh
 ./bashrc/cscope_old.sh
 ./bashrc/csr.sh
+./bashrc/cutcommon.sh
 ./bashrc/dcopy.sh
 ./bashrc/dd.sh
 ./bashrc/debmirror.sh
