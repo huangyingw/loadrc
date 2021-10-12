@@ -13,5 +13,5 @@ do
         then
             ffmpeg -n -ss "$start" -to "$end" -i "$input" "$output"
         fi
-done < "$ss"
+    done < "$ss"
 done
