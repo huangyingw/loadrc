@@ -2731,6 +2731,9 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/imaps.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/include.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/info.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/jobs.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/jobs/neovim.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/jobs/vim.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/kpsewhich.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/log.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/matchparen.vim
@@ -2763,7 +2766,6 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/vimcomplete.bst
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/paths.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/pos.vim
-./vimrc/.vim/bundle/vimtex/autoload/vimtex/process.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/profile.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/qf.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/qf/biblatex.vim
