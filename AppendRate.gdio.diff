@@ -18,12 +18,6 @@ index 00000000..f6663d43
 +source=$(echo "$1" | sed 's/"//g')
 +target=$(~/loadrc/bashrc/append_num.sh "$1" "$2")
 +mv -nv "$source" "$target"
-diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
---- ./vimrc/.vim/bundle/bash-support.vim
-+++ ./vimrc/.vim/bundle/bash-support.vim
-@@ -1 +1 @@
--Subproject commit e919b7f843b043c4189f5b7c419c0d47f9b622b8
-+Subproject commit e919b7f843b043c4189f5b7c419c0d47f9b622b8-dirty
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 index 760021ef..d0cda9a4 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
