@@ -1,0 +1,13 @@
+diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
+index 2e325ba5..0c4a61cb 100755
+--- ./gitrc/gdi2.sh
++++ ./gitrc/gdi2.sh
+@@ -26,6 +26,8 @@ fi
+ host=$(git config deploy.host)
+ rpath=$(git config deploy.path)
+ 
++git push
++
+ GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
+ 
+ if [ -z $(cat $GDITDIFF) ]

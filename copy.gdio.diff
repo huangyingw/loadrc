@@ -1,0 +1,44 @@
+diff --git a/neovim b/neovim
+index b0ed4793..70c59ed6 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit b0ed4793be6df3e1f951fd1874fbc5b3e266c91b
++Subproject commit 70c59ed680e03665e5b924e8deb6c2a2b0ad842e
+diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
+index e83ca052..3278cf3b 160000
+--- ./vimrc/.vim/bundle/swift.vim
++++ ./vimrc/.vim/bundle/swift.vim
+@@ -1 +1 @@
+-Subproject commit e83ca052e88805b8b20bc2558e7995461665e306
++Subproject commit 3278cf3b0522e6f08eaf11275fedce619beffe9a
+diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
+index c395bf31..c8ebe453 160000
+--- ./vimrc/.vim/bundle/vim-autoformat
++++ ./vimrc/.vim/bundle/vim-autoformat
+@@ -1 +1 @@
+-Subproject commit c395bf31769baf4ccaf4d6e255038c375a1672bb
++Subproject commit c8ebe45315b3b574c12bf02603c658b1417c5afd
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 76b1a4eb..f9a81d3e 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 76b1a4ebcb7ec8aba88fd3072649f13b1a783585
++Subproject commit f9a81d3e9f7f58f910baf6a7c1d81777c48e67a7
+diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
+index 029b616a..42dfdc56 100644
+--- ./vimrc/.vim/plugin/fugitive.vim
++++ ./vimrc/.vim/plugin/fugitive.vim
+@@ -538,6 +538,11 @@ function! s:Gsubbr() abort
+ endfunction
+ 
+ function! s:Copy(...) abort
++    if &modified
++        echom 'Please check and save your file first!!!'
++        return 0
++    endif
++
+     let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
+     exec '!rm ' . newFile
+     exec 'w ' . newFile

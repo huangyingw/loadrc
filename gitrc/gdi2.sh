@@ -26,6 +26,8 @@ fi
 host=$(git config deploy.host)
 rpath=$(git config deploy.path)
 
+git push
+
 GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
 
 if [ -z $(cat $GDITDIFF) ]
