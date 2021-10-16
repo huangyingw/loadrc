@@ -1,5 +1,5 @@
 diff --git a/bashrc/append_num.sh b/bashrc/append_num.sh
-new file mode 100644
+new file mode 100755
 index 00000000..d24ea5f8
 --- /dev/null
 +++ ./bashrc/append_num.sh
@@ -8,7 +8,7 @@ index 00000000..d24ea5f8
 +
 +echo "$1" | sed "s/\/[6-9]\s\([^\/]*$\)/\/\1/g;s/\/\([^\/]*$\)/\/$2 \1/g;s/  \+/ /g;s/\"//g"
 diff --git a/bashrc/append_rate.sh b/bashrc/append_rate.sh
-new file mode 100644
+new file mode 100755
 index 00000000..7a42f1a1
 --- /dev/null
 +++ ./bashrc/append_rate.sh
