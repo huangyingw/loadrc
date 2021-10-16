@@ -6,6 +6,8 @@ do
 
     if [ "$ss" != "$target" ]
     then
-        echo mv -nv "$ss" "$target"
+        dir=$(dirname "$target")
+        mkdir -p "$dir"
+        mv -nv "$ss" "$target"
     fi
 done
