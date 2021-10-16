@@ -9,17 +9,23 @@ index 00000000..d24ea5f8
 +echo "$1" | sed "s/\/[6-9]\s\([^\/]*$\)/\/\1/g;s/\/\([^\/]*$\)/\/$2 \1/g;s/  \+/ /g;s/\"//g"
 diff --git a/bashrc/append_rate.sh b/bashrc/append_rate.sh
 new file mode 100755
-index 00000000..7a42f1a1
+index 00000000..f6663d43
 --- /dev/null
 +++ ./bashrc/append_rate.sh
 @@ -0,0 +1,5 @@
 +#!/bin/zsh
 +
 +source=$(echo "$1" | sed 's/"//g')
-+target=$(~/loadrc/bashrc/append_num.sh "$1")
++target=$(~/loadrc/bashrc/append_num.sh "$1" "$2")
 +mv -nv "$source" "$target"
+diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
+--- ./vimrc/.vim/bundle/bash-support.vim
++++ ./vimrc/.vim/bundle/bash-support.vim
+@@ -1 +1 @@
+-Subproject commit e919b7f843b043c4189f5b7c419c0d47f9b622b8
++Subproject commit e919b7f843b043c4189f5b7c419c0d47f9b622b8-dirty
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index 760021ef..49fab7f4 100644
+index 760021ef..d0cda9a4 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,3 +1,4 @@
@@ -27,7 +33,7 @@ index 760021ef..49fab7f4 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject ApplyBranch :execute s:ApplyBranch(<q-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject BinaryGrep :execute s:BinaryGrep(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatDu :execute s:CatDu(<f-args>)
-@@ -575,6 +576,27 @@ function! s:CatMove(...) abort
+@@ -575,6 +576,28 @@ function! s:CatMove(...) abort
      call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
  endfunction
  
@@ -41,7 +47,8 @@ index 760021ef..49fab7f4 100644
 +
 +        if filereadable(oldname)
 +            exec '!~/loadrc/bashrc/append_rate.sh ' . '"' .  oldname . '"' . ' ' . '"' . a:1 . '"'
-+            let newname = substitute(system("~/loadrc/bashrc/append_num.sh " . '"' . oldname . '"'), '\n', '', '')
++            let newname = substitute(system("~/loadrc/bashrc/append_num.sh " . '"' . oldname . '"' . ' ' . '"' . a:1 . '"'), '\n', '', '')
++            let newname = substitute(newname, getcwd(), '.', 'e')
 +            call setline('.', '"' . newname . '"')
 +            w!
 +            call UpdateProj()
