@@ -1,3 +1,4 @@
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject AppendRate :execute s:AppendRate(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject ApplyBranch :execute s:ApplyBranch(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject BinaryGrep :execute s:BinaryGrep(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatDu :execute s:CatDu(<f-args>)
@@ -573,6 +574,28 @@ function! s:CatMove(...) abort
     endif
 
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+endfunction
+
+function! s:AppendRate(...) abort
+    if a:0 >= 1
+        let curword = GetWord()
+        let b:netrw_curdir = getcwd()
+        let map_escape = "<|\n\r\\\<C-V>\""
+        let mapsafecurdir = escape(b:netrw_curdir, map_escape)
+        let oldname = ComposePath(mapsafecurdir, curword)
+
+        if filereadable(oldname)
+            exec '!~/loadrc/bashrc/append_rate.sh ' . '"' .  oldname . '"' . ' ' . '"' . a:1 . '"'
+            let newname = substitute(system("~/loadrc/bashrc/append_num.sh " . '"' . oldname . '"' . ' ' . '"' . a:1 . '"'), '\n', '', '')
+            let newname = substitute(newname, getcwd(), '.', 'e')
+            call setline('.', '"' . newname . '"')
+            w!
+            call UpdateProj()
+        endif
+
+    endif
+
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
 endfunction
 
 function! s:CatRate(...) abort
