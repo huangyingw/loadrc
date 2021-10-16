@@ -8,6 +8,7 @@ do
     then
         dir=$(dirname "$target")
         mkdir -p "$dir"
-        mv -nv "$ss" "$target"
+        source=$(echo "$ss" | sed 's/"//g')
+        mv -nv "$source" "$target"
     fi
 done
