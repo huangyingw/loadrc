@@ -1,20 +1,18 @@
-diff --git a/bashrc/move67.sh b/bashrc/move67.sh
-index 04171a45..8c944b52 100755
---- ./bashrc/move67.sh
-+++ ./bashrc/move67.sh
-@@ -1,4 +1,12 @@
- #!/bin/zsh
--find /media/volgrp/mirror1/av/ -type f -size +100M -name 6\* | while read ss; do dir=$(echo "$ss" | sed 's/\/mirror1\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"; done
--find /media/volgrp/mirror1/av/ -type f -size +100M -name 7\* | while read ss; do dir=$(echo "$ss" | sed 's/\/mirror1\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"; done
--find /media/volgrp/mirror1/av/ -type f -size +100M -name 8\* | while read ss; do dir=$(echo "$ss" | sed 's/\/mirror1\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"; done
-+function move_zarchive()
-+{
-+    num=$1
-+    find /media/volgrp/mirror1/av/ -type f -size +100M -name $num\* | while read ss; do dir=$(echo "$ss" | sed 's/\/mirror1\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"; done
-+}
-+
-+for (( c=6; c<=8; c++ ))
-+do
-+    echo "Welcome $c times"
-+    move_zarchive "$c"
-+done
+diff --git a/linux_links/etc/crypttab b/linux_links/etc/crypttab
+index 191dd600..9f6b0964 100644
+--- ./linux_links/etc/crypttab
++++ ./linux_links/etc/crypttab
+@@ -9,4 +9,5 @@ usb_backup_crypt_4T      /dev/disk/by-uuid/4e0d72a2-2f98-4c11-becd-beaa21ec1957
+ usb_backup_crypt_5T_1      /dev/disk/by-uuid/5d5e3fde-814f-4018-a103-2789c84d43e2  /root/loadrc/keys/keyfile   luks
+ zarchive      /dev/disk/by-uuid/a840176a-b76a-4d0f-962c-439e68107670  /root/loadrc/keys/keyfile   luks
+ vserver_crypt      /dev/disk/by-uuid/a4ff213e-f734-4c88-aba9-2ce733d0de76  /root/loadrc/keys/keyfile   luks
+-usb_backup_crypt_8T      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
++usb_backup_crypt_8T_1      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
++usb_backup_crypt_8T_2      /dev/disk/by-uuid/bbbc9066-0479-4959-af61-ead6a9cea3ba  /root/loadrc/keys/keyfile   luks
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 4d72ea66..05667154 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 4d72ea66a5e5d804f8ba01cc163063e9684d973e
++Subproject commit 0566715473d62ada1a29728a51a9be6ff952e314
