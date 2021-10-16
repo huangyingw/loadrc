@@ -1,0 +1,21 @@
+diff --git a/bashrc/append_num.sh b/bashrc/append_num.sh
+new file mode 100644
+index 00000000..d24ea5f8
+--- /dev/null
++++ ./bashrc/append_num.sh
+@@ -0,0 +1,3 @@
++#!/bin/zsh
++
++echo "$1" | sed "s/\/[6-9]\s\([^\/]*$\)/\/\1/g;s/\/\([^\/]*$\)/\/$2 \1/g;s/  \+/ /g;s/\"//g"
+diff --git a/vishrc/cat_rate.sh b/vishrc/cat_rate.sh
+index 5ace0203..903add67 100755
+--- ./vishrc/cat_rate.sh
++++ ./vishrc/cat_rate.sh
+@@ -3,6 +3,6 @@
+ while read ss
+ do
+     source=$(echo "$ss" | sed 's/"//g')
+-    target=$(echo "$ss" | sed "s/\/[6-9]\s\([^\/]*$\)/\/\1/g;s/\/\([^\/]*$\)/\/$2 \1/g;s/  \+/ /g;s/\"//g")
++    target=$(~/loadrc/bashrc/append_num.sh "$ss")
+     mv -nv "$source" "$target"
+ done < "$1"
