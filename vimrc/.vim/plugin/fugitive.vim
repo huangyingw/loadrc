@@ -4,6 +4,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatDu 
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatMove :execute s:CatMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatPlay :execute s:CatPlay(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRate :execute s:CatRate(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject AppendRate :execute s:AppendRate(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRun :execute s:CatRun(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Copy :execute s:Copy(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dodev :execute s:Dodev()
@@ -573,6 +574,27 @@ function! s:CatMove(...) abort
     endif
 
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+endfunction
+
+function! s:AppendRate(...) abort
+    if a:0 >= 1
+        let curword = GetWord()
+        let b:netrw_curdir = getcwd()
+        let map_escape = "<|\n\r\\\<C-V>\""
+        let mapsafecurdir = escape(b:netrw_curdir, map_escape)
+        let oldname = ComposePath(mapsafecurdir, curword)
+
+        if filereadable(oldname)
+            exec '!~/loadrc/bashrc/append_rate.sh ' . '"' .  oldname . '"' . ' ' . '"' . a:1 . '"'
+            let newname = substitute(system("~/loadrc/bashrc/append_num.sh " . '"' . oldname . '"'), '\n', '', '')
+            call setline('.', '"' . newname . '"')
+            w!
+            call UpdateProj()
+        endif
+
+    endif
+
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
 endfunction
 
 function! s:CatRate(...) abort
