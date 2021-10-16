@@ -586,7 +586,8 @@ function! s:AppendRate(...) abort
 
         if filereadable(oldname)
             exec '!~/loadrc/bashrc/append_rate.sh ' . '"' .  oldname . '"' . ' ' . '"' . a:1 . '"'
-            let newname = substitute(system("~/loadrc/bashrc/append_num.sh " . '"' . oldname . '"'), '\n', '', '')
+            let newname = substitute(system("~/loadrc/bashrc/append_num.sh " . '"' . oldname . '"' . ' ' . '"' . a:1 . '"'), '\n', '', '')
+            let newname = substitute(newname, getcwd(), '.', 'e')
             call setline('.', '"' . newname . '"')
             w!
             call UpdateProj()
