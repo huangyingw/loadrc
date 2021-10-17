@@ -18,6 +18,35 @@ index 00000000..f6663d43
 +source=$(echo "$1" | sed 's/"//g')
 +target=$(~/loadrc/bashrc/append_num.sh "$1" "$2")
 +mv -nv "$source" "$target"
+diff --git a/bashrc/move67.sh b/bashrc/move67.sh
+index ba494f8e..12242b7c 100755
+--- ./bashrc/move67.sh
++++ ./bashrc/move67.sh
+@@ -1,14 +1,14 @@
+ #!/bin/zsh
+-function move_zarchive()
+-{
+-    num=$1
+-    find /media/volgrp/mirror1/av/ -type f -size +100M -name $num\* | while read ss
+-    do 
+-        dir=$(echo "$ss" | sed 's/\/mirror1\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"
+-    done
+-}
+ 
+-for (( c=6; c<=8; c++ ))
++find /media/volgrp/mirror1/av/ -type f -size +100M  | while read ss
+ do
+-    move_zarchive "$c"
++    target=$(echo "$ss" | sed 's/\/mirror1\(\/.*\/[6-8]\s\)/\/zarchive\1/g')
++
++    if [ "$ss" != "$target" ]
++    then
++        dir=$(dirname "$target")
++        mkdir -p "$dir"
++        source=$(echo "$ss" | sed 's/"//g')
++        mv -nv "$source" "$target"
++    fi
+ done
 diff --git a/linux_links/etc/crypttab b/linux_links/etc/crypttab
 index 191dd600..9f6b0964 100644
 --- ./linux_links/etc/crypttab
@@ -29,6 +58,13 @@ index 191dd600..9f6b0964 100644
 -usb_backup_crypt_8T      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
 +usb_backup_crypt_8T_1      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
 +usb_backup_crypt_8T_2      /dev/disk/by-uuid/bbbc9066-0479-4959-af61-ead6a9cea3ba  /root/loadrc/keys/keyfile   luks
+diff --git a/neovim b/neovim
+index 5a076473..a585f609 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit 5a07647377ec6830e6f82432e77b87755507c49e
++Subproject commit a585f609bef129823b485a0c735c4ee710725c10
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 index 760021ef..d0cda9a4 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
