@@ -1,0 +1,29 @@
+diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
+index 0c4a61cb..0f54288f 100755
+--- ./gitrc/gdi2.sh
++++ ./gitrc/gdi2.sh
+@@ -26,7 +26,9 @@ fi
+ host=$(git config deploy.host)
+ rpath=$(git config deploy.path)
+ 
+-git push
++remote="$(git config gsync.remote)"
++ 
++git push "$remote" "$targetBranch"
+ 
+ GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
+ 
+diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
+index bd703fed..44364f06 100755
+--- ./imvurc/ghypo.sh
++++ ./imvurc/ghypo.sh
+@@ -25,7 +25,8 @@ else
+ 
+     if [ $(~/loadrc/gitrc/git_ready.sh) ]
+     then
+-        s/hypo
++        s/hypo_best
++        # s/hypo
+         # s/hypo --buildbot=hypo2 
+     fi
+ fi
