@@ -2812,6 +2812,7 @@
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/mhequ.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/minted.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/moreverb.vim"
+"./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/nameref.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/natbib.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/pdfpages.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/pgfplots.vim"
