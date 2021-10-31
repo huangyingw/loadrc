@@ -19,6 +19,8 @@
 192.168.123.203 u2004
 10.211.55.5 macos
 192.168.123.177 ubuntu20.04
+# 172.27.174.184 mbp
+192.168.31.168 mbp
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
