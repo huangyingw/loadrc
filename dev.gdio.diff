@@ -723,12 +723,12 @@ index 7042dce9..0e670bd9 100755
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
 diff --git a/cscope b/cscope
-index 18a46b20..c8258369 160000
+index 18a46b20..40e22631 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit c8258369e51db3fe64d4feb374dcf1cfee79ba6a
++Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
 diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
 index 58429e06..51c59336 100755
 --- ./ffmpegrc/concat.sh
@@ -1155,14 +1155,15 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..cd5a304e 100644
+index 425c9192..a36ccd21 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
-@@ -18,6 +18,7 @@
+@@ -18,6 +18,8 @@
  192.168.31.99 mldonkey
  192.168.123.203 u2004
  10.211.55.5 macos
 +192.168.123.177 ubuntu20.04
++192.168.123.80 u2110
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
@@ -1511,12 +1512,12 @@ index 2b1dca6c..8d45fc92 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit 8d45fc9266d005929a964b099c8f9f61e526ec10
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..94e18b63 160000
+index cc6342c3..358daa3e 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 94e18b63aa8b2ad76713d97e3f65038382f08625
++Subproject commit 358daa3ec7112bdaf29795179a87f1dcab86b3c2
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
