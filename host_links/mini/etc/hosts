@@ -21,6 +21,7 @@
 192.168.123.177 ubuntu20.04
 # 172.27.174.184 mbp
 192.168.31.168 mbp
+192.168.123.80 u2110
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
