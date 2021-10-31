@@ -49,7 +49,7 @@
     merge = refs/heads/findresult
 [gsync]
     remote = origin
-    target = origin/dev
+    target = origin/master
 [gdif]
     ignore = ./bashrc/cscope_old.sh
     ignore = ./bashrc/update_proj_old.sh
