@@ -1,14 +1,14 @@
 #!/bin/zsh
-function move_zarchive()
-{
-    num=$1
-    find /media/volgrp/mirror1/av/ -type f -size +100M -name $num\* | while read ss
-    do 
-        dir=$(echo "$ss" | sed 's/\/mirror1\//\/zarchive\//g'); mkdir -p "$(dirname "$dir")";mv -v "$ss" "$(dirname "$dir")"
-    done
-}
 
-for (( c=6; c<=8; c++ ))
+find /media/volgrp/mirror1/av/ -type f -size +100M  | while read ss
 do
-    move_zarchive "$c"
+    target=$(echo "$ss" | sed 's/\/mirror1\(\/.*\/[6-8][^0-9][^\/]*$\)/\/zarchive\1/g')
+
+    if [ "$ss" != "$target" ]
+    then
+        dir=$(dirname "$target")
+        mkdir -p "$dir"
+        source=$(echo "$ss" | sed 's/"//g')
+        mv -nv "$source" "$target"
+    fi
 done
