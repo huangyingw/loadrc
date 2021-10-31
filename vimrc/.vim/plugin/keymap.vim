@@ -80,14 +80,14 @@ function! ShowRemember()
     let b:csdbpath = Cd2ProjectRoot("files.proj")
     let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
 
+    echom relativePath
+    call SendTextToPbCopy(expand('%:p'))
+
     if &clipboard == 'unnamed'
         let @* = relativePath
     else
         let @+ = relativePath
     endif
-
-    echom relativePath
-    call SendTextToPbCopy(expand('%:p'))
 endfunction
 
 function! Filter()
