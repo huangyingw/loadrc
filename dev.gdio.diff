@@ -105,7 +105,7 @@ index a51724b9..82a595f3 100644
  export GOPATH=$HOME/go
 -export PATH=$PATH:/usr/local/go/bin
 diff --git a/.imacpro.rc b/.imacpro.rc
-index a0d25e95..922db5fe 100755
+index a0d25e95..4f59350a 100755
 --- ./.imacpro.rc
 +++ ./.imacpro.rc
 @@ -1,10 +1,9 @@
@@ -113,13 +113,13 @@ index a0d25e95..922db5fe 100755
  #alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
  
 -if [ $(uname) = "Darwin" ]
-+if ! (sudo systemsetup -getcomputersleep | grep -q Never)
++if ! (sudo systemsetup -getcomputersleep | grep -q "after 10 minutes")
  then
 -    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
 -        then \
 -        sudo systemsetup -setcomputersleep Never; \
 -        fi
-+    sudo systemsetup -setcomputersleep Never
++    sudo systemsetup -setcomputersleep 10
  fi
 +
 +~/loadrc/setup_bidirectional_clipboard.sh
@@ -1375,11 +1375,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..17c096ce
+index 00000000..89afa234
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 17c096cedb0b81132c49a39278c1162373031374
++Subproject commit 89afa2342916b80e29d85475b549dd7a046b605d
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1505,19 +1505,19 @@ index 0c22efb1..00000000
 @@ -1 +0,0 @@
 -Subproject commit 0c22efb1b919573f69ec237e7a8ab7ca1c1ecc03
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..8d45fc92 160000
+index 2b1dca6c..ac084414 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit 8d45fc9266d005929a964b099c8f9f61e526ec10
++Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..358daa3e 160000
+index cc6342c3..66bd6840 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 358daa3ec7112bdaf29795179a87f1dcab86b3c2
++Subproject commit 66bd684099ea7f763f852735205b3c18eaff5c54
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -1568,12 +1568,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..80611d3b 160000
+index 8468d6a8..e70ad105 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 80611d3b871d71f85c0d1bd85ef395cba6cfda77
++Subproject commit e70ad105fc70ba05155b736e05eb584227cac53b
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
