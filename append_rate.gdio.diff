@@ -961,10 +961,10 @@ index 00000000..e8b5bfa5
 +~/loadrc/gitrc/gdio.sh
 +git checkout "$CURRENT_BRANCH.gdio.diff"
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index dbcf937b..0f54288f 100755
+index dbcf937b..0c4a61cb 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
-@@ -17,21 +18,42 @@ fi
+@@ -17,21 +18,40 @@ fi
  
  targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
  
@@ -978,9 +978,7 @@ index dbcf937b..0f54288f 100755
  host=$(git config deploy.host)
  rpath=$(git config deploy.path)
  
-+remote="$(git config gsync.remote)"
-+ 
-+git push "$remote" "$targetBranch"
++git push
 +
  GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
 +
@@ -1076,25 +1074,19 @@ index 20dd9aa3..0f505a1e 100755
 +CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
  git fetch . "$CURRENT_BRANCH":"$1"
 diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
-index fa900e00..a4f538c7 100755
+index fa900e00..9aab14ed 100755
 --- ./gitrc/gpl.sh
 +++ ./gitrc/gpl.sh
-@@ -2,27 +2,25 @@
+@@ -2,7 +2,7 @@
  
  ~/loadrc/gitrc/include_gitconfig.sh
  git remote update &
 -git checkout *.gdio.diff
--git pull &
 +~/loadrc/gitrc/discard_unnecessaries.sh
-+git pull
+ git pull &
  currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
  
- for ss in `git remote -v |awk '/\(fetch\)$/{print $1}'`
- do
--    git pull $ss $currentBranch &
-+    git pull $ss $currentBranch
-     git remote prune $ss &
- done
+@@ -14,15 +14,13 @@ done
  
  for ss in $(git config --get-all pull.from)
  do
@@ -1208,7 +1200,7 @@ index 50886663..e97170fc 100644
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
 diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
-index ea2bc967..44364f06 100755
+index ea2bc967..bd703fed 100755
 --- ./imvurc/ghypo.sh
 +++ ./imvurc/ghypo.sh
 @@ -1,4 +1,11 @@
@@ -1223,14 +1215,11 @@ index ea2bc967..44364f06 100755
  if [ $(hostname) != "linb-sandbox" ]
  then
      if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
-@@ -18,6 +25,8 @@ else
- 
+@@ -19,5 +26,6 @@ else
      if [ $(~/loadrc/gitrc/git_ready.sh) ]
      then
--        s/hypo
-+        s/hypo_best
-+        # s/hypo
-+        # s/hypo --buildbot=hypo2 
+         s/hypo
++        #s/hypo --buildbot=hypo2 
      fi
  fi
 diff --git a/install_basic.sh b/install_basic.sh
@@ -1429,11 +1418,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..c9aab672
+index 00000000..5a076473
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit c9aab6720120b5ff213a5c1e827c0f73c76e92db
++Subproject commit 5a07647377ec6830e6f82432e77b87755507c49e
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1566,12 +1555,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..a4e5d9e0 160000
+index cc6342c3..358daa3e 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit a4e5d9e01326a47437025756dcd1dd2ba3ec8728
++Subproject commit 358daa3ec7112bdaf29795179a87f1dcab86b3c2
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -1622,12 +1611,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..e16cf5f5 160000
+index 8468d6a8..32fa2c9a 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit e16cf5f58b800140c3ebf985b3f97ee0c78f4e52
++Subproject commit 32fa2c9a90618f9f3fef9fadeb3554656055eba6
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
