@@ -1,8 +1,13 @@
 #!/bin/zsh
 
+result=()
+
 while read ss
 do
-    source=$(echo "$ss" | sed 's/"//g')
-    target=$(echo "$ss" | sed "s/\/[6-9]\s\([^\/]*$\)/\/\1/g;s/\/\([^\/]*$\)/\/$2 \1/g;s/  \+/ /g;s/\"//g")
-    mv -nv "$source" "$target"
+    ~/loadrc/bashrc/append_rate.sh "$ss" "$2"
+    target=$(~/loadrc/bashrc/append_num.sh "$ss" "$2")
+    result+=("$target")
 done < "$1"
+
+printf "%s\n" "${result[@]}" > "$1".tmp
+cp -fv "$1".tmp "$1"
