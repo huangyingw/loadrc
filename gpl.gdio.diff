@@ -1198,7 +1198,7 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..49369709 100644
+index 425c9192..8879ff4f 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
 @@ -18,6 +18,10 @@
@@ -1207,7 +1207,7 @@ index 425c9192..49369709 100644
  10.211.55.5 macos
 +192.168.123.177 ubuntu20.04
 +# 172.27.174.184 mbp
-+192.168.31.168 mbp
++192.168.31.96 mbp
 +192.168.123.80 u2110
  
  # The following lines are desirable for IPv6 capable hosts
@@ -1446,11 +1446,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..8d2d68ba
+index 00000000..5a076473
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 8d2d68ba02c118d5001f860dd54743330a67619a
++Subproject commit 5a07647377ec6830e6f82432e77b87755507c49e
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1576,12 +1576,12 @@ index 0c22efb1..00000000
 @@ -1 +0,0 @@
 -Subproject commit 0c22efb1b919573f69ec237e7a8ab7ca1c1ecc03
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..8d45fc92 160000
+index 2b1dca6c..ac084414 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit 8d45fc9266d005929a964b099c8f9f61e526ec10
++Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
 index cc6342c3..2cab0699 160000
 --- ./vimrc/.vim/bundle/python-mode
@@ -1639,12 +1639,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..80611d3b 160000
+index 8468d6a8..d18f5154 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 80611d3b871d71f85c0d1bd85ef395cba6cfda77
++Subproject commit d18f5154c5aa6d22837d9349b64b551f9a497ff5
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
