@@ -1444,11 +1444,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..17c096ce
+index 00000000..f950af9b
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 17c096cedb0b81132c49a39278c1162373031374-dirty
++Subproject commit f950af9b393bb54a90ff80b86c82ef2fa9115fc6
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1574,12 +1574,12 @@ index 0c22efb1..00000000
 @@ -1 +0,0 @@
 -Subproject commit 0c22efb1b919573f69ec237e7a8ab7ca1c1ecc03
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..8d45fc92 160000
+index 2b1dca6c..ac084414 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit 8d45fc9266d005929a964b099c8f9f61e526ec10
++Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
 index cc6342c3..2cab0699 160000
 --- ./vimrc/.vim/bundle/python-mode
@@ -1637,12 +1637,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..80611d3b 160000
+index 8468d6a8..d18f5154 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 80611d3b871d71f85c0d1bd85ef395cba6cfda77
++Subproject commit d18f5154c5aa6d22837d9349b64b551f9a497ff5
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -2227,10 +2227,10 @@ index 5fd4a230..cbae7bd5 100644
 +    endif
 +endfunction
 diff --git a/vimrc/.vim/plugin/netrw.vim b/vimrc/.vim/plugin/netrw.vim
-index 56c73821..641c8a60 100644
+index 56c73821..832d05c3 100644
 --- ./vimrc/.vim/plugin/netrw.vim
 +++ ./vimrc/.vim/plugin/netrw.vim
-@@ -55,18 +55,11 @@ fun! ComposePath(base, subdir)
+@@ -55,18 +55,10 @@ fun! ComposePath(base, subdir)
      return ret
  endfun
  fun! LocalRename() range
@@ -2241,8 +2241,6 @@ index 56c73821..641c8a60 100644
 -    let oldname = ComposePath(mapsafecurdir, curword)
 +    let curline = getline(line("."))
 +    let nxtline = getline(line(".") + 1)
-+    echom 'curline --> ' . curline
-+    echom 'nxtline --> ' . nxtline
  
 -    if filereadable(oldname)
 -        let newname = input("", substitute(oldname, '/*$', '', 'e'))
@@ -2250,10 +2248,10 @@ index 56c73821..641c8a60 100644
 -        let newname = substitute(newname, getcwd(), '.', 'e')
 -        call setline('.', '"' . newname . '"')
 -        w!
--        call UpdateProj()
--    endif
 +    exec '!~/loadrc/bashrc/rename.sh ' . curline . ' ' . nxtline
 +    normal dd
+     call UpdateProj()
+-    endif
  endfun
 diff --git a/vimrc/.vim/plugin/pbpaste.vim b/vimrc/.vim/plugin/pbpaste.vim
 new file mode 100644
