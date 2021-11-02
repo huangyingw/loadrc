@@ -22,5 +22,5 @@ target=$(git config gsync.target)
 
 if [ -n "$target" ]
 then
-    git merge "$target"
+    git merge "$target" &
 fi
