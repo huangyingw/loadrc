@@ -55,18 +55,10 @@ fun! ComposePath(base, subdir)
     return ret
 endfun
 fun! LocalRename() range
-    let curword = GetWord()
-    let b:netrw_curdir = getcwd()
-    let map_escape = "<|\n\r\\\<C-V>\""
-    let mapsafecurdir = escape(b:netrw_curdir, map_escape)
-    let oldname = ComposePath(mapsafecurdir, curword)
+    let curline = getline(line("."))
+    let nxtline = getline(line(".") + 1)
 
-    if filereadable(oldname)
-        let newname = input("", substitute(oldname, '/*$', '', 'e'))
-        call rename(oldname, newname)
-        let newname = substitute(newname, getcwd(), '.', 'e')
-        call setline('.', '"' . newname . '"')
-        w!
-        call UpdateProj()
-    endif
+    exec '!~/loadrc/bashrc/rename.sh ' . curline . ' ' . nxtline
+    normal dd
+    call UpdateProj()
 endfun

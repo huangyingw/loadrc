@@ -2,7 +2,7 @@
 
 if [[ "$(git config remote.origin.url)" != *'website.git' ]]
 then
-    echo -e "${red}ghypo only run for imvu website repo... ${NC}" 
+    echo -e "${red}ghypo only run for imvu website repo... ${NC}"
     exit 1
 fi
 
@@ -27,6 +27,6 @@ else
     then
         s/hypo_best
         # s/hypo
-        # s/hypo --buildbot=hypo2 
+        # s/hypo --buildbot=hypo2
     fi
 fi
