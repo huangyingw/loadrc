@@ -50,7 +50,7 @@ index 5ed35a81..0ea38ff6 100644
      allow = true
  [branch "dev"]
 diff --git a/.gitmodules b/.gitmodules
-index e17f9887..984b9375 100644
+index e17f9887..029984a6 100644
 --- ./.gitmodules
 +++ ./.gitmodules
 @@ -133,10 +133,6 @@
@@ -70,7 +70,7 @@ index e17f9887..984b9375 100644
      url = git@github.com:rbgrouleff/bclose.vim.git
 +[submodule "vimrc/.vim/bundle/vim-pbcopy"]
 +	path = vimrc/.vim/bundle/vim-pbcopy
-+	url = git@github.com:huangyingw/vim-pbcopy.git 
++	url = git@github.com:huangyingw/vim-pbcopy.git
 +[submodule "neovim"]
 +	path = neovim
 +	url = git@github.com:huangyingw/neovim.git
@@ -105,20 +105,23 @@ index a51724b9..82a595f3 100644
  export GOPATH=$HOME/go
 -export PATH=$PATH:/usr/local/go/bin
 diff --git a/.imacpro.rc b/.imacpro.rc
-index a0d25e95..e1869610 100755
+index a0d25e95..4f59350a 100755
 --- ./.imacpro.rc
 +++ ./.imacpro.rc
-@@ -1,10 +1,4 @@
+@@ -1,10 +1,9 @@
  #!/bin/zsh
  #alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
  
 -if [ $(uname) = "Darwin" ]
--then
++if ! (sudo systemsetup -getcomputersleep | grep -q "after 10 minutes")
+ then
 -    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
 -        then \
 -        sudo systemsetup -setcomputersleep Never; \
 -        fi
--fi
++    sudo systemsetup -setcomputersleep 10
+ fi
++
 +~/loadrc/setup_bidirectional_clipboard.sh
 diff --git a/.loadrc b/.loadrc
 index 17e45232..14ec11eb 100755
@@ -648,6 +651,18 @@ index 00000000..10e89a8a
 +cd "$SCRIPTPATH"
 +
 +export PATH=$(echo $PATH | tr ":" "\n" | grep -v "anaconda3" | tr "\n" ":")
+diff --git a/bashrc/rename.sh b/bashrc/rename.sh
+new file mode 100755
+index 00000000..d3a5e9de
+--- /dev/null
++++ ./bashrc/rename.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++
++source="$1"
++target="$2"
++mkdir -p "$(dirname "$target")"
++mv -nv "$source" "$target"
 diff --git a/bashrc/select_move.sh b/bashrc/select_move.sh
 new file mode 100755
 index 00000000..29fd5336
@@ -834,7 +849,7 @@ index dbf809a0..9df3e01a 100755
  git checkout files.proj
  git checkout rsync.files
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
-index 4f8edfc6..12e3635f 100755
+index 4f8edfc6..4f5de493 100755
 --- ./gitrc/dogdio.sh
 +++ ./gitrc/dogdio.sh
 @@ -1,5 +1,6 @@
@@ -854,7 +869,7 @@ index 4f8edfc6..12e3635f 100755
 +target="$(git config gsync.target)"
  
 -~/loadrc/gitrc/gdi.sh "$remote/$remote_branch" 2>&1 | tee "$output"  
-+~/loadrc/gitrc/gdi.sh "$target" 2>&1 | tee "$output"  
++~/loadrc/gitrc/gdi.sh "$target" 2>&1 | tee "$output"
  sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
  exit 0
 diff --git a/gitrc/g.sh b/gitrc/g.sh
@@ -961,10 +976,10 @@ index 00000000..e8b5bfa5
 +~/loadrc/gitrc/gdio.sh
 +git checkout "$CURRENT_BRANCH.gdio.diff"
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index dbcf937b..0c4a61cb 100755
+index dbcf937b..72b45d13 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
-@@ -17,21 +18,40 @@ fi
+@@ -17,21 +18,42 @@ fi
  
  targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
  
@@ -978,7 +993,9 @@ index dbcf937b..0c4a61cb 100755
  host=$(git config deploy.host)
  rpath=$(git config deploy.path)
  
-+git push
++remote="$(git config gsync.remote)"
++
++git push "$remote" "$targetBranch"
 +
  GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
 +
@@ -1074,25 +1091,19 @@ index 20dd9aa3..0f505a1e 100755
 +CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
  git fetch . "$CURRENT_BRANCH":"$1"
 diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
-index fa900e00..a4f538c7 100755
+index fa900e00..b0ff79ac 100755
 --- ./gitrc/gpl.sh
 +++ ./gitrc/gpl.sh
-@@ -2,27 +2,25 @@
+@@ -2,7 +2,7 @@
  
  ~/loadrc/gitrc/include_gitconfig.sh
  git remote update &
 -git checkout *.gdio.diff
--git pull &
 +~/loadrc/gitrc/discard_unnecessaries.sh
-+git pull
+ git pull &
  currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
  
- for ss in `git remote -v |awk '/\(fetch\)$/{print $1}'`
- do
--    git pull $ss $currentBranch &
-+    git pull $ss $currentBranch
-     git remote prune $ss &
- done
+@@ -14,15 +14,13 @@ done
  
  for ss in $(git config --get-all pull.from)
  do
@@ -1110,18 +1121,26 @@ index fa900e00..a4f538c7 100755
 +if [ -n "$target" ]
  then
 -    git merge "$remote"/"$remote_branch"
-+    git merge "$target"
++    git merge "$target" &
  fi
 diff --git a/gitrc/gps.sh b/gitrc/gps.sh
-index 2198cb7f..038cc606 100755
+index 2198cb7f..1af0b074 100755
 --- ./gitrc/gps.sh
 +++ ./gitrc/gps.sh
-@@ -1,5 +1,4 @@
+@@ -1,11 +1,11 @@
  #!/bin/zsh
 -currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
  ~/loadrc/gitrc/include_gitconfig.sh
  
  if [[ $(git config --get-all push.remote) ]]
+ then
+     for ss in $(git config --get-all push.remote)
+     do
+-        git push --all -v "$ss" && git push -v --tag "$ss" &
++        git push --all -v "$ss" &
++        git push -v --tag "$ss" &
+     done
+ fi
 diff --git a/gitrc/gres.sh b/gitrc/gres.sh
 deleted file mode 100755
 index 1de7ff41..00000000
@@ -1206,7 +1225,7 @@ index 50886663..e97170fc 100644
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
 diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
-index ea2bc967..bd703fed 100755
+index ea2bc967..b7adab11 100755
 --- ./imvurc/ghypo.sh
 +++ ./imvurc/ghypo.sh
 @@ -1,4 +1,11 @@
@@ -1214,18 +1233,21 @@ index ea2bc967..bd703fed 100755
 +
 +if [[ "$(git config remote.origin.url)" != *'website.git' ]]
 +then
-+    echo -e "${red}ghypo only run for imvu website repo... ${NC}" 
++    echo -e "${red}ghypo only run for imvu website repo... ${NC}"
 +    exit 1
 +fi
 +
  if [ $(hostname) != "linb-sandbox" ]
  then
      if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
-@@ -19,5 +26,6 @@ else
+@@ -18,6 +25,8 @@ else
+ 
      if [ $(~/loadrc/gitrc/git_ready.sh) ]
      then
-         s/hypo
-+        #s/hypo --buildbot=hypo2 
+-        s/hypo
++        s/hypo_best
++        # s/hypo
++        # s/hypo --buildbot=hypo2
      fi
  fi
 diff --git a/install_basic.sh b/install_basic.sh
@@ -1424,11 +1446,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..17c096ce
+index 00000000..85fb91d5
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 17c096cedb0b81132c49a39278c1162373031374
++Subproject commit 85fb91d5b0c6fa72deda6200d5ca68ef3227076c
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1561,12 +1583,12 @@ index 2b1dca6c..8d45fc92 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit 8d45fc9266d005929a964b099c8f9f61e526ec10
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..358daa3e 160000
+index cc6342c3..2cab0699 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 358daa3ec7112bdaf29795179a87f1dcab86b3c2
++Subproject commit 2cab0699d9bc8b60a807f7eb6bbf7aff52849028
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -1823,7 +1845,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..d0cda9a4 100644
+index d5874fe5..23621868 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,7 +1,10 @@
@@ -2060,7 +2082,7 @@ index d5874fe5..d0cda9a4 100644
      endif
  
 -    exec '!~/loadrc/bashrc/fr.sh ' . '"' .  a:find . '"' . ' ' . '"' .  a:replace . '"' . ' ' . '"' .  fileList . '"'
-+    exec '!~/loadrc/bashrc/fr.sh ' . '"' .  find . '"' . ' ' . '"' .  replace . '"' . ' ' . '"' .  fileList . '"' . ' ' . '"' .  word_only . '"' 
++    exec '!~/loadrc/bashrc/fr.sh ' . '"' .  find . '"' . ' ' . '"' .  replace . '"' . ' ' . '"' .  fileList . '"' . ' ' . '"' .  word_only . '"'
      call s:Gs()
  endfunction
  
@@ -2080,7 +2102,7 @@ index d5874fe5..d0cda9a4 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..c318f0f1 100644
+index 5fd4a230..cbae7bd5 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -77,8 +77,17 @@ function! VFilter()
@@ -2092,14 +2114,14 @@ index 5fd4a230..c318f0f1 100644
 +    let b:csdbpath = Cd2ProjectRoot("files.proj")
 +    let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
 +
++    echom relativePath
++    call SendTextToPbCopy(expand('%:p'))
++
 +    if &clipboard == 'unnamed'
 +        let @* = relativePath
 +    else
 +        let @+ = relativePath
 +    endif
-+
-+    echom relativePath
-+    call SendTextToPbCopy(expand('%:p'))
  endfunction
  
  function! Filter()
@@ -2177,7 +2199,7 @@ index 5fd4a230..c318f0f1 100644
  " open tig with Project root path
  nnoremap <Leader>t :TigOpenProjectRootDir<CR>
  nnoremap <leader>T :TigOpenCurrentFile<CR>
-+nnoremap <silent> ml :call CopyLineInfo()<cr> 
++nnoremap <silent> ml :call CopyLineInfo()<cr>
 +
 +function! CopyLineInfo()
 +    normal yy
@@ -2206,6 +2228,33 @@ index 5fd4a230..c318f0f1 100644
 +        call DiffAll()
 +    endif
 +endfunction
+diff --git a/vimrc/.vim/plugin/netrw.vim b/vimrc/.vim/plugin/netrw.vim
+index 56c73821..832d05c3 100644
+--- ./vimrc/.vim/plugin/netrw.vim
++++ ./vimrc/.vim/plugin/netrw.vim
+@@ -55,18 +55,10 @@ fun! ComposePath(base, subdir)
+     return ret
+ endfun
+ fun! LocalRename() range
+-    let curword = GetWord()
+-    let b:netrw_curdir = getcwd()
+-    let map_escape = "<|\n\r\\\<C-V>\""
+-    let mapsafecurdir = escape(b:netrw_curdir, map_escape)
+-    let oldname = ComposePath(mapsafecurdir, curword)
++    let curline = getline(line("."))
++    let nxtline = getline(line(".") + 1)
+ 
+-    if filereadable(oldname)
+-        let newname = input("", substitute(oldname, '/*$', '', 'e'))
+-        call rename(oldname, newname)
+-        let newname = substitute(newname, getcwd(), '.', 'e')
+-        call setline('.', '"' . newname . '"')
+-        w!
++    exec '!~/loadrc/bashrc/rename.sh ' . curline . ' ' . nxtline
++    normal dd
+     call UpdateProj()
+-    endif
+ endfun
 diff --git a/vimrc/.vim/plugin/pbpaste.vim b/vimrc/.vim/plugin/pbpaste.vim
 new file mode 100644
 index 00000000..df39432d
@@ -2698,16 +2747,23 @@ index ed41d521..71bd07af 100755
 -done
 diff --git a/vishrc/cat_rate.sh b/vishrc/cat_rate.sh
 new file mode 100755
-index 00000000..e35fc278
+index 00000000..edfddbb7
 --- /dev/null
 +++ ./vishrc/cat_rate.sh
-@@ -0,0 +1,6 @@
+@@ -0,0 +1,13 @@
 +#!/bin/zsh
++
++result=()
 +
 +while read ss
 +do
 +    ~/loadrc/bashrc/append_rate.sh "$ss" "$2"
++    target=$(~/loadrc/bashrc/append_num.sh "$ss" "$2")
++    result+=("$target")
 +done < "$1"
++
++printf "%s\n" "${result[@]}" > "$1".tmp
++cp -fv "$1".tmp "$1"
 diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
 index e14de500..14ffa5a3 100755
 --- ./vishrc/vrun.sh
