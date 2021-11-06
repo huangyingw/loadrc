@@ -663,6 +663,45 @@ index 00000000..d3a5e9de
 +target="$2"
 +mkdir -p "$(dirname "$target")"
 +mv -nv "$source" "$target"
+diff --git a/bashrc/retire_parts.sh b/bashrc/retire_parts.sh
+new file mode 100755
+index 00000000..2a7dacba
+--- /dev/null
++++ ./bashrc/retire_parts.sh
+@@ -0,0 +1,33 @@
++#!/bin/zsh
++
++function CountParts()
++{
++    echo $(find /var/lib/transmission-daemon/ -type f -mtime +"$1" -name \*.part | wc -l)
++}
++
++left=1
++right=30
++
++while [ $left -lt $right ]
++do
++    mid=$(printf '%s\n' $left $right | datamash median 1)
++    mid=${mid%.*}
++    echo "mid --> $mid"
++
++    local result=$(CountParts $mid)
++    result=${result%.*}
++    echo "result --> $result"
++
++    if [ $result -gt 0 ]
++    then
++        left=$((mid + 1))
++        echo "left --> $left"
++    else
++        right=$mid
++        echo "right --> $right"
++    fi
++done
++
++echo "find /var/lib/transmission-daemon/ -type f -mtime +$mid -name \*.part | wc -l"
++echo "find /var/lib/transmission-daemon/ -type f -mtime +$left -name \*.part | wc -l"
++echo "find /var/lib/transmission-daemon/ -type f -mtime +$right -name \*.part | wc -l"
 diff --git a/bashrc/select_move.sh b/bashrc/select_move.sh
 new file mode 100755
 index 00000000..29fd5336
@@ -1358,7 +1397,7 @@ index 2bc75c67..ab07848c 100755
 +
 +./neovim/install.sh
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
-index 298b6bc4..cd4e7524 100755
+index 298b6bc4..05bbc137 100755
 --- ./install_prerequisite.sh
 +++ ./install_prerequisite.sh
 @@ -1,14 +1,13 @@
@@ -1377,7 +1416,15 @@ index 298b6bc4..cd4e7524 100755
      binutils \
      build-essential \
      cmake \
-@@ -30,6 +29,7 @@ apt-get install -y \
+@@ -16,6 +15,7 @@ apt-get install -y \
+     cryptsetup \
+     cscope \
+     curl \
++    datamash \
+     dkms \
+     dos2unix \
+     exuberant-ctags \
+@@ -30,6 +30,7 @@ apt-get install -y \
      iperf \
      iperf3 \
      iputils-ping \
@@ -1385,7 +1432,7 @@ index 298b6bc4..cd4e7524 100755
      kdiff3 \
      libsecret-1-dev \
      libsecret-tools \
-@@ -37,10 +37,11 @@ apt-get install -y \
+@@ -37,10 +38,11 @@ apt-get install -y \
      manpages-fr-extra \
      manpages-pl \
      mdadm \
@@ -1398,7 +1445,7 @@ index 298b6bc4..cd4e7524 100755
      npm \
      openvpn \
      perl \
-@@ -54,10 +55,11 @@ apt-get install -y \
+@@ -54,10 +56,11 @@ apt-get install -y \
      slurm \
      smplayer \
      software-properties-common \
@@ -1446,11 +1493,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..670bdc7f
+index 00000000..e0a39808
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 670bdc7fd702fb642418ed8401f4412303c1fd77
++Subproject commit e0a398085335da529a8651fb6cc665e26ce3d74c
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
