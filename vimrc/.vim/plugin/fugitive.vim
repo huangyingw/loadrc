@@ -230,12 +230,14 @@ endfunction
 
 function! s:Gbib() abort
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/gbib.sh'
+    exec '!~/loadrc/gitrc/gbib.sh | tee gbil.log.runresult'
+    call OpenOrSwitch('gbil.log.runresult', 'vs')
 endfunction
 
 function! s:Gbig() abort
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/gbig.sh'
+    exec '!~/loadrc/gitrc/gbig.sh | tee gbil.log.runresult' 
+    call OpenOrSwitch('gbil.log.runresult', 'vs')
 endfunction
 
 function! s:Gbil() abort

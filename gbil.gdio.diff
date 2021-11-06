@@ -1450,7 +1450,7 @@ index 00000000..8d2d68ba
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 8d2d68ba02c118d5001f860dd54743330a67619a
++Subproject commit 8d2d68ba02c118d5001f860dd54743330a67619a-dirty
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1845,7 +1845,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..23621868 100644
+index d5874fe5..e309a756 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,7 +1,10 @@
@@ -1928,7 +1928,24 @@ index d5874fe5..23621868 100644
      endif
  endfunction
  
-@@ -366,9 +368,8 @@ function! s:Gdi(...) abort
+@@ -228,12 +230,14 @@ endfunction
+ 
+ function! s:Gbib() abort
+     let worktree = Cd2Worktree()
+-    exec '!~/loadrc/gitrc/gbib.sh'
++    exec '!~/loadrc/gitrc/gbib.sh | tee gbil.log.runresult'
++    call OpenOrSwitch('gbil.log.runresult', 'vs')
+ endfunction
+ 
+ function! s:Gbig() abort
+     let worktree = Cd2Worktree()
+-    exec '!~/loadrc/gitrc/gbig.sh'
++    exec '!~/loadrc/gitrc/gbig.sh | tee gbil.log.runresult' 
++    call OpenOrSwitch('gbil.log.runresult', 'vs')
+ endfunction
+ 
+ function! s:Gbil() abort
+@@ -366,9 +370,8 @@ function! s:Gdi(...) abort
          if arg1 == ''
              call fugitive#Diffsplit(0, 1, "vert", '', [])
          elseif tolower(arg1) == 'o'
@@ -1940,7 +1957,7 @@ index d5874fe5..23621868 100644
          else
              call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
          endif
-@@ -424,7 +425,7 @@ function! s:Gdi2(...) abort
+@@ -424,7 +427,7 @@ function! s:Gdi2(...) abort
      let worktree = Cd2Worktree()
      let output = 'gdi2.findresult'
      let arg1 = (a:0 >= 1) ? a:1 : ''
@@ -1949,7 +1966,7 @@ index d5874fe5..23621868 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -475,18 +476,17 @@ endfunction
+@@ -475,18 +478,17 @@ endfunction
  
  function! s:Gdif(...) abort
      let worktree = Cd2Worktree()
@@ -1974,7 +1991,7 @@ index d5874fe5..23621868 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -516,10 +516,15 @@ endfunction
+@@ -516,10 +518,15 @@ endfunction
  
  function! s:ApplyBranch(args, ...) abort
      let worktree = Cd2Worktree()
@@ -1991,7 +2008,7 @@ index d5874fe5..23621868 100644
  function! s:Gshow(args, ...) abort
      let worktree = Cd2Worktree()
      let output = a:args . '.diff'
-@@ -527,7 +532,19 @@ function! s:Gshow(args, ...) abort
+@@ -527,7 +534,19 @@ function! s:Gshow(args, ...) abort
      call OpenOrSwitch(output, 'vs')
  endfunction
  
@@ -2011,7 +2028,7 @@ index d5874fe5..23621868 100644
      let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
      exec '!rm ' . newFile
      exec 'w ' . newFile
-@@ -559,6 +576,41 @@ function! s:CatMove(...) abort
+@@ -559,6 +578,41 @@ function! s:CatMove(...) abort
      call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
  endfunction
  
@@ -2053,7 +2070,7 @@ index d5874fe5..23621868 100644
  function! s:CatDu(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -585,11 +637,6 @@ function! s:Tail() abort
+@@ -585,11 +639,6 @@ function! s:Tail() abort
      exec '!tail -f ' . expand("%:p")
  endfunction
  
@@ -2065,7 +2082,7 @@ index d5874fe5..23621868 100644
  function! s:Dps() abort
      let worktree = Cd2Worktree()
      silent exec '!~/loadrc/dockerrc/dps.sh'
-@@ -640,7 +687,10 @@ function! s:Prune() abort
+@@ -640,7 +689,10 @@ function! s:Prune() abort
      call asyncrun#run('<bang>', '', '~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
  endfunction
  
@@ -2077,7 +2094,7 @@ index d5874fe5..23621868 100644
      call Cd2ProjectRoot("files.proj")
  
      if expand('%:t') != 'index'
-@@ -649,7 +699,7 @@ function! s:Fr(find, replace) abort
+@@ -649,7 +701,7 @@ function! s:Fr(find, replace) abort
          let fileList = "files.proj"
      endif
  
@@ -2086,7 +2103,7 @@ index d5874fe5..23621868 100644
      call s:Gs()
  endfunction
  
-@@ -671,7 +721,7 @@ function! s:Gfix() abort
+@@ -671,7 +723,7 @@ function! s:Gfix() abort
  endfunction
  
  function! s:Reapply() abort
@@ -2095,7 +2112,7 @@ index d5874fe5..23621868 100644
          echom 'Please only run on *gdio.diff!!!'
          return 0
      endif
-@@ -701,3 +751,5 @@ function! s:GenerateIpynb() abort
+@@ -701,3 +753,5 @@ function! s:GenerateIpynb() abort
      exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
      w
  endfunction
