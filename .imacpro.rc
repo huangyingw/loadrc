@@ -1,9 +1,9 @@
 #!/bin/zsh
 #alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
 
-if ! (sudo systemsetup -getcomputersleep | grep -q Never)
+if ! (sudo systemsetup -getcomputersleep | grep -q "after 10 minutes")
 then
-    sudo systemsetup -setcomputersleep Never
+    sudo systemsetup -setcomputersleep 10
 fi
 
 ~/loadrc/setup_bidirectional_clipboard.sh

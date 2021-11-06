@@ -198,6 +198,8 @@
 ./bashrc/HuangYings-MacBook-Pro.local.csc.properties
 ./bashrc/apf.sh
 ./bashrc/app_list
+./bashrc/append_num.sh
+./bashrc/append_rate.sh
 ./bashrc/apt-mirror.sh
 ./bashrc/back.sh
 ./bashrc/bash.test.sh
