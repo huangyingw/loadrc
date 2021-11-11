@@ -665,10 +665,10 @@ index 00000000..d3a5e9de
 +mv -nv "$source" "$target"
 diff --git a/bashrc/retire_parts.sh b/bashrc/retire_parts.sh
 new file mode 100755
-index 00000000..2a7dacba
+index 00000000..cd2de1bb
 --- /dev/null
 +++ ./bashrc/retire_parts.sh
-@@ -0,0 +1,33 @@
+@@ -0,0 +1,40 @@
 +#!/bin/zsh
 +
 +function CountParts()
@@ -679,7 +679,7 @@ index 00000000..2a7dacba
 +left=1
 +right=30
 +
-+while [ $left -lt $right ]
++while [ $((left + 1)) -lt $right ]
 +do
 +    mid=$(printf '%s\n' $left $right | datamash median 1)
 +    mid=${mid%.*}
@@ -691,7 +691,7 @@ index 00000000..2a7dacba
 +
 +    if [ $result -gt 0 ]
 +    then
-+        left=$((mid + 1))
++        left=$mid
 +        echo "left --> $left"
 +    else
 +        right=$mid
@@ -699,9 +699,16 @@ index 00000000..2a7dacba
 +    fi
 +done
 +
-+echo "find /var/lib/transmission-daemon/ -type f -mtime +$mid -name \*.part | wc -l"
-+echo "find /var/lib/transmission-daemon/ -type f -mtime +$left -name \*.part | wc -l"
-+echo "find /var/lib/transmission-daemon/ -type f -mtime +$right -name \*.part | wc -l"
++local result=$(CountParts $right)
++result=${result%.*}
++echo "result --> $result"
++
++if [ $result -gt 0 ]
++then
++    find /var/lib/transmission-daemon/ -type f -mtime +$right -name \*.part -delete
++else
++    find /var/lib/transmission-daemon/ -type f -mtime +$left -name \*.part -delete 
++fi
 diff --git a/bashrc/select_move.sh b/bashrc/select_move.sh
 new file mode 100755
 index 00000000..29fd5336
@@ -1497,7 +1504,7 @@ index 00000000..e0a39808
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit e0a398085335da529a8651fb6cc665e26ce3d74c
++Subproject commit e0a398085335da529a8651fb6cc665e26ce3d74c-dirty
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
