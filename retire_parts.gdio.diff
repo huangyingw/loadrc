@@ -1244,7 +1244,7 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..49369709 100644
+index 425c9192..8879ff4f 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
 @@ -18,6 +18,10 @@
@@ -1253,20 +1253,20 @@ index 425c9192..49369709 100644
  10.211.55.5 macos
 +192.168.123.177 ubuntu20.04
 +# 172.27.174.184 mbp
-+192.168.31.168 mbp
++192.168.31.96 mbp
 +192.168.123.80 u2110
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
 diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
-index 50886663..e97170fc 100644
+index 50886663..1079d97e 100644
 --- ./host_links/server/etc/hosts
 +++ ./host_links/server/etc/hosts
 @@ -10,6 +10,7 @@
  192.168.31.115 gluster02
  192.168.31.99 mldonkey
  192.168.31.147 imacpro
-+172.27.174.184 mbp
++192.168.31.96 mbp
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
@@ -1500,11 +1500,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..433f0e96
+index 00000000..8ae22754
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 433f0e9600753813261e11e8094dc2d19fd3ab56-dirty
++Subproject commit 8ae22754a0fe585790b4ee4bd1588a3031b2cedf
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1513,6 +1513,19 @@ index 00000000..80d3b345
 @@ -0,0 +1,2 @@
 +#!/bin/sh
 +nc localhost 2225
+diff --git a/prunefile_template.conf b/prunefile_template.conf
+index 8e34f2fa..9deeb31c 100644
+--- ./prunefile_template.conf
++++ ./prunefile_template.conf
+@@ -1,6 +1,7 @@
++"./.fugitiveblame"
+ "./cscope"
+ "./files.proj"
++"./gbra.log"
+ "./running.lck"
+ "./running.time"
+ .err
+-"./gbra.log"
 diff --git a/setup.sh b/setup.sh
 index cc9fd3f1..608329fd 100755
 --- ./setup.sh
