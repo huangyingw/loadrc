@@ -1,5 +1,10 @@
 #!/bin/zsh
 
+if [ -n "$(git status --porcelain --ignore-submodules)" ]
+then
+    return
+fi
+
 ~/loadrc/gitrc/include_gitconfig.sh
 git remote update &
 ~/loadrc/gitrc/discard_unnecessaries.sh
