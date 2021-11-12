@@ -1450,7 +1450,7 @@ index 00000000..c63fda11
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit c63fda114dc046aa96cf000de4133f34a8b42863-dirty
++Subproject commit c63fda114dc046aa96cf000de4133f34a8b42863
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1583,12 +1583,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..2cab0699 160000
+index cc6342c3..de4a3bd8 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 2cab0699d9bc8b60a807f7eb6bbf7aff52849028
++Subproject commit de4a3bd8b4db0f137471c808b92ba3b4748a7678
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -1618,12 +1618,12 @@ index 4579327e..4b3a848c 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4b3a848ca36318fc1a82c712c5b5c7ea658e4a86
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..fb49cea4 160000
+index dbe8b1e2..bb9753ce 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit fb49cea4932191a61ee541fa7ae1492ec6023d36
++Subproject commit bb9753ceba554d673b04f8b878b2d1f4febf6807
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..63196768 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -1639,12 +1639,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..d18f5154 160000
+index 8468d6a8..b3f8bb81 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit d18f5154c5aa6d22837d9349b64b551f9a497ff5
++Subproject commit b3f8bb81e96db24d2d6eeab768bf10d9a3bfa6c7
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
