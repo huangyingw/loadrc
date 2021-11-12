@@ -305,6 +305,7 @@
 ./bashrc/recurse.sh
 ./bashrc/redo.sh
 ./bashrc/remove_path.sh
+./bashrc/rename.sh
 ./bashrc/replace_spaces_in_file_names.sh
 ./bashrc/rmEmpty.sh
 ./bashrc/rsleep.sh
@@ -2958,4 +2959,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-dev.gdio.diff
+gpl.gdio.diff
