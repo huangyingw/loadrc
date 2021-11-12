@@ -1100,13 +1100,13 @@ index 20dd9aa3..0f505a1e 100755
 +CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
  git fetch . "$CURRENT_BRANCH":"$1"
 diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
-index fa900e00..21b1688b 100755
+index fa900e00..d6097a9f 100755
 --- ./gitrc/gpl.sh
 +++ ./gitrc/gpl.sh
 @@ -1,8 +1,13 @@
  #!/bin/zsh
  
-+if [ -n "$(git status --porcelain)" ]
++if [ -n "$(git status --porcelain --ignore-submodules)" ]
 +then
 +    return
 +fi
