@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-if [ -n "$(git status --porcelain)" ]
+if [ -n "$(git status --porcelain --ignore-submodules)" ]
 then
     return
 fi
