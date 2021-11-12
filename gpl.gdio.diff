@@ -476,6 +476,15 @@ index 00000000..c66a8e4c
 +comm -1 -3 <(sort "$1") <(sort "$2") > "$2".findresult
 +cp -fv "$1".findresult "$1"
 +cp -fv "$2".findresult "$2"
+diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
+index 9a6e19c8..f5458e6f 100755
+--- ./bashrc/do_update_proj.sh
++++ ./bashrc/do_update_proj.sh
+@@ -5,3 +5,4 @@
+ ~/loadrc/bashrc/fvideos.sh
+ ~/loadrc/bashrc/fdocs.sh
+ ~/loadrc/bashrc/cscope.sh
++git remote update &
 diff --git a/bashrc/fdisk_log.sh b/bashrc/fdisk_log.sh
 index 37081d0c..3867ab7b 100755
 --- ./bashrc/fdisk_log.sh
@@ -1091,11 +1100,17 @@ index 20dd9aa3..0f505a1e 100755
 +CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
  git fetch . "$CURRENT_BRANCH":"$1"
 diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
-index fa900e00..b0ff79ac 100755
+index fa900e00..d6097a9f 100755
 --- ./gitrc/gpl.sh
 +++ ./gitrc/gpl.sh
-@@ -2,7 +2,7 @@
+@@ -1,8 +1,13 @@
+ #!/bin/zsh
  
++if [ -n "$(git status --porcelain --ignore-submodules)" ]
++then
++    return
++fi
++
  ~/loadrc/gitrc/include_gitconfig.sh
  git remote update &
 -git checkout *.gdio.diff
@@ -1103,7 +1118,7 @@ index fa900e00..b0ff79ac 100755
  git pull &
  currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
  
-@@ -14,15 +14,13 @@ done
+@@ -14,15 +19,13 @@ done
  
  for ss in $(git config --get-all pull.from)
  do
@@ -1198,7 +1213,7 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..49369709 100644
+index 425c9192..8879ff4f 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
 @@ -18,6 +18,10 @@
@@ -1207,7 +1222,7 @@ index 425c9192..49369709 100644
  10.211.55.5 macos
 +192.168.123.177 ubuntu20.04
 +# 172.27.174.184 mbp
-+192.168.31.168 mbp
++192.168.31.96 mbp
 +192.168.123.80 u2110
  
  # The following lines are desirable for IPv6 capable hosts
@@ -1446,11 +1461,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..c63fda11
+index 00000000..479fd406
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit c63fda114dc046aa96cf000de4133f34a8b42863
++Subproject commit 479fd406420ba0f9cc2f7df0d755f0756ef7bd64-dirty
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1588,7 +1603,7 @@ index cc6342c3..de4a3bd8 160000
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit de4a3bd8b4db0f137471c808b92ba3b4748a7678
++Subproject commit de4a3bd8b4db0f137471c808b92ba3b4748a7678-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -1644,7 +1659,7 @@ index 8468d6a8..b3f8bb81 160000
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit b3f8bb81e96db24d2d6eeab768bf10d9a3bfa6c7
++Subproject commit b3f8bb81e96db24d2d6eeab768bf10d9a3bfa6c7-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
