@@ -1100,12 +1100,14 @@ index 20dd9aa3..0f505a1e 100755
 +CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
  git fetch . "$CURRENT_BRANCH":"$1"
 diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
-index fa900e00..d6097a9f 100755
+index fa900e00..2c0b9522 100755
 --- ./gitrc/gpl.sh
 +++ ./gitrc/gpl.sh
-@@ -1,8 +1,13 @@
+@@ -1,8 +1,14 @@
  #!/bin/zsh
  
++~/loadrc/gitrc/discard_unnecessaries.sh
++
 +if [ -n "$(git status --porcelain --ignore-submodules)" ]
 +then
 +    return
@@ -1114,11 +1116,10 @@ index fa900e00..d6097a9f 100755
  ~/loadrc/gitrc/include_gitconfig.sh
  git remote update &
 -git checkout *.gdio.diff
-+~/loadrc/gitrc/discard_unnecessaries.sh
  git pull &
  currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
  
-@@ -14,15 +19,13 @@ done
+@@ -14,15 +20,13 @@ done
  
  for ss in $(git config --get-all pull.from)
  do
