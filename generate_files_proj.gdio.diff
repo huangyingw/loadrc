@@ -1500,11 +1500,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..8ae22754
+index 00000000..825b13fa
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 8ae22754a0fe585790b4ee4bd1588a3031b2cedf
++Subproject commit 825b13fa4f57d7f35b2dee617ad29fa28aa16c4b
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1650,12 +1650,12 @@ index 2b1dca6c..8d45fc92 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit 8d45fc9266d005929a964b099c8f9f61e526ec10
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..43005b24 160000
+index cc6342c3..5a8e92c6 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 43005b24c9d0bd9b8af5036826de1f3e32daf72b
++Subproject commit 5a8e92c6d1e31062057a8c5a4926b836ffdf40f4
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
