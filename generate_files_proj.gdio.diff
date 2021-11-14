@@ -500,13 +500,44 @@ index 37081d0c..3867ab7b 100755
  blkid >> "$logFile"
 diff --git a/bashrc/find_text.sh b/bashrc/find_text.sh
 new file mode 100755
-index 00000000..4fa2f8c7
+index 00000000..6d2b8f8b
 --- /dev/null
 +++ ./bashrc/find_text.sh
-@@ -0,0 +1,3 @@
+@@ -0,0 +1,34 @@
 +#!/bin/zsh
 +
 +cd ~/loadrc/
++
++function fun1()
++{
++    find . -type f -exec grep -Il "" {} + > fun1.log
++}
++
++function fun2()
++{
++    find . -type f -exec grep -Iq . {} \; -print > fun2.log 
++}
++
++function fun3()
++{
++    find . -type f -exec grep -Il "" {} \; > fun3.log 
++}
++
++function fun4()
++{
++    find . -type f -exec grep -Il . {} + > fun4.log 
++}
++
++function fun5()
++{
++    find . -type f -print0 | xargs -0 grep -IZl . > fun5.log 
++}
++
++fun1
++fun2
++fun3
++fun4
++fun5
 diff --git a/bashrc/fr.sh b/bashrc/fr.sh
 index f58a2ee7..dcc8f356 100755
 --- ./bashrc/fr.sh
