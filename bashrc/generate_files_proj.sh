@@ -58,6 +58,5 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
         cp -fv "$TARGET.tmp" "$TARGET" && \
         sort -u "$TARGET" -o "$TARGET" && \
         cp -fv "$TARGET" files.proj && \
-        echo "$TARGETEDIR"/files.proj >> ~/all.proj && \
-        sed -i.bak 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' ~/all.proj && \
+        echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
         sort -u ~/all.proj -o ~/all.proj
