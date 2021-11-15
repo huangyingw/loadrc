@@ -245,6 +245,7 @@
 ./bashrc/file_type
 ./bashrc/find-free-nbd-device.sh
 ./bashrc/find_projects.sh
+./bashrc/find_text.sh
 ./bashrc/find_up.sh
 ./bashrc/find_up_folder.sh
 ./bashrc/find_up_goto.sh
@@ -307,6 +308,7 @@
 ./bashrc/remove_path.sh
 ./bashrc/rename.sh
 ./bashrc/replace_spaces_in_file_names.sh
+./bashrc/retire_parts.sh
 ./bashrc/rmEmpty.sh
 ./bashrc/rsleep.sh
 ./bashrc/rssh.sh
@@ -2961,4 +2963,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-gpl.gdio.diff
+generate_files_proj.reduce_sed.gdio.diff

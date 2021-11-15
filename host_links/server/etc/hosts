@@ -10,7 +10,7 @@
 192.168.31.115 gluster02
 192.168.31.99 mldonkey
 192.168.31.147 imacpro
-172.27.174.184 mbp
+192.168.31.96 mbp
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
