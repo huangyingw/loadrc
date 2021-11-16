@@ -981,7 +981,7 @@ index ff263b6d..305c2262 100755
 +    git push "$ss" --delete "$1" || true
  done
 diff --git a/gitrc/gcl.sh b/gitrc/gcl.sh
-index e118a4de..e1f58816 100755
+index e118a4de..828e3eae 100755
 --- ./gitrc/gcl.sh
 +++ ./gitrc/gcl.sh
 @@ -18,7 +18,10 @@ urlVar=$(echo "$urlVar" | sed 's/\//\\\//g')
@@ -996,6 +996,12 @@ index e118a4de..e1f58816 100755
  git remote remove origin ; \
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
+@@ -26,5 +29,4 @@ cd "$target" && \
+     git add . && \
+     git add -f files.proj .gitconfig && \
+     $HOME/loadrc/gitrc/g.sh && \
+-    hub create "${author}_${repo}" && \
+     ~/loadrc/gitrc/gclb.sh
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 new file mode 100755
 index 00000000..e8b5bfa5
@@ -1260,9 +1266,18 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..8879ff4f 100644
+index 425c9192..b2f5fdc0 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
+@@ -9,7 +9,7 @@
+ 192.168.122.65 master-node
+ 192.168.122.136 slave-node
+ 192.168.122.244 zsh
+-192.168.31.29 work
++192.168.31.191 work
+ 172.27.217.162 localhost.imvu.com
+ 192.168.31.31 server
+ 192.168.31.147 imacpro
 @@ -18,6 +18,10 @@
  192.168.31.99 mldonkey
  192.168.123.203 u2004
@@ -1516,11 +1531,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..825b13fa
+index 00000000..31c6a188
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 825b13fa4f57d7f35b2dee617ad29fa28aa16c4b
++Subproject commit 31c6a188efc2cc5bcc89dd3ee390cb6ab4609a79
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1666,12 +1681,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..5a8e92c6 160000
+index cc6342c3..a36bc1fe 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 5a8e92c6d1e31062057a8c5a4926b836ffdf40f4
++Subproject commit a36bc1fe9a2c4cee9a48e26cf1e97e21a76b67c9
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -1748,7 +1763,7 @@ index 00000000..d6adab9d
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-pbcopy
 @@ -0,0 +1 @@
-+Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
++Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7-dirty
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
 index 3b379635..a4595b48 160000
 --- ./vimrc/.vim/bundle/vim-rails
