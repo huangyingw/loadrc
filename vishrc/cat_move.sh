@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 if [ ! -d "$2" ]
 then
     mkdir -p "$2"
