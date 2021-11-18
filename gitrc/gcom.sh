@@ -24,5 +24,7 @@ then
     git stash pop stash@{0}
 fi
 
-~/loadrc/gitrc/gdio.sh
 git checkout "$CURRENT_BRANCH.gdio.diff"
+~/loadrc/gitrc/discard_unnecessaries.sh
+git pull "$(git config gsync.remote)" "$(~/loadrc/gitrc/get_current_branch.sh)"
+~/loadrc/gitrc/gdio.sh
