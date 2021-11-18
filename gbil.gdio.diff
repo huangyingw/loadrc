@@ -1198,7 +1198,7 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..49369709 100644
+index 425c9192..8879ff4f 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
 @@ -18,6 +18,10 @@
@@ -1207,7 +1207,7 @@ index 425c9192..49369709 100644
  10.211.55.5 macos
 +192.168.123.177 ubuntu20.04
 +# 172.27.174.184 mbp
-+192.168.31.168 mbp
++192.168.31.96 mbp
 +192.168.123.80 u2110
  
  # The following lines are desirable for IPv6 capable hosts
@@ -1459,6 +1459,19 @@ index 00000000..80d3b345
 @@ -0,0 +1,2 @@
 +#!/bin/sh
 +nc localhost 2225
+diff --git a/prunefile_template.conf b/prunefile_template.conf
+index 8e34f2fa..9deeb31c 100644
+--- ./prunefile_template.conf
++++ ./prunefile_template.conf
+@@ -1,6 +1,7 @@
++"./.fugitiveblame"
+ "./cscope"
+ "./files.proj"
++"./gbra.log"
+ "./running.lck"
+ "./running.time"
+ .err
+-"./gbra.log"
 diff --git a/setup.sh b/setup.sh
 index cc9fd3f1..608329fd 100755
 --- ./setup.sh
@@ -1583,12 +1596,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..9cd7b1de 160000
+index cc6342c3..43005b24 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 9cd7b1deac3c2129122e7b18cb3d79aa9623e4f6
++Subproject commit 43005b24c9d0bd9b8af5036826de1f3e32daf72b
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim

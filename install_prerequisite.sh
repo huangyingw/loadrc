@@ -15,6 +15,7 @@ apt-get install -y \
     cryptsetup \
     cscope \
     curl \
+    datamash \
     dkms \
     dos2unix \
     exuberant-ctags \
