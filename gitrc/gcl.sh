@@ -29,4 +29,5 @@ git remote remove origin ; \
     git add . && \
     git add -f files.proj .gitconfig && \
     $HOME/loadrc/gitrc/g.sh && \
+    hub create "${author}_${repo}" && \
     ~/loadrc/gitrc/gclb.sh
