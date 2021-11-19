@@ -9,13 +9,12 @@ fi
 
 ~/loadrc/gitrc/include_gitconfig.sh
 git remote update &
-git pull &
 currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 
-for ss in `git remote -v |awk '/\(fetch\)$/{print $1}'`
+for remote in $(git remote)
 do
-    git pull $ss $currentBranch &
-    git remote prune $ss &
+    git pull $remote $currentBranch &
+    git remote prune $remote &
 done
 
 for ss in $(git config --get-all pull.from)
