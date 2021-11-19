@@ -25,11 +25,5 @@ then
 fi
 
 git checkout "$current_branch.gdio.diff"
-~/loadrc/gitrc/discard_unnecessaries.sh
-
-for remote in $(git remote)
-do
-    git pull "$remote" "$1" || true
-done
-
+~/loadrc/gitrc/gpl.sh
 ~/loadrc/gitrc/gdio.sh
