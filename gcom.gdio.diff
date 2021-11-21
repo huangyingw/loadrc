@@ -1476,7 +1476,7 @@ index 2bc75c67..ab07848c 100755
 +
 +./neovim/install.sh
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
-index 298b6bc4..05bbc137 100755
+index 298b6bc4..a78577d2 100755
 --- ./install_prerequisite.sh
 +++ ./install_prerequisite.sh
 @@ -1,14 +1,13 @@
@@ -1511,20 +1511,21 @@ index 298b6bc4..05bbc137 100755
      kdiff3 \
      libsecret-1-dev \
      libsecret-tools \
-@@ -37,10 +38,11 @@ apt-get install -y \
+@@ -37,10 +38,12 @@ apt-get install -y \
      manpages-fr-extra \
      manpages-pl \
      mdadm \
 -    mosh \
 +    moreutils \
      mplayer \
++    mysql-client \
      net-tools \
      netcat \
 +    nfs-kernel-server \
      npm \
      openvpn \
      perl \
-@@ -54,10 +56,11 @@ apt-get install -y \
+@@ -54,10 +57,11 @@ apt-get install -y \
      slurm \
      smplayer \
      software-properties-common \
@@ -1573,11 +1574,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..084ab47f
+index 00000000..3196c72c
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 084ab47f417670a167fbea7e865f25c4d57367f3-dirty
++Subproject commit 3196c72c25b16d9e8ad466a970eef1c42698f7ff-dirty
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1668,6 +1669,31 @@ index 00000000..f0de7a8b
 +
 +./deploy_configurations.sh
 +./swith-2-zsh.sh
+diff --git a/sqlrc/xsql.sh b/sqlrc/xsql.sh
+index 0aae8085..2d88e3a8 100755
+--- ./sqlrc/xsql.sh
++++ ./sqlrc/xsql.sh
+@@ -12,6 +12,8 @@ user=`cat ${loginFile} |awk -F'=' '/user/{print $2}'`
+ password=`cat ${loginFile} |awk -F'=' '/password/{print $2}'`
+ host=`cat ${loginFile} |awk -F'=' '/host/{print $2}'`
+ dbinstance=`cat ${loginFile} |awk -F'=' '/dbinstance/{print $2}'`
++protocol=`cat ${loginFile} |awk -F'=' '/protocol/{print $2}'`
++option=""
+ 
+ if [ -z "$host" ]
+ then
+@@ -22,5 +24,10 @@ then
+     sort -u "$loginFile" -o "$loginFile"
+ fi
+ 
++if [ -n "$protocol" ]
++then
++    option="--protocol=$protocol"
++fi
++
+ cd "$(dirname "$file")"
+-mysql -v -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
++mysql -v "$option" -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
 diff --git a/uninstall_bidirectional_clipboard.sh b/uninstall_bidirectional_clipboard.sh
 new file mode 100755
 index 00000000..3be79dc7
@@ -1728,7 +1754,7 @@ index cc6342c3..44fb5553 160000
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 44fb5553369592286130b35d2bb14dec8ff48be7-dirty
++Subproject commit 44fb5553369592286130b35d2bb14dec8ff48be7
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -1779,12 +1805,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..9819b2e9 160000
+index 8468d6a8..e7985898 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 9819b2e986c8b8ff7acc131fb0ad38ef7217ed0b-dirty
++Subproject commit e79858984337f1373500cc8f2ae1a80708735d60
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
