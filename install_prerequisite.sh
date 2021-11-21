@@ -40,6 +40,7 @@ apt-get install -y \
     mdadm \
     moreutils \
     mplayer \
+    mysql-client \
     net-tools \
     netcat \
     nfs-kernel-server \
