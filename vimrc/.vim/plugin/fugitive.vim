@@ -723,8 +723,8 @@ endfunction
 
 function! s:FindDeleted() abort
     call Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/find_deleted.sh 2>&1 | tee find_deleted.findresult'
-    call OpenOrSwitch('find_deleted.findresult', 'vs')
+    silent exec '!~/loadrc/gitrc/find_deleted.sh 2>&1 | tee find_deleted.runresult'
+    call OpenOrSwitch('find_deleted.runresult', 'vs')
 endfunction
 
 function! s:Gwap() abort
