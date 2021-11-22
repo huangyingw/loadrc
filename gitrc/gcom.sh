@@ -24,6 +24,5 @@ then
     git stash pop stash@{0}
 fi
 
-git checkout "$current_branch.gdio.diff"
 ~/loadrc/gitrc/gpl.sh
 ~/loadrc/gitrc/gdio.sh
