@@ -1046,10 +1046,10 @@ index e118a4de..e1f58816 100755
      $HOME/loadrc/gitrc/gdev.sh && \
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 new file mode 100755
-index 00000000..0b4e9d13
+index 00000000..7c44202b
 --- /dev/null
 +++ ./gitrc/gcom.sh
-@@ -0,0 +1,29 @@
+@@ -0,0 +1,28 @@
 +#!/bin/zsh
 +
 +if [ -z "$1" ]
@@ -1076,7 +1076,6 @@ index 00000000..0b4e9d13
 +    git stash pop stash@{0}
 +fi
 +
-+git checkout "$current_branch.gdio.diff"
 +~/loadrc/gitrc/gpl.sh
 +~/loadrc/gitrc/gdio.sh
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
@@ -1723,12 +1722,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..44fb5553 160000
+index cc6342c3..8d5b5d98 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 44fb5553369592286130b35d2bb14dec8ff48be7-dirty
++Subproject commit 8d5b5d986e98d11567c5ef28442eaa0552ddc72a
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
