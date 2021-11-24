@@ -2,7 +2,7 @@
 
 ~/loadrc/gitrc/discard_unnecessaries.sh
 
-if [ -n "$(git status --porcelain --ignore-submodules)" ]
+if [ -n "$(git status --untracked-files=no --porcelain --ignore-submodules)" ]
 then
     return
 fi
