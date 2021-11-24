@@ -858,6 +858,32 @@ index 7042dce9..0e670bd9 100755
 -
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
+diff --git a/bashrc/tubak.sh b/bashrc/tubak.sh
+index 6892f2e1..5fb2ec37 100755
+--- ./bashrc/tubak.sh
++++ ./bashrc/tubak.sh
+@@ -1,5 +1,13 @@
+ #! /bin/zsh
++
++if [ $(uname) = "Darwin" ]
++then
++    echo -e "${red}It could only run in Linux... ${NC}"
++    exit 1
++fi
++
+ TARGET=/media/volgrp/media/`hostname`/
++
+ if [ -n "$1" ]
+ then
+     TARGET="$1"
+@@ -17,5 +29,5 @@ while read suf
+ do
+     include_params+=( "--include=$suf" )
+ done < "$UBAKIN"
+-rsync -aHinv --force --delete-during "${exclude_params[@]}" "${include_params[@]}" / "${TARGET}" > find.findresult
+-nvim find.findresult
++
++rsync -aHinv --force --delete-during "${exclude_params[@]}" "${include_params[@]}" / "${TARGET}" > tubak.runresult
 diff --git a/cscope b/cscope
 index 18a46b20..40e22631 160000
 --- ./cscope
