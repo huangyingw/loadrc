@@ -884,6 +884,20 @@ index 6892f2e1..5fb2ec37 100755
 -nvim find.findresult
 +
 +rsync -aHinv --force --delete-during "${exclude_params[@]}" "${include_params[@]}" / "${TARGET}" > tubak.runresult
+diff --git a/bashrc/ubak_ex b/bashrc/ubak_ex
+index 1dcf1e10..59064a89 100644
+--- ./bashrc/ubak_ex
++++ ./bashrc/ubak_ex
+@@ -1,4 +1,9 @@
++/app/
++/cdrom/
++/lost+found/
+ /media/
++/mnt/
+ /proc/
+ /run/
+ /sys/
++/tmp/
 diff --git a/cscope b/cscope
 index 18a46b20..40e22631 160000
 --- ./cscope
