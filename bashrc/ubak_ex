@@ -17,4 +17,4 @@
 /swapfile
 /sys/
 /tmp/
-/var/lib/docker/
+/var/
