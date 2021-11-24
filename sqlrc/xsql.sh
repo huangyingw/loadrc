@@ -12,6 +12,8 @@ user=`cat ${loginFile} |awk -F'=' '/user/{print $2}'`
 password=`cat ${loginFile} |awk -F'=' '/password/{print $2}'`
 host=`cat ${loginFile} |awk -F'=' '/host/{print $2}'`
 dbinstance=`cat ${loginFile} |awk -F'=' '/dbinstance/{print $2}'`
+protocol=`cat ${loginFile} |awk -F'=' '/protocol/{print $2}'`
+option=""
 
 if [ -z "$host" ]
 then
@@ -22,5 +24,10 @@ then
     sort -u "$loginFile" -o "$loginFile"
 fi
 
+if [ -n "$protocol" ]
+then
+    option="--protocol=$protocol"
+fi
+
 cd "$(dirname "$file")"
-mysql -v -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
+mysql -v "$option" -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}

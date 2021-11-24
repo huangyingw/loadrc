@@ -56,13 +56,13 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :execute s:Gs()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsubbr :execute s:Gsubbr()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gst :execute s:Gst()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsti :execute s:Gsti()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstl :execute s:Gstl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstlv :execute s:Gstlv()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstp :execute s:Gstp(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstv :execute s:Gstv(<q-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsubbr :execute s:Gsubbr()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsync :execute s:Gsync()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gtg :execute s:Gtg()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gwap :execute s:Gwap()
@@ -73,6 +73,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute s:SelectMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Split :execute s:Split()
@@ -565,6 +566,21 @@ function! s:CatPlay(...) abort
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
+function! s:SelectMove(...) abort
+    if &modified
+        echom 'Please check and save your file first!!!'
+        return 0
+    endif
+
+    if a:0 >= 1
+        let b:output = expand("%:p") . '.runresult'
+        exec '!~/loadrc/bashrc/select_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '" 2>&1 | tee ' . b:output 
+        call OpenOrSwitch(b:output, 'vs')
+    endif
+
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+endfunction
+
 function! s:CatMove(...) abort
     if &modified
         echom 'Please check and save your file first!!!'
@@ -707,8 +723,8 @@ endfunction
 
 function! s:FindDeleted() abort
     call Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/find_deleted.sh 2>&1 | tee find_deleted.findresult'
-    call OpenOrSwitch('find_deleted.findresult', 'vs')
+    silent exec '!~/loadrc/gitrc/find_deleted.sh 2>&1 | tee find_deleted.runresult'
+    call OpenOrSwitch('find_deleted.runresult', 'vs')
 endfunction
 
 function! s:Gwap() abort

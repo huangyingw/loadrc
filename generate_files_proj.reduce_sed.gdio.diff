@@ -560,7 +560,7 @@ index f58a2ee7..dcc8f356 100755
      xargs sed -i.bak  "s/${FIND}/${REPLACE}/g" < "$3"
 +fi
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
-index 83e2c748..2c184654 100755
+index 83e2c748..aa00d35f 100755
 --- ./bashrc/generate_files_proj.sh
 +++ ./bashrc/generate_files_proj.sh
 @@ -15,6 +15,8 @@ then
@@ -572,21 +572,29 @@ index 83e2c748..2c184654 100755
  TARGETEDIR=`realpath "$PWD"`
  cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
  cp -nv ~/loadrc/prunefile_template.conf ./prunefile.conf
-@@ -46,12 +48,12 @@ done < "$INCLUDE_FILE"
+@@ -45,16 +47,16 @@ done < "$INCLUDE_FILE"
+ 
  export LC_ALL=C
  
- find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
+-find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
 -    comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
 -    cp -fv "$TARGET.tmp" "$TARGET" && \
++find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + > "$TARGET" && \
      if [ ${#include_params[@]} -gt 0 ] ; \
      then \
-         find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
+-        find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
++        find . "(" "${include_params[@]}" ")" -type f -size -9000k >> ${TARGET} ; \
          fi && \
+-        echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
++        echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" >> ${TARGET} && \
++        sed -i.bak 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/;s/ /\\ /g' "$TARGET" && \
 +        comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
 +        cp -fv "$TARGET.tmp" "$TARGET" && \
-         echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
          sort -u "$TARGET" -o "$TARGET" && \
-         sed -i.bak 's/ /\\ /g' "$TARGET" && \
+-        sed -i.bak 's/ /\\ /g' "$TARGET" && \
+         cp -fv "$TARGET" files.proj && \
+         echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
+         sort -u ~/all.proj -o ~/all.proj
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
 index e2137142..005dcff1 100755
 --- ./bashrc/jdupes.sh
@@ -1699,12 +1707,12 @@ index 0c22efb1..00000000
 @@ -1 +0,0 @@
 -Subproject commit 0c22efb1b919573f69ec237e7a8ab7ca1c1ecc03
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..8d45fc92 160000
+index 2b1dca6c..ac084414 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit 8d45fc9266d005929a964b099c8f9f61e526ec10
++Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
 index cc6342c3..5a8e92c6 160000
 --- ./vimrc/.vim/bundle/python-mode
@@ -1762,12 +1770,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..80611d3b 160000
+index 8468d6a8..d7d8bb4a 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 80611d3b871d71f85c0d1bd85ef395cba6cfda77
++Subproject commit d7d8bb4a3eb91ea6953b81e4b94e669ce5d5e7a0
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax

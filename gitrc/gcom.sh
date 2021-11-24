@@ -14,15 +14,15 @@ then
 fi
 
 ~/loadrc/gitrc/discard_unnecessaries.sh
-CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
+current_branch=$(~/loadrc/gitrc/get_current_branch.sh)
 git checkout -b "$1" || \
     git checkout "$1" &&
-    git merge "$CURRENT_BRANCH"
+    git merge "$current_branch"
 
 if [ -n "$clean" ]
 then
     git stash pop stash@{0}
 fi
 
+~/loadrc/gitrc/gpl.sh
 ~/loadrc/gitrc/gdio.sh
-git checkout "$CURRENT_BRANCH.gdio.diff"
