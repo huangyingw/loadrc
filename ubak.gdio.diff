@@ -885,17 +885,27 @@ index 6892f2e1..5fb2ec37 100755
 +
 +rsync -aHinv --force --delete-during "${exclude_params[@]}" "${include_params[@]}" / "${TARGET}" > tubak.runresult
 diff --git a/bashrc/ubak_ex b/bashrc/ubak_ex
-index 1dcf1e10..59064a89 100644
+index 1dcf1e10..cd468faa 100644
 --- ./bashrc/ubak_ex
 +++ ./bashrc/ubak_ex
-@@ -1,4 +1,9 @@
+@@ -1,4 +1,19 @@
 +/app/
++/bin/
 +/cdrom/
++/dev/
++/lib32/
++/lib64/
++/libx32/
 +/lost+found/
  /media/
 +/mnt/
++/opt/
  /proc/
  /run/
++/sbin/
++/snap/
++/srv/
++/swapfile
  /sys/
 +/tmp/
 diff --git a/cscope b/cscope
