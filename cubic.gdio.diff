@@ -1656,11 +1656,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..31925ef5
+index 00000000..a6eb44e1
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 31925ef522ceec239c24647cb75496c60c34d5eb-dirty
++Subproject commit a6eb44e156cb2a5ee3402801d16904209da27ff1-dirty
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
