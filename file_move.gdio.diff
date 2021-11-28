@@ -964,7 +964,7 @@ index 18a46b20..40e22631 160000
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
++Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b-dirty
 diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
 index 58429e06..51c59336 100755
 --- ./ffmpegrc/concat.sh
@@ -1710,11 +1710,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..6ea6faba
+index 00000000..3196c72c
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 6ea6faba3823f0a2f2e8d15f39367ec08f2c9df4
++Subproject commit 3196c72c25b16d9e8ad466a970eef1c42698f7ff
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
