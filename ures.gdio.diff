@@ -498,27 +498,12 @@ index 37081d0c..3867ab7b 100755
  DEVICE=`mdadm -D --scan|awk '{print $2}'`
  mdadm -D "$DEVICE" >> "$logFile"
  blkid >> "$logFile"
-diff --git a/bashrc/file_move.sh b/bashrc/file_move.sh
-new file mode 100755
-index 00000000..889a9697
---- /dev/null
-+++ ./bashrc/file_move.sh
-@@ -0,0 +1,9 @@
-+#!/bin/zsh
-+
-+if [ ! -d "$2" ]
-+then
-+    mkdir -p "$2"
-+fi
-+
-+ss=$(echo "$1" | sed 's/"//g')
-+mv -nv "$ss" "$2"
 diff --git a/bashrc/find_text.sh b/bashrc/find_text.sh
 new file mode 100755
-index 00000000..72760428
+index 00000000..6d2b8f8b
 --- /dev/null
 +++ ./bashrc/find_text.sh
-@@ -0,0 +1,30 @@
+@@ -0,0 +1,34 @@
 +#!/bin/zsh
 +
 +cd ~/loadrc/
@@ -530,7 +515,7 @@ index 00000000..72760428
 +
 +function fun2()
 +{
-+    find . -type f -exec grep -Iq . {} \; -print > fun2.log # auto-ignore the zero size file  
++    find . -type f -exec grep -Iq . {} \; -print > fun2.log 
 +}
 +
 +function fun3()
@@ -540,15 +525,19 @@ index 00000000..72760428
 +
 +function fun4()
 +{
-+    find . -type f -exec grep -Il . {} + > fun4.log # auto-ignore the zero size file  
++    find . -type f -exec grep -Il . {} + > fun4.log 
 +}
 +
 +function fun5()
 +{
-+    find . -type f -print0 | xargs -0 grep -Il . > fun5.log # auto-ignore the zero size file
++    find . -type f -print0 | xargs -0 grep -IZl . > fun5.log 
 +}
 +
-+if [ "$1" = "1" ]
++fun1
++fun2
++fun3
++fun4
++fun5
 diff --git a/bashrc/fr.sh b/bashrc/fr.sh
 index f58a2ee7..dcc8f356 100755
 --- ./bashrc/fr.sh
@@ -606,20 +595,6 @@ index 83e2c748..aa00d35f 100755
          cp -fv "$TARGET" files.proj && \
          echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
          sort -u ~/all.proj -o ~/all.proj
-diff --git a/bashrc/iso2usb.sh b/bashrc/iso2usb.sh
-new file mode 100755
-index 00000000..21b66e14
---- /dev/null
-+++ ./bashrc/iso2usb.sh
-@@ -0,0 +1,8 @@
-+#!/bin/zsh
-+
-+dd \
-+    bs=4M \
-+    if=/media/volgrp/cubic/ubuntu-21.10.0-2021.11.27-desktop-amd64.iso \
-+    of=/dev/sda \
-+    conv=fdatasync \
-+    status=progress
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
 index e2137142..005dcff1 100755
 --- ./bashrc/jdupes.sh
@@ -883,32 +858,6 @@ index 7042dce9..0e670bd9 100755
 -
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
-diff --git a/bashrc/tubak.sh b/bashrc/tubak.sh
-index 6892f2e1..5fb2ec37 100755
---- ./bashrc/tubak.sh
-+++ ./bashrc/tubak.sh
-@@ -1,5 +1,13 @@
- #! /bin/zsh
-+
-+if [ $(uname) = "Darwin" ]
-+then
-+    echo -e "${red}It could only run in Linux... ${NC}"
-+    exit 1
-+fi
-+
- TARGET=/media/volgrp/media/`hostname`/
-+
- if [ -n "$1" ]
- then
-     TARGET="$1"
-@@ -17,5 +29,5 @@ while read suf
- do
-     include_params+=( "--include=$suf" )
- done < "$UBAKIN"
--rsync -aHinv --force --delete-during "${exclude_params[@]}" "${include_params[@]}" / "${TARGET}" > find.findresult
--nvim find.findresult
-+
-+rsync -aHinv --force --delete-during "${exclude_params[@]}" "${include_params[@]}" / "${TARGET}" > tubak.runresult
 diff --git a/bashrc/tures.sh b/bashrc/tures.sh
 index ca135ec6..d10e6ad8 100755
 --- ./bashrc/tures.sh
@@ -922,30 +871,6 @@ index ca135ec6..d10e6ad8 100755
  touch "$output"
  rsync -aHSvn --progress --delete-before --force --exclude-from ~/loadrc/bashrc/ures_ex "$1" "$2" 2>&1 | tee "$output"
 -nvim "$output"
-diff --git a/bashrc/ubak_ex b/bashrc/ubak_ex
-index 1dcf1e10..cd468faa 100644
---- ./bashrc/ubak_ex
-+++ ./bashrc/ubak_ex
-@@ -1,4 +1,19 @@
-+/app/
-+/bin/
-+/cdrom/
-+/dev/
-+/lib32/
-+/lib64/
-+/libx32/
-+/lost+found/
- /media/
-+/mnt/
-+/opt/
- /proc/
- /run/
-+/sbin/
-+/snap/
-+/srv/
-+/swapfile
- /sys/
-+/tmp/
 diff --git a/bashrc/ures.sh b/bashrc/ures.sh
 index 1739b0a9..e1f3df17 100755
 --- ./bashrc/ures.sh
@@ -1494,7 +1419,7 @@ index aeaf8ba1..c5237240 100755
      SCRIPTPATH=$(dirname "$SCRIPT") && \
      cd "$SCRIPTPATH" || cd ~/loadrc/
 diff --git a/install_basic_linux.sh b/install_basic_linux.sh
-index 34269226..07ce6ecd 100755
+index 34269226..b7a0ec3b 100755
 --- ./install_basic_linux.sh
 +++ ./install_basic_linux.sh
 @@ -1,4 +1,4 @@
@@ -1503,7 +1428,7 @@ index 34269226..07ce6ecd 100755
  SCRIPT=$(realpath "$0")
  SCRIPTPATH=$(dirname "$SCRIPT")
  cd "$SCRIPTPATH"
-@@ -9,12 +9,15 @@ then
+@@ -9,7 +9,9 @@ then
      exit 0
  fi
  
@@ -1513,12 +1438,6 @@ index 34269226..07ce6ecd 100755
  ./install_nodejs.sh
  ./install_time_machine.sh
  ./enpass_install.sh
- ./nxrc/install.sh
- ./kubernetesrc/install.sh
-+./install_cubic.sh
- cp -fv /bin/true /usr/bin/true
- cp -fv ./wifirc/autoconnect.sh /etc/NetworkManager/dispatcher.d/
- systemctl disable NetworkManager-wait-online.service
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
 index 62d92acb..ac4412e5 100755
 --- ./install_basic_macos.sh
@@ -1560,21 +1479,6 @@ index 62d92acb..ac4412e5 100755
      w3m \
      wakeonlan \
      watch \
-diff --git a/install_cubic.sh b/install_cubic.sh
-new file mode 100755
-index 00000000..d864cce8
---- /dev/null
-+++ ./install_cubic.sh
-@@ -0,0 +1,9 @@
-+#!/bin/zsh
-+SCRIPT=$(realpath "$0")
-+SCRIPTPATH=$(dirname "$SCRIPT")
-+cd "$SCRIPTPATH"
-+
-+apt-add-repository ppa:cubic-wizard/release
-+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B7579F80E494ED3406A59DF9081525E2B4F1283B
-+apt update
-+apt install -y cubic
 diff --git a/install_gh.sh b/install_gh.sh
 new file mode 100755
 index 00000000..c3363697
@@ -1736,19 +1640,6 @@ index 8e34f2fa..9deeb31c 100644
  "./running.time"
  .err
 -"./gbra.log"
-diff --git a/pythonrc/vlc.py b/pythonrc/vlc.py
-index 13a0cf4c..d245f963 100755
---- ./pythonrc/vlc.py
-+++ ./pythonrc/vlc.py
-@@ -13,7 +13,7 @@ def callvlc(targetFile, start=0):
-     if targetFile:
-         if platform.system() == 'Darwin':
-             if start == 0:
--                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', targetFile])
-+                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--rate=1.5', targetFile])
-             else:
-                 subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
-         else:
 diff --git a/setup.sh b/setup.sh
 index cc9fd3f1..608329fd 100755
 --- ./setup.sh
@@ -1954,12 +1845,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..e7985898 160000
+index 8468d6a8..678ccb54 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit e79858984337f1373500cc8f2ae1a80708735d60
++Subproject commit 678ccb5430505fff2f9f1c5abd131e030c765227-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -2160,10 +2051,10 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..5a16cc10 100644
+index d5874fe5..1f29e547 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -1,13 +1,17 @@
+@@ -1,7 +1,10 @@
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject AppendRate :execute s:AppendRate(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject ApplyBranch :execute s:ApplyBranch(<q-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject BinaryGrep :execute s:BinaryGrep(<f-args>)
@@ -2174,14 +2065,7 @@ index d5874fe5..5a16cc10 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRun :execute s:CatRun(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Copy :execute s:Copy(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dodev :execute s:Dodev()
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dps :execute s:Dps()
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fcscope :execute s:Fcscope()
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fdisklog :execute s:Fdisklog()
-+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FileMove :execute s:FileMove(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDeleted :execute s:FindDeleted()
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
-@@ -27,23 +31,25 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean
+@@ -27,23 +30,25 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gco :execute s:Gco(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcob :execute s:Gcob(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcof :execute s:Gcof(<f-args>)
@@ -2209,7 +2093,7 @@ index d5874fe5..5a16cc10 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtu :execute s:Grtu()
-@@ -51,25 +57,24 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
+@@ -51,25 +56,24 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :execute s:Gs()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
@@ -2238,7 +2122,7 @@ index d5874fe5..5a16cc10 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Split :execute s:Split()
-@@ -111,13 +116,12 @@ endfunction
+@@ -111,13 +115,12 @@ endfunction
  
  function! s:Gkdo() abort
      let worktree = Cd2Worktree()
@@ -2255,7 +2139,7 @@ index d5874fe5..5a16cc10 100644
      endif
  endfunction
  
-@@ -228,12 +232,14 @@ endfunction
+@@ -228,12 +231,14 @@ endfunction
  
  function! s:Gbib() abort
      let worktree = Cd2Worktree()
@@ -2272,7 +2156,7 @@ index d5874fe5..5a16cc10 100644
  endfunction
  
  function! s:Gbil() abort
-@@ -366,9 +372,8 @@ function! s:Gdi(...) abort
+@@ -366,9 +371,8 @@ function! s:Gdi(...) abort
          if arg1 == ''
              call fugitive#Diffsplit(0, 1, "vert", '', [])
          elseif tolower(arg1) == 'o'
@@ -2284,7 +2168,7 @@ index d5874fe5..5a16cc10 100644
          else
              call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
          endif
-@@ -424,7 +429,7 @@ function! s:Gdi2(...) abort
+@@ -424,7 +428,7 @@ function! s:Gdi2(...) abort
      let worktree = Cd2Worktree()
      let output = 'gdi2.findresult'
      let arg1 = (a:0 >= 1) ? a:1 : ''
@@ -2293,7 +2177,7 @@ index d5874fe5..5a16cc10 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -475,18 +480,17 @@ endfunction
+@@ -475,18 +479,17 @@ endfunction
  
  function! s:Gdif(...) abort
      let worktree = Cd2Worktree()
@@ -2318,7 +2202,7 @@ index d5874fe5..5a16cc10 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -516,10 +520,15 @@ endfunction
+@@ -516,10 +519,15 @@ endfunction
  
  function! s:ApplyBranch(args, ...) abort
      let worktree = Cd2Worktree()
@@ -2335,7 +2219,7 @@ index d5874fe5..5a16cc10 100644
  function! s:Gshow(args, ...) abort
      let worktree = Cd2Worktree()
      let output = a:args . '.diff'
-@@ -527,7 +536,19 @@ function! s:Gshow(args, ...) abort
+@@ -527,7 +535,19 @@ function! s:Gshow(args, ...) abort
      call OpenOrSwitch(output, 'vs')
  endfunction
  
@@ -2355,7 +2239,7 @@ index d5874fe5..5a16cc10 100644
      let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
      exec '!rm ' . newFile
      exec 'w ' . newFile
-@@ -546,6 +567,21 @@ function! s:CatPlay(...) abort
+@@ -546,6 +566,21 @@ function! s:CatPlay(...) abort
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
@@ -2377,34 +2261,10 @@ index d5874fe5..5a16cc10 100644
  function! s:CatMove(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -559,6 +595,65 @@ function! s:CatMove(...) abort
+@@ -559,6 +594,41 @@ function! s:CatMove(...) abort
      call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
  endfunction
  
-+function! s:FileMove(...) abort
-+    if a:0 >= 1
-+        let curword = GetWord()
-+        let b:netrw_curdir = getcwd()
-+        let map_escape = "<|\n\r\\\<C-V>\""
-+        let mapsafecurdir = escape(b:netrw_curdir, map_escape)
-+        let oldname = ComposePath(mapsafecurdir, curword)
-+
-+        if filereadable(oldname)
-+            exec '!~/loadrc/bashrc/file_move.sh ' . '"' .  oldname . '"' . ' ' . '"' . a:1 . '"'
-+            let newname = a:1 . '/' . substitute(system("basename " . '"' . oldname . '"'), '\n', '', '')
-+            let newname = substitute(system("realpath " . '"' . newname . '"'), '\n', '', '')
-+            let newname = substitute(newname, getcwd(), '.', 'e')
-+            call setline('.', '"' . newname . '"')
-+            w!
-+            call UpdateProj()
-+        endif
-+
-+    endif
-+
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
-+endfunction
-+
-+
 +function! s:AppendRate(...) abort
 +    if a:0 >= 1
 +        let curword = GetWord()
@@ -2443,7 +2303,7 @@ index d5874fe5..5a16cc10 100644
  function! s:CatDu(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -585,11 +680,6 @@ function! s:Tail() abort
+@@ -585,11 +655,6 @@ function! s:Tail() abort
      exec '!tail -f ' . expand("%:p")
  endfunction
  
@@ -2455,7 +2315,7 @@ index d5874fe5..5a16cc10 100644
  function! s:Dps() abort
      let worktree = Cd2Worktree()
      silent exec '!~/loadrc/dockerrc/dps.sh'
-@@ -640,7 +730,10 @@ function! s:Prune() abort
+@@ -640,7 +705,10 @@ function! s:Prune() abort
      call asyncrun#run('<bang>', '', '~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
  endfunction
  
@@ -2467,7 +2327,7 @@ index d5874fe5..5a16cc10 100644
      call Cd2ProjectRoot("files.proj")
  
      if expand('%:t') != 'index'
-@@ -649,14 +742,14 @@ function! s:Fr(find, replace) abort
+@@ -649,14 +717,14 @@ function! s:Fr(find, replace) abort
          let fileList = "files.proj"
      endif
  
@@ -2485,7 +2345,7 @@ index d5874fe5..5a16cc10 100644
  endfunction
  
  function! s:Gwap() abort
-@@ -671,7 +764,7 @@ function! s:Gfix() abort
+@@ -671,7 +739,7 @@ function! s:Gfix() abort
  endfunction
  
  function! s:Reapply() abort
@@ -2494,7 +2354,7 @@ index d5874fe5..5a16cc10 100644
          echom 'Please only run on *gdio.diff!!!'
          return 0
      endif
-@@ -701,3 +794,5 @@ function! s:GenerateIpynb() abort
+@@ -701,3 +769,5 @@ function! s:GenerateIpynb() abort
      exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
      w
  endfunction
