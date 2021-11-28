@@ -499,7 +499,7 @@ index 37081d0c..3867ab7b 100755
  mdadm -D "$DEVICE" >> "$logFile"
  blkid >> "$logFile"
 diff --git a/bashrc/file_move.sh b/bashrc/file_move.sh
-new file mode 100644
+new file mode 100755
 index 00000000..889a9697
 --- /dev/null
 +++ ./bashrc/file_move.sh
