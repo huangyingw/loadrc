@@ -1604,11 +1604,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..f76b43b6
+index 00000000..68c85c3d
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit f76b43b6b8effde7c8b2f71ea0741b2140bf7382
++Subproject commit 68c85c3df27342ca8a2be3116f9440233befab44
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1848,12 +1848,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..678ccb54 160000
+index 8468d6a8..7bd408b2 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 678ccb5430505fff2f9f1c5abd131e030c765227-dirty
++Subproject commit 7bd408b2afb8b5addd4f8f6702fd95fa79e2fbca-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
