@@ -515,10 +515,10 @@ index 00000000..889a9697
 +mv -nv "$ss" "$2"
 diff --git a/bashrc/find_text.sh b/bashrc/find_text.sh
 new file mode 100755
-index 00000000..6d2b8f8b
+index 00000000..72760428
 --- /dev/null
 +++ ./bashrc/find_text.sh
-@@ -0,0 +1,34 @@
+@@ -0,0 +1,30 @@
 +#!/bin/zsh
 +
 +cd ~/loadrc/
@@ -530,7 +530,7 @@ index 00000000..6d2b8f8b
 +
 +function fun2()
 +{
-+    find . -type f -exec grep -Iq . {} \; -print > fun2.log 
++    find . -type f -exec grep -Iq . {} \; -print > fun2.log # auto-ignore the zero size file  
 +}
 +
 +function fun3()
@@ -540,19 +540,15 @@ index 00000000..6d2b8f8b
 +
 +function fun4()
 +{
-+    find . -type f -exec grep -Il . {} + > fun4.log 
++    find . -type f -exec grep -Il . {} + > fun4.log # auto-ignore the zero size file  
 +}
 +
 +function fun5()
 +{
-+    find . -type f -print0 | xargs -0 grep -IZl . > fun5.log 
++    find . -type f -print0 | xargs -0 grep -Il . > fun5.log # auto-ignore the zero size file
 +}
 +
-+fun1
-+fun2
-+fun3
-+fun4
-+fun5
++if [ "$1" = "1" ]
 diff --git a/bashrc/fr.sh b/bashrc/fr.sh
 index f58a2ee7..dcc8f356 100755
 --- ./bashrc/fr.sh
@@ -610,6 +606,20 @@ index 83e2c748..aa00d35f 100755
          cp -fv "$TARGET" files.proj && \
          echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
          sort -u ~/all.proj -o ~/all.proj
+diff --git a/bashrc/iso2usb.sh b/bashrc/iso2usb.sh
+new file mode 100755
+index 00000000..21b66e14
+--- /dev/null
++++ ./bashrc/iso2usb.sh
+@@ -0,0 +1,8 @@
++#!/bin/zsh
++
++dd \
++    bs=4M \
++    if=/media/volgrp/cubic/ubuntu-21.10.0-2021.11.27-desktop-amd64.iso \
++    of=/dev/sda \
++    conv=fdatasync \
++    status=progress
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
 index e2137142..005dcff1 100755
 --- ./bashrc/jdupes.sh
@@ -873,6 +883,81 @@ index 7042dce9..0e670bd9 100755
 -
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
+diff --git a/bashrc/tubak.sh b/bashrc/tubak.sh
+index 6892f2e1..5fb2ec37 100755
+--- ./bashrc/tubak.sh
++++ ./bashrc/tubak.sh
+@@ -1,5 +1,13 @@
+ #! /bin/zsh
++
++if [ $(uname) = "Darwin" ]
++then
++    echo -e "${red}It could only run in Linux... ${NC}"
++    exit 1
++fi
++
+ TARGET=/media/volgrp/media/`hostname`/
++
+ if [ -n "$1" ]
+ then
+     TARGET="$1"
+@@ -17,5 +29,5 @@ while read suf
+ do
+     include_params+=( "--include=$suf" )
+ done < "$UBAKIN"
+-rsync -aHinv --force --delete-during "${exclude_params[@]}" "${include_params[@]}" / "${TARGET}" > find.findresult
+-nvim find.findresult
++
++rsync -aHinv --force --delete-during "${exclude_params[@]}" "${include_params[@]}" / "${TARGET}" > tubak.runresult
+diff --git a/bashrc/tures.sh b/bashrc/tures.sh
+index ca135ec6..d10e6ad8 100755
+--- ./bashrc/tures.sh
++++ ./bashrc/tures.sh
+@@ -17,7 +17,6 @@ then
+     exit 1
+ fi
+ 
+-output=~/loadrc/tures.findresult
++output=~/loadrc/tures.runresult
+ touch "$output"
+ rsync -aHSvn --progress --delete-before --force --exclude-from ~/loadrc/bashrc/ures_ex "$1" "$2" 2>&1 | tee "$output"
+-nvim "$output"
+diff --git a/bashrc/ubak_ex b/bashrc/ubak_ex
+index 1dcf1e10..cd468faa 100644
+--- ./bashrc/ubak_ex
++++ ./bashrc/ubak_ex
+@@ -1,4 +1,19 @@
++/app/
++/bin/
++/cdrom/
++/dev/
++/lib32/
++/lib64/
++/libx32/
++/lost+found/
+ /media/
++/mnt/
++/opt/
+ /proc/
+ /run/
++/sbin/
++/snap/
++/srv/
++/swapfile
+ /sys/
++/tmp/
+diff --git a/bashrc/ures.sh b/bashrc/ures.sh
+index 1739b0a9..e1f3df17 100755
+--- ./bashrc/ures.sh
++++ ./bashrc/ures.sh
+@@ -17,6 +17,6 @@ then
+     exit 1
+ fi
+ 
+-output=~/loadrc/tures.findresult
++output=~/loadrc/tures.runresult
+ touch "$output"
+ rsync -aHSv --progress --delete-before --force --exclude-from ~/loadrc/bashrc/ures_ex "$1" "$2" 2>&1 | tee "$output"
 diff --git a/cscope b/cscope
 index 18a46b20..40e22631 160000
 --- ./cscope
@@ -1409,7 +1494,7 @@ index aeaf8ba1..c5237240 100755
      SCRIPTPATH=$(dirname "$SCRIPT") && \
      cd "$SCRIPTPATH" || cd ~/loadrc/
 diff --git a/install_basic_linux.sh b/install_basic_linux.sh
-index 34269226..b7a0ec3b 100755
+index 34269226..07ce6ecd 100755
 --- ./install_basic_linux.sh
 +++ ./install_basic_linux.sh
 @@ -1,4 +1,4 @@
@@ -1418,7 +1503,7 @@ index 34269226..b7a0ec3b 100755
  SCRIPT=$(realpath "$0")
  SCRIPTPATH=$(dirname "$SCRIPT")
  cd "$SCRIPTPATH"
-@@ -9,7 +9,9 @@ then
+@@ -9,12 +9,15 @@ then
      exit 0
  fi
  
@@ -1428,6 +1513,12 @@ index 34269226..b7a0ec3b 100755
  ./install_nodejs.sh
  ./install_time_machine.sh
  ./enpass_install.sh
+ ./nxrc/install.sh
+ ./kubernetesrc/install.sh
++./install_cubic.sh
+ cp -fv /bin/true /usr/bin/true
+ cp -fv ./wifirc/autoconnect.sh /etc/NetworkManager/dispatcher.d/
+ systemctl disable NetworkManager-wait-online.service
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
 index 62d92acb..ac4412e5 100755
 --- ./install_basic_macos.sh
@@ -1469,6 +1560,21 @@ index 62d92acb..ac4412e5 100755
      w3m \
      wakeonlan \
      watch \
+diff --git a/install_cubic.sh b/install_cubic.sh
+new file mode 100755
+index 00000000..d864cce8
+--- /dev/null
++++ ./install_cubic.sh
+@@ -0,0 +1,9 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++apt-add-repository ppa:cubic-wizard/release
++apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B7579F80E494ED3406A59DF9081525E2B4F1283B
++apt update
++apt install -y cubic
 diff --git a/install_gh.sh b/install_gh.sh
 new file mode 100755
 index 00000000..c3363697
@@ -1604,11 +1710,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..68c85c3d
+index 00000000..6ea6faba
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 68c85c3df27342ca8a2be3116f9440233befab44
++Subproject commit 6ea6faba3823f0a2f2e8d15f39367ec08f2c9df4
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1848,12 +1954,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..7bd408b2 160000
+index 8468d6a8..e7985898 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 7bd408b2afb8b5addd4f8f6702fd95fa79e2fbca-dirty
++Subproject commit e79858984337f1373500cc8f2ae1a80708735d60
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -1876,12 +1982,12 @@ index 00000000..d6adab9d
 @@ -0,0 +1 @@
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..582c4f6c 160000
+index 3b379635..a4595b48 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit 582c4f6cf310b2b3044c366c726a90c0010fc45d
++Subproject commit a4595b48a83824e36c1ebe48b574aa8624632695
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
