@@ -964,7 +964,7 @@ index 18a46b20..40e22631 160000
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
++Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b-dirty
 diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
 index 58429e06..51c59336 100755
 --- ./ffmpegrc/concat.sh
@@ -1685,23 +1685,11 @@ index 328d9be3..b4aaeb9c 100755
      ../downloads/"$NUM"/ \
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
-diff --git a/linux_links/etc/crypttab b/linux_links/etc/crypttab
-index 191dd600..ebd44801 100644
---- ./linux_links/etc/crypttab
-+++ ./linux_links/etc/crypttab
-@@ -9,4 +9,6 @@ usb_backup_crypt_4T      /dev/disk/by-uuid/4e0d72a2-2f98-4c11-becd-beaa21ec1957
- usb_backup_crypt_5T_1      /dev/disk/by-uuid/5d5e3fde-814f-4018-a103-2789c84d43e2  /root/loadrc/keys/keyfile   luks
- zarchive      /dev/disk/by-uuid/a840176a-b76a-4d0f-962c-439e68107670  /root/loadrc/keys/keyfile   luks
- vserver_crypt      /dev/disk/by-uuid/a4ff213e-f734-4c88-aba9-2ce733d0de76  /root/loadrc/keys/keyfile   luks
--usb_backup_crypt_8T      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
-+usb_backup_crypt_8T_1      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
-+usb_backup_crypt_8T_2      /dev/disk/by-uuid/bbbc9066-0479-4959-af61-ead6a9cea3ba  /root/loadrc/keys/keyfile   luks
-+timemachine      /dev/disk/by-uuid/72eff5fa-e188-4b1a-8760-5f5ff828aa37  /root/loadrc/keys/keyfile   luks
-diff --git a/linux_links/usr/NX/etc/server.cfg b/linux_links/usr/NX/etc/server.cfg
+diff --git a/linux/usr/NX/etc/server.cfg b/linux/usr/NX/etc/server.cfg
 new file mode 100644
 index 00000000..1d334667
 --- /dev/null
-+++ ./linux_links/usr/NX/etc/server.cfg
++++ ./linux/usr/NX/etc/server.cfg
 @@ -0,0 +1,1686 @@
 +######################################################################
 +#                                                                    #
@@ -3389,6 +3377,18 @@ index 00000000..1d334667
 +#
 +# EndSection
 +
+diff --git a/linux_links/etc/crypttab b/linux_links/etc/crypttab
+index 191dd600..ebd44801 100644
+--- ./linux_links/etc/crypttab
++++ ./linux_links/etc/crypttab
+@@ -9,4 +9,6 @@ usb_backup_crypt_4T      /dev/disk/by-uuid/4e0d72a2-2f98-4c11-becd-beaa21ec1957
+ usb_backup_crypt_5T_1      /dev/disk/by-uuid/5d5e3fde-814f-4018-a103-2789c84d43e2  /root/loadrc/keys/keyfile   luks
+ zarchive      /dev/disk/by-uuid/a840176a-b76a-4d0f-962c-439e68107670  /root/loadrc/keys/keyfile   luks
+ vserver_crypt      /dev/disk/by-uuid/a4ff213e-f734-4c88-aba9-2ce733d0de76  /root/loadrc/keys/keyfile   luks
+-usb_backup_crypt_8T      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
++usb_backup_crypt_8T_1      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
++usb_backup_crypt_8T_2      /dev/disk/by-uuid/bbbc9066-0479-4959-af61-ead6a9cea3ba  /root/loadrc/keys/keyfile   luks
++timemachine      /dev/disk/by-uuid/72eff5fa-e188-4b1a-8760-5f5ff828aa37  /root/loadrc/keys/keyfile   luks
 diff --git a/macosrc/configure_mosh.sh b/macosrc/configure_mosh.sh
 index bb27cd34..a45fa3fe 100755
 --- ./macosrc/configure_mosh.sh
