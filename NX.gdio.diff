@@ -191,6 +191,13 @@ index 00000000..9e7032fd
 +++ ./.mini.rc
 @@ -0,0 +1 @@
 +~/loadrc/setup_pbpaste-remote.sh
+diff --git a/.mini2.rc b/.mini2.rc
+new file mode 100755
+index 00000000..9e7032fd
+--- /dev/null
++++ ./.mini2.rc
+@@ -0,0 +1 @@
++~/loadrc/setup_pbpaste-remote.sh
 diff --git a/.pathrc b/.pathrc
 new file mode 100644
 index 00000000..a4b516a8
@@ -964,7 +971,7 @@ index 18a46b20..40e22631 160000
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b-dirty
++Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
 diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
 index 58429e06..51c59336 100755
 --- ./ffmpegrc/concat.sh
