@@ -1465,6 +1465,35 @@ index 50886663..1079d97e 100644
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
+diff --git a/hosts/mbp/etc/NetworkManager/system-connections/Wired.nmconnection b/hosts/mbp/etc/NetworkManager/system-connections/Wired.nmconnection
+new file mode 100644
+index 00000000..10ce7b9c
+--- /dev/null
++++ ./hosts/mbp/etc/NetworkManager/system-connections/Wired.nmconnection
+@@ -0,0 +1,23 @@
++[connection]
++id=Wired connection 1
++uuid=f51b7e63-5e4c-39cf-86a5-d1d47899903d
++type=ethernet
++autoconnect-priority=-999
++interface-name=eth0
++permissions=
++timestamp=1635740716
++
++[ethernet]
++mac-address-blacklist=
++
++[ipv4]
++address1=192.168.31.96/24
++dns-search=
++method=manual
++
++[ipv6]
++addr-gen-mode=stable-privacy
++dns-search=
++method=auto
++
++[proxy]
 diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
 index ea2bc967..b7adab11 100755
 --- ./imvurc/ghypo.sh
@@ -1684,6 +1713,18 @@ index 298b6bc4..a78577d2 100755
      unrar \
      w3m \
      w3m-img \
+diff --git a/kvmrc/install.sh b/kvmrc/install.sh
+index 14f88047..bc84a185 100755
+--- ./kvmrc/install.sh
++++ ./kvmrc/install.sh
+@@ -16,3 +16,7 @@ apt-get update ; \
+     qemu \
+     qemu-kvm \
+     virt-manager
++
++USER=huangyingw
++usermod -aG libvirt "$USER"
++usermod -aG kvm "$USER"
 diff --git a/leetcoderc/restore.sh b/leetcoderc/restore.sh
 index 328d9be3..b4aaeb9c 100755
 --- ./leetcoderc/restore.sh
