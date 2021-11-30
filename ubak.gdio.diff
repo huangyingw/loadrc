@@ -500,10 +500,10 @@ index 37081d0c..3867ab7b 100755
  blkid >> "$logFile"
 diff --git a/bashrc/find_text.sh b/bashrc/find_text.sh
 new file mode 100755
-index 00000000..6d2b8f8b
+index 00000000..72760428
 --- /dev/null
 +++ ./bashrc/find_text.sh
-@@ -0,0 +1,34 @@
+@@ -0,0 +1,30 @@
 +#!/bin/zsh
 +
 +cd ~/loadrc/
@@ -515,7 +515,7 @@ index 00000000..6d2b8f8b
 +
 +function fun2()
 +{
-+    find . -type f -exec grep -Iq . {} \; -print > fun2.log 
++    find . -type f -exec grep -Iq . {} \; -print > fun2.log # auto-ignore the zero size file  
 +}
 +
 +function fun3()
@@ -525,19 +525,15 @@ index 00000000..6d2b8f8b
 +
 +function fun4()
 +{
-+    find . -type f -exec grep -Il . {} + > fun4.log 
++    find . -type f -exec grep -Il . {} + > fun4.log # auto-ignore the zero size file  
 +}
 +
 +function fun5()
 +{
-+    find . -type f -print0 | xargs -0 grep -IZl . > fun5.log 
++    find . -type f -print0 | xargs -0 grep -Il . > fun5.log # auto-ignore the zero size file
 +}
 +
-+fun1
-+fun2
-+fun3
-+fun4
-+fun5
++if [ "$1" = "1" ]
 diff --git a/bashrc/fr.sh b/bashrc/fr.sh
 index f58a2ee7..dcc8f356 100755
 --- ./bashrc/fr.sh
@@ -885,10 +881,10 @@ index 6892f2e1..5fb2ec37 100755
 +
 +rsync -aHinv --force --delete-during "${exclude_params[@]}" "${include_params[@]}" / "${TARGET}" > tubak.runresult
 diff --git a/bashrc/ubak_ex b/bashrc/ubak_ex
-index 1dcf1e10..cd468faa 100644
+index 1dcf1e10..91dd26fc 100644
 --- ./bashrc/ubak_ex
 +++ ./bashrc/ubak_ex
-@@ -1,4 +1,19 @@
+@@ -1,4 +1,20 @@
 +/app/
 +/bin/
 +/cdrom/
@@ -908,6 +904,16 @@ index 1dcf1e10..cd468faa 100644
 +/swapfile
  /sys/
 +/tmp/
++/var/
+diff --git a/bashrc/ubak_in b/bashrc/ubak_in
+index 831e26da..0999e53a 100644
+--- ./bashrc/ubak_in
++++ ./bashrc/ubak_in
+@@ -4,4 +4,3 @@
+ /lib/
+ /root/
+ /usr/
+-/var/
 diff --git a/cscope b/cscope
 index 18a46b20..40e22631 160000
 --- ./cscope
