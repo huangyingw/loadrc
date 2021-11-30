@@ -931,10 +931,10 @@ index ca135ec6..d10e6ad8 100755
  rsync -aHSvn --progress --delete-before --force --exclude-from ~/loadrc/bashrc/ures_ex "$1" "$2" 2>&1 | tee "$output"
 -nvim "$output"
 diff --git a/bashrc/ubak_ex b/bashrc/ubak_ex
-index 1dcf1e10..cd468faa 100644
+index 1dcf1e10..91dd26fc 100644
 --- ./bashrc/ubak_ex
 +++ ./bashrc/ubak_ex
-@@ -1,4 +1,19 @@
+@@ -1,4 +1,20 @@
 +/app/
 +/bin/
 +/cdrom/
@@ -954,6 +954,16 @@ index 1dcf1e10..cd468faa 100644
 +/swapfile
  /sys/
 +/tmp/
++/var/
+diff --git a/bashrc/ubak_in b/bashrc/ubak_in
+index 831e26da..0999e53a 100644
+--- ./bashrc/ubak_in
++++ ./bashrc/ubak_in
+@@ -4,4 +4,3 @@
+ /lib/
+ /root/
+ /usr/
+-/var/
 diff --git a/bashrc/ures.sh b/bashrc/ures.sh
 index 1739b0a9..e1f3df17 100755
 --- ./bashrc/ures.sh
@@ -985,7 +995,7 @@ index 18a46b20..40e22631 160000
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b-dirty
++Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
 diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
 index 58429e06..51c59336 100755
 --- ./ffmpegrc/concat.sh
@@ -1786,7 +1796,7 @@ index 298b6bc4..a78577d2 100755
      w3m \
      w3m-img \
 diff --git a/kvmrc/configure.sh b/kvmrc/configure.sh
-new file mode 100644
+new file mode 100755
 index 00000000..d231f155
 --- /dev/null
 +++ ./kvmrc/configure.sh
@@ -3535,11 +3545,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..3196c72c
+index 00000000..e441c619
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 3196c72c25b16d9e8ad466a970eef1c42698f7ff
++Subproject commit e441c619df2d7e7d4aadaf660fb463f40f588e4d
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -3787,7 +3797,7 @@ index cfac13ef..3658e644 160000
 +++ ./vimrc/.vim/bundle/vim-buffergator
 @@ -1 +1 @@
 -Subproject commit cfac13efd7832866c134e6fa1b213940e8c0c4d7
-+Subproject commit 3658e6445b70e557088613e4b8d95a90c92af79e
++Subproject commit 3658e6445b70e557088613e4b8d95a90c92af79e-dirty
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
