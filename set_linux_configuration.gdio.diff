@@ -995,7 +995,7 @@ index 18a46b20..40e22631 160000
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
++Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b-dirty
 diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
 index 58429e06..51c59336 100755
 --- ./ffmpegrc/concat.sh
@@ -3545,11 +3545,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..e441c619
+index 00000000..b1629bd2
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit e441c619df2d7e7d4aadaf660fb463f40f588e4d
++Subproject commit b1629bd2d5669fb7406149fbdf498942695ded49
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -3750,12 +3750,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..8d5b5d98 160000
+index cc6342c3..c17ab9a0 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 8d5b5d986e98d11567c5ef28442eaa0552ddc72a-dirty
++Subproject commit c17ab9a057387e42d39d766bb48d9efc9ca25bdf
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -3792,12 +3792,12 @@ index dbe8b1e2..bb9753ce 160000
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
 +Subproject commit bb9753ceba554d673b04f8b878b2d1f4febf6807
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
-index cfac13ef..3658e644 160000
+index cfac13ef..c5d93a95 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
 +++ ./vimrc/.vim/bundle/vim-buffergator
 @@ -1 +1 @@
 -Subproject commit cfac13efd7832866c134e6fa1b213940e8c0c4d7
-+Subproject commit 3658e6445b70e557088613e4b8d95a90c92af79e-dirty
++Subproject commit c5d93a95bcbe3fff9a4097adb6b6a7a326ecb4e4
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
