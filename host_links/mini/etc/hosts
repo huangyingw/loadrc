@@ -1,27 +1,38 @@
 127.0.0.1       localhost
 127.0.1.1       mini
-#192.168.2.2 server
-#192.168.2.144 mldonkey
-#192.168.2.1 ddwrt
-#172.27.83.234 sb
-192.168.112.14 sb
-192.168.122.102 u1804
-192.168.122.65 master-node
-192.168.122.136 slave-node
-192.168.122.244 zsh
-192.168.31.29 work
-172.27.217.162 localhost.imvu.com
+34.210.205.94 awsp2
+52.26.142.204 awst2
+192.168.1.2 movie
+34.215.56.158 tinc-master
+192.168.31.191 work
+#172.27.185.36 work
+172.27.131.85 sandbox
+#172.27.23.235 mldonkey
+#10.1.10.146 server
+#172.27.59.214 server
 192.168.31.31 server
-192.168.31.147 imacpro
-172.27.68.119 imac
-172.27.118.58 vagrant
-192.168.31.99 mldonkey
-192.168.123.203 u2004
+192.168.31.150 ubuntu
+172.27.93.135 u1604
+10.211.55.22 vmac
 10.211.55.5 macos
-192.168.123.177 ubuntu20.04
-# 172.27.174.184 mbp
+172.27.68.119 imac
+172.27.217.162 sb
+172.27.217.162 localhost.imvu.com
+192.168.31.213 gluster00
+192.168.31.10 gluster01
+192.168.31.194 gluster02
+172.27.82.7 kubernetes-master
+172.27.182.148 minds
+192.168.31.127 u1804
 192.168.31.96 mbp
-192.168.123.80 u2110
+# 192.168.31.168 mbp
+192.168.31.111 u2004
+192.168.31.67 kvm
+172.27.118.58 vagrant
+172.27.23.235 haikou
+# 192.168.31.192 macmini
+192.168.31.243 macmini
+192.168.31.32 mini2
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
