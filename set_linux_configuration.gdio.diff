@@ -985,7 +985,7 @@ index 18a46b20..40e22631 160000
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
++Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b-dirty
 diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
 index 58429e06..51c59336 100755
 --- ./ffmpegrc/concat.sh
@@ -3643,18 +3643,20 @@ index 00000000..b385cdc6
 +cp -fv ./pbpaste-remote ~/bin/pbpaste-remote
 diff --git a/setup_remote.sh b/setup_remote.sh
 new file mode 100755
-index 00000000..f0de7a8b
+index 00000000..52209e6a
 --- /dev/null
 +++ ./setup_remote.sh
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,13 @@
 +#!/bin/bash
 +
 +apt-get update
 +apt-get install -y \
-+    mosh \
 +    ssh \
 +    tmux \
++    vim \
 +    zsh
++
++apt-get install -y mosh
 +
 +./deploy_configurations.sh
 +./swith-2-zsh.sh
@@ -3780,12 +3782,12 @@ index dbe8b1e2..bb9753ce 160000
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
 +Subproject commit bb9753ceba554d673b04f8b878b2d1f4febf6807
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
-index cfac13ef..63196768 160000
+index cfac13ef..3658e644 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
 +++ ./vimrc/.vim/bundle/vim-buffergator
 @@ -1 +1 @@
 -Subproject commit cfac13efd7832866c134e6fa1b213940e8c0c4d7
-+Subproject commit 631967689bae60870180b41fd590ff93d673b82d-dirty
++Subproject commit 3658e6445b70e557088613e4b8d95a90c92af79e
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
