@@ -17,6 +17,4 @@ apt-get update ; \
     qemu-kvm \
     virt-manager
 
-USER=huangyingw
-usermod -aG libvirt "$USER"
-usermod -aG kvm "$USER"
+./configure.sh
