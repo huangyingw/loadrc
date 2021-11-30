@@ -966,6 +966,19 @@ index 1739b0a9..e1f3df17 100755
 +output=~/loadrc/tures.runresult
  touch "$output"
  rsync -aHSv --progress --delete-before --force --exclude-from ~/loadrc/bashrc/ures_ex "$1" "$2" 2>&1 | tee "$output"
+diff --git a/bashrc/wol.sh b/bashrc/wol.sh
+index 1e941ff7..2062d8cd 100755
+--- ./bashrc/wol.sh
++++ ./bashrc/wol.sh
+@@ -39,4 +39,8 @@ then
+     wakeonlan 1c:87:2c:b7:a1:ce #movie wifi
+     wakeonlan -i 192.168.1.2 00:0a:cd:1e:e9:be #movie
+     ping movie
++elif [ "$target" = "mini2" ]
++then
++    wakeonlan f4:4e:e3:fd:1c:e5 #mini2 wifi
++    ping movie
+ fi
 diff --git a/cscope b/cscope
 index 18a46b20..40e22631 160000
 --- ./cscope
@@ -1439,17 +1452,60 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..8879ff4f 100644
+index 425c9192..187c445c 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
-@@ -18,6 +18,10 @@
- 192.168.31.99 mldonkey
- 192.168.123.203 u2004
- 10.211.55.5 macos
-+192.168.123.177 ubuntu20.04
-+# 172.27.174.184 mbp
+@@ -1,23 +1,38 @@
+ 127.0.0.1       localhost
+ 127.0.1.1       mini
+-#192.168.2.2 server
+-#192.168.2.144 mldonkey
+-#192.168.2.1 ddwrt
+-#172.27.83.234 sb
+-192.168.112.14 sb
+-192.168.122.102 u1804
+-192.168.122.65 master-node
+-192.168.122.136 slave-node
+-192.168.122.244 zsh
+-192.168.31.29 work
+-172.27.217.162 localhost.imvu.com
++34.210.205.94 awsp2
++52.26.142.204 awst2
++192.168.1.2 movie
++34.215.56.158 tinc-master
++192.168.31.191 work
++#172.27.185.36 work
++172.27.131.85 sandbox
++#172.27.23.235 mldonkey
++#10.1.10.146 server
++#172.27.59.214 server
+ 192.168.31.31 server
+-192.168.31.147 imacpro
++192.168.31.150 ubuntu
++172.27.93.135 u1604
++10.211.55.22 vmac
++10.211.55.5 macos
+ 172.27.68.119 imac
++172.27.217.162 sb
++172.27.217.162 localhost.imvu.com
++192.168.31.213 gluster00
++192.168.31.10 gluster01
++192.168.31.194 gluster02
++172.27.82.7 kubernetes-master
++172.27.182.148 minds
++192.168.31.127 u1804
 +192.168.31.96 mbp
-+192.168.123.80 u2110
++# 192.168.31.168 mbp
++192.168.31.111 u2004
++192.168.31.67 kvm
+ 172.27.118.58 vagrant
+-192.168.31.99 mldonkey
+-192.168.123.203 u2004
+-10.211.55.5 macos
++172.27.23.235 haikou
++# 192.168.31.192 macmini
++192.168.31.243 macmini
++192.168.31.32 mini2
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
@@ -1494,6 +1550,22 @@ index 00000000..10ce7b9c
 +method=auto
 +
 +[proxy]
+diff --git a/hosts/mini2/var/lib/zerotier-one/identity.public b/hosts/mini2/var/lib/zerotier-one/identity.public
+new file mode 100644
+index 00000000..d1a7ea73
+--- /dev/null
++++ ./hosts/mini2/var/lib/zerotier-one/identity.public
+@@ -0,0 +1 @@
++b4f0695fc0:0:bd2168bc6aa9a06973fe7cbb5aa8ff3ef85c16771e62dd77290b5100c1ca394e3301bb74ced726ccfce563236b18570c9c515181090f20b034744637f224af51
+\ No newline at end of file
+diff --git a/hosts/mini2/var/lib/zerotier-one/identity.secret b/hosts/mini2/var/lib/zerotier-one/identity.secret
+new file mode 100644
+index 00000000..ef7b0277
+--- /dev/null
++++ ./hosts/mini2/var/lib/zerotier-one/identity.secret
+@@ -0,0 +1 @@
++b4f0695fc0:0:bd2168bc6aa9a06973fe7cbb5aa8ff3ef85c16771e62dd77290b5100c1ca394e3301bb74ced726ccfce563236b18570c9c515181090f20b034744637f224af51:5bf5e6d525fc1f9fc72e2eefa958520edab7666dfd79ae306a16b440835d96d39a5ecd351a385aa50b241a59c9539098fda047f7930a7c33e21248678bad2753
+\ No newline at end of file
 diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
 index ea2bc967..b7adab11 100755
 --- ./imvurc/ghypo.sh
@@ -3452,11 +3524,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..6637fa1a
+index 00000000..e441c619
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 6637fa1a9fba92b21d78b6ae13e2b3ef950afd1e
++Subproject commit e441c619df2d7e7d4aadaf660fb463f40f588e4d
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -3682,12 +3754,12 @@ index dbe8b1e2..bb9753ce 160000
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
 +Subproject commit bb9753ceba554d673b04f8b878b2d1f4febf6807
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
-index cfac13ef..63196768 160000
+index cfac13ef..3658e644 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
 +++ ./vimrc/.vim/bundle/vim-buffergator
 @@ -1 +1 @@
 -Subproject commit cfac13efd7832866c134e6fa1b213940e8c0c4d7
-+Subproject commit 631967689bae60870180b41fd590ff93d673b82d-dirty
++Subproject commit 3658e6445b70e557088613e4b8d95a90c92af79e-dirty
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
