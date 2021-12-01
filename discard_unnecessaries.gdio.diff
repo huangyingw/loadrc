@@ -941,6 +941,16 @@ index d81f6f38..5b7555ad 100755
  done
 +
 +git show "$1":COMMIT_EDITMSG > COMMIT_EDITMSG
+diff --git a/gitrc/discard_unnecessaries.sh b/gitrc/discard_unnecessaries.sh
+index dbf809a0..87a8c1b4 100755
+--- ./gitrc/discard_unnecessaries.sh
++++ ./gitrc/discard_unnecessaries.sh
+@@ -1,4 +1,4 @@
+ #!/bin/zsh
+-git checkout *.gdio.diff
++git checkout \*.gdio.diff
+ git checkout files.proj
+ git checkout rsync.files
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
 index 4f8edfc6..4f5de493 100755
 --- ./gitrc/dogdio.sh
@@ -1036,10 +1046,10 @@ index e118a4de..e1f58816 100755
      $HOME/loadrc/gitrc/gdev.sh && \
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 new file mode 100755
-index 00000000..7c44202b
+index 00000000..81a61668
 --- /dev/null
 +++ ./gitrc/gcom.sh
-@@ -0,0 +1,28 @@
+@@ -0,0 +1,40 @@
 +#!/bin/zsh
 +
 +if [ -z "$1" ]
@@ -1057,8 +1067,20 @@ index 00000000..7c44202b
 +
 +~/loadrc/gitrc/discard_unnecessaries.sh
 +current_branch=$(~/loadrc/gitrc/get_current_branch.sh)
-+git checkout -b "$1" || \
-+    git checkout "$1" &&
++
++TARGET_BRANCH="$1"
++TARGET_BRANCH=$(echo "$TARGET_BRANCH" | sed 's/remotes\///g')
++TARGET_BRANCH="$TARGET_BRANCH"
++
++for remote in $(git remote)
++do
++    TARGET_BRANCH=$(echo "$TARGET_BRANCH" | sed "s/^$remote\///g")
++done
++
++echo "TARGET_BRANCH --> $TARGET_BRANCH" 
++
++git checkout -b "$TARGET_BRANCH" || \
++    git checkout "$TARGET_BRANCH" &&
 +    git merge "$current_branch"
 +
 +if [ -n "$clean" ]
