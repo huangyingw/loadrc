@@ -8,18 +8,18 @@ then
 fi
 
 ~/loadrc/gitrc/include_gitconfig.sh
-git remote update &
+git remote update
 currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 
 for remote in $(git remote)
 do
-    git pull $remote $currentBranch &
-    git remote prune $remote &
+    git pull $remote $currentBranch
+    git remote prune $remote
 done
 
 for ss in $(git config --get-all pull.from)
 do
-    COMMAND="git merge $ss &"
+    COMMAND="git merge $ss"
     eval "$COMMAND"
 done
 
@@ -27,5 +27,5 @@ target=$(git config gsync.target)
 
 if [ -n "$target" ]
 then
-    git merge "$target" &
+    git merge "$target"
 fi
