@@ -15,8 +15,20 @@ fi
 
 ~/loadrc/gitrc/discard_unnecessaries.sh
 current_branch=$(~/loadrc/gitrc/get_current_branch.sh)
-git checkout -b "$1" || \
-    git checkout "$1" &&
+
+TARGET_BRANCH="$1"
+TARGET_BRANCH=$(echo "$TARGET_BRANCH" | sed 's/remotes\///g')
+TARGET_BRANCH="$TARGET_BRANCH"
+
+for remote in $(git remote)
+do
+    TARGET_BRANCH=$(echo "$TARGET_BRANCH" | sed "s/^$remote\///g")
+done
+
+echo "TARGET_BRANCH --> $TARGET_BRANCH" 
+
+git checkout -b "$TARGET_BRANCH" || \
+    git checkout "$TARGET_BRANCH" &&
     git merge "$current_branch"
 
 if [ -n "$clean" ]

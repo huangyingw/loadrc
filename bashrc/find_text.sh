@@ -9,7 +9,7 @@ function fun1()
 
 function fun2()
 {
-    find . -type f -exec grep -Iq . {} \; -print > fun2.log # auto-ignore the zero size file  
+    find . -type f -exec grep -Iq . {} \; -print > fun2.log 
 }
 
 function fun3()
@@ -19,12 +19,16 @@ function fun3()
 
 function fun4()
 {
-    find . -type f -exec grep -Il . {} + > fun4.log # auto-ignore the zero size file  
+    find . -type f -exec grep -Il . {} + > fun4.log 
 }
 
 function fun5()
 {
-    find . -type f -print0 | xargs -0 grep -Il . > fun5.log # auto-ignore the zero size file
+    find . -type f -print0 | xargs -0 grep -IZl . > fun5.log 
 }
 
-if [ "$1" = "1" ]
+fun1
+fun2
+fun3
+fun4
+fun5

@@ -15,9 +15,7 @@ done
 
 find linux/ -type f | while read ss; \
 do \
-    target="/$(echo "$ss" | sed "s/linux\///g")"
-    mkdir -p "$(dirname "$target")"
-    cp -fv --remove-destination "$ss" "$target"; \
+    cp -fv --remove-destination "$ss" "/$(echo "$ss" | sed "s/linux\///g")"; \
 done
 
 grub-mkconfig -o /boot/grub/grub.cfg
