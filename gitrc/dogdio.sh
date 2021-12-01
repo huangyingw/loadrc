@@ -10,4 +10,4 @@ output="$local_branch.gdio.diff"
 output=$(echo "$output" | sed 's/\//_/g')
 target="$(git config gsync.target)"
 
-~/loadrc/gitrc/gdi.sh "$target" 2>&1 | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" | tee "$output" 
+~/loadrc/gitrc/gdi.sh "$target" 2>&1 | tee "$output" 
