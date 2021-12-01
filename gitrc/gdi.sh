@@ -13,4 +13,4 @@ else
         COMMAND="$COMMAND  ':(exclude)$ss'"
     done
 fi
-eval "$COMMAND"
+eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
