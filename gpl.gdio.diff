@@ -858,6 +858,20 @@ index 7042dce9..0e670bd9 100755
 -
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
+diff --git a/bashrc/wol.sh b/bashrc/wol.sh
+index 1e941ff7..5e9420df 100755
+--- ./bashrc/wol.sh
++++ ./bashrc/wol.sh
+@@ -39,4 +39,9 @@ then
+     wakeonlan 1c:87:2c:b7:a1:ce #movie wifi
+     wakeonlan -i 192.168.1.2 00:0a:cd:1e:e9:be #movie
+     ping movie
++elif [ "$target" = "mini2" ]
++then
++    wakeonlan f4:4e:e3:fd:1c:e5 #mini2 wifi
++    wakeonlan 00:E0:4C:00:07:A8 #mini2 wired
++    ping mini2
+ fi
 diff --git a/cscope b/cscope
 index 18a46b20..40e22631 160000
 --- ./cscope
@@ -942,13 +956,13 @@ index d81f6f38..5b7555ad 100755
 +
 +git show "$1":COMMIT_EDITMSG > COMMIT_EDITMSG
 diff --git a/gitrc/discard_unnecessaries.sh b/gitrc/discard_unnecessaries.sh
-index dbf809a0..9df3e01a 100755
+index dbf809a0..87a8c1b4 100755
 --- ./gitrc/discard_unnecessaries.sh
 +++ ./gitrc/discard_unnecessaries.sh
 @@ -1,4 +1,4 @@
  #!/bin/zsh
 -git checkout *.gdio.diff
-+git checkout "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff"
++git checkout \*.gdio.diff
  git checkout files.proj
  git checkout rsync.files
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
@@ -1046,10 +1060,10 @@ index e118a4de..e1f58816 100755
      $HOME/loadrc/gitrc/gdev.sh && \
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 new file mode 100755
-index 00000000..7c44202b
+index 00000000..81a61668
 --- /dev/null
 +++ ./gitrc/gcom.sh
-@@ -0,0 +1,28 @@
+@@ -0,0 +1,40 @@
 +#!/bin/zsh
 +
 +if [ -z "$1" ]
@@ -1067,8 +1081,20 @@ index 00000000..7c44202b
 +
 +~/loadrc/gitrc/discard_unnecessaries.sh
 +current_branch=$(~/loadrc/gitrc/get_current_branch.sh)
-+git checkout -b "$1" || \
-+    git checkout "$1" &&
++
++TARGET_BRANCH="$1"
++TARGET_BRANCH=$(echo "$TARGET_BRANCH" | sed 's/remotes\///g')
++TARGET_BRANCH="$TARGET_BRANCH"
++
++for remote in $(git remote)
++do
++    TARGET_BRANCH=$(echo "$TARGET_BRANCH" | sed "s/^$remote\///g")
++done
++
++echo "TARGET_BRANCH --> $TARGET_BRANCH" 
++
++git checkout -b "$TARGET_BRANCH" || \
++    git checkout "$TARGET_BRANCH" &&
 +    git merge "$current_branch"
 +
 +if [ -n "$clean" ]
@@ -1194,7 +1220,7 @@ index 20dd9aa3..0f505a1e 100755
 +CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
  git fetch . "$CURRENT_BRANCH":"$1"
 diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
-index fa900e00..bc57680c 100755
+index fa900e00..4cb43793 100755
 --- ./gitrc/gpl.sh
 +++ ./gitrc/gpl.sh
 @@ -1,28 +1,31 @@
@@ -1208,9 +1234,10 @@ index fa900e00..bc57680c 100755
 +fi
 +
  ~/loadrc/gitrc/include_gitconfig.sh
- git remote update &
+-git remote update &
 -git checkout *.gdio.diff
 -git pull &
++git remote update
  currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
  
 -for ss in `git remote -v |awk '/\(fetch\)$/{print $1}'`
@@ -1218,15 +1245,15 @@ index fa900e00..bc57680c 100755
  do
 -    git pull $ss $currentBranch &
 -    git remote prune $ss &
-+    git pull $remote $currentBranch &
-+    git remote prune $remote &
++    git pull $remote $currentBranch
++    git remote prune $remote
  done
  
  for ss in $(git config --get-all pull.from)
  do
 -    pull_from=$(echo "$ss" | sed  -e "s/\// /g")
 -    COMMAND="git pull $pull_from &"
-+    COMMAND="git merge $ss &"
++    COMMAND="git merge $ss"
      eval "$COMMAND"
  done
  
@@ -1238,7 +1265,7 @@ index fa900e00..bc57680c 100755
 +if [ -n "$target" ]
  then
 -    git merge "$remote"/"$remote_branch"
-+    git merge "$target" &
++    git merge "$target"
  fi
 diff --git a/gitrc/gps.sh b/gitrc/gps.sh
 index 2198cb7f..1af0b074 100755
@@ -1589,11 +1616,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..f49e017d
+index 00000000..57d78e49
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit f49e017dff5dd42a14a51c12d8ed0c4959e0d649-dirty
++Subproject commit 57d78e4961b58aa5d3aa4a3b23b80ee955c0a28c
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1669,10 +1696,10 @@ index 00000000..b385cdc6
 +cp -fv ./pbpaste-remote ~/bin/pbpaste-remote
 diff --git a/setup_remote.sh b/setup_remote.sh
 new file mode 100755
-index 00000000..f0de7a8b
+index 00000000..be5c410c
 --- /dev/null
 +++ ./setup_remote.sh
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,12 @@
 +#!/bin/bash
 +
 +apt-get update
@@ -1683,7 +1710,33 @@ index 00000000..f0de7a8b
 +    zsh
 +
 +./deploy_configurations.sh
++~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
 +./swith-2-zsh.sh
+diff --git a/sqlrc/xsql.sh b/sqlrc/xsql.sh
+index 0aae8085..2d88e3a8 100755
+--- ./sqlrc/xsql.sh
++++ ./sqlrc/xsql.sh
+@@ -12,6 +12,8 @@ user=`cat ${loginFile} |awk -F'=' '/user/{print $2}'`
+ password=`cat ${loginFile} |awk -F'=' '/password/{print $2}'`
+ host=`cat ${loginFile} |awk -F'=' '/host/{print $2}'`
+ dbinstance=`cat ${loginFile} |awk -F'=' '/dbinstance/{print $2}'`
++protocol=`cat ${loginFile} |awk -F'=' '/protocol/{print $2}'`
++option=""
+ 
+ if [ -z "$host" ]
+ then
+@@ -22,5 +24,10 @@ then
+     sort -u "$loginFile" -o "$loginFile"
+ fi
+ 
++if [ -n "$protocol" ]
++then
++    option="--protocol=$protocol"
++fi
++
+ cd "$(dirname "$file")"
+-mysql -v -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
++mysql -v "$option" -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
 diff --git a/uninstall_bidirectional_clipboard.sh b/uninstall_bidirectional_clipboard.sh
 new file mode 100755
 index 00000000..3be79dc7
@@ -1739,12 +1792,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..8d5b5d98 160000
+index cc6342c3..c17ab9a0 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 8d5b5d986e98d11567c5ef28442eaa0552ddc72a
++Subproject commit c17ab9a057387e42d39d766bb48d9efc9ca25bdf
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -1781,12 +1834,12 @@ index dbe8b1e2..bb9753ce 160000
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
 +Subproject commit bb9753ceba554d673b04f8b878b2d1f4febf6807
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
-index cfac13ef..63196768 160000
+index cfac13ef..c5d93a95 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
 +++ ./vimrc/.vim/bundle/vim-buffergator
 @@ -1 +1 @@
 -Subproject commit cfac13efd7832866c134e6fa1b213940e8c0c4d7
-+Subproject commit 631967689bae60870180b41fd590ff93d673b82d
++Subproject commit c5d93a95bcbe3fff9a4097adb6b6a7a326ecb4e4
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
@@ -1795,12 +1848,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..3ef1ab35 160000
+index 8468d6a8..e7985898 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 3ef1ab35b28d14f7b3b76f615c5bb006ac27afc2-dirty
++Subproject commit e79858984337f1373500cc8f2ae1a80708735d60
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -1823,12 +1876,12 @@ index 00000000..d6adab9d
 @@ -0,0 +1 @@
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..582c4f6c 160000
+index 3b379635..a4595b48 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit 582c4f6cf310b2b3044c366c726a90c0010fc45d
++Subproject commit a4595b48a83824e36c1ebe48b574aa8624632695
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
@@ -2001,7 +2054,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..c96dad64 100644
+index d5874fe5..1f29e547 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,7 +1,10 @@
@@ -2277,7 +2330,7 @@ index d5874fe5..c96dad64 100644
      call Cd2ProjectRoot("files.proj")
  
      if expand('%:t') != 'index'
-@@ -649,7 +717,7 @@ function! s:Fr(find, replace) abort
+@@ -649,14 +717,14 @@ function! s:Fr(find, replace) abort
          let fileList = "files.proj"
      endif
  
@@ -2286,6 +2339,15 @@ index d5874fe5..c96dad64 100644
      call s:Gs()
  endfunction
  
+ function! s:FindDeleted() abort
+     call Cd2Worktree()
+-    silent exec '!~/loadrc/gitrc/find_deleted.sh 2>&1 | tee find_deleted.findresult'
+-    call OpenOrSwitch('find_deleted.findresult', 'vs')
++    silent exec '!~/loadrc/gitrc/find_deleted.sh 2>&1 | tee find_deleted.runresult'
++    call OpenOrSwitch('find_deleted.runresult', 'vs')
+ endfunction
+ 
+ function! s:Gwap() abort
 @@ -671,7 +739,7 @@ function! s:Gfix() abort
  endfunction
  
@@ -2965,9 +3027,18 @@ index 00000000..edfddbb7
 +printf "%s\n" "${result[@]}" > "$1".tmp
 +cp -fv "$1".tmp "$1"
 diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
-index e14de500..14ffa5a3 100755
+index e14de500..da1c895d 100755
 --- ./vishrc/vrun.sh
 +++ ./vishrc/vrun.sh
+@@ -27,7 +27,7 @@ rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$file" "files.proj")
+ rfile=$(realpath --relative-to="$rootFolder" "$file")
+ rfolder=$(realpath --relative-to="$rootFolder" $(dirname "$file"))
+ 
+-if [[ "$file" = *'Dockerfile' ]] 
++if [[ "$file" = *'Dockerfile'* ]] 
+ then
+     cd "$rootFolder"
+     docker build -f "$rfile" "$rfolder"
 @@ -58,7 +58,7 @@ case $extension in
      sh)
          if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
