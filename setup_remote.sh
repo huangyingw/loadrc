@@ -10,4 +10,5 @@ apt-get install -y \
 apt-get install -y mosh
 
 ./deploy_configurations.sh
+~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
 ./swith-2-zsh.sh
