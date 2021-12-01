@@ -1366,9 +1366,18 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..8879ff4f 100644
+index 425c9192..b2f5fdc0 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
+@@ -9,7 +9,7 @@
+ 192.168.122.65 master-node
+ 192.168.122.136 slave-node
+ 192.168.122.244 zsh
+-192.168.31.29 work
++192.168.31.191 work
+ 172.27.217.162 localhost.imvu.com
+ 192.168.31.31 server
+ 192.168.31.147 imacpro
 @@ -18,6 +18,10 @@
  192.168.31.99 mldonkey
  192.168.123.203 u2004
@@ -1624,11 +1633,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..29824a76
+index 00000000..9c0586fb
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 29824a76adc77d0b25d68197a50d8adc3a7aea62-dirty
++Subproject commit 9c0586fbf7c2398eb7b5f9e172caa6b5d94bfcc0
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1650,6 +1659,19 @@ index 8e34f2fa..9deeb31c 100644
  "./running.time"
  .err
 -"./gbra.log"
+diff --git a/pythonrc/vlc.py b/pythonrc/vlc.py
+index 13a0cf4c..d245f963 100755
+--- ./pythonrc/vlc.py
++++ ./pythonrc/vlc.py
+@@ -13,7 +13,7 @@ def callvlc(targetFile, start=0):
+     if targetFile:
+         if platform.system() == 'Darwin':
+             if start == 0:
+-                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', targetFile])
++                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--rate=1.5', targetFile])
+             else:
+                 subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
+         else:
 diff --git a/setup.sh b/setup.sh
 index cc9fd3f1..608329fd 100755
 --- ./setup.sh
@@ -1856,12 +1878,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..087ab0cd 160000
+index 8468d6a8..77981855 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 087ab0cd74be2610569a1ea0a7af8b170b5d4a4f-dirty
++Subproject commit 77981855c008657cfa008a016f08c017b9e05d0e-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
