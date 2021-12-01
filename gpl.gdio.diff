@@ -1624,11 +1624,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..57d78e49
+index 00000000..29824a76
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 57d78e4961b58aa5d3aa4a3b23b80ee955c0a28c-dirty
++Subproject commit 29824a76adc77d0b25d68197a50d8adc3a7aea62-dirty
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1805,7 +1805,7 @@ index cc6342c3..c17ab9a0 160000
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit c17ab9a057387e42d39d766bb48d9efc9ca25bdf
++Subproject commit c17ab9a057387e42d39d766bb48d9efc9ca25bdf-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -1842,12 +1842,12 @@ index dbe8b1e2..bb9753ce 160000
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
 +Subproject commit bb9753ceba554d673b04f8b878b2d1f4febf6807
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
-index cfac13ef..c5d93a95 160000
+index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
 +++ ./vimrc/.vim/bundle/vim-buffergator
 @@ -1 +1 @@
 -Subproject commit cfac13efd7832866c134e6fa1b213940e8c0c4d7
-+Subproject commit c5d93a95bcbe3fff9a4097adb6b6a7a326ecb4e4
++Subproject commit c663ae0cf3e9337d4639ad3bb3235fdfccb4e488
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
@@ -1856,12 +1856,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..e7985898 160000
+index 8468d6a8..087ab0cd 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit e79858984337f1373500cc8f2ae1a80708735d60
++Subproject commit 087ab0cd74be2610569a1ea0a7af8b170b5d4a4f-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -1884,12 +1884,12 @@ index 00000000..d6adab9d
 @@ -0,0 +1 @@
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..a4595b48 160000
+index 3b379635..582c4f6c 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit a4595b48a83824e36c1ebe48b574aa8624632695
++Subproject commit 582c4f6cf310b2b3044c366c726a90c0010fc45d
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
