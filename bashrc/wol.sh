@@ -39,4 +39,9 @@ then
     wakeonlan 1c:87:2c:b7:a1:ce #movie wifi
     wakeonlan -i 192.168.1.2 00:0a:cd:1e:e9:be #movie
     ping movie
+elif [ "$target" = "mini2" ]
+then
+    wakeonlan f4:4e:e3:fd:1c:e5 #mini2 wifi
+    wakeonlan 00:E0:4C:00:07:A8 #mini2 wired
+    ping mini2
 fi
