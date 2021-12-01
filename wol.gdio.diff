@@ -3525,11 +3525,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..5617cb60
+index 00000000..bee8d8b7
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 5617cb606f51580b4bee3430e372579e6fdd8851
++Subproject commit bee8d8b7fc173e571c4b1eb731e811a098713318
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -3755,12 +3755,12 @@ index dbe8b1e2..bb9753ce 160000
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
 +Subproject commit bb9753ceba554d673b04f8b878b2d1f4febf6807
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
-index cfac13ef..63196768 160000
+index cfac13ef..d654cd84 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
 +++ ./vimrc/.vim/bundle/vim-buffergator
 @@ -1 +1 @@
 -Subproject commit cfac13efd7832866c134e6fa1b213940e8c0c4d7
-+Subproject commit 631967689bae60870180b41fd590ff93d673b82d
++Subproject commit d654cd84c94224c79f396a22f754f5d0e7449dac-dirty
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
