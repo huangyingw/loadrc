@@ -191,6 +191,14 @@ index 00000000..9e7032fd
 +++ ./.mini.rc
 @@ -0,0 +1 @@
 +~/loadrc/setup_pbpaste-remote.sh
+diff --git a/.mini2.rc b/.mini2.rc
+new file mode 100755
+index 00000000..d20e36a3
+--- /dev/null
++++ ./.mini2.rc
+@@ -0,0 +1,2 @@
++~/loadrc/setup_pbpaste-remote.sh
++~/loadrc/wifirc/enable.sh
 diff --git a/.pathrc b/.pathrc
 new file mode 100644
 index 00000000..a4b516a8
@@ -1620,7 +1628,7 @@ index 00000000..57d78e49
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 57d78e4961b58aa5d3aa4a3b23b80ee955c0a28c
++Subproject commit 57d78e4961b58aa5d3aa4a3b23b80ee955c0a28c-dirty
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
