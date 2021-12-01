@@ -27,5 +27,4 @@ else
     #brew install --with-toolchain --with-clang llvm
 fi
 
-./neovim/install_prerequisite.sh
 ./neovim/install.sh
