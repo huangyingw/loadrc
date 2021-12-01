@@ -191,6 +191,14 @@ index 00000000..9e7032fd
 +++ ./.mini.rc
 @@ -0,0 +1 @@
 +~/loadrc/setup_pbpaste-remote.sh
+diff --git a/.mini2.rc b/.mini2.rc
+new file mode 100755
+index 00000000..d20e36a3
+--- /dev/null
++++ ./.mini2.rc
+@@ -0,0 +1,2 @@
++~/loadrc/setup_pbpaste-remote.sh
++~/loadrc/wifirc/enable.sh
 diff --git a/.pathrc b/.pathrc
 new file mode 100644
 index 00000000..a4b516a8
@@ -959,18 +967,19 @@ index 1739b0a9..e1f3df17 100755
  touch "$output"
  rsync -aHSv --progress --delete-before --force --exclude-from ~/loadrc/bashrc/ures_ex "$1" "$2" 2>&1 | tee "$output"
 diff --git a/bashrc/wol.sh b/bashrc/wol.sh
-index 1e941ff7..0de864e8 100755
+index 1e941ff7..5e9420df 100755
 --- ./bashrc/wol.sh
 +++ ./bashrc/wol.sh
-@@ -40,3 +40,8 @@ then
+@@ -39,4 +39,9 @@ then
+     wakeonlan 1c:87:2c:b7:a1:ce #movie wifi
      wakeonlan -i 192.168.1.2 00:0a:cd:1e:e9:be #movie
      ping movie
- fi
 +elif [ "$target" = "mini2" ]
 +then
 +    wakeonlan f4:4e:e3:fd:1c:e5 #mini2 wifi
-+    ping movie
-+fi
++    wakeonlan 00:E0:4C:00:07:A8 #mini2 wired
++    ping mini2
+ fi
 diff --git a/cscope b/cscope
 index 18a46b20..40e22631 160000
 --- ./cscope
@@ -1444,17 +1453,60 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..8879ff4f 100644
+index 425c9192..187c445c 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
-@@ -18,6 +18,10 @@
- 192.168.31.99 mldonkey
- 192.168.123.203 u2004
- 10.211.55.5 macos
-+192.168.123.177 ubuntu20.04
-+# 172.27.174.184 mbp
+@@ -1,23 +1,38 @@
+ 127.0.0.1       localhost
+ 127.0.1.1       mini
+-#192.168.2.2 server
+-#192.168.2.144 mldonkey
+-#192.168.2.1 ddwrt
+-#172.27.83.234 sb
+-192.168.112.14 sb
+-192.168.122.102 u1804
+-192.168.122.65 master-node
+-192.168.122.136 slave-node
+-192.168.122.244 zsh
+-192.168.31.29 work
+-172.27.217.162 localhost.imvu.com
++34.210.205.94 awsp2
++52.26.142.204 awst2
++192.168.1.2 movie
++34.215.56.158 tinc-master
++192.168.31.191 work
++#172.27.185.36 work
++172.27.131.85 sandbox
++#172.27.23.235 mldonkey
++#10.1.10.146 server
++#172.27.59.214 server
+ 192.168.31.31 server
+-192.168.31.147 imacpro
++192.168.31.150 ubuntu
++172.27.93.135 u1604
++10.211.55.22 vmac
++10.211.55.5 macos
+ 172.27.68.119 imac
++172.27.217.162 sb
++172.27.217.162 localhost.imvu.com
++192.168.31.213 gluster00
++192.168.31.10 gluster01
++192.168.31.194 gluster02
++172.27.82.7 kubernetes-master
++172.27.182.148 minds
++192.168.31.127 u1804
 +192.168.31.96 mbp
-+192.168.123.80 u2110
++# 192.168.31.168 mbp
++192.168.31.111 u2004
++192.168.31.67 kvm
+ 172.27.118.58 vagrant
+-192.168.31.99 mldonkey
+-192.168.123.203 u2004
+-10.211.55.5 macos
++172.27.23.235 haikou
++# 192.168.31.192 macmini
++192.168.31.243 macmini
++192.168.31.32 mini2
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
@@ -1470,6 +1522,51 @@ index 50886663..1079d97e 100644
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
+diff --git a/hosts/mbp/etc/NetworkManager/system-connections/Wired.nmconnection b/hosts/mbp/etc/NetworkManager/system-connections/Wired.nmconnection
+new file mode 100644
+index 00000000..10ce7b9c
+--- /dev/null
++++ ./hosts/mbp/etc/NetworkManager/system-connections/Wired.nmconnection
+@@ -0,0 +1,23 @@
++[connection]
++id=Wired connection 1
++uuid=f51b7e63-5e4c-39cf-86a5-d1d47899903d
++type=ethernet
++autoconnect-priority=-999
++interface-name=eth0
++permissions=
++timestamp=1635740716
++
++[ethernet]
++mac-address-blacklist=
++
++[ipv4]
++address1=192.168.31.96/24
++dns-search=
++method=manual
++
++[ipv6]
++addr-gen-mode=stable-privacy
++dns-search=
++method=auto
++
++[proxy]
+diff --git a/hosts/mini2/var/lib/zerotier-one/identity.public b/hosts/mini2/var/lib/zerotier-one/identity.public
+new file mode 100644
+index 00000000..d1a7ea73
+--- /dev/null
++++ ./hosts/mini2/var/lib/zerotier-one/identity.public
+@@ -0,0 +1 @@
++b4f0695fc0:0:bd2168bc6aa9a06973fe7cbb5aa8ff3ef85c16771e62dd77290b5100c1ca394e3301bb74ced726ccfce563236b18570c9c515181090f20b034744637f224af51
+\ No newline at end of file
+diff --git a/hosts/mini2/var/lib/zerotier-one/identity.secret b/hosts/mini2/var/lib/zerotier-one/identity.secret
+new file mode 100644
+index 00000000..ef7b0277
+--- /dev/null
++++ ./hosts/mini2/var/lib/zerotier-one/identity.secret
+@@ -0,0 +1 @@
++b4f0695fc0:0:bd2168bc6aa9a06973fe7cbb5aa8ff3ef85c16771e62dd77290b5100c1ca394e3301bb74ced726ccfce563236b18570c9c515181090f20b034744637f224af51:5bf5e6d525fc1f9fc72e2eefa958520edab7666dfd79ae306a16b440835d96d39a5ecd351a385aa50b241a59c9539098fda047f7930a7c33e21248678bad2753
+\ No newline at end of file
 diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
 index ea2bc967..b7adab11 100755
 --- ./imvurc/ghypo.sh
@@ -1615,14 +1712,15 @@ index c3036dee..09b82d56 100755
 +    mv -v "$OTHER_NODE" "$OTHER_NODE".bak
 +fi
 diff --git a/install_nvim_pre.sh b/install_nvim_pre.sh
-index 2bc75c67..ab07848c 100755
+index 2bc75c67..deb1938c 100755
 --- ./install_nvim_pre.sh
 +++ ./install_nvim_pre.sh
-@@ -26,3 +26,5 @@ else
+@@ -26,3 +26,6 @@ else
      sudo pip3 install pynvim jedi 
      #brew install --with-toolchain --with-clang llvm
  fi
 +
++./neovim/install_prerequisite.sh
 +./neovim/install.sh
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
 index 298b6bc4..a78577d2 100755
@@ -1688,6 +1786,18 @@ index 298b6bc4..a78577d2 100755
      unrar \
      w3m \
      w3m-img \
+diff --git a/kvmrc/install.sh b/kvmrc/install.sh
+index 14f88047..bc84a185 100755
+--- ./kvmrc/install.sh
++++ ./kvmrc/install.sh
+@@ -16,3 +16,7 @@ apt-get update ; \
+     qemu \
+     qemu-kvm \
+     virt-manager
++
++USER=huangyingw
++usermod -aG libvirt "$USER"
++usermod -aG kvm "$USER"
 diff --git a/leetcoderc/restore.sh b/leetcoderc/restore.sh
 index 328d9be3..b4aaeb9c 100755
 --- ./leetcoderc/restore.sh
@@ -4899,3 +5009,12 @@ index e14de500..da1c895d 100755
          else
              SCRIPT=$(realpath "$file")
              SCRIPTPATH=$(dirname "$SCRIPT")
+diff --git a/wifirc/connect.sh b/wifirc/connect.sh
+new file mode 100755
+index 00000000..69fa8037
+--- /dev/null
++++ ./wifirc/connect.sh
+@@ -0,0 +1,3 @@
++#!/bin/zsh
++
++nmcli -a d wifi connect MiMesh2
