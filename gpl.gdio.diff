@@ -1545,14 +1545,15 @@ index c3036dee..09b82d56 100755
 +    mv -v "$OTHER_NODE" "$OTHER_NODE".bak
 +fi
 diff --git a/install_nvim_pre.sh b/install_nvim_pre.sh
-index 2bc75c67..ab07848c 100755
+index 2bc75c67..deb1938c 100755
 --- ./install_nvim_pre.sh
 +++ ./install_nvim_pre.sh
-@@ -26,3 +26,5 @@ else
+@@ -26,3 +26,6 @@ else
      sudo pip3 install pynvim jedi 
      #brew install --with-toolchain --with-clang llvm
  fi
 +
++./neovim/install_prerequisite.sh
 +./neovim/install.sh
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
 index 298b6bc4..a78577d2 100755
@@ -1657,7 +1658,7 @@ index 00000000..14761a9c
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 14761a9c182bdbd20ed9f55d0f2bb7e640f5e3cb-dirty
++Subproject commit 14761a9c182bdbd20ed9f55d0f2bb7e640f5e3cb
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
