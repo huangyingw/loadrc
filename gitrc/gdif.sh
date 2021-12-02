@@ -30,4 +30,4 @@ do
     COMMAND="$COMMAND  -- '$ss'"
 done < "$file"
 
-eval "$COMMAND"
+eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
