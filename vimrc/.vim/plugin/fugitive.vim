@@ -11,6 +11,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dodev 
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dps :execute s:Dps()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fcscope :execute s:Fcscope()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fdisklog :execute s:Fdisklog()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FileMove :execute s:FileMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDeleted :execute s:FindDeleted()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
@@ -210,7 +211,8 @@ endfunction
 
 function! s:Gpl() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gpl.sh 2>&1 | tee gpl.findresult')
+    exec '!~/loadrc/gitrc/gpl.sh 2>&1 | tee gpl.findresult'
+    call OpenOrSwitch('gpl.findresult', 'vs')
 endfunction
 
 function! s:Fsync() abort
@@ -330,7 +332,7 @@ function! s:G(args, ...) abort
     endif
 
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.findresult')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.runresult')
 
     if &diff
         call s:Gs()
@@ -593,6 +595,30 @@ function! s:CatMove(...) abort
 
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
 endfunction
+
+function! s:FileMove(...) abort
+    if a:0 >= 1
+        let curword = GetWord()
+        let b:netrw_curdir = getcwd()
+        let map_escape = "<|\n\r\\\<C-V>\""
+        let mapsafecurdir = escape(b:netrw_curdir, map_escape)
+        let oldname = ComposePath(mapsafecurdir, curword)
+
+        if filereadable(oldname)
+            exec '!~/loadrc/bashrc/file_move.sh ' . '"' .  oldname . '"' . ' ' . '"' . a:1 . '"'
+            let newname = a:1 . '/' . substitute(system("basename " . '"' . oldname . '"'), '\n', '', '')
+            let newname = substitute(system("realpath " . '"' . newname . '"'), '\n', '', '')
+            let newname = substitute(newname, getcwd(), '.', 'e')
+            call setline('.', '"' . newname . '"')
+            w!
+            call UpdateProj()
+        endif
+
+    endif
+
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+endfunction
+
 
 function! s:AppendRate(...) abort
     if a:0 >= 1
