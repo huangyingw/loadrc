@@ -1685,7 +1685,7 @@ index 00000000..51f5d05a
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 51f5d05ae917f14db3abc5c3cec52d5e1683b846
++Subproject commit 51f5d05ae917f14db3abc5c3cec52d5e1683b846-dirty
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1995,10 +1995,13 @@ deleted file mode 100644
 index e69de29b..00000000
 diff --git a/vimrc/.vim/plugin/commands.vim b/vimrc/.vim/plugin/commands.vim
 new file mode 100644
-index 00000000..bfce3f2d
+index 00000000..4217e642
 --- /dev/null
 +++ ./vimrc/.vim/plugin/commands.vim
-@@ -0,0 +1 @@
+@@ -0,0 +1,4 @@
++au BufEnter * set noro
++" Don't let Vim's "Found a swap file" message block input
++set shortmess=A
 +command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
 index 63869eb8..5ba1b10b 100644
