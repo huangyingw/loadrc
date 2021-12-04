@@ -974,7 +974,7 @@ index dbf809a0..87a8c1b4 100755
  git checkout files.proj
  git checkout rsync.files
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
-index 4f8edfc6..4f5de493 100755
+index 4f8edfc6..fd91f70c 100755
 --- ./gitrc/dogdio.sh
 +++ ./gitrc/dogdio.sh
 @@ -1,5 +1,6 @@
@@ -985,7 +985,7 @@ index 4f8edfc6..4f5de493 100755
  then
      exit 0
  fi
-@@ -7,9 +8,8 @@ fi
+@@ -7,9 +8,6 @@ fi
  local_branch="$(~/loadrc/gitrc/get_current_branch.sh)" 
  output="$local_branch.gdio.diff"
  output=$(echo "$output" | sed 's/\//_/g')
@@ -994,9 +994,9 @@ index 4f8edfc6..4f5de493 100755
 +target="$(git config gsync.target)"
  
 -~/loadrc/gitrc/gdi.sh "$remote/$remote_branch" 2>&1 | tee "$output"  
-+~/loadrc/gitrc/gdi.sh "$target" 2>&1 | tee "$output"
- sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
- exit 0
+-sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
+-exit 0
++~/loadrc/gitrc/gdi.sh "$target" 2>&1 | tee "$output" 
 diff --git a/gitrc/g.sh b/gitrc/g.sh
 index 8de34e76..2477da66 100755
 --- ./gitrc/g.sh
@@ -1112,6 +1112,16 @@ index 00000000..81a61668
 +
 +~/loadrc/gitrc/gpl.sh
 +~/loadrc/gitrc/gdio.sh
+diff --git a/gitrc/gdi.sh b/gitrc/gdi.sh
+index b720ac69..8fcc4eed 100755
+--- ./gitrc/gdi.sh
++++ ./gitrc/gdi.sh
+@@ -13,4 +13,4 @@ else
+         COMMAND="$COMMAND  ':(exclude)$ss'"
+     done
+ fi
+-eval "$COMMAND"
++eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
 index dbcf937b..72b45d13 100755
 --- ./gitrc/gdi2.sh
@@ -1164,6 +1174,16 @@ index dbcf937b..72b45d13 100755
          . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
          ~/loadrc/gitrc/gfix.sh
 +fi
+diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
+index b0247ec4..07590e7c 100755
+--- ./gitrc/gdif.sh
++++ ./gitrc/gdif.sh
+@@ -30,4 +30,4 @@ do
+     COMMAND="$COMMAND  -- '$ss'"
+ done < "$file"
+ 
+-eval "$COMMAND"
++eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
 index 700d6af6..c3c54016 100755
 --- ./gitrc/gdit.sh
@@ -1525,14 +1545,15 @@ index c3036dee..09b82d56 100755
 +    mv -v "$OTHER_NODE" "$OTHER_NODE".bak
 +fi
 diff --git a/install_nvim_pre.sh b/install_nvim_pre.sh
-index 2bc75c67..ab07848c 100755
+index 2bc75c67..deb1938c 100755
 --- ./install_nvim_pre.sh
 +++ ./install_nvim_pre.sh
-@@ -26,3 +26,5 @@ else
+@@ -26,3 +26,6 @@ else
      sudo pip3 install pynvim jedi 
      #brew install --with-toolchain --with-clang llvm
  fi
 +
++./neovim/install_prerequisite.sh
 +./neovim/install.sh
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
 index 298b6bc4..a78577d2 100755
@@ -1633,11 +1654,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..9c0586fb
+index 00000000..14761a9c
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 9c0586fbf7c2398eb7b5f9e172caa6b5d94bfcc0
++Subproject commit 14761a9c182bdbd20ed9f55d0f2bb7e640f5e3cb
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1878,12 +1899,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..77981855 160000
+index 8468d6a8..16625497 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 77981855c008657cfa008a016f08c017b9e05d0e-dirty
++Subproject commit 1662549704d8329670ee89348bedbc70bec68c97-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -2084,7 +2105,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..1f29e547 100644
+index d5874fe5..d51a3f5e 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,7 +1,10 @@
@@ -2172,7 +2193,17 @@ index d5874fe5..1f29e547 100644
      endif
  endfunction
  
-@@ -228,12 +231,14 @@ endfunction
+@@ -207,7 +210,8 @@ endfunction
+ 
+ function! s:Gpl() abort
+     let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gpl.sh 2>&1 | tee gpl.findresult')
++    exec '!~/loadrc/gitrc/gpl.sh 2>&1 | tee gpl.findresult'
++    call OpenOrSwitch('gpl.findresult', 'vs')
+ endfunction
+ 
+ function! s:Fsync() abort
+@@ -228,12 +232,14 @@ endfunction
  
  function! s:Gbib() abort
      let worktree = Cd2Worktree()
@@ -2189,7 +2220,7 @@ index d5874fe5..1f29e547 100644
  endfunction
  
  function! s:Gbil() abort
-@@ -366,9 +371,8 @@ function! s:Gdi(...) abort
+@@ -366,9 +372,8 @@ function! s:Gdi(...) abort
          if arg1 == ''
              call fugitive#Diffsplit(0, 1, "vert", '', [])
          elseif tolower(arg1) == 'o'
@@ -2201,7 +2232,7 @@ index d5874fe5..1f29e547 100644
          else
              call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
          endif
-@@ -424,7 +428,7 @@ function! s:Gdi2(...) abort
+@@ -424,7 +429,7 @@ function! s:Gdi2(...) abort
      let worktree = Cd2Worktree()
      let output = 'gdi2.findresult'
      let arg1 = (a:0 >= 1) ? a:1 : ''
@@ -2210,7 +2241,7 @@ index d5874fe5..1f29e547 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -475,18 +479,17 @@ endfunction
+@@ -475,18 +480,17 @@ endfunction
  
  function! s:Gdif(...) abort
      let worktree = Cd2Worktree()
@@ -2235,7 +2266,7 @@ index d5874fe5..1f29e547 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -516,10 +519,15 @@ endfunction
+@@ -516,10 +520,15 @@ endfunction
  
  function! s:ApplyBranch(args, ...) abort
      let worktree = Cd2Worktree()
@@ -2252,7 +2283,7 @@ index d5874fe5..1f29e547 100644
  function! s:Gshow(args, ...) abort
      let worktree = Cd2Worktree()
      let output = a:args . '.diff'
-@@ -527,7 +535,19 @@ function! s:Gshow(args, ...) abort
+@@ -527,7 +536,19 @@ function! s:Gshow(args, ...) abort
      call OpenOrSwitch(output, 'vs')
  endfunction
  
@@ -2272,7 +2303,7 @@ index d5874fe5..1f29e547 100644
      let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
      exec '!rm ' . newFile
      exec 'w ' . newFile
-@@ -546,6 +566,21 @@ function! s:CatPlay(...) abort
+@@ -546,6 +567,21 @@ function! s:CatPlay(...) abort
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
@@ -2294,7 +2325,7 @@ index d5874fe5..1f29e547 100644
  function! s:CatMove(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -559,6 +594,41 @@ function! s:CatMove(...) abort
+@@ -559,6 +595,41 @@ function! s:CatMove(...) abort
      call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
  endfunction
  
@@ -2336,7 +2367,7 @@ index d5874fe5..1f29e547 100644
  function! s:CatDu(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -585,11 +655,6 @@ function! s:Tail() abort
+@@ -585,11 +656,6 @@ function! s:Tail() abort
      exec '!tail -f ' . expand("%:p")
  endfunction
  
@@ -2348,7 +2379,7 @@ index d5874fe5..1f29e547 100644
  function! s:Dps() abort
      let worktree = Cd2Worktree()
      silent exec '!~/loadrc/dockerrc/dps.sh'
-@@ -640,7 +705,10 @@ function! s:Prune() abort
+@@ -640,7 +706,10 @@ function! s:Prune() abort
      call asyncrun#run('<bang>', '', '~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
  endfunction
  
@@ -2360,7 +2391,7 @@ index d5874fe5..1f29e547 100644
      call Cd2ProjectRoot("files.proj")
  
      if expand('%:t') != 'index'
-@@ -649,14 +717,14 @@ function! s:Fr(find, replace) abort
+@@ -649,14 +718,14 @@ function! s:Fr(find, replace) abort
          let fileList = "files.proj"
      endif
  
@@ -2378,7 +2409,7 @@ index d5874fe5..1f29e547 100644
  endfunction
  
  function! s:Gwap() abort
-@@ -671,7 +739,7 @@ function! s:Gfix() abort
+@@ -671,7 +740,7 @@ function! s:Gfix() abort
  endfunction
  
  function! s:Reapply() abort
@@ -2387,7 +2418,7 @@ index d5874fe5..1f29e547 100644
          echom 'Please only run on *gdio.diff!!!'
          return 0
      endif
-@@ -701,3 +769,5 @@ function! s:GenerateIpynb() abort
+@@ -701,3 +770,5 @@ function! s:GenerateIpynb() abort
      exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
      w
  endfunction

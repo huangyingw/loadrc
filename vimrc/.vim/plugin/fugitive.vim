@@ -211,7 +211,8 @@ endfunction
 
 function! s:Gpl() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gpl.sh 2>&1 | tee gpl.findresult')
+    exec '!~/loadrc/gitrc/gpl.sh 2>&1 | tee gpl.findresult'
+    call OpenOrSwitch('gpl.findresult', 'vs')
 endfunction
 
 function! s:Fsync() abort
@@ -331,7 +332,7 @@ function! s:G(args, ...) abort
     endif
 
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.findresult')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.runresult')
 
     if &diff
         call s:Gs()
