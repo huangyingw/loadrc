@@ -16,7 +16,7 @@ TARGET_ID=$(nmcli connection show | grep wifi | sed 's/.*[^0-9a-z]\(\([0-9a-z]*-
 if [ "$CONNECTION_UUID" = "$TARGET_ID" ]
 then
     if [ "$2" = "down" ]; then
-        sleep 10
+        sleep 5
         nmcli con up uuid $CONNECTION_UUID
     fi
 fi
