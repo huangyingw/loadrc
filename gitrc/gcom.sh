@@ -37,4 +37,3 @@ then
 fi
 
 ~/loadrc/gitrc/gpl.sh
-~/loadrc/gitrc/gdio.sh

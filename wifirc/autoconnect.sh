@@ -11,7 +11,7 @@ DEV=$(
     done
 ) 
 
-TARGET_ID=$(nmcli connection show | grep $DEV | sed 's/.*[^0-9a-z]\(\([0-9a-z]*-\)\{4\}[0-9a-z]*\).*/\1/g')
+TARGET_ID=$(nmcli connection show | grep wifi | sed 's/.*[^0-9a-z]\(\([0-9a-z]*-\)\{4\}[0-9a-z]*\).*/\1/g')
 
 if [ "$CONNECTION_UUID" = "$TARGET_ID" ]
 then
