@@ -107,6 +107,16 @@ index a51724b9..82a595f3 100644
 @@ -1,2 +1 @@
  export GOPATH=$HOME/go
 -export PATH=$PATH:/usr/local/go/bin
+diff --git a/.imac.rc b/.imac.rc
+index a0d25e95..d053c758 100755
+--- ./.imac.rc
++++ ./.imac.rc
+@@ -8,3 +8,5 @@ then
+         sudo systemsetup -setcomputersleep Never; \
+         fi
+ fi
++
++~/loadrc/wifi-auto-reconnect/install.sh
 diff --git a/.imacpro.rc b/.imacpro.rc
 index a0d25e95..922db5fe 100755
 --- ./.imacpro.rc
@@ -3228,11 +3238,11 @@ index e14de500..da1c895d 100755
              SCRIPTPATH=$(dirname "$SCRIPT")
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
-index 00000000..658eea2a
+index 00000000..36940376
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
-+Subproject commit 658eea2a2b4fe434021025804eac4d83bfd3efa6
++Subproject commit 36940376d1ec457ddc9779a3835ab33c086d1dc6
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 index 430298e0..a62023e1 100755
 --- ./wifirc/autoconnect.sh
