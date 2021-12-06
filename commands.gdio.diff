@@ -50,7 +50,7 @@ index 5ed35a81..0ea38ff6 100644
      allow = true
  [branch "dev"]
 diff --git a/.gitmodules b/.gitmodules
-index e17f9887..029984a6 100644
+index e17f9887..146f4725 100644
 --- ./.gitmodules
 +++ ./.gitmodules
 @@ -133,10 +133,6 @@
@@ -64,7 +64,7 @@ index e17f9887..029984a6 100644
  [submodule "vimrc/.vim/bundle/vimtex"]
      path = vimrc/.vim/bundle/vimtex
      url = https://github.com/lervag/vimtex
-@@ -231,3 +227,12 @@
+@@ -231,3 +227,15 @@
  [submodule "vimrc/.vim/bundle/bclose.vim"]
      path = vimrc/.vim/bundle/bclose.vim
      url = git@github.com:rbgrouleff/bclose.vim.git
@@ -77,6 +77,9 @@ index e17f9887..029984a6 100644
 +[submodule "vimrc/.vim/bundle/vim-fetch"]
 +	path = vimrc/.vim/bundle/vim-fetch
 +	url = git@github.com:wsdjeg/vim-fetch.git
++[submodule "wifi-auto-reconnect"]
++	path = wifi-auto-reconnect
++	url = git@github.com:huangyingw/martinsoft_wifi-auto-reconnect.git
 diff --git a/.gitrc b/.gitrc
 index 8e753cb1..d416ab62 100755
 --- ./.gitrc
@@ -104,6 +107,16 @@ index a51724b9..82a595f3 100644
 @@ -1,2 +1 @@
  export GOPATH=$HOME/go
 -export PATH=$PATH:/usr/local/go/bin
+diff --git a/.imac.rc b/.imac.rc
+index a0d25e95..d053c758 100755
+--- ./.imac.rc
++++ ./.imac.rc
+@@ -8,3 +8,5 @@ then
+         sudo systemsetup -setcomputersleep Never; \
+         fi
+ fi
++
++~/loadrc/wifi-auto-reconnect/install.sh
 diff --git a/.imacpro.rc b/.imacpro.rc
 index a0d25e95..922db5fe 100755
 --- ./.imacpro.rc
@@ -168,22 +181,26 @@ index de211c97..1298e4e5 100644
 -    export PATH="/Applications/NoMachine.app/Contents/MacOS:$PATH"
  fi
 diff --git a/.mbp.rc b/.mbp.rc
-index 514389f0..9e7032fd 100755
+index 514389f0..9ce19350 100755
 --- ./.mbp.rc
 +++ ./.mbp.rc
-@@ -1,11 +1 @@
--#!/bin/zsh
+@@ -1,11 +1,9 @@
+ #!/bin/zsh
 -#alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
 -alias restartBluetooth='$HOME/loadrc/osxrc/restart_bluetooth.sh'
--
+ 
 -if [ $(uname) = "Darwin" ]
--then
++if ! (sudo systemsetup -getcomputersleep | grep -q Never)
+ then
 -    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
 -        then \
 -        sudo systemsetup -setcomputersleep Never; \
 -        fi
--fi
++    sudo systemsetup -setcomputersleep Never
+ fi
++
 +~/loadrc/setup_pbpaste-remote.sh
++~/loadrc/uninstall_bidirectional_clipboard.sh
 diff --git a/.mini.rc b/.mini.rc
 new file mode 100755
 index 00000000..9e7032fd
@@ -1095,10 +1112,10 @@ index e118a4de..e1f58816 100755
      $HOME/loadrc/gitrc/gdev.sh && \
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 new file mode 100755
-index 00000000..81a61668
+index 00000000..d640ba0d
 --- /dev/null
 +++ ./gitrc/gcom.sh
-@@ -0,0 +1,40 @@
+@@ -0,0 +1,39 @@
 +#!/bin/zsh
 +
 +if [ -z "$1" ]
@@ -1138,7 +1155,6 @@ index 00000000..81a61668
 +fi
 +
 +~/loadrc/gitrc/gpl.sh
-+~/loadrc/gitrc/gdio.sh
 diff --git a/gitrc/gdi.sh b/gitrc/gdi.sh
 index b720ac69..8fcc4eed 100755
 --- ./gitrc/gdi.sh
@@ -1413,7 +1429,7 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..b2f5fdc0 100644
+index 425c9192..f4db2057 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
 @@ -9,7 +9,7 @@
@@ -1425,7 +1441,7 @@ index 425c9192..b2f5fdc0 100644
  172.27.217.162 localhost.imvu.com
  192.168.31.31 server
  192.168.31.147 imacpro
-@@ -18,6 +18,10 @@
+@@ -18,6 +18,11 @@
  192.168.31.99 mldonkey
  192.168.123.203 u2004
  10.211.55.5 macos
@@ -1433,6 +1449,7 @@ index 425c9192..b2f5fdc0 100644
 +# 172.27.174.184 mbp
 +192.168.31.96 mbp
 +192.168.123.80 u2110
++192.168.31.99 haikou
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
@@ -1448,6 +1465,22 @@ index 50886663..1079d97e 100644
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
+diff --git a/hosts/mba/Library/Application Support/ZeroTier/One/identity.public b/hosts/mba/Library/Application Support/ZeroTier/One/identity.public
+new file mode 100644
+index 00000000..94896a7f
+--- /dev/null
++++ ./hosts/mba/Library/Application Support/ZeroTier/One/identity.public	
+@@ -0,0 +1 @@
++7400d3ebd5:0:3aa5d438010e88845739f49f4ca3a14772bdd7aa6f57467dfd1909e25fb8be0f835e54a8d7a571d0bddf8d7113936e69ac70f0b08136e810f63515a54db2b69d
+\ No newline at end of file
+diff --git a/hosts/mba/Library/Application Support/ZeroTier/One/identity.secret b/hosts/mba/Library/Application Support/ZeroTier/One/identity.secret
+new file mode 100644
+index 00000000..ce55630d
+--- /dev/null
++++ ./hosts/mba/Library/Application Support/ZeroTier/One/identity.secret	
+@@ -0,0 +1 @@
++7400d3ebd5:0:3aa5d438010e88845739f49f4ca3a14772bdd7aa6f57467dfd1909e25fb8be0f835e54a8d7a571d0bddf8d7113936e69ac70f0b08136e810f63515a54db2b69d:7937cc458423352fe676c08d916a0e2aa8f4a253f1396e77ad0bc86800e2a1c883b29c48e92569307a620c5704659320e9063801c10e44ee27ca4b94d42960bc
+\ No newline at end of file
 diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
 index ea2bc967..b7adab11 100755
 --- ./imvurc/ghypo.sh
@@ -1681,11 +1714,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..2db063c9
+index 00000000..065cc339
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 2db063c94eb7e437c75e47dd147e8d48c1c91d05
++Subproject commit 065cc339cfaea46f6228ea6d9102ed0379457c97-dirty
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1708,7 +1741,7 @@ index 8e34f2fa..9deeb31c 100644
  .err
 -"./gbra.log"
 diff --git a/pythonrc/vlc.py b/pythonrc/vlc.py
-index 13a0cf4c..d245f963 100755
+index 13a0cf4c..d8d70042 100755
 --- ./pythonrc/vlc.py
 +++ ./pythonrc/vlc.py
 @@ -13,7 +13,7 @@ def callvlc(targetFile, start=0):
@@ -1716,7 +1749,7 @@ index 13a0cf4c..d245f963 100755
          if platform.system() == 'Darwin':
              if start == 0:
 -                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', targetFile])
-+                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--rate=1.5', targetFile])
++                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--rate=2.0', targetFile])
              else:
                  subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
          else:
@@ -1817,14 +1850,19 @@ index 0aae8085..2d88e3a8 100755
 +mysql -v "$option" -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
 diff --git a/uninstall_bidirectional_clipboard.sh b/uninstall_bidirectional_clipboard.sh
 new file mode 100755
-index 00000000..3be79dc7
+index 00000000..92c29592
 --- /dev/null
 +++ ./uninstall_bidirectional_clipboard.sh
-@@ -0,0 +1,13 @@
+@@ -0,0 +1,18 @@
 +#!/bin/zsh
 +SCRIPT=$(realpath "$0") && \
 +    SCRIPTPATH=$(dirname "$SCRIPT") && \
 +    cd "$SCRIPTPATH" || cd ~/loadrc/
++
++if [ ! -f ~/Library/LaunchAgents/pbcopy.plist  ]
++then
++    exit 0
++fi
 +
 +launchctl stop ~/Library/LaunchAgents/pbcopy.plist
 +launchctl stop ~/Library/LaunchAgents/pbpaste.plist
@@ -1870,12 +1908,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..c17ab9a0 160000
+index cc6342c3..15cbdf16 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit c17ab9a057387e42d39d766bb48d9efc9ca25bdf-dirty
++Subproject commit 15cbdf166ab253b60c32062cb5f3607d51708fec-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -1926,12 +1964,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..c176d119 160000
+index 8468d6a8..31da2740 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit c176d11923d65bf6590f929369902961580a50dd-dirty
++Subproject commit 31da2740be610231d83256e38c9601a8b937c7be
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -1995,13 +2033,13 @@ deleted file mode 100644
 index e69de29b..00000000
 diff --git a/vimrc/.vim/plugin/commands.vim b/vimrc/.vim/plugin/commands.vim
 new file mode 100644
-index 00000000..4217e642
+index 00000000..42bb8370
 --- /dev/null
 +++ ./vimrc/.vim/plugin/commands.vim
 @@ -0,0 +1,4 @@
 +au BufEnter * set noro
 +" Don't let Vim's "Found a swap file" message block input
-+set shortmess=A
++set shortmess=filnxtToOFA
 +command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
 index 63869eb8..5ba1b10b 100644
@@ -3198,3 +3236,23 @@ index e14de500..da1c895d 100755
          else
              SCRIPT=$(realpath "$file")
              SCRIPTPATH=$(dirname "$SCRIPT")
+diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
+new file mode 160000
+index 00000000..36940376
+--- /dev/null
++++ ./wifi-auto-reconnect
+@@ -0,0 +1 @@
++Subproject commit 36940376d1ec457ddc9779a3835ab33c086d1dc6
+diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
+index 430298e0..a62023e1 100755
+--- ./wifirc/autoconnect.sh
++++ ./wifirc/autoconnect.sh
+@@ -11,7 +11,7 @@ DEV=$(
+     done
+ ) 
+ 
+-TARGET_ID=$(nmcli connection show | grep $DEV | sed 's/.*[^0-9a-z]\(\([0-9a-z]*-\)\{4\}[0-9a-z]*\).*/\1/g')
++TARGET_ID=$(nmcli connection show | grep wifi | sed 's/.*[^0-9a-z]\(\([0-9a-z]*-\)\{4\}[0-9a-z]*\).*/\1/g')
+ 
+ if [ "$CONNECTION_UUID" = "$TARGET_ID" ]
+ then
