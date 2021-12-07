@@ -140,6 +140,8 @@
 ./.git/modules/vimrc/.vim/bundle/vimtex/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vundle.vim/config
 ./.git/modules/vimrc/.vim/bundle/vundle.vim/info/exclude
+./.git/modules/wifi-auto-reconnect/config
+./.git/modules/wifi-auto-reconnect/info/exclude
 ./.gitattributes
 ./.gitconfig
 ./.gitconfig_sample
@@ -162,6 +164,7 @@
 ./.mbp.rc
 ./.mindsrc
 ./.mini.rc
+./.mini2.rc
 ./.movie.mirror.check
 ./.netrc
 ./.p4rc
@@ -242,6 +245,7 @@
 ./bashrc/fdocs.sh
 ./bashrc/fflink.sh
 ./bashrc/fgh.sh
+./bashrc/file_move.sh
 ./bashrc/file_type
 ./bashrc/find-free-nbd-device.sh
 ./bashrc/find_projects.sh
@@ -537,6 +541,8 @@
 ./hosts/imacpro/Users/huangyingw/.config/karabiner/karabiner.json
 ./hosts/lint-sandbox/var/lib/zerotier-one/identity.public
 ./hosts/lint-sandbox/var/lib/zerotier-one/identity.secret
+./hosts/mba/Library/Application Support/ZeroTier/One/identity.public
+./hosts/mba/Library/Application Support/ZeroTier/One/identity.secret
 ./hosts/mbp/Library/Application Support/ZeroTier/One/identity.public
 ./hosts/mbp/Library/Application Support/ZeroTier/One/identity.secret
 ./hosts/mini/var/lib/zerotier-one/identity.public
@@ -2869,6 +2875,7 @@
 ./vimrc/.vim/bundle/vimtex/rplugin/python3/denite/source/vimtex.py
 ./vimrc/.vim/bundle/vimtex/syntax/tex.vim
 ./vimrc/.vim/bundle/vimtex/test/test-completion-bibtex/.gitignore
+./vimrc/.vim/bundle/vimtex/test/test-quickfix-fix-path/.gitignore
 ./vimrc/.vim/bundle/vundle.vim/.gitignore
 ./vimrc/.vim/bundle/vundle.vim/CONTRIBUTING.md
 ./vimrc/.vim/bundle/vundle.vim/LICENSE-MIT.txt
@@ -2912,6 +2919,7 @@
 ./vimrc/.vim/plugin/buffergator.vim
 ./vimrc/.vim/plugin/bundle.vim
 ./vimrc/.vim/plugin/clipboard.vim
+./vimrc/.vim/plugin/commands.vim
 ./vimrc/.vim/plugin/common.vim
 ./vimrc/.vim/plugin/dictionary.vim
 ./vimrc/.vim/plugin/diff-options.vim
@@ -2954,6 +2962,16 @@
 ./vishrc/vlc.sh
 ./vishrc/vrun.sh
 ./vishrc/vsearch.sh
+./wifi-auto-reconnect/.gitconfig
+./wifi-auto-reconnect/.gitignore
+./wifi-auto-reconnect/LICENSE
+./wifi-auto-reconnect/README.md
+./wifi-auto-reconnect/install.sh
+./wifi-auto-reconnect/net.martinsoft.wifiautoreconnect.plist
+./wifi-auto-reconnect/rsync.files
+./wifi-auto-reconnect/setup.cfg
+./wifi-auto-reconnect/uninstall.sh
+./wifi-auto-reconnect/wifiautoreconnect.sh
 ./wifirc/autoconnect.sh
 ./wifirc/enable.sh
 ./wifirc/show.sh
@@ -2963,4 +2981,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-generate_files_proj.reduce_sed.gdio.diff
+wifi-auto-reconnect.gdio.diff

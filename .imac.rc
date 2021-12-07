@@ -8,3 +8,5 @@ then
         sudo systemsetup -setcomputersleep Never; \
         fi
 fi
+
+~/loadrc/wifi-auto-reconnect/install.sh

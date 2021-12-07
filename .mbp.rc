@@ -6,3 +6,4 @@ then
 fi
 
 ~/loadrc/setup_pbpaste-remote.sh
+~/loadrc/uninstall_bidirectional_clipboard.sh

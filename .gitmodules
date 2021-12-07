@@ -236,3 +236,6 @@
 [submodule "vimrc/.vim/bundle/vim-fetch"]
 	path = vimrc/.vim/bundle/vim-fetch
 	url = git@github.com:wsdjeg/vim-fetch.git
+[submodule "wifi-auto-reconnect"]
+	path = wifi-auto-reconnect
+	url = git@github.com:huangyingw/martinsoft_wifi-auto-reconnect.git
