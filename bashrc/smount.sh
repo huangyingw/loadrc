@@ -10,7 +10,7 @@ mkdir -p ~/"$remoteServer"
 
 if [ $(uname) = "Linux" ]
 then
-    mount "$remoteServer":/media/ ~/"$remoteServer"
+    sshfs "$remoteServer":/media/ ~/"$remoteServer"
     df -TH
 else
     sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/"$remoteServer"
