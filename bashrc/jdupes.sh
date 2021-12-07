@@ -10,7 +10,6 @@ TARGET="$1"
 MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
 
 crontab -r
-echo idle > /sys/block/md0/md/sync_action
 
 if [ -f ${MIRRORCHECK} ] ; \
 then \
