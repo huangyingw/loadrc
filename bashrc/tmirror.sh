@@ -1,13 +1,17 @@
 #!/bin/zsh
-SOURCE=$1
-TARGET=$2
+source=$1
+target=$2
 
-ready_file="$SOURCE"/"tmirror.ready"
+ready_file="$source"/"tmirror.ready"
 
-if [ ! -d "$TARGET" ]
+if [ ! -d "$target" ]
 then
-    mkdir -p "$TARGET"
+    mkdir -p "$target"
 fi
 
+siconv=$(~/loadrc/bashrc/get_iconv.sh "$source")
+ticonv=$(~/loadrc/bashrc/get_iconv.sh "$target")
+
 rsync -aHinv --delete-before --force \
-    "$SOURCE" "$TARGET" > "$ready_file"
+    --iconv="$siconv,$ticonv" \
+    "$source" "$target" > "$ready_file"
