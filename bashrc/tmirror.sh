@@ -12,6 +12,6 @@ fi
 siconv=$(~/loadrc/bashrc/get_iconv.sh "$source")
 ticonv=$(~/loadrc/bashrc/get_iconv.sh "$target")
 
-rsync -aHinv --delete-before --force \
+rsync -aHivn --delete-before --force \
     --iconv="$siconv,$ticonv" \
     "$source" "$target" > "$ready_file"
