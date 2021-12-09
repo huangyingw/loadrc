@@ -6,10 +6,10 @@ then
     exit 1
 fi
 
-SOURCE=$1
-TARGET=$2
+source=$1
+target=$2
 
-ready_file="$SOURCE"/"tmirror.ready"
+ready_file="$source"/"tmirror.ready"
 MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
 
 if [[ "${ready_file}" != *":"* ]] && [[ ! -f ${ready_file} ]]
@@ -18,26 +18,31 @@ then
     exit 1
 fi
 
-if [ -z "$SOURCE" ]
+if [ -z "$source" ]
 then
-    echo -e "${red}SOURCE could not be none... ${NC}"
+    echo -e "${red}source could not be none... ${NC}"
     exit 1
 fi
 
-if [ -z "$TARGET" ]
+if [ -z "$target" ]
 then
-    echo -e "${red}TARGET could not be none... ${NC}"
+    echo -e "${red}target could not be none... ${NC}"
     exit 1
 fi
 
-if [[ "${TARGET}" != *":"* ]] && [[ ! -d "${TARGET}" ]]
+if [[ "$target" != *":"* ]] && [[ ! -d "$target" ]]
 then
-    mkdir -p "${TARGET}"
+    mkdir -p "$target"
 fi
 
 rm "$ready_file"
+
+siconv=$(~/loadrc/bashrc/get_iconv.sh "$source")
+ticonv=$(~/loadrc/bashrc/get_iconv.sh "$target")
+
 rsync -aHSv --progress --delete-before --force \
-    "${SOURCE}/" "${TARGET}/" && \
+    --iconv="$siconv,$ticonv" \
+    "$source/" "$target/" && \
     if [ -f "${MIRRORCHECK}" ] ; \
     then \
         ~/loadrc/bashrc/sleep.sh ; \
