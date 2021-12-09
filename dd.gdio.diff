@@ -502,7 +502,7 @@ index 00000000..c66a8e4c
 +cp -fv "$1".findresult "$1"
 +cp -fv "$2".findresult "$2"
 diff --git a/bashrc/dd.sh b/bashrc/dd.sh
-index 26ad90c3..422b3046 100755
+index 26ad90c3..e856fdd6 100755
 --- ./bashrc/dd.sh
 +++ ./bashrc/dd.sh
 @@ -1,2 +1,6 @@
@@ -510,8 +510,8 @@ index 26ad90c3..422b3046 100755
 -dd if=/dev/nbd0 | pv | dd of=/dev/nbd0
 +
 +input=/dev/nbd0
-+output=/media/volgrp/image.img
-+dd if="$input" bs=4096 conv=sync,noerror | gzip -9 | (pv -s $(fdisk -l "$input" | grep -o '[0-9]*\{1\} GiB' | awk '{print $1}')g) | dd of="$output" 
++output=/media/volgrp/software/os/ubuntu/u2004.img
++dd if="$input" bs=4096 conv=sync,noerror | (pv -s $(fdisk -l "$input" | grep -o '[0-9]*\{1\} GiB' | awk '{print $1}')g) | dd of="$output" 
 +dd if=/media/volgrp/image.img of=/dev/nbd0 bs=16M
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
 index 9a6e19c8..f5458e6f 100755
@@ -648,10 +648,18 @@ index 83e2c748..aa00d35f 100755
          echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
          sort -u ~/all.proj -o ~/all.proj
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
-index e2137142..005dcff1 100755
+index e2137142..86b5db61 100755
 --- ./bashrc/jdupes.sh
 +++ ./bashrc/jdupes.sh
-@@ -20,5 +20,4 @@ then \
+@@ -10,7 +10,6 @@ TARGET="$1"
+ MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
+ 
+ crontab -r
+-echo idle > /sys/block/md0/md/sync_action
+ 
+ if [ -f ${MIRRORCHECK} ] ; \
+ then \
+@@ -20,5 +19,4 @@ then \
      if [ -f ${MIRRORCHECK} ] ; \
      then \
          ~/loadrc/bashrc/sleep.sh ; \
@@ -876,7 +884,7 @@ index 1d01bc62..00000000
 -  . $HOME/loadrc/.loadrc
 -fi
 diff --git a/bashrc/smount.sh b/bashrc/smount.sh
-index 8f22cb80..fbba113f 100755
+index 8f22cb80..6bf46761 100755
 --- ./bashrc/smount.sh
 +++ ./bashrc/smount.sh
 @@ -10,11 +10,9 @@ mkdir -p ~/"$remoteServer"
@@ -885,7 +893,7 @@ index 8f22cb80..fbba113f 100755
  then
 -    umount -l ~/"$remoteServer"
 -    sshfs "$remoteServer":/ ~/"$remoteServer"
-+    mount "$remoteServer":/media/ ~/"$remoteServer"
++    sshfs "$remoteServer":/media/ ~/"$remoteServer"
      df -TH
  else
 -    diskutil unmountDisk force ~/"$remoteServer"
@@ -930,7 +938,7 @@ index 18a46b20..40e22631 160000
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
++Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b-dirty
 diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
 index 58429e06..51c59336 100755
 --- ./ffmpegrc/concat.sh
@@ -1383,6 +1391,14 @@ index 1de7ff41..00000000
 -    git add $conflict
 -    git reset HEAD $conflict
 -done
+diff --git a/gitrc/gshow.sh b/gitrc/gshow.sh
+index 06604af2..0a925ad8 100755
+--- ./gitrc/gshow.sh
++++ ./gitrc/gshow.sh
+@@ -1,2 +1,2 @@
+ #!/bin/zsh
+-git show -w "$1"
++git show -w "$1" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" 
 diff --git a/gitrc/postCommit.sh b/gitrc/postCommit.sh
 index 3bd9b5b1..08477d81 100755
 --- ./gitrc/postCommit.sh
@@ -1701,6 +1717,10 @@ index 328d9be3..b4aaeb9c 100755
      ../downloads/"$NUM"/ \
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
+diff --git a/hosts/server/etc/netplan/00-installer-config.yaml b/linux/etc/netplan/00-installer-config.yaml
+similarity index 100%
+rename from hosts/server/etc/netplan/00-installer-config.yaml
+rename to linux/etc/netplan/00-installer-config.yaml
 diff --git a/linux_links/etc/crypttab b/linux_links/etc/crypttab
 index 191dd600..ebd44801 100644
 --- ./linux_links/etc/crypttab
@@ -1726,11 +1746,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..ef445225
+index 00000000..2db063c9
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit ef445225754a8f5a521bd9baafd01844dc0c1d0c
++Subproject commit 2db063c94eb7e437c75e47dd147e8d48c1c91d05
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1920,12 +1940,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..44fb5553 160000
+index cc6342c3..15cbdf16 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 44fb5553369592286130b35d2bb14dec8ff48be7
++Subproject commit 15cbdf166ab253b60c32062cb5f3607d51708fec
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -1962,12 +1982,12 @@ index dbe8b1e2..bb9753ce 160000
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
 +Subproject commit bb9753ceba554d673b04f8b878b2d1f4febf6807
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
-index cfac13ef..63196768 160000
+index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
 +++ ./vimrc/.vim/bundle/vim-buffergator
 @@ -1 +1 @@
 -Subproject commit cfac13efd7832866c134e6fa1b213940e8c0c4d7
-+Subproject commit 631967689bae60870180b41fd590ff93d673b82d
++Subproject commit c663ae0cf3e9337d4639ad3bb3235fdfccb4e488
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
@@ -1976,12 +1996,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..c176d119 160000
+index 8468d6a8..7e0d07c0 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit c176d11923d65bf6590f929369902961580a50dd-dirty
++Subproject commit 7e0d07c094dec8790bcfbc7e7e84b947ca2b3768
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -2004,12 +2024,12 @@ index 00000000..d6adab9d
 @@ -0,0 +1 @@
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..a4595b48 160000
+index 3b379635..582c4f6c 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit a4595b48a83824e36c1ebe48b574aa8624632695
++Subproject commit 582c4f6cf310b2b3044c366c726a90c0010fc45d
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
@@ -2045,13 +2065,13 @@ deleted file mode 100644
 index e69de29b..00000000
 diff --git a/vimrc/.vim/plugin/commands.vim b/vimrc/.vim/plugin/commands.vim
 new file mode 100644
-index 00000000..42bb8370
+index 00000000..dfb309e2
 --- /dev/null
 +++ ./vimrc/.vim/plugin/commands.vim
 @@ -0,0 +1,4 @@
 +au BufEnter * set noro
 +" Don't let Vim's "Found a swap file" message block input
-+set shortmess=filnxtToOFA
++set shortmess+=A
 +command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
 index 63869eb8..5ba1b10b 100644
@@ -2555,7 +2575,7 @@ index d5874fe5..f425edef 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..cbae7bd5 100644
+index 5fd4a230..b7871365 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -77,8 +77,17 @@ function! VFilter()
@@ -2636,6 +2656,15 @@ index 5fd4a230..cbae7bd5 100644
  nnoremap mg :call VFilter()<cr>
  nnoremap me :call ExtractHighLight()<cr>
  nnoremap mf :call ExFilter()<cr>
+@@ -475,7 +458,7 @@ nnoremap H :call ShowVITAG()<cr>
+ nnoremap F :call GetFirstColumnOfFile()<cr>
+ nnoremap T :vs $HOME/all.proj<cr>
+ nnoremap L :vs <C-R>"<cr>
+-map <F5> :call VRun()<cr>
++map <F5> :call VRun()<cr><cr>
+ map <F3> :call VDebug()<cr>
+ " nnoremap gf gF<cr>
+ nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
 @@ -490,10 +473,7 @@ function! CutFile2()
  endfunc
  
