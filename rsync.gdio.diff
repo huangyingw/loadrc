@@ -1081,7 +1081,7 @@ index 7042dce9..0e670bd9 100755
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
 diff --git a/bashrc/tmirror.sh b/bashrc/tmirror.sh
-index 30abd357..8bc98382 100755
+index 30abd357..8bd99f9e 100755
 --- ./bashrc/tmirror.sh
 +++ ./bashrc/tmirror.sh
 @@ -1,13 +1,17 @@
@@ -1101,11 +1101,12 @@ index 30abd357..8bc98382 100755
 +    mkdir -p "$target"
  fi
  
+-rsync -aHinv --delete-before --force \
+-    "$SOURCE" "$TARGET" > "$ready_file"
 +siconv=$(~/loadrc/bashrc/get_iconv.sh "$source")
 +ticonv=$(~/loadrc/bashrc/get_iconv.sh "$target")
 +
- rsync -aHinv --delete-before --force \
--    "$SOURCE" "$TARGET" > "$ready_file"
++rsync -aHivn --delete-before --force \
 +    --iconv="$siconv,$ticonv" \
 +    "$source" "$target" > "$ready_file"
 diff --git a/bashrc/wol.sh b/bashrc/wol.sh
@@ -2193,7 +2194,7 @@ index 8468d6a8..cc9dd046 160000
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit cc9dd046d279871d2456afd71d100f8f67f99c8a-dirty
++Subproject commit cc9dd046d279871d2456afd71d100f8f67f99c8a
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
