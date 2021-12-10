@@ -458,7 +458,7 @@ nnoremap H :call ShowVITAG()<cr>
 nnoremap F :call GetFirstColumnOfFile()<cr>
 nnoremap T :vs $HOME/all.proj<cr>
 nnoremap L :vs <C-R>"<cr>
-map <F5> :call VRun()<cr>
+map <F5> :call VRun()<cr><cr>
 map <F3> :call VDebug()<cr>
 " nnoremap gf gF<cr>
 nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
