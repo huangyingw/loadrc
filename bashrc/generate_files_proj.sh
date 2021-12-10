@@ -47,7 +47,7 @@ done < "$INCLUDE_FILE"
 
 export LC_ALL=C
 
-find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + > "$TARGET" && \
+find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + > "$TARGET" ; \
     if [ ${#include_params[@]} -gt 0 ] ; \
     then \
         find . "(" "${include_params[@]}" ")" -type f -size -9000k >> ${TARGET} ; \
