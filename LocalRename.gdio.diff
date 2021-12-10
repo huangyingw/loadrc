@@ -50,7 +50,7 @@ index 5ed35a81..0ea38ff6 100644
      allow = true
  [branch "dev"]
 diff --git a/.gitmodules b/.gitmodules
-index e17f9887..029984a6 100644
+index e17f9887..146f4725 100644
 --- ./.gitmodules
 +++ ./.gitmodules
 @@ -133,10 +133,6 @@
@@ -64,7 +64,7 @@ index e17f9887..029984a6 100644
  [submodule "vimrc/.vim/bundle/vimtex"]
      path = vimrc/.vim/bundle/vimtex
      url = https://github.com/lervag/vimtex
-@@ -231,3 +227,12 @@
+@@ -231,3 +227,15 @@
  [submodule "vimrc/.vim/bundle/bclose.vim"]
      path = vimrc/.vim/bundle/bclose.vim
      url = git@github.com:rbgrouleff/bclose.vim.git
@@ -77,6 +77,9 @@ index e17f9887..029984a6 100644
 +[submodule "vimrc/.vim/bundle/vim-fetch"]
 +	path = vimrc/.vim/bundle/vim-fetch
 +	url = git@github.com:wsdjeg/vim-fetch.git
++[submodule "wifi-auto-reconnect"]
++	path = wifi-auto-reconnect
++	url = git@github.com:huangyingw/martinsoft_wifi-auto-reconnect.git
 diff --git a/.gitrc b/.gitrc
 index 8e753cb1..d416ab62 100755
 --- ./.gitrc
@@ -104,8 +107,18 @@ index a51724b9..82a595f3 100644
 @@ -1,2 +1 @@
  export GOPATH=$HOME/go
 -export PATH=$PATH:/usr/local/go/bin
+diff --git a/.imac.rc b/.imac.rc
+index a0d25e95..d053c758 100755
+--- ./.imac.rc
++++ ./.imac.rc
+@@ -8,3 +8,5 @@ then
+         sudo systemsetup -setcomputersleep Never; \
+         fi
+ fi
++
++~/loadrc/wifi-auto-reconnect/install.sh
 diff --git a/.imacpro.rc b/.imacpro.rc
-index a0d25e95..4f59350a 100755
+index a0d25e95..922db5fe 100755
 --- ./.imacpro.rc
 +++ ./.imacpro.rc
 @@ -1,10 +1,9 @@
@@ -113,13 +126,13 @@ index a0d25e95..4f59350a 100755
  #alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
  
 -if [ $(uname) = "Darwin" ]
-+if ! (sudo systemsetup -getcomputersleep | grep -q "after 10 minutes")
++if ! (sudo systemsetup -getcomputersleep | grep -q Never)
  then
 -    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
 -        then \
 -        sudo systemsetup -setcomputersleep Never; \
 -        fi
-+    sudo systemsetup -setcomputersleep 10
++    sudo systemsetup -setcomputersleep Never
  fi
 +
 +~/loadrc/setup_bidirectional_clipboard.sh
@@ -168,22 +181,26 @@ index de211c97..1298e4e5 100644
 -    export PATH="/Applications/NoMachine.app/Contents/MacOS:$PATH"
  fi
 diff --git a/.mbp.rc b/.mbp.rc
-index 514389f0..9e7032fd 100755
+index 514389f0..9ce19350 100755
 --- ./.mbp.rc
 +++ ./.mbp.rc
-@@ -1,11 +1 @@
--#!/bin/zsh
+@@ -1,11 +1,9 @@
+ #!/bin/zsh
 -#alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
 -alias restartBluetooth='$HOME/loadrc/osxrc/restart_bluetooth.sh'
--
+ 
 -if [ $(uname) = "Darwin" ]
--then
++if ! (sudo systemsetup -getcomputersleep | grep -q Never)
+ then
 -    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
 -        then \
 -        sudo systemsetup -setcomputersleep Never; \
 -        fi
--fi
++    sudo systemsetup -setcomputersleep Never
+ fi
++
 +~/loadrc/setup_pbpaste-remote.sh
++~/loadrc/uninstall_bidirectional_clipboard.sh
 diff --git a/.mini.rc b/.mini.rc
 new file mode 100755
 index 00000000..9e7032fd
@@ -191,6 +208,14 @@ index 00000000..9e7032fd
 +++ ./.mini.rc
 @@ -0,0 +1 @@
 +~/loadrc/setup_pbpaste-remote.sh
+diff --git a/.mini2.rc b/.mini2.rc
+new file mode 100755
+index 00000000..d20e36a3
+--- /dev/null
++++ ./.mini2.rc
+@@ -0,0 +1,2 @@
++~/loadrc/setup_pbpaste-remote.sh
++~/loadrc/wifirc/enable.sh
 diff --git a/.pathrc b/.pathrc
 new file mode 100644
 index 00000000..a4b516a8
@@ -476,6 +501,15 @@ index 00000000..c66a8e4c
 +comm -1 -3 <(sort "$1") <(sort "$2") > "$2".findresult
 +cp -fv "$1".findresult "$1"
 +cp -fv "$2".findresult "$2"
+diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
+index 9a6e19c8..f5458e6f 100755
+--- ./bashrc/do_update_proj.sh
++++ ./bashrc/do_update_proj.sh
+@@ -5,3 +5,4 @@
+ ~/loadrc/bashrc/fvideos.sh
+ ~/loadrc/bashrc/fdocs.sh
+ ~/loadrc/bashrc/cscope.sh
++git remote update &
 diff --git a/bashrc/fdisk_log.sh b/bashrc/fdisk_log.sh
 index 37081d0c..3867ab7b 100755
 --- ./bashrc/fdisk_log.sh
@@ -489,6 +523,61 @@ index 37081d0c..3867ab7b 100755
  DEVICE=`mdadm -D --scan|awk '{print $2}'`
  mdadm -D "$DEVICE" >> "$logFile"
  blkid >> "$logFile"
+diff --git a/bashrc/file_move.sh b/bashrc/file_move.sh
+new file mode 100755
+index 00000000..889a9697
+--- /dev/null
++++ ./bashrc/file_move.sh
+@@ -0,0 +1,9 @@
++#!/bin/zsh
++
++if [ ! -d "$2" ]
++then
++    mkdir -p "$2"
++fi
++
++ss=$(echo "$1" | sed 's/"//g')
++mv -nv "$ss" "$2"
+diff --git a/bashrc/find_text.sh b/bashrc/find_text.sh
+new file mode 100755
+index 00000000..6d2b8f8b
+--- /dev/null
++++ ./bashrc/find_text.sh
+@@ -0,0 +1,34 @@
++#!/bin/zsh
++
++cd ~/loadrc/
++
++function fun1()
++{
++    find . -type f -exec grep -Il "" {} + > fun1.log
++}
++
++function fun2()
++{
++    find . -type f -exec grep -Iq . {} \; -print > fun2.log 
++}
++
++function fun3()
++{
++    find . -type f -exec grep -Il "" {} \; > fun3.log 
++}
++
++function fun4()
++{
++    find . -type f -exec grep -Il . {} + > fun4.log 
++}
++
++function fun5()
++{
++    find . -type f -print0 | xargs -0 grep -IZl . > fun5.log 
++}
++
++fun1
++fun2
++fun3
++fun4
++fun5
 diff --git a/bashrc/fr.sh b/bashrc/fr.sh
 index f58a2ee7..dcc8f356 100755
 --- ./bashrc/fr.sh
@@ -511,7 +600,7 @@ index f58a2ee7..dcc8f356 100755
      xargs sed -i.bak  "s/${FIND}/${REPLACE}/g" < "$3"
 +fi
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
-index 83e2c748..2c184654 100755
+index 83e2c748..aa00d35f 100755
 --- ./bashrc/generate_files_proj.sh
 +++ ./bashrc/generate_files_proj.sh
 @@ -15,6 +15,8 @@ then
@@ -523,21 +612,29 @@ index 83e2c748..2c184654 100755
  TARGETEDIR=`realpath "$PWD"`
  cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
  cp -nv ~/loadrc/prunefile_template.conf ./prunefile.conf
-@@ -46,12 +48,12 @@ done < "$INCLUDE_FILE"
+@@ -45,16 +47,16 @@ done < "$INCLUDE_FILE"
+ 
  export LC_ALL=C
  
- find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
+-find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' > "$TARGET" && \
 -    comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
 -    cp -fv "$TARGET.tmp" "$TARGET" && \
++find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + > "$TARGET" && \
      if [ ${#include_params[@]} -gt 0 ] ; \
      then \
-         find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
+-        find . "(" "${include_params[@]}" ")" -type f -size -9000k | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} ; \
++        find . "(" "${include_params[@]}" ")" -type f -size -9000k >> ${TARGET} ; \
          fi && \
+-        echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
++        echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" >> ${TARGET} && \
++        sed -i.bak 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/;s/ /\\ /g' "$TARGET" && \
 +        comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
 +        cp -fv "$TARGET.tmp" "$TARGET" && \
-         echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/' >> ${TARGET} && \
          sort -u "$TARGET" -o "$TARGET" && \
-         sed -i.bak 's/ /\\ /g' "$TARGET" && \
+-        sed -i.bak 's/ /\\ /g' "$TARGET" && \
+         cp -fv "$TARGET" files.proj && \
+         echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
+         sort -u ~/all.proj -o ~/all.proj
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
 index e2137142..005dcff1 100755
 --- ./bashrc/jdupes.sh
@@ -663,9 +760,55 @@ index 00000000..d3a5e9de
 +target="$2"
 +mkdir -p "$(dirname "$target")"
 +mv -nv "$source" "$target"
+diff --git a/bashrc/retire_parts.sh b/bashrc/retire_parts.sh
+new file mode 100755
+index 00000000..cd2de1bb
+--- /dev/null
++++ ./bashrc/retire_parts.sh
+@@ -0,0 +1,40 @@
++#!/bin/zsh
++
++function CountParts()
++{
++    echo $(find /var/lib/transmission-daemon/ -type f -mtime +"$1" -name \*.part | wc -l)
++}
++
++left=1
++right=30
++
++while [ $((left + 1)) -lt $right ]
++do
++    mid=$(printf '%s\n' $left $right | datamash median 1)
++    mid=${mid%.*}
++    echo "mid --> $mid"
++
++    local result=$(CountParts $mid)
++    result=${result%.*}
++    echo "result --> $result"
++
++    if [ $result -gt 0 ]
++    then
++        left=$mid
++        echo "left --> $left"
++    else
++        right=$mid
++        echo "right --> $right"
++    fi
++done
++
++local result=$(CountParts $right)
++result=${result%.*}
++echo "result --> $result"
++
++if [ $result -gt 0 ]
++then
++    find /var/lib/transmission-daemon/ -type f -mtime +$right -name \*.part -delete
++else
++    find /var/lib/transmission-daemon/ -type f -mtime +$left -name \*.part -delete 
++fi
 diff --git a/bashrc/select_move.sh b/bashrc/select_move.sh
 new file mode 100755
-index 00000000..29fd5336
+index 00000000..2ef72567
 --- /dev/null
 +++ ./bashrc/select_move.sh
 @@ -0,0 +1,8 @@
@@ -675,8 +818,8 @@ index 00000000..29fd5336
 +rsync -aHv --force --progress \
 +    --remove-source-files \
 +    --files-from "$1".tmp \
-+    "$2" \
-+    "$3"
++    . \
++    "$2"
 diff --git a/bashrc/setup.sh b/bashrc/setup.sh
 deleted file mode 100755
 index a7a35d8f..00000000
@@ -721,7 +864,7 @@ index 1d01bc62..00000000
 -  . $HOME/loadrc/.loadrc
 -fi
 diff --git a/bashrc/smount.sh b/bashrc/smount.sh
-index 8f22cb80..fbba113f 100755
+index 8f22cb80..6bf46761 100755
 --- ./bashrc/smount.sh
 +++ ./bashrc/smount.sh
 @@ -10,11 +10,9 @@ mkdir -p ~/"$remoteServer"
@@ -730,7 +873,7 @@ index 8f22cb80..fbba113f 100755
  then
 -    umount -l ~/"$remoteServer"
 -    sshfs "$remoteServer":/ ~/"$remoteServer"
-+    mount "$remoteServer":/media/ ~/"$remoteServer"
++    sshfs "$remoteServer":/media/ ~/"$remoteServer"
      df -TH
  else
 -    diskutil unmountDisk force ~/"$remoteServer"
@@ -755,6 +898,20 @@ index 7042dce9..0e670bd9 100755
 -
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
+diff --git a/bashrc/wol.sh b/bashrc/wol.sh
+index 1e941ff7..5e9420df 100755
+--- ./bashrc/wol.sh
++++ ./bashrc/wol.sh
+@@ -39,4 +39,9 @@ then
+     wakeonlan 1c:87:2c:b7:a1:ce #movie wifi
+     wakeonlan -i 192.168.1.2 00:0a:cd:1e:e9:be #movie
+     ping movie
++elif [ "$target" = "mini2" ]
++then
++    wakeonlan f4:4e:e3:fd:1c:e5 #mini2 wifi
++    wakeonlan 00:E0:4C:00:07:A8 #mini2 wired
++    ping mini2
+ fi
 diff --git a/cscope b/cscope
 index 18a46b20..40e22631 160000
 --- ./cscope
@@ -839,17 +996,17 @@ index d81f6f38..5b7555ad 100755
 +
 +git show "$1":COMMIT_EDITMSG > COMMIT_EDITMSG
 diff --git a/gitrc/discard_unnecessaries.sh b/gitrc/discard_unnecessaries.sh
-index dbf809a0..9df3e01a 100755
+index dbf809a0..87a8c1b4 100755
 --- ./gitrc/discard_unnecessaries.sh
 +++ ./gitrc/discard_unnecessaries.sh
 @@ -1,4 +1,4 @@
  #!/bin/zsh
 -git checkout *.gdio.diff
-+git checkout "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff"
++git checkout \*.gdio.diff
  git checkout files.proj
  git checkout rsync.files
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
-index 4f8edfc6..4f5de493 100755
+index 4f8edfc6..fd91f70c 100755
 --- ./gitrc/dogdio.sh
 +++ ./gitrc/dogdio.sh
 @@ -1,5 +1,6 @@
@@ -860,7 +1017,7 @@ index 4f8edfc6..4f5de493 100755
  then
      exit 0
  fi
-@@ -7,9 +8,8 @@ fi
+@@ -7,9 +8,6 @@ fi
  local_branch="$(~/loadrc/gitrc/get_current_branch.sh)" 
  output="$local_branch.gdio.diff"
  output=$(echo "$output" | sed 's/\//_/g')
@@ -869,9 +1026,21 @@ index 4f8edfc6..4f5de493 100755
 +target="$(git config gsync.target)"
  
 -~/loadrc/gitrc/gdi.sh "$remote/$remote_branch" 2>&1 | tee "$output"  
-+~/loadrc/gitrc/gdi.sh "$target" 2>&1 | tee "$output"
- sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
- exit 0
+-sed -i.bak "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" "$output"
+-exit 0
++~/loadrc/gitrc/gdi.sh "$target" 2>&1 | tee "$output" 
+diff --git a/gitrc/dogsync.sh b/gitrc/dogsync.sh
+index 6e5ba70f..b2d70447 100755
+--- ./gitrc/dogsync.sh
++++ ./gitrc/dogsync.sh
+@@ -5,6 +5,6 @@ then
+     exit
+ fi
+ 
++~/loadrc/gitrc/gps.sh &
+ ~/loadrc/gitrc/gpl.sh
+-~/loadrc/gitrc/gps.sh
+ ~/loadrc/gitrc/dogdio.sh
 diff --git a/gitrc/g.sh b/gitrc/g.sh
 index 8de34e76..2477da66 100755
 --- ./gitrc/g.sh
@@ -943,10 +1112,10 @@ index e118a4de..e1f58816 100755
      $HOME/loadrc/gitrc/gdev.sh && \
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 new file mode 100755
-index 00000000..e8b5bfa5
+index 00000000..d640ba0d
 --- /dev/null
 +++ ./gitrc/gcom.sh
-@@ -0,0 +1,28 @@
+@@ -0,0 +1,39 @@
 +#!/bin/zsh
 +
 +if [ -z "$1" ]
@@ -963,18 +1132,39 @@ index 00000000..e8b5bfa5
 +fi
 +
 +~/loadrc/gitrc/discard_unnecessaries.sh
-+CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
-+git checkout -b "$1" || \
-+    git checkout "$1" &&
-+    git merge "$CURRENT_BRANCH"
++current_branch=$(~/loadrc/gitrc/get_current_branch.sh)
++
++TARGET_BRANCH="$1"
++TARGET_BRANCH=$(echo "$TARGET_BRANCH" | sed 's/remotes\///g')
++TARGET_BRANCH="$TARGET_BRANCH"
++
++for remote in $(git remote)
++do
++    TARGET_BRANCH=$(echo "$TARGET_BRANCH" | sed "s/^$remote\///g")
++done
++
++echo "TARGET_BRANCH --> $TARGET_BRANCH" 
++
++git checkout -b "$TARGET_BRANCH" || \
++    git checkout "$TARGET_BRANCH" &&
++    git merge "$current_branch"
 +
 +if [ -n "$clean" ]
 +then
 +    git stash pop stash@{0}
 +fi
 +
-+~/loadrc/gitrc/gdio.sh
-+git checkout "$CURRENT_BRANCH.gdio.diff"
++~/loadrc/gitrc/gpl.sh
+diff --git a/gitrc/gdi.sh b/gitrc/gdi.sh
+index b720ac69..8fcc4eed 100755
+--- ./gitrc/gdi.sh
++++ ./gitrc/gdi.sh
+@@ -13,4 +13,4 @@ else
+         COMMAND="$COMMAND  ':(exclude)$ss'"
+     done
+ fi
+-eval "$COMMAND"
++eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
 index dbcf937b..72b45d13 100755
 --- ./gitrc/gdi2.sh
@@ -1027,6 +1217,16 @@ index dbcf937b..72b45d13 100755
          . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
          ~/loadrc/gitrc/gfix.sh
 +fi
+diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
+index b0247ec4..07590e7c 100755
+--- ./gitrc/gdif.sh
++++ ./gitrc/gdif.sh
+@@ -30,4 +30,4 @@ do
+     COMMAND="$COMMAND  -- '$ss'"
+ done < "$file"
+ 
+-eval "$COMMAND"
++eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
 index 700d6af6..c3c54016 100755
 --- ./gitrc/gdit.sh
@@ -1091,31 +1291,40 @@ index 20dd9aa3..0f505a1e 100755
 +CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
  git fetch . "$CURRENT_BRANCH":"$1"
 diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
-index fa900e00..a4f538c7 100755
+index fa900e00..4cb43793 100755
 --- ./gitrc/gpl.sh
 +++ ./gitrc/gpl.sh
-@@ -2,27 +2,25 @@
+@@ -1,28 +1,31 @@
+ #!/bin/zsh
  
++~/loadrc/gitrc/discard_unnecessaries.sh
++
++if [ -n "$(git status --untracked-files=no --porcelain --ignore-submodules)" ]
++then
++    return
++fi
++
  ~/loadrc/gitrc/include_gitconfig.sh
- git remote update &
+-git remote update &
 -git checkout *.gdio.diff
 -git pull &
-+~/loadrc/gitrc/discard_unnecessaries.sh
-+git pull
++git remote update
  currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
  
- for ss in `git remote -v |awk '/\(fetch\)$/{print $1}'`
+-for ss in `git remote -v |awk '/\(fetch\)$/{print $1}'`
++for remote in $(git remote)
  do
 -    git pull $ss $currentBranch &
-+    git pull $ss $currentBranch
-     git remote prune $ss &
+-    git remote prune $ss &
++    git pull $remote $currentBranch
++    git remote prune $remote
  done
  
  for ss in $(git config --get-all pull.from)
  do
 -    pull_from=$(echo "$ss" | sed  -e "s/\// /g")
 -    COMMAND="git pull $pull_from &"
-+    COMMAND="git merge $ss &"
++    COMMAND="git merge $ss"
      eval "$COMMAND"
  done
  
@@ -1130,15 +1339,23 @@ index fa900e00..a4f538c7 100755
 +    git merge "$target"
  fi
 diff --git a/gitrc/gps.sh b/gitrc/gps.sh
-index 2198cb7f..038cc606 100755
+index 2198cb7f..1af0b074 100755
 --- ./gitrc/gps.sh
 +++ ./gitrc/gps.sh
-@@ -1,5 +1,4 @@
+@@ -1,11 +1,11 @@
  #!/bin/zsh
 -currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
  ~/loadrc/gitrc/include_gitconfig.sh
  
  if [[ $(git config --get-all push.remote) ]]
+ then
+     for ss in $(git config --get-all push.remote)
+     do
+-        git push --all -v "$ss" && git push -v --tag "$ss" &
++        git push --all -v "$ss" &
++        git push -v --tag "$ss" &
+     done
+ fi
 diff --git a/gitrc/gres.sh b/gitrc/gres.sh
 deleted file mode 100755
 index 1de7ff41..00000000
@@ -1162,6 +1379,22 @@ index 3bd9b5b1..08477d81 100755
  #!/bin/zsh
  ~/loadrc/gitrc/gsync.sh
 +~/loadrc/bashrc/update_proj.sh
+diff --git a/gitrc/reapply.sh b/gitrc/reapply.sh
+index d1ffbd95..e6e1d0fc 100755
+--- ./gitrc/reapply.sh
++++ ./gitrc/reapply.sh
+@@ -1,9 +1,9 @@
+ #!/bin/zsh
+ DIFF="$1"
+ CURRET_BRANCH_DIFF="$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff"
+-git apply --reverse "$CURRET_BRANCH_DIFF" 
++git apply --index --reverse "$CURRET_BRANCH_DIFF"
+ git checkout -- "$CURRET_BRANCH_DIFF"
+-git apply --reject --whitespace=fix "$DIFF"
++git apply --index --reject --whitespace=fix "$DIFF"
+ ~/loadrc/gitrc/gdio.sh
+ 
+ if [ "$CURRET_BRANCH_DIFF" = "$DIFF" ]
 diff --git a/gpurc/.gpurc b/gpurc/.gpurc
 index 8be8d98c..6026d401 100644
 --- ./gpurc/.gpurc
@@ -1196,32 +1429,58 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..49369709 100644
+index 425c9192..f4db2057 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
-@@ -18,6 +18,10 @@
+@@ -9,7 +9,7 @@
+ 192.168.122.65 master-node
+ 192.168.122.136 slave-node
+ 192.168.122.244 zsh
+-192.168.31.29 work
++192.168.31.191 work
+ 172.27.217.162 localhost.imvu.com
+ 192.168.31.31 server
+ 192.168.31.147 imacpro
+@@ -18,6 +18,11 @@
  192.168.31.99 mldonkey
  192.168.123.203 u2004
  10.211.55.5 macos
 +192.168.123.177 ubuntu20.04
 +# 172.27.174.184 mbp
-+192.168.31.168 mbp
++192.168.31.96 mbp
 +192.168.123.80 u2110
++192.168.31.99 haikou
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
 diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
-index 50886663..e97170fc 100644
+index 50886663..1079d97e 100644
 --- ./host_links/server/etc/hosts
 +++ ./host_links/server/etc/hosts
 @@ -10,6 +10,7 @@
  192.168.31.115 gluster02
  192.168.31.99 mldonkey
  192.168.31.147 imacpro
-+172.27.174.184 mbp
++192.168.31.96 mbp
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
+diff --git a/hosts/mba/Library/Application Support/ZeroTier/One/identity.public b/hosts/mba/Library/Application Support/ZeroTier/One/identity.public
+new file mode 100644
+index 00000000..94896a7f
+--- /dev/null
++++ ./hosts/mba/Library/Application Support/ZeroTier/One/identity.public	
+@@ -0,0 +1 @@
++7400d3ebd5:0:3aa5d438010e88845739f49f4ca3a14772bdd7aa6f57467dfd1909e25fb8be0f835e54a8d7a571d0bddf8d7113936e69ac70f0b08136e810f63515a54db2b69d
+\ No newline at end of file
+diff --git a/hosts/mba/Library/Application Support/ZeroTier/One/identity.secret b/hosts/mba/Library/Application Support/ZeroTier/One/identity.secret
+new file mode 100644
+index 00000000..ce55630d
+--- /dev/null
++++ ./hosts/mba/Library/Application Support/ZeroTier/One/identity.secret	
+@@ -0,0 +1 @@
++7400d3ebd5:0:3aa5d438010e88845739f49f4ca3a14772bdd7aa6f57467dfd1909e25fb8be0f835e54a8d7a571d0bddf8d7113936e69ac70f0b08136e810f63515a54db2b69d:7937cc458423352fe676c08d916a0e2aa8f4a253f1396e77ad0bc86800e2a1c883b29c48e92569307a620c5704659320e9063801c10e44ee27ca4b94d42960bc
+\ No newline at end of file
 diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
 index ea2bc967..b7adab11 100755
 --- ./imvurc/ghypo.sh
@@ -1346,17 +1605,18 @@ index c3036dee..09b82d56 100755
 +    mv -v "$OTHER_NODE" "$OTHER_NODE".bak
 +fi
 diff --git a/install_nvim_pre.sh b/install_nvim_pre.sh
-index 2bc75c67..ab07848c 100755
+index 2bc75c67..deb1938c 100755
 --- ./install_nvim_pre.sh
 +++ ./install_nvim_pre.sh
-@@ -26,3 +26,5 @@ else
+@@ -26,3 +26,6 @@ else
      sudo pip3 install pynvim jedi 
      #brew install --with-toolchain --with-clang llvm
  fi
 +
++./neovim/install_prerequisite.sh
 +./neovim/install.sh
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
-index 298b6bc4..cd4e7524 100755
+index 298b6bc4..a78577d2 100755
 --- ./install_prerequisite.sh
 +++ ./install_prerequisite.sh
 @@ -1,14 +1,13 @@
@@ -1375,7 +1635,15 @@ index 298b6bc4..cd4e7524 100755
      binutils \
      build-essential \
      cmake \
-@@ -30,6 +29,7 @@ apt-get install -y \
+@@ -16,6 +15,7 @@ apt-get install -y \
+     cryptsetup \
+     cscope \
+     curl \
++    datamash \
+     dkms \
+     dos2unix \
+     exuberant-ctags \
+@@ -30,6 +30,7 @@ apt-get install -y \
      iperf \
      iperf3 \
      iputils-ping \
@@ -1383,20 +1651,21 @@ index 298b6bc4..cd4e7524 100755
      kdiff3 \
      libsecret-1-dev \
      libsecret-tools \
-@@ -37,10 +37,11 @@ apt-get install -y \
+@@ -37,10 +38,12 @@ apt-get install -y \
      manpages-fr-extra \
      manpages-pl \
      mdadm \
 -    mosh \
 +    moreutils \
      mplayer \
++    mysql-client \
      net-tools \
      netcat \
 +    nfs-kernel-server \
      npm \
      openvpn \
      perl \
-@@ -54,10 +55,11 @@ apt-get install -y \
+@@ -54,10 +57,11 @@ apt-get install -y \
      slurm \
      smplayer \
      software-properties-common \
@@ -1421,16 +1690,17 @@ index 328d9be3..b4aaeb9c 100755
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
 diff --git a/linux_links/etc/crypttab b/linux_links/etc/crypttab
-index 191dd600..9f6b0964 100644
+index 191dd600..ebd44801 100644
 --- ./linux_links/etc/crypttab
 +++ ./linux_links/etc/crypttab
-@@ -9,4 +9,5 @@ usb_backup_crypt_4T      /dev/disk/by-uuid/4e0d72a2-2f98-4c11-becd-beaa21ec1957
+@@ -9,4 +9,6 @@ usb_backup_crypt_4T      /dev/disk/by-uuid/4e0d72a2-2f98-4c11-becd-beaa21ec1957
  usb_backup_crypt_5T_1      /dev/disk/by-uuid/5d5e3fde-814f-4018-a103-2789c84d43e2  /root/loadrc/keys/keyfile   luks
  zarchive      /dev/disk/by-uuid/a840176a-b76a-4d0f-962c-439e68107670  /root/loadrc/keys/keyfile   luks
  vserver_crypt      /dev/disk/by-uuid/a4ff213e-f734-4c88-aba9-2ce733d0de76  /root/loadrc/keys/keyfile   luks
 -usb_backup_crypt_8T      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
 +usb_backup_crypt_8T_1      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
 +usb_backup_crypt_8T_2      /dev/disk/by-uuid/bbbc9066-0479-4959-af61-ead6a9cea3ba  /root/loadrc/keys/keyfile   luks
++timemachine      /dev/disk/by-uuid/72eff5fa-e188-4b1a-8760-5f5ff828aa37  /root/loadrc/keys/keyfile   luks
 diff --git a/macosrc/configure_mosh.sh b/macosrc/configure_mosh.sh
 index bb27cd34..a45fa3fe 100755
 --- ./macosrc/configure_mosh.sh
@@ -1444,11 +1714,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..f950af9b
+index 00000000..51f5d05a
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit f950af9b393bb54a90ff80b86c82ef2fa9115fc6
++Subproject commit 51f5d05ae917f14db3abc5c3cec52d5e1683b846
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1457,6 +1727,32 @@ index 00000000..80d3b345
 @@ -0,0 +1,2 @@
 +#!/bin/sh
 +nc localhost 2225
+diff --git a/prunefile_template.conf b/prunefile_template.conf
+index 8e34f2fa..9deeb31c 100644
+--- ./prunefile_template.conf
++++ ./prunefile_template.conf
+@@ -1,6 +1,7 @@
++"./.fugitiveblame"
+ "./cscope"
+ "./files.proj"
++"./gbra.log"
+ "./running.lck"
+ "./running.time"
+ .err
+-"./gbra.log"
+diff --git a/pythonrc/vlc.py b/pythonrc/vlc.py
+index 13a0cf4c..d8d70042 100755
+--- ./pythonrc/vlc.py
++++ ./pythonrc/vlc.py
+@@ -13,7 +13,7 @@ def callvlc(targetFile, start=0):
+     if targetFile:
+         if platform.system() == 'Darwin':
+             if start == 0:
+-                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', targetFile])
++                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--rate=2.0', targetFile])
+             else:
+                 subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
+         else:
 diff --git a/setup.sh b/setup.sh
 index cc9fd3f1..608329fd 100755
 --- ./setup.sh
@@ -1511,10 +1807,10 @@ index 00000000..b385cdc6
 +cp -fv ./pbpaste-remote ~/bin/pbpaste-remote
 diff --git a/setup_remote.sh b/setup_remote.sh
 new file mode 100755
-index 00000000..f0de7a8b
+index 00000000..be5c410c
 --- /dev/null
 +++ ./setup_remote.sh
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,12 @@
 +#!/bin/bash
 +
 +apt-get update
@@ -1525,17 +1821,48 @@ index 00000000..f0de7a8b
 +    zsh
 +
 +./deploy_configurations.sh
++~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
 +./swith-2-zsh.sh
+diff --git a/sqlrc/xsql.sh b/sqlrc/xsql.sh
+index 0aae8085..2d88e3a8 100755
+--- ./sqlrc/xsql.sh
++++ ./sqlrc/xsql.sh
+@@ -12,6 +12,8 @@ user=`cat ${loginFile} |awk -F'=' '/user/{print $2}'`
+ password=`cat ${loginFile} |awk -F'=' '/password/{print $2}'`
+ host=`cat ${loginFile} |awk -F'=' '/host/{print $2}'`
+ dbinstance=`cat ${loginFile} |awk -F'=' '/dbinstance/{print $2}'`
++protocol=`cat ${loginFile} |awk -F'=' '/protocol/{print $2}'`
++option=""
+ 
+ if [ -z "$host" ]
+ then
+@@ -22,5 +24,10 @@ then
+     sort -u "$loginFile" -o "$loginFile"
+ fi
+ 
++if [ -n "$protocol" ]
++then
++    option="--protocol=$protocol"
++fi
++
+ cd "$(dirname "$file")"
+-mysql -v -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
++mysql -v "$option" -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
 diff --git a/uninstall_bidirectional_clipboard.sh b/uninstall_bidirectional_clipboard.sh
 new file mode 100755
-index 00000000..3be79dc7
+index 00000000..92c29592
 --- /dev/null
 +++ ./uninstall_bidirectional_clipboard.sh
-@@ -0,0 +1,13 @@
+@@ -0,0 +1,18 @@
 +#!/bin/zsh
 +SCRIPT=$(realpath "$0") && \
 +    SCRIPTPATH=$(dirname "$SCRIPT") && \
 +    cd "$SCRIPTPATH" || cd ~/loadrc/
++
++if [ ! -f ~/Library/LaunchAgents/pbcopy.plist  ]
++then
++    exit 0
++fi
 +
 +launchctl stop ~/Library/LaunchAgents/pbcopy.plist
 +launchctl stop ~/Library/LaunchAgents/pbpaste.plist
@@ -1581,12 +1908,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..2cab0699 160000
+index cc6342c3..44fb5553 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 2cab0699d9bc8b60a807f7eb6bbf7aff52849028
++Subproject commit 44fb5553369592286130b35d2bb14dec8ff48be7
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -1616,12 +1943,12 @@ index 4579327e..4b3a848c 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4b3a848ca36318fc1a82c712c5b5c7ea658e4a86
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..fb49cea4 160000
+index dbe8b1e2..bb9753ce 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit fb49cea4932191a61ee541fa7ae1492ec6023d36
++Subproject commit bb9753ceba554d673b04f8b878b2d1f4febf6807
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..63196768 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -1637,12 +1964,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..d18f5154 160000
+index 8468d6a8..c176d119 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit d18f5154c5aa6d22837d9349b64b551f9a497ff5
++Subproject commit c176d11923d65bf6590f929369902961580a50dd
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -1701,6 +2028,19 @@ index 00000000..6ccf639b
 +else
 +    set clipboard=unnamed
 +endif
+diff --git a/vimrc/.vim/plugin/command.vim b/vimrc/.vim/plugin/command.vim
+deleted file mode 100644
+index e69de29b..00000000
+diff --git a/vimrc/.vim/plugin/commands.vim b/vimrc/.vim/plugin/commands.vim
+new file mode 100644
+index 00000000..dfb309e2
+--- /dev/null
++++ ./vimrc/.vim/plugin/commands.vim
+@@ -0,0 +1,4 @@
++au BufEnter * set noro
++" Don't let Vim's "Found a swap file" message block input
++set shortmess+=A
++command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
 index 63869eb8..5ba1b10b 100644
 --- ./vimrc/.vim/plugin/common.vim
@@ -1843,10 +2183,10 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..23621868 100644
+index d5874fe5..f425edef 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -1,7 +1,10 @@
+@@ -1,13 +1,17 @@
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject AppendRate :execute s:AppendRate(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject ApplyBranch :execute s:ApplyBranch(<q-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject BinaryGrep :execute s:BinaryGrep(<f-args>)
@@ -1857,7 +2197,14 @@ index d5874fe5..23621868 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRun :execute s:CatRun(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Copy :execute s:Copy(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dodev :execute s:Dodev()
-@@ -27,23 +30,25 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dps :execute s:Dps()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fcscope :execute s:Fcscope()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fdisklog :execute s:Fdisklog()
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FileMove :execute s:FileMove(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDeleted :execute s:FindDeleted()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
+@@ -27,23 +31,25 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gco :execute s:Gco(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcob :execute s:Gcob(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcof :execute s:Gcof(<f-args>)
@@ -1885,17 +2232,18 @@ index d5874fe5..23621868 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtu :execute s:Grtu()
-@@ -51,7 +56,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
+@@ -51,25 +57,24 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :execute s:Gs()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
 -command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject ApplyBranch :execute s:ApplyBranch(<q-args>)
-+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsubbr :execute s:Gsubbr()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gst :execute s:Gst()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsti :execute s:Gsti()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstl :execute s:Gstl()
-@@ -60,13 +65,11 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstp :
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstlv :execute s:Gstlv()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstp :execute s:Gstp(<q-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gstv :execute s:Gstv(<q-args>)
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsubbr :execute s:Gsubbr()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsync :execute s:Gsync()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gtg :execute s:Gtg()
 -command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkd :execute s:Gkd(<f-args>)
@@ -1909,7 +2257,11 @@ index d5874fe5..23621868 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
-@@ -111,13 +114,12 @@ endfunction
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute s:SelectMove(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Split :execute s:Split()
+@@ -111,13 +116,12 @@ endfunction
  
  function! s:Gkdo() abort
      let worktree = Cd2Worktree()
@@ -1926,7 +2278,43 @@ index d5874fe5..23621868 100644
      endif
  endfunction
  
-@@ -366,9 +368,8 @@ function! s:Gdi(...) abort
+@@ -207,7 +211,8 @@ endfunction
+ 
+ function! s:Gpl() abort
+     let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gpl.sh 2>&1 | tee gpl.findresult')
++    exec '!~/loadrc/gitrc/gpl.sh 2>&1 | tee gpl.findresult'
++    call OpenOrSwitch('gpl.findresult', 'vs')
+ endfunction
+ 
+ function! s:Fsync() abort
+@@ -228,12 +233,14 @@ endfunction
+ 
+ function! s:Gbib() abort
+     let worktree = Cd2Worktree()
+-    exec '!~/loadrc/gitrc/gbib.sh'
++    exec '!~/loadrc/gitrc/gbib.sh | tee gbil.log.runresult'
++    call OpenOrSwitch('gbil.log.runresult', 'vs')
+ endfunction
+ 
+ function! s:Gbig() abort
+     let worktree = Cd2Worktree()
+-    exec '!~/loadrc/gitrc/gbig.sh'
++    exec '!~/loadrc/gitrc/gbig.sh | tee gbil.log.runresult' 
++    call OpenOrSwitch('gbil.log.runresult', 'vs')
+ endfunction
+ 
+ function! s:Gbil() abort
+@@ -325,7 +332,7 @@ function! s:G(args, ...) abort
+     endif
+ 
+     let worktree = Cd2Worktree()
+-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.findresult')
++    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.runresult')
+ 
+     if &diff
+         call s:Gs()
+@@ -366,9 +373,8 @@ function! s:Gdi(...) abort
          if arg1 == ''
              call fugitive#Diffsplit(0, 1, "vert", '', [])
          elseif tolower(arg1) == 'o'
@@ -1938,7 +2326,7 @@ index d5874fe5..23621868 100644
          else
              call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
          endif
-@@ -424,7 +425,7 @@ function! s:Gdi2(...) abort
+@@ -424,7 +430,7 @@ function! s:Gdi2(...) abort
      let worktree = Cd2Worktree()
      let output = 'gdi2.findresult'
      let arg1 = (a:0 >= 1) ? a:1 : ''
@@ -1947,7 +2335,7 @@ index d5874fe5..23621868 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -475,18 +476,17 @@ endfunction
+@@ -475,18 +481,17 @@ endfunction
  
  function! s:Gdif(...) abort
      let worktree = Cd2Worktree()
@@ -1972,7 +2360,7 @@ index d5874fe5..23621868 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -516,10 +516,15 @@ endfunction
+@@ -516,10 +521,15 @@ endfunction
  
  function! s:ApplyBranch(args, ...) abort
      let worktree = Cd2Worktree()
@@ -1989,7 +2377,7 @@ index d5874fe5..23621868 100644
  function! s:Gshow(args, ...) abort
      let worktree = Cd2Worktree()
      let output = a:args . '.diff'
-@@ -527,7 +532,19 @@ function! s:Gshow(args, ...) abort
+@@ -527,7 +537,19 @@ function! s:Gshow(args, ...) abort
      call OpenOrSwitch(output, 'vs')
  endfunction
  
@@ -2009,10 +2397,56 @@ index d5874fe5..23621868 100644
      let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
      exec '!rm ' . newFile
      exec 'w ' . newFile
-@@ -559,6 +576,41 @@ function! s:CatMove(...) abort
+@@ -546,6 +568,21 @@ function! s:CatPlay(...) abort
+     call OpenOrSwitch(b:output, 'vs')
+ endfunction
+ 
++function! s:SelectMove(...) abort
++    if &modified
++        echom 'Please check and save your file first!!!'
++        return 0
++    endif
++
++    if a:0 >= 1
++        let b:output = expand("%:p") . '.runresult'
++        exec '!~/loadrc/bashrc/select_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '" 2>&1 | tee ' . b:output 
++        call OpenOrSwitch(b:output, 'vs')
++    endif
++
++    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
++endfunction
++
+ function! s:CatMove(...) abort
+     if &modified
+         echom 'Please check and save your file first!!!'
+@@ -559,6 +596,65 @@ function! s:CatMove(...) abort
      call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
  endfunction
  
++function! s:FileMove(...) abort
++    if a:0 >= 1
++        let curword = GetWord()
++        let b:netrw_curdir = getcwd()
++        let map_escape = "<|\n\r\\\<C-V>\""
++        let mapsafecurdir = escape(b:netrw_curdir, map_escape)
++        let oldname = ComposePath(mapsafecurdir, curword)
++
++        if filereadable(oldname)
++            exec '!~/loadrc/bashrc/file_move.sh ' . '"' .  oldname . '"' . ' ' . '"' . a:1 . '"'
++            let newname = a:1 . '/' . substitute(system("basename " . '"' . oldname . '"'), '\n', '', '')
++            let newname = substitute(system("realpath " . '"' . newname . '"'), '\n', '', '')
++            let newname = substitute(newname, getcwd(), '.', 'e')
++            call setline('.', '"' . newname . '"')
++            w!
++            call UpdateProj()
++        endif
++
++    endif
++
++    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
++endfunction
++
++
 +function! s:AppendRate(...) abort
 +    if a:0 >= 1
 +        let curword = GetWord()
@@ -2051,7 +2485,7 @@ index d5874fe5..23621868 100644
  function! s:CatDu(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -585,11 +637,6 @@ function! s:Tail() abort
+@@ -585,11 +681,6 @@ function! s:Tail() abort
      exec '!tail -f ' . expand("%:p")
  endfunction
  
@@ -2063,7 +2497,7 @@ index d5874fe5..23621868 100644
  function! s:Dps() abort
      let worktree = Cd2Worktree()
      silent exec '!~/loadrc/dockerrc/dps.sh'
-@@ -640,7 +687,10 @@ function! s:Prune() abort
+@@ -640,7 +731,10 @@ function! s:Prune() abort
      call asyncrun#run('<bang>', '', '~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
  endfunction
  
@@ -2075,7 +2509,7 @@ index d5874fe5..23621868 100644
      call Cd2ProjectRoot("files.proj")
  
      if expand('%:t') != 'index'
-@@ -649,7 +699,7 @@ function! s:Fr(find, replace) abort
+@@ -649,14 +743,14 @@ function! s:Fr(find, replace) abort
          let fileList = "files.proj"
      endif
  
@@ -2084,7 +2518,16 @@ index d5874fe5..23621868 100644
      call s:Gs()
  endfunction
  
-@@ -671,7 +721,7 @@ function! s:Gfix() abort
+ function! s:FindDeleted() abort
+     call Cd2Worktree()
+-    silent exec '!~/loadrc/gitrc/find_deleted.sh 2>&1 | tee find_deleted.findresult'
+-    call OpenOrSwitch('find_deleted.findresult', 'vs')
++    silent exec '!~/loadrc/gitrc/find_deleted.sh 2>&1 | tee find_deleted.runresult'
++    call OpenOrSwitch('find_deleted.runresult', 'vs')
+ endfunction
+ 
+ function! s:Gwap() abort
+@@ -671,7 +765,7 @@ function! s:Gfix() abort
  endfunction
  
  function! s:Reapply() abort
@@ -2093,7 +2536,7 @@ index d5874fe5..23621868 100644
          echom 'Please only run on *gdio.diff!!!'
          return 0
      endif
-@@ -701,3 +751,5 @@ function! s:GenerateIpynb() abort
+@@ -701,3 +795,5 @@ function! s:GenerateIpynb() abort
      exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
      w
  endfunction
@@ -2227,10 +2670,10 @@ index 5fd4a230..cbae7bd5 100644
 +    endif
 +endfunction
 diff --git a/vimrc/.vim/plugin/netrw.vim b/vimrc/.vim/plugin/netrw.vim
-index 56c73821..832d05c3 100644
+index 56c73821..0811cc25 100644
 --- ./vimrc/.vim/plugin/netrw.vim
 +++ ./vimrc/.vim/plugin/netrw.vim
-@@ -55,18 +55,10 @@ fun! ComposePath(base, subdir)
+@@ -55,18 +55,11 @@ fun! ComposePath(base, subdir)
      return ret
  endfun
  fun! LocalRename() range
@@ -2248,6 +2691,7 @@ index 56c73821..832d05c3 100644
 -        let newname = substitute(newname, getcwd(), '.', 'e')
 -        call setline('.', '"' . newname . '"')
 -        w!
++    let curline = substitute(curline, '\\', '', 'g')
 +    exec '!~/loadrc/bashrc/rename.sh ' . curline . ' ' . nxtline
 +    normal dd
      call UpdateProj()
@@ -2763,9 +3207,18 @@ index 00000000..edfddbb7
 +printf "%s\n" "${result[@]}" > "$1".tmp
 +cp -fv "$1".tmp "$1"
 diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
-index e14de500..14ffa5a3 100755
+index e14de500..da1c895d 100755
 --- ./vishrc/vrun.sh
 +++ ./vishrc/vrun.sh
+@@ -27,7 +27,7 @@ rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$file" "files.proj")
+ rfile=$(realpath --relative-to="$rootFolder" "$file")
+ rfolder=$(realpath --relative-to="$rootFolder" $(dirname "$file"))
+ 
+-if [[ "$file" = *'Dockerfile' ]] 
++if [[ "$file" = *'Dockerfile'* ]] 
+ then
+     cd "$rootFolder"
+     docker build -f "$rfile" "$rfolder"
 @@ -58,7 +58,7 @@ case $extension in
      sh)
          if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
@@ -2784,3 +3237,29 @@ index e14de500..14ffa5a3 100755
          else
              SCRIPT=$(realpath "$file")
              SCRIPTPATH=$(dirname "$SCRIPT")
+diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
+new file mode 160000
+index 00000000..36940376
+--- /dev/null
++++ ./wifi-auto-reconnect
+@@ -0,0 +1 @@
++Subproject commit 36940376d1ec457ddc9779a3835ab33c086d1dc6
+diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
+index 430298e0..cb9795ec 100755
+--- ./wifirc/autoconnect.sh
++++ ./wifirc/autoconnect.sh
+@@ -11,12 +11,12 @@ DEV=$(
+     done
+ ) 
+ 
+-TARGET_ID=$(nmcli connection show | grep $DEV | sed 's/.*[^0-9a-z]\(\([0-9a-z]*-\)\{4\}[0-9a-z]*\).*/\1/g')
++TARGET_ID=$(nmcli connection show | grep wifi | sed 's/.*[^0-9a-z]\(\([0-9a-z]*-\)\{4\}[0-9a-z]*\).*/\1/g')
+ 
+ if [ "$CONNECTION_UUID" = "$TARGET_ID" ]
+ then
+     if [ "$2" = "down" ]; then
+-        sleep 10
++        sleep 5
+         nmcli con up uuid $CONNECTION_UUID
+     fi
+ fi
