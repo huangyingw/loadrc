@@ -59,7 +59,11 @@ fun! LocalRename() range
     let nxtline = getline(line(".") + 1)
 
     let curline = substitute(curline, '\\', '', 'g')
-    exec '!~/loadrc/bashrc/rename.sh ' . curline . ' ' . nxtline
+    let curline = substitute(curline, "^\"", "", "")
+    let curline = substitute(curline, "\"$", "", "")
+    let nxtline = substitute(nxtline, "^\"", "", "")
+    let nxtline = substitute(nxtline, "\"$", "", "")
+    exec '!~/loadrc/bashrc/rename.sh ' . '"' .  curline . '"'  . ' ' . '"' .  nxtline . '"'
     normal dd
     call UpdateProj()
 endfun
