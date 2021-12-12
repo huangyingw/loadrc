@@ -16,6 +16,7 @@ apt-get install -y \
     cscope \
     curl \
     datamash \
+    dialog \
     dkms \
     dos2unix \
     exuberant-ctags \
