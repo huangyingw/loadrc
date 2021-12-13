@@ -343,11 +343,11 @@ endfunction
 function! GitSearch()
     normal! gvy<CR>
     let keyword = GetEscapedKeyword(@@)
-    let b:result = GetEscapedResult(keyword)
+    let b:result = GetEscapedResult(keyword) . '.findresult'
 
     call Cd2Worktree()
     silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  keyword . '"' . ' "' .  b:result . '"'
-    call OpenOrSwitch(b:result . '.gsearch.findresult', 'vs')
+    call OpenOrSwitch(b:result, 'vs')
     call HighlightKeyword(keyword)
 endfunction
 
