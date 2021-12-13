@@ -994,12 +994,12 @@ index 1e941ff7..5e9420df 100755
 +    ping mini2
  fi
 diff --git a/cscope b/cscope
-index 18a46b20..40e22631 160000
+index 18a46b20..41fab780 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
++Subproject commit 41fab780d1ca14aad7467436000b0a8ec550c09f
 diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
 index 58429e06..51c59336 100755
 --- ./ffmpegrc/concat.sh
