@@ -1,4 +1,3 @@
 #!/bin/zsh
-find_result="$2".gsearch.findresult
-echo "find_result --> $find_result"
-git grep -nH -C2 "$1" $(git rev-list --all) &> "$find_result"
+
+git log --binary --ignore-all-space --ignore-blank-lines --ignore-cr-at-eol --ignore-space-at-eol --ignore-space-change -p -G "$1" &> "$2"
