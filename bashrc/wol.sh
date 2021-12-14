@@ -8,10 +8,10 @@ then
     wakeonlan 00:e0:4c:68:03:cd
     wakeonlan 00:e0:4c:00:07:a8
     ping server
-elif [ "$target" = "mldonkey" ]
+elif [ "$target" = "haikou" ]
 then
-    wakeonlan 00:01:c0:12:92:a2 #mldonkey
-    ping mldonkey
+    wakeonlan 00:01:c0:12:92:a2 #haikou
+    ping haikou
 elif [ "$target" = "thinkpad" ]
 then
     wakeonlan 00:21:cc:c0:53:a9 #thinkpad
