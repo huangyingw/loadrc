@@ -44,4 +44,8 @@ then
     wakeonlan f4:4e:e3:fd:1c:e5 #mini2 wifi
     wakeonlan 00:E0:4C:00:07:A8 #mini2 wired
     ping mini2
+elif [ "$target" = "mba" ]
+then
+    wakeonlan B0:BE:83:1F:9E:EF #wifi
+    ping mba
 fi
