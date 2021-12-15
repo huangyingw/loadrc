@@ -9,6 +9,6 @@ fi
 inputFile="$1"
 inputBak="$inputFile".bak
 awk -F":| " '{print $1}' "$inputFile" > "$inputBak"
-sed -i '/^$/d' "$inputBak"
+sed -i.bak "/^$/d" "$inputBak"
 sort -u "$inputBak" -o "$inputBak"
 echo "$inputBak"
