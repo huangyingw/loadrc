@@ -25,11 +25,13 @@ do
     TARGET_BRANCH=$(echo "$TARGET_BRANCH" | sed "s/^$remote\///g")
 done
 
-echo "TARGET_BRANCH --> $TARGET_BRANCH" 
+echo "TARGET_BRANCH --> $TARGET_BRANCH"
 
 git checkout -b "$TARGET_BRANCH" || \
     git checkout "$TARGET_BRANCH" &&
     git merge "$current_branch"
+
+git merge "$1"
 
 if [ -n "$clean" ]
 then
