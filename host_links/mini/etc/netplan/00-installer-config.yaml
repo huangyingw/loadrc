@@ -1,0 +1,12 @@
+network:
+  ethernets:
+    eth0:
+      addresses:
+        - 192.168.31.140/24 
+  version: 2
+
+  bridges:
+    br0:
+      interfaces: [eth0]
+      addresses:
+        - 192.168.31.140/24 
