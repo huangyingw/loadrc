@@ -610,7 +610,6 @@ function! s:FileMove(...) abort
             let newname = substitute(system("realpath " . '"' . newname . '"'), '\n', '', '')
             let newname = substitute(newname, getcwd(), '.', 'e')
             call setline('.', '"' . newname . '"')
-            w!
             call UpdateProj()
         endif
 
