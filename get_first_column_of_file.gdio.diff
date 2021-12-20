@@ -632,14 +632,14 @@ index f58a2ee7..dcc8f356 100755
      xargs sed -i.bak  "s/${FIND}/${REPLACE}/g" < "$3"
 +fi
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
-index 83e2c748..1bc2abee 100755
+index 83e2c748..19fda7d5 100755
 --- ./bashrc/generate_files_proj.sh
 +++ ./bashrc/generate_files_proj.sh
 @@ -15,6 +15,8 @@ then
      exit 1
  fi
  
-+mkdir -p .git
++git init
 +
  TARGETEDIR=`realpath "$PWD"`
  cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
@@ -1004,7 +1004,7 @@ index 7042dce9..0e670bd9 100755
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
 diff --git a/bashrc/wol.sh b/bashrc/wol.sh
-index 1e941ff7..d13e83d3 100755
+index 1e941ff7..f7b1920a 100755
 --- ./bashrc/wol.sh
 +++ ./bashrc/wol.sh
 @@ -8,10 +8,10 @@ then
@@ -1021,7 +1021,7 @@ index 1e941ff7..d13e83d3 100755
  elif [ "$target" = "thinkpad" ]
  then
      wakeonlan 00:21:cc:c0:53:a9 #thinkpad
-@@ -39,4 +39,13 @@ then
+@@ -39,4 +39,17 @@ then
      wakeonlan 1c:87:2c:b7:a1:ce #movie wifi
      wakeonlan -i 192.168.1.2 00:0a:cd:1e:e9:be #movie
      ping movie
@@ -1034,6 +1034,10 @@ index 1e941ff7..d13e83d3 100755
 +then
 +    wakeonlan B0:BE:83:1F:9E:EF #wifi
 +    ping mba
++elif [ "$target" = "mbp" ]
++then
++    wakeonlan AC:BC:32:87:BF:DB #wifi
++    ping mbp
  fi
 diff --git a/cscope b/cscope
 index 18a46b20..41fab780 160000
@@ -1585,7 +1589,7 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..f088bf7e 100644
+index 425c9192..349d8841 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
 @@ -9,7 +9,7 @@
@@ -1603,17 +1607,31 @@ index 425c9192..f088bf7e 100644
  10.211.55.5 macos
 +192.168.123.177 ubuntu20.04
 +# 172.27.174.184 mbp
-+# 192.168.31.96 mbp
++192.168.31.96 mbp
 +192.168.123.80 u2110
 +192.168.31.99 haikou
 +192.168.31.223 transmission
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
-diff --git a/hosts/server/etc/netplan/00-installer-config.yaml b/host_links/mini/etc/netplan/00-installer-config.yaml
-similarity index 100%
-rename from hosts/server/etc/netplan/00-installer-config.yaml
-rename to host_links/mini/etc/netplan/00-installer-config.yaml
+diff --git a/host_links/mini/etc/netplan/00-installer-config.yaml b/host_links/mini/etc/netplan/00-installer-config.yaml
+new file mode 100644
+index 00000000..fc3d765a
+--- /dev/null
++++ ./host_links/mini/etc/netplan/00-installer-config.yaml
+@@ -0,0 +1,12 @@
++network:
++  ethernets:
++    eth0:
++      addresses:
++        - 192.168.31.140/24 
++  version: 2
++
++  bridges:
++    br0:
++      interfaces: [eth0]
++      addresses:
++        - 192.168.31.140/24 
 diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
 index 50886663..1079d97e 100644
 --- ./host_links/server/etc/hosts
@@ -1879,6 +1897,10 @@ index 328d9be3..b4aaeb9c 100755
      ../downloads/"$NUM"/ \
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
+diff --git a/hosts/server/etc/netplan/00-installer-config.yaml b/linux/etc/netplan/00-installer-config.yaml
+similarity index 100%
+rename from hosts/server/etc/netplan/00-installer-config.yaml
+rename to linux/etc/netplan/00-installer-config.yaml
 diff --git a/linux_links/etc/crypttab b/linux_links/etc/crypttab
 index 191dd600..ebd44801 100644
 --- ./linux_links/etc/crypttab
@@ -1904,11 +1926,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..69dcd1e2
+index 00000000..235c39e9
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 69dcd1e21e537f08409cf4b686de337cda463c03-dirty
++Subproject commit 235c39e9a810e1e82aa9e18bd2d2eff1df968a3c-dirty
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -1943,19 +1965,6 @@ index 13a0cf4c..d8d70042 100755
              else:
                  subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
          else:
-diff --git a/set_linux_configuration.sh b/set_linux_configuration.sh
-index ced4c25c..e3f0f6f7 100755
---- ./set_linux_configuration.sh
-+++ ./set_linux_configuration.sh
-@@ -15,7 +15,7 @@ done
- 
- find linux/ -type f | while read ss; \
- do \
--    cp -fv --remove-destination "$ss" "/$(echo "$ss" | sed "s/linux\///g")"; \
-+    cp -nv --remove-destination "$ss" "/$(echo "$ss" | sed "s/linux\///g")"; \
- done
- 
- grub-mkconfig -o /boot/grub/grub.cfg
 diff --git a/setup.sh b/setup.sh
 index cc9fd3f1..608329fd 100755
 --- ./setup.sh
@@ -2111,12 +2120,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..44fb5553 160000
+index cc6342c3..15cbdf16 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 44fb5553369592286130b35d2bb14dec8ff48be7-dirty
++Subproject commit 15cbdf166ab253b60c32062cb5f3607d51708fec-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -2153,12 +2162,12 @@ index dbe8b1e2..bb9753ce 160000
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
 +Subproject commit bb9753ceba554d673b04f8b878b2d1f4febf6807
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
-index cfac13ef..63196768 160000
+index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
 +++ ./vimrc/.vim/bundle/vim-buffergator
 @@ -1 +1 @@
 -Subproject commit cfac13efd7832866c134e6fa1b213940e8c0c4d7
-+Subproject commit 631967689bae60870180b41fd590ff93d673b82d-dirty
++Subproject commit c663ae0cf3e9337d4639ad3bb3235fdfccb4e488
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
@@ -2195,12 +2204,12 @@ index 00000000..d6adab9d
 @@ -0,0 +1 @@
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..a4595b48 160000
+index 3b379635..582c4f6c 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit a4595b48a83824e36c1ebe48b574aa8624632695
++Subproject commit 582c4f6cf310b2b3044c366c726a90c0010fc45d
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
@@ -2386,7 +2395,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..bcf02e42 100644
+index d5874fe5..03e52884 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,17 @@
@@ -2622,7 +2631,7 @@ index d5874fe5..bcf02e42 100644
  function! s:CatMove(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -559,6 +596,64 @@ function! s:CatMove(...) abort
+@@ -559,6 +596,63 @@ function! s:CatMove(...) abort
      call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
  endfunction
  
@@ -2640,7 +2649,6 @@ index d5874fe5..bcf02e42 100644
 +            let newname = substitute(system("realpath " . '"' . newname . '"'), '\n', '', '')
 +            let newname = substitute(newname, getcwd(), '.', 'e')
 +            call setline('.', '"' . newname . '"')
-+            w!
 +            call UpdateProj()
 +        endif
 +
@@ -2687,7 +2695,7 @@ index d5874fe5..bcf02e42 100644
  function! s:CatDu(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -585,11 +680,6 @@ function! s:Tail() abort
+@@ -585,11 +679,6 @@ function! s:Tail() abort
      exec '!tail -f ' . expand("%:p")
  endfunction
  
@@ -2699,7 +2707,7 @@ index d5874fe5..bcf02e42 100644
  function! s:Dps() abort
      let worktree = Cd2Worktree()
      silent exec '!~/loadrc/dockerrc/dps.sh'
-@@ -640,7 +730,10 @@ function! s:Prune() abort
+@@ -640,7 +729,10 @@ function! s:Prune() abort
      call asyncrun#run('<bang>', '', '~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
  endfunction
  
@@ -2711,7 +2719,7 @@ index d5874fe5..bcf02e42 100644
      call Cd2ProjectRoot("files.proj")
  
      if expand('%:t') != 'index'
-@@ -649,14 +742,14 @@ function! s:Fr(find, replace) abort
+@@ -649,14 +741,14 @@ function! s:Fr(find, replace) abort
          let fileList = "files.proj"
      endif
  
@@ -2729,7 +2737,7 @@ index d5874fe5..bcf02e42 100644
  endfunction
  
  function! s:Gwap() abort
-@@ -671,7 +764,7 @@ function! s:Gfix() abort
+@@ -671,7 +763,7 @@ function! s:Gfix() abort
  endfunction
  
  function! s:Reapply() abort
@@ -2738,7 +2746,7 @@ index d5874fe5..bcf02e42 100644
          echom 'Please only run on *gdio.diff!!!'
          return 0
      endif
-@@ -701,3 +794,5 @@ function! s:GenerateIpynb() abort
+@@ -701,3 +793,5 @@ function! s:GenerateIpynb() abort
      exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
      w
  endfunction
