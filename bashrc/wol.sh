@@ -48,4 +48,8 @@ elif [ "$target" = "mba" ]
 then
     wakeonlan B0:BE:83:1F:9E:EF #wifi
     ping mba
+elif [ "$target" = "mbp" ]
+then
+    wakeonlan AC:BC:32:87:BF:DB #wifi
+    ping mbp
 fi
