@@ -10,5 +10,9 @@ else
     cscope -CdL -f cscope.out -"$3""$keyword" > "$find_result"
 fi
 
-awk 'BEGIN{FS=OFS=":"} {gsub(/ /,"\\\\&",$1)} 1' "$find_result" > "$find_result".bak
+# https://stackoverflow.com/questions/70444758/how-to-regex-replace-before-colon
+# awk 'BEGIN {FS=OFS=":"}{if(NF>1)gsub(" ","\\ ",$1)}1' "$find_result" > "$find_result".bak 
+# perl -pe 's/\G[^ :]*\K /\\ /g' "$find_result" > "$find_result".bak   
+sed -E 's/:/\n:/;h;s/ /\\ /g;G;s/\n.*\n//' "$find_result" > "$find_result".bak  
+
 cp -fv "$find_result".bak "$find_result"
