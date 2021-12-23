@@ -9,3 +9,6 @@ then
 else
     cscope -CdL -f cscope.out -"$3""$keyword" > "$find_result"
 fi
+
+awk 'BEGIN{FS=OFS=":"} {gsub(/ /,"\\\\&",$1)} 1' "$find_result" > "$find_result".bak
+cp -fv "$find_result".bak "$find_result"
