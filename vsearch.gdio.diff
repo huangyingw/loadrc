@@ -3503,16 +3503,19 @@ index e14de500..da1c895d 100755
              SCRIPT=$(realpath "$file")
              SCRIPTPATH=$(dirname "$SCRIPT")
 diff --git a/vishrc/vsearch.sh b/vishrc/vsearch.sh
-index 48f7223b..a0bd80ec 100755
+index 48f7223b..7385adb1 100755
 --- ./vishrc/vsearch.sh
 +++ ./vishrc/vsearch.sh
-@@ -9,3 +9,7 @@ then
+@@ -9,3 +9,10 @@ then
  else
      cscope -CdL -f cscope.out -"$3""$keyword" > "$find_result"
  fi
 +
 +# https://stackoverflow.com/questions/70444758/how-to-regex-replace-before-colon
-+awk 'BEGIN {FS=OFS=":"}{if(NF>1)gsub(" ","\\ ",$1)}1' "$find_result" > "$find_result".bak 
++# awk 'BEGIN {FS=OFS=":"}{if(NF>1)gsub(" ","\\ ",$1)}1' "$find_result" > "$find_result".bak 
++# perl -pe 's/\G[^ :]*\K /\\ /g' "$find_result" > "$find_result".bak   
++sed -E 's/:/\n:/;h;s/ /\\ /g;G;s/\n.*\n//' "$find_result" > "$find_result".bak  
++
 +cp -fv "$find_result".bak "$find_result"
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
