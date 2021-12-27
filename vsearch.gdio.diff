@@ -1040,12 +1040,12 @@ index 1e941ff7..f7b1920a 100755
 +    ping mbp
  fi
 diff --git a/cscope b/cscope
-index 18a46b20..41fab780 160000
+index 18a46b20..40e22631 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 41fab780d1ca14aad7467436000b0a8ec550c09f
++Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
 diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
 index 58429e06..51c59336 100755
 --- ./ffmpegrc/concat.sh
@@ -1933,11 +1933,51 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..4f6f53d2
+index 00000000..6dab6b1c
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 4f6f53d246d389b62e43632ba539a834b016e8ba-dirty
++Subproject commit 6dab6b1c03cf4fc66edc6ff22e978ab0ece78f35
+diff --git a/networkrc/ping.sh b/networkrc/ping.sh
+new file mode 100755
+index 00000000..ce000442
+--- /dev/null
++++ ./networkrc/ping.sh
+@@ -0,0 +1,15 @@
++#!/bin/zsh
++((count = 10))                           # Maximum number to try.
++
++while [[ $count -ne 0 ]] ; do
++    ping -c 1 8.8.8.8                    # Try once.
++    rc=$?
++    if [[ $rc -eq 0 ]] ; then
++        ((count = 1))                    # If okay, flag loop exit.
++    else
++        sleep 1                          # Minimise network storm.
++    fi
++    ((count = count - 1))                # So we don't go forever.
++done
++
++exit $rc
+diff --git a/networkrc/ping.test.sh b/networkrc/ping.test.sh
+new file mode 100755
+index 00000000..4529c81e
+--- /dev/null
++++ ./networkrc/ping.test.sh
+@@ -0,0 +1,13 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++./ping.sh
++rc=$?
++
++if [[ $rc -eq 0 ]] ; then                # Make final determination.
++    echo "say The internet is back up."
++else
++    echo "say Timeout."
++fi
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
 index 00000000..80d3b345
@@ -2127,12 +2167,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..44fb5553 160000
+index cc6342c3..15cbdf16 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 44fb5553369592286130b35d2bb14dec8ff48be7-dirty
++Subproject commit 15cbdf166ab253b60c32062cb5f3607d51708fec-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -2169,12 +2209,12 @@ index dbe8b1e2..bb9753ce 160000
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
 +Subproject commit bb9753ceba554d673b04f8b878b2d1f4febf6807
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
-index cfac13ef..63196768 160000
+index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
 +++ ./vimrc/.vim/bundle/vim-buffergator
 @@ -1 +1 @@
 -Subproject commit cfac13efd7832866c134e6fa1b213940e8c0c4d7
-+Subproject commit 631967689bae60870180b41fd590ff93d673b82d-dirty
++Subproject commit c663ae0cf3e9337d4639ad3bb3235fdfccb4e488
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
 index 00000000..0a6ab17e
@@ -2183,12 +2223,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..cc9dd046 160000
+index 8468d6a8..bc262bea 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit cc9dd046d279871d2456afd71d100f8f67f99c8a-dirty
++Subproject commit bc262beae1fbfedd8f8e39254ded5f462b673090-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -2211,12 +2251,12 @@ index 00000000..d6adab9d
 @@ -0,0 +1 @@
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..a4595b48 160000
+index 3b379635..582c4f6c 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit a4595b48a83824e36c1ebe48b574aa8624632695
++Subproject commit 582c4f6cf310b2b3044c366c726a90c0010fc45d
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
@@ -3503,10 +3543,10 @@ index e14de500..da1c895d 100755
              SCRIPT=$(realpath "$file")
              SCRIPTPATH=$(dirname "$SCRIPT")
 diff --git a/vishrc/vsearch.sh b/vishrc/vsearch.sh
-index 48f7223b..7385adb1 100755
+index 48f7223b..dbe5c9d1 100755
 --- ./vishrc/vsearch.sh
 +++ ./vishrc/vsearch.sh
-@@ -9,3 +9,10 @@ then
+@@ -9,3 +9,9 @@ then
  else
      cscope -CdL -f cscope.out -"$3""$keyword" > "$find_result"
  fi
@@ -3514,9 +3554,8 @@ index 48f7223b..7385adb1 100755
 +# https://stackoverflow.com/questions/70444758/how-to-regex-replace-before-colon
 +# awk 'BEGIN {FS=OFS=":"}{if(NF>1)gsub(" ","\\ ",$1)}1' "$find_result" > "$find_result".bak 
 +# perl -pe 's/\G[^ :]*\K /\\ /g' "$find_result" > "$find_result".bak   
-+sed -E 's/:/\n:/;h;s/ /\\ /g;G;s/\n.*\n//' "$find_result" > "$find_result".bak  
-+
-+cp -fv "$find_result".bak "$find_result"
++# sed -i.bak -E 's/:/\n:/;h;s/ /\\ /g;G;s/\n.*\n//' "$find_result"
++awk -i inplace 'BEGIN {FS=OFS=":"}{if(NF>1)gsub(" ","\\ ",$1)}1' "$find_result"
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
 index 00000000..36940376
