@@ -81,3 +81,9 @@ Error detected while processing function provider#clipboard#Call[6]..6:
 line    8:
 E15: Invalid expression: match(&clipboard, '\v(unnamed|unnamedplus)') >= 0 && get(s:selections[a:reg].data, 0, []) ==# clipboard_data
 clipboard: provider returned invalid data
+Error detected while processing function CSCSearch[12]..GetEscapedResult:
+line   17:
+E33: No previous substitute regular expression
+Error detected while processing function VFilter[5]..Filter2Findresult[3]..GetEscapedResult:
+line   17:
+E33: No previous substitute regular expression
