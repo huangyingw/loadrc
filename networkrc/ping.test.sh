@@ -6,7 +6,8 @@ cd "$SCRIPTPATH"
 ./ping.sh
 rc=$?
 
-if [[ $rc -eq 0 ]] ; then                # Make final determination.
+if [[ $rc -eq 0 ]]
+then
     echo "say The internet is back up."
 else
     echo "say Timeout."
