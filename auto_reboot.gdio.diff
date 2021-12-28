@@ -2118,7 +2118,7 @@ index 0aae8085..2d88e3a8 100755
 -mysql -v -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
 +mysql -v "$option" -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
 diff --git a/transmissionrc/auto_reboot.sh b/transmissionrc/auto_reboot.sh
-new file mode 100644
+new file mode 100755
 index 00000000..19236b88
 --- /dev/null
 +++ ./transmissionrc/auto_reboot.sh
