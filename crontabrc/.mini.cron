@@ -1,2 +1,3 @@
 */10 * * * * /usr/bin/expressvpn connect smart 
 * * * * * /root/loadrc/transmissionrc/auto_restart.sh
+*/30 * * * * /root/loadrc/transmissionrc/auto_reboot.sh 
