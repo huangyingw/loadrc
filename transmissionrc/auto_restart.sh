@@ -1,7 +1,6 @@
 #!/bin/zsh
 
-while /etc/init.d/transmission-daemon status | grep "Active: failed" > /dev/null
+while ! (/etc/init.d/transmission-daemon status | grep -q "Active: active")
 do
-    sleep 3
-    /etc/init.d/transmission-daemon restart
+    /root/loadrc/bashrc/check_running.sh /root/loadrc/transmissionrc/restart.sh
 done
