@@ -1028,21 +1028,21 @@ index 1e941ff7..f7b1920a 100755
 +    ping mbp
  fi
 diff --git a/crontabrc/.mini.cron b/crontabrc/.mini.cron
-index d8126721..0974e6a9 100644
+index d8126721..d5235589 100644
 --- ./crontabrc/.mini.cron
 +++ ./crontabrc/.mini.cron
 @@ -1,2 +1,3 @@
- */10 * * * * /usr/bin/expressvpn connect smart 
+ */10 * * * * /usr/bin/expressvpn connect smart
 -0 22-23,0-8 * * * /root/loadrc/crontabrc/mldonkey_start.sh
 +* * * * * /root/loadrc/transmissionrc/auto_restart.sh
-+*/30 * * * * /root/loadrc/transmissionrc/auto_reboot.sh 
++* * * * * /root/loadrc/transmissionrc/auto_reboot.sh
 diff --git a/cscope b/cscope
-index 18a46b20..41fab780 160000
+index 18a46b20..40e22631 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 41fab780d1ca14aad7467436000b0a8ec550c09f
++Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
 diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
 index 58429e06..51c59336 100755
 --- ./ffmpegrc/concat.sh
@@ -1777,6 +1777,15 @@ index 62d92acb..e34ba490 100755
  
  brew cask install \
      kdiff3 \
+diff --git a/install_cubbit.sh b/install_cubbit.sh
+new file mode 100755
+index 00000000..836c58f7
+--- /dev/null
++++ ./install_cubbit.sh
+@@ -0,0 +1,3 @@
++#!/bin/zsh
++
++bash -c "echo $(curl -fsSl https://get.cubbit.io/desktop/linux/)"
 diff --git a/install_gh.sh b/install_gh.sh
 new file mode 100755
 index 00000000..c3363697
@@ -1956,11 +1965,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..09df8aed
+index 00000000..6dab6b1c
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 09df8aed4c686afa50a8c7a693de43b34b1f2a43
++Subproject commit 6dab6b1c03cf4fc66edc6ff22e978ab0ece78f35
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..ce000442
@@ -2133,14 +2142,26 @@ index 0aae8085..2d88e3a8 100755
 +mysql -v "$option" -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
 diff --git a/transmissionrc/auto_reboot.sh b/transmissionrc/auto_reboot.sh
 new file mode 100755
-index 00000000..19236b88
+index 00000000..6bf78f1f
 --- /dev/null
 +++ ./transmissionrc/auto_reboot.sh
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,23 @@
 +#!/bin/zsh
 +
-+/root/loadrc/networkrc/ping.sh 
-+rc=$?
++((count = 10))                           # Maximum number to try.
++
++while [[ $count -ne 0 ]] ; do
++    ping -c 1 8.8.8.8                    # Try once.
++    rc=$?
++
++    if [[ $rc -eq 0 ]] ; then
++        ((count = 1))                    # If okay, flag loop exit.
++    else
++        sleep 1                          # Minimise network storm.
++    fi
++
++    ((count = count - 1))                # So we don't go forever.
++done
 +
 +if [[ $rc -eq 0 ]]
 +then
@@ -2313,12 +2334,12 @@ index 00000000..d6adab9d
 @@ -0,0 +1 @@
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..3bac0233 160000
+index 3b379635..582c4f6c 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit 3bac0233a49d2a00805c66bf17d3e2ea114b05d1
++Subproject commit 582c4f6cf310b2b3044c366c726a90c0010fc45d
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
