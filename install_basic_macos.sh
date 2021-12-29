@@ -42,6 +42,7 @@ brew install \
     minikube \
     openssl \
     rename \
+    rsync \
     tig \
     w3m \
     wakeonlan \

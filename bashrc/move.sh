@@ -11,18 +11,23 @@ then
     mkdir -p "$2"
 fi
 
-SOURCE="$1"
-realpath "$1" && SOURCE=$(realpath "$1")
+source="$1"
+realpath "$1" && source=$(realpath "$1")
 
-TARGET="$2"
-realpath "$2" && TARGET=$(realpath "$2")
+target="$2"
+realpath "$2" && target=$(realpath "$2")
 
-if [ -n "$SOURCE" ] && [ -n "$TARGET" ] && [ "$SOURCE" != "$TARGET" ]
+if [ -n "$source" ] && [ -n "$target" ] && [ "$source" != "$target" ]
 then
-    rsync --remove-source-files -aHSv --progress --force "$SOURCE/" "$TARGET/" ; \
-        ~/loadrc/bashrc/rmEmpty.sh "$SOURCE/"
+    siconv=$(~/loadrc/bashrc/get_iconv.sh "$source")
+    ticonv=$(~/loadrc/bashrc/get_iconv.sh "$target")
+
+    rsync --remove-source-files -aHSv --progress --force \
+        --iconv="$ticonv,$siconv" \
+        "$source/" "$target/" ; \
+        ~/loadrc/bashrc/rmEmpty.sh "$source/"
 else
-    echo -e "${red}same dir --> ${SOURCE} ... ${NC}"
+    echo -e "${red}same dir --> ${source} ... ${NC}"
     echo -e "${red}please choose the different dir! ... ${NC}"
     exit 1
 fi
