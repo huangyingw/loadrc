@@ -6,13 +6,17 @@ then
     exit 1
 fi
 
-SOURCE=$1
-TARGET=$2
+source=$1
+target=$2
 
-if [[ "${TARGET}" != *":"* ]] && [[ ! -d "${TARGET}" ]]
+if [[ "$target" != *":"* ]] && [[ ! -d "$target" ]]
 then
-    mkdir -p "${TARGET}"
+    mkdir -p "$target"
 fi
 
+siconv=$(~/loadrc/bashrc/get_iconv.sh "$source")
+ticonv=$(~/loadrc/bashrc/get_iconv.sh "$target")
+
 rsync -aHSv --progress --force \
-    "${SOURCE}" "${TARGET}"
+    --iconv="$siconv,$ticonv" \
+    "$source" "$target"
