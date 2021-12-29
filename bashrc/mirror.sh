@@ -41,7 +41,7 @@ siconv=$(~/loadrc/bashrc/get_iconv.sh "$source")
 ticonv=$(~/loadrc/bashrc/get_iconv.sh "$target")
 
 rsync -aHSv --progress --delete-before --force \
-    --iconv="$siconv,$ticonv" \
+    --iconv="$ticonv,$siconv" \
     "$source/" "$target/" && \
     if [ -f "${MIRRORCHECK}" ] ; \
     then \
