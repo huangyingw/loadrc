@@ -23,7 +23,7 @@ then
     ticonv=$(~/loadrc/bashrc/get_iconv.sh "$target")
 
     rsync --remove-source-files -aHSv --progress --force \
-        --iconv="$siconv,$ticonv" \
+        --iconv="$ticonv,$siconv" \
         "$source/" "$target/" ; \
         ~/loadrc/bashrc/rmEmpty.sh "$source/"
 else
