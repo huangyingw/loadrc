@@ -12,6 +12,7 @@ fi
 ./setup_remote.sh
 ./install_prerequisite.sh
 ./install_gh.sh
+./install_hub.sh
 ./install_nodejs.sh
 ./install_time_machine.sh
 ./enpass_install.sh
