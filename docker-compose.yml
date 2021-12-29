@@ -17,6 +17,9 @@ services:
             - ./.config/nvim/init.vim:/root/.config/nvim/init.vim
             - ~/.gitconfig:/root/.gitconfig
             - ~/.globalgitignore:/root/.globalgitignore
+            - /etc/hosts:/etc/hosts
+            - ~/.zsh_history:/root/.zsh_history
+            - ~/.nvm:/root/.nvm
         environment:
             - FILENAME="~/.bashrc"
         command: /bin/sh -c "/entrypoint.sh 2>&1 | tee /var/logs/containner.log"
