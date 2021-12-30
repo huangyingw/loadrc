@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+echo "" > /root/loadrc/crontab.log
+
 /root/loadrc/networkrc/ping.sh 
 rc=$?
 
