@@ -14,7 +14,7 @@ function cerror
 
 function titlize
 {
-	echo "${YELLOW}$1${RESET}"
+    echo "${YELLOW}$1${RESET}"
 }
 
 ######## COLORS ########
@@ -42,53 +42,53 @@ fi
 
 if [[ $file_manager != "skip" ]]; then
 
-	clog "[3.2] File manager detected: $file_manager. Downloading and installing dependencies"
+    clog "[3.2] File manager detected: $file_manager. Downloading and installing dependencies"
 
-	sudo apt-get update -y &>/dev/null
-	sudo apt-get install -y libappindicator1 &>/dev/null
+    sudo apt-get update -y &>/dev/null
+    sudo apt-get install -y libappindicator1 &>/dev/null
 
-	if [ $(apt-cache search python3-$file_manager | wc -l) -ne 0 ]; then
-		sudo apt-get install -y python3-$file_manager &>/dev/null
-	else
-		sudo apt-get install -y python-$file_manager &>/dev/null
-	fi
+    if [ $(apt-cache search python3-$file_manager | wc -l) -ne 0 ]; then
+        sudo apt-get install -y python3-$file_manager &>/dev/null
+    else
+        sudo apt-get install -y python-$file_manager &>/dev/null
+    fi
 
-	tmp_dir=$(mktemp -d -t cubbit-XXXXXX)
-	wget "$base_url/deps.tar.gz" -O "$tmp_dir/deps.tar.gz" &>/dev/null
-	tar xf "$tmp_dir/deps.tar.gz" -C "$tmp_dir"
+    tmp_dir=$(mktemp -d -t cubbit-XXXXXX)
+    wget "$base_url/deps.tar.gz" -O "$tmp_dir/deps.tar.gz" &>/dev/null
+    tar xf "$tmp_dir/deps.tar.gz" -C "$tmp_dir"
 
-	capitalized_file_manager="$(tr '[:lower:]' '[:upper:]' <<< ${file_manager:0:1})${file_manager:1}"
-	assets_dir="$tmp_dir/deps/assets"
+    capitalized_file_manager="$(tr '[:lower:]' '[:upper:]' <<< ${file_manager:0:1})${file_manager:1}"
+    assets_dir="$tmp_dir/deps/assets"
 
-	clog "[3.3] Copying extension icons"
-	for icon_size in `ls $assets_dir`; do
-		sudo cp $assets_dir/$icon_size/* /usr/share/icons/hicolor/$icon_size/emblems/
-	done
-	sudo gtk-update-icon-cache /usr/share/icons/hicolor/ &>/dev/null
+    clog "[3.3] Copying extension icons"
+    for icon_size in `ls $assets_dir`; do
+        sudo cp $assets_dir/$icon_size/* /usr/share/icons/hicolor/$icon_size/emblems/
+    done
+    sudo gtk-update-icon-cache /usr/share/icons/hicolor/ &>/dev/null
 
-	clog "[3.4] Installing $file_manager extension"
-	sudo cp $tmp_dir/deps/CubbitExtension.py /usr/share/$file_manager-python/extensions/CubbitExtension.py
-	rm -rf $tmp_dir &>/dev/null
-	sudo sed -i.org -e "s/Nemo/$capitalized_file_manager/g" /usr/share/$file_manager-python/extensions/CubbitExtension.py
+    clog "[3.4] Installing $file_manager extension"
+    sudo cp $tmp_dir/deps/CubbitExtension.py /usr/share/$file_manager-python/extensions/CubbitExtension.py
+    rm -rf $tmp_dir &>/dev/null
+    sudo sed -i.org -e "s/Nemo/$capitalized_file_manager/g" /usr/share/$file_manager-python/extensions/CubbitExtension.py
 
-	while [[ $selection != "Y" ]] && [[ $selection != "y" ]] && [[ $selection != "n" ]] && [[ $selection != "N" ]]; do
-		read -p "File manager need to be restarted in order to enable Cubbit sync extension. Do you want to restart it now? [Y/n]" "selection"
-		if [[ $selection == "Y" ]] || [[ $selection == "y" ]] || [[ -z $selection ]]; then
-			(killall $file_manager || true) &>/dev/null
-			selection="Y"
-		elif [[ $selection == "n" ]] || [[ $selection == "N" ]]; then
-			echo "In order to enable Cubbit sync extension you need to manually restart $file_manager (e.g. killall $file_manager)"
-		fi
-	done
+    while [[ $selection != "Y" ]] && [[ $selection != "y" ]] && [[ $selection != "n" ]] && [[ $selection != "N" ]]; do
+        read -p "File manager need to be restarted in order to enable Cubbit sync extension. Do you want to restart it now? [Y/n]" "selection"
+        if [[ $selection == "Y" ]] || [[ $selection == "y" ]] || [[ -z $selection ]]; then
+            (killall $file_manager || true) &>/dev/null
+            selection="Y"
+        elif [[ $selection == "n" ]] || [[ $selection == "N" ]]; then
+            echo "In order to enable Cubbit sync extension you need to manually restart $file_manager (e.g. killall $file_manager)"
+        fi
+    done
 else
-	clog "Your file manager ($default_file_manager) is not currently supported by Cubbit."
-	clog "Do you want to install Cubbit anyways?"
-	select yn in "Yes" "No"; do
-		case "$yn" in
-			Yes ) break;;
-			No ) exit;;
-		esac
-	done
+    clog "Your file manager ($default_file_manager) is not currently supported by Cubbit."
+    clog "Do you want to install Cubbit anyways?"
+    select yn in "Yes" "No"; do
+        case "$yn" in
+            Yes ) break;;
+            No ) exit;;
+        esac
+    done
 fi
 
 cubbit_latest=$(curl -qs https://cubbit.s3.eu-central-1.amazonaws.com/desktop/linux/latest-linux.yml | grep path | awk '{split($0,a," "); print a[2]}')
