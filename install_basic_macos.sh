@@ -43,6 +43,7 @@ brew install \
     openssl \
     rename \
     rsync \
+    sponge \
     tig \
     w3m \
     wakeonlan \
