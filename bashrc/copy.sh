@@ -18,5 +18,5 @@ siconv=$(~/loadrc/bashrc/get_iconv.sh "$source")
 ticonv=$(~/loadrc/bashrc/get_iconv.sh "$target")
 
 rsync -aHSv --progress --force \
-    --iconv="$ticonv,$siconv" \
+    --iconv="$siconv,$ticonv" \
     "$source" "$target"
