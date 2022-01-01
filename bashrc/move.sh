@@ -19,12 +19,9 @@ realpath "$2" && target=$(realpath "$2")
 
 if [ -n "$source" ] && [ -n "$target" ] && [ "$source" != "$target" ]
 then
-    siconv=$(~/loadrc/bashrc/get_iconv.sh "$source")
-    ticonv=$(~/loadrc/bashrc/get_iconv.sh "$target")
-
+    iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target") 
     rsync --remove-source-files -aHSv --progress --force \
-        --iconv="$ticonv,$siconv" \
-        "$source/" "$target/" ; \
+        "$iconvs" "$source" "$target" ; \
         ~/loadrc/bashrc/rmEmpty.sh "$source/"
 else
     echo -e "${red}same dir --> ${source} ... ${NC}"
