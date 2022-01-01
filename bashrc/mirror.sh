@@ -37,12 +37,10 @@ fi
 
 rm "$ready_file"
 
-siconv=$(~/loadrc/bashrc/get_iconv.sh "$source")
-ticonv=$(~/loadrc/bashrc/get_iconv.sh "$target")
+iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target") 
 
 rsync -aHSv --progress --delete-before --force \
-    --iconv="$ticonv,$siconv" \
-    "$source/" "$target/" && \
+    "$iconvs" "$source/" "$target/" && \
     if [ -f "${MIRRORCHECK}" ] ; \
     then \
         ~/loadrc/bashrc/sleep.sh ; \

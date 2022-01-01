@@ -498,7 +498,7 @@ index 00000000..c0515d20
 +mkdir -p "$(dirname "$target")"
 +mv -nv "$source" "$target"
 diff --git a/bashrc/copy.sh b/bashrc/copy.sh
-index 09330daf..b83ee85e 100755
+index 09330daf..f5c87c31 100755
 --- ./bashrc/copy.sh
 +++ ./bashrc/copy.sh
 @@ -6,13 +6,17 @@ then
@@ -517,12 +517,12 @@ index 09330daf..b83ee85e 100755
 +    mkdir -p "$target"
  fi
  
-+siconv=$(~/loadrc/bashrc/get_iconv.sh "$source")
-+ticonv=$(~/loadrc/bashrc/get_iconv.sh "$target")
++iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target") 
 +
++echo --iconv="$siconv,$ticonv"
  rsync -aHSv --progress --force \
 -    "${SOURCE}" "${TARGET}"
-+    --iconv="$ticonv,$siconv" \
++    "$iconvs" \
 +    "$source" "$target"
 diff --git a/bashrc/cutcommon.sh b/bashrc/cutcommon.sh
 new file mode 100755
@@ -694,22 +694,6 @@ index 7b83d343..d1f2c94c 100755
 +sed -i.bak "/^$/d" "$inputBak"
  sort -u "$inputBak" -o "$inputBak"
  echo "$inputBak"
-diff --git a/bashrc/get_iconv.sh b/bashrc/get_iconv.sh
-new file mode 100755
-index 00000000..229a6509
---- /dev/null
-+++ ./bashrc/get_iconv.sh
-@@ -0,0 +1,10 @@
-+#!/bin/zsh
-+
-+host=$(~/loadrc/bashrc/parse_host.sh "$1" )
-+
-+if ( ssh -q "$host" "uname" | grep -q Darwin )
-+then
-+    echo "utf-8-mac"
-+else
-+    echo "utf-8"
-+fi
 diff --git a/bashrc/get_iconv.test.sh b/bashrc/get_iconv.test.sh
 new file mode 100755
 index 00000000..60512395
@@ -724,6 +708,45 @@ index 00000000..60512395
 +./get_iconv.sh "u2004:~/loadrc"
 +./get_iconv.sh "huangyingw@mbp:~/loadrc"
 +./get_iconv.sh "~/loadrc"
+diff --git a/bashrc/get_iconvs.sh b/bashrc/get_iconvs.sh
+new file mode 100755
+index 00000000..96f1f96f
+--- /dev/null
++++ ./bashrc/get_iconvs.sh
+@@ -0,0 +1,33 @@
++#!/bin/zsh
++
++source=$1
++target=$2
++
++shost=$(~/loadrc/bashrc/parse_host.sh "$source")
++thost=$(~/loadrc/bashrc/parse_host.sh "$target")
++
++function get_utf_8_str()
++{
++    host=$1
++
++    if ( ssh -q "$host" "uname" | grep -q Darwin )
++    then
++        echo "utf-8-mac"
++    else
++        echo "utf-8"
++    fi
++}
++
++local_utf_8_str=$(get_utf_8_str "localhost")
++
++if [ "$shost" != "localhost" ]
++then
++    remote_utf_8_str=$(get_utf_8_str $shost)
++    echo "--iconv=$local_utf_8_str,$remote_utf_8_str"
++elif [ "$thost" != "localhost" ]
++then
++    remote_utf_8_str=$(get_utf_8_str $thost)
++    echo "--iconv=$local_utf_8_str,$remote_utf_8_str"
++else
++    echo ""
++fi
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
 index e2137142..86b5db61 100755
 --- ./bashrc/jdupes.sh
@@ -1175,12 +1198,12 @@ index d8126721..d5235589 100644
 +* * * * * /root/loadrc/transmissionrc/auto_restart.sh
 +* * * * * /root/loadrc/transmissionrc/auto_reboot.sh
 diff --git a/cscope b/cscope
-index 18a46b20..41fab780 160000
+index 18a46b20..40e22631 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 41fab780d1ca14aad7467436000b0a8ec550c09f
++Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -2009,7 +2032,7 @@ index 34269226..a8a824c3 100755
  ./install_time_machine.sh
  ./enpass_install.sh
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 62d92acb..8f48c4e8 100755
+index 62d92acb..9db54109 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
 @@ -8,14 +8,21 @@ then
@@ -2062,7 +2085,7 @@ index 62d92acb..8f48c4e8 100755
  sudo pip install --upgrade pip
  
  #./install_nx.sh
-+cp -fv /usr/bin/uname /usr/local/bin/
++cp -nv /usr/bin/uname /usr/local/bin/
 diff --git a/install_cubbit.sh b/install_cubbit.sh
 new file mode 100755
 index 00000000..836c58f7
@@ -2260,11 +2283,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..d78027b6
+index 00000000..dc0b2097
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit d78027b682e03fc88acf6941d7fa1f99bf764206-dirty
++Subproject commit dc0b209753085e6fa7cfbabf6878d53549ee13bd-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..ce000442
@@ -2589,12 +2612,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..8390e1fd 160000
+index 8468d6a8..a4a962d0 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 8390e1fdd44373a4f8447584765ee109ec629417
++Subproject commit a4a962d0049d9ffa522ac135cbd2f38eabd24d19-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -2617,12 +2640,12 @@ index 00000000..d6adab9d
 @@ -0,0 +1 @@
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..3bac0233 160000
+index 3b379635..582c4f6c 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit 3bac0233a49d2a00805c66bf17d3e2ea114b05d1
++Subproject commit 582c4f6cf310b2b3044c366c726a90c0010fc45d
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala

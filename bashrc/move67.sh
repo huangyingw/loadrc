@@ -2,7 +2,7 @@
 
 find /media/volgrp/mirror1/av/ -type f -size +100M  | while read ss
 do
-    target=$(echo "$ss" | sed 's/\/mirror1\(\/.*\/[6-8][^0-9][^\/]*$\)/\/zarchive\1/g')
+    target=$(echo "$ss" | sed 's/\/mirror1\(\/.*\/[6-7][^0-9][^\/]*$\)/\/zarchive\1/g')
 
     if [ "$ss" != "$target" ]
     then

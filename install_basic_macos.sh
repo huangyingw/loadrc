@@ -43,6 +43,7 @@ brew install \
     openssl \
     rename \
     rsync \
+    sponge \
     tig \
     w3m \
     wakeonlan \
@@ -61,3 +62,4 @@ sudo easy_install pip
 sudo pip install --upgrade pip
 
 #./install_nx.sh
+cp -nv /usr/bin/uname /usr/local/bin/
