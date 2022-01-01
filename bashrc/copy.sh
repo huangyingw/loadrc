@@ -14,9 +14,8 @@ then
     mkdir -p "$target"
 fi
 
-siconv=$(~/loadrc/bashrc/get_iconv.sh "$source")
-ticonv=$(~/loadrc/bashrc/get_iconv.sh "$target")
+iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target") 
 
 rsync -aHSv --progress --force \
-    --iconv="$siconv,$ticonv" \
+    "$iconvs" \
     "$source" "$target"
