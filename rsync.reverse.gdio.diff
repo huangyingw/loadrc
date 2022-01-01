@@ -883,7 +883,7 @@ index 84be1e2f..3947b761 100755
      exit 1
  fi
 diff --git a/bashrc/move67.sh b/bashrc/move67.sh
-index 22da4353..42718485 100755
+index 22da4353..30c75290 100755
 --- ./bashrc/move67.sh
 +++ ./bashrc/move67.sh
 @@ -1,3 +1,14 @@
@@ -893,7 +893,7 @@ index 22da4353..42718485 100755
 +
 +find /media/volgrp/mirror1/av/ -type f -size +100M  | while read ss
 +do
-+    target=$(echo "$ss" | sed 's/\/mirror1\(\/.*\/[6-8][^0-9][^\/]*$\)/\/zarchive\1/g')
++    target=$(echo "$ss" | sed 's/\/mirror1\(\/.*\/[6-7][^0-9][^\/]*$\)/\/zarchive\1/g')
 +
 +    if [ "$ss" != "$target" ]
 +    then
@@ -1175,12 +1175,12 @@ index d8126721..d5235589 100644
 +* * * * * /root/loadrc/transmissionrc/auto_restart.sh
 +* * * * * /root/loadrc/transmissionrc/auto_reboot.sh
 diff --git a/cscope b/cscope
-index 18a46b20..40e22631 160000
+index 18a46b20..41fab780 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
++Subproject commit 41fab780d1ca14aad7467436000b0a8ec550c09f
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -2009,7 +2009,7 @@ index 34269226..a8a824c3 100755
  ./install_time_machine.sh
  ./enpass_install.sh
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 62d92acb..7531b3ad 100755
+index 62d92acb..8f48c4e8 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
 @@ -8,14 +8,21 @@ then
@@ -2036,7 +2036,7 @@ index 62d92acb..7531b3ad 100755
      coreutils \
      dos2unix \
      ffmpeg \
-@@ -33,17 +40,16 @@ brew install \
+@@ -33,17 +40,17 @@ brew install \
      libtool \
      lynx \
      minikube \
@@ -2045,6 +2045,7 @@ index 62d92acb..7531b3ad 100755
      rename \
 -    sshfs \
 +    rsync \
++    sponge \
      tig \
 -    tmux \
      w3m \
@@ -2057,6 +2058,11 @@ index 62d92acb..7531b3ad 100755
  
  brew cask install \
      kdiff3 \
+@@ -55,3 +62,4 @@ sudo easy_install pip
+ sudo pip install --upgrade pip
+ 
+ #./install_nx.sh
++cp -fv /usr/bin/uname /usr/local/bin/
 diff --git a/install_cubbit.sh b/install_cubbit.sh
 new file mode 100755
 index 00000000..836c58f7
@@ -2254,11 +2260,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..dc0b2097
+index 00000000..d78027b6
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit dc0b209753085e6fa7cfbabf6878d53549ee13bd-dirty
++Subproject commit d78027b682e03fc88acf6941d7fa1f99bf764206-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..ce000442
@@ -2611,12 +2617,12 @@ index 00000000..d6adab9d
 @@ -0,0 +1 @@
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..582c4f6c 160000
+index 3b379635..3bac0233 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit 582c4f6cf310b2b3044c366c726a90c0010fc45d
++Subproject commit 3bac0233a49d2a00805c66bf17d3e2ea114b05d1
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
