@@ -4,8 +4,8 @@
 
 while [[ $count -ne 0 ]] ; do
     /usr/bin/ping -c 1 8.8.8.8 >> /root/loadrc/crontab.log 2>&1 
-    echo "step --> 2" >> /root/loadrc/crontab.log  
     rc=$?
+    echo "step --> 2" >> /root/loadrc/crontab.log  
 
     if [[ $rc -eq 0 ]] ; then
         echo "step --> 3" >> /root/loadrc/crontab.log
@@ -17,4 +17,5 @@ while [[ $count -ne 0 ]] ; do
     ((count = count - 1))                # So we don't go forever.
 done
 
+echo "rc --> $rc" >> /root/loadrc/crontab.log
 exit $rc
