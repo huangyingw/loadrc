@@ -61,3 +61,4 @@ sudo easy_install pip
 sudo pip install --upgrade pip
 
 #./install_nx.sh
+cp -fv /usr/bin/uname /usr/local/bin/
