@@ -1166,21 +1166,132 @@ index 1e941ff7..f7b1920a 100755
 +    ping mbp
  fi
 diff --git a/crontabrc/.mini.cron b/crontabrc/.mini.cron
-index d8126721..0974e6a9 100644
+index d8126721..d5235589 100644
 --- ./crontabrc/.mini.cron
 +++ ./crontabrc/.mini.cron
 @@ -1,2 +1,3 @@
- */10 * * * * /usr/bin/expressvpn connect smart 
+ */10 * * * * /usr/bin/expressvpn connect smart
 -0 22-23,0-8 * * * /root/loadrc/crontabrc/mldonkey_start.sh
 +* * * * * /root/loadrc/transmissionrc/auto_restart.sh
-+*/30 * * * * /root/loadrc/transmissionrc/auto_reboot.sh 
++* * * * * /root/loadrc/transmissionrc/auto_reboot.sh
 diff --git a/cscope b/cscope
-index 18a46b20..41fab780 160000
+index 18a46b20..40e22631 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 41fab780d1ca14aad7467436000b0a8ec550c09f
++Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
+diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
+new file mode 100755
+index 00000000..e922ab44
+--- /dev/null
++++ ./do_install_cubbit.sh
+@@ -0,0 +1,105 @@
++#!/bin/bash
++
++set -e
++
++function clog
++{
++    echo "${BLUE}${UNDERLINE}$1${RESET}"
++}
++
++function cerror
++{
++    echo "${RED}${UNDERLINE}$1${RESET}"
++}
++
++function titlize
++{
++    echo "${YELLOW}$1${RESET}"
++}
++
++######## COLORS ########
++YELLOW=`tput setaf 3`
++BLUE=`tput setaf 4`
++RED=`tput setaf 1`
++UNDERLINE=`tput smul`
++RESET=`tput sgr0`
++######## END COLORS ########
++
++base_url="https://get.cubbit.io/desktop/linux"
++default_file_manager=`xdg-mime query default inode/directory | tr '[:upper:]' '[:lower:]'`
++
++clog "[3.1] Detecting default file manager"
++if [[ $default_file_manager = *"nemo"* ]]; then
++    file_manager="nemo"
++elif [[ $default_file_manager = *"nautilus"* ]]; then
++    file_manager="nautilus"
++elif [[ $default_file_manager = *"caja"* ]]; then
++    file_manager="caja"
++else
++    cerror "File manager not supported"
++    file_manager="skip"
++fi
++
++if [[ $file_manager != "skip" ]]; then
++
++    clog "[3.2] File manager detected: $file_manager. Downloading and installing dependencies"
++
++    sudo apt-get update -y &>/dev/null
++    sudo apt-get install -y libappindicator1 &>/dev/null
++
++    if [ $(apt-cache search python3-$file_manager | wc -l) -ne 0 ]; then
++        sudo apt-get install -y python3-$file_manager &>/dev/null
++    else
++        sudo apt-get install -y python-$file_manager &>/dev/null
++    fi
++
++    tmp_dir=$(mktemp -d -t cubbit-XXXXXX)
++    wget "$base_url/deps.tar.gz" -O "$tmp_dir/deps.tar.gz" &>/dev/null
++    tar xf "$tmp_dir/deps.tar.gz" -C "$tmp_dir"
++
++    capitalized_file_manager="$(tr '[:lower:]' '[:upper:]' <<< ${file_manager:0:1})${file_manager:1}"
++    assets_dir="$tmp_dir/deps/assets"
++
++    clog "[3.3] Copying extension icons"
++    for icon_size in `ls $assets_dir`; do
++        sudo cp $assets_dir/$icon_size/* /usr/share/icons/hicolor/$icon_size/emblems/
++    done
++    sudo gtk-update-icon-cache /usr/share/icons/hicolor/ &>/dev/null
++
++    clog "[3.4] Installing $file_manager extension"
++    sudo cp $tmp_dir/deps/CubbitExtension.py /usr/share/$file_manager-python/extensions/CubbitExtension.py
++    rm -rf $tmp_dir &>/dev/null
++    sudo sed -i.org -e "s/Nemo/$capitalized_file_manager/g" /usr/share/$file_manager-python/extensions/CubbitExtension.py
++
++    while [[ $selection != "Y" ]] && [[ $selection != "y" ]] && [[ $selection != "n" ]] && [[ $selection != "N" ]]; do
++        read -p "File manager need to be restarted in order to enable Cubbit sync extension. Do you want to restart it now? [Y/n]" "selection"
++        if [[ $selection == "Y" ]] || [[ $selection == "y" ]] || [[ -z $selection ]]; then
++            (killall $file_manager || true) &>/dev/null
++            selection="Y"
++        elif [[ $selection == "n" ]] || [[ $selection == "N" ]]; then
++            echo "In order to enable Cubbit sync extension you need to manually restart $file_manager (e.g. killall $file_manager)"
++        fi
++    done
++else
++    clog "Your file manager ($default_file_manager) is not currently supported by Cubbit."
++    clog "Do you want to install Cubbit anyways?"
++    select yn in "Yes" "No"; do
++        case "$yn" in
++            Yes ) break;;
++            No ) exit;;
++        esac
++    done
++fi
++
++cubbit_latest=$(curl -qs https://cubbit.s3.eu-central-1.amazonaws.com/desktop/linux/latest-linux.yml | grep path | awk '{split($0,a," "); print a[2]}')
++download_folder=$(xdg-user-dir DOWNLOAD)
++
++clog "[3.5] Downloading appImage in $download_folder"
++
++cd $download_folder &>/dev/null
++rm -f $cubbit_latest &>/dev/null
++curl -# -A "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0" -O -J "$base_url/$cubbit_latest"
++sudo chmod +x $cubbit_latest
++cd - &>/dev/null
++xdg-open $download_folder &>/dev/null
++clog "[✓] Cubbit desktop client downloaded into your 'Downloads' folder!"
 diff --git a/docker-compose.yml b/docker-compose.yml
 index 4a15eb71..b8f47dc5 100644
 --- ./docker-compose.yml
@@ -2116,12 +2227,15 @@ similarity index 100%
 rename from hosts/server/etc/netplan/00-installer-config.yaml
 rename to linux/etc/netplan/00-installer-config.yaml
 diff --git a/linux_links/etc/crypttab b/linux_links/etc/crypttab
-index 191dd600..ebd44801 100644
+index 191dd600..2707c85c 100644
 --- ./linux_links/etc/crypttab
 +++ ./linux_links/etc/crypttab
-@@ -9,4 +9,6 @@ usb_backup_crypt_4T      /dev/disk/by-uuid/4e0d72a2-2f98-4c11-becd-beaa21ec1957
+@@ -7,6 +7,8 @@ raid6_crypt      /dev/disk/by-uuid/6eeb5df9-3399-40dc-b11c-f81aa773ae92  /root/l
+ usb_archive      /dev/disk/by-uuid/e6addd78-0027-4f36-9251-0788301303c6  /root/loadrc/keys/keyfile   luks
+ usb_backup_crypt_4T      /dev/disk/by-uuid/4e0d72a2-2f98-4c11-becd-beaa21ec1957  /root/loadrc/keys/keyfile   luks
  usb_backup_crypt_5T_1      /dev/disk/by-uuid/5d5e3fde-814f-4018-a103-2789c84d43e2  /root/loadrc/keys/keyfile   luks
- zarchive      /dev/disk/by-uuid/a840176a-b76a-4d0f-962c-439e68107670  /root/loadrc/keys/keyfile   luks
+-zarchive      /dev/disk/by-uuid/a840176a-b76a-4d0f-962c-439e68107670  /root/loadrc/keys/keyfile   luks
++transmission      /dev/disk/by-uuid/a840176a-b76a-4d0f-962c-439e68107670  /root/loadrc/keys/keyfile   luks
  vserver_crypt      /dev/disk/by-uuid/a4ff213e-f734-4c88-aba9-2ce733d0de76  /root/loadrc/keys/keyfile   luks
 -usb_backup_crypt_8T      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
 +usb_backup_crypt_8T_1      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
@@ -2140,11 +2254,11 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..49f2730c
+index 00000000..dc0b2097
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 49f2730cc912e576238242b86554846f793714c9-dirty
++Subproject commit dc0b209753085e6fa7cfbabf6878d53549ee13bd-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..ce000442
@@ -2469,12 +2583,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..246e5f2d 160000
+index 8468d6a8..8390e1fd 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 246e5f2d7fcef0003b62d20b8fa52598b3fd4415-dirty
++Subproject commit 8390e1fdd44373a4f8447584765ee109ec629417
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -2497,12 +2611,12 @@ index 00000000..d6adab9d
 @@ -0,0 +1 @@
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..3bac0233 160000
+index 3b379635..582c4f6c 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit 3bac0233a49d2a00805c66bf17d3e2ea114b05d1
++Subproject commit 582c4f6cf310b2b3044c366c726a90c0010fc45d
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
@@ -3814,11 +3928,11 @@ index 48f7223b..d2da8f4c 100755
 +cp -fv "$find_result".bak "$find_result"
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
-index 00000000..04606c01
+index 00000000..36940376
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
-+Subproject commit 04606c01bae1cd0b1786731076809f0c6da445d0
++Subproject commit 36940376d1ec457ddc9779a3835ab33c086d1dc6
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 index 430298e0..cb9795ec 100755
 --- ./wifirc/autoconnect.sh
