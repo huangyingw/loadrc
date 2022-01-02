@@ -9,7 +9,8 @@ then
     mkdir -p "$target"
 fi
 
-iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target") 
+iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
 
-rsync -aHivn --delete-before --force \
-    "$iconvs" "$source" "$target" > "$ready_file"
+COMMAND="rsync -aHivn --delete-before --force"
+COMMAND="$COMMAND $iconvs $source $target > $ready_file"
+eval "$COMMAND"
