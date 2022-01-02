@@ -14,7 +14,8 @@ then
     mkdir -p "$target"
 fi
 
-iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target") 
+iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
 
-rsync -aHSv --progress --force \
-    "$iconvs" "$source" "$target"
+COMMAND="rsync -aHSv --progress --force "
+COMMAND="$COMMAND $iconvs $source $target"
+eval "$COMMAND"
