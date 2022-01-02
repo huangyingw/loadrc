@@ -37,10 +37,11 @@ fi
 
 rm "$ready_file"
 
-iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target") 
+iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
 
-rsync -aHSv --progress --delete-before --force \
-    "$iconvs" "$source" "$target" && \
+COMMAND="rsync -aHSv --progress --delete-before --force"
+COMMAND="$COMMAND $iconvs $source $target"
+eval "$COMMAND" && \
     if [ -f "${MIRRORCHECK}" ] ; \
     then \
         ~/loadrc/bashrc/sleep.sh ; \
