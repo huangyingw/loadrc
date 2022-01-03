@@ -725,10 +725,10 @@ index 00000000..60512395
 +./get_iconv.sh "huangyingw@mbp:~/loadrc"
 +./get_iconv.sh "~/loadrc"
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
-index e2137142..86b5db61 100755
+index e2137142..bcae4a5b 100755
 --- ./bashrc/jdupes.sh
 +++ ./bashrc/jdupes.sh
-@@ -10,7 +10,6 @@ TARGET="$1"
+@@ -10,15 +10,9 @@ TARGET="$1"
  MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
  
  crontab -r
@@ -736,13 +736,15 @@ index e2137142..86b5db61 100755
  
  if [ -f ${MIRRORCHECK} ] ; \
  then \
-@@ -20,5 +19,4 @@ then \
-     if [ -f ${MIRRORCHECK} ] ; \
-     then \
-         ~/loadrc/bashrc/sleep.sh ; \
+     ~/loadrc/bashrc/move67.sh ; \
+     fi ; \
+-    jdupes -1dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
+-    if [ -f ${MIRRORCHECK} ] ; \
+-    then \
+-        ~/loadrc/bashrc/sleep.sh ; \
 -        fi ; \
 -        nvim ~/loadrc/jdupes.log
-+    fi
++    jdupes -1dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log
 diff --git a/bashrc/mirror.sh b/bashrc/mirror.sh
 index 889ade9a..d12cbfac 100755
 --- ./bashrc/mirror.sh
@@ -1908,14 +1910,15 @@ index 00000000..fc3d765a
 +      addresses:
 +        - 192.168.31.140/24 
 diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
-index 50886663..1079d97e 100644
+index 50886663..3dda7119 100644
 --- ./host_links/server/etc/hosts
 +++ ./host_links/server/etc/hosts
-@@ -10,6 +10,7 @@
+@@ -10,6 +10,8 @@
  192.168.31.115 gluster02
  192.168.31.99 mldonkey
  192.168.31.147 imacpro
 +192.168.31.96 mbp
++192.168.31.88 transmission
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
@@ -2260,11 +2263,19 @@ index bb27cd34..a45fa3fe 100755
  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/neovim b/neovim
 new file mode 160000
+<<<<<<< Updated upstream
 index 00000000..d78027b6
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
 +Subproject commit d78027b682e03fc88acf6941d7fa1f99bf764206-dirty
+=======
+index 00000000..7595c4b6
+--- /dev/null
++++ ./neovim
+@@ -0,0 +1 @@
++Subproject commit 7595c4b651c8a7dcc95566b994c5546c8b380919-dirty
+>>>>>>> Stashed changes
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..ce000442
@@ -2589,12 +2600,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..8390e1fd 160000
+index 8468d6a8..7e0d07c0 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 8390e1fdd44373a4f8447584765ee109ec629417
++Subproject commit 7e0d07c094dec8790bcfbc7e7e84b947ca2b3768-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
