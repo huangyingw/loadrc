@@ -12,5 +12,5 @@ fi
 iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
 
 COMMAND="rsync -aHivn --delete-before --force"
-COMMAND="$COMMAND $iconvs $source $target > $ready_file"
+COMMAND="$COMMAND $iconvs $source/ $target/ > $ready_file"
 eval "$COMMAND"
