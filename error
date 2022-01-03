@@ -87,3 +87,7 @@ E33: No previous substitute regular expression
 Error detected while processing function VFilter[5]..Filter2Findresult[3]..GetEscapedResult:
 line   17:
 E33: No previous substitute regular expression
+
+Error detected while processing function ResCur:
+line    2:
+E20: Mark not set
