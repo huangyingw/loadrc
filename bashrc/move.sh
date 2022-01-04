@@ -21,7 +21,7 @@ if [ -n "$source" ] && [ -n "$target" ] && [ "$source" != "$target" ]
 then
     iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
     COMMAND="rsync --remove-source-files -aHSv --progress --force"
-    COMMAND="$COMMAND $iconvs $source $target"
+    COMMAND="$COMMAND $iconvs $source/ $target/"
     eval "$COMMAND" ; \
         ~/loadrc/bashrc/rmEmpty.sh "$source"
 else

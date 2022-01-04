@@ -140,8 +140,6 @@
 ./.git/modules/vimrc/.vim/bundle/vimtex/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vundle.vim/config
 ./.git/modules/vimrc/.vim/bundle/vundle.vim/info/exclude
-./.git/modules/wifi-auto-reconnect/config
-./.git/modules/wifi-auto-reconnect/info/exclude
 ./.gitattributes
 ./.gitconfig
 ./.gitconfig_sample
@@ -268,6 +266,8 @@
 ./bashrc/generate_rsync_files.sh
 ./bashrc/get_first_column_of_file.sh
 ./bashrc/get_first_column_of_file_test.sh
+./bashrc/get_iconv.sh
+./bashrc/get_iconv.test.sh
 ./bashrc/getopts.sh
 ./bashrc/glink.sh
 ./bashrc/hardseed.list
@@ -301,6 +301,8 @@
 ./bashrc/osmirror.sh
 ./bashrc/osmirror_exclude
 ./bashrc/osmirror_test.sh
+./bashrc/parse_host.sh
+./bashrc/parse_host.test.sh
 ./bashrc/portList
 ./bashrc/post.sh
 ./bashrc/qrsync.sh
@@ -388,6 +390,7 @@
 ./dhcprc/config.sh
 ./dhcprc/install.sh
 ./dhcprc/restart.sh
+./do_install_cubbit.sh
 ./docker-compose.yml
 ./dockerrc/cdocker.sh
 ./dockerrc/cleandocker.sh
@@ -523,6 +526,7 @@
 ./host_links/mini/etc/default/isc-dhcp-server
 ./host_links/mini/etc/dhcp/dhcpd.conf
 ./host_links/mini/etc/hosts
+./host_links/mini/etc/netplan/00-installer-config.yaml
 ./host_links/mini/root/.fastai/config.yml
 ./host_links/movie/etc/network/interfaces
 ./host_links/server/etc/hosts
@@ -563,6 +567,8 @@
 ./hosts/u1710/var/lib/zerotier-one/identity.secret
 ./hosts/u1804/var/lib/zerotier-one/identity.public
 ./hosts/u1804/var/lib/zerotier-one/identity.secret
+./hosts/u2004/var/lib/zerotier-one/identity.public
+./hosts/u2004/var/lib/zerotier-one/identity.secret
 ./hosts/vserver/var/lib/zerotier-one/identity.public
 ./hosts/vserver/var/lib/zerotier-one/identity.secret
 ./htmlrc/convert_all_htmls.sh
@@ -580,6 +586,7 @@
 ./install_basic_linux.sh
 ./install_basic_macos.sh
 ./install_cscope.sh
+./install_cubbit.sh
 ./install_flacon.sh
 ./install_gh.sh
 ./install_hub.sh
@@ -635,6 +642,7 @@
 ./kvmrc/vsuspend.sh
 ./kvmrc/vview.sh
 ./leetcoderc/KdiffFile.py
+./leetcoderc/do_post_submit.sh
 ./leetcoderc/handle.sh
 ./leetcoderc/handle_test.sh
 ./leetcoderc/post_submit.sh
@@ -675,10 +683,13 @@
 ./musicrc/unzip.sh
 ./neovim/.gitconfig
 ./neovim/.gitignore
+./networkrc/ping.sh
+./networkrc/ping.test.sh
 ./nxrc/install.sh
 ./oh-my-zsh/.gitconfig
 ./oh-my-zsh/.gitignore
 ./oh-my-zsh/custom/plugins/zsh-nvm/.gitignore
+./oh-my-zsh/plugins/aliases/.gitignore
 ./oh-my-zsh/plugins/chucknorris/.gitignore
 ./oh-my-zsh/plugins/colemak/.gitignore
 ./oh-my-zsh/plugins/hitchhiker/.gitignore
@@ -729,6 +740,9 @@
 ./timemachinerc/etc/netatalk/AppleVolumes.default
 ./timemachinerc/etc/nsswitch.conf
 ./timemachinerc/listlocalsnapshots.sh
+./transmissionrc/auto_reboot.sh
+./transmissionrc/auto_restart.sh
+./transmissionrc/restart.sh
 ./uninstall_bidirectional_clipboard.sh
 ./update.sh
 ./vimrc/.vim/autoload/SQLUtilities.vim
@@ -2805,6 +2819,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/booktabs.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/breqn.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/cases.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/chemformula.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/circuitikz.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/cleveref.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/comment.vim
@@ -2823,6 +2838,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/mhequ.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/minted.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/moreverb.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/nameref.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/natbib.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/pdfpages.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/pgfplots.vim
@@ -2847,9 +2863,9 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/util.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/view.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/view/_template.vim
-./vimrc/.vim/bundle/vimtex/autoload/vimtex/view/_template_xwin.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/view/general.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/view/mupdf.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/view/sioyek.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/view/skim.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/view/zathura.vim
 ./vimrc/.vim/bundle/vimtex/compiler/bibertool.vim
@@ -2869,9 +2885,11 @@
 ./vimrc/.vim/bundle/vimtex/ftplugin/tex.vim
 ./vimrc/.vim/bundle/vimtex/indent/bib.vim
 ./vimrc/.vim/bundle/vimtex/indent/tex.vim
+./vimrc/.vim/bundle/vimtex/plugin/vimtex.vim
 ./vimrc/.vim/bundle/vimtex/rplugin/python3/denite/source/vimtex.py
 ./vimrc/.vim/bundle/vimtex/syntax/tex.vim
 ./vimrc/.vim/bundle/vimtex/test/test-completion-bibtex/.gitignore
+./vimrc/.vim/bundle/vimtex/test/test-quickfix-fix-path/.gitignore
 ./vimrc/.vim/bundle/vundle.vim/.gitignore
 ./vimrc/.vim/bundle/vundle.vim/CONTRIBUTING.md
 ./vimrc/.vim/bundle/vundle.vim/LICENSE-MIT.txt
@@ -2958,14 +2976,6 @@
 ./vishrc/vlc.sh
 ./vishrc/vrun.sh
 ./vishrc/vsearch.sh
-./wifi-auto-reconnect/.gitconfig
-./wifi-auto-reconnect/.gitignore
-./wifi-auto-reconnect/LICENSE
-./wifi-auto-reconnect/README.md
-./wifi-auto-reconnect/install.sh
-./wifi-auto-reconnect/net.martinsoft.wifiautoreconnect.plist
-./wifi-auto-reconnect/uninstall.sh
-./wifi-auto-reconnect/wifiautoreconnect.sh
 ./wifirc/autoconnect.sh
 ./wifirc/enable.sh
 ./wifirc/show.sh
@@ -2975,4 +2985,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-LocalRename.gdio.diff
+rsync.reverse.gdio.diff
