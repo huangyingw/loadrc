@@ -2284,7 +2284,7 @@ index 00000000..5eb99dd5
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 5eb99dd55fe086e3952589754d4c3773f7eea156
++Subproject commit 5eb99dd55fe086e3952589754d4c3773f7eea156-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
