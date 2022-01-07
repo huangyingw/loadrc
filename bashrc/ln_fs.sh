@@ -16,5 +16,10 @@ then
         cp -nv "$TARGET" "$TARGET".bak
     fi
 
+    if [ -d "$TARGET" ]
+    then
+        ~/loadrc/bashrc/move.sh "$TARGET" "$TARGET".bak
+    fi
+
     ln -fs "$SOURCE" "$TARGET"
 fi
