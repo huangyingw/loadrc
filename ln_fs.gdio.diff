@@ -1258,12 +1258,12 @@ index d8126721..95a16ef9 100644
 +* * * * * /root/loadrc/transmissionrc/auto_restart.sh
 +*/10 * * * * /root/loadrc/transmissionrc/auto_reboot.sh
 diff --git a/cscope b/cscope
-index 18a46b20..40e22631 160000
+index 18a46b20..41fab780 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
++Subproject commit 41fab780d1ca14aad7467436000b0a8ec550c09f
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
