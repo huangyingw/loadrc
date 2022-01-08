@@ -9,14 +9,10 @@ then
     if [ -L "$TARGET" ]
     then
         rm "$TARGET"
-    fi
-
-    if [ -f "$TARGET" ]
+    elif [ -f "$TARGET" ]
     then
         cp -nv "$TARGET" "$TARGET".bak
-    fi
-
-    if [ -d "$TARGET" ]
+    elif [ -d "$TARGET" ]
     then
         ~/loadrc/bashrc/move.sh "$TARGET" "$TARGET".bak
     fi
