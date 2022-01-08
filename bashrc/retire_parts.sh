@@ -6,7 +6,7 @@ function CountParts()
 }
 
 left=1
-right=30
+right=300
 
 while [ $((left + 1)) -lt $right ]
 do

@@ -176,8 +176,17 @@
 ./.sqlrc
 ./.ssh/.gitconfig
 ./.ssh/.gitignore
+./.ssh/authorized_keys
 ./.ssh/client.ovpn
 ./.ssh/config
+./.ssh/github_id_rsa
+./.ssh/github_id_rsa.pub
+./.ssh/id_dsa
+./.ssh/id_dsa.pub
+./.ssh/id_rsa
+./.ssh/id_rsa.pub
+./.ssh/id_rsa_cit
+./.ssh/known_hosts
 ./.subversion/README.txt
 ./.subversion/auth/svn.simple/6146213a2dda95c6394ae9ae66ab729c
 ./.subversion/auth/svn.simple/aa981e5344c742bc4b68cc8ef33f0e18
@@ -266,8 +275,8 @@
 ./bashrc/generate_rsync_files.sh
 ./bashrc/get_first_column_of_file.sh
 ./bashrc/get_first_column_of_file_test.sh
-./bashrc/get_iconv.sh
 ./bashrc/get_iconv.test.sh
+./bashrc/get_iconvs.sh
 ./bashrc/getopts.sh
 ./bashrc/glink.sh
 ./bashrc/hardseed.list
@@ -685,6 +694,7 @@
 ./neovim/.gitignore
 ./networkrc/ping.sh
 ./networkrc/ping.test.sh
+./networkrc/temp.sh
 ./nxrc/install.sh
 ./oh-my-zsh/.gitconfig
 ./oh-my-zsh/.gitignore
@@ -2985,4 +2995,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-rsync.reverse.gdio.diff
+rsync.eval.gdio.diff
