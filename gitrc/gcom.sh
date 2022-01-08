@@ -32,10 +32,9 @@ git checkout -b "$TARGET_BRANCH" || \
     git merge "$current_branch"
 
 git merge "$1"
+~/loadrc/gitrc/gpl.sh
 
 if [ -n "$clean" ]
 then
     git stash pop stash@{0}
 fi
-
-~/loadrc/gitrc/gpl.sh
