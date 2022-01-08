@@ -29,5 +29,5 @@ then
     remote_utf_8_str=$(get_utf_8_str $thost)
     echo "--iconv=$local_utf_8_str,$remote_utf_8_str"
 else
-    echo ""
+    echo "--iconv=$local_utf_8_str,$local_utf_8_str"
 fi
