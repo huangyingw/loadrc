@@ -513,7 +513,7 @@ index 00000000..c0515d20
 +mkdir -p "$(dirname "$target")"
 +mv -nv "$source" "$target"
 diff --git a/bashrc/copy.sh b/bashrc/copy.sh
-index 09330daf..32dea764 100755
+index 09330daf..c4afb3aa 100755
 --- ./bashrc/copy.sh
 +++ ./bashrc/copy.sh
 @@ -6,13 +6,16 @@ then
@@ -532,13 +532,12 @@ index 09330daf..32dea764 100755
 +    mkdir -p "$target"
  fi
  
--rsync -aHSv --progress --force \
--    "${SOURCE}" "${TARGET}"
 +iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
 +
-+COMMAND="rsync -aHSv --progress --force"
-+COMMAND="$COMMAND $iconvs $source/ $target/"
-+eval "$COMMAND"
+ rsync -aHSv --progress --force \
+-    "${SOURCE}" "${TARGET}"
++    "$iconvs" \
++    "$source/" "$target/"
 diff --git a/bashrc/cutcommon.sh b/bashrc/cutcommon.sh
 new file mode 100755
 index 00000000..c66a8e4c
@@ -835,7 +834,7 @@ index 00000000..006dc346
 +ls -al lib
 +echo
 diff --git a/bashrc/mirror.sh b/bashrc/mirror.sh
-index 889ade9a..fed62170 100755
+index 889ade9a..e3a36ccb 100755
 --- ./bashrc/mirror.sh
 +++ ./bashrc/mirror.sh
 @@ -6,38 +6,42 @@ then
@@ -882,14 +881,13 @@ index 889ade9a..fed62170 100755
  fi
  
  rm "$ready_file"
--rsync -aHSv --progress --delete-before --force \
--    "${SOURCE}/" "${TARGET}/" && \
 +
 +iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
 +
-+COMMAND="rsync -aHSv --progress --delete-before --force"
-+COMMAND="$COMMAND $iconvs $source/ $target/"
-+eval "$COMMAND" && \
+ rsync -aHSv --progress --delete-before --force \
+-    "${SOURCE}/" "${TARGET}/" && \
++    "$iconvs" \
++    "$source/" "$target/" && \
      if [ -f "${MIRRORCHECK}" ] ; \
      then \
          ~/loadrc/bashrc/sleep.sh ; \
@@ -938,10 +936,10 @@ index fba69a67..00000000
 -    sshfs -o idmap=user huangyingw@vdonkey:/media/ /media/samba/
 -fi
 diff --git a/bashrc/move.sh b/bashrc/move.sh
-index 84be1e2f..3091f612 100755
+index 84be1e2f..32f935e0 100755
 --- ./bashrc/move.sh
 +++ ./bashrc/move.sh
-@@ -11,18 +11,21 @@ then
+@@ -11,18 +11,22 @@ then
      mkdir -p "$2"
  fi
  
@@ -961,10 +959,11 @@ index 84be1e2f..3091f612 100755
 -    rsync --remove-source-files -aHSv --progress --force "$SOURCE/" "$TARGET/" ; \
 -        ~/loadrc/bashrc/rmEmpty.sh "$SOURCE/"
 +    iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
-+    COMMAND="rsync --remove-source-files -aHSv --progress --force"
-+    COMMAND="$COMMAND $iconvs $source/ $target/"
-+    eval "$COMMAND" ; \
++    rsync --remove-source-files -aHSv --progress --force \
++        "$iconvs" \
++        "$source/" "$target/" ; \
 +        ~/loadrc/bashrc/rmEmpty.sh "$source"
++
  else
 -    echo -e "${red}same dir --> ${SOURCE} ... ${NC}"
 +    echo -e "${red}same dir --> ${source} ... ${NC}"
@@ -1190,7 +1189,7 @@ index 7042dce9..0e670bd9 100755
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
 diff --git a/bashrc/tmirror.sh b/bashrc/tmirror.sh
-index 30abd357..20e86269 100755
+index 30abd357..de5bafe6 100755
 --- ./bashrc/tmirror.sh
 +++ ./bashrc/tmirror.sh
 @@ -1,13 +1,16 @@
@@ -1214,9 +1213,9 @@ index 30abd357..20e86269 100755
 -    "$SOURCE" "$TARGET" > "$ready_file"
 +iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
 +
-+COMMAND="rsync -aHivn --delete-before --force"
-+COMMAND="$COMMAND $iconvs $source/ $target/ > $ready_file"
-+eval "$COMMAND"
++rsync -aHivn --delete-before --force \
++    "$iconvs" \
++    "$source/" "$target/" > "$ready_file"
 diff --git a/bashrc/wol.sh b/bashrc/wol.sh
 index 1e941ff7..f7b1920a 100755
 --- ./bashrc/wol.sh
