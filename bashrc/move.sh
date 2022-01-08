@@ -20,10 +20,11 @@ realpath "$2" && target=$(realpath "$2")
 if [ -n "$source" ] && [ -n "$target" ] && [ "$source" != "$target" ]
 then
     iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
-    COMMAND="rsync --remove-source-files -aHSv --progress --force"
-    COMMAND="$COMMAND $iconvs $source/ $target/"
-    eval "$COMMAND" ; \
+    rsync --remove-source-files -aHSv --progress --force \
+        "$iconvs" \
+        "$source/" "$target/" ; \
         ~/loadrc/bashrc/rmEmpty.sh "$source"
+
 else
     echo -e "${red}same dir --> ${source} ... ${NC}"
     echo -e "${red}please choose the different dir! ... ${NC}"
