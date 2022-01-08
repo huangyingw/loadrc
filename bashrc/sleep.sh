@@ -5,6 +5,6 @@ then
     pmset displaysleepnow
     #pmset sleepnow
 else
-    #~/loadrc/gpurc/kill_nvidia.sh
+    # ~/loadrc/gpurc/kill_nvidia.sh
     pm-suspend
 fi
