@@ -16,6 +16,6 @@ fi
 
 iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
 
-COMMAND="rsync -aHSv --progress --force"
-COMMAND="$COMMAND $iconvs $source/ $target/"
-eval "$COMMAND"
+rsync -aHSv --progress --force \
+    "$iconvs" \
+    "$source/" "$target/"
