@@ -140,6 +140,8 @@
 ./.git/modules/vimrc/.vim/bundle/vimtex/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vundle.vim/config
 ./.git/modules/vimrc/.vim/bundle/vundle.vim/info/exclude
+./.git/modules/wifi-auto-reconnect/config
+./.git/modules/wifi-auto-reconnect/info/exclude
 ./.gitattributes
 ./.gitconfig
 ./.gitconfig_sample
@@ -159,6 +161,7 @@
 ./.macmini.rc
 ./.macos.rc
 ./.macosrc
+./.mba.rc
 ./.mbp.rc
 ./.mindsrc
 ./.mini.rc
@@ -179,6 +182,7 @@
 ./.ssh/authorized_keys
 ./.ssh/client.ovpn
 ./.ssh/config
+./.ssh/environment
 ./.ssh/github_id_rsa
 ./.ssh/github_id_rsa.pub
 ./.ssh/id_dsa
@@ -289,6 +293,7 @@
 ./bashrc/kill_port.sh
 ./bashrc/kill_top_processes.sh
 ./bashrc/ln_fs.sh
+./bashrc/ln_fs.test.sh
 ./bashrc/logFilter.sh
 ./bashrc/lsnic.sh
 ./bashrc/lsof.sh
@@ -2986,6 +2991,16 @@
 ./vishrc/vlc.sh
 ./vishrc/vrun.sh
 ./vishrc/vsearch.sh
+./wifi-auto-reconnect/.gitconfig
+./wifi-auto-reconnect/.gitignore
+./wifi-auto-reconnect/LICENSE
+./wifi-auto-reconnect/README.md
+./wifi-auto-reconnect/install.sh
+./wifi-auto-reconnect/net.martinsoft.wifiautoreconnect.plist
+./wifi-auto-reconnect/rsync.files
+./wifi-auto-reconnect/setup.cfg
+./wifi-auto-reconnect/uninstall.sh
+./wifi-auto-reconnect/wifiautoreconnect.sh
 ./wifirc/autoconnect.sh
 ./wifirc/enable.sh
 ./wifirc/show.sh
@@ -2995,4 +3010,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-rsync.eval.gdio.diff
+gcom.gdio.diff
