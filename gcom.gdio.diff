@@ -1127,7 +1127,7 @@ index a7a35d8f..00000000
 -
 -apt-get install "${app_list[@]}" --force-yes -y
 diff --git a/bashrc/sleep.sh b/bashrc/sleep.sh
-index 4f4f20d8..c204bfd7 100755
+index 4f4f20d8..68683380 100755
 --- ./bashrc/sleep.sh
 +++ ./bashrc/sleep.sh
 @@ -5,6 +5,6 @@ then
@@ -1135,7 +1135,7 @@ index 4f4f20d8..c204bfd7 100755
      #pmset sleepnow
  else
 -    ~/loadrc/gpurc/kill_nvidia.sh
-+    #~/loadrc/gpurc/kill_nvidia.sh
++    # ~/loadrc/gpurc/kill_nvidia.sh
      pm-suspend
  fi
 diff --git a/bashrc/sload.sh b/bashrc/sload.sh
@@ -2380,11 +2380,11 @@ index bb27cd34..b6ca2646 100755
 +/usr/bin/sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..49a0a041
+index 00000000..df332154
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 49a0a041a20696b0a3f2eab29a426f0a1d0ca04a
++Subproject commit df3321540ec512f568ad7f3058c6cf5b9039726b-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
