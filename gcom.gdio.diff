@@ -1052,7 +1052,7 @@ index 00000000..d3a5e9de
 +mv -nv "$source" "$target"
 diff --git a/bashrc/retire_parts.sh b/bashrc/retire_parts.sh
 new file mode 100755
-index 00000000..cd2de1bb
+index 00000000..9f5ac8da
 --- /dev/null
 +++ ./bashrc/retire_parts.sh
 @@ -0,0 +1,40 @@
@@ -1064,7 +1064,7 @@ index 00000000..cd2de1bb
 +}
 +
 +left=1
-+right=30
++right=300
 +
 +while [ $((left + 1)) -lt $right ]
 +do
@@ -1948,10 +1948,10 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..76001f65 100644
+index 425c9192..dfb4319b 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
-@@ -9,15 +9,21 @@
+@@ -9,15 +9,22 @@
  192.168.122.65 master-node
  192.168.122.136 slave-node
  192.168.122.244 zsh
@@ -1972,6 +1972,7 @@ index 425c9192..76001f65 100644
 +192.168.123.80 u2110
 +192.168.31.99 haikou
 +192.168.31.223 transmission
++192.168.31.118 mba
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
