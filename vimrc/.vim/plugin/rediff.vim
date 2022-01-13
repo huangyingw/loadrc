@@ -9,5 +9,5 @@ endfunction
 
 augroup rediff_augroup
     au!
-    au BufWritePost,TextChanged * call <SID>rediff_augroup()
+    au BufWritePost * call <SID>rediff_augroup()
 augroup END
