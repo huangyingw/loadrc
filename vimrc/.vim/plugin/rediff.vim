@@ -1,5 +1,5 @@
 function! s:rediff_augroup()
-    if !&diff
+    if (expand("%") !~ '.*.diff')
         return
     endif
 
