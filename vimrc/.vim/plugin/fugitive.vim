@@ -763,7 +763,7 @@ function! s:Gfix() abort
 endfunction
 
 function! s:Reapply() abort
-    if !&diff
+    if (expand("%") !~ '.*.diff')
         echom 'Please only run on *gdio.diff!!!'
         return 0
     endif
