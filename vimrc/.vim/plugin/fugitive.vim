@@ -74,7 +74,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Rediff :execute s:Rediff()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute s:SelectMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
@@ -771,17 +770,6 @@ function! s:Reapply() abort
 
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
-    call s:Gs()
-endfunction
-
-function! s:Rediff() abort
-    if !&diff
-        echom 'Please only run on *diff!!!'
-        return 0
-    endif
-
-    let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/rediff.sh ' . '"' .  expand("%:p") . '"'
     call s:Gs()
 endfunction
 
