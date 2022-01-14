@@ -2097,7 +2097,7 @@ index 34269226..a8a824c3 100755
  ./install_time_machine.sh
  ./enpass_install.sh
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 62d92acb..9db54109 100755
+index 62d92acb..bbbf7751 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
 @@ -8,14 +8,21 @@ then
@@ -2124,7 +2124,7 @@ index 62d92acb..9db54109 100755
      coreutils \
      dos2unix \
      ffmpeg \
-@@ -33,17 +40,17 @@ brew install \
+@@ -33,17 +40,18 @@ brew install \
      libtool \
      lynx \
      minikube \
@@ -2133,6 +2133,7 @@ index 62d92acb..9db54109 100755
      rename \
 -    sshfs \
 +    rsync \
++    patchutils \
 +    sponge \
      tig \
 -    tmux \
@@ -2146,7 +2147,7 @@ index 62d92acb..9db54109 100755
  
  brew cask install \
      kdiff3 \
-@@ -55,3 +62,4 @@ sudo easy_install pip
+@@ -55,3 +63,4 @@ sudo easy_install pip
  sudo pip install --upgrade pip
  
  #./install_nx.sh
@@ -2380,11 +2381,11 @@ index bb27cd34..b6ca2646 100755
 +/usr/bin/sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..df332154
+index 00000000..3adaacac
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit df3321540ec512f568ad7f3058c6cf5b9039726b-dirty
++Subproject commit 3adaacac5360576ebd73d97bcfe5b496d2818bfe-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -2641,12 +2642,12 @@ index 86d744c6..2a31e6bc 160000
 -Subproject commit 86d744c6e4731d0014ef469f019a305e2d7baac0
 +Subproject commit 2a31e6bcea5977209c05c728c4253d82fd873c82
 diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
-index 1d4a909f..e919b7f8 160000
+index 1d4a909f..a394f1ed 160000
 --- ./vimrc/.vim/bundle/bash-support.vim
 +++ ./vimrc/.vim/bundle/bash-support.vim
 @@ -1 +1 @@
 -Subproject commit 1d4a909f46698906b16d711aeb260663f4c4794a
-+Subproject commit e919b7f843b043c4189f5b7c419c0d47f9b622b8
++Subproject commit a394f1ed8ce29873ed2d8344ce20673ee0029764-dirty
 diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
 index 3de17695..d2d8cc43 160000
 --- ./vimrc/.vim/bundle/ncm2
@@ -2725,12 +2726,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..a08c481d 160000
+index 8468d6a8..2e9d425c 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit a08c481de2d8ebbd9f2a89d6dd6a05ca18718707
++Subproject commit 2e9d425c00bc06c708855cbb322248d8defbab79-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
