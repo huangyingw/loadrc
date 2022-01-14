@@ -5,4 +5,5 @@
 ~/loadrc/bashrc/fvideos.sh
 ~/loadrc/bashrc/fdocs.sh
 ~/loadrc/bashrc/cscope.sh
+~/loadrc/bashrc/generate_all_list.sh &
 git remote update &

@@ -1975,37 +1975,21 @@ index 3bd9b5b1..08477d81 100755
  ~/loadrc/gitrc/gsync.sh
 +~/loadrc/bashrc/update_proj.sh
 diff --git a/gitrc/reapply.sh b/gitrc/reapply.sh
-index d1ffbd95..dc3ebae3 100755
+index d1ffbd95..e6e1d0fc 100755
 --- ./gitrc/reapply.sh
 +++ ./gitrc/reapply.sh
-@@ -1,12 +1,10 @@
+@@ -1,9 +1,9 @@
  #!/bin/zsh
  DIFF="$1"
  CURRET_BRANCH_DIFF="$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff"
 -git apply --reverse "$CURRET_BRANCH_DIFF" 
--git checkout -- "$CURRET_BRANCH_DIFF"
++git apply --index --reverse "$CURRET_BRANCH_DIFF"
+ git checkout -- "$CURRET_BRANCH_DIFF"
 -git apply --reject --whitespace=fix "$DIFF"
-+
-+cp -fv "$DIFF" "$DIFF".bak
++git apply --index --reject --whitespace=fix "$DIFF"
  ~/loadrc/gitrc/gdio.sh
-+git apply --reverse "$CURRET_BRANCH_DIFF"
-+cp -fv "$DIFF".bak "$DIFF"
  
--if [ "$CURRET_BRANCH_DIFF" = "$DIFF" ]
--then
--    git add "$CURRET_BRANCH_DIFF"
--fi
-+git apply --reject --whitespace=fix "$DIFF"
-diff --git a/gitrc/rediff.sh b/gitrc/rediff.sh
-new file mode 100755
-index 00000000..8c70d0cc
---- /dev/null
-+++ ./gitrc/rediff.sh
-@@ -0,0 +1,4 @@
-+#!/bin/zsh
-+
-+DIFF_FILE="$1"
-+rediff "$DIFF_FILE" | sponge "$DIFF_FILE"
+ if [ "$CURRET_BRANCH_DIFF" = "$DIFF" ]
 diff --git a/gpurc/.gpurc b/gpurc/.gpurc
 index 8be8d98c..6026d401 100644
 --- ./gpurc/.gpurc
@@ -2472,11 +2456,11 @@ index bb27cd34..b6ca2646 100755
 +/usr/bin/sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..7beda919
+index 00000000..ebe74464
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 7beda919d8a2630fd6f7fd386edb839a5cc0df7f-dirty
++Subproject commit ebe74464a5e586851d003d1f24a5d5cb0177e298
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -2733,12 +2717,12 @@ index 86d744c6..2a31e6bc 160000
 -Subproject commit 86d744c6e4731d0014ef469f019a305e2d7baac0
 +Subproject commit 2a31e6bcea5977209c05c728c4253d82fd873c82
 diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
-index 1d4a909f..a394f1ed 160000
+index 1d4a909f..e919b7f8 160000
 --- ./vimrc/.vim/bundle/bash-support.vim
 +++ ./vimrc/.vim/bundle/bash-support.vim
 @@ -1 +1 @@
 -Subproject commit 1d4a909f46698906b16d711aeb260663f4c4794a
-+Subproject commit a394f1ed8ce29873ed2d8344ce20673ee0029764-dirty
++Subproject commit e919b7f843b043c4189f5b7c419c0d47f9b622b8
 diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
 index 3de17695..d2d8cc43 160000
 --- ./vimrc/.vim/bundle/ncm2
@@ -2817,12 +2801,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..2e9d425c 160000
+index 8468d6a8..a7c541c9 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 2e9d425c00bc06c708855cbb322248d8defbab79-dirty
++Subproject commit a7c541c9b5747ee08c53d24458fcb9f09300584e-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -3615,25 +3599,6 @@ index 00000000..df39432d
 +
 +nnoremap <silent> cp :call PopulatePasteBufferFromOSX('n')<cr>
 +vnoremap <silent> cp :call PopulatePasteBufferFromOSX('v')<cr>
-diff --git a/vimrc/.vim/plugin/rediff.vim b/vimrc/.vim/plugin/rediff.vim
-new file mode 100644
-index 00000000..0b65aa4d
---- /dev/null
-+++ ./vimrc/.vim/plugin/rediff.vim
-@@ -0,0 +1,13 @@
-+function! s:rediff_augroup()
-+    if (expand("%") !~ '.*.diff')
-+        return
-+    endif
-+
-+    let worktree = Cd2Worktree()
-+    silent exec '!~/loadrc/gitrc/rediff.sh ' . '"' .  expand("%:p") . '"'
-+endfunction
-+
-+augroup rediff_augroup
-+    au!
-+    au BufWritePost * call <SID>rediff_augroup()
-+augroup END
 diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
 index 41afb6c6..55b41320 100644
 --- ./vimrc/.vim/plugin/view.vim
