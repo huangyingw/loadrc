@@ -2325,7 +2325,7 @@ index 2bc75c67..49f4fbcd 100755
 +./neovim/install_prerequisite.sh
 +./neovim/install.sh
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
-index 298b6bc4..89bfd577 100755
+index 298b6bc4..324e52db 100755
 --- ./install_prerequisite.sh
 +++ ./install_prerequisite.sh
 @@ -1,14 +1,13 @@
@@ -2361,7 +2361,7 @@ index 298b6bc4..89bfd577 100755
      kdiff3 \
      libsecret-1-dev \
      libsecret-tools \
-@@ -37,10 +39,12 @@ apt-get install -y \
+@@ -37,12 +39,15 @@ apt-get install -y \
      manpages-fr-extra \
      manpages-pl \
      mdadm \
@@ -2374,8 +2374,11 @@ index 298b6bc4..89bfd577 100755
 +    nfs-kernel-server \
      npm \
      openvpn \
++    patchutils \
      perl \
-@@ -54,10 +58,11 @@ apt-get install -y \
+     pm-utils \
+     pv \
+@@ -54,10 +59,11 @@ apt-get install -y \
      slurm \
      smplayer \
      software-properties-common \
@@ -2389,7 +2392,7 @@ index 298b6bc4..89bfd577 100755
      unrar \
      w3m \
      w3m-img \
-@@ -68,5 +73,3 @@ apt-get install -y \
+@@ -68,5 +74,3 @@ apt-get install -y \
  modprobe wl
  update-initramfs -u
  locale-gen en_US.UTF-8
@@ -2487,11 +2490,11 @@ index bb27cd34..b6ca2646 100755
 +/usr/bin/sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..cf41e4ce
+index 00000000..1af63719
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit cf41e4ce9911565faa6bce59b312e178ffd20221
++Subproject commit 1af63719304693bed1c255f4f5e74d35f2d79942-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -2748,12 +2751,12 @@ index 86d744c6..2a31e6bc 160000
 -Subproject commit 86d744c6e4731d0014ef469f019a305e2d7baac0
 +Subproject commit 2a31e6bcea5977209c05c728c4253d82fd873c82
 diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
-index 1d4a909f..e919b7f8 160000
+index 1d4a909f..a394f1ed 160000
 --- ./vimrc/.vim/bundle/bash-support.vim
 +++ ./vimrc/.vim/bundle/bash-support.vim
 @@ -1 +1 @@
 -Subproject commit 1d4a909f46698906b16d711aeb260663f4c4794a
-+Subproject commit e919b7f843b043c4189f5b7c419c0d47f9b622b8
++Subproject commit a394f1ed8ce29873ed2d8344ce20673ee0029764-dirty
 diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
 index 3de17695..d2d8cc43 160000
 --- ./vimrc/.vim/bundle/ncm2
@@ -2776,12 +2779,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..d0dc057d 160000
+index cc6342c3..15cbdf16 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit d0dc057d0129bfd5f04b693b5e87e909ab059025
++Subproject commit 15cbdf166ab253b60c32062cb5f3607d51708fec-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -2832,12 +2835,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..a08c481d 160000
+index 8468d6a8..2858a8e2 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit a08c481de2d8ebbd9f2a89d6dd6a05ca18718707
++Subproject commit 2858a8e237bffd3c1031315d78886f23926e02c6-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -4063,7 +4066,7 @@ index e0416589..00000000
 -
 -" }}}
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
-index 777cb3ad..6cb746a0 100644
+index 777cb3ad..d60f11d9 100644
 --- ./vimrc/.vimrc
 +++ ./vimrc/.vimrc
 @@ -28,7 +28,6 @@ inoremap { {}<LEFT>
@@ -4088,7 +4091,7 @@ index 777cb3ad..6cb746a0 100644
  let g:phpfmt_autosave = 1
  let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
  
-@@ -277,3 +271,9 @@ let g:tex_flavor = 'latex'
+@@ -277,3 +271,12 @@ let g:tex_flavor = 'latex'
  " add @ to cfile handle
  set isfname+=@-@
  set history=10000
@@ -4098,6 +4101,9 @@ index 777cb3ad..6cb746a0 100644
 +else
 +    let g:vim_pbcopy_remote_cmd = "nc -N localhost 2224"
 +endif
++
++" https://stackoverflow.com/questions/4642822/how-to-make-bashrc-aliases-available-within-a-vim-shell-command
++set shellcmdflag=-ic
 diff --git a/vishrc/cat_play.sh b/vishrc/cat_play.sh
 index ed41d521..71bd07af 100755
 --- ./vishrc/cat_play.sh
@@ -4196,11 +4202,11 @@ index 48f7223b..d2da8f4c 100755
 +cp -fv "$find_result".bak "$find_result"
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
-index 00000000..a30c815b
+index 00000000..04606c01
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
-+Subproject commit a30c815b53b8fa0f0ca23680f5671deda334cacd
++Subproject commit 04606c01bae1cd0b1786731076809f0c6da445d0
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 index 430298e0..cb9795ec 100755
 --- ./wifirc/autoconnect.sh
