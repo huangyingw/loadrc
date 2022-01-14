@@ -2487,11 +2487,11 @@ index bb27cd34..b6ca2646 100755
 +/usr/bin/sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..169a1b39
+index 00000000..cf41e4ce
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 169a1b3929ffc7954b488f461394a9a293eac0c1
++Subproject commit cf41e4ce9911565faa6bce59b312e178ffd20221
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
