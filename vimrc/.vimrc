@@ -277,3 +277,6 @@ if has('mac') || system('uname') =~# 'Darwin'
 else
     let g:vim_pbcopy_remote_cmd = "nc -N localhost 2224"
 endif
+
+" https://stackoverflow.com/questions/4642822/how-to-make-bashrc-aliases-available-within-a-vim-shell-command
+set shellcmdflag=-ic

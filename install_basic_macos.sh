@@ -43,6 +43,7 @@ brew install \
     openssl \
     rename \
     rsync \
+    patchutils \
     sponge \
     tig \
     w3m \
