@@ -491,6 +491,69 @@ index 00000000..392c21db
 +	</dict>
 +    </dict>
 +</plist>
+diff --git a/bashrc/all_prunefix.conf b/bashrc/all_prunefix.conf
+new file mode 100644
+index 00000000..7ccfc45e
+--- /dev/null
++++ ./bashrc/all_prunefix.conf
+@@ -0,0 +1,57 @@
++"*/vimtex/test/*"
++"./*.diff"
++"./*.egg"
++"./*.log"
++"./*.original"
++"./*.pdf"
++"./*.so"
++"./*.zip"
++"./*/gbil.log"
++"./*/running.time"
++"./*/tmirror.ready"
++"./cscope.*"
++"./cscope/*"
++"./jdupes/*"
++"./neovim/*"
++"./oh-my-zsh/*"
++"./vimrc/.vim/autosess/*"
++"./vimrc/.vim/view/*"
++*.bak
++*.class
++*.cvs
++*.findresult
++*.gif
++*.git
++*.hg
++*.jpg
++*.lck
++*.metadata
++*.orig
++*.out
++*.pem
++*.png
++*.py[co]
++*.runresult
++*.sort
++*.svn
++*.sw[a-z]
++*.tmp
++*/.classpath
++*/.fugitiveblame
++*/.project
++*/.ropeproject/*
++*/.settings/*
++*/bashrc/.bash_history
++*/build/*
++*/files.proj
++*/fonts/*
++*/gbil.log
++*/images/*
++*/src/MacVim/icons/*
++*/target/*
++*/third_party/*
++./*/includefile.conf
++./*/prunefile.conf
++./*/prunefix.conf
++./keys/*
++./vimrc/.vim/bundle/node_modules/*
 diff --git a/bashrc/append_num.sh b/bashrc/append_num.sh
 new file mode 100755
 index 00000000..67fd9240
@@ -563,13 +626,14 @@ index 26ad90c3..20226fa3 100755
 +output="$2" 
 +(pv -n "$input" | dd of="$output" bs=128M conv=notrunc,noerror) 2>&1 | dialog --gauge "Running dd command (cloning), please wait..." 10 70 0
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
-index 9a6e19c8..f5458e6f 100755
+index 9a6e19c8..7f8236ad 100755
 --- ./bashrc/do_update_proj.sh
 +++ ./bashrc/do_update_proj.sh
-@@ -5,3 +5,4 @@
+@@ -5,3 +5,5 @@
  ~/loadrc/bashrc/fvideos.sh
  ~/loadrc/bashrc/fdocs.sh
  ~/loadrc/bashrc/cscope.sh
++~/loadrc/bashrc/generate_all_list.sh &
 +git remote update &
 diff --git a/bashrc/fdisk_log.sh b/bashrc/fdisk_log.sh
 index 37081d0c..3867ab7b 100755
@@ -660,6 +724,18 @@ index f58a2ee7..dcc8f356 100755
 +else
      xargs sed -i.bak  "s/${FIND}/${REPLACE}/g" < "$3"
 +fi
+diff --git a/bashrc/generate_all_list.sh b/bashrc/generate_all_list.sh
+new file mode 100644
+index 00000000..903dee7b
+--- /dev/null
++++ ./bashrc/generate_all_list.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++
++TARGET=all.list.bak
++PRUNE_POSTFIX=all_prunefix.conf
++
++find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + > "$TARGET" ; \
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
 index 83e2c748..19fda7d5 100755
 --- ./bashrc/generate_files_proj.sh
@@ -1026,6 +1102,20 @@ index 00000000..e46e9472
 +./parse_host.sh "mini:~/loadrc"
 +./parse_host.sh "huangyingw@mini:~/loadrc"
 +./parse_host.sh "~/loadrc"
+diff --git a/bashrc/reboot.sh b/bashrc/reboot.sh
+index 1320581d..e40cc39b 100755
+--- ./bashrc/reboot.sh
++++ ./bashrc/reboot.sh
+@@ -1,3 +1,8 @@
+ #!/bin/zsh
+-#~/loadrc/kvmrc/vsave.sh
++
++if [ $(uname) = "Darwin" ]
++then
++    sudo fdesetup authrestart -user $(whoami) -inputplist < ~/login.plist
++else
+     reboot
++fi
 diff --git a/bashrc/remove_path.sh b/bashrc/remove_path.sh
 new file mode 100644
 index 00000000..10e89a8a
@@ -1899,21 +1989,37 @@ index 3bd9b5b1..08477d81 100755
  ~/loadrc/gitrc/gsync.sh
 +~/loadrc/bashrc/update_proj.sh
 diff --git a/gitrc/reapply.sh b/gitrc/reapply.sh
-index d1ffbd95..e6e1d0fc 100755
+index d1ffbd95..dc3ebae3 100755
 --- ./gitrc/reapply.sh
 +++ ./gitrc/reapply.sh
-@@ -1,9 +1,9 @@
+@@ -1,12 +1,10 @@
  #!/bin/zsh
  DIFF="$1"
  CURRET_BRANCH_DIFF="$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff"
 -git apply --reverse "$CURRET_BRANCH_DIFF" 
-+git apply --index --reverse "$CURRET_BRANCH_DIFF"
- git checkout -- "$CURRET_BRANCH_DIFF"
+-git checkout -- "$CURRET_BRANCH_DIFF"
 -git apply --reject --whitespace=fix "$DIFF"
-+git apply --index --reject --whitespace=fix "$DIFF"
++
++cp -fv "$DIFF" "$DIFF".bak
  ~/loadrc/gitrc/gdio.sh
++git apply --reverse "$CURRET_BRANCH_DIFF"
++cp -fv "$DIFF".bak "$DIFF"
  
- if [ "$CURRET_BRANCH_DIFF" = "$DIFF" ]
+-if [ "$CURRET_BRANCH_DIFF" = "$DIFF" ]
+-then
+-    git add "$CURRET_BRANCH_DIFF"
+-fi
++git apply --reject --whitespace=fix "$DIFF"
+diff --git a/gitrc/rediff.sh b/gitrc/rediff.sh
+new file mode 100755
+index 00000000..8c70d0cc
+--- /dev/null
++++ ./gitrc/rediff.sh
+@@ -0,0 +1,4 @@
++#!/bin/zsh
++
++DIFF_FILE="$1"
++rediff "$DIFF_FILE" | sponge "$DIFF_FILE"
 diff --git a/gpurc/.gpurc b/gpurc/.gpurc
 index 8be8d98c..6026d401 100644
 --- ./gpurc/.gpurc
@@ -2381,11 +2487,11 @@ index bb27cd34..b6ca2646 100755
 +/usr/bin/sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..3adaacac
+index 00000000..cf41e4ce
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 3adaacac5360576ebd73d97bcfe5b496d2818bfe-dirty
++Subproject commit cf41e4ce9911565faa6bce59b312e178ffd20221
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -2642,12 +2748,12 @@ index 86d744c6..2a31e6bc 160000
 -Subproject commit 86d744c6e4731d0014ef469f019a305e2d7baac0
 +Subproject commit 2a31e6bcea5977209c05c728c4253d82fd873c82
 diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
-index 1d4a909f..a394f1ed 160000
+index 1d4a909f..e919b7f8 160000
 --- ./vimrc/.vim/bundle/bash-support.vim
 +++ ./vimrc/.vim/bundle/bash-support.vim
 @@ -1 +1 @@
 -Subproject commit 1d4a909f46698906b16d711aeb260663f4c4794a
-+Subproject commit a394f1ed8ce29873ed2d8344ce20673ee0029764-dirty
++Subproject commit e919b7f843b043c4189f5b7c419c0d47f9b622b8
 diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
 index 3de17695..d2d8cc43 160000
 --- ./vimrc/.vim/bundle/ncm2
@@ -2726,12 +2832,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..2e9d425c 160000
+index 8468d6a8..a08c481d 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 2e9d425c00bc06c708855cbb322248d8defbab79-dirty
++Subproject commit a08c481de2d8ebbd9f2a89d6dd6a05ca18718707
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -3524,6 +3630,25 @@ index 00000000..df39432d
 +
 +nnoremap <silent> cp :call PopulatePasteBufferFromOSX('n')<cr>
 +vnoremap <silent> cp :call PopulatePasteBufferFromOSX('v')<cr>
+diff --git a/vimrc/.vim/plugin/rediff.vim b/vimrc/.vim/plugin/rediff.vim
+new file mode 100644
+index 00000000..0b65aa4d
+--- /dev/null
++++ ./vimrc/.vim/plugin/rediff.vim
+@@ -0,0 +1,13 @@
++function! s:rediff_augroup()
++    if (expand("%") !~ '.*.diff')
++        return
++    endif
++
++    let worktree = Cd2Worktree()
++    silent exec '!~/loadrc/gitrc/rediff.sh ' . '"' .  expand("%:p") . '"'
++endfunction
++
++augroup rediff_augroup
++    au!
++    au BufWritePost * call <SID>rediff_augroup()
++augroup END
 diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
 index 41afb6c6..55b41320 100644
 --- ./vimrc/.vim/plugin/view.vim

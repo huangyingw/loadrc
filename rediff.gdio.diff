@@ -491,6 +491,69 @@ index 00000000..392c21db
 +	</dict>
 +    </dict>
 +</plist>
+diff --git a/bashrc/all_prunefix.conf b/bashrc/all_prunefix.conf
+new file mode 100644
+index 00000000..7ccfc45e
+--- /dev/null
++++ ./bashrc/all_prunefix.conf
+@@ -0,0 +1,57 @@
++"*/vimtex/test/*"
++"./*.diff"
++"./*.egg"
++"./*.log"
++"./*.original"
++"./*.pdf"
++"./*.so"
++"./*.zip"
++"./*/gbil.log"
++"./*/running.time"
++"./*/tmirror.ready"
++"./cscope.*"
++"./cscope/*"
++"./jdupes/*"
++"./neovim/*"
++"./oh-my-zsh/*"
++"./vimrc/.vim/autosess/*"
++"./vimrc/.vim/view/*"
++*.bak
++*.class
++*.cvs
++*.findresult
++*.gif
++*.git
++*.hg
++*.jpg
++*.lck
++*.metadata
++*.orig
++*.out
++*.pem
++*.png
++*.py[co]
++*.runresult
++*.sort
++*.svn
++*.sw[a-z]
++*.tmp
++*/.classpath
++*/.fugitiveblame
++*/.project
++*/.ropeproject/*
++*/.settings/*
++*/bashrc/.bash_history
++*/build/*
++*/files.proj
++*/fonts/*
++*/gbil.log
++*/images/*
++*/src/MacVim/icons/*
++*/target/*
++*/third_party/*
++./*/includefile.conf
++./*/prunefile.conf
++./*/prunefix.conf
++./keys/*
++./vimrc/.vim/bundle/node_modules/*
 diff --git a/bashrc/append_num.sh b/bashrc/append_num.sh
 new file mode 100755
 index 00000000..67fd9240
@@ -563,13 +626,14 @@ index 26ad90c3..20226fa3 100755
 +output="$2" 
 +(pv -n "$input" | dd of="$output" bs=128M conv=notrunc,noerror) 2>&1 | dialog --gauge "Running dd command (cloning), please wait..." 10 70 0
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
-index 9a6e19c8..f5458e6f 100755
+index 9a6e19c8..7f8236ad 100755
 --- ./bashrc/do_update_proj.sh
 +++ ./bashrc/do_update_proj.sh
-@@ -5,3 +5,4 @@
+@@ -5,3 +5,5 @@
  ~/loadrc/bashrc/fvideos.sh
  ~/loadrc/bashrc/fdocs.sh
  ~/loadrc/bashrc/cscope.sh
++~/loadrc/bashrc/generate_all_list.sh &
 +git remote update &
 diff --git a/bashrc/fdisk_log.sh b/bashrc/fdisk_log.sh
 index 37081d0c..3867ab7b 100755
@@ -660,6 +724,18 @@ index f58a2ee7..dcc8f356 100755
 +else
      xargs sed -i.bak  "s/${FIND}/${REPLACE}/g" < "$3"
 +fi
+diff --git a/bashrc/generate_all_list.sh b/bashrc/generate_all_list.sh
+new file mode 100644
+index 00000000..903dee7b
+--- /dev/null
++++ ./bashrc/generate_all_list.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++
++TARGET=all.list.bak
++PRUNE_POSTFIX=all_prunefix.conf
++
++find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + > "$TARGET" ; \
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
 index 83e2c748..19fda7d5 100755
 --- ./bashrc/generate_files_proj.sh
@@ -1914,6 +1990,17 @@ index d1ffbd95..e6e1d0fc 100755
  ~/loadrc/gitrc/gdio.sh
  
  if [ "$CURRET_BRANCH_DIFF" = "$DIFF" ]
+diff --git a/gitrc/rediff.sh b/gitrc/rediff.sh
+new file mode 100755
+index 00000000..ffbed788
+--- /dev/null
++++ ./gitrc/rediff.sh
+@@ -0,0 +1,5 @@
++#!/bin/zsh
++
++DIFF_FILE="$1"
++rediff "$DIFF_FILE" | sponge "$DIFF_FILE"
++git add "$DIFF_FILE"
 diff --git a/gpurc/.gpurc b/gpurc/.gpurc
 index 8be8d98c..6026d401 100644
 --- ./gpurc/.gpurc
@@ -2097,7 +2184,7 @@ index 34269226..a8a824c3 100755
  ./install_time_machine.sh
  ./enpass_install.sh
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 62d92acb..bbbf7751 100755
+index 62d92acb..9db54109 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
 @@ -8,14 +8,21 @@ then
@@ -2124,7 +2211,7 @@ index 62d92acb..bbbf7751 100755
      coreutils \
      dos2unix \
      ffmpeg \
-@@ -33,17 +40,18 @@ brew install \
+@@ -33,17 +40,17 @@ brew install \
      libtool \
      lynx \
      minikube \
@@ -2133,7 +2220,6 @@ index 62d92acb..bbbf7751 100755
      rename \
 -    sshfs \
 +    rsync \
-+    patchutils \
 +    sponge \
      tig \
 -    tmux \
@@ -2147,7 +2233,7 @@ index 62d92acb..bbbf7751 100755
  
  brew cask install \
      kdiff3 \
-@@ -55,3 +63,4 @@ sudo easy_install pip
+@@ -55,3 +62,4 @@ sudo easy_install pip
  sudo pip install --upgrade pip
  
  #./install_nx.sh
@@ -2381,11 +2467,11 @@ index bb27cd34..b6ca2646 100755
 +/usr/bin/sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..3adaacac
+index 00000000..7beda919
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 3adaacac5360576ebd73d97bcfe5b496d2818bfe-dirty
++Subproject commit 7beda919d8a2630fd6f7fd386edb839a5cc0df7f
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -2670,12 +2756,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..d0dc057d 160000
+index cc6342c3..15cbdf16 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit d0dc057d0129bfd5f04b693b5e87e909ab059025
++Subproject commit 15cbdf166ab253b60c32062cb5f3607d51708fec-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -2954,7 +3040,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..03e52884 100644
+index d5874fe5..441c4ba5 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,17 @@
@@ -3003,7 +3089,7 @@ index d5874fe5..03e52884 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtu :execute s:Grtu()
-@@ -51,25 +57,24 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
+@@ -51,25 +57,25 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :execute s:Gs()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
@@ -3028,11 +3114,12 @@ index d5874fe5..03e52884 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Rediff :execute s:Rediff()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute s:SelectMove(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Split :execute s:Split()
-@@ -111,13 +116,12 @@ endfunction
+@@ -111,13 +117,12 @@ endfunction
  
  function! s:Gkdo() abort
      let worktree = Cd2Worktree()
@@ -3049,7 +3136,7 @@ index d5874fe5..03e52884 100644
      endif
  endfunction
  
-@@ -207,7 +211,8 @@ endfunction
+@@ -207,7 +212,8 @@ endfunction
  
  function! s:Gpl() abort
      let worktree = Cd2Worktree()
@@ -3059,7 +3146,7 @@ index d5874fe5..03e52884 100644
  endfunction
  
  function! s:Fsync() abort
-@@ -228,12 +233,14 @@ endfunction
+@@ -228,12 +234,14 @@ endfunction
  
  function! s:Gbib() abort
      let worktree = Cd2Worktree()
@@ -3076,7 +3163,7 @@ index d5874fe5..03e52884 100644
  endfunction
  
  function! s:Gbil() abort
-@@ -325,7 +332,7 @@ function! s:G(args, ...) abort
+@@ -325,7 +333,7 @@ function! s:G(args, ...) abort
      endif
  
      let worktree = Cd2Worktree()
@@ -3085,7 +3172,7 @@ index d5874fe5..03e52884 100644
  
      if &diff
          call s:Gs()
-@@ -366,9 +373,8 @@ function! s:Gdi(...) abort
+@@ -366,9 +374,8 @@ function! s:Gdi(...) abort
          if arg1 == ''
              call fugitive#Diffsplit(0, 1, "vert", '', [])
          elseif tolower(arg1) == 'o'
@@ -3097,7 +3184,7 @@ index d5874fe5..03e52884 100644
          else
              call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
          endif
-@@ -424,7 +430,7 @@ function! s:Gdi2(...) abort
+@@ -424,7 +431,7 @@ function! s:Gdi2(...) abort
      let worktree = Cd2Worktree()
      let output = 'gdi2.findresult'
      let arg1 = (a:0 >= 1) ? a:1 : ''
@@ -3106,7 +3193,7 @@ index d5874fe5..03e52884 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -475,18 +481,17 @@ endfunction
+@@ -475,18 +482,17 @@ endfunction
  
  function! s:Gdif(...) abort
      let worktree = Cd2Worktree()
@@ -3131,7 +3218,7 @@ index d5874fe5..03e52884 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -516,10 +521,15 @@ endfunction
+@@ -516,10 +522,15 @@ endfunction
  
  function! s:ApplyBranch(args, ...) abort
      let worktree = Cd2Worktree()
@@ -3148,7 +3235,7 @@ index d5874fe5..03e52884 100644
  function! s:Gshow(args, ...) abort
      let worktree = Cd2Worktree()
      let output = a:args . '.diff'
-@@ -527,7 +537,19 @@ function! s:Gshow(args, ...) abort
+@@ -527,7 +538,19 @@ function! s:Gshow(args, ...) abort
      call OpenOrSwitch(output, 'vs')
  endfunction
  
@@ -3168,7 +3255,7 @@ index d5874fe5..03e52884 100644
      let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
      exec '!rm ' . newFile
      exec 'w ' . newFile
-@@ -546,6 +568,21 @@ function! s:CatPlay(...) abort
+@@ -546,6 +569,21 @@ function! s:CatPlay(...) abort
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
@@ -3190,7 +3277,7 @@ index d5874fe5..03e52884 100644
  function! s:CatMove(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -559,6 +596,63 @@ function! s:CatMove(...) abort
+@@ -559,6 +597,63 @@ function! s:CatMove(...) abort
      call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
  endfunction
  
@@ -3254,7 +3341,7 @@ index d5874fe5..03e52884 100644
  function! s:CatDu(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -585,11 +679,6 @@ function! s:Tail() abort
+@@ -585,11 +680,6 @@ function! s:Tail() abort
      exec '!tail -f ' . expand("%:p")
  endfunction
  
@@ -3266,7 +3353,7 @@ index d5874fe5..03e52884 100644
  function! s:Dps() abort
      let worktree = Cd2Worktree()
      silent exec '!~/loadrc/dockerrc/dps.sh'
-@@ -640,7 +729,10 @@ function! s:Prune() abort
+@@ -640,7 +730,10 @@ function! s:Prune() abort
      call asyncrun#run('<bang>', '', '~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
  endfunction
  
@@ -3278,7 +3365,7 @@ index d5874fe5..03e52884 100644
      call Cd2ProjectRoot("files.proj")
  
      if expand('%:t') != 'index'
-@@ -649,14 +741,14 @@ function! s:Fr(find, replace) abort
+@@ -649,14 +742,14 @@ function! s:Fr(find, replace) abort
          let fileList = "files.proj"
      endif
  
@@ -3296,7 +3383,7 @@ index d5874fe5..03e52884 100644
  endfunction
  
  function! s:Gwap() abort
-@@ -671,7 +763,7 @@ function! s:Gfix() abort
+@@ -671,7 +764,7 @@ function! s:Gfix() abort
  endfunction
  
  function! s:Reapply() abort
@@ -3305,7 +3392,25 @@ index d5874fe5..03e52884 100644
          echom 'Please only run on *gdio.diff!!!'
          return 0
      endif
-@@ -701,3 +793,5 @@ function! s:GenerateIpynb() abort
+@@ -681,6 +774,17 @@ function! s:Reapply() abort
+     call s:Gs()
+ endfunction
+ 
++function! s:Rediff() abort
++    if (expand("%") !~ '.*.diff')
++        echom 'Please only run on *gdio.diff!!!'
++        return 0
++    endif
++
++    let worktree = Cd2Worktree()
++    exec '!~/loadrc/gitrc/rediff.sh ' . '"' .  expand("%:p") . '"'
++    call s:Gs()
++endfunction
++
+ function! s:Split() abort
+     let worktree = Cd2Worktree()
+     exec '!~/loadrc/bashrc/split.sh ' . '"' .  expand('%:t') . '"'
+@@ -701,3 +805,5 @@ function! s:GenerateIpynb() abort
      exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
      w
  endfunction
@@ -4071,11 +4176,11 @@ index 48f7223b..d2da8f4c 100755
 +cp -fv "$find_result".bak "$find_result"
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
-index 00000000..a30c815b
+index 00000000..04606c01
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
-+Subproject commit a30c815b53b8fa0f0ca23680f5671deda334cacd
++Subproject commit 04606c01bae1cd0b1786731076809f0c6da445d0
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 index 430298e0..cb9795ec 100755
 --- ./wifirc/autoconnect.sh

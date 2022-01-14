@@ -491,6 +491,69 @@ index 00000000..392c21db
 +	</dict>
 +    </dict>
 +</plist>
+diff --git a/bashrc/all_prunefix.conf b/bashrc/all_prunefix.conf
+new file mode 100644
+index 00000000..7ccfc45e
+--- /dev/null
++++ ./bashrc/all_prunefix.conf
+@@ -0,0 +1,57 @@
++"*/vimtex/test/*"
++"./*.diff"
++"./*.egg"
++"./*.log"
++"./*.original"
++"./*.pdf"
++"./*.so"
++"./*.zip"
++"./*/gbil.log"
++"./*/running.time"
++"./*/tmirror.ready"
++"./cscope.*"
++"./cscope/*"
++"./jdupes/*"
++"./neovim/*"
++"./oh-my-zsh/*"
++"./vimrc/.vim/autosess/*"
++"./vimrc/.vim/view/*"
++*.bak
++*.class
++*.cvs
++*.findresult
++*.gif
++*.git
++*.hg
++*.jpg
++*.lck
++*.metadata
++*.orig
++*.out
++*.pem
++*.png
++*.py[co]
++*.runresult
++*.sort
++*.svn
++*.sw[a-z]
++*.tmp
++*/.classpath
++*/.fugitiveblame
++*/.project
++*/.ropeproject/*
++*/.settings/*
++*/bashrc/.bash_history
++*/build/*
++*/files.proj
++*/fonts/*
++*/gbil.log
++*/images/*
++*/src/MacVim/icons/*
++*/target/*
++*/third_party/*
++./*/includefile.conf
++./*/prunefile.conf
++./*/prunefix.conf
++./keys/*
++./vimrc/.vim/bundle/node_modules/*
 diff --git a/bashrc/append_num.sh b/bashrc/append_num.sh
 new file mode 100755
 index 00000000..67fd9240
@@ -563,13 +626,14 @@ index 26ad90c3..20226fa3 100755
 +output="$2" 
 +(pv -n "$input" | dd of="$output" bs=128M conv=notrunc,noerror) 2>&1 | dialog --gauge "Running dd command (cloning), please wait..." 10 70 0
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
-index 9a6e19c8..f5458e6f 100755
+index 9a6e19c8..7f8236ad 100755
 --- ./bashrc/do_update_proj.sh
 +++ ./bashrc/do_update_proj.sh
-@@ -5,3 +5,4 @@
+@@ -5,3 +5,5 @@
  ~/loadrc/bashrc/fvideos.sh
  ~/loadrc/bashrc/fdocs.sh
  ~/loadrc/bashrc/cscope.sh
++~/loadrc/bashrc/generate_all_list.sh &
 +git remote update &
 diff --git a/bashrc/fdisk_log.sh b/bashrc/fdisk_log.sh
 index 37081d0c..3867ab7b 100755
@@ -660,6 +724,18 @@ index f58a2ee7..dcc8f356 100755
 +else
      xargs sed -i.bak  "s/${FIND}/${REPLACE}/g" < "$3"
 +fi
+diff --git a/bashrc/generate_all_list.sh b/bashrc/generate_all_list.sh
+new file mode 100644
+index 00000000..903dee7b
+--- /dev/null
++++ ./bashrc/generate_all_list.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++
++TARGET=all.list.bak
++PRUNE_POSTFIX=all_prunefix.conf
++
++find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + > "$TARGET" ; \
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
 index 83e2c748..19fda7d5 100755
 --- ./bashrc/generate_files_proj.sh
@@ -2097,7 +2173,7 @@ index 34269226..a8a824c3 100755
  ./install_time_machine.sh
  ./enpass_install.sh
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 62d92acb..bbbf7751 100755
+index 62d92acb..9db54109 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
 @@ -8,14 +8,21 @@ then
@@ -2124,7 +2200,7 @@ index 62d92acb..bbbf7751 100755
      coreutils \
      dos2unix \
      ffmpeg \
-@@ -33,17 +40,18 @@ brew install \
+@@ -33,17 +40,17 @@ brew install \
      libtool \
      lynx \
      minikube \
@@ -2133,7 +2209,6 @@ index 62d92acb..bbbf7751 100755
      rename \
 -    sshfs \
 +    rsync \
-+    patchutils \
 +    sponge \
      tig \
 -    tmux \
@@ -2147,7 +2222,7 @@ index 62d92acb..bbbf7751 100755
  
  brew cask install \
      kdiff3 \
-@@ -55,3 +63,4 @@ sudo easy_install pip
+@@ -55,3 +62,4 @@ sudo easy_install pip
  sudo pip install --upgrade pip
  
  #./install_nx.sh
@@ -2381,11 +2456,11 @@ index bb27cd34..b6ca2646 100755
 +/usr/bin/sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..3adaacac
+index 00000000..ebe74464
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 3adaacac5360576ebd73d97bcfe5b496d2818bfe-dirty
++Subproject commit ebe74464a5e586851d003d1f24a5d5cb0177e298
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -2642,12 +2717,12 @@ index 86d744c6..2a31e6bc 160000
 -Subproject commit 86d744c6e4731d0014ef469f019a305e2d7baac0
 +Subproject commit 2a31e6bcea5977209c05c728c4253d82fd873c82
 diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
-index 1d4a909f..a394f1ed 160000
+index 1d4a909f..e919b7f8 160000
 --- ./vimrc/.vim/bundle/bash-support.vim
 +++ ./vimrc/.vim/bundle/bash-support.vim
 @@ -1 +1 @@
 -Subproject commit 1d4a909f46698906b16d711aeb260663f4c4794a
-+Subproject commit a394f1ed8ce29873ed2d8344ce20673ee0029764-dirty
++Subproject commit e919b7f843b043c4189f5b7c419c0d47f9b622b8
 diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
 index 3de17695..d2d8cc43 160000
 --- ./vimrc/.vim/bundle/ncm2
@@ -2670,12 +2745,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..d0dc057d 160000
+index cc6342c3..15cbdf16 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit d0dc057d0129bfd5f04b693b5e87e909ab059025
++Subproject commit 15cbdf166ab253b60c32062cb5f3607d51708fec-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -2726,12 +2801,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..2e9d425c 160000
+index 8468d6a8..a7c541c9 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 2e9d425c00bc06c708855cbb322248d8defbab79-dirty
++Subproject commit a7c541c9b5747ee08c53d24458fcb9f09300584e-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -4071,11 +4146,11 @@ index 48f7223b..d2da8f4c 100755
 +cp -fv "$find_result".bak "$find_result"
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
-index 00000000..a30c815b
+index 00000000..04606c01
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
-+Subproject commit a30c815b53b8fa0f0ca23680f5671deda334cacd
++Subproject commit 04606c01bae1cd0b1786731076809f0c6da445d0
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 index 430298e0..cb9795ec 100755
 --- ./wifirc/autoconnect.sh

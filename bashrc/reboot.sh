@@ -1,3 +1,8 @@
 #!/bin/zsh
-#~/loadrc/kvmrc/vsave.sh
-reboot
+
+if [ $(uname) = "Darwin" ]
+then
+    sudo fdesetup authrestart -user $(whoami) -inputplist < ~/login.plist
+else
+    reboot
+fi
