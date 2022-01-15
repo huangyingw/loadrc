@@ -19,3 +19,4 @@ do \
 done
 
 ./macosrc/configure_mosh.sh
+# ./macosrc/configure_ssh.sh
