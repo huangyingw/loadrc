@@ -526,6 +526,11 @@ function! s:ApplyBranch(args, ...) abort
 endfunction
 
 function! s:Gcom(args, ...) abort
+    if (expand("%") != 'index')
+        echom 'Please only run on index!!!'
+        return 0
+    endif
+
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"'
 endfunction
