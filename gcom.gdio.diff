@@ -1026,6 +1026,21 @@ index 00000000..e46e9472
 +./parse_host.sh "mini:~/loadrc"
 +./parse_host.sh "huangyingw@mini:~/loadrc"
 +./parse_host.sh "~/loadrc"
+diff --git a/bashrc/reboot.sh b/bashrc/reboot.sh
+index 1320581d..dc8a63dc 100755
+--- ./bashrc/reboot.sh
++++ ./bashrc/reboot.sh
+@@ -1,3 +1,9 @@
+ #!/bin/zsh
+-#~/loadrc/kvmrc/vsave.sh
++
++if [ $(uname) = "Darwin" ]
++then
++    # sudo fdesetup authrestart -user $(whoami) -inputplist < ~/login.plist
++    sudo reboot
++else
+     reboot
++fi
 diff --git a/bashrc/remove_path.sh b/bashrc/remove_path.sh
 new file mode 100644
 index 00000000..10e89a8a
@@ -1899,21 +1914,37 @@ index 3bd9b5b1..08477d81 100755
  ~/loadrc/gitrc/gsync.sh
 +~/loadrc/bashrc/update_proj.sh
 diff --git a/gitrc/reapply.sh b/gitrc/reapply.sh
-index d1ffbd95..e6e1d0fc 100755
+index d1ffbd95..dc3ebae3 100755
 --- ./gitrc/reapply.sh
 +++ ./gitrc/reapply.sh
-@@ -1,9 +1,9 @@
+@@ -1,12 +1,10 @@
  #!/bin/zsh
  DIFF="$1"
  CURRET_BRANCH_DIFF="$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff"
 -git apply --reverse "$CURRET_BRANCH_DIFF" 
-+git apply --index --reverse "$CURRET_BRANCH_DIFF"
- git checkout -- "$CURRET_BRANCH_DIFF"
+-git checkout -- "$CURRET_BRANCH_DIFF"
 -git apply --reject --whitespace=fix "$DIFF"
-+git apply --index --reject --whitespace=fix "$DIFF"
++
++cp -fv "$DIFF" "$DIFF".bak
  ~/loadrc/gitrc/gdio.sh
++git apply --reverse "$CURRET_BRANCH_DIFF"
++cp -fv "$DIFF".bak "$DIFF"
  
- if [ "$CURRET_BRANCH_DIFF" = "$DIFF" ]
+-if [ "$CURRET_BRANCH_DIFF" = "$DIFF" ]
+-then
+-    git add "$CURRET_BRANCH_DIFF"
+-fi
++git apply --reject --whitespace=fix "$DIFF"
+diff --git a/gitrc/rediff.sh b/gitrc/rediff.sh
+new file mode 100755
+index 00000000..8c70d0cc
+--- /dev/null
++++ ./gitrc/rediff.sh
+@@ -0,0 +1,4 @@
++#!/bin/zsh
++
++DIFF_FILE="$1"
++rediff "$DIFF_FILE" | sponge "$DIFF_FILE"
 diff --git a/gpurc/.gpurc b/gpurc/.gpurc
 index 8be8d98c..6026d401 100644
 --- ./gpurc/.gpurc
@@ -2219,7 +2250,7 @@ index 2bc75c67..49f4fbcd 100755
 +./neovim/install_prerequisite.sh
 +./neovim/install.sh
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
-index 298b6bc4..89bfd577 100755
+index 298b6bc4..324e52db 100755
 --- ./install_prerequisite.sh
 +++ ./install_prerequisite.sh
 @@ -1,14 +1,13 @@
@@ -2255,7 +2286,7 @@ index 298b6bc4..89bfd577 100755
      kdiff3 \
      libsecret-1-dev \
      libsecret-tools \
-@@ -37,10 +39,12 @@ apt-get install -y \
+@@ -37,12 +39,15 @@ apt-get install -y \
      manpages-fr-extra \
      manpages-pl \
      mdadm \
@@ -2268,8 +2299,11 @@ index 298b6bc4..89bfd577 100755
 +    nfs-kernel-server \
      npm \
      openvpn \
++    patchutils \
      perl \
-@@ -54,10 +58,11 @@ apt-get install -y \
+     pm-utils \
+     pv \
+@@ -54,10 +59,11 @@ apt-get install -y \
      slurm \
      smplayer \
      software-properties-common \
@@ -2283,7 +2317,7 @@ index 298b6bc4..89bfd577 100755
      unrar \
      w3m \
      w3m-img \
-@@ -68,5 +73,3 @@ apt-get install -y \
+@@ -68,5 +74,3 @@ apt-get install -y \
  modprobe wl
  update-initramfs -u
  locale-gen en_US.UTF-8
@@ -2379,13 +2413,152 @@ index bb27cd34..b6ca2646 100755
  # Turn the firewall back on
 -sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 +/usr/bin/sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+diff --git a/macosrc/configure_ssh.sh b/macosrc/configure_ssh.sh
+new file mode 100644
+index 00000000..283031c4
+--- /dev/null
++++ ./macosrc/configure_ssh.sh
+@@ -0,0 +1,7 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++sudo cp -nv /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
++sudo cp -fv ./etc/ssh/sshd_config /etc/ssh/sshd_config  
+diff --git a/macosrc/etc/ssh/sshd_config b/macosrc/etc/ssh/sshd_config
+new file mode 100644
+index 00000000..0f662165
+--- /dev/null
++++ ./macosrc/etc/ssh/sshd_config
+@@ -0,0 +1,120 @@
++#	$OpenBSD: sshd_config,v 1.103 2018/04/09 20:41:22 tj Exp $
++
++# This is the sshd server system-wide configuration file.  See
++# sshd_config(5) for more information.
++
++# This sshd was compiled with PATH=/usr/bin:/bin:/usr/sbin:/sbin
++
++# The strategy used for options in the default sshd_config shipped with
++# OpenSSH is to specify options with their default value where
++# possible, but leave them commented.  Uncommented options override the
++# default value.
++
++#Port 22
++#AddressFamily any
++#ListenAddress 0.0.0.0
++#ListenAddress ::
++
++#HostKey /etc/ssh/ssh_host_rsa_key
++#HostKey /etc/ssh/ssh_host_ecdsa_key
++#HostKey /etc/ssh/ssh_host_ed25519_key
++
++# Ciphers and keying
++#RekeyLimit default none
++
++# Logging
++#SyslogFacility AUTH
++#LogLevel INFO
++
++# Authentication:
++
++#LoginGraceTime 2m
++#PermitRootLogin prohibit-password
++#StrictModes yes
++#MaxAuthTries 6
++#MaxSessions 10
++
++#PubkeyAuthentication yes
++
++# The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
++# but this is overridden so installations will only check .ssh/authorized_keys
++AuthorizedKeysFile	.ssh/authorized_keys
++
++#AuthorizedPrincipalsFile none
++
++#AuthorizedKeysCommand none
++#AuthorizedKeysCommandUser nobody
++
++# For this to work you will also need host keys in /etc/ssh/ssh_known_hosts
++#HostbasedAuthentication no
++# Change to yes if you don't trust ~/.ssh/known_hosts for
++# HostbasedAuthentication
++#IgnoreUserKnownHosts no
++# Don't read the user's ~/.rhosts and ~/.shosts files
++#IgnoreRhosts yes
++
++# To disable tunneled clear text passwords, change to no here!
++#PasswordAuthentication yes
++#PermitEmptyPasswords no
++
++# Change to no to disable s/key passwords
++#ChallengeResponseAuthentication yes
++
++# Kerberos options
++#KerberosAuthentication no
++#KerberosOrLocalPasswd yes
++#KerberosTicketCleanup yes
++#KerberosGetAFSToken no
++
++# GSSAPI options
++#GSSAPIAuthentication no
++#GSSAPICleanupCredentials yes
++
++# Set this to 'yes' to enable PAM authentication, account processing,
++# and session processing. If this is enabled, PAM authentication will
++# be allowed through the ChallengeResponseAuthentication and
++# PasswordAuthentication.  Depending on your PAM configuration,
++# PAM authentication via ChallengeResponseAuthentication may bypass
++# the setting of "PermitRootLogin without-password".
++# If you just want the PAM account and session checks to run without
++# PAM authentication, then enable this but set PasswordAuthentication
++# and ChallengeResponseAuthentication to 'no'.
++UsePAM yes
++
++#AllowAgentForwarding yes
++#AllowTcpForwarding yes
++#GatewayPorts no
++#X11Forwarding no
++#X11DisplayOffset 10
++#X11UseLocalhost yes
++#PermitTTY yes
++#PrintMotd yes
++#PrintLastLog yes
++#TCPKeepAlive yes
++#PermitUserEnvironment no
++#Compression delayed
++#ClientAliveInterval 0
++#ClientAliveCountMax 3
++#UseDNS no
++#PidFile /var/run/sshd.pid
++#MaxStartups 10:30:100
++#PermitTunnel no
++#ChrootDirectory none
++#VersionAddendum none
++
++# pass locale information
++AcceptEnv LANG LC_*
++
++# no default banner path
++#Banner none
++
++# override default of no subsystems
++Subsystem	sftp	/usr/libexec/sftp-server
++
++# Example of overriding settings on a per-user basis
++#Match User anoncvs
++#	X11Forwarding no
++#	AllowTcpForwarding no
++#	PermitTTY no
++#	ForceCommand cvs server
++PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..3adaacac
+index 00000000..f3bca495
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 3adaacac5360576ebd73d97bcfe5b496d2818bfe-dirty
++Subproject commit f3bca4958f8134c1982df6115ebf0fb937470be8
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -2477,6 +2650,15 @@ index 13a0cf4c..d8d70042 100755
              else:
                  subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
          else:
+diff --git a/set_macos_configuration.sh b/set_macos_configuration.sh
+index cf9a010a..26f18169 100755
+--- ./set_macos_configuration.sh
++++ ./set_macos_configuration.sh
+@@ -19,3 +19,4 @@ do \
+ done
+ 
+ ./macosrc/configure_mosh.sh
++# ./macosrc/configure_ssh.sh
 diff --git a/setup.sh b/setup.sh
 index cc9fd3f1..608329fd 100755
 --- ./setup.sh
@@ -2642,12 +2824,12 @@ index 86d744c6..2a31e6bc 160000
 -Subproject commit 86d744c6e4731d0014ef469f019a305e2d7baac0
 +Subproject commit 2a31e6bcea5977209c05c728c4253d82fd873c82
 diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
-index 1d4a909f..a394f1ed 160000
+index 1d4a909f..826930ed 160000
 --- ./vimrc/.vim/bundle/bash-support.vim
 +++ ./vimrc/.vim/bundle/bash-support.vim
 @@ -1 +1 @@
 -Subproject commit 1d4a909f46698906b16d711aeb260663f4c4794a
-+Subproject commit a394f1ed8ce29873ed2d8344ce20673ee0029764-dirty
++Subproject commit 826930edcb658e0d1865a926aacfb0d6c876d9b5
 diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
 index 3de17695..d2d8cc43 160000
 --- ./vimrc/.vim/bundle/ncm2
@@ -2670,12 +2852,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..d0dc057d 160000
+index cc6342c3..9ed1c46a 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit d0dc057d0129bfd5f04b693b5e87e909ab059025
++Subproject commit 9ed1c46a77a3970a4170cdddab4cba53dea250ca
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -2726,12 +2908,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..2e9d425c 160000
+index 8468d6a8..664c30d4 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 2e9d425c00bc06c708855cbb322248d8defbab79-dirty
++Subproject commit 664c30d401e25d5ea108eca9c642e5eeb3b37bc3
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -2954,7 +3136,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..03e52884 100644
+index d5874fe5..e5091a76 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,17 @@
@@ -3131,7 +3313,7 @@ index d5874fe5..03e52884 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -516,10 +521,15 @@ endfunction
+@@ -516,10 +521,20 @@ endfunction
  
  function! s:ApplyBranch(args, ...) abort
      let worktree = Cd2Worktree()
@@ -3141,6 +3323,11 @@ index d5874fe5..03e52884 100644
  endfunction
  
 +function! s:Gcom(args, ...) abort
++    if (expand("%") != 'index')
++        echom 'Please only run on index!!!'
++        return 0
++    endif
++
 +    let worktree = Cd2Worktree()
 +    exec '!~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"'
 +endfunction
@@ -3148,7 +3335,7 @@ index d5874fe5..03e52884 100644
  function! s:Gshow(args, ...) abort
      let worktree = Cd2Worktree()
      let output = a:args . '.diff'
-@@ -527,7 +537,19 @@ function! s:Gshow(args, ...) abort
+@@ -527,7 +542,19 @@ function! s:Gshow(args, ...) abort
      call OpenOrSwitch(output, 'vs')
  endfunction
  
@@ -3168,7 +3355,7 @@ index d5874fe5..03e52884 100644
      let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
      exec '!rm ' . newFile
      exec 'w ' . newFile
-@@ -546,6 +568,21 @@ function! s:CatPlay(...) abort
+@@ -546,6 +573,21 @@ function! s:CatPlay(...) abort
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
@@ -3190,7 +3377,7 @@ index d5874fe5..03e52884 100644
  function! s:CatMove(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -559,6 +596,63 @@ function! s:CatMove(...) abort
+@@ -559,6 +601,63 @@ function! s:CatMove(...) abort
      call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
  endfunction
  
@@ -3254,7 +3441,7 @@ index d5874fe5..03e52884 100644
  function! s:CatDu(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -585,11 +679,6 @@ function! s:Tail() abort
+@@ -585,11 +684,6 @@ function! s:Tail() abort
      exec '!tail -f ' . expand("%:p")
  endfunction
  
@@ -3266,7 +3453,7 @@ index d5874fe5..03e52884 100644
  function! s:Dps() abort
      let worktree = Cd2Worktree()
      silent exec '!~/loadrc/dockerrc/dps.sh'
-@@ -640,7 +729,10 @@ function! s:Prune() abort
+@@ -640,7 +734,10 @@ function! s:Prune() abort
      call asyncrun#run('<bang>', '', '~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
  endfunction
  
@@ -3278,7 +3465,7 @@ index d5874fe5..03e52884 100644
      call Cd2ProjectRoot("files.proj")
  
      if expand('%:t') != 'index'
-@@ -649,14 +741,14 @@ function! s:Fr(find, replace) abort
+@@ -649,14 +746,14 @@ function! s:Fr(find, replace) abort
          let fileList = "files.proj"
      endif
  
@@ -3296,7 +3483,7 @@ index d5874fe5..03e52884 100644
  endfunction
  
  function! s:Gwap() abort
-@@ -671,7 +763,7 @@ function! s:Gfix() abort
+@@ -671,7 +768,7 @@ function! s:Gfix() abort
  endfunction
  
  function! s:Reapply() abort
@@ -3305,7 +3492,7 @@ index d5874fe5..03e52884 100644
          echom 'Please only run on *gdio.diff!!!'
          return 0
      endif
-@@ -701,3 +793,5 @@ function! s:GenerateIpynb() abort
+@@ -701,3 +798,5 @@ function! s:GenerateIpynb() abort
      exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
      w
  endfunction
@@ -3524,6 +3711,21 @@ index 00000000..df39432d
 +
 +nnoremap <silent> cp :call PopulatePasteBufferFromOSX('n')<cr>
 +vnoremap <silent> cp :call PopulatePasteBufferFromOSX('v')<cr>
+diff --git a/vimrc/.vim/plugin/rediff.vim b/vimrc/.vim/plugin/rediff.vim
+new file mode 100644
+index 00000000..19f8d623
+--- /dev/null
++++ ./vimrc/.vim/plugin/rediff.vim
+@@ -0,0 +1,9 @@
++function! s:rediff_augroup()
++    let worktree = Cd2Worktree()
++    silent exec '!~/loadrc/gitrc/rediff.sh ' . '"' .  expand("%:p") . '"'
++endfunction
++
++augroup rediff_augroup
++    au!
++    au BufWritePost *.diff call <SID>rediff_augroup()
++augroup END
 diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
 index 41afb6c6..55b41320 100644
 --- ./vimrc/.vim/plugin/view.vim
@@ -3938,7 +4140,7 @@ index e0416589..00000000
 -
 -" }}}
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
-index 777cb3ad..6cb746a0 100644
+index 777cb3ad..e51bfe9b 100644
 --- ./vimrc/.vimrc
 +++ ./vimrc/.vimrc
 @@ -28,7 +28,6 @@ inoremap { {}<LEFT>
@@ -3963,7 +4165,7 @@ index 777cb3ad..6cb746a0 100644
  let g:phpfmt_autosave = 1
  let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
  
-@@ -277,3 +271,9 @@ let g:tex_flavor = 'latex'
+@@ -277,3 +271,12 @@ let g:tex_flavor = 'latex'
  " add @ to cfile handle
  set isfname+=@-@
  set history=10000
@@ -3973,6 +4175,9 @@ index 777cb3ad..6cb746a0 100644
 +else
 +    let g:vim_pbcopy_remote_cmd = "nc -N localhost 2224"
 +endif
++
++" https://stackoverflow.com/questions/4642822/how-to-make-bashrc-aliases-available-within-a-vim-shell-command
++" set shellcmdflag=-ic
 diff --git a/vishrc/cat_play.sh b/vishrc/cat_play.sh
 index ed41d521..71bd07af 100755
 --- ./vishrc/cat_play.sh
@@ -4071,11 +4276,11 @@ index 48f7223b..d2da8f4c 100755
 +cp -fv "$find_result".bak "$find_result"
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
-index 00000000..a30c815b
+index 00000000..04606c01
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
-+Subproject commit a30c815b53b8fa0f0ca23680f5671deda334cacd
++Subproject commit 04606c01bae1cd0b1786731076809f0c6da445d0
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 index 430298e0..cb9795ec 100755
 --- ./wifirc/autoconnect.sh
