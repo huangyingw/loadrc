@@ -3010,4 +3010,4 @@
 "./zerotierrc/install.sh"
 "./zerotierrc/restart.sh"
 "./zerotierrc/zerotierrc.conf"
-"reboot.gdio.diff"
+"rediff.gdio.diff"
