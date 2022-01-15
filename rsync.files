@@ -523,6 +523,7 @@
 ./gitrc/parse-github.test.sh
 ./gitrc/postCommit.sh
 ./gitrc/reapply.sh
+./gitrc/rediff.sh
 ./gitrc/restore_deleted.sh
 ./gitrc/retached.sh
 ./gitrc/subfolder_2_repository.sh
@@ -2957,6 +2958,7 @@
 ./vimrc/.vim/plugin/netrw.vim
 ./vimrc/.vim/plugin/nextval.vim
 ./vimrc/.vim/plugin/pbpaste.vim
+./vimrc/.vim/plugin/rediff.vim
 ./vimrc/.vim/plugin/repeat.vim
 ./vimrc/.vim/plugin/restore_view.vim
 ./vimrc/.vim/plugin/spell.vim
@@ -2997,8 +2999,6 @@
 ./wifi-auto-reconnect/README.md
 ./wifi-auto-reconnect/install.sh
 ./wifi-auto-reconnect/net.martinsoft.wifiautoreconnect.plist
-./wifi-auto-reconnect/rsync.files
-./wifi-auto-reconnect/setup.cfg
 ./wifi-auto-reconnect/uninstall.sh
 ./wifi-auto-reconnect/wifiautoreconnect.sh
 ./wifirc/autoconnect.sh
@@ -3010,4 +3010,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-gcom.gdio.diff
+reboot.gdio.diff
