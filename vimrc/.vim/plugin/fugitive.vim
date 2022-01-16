@@ -74,7 +74,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reverse :execute s:Reverse()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute s:SelectMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
@@ -766,10 +765,6 @@ endfunction
 function! s:Gfix() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/gfix.sh'
-endfunction
-
-function! s:Reverse() abort
-    exec 'g/^/m0'
 endfunction
 
 function! s:Reapply() abort
