@@ -1068,14 +1068,15 @@ index 00000000..d3a5e9de
 +mv -nv "$source" "$target"
 diff --git a/bashrc/retire_parts.sh b/bashrc/retire_parts.sh
 new file mode 100755
-index 00000000..9f59d7dd
+index 00000000..cd45d46d
 --- /dev/null
 +++ ./bashrc/retire_parts.sh
-@@ -0,0 +1,40 @@
+@@ -0,0 +1,46 @@
 +#!/bin/zsh
 +
 +if ! (/usr/bin/df -TH /dev/mapper/transmission | /usr/bin/grep -q 100% )
 +then
++    echo "partition is not full yet"
 +    exit 1
 +fi
 +
@@ -1091,20 +1092,25 @@ index 00000000..9f59d7dd
 +do
 +    mid=$(printf '%s\n' $left $right | /usr/bin/datamash median 1)
 +    mid=${mid%.*}
++    echo "mid --> $mid"
 +
 +    local result=$(CountParts $mid)
 +    result=${result%.*}
++    echo "result --> $result"
 +
 +    if [ $result -gt 0 ]
 +    then
 +        left=$mid
++        echo "left --> $left"
 +    else
 +        right=$mid
++        echo "right --> $right"
 +    fi
 +done
 +
 +local result=$(CountParts $right)
 +result=${result%.*}
++echo "result --> $result"
 +
 +if [ $result -gt 0 ]
 +then
