@@ -1,5 +1,11 @@
 #!/bin/zsh
 
+if ! (df -TH /dev/mapper/transmission | grep -q 100% )
+then
+    echo "partition is not full yet"
+    exit 1
+fi
+
 function CountParts()
 {
     echo $(find /var/lib/transmission-daemon/ -type f -mtime +"$1" -name \*.part | wc -l)
