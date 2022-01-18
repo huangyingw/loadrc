@@ -36,6 +36,7 @@ done
 
 local result=$(CountParts $right)
 result=${result%.*}
+echo "result --> $result"
 
 if [ $result -gt 0 ]
 then
