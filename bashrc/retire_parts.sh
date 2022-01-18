@@ -2,6 +2,7 @@
 
 if ! (/usr/bin/df -TH /dev/mapper/transmission | /usr/bin/grep -q 100% )
 then
+    echo "partition is not full yet"
     exit 1
 fi
 
@@ -17,15 +18,19 @@ while [ $((left + 1)) -lt $right ]
 do
     mid=$(printf '%s\n' $left $right | /usr/bin/datamash median 1)
     mid=${mid%.*}
+    echo "mid --> $mid"
 
     local result=$(CountParts $mid)
     result=${result%.*}
+    echo "result --> $result"
 
     if [ $result -gt 0 ]
     then
         left=$mid
+        echo "left --> $left"
     else
         right=$mid
+        echo "right --> $right"
     fi
 done
 
