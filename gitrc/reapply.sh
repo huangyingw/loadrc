@@ -7,4 +7,4 @@ cp -fv "$DIFF" "$DIFF".bak
 git apply --reverse "$CURRET_BRANCH_DIFF"
 cp -fv "$DIFF".bak "$DIFF"
 
-git apply --reject --whitespace=fix "$DIFF"
+git apply --reject --whitespace=fix --recount "$DIFF"
