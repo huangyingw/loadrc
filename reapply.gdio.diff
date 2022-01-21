@@ -1092,15 +1092,21 @@ index 00000000..d3a5e9de
 +mv -nv "$source" "$target"
 diff --git a/bashrc/retire_parts.sh b/bashrc/retire_parts.sh
 new file mode 100755
-index 00000000..9f5ac8da
+index 00000000..cd45d46d
 --- /dev/null
 +++ ./bashrc/retire_parts.sh
-@@ -0,0 +1,40 @@
+@@ -0,0 +1,46 @@
 +#!/bin/zsh
++
++if ! (/usr/bin/df -TH /dev/mapper/transmission | /usr/bin/grep -q 100% )
++then
++    echo "partition is not full yet"
++    exit 1
++fi
 +
 +function CountParts()
 +{
-+    echo $(find /var/lib/transmission-daemon/ -type f -mtime +"$1" -name \*.part | wc -l)
++    /usr/bin/find /var/lib/transmission-daemon/ -type f -mtime +"$1" -name \*.part | /usr/bin/wc -l
 +}
 +
 +left=1
@@ -1108,7 +1114,7 @@ index 00000000..9f5ac8da
 +
 +while [ $((left + 1)) -lt $right ]
 +do
-+    mid=$(printf '%s\n' $left $right | datamash median 1)
++    mid=$(printf '%s\n' $left $right | /usr/bin/datamash median 1)
 +    mid=${mid%.*}
 +    echo "mid --> $mid"
 +
@@ -1132,9 +1138,9 @@ index 00000000..9f5ac8da
 +
 +if [ $result -gt 0 ]
 +then
-+    find /var/lib/transmission-daemon/ -type f -mtime +$right -name \*.part -delete
++    /usr/bin/find /var/lib/transmission-daemon/ -type f -mtime +$right -name \*.part -delete
 +else
-+    find /var/lib/transmission-daemon/ -type f -mtime +$left -name \*.part -delete 
++    /usr/bin/find /var/lib/transmission-daemon/ -type f -mtime +$left -name \*.part -delete 
 +fi
 diff --git a/bashrc/select_move.sh b/bashrc/select_move.sh
 new file mode 100755
@@ -1293,21 +1299,22 @@ index 1e941ff7..f7b1920a 100755
 +    ping mbp
  fi
 diff --git a/crontabrc/.mini.cron b/crontabrc/.mini.cron
-index d8126721..95a16ef9 100644
+index d8126721..c3db43ec 100644
 --- ./crontabrc/.mini.cron
 +++ ./crontabrc/.mini.cron
-@@ -1,2 +1,3 @@
+@@ -1,2 +1,4 @@
  */10 * * * * /usr/bin/expressvpn connect smart
 -0 22-23,0-8 * * * /root/loadrc/crontabrc/mldonkey_start.sh
 +* * * * * /root/loadrc/transmissionrc/auto_restart.sh
 +*/10 * * * * /root/loadrc/transmissionrc/auto_reboot.sh
++*/10 * * * * /root/loadrc/bashrc/retire_parts.sh >> /root/loadrc/retire_parts.log 2>&1
 diff --git a/cscope b/cscope
-index 18a46b20..41fab780 160000
+index 18a46b20..40e22631 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 41fab780d1ca14aad7467436000b0a8ec550c09f
++Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -2893,7 +2900,7 @@ index cc6342c3..a375cc1d 160000
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit a375cc1dce93b6fd7f756901006c90d8ecf38fd1-dirty
++Subproject commit a375cc1dce93b6fd7f756901006c90d8ecf38fd1
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -2949,7 +2956,7 @@ index 8468d6a8..c95c60cd 160000
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit c95c60cd8bf2a62aee5a1cdb9e493b04b323d567-dirty
++Subproject commit c95c60cd8bf2a62aee5a1cdb9e493b04b323d567
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -2972,12 +2979,12 @@ index 00000000..d6adab9d
 @@ -0,0 +1 @@
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..de73f6d1 160000
+index 3b379635..582c4f6c 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit de73f6d1b0bf1b2af2d576f3420fc861af14769f
++Subproject commit 582c4f6cf310b2b3044c366c726a90c0010fc45d
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
@@ -3535,10 +3542,10 @@ index d5874fe5..e5091a76 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..dc479837 100644
+index 5fd4a230..24006518 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
-@@ -77,8 +77,16 @@ function! VFilter()
+@@ -77,8 +77,17 @@ function! VFilter()
  endfunction
  
  function! ShowRemember()
@@ -3548,6 +3555,7 @@ index 5fd4a230..dc479837 100644
 +    let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
 +
 +    echom relativePath
++    call SendTextToPbCopy(expand('%:p'))
 +
 +    if &clipboard == 'unnamed'
 +        let @* = relativePath
@@ -3557,7 +3565,7 @@ index 5fd4a230..dc479837 100644
  endfunction
  
  function! Filter()
-@@ -172,7 +180,6 @@ function! GetFirstColumnOfFile()
+@@ -172,7 +181,6 @@ function! GetFirstColumnOfFile()
          return 0
      endif
  
@@ -3565,7 +3573,7 @@ index 5fd4a230..dc479837 100644
      silent exec '!~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'
      call OpenOrSwitch(expand("%:p") . '.bak', 'vs')
  endfunction
-@@ -334,11 +341,11 @@ endfunction
+@@ -334,11 +342,11 @@ endfunction
  function! GitSearch()
      normal! gvy<CR>
      let keyword = GetEscapedKeyword(@@)
@@ -3579,7 +3587,7 @@ index 5fd4a230..dc479837 100644
      call HighlightKeyword(keyword)
  endfunction
  
-@@ -353,13 +360,6 @@ function! VimSearch()
+@@ -353,13 +361,6 @@ function! VimSearch()
      call HighlightKeyword(keyword)
  endfunction
  
@@ -3593,7 +3601,7 @@ index 5fd4a230..dc479837 100644
  function! SwitchWinSize()
      if &winwidth == 1
          set winwidth=999999
-@@ -416,40 +416,21 @@ nnoremap <leader>Y "+yy
+@@ -416,40 +417,21 @@ nnoremap <leader>Y "+yy
  nnoremap <leader>p "+p
  nnoremap <leader>P "+P
  nnoremap tt :Autoformat<CR>:w!<cr>
@@ -3637,7 +3645,7 @@ index 5fd4a230..dc479837 100644
  nnoremap mg :call VFilter()<cr>
  nnoremap me :call ExtractHighLight()<cr>
  nnoremap mf :call ExFilter()<cr>
-@@ -475,7 +456,8 @@ nnoremap H :call ShowVITAG()<cr>
+@@ -475,7 +457,8 @@ nnoremap H :call ShowVITAG()<cr>
  nnoremap F :call GetFirstColumnOfFile()<cr>
  nnoremap T :vs $HOME/all.proj<cr>
  nnoremap L :vs <C-R>"<cr>
@@ -3647,7 +3655,7 @@ index 5fd4a230..dc479837 100644
  map <F3> :call VDebug()<cr>
  " nnoremap gf gF<cr>
  nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
-@@ -490,10 +472,7 @@ function! CutFile2()
+@@ -490,10 +473,7 @@ function! CutFile2()
  endfunc
  
  function! CutCommon()
@@ -3659,7 +3667,7 @@ index 5fd4a230..dc479837 100644
  endfunc
  
  nnoremap <leader>2 :call CutCommon()<cr>
-@@ -505,3 +484,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
+@@ -505,3 +485,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
  " open tig with Project root path
  nnoremap <Leader>t :TigOpenProjectRootDir<CR>
  nnoremap <leader>T :TigOpenCurrentFile<CR>
@@ -4301,11 +4309,11 @@ index 48f7223b..d2da8f4c 100755
 +cp -fv "$find_result".bak "$find_result"
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
-index 00000000..04606c01
+index 00000000..36940376
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
-+Subproject commit 04606c01bae1cd0b1786731076809f0c6da445d0
++Subproject commit 36940376d1ec457ddc9779a3835ab33c086d1dc6
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 index 430298e0..cb9795ec 100755
 --- ./wifirc/autoconnect.sh
