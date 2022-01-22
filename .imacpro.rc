@@ -7,3 +7,4 @@ then
 fi
 
 ~/loadrc/setup_bidirectional_clipboard.sh
+brightness -m 0.080217
