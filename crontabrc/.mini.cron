@@ -1,3 +1,4 @@
 */10 * * * * /usr/bin/expressvpn connect smart
 * * * * * /root/loadrc/transmissionrc/auto_restart.sh
 */10 * * * * /root/loadrc/transmissionrc/auto_reboot.sh
+*/10 * * * * /root/loadrc/bashrc/retire_parts.sh >> /root/loadrc/retire_parts.log 2>&1
