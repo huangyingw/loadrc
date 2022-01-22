@@ -10,7 +10,7 @@ time \
     find . -type f > /dev/null 2>&1
 
 time \
-    find . -type f -exec grep -Il "" {} + > /dev/null 2>&1
+    find . -type f -exec file {} + | grep text | cut -d: -f1 > /dev/null 2>&1
 
 time \
-    find . -type f -exec file {} + | grep text | cut -d: -f1 > /dev/null 2>&1
+    find . -type f -exec grep -Il "" {} + > /dev/null 2>&1
