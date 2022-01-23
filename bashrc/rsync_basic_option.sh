@@ -1,7 +1,8 @@
 #!/bin/zsh
 
-echo \
+rsync_basic_option=(
     -aHSv \
-    --progress \
-    --force \
-    --append-verify \
+        --progress \
+        --force \
+        --append-verify
+    )
