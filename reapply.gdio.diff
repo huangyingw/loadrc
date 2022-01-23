@@ -118,10 +118,10 @@ index a0d25e95..d053c758 100755
 +
 +~/loadrc/wifi-auto-reconnect/install.sh
 diff --git a/.imacpro.rc b/.imacpro.rc
-index a0d25e95..922db5fe 100755
+index a0d25e95..5dd47721 100755
 --- ./.imacpro.rc
 +++ ./.imacpro.rc
-@@ -1,10 +1,9 @@
+@@ -1,10 +1,10 @@
  #!/bin/zsh
  #alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
  
@@ -136,6 +136,7 @@ index a0d25e95..922db5fe 100755
  fi
 +
 +~/loadrc/setup_bidirectional_clipboard.sh
++brightness -m 0.080217
 diff --git a/.loadrc b/.loadrc
 index 17e45232..14ec11eb 100755
 --- ./.loadrc
@@ -513,7 +514,7 @@ index 00000000..c0515d20
 +mkdir -p "$(dirname "$target")"
 +mv -nv "$source" "$target"
 diff --git a/bashrc/best_find.sh b/bashrc/best_find.sh
-index 0d2de988..0caaa6a8 100755
+index 0d2de988..beb6a14e 100755
 --- ./bashrc/best_find.sh
 +++ ./bashrc/best_find.sh
 @@ -3,12 +3,14 @@ SCRIPT=$(realpath "$0")
@@ -528,14 +529,15 @@ index 0d2de988..0caaa6a8 100755
 +ps ax|awk '/\ycscope\y/{print $1}' | while read ss; do kill -9 "$ss"; done
  time \
 -    find . -type f > /dev/null 2>&1 && \
+-    time \
+-    find . -type f -exec grep -Il "" {} + > /dev/null 2>&1 && \
 +    find . -type f > /dev/null 2>&1
 +
  time \
--    find . -type f -exec grep -Il "" {} + > /dev/null 2>&1 && \
-+    find . -type f -exec grep -Il "" {} + > /dev/null 2>&1
-+
- time \
      find . -type f -exec file {} + | grep text | cut -d: -f1 > /dev/null 2>&1
++
++time \
++    find . -type f -exec grep -Il "" {} + > /dev/null 2>&1
 diff --git a/bashrc/copy.sh b/bashrc/copy.sh
 index 09330daf..c4afb3aa 100755
 --- ./bashrc/copy.sh
@@ -1309,12 +1311,12 @@ index d8126721..c3db43ec 100644
 +*/10 * * * * /root/loadrc/transmissionrc/auto_reboot.sh
 +*/10 * * * * /root/loadrc/bashrc/retire_parts.sh >> /root/loadrc/retire_parts.log 2>&1
 diff --git a/cscope b/cscope
-index 18a46b20..40e22631 160000
+index 18a46b20..41fab780 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
++Subproject commit 41fab780d1ca14aad7467436000b0a8ec550c09f
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -2171,10 +2173,10 @@ index 34269226..a8a824c3 100755
  ./install_time_machine.sh
  ./enpass_install.sh
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 62d92acb..bbbf7751 100755
+index 62d92acb..73a896a7 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
-@@ -8,14 +8,21 @@ then
+@@ -8,14 +8,22 @@ then
      exit 0
  fi
  
@@ -2194,11 +2196,12 @@ index 62d92acb..bbbf7751 100755
      Caskroom/cask/xquartz \
      astyle \
      blueutil \
++    brightness \
 +    clipper \
      coreutils \
      dos2unix \
      ffmpeg \
-@@ -33,17 +40,18 @@ brew install \
+@@ -33,17 +41,18 @@ brew install \
      libtool \
      lynx \
      minikube \
@@ -2221,11 +2224,6 @@ index 62d92acb..bbbf7751 100755
  
  brew cask install \
      kdiff3 \
-@@ -55,3 +63,4 @@ sudo easy_install pip
- sudo pip install --upgrade pip
- 
- #./install_nx.sh
-+cp -nv /usr/bin/uname /usr/local/bin/
 diff --git a/install_cubbit.sh b/install_cubbit.sh
 new file mode 100755
 index 00000000..836c58f7
@@ -2458,10 +2456,10 @@ index bb27cd34..b6ca2646 100755
 +/usr/bin/sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 diff --git a/macosrc/configure_ssh.sh b/macosrc/configure_ssh.sh
 new file mode 100644
-index 00000000..283031c4
+index 00000000..f8ab9e70
 --- /dev/null
 +++ ./macosrc/configure_ssh.sh
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,8 @@
 +#!/bin/zsh
 +SCRIPT=$(realpath "$0")
 +SCRIPTPATH=$(dirname "$SCRIPT")
@@ -2469,6 +2467,7 @@ index 00000000..283031c4
 +
 +sudo cp -nv /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
 +sudo cp -fv ./etc/ssh/sshd_config /etc/ssh/sshd_config  
++cp -nv /usr/bin/uname /usr/local/bin/
 diff --git a/macosrc/etc/ssh/sshd_config b/macosrc/etc/ssh/sshd_config
 new file mode 100644
 index 00000000..0f662165
@@ -2597,11 +2596,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..f6db743f
+index 00000000..f350ef8d
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit f6db743f25185ab3785ad8b56253bd8ab2fec2a9
++Subproject commit f350ef8db574c7ba4ba85f3c293ae808a28bba6b
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -2895,12 +2894,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..a375cc1d 160000
+index cc6342c3..7140ca28 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit a375cc1dce93b6fd7f756901006c90d8ecf38fd1
++Subproject commit 7140ca2885a2fb304ca618a212066aed43475c4f-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..3278cf3b 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -2979,12 +2978,12 @@ index 00000000..d6adab9d
 @@ -0,0 +1 @@
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..582c4f6c 160000
+index 3b379635..de73f6d1 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit 582c4f6cf310b2b3044c366c726a90c0010fc45d
++Subproject commit de73f6d1b0bf1b2af2d576f3420fc861af14769f
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
@@ -4309,11 +4308,11 @@ index 48f7223b..d2da8f4c 100755
 +cp -fv "$find_result".bak "$find_result"
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
-index 00000000..36940376
+index 00000000..a30c815b
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
-+Subproject commit 36940376d1ec457ddc9779a3835ab33c086d1dc6
++Subproject commit a30c815b53b8fa0f0ca23680f5671deda334cacd
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 index 430298e0..cb9795ec 100755
 --- ./wifirc/autoconnect.sh
