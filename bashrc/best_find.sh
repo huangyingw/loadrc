@@ -14,3 +14,15 @@ time \
 
 time \
     find . -type f -exec grep -Il "" {} + > /dev/null 2>&1
+
+time \
+    find . -type f -exec grep -Iq . {} \; -print > /dev/null 2>&1
+
+time \
+    find . -type f -exec grep -Il "" {} \; > /dev/null 2>&1
+
+time \
+    find . -type f -exec grep -Il . {} + > /dev/null 2>&1
+
+time \
+    find . -type f -print0 | xargs -0 grep -IZl . > /dev/null 2>&1
