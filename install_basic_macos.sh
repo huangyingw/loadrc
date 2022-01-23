@@ -22,6 +22,7 @@ brew install \
     Caskroom/cask/xquartz \
     astyle \
     blueutil \
+    brightness \
     clipper \
     coreutils \
     dos2unix \
