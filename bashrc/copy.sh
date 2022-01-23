@@ -15,9 +15,9 @@ then
 fi
 
 iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
-rsync_basic_option=$(~/loadrc/bashrc/rsync_basic_option.sh)
+. ~/loadrc/bashrc/rsync_basic_option.sh
 
 rsync \
-    "$rsync_basic_option" \
+    "${rsync_basic_option[@]}" \
     "$iconvs" \
     "$source/" "$target/"
