@@ -20,7 +20,7 @@ realpath "$2" && target=$(realpath "$2")
 if [ -n "$source" ] && [ -n "$target" ] && [ "$source" != "$target" ]
 then
     iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
-    rsync_basic_options=($(< rsync_basic_options))       # might be problematic if dealing with embedded white space
+    rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))       # might be problematic if dealing with embedded white space
     rsync --remove-source-files \
         "${rsync_basic_options[@]}" \
         "$iconvs" \
