@@ -539,10 +539,10 @@ index 0d2de988..beb6a14e 100755
 +time \
 +    find . -type f -exec grep -Il "" {} + > /dev/null 2>&1
 diff --git a/bashrc/copy.sh b/bashrc/copy.sh
-index 09330daf..c4afb3aa 100755
+index 09330daf..715b8d35 100755
 --- ./bashrc/copy.sh
 +++ ./bashrc/copy.sh
-@@ -6,13 +6,16 @@ then
+@@ -6,13 +6,19 @@ then
      exit 1
  fi
  
@@ -558,12 +558,28 @@ index 09330daf..c4afb3aa 100755
 +    mkdir -p "$target"
  fi
  
-+iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
-+
- rsync -aHSv --progress --force \
+-rsync -aHSv --progress --force \
 -    "${SOURCE}" "${TARGET}"
++iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
++rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
++# mapfile -t rsync_basic_options < rsync_basic_options
++
++rsync \
++    "${rsync_basic_options[@]}" \
 +    "$iconvs" \
 +    "$source/" "$target/"
+diff --git a/bashrc/copy.test.sh b/bashrc/copy.test.sh
+new file mode 100755
+index 00000000..83b0bbaf
+--- /dev/null
++++ ./bashrc/copy.test.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++./copy.sh ~/loadrc/ ~/loadrc.bak/
 diff --git a/bashrc/cutcommon.sh b/bashrc/cutcommon.sh
 new file mode 100755
 index 00000000..c66a8e4c
@@ -860,10 +876,10 @@ index 00000000..006dc346
 +ls -al lib
 +echo
 diff --git a/bashrc/mirror.sh b/bashrc/mirror.sh
-index 889ade9a..e3a36ccb 100755
+index 889ade9a..a17517a0 100755
 --- ./bashrc/mirror.sh
 +++ ./bashrc/mirror.sh
-@@ -6,38 +6,42 @@ then
+@@ -6,38 +6,45 @@ then
      exit 1
  fi
  
@@ -907,11 +923,15 @@ index 889ade9a..e3a36ccb 100755
  fi
  
  rm "$ready_file"
+-rsync -aHSv --progress --delete-before --force \
+-    "${SOURCE}/" "${TARGET}/" && \
 +
 +iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
++rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 +
- rsync -aHSv --progress --delete-before --force \
--    "${SOURCE}/" "${TARGET}/" && \
++rsync \
++    --delete-before \
++    "${rsync_basic_options[@]}" \
 +    "$iconvs" \
 +    "$source/" "$target/" && \
      if [ -f "${MIRRORCHECK}" ] ; \
@@ -962,10 +982,10 @@ index fba69a67..00000000
 -    sshfs -o idmap=user huangyingw@vdonkey:/media/ /media/samba/
 -fi
 diff --git a/bashrc/move.sh b/bashrc/move.sh
-index 84be1e2f..32f935e0 100755
+index 84be1e2f..6652f419 100755
 --- ./bashrc/move.sh
 +++ ./bashrc/move.sh
-@@ -11,18 +11,22 @@ then
+@@ -11,18 +11,25 @@ then
      mkdir -p "$2"
  fi
  
@@ -985,7 +1005,10 @@ index 84be1e2f..32f935e0 100755
 -    rsync --remove-source-files -aHSv --progress --force "$SOURCE/" "$TARGET/" ; \
 -        ~/loadrc/bashrc/rmEmpty.sh "$SOURCE/"
 +    iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
-+    rsync --remove-source-files -aHSv --progress --force \
++    rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
++    rsync \
++        --remove-source-files \
++        "${rsync_basic_options[@]}" \
 +        "$iconvs" \
 +        "$source/" "$target/" ; \
 +        ~/loadrc/bashrc/rmEmpty.sh "$source"
@@ -1144,6 +1167,16 @@ index 00000000..cd45d46d
 +else
 +    /usr/bin/find /var/lib/transmission-daemon/ -type f -mtime +$left -name \*.part -delete 
 +fi
+diff --git a/bashrc/rsync_basic_options b/bashrc/rsync_basic_options
+new file mode 100644
+index 00000000..678478c1
+--- /dev/null
++++ ./bashrc/rsync_basic_options
+@@ -0,0 +1,4 @@
++-aHSv
++--progress
++--force
++--append-verify
 diff --git a/bashrc/select_move.sh b/bashrc/select_move.sh
 new file mode 100755
 index 00000000..2ef72567
@@ -1237,10 +1270,10 @@ index 7042dce9..0e670bd9 100755
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
 diff --git a/bashrc/tmirror.sh b/bashrc/tmirror.sh
-index 30abd357..de5bafe6 100755
+index 30abd357..8b56e76c 100755
 --- ./bashrc/tmirror.sh
 +++ ./bashrc/tmirror.sh
-@@ -1,13 +1,16 @@
+@@ -1,13 +1,20 @@
  #!/bin/zsh
 -SOURCE=$1
 -TARGET=$2
@@ -1260,8 +1293,12 @@ index 30abd357..de5bafe6 100755
 -rsync -aHinv --delete-before --force \
 -    "$SOURCE" "$TARGET" > "$ready_file"
 +iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
++rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 +
-+rsync -aHivn --delete-before --force \
++rsync \
++    -in \
++    --delete-before \
++    "${rsync_basic_options[@]}" \
 +    "$iconvs" \
 +    "$source/" "$target/" > "$ready_file"
 diff --git a/bashrc/wol.sh b/bashrc/wol.sh
@@ -2596,11 +2633,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..f350ef8d
+index 00000000..9246632a
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit f350ef8db574c7ba4ba85f3c293ae808a28bba6b
++Subproject commit 9246632aaeb62f397a7c8b89e2e75c392e81ae5b
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -2950,12 +2987,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..c95c60cd 160000
+index 8468d6a8..d75e0729 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit c95c60cd8bf2a62aee5a1cdb9e493b04b323d567
++Subproject commit d75e07297020aa03a21c0c27190bf000bbf8c742-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -3028,11 +3065,16 @@ index 00000000..dfb309e2
 +set shortmess+=A
 +command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
-index 63869eb8..baf93470 100644
+index 63869eb8..8e6ef513 100644
 --- ./vimrc/.vim/plugin/common.vim
 +++ ./vimrc/.vim/plugin/common.vim
-@@ -141,14 +141,21 @@ endfunction
- function! OpenOrSwitch(buffername, openMode)
+@@ -138,17 +138,25 @@ function! GetWorktree()
+     return substitute(system("~/loadrc/gitrc/get_worktree.sh " . '"' . expand('%:p') . '"'), '\n', '', '')
+ endfunction
+ 
+-function! OpenOrSwitch(buffername, openMode)
++function! OpenOrSwitch(buffername, openMode, ...)
++    let topleft = (a:0 >= 1) ? a:1 : 'topleft'
      let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
      let bnr = bufwinnr('^' . realpath . '$')
 +    let l:line   = getline(line('.'))
@@ -3051,11 +3093,11 @@ index 63869eb8..baf93470 100644
 +        silent exec 'e ' . a:buffername . l:line_num
      else
 -        silent exec 'topleft vs ' . a:buffername
-+        silent exec 'topleft vs ' . a:buffername . l:line_num
++        silent exec topleft . ' vs ' . a:buffername . l:line_num
      endif
  endfunction
  
-@@ -208,7 +215,7 @@ function! GetEscapedResult(keywordStr)
+@@ -208,7 +216,7 @@ function! GetEscapedResult(keywordStr)
      let result = substitute(result, '!', '', 'g')
      let result = substitute(result, "<", "", "g")
      let result = substitute(result, ">", "", "g")
@@ -3064,7 +3106,7 @@ index 63869eb8..baf93470 100644
      let result = substitute(result, "*", "", "g")
      let result = substitute(result, "%", "", "g")
      let result = substitute(result, ":", "", "g")
-@@ -263,7 +270,7 @@ function! Filter2Findresult()
+@@ -263,7 +271,7 @@ function! Filter2Findresult()
  endfunc
  
  function! Cd2ProjectRoot(filename)
@@ -3541,7 +3583,7 @@ index d5874fe5..e5091a76 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..24006518 100644
+index 5fd4a230..25db902a 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -77,8 +77,17 @@ function! VFilter()
@@ -3564,6 +3606,15 @@ index 5fd4a230..24006518 100644
  endfunction
  
  function! Filter()
+@@ -149,7 +158,7 @@ function! VRun()
+     endif
+ 
+     if b:to_run != 'gbil.log'
+-        call OpenOrSwitch(b:output, 'vs')
++        call OpenOrSwitch(b:output, 'vs', '')
+     else
+         call OpenOrSwitch('gbil.log', 'vs')
+     endif
 @@ -172,7 +181,6 @@ function! GetFirstColumnOfFile()
          return 0
      endif
@@ -3618,7 +3669,7 @@ index 5fd4a230..24006518 100644
 -if has('win32')
 -    nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 -    nmap <leader>cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
- 
+-
 -    " This will copy the path in 8.3 short format, for DOS and Windows 9x
 -    nmap <leader>c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
 -else
@@ -3628,7 +3679,7 @@ index 5fd4a230..24006518 100644
 -if has('win32')
 -    nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 -    nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
--
+ 
 -    " This will copy the path in 8.3 short format, for DOS and Windows 9x
 -    nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
 -else

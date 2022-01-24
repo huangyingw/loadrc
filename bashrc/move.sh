@@ -20,7 +20,10 @@ realpath "$2" && target=$(realpath "$2")
 if [ -n "$source" ] && [ -n "$target" ] && [ "$source" != "$target" ]
 then
     iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
-    rsync --remove-source-files -aHSv --progress --force \
+    rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
+    rsync \
+        --remove-source-files \
+        "${rsync_basic_options[@]}" \
         "$iconvs" \
         "$source/" "$target/" ; \
         ~/loadrc/bashrc/rmEmpty.sh "$source"

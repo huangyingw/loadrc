@@ -10,7 +10,11 @@ then
 fi
 
 iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
+rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 
-rsync -aHivn --delete-before --force \
+rsync \
+    -in \
+    --delete-before \
+    "${rsync_basic_options[@]}" \
     "$iconvs" \
     "$source/" "$target/" > "$ready_file"

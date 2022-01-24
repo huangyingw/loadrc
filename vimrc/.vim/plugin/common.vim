@@ -138,7 +138,8 @@ function! GetWorktree()
     return substitute(system("~/loadrc/gitrc/get_worktree.sh " . '"' . expand('%:p') . '"'), '\n', '', '')
 endfunction
 
-function! OpenOrSwitch(buffername, openMode)
+function! OpenOrSwitch(buffername, openMode, ...)
+    let topleft = (a:0 >= 1) ? a:1 : 'topleft'
     let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
     let bnr = bufwinnr('^' . realpath . '$')
     let l:line   = getline(line('.'))
@@ -155,7 +156,7 @@ function! OpenOrSwitch(buffername, openMode)
     elseif a:openMode ==? "goto"
         silent exec 'e ' . a:buffername . l:line_num
     else
-        silent exec 'topleft vs ' . a:buffername . l:line_num
+        silent exec topleft . ' vs ' . a:buffername . l:line_num
     endif
 endfunction
 

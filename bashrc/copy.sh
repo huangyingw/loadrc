@@ -15,7 +15,10 @@ then
 fi
 
 iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
+rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
+# mapfile -t rsync_basic_options < rsync_basic_options
 
-rsync -aHSv --progress --force \
+rsync \
+    "${rsync_basic_options[@]}" \
     "$iconvs" \
     "$source/" "$target/"
