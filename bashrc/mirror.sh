@@ -38,8 +38,11 @@ fi
 rm "$ready_file"
 
 iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
+rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))       # might be problematic if dealing with embedded white space
 
-rsync -aHSv --progress --delete-before --force \
+rsync \
+    --delete-before \
+    "${rsync_basic_options[@]}" \
     "$iconvs" \
     "$source/" "$target/" && \
     if [ -f "${MIRRORCHECK}" ] ; \
