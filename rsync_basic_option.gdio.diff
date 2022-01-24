@@ -539,10 +539,10 @@ index 0d2de988..beb6a14e 100755
 +time \
 +    find . -type f -exec grep -Il "" {} + > /dev/null 2>&1
 diff --git a/bashrc/copy.sh b/bashrc/copy.sh
-index 09330daf..4082041c 100755
+index 09330daf..715b8d35 100755
 --- ./bashrc/copy.sh
 +++ ./bashrc/copy.sh
-@@ -6,13 +6,18 @@ then
+@@ -6,13 +6,19 @@ then
      exit 1
  fi
  
@@ -561,10 +561,11 @@ index 09330daf..4082041c 100755
 -rsync -aHSv --progress --force \
 -    "${SOURCE}" "${TARGET}"
 +iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
-+. ~/loadrc/bashrc/rsync_basic_option.sh
++rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
++# mapfile -t rsync_basic_options < rsync_basic_options
 +
 +rsync \
-+    "${rsync_basic_option[@]}" \
++    "${rsync_basic_options[@]}" \
 +    "$iconvs" \
 +    "$source/" "$target/"
 diff --git a/bashrc/copy.test.sh b/bashrc/copy.test.sh
@@ -875,10 +876,10 @@ index 00000000..006dc346
 +ls -al lib
 +echo
 diff --git a/bashrc/mirror.sh b/bashrc/mirror.sh
-index 889ade9a..e3a36ccb 100755
+index 889ade9a..a17517a0 100755
 --- ./bashrc/mirror.sh
 +++ ./bashrc/mirror.sh
-@@ -6,38 +6,42 @@ then
+@@ -6,38 +6,45 @@ then
      exit 1
  fi
  
@@ -922,11 +923,15 @@ index 889ade9a..e3a36ccb 100755
  fi
  
  rm "$ready_file"
+-rsync -aHSv --progress --delete-before --force \
+-    "${SOURCE}/" "${TARGET}/" && \
 +
 +iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
++rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 +
- rsync -aHSv --progress --delete-before --force \
--    "${SOURCE}/" "${TARGET}/" && \
++rsync \
++    --delete-before \
++    "${rsync_basic_options[@]}" \
 +    "$iconvs" \
 +    "$source/" "$target/" && \
      if [ -f "${MIRRORCHECK}" ] ; \
@@ -977,10 +982,10 @@ index fba69a67..00000000
 -    sshfs -o idmap=user huangyingw@vdonkey:/media/ /media/samba/
 -fi
 diff --git a/bashrc/move.sh b/bashrc/move.sh
-index 84be1e2f..32f935e0 100755
+index 84be1e2f..6652f419 100755
 --- ./bashrc/move.sh
 +++ ./bashrc/move.sh
-@@ -11,18 +11,22 @@ then
+@@ -11,18 +11,25 @@ then
      mkdir -p "$2"
  fi
  
@@ -1000,7 +1005,10 @@ index 84be1e2f..32f935e0 100755
 -    rsync --remove-source-files -aHSv --progress --force "$SOURCE/" "$TARGET/" ; \
 -        ~/loadrc/bashrc/rmEmpty.sh "$SOURCE/"
 +    iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
-+    rsync --remove-source-files -aHSv --progress --force \
++    rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
++    rsync \
++        --remove-source-files \
++        "${rsync_basic_options[@]}" \
 +        "$iconvs" \
 +        "$source/" "$target/" ; \
 +        ~/loadrc/bashrc/rmEmpty.sh "$source"
@@ -1159,20 +1167,16 @@ index 00000000..cd45d46d
 +else
 +    /usr/bin/find /var/lib/transmission-daemon/ -type f -mtime +$left -name \*.part -delete 
 +fi
-diff --git a/bashrc/rsync_basic_option.sh b/bashrc/rsync_basic_option.sh
-new file mode 100755
-index 00000000..de4adf5d
+diff --git a/bashrc/rsync_basic_options b/bashrc/rsync_basic_options
+new file mode 100644
+index 00000000..678478c1
 --- /dev/null
-+++ ./bashrc/rsync_basic_option.sh
-@@ -0,0 +1,8 @@
-+#!/bin/zsh
-+
-+rsync_basic_option=(
-+    -aHSv \
-+        --progress \
-+        --force \
-+        --append-verify \
-+    )
++++ ./bashrc/rsync_basic_options
+@@ -0,0 +1,4 @@
++-aHSv
++--progress
++--force
++--append-verify
 diff --git a/bashrc/select_move.sh b/bashrc/select_move.sh
 new file mode 100755
 index 00000000..2ef72567
@@ -1266,10 +1270,10 @@ index 7042dce9..0e670bd9 100755
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
 diff --git a/bashrc/tmirror.sh b/bashrc/tmirror.sh
-index 30abd357..de5bafe6 100755
+index 30abd357..8b56e76c 100755
 --- ./bashrc/tmirror.sh
 +++ ./bashrc/tmirror.sh
-@@ -1,13 +1,16 @@
+@@ -1,13 +1,20 @@
  #!/bin/zsh
 -SOURCE=$1
 -TARGET=$2
@@ -1289,8 +1293,12 @@ index 30abd357..de5bafe6 100755
 -rsync -aHinv --delete-before --force \
 -    "$SOURCE" "$TARGET" > "$ready_file"
 +iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
++rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 +
-+rsync -aHivn --delete-before --force \
++rsync \
++    -in \
++    --delete-before \
++    "${rsync_basic_options[@]}" \
 +    "$iconvs" \
 +    "$source/" "$target/" > "$ready_file"
 diff --git a/bashrc/wol.sh b/bashrc/wol.sh
