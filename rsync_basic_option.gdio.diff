@@ -539,7 +539,7 @@ index 0d2de988..beb6a14e 100755
 +time \
 +    find . -type f -exec grep -Il "" {} + > /dev/null 2>&1
 diff --git a/bashrc/copy.sh b/bashrc/copy.sh
-index 09330daf..6a160473 100755
+index 09330daf..4082041c 100755
 --- ./bashrc/copy.sh
 +++ ./bashrc/copy.sh
 @@ -6,13 +6,18 @@ then
@@ -561,12 +561,24 @@ index 09330daf..6a160473 100755
 -rsync -aHSv --progress --force \
 -    "${SOURCE}" "${TARGET}"
 +iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
-+rsync_basic_option=$(~/loadrc/bashrc/rsync_basic_option.sh)
++. ~/loadrc/bashrc/rsync_basic_option.sh
 +
 +rsync \
-+    "$rsync_basic_option" \
++    "${rsync_basic_option[@]}" \
 +    "$iconvs" \
 +    "$source/" "$target/"
+diff --git a/bashrc/copy.test.sh b/bashrc/copy.test.sh
+new file mode 100755
+index 00000000..83b0bbaf
+--- /dev/null
++++ ./bashrc/copy.test.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++./copy.sh ~/loadrc/ ~/loadrc.bak/
 diff --git a/bashrc/cutcommon.sh b/bashrc/cutcommon.sh
 new file mode 100755
 index 00000000..c66a8e4c
@@ -1149,17 +1161,18 @@ index 00000000..cd45d46d
 +fi
 diff --git a/bashrc/rsync_basic_option.sh b/bashrc/rsync_basic_option.sh
 new file mode 100755
-index 00000000..78bed10f
+index 00000000..de4adf5d
 --- /dev/null
 +++ ./bashrc/rsync_basic_option.sh
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,8 @@
 +#!/bin/zsh
 +
-+echo \
++rsync_basic_option=(
 +    -aHSv \
-+    --progress \
-+    --force \
-+    --append-verify \
++        --progress \
++        --force \
++        --append-verify \
++    )
 diff --git a/bashrc/select_move.sh b/bashrc/select_move.sh
 new file mode 100755
 index 00000000..2ef72567
