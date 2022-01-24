@@ -15,7 +15,7 @@ then
 fi
 
 iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
-rsync_basic_options=($(< rsync_basic_options))       # might be problematic if dealing with embedded white space
+rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))       # might be problematic if dealing with embedded white space
 # mapfile -t rsync_basic_options < rsync_basic_options
 
 rsync \
