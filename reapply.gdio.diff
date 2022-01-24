@@ -1529,7 +1529,7 @@ diff --git a/gitrc/checkout_rejs.sh b/gitrc/checkout_rejs.sh
 index d81f6f38..5b7555ad 100755
 --- ./gitrc/checkout_rejs.sh
 +++ ./gitrc/checkout_rejs.sh
-@@ -2,6 +3,13 @@
+@@ -2,6 +2,13 @@
  for ss in $(git status | grep \.rej$) ; \
  do \
      targetFile=$(echo "$ss" | sed 's/\.rej$//g')
@@ -1718,7 +1718,7 @@ diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
 index dbcf937b..06d9ea88 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
-@@ -17,21 +18,42 @@ fi
+@@ -17,21 +17,42 @@ fi
  
  targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
  
