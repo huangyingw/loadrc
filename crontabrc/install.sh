@@ -18,6 +18,7 @@ then
     crontab "$CRONRC"
 fi
 
+crontab ./crontabrc/silent.cron
 crontab -l > crontab_file
 
 while read -r line || [ -n "$line" ]
