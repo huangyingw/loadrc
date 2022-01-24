@@ -1,5 +1,4 @@
-
--aHSv \
-        --progress \
-        --force \
-        --append-verify \
+-aHSv
+--progress
+--force
+--append-verify
