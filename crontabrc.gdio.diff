@@ -3646,7 +3646,7 @@ index d5874fe5..e5091a76 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..25db902a 100644
+index 5fd4a230..5aa30148 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -77,8 +77,17 @@ function! VFilter()
@@ -3686,6 +3686,18 @@ index 5fd4a230..25db902a 100644
      silent exec '!~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'
      call OpenOrSwitch(expand("%:p") . '.bak', 'vs')
  endfunction
+@@ -233,9 +241,9 @@ function! OpenAll()
+         let line = substitute(line, '"', '', "g")
+         exec 'vs ' . currentDir . '/' . line
+     endfor
+-    set winwidth=1
+     windo set nowrap
+-    wincmd =
++    " set winwidth=999999
++    " wincmd |
+ 
+     let bnr = bufwinnr('^' . currentFile . '$')
+     exe bnr . "wincmd w"
 @@ -334,11 +342,11 @@ endfunction
  function! GitSearch()
      normal! gvy<CR>
