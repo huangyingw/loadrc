@@ -15,11 +15,10 @@ CRONRC=$HOME/loadrc/crontabrc/."`hostname`".cron
 
 if [ -f "$CRONRC" ]
 then
-    crontab "$CRONRC"
+    cat "$CRONRC" > crontab_file
 fi
 
-crontab ~/loadrc/crontabrc/silent.cron
-crontab -l > crontab_file
+cat ~/loadrc/crontabrc/silent.cron >> crontab_file
 
 while read -r line || [ -n "$line" ]
 do
