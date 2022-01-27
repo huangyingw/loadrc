@@ -241,9 +241,9 @@ function! OpenAll()
         let line = substitute(line, '"', '', "g")
         exec 'vs ' . currentDir . '/' . line
     endfor
-    set winwidth=1
     windo set nowrap
-    wincmd =
+    " set winwidth=999999
+    " wincmd |
 
     let bnr = bufwinnr('^' . currentFile . '$')
     exe bnr . "wincmd w"
