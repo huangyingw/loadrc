@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 file=$(realpath "$1")
-target="$1.sh"
+target="$1.lsh"
 
 if [ ! -f "$target" ]
 then
