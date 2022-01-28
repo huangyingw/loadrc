@@ -146,6 +146,8 @@ function! VRun()
 
     if filereadable(b:to_run . '.sh')
         let b:to_run = b:to_run . '.sh'
+    elseif filereadable(b:to_run . '.lsh') 
+        let b:to_run = b:to_run . '.lsh'
     endif
 
     let b:csdbpath = Cd2Worktree()
