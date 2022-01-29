@@ -2709,11 +2709,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..0178dc9b
+index 00000000..3921c914
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 0178dc9b48e7b009fcb705a69dc68f6d0fd3a1c3
++Subproject commit 3921c9146e0026fb6339b5c3dbbcae4308d17e22-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
