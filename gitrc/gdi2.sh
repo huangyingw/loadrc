@@ -40,7 +40,7 @@ fi
 
 ~/loadrc/gitrc/discard_unnecessaries.sh ; \
     git checkout -f "$targetBranch" ; \
-    git apply --index --reject --whitespace=fix --recount "$GDITDIFF"
+    git apply --reject --whitespace=fix --recount --index "$GDITDIFF"
 
 retVal=$?
 
