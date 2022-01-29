@@ -144,9 +144,7 @@ function! VRun()
     let b:file_name = expand('%:t')
     let b:to_run = expand("%:p")
 
-    if filereadable(b:to_run . '.sh')
-        let b:to_run = b:to_run . '.sh'
-    elseif filereadable(b:to_run . '.lsh') 
+    if filereadable(b:to_run . '.lsh')
         let b:to_run = b:to_run . '.lsh'
     endif
 
