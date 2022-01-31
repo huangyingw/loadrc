@@ -2590,7 +2590,7 @@ index bb27cd34..b6ca2646 100755
 -sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 +/usr/bin/sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 diff --git a/macosrc/configure_ssh.sh b/macosrc/configure_ssh.sh
-new file mode 100644
+new file mode 100755
 index 00000000..f8ab9e70
 --- /dev/null
 +++ ./macosrc/configure_ssh.sh
@@ -2731,11 +2731,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..101a9950
+index 00000000..f795bc04
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 101a995003560fea12b1eea94b18d329f450d1f4-dirty
++Subproject commit f795bc046ae944e724c0ff953a341ee0c76236fb-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3034,7 +3034,7 @@ index cc6342c3..7140ca28 160000
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 7140ca2885a2fb304ca618a212066aed43475c4f-dirty
++Subproject commit 7140ca2885a2fb304ca618a212066aed43475c4f
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..478e1181 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -3681,7 +3681,7 @@ index d5874fe5..e5091a76 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..5a0bf9bb 100644
+index 5fd4a230..ef260d45 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -77,8 +77,17 @@ function! VFilter()
@@ -3704,18 +3704,22 @@ index 5fd4a230..5a0bf9bb 100644
  endfunction
  
  function! Filter()
-@@ -135,8 +144,8 @@ function! VRun()
+@@ -135,8 +144,12 @@ function! VRun()
      let b:file_name = expand('%:t')
      let b:to_run = expand("%:p")
  
 -    if filereadable(b:to_run . '.sh')
 -        let b:to_run = b:to_run . '.sh'
++    if (expand('%:e') ==# 'php')
++        exec '!~/loadrc/imvurc/generate.sh ' . '"' .  expand('%:p') . '"'
++    endif
++
 +    if filereadable(b:to_run . '.lsh')
 +        let b:to_run = b:to_run . '.lsh'
      endif
  
      let b:csdbpath = Cd2Worktree()
-@@ -149,7 +158,7 @@ function! VRun()
+@@ -149,7 +162,7 @@ function! VRun()
      endif
  
      if b:to_run != 'gbil.log'
@@ -3724,7 +3728,7 @@ index 5fd4a230..5a0bf9bb 100644
      else
          call OpenOrSwitch('gbil.log', 'vs')
      endif
-@@ -172,7 +181,6 @@ function! GetFirstColumnOfFile()
+@@ -172,7 +185,6 @@ function! GetFirstColumnOfFile()
          return 0
      endif
  
@@ -3732,7 +3736,7 @@ index 5fd4a230..5a0bf9bb 100644
      silent exec '!~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'
      call OpenOrSwitch(expand("%:p") . '.bak', 'vs')
  endfunction
-@@ -233,9 +241,9 @@ function! OpenAll()
+@@ -233,9 +245,9 @@ function! OpenAll()
          let line = substitute(line, '"', '', "g")
          exec 'vs ' . currentDir . '/' . line
      endfor
@@ -3744,7 +3748,7 @@ index 5fd4a230..5a0bf9bb 100644
  
      let bnr = bufwinnr('^' . currentFile . '$')
      exe bnr . "wincmd w"
-@@ -334,11 +342,11 @@ endfunction
+@@ -334,11 +346,11 @@ endfunction
  function! GitSearch()
      normal! gvy<CR>
      let keyword = GetEscapedKeyword(@@)
@@ -3758,7 +3762,7 @@ index 5fd4a230..5a0bf9bb 100644
      call HighlightKeyword(keyword)
  endfunction
  
-@@ -353,13 +361,6 @@ function! VimSearch()
+@@ -353,13 +365,6 @@ function! VimSearch()
      call HighlightKeyword(keyword)
  endfunction
  
@@ -3772,7 +3776,7 @@ index 5fd4a230..5a0bf9bb 100644
  function! SwitchWinSize()
      if &winwidth == 1
          set winwidth=999999
-@@ -416,40 +417,21 @@ nnoremap <leader>Y "+yy
+@@ -416,40 +421,21 @@ nnoremap <leader>Y "+yy
  nnoremap <leader>p "+p
  nnoremap <leader>P "+P
  nnoremap tt :Autoformat<CR>:w!<cr>
@@ -3816,7 +3820,7 @@ index 5fd4a230..5a0bf9bb 100644
  nnoremap mg :call VFilter()<cr>
  nnoremap me :call ExtractHighLight()<cr>
  nnoremap mf :call ExFilter()<cr>
-@@ -475,7 +457,8 @@ nnoremap H :call ShowVITAG()<cr>
+@@ -475,7 +461,8 @@ nnoremap H :call ShowVITAG()<cr>
  nnoremap F :call GetFirstColumnOfFile()<cr>
  nnoremap T :vs $HOME/all.proj<cr>
  nnoremap L :vs <C-R>"<cr>
@@ -3826,7 +3830,7 @@ index 5fd4a230..5a0bf9bb 100644
  map <F3> :call VDebug()<cr>
  " nnoremap gf gF<cr>
  nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
-@@ -490,10 +473,7 @@ function! CutFile2()
+@@ -490,10 +477,7 @@ function! CutFile2()
  endfunc
  
  function! CutCommon()
@@ -3838,7 +3842,7 @@ index 5fd4a230..5a0bf9bb 100644
  endfunc
  
  nnoremap <leader>2 :call CutCommon()<cr>
-@@ -505,3 +485,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
+@@ -505,3 +489,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
  " open tig with Project root path
  nnoremap <Leader>t :TigOpenProjectRootDir<CR>
  nnoremap <leader>T :TigOpenCurrentFile<CR>
@@ -4433,10 +4437,23 @@ index 57af963a..b4ad2e35 100755
      #smplayer "$1"
      smplayer -fullscreen "$1"
 diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
-index e14de500..da1c895d 100755
+index e14de500..f1885a19 100755
 --- ./vishrc/vrun.sh
 +++ ./vishrc/vrun.sh
-@@ -27,7 +27,7 @@ rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$file" "files.proj")
+@@ -14,12 +14,6 @@ then
+     exit 0
+ fi
+ 
+-if [[ "$file" = *'.php' ]] 
+-then
+-    ~/loadrc/imvurc/generate.sh "$file"
+-    exit 0
+-fi
+-
+ extension=${file##*.}
+ host=$(git config deploy.host)
+ rpath=$(git config deploy.path)
+@@ -27,7 +21,7 @@ rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$file" "files.proj")
  rfile=$(realpath --relative-to="$rootFolder" "$file")
  rfolder=$(realpath --relative-to="$rootFolder" $(dirname "$file"))
  
@@ -4445,7 +4462,7 @@ index e14de500..da1c895d 100755
  then
      cd "$rootFolder"
      docker build -f "$rfile" "$rfolder"
-@@ -58,7 +58,7 @@ case $extension in
+@@ -58,7 +52,7 @@ case $extension in
      sh)
          if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
          then
@@ -4454,7 +4471,7 @@ index e14de500..da1c895d 100755
          else
              "$file"
          fi
-@@ -69,7 +69,7 @@ case $extension in
+@@ -69,7 +63,7 @@ case $extension in
      py)
          if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
          then
@@ -4480,11 +4497,11 @@ index 48f7223b..d2da8f4c 100755
 +cp -fv "$find_result".bak "$find_result"
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
-index 00000000..a30c815b
+index 00000000..04606c01
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
-+Subproject commit a30c815b53b8fa0f0ca23680f5671deda334cacd
++Subproject commit 04606c01bae1cd0b1786731076809f0c6da445d0
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 index 430298e0..cb9795ec 100755
 --- ./wifirc/autoconnect.sh
