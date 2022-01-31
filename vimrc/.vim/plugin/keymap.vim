@@ -144,6 +144,10 @@ function! VRun()
     let b:file_name = expand('%:t')
     let b:to_run = expand("%:p")
 
+    if (expand('%:e') ==# 'php')
+        exec '!~/loadrc/imvurc/generate.sh ' . '"' .  expand('%:p') . '"'
+    endif
+
     if filereadable(b:to_run . '.lsh')
         let b:to_run = b:to_run . '.lsh'
     endif

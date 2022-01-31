@@ -14,12 +14,6 @@ then
     exit 0
 fi
 
-if [[ "$file" = *'.php' ]] 
-then
-    ~/loadrc/imvurc/generate.sh "$file"
-    exit 0
-fi
-
 extension=${file##*.}
 host=$(git config deploy.host)
 rpath=$(git config deploy.path)
