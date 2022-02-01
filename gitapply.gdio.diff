@@ -1315,7 +1315,7 @@ index 30abd357..8b56e76c 100755
 +    "$iconvs" \
 +    "$source/" "$target/" > "$ready_file"
 diff --git a/bashrc/wol.sh b/bashrc/wol.sh
-index 1e941ff7..f7b1920a 100755
+index 1e941ff7..b1d88cb4 100755
 --- ./bashrc/wol.sh
 +++ ./bashrc/wol.sh
 @@ -8,10 +8,10 @@ then
@@ -1332,7 +1332,7 @@ index 1e941ff7..f7b1920a 100755
  elif [ "$target" = "thinkpad" ]
  then
      wakeonlan 00:21:cc:c0:53:a9 #thinkpad
-@@ -39,4 +39,17 @@ then
+@@ -39,4 +39,21 @@ then
      wakeonlan 1c:87:2c:b7:a1:ce #movie wifi
      wakeonlan -i 192.168.1.2 00:0a:cd:1e:e9:be #movie
      ping movie
@@ -1349,6 +1349,10 @@ index 1e941ff7..f7b1920a 100755
 +then
 +    wakeonlan AC:BC:32:87:BF:DB #wifi
 +    ping mbp
++elif [ "$target" = "tiny" ]
++then
++    wakeonlan e4:5f:01:81:11:55
++    ping tinypilot
  fi
 diff --git a/crontabrc/.imacpro.cron b/crontabrc/.imacpro.cron
 new file mode 100644
@@ -2731,11 +2735,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..f795bc04
+index 00000000..101a9950
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit f795bc046ae944e724c0ff953a341ee0c76236fb-dirty
++Subproject commit 101a995003560fea12b1eea94b18d329f450d1f4-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3034,7 +3038,7 @@ index cc6342c3..7140ca28 160000
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 7140ca2885a2fb304ca618a212066aed43475c4f
++Subproject commit 7140ca2885a2fb304ca618a212066aed43475c4f-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..478e1181 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -4497,11 +4501,11 @@ index 48f7223b..d2da8f4c 100755
 +cp -fv "$find_result".bak "$find_result"
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
-index 00000000..04606c01
+index 00000000..a30c815b
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
-+Subproject commit 04606c01bae1cd0b1786731076809f0c6da445d0
++Subproject commit a30c815b53b8fa0f0ca23680f5671deda334cacd
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 index 430298e0..cb9795ec 100755
 --- ./wifirc/autoconnect.sh
