@@ -52,4 +52,8 @@ elif [ "$target" = "mbp" ]
 then
     wakeonlan AC:BC:32:87:BF:DB #wifi
     ping mbp
+elif [ "$target" = "tiny" ]
+then
+    wakeonlan e4:5f:01:81:11:55
+    ping tinypilot
 fi
