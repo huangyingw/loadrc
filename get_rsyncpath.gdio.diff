@@ -939,10 +939,10 @@ index 00000000..006dc346
 +ls -al lib
 +echo
 diff --git a/bashrc/mirror.sh b/bashrc/mirror.sh
-index 889ade9a..a17517a0 100755
+index 889ade9a..7dcdd14a 100755
 --- ./bashrc/mirror.sh
 +++ ./bashrc/mirror.sh
-@@ -6,38 +6,45 @@ then
+@@ -6,38 +6,47 @@ then
      exit 1
  fi
  
@@ -990,12 +990,14 @@ index 889ade9a..a17517a0 100755
 -    "${SOURCE}/" "${TARGET}/" && \
 +
 +iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
++rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source" "$target")
 +rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 +
 +rsync \
 +    --delete-before \
 +    "${rsync_basic_options[@]}" \
 +    "$iconvs" \
++    "$rsyncpath" \
 +    "$source/" "$target/" && \
      if [ -f "${MIRRORCHECK}" ] ; \
      then \
@@ -1045,10 +1047,10 @@ index fba69a67..00000000
 -    sshfs -o idmap=user huangyingw@vdonkey:/media/ /media/samba/
 -fi
 diff --git a/bashrc/move.sh b/bashrc/move.sh
-index 84be1e2f..6652f419 100755
+index 84be1e2f..8c1c97d4 100755
 --- ./bashrc/move.sh
 +++ ./bashrc/move.sh
-@@ -11,18 +11,25 @@ then
+@@ -11,18 +11,27 @@ then
      mkdir -p "$2"
  fi
  
@@ -1068,11 +1070,13 @@ index 84be1e2f..6652f419 100755
 -    rsync --remove-source-files -aHSv --progress --force "$SOURCE/" "$TARGET/" ; \
 -        ~/loadrc/bashrc/rmEmpty.sh "$SOURCE/"
 +    iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
++    rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source" "$target")
 +    rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 +    rsync \
 +        --remove-source-files \
 +        "${rsync_basic_options[@]}" \
 +        "$iconvs" \
++        "$rsyncpath" \
 +        "$source/" "$target/" ; \
 +        ~/loadrc/bashrc/rmEmpty.sh "$source"
 +
@@ -1333,10 +1337,10 @@ index 7042dce9..0e670bd9 100755
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
 diff --git a/bashrc/tmirror.sh b/bashrc/tmirror.sh
-index 30abd357..8b56e76c 100755
+index 30abd357..19173b67 100755
 --- ./bashrc/tmirror.sh
 +++ ./bashrc/tmirror.sh
-@@ -1,13 +1,20 @@
+@@ -1,13 +1,22 @@
  #!/bin/zsh
 -SOURCE=$1
 -TARGET=$2
@@ -1356,6 +1360,7 @@ index 30abd357..8b56e76c 100755
 -rsync -aHinv --delete-before --force \
 -    "$SOURCE" "$TARGET" > "$ready_file"
 +iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
++rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source" "$target")
 +rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 +
 +rsync \
@@ -1363,6 +1368,7 @@ index 30abd357..8b56e76c 100755
 +    --delete-before \
 +    "${rsync_basic_options[@]}" \
 +    "$iconvs" \
++    "$rsyncpath" \
 +    "$source/" "$target/" > "$ready_file"
 diff --git a/bashrc/wol.sh b/bashrc/wol.sh
 index 1e941ff7..b1d88cb4 100755
@@ -2785,11 +2791,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..67fdb917
+index 00000000..7f4da4ac
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 67fdb917072f68e74de564bcd2a54a662ce649ad-dirty
++Subproject commit 7f4da4ac9df105c2bc5eedd0bc20378b4fca6d13-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3139,12 +3145,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..a08c481d 160000
+index 8468d6a8..84c7d813 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit a08c481de2d8ebbd9f2a89d6dd6a05ca18718707-dirty
++Subproject commit 84c7d8138609fbed15a0bcb2ebcc6ee71bd2910f-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
