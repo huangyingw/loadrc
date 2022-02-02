@@ -552,10 +552,10 @@ index 0d2de988..4390b138 100755
 +time \
 +    find . -type f -print0 | xargs -0 grep -IZl . > /dev/null 2>&1
 diff --git a/bashrc/copy.sh b/bashrc/copy.sh
-index 09330daf..715b8d35 100755
+index 09330daf..27614698 100755
 --- ./bashrc/copy.sh
 +++ ./bashrc/copy.sh
-@@ -6,13 +6,19 @@ then
+@@ -6,13 +6,21 @@ then
      exit 1
  fi
  
@@ -574,12 +574,14 @@ index 09330daf..715b8d35 100755
 -rsync -aHSv --progress --force \
 -    "${SOURCE}" "${TARGET}"
 +iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
++rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source" "$target")
 +rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 +# mapfile -t rsync_basic_options < rsync_basic_options
 +
 +rsync \
 +    "${rsync_basic_options[@]}" \
 +    "$iconvs" \
++    "$rsyncpath" \
 +    "$source/" "$target/"
 diff --git a/bashrc/copy.test.sh b/bashrc/copy.test.sh
 new file mode 100755
@@ -816,6 +818,54 @@ index 00000000..5c80ad37
 +else
 +    echo "--iconv=$local_utf_8_str,$local_utf_8_str"
 +fi
+diff --git a/bashrc/get_rsyncpath.sh b/bashrc/get_rsyncpath.sh
+new file mode 100755
+index 00000000..b1cde219
+--- /dev/null
++++ ./bashrc/get_rsyncpath.sh
+@@ -0,0 +1,26 @@
++#!/bin/zsh
++
++source=$1
++target=$2
++
++shost=$(~/loadrc/bashrc/parse_host.sh "$source")
++thost=$(~/loadrc/bashrc/parse_host.sh "$target")
++
++function get_rsyncpath()
++{
++    host=$1
++    echo $(ssh "$host" ". ~/loadrc/.pathrc ; which rsync")
++}
++
++if [ "$shost" != "localhost" ]
++then
++    rsyncpath=$(get_rsyncpath $shost)
++    echo "--rsync-path=$rsyncpath"
++elif [ "$thost" != "localhost" ]
++then
++    rsyncpath=$(get_rsyncpath $thost)
++    echo "--rsync-path=$rsyncpath"
++else
++    rsyncpath=$(get_rsyncpath "localhost")
++    echo "--rsync-path=$rsyncpath"
++fi
+diff --git a/bashrc/get_rsyncpath.test.sh b/bashrc/get_rsyncpath.test.sh
+new file mode 100755
+index 00000000..ccd1a783
+--- /dev/null
++++ ./bashrc/get_rsyncpath.test.sh
+@@ -0,0 +1,10 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++./get_rsyncpath.sh mba:~/loadrc/ ~/loadrc/
++./get_rsyncpath.sh ~/loadrc/ ~/loadrc.bak/
++./get_rsyncpath.sh ~/loadrc/ mba:~/loadrc/
++./get_rsyncpath.sh ~/loadrc/ mini:~/loadrc/
++./get_rsyncpath.sh mini:~/loadrc/ ~/loadrc/
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
 index e2137142..86b5db61 100755
 --- ./bashrc/jdupes.sh
@@ -889,10 +939,10 @@ index 00000000..006dc346
 +ls -al lib
 +echo
 diff --git a/bashrc/mirror.sh b/bashrc/mirror.sh
-index 889ade9a..a17517a0 100755
+index 889ade9a..7dcdd14a 100755
 --- ./bashrc/mirror.sh
 +++ ./bashrc/mirror.sh
-@@ -6,38 +6,45 @@ then
+@@ -6,38 +6,47 @@ then
      exit 1
  fi
  
@@ -940,12 +990,14 @@ index 889ade9a..a17517a0 100755
 -    "${SOURCE}/" "${TARGET}/" && \
 +
 +iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
++rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source" "$target")
 +rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 +
 +rsync \
 +    --delete-before \
 +    "${rsync_basic_options[@]}" \
 +    "$iconvs" \
++    "$rsyncpath" \
 +    "$source/" "$target/" && \
      if [ -f "${MIRRORCHECK}" ] ; \
      then \
@@ -995,10 +1047,10 @@ index fba69a67..00000000
 -    sshfs -o idmap=user huangyingw@vdonkey:/media/ /media/samba/
 -fi
 diff --git a/bashrc/move.sh b/bashrc/move.sh
-index 84be1e2f..6652f419 100755
+index 84be1e2f..8c1c97d4 100755
 --- ./bashrc/move.sh
 +++ ./bashrc/move.sh
-@@ -11,18 +11,25 @@ then
+@@ -11,18 +11,27 @@ then
      mkdir -p "$2"
  fi
  
@@ -1018,11 +1070,13 @@ index 84be1e2f..6652f419 100755
 -    rsync --remove-source-files -aHSv --progress --force "$SOURCE/" "$TARGET/" ; \
 -        ~/loadrc/bashrc/rmEmpty.sh "$SOURCE/"
 +    iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
++    rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source" "$target")
 +    rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 +    rsync \
 +        --remove-source-files \
 +        "${rsync_basic_options[@]}" \
 +        "$iconvs" \
++        "$rsyncpath" \
 +        "$source/" "$target/" ; \
 +        ~/loadrc/bashrc/rmEmpty.sh "$source"
 +
@@ -1283,10 +1337,10 @@ index 7042dce9..0e670bd9 100755
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
  ssh -Y "$target" -t -- ${tmuxAction}
 diff --git a/bashrc/tmirror.sh b/bashrc/tmirror.sh
-index 30abd357..8b56e76c 100755
+index 30abd357..19173b67 100755
 --- ./bashrc/tmirror.sh
 +++ ./bashrc/tmirror.sh
-@@ -1,13 +1,20 @@
+@@ -1,13 +1,22 @@
  #!/bin/zsh
 -SOURCE=$1
 -TARGET=$2
@@ -1306,6 +1360,7 @@ index 30abd357..8b56e76c 100755
 -rsync -aHinv --delete-before --force \
 -    "$SOURCE" "$TARGET" > "$ready_file"
 +iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
++rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source" "$target")
 +rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 +
 +rsync \
@@ -1313,9 +1368,10 @@ index 30abd357..8b56e76c 100755
 +    --delete-before \
 +    "${rsync_basic_options[@]}" \
 +    "$iconvs" \
++    "$rsyncpath" \
 +    "$source/" "$target/" > "$ready_file"
 diff --git a/bashrc/wol.sh b/bashrc/wol.sh
-index 1e941ff7..f7b1920a 100755
+index 1e941ff7..b1d88cb4 100755
 --- ./bashrc/wol.sh
 +++ ./bashrc/wol.sh
 @@ -8,10 +8,10 @@ then
@@ -1332,7 +1388,7 @@ index 1e941ff7..f7b1920a 100755
  elif [ "$target" = "thinkpad" ]
  then
      wakeonlan 00:21:cc:c0:53:a9 #thinkpad
-@@ -39,4 +39,17 @@ then
+@@ -39,4 +39,21 @@ then
      wakeonlan 1c:87:2c:b7:a1:ce #movie wifi
      wakeonlan -i 192.168.1.2 00:0a:cd:1e:e9:be #movie
      ping movie
@@ -1349,14 +1405,25 @@ index 1e941ff7..f7b1920a 100755
 +then
 +    wakeonlan AC:BC:32:87:BF:DB #wifi
 +    ping mbp
++elif [ "$target" = "tiny" ]
++then
++    wakeonlan e4:5f:01:81:11:55
++    ping tinypilot
  fi
 diff --git a/crontabrc/.imacpro.cron b/crontabrc/.imacpro.cron
 new file mode 100644
-index 00000000..d197290e
+index 00000000..5f310bda
 --- /dev/null
 +++ ./crontabrc/.imacpro.cron
 @@ -0,0 +1 @@
-+*/10 * * * * /Users/huangyingw/loadrc/crontabrc/set_brightness.sh
++* * * * * /Users/huangyingw/loadrc/crontabrc/set_brightness.sh
+diff --git a/crontabrc/.mbp.cron b/crontabrc/.mbp.cron
+deleted file mode 100644
+index 9d256165..00000000
+--- ./crontabrc/.mbp.cron
++++ /dev/null
+@@ -1 +0,0 @@
+-0 * * * * sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/crontabrc/.mini.cron b/crontabrc/.mini.cron
 index d8126721..c3db43ec 100644
 --- ./crontabrc/.mini.cron
@@ -1368,22 +1435,40 @@ index d8126721..c3db43ec 100644
 +*/10 * * * * /root/loadrc/transmissionrc/auto_reboot.sh
 +*/10 * * * * /root/loadrc/bashrc/retire_parts.sh >> /root/loadrc/retire_parts.log 2>&1
 diff --git a/crontabrc/install.sh b/crontabrc/install.sh
-index bb10bf3c..61edba77 100755
+index bb10bf3c..809eacb1 100755
 --- ./crontabrc/install.sh
 +++ ./crontabrc/install.sh
-@@ -15,10 +15,10 @@ CRONRC=$HOME/loadrc/crontabrc/."`hostname`".cron
+@@ -3,6 +3,14 @@ SCRIPT=$(realpath "$0")
+ SCRIPTPATH=$(dirname "$SCRIPT")
+ cd "$SCRIPTPATH"
  
- if [ -f "$CRONRC" ]
- then
++cat ~/loadrc/crontabrc/silent.cron > crontab_file
++CRONRC=$HOME/loadrc/crontabrc/."`hostname`".cron
++
++if [ -f "$CRONRC" ]
++then
++    cat "$CRONRC" >> crontab_file
++fi
++
+ echo2crontab() {
+     RESTARTFILE="$1"
+     if [ -f "$RESTARTFILE" ]
+@@ -11,15 +19,6 @@ echo2crontab() {
+     fi
+ }
+ 
+-CRONRC=$HOME/loadrc/crontabrc/."`hostname`".cron
+-
+-if [ -f "$CRONRC" ]
+-then
 -    crontab "$CRONRC"
-+    cat "$CRONRC" > crontab_file
- fi
- 
+-fi
+-
 -crontab -l > crontab_file
-+cat ~/loadrc/crontabrc/silent.cron >> crontab_file
- 
+-
  while read -r line || [ -n "$line" ]
  do
+     echo2crontab "$line"
 diff --git a/crontabrc/set_brightness.sh b/crontabrc/set_brightness.sh
 new file mode 100755
 index 00000000..55bd9b79
@@ -1815,7 +1900,7 @@ index b720ac69..8fcc4eed 100755
 -eval "$COMMAND"
 +eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index dbcf937b..06d9ea88 100755
+index dbcf937b..165476af 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
 @@ -17,21 +18,42 @@ fi
@@ -1849,7 +1934,7 @@ index dbcf937b..06d9ea88 100755
 -    git apply --index --reject --whitespace=fix "$GDITDIFF" ; \
 -    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
 -    git commit  --no-verify -am "$commit_message" ; \
-+    git apply --index --reject --whitespace=fix --recount "$GDITDIFF"
++    git apply --reject --whitespace=fix --recount --index "$GDITDIFF"
 +
 +retVal=$?
 +
@@ -1923,6 +2008,14 @@ index 00000000..538f2109
 @@ -0,0 +1,2 @@
 +#!/bin/zsh
 +git submodule foreach git branch
+diff --git a/gitrc/gitapply.sh b/gitrc/gitapply.sh
+deleted file mode 100755
+index 02b92af6..00000000
+--- ./gitrc/gitapply.sh
++++ /dev/null
+@@ -1,2 +0,0 @@
+-#!/bin/zsh
+-git apply svn.diff
 diff --git a/gitrc/gme2.sh b/gitrc/gme2.sh
 index 20dd9aa3..0f505a1e 100755
 --- ./gitrc/gme2.sh
@@ -2039,6 +2132,20 @@ index 06604af2..0a925ad8 100755
  #!/bin/zsh
 -git show -w "$1"
 +git show -w "$1" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g" 
+diff --git a/gitrc/gstp.sh b/gitrc/gstp.sh
+index 559b2ec5..15e9fe67 100755
+--- ./gitrc/gstp.sh
++++ ./gitrc/gstp.sh
+@@ -1,7 +1,7 @@
+ #!/bin/zsh
+ if [ -z "$1" ]
+ then
+-    git stash show -p stash@{0} | git apply && git stash drop stash@{0}
++    git stash show -p stash@{0} | git apply --reject --whitespace=fix --recount && git stash drop stash@{0}
+ else
+-    git stash show -p stash@{"$1"} | git apply && git stash drop stash@{"$1"}
++    git stash show -p stash@{"$1"} | git apply --reject --whitespace=fix --recount && git stash drop stash@{"$1"}
+ fi
 diff --git a/gitrc/postCommit.sh b/gitrc/postCommit.sh
 index 3bd9b5b1..08477d81 100755
 --- ./gitrc/postCommit.sh
@@ -2215,6 +2322,19 @@ index 00000000..a8969b40
 @@ -0,0 +1 @@
 +8414efd65b:0:1ae70e353e7b0e3dc9be1630ee0f3fd28849a1342f45fa289ff1a3cdd362677208029a287017e897cb076a0e0ee34f8f16084ddd365fbd40cba0583d3ab200d1:0db6a42863a1f6a1619ea0eff9501c27d31616a1dfb051f6d657f0d5b2e1dd5f68c7e0f029c78449470c27bc2b3b3acfbdcab05133df9d9ca6238aeaec053b70
 \ No newline at end of file
+diff --git a/imvurc/generate.sh b/imvurc/generate.sh
+index c278d081..c627c53d 100755
+--- ./imvurc/generate.sh
++++ ./imvurc/generate.sh
+@@ -1,7 +1,7 @@
+ #!/bin/zsh
+ 
+ file=$(realpath "$1")
+-target="$1.sh"
++target="$1.lsh"
+ 
+ if [ ! -f "$target" ]
+ then
 diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
 index ea2bc967..b7adab11 100755
 --- ./imvurc/ghypo.sh
@@ -2555,8 +2675,8 @@ index bb27cd34..b6ca2646 100755
 -sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 +/usr/bin/sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 diff --git a/macosrc/configure_ssh.sh b/macosrc/configure_ssh.sh
-new file mode 100644
-index 00000000..f8ab9e70
+new file mode 100755
+index 00000000..65a2e213
 --- /dev/null
 +++ ./macosrc/configure_ssh.sh
 @@ -0,0 +1,8 @@
@@ -2567,7 +2687,7 @@ index 00000000..f8ab9e70
 +
 +sudo cp -nv /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
 +sudo cp -fv ./etc/ssh/sshd_config /etc/ssh/sshd_config  
-+cp -nv /usr/bin/uname /usr/local/bin/
++cp -fv /usr/bin/uname /usr/local/bin/
 diff --git a/macosrc/etc/ssh/sshd_config b/macosrc/etc/ssh/sshd_config
 new file mode 100644
 index 00000000..0f662165
@@ -2696,11 +2816,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..1481b240
+index 00000000..67fdb917
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 1481b240ce19a05f42e84c30e3a74090e448ea38
++Subproject commit 67fdb917072f68e74de564bcd2a54a662ce649ad-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3001,12 +3121,12 @@ index cc6342c3..7140ca28 160000
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
 +Subproject commit 7140ca2885a2fb304ca618a212066aed43475c4f-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
-index 7ef452b4..3278cf3b 160000
+index 7ef452b4..478e1181 160000
 --- ./vimrc/.vim/bundle/swift.vim
 +++ ./vimrc/.vim/bundle/swift.vim
 @@ -1 +1 @@
 -Subproject commit 7ef452b47f14a2bfed26324793777cf12d2a8d78
-+Subproject commit 3278cf3b0522e6f08eaf11275fedce619beffe9a
++Subproject commit 478e11812f3ddb1778918bd243d8b27c9984ab26
 diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
 index 2d520bdf..f4ec3e57 160000
 --- ./vimrc/.vim/bundle/tig-explorer.vim
@@ -3050,12 +3170,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..84c7d813 160000
+index 8468d6a8..a08c481d 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 84c7d8138609fbed15a0bcb2ebcc6ee71bd2910f-dirty
++Subproject commit a08c481de2d8ebbd9f2a89d6dd6a05ca18718707-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -3646,7 +3766,7 @@ index d5874fe5..e5091a76 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..5aa30148 100644
+index 5fd4a230..ef260d45 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -77,8 +77,17 @@ function! VFilter()
@@ -3669,7 +3789,22 @@ index 5fd4a230..5aa30148 100644
  endfunction
  
  function! Filter()
-@@ -149,7 +158,7 @@ function! VRun()
+@@ -135,8 +144,12 @@ function! VRun()
+     let b:file_name = expand('%:t')
+     let b:to_run = expand("%:p")
+ 
+-    if filereadable(b:to_run . '.sh')
+-        let b:to_run = b:to_run . '.sh'
++    if (expand('%:e') ==# 'php')
++        exec '!~/loadrc/imvurc/generate.sh ' . '"' .  expand('%:p') . '"'
++    endif
++
++    if filereadable(b:to_run . '.lsh')
++        let b:to_run = b:to_run . '.lsh'
+     endif
+ 
+     let b:csdbpath = Cd2Worktree()
+@@ -149,7 +162,7 @@ function! VRun()
      endif
  
      if b:to_run != 'gbil.log'
@@ -3678,7 +3813,7 @@ index 5fd4a230..5aa30148 100644
      else
          call OpenOrSwitch('gbil.log', 'vs')
      endif
-@@ -172,7 +181,6 @@ function! GetFirstColumnOfFile()
+@@ -172,7 +185,6 @@ function! GetFirstColumnOfFile()
          return 0
      endif
  
@@ -3686,7 +3821,7 @@ index 5fd4a230..5aa30148 100644
      silent exec '!~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'
      call OpenOrSwitch(expand("%:p") . '.bak', 'vs')
  endfunction
-@@ -233,9 +241,9 @@ function! OpenAll()
+@@ -233,9 +245,9 @@ function! OpenAll()
          let line = substitute(line, '"', '', "g")
          exec 'vs ' . currentDir . '/' . line
      endfor
@@ -3698,7 +3833,7 @@ index 5fd4a230..5aa30148 100644
  
      let bnr = bufwinnr('^' . currentFile . '$')
      exe bnr . "wincmd w"
-@@ -334,11 +342,11 @@ endfunction
+@@ -334,11 +346,11 @@ endfunction
  function! GitSearch()
      normal! gvy<CR>
      let keyword = GetEscapedKeyword(@@)
@@ -3712,7 +3847,7 @@ index 5fd4a230..5aa30148 100644
      call HighlightKeyword(keyword)
  endfunction
  
-@@ -353,13 +361,6 @@ function! VimSearch()
+@@ -353,13 +365,6 @@ function! VimSearch()
      call HighlightKeyword(keyword)
  endfunction
  
@@ -3726,7 +3861,7 @@ index 5fd4a230..5aa30148 100644
  function! SwitchWinSize()
      if &winwidth == 1
          set winwidth=999999
-@@ -416,40 +417,21 @@ nnoremap <leader>Y "+yy
+@@ -416,40 +421,21 @@ nnoremap <leader>Y "+yy
  nnoremap <leader>p "+p
  nnoremap <leader>P "+P
  nnoremap tt :Autoformat<CR>:w!<cr>
@@ -3744,7 +3879,7 @@ index 5fd4a230..5aa30148 100644
 -if has('win32')
 -    nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 -    nmap <leader>cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
--
+ 
 -    " This will copy the path in 8.3 short format, for DOS and Windows 9x
 -    nmap <leader>c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
 -else
@@ -3754,7 +3889,7 @@ index 5fd4a230..5aa30148 100644
 -if has('win32')
 -    nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 -    nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
- 
+-
 -    " This will copy the path in 8.3 short format, for DOS and Windows 9x
 -    nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
 -else
@@ -3770,7 +3905,7 @@ index 5fd4a230..5aa30148 100644
  nnoremap mg :call VFilter()<cr>
  nnoremap me :call ExtractHighLight()<cr>
  nnoremap mf :call ExFilter()<cr>
-@@ -475,7 +457,8 @@ nnoremap H :call ShowVITAG()<cr>
+@@ -475,7 +461,8 @@ nnoremap H :call ShowVITAG()<cr>
  nnoremap F :call GetFirstColumnOfFile()<cr>
  nnoremap T :vs $HOME/all.proj<cr>
  nnoremap L :vs <C-R>"<cr>
@@ -3780,7 +3915,7 @@ index 5fd4a230..5aa30148 100644
  map <F3> :call VDebug()<cr>
  " nnoremap gf gF<cr>
  nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
-@@ -490,10 +473,7 @@ function! CutFile2()
+@@ -490,10 +477,7 @@ function! CutFile2()
  endfunc
  
  function! CutCommon()
@@ -3792,7 +3927,7 @@ index 5fd4a230..5aa30148 100644
  endfunc
  
  nnoremap <leader>2 :call CutCommon()<cr>
-@@ -505,3 +485,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
+@@ -505,3 +489,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
  " open tig with Project root path
  nnoremap <Leader>t :TigOpenProjectRootDir<CR>
  nnoremap <leader>T :TigOpenCurrentFile<CR>
@@ -4387,10 +4522,23 @@ index 57af963a..b4ad2e35 100755
      #smplayer "$1"
      smplayer -fullscreen "$1"
 diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
-index e14de500..da1c895d 100755
+index e14de500..f1885a19 100755
 --- ./vishrc/vrun.sh
 +++ ./vishrc/vrun.sh
-@@ -27,7 +27,7 @@ rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$file" "files.proj")
+@@ -14,12 +14,6 @@ then
+     exit 0
+ fi
+ 
+-if [[ "$file" = *'.php' ]] 
+-then
+-    ~/loadrc/imvurc/generate.sh "$file"
+-    exit 0
+-fi
+-
+ extension=${file##*.}
+ host=$(git config deploy.host)
+ rpath=$(git config deploy.path)
+@@ -27,7 +21,7 @@ rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$file" "files.proj")
  rfile=$(realpath --relative-to="$rootFolder" "$file")
  rfolder=$(realpath --relative-to="$rootFolder" $(dirname "$file"))
  
@@ -4399,7 +4547,7 @@ index e14de500..da1c895d 100755
  then
      cd "$rootFolder"
      docker build -f "$rfile" "$rfolder"
-@@ -58,7 +58,7 @@ case $extension in
+@@ -58,7 +52,7 @@ case $extension in
      sh)
          if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
          then
@@ -4408,7 +4556,7 @@ index e14de500..da1c895d 100755
          else
              "$file"
          fi
-@@ -69,7 +69,7 @@ case $extension in
+@@ -69,7 +63,7 @@ case $extension in
      py)
          if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
          then
