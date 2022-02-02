@@ -30,11 +30,6 @@ then
     exit 1
 fi
 
-if [[ "$target" != *":"* ]] && [[ ! -d "$target" ]]
-then
-    mkdir -p "$target"
-fi
-
 rm "$ready_file"
 
 iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
