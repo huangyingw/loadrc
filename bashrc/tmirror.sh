@@ -4,11 +4,6 @@ target=$2
 
 ready_file="$source"/"tmirror.ready"
 
-if [ ! -d "$target" ]
-then
-    mkdir -p "$target"
-fi
-
 iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
 rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 
