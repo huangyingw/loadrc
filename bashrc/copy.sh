@@ -9,11 +9,6 @@ fi
 source=$1
 target=$2
 
-if [[ "$target" != *":"* ]] && [[ ! -d "$target" ]]
-then
-    mkdir -p "$target"
-fi
-
 iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
 rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 # mapfile -t rsync_basic_options < rsync_basic_options
