@@ -3094,7 +3094,7 @@ index cc6342c3..7140ca28 160000
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 7140ca2885a2fb304ca618a212066aed43475c4f
++Subproject commit 7140ca2885a2fb304ca618a212066aed43475c4f-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..478e1181 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -3150,7 +3150,7 @@ index 8468d6a8..84c7d813 160000
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 84c7d8138609fbed15a0bcb2ebcc6ee71bd2910f-dirty
++Subproject commit 84c7d8138609fbed15a0bcb2ebcc6ee71bd2910f
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
