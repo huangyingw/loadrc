@@ -5,4 +5,4 @@ cd "$SCRIPTPATH"
 
 sudo cp -nv /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
 sudo cp -fv ./etc/ssh/sshd_config /etc/ssh/sshd_config  
-cp -nv /usr/bin/uname /usr/local/bin/
+cp -fv /usr/bin/uname /usr/local/bin/
