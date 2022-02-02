@@ -3088,7 +3088,7 @@ index cc6342c3..7140ca28 160000
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 7140ca2885a2fb304ca618a212066aed43475c4f-dirty
++Subproject commit 7140ca2885a2fb304ca618a212066aed43475c4f
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..478e1181 160000
 --- ./vimrc/.vim/bundle/swift.vim
