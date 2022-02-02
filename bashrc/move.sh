@@ -6,11 +6,6 @@ then
     exit 1
 fi
 
-if [[ "$2" != *":"* ]] && [[ ! -d "$2" ]]
-then
-    mkdir -p "$2"
-fi
-
 source="$1"
 realpath "$1" && source=$(realpath "$1")
 
