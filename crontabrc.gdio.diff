@@ -2843,7 +2843,7 @@ index 00000000..a99e9b77
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit a99e9b77f29a6500213ab8976e676e6ff4c7c6da-dirty
++Subproject commit a99e9b77f29a6500213ab8976e676e6ff4c7c6da
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -2909,6 +2909,17 @@ index 00000000..80d3b345
 @@ -0,0 +1,2 @@
 +#!/bin/sh
 +nc localhost 2225
+diff --git a/post_setup.sh b/post_setup.sh
+index 2cc2f2d0..f052ae63 100755
+--- ./post_setup.sh
++++ ./post_setup.sh
+@@ -7,4 +7,6 @@ if [ $(uname) = "Darwin" ]
+ then
+     ./bashrc/update_proj.sh
+ fi
++
+ ./gitrc/gclean.sh
++chown $(whoami) -R ~/loadrc/oh-my-zsh/
 diff --git a/prunefile_template.conf b/prunefile_template.conf
 index 8e34f2fa..9deeb31c 100644
 --- ./prunefile_template.conf
@@ -3130,12 +3141,12 @@ index 0c22efb1..00000000
 @@ -1 +0,0 @@
 -Subproject commit 0c22efb1b919573f69ec237e7a8ab7ca1c1ecc03
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..4b537fa0 160000
+index 2b1dca6c..ac084414 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit 4b537fa01c28f2f7cf249722530561d2e477b49f
++Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
 index cc6342c3..7b5f7671 160000
 --- ./vimrc/.vim/bundle/python-mode
