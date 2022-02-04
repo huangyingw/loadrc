@@ -2222,6 +2222,10 @@ index 82bc6cb7..00000000
 @@ -1,2 +0,0 @@
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
+diff --git a/host_links/lint-sandbox/etc/network/interfaces b/host_links/lint-sandbox/etc/network/interfaces_bak
+similarity index 100%
+rename from host_links/lint-sandbox/etc/network/interfaces
+rename to host_links/lint-sandbox/etc/network/interfaces_bak
 diff --git a/host_links/mbp/Users/huangyingw/.bashrc b/host_links/mbp/Users/huangyingw/.bashrc
 deleted file mode 100644
 index 82bc6cb7..00000000
@@ -2259,11 +2263,11 @@ index 425c9192..86808503 100644
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
-diff --git a/host_links/mini/etc/netplan/00-installer-config.yaml b/host_links/mini/etc/netplan/00-installer-config.yaml
+diff --git a/host_links/mini/etc/netplan/00-installer-config.yaml_bak b/host_links/mini/etc/netplan/00-installer-config.yaml_bak
 new file mode 100644
 index 00000000..fc3d765a
 --- /dev/null
-+++ ./host_links/mini/etc/netplan/00-installer-config.yaml
++++ ./host_links/mini/etc/netplan/00-installer-config.yaml_bak
 @@ -0,0 +1,12 @@
 +network:
 +  ethernets:
@@ -2277,6 +2281,10 @@ index 00000000..fc3d765a
 +      interfaces: [eth0]
 +      addresses:
 +        - 192.168.31.140/24 
+diff --git a/host_links/movie/etc/network/interfaces b/host_links/movie/etc/network/interfaces_bak
+similarity index 100%
+rename from host_links/movie/etc/network/interfaces
+rename to host_links/movie/etc/network/interfaces_bak
 diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
 index 50886663..3dda7119 100644
 --- ./host_links/server/etc/hosts
@@ -2290,6 +2298,14 @@ index 50886663..3dda7119 100644
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
+diff --git a/host_links/server/etc/network/interfaces b/host_links/server/etc/network/interfaces_bak
+similarity index 100%
+rename from host_links/server/etc/network/interfaces
+rename to host_links/server/etc/network/interfaces_bak
+diff --git a/host_links/ubuntu/etc/network/interfaces b/host_links/ubuntu/etc/network/interfaces_bak
+similarity index 100%
+rename from host_links/ubuntu/etc/network/interfaces
+rename to host_links/ubuntu/etc/network/interfaces_bak
 diff --git a/hosts/mba/Library/Application Support/ZeroTier/One/identity.public b/hosts/mba/Library/Application Support/ZeroTier/One/identity.public
 new file mode 100644
 index 00000000..94896a7f
@@ -2632,10 +2648,10 @@ index 328d9be3..4aaa0f8c 100755
      ../downloads/"$NUM"/ \
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
-diff --git a/hosts/server/etc/netplan/00-installer-config.yaml b/linux/etc/netplan/00-installer-config.yaml
+diff --git a/hosts/server/etc/netplan/00-installer-config.yaml b/linux/etc/netplan/00-installer-config.yaml_bak
 similarity index 100%
 rename from hosts/server/etc/netplan/00-installer-config.yaml
-rename to linux/etc/netplan/00-installer-config.yaml
+rename to linux/etc/netplan/00-installer-config.yaml_bak
 diff --git a/linux_links/etc/crypttab b/linux_links/etc/crypttab
 index 191dd600..2707c85c 100644
 --- ./linux_links/etc/crypttab
@@ -2651,6 +2667,14 @@ index 191dd600..2707c85c 100644
 +usb_backup_crypt_8T_1      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
 +usb_backup_crypt_8T_2      /dev/disk/by-uuid/bbbc9066-0479-4959-af61-ead6a9cea3ba  /root/loadrc/keys/keyfile   luks
 +timemachine      /dev/disk/by-uuid/72eff5fa-e188-4b1a-8760-5f5ff828aa37  /root/loadrc/keys/keyfile   luks
+diff --git a/linux_links/etc/resolvconf/resolv.conf.d/base b/linux_links/etc/resolvconf/resolv.conf.d/base_bak
+similarity index 100%
+rename from linux_links/etc/resolvconf/resolv.conf.d/base
+rename to linux_links/etc/resolvconf/resolv.conf.d/base_bak
+diff --git a/linux_links/etc/resolvconf/resolv.conf.d/head b/linux_links/etc/resolvconf/resolv.conf.d/head_bak
+similarity index 100%
+rename from linux_links/etc/resolvconf/resolv.conf.d/head
+rename to linux_links/etc/resolvconf/resolv.conf.d/head_bak
 diff --git a/macosrc/configure_mosh.sh b/macosrc/configure_mosh.sh
 index bb27cd34..b6ca2646 100755
 --- ./macosrc/configure_mosh.sh
@@ -2815,11 +2839,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..e6c4de70
+index 00000000..4238d481
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit e6c4de70da86b7a1426ce3f05dd1db045c1ac73f
++Subproject commit 4238d48172356cb841a43076a2d5dceae795c14b-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3106,12 +3130,12 @@ index 0c22efb1..00000000
 @@ -1 +0,0 @@
 -Subproject commit 0c22efb1b919573f69ec237e7a8ab7ca1c1ecc03
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..ac084414 160000
+index 2b1dca6c..4b537fa0 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
++Subproject commit 4b537fa01c28f2f7cf249722530561d2e477b49f
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
 index cc6342c3..7b5f7671 160000
 --- ./vimrc/.vim/bundle/python-mode
