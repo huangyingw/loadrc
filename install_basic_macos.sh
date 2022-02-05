@@ -25,6 +25,7 @@ brew install \
     brightness \
     clipper \
     coreutils \
+    dialog \
     dos2unix \
     ffmpeg \
     git \
