@@ -9,7 +9,7 @@ SCRIPT=$(realpath "$0") && \
 ./gpurc/install.sh
 ./install_vagrant.sh
 ./install_flacon.sh
-./cscope/build.sh
+./cscope/install-sh.sh
 ./jdupes/install.sh
 ./submodule_setup.sh
 ./kvmrc/install.sh
