@@ -1496,12 +1496,12 @@ index 00000000..f90514ae
 +
 +sudo /usr/bin/osascript -e "set Volume 0"
 diff --git a/cscope b/cscope
-index 18a46b20..40e22631 160000
+index 18a46b20..41fab780 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 40e22631e185eadcfb1b20355518f8719d9a881b
++Subproject commit 41fab780d1ca14aad7467436000b0a8ec550c09f
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -2222,6 +2222,10 @@ index 82bc6cb7..00000000
 @@ -1,2 +0,0 @@
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
+diff --git a/host_links/lint-sandbox/etc/network/interfaces b/host_links/lint-sandbox/etc/network/interfaces_bak
+similarity index 100%
+rename from host_links/lint-sandbox/etc/network/interfaces
+rename to host_links/lint-sandbox/etc/network/interfaces_bak
 diff --git a/host_links/mbp/Users/huangyingw/.bashrc b/host_links/mbp/Users/huangyingw/.bashrc
 deleted file mode 100644
 index 82bc6cb7..00000000
@@ -2259,11 +2263,11 @@ index 425c9192..86808503 100644
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
-diff --git a/host_links/mini/etc/netplan/00-installer-config.yaml b/host_links/mini/etc/netplan/00-installer-config.yaml
+diff --git a/host_links/mini/etc/netplan/00-installer-config.yaml_bak b/host_links/mini/etc/netplan/00-installer-config.yaml_bak
 new file mode 100644
 index 00000000..fc3d765a
 --- /dev/null
-+++ ./host_links/mini/etc/netplan/00-installer-config.yaml
++++ ./host_links/mini/etc/netplan/00-installer-config.yaml_bak
 @@ -0,0 +1,12 @@
 +network:
 +  ethernets:
@@ -2277,6 +2281,10 @@ index 00000000..fc3d765a
 +      interfaces: [eth0]
 +      addresses:
 +        - 192.168.31.140/24 
+diff --git a/host_links/movie/etc/network/interfaces b/host_links/movie/etc/network/interfaces_bak
+similarity index 100%
+rename from host_links/movie/etc/network/interfaces
+rename to host_links/movie/etc/network/interfaces_bak
 diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
 index 50886663..3dda7119 100644
 --- ./host_links/server/etc/hosts
@@ -2290,6 +2298,14 @@ index 50886663..3dda7119 100644
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
+diff --git a/host_links/server/etc/network/interfaces b/host_links/server/etc/network/interfaces_bak
+similarity index 100%
+rename from host_links/server/etc/network/interfaces
+rename to host_links/server/etc/network/interfaces_bak
+diff --git a/host_links/ubuntu/etc/network/interfaces b/host_links/ubuntu/etc/network/interfaces_bak
+similarity index 100%
+rename from host_links/ubuntu/etc/network/interfaces
+rename to host_links/ubuntu/etc/network/interfaces_bak
 diff --git a/hosts/mba/Library/Application Support/ZeroTier/One/identity.public b/hosts/mba/Library/Application Support/ZeroTier/One/identity.public
 new file mode 100644
 index 00000000..94896a7f
@@ -2632,10 +2648,10 @@ index 328d9be3..4aaa0f8c 100755
      ../downloads/"$NUM"/ \
 -    ./"$NUM"/
 +    ../submissions/"$NUM"/
-diff --git a/hosts/server/etc/netplan/00-installer-config.yaml b/linux/etc/netplan/00-installer-config.yaml
+diff --git a/hosts/server/etc/netplan/00-installer-config.yaml b/linux/etc/netplan/00-installer-config.yaml_bak
 similarity index 100%
 rename from hosts/server/etc/netplan/00-installer-config.yaml
-rename to linux/etc/netplan/00-installer-config.yaml
+rename to linux/etc/netplan/00-installer-config.yaml_bak
 diff --git a/linux_links/etc/crypttab b/linux_links/etc/crypttab
 index 191dd600..2707c85c 100644
 --- ./linux_links/etc/crypttab
@@ -2651,6 +2667,14 @@ index 191dd600..2707c85c 100644
 +usb_backup_crypt_8T_1      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
 +usb_backup_crypt_8T_2      /dev/disk/by-uuid/bbbc9066-0479-4959-af61-ead6a9cea3ba  /root/loadrc/keys/keyfile   luks
 +timemachine      /dev/disk/by-uuid/72eff5fa-e188-4b1a-8760-5f5ff828aa37  /root/loadrc/keys/keyfile   luks
+diff --git a/linux_links/etc/resolvconf/resolv.conf.d/base b/linux_links/etc/resolvconf/resolv.conf.d/base_bak
+similarity index 100%
+rename from linux_links/etc/resolvconf/resolv.conf.d/base
+rename to linux_links/etc/resolvconf/resolv.conf.d/base_bak
+diff --git a/linux_links/etc/resolvconf/resolv.conf.d/head b/linux_links/etc/resolvconf/resolv.conf.d/head_bak
+similarity index 100%
+rename from linux_links/etc/resolvconf/resolv.conf.d/head
+rename to linux_links/etc/resolvconf/resolv.conf.d/head_bak
 diff --git a/macosrc/configure_mosh.sh b/macosrc/configure_mosh.sh
 index bb27cd34..b6ca2646 100755
 --- ./macosrc/configure_mosh.sh
@@ -2815,11 +2839,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..67fdb917
+index 00000000..a99e9b77
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 67fdb917072f68e74de564bcd2a54a662ce649ad-dirty
++Subproject commit a99e9b77f29a6500213ab8976e676e6ff4c7c6da
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -2885,6 +2909,17 @@ index 00000000..80d3b345
 @@ -0,0 +1,2 @@
 +#!/bin/sh
 +nc localhost 2225
+diff --git a/post_setup.sh b/post_setup.sh
+index 2cc2f2d0..f052ae63 100755
+--- ./post_setup.sh
++++ ./post_setup.sh
+@@ -7,4 +7,6 @@ if [ $(uname) = "Darwin" ]
+ then
+     ./bashrc/update_proj.sh
+ fi
++
+ ./gitrc/gclean.sh
++chown $(whoami) -R ~/loadrc/oh-my-zsh/
 diff --git a/prunefile_template.conf b/prunefile_template.conf
 index 8e34f2fa..9deeb31c 100644
 --- ./prunefile_template.conf
@@ -3113,19 +3148,19 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..a375cc1d 160000
+index cc6342c3..7b5f7671 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit a375cc1dce93b6fd7f756901006c90d8ecf38fd1
++Subproject commit 7b5f7671b61c802a0321cda6654bcd98fb746e07
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
-index 7ef452b4..3278cf3b 160000
+index 7ef452b4..478e1181 160000
 --- ./vimrc/.vim/bundle/swift.vim
 +++ ./vimrc/.vim/bundle/swift.vim
 @@ -1 +1 @@
 -Subproject commit 7ef452b47f14a2bfed26324793777cf12d2a8d78
-+Subproject commit 3278cf3b0522e6f08eaf11275fedce619beffe9a
++Subproject commit 478e11812f3ddb1778918bd243d8b27c9984ab26
 diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
 index 2d520bdf..f4ec3e57 160000
 --- ./vimrc/.vim/bundle/tig-explorer.vim
@@ -3169,12 +3204,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..c95c60cd 160000
+index 8468d6a8..7339c37d 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit c95c60cd8bf2a62aee5a1cdb9e493b04b323d567
++Subproject commit 7339c37d9cb3810568ce873315b341f83ed8f34e
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -3197,12 +3232,12 @@ index 00000000..d6adab9d
 @@ -0,0 +1 @@
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..582c4f6c 160000
+index 3b379635..de73f6d1 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit 582c4f6cf310b2b3044c366c726a90c0010fc45d
++Subproject commit de73f6d1b0bf1b2af2d576f3420fc861af14769f
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
@@ -4581,11 +4616,11 @@ index 48f7223b..d2da8f4c 100755
 +cp -fv "$find_result".bak "$find_result"
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
-index 00000000..36940376
+index 00000000..a30c815b
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
-+Subproject commit 36940376d1ec457ddc9779a3835ab33c086d1dc6
++Subproject commit a30c815b53b8fa0f0ca23680f5671deda334cacd
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 index 430298e0..cb9795ec 100755
 --- ./wifirc/autoconnect.sh
