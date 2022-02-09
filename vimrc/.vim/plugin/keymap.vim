@@ -448,7 +448,7 @@ nmap <C-@> :call CSCSearch(4)<cr>
 nmap <C-f> :call CSCSearch(7)<cr>
 nmap <C-e> :call CSCSearch(1)<cr>
 nmap <C-g> :call CSCSearch(3)<cr>
-nnoremap <leader>d :!rm %:p<CR>:q<cr>
+nnoremap <leader>d :!rm "%:p"<CR>:q<cr>
 nmap <C-j> :call PlayVideo()<cr>
 nmap <C-p> :call Prune()<cr>
 nmap <C-k> :call KdiffAll()<cr>
