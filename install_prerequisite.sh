@@ -25,6 +25,7 @@ apt-get install -y \
     git \
     git-gui \
     gparted \
+    hashcat \
     hfsprogs \
     htop \
     inetutils-traceroute \
