@@ -20,7 +20,6 @@ services:
             - /etc/hosts:/etc/hosts
             - ~/.zsh_history:/root/.zsh_history
             - ~/.nvm:/root/.nvm
-            - /Volumes/mirror1/:/media/mirror1/
         environment:
             - FILENAME="~/.bashrc"
         command: /bin/sh -c "/entrypoint.sh 2>&1 | tee /var/logs/containner.log"
