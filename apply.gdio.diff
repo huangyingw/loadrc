@@ -2859,11 +2859,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..9d31c3b4
+index 00000000..0d9aca16
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 9d31c3b4a475667cb0f0cf52e59d754feb967dc3
++Subproject commit 0d9aca1629f2598b4f4545437ce2944dba71280c
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3156,6 +3156,13 @@ index 1d4a909f..826930ed 160000
 @@ -1 +1 @@
 -Subproject commit 1d4a909f46698906b16d711aeb260663f4c4794a
 +Subproject commit 826930edcb658e0d1865a926aacfb0d6c876d9b5
+diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
+index 5617a1cf..7753505f 160000
+--- ./vimrc/.vim/bundle/indentLine
++++ ./vimrc/.vim/bundle/indentLine
+@@ -1 +1 @@
+-Subproject commit 5617a1cf7d315e6e6f84d825c85e3b669d220bfa
++Subproject commit 7753505f3c500ec88d11e9373d05250f49c1d900
 diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
 index 3de17695..d2d8cc43 160000
 --- ./vimrc/.vim/bundle/ncm2
@@ -3467,7 +3474,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..b8e84739 100644
+index d5874fe5..cf89568b 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,17 @@
@@ -3620,9 +3627,12 @@ index d5874fe5..b8e84739 100644
          else
              call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
          endif
-@@ -424,7 +431,7 @@ function! s:Gdi2(...) abort
+@@ -422,9 +429,9 @@ function! s:Gdi2(...) abort
+     endif
+ 
      let worktree = Cd2Worktree()
-     let output = 'gdi2.findresult'
+-    let output = 'gdi2.findresult'
++    let output = 'gdi2.runresult'
      let arg1 = (a:0 >= 1) ? a:1 : ''
 -    exec '!~/loadrc/gitrc/gdi2.sh 2>&1 | tee ' . '"' .  output . '"'
 +    exec '!~/loadrc/gitrc/gdi2.sh ' . '"' .  arg1 . '"' . ' 2>&1 | tee ' . '"' .  output . '"'
@@ -3824,7 +3834,7 @@ index d5874fe5..b8e84739 100644
  endfunction
  
  function! s:Gwap() abort
-@@ -671,7 +769,7 @@ function! s:Gfix() abort
+@@ -671,13 +769,15 @@ function! s:Gfix() abort
  endfunction
  
  function! s:Reapply() abort
@@ -3833,7 +3843,16 @@ index d5874fe5..b8e84739 100644
          echom 'Please only run on *gdio.diff!!!'
          return 0
      endif
-@@ -701,3 +799,5 @@ function! s:GenerateIpynb() abort
+ 
+     let worktree = Cd2Worktree()
+-    exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
++    let output = 'reapply.runresult'
++    exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"' . ' 2>&1 | tee ' . '"' .  output . '"' 
++    call OpenOrSwitch(output, 'vs')
+     call s:Gs()
+ endfunction
+ 
+@@ -701,3 +801,5 @@ function! s:GenerateIpynb() abort
      exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
      w
  endfunction
