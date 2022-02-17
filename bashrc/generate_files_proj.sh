@@ -55,8 +55,8 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
         echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" >> ${TARGET} && \
         sed -i.bak 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/;s/ /\\ /g' "$TARGET" && \
         comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
-        cp -fv "$TARGET.tmp" "$TARGET" && \
+        rsync -v "$TARGET.tmp" "$TARGET" && \
         sort -u "$TARGET" -o "$TARGET" && \
-        cp -fv "$TARGET" files.proj && \
+        rsync -v "$TARGET" files.proj && \
         echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
         sort -u ~/all.proj -o ~/all.proj
