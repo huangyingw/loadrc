@@ -1,7 +1,4 @@
 #!/bin/zsh
-SCRIPT=$(realpath "$0")
-SCRIPTPATH=$(dirname "$SCRIPT")
-cd "$SCRIPTPATH"
 
 LOCALE="en_US.UTF-8"
 echo "locales locales/default_environment_locale select $LOCALE" | debconf-set-selections
