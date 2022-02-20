@@ -5,7 +5,6 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: huangyingw/dloadrc
         volumes:
             - ./var/logs/:/var/logs/
             - ./.bashrc:/root/.bashrc
