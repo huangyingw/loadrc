@@ -421,23 +421,15 @@ index c7c0b3ff..88872777 100644
  . $HOME/loadrc/.loadrc
  setopt HIST_IGNORE_ALL_DUPS
 diff --git a/Dockerfile b/Dockerfile
-<<<<<<< HEAD
 index 08e0c80b..00eb8ea8 100644
-=======
-index 08e0c80b..169c9ec2 100644
->>>>>>> origin/generate_files_proj
 --- ./Dockerfile
 +++ ./Dockerfile
 @@ -4,14 +4,21 @@ ENV DEBIAN_FRONTEND noninteractive
  WORKDIR /root/loadrc
  
  COPY ./*.sh /root/loadrc/
-<<<<<<< HEAD
 +COPY ./bashrc/*.sh /root/loadrc/bashrc/
 +COPY ./gitrc/*.sh /root/loadrc/gitrc/
-=======
-+COPY ./neovim/ /root/loadrc/neovim/
->>>>>>> origin/generate_files_proj
  COPY ./.ssh/id_* /root/.ssh/
  COPY ./entrypoint.sh /entrypoint.sh
  
@@ -630,27 +622,6 @@ index 2c4bf8d7..83b0bbaf 100755
 -. ~/loadrc/.loadrc
 -dpkg -i $SOFTWARE/nx/nomachine_*.deb
 +./copy.sh ~/loadrc/ ~/loadrc.bak/
-<<<<<<< HEAD
-=======
-diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
-index 9c24d246..f6f6758a 100755
---- ./bashrc/cscope.sh
-+++ ./bashrc/cscope.sh
-@@ -3,9 +3,9 @@
- SOURCEFILE="cscopesourcefile.bak"
- CSCOPEFILE="cscopefile.bak"
- 
--cp -fv files.proj "$SOURCEFILE" && \
-+rsync -v files.proj "$SOURCEFILE" && \
-     sed -i.bak 's/\\ / /g' "$SOURCEFILE" && \
-     cscope -bq -i "$SOURCEFILE" -f "$CSCOPEFILE" && \
--    cp -fv "$CSCOPEFILE" cscope.out && \
--    cp -fv "$CSCOPEFILE".in cscope.out.in && \
--    cp -fv "$CSCOPEFILE".po cscope.out.po
-+    rsync -v "$CSCOPEFILE" cscope.out && \
-+    rsync -v "$CSCOPEFILE".in cscope.out.in && \
-+    rsync -v "$CSCOPEFILE".po cscope.out.po
->>>>>>> origin/generate_files_proj
 diff --git a/bashrc/cutcommon.sh b/bashrc/cutcommon.sh
 new file mode 100755
 index 00000000..c66a8e4c
@@ -774,11 +745,7 @@ index f58a2ee7..dcc8f356 100755
      xargs sed -i.bak  "s/${FIND}/${REPLACE}/g" < "$3"
 +fi
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
-<<<<<<< HEAD
 index 83e2c748..19fda7d5 100755
-=======
-index 83e2c748..5cb41d52 100755
->>>>>>> origin/generate_files_proj
 --- ./bashrc/generate_files_proj.sh
 +++ ./bashrc/generate_files_proj.sh
 @@ -15,6 +15,8 @@ then
@@ -807,18 +774,10 @@ index 83e2c748..5cb41d52 100755
 +        echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" >> ${TARGET} && \
 +        sed -i.bak 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/;s/ /\\ /g' "$TARGET" && \
 +        comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
-<<<<<<< HEAD
 +        cp -fv "$TARGET.tmp" "$TARGET" && \
          sort -u "$TARGET" -o "$TARGET" && \
 -        sed -i.bak 's/ /\\ /g' "$TARGET" && \
          cp -fv "$TARGET" files.proj && \
-=======
-+        rsync -v "$TARGET.tmp" "$TARGET" && \
-         sort -u "$TARGET" -o "$TARGET" && \
--        sed -i.bak 's/ /\\ /g' "$TARGET" && \
--        cp -fv "$TARGET" files.proj && \
-+        rsync -v "$TARGET" files.proj && \
->>>>>>> origin/generate_files_proj
          echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
          sort -u ~/all.proj -o ~/all.proj
 diff --git a/bashrc/get_first_column_of_file.sh b/bashrc/get_first_column_of_file.sh
@@ -1190,48 +1149,6 @@ index cd9fe5f8..d00ebc3a 100644
 diff --git a/bashrc/parse_host.sh b/bashrc/parse_host.sh
 new file mode 100755
 index 00000000..9ffc3f7b
-<<<<<<< HEAD
-=======
---- /dev/null
-+++ ./bashrc/parse_host.sh
-@@ -0,0 +1,3 @@
-+#!/bin/zsh
-+
-+echo "$1" | sed 's/^[^:]*$/localhost/g;s/\([^:]*\):.*$/\1/g'
-diff --git a/bashrc/parse_host.test.sh b/bashrc/parse_host.test.sh
-new file mode 100755
-index 00000000..e46e9472
---- /dev/null
-+++ ./bashrc/parse_host.test.sh
-@@ -0,0 +1,8 @@
-+#!/bin/zsh
-+SCRIPT=$(realpath "$0")
-+SCRIPTPATH=$(dirname "$SCRIPT")
-+cd "$SCRIPTPATH"
-+
-+./parse_host.sh "mini:~/loadrc"
-+./parse_host.sh "huangyingw@mini:~/loadrc"
-+./parse_host.sh "~/loadrc"
-diff --git a/bashrc/reboot.sh b/bashrc/reboot.sh
-index 1320581d..241a362f 100755
---- ./bashrc/reboot.sh
-+++ ./bashrc/reboot.sh
-@@ -1,3 +1,10 @@
- #!/bin/zsh
--#~/loadrc/kvmrc/vsave.sh
-+
-+if [ $(uname) = "Darwin" ]
-+then
-+    sudo fdesetup authrestart -user $(whoami) -inputplist < ~/login.plist || \
-+        sudo reboot
-+
-+else
-     reboot
-+fi
-diff --git a/bashrc/remove_path.sh b/bashrc/remove_path.sh
-new file mode 100644
-index 00000000..10e89a8a
->>>>>>> origin/generate_files_proj
 --- /dev/null
 +++ ./bashrc/parse_host.sh
 @@ -0,0 +1,3 @@
@@ -1612,20 +1529,12 @@ index 00000000..f90514ae
 +
 +sudo /usr/bin/osascript -e "set Volume 0"
 diff --git a/cscope b/cscope
-<<<<<<< HEAD
 index 18a46b20..d153a8d8 160000
-=======
-index 18a46b20..41fab780 160000
->>>>>>> origin/generate_files_proj
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-<<<<<<< HEAD
 +Subproject commit d153a8d8ad751d805d7efb05bbe2523d9164674b
-=======
-+Subproject commit 41fab780d1ca14aad7467436000b0a8ec550c09f
->>>>>>> origin/generate_files_proj
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -1738,7 +1647,6 @@ index 00000000..e922ab44
 +xdg-open $download_folder &>/dev/null
 +clog "[✓] Cubbit desktop client downloaded into your 'Downloads' folder!"
 diff --git a/docker-compose.yml b/docker-compose.yml
-<<<<<<< HEAD
 index 4a15eb71..ddd176a8 100644
 --- ./docker-compose.yml
 +++ ./docker-compose.yml
@@ -1751,19 +1659,12 @@ index 4a15eb71..ddd176a8 100644
              - ./var/logs/:/var/logs/
              - ./.bashrc:/root/.bashrc
 @@ -17,6 +16,9 @@ services:
-=======
-index 4a15eb71..b8f47dc5 100644
---- ./docker-compose.yml
-+++ ./docker-compose.yml
-@@ -17,6 +17,10 @@ services:
->>>>>>> origin/generate_files_proj
              - ./.config/nvim/init.vim:/root/.config/nvim/init.vim
              - ~/.gitconfig:/root/.gitconfig
              - ~/.globalgitignore:/root/.globalgitignore
 +            - /etc/hosts:/etc/hosts
 +            - ~/.zsh_history:/root/.zsh_history
 +            - ~/.nvm:/root/.nvm
-<<<<<<< HEAD
          environment:
              - FILENAME="~/.bashrc"
          command: /bin/sh -c "/entrypoint.sh 2>&1 | tee /var/logs/containner.log"
@@ -1793,12 +1694,6 @@ index dd7d981a..1d2d1267 100755
 -
 -set -o nounset                              # Treat unset variables as an error
  docker rmi -f $(docker images -a | grep '<none>' | tr -s ' ' | cut -d ' ' -f 3)
-=======
-+            - /Volumes/mirror1/:/media/mirror1/
-         environment:
-             - FILENAME="~/.bashrc"
-         command: /bin/sh -c "/entrypoint.sh 2>&1 | tee /var/logs/containner.log"
->>>>>>> origin/generate_files_proj
 diff --git a/dockerrc/edocker.sh b/dockerrc/edocker.sh
 index 889b85af..a0cd5228 100755
 --- ./dockerrc/edocker.sh
@@ -2462,17 +2357,10 @@ similarity index 100%
 rename from host_links/movie/etc/network/interfaces
 rename to host_links/movie/etc/network/interfaces_bak
 diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
-<<<<<<< HEAD
 index 50886663..8fdc2229 100644
 --- ./host_links/server/etc/hosts
 +++ ./host_links/server/etc/hosts
 @@ -10,6 +10,9 @@
-=======
-index 50886663..3dda7119 100644
---- ./host_links/server/etc/hosts
-+++ ./host_links/server/etc/hosts
-@@ -10,6 +10,8 @@
->>>>>>> origin/generate_files_proj
  192.168.31.115 gluster02
  192.168.31.99 mldonkey
  192.168.31.147 imacpro
@@ -2731,11 +2619,7 @@ index 2bc75c67..49f4fbcd 100755
 +./neovim/install_prerequisite.sh
 +./neovim/install.sh
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
-<<<<<<< HEAD
 index 298b6bc4..817072f6 100755
-=======
-index 298b6bc4..cd42b40b 100755
->>>>>>> origin/generate_files_proj
 --- ./install_prerequisite.sh
 +++ ./install_prerequisite.sh
 @@ -1,21 +1,21 @@
@@ -2754,11 +2638,7 @@ index 298b6bc4..cd42b40b 100755
      binutils \
      build-essential \
      cmake \
-<<<<<<< HEAD
      coreutils \
-=======
-@@ -16,6 +15,8 @@ apt-get install -y \
->>>>>>> origin/generate_files_proj
      cryptsetup \
 -    cscope \
      curl \
@@ -2767,11 +2647,7 @@ index 298b6bc4..cd42b40b 100755
      dkms \
      dos2unix \
      exuberant-ctags \
-<<<<<<< HEAD
 @@ -24,12 +24,14 @@ apt-get install -y \
-=======
-@@ -24,12 +25,14 @@ apt-get install -y \
->>>>>>> origin/generate_files_proj
      git \
      git-gui \
      gparted \
@@ -2786,11 +2662,7 @@ index 298b6bc4..cd42b40b 100755
      kdiff3 \
      libsecret-1-dev \
      libsecret-tools \
-<<<<<<< HEAD
 @@ -37,12 +39,15 @@ apt-get install -y \
-=======
-@@ -37,12 +40,15 @@ apt-get install -y \
->>>>>>> origin/generate_files_proj
      manpages-fr-extra \
      manpages-pl \
      mdadm \
@@ -2807,11 +2679,7 @@ index 298b6bc4..cd42b40b 100755
      perl \
      pm-utils \
      pv \
-<<<<<<< HEAD
 @@ -54,10 +59,11 @@ apt-get install -y \
-=======
-@@ -54,10 +60,11 @@ apt-get install -y \
->>>>>>> origin/generate_files_proj
      slurm \
      smplayer \
      software-properties-common \
@@ -2825,11 +2693,7 @@ index 298b6bc4..cd42b40b 100755
      unrar \
      w3m \
      w3m-img \
-<<<<<<< HEAD
 @@ -68,5 +74,3 @@ apt-get install -y \
-=======
-@@ -68,5 +75,3 @@ apt-get install -y \
->>>>>>> origin/generate_files_proj
  modprobe wl
  update-initramfs -u
  locale-gen en_US.UTF-8
@@ -3076,19 +2940,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-<<<<<<< HEAD
 index 00000000..074b410a
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
 +Subproject commit 074b410a0992ff0bb49da79b9f086b7a9daff9d0
-=======
-index 00000000..f175a48c
---- /dev/null
-+++ ./neovim
-@@ -0,0 +1 @@
-+Subproject commit f175a48cef5770a41429acc5529751b211091bed
->>>>>>> origin/generate_files_proj
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3277,17 +3133,10 @@ index 00000000..b385cdc6
 +cp -fv ./pbpaste-remote ~/bin/pbpaste-remote
 diff --git a/setup_remote.sh b/setup_remote.sh
 new file mode 100755
-<<<<<<< HEAD
 index 00000000..d4a1766d
 --- /dev/null
 +++ ./setup_remote.sh
 @@ -0,0 +1,13 @@
-=======
-index 00000000..be5c410c
---- /dev/null
-+++ ./setup_remote.sh
-@@ -0,0 +1,12 @@
->>>>>>> origin/generate_files_proj
 +#!/bin/bash
 +
 +apt-get update
@@ -3299,10 +3148,7 @@ index 00000000..be5c410c
 +
 +./deploy_configurations.sh
 +~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
-<<<<<<< HEAD
 +./setup_locale.sh
-=======
->>>>>>> origin/generate_files_proj
 +./swith-2-zsh.sh
 diff --git a/sqlrc/xsql.sh b/sqlrc/xsql.sh
 index 0aae8085..2d88e3a8 100755
@@ -3434,16 +3280,12 @@ index 2b1dca6c..4b537fa0 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit 4b537fa01c28f2f7cf249722530561d2e477b49f
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..a69703cf 160000
+index cc6342c3..b629be02 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-<<<<<<< HEAD
-+Subproject commit a69703cfab85f654cc6890b0fc476f3b30181f83-dirty
-=======
-+Subproject commit a69703cfab85f654cc6890b0fc476f3b30181f83
->>>>>>> origin/generate_files_proj
++Subproject commit b629be0234f5cc7cdb2b2f7172eb11e72c9ff8e3
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..478e1181 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -3494,16 +3336,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..77de6cc0 160000
+index 8468d6a8..6fb60ba0 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-<<<<<<< HEAD
-+Subproject commit 77de6cc0e6e741db410ea2132a597630193aec60-dirty
-=======
-+Subproject commit 77de6cc0e6e741db410ea2132a597630193aec60
->>>>>>> origin/generate_files_proj
++Subproject commit 6fb60ba0f00659c69afa3d511ad65383adab1b4f
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -4941,19 +4779,11 @@ index 48f7223b..d2da8f4c 100755
 +cp -fv "$find_result".bak "$find_result"
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
-<<<<<<< HEAD
 index 00000000..a30c815b
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
 +Subproject commit a30c815b53b8fa0f0ca23680f5671deda334cacd
-=======
-index 00000000..04606c01
---- /dev/null
-+++ ./wifi-auto-reconnect
-@@ -0,0 +1 @@
-+Subproject commit 04606c01bae1cd0b1786731076809f0c6da445d0
->>>>>>> origin/generate_files_proj
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 index 430298e0..cb9795ec 100755
 --- ./wifirc/autoconnect.sh
