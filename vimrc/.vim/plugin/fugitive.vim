@@ -47,6 +47,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkd :e
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkdo :execute s:Gkdo()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glf :execute s:Glf()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glg :execute s:Glg()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gme2 :execute s:Gme2(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gmet :execute s:Gmet()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
@@ -313,7 +314,7 @@ endfunction
 
 function! s:Gme2(args, ...) abort
     let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/gme2.sh ' . '"' .  a:args . '" 2>&1 | tee gme2.findresult'
+    exec '!~/loadrc/gitrc/gme2.sh ' . '"' .  a:args . '" 2>&1 | tee gme2.findresult'
     call OpenOrSwitch(worktree . '/' . 'gme2.findresult', 'vs')
 endfunction
 
@@ -428,7 +429,7 @@ function! s:Gdi2(...) abort
     endif
 
     let worktree = Cd2Worktree()
-    let output = 'gdi2.findresult'
+    let output = 'gdi2.runresult'
     let arg1 = (a:0 >= 1) ? a:1 : ''
     exec '!~/loadrc/gitrc/gdi2.sh ' . '"' .  arg1 . '"' . ' 2>&1 | tee ' . '"' .  output . '"'
     call OpenOrSwitch(output, 'vs')
@@ -774,7 +775,9 @@ function! s:Reapply() abort
     endif
 
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
+    let output = 'reapply.runresult'
+    exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"' . ' 2>&1 | tee ' . '"' .  output . '"' 
+    call OpenOrSwitch(output, 'vs')
     call s:Gs()
 endfunction
 
