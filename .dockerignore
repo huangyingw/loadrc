@@ -9,3 +9,7 @@
 *.md
 !README*.md
 README-secret.md
+
+*.diff
+*.findresult
+*.runresult
