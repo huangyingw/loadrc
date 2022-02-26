@@ -240,7 +240,7 @@ endfunction
 
 function! s:Gbig() abort
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/gbig.sh | tee gbil.log.runresult' 
+    exec '!~/loadrc/gitrc/gbig.sh | tee gbil.log.runresult'
     call OpenOrSwitch('gbil.log.runresult', 'vs')
 endfunction
 
@@ -582,11 +582,11 @@ function! s:SelectMove(...) abort
 
     if a:0 >= 1
         let b:output = expand("%:p") . '.runresult'
-        exec '!~/loadrc/bashrc/select_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '" 2>&1 | tee ' . b:output 
+        exec '!~/loadrc/bashrc/select_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '" 2>&1 | tee ' . b:output
         call OpenOrSwitch(b:output, 'vs')
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
 endfunction
 
 function! s:CatMove(...) abort
@@ -776,7 +776,7 @@ function! s:Reapply() abort
 
     let worktree = Cd2Worktree()
     let output = 'reapply.runresult'
-    exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"' . ' 2>&1 | tee ' . '"' .  output . '"' 
+    exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"' . ' 2>&1 | tee ' . '"' .  output . '"'
     call OpenOrSwitch(output, 'vs')
     call s:Gs()
 endfunction
