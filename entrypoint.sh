@@ -5,6 +5,5 @@ for ss in \
     findresult \
     git
 do
-    echo $ss
     find . -name \*.$ss\*
 done
