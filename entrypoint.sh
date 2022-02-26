@@ -1,6 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
-while true
-do
-    :
-done
+find . -type f -name \*.bak
+find . -type f -name \*.findresult
