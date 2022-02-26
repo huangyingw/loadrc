@@ -1,4 +1,5 @@
 #!/bin/bash
 
-find . -type f -name \*.bak
-find . -type f -name \*.findresult
+find . -name \*.bak
+find . -name \*.findresult
+find . -name \*.git\*
