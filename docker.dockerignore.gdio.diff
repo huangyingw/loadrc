@@ -27,29 +27,35 @@ index a327085e..812c6e14 100644
 -. $HOME/loadrc/.loadrc
 diff --git a/.dockerignore b/.dockerignore
 new file mode 100644
-index 00000000..109ecbb4
+index 00000000..35ff5e66
 --- /dev/null
 +++ ./.dockerignore
-@@ -0,0 +1,19 @@
-+# ignore .git and .cache folders
-+.git
-+.cache
-+
-+# ignore all *.class files in all folders, including build root
-+**/*.class
-+
-+# ignore all markdown files (md) beside all README*.md other than README-secret.md
-+*.md
-+!README*.md
-+README-secret.md
-+
-+*.bak
-+*.diff
-+*.findresult
-+*.runresult
-+*.tmp
+@@ -0,0 +1,10 @@
++**.cache
 +**.deps
-+.git*
++**/*.bak
++**/*.class
++**/*.diff
++**/*.findresult
++**/*.git**
++**/*.md
++**/*.runresult
++**/*.tmp
+diff --git a/install_cscope.sh b/.dockerignore.lsh
+similarity index 53%
+rename from install_cscope.sh
+rename to .dockerignore.lsh
+index 14d8f004..fec61aef 100755
+--- ./install_cscope.sh
++++ ./.dockerignore.lsh
+@@ -3,5 +3,5 @@ SCRIPT=$(realpath "$0")
+ SCRIPTPATH=$(dirname "$SCRIPT")
+ cd "$SCRIPTPATH"
+ 
+-git clone https://github.com/huangyingw/cscope.git
+-./cscope/build_pre.sh
++docker-compose build --no-cache
++docker-compose up --force-recreate
 diff --git a/.envrc b/.envrc
 index 47a567de..cbf2b86e 100755
 --- ./.envrc
@@ -446,26 +452,24 @@ index c7c0b3ff..88872777 100644
  . $HOME/loadrc/.loadrc
  setopt HIST_IGNORE_ALL_DUPS
 diff --git a/Dockerfile b/Dockerfile
-index 08e0c80b..da595527 100644
+index 08e0c80b..715a1c4b 100644
 --- ./Dockerfile
 +++ ./Dockerfile
-@@ -4,17 +4,13 @@ ENV DEBIAN_FRONTEND noninteractive
+@@ -3,18 +3,9 @@ FROM ubuntu:20.04
+ ENV DEBIAN_FRONTEND noninteractive
  WORKDIR /root/loadrc
  
- COPY ./*.sh /root/loadrc/
-+COPY ./bashrc/*.sh /root/loadrc/bashrc/
-+COPY ./gitrc/*.sh /root/loadrc/gitrc/
- COPY ./.ssh/id_* /root/.ssh/
+-COPY ./*.sh /root/loadrc/
+-COPY ./.ssh/id_* /root/.ssh/
++COPY ./ /root/loadrc/
  COPY ./entrypoint.sh /entrypoint.sh
--
+ 
 -RUN /root/loadrc/fix_resolvconf_in_docker.sh 
 -RUN /root/loadrc/install_prerequisite.sh
 -RUN chmod 400 /root/.ssh/id_rsa
 -RUN /root/loadrc/install_nvim_pre.sh
 -RUN /root/loadrc/install_cscope.sh
-+COPY ./cscope/ /root/loadrc/cscope/
-+COPY ./neovim/ /root/loadrc/neovim/
- 
+-
  # Clean up APT when done.
 -RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 -
@@ -1208,21 +1212,17 @@ index 1320581d..241a362f 100755
 +else
      reboot
 +fi
-diff --git a/install_cscope.sh b/bashrc/remove_path.sh
-old mode 100755
-new mode 100644
-similarity index 52%
-rename from install_cscope.sh
-rename to bashrc/remove_path.sh
-index 14d8f004..10e89a8a
---- ./install_cscope.sh
+diff --git a/bashrc/remove_path.sh b/bashrc/remove_path.sh
+new file mode 100644
+index 00000000..10e89a8a
+--- /dev/null
 +++ ./bashrc/remove_path.sh
-@@ -3,5 +3,4 @@ SCRIPT=$(realpath "$0")
- SCRIPTPATH=$(dirname "$SCRIPT")
- cd "$SCRIPTPATH"
- 
--git clone https://github.com/huangyingw/cscope.git
--./cscope/build_pre.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
 +export PATH=$(echo $PATH | tr ":" "\n" | grep -v "anaconda3" | tr "\n" ":")
 diff --git a/bashrc/rename.sh b/bashrc/rename.sh
 new file mode 100755
@@ -1481,7 +1481,7 @@ index 9d256165..00000000
 @@ -1 +0,0 @@
 -0 * * * * sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/crontabrc/.mini.cron b/crontabrc/.mini.cron
-index d8126721..1ed3b9fc 100644
+index d8126721..cb457176 100644
 --- ./crontabrc/.mini.cron
 +++ ./crontabrc/.mini.cron
 @@ -1,2 +1,4 @@
@@ -1489,7 +1489,7 @@ index d8126721..1ed3b9fc 100644
 -0 22-23,0-8 * * * /root/loadrc/crontabrc/mldonkey_start.sh
 +* * * * * /root/loadrc/transmissionrc/auto_restart.sh
 +*/30 * * * * /root/loadrc/transmissionrc/auto_reboot.sh
-+*/10 * * * * /root/loadrc/bashrc/retire_parts.sh >> /root/loadrc/retire_parts.log 2>&1
++* * * * * /root/loadrc/bashrc/retire_parts.sh >> /root/loadrc/retire_parts.log 2>&1
 diff --git a/crontabrc/install.sh b/crontabrc/install.sh
 index bb10bf3c..809eacb1 100755
 --- ./crontabrc/install.sh
@@ -1695,6 +1695,19 @@ index 4a15eb71..3be26073 100644
          environment:
              - FILENAME="~/.bashrc"
          command: /bin/sh -c "/entrypoint.sh 2>&1 | tee /var/logs/containner.log"
+diff --git a/docker-compose.yml.lsh b/docker-compose.yml.lsh
+new file mode 100755
+index 00000000..fec61aef
+--- /dev/null
++++ ./docker-compose.yml.lsh
+@@ -0,0 +1,7 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++docker-compose build --no-cache
++docker-compose up --force-recreate
 diff --git a/dockerrc/cleandocker.sh b/dockerrc/cleandocker.sh
 index dd7d981a..1d2d1267 100755
 --- ./dockerrc/cleandocker.sh
@@ -1733,6 +1746,27 @@ index 889b85af..a0cd5228 100755
 -  -it "$CONTAINERID" bash
 +docker exec -it "$CONTAINERID" zsh || \
 +    docker exec -it "$CONTAINERID" bash
+diff --git a/entrypoint.sh b/entrypoint.sh
+index b9afb9f0..2405fc43 100755
+--- ./entrypoint.sh
++++ ./entrypoint.sh
+@@ -1,5 +1,13 @@
+-#!/bin/zsh
+-while true
++#!/bin/bash
++
++for ss in \
++    bak \
++    findresult \
++    runresult \
++    deps \
++    diff \
++    cache \
++    git
+ do
+-    :
++    find . -name \*.$ss\*
+ done
 diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
 index 58429e06..51c59336 100755
 --- ./ffmpegrc/concat.sh
@@ -2967,11 +3001,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..6b0f5437
+index 00000000..1b433c9d
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 6b0f5437fb177b842ae0203d7677dd22b47b2744
++Subproject commit 1b433c9d435b0eb1d913998bedf5f6241e364c94
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4657,7 +4691,7 @@ index e0416589..00000000
 -
 -" }}}
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
-index 777cb3ad..e51bfe9b 100644
+index 777cb3ad..1b355b44 100644
 --- ./vimrc/.vimrc
 +++ ./vimrc/.vimrc
 @@ -28,7 +28,6 @@ inoremap { {}<LEFT>
@@ -4682,7 +4716,7 @@ index 777cb3ad..e51bfe9b 100644
  let g:phpfmt_autosave = 1
  let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
  
-@@ -277,3 +271,12 @@ let g:tex_flavor = 'latex'
+@@ -277,3 +271,14 @@ let g:tex_flavor = 'latex'
  " add @ to cfile handle
  set isfname+=@-@
  set history=10000
@@ -4695,6 +4729,8 @@ index 777cb3ad..e51bfe9b 100644
 +
 +" https://stackoverflow.com/questions/4642822/how-to-make-bashrc-aliases-available-within-a-vim-shell-command
 +" set shellcmdflag=-ic
++
++let g:BASH_AlsoBash = [ '*.lsh' ]
 diff --git a/vishrc/cat_play.sh b/vishrc/cat_play.sh
 index ed41d521..71bd07af 100755
 --- ./vishrc/cat_play.sh
