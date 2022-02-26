@@ -461,7 +461,7 @@ nnoremap H :call ShowVITAG()<cr>
 nnoremap F :call GetFirstColumnOfFile()<cr>
 nnoremap T :vs $HOME/all.proj<cr>
 nnoremap L :vs <C-R>"<cr>
-nnoremap <leader>r :call Reverse()<cr> 
+nnoremap <leader>r :call Reverse()<cr>
 map <F5> :call VRun()<cr><cr>
 map <F3> :call VDebug()<cr>
 " nnoremap gf gF<cr>
