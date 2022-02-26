@@ -1,5 +1,10 @@
 #!/bin/bash
 
-find . -name \*.bak
-find . -name \*.findresult
-find . -name \*.git\*
+for ss in \
+    bak \
+    findresult \
+    git
+do
+    echo $ss
+    find . -name \*.$ss\*
+done
