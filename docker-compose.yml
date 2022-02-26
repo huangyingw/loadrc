@@ -10,7 +10,6 @@ services:
             - ./.bashrc:/root/.bashrc
             - ./.zshrc:/root/.zshrc
             - ./oh-my-zsh:/root/.oh-my-zsh
-            - ./:/root/loadrc
             - ./vimrc/.vim:/root/.vim
             - ./vimrc/.vimrc:/root/.vimrc
             - ./.config/nvim/init.vim:/root/.config/nvim/init.vim
