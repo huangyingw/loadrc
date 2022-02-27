@@ -22,7 +22,7 @@ cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
 cp -nv ~/loadrc/prunefile_template.conf ./prunefile.conf
 cp -nv ~/loadrc/includefile_template.conf ./includefile.conf
 cp -nv ~/loadrc/setup.cfg ./setup.cfg
-TARGET=files.proj.bak
+TARGET=files.proj.tmp
 PRUNE_POSTFIX=prunefix.conf
 PRUNE_FILE=prunefile.conf
 INCLUDE_FILE=includefile.conf
