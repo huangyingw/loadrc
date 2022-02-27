@@ -186,7 +186,7 @@ function! GetFirstColumnOfFile()
     endif
 
     silent exec '!~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'
-    call OpenOrSwitch(expand("%:p") . '.bak', 'vs')
+    call OpenOrSwitch(expand("%:p") . '.tmp', 'vs')
 endfunction
 
 function! CSCSearch(num)
