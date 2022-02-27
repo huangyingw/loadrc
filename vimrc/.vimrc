@@ -280,3 +280,5 @@ endif
 
 " https://stackoverflow.com/questions/4642822/how-to-make-bashrc-aliases-available-within-a-vim-shell-command
 " set shellcmdflag=-ic
+
+let g:BASH_AlsoBash = [ '*.lsh' ]

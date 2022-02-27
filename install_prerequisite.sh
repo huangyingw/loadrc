@@ -13,7 +13,6 @@ apt-get install -y \
     cmake \
     coreutils \
     cryptsetup \
-    cscope \
     curl \
     datamash \
     dialog \

@@ -788,10 +788,10 @@ index 38fb060b..0390e708 100755
  find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
      cp -fv "$FAVLOG" fav.log && \
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
-index 83e2c748..19fda7d5 100755
+index 83e2c748..a194edb1 100755
 --- ./bashrc/generate_files_proj.sh
 +++ ./bashrc/generate_files_proj.sh
-@@ -15,6 +15,8 @@ then
+@@ -15,12 +15,14 @@ then
      exit 1
  fi
  
@@ -800,6 +800,13 @@ index 83e2c748..19fda7d5 100755
  TARGETEDIR=`realpath "$PWD"`
  cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
  cp -nv ~/loadrc/prunefile_template.conf ./prunefile.conf
+ cp -nv ~/loadrc/includefile_template.conf ./includefile.conf
+ cp -nv ~/loadrc/setup.cfg ./setup.cfg
+-TARGET=files.proj.bak
++TARGET=files.proj.tmp
+ PRUNE_POSTFIX=prunefix.conf
+ PRUNE_FILE=prunefile.conf
+ INCLUDE_FILE=includefile.conf
 @@ -45,16 +47,16 @@ done < "$INCLUDE_FILE"
  
  export LC_ALL=C
@@ -823,13 +830,28 @@ index 83e2c748..19fda7d5 100755
          cp -fv "$TARGET" files.proj && \
          echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
          sort -u ~/all.proj -o ~/all.proj
+diff --git a/bashrc/generate_rsync_files.sh b/bashrc/generate_rsync_files.sh
+index d5360ed8..c1186f5e 100755
+--- ./bashrc/generate_rsync_files.sh
++++ ./bashrc/generate_rsync_files.sh
+@@ -1,6 +1,6 @@
+ #!/bin/zsh
+ 
+-rsyncFiles=rsync.files.bak
++rsyncFiles=rsync.files.tmp
+ cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > "$rsyncFiles"
+ PRUNE_POSTFIX=prunefix.rsync
+ INCLUDE_FILE=includefile.rsync
 diff --git a/bashrc/get_first_column_of_file.sh b/bashrc/get_first_column_of_file.sh
-index 7b83d343..d1f2c94c 100755
+index 7b83d343..31d5756a 100755
 --- ./bashrc/get_first_column_of_file.sh
 +++ ./bashrc/get_first_column_of_file.sh
-@@ -9,6 +9,6 @@ fi
+@@ -7,8 +7,8 @@ then
+ fi
+ 
  inputFile="$1"
- inputBak="$inputFile".bak
+-inputBak="$inputFile".bak
++inputBak="$inputFile".tmp
  awk -F":| " '{print $1}' "$inputFile" > "$inputBak"
 -sed -i '/^$/d' "$inputBak"
 +sed -i.bak "/^$/d" "$inputBak"
@@ -1951,6 +1973,20 @@ index e118a4de..e1f58816 100755
  git remote remove origin ; \
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
+diff --git a/gitrc/gcof.sh b/gitrc/gcof.sh
+index f39831a0..2d2c05ef 100755
+--- ./gitrc/gcof.sh
++++ ./gitrc/gcof.sh
+@@ -3,7 +3,7 @@
+ commit=`git rev-list --branches -n 1 HEAD -- "$1"`
+ if [ -z "$2" ]
+ then
+-    git show HEAD:"$1" > "$1".bak
++    git show HEAD:"$1" > "$1".tmp
+ else
+-    git show "$2":"$1" > "$1".bak
++    git show "$2":"$1" > "$1".tmp
+ fi
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 new file mode 100755
 index 00000000..f43af40a
@@ -2264,7 +2300,7 @@ index 3bd9b5b1..08477d81 100755
  ~/loadrc/gitrc/gsync.sh
 +~/loadrc/bashrc/update_proj.sh
 diff --git a/gitrc/reapply.sh b/gitrc/reapply.sh
-index d1ffbd95..46fa0bb5 100755
+index d1ffbd95..2147c2c7 100755
 --- ./gitrc/reapply.sh
 +++ ./gitrc/reapply.sh
 @@ -1,12 +1,10 @@
@@ -2280,9 +2316,9 @@ index d1ffbd95..46fa0bb5 100755
 -then
 -    git add "$CURRET_BRANCH_DIFF"
 -fi
-+cp -fv "$DIFF" "$DIFF".bak
++cp -fv "$DIFF" "$DIFF".tmp
 +~/loadrc/gitrc/restore.sh
-+cp -fv "$DIFF".bak "$DIFF"
++cp -fv "$DIFF".tmp "$DIFF"
 +
 +git apply --reject --whitespace=fix --recount "$DIFF" || \
 +    echo "git apply failed" && \
@@ -2741,6 +2777,19 @@ index 298b6bc4..817072f6 100755
  locale-gen en_US.UTF-8
 -
 -./install_hub.sh
+diff --git a/kvmrc/vshrink.sh b/kvmrc/vshrink.sh
+index e721fccd..9a7739dd 100755
+--- ./kvmrc/vshrink.sh
++++ ./kvmrc/vshrink.sh
+@@ -6,7 +6,7 @@ then
+ fi
+ 
+ TARGET=$(realpath "$1")
+-BAK="$TARGET".bak
++BAK="$TARGET".tmp
+ 
+ mv -v "$TARGET" "$BAK" \
+     && qemu-img convert -O qcow2 -c "$BAK" "$TARGET" \
 diff --git a/leetcoderc/do_post_submit.sh b/leetcoderc/do_post_submit.sh
 new file mode 100755
 index 00000000..09669214
@@ -2982,11 +3031,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..3ffc0112
+index 00000000..8f09348d
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 3ffc01123797f930bc38627557f26e5c24cbd6a5
++Subproject commit 8f09348d95ebf98cca4010b0f43fc45142ac21dd
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3611,7 +3660,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..ae61a84c 100644
+index d5874fe5..3c9dd53c 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,17 @@
@@ -3707,7 +3756,13 @@ index d5874fe5..ae61a84c 100644
      endif
  endfunction
  
-@@ -207,7 +212,8 @@ endfunction
+@@ -202,12 +207,13 @@ function! s:Gcof(...) abort
+     let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
+     let arg1 = (a:0 >= 1) ? a:1 : ''
+     silent exec '!~/loadrc/gitrc/gcof.sh ' . '"' .  b:relativePath . '" "' .  arg1 . '"'
+-    call OpenOrSwitch(expand('%:p') . '.bak', 'vs')
++    call OpenOrSwitch(expand('%:p') . '.tmp', 'vs')
+ endfunction
  
  function! s:Gpl() abort
      let worktree = Cd2Worktree()
@@ -3996,7 +4051,7 @@ index d5874fe5..ae61a84c 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..a59df863 100644
+index 5fd4a230..695e4cfe 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -77,8 +77,17 @@ function! VFilter()
@@ -4043,14 +4098,17 @@ index 5fd4a230..a59df863 100644
      else
          call OpenOrSwitch('gbil.log', 'vs')
      endif
-@@ -172,7 +185,6 @@ function! GetFirstColumnOfFile()
+@@ -172,9 +185,8 @@ function! GetFirstColumnOfFile()
          return 0
      endif
  
 -    let bak_file = substitute(system('~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'), '\n', '', '')
      silent exec '!~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'
-     call OpenOrSwitch(expand("%:p") . '.bak', 'vs')
+-    call OpenOrSwitch(expand("%:p") . '.bak', 'vs')
++    call OpenOrSwitch(expand("%:p") . '.tmp', 'vs')
  endfunction
+ 
+ function! CSCSearch(num)
 @@ -233,9 +245,9 @@ function! OpenAll()
          let line = substitute(line, '"', '', "g")
          exec 'vs ' . currentDir . '/' . line
@@ -4807,7 +4865,7 @@ index e14de500..b8784f97 100755
              SCRIPT=$(realpath "$file")
              SCRIPTPATH=$(dirname "$SCRIPT")
 diff --git a/vishrc/vsearch.sh b/vishrc/vsearch.sh
-index 48f7223b..8124da7e 100755
+index 48f7223b..7134d738 100755
 --- ./vishrc/vsearch.sh
 +++ ./vishrc/vsearch.sh
 @@ -9,3 +9,10 @@ then
@@ -4819,8 +4877,8 @@ index 48f7223b..8124da7e 100755
 +# awk 'BEGIN {FS=OFS=":"}{if(NF>1)gsub(" ","\\ ",$1)}1' "$find_result" > "$find_result".bak
 +# perl -pe 's/\G[^ :]*\K /\\ /g' "$find_result" > "$find_result".bak
 +# sed -i.bak -E 's/:/\n:/;h;s/ /\\ /g;G;s/\n.*\n//' "$find_result"
-+awk 'BEGIN {FS=OFS=":"}{if(NF>1)gsub(" ","\\ ",$1)}1' "$find_result" > "$find_result".bak
-+cp -fv "$find_result".bak "$find_result"
++awk 'BEGIN {FS=OFS=":"}{if(NF>1)gsub(" ","\\ ",$1)}1' "$find_result" > "$find_result".tmp
++cp -fv "$find_result".tmp "$find_result"
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
 index 00000000..a30c815b
