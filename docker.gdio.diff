@@ -684,6 +684,19 @@ index 37081d0c..3867ab7b 100755
  DEVICE=`mdadm -D --scan|awk '{print $2}'`
  mdadm -D "$DEVICE" >> "$logFile"
  blkid >> "$logFile"
+diff --git a/bashrc/fdocs.sh b/bashrc/fdocs.sh
+index bee84cf0..2ed8004b 100755
+--- ./bashrc/fdocs.sh
++++ ./bashrc/fdocs.sh
+@@ -2,7 +2,7 @@
+ 
+ FdocsInclude="fdocs.include"
+ FdocsExclude="fdocs.exclude"
+-TARGET="fdocs.list.bak"
++TARGET="fdocs.list.tmp"
+ 
+ if [ ! -f "$FdocsInclude" ] || [ ! -f "$FdocsExclude" ]
+ then
 diff --git a/bashrc/file_move.sh b/bashrc/file_move.sh
 new file mode 100755
 index 00000000..889a9697
@@ -3302,12 +3315,12 @@ index 0c22efb1..00000000
 @@ -1 +0,0 @@
 -Subproject commit 0c22efb1b919573f69ec237e7a8ab7ca1c1ecc03
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..ac084414 160000
+index 2b1dca6c..4b537fa0 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
++Subproject commit 4b537fa01c28f2f7cf249722530561d2e477b49f
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
 index cc6342c3..b629be02 160000
 --- ./vimrc/.vim/bundle/python-mode
