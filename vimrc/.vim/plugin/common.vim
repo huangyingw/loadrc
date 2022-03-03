@@ -156,7 +156,7 @@ function! OpenOrSwitch(buffername, openMode, ...)
     elseif a:openMode ==? "goto"
         silent exec 'e ' . a:buffername . l:line_num
     else
-        silent exec topleft . ' vs ' . a:buffername . l:line_num
+        silent exec ' vs ' . a:buffername . l:line_num
     endif
 endfunction
 
