@@ -42,5 +42,5 @@ if [ $result -gt 0 ]
 then
     /usr/bin/find /var/lib/transmission-daemon/ -type f -mtime +$right -name \*.part -delete
 else
-    /usr/bin/find /var/lib/transmission-daemon/ -type f -mtime +$left -name \*.part -delete 
+    /usr/bin/find /var/lib/transmission-daemon/ -type f -mtime +$left -name \*.part -delete
 fi

@@ -19,7 +19,7 @@ else
         coreutils \
         python
     brew reinstall python
-    sudo pip3 install pynvim jedi 
+    sudo pip3 install pynvim jedi
     #brew install --with-toolchain --with-clang llvm
 fi
 

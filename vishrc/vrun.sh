@@ -21,7 +21,7 @@ rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$file" "files.proj")
 rfile=$(realpath --relative-to="$rootFolder" "$file")
 rfolder=$(realpath --relative-to="$rootFolder" $(dirname "$file"))
 
-if [[ "$file" = *'Dockerfile'* ]] 
+if [[ "$file" = *'Dockerfile'* ]]
 then
     cd "$rootFolder"
     docker build -f "$rfile" "$rfolder"

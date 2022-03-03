@@ -1593,12 +1593,12 @@ index 00000000..f90514ae
 +
 +sudo /usr/bin/osascript -e "set Volume 0"
 diff --git a/cscope b/cscope
-index 18a46b20..41fab780 160000
+index 18a46b20..d153a8d8 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 41fab780d1ca14aad7467436000b0a8ec550c09f
++Subproject commit d153a8d8ad751d805d7efb05bbe2523d9164674b
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -2472,24 +2472,6 @@ index 00000000..ce55630d
 @@ -0,0 +1 @@
 +7400d3ebd5:0:3aa5d438010e88845739f49f4ca3a14772bdd7aa6f57467dfd1909e25fb8be0f835e54a8d7a571d0bddf8d7113936e69ac70f0b08136e810f63515a54db2b69d:7937cc458423352fe676c08d916a0e2aa8f4a253f1396e77ad0bc86800e2a1c883b29c48e92569307a620c5704659320e9063801c10e44ee27ca4b94d42960bc
 \ No newline at end of file
-diff --git a/hosts/server/var/lib/zerotier-one/identity.public b/hosts/server/var/lib/zerotier-one/identity.public
-index 55095016..d55d1f79 100644
---- ./hosts/server/var/lib/zerotier-one/identity.public
-+++ ./hosts/server/var/lib/zerotier-one/identity.public
-@@ -1 +1 @@
--8c46ba67a4:0:a54497263ef29871dba220fc69ec8daeb68d76a9b587b4db8d094e63cd1e9c156a47c76b5a31dfc66299627de77ab228aebaf2739d12a883019b03bcc0882675
-\ No newline at end of file
-+ed0979a312:0:5d0f17fa53c4e624bdfdeaaf7860a0fcbf252acaf54e87c5603a9369ab50a32f0a582d713b3e5bdb8080f90ecc5e1970fcb04b2820fa4d40ba779e67e3fd882f
-\ No newline at end of file
-diff --git a/hosts/server/var/lib/zerotier-one/identity.secret b/hosts/server/var/lib/zerotier-one/identity.secret
-index 5882ce82..4419cb23 100644
---- ./hosts/server/var/lib/zerotier-one/identity.secret
-+++ ./hosts/server/var/lib/zerotier-one/identity.secret
-@@ -1 +1 @@
--8c46ba67a4:0:a54497263ef29871dba220fc69ec8daeb68d76a9b587b4db8d094e63cd1e9c156a47c76b5a31dfc66299627de77ab228aebaf2739d12a883019b03bcc0882675:eae5d5401d9ef83b4430595dd0a9c82f0d3b7315c7f61cdfd4ebe844ae91bffe2346e4bee9dd87edcc0506976c596a6011f4c707f7cc0efd4e17026f258cbc32
-\ No newline at end of file
-+ed0979a312:0:5d0f17fa53c4e624bdfdeaaf7860a0fcbf252acaf54e87c5603a9369ab50a32f0a582d713b3e5bdb8080f90ecc5e1970fcb04b2820fa4d40ba779e67e3fd882f:ffb437eb0000527c0f08affec246e50d2a19a02d2a91fb712ca8abccd2230ea6ce05732e1ca23e16a89cff60fc23f5d9ca7bf1c9e4d9f8feadfe632366dcdf45
-\ No newline at end of file
 diff --git a/hosts/u2004/var/lib/zerotier-one/identity.public b/hosts/u2004/var/lib/zerotier-one/identity.public
 new file mode 100644
 index 00000000..0cd205f6
@@ -3049,11 +3031,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..6f30242c
+index 00000000..8f09348d
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 6f30242ceb559fb9d1ad9b7c1a0cf811b91987eb-dirty
++Subproject commit 8f09348d95ebf98cca4010b0f43fc45142ac21dd
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3394,14 +3376,14 @@ index cc6342c3..b629be02 160000
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit b629be0234f5cc7cdb2b2f7172eb11e72c9ff8e3-dirty
++Subproject commit b629be0234f5cc7cdb2b2f7172eb11e72c9ff8e3
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
-index 7ef452b4..3f1c8e29 160000
+index 7ef452b4..478e1181 160000
 --- ./vimrc/.vim/bundle/swift.vim
 +++ ./vimrc/.vim/bundle/swift.vim
 @@ -1 +1 @@
 -Subproject commit 7ef452b47f14a2bfed26324793777cf12d2a8d78
-+Subproject commit 3f1c8e297fcfb2e2a322142e89126dc26baff7b7
++Subproject commit 478e11812f3ddb1778918bd243d8b27c9984ab26
 diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
 index 2d520bdf..f4ec3e57 160000
 --- ./vimrc/.vim/bundle/tig-explorer.vim
@@ -3445,12 +3427,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..cb7c8740 160000
+index 8468d6a8..6fb60ba0 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit cb7c874013267e9b22cfc74b925fd477e3c8b068-dirty
++Subproject commit 6fb60ba0f00659c69afa3d511ad65383adab1b4f
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -3523,7 +3505,7 @@ index 00000000..dfb309e2
 +set shortmess+=A
 +command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
-index 63869eb8..939c10a2 100644
+index 63869eb8..8e6ef513 100644
 --- ./vimrc/.vim/plugin/common.vim
 +++ ./vimrc/.vim/plugin/common.vim
 @@ -138,17 +138,25 @@ function! GetWorktree()
@@ -3551,7 +3533,7 @@ index 63869eb8..939c10a2 100644
 +        silent exec 'e ' . a:buffername . l:line_num
      else
 -        silent exec 'topleft vs ' . a:buffername
-+        silent exec ' vs ' . a:buffername . l:line_num
++        silent exec topleft . ' vs ' . a:buffername . l:line_num
      endif
  endfunction
  
@@ -4899,11 +4881,11 @@ index 48f7223b..7134d738 100755
 +cp -fv "$find_result".tmp "$find_result"
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
-index 00000000..04606c01
+index 00000000..a30c815b
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
-+Subproject commit 04606c01bae1cd0b1786731076809f0c6da445d0
++Subproject commit a30c815b53b8fa0f0ca23680f5671deda334cacd
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 index 430298e0..cb9795ec 100755
 --- ./wifirc/autoconnect.sh
