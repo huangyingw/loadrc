@@ -2,7 +2,7 @@
 
 FdocsInclude="fdocs.include"
 FdocsExclude="fdocs.exclude"
-TARGET="fdocs.list.bak"
+TARGET="fdocs.list.tmp"
 
 if [ ! -f "$FdocsInclude" ] || [ ! -f "$FdocsExclude" ]
 then

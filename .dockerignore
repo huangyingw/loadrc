@@ -1,0 +1,10 @@
+**.cache
+**.deps
+**/*.bak
+**/*.class
+**/*.diff
+**/*.findresult
+**/*.git**
+**/*.md
+**/*.runresult
+**/*.tmp

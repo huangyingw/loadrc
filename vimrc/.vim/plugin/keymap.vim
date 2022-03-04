@@ -186,7 +186,7 @@ function! GetFirstColumnOfFile()
     endif
 
     silent exec '!~/loadrc/bashrc/get_first_column_of_file.sh ' . '"' .  expand("%:p") . '"'
-    call OpenOrSwitch(expand("%:p") . '.bak', 'vs')
+    call OpenOrSwitch(expand("%:p") . '.tmp', 'vs')
 endfunction
 
 function! CSCSearch(num)
@@ -448,7 +448,7 @@ nmap <C-@> :call CSCSearch(4)<cr>
 nmap <C-f> :call CSCSearch(7)<cr>
 nmap <C-e> :call CSCSearch(1)<cr>
 nmap <C-g> :call CSCSearch(3)<cr>
-nnoremap <leader>d :!rm %:p<CR>:q<cr>
+nnoremap <leader>d :!rm "%:p"<CR>:q<cr>
 nmap <C-j> :call PlayVideo()<cr>
 nmap <C-p> :call Prune()<cr>
 nmap <C-k> :call KdiffAll()<cr>
@@ -461,7 +461,7 @@ nnoremap H :call ShowVITAG()<cr>
 nnoremap F :call GetFirstColumnOfFile()<cr>
 nnoremap T :vs $HOME/all.proj<cr>
 nnoremap L :vs <C-R>"<cr>
-nnoremap <leader>r :call Reverse()<cr> 
+nnoremap <leader>r :call Reverse()<cr>
 map <F5> :call VRun()<cr><cr>
 map <F3> :call VDebug()<cr>
 " nnoremap gf gF<cr>

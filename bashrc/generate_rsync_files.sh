@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-rsyncFiles=rsync.files.bak
+rsyncFiles=rsync.files.tmp
 cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > "$rsyncFiles"
 PRUNE_POSTFIX=prunefix.rsync
 INCLUDE_FILE=includefile.rsync

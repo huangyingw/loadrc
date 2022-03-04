@@ -47,6 +47,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkd :e
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkdo :execute s:Gkdo()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glf :execute s:Glf()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glg :execute s:Glg()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gme2 :execute s:Gme2(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gmet :execute s:Gmet()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
@@ -206,7 +207,7 @@ function! s:Gcof(...) abort
     let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
     let arg1 = (a:0 >= 1) ? a:1 : ''
     silent exec '!~/loadrc/gitrc/gcof.sh ' . '"' .  b:relativePath . '" "' .  arg1 . '"'
-    call OpenOrSwitch(expand('%:p') . '.bak', 'vs')
+    call OpenOrSwitch(expand('%:p') . '.tmp', 'vs')
 endfunction
 
 function! s:Gpl() abort
@@ -239,7 +240,7 @@ endfunction
 
 function! s:Gbig() abort
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/gbig.sh | tee gbil.log.runresult' 
+    exec '!~/loadrc/gitrc/gbig.sh | tee gbil.log.runresult'
     call OpenOrSwitch('gbil.log.runresult', 'vs')
 endfunction
 
@@ -313,7 +314,7 @@ endfunction
 
 function! s:Gme2(args, ...) abort
     let worktree = Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/gme2.sh ' . '"' .  a:args . '" 2>&1 | tee gme2.findresult'
+    exec '!~/loadrc/gitrc/gme2.sh ' . '"' .  a:args . '" 2>&1 | tee gme2.findresult'
     call OpenOrSwitch(worktree . '/' . 'gme2.findresult', 'vs')
 endfunction
 
@@ -428,7 +429,7 @@ function! s:Gdi2(...) abort
     endif
 
     let worktree = Cd2Worktree()
-    let output = 'gdi2.findresult'
+    let output = 'gdi2.runresult'
     let arg1 = (a:0 >= 1) ? a:1 : ''
     exec '!~/loadrc/gitrc/gdi2.sh ' . '"' .  arg1 . '"' . ' 2>&1 | tee ' . '"' .  output . '"'
     call OpenOrSwitch(output, 'vs')
@@ -581,11 +582,11 @@ function! s:SelectMove(...) abort
 
     if a:0 >= 1
         let b:output = expand("%:p") . '.runresult'
-        exec '!~/loadrc/bashrc/select_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '" 2>&1 | tee ' . b:output 
+        exec '!~/loadrc/bashrc/select_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '" 2>&1 | tee ' . b:output
         call OpenOrSwitch(b:output, 'vs')
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
 endfunction
 
 function! s:CatMove(...) abort
@@ -774,7 +775,9 @@ function! s:Reapply() abort
     endif
 
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"'
+    let output = 'reapply.runresult'
+    exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"' . ' 2>&1 | tee ' . '"' .  output . '"'
+    call OpenOrSwitch(output, 'vs')
     call s:Gs()
 endfunction
 

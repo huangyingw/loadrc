@@ -583,17 +583,19 @@ index 09330daf..27614698 100755
 +    "$iconvs" \
 +    "$rsyncpath" \
 +    "$source/" "$target/"
-diff --git a/bashrc/copy.test.sh b/bashrc/copy.test.sh
-new file mode 100755
-index 00000000..83b0bbaf
---- /dev/null
+diff --git a/nxrc/install.sh b/bashrc/copy.test.sh
+similarity index 60%
+rename from nxrc/install.sh
+rename to bashrc/copy.test.sh
+index 2c4bf8d7..83b0bbaf 100755
+--- ./nxrc/install.sh
 +++ ./bashrc/copy.test.sh
-@@ -0,0 +1,6 @@
-+#!/bin/zsh
-+SCRIPT=$(realpath "$0")
-+SCRIPTPATH=$(dirname "$SCRIPT")
-+cd "$SCRIPTPATH"
-+
+@@ -3,5 +3,4 @@ SCRIPT=$(realpath "$0")
+ SCRIPTPATH=$(dirname "$SCRIPT")
+ cd "$SCRIPTPATH"
+ 
+-. ~/loadrc/.loadrc
+-dpkg -i $SOFTWARE/nx/nomachine_*.deb
 +./copy.sh ~/loadrc/ ~/loadrc.bak/
 diff --git a/bashrc/cutcommon.sh b/bashrc/cutcommon.sh
 new file mode 100755
@@ -1425,14 +1427,14 @@ index 9d256165..00000000
 @@ -1 +0,0 @@
 -0 * * * * sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 diff --git a/crontabrc/.mini.cron b/crontabrc/.mini.cron
-index d8126721..c3db43ec 100644
+index d8126721..1ed3b9fc 100644
 --- ./crontabrc/.mini.cron
 +++ ./crontabrc/.mini.cron
 @@ -1,2 +1,4 @@
  */10 * * * * /usr/bin/expressvpn connect smart
 -0 22-23,0-8 * * * /root/loadrc/crontabrc/mldonkey_start.sh
 +* * * * * /root/loadrc/transmissionrc/auto_restart.sh
-+*/10 * * * * /root/loadrc/transmissionrc/auto_reboot.sh
++*/30 * * * * /root/loadrc/transmissionrc/auto_reboot.sh
 +*/10 * * * * /root/loadrc/bashrc/retire_parts.sh >> /root/loadrc/retire_parts.log 2>&1
 diff --git a/crontabrc/install.sh b/crontabrc/install.sh
 index bb10bf3c..809eacb1 100755
@@ -2114,16 +2116,17 @@ index 1de7ff41..00000000
 -    git reset HEAD $conflict
 -done
 diff --git a/gitrc/gsearch.sh b/gitrc/gsearch.sh
-index b3980c8a..1b8ca893 100755
+index b3980c8a..83058fc5 100755
 --- ./gitrc/gsearch.sh
 +++ ./gitrc/gsearch.sh
-@@ -1,4 +1,3 @@
+@@ -1,4 +1,4 @@
  #!/bin/zsh
 -find_result="$2".gsearch.findresult
 -echo "find_result --> $find_result"
 -git grep -nH -C2 "$1" $(git rev-list --all) &> "$find_result"
 +
 +git log --binary --ignore-all-space --ignore-blank-lines --ignore-cr-at-eol --ignore-space-at-eol --ignore-space-change -p -G "$1" &> "$2"
++# git log --binary --ignore-all-space --ignore-blank-lines --ignore-cr-at-eol --ignore-space-at-eol --ignore-space-change -p master -G "property\(" --author="Ying Huang <yhuang@imvu.com>" --since="2017-08-15" -- rest/service > diff1.log
 diff --git a/gitrc/gshow.sh b/gitrc/gshow.sh
 index 06604af2..0a925ad8 100755
 --- ./gitrc/gshow.sh
@@ -2409,10 +2412,10 @@ index 34269226..a8a824c3 100755
  ./install_time_machine.sh
  ./enpass_install.sh
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 62d92acb..73a896a7 100755
+index 62d92acb..3a706ab9 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
-@@ -8,14 +8,22 @@ then
+@@ -8,15 +8,24 @@ then
      exit 0
  fi
  
@@ -2435,9 +2438,11 @@ index 62d92acb..73a896a7 100755
 +    brightness \
 +    clipper \
      coreutils \
++    dialog \
      dos2unix \
      ffmpeg \
-@@ -33,17 +41,18 @@ brew install \
+     git \
+@@ -33,17 +42,18 @@ brew install \
      libtool \
      lynx \
      minikube \
@@ -2839,11 +2844,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..a99e9b77
+index 00000000..6207621a
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit a99e9b77f29a6500213ab8976e676e6ff4c7c6da
++Subproject commit 6207621a4be484ebd5d1700e707e04878331ba33-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -2910,16 +2915,17 @@ index 00000000..80d3b345
 +#!/bin/sh
 +nc localhost 2225
 diff --git a/post_setup.sh b/post_setup.sh
-index 2cc2f2d0..f052ae63 100755
+index 2cc2f2d0..c9969cf8 100755
 --- ./post_setup.sh
 +++ ./post_setup.sh
-@@ -7,4 +7,6 @@ if [ $(uname) = "Darwin" ]
+@@ -7,4 +7,7 @@ if [ $(uname) = "Darwin" ]
  then
      ./bashrc/update_proj.sh
  fi
 +
  ./gitrc/gclean.sh
 +chown $(whoami) -R ~/loadrc/oh-my-zsh/
++chown $(whoami) ~/.ssh/config
 diff --git a/prunefile_template.conf b/prunefile_template.conf
 index 8e34f2fa..9deeb31c 100644
 --- ./prunefile_template.conf
@@ -2956,7 +2962,7 @@ index cf9a010a..26f18169 100755
  ./macosrc/configure_mosh.sh
 +# ./macosrc/configure_ssh.sh
 diff --git a/setup.sh b/setup.sh
-index cc9fd3f1..608329fd 100755
+index cc9fd3f1..ef482d0f 100755
 --- ./setup.sh
 +++ ./setup.sh
 @@ -1,4 +1,4 @@
@@ -2965,6 +2971,15 @@ index cc9fd3f1..608329fd 100755
  SCRIPT=$(realpath "$0") && \
      SCRIPTPATH=$(dirname "$SCRIPT") && \
      cd "$SCRIPTPATH" || cd ~/loadrc/
+@@ -9,7 +9,7 @@ SCRIPT=$(realpath "$0") && \
+ ./gpurc/install.sh
+ ./install_vagrant.sh
+ ./install_flacon.sh
+-./cscope/build.sh
++./cscope/install-sh.sh
+ ./jdupes/install.sh
+ ./submodule_setup.sh
+ ./kvmrc/install.sh
 diff --git a/setup_bidirectional_clipboard.sh b/setup_bidirectional_clipboard.sh
 new file mode 100755
 index 00000000..93d8270a
@@ -3148,12 +3163,12 @@ index 2b1dca6c..ac084414 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit ac084414cf1e0de86f5abaab6269b940806e8c6e
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..7b5f7671 160000
+index cc6342c3..7140ca28 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 7b5f7671b61c802a0321cda6654bcd98fb746e07
++Subproject commit 7140ca2885a2fb304ca618a212066aed43475c4f
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..478e1181 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -3204,12 +3219,12 @@ index 00000000..0a6ab17e
 @@ -0,0 +1 @@
 +Subproject commit 0a6ab17e84c7f4808bf05ec380121bce40b40d21
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..7339c37d 160000
+index 8468d6a8..84c7d813 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 7339c37d9cb3810568ce873315b341f83ed8f34e
++Subproject commit 84c7d8138609fbed15a0bcb2ebcc6ee71bd2910f-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -3800,7 +3815,7 @@ index d5874fe5..e5091a76 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..ef260d45 100644
+index 5fd4a230..417cb7c7 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -77,8 +77,17 @@ function! VFilter()
@@ -3939,6 +3954,15 @@ index 5fd4a230..ef260d45 100644
  nnoremap mg :call VFilter()<cr>
  nnoremap me :call ExtractHighLight()<cr>
  nnoremap mf :call ExFilter()<cr>
+@@ -462,7 +448,7 @@ nmap <C-@> :call CSCSearch(4)<cr>
+ nmap <C-f> :call CSCSearch(7)<cr>
+ nmap <C-e> :call CSCSearch(1)<cr>
+ nmap <C-g> :call CSCSearch(3)<cr>
+-nnoremap <leader>d :!rm %:p<CR>:q<cr>
++nnoremap <leader>d :!rm "%:p"<CR>:q<cr>
+ nmap <C-j> :call PlayVideo()<cr>
+ nmap <C-p> :call Prune()<cr>
+ nmap <C-k> :call KdiffAll()<cr>
 @@ -475,7 +461,8 @@ nnoremap H :call ShowVITAG()<cr>
  nnoremap F :call GetFirstColumnOfFile()<cr>
  nnoremap T :vs $HOME/all.proj<cr>
@@ -4616,11 +4640,11 @@ index 48f7223b..d2da8f4c 100755
 +cp -fv "$find_result".bak "$find_result"
 diff --git a/wifi-auto-reconnect b/wifi-auto-reconnect
 new file mode 160000
-index 00000000..a30c815b
+index 00000000..04606c01
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
-+Subproject commit a30c815b53b8fa0f0ca23680f5671deda334cacd
++Subproject commit 04606c01bae1cd0b1786731076809f0c6da445d0
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 index 430298e0..cb9795ec 100755
 --- ./wifirc/autoconnect.sh

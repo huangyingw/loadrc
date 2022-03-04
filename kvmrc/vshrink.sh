@@ -6,7 +6,7 @@ then
 fi
 
 TARGET=$(realpath "$1")
-BAK="$TARGET".bak
+BAK="$TARGET".tmp
 
 mv -v "$TARGET" "$BAK" \
     && qemu-img convert -O qcow2 -c "$BAK" "$TARGET" \

@@ -13,7 +13,6 @@ apt-get install -y \
     cmake \
     coreutils \
     cryptsetup \
-    cscope \
     curl \
     datamash \
     dialog \
@@ -25,6 +24,7 @@ apt-get install -y \
     git \
     git-gui \
     gparted \
+    hashcat \
     hfsprogs \
     htop \
     inetutils-traceroute \
