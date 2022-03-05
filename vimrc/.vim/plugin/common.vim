@@ -142,17 +142,10 @@ function! OpenOrSwitch(buffername, openMode, ...)
     let topleft = (a:0 >= 1) ? a:1 : 'topleft'
     let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
     let bnr = bufwinnr('^' . realpath . '$')
-    let l:line   = getline(line('.'))
-    let l:pattern = '\m\%(:\d\+\)\{1,2}'
-    let l:line_num= matchstr(l:line, l:pattern)
 
     if bnr > 0
         exe bnr . "wincmd w"
-        if l:line_num != ''
-            call fetch#cfile(a:buffername, 'e')
-        else
-            call fetch#cfile(a:buffername, 'e')
-        endif
+        call fetch#cfile(a:buffername, 'e')
     elseif a:openMode ==? "goto"
         call fetch#cfile(a:buffername, 'e')
     else
