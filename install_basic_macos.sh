@@ -43,9 +43,10 @@ brew install \
     lynx \
     minikube \
     openssl \
+    patchutils \
+    pv \
     rename \
     rsync \
-    patchutils \
     sponge \
     tig \
     w3m \
