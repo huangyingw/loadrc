@@ -149,14 +149,14 @@ function! OpenOrSwitch(buffername, openMode, ...)
     if bnr > 0
         exe bnr . "wincmd w"
         if l:line_num != ''
-            exec 'e' . '+' . l:line_num
+            call fetch#cfile(a:buffername, 'e')
         else
-            exec 'e'
+            call fetch#cfile(a:buffername, 'e')
         endif
     elseif a:openMode ==? "goto"
-        silent exec 'e ' . a:buffername . l:line_num
+        call fetch#cfile(a:buffername, 'e')
     else
-        silent exec ' vs ' . a:buffername . l:line_num
+        call fetch#cfile(a:buffername, 'vs')
     endif
 endfunction
 
