@@ -66,7 +66,7 @@ index 5ed35a81..0ea38ff6 100644
      allow = true
  [branch "dev"]
 diff --git a/.gitmodules b/.gitmodules
-index e17f9887..7be11b3d 100644
+index e17f9887..0cc77eb1 100644
 --- ./.gitmodules
 +++ ./.gitmodules
 @@ -133,10 +133,6 @@
@@ -80,7 +80,7 @@ index e17f9887..7be11b3d 100644
  [submodule "vimrc/.vim/bundle/vimtex"]
      path = vimrc/.vim/bundle/vimtex
      url = https://github.com/lervag/vimtex
-@@ -231,3 +227,15 @@
+@@ -231,3 +227,16 @@
  [submodule "vimrc/.vim/bundle/bclose.vim"]
      path = vimrc/.vim/bundle/bclose.vim
      url = git@github.com:rbgrouleff/bclose.vim.git
@@ -93,6 +93,7 @@ index e17f9887..7be11b3d 100644
 +[submodule "vimrc/.vim/bundle/vim-fetch"]
 +	path = vimrc/.vim/bundle/vim-fetch
 +	url = git@github.com:huangyingw/vim-fetch.git
++    branch = OpenOrSwitch
 +[submodule "wifi-auto-reconnect"]
 +	path = wifi-auto-reconnect
 +	url = git@github.com:huangyingw/martinsoft_wifi-auto-reconnect.git
@@ -682,7 +683,7 @@ index 00000000..c66a8e4c
 +cp -fv "$1".findresult "$1"
 +cp -fv "$2".findresult "$2"
 diff --git a/bashrc/dd.sh b/bashrc/dd.sh
-index 26ad90c3..bd0e952b 100755
+index 26ad90c3..447bace9 100755
 --- ./bashrc/dd.sh
 +++ ./bashrc/dd.sh
 @@ -1,2 +1,12 @@
@@ -697,13 +698,13 @@ index 26ad90c3..bd0e952b 100755
 +    (pv -n "$input" | dd of="$output" bs=128M conv=notrunc,noerror) 2>&1 | gunzip -c | dialog --gauge "Running dd command (cloning), please wait..." 10 70 0
 +elif [[ "$output" = *'.img' ]] && [[ "$input" = *'/dev/'* ]]
 +then
-+    (sudo pv -n "$input" | gzip -c1 | dd of="$output" bs=128m conv=notrunc,noerror) 2>&1 | dialog --gauge "Running dd command (cloning), please wait..." 10 70 0
++    (pv -n "$input" | gzip -c1 | dd of="$output" bs=128M conv=notrunc,noerror) 2>&1 | dialog --gauge "Running dd command (cloning), please wait..." 10 70 0
 +fi
 diff --git a/install_cscope.sh b/bashrc/dd.test.sh
 similarity index 53%
 rename from install_cscope.sh
 rename to bashrc/dd.test.sh
-index 14d8f004..61a64611 100755
+index 14d8f004..079fcc07 100755
 --- ./install_cscope.sh
 +++ ./bashrc/dd.test.sh
 @@ -3,5 +3,4 @@ SCRIPT=$(realpath "$0")
@@ -712,7 +713,7 @@ index 14d8f004..61a64611 100755
  
 -git clone https://github.com/huangyingw/cscope.git
 -./cscope/build_pre.sh
-+./dd.sh /dev/nbd0 /media/nvme/software/test.img
++./dd.sh /dev/nbd0 /tmp/test.img
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
 index 9a6e19c8..f5458e6f 100755
 --- ./bashrc/do_update_proj.sh
@@ -1515,6 +1516,29 @@ index 30abd357..19173b67 100755
 +    "$iconvs" \
 +    "$rsyncpath" \
 +    "$source/" "$target/" > "$ready_file"
+diff --git a/bashrc/vm2img.sh b/bashrc/vm2img.sh
+new file mode 100644
+index 00000000..ff308314
+--- /dev/null
++++ ./bashrc/vm2img.sh
+@@ -0,0 +1,5 @@
++#!/bin/zsh
++
++input="$1"
++output="$2"
++(pv -n "$input" | gzip -c1 | dd of="$output" bs=128M conv=notrunc,noerror) 2>&1 | dialog --gauge "Running dd command (cloning), please wait..." 10 70 0
+diff --git a/bashrc/vm2img.test.sh b/bashrc/vm2img.test.sh
+new file mode 100644
+index 00000000..1418c340
+--- /dev/null
++++ ./bashrc/vm2img.test.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++./vm2img.sh
 diff --git a/bashrc/wol.sh b/bashrc/wol.sh
 index 1e941ff7..b1d88cb4 100755
 --- ./bashrc/wol.sh
@@ -2911,10 +2935,10 @@ similarity index 100%
 rename from hosts/server/etc/netplan/00-installer-config.yaml
 rename to linux/etc/netplan/00-installer-config.yaml_bak
 diff --git a/linux_links/etc/crypttab b/linux_links/etc/crypttab
-index 191dd600..2707c85c 100644
+index 191dd600..ed19136d 100644
 --- ./linux_links/etc/crypttab
 +++ ./linux_links/etc/crypttab
-@@ -7,6 +7,8 @@ raid6_crypt      /dev/disk/by-uuid/6eeb5df9-3399-40dc-b11c-f81aa773ae92  /root/l
+@@ -7,6 +7,9 @@ raid6_crypt      /dev/disk/by-uuid/6eeb5df9-3399-40dc-b11c-f81aa773ae92  /root/l
  usb_archive      /dev/disk/by-uuid/e6addd78-0027-4f36-9251-0788301303c6  /root/loadrc/keys/keyfile   luks
  usb_backup_crypt_4T      /dev/disk/by-uuid/4e0d72a2-2f98-4c11-becd-beaa21ec1957  /root/loadrc/keys/keyfile   luks
  usb_backup_crypt_5T_1      /dev/disk/by-uuid/5d5e3fde-814f-4018-a103-2789c84d43e2  /root/loadrc/keys/keyfile   luks
@@ -2925,6 +2949,7 @@ index 191dd600..2707c85c 100644
 +usb_backup_crypt_8T_1      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
 +usb_backup_crypt_8T_2      /dev/disk/by-uuid/bbbc9066-0479-4959-af61-ead6a9cea3ba  /root/loadrc/keys/keyfile   luks
 +timemachine      /dev/disk/by-uuid/72eff5fa-e188-4b1a-8760-5f5ff828aa37  /root/loadrc/keys/keyfile   luks
++zarchive      /dev/disk/by-uuid/69251abc-347f-4b64-be99-809da622893a  /root/loadrc/keys/keyfile   luks
 diff --git a/linux_links/etc/resolvconf/resolv.conf.d/base b/linux_links/etc/resolvconf/resolv.conf.d/base_bak
 similarity index 100%
 rename from linux_links/etc/resolvconf/resolv.conf.d/base
@@ -3110,11 +3135,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..d432ef7d
+index 00000000..7ed9eb05
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit d432ef7d18307b3b4f575fd2eb748b058737f1d1-dirty
++Subproject commit 7ed9eb05e1a4dff7e4e9e68439173ea1bf6b50e3-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3457,12 +3482,12 @@ index cc6342c3..abd506ac 160000
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
 +Subproject commit abd506acd2d144d8824218dd029cbd20bf567fbc-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
-index 7ef452b4..64256d0f 160000
+index 7ef452b4..3f1c8e29 160000
 --- ./vimrc/.vim/bundle/swift.vim
 +++ ./vimrc/.vim/bundle/swift.vim
 @@ -1 +1 @@
 -Subproject commit 7ef452b47f14a2bfed26324793777cf12d2a8d78
-+Subproject commit 64256d0f2c410d35ac1752aa2a2f7ade3a04695e
++Subproject commit 3f1c8e297fcfb2e2a322142e89126dc26baff7b7
 diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
 index 2d520bdf..f4ec3e57 160000
 --- ./vimrc/.vim/bundle/tig-explorer.vim
