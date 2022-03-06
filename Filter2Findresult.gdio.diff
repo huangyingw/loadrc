@@ -66,7 +66,7 @@ index 5ed35a81..0ea38ff6 100644
      allow = true
  [branch "dev"]
 diff --git a/.gitmodules b/.gitmodules
-index e17f9887..0cc77eb1 100644
+index e17f9887..86083e0c 100644
 --- ./.gitmodules
 +++ ./.gitmodules
 @@ -133,10 +133,6 @@
@@ -80,7 +80,17 @@ index e17f9887..0cc77eb1 100644
  [submodule "vimrc/.vim/bundle/vimtex"]
      path = vimrc/.vim/bundle/vimtex
      url = https://github.com/lervag/vimtex
-@@ -231,3 +227,16 @@
+@@ -183,8 +179,7 @@
+     branch = master
+ [submodule "vimrc/.vim/bundle/vim-snipmate"]
+     path = vimrc/.vim/bundle/vim-snipmate
+-    url = git@github.com:garbas/vim-snipmate.git
+-    branch = master
++	url = git@github.com:huangyingw/vim-snipmate.git
+ [submodule "vimrc/.vim/bundle/neco-syntax"]
+     path = vimrc/.vim/bundle/neco-syntax
+     url = git@github.com:Shougo/neco-syntax.git
+@@ -231,3 +226,16 @@
  [submodule "vimrc/.vim/bundle/bclose.vim"]
      path = vimrc/.vim/bundle/bclose.vim
      url = git@github.com:rbgrouleff/bclose.vim.git
@@ -3135,11 +3145,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..7ed9eb05
+index 00000000..d432ef7d
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 7ed9eb05e1a4dff7e4e9e68439173ea1bf6b50e3-dirty
++Subproject commit d432ef7d18307b3b4f575fd2eb748b058737f1d1-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3482,12 +3492,12 @@ index cc6342c3..abd506ac 160000
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
 +Subproject commit abd506acd2d144d8824218dd029cbd20bf567fbc-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
-index 7ef452b4..3f1c8e29 160000
+index 7ef452b4..64256d0f 160000
 --- ./vimrc/.vim/bundle/swift.vim
 +++ ./vimrc/.vim/bundle/swift.vim
 @@ -1 +1 @@
 -Subproject commit 7ef452b47f14a2bfed26324793777cf12d2a8d78
-+Subproject commit 3f1c8e297fcfb2e2a322142e89126dc26baff7b7
++Subproject commit 64256d0f2c410d35ac1752aa2a2f7ade3a04695e
 diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
 index 2d520bdf..f4ec3e57 160000
 --- ./vimrc/.vim/bundle/tig-explorer.vim
@@ -3572,6 +3582,13 @@ index bbdfea4b..7657218f 160000
 @@ -1 +1 @@
 -Subproject commit bbdfea4b98fdb8866a8a6060ec1294643cfeb413
 +Subproject commit 7657218f14837395a4e6759f15289bad6febd1b4
+diff --git a/vimrc/.vim/bundle/vim-snipmate b/vimrc/.vim/bundle/vim-snipmate
+index ed3c5426..a4e76182 160000
+--- ./vimrc/.vim/bundle/vim-snipmate
++++ ./vimrc/.vim/bundle/vim-snipmate
+@@ -1 +1 @@
+-Subproject commit ed3c5426a20bf1c06d7980946ada34fd9f93320e
++Subproject commit a4e7618279d0036a1fbb28bf834647c6c883c1bf
 diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
 index 7d7359a3..27d015ae 100644
 --- ./vimrc/.vim/plugin/ShowVITAG.vim
@@ -3609,7 +3626,7 @@ index 00000000..dfb309e2
 +set shortmess+=A
 +command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
-index 63869eb8..a4f56ec2 100644
+index 63869eb8..84837bc9 100644
 --- ./vimrc/.vim/plugin/common.vim
 +++ ./vimrc/.vim/plugin/common.vim
 @@ -138,17 +138,18 @@ function! GetWorktree()
@@ -3667,6 +3684,14 @@ index 63869eb8..a4f56ec2 100644
  
      if csdbpath != "Nothing"
          exec "cd " . csdbpath
+@@ -277,7 +272,6 @@ function! Cd2Worktree()
+     try
+         exec "cd " . fnameescape(worktree)
+     catch /./
+-        echom 'Cought anything: ' . v:exception
+     endtry
+ 
+     return worktree
 diff --git a/vimrc/.vim/plugin/copypath.vim b/vimrc/.vim/plugin/copypath.vim
 deleted file mode 100755
 index 65740cb6..00000000
