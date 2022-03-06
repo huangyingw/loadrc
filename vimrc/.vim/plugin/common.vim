@@ -246,7 +246,13 @@ function! Filter2Findresult()
 
     if expand('%:e') != "findresult"
         let buffername = b:result . '.findresult'
-        silent exec '!cp -fv' . ' ' . '"' .  expand('%:p') . '"' . ' ' . '"' .  buffername . '"'
+        silent exec '!rm ' . buffername
+
+        if bufexists(buffername)
+            exe "bd!" . buffername
+        endif
+
+        silent exec '!cp' . ' ' . '"' .  expand('%:p') . '"' . ' ' . '"' .  buffername . '"'
         let worktree = Cd2Worktree()
         call OpenOrSwitch(buffername, 'vs')
     endif
