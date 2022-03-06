@@ -91,3 +91,11 @@ E33: No previous substitute regular expression
 Error detected while processing function ResCur:
 line    2:
 E20: Mark not set
+
+Error detected while processing function VFilter:
+line    7:
+E207: Can't delete backup file
+
+Error detected while processing function ExFilter:
+line    7:
+E207: Can't delete backup file
