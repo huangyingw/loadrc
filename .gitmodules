@@ -179,8 +179,7 @@
     branch = master
 [submodule "vimrc/.vim/bundle/vim-snipmate"]
     path = vimrc/.vim/bundle/vim-snipmate
-    url = git@github.com:garbas/vim-snipmate.git
-    branch = master
+	url = git@github.com:huangyingw/vim-snipmate.git
 [submodule "vimrc/.vim/bundle/neco-syntax"]
     path = vimrc/.vim/bundle/neco-syntax
     url = git@github.com:Shougo/neco-syntax.git
