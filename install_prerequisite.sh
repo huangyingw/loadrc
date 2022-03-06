@@ -47,6 +47,7 @@ apt-get install -y \
     nfs-kernel-server \
     npm \
     openvpn \
+    parallel \
     patchutils \
     perl \
     pm-utils \
