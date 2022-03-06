@@ -140,13 +140,8 @@ endfunction
 
 function! OpenOrSwitch(buffername, openMode, ...)
     let topleft = (a:0 >= 1) ? a:1 : 'topleft'
-    let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
-    let bnr = bufwinnr('^' . realpath . '$')
 
-    if bnr > 0
-        exe bnr . "wincmd w"
-        call fetch#cfile(a:buffername, 'e')
-    elseif a:openMode ==? "goto"
+    if a:openMode ==? "goto"
         call fetch#cfile(a:buffername, 'e')
     else
         call fetch#cfile(a:buffername, 'vs')
