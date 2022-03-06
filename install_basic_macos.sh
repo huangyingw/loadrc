@@ -43,6 +43,7 @@ brew install \
     lynx \
     minikube \
     openssl \
+    parallel \
     patchutils \
     pv \
     rename \
