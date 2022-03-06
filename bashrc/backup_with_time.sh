@@ -8,5 +8,5 @@ dt=$(date '+%m_%d_%Y_%H_%M_%S');
 target="${source}.$dt"
 echo "target --> $target"
 
-rsync -aHv --progress --delete-after \
+rsync -aHv --delete-after \
     "${source}" "${target}"
