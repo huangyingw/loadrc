@@ -272,7 +272,6 @@ function! Cd2Worktree()
     try
         exec "cd " . fnameescape(worktree)
     catch /./
-        echom 'Cought anything: ' . v:exception
     endtry
 
     return worktree
