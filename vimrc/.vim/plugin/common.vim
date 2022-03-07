@@ -97,7 +97,11 @@ endfunction
 
 function! ResCur()
     if line("'\"") <= line("$")
-        normal! g`"
+        try
+            normal! g`"
+        catch /./
+        endtry
+
         return 1
     endif
 endfunction
