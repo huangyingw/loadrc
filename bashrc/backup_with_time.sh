@@ -9,4 +9,4 @@ target="${source}.$dt"
 echo "target --> $target"
 
 rsync -aHv --delete-after \
-    "${source}" "${target}"
+    "${source}/" "${target}/"
