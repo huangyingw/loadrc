@@ -13,6 +13,8 @@ then
     sshfs "$remoteServer":/media/ ~/"$remoteServer"
     df -TH
 else
-    sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/"$remoteServer"
+    sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/"$remoteServer" || \
+        sshfs "$remoteServer":/ ~/"$remoteServer"
+
     df -H
 fi
