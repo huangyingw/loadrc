@@ -1456,10 +1456,10 @@ index 1d01bc62..00000000
 -  . $HOME/loadrc/.loadrc
 -fi
 diff --git a/bashrc/smount.sh b/bashrc/smount.sh
-index 8f22cb80..6bf46761 100755
+index 8f22cb80..3b76862c 100755
 --- ./bashrc/smount.sh
 +++ ./bashrc/smount.sh
-@@ -10,11 +10,9 @@ mkdir -p ~/"$remoteServer"
+@@ -10,11 +11,11 @@ mkdir -p ~/"$remoteServer"
  
  if [ $(uname) = "Linux" ]
  then
@@ -1469,8 +1469,9 @@ index 8f22cb80..6bf46761 100755
      df -TH
  else
 -    diskutil unmountDisk force ~/"$remoteServer"
--    sshfs "$remoteServer":/ ~/"$remoteServer"
-+    sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/"$remoteServer"
++    sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/"$remoteServer" || \
+         sshfs "$remoteServer":/ ~/"$remoteServer"
++
      df -H
  fi
 diff --git a/bashrc/ssh.sh b/bashrc/ssh.sh
@@ -3160,11 +3161,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..b177de9a
+index 00000000..dc89b957
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit b177de9a6e671affe6a01853ee4bf2d726f72426
++Subproject commit dc89b957603783360a7bd49c32336fea5ed3d349
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3500,12 +3501,12 @@ index 2b1dca6c..4b537fa0 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit 4b537fa01c28f2f7cf249722530561d2e477b49f
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..dc3d38ff 160000
+index cc6342c3..76db4753 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit dc3d38ff6c809b16759645382f7a32f15ea53fcd
++Subproject commit 76db4753ccf956b2046ff46b97f5e354e8e7a9d0
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..64256d0f 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -3556,12 +3557,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..43c2a715 160000
+index 8468d6a8..aaea5cf9 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 43c2a7154b0400ce574fde877580b31bdc3861a6
++Subproject commit aaea5cf9285c027cb0409c2aa9b2abbcdf013da5
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -4201,10 +4202,30 @@ index d5874fe5..3c9dd53c 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..695e4cfe 100644
+index 5fd4a230..6bd0756d 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
-@@ -77,8 +77,17 @@ function! VFilter()
+@@ -15,7 +15,11 @@ function! ExFilter()
+ 
+     call Filter2Findresult()
+     silent exec 'g/' . @/ . '/d'
++
++    try
+         w!
++    catch
++    endtry
+ endfunction
+ 
+ function! ExtractHighLight()
+@@ -73,12 +77,25 @@ function! VFilter()
+ 
+     call Filter2Findresult()
+     silent exec 'g!/' . @/ . '/d'
++
++    try
+         w!
++    catch
++    endtry
  endfunction
  
  function! ShowRemember()
@@ -4224,7 +4245,7 @@ index 5fd4a230..695e4cfe 100644
  endfunction
  
  function! Filter()
-@@ -135,8 +144,12 @@ function! VRun()
+@@ -135,8 +152,12 @@ function! VRun()
      let b:file_name = expand('%:t')
      let b:to_run = expand("%:p")
  
@@ -4239,7 +4260,7 @@ index 5fd4a230..695e4cfe 100644
      endif
  
      let b:csdbpath = Cd2Worktree()
-@@ -149,7 +162,7 @@ function! VRun()
+@@ -149,7 +170,7 @@ function! VRun()
      endif
  
      if b:to_run != 'gbil.log'
@@ -4248,7 +4269,7 @@ index 5fd4a230..695e4cfe 100644
      else
          call OpenOrSwitch('gbil.log', 'vs')
      endif
-@@ -172,9 +185,8 @@ function! GetFirstColumnOfFile()
+@@ -172,9 +193,8 @@ function! GetFirstColumnOfFile()
          return 0
      endif
  
@@ -4259,7 +4280,7 @@ index 5fd4a230..695e4cfe 100644
  endfunction
  
  function! CSCSearch(num)
-@@ -233,9 +245,9 @@ function! OpenAll()
+@@ -233,9 +253,9 @@ function! OpenAll()
          let line = substitute(line, '"', '', "g")
          exec 'vs ' . currentDir . '/' . line
      endfor
@@ -4271,7 +4292,7 @@ index 5fd4a230..695e4cfe 100644
  
      let bnr = bufwinnr('^' . currentFile . '$')
      exe bnr . "wincmd w"
-@@ -334,11 +346,11 @@ endfunction
+@@ -334,11 +354,11 @@ endfunction
  function! GitSearch()
      normal! gvy<CR>
      let keyword = GetEscapedKeyword(@@)
@@ -4285,7 +4306,7 @@ index 5fd4a230..695e4cfe 100644
      call HighlightKeyword(keyword)
  endfunction
  
-@@ -353,13 +365,6 @@ function! VimSearch()
+@@ -353,13 +373,6 @@ function! VimSearch()
      call HighlightKeyword(keyword)
  endfunction
  
@@ -4299,7 +4320,7 @@ index 5fd4a230..695e4cfe 100644
  function! SwitchWinSize()
      if &winwidth == 1
          set winwidth=999999
-@@ -416,40 +421,21 @@ nnoremap <leader>Y "+yy
+@@ -416,40 +429,21 @@ nnoremap <leader>Y "+yy
  nnoremap <leader>p "+p
  nnoremap <leader>P "+P
  nnoremap tt :Autoformat<CR>:w!<cr>
@@ -4317,7 +4338,7 @@ index 5fd4a230..695e4cfe 100644
 -if has('win32')
 -    nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 -    nmap <leader>cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
- 
+-
 -    " This will copy the path in 8.3 short format, for DOS and Windows 9x
 -    nmap <leader>c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
 -else
@@ -4327,7 +4348,7 @@ index 5fd4a230..695e4cfe 100644
 -if has('win32')
 -    nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 -    nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
--
+ 
 -    " This will copy the path in 8.3 short format, for DOS and Windows 9x
 -    nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
 -else
@@ -4343,7 +4364,7 @@ index 5fd4a230..695e4cfe 100644
  nnoremap mg :call VFilter()<cr>
  nnoremap me :call ExtractHighLight()<cr>
  nnoremap mf :call ExFilter()<cr>
-@@ -462,7 +448,7 @@ nmap <C-@> :call CSCSearch(4)<cr>
+@@ -462,7 +456,7 @@ nmap <C-@> :call CSCSearch(4)<cr>
  nmap <C-f> :call CSCSearch(7)<cr>
  nmap <C-e> :call CSCSearch(1)<cr>
  nmap <C-g> :call CSCSearch(3)<cr>
@@ -4352,7 +4373,7 @@ index 5fd4a230..695e4cfe 100644
  nmap <C-j> :call PlayVideo()<cr>
  nmap <C-p> :call Prune()<cr>
  nmap <C-k> :call KdiffAll()<cr>
-@@ -475,7 +461,8 @@ nnoremap H :call ShowVITAG()<cr>
+@@ -475,7 +469,8 @@ nnoremap H :call ShowVITAG()<cr>
  nnoremap F :call GetFirstColumnOfFile()<cr>
  nnoremap T :vs $HOME/all.proj<cr>
  nnoremap L :vs <C-R>"<cr>
@@ -4362,7 +4383,7 @@ index 5fd4a230..695e4cfe 100644
  map <F3> :call VDebug()<cr>
  " nnoremap gf gF<cr>
  nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
-@@ -490,10 +477,7 @@ function! CutFile2()
+@@ -490,10 +485,7 @@ function! CutFile2()
  endfunc
  
  function! CutCommon()
@@ -4374,7 +4395,7 @@ index 5fd4a230..695e4cfe 100644
  endfunc
  
  nnoremap <leader>2 :call CutCommon()<cr>
-@@ -505,3 +489,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
+@@ -505,3 +497,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
  " open tig with Project root path
  nnoremap <Leader>t :TigOpenProjectRootDir<CR>
  nnoremap <leader>T :TigOpenCurrentFile<CR>
