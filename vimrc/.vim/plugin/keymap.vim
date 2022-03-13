@@ -15,7 +15,11 @@ function! ExFilter()
 
     call Filter2Findresult()
     silent exec 'g/' . @/ . '/d'
-    w!
+
+    try
+        w!
+    catch
+    endtry
 endfunction
 
 function! ExtractHighLight()
@@ -73,7 +77,11 @@ function! VFilter()
 
     call Filter2Findresult()
     silent exec 'g!/' . @/ . '/d'
-    w!
+
+    try
+        w!
+    catch
+    endtry
 endfunction
 
 function! ShowRemember()
