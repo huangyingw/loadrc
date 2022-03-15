@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 if [ -z "$1" ]
 then
     echo -e "${red}please provide the host name... ${NC}"
@@ -13,6 +14,8 @@ then
     sshfs "$remoteServer":/media/ ~/"$remoteServer"
     df -TH
 else
-    sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/"$remoteServer"
+    sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/"$remoteServer" || \
+        sshfs "$remoteServer":/ ~/"$remoteServer"
+
     df -H
 fi
