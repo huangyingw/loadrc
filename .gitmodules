@@ -239,3 +239,6 @@
 [submodule "wifi-auto-reconnect"]
 	path = wifi-auto-reconnect
 	url = git@github.com:huangyingw/martinsoft_wifi-auto-reconnect.git
+[submodule "rsync"]
+	path = rsync
+	url = git@github.com:huangyingw/WayneD_rsync.git
