@@ -1456,10 +1456,10 @@ index 1d01bc62..00000000
 -  . $HOME/loadrc/.loadrc
 -fi
 diff --git a/bashrc/smount.sh b/bashrc/smount.sh
-index 8f22cb80..6bf46761 100755
+index 8f22cb80..3bcee081 100755
 --- ./bashrc/smount.sh
 +++ ./bashrc/smount.sh
-@@ -10,11 +10,9 @@ mkdir -p ~/"$remoteServer"
+@@ -10,11 +10,11 @@ mkdir -p ~/"$remoteServer"
  
  if [ $(uname) = "Linux" ]
  then
@@ -1469,8 +1469,9 @@ index 8f22cb80..6bf46761 100755
      df -TH
  else
 -    diskutil unmountDisk force ~/"$remoteServer"
--    sshfs "$remoteServer":/ ~/"$remoteServer"
-+    sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/"$remoteServer"
++    sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/"$remoteServer" || \
+         sshfs "$remoteServer":/ ~/"$remoteServer"
++
      df -H
  fi
 diff --git a/bashrc/ssh.sh b/bashrc/ssh.sh
@@ -1678,12 +1679,12 @@ index 00000000..f90514ae
 +
 +sudo /usr/bin/osascript -e "set Volume 0"
 diff --git a/cscope b/cscope
-index 18a46b20..d153a8d8 160000
+index 18a46b20..41fab780 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit d153a8d8ad751d805d7efb05bbe2523d9164674b
++Subproject commit 41fab780d1ca14aad7467436000b0a8ec550c09f
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -3160,11 +3161,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..b177de9a
+index 00000000..321718d8
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit b177de9a6e671affe6a01853ee4bf2d726f72426
++Subproject commit 321718d8be6f079a2ac9a2078426dd41aacef572
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3500,12 +3501,12 @@ index 2b1dca6c..4b537fa0 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit 4b537fa01c28f2f7cf249722530561d2e477b49f
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..dc3d38ff 160000
+index cc6342c3..b955fb7b 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit dc3d38ff6c809b16759645382f7a32f15ea53fcd
++Subproject commit b955fb7b46b2a0e2fd4b307ba3dae2afa55396cd
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..64256d0f 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -3556,12 +3557,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..43c2a715 160000
+index 8468d6a8..89f752aa 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 43c2a7154b0400ce574fde877580b31bdc3861a6
++Subproject commit 89f752aae5b3124226bc1a1ef649291516085085
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
