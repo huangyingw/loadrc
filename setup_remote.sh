@@ -1,5 +1,12 @@
 #!/bin/bash
 
+apt-get update && \
+    apt-get install -y \
+    mosh \
+    ssh \
+    tmux \
+    zsh
+
 rw && \
     pacman --noconfirm -Syu \
     mosh \
