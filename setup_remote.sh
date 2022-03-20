@@ -3,7 +3,6 @@
 rw
 pacman --noconfirm -Syu \
     mosh \
-    ssh \
     tmux \
     zsh
 
