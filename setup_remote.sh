@@ -1,7 +1,7 @@
 #!/bin/bash
 
-apt-get update
-apt-get install -y \
+rw
+pacman --noconfirm -Syu \
     mosh \
     ssh \
     tmux \
