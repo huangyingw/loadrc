@@ -53,20 +53,22 @@ index 47a567de..cbf2b86e 100755
 -export PATH=/usr/local/bin:$PATH
 -export PATH=~/bin:$PATH
 diff --git a/.gitconfig_sample b/.gitconfig_sample
-index 5ed35a81..0ea38ff6 100644
+index 5ed35a81..92913780 100644
 --- ./.gitconfig_sample
 +++ ./.gitconfig_sample
-@@ -8,7 +8,7 @@
+@@ -8,9 +8,7 @@
      remote = origin
  [gsync]
      remote = authorVar
 -    branch = master
+-[merge]
+-    allow = true
 +    target = authorVar/branchVar
- [merge]
-     allow = true
  [branch "dev"]
+     remote = origin
+     merge = refs/heads/dev
 diff --git a/.gitmodules b/.gitmodules
-index e17f9887..86083e0c 100644
+index e17f9887..c03fba99 100644
 --- ./.gitmodules
 +++ ./.gitmodules
 @@ -133,10 +133,6 @@
@@ -90,7 +92,7 @@ index e17f9887..86083e0c 100644
  [submodule "vimrc/.vim/bundle/neco-syntax"]
      path = vimrc/.vim/bundle/neco-syntax
      url = git@github.com:Shougo/neco-syntax.git
-@@ -231,3 +226,16 @@
+@@ -231,3 +226,19 @@
  [submodule "vimrc/.vim/bundle/bclose.vim"]
      path = vimrc/.vim/bundle/bclose.vim
      url = git@github.com:rbgrouleff/bclose.vim.git
@@ -107,6 +109,9 @@ index e17f9887..86083e0c 100644
 +[submodule "wifi-auto-reconnect"]
 +	path = wifi-auto-reconnect
 +	url = git@github.com:huangyingw/martinsoft_wifi-auto-reconnect.git
++[submodule "rsync"]
++	path = rsync
++	url = git@github.com:huangyingw/WayneD_rsync.git
 diff --git a/.gitrc b/.gitrc
 index 8e753cb1..d416ab62 100755
 --- ./.gitrc
@@ -634,10 +639,10 @@ index 0d2de988..4390b138 100755
 +time \
 +    find . -type f -print0 | xargs -0 grep -IZl . > /dev/null 2>&1
 diff --git a/bashrc/copy.sh b/bashrc/copy.sh
-index 09330daf..27614698 100755
+index 09330daf..63c0c62f 100755
 --- ./bashrc/copy.sh
 +++ ./bashrc/copy.sh
-@@ -6,13 +6,21 @@ then
+@@ -6,13 +6,16 @@ then
      exit 1
  fi
  
@@ -647,19 +652,16 @@ index 09330daf..27614698 100755
 +target=$2
  
 -if [[ "${TARGET}" != *":"* ]] && [[ ! -d "${TARGET}" ]]
-+if [[ "$target" != *":"* ]] && [[ ! -d "$target" ]]
- then
+-then
 -    mkdir -p "${TARGET}"
-+    mkdir -p "$target"
- fi
- 
--rsync -aHSv --progress --force \
--    "${SOURCE}" "${TARGET}"
+-fi
 +iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
 +rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source" "$target")
 +rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 +# mapfile -t rsync_basic_options < rsync_basic_options
-+
+ 
+-rsync -aHSv --progress --force \
+-    "${SOURCE}" "${TARGET}"
 +rsync \
 +    "${rsync_basic_options[@]}" \
 +    "$iconvs" \
@@ -679,6 +681,23 @@ index 2c4bf8d7..83b0bbaf 100755
 -. ~/loadrc/.loadrc
 -dpkg -i $SOFTWARE/nx/nomachine_*.deb
 +./copy.sh ~/loadrc/ ~/loadrc.bak/
+diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
+index 9c24d246..2fb9f62d 100755
+--- ./bashrc/cscope.sh
++++ ./bashrc/cscope.sh
+@@ -1,11 +1,7 @@
+ #!/bin/zsh
+ 
+ SOURCEFILE="cscopesourcefile.bak"
+-CSCOPEFILE="cscopefile.bak"
+ 
+ cp -fv files.proj "$SOURCEFILE" && \
+     sed -i.bak 's/\\ / /g' "$SOURCEFILE" && \
+-    cscope -bq -i "$SOURCEFILE" -f "$CSCOPEFILE" && \
+-    cp -fv "$CSCOPEFILE" cscope.out && \
+-    cp -fv "$CSCOPEFILE".in cscope.out.in && \
+-    cp -fv "$CSCOPEFILE".po cscope.out.po
++    cscope -bq -i "$SOURCEFILE"
 diff --git a/bashrc/cutcommon.sh b/bashrc/cutcommon.sh
 new file mode 100755
 index 00000000..c66a8e4c
@@ -1093,10 +1112,10 @@ index 00000000..006dc346
 +ls -al lib
 +echo
 diff --git a/bashrc/mirror.sh b/bashrc/mirror.sh
-index 889ade9a..7dcdd14a 100755
+index 889ade9a..96dc7a46 100755
 --- ./bashrc/mirror.sh
 +++ ./bashrc/mirror.sh
-@@ -6,38 +6,47 @@ then
+@@ -6,38 +6,42 @@ then
      exit 1
  fi
  
@@ -1133,12 +1152,10 @@ index 889ade9a..7dcdd14a 100755
  fi
  
 -if [[ "${TARGET}" != *":"* ]] && [[ ! -d "${TARGET}" ]]
-+if [[ "$target" != *":"* ]] && [[ ! -d "$target" ]]
- then
+-then
 -    mkdir -p "${TARGET}"
-+    mkdir -p "$target"
- fi
- 
+-fi
+-
  rm "$ready_file"
 -rsync -aHSv --progress --delete-before --force \
 -    "${SOURCE}/" "${TARGET}/" && \
@@ -1201,23 +1218,28 @@ index fba69a67..00000000
 -    sshfs -o idmap=user huangyingw@vdonkey:/media/ /media/samba/
 -fi
 diff --git a/bashrc/move.sh b/bashrc/move.sh
-index 84be1e2f..8c1c97d4 100755
+index 84be1e2f..6c51f5c7 100755
 --- ./bashrc/move.sh
 +++ ./bashrc/move.sh
-@@ -11,18 +11,27 @@ then
-     mkdir -p "$2"
+@@ -6,23 +6,27 @@ then
+     exit 1
  fi
  
--SOURCE="$1"
--realpath "$1" && SOURCE=$(realpath "$1")
+-if [[ "$2" != *":"* ]] && [[ ! -d "$2" ]]
+-then
+-    mkdir -p "$2"
+-fi
 +source="$1"
 +realpath "$1" && source=$(realpath "$1")
  
--TARGET="$2"
--realpath "$2" && TARGET=$(realpath "$2")
+-SOURCE="$1"
+-realpath "$1" && SOURCE=$(realpath "$1")
 +target="$2"
 +realpath "$2" && target=$(realpath "$2")
  
+-TARGET="$2"
+-realpath "$2" && TARGET=$(realpath "$2")
+-
 -if [ -n "$SOURCE" ] && [ -n "$TARGET" ] && [ "$SOURCE" != "$TARGET" ]
 +if [ -n "$source" ] && [ -n "$target" ] && [ "$source" != "$target" ]
  then
@@ -1390,14 +1412,15 @@ index 00000000..582ea49d
 +fi
 diff --git a/bashrc/rsync_basic_options b/bashrc/rsync_basic_options
 new file mode 100644
-index 00000000..678478c1
+index 00000000..77b6e8fa
 --- /dev/null
 +++ ./bashrc/rsync_basic_options
-@@ -0,0 +1,4 @@
+@@ -0,0 +1,5 @@
 +-aHSv
 +--progress
 +--force
 +--append-verify
++--mkpath
 diff --git a/bashrc/select_move.sh b/bashrc/select_move.sh
 new file mode 100755
 index 00000000..2ef72567
@@ -1456,10 +1479,10 @@ index 1d01bc62..00000000
 -  . $HOME/loadrc/.loadrc
 -fi
 diff --git a/bashrc/smount.sh b/bashrc/smount.sh
-index 8f22cb80..3bcee081 100755
+index 8f22cb80..3b76862c 100755
 --- ./bashrc/smount.sh
 +++ ./bashrc/smount.sh
-@@ -10,11 +10,11 @@ mkdir -p ~/"$remoteServer"
+@@ -10,11 +11,11 @@ mkdir -p ~/"$remoteServer"
  
  if [ $(uname) = "Linux" ]
  then
@@ -1494,10 +1517,10 @@ index 7042dce9..867503a8 100755
 +ssh -fnN -R 2225:localhost:2225 "$target" &
  ssh -Y "$target" -t -- ${tmuxAction}
 diff --git a/bashrc/tmirror.sh b/bashrc/tmirror.sh
-index 30abd357..19173b67 100755
+index 30abd357..31ce354d 100755
 --- ./bashrc/tmirror.sh
 +++ ./bashrc/tmirror.sh
-@@ -1,13 +1,22 @@
+@@ -1,13 +1,17 @@
  #!/bin/zsh
 -SOURCE=$1
 -TARGET=$2
@@ -1508,18 +1531,15 @@ index 30abd357..19173b67 100755
 +ready_file="$source"/"tmirror.ready"
  
 -if [ ! -d "$TARGET" ]
-+if [ ! -d "$target" ]
- then
+-then
 -    mkdir -p "$TARGET"
-+    mkdir -p "$target"
- fi
- 
--rsync -aHinv --delete-before --force \
--    "$SOURCE" "$TARGET" > "$ready_file"
+-fi
 +iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
 +rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source" "$target")
 +rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
-+
+ 
+-rsync -aHinv --delete-before --force \
+-    "$SOURCE" "$TARGET" > "$ready_file"
 +rsync \
 +    -in \
 +    --delete-before \
@@ -3161,11 +3181,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..637363f2
+index 00000000..7b1a5cfd
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 637363f26298b0be1fc785ec2cfb4ae7765620bc
++Subproject commit 7b1a5cfd083d215ea282c8f86537d83b9c3a7810
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3257,7 +3277,7 @@ index 8e34f2fa..9deeb31c 100644
  .err
 -"./gbra.log"
 diff --git a/pythonrc/vlc.py b/pythonrc/vlc.py
-index 13a0cf4c..d8d70042 100755
+index 13a0cf4c..9101a8a4 100755
 --- ./pythonrc/vlc.py
 +++ ./pythonrc/vlc.py
 @@ -13,7 +13,7 @@ def callvlc(targetFile, start=0):
@@ -3265,10 +3285,17 @@ index 13a0cf4c..d8d70042 100755
          if platform.system() == 'Darwin':
              if start == 0:
 -                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', targetFile])
-+                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--rate=2.0', targetFile])
++                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--rate=1.0', targetFile])
              else:
                  subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
          else:
+diff --git a/rsync b/rsync
+new file mode 160000
+index 00000000..99b9306c
+--- /dev/null
++++ ./rsync
+@@ -0,0 +1 @@
++Subproject commit 99b9306c0033af87ff81f730a24e0051d2bbbb32
 diff --git a/set_macos_configuration.sh b/set_macos_configuration.sh
 index cf9a010a..26f18169 100755
 --- ./set_macos_configuration.sh
@@ -3279,7 +3306,7 @@ index cf9a010a..26f18169 100755
  ./macosrc/configure_mosh.sh
 +# ./macosrc/configure_ssh.sh
 diff --git a/setup.sh b/setup.sh
-index cc9fd3f1..ef482d0f 100755
+index cc9fd3f1..7d9c8333 100755
 --- ./setup.sh
 +++ ./setup.sh
 @@ -1,4 +1,4 @@
@@ -3288,7 +3315,11 @@ index cc9fd3f1..ef482d0f 100755
  SCRIPT=$(realpath "$0") && \
      SCRIPTPATH=$(dirname "$SCRIPT") && \
      cd "$SCRIPTPATH" || cd ~/loadrc/
-@@ -9,7 +9,7 @@ SCRIPT=$(realpath "$0") && \
+@@ -6,10 +6,11 @@ SCRIPT=$(realpath "$0") && \
+ ./install_basic.sh
+ ~/loadrc/gitrc/gpl.sh
+ ./install_nvim.sh
++./rsync/install.sh
  ./gpurc/install.sh
  ./install_vagrant.sh
  ./install_flacon.sh
@@ -3354,14 +3385,21 @@ index 00000000..b385cdc6
 +cp -fv ./pbpaste-remote ~/bin/pbpaste-remote
 diff --git a/setup_remote.sh b/setup_remote.sh
 new file mode 100755
-index 00000000..41c86e5c
+index 00000000..c8166159
 --- /dev/null
 +++ ./setup_remote.sh
-@@ -0,0 +1,12 @@
+@@ -0,0 +1,19 @@
 +#!/bin/bash
 +
-+rw
-+pacman --noconfirm -Syu \
++apt-get update && \
++    apt-get install -y \
++    mosh \
++    ssh \
++    tmux \
++    zsh
++
++rw && \
++    pacman --noconfirm -Syu \
 +    mosh \
 +    tmux \
 +    zsh
@@ -3465,12 +3503,12 @@ index 86d744c6..2a31e6bc 160000
 -Subproject commit 86d744c6e4731d0014ef469f019a305e2d7baac0
 +Subproject commit 2a31e6bcea5977209c05c728c4253d82fd873c82
 diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
-index 1d4a909f..826930ed 160000
+index 1d4a909f..537b2a38 160000
 --- ./vimrc/.vim/bundle/bash-support.vim
 +++ ./vimrc/.vim/bundle/bash-support.vim
 @@ -1 +1 @@
 -Subproject commit 1d4a909f46698906b16d711aeb260663f4c4794a
-+Subproject commit 826930edcb658e0d1865a926aacfb0d6c876d9b5
++Subproject commit 537b2a38560042dfcb134ed8cdfdb77e3c649e6e
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 index 5617a1cf..7753505f 160000
 --- ./vimrc/.vim/bundle/indentLine
@@ -4201,10 +4239,30 @@ index d5874fe5..3c9dd53c 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..695e4cfe 100644
+index 5fd4a230..6bd0756d 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
-@@ -77,8 +77,17 @@ function! VFilter()
+@@ -15,7 +15,11 @@ function! ExFilter()
+ 
+     call Filter2Findresult()
+     silent exec 'g/' . @/ . '/d'
++
++    try
+         w!
++    catch
++    endtry
+ endfunction
+ 
+ function! ExtractHighLight()
+@@ -73,12 +77,25 @@ function! VFilter()
+ 
+     call Filter2Findresult()
+     silent exec 'g!/' . @/ . '/d'
++
++    try
+         w!
++    catch
++    endtry
  endfunction
  
  function! ShowRemember()
@@ -4224,7 +4282,7 @@ index 5fd4a230..695e4cfe 100644
  endfunction
  
  function! Filter()
-@@ -135,8 +144,12 @@ function! VRun()
+@@ -135,8 +152,12 @@ function! VRun()
      let b:file_name = expand('%:t')
      let b:to_run = expand("%:p")
  
@@ -4239,7 +4297,7 @@ index 5fd4a230..695e4cfe 100644
      endif
  
      let b:csdbpath = Cd2Worktree()
-@@ -149,7 +162,7 @@ function! VRun()
+@@ -149,7 +170,7 @@ function! VRun()
      endif
  
      if b:to_run != 'gbil.log'
@@ -4248,7 +4306,7 @@ index 5fd4a230..695e4cfe 100644
      else
          call OpenOrSwitch('gbil.log', 'vs')
      endif
-@@ -172,9 +185,8 @@ function! GetFirstColumnOfFile()
+@@ -172,9 +193,8 @@ function! GetFirstColumnOfFile()
          return 0
      endif
  
@@ -4259,7 +4317,7 @@ index 5fd4a230..695e4cfe 100644
  endfunction
  
  function! CSCSearch(num)
-@@ -233,9 +245,9 @@ function! OpenAll()
+@@ -233,9 +253,9 @@ function! OpenAll()
          let line = substitute(line, '"', '', "g")
          exec 'vs ' . currentDir . '/' . line
      endfor
@@ -4271,7 +4329,7 @@ index 5fd4a230..695e4cfe 100644
  
      let bnr = bufwinnr('^' . currentFile . '$')
      exe bnr . "wincmd w"
-@@ -334,11 +346,11 @@ endfunction
+@@ -334,11 +354,11 @@ endfunction
  function! GitSearch()
      normal! gvy<CR>
      let keyword = GetEscapedKeyword(@@)
@@ -4285,7 +4343,7 @@ index 5fd4a230..695e4cfe 100644
      call HighlightKeyword(keyword)
  endfunction
  
-@@ -353,13 +365,6 @@ function! VimSearch()
+@@ -353,13 +373,6 @@ function! VimSearch()
      call HighlightKeyword(keyword)
  endfunction
  
@@ -4299,7 +4357,7 @@ index 5fd4a230..695e4cfe 100644
  function! SwitchWinSize()
      if &winwidth == 1
          set winwidth=999999
-@@ -416,40 +421,21 @@ nnoremap <leader>Y "+yy
+@@ -416,40 +429,21 @@ nnoremap <leader>Y "+yy
  nnoremap <leader>p "+p
  nnoremap <leader>P "+P
  nnoremap tt :Autoformat<CR>:w!<cr>
@@ -4317,7 +4375,7 @@ index 5fd4a230..695e4cfe 100644
 -if has('win32')
 -    nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 -    nmap <leader>cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
- 
+-
 -    " This will copy the path in 8.3 short format, for DOS and Windows 9x
 -    nmap <leader>c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
 -else
@@ -4327,7 +4385,7 @@ index 5fd4a230..695e4cfe 100644
 -if has('win32')
 -    nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 -    nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
--
+ 
 -    " This will copy the path in 8.3 short format, for DOS and Windows 9x
 -    nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
 -else
@@ -4343,7 +4401,7 @@ index 5fd4a230..695e4cfe 100644
  nnoremap mg :call VFilter()<cr>
  nnoremap me :call ExtractHighLight()<cr>
  nnoremap mf :call ExFilter()<cr>
-@@ -462,7 +448,7 @@ nmap <C-@> :call CSCSearch(4)<cr>
+@@ -462,7 +456,7 @@ nmap <C-@> :call CSCSearch(4)<cr>
  nmap <C-f> :call CSCSearch(7)<cr>
  nmap <C-e> :call CSCSearch(1)<cr>
  nmap <C-g> :call CSCSearch(3)<cr>
@@ -4352,7 +4410,7 @@ index 5fd4a230..695e4cfe 100644
  nmap <C-j> :call PlayVideo()<cr>
  nmap <C-p> :call Prune()<cr>
  nmap <C-k> :call KdiffAll()<cr>
-@@ -475,7 +461,8 @@ nnoremap H :call ShowVITAG()<cr>
+@@ -475,7 +469,8 @@ nnoremap H :call ShowVITAG()<cr>
  nnoremap F :call GetFirstColumnOfFile()<cr>
  nnoremap T :vs $HOME/all.proj<cr>
  nnoremap L :vs <C-R>"<cr>
@@ -4362,7 +4420,7 @@ index 5fd4a230..695e4cfe 100644
  map <F3> :call VDebug()<cr>
  " nnoremap gf gF<cr>
  nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
-@@ -490,10 +477,7 @@ function! CutFile2()
+@@ -490,10 +485,7 @@ function! CutFile2()
  endfunc
  
  function! CutCommon()
@@ -4374,7 +4432,7 @@ index 5fd4a230..695e4cfe 100644
  endfunc
  
  nnoremap <leader>2 :call CutCommon()<cr>
-@@ -505,3 +489,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
+@@ -505,3 +497,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
  " open tig with Project root path
  nnoremap <Leader>t :TigOpenProjectRootDir<CR>
  nnoremap <leader>T :TigOpenCurrentFile<CR>
