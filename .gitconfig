@@ -42,7 +42,7 @@
     remote = origin
     merge = refs/heads/async
 [deploy]
-    host = localhost
+    host = pikvm
     path = ~/loadrc
 [branch "findresult"]
     remote = origin
