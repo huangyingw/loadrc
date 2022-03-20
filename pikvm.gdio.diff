@@ -3354,16 +3354,15 @@ index 00000000..b385cdc6
 +cp -fv ./pbpaste-remote ~/bin/pbpaste-remote
 diff --git a/setup_remote.sh b/setup_remote.sh
 new file mode 100755
-index 00000000..d4a1766d
+index 00000000..41c86e5c
 --- /dev/null
 +++ ./setup_remote.sh
-@@ -0,0 +1,13 @@
+@@ -0,0 +1,12 @@
 +#!/bin/bash
 +
-+apt-get update
-+apt-get install -y \
++rw
++pacman --noconfirm -Syu \
 +    mosh \
-+    ssh \
 +    tmux \
 +    zsh
 +
