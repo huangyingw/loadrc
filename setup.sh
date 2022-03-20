@@ -6,6 +6,7 @@ SCRIPT=$(realpath "$0") && \
 ./install_basic.sh
 ~/loadrc/gitrc/gpl.sh
 ./install_nvim.sh
+./rsync/install.sh
 ./gpurc/install.sh
 ./install_vagrant.sh
 ./install_flacon.sh
