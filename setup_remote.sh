@@ -1,7 +1,7 @@
 #!/bin/bash
 
-rw
-pacman --noconfirm -Syu \
+rw && \
+    pacman --noconfirm -Syu \
     mosh \
     tmux \
     zsh
