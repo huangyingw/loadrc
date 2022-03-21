@@ -681,6 +681,23 @@ index 2c4bf8d7..83b0bbaf 100755
 -. ~/loadrc/.loadrc
 -dpkg -i $SOFTWARE/nx/nomachine_*.deb
 +./copy.sh ~/loadrc/ ~/loadrc.bak/
+diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
+index 9c24d246..2fb9f62d 100755
+--- ./bashrc/cscope.sh
++++ ./bashrc/cscope.sh
+@@ -1,11 +1,7 @@
+ #!/bin/zsh
+ 
+ SOURCEFILE="cscopesourcefile.bak"
+-CSCOPEFILE="cscopefile.bak"
+ 
+ cp -fv files.proj "$SOURCEFILE" && \
+     sed -i.bak 's/\\ / /g' "$SOURCEFILE" && \
+-    cscope -bq -i "$SOURCEFILE" -f "$CSCOPEFILE" && \
+-    cp -fv "$CSCOPEFILE" cscope.out && \
+-    cp -fv "$CSCOPEFILE".in cscope.out.in && \
+-    cp -fv "$CSCOPEFILE".po cscope.out.po
++    cscope -bq -i "$SOURCEFILE"
 diff --git a/bashrc/cutcommon.sh b/bashrc/cutcommon.sh
 new file mode 100755
 index 00000000..c66a8e4c
@@ -3164,11 +3181,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..637363f2
+index 00000000..e3953adc
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 637363f26298b0be1fc785ec2cfb4ae7765620bc
++Subproject commit e3953adc1ec17e418807b66b8b6d287dd7bd177f-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3368,16 +3385,22 @@ index 00000000..b385cdc6
 +cp -fv ./pbpaste-remote ~/bin/pbpaste-remote
 diff --git a/setup_remote.sh b/setup_remote.sh
 new file mode 100755
-index 00000000..d4a1766d
+index 00000000..c8166159
 --- /dev/null
 +++ ./setup_remote.sh
-@@ -0,0 +1,13 @@
+@@ -0,0 +1,19 @@
 +#!/bin/bash
 +
-+apt-get update
-+apt-get install -y \
++apt-get update && \
++    apt-get install -y \
 +    mosh \
 +    ssh \
++    tmux \
++    zsh
++
++rw && \
++    pacman --noconfirm -Syu \
++    mosh \
 +    tmux \
 +    zsh
 +
@@ -3480,12 +3503,12 @@ index 86d744c6..2a31e6bc 160000
 -Subproject commit 86d744c6e4731d0014ef469f019a305e2d7baac0
 +Subproject commit 2a31e6bcea5977209c05c728c4253d82fd873c82
 diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
-index 1d4a909f..826930ed 160000
+index 1d4a909f..537b2a38 160000
 --- ./vimrc/.vim/bundle/bash-support.vim
 +++ ./vimrc/.vim/bundle/bash-support.vim
 @@ -1 +1 @@
 -Subproject commit 1d4a909f46698906b16d711aeb260663f4c4794a
-+Subproject commit 826930edcb658e0d1865a926aacfb0d6c876d9b5
++Subproject commit 537b2a38560042dfcb134ed8cdfdb77e3c649e6e
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 index 5617a1cf..7753505f 160000
 --- ./vimrc/.vim/bundle/indentLine
