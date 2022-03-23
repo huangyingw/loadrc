@@ -2661,7 +2661,7 @@ index ea2bc967..b7adab11 100755
      fi
  fi
 diff --git a/install_basic.sh b/install_basic.sh
-index aeaf8ba1..c5237240 100755
+index aeaf8ba1..42dea60c 100755
 --- ./install_basic.sh
 +++ ./install_basic.sh
 @@ -1,4 +1,4 @@
@@ -2670,6 +2670,20 @@ index aeaf8ba1..c5237240 100755
  SCRIPT=$(realpath "$0") && \
      SCRIPTPATH=$(dirname "$SCRIPT") && \
      cd "$SCRIPTPATH" || cd ~/loadrc/
+@@ -15,6 +15,13 @@ pip install \
+     pdftotext \
+     proxybroker
+ 
++pip3 install \
++    autoflake \
++    autopep8 \
++    ipynb-py-convert \
++    pdftotext \
++    proxybroker
++
+ pip3 install git+https://github.com/gaborvecsei/pdf-split-merge.git
+ 
+ npm -g install \
 diff --git a/install_basic_linux.sh b/install_basic_linux.sh
 index 34269226..a8a824c3 100755
 --- ./install_basic_linux.sh
@@ -3181,11 +3195,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..e3953adc
+index 00000000..fdfa0727
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit e3953adc1ec17e418807b66b8b6d287dd7bd177f-dirty
++Subproject commit fdfa0727704dbe9fc7862536a0a9c0985c0e3bf4-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3276,6 +3290,16 @@ index 8e34f2fa..9deeb31c 100644
  "./running.time"
  .err
 -"./gbra.log"
+diff --git a/pythonrc/remove_comments.py b/pythonrc/remove_comments.py
+index 5bccdfa7..0e1c4279 100755
+--- ./pythonrc/remove_comments.py
++++ ./pythonrc/remove_comments.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ import sys
+ import token
+ import tokenize
 diff --git a/pythonrc/vlc.py b/pythonrc/vlc.py
 index 13a0cf4c..9101a8a4 100755
 --- ./pythonrc/vlc.py
@@ -3848,7 +3872,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..3c9dd53c 100644
+index d5874fe5..f6b74d91 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,17 @@
@@ -3986,7 +4010,12 @@ index d5874fe5..3c9dd53c 100644
      call OpenOrSwitch(worktree . '/' . 'gme2.findresult', 'vs')
  endfunction
  
-@@ -325,7 +333,7 @@ function! s:G(args, ...) abort
+@@ -321,11 +329,11 @@ function! s:G(args, ...) abort
+     endif
+ 
+     if &diff
+-        exec '!git reset HEAD ; git add %'
++        exec '!git reset HEAD ; git add ' . '"' .  expand('%:p') . '"' 
      endif
  
      let worktree = Cd2Worktree()
