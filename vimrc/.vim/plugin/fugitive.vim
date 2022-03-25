@@ -207,7 +207,7 @@ function! s:Gcof(...) abort
     let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
     let arg1 = (a:0 >= 1) ? a:1 : ''
     silent exec '!~/loadrc/gitrc/gcof.sh ' . '"' .  b:relativePath . '" "' .  arg1 . '"'
-    call OpenOrSwitch(expand('%:p') . '.tmp', 'vs')
+    call OpenOrSwitch(expand('%:p') . '.bak', 'vs')
 endfunction
 
 function! s:Gpl() abort
