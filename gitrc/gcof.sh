@@ -3,7 +3,7 @@
 commit=`git rev-list --branches -n 1 HEAD -- "$1"`
 if [ -z "$2" ]
 then
-    git show HEAD:"$1" > "$1".tmp
+    git show HEAD:"$1" > "$1".bak
 else
-    git show "$2":"$1" > "$1".tmp
+    git show "$2":"$1" > "$1".bak
 fi
