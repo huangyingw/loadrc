@@ -382,7 +382,7 @@ function! s:Gdi(...) abort
         return 
     else
         let arg1 = (a:0 >= 1) ? a:1 : ''
-        silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" HEAD 2>&1 | tee ' . '"' .  output . '"'
+        exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" HEAD 2>&1 | tee ' . '"' .  output . '"'
     endif
 
     if bufwinnr('^' . output . '$') > 0
