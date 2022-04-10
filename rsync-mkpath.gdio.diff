@@ -1699,12 +1699,12 @@ index 00000000..f90514ae
 +
 +sudo /usr/bin/osascript -e "set Volume 0"
 diff --git a/cscope b/cscope
-index 18a46b20..d153a8d8 160000
+index 18a46b20..41fab780 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit d153a8d8ad751d805d7efb05bbe2523d9164674b
++Subproject commit 41fab780d1ca14aad7467436000b0a8ec550c09f
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -2079,20 +2079,6 @@ index e118a4de..e1f58816 100755
  git remote remove origin ; \
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
-diff --git a/gitrc/gcof.sh b/gitrc/gcof.sh
-index f39831a0..2d2c05ef 100755
---- ./gitrc/gcof.sh
-+++ ./gitrc/gcof.sh
-@@ -3,7 +3,7 @@
- commit=`git rev-list --branches -n 1 HEAD -- "$1"`
- if [ -z "$2" ]
- then
--    git show HEAD:"$1" > "$1".bak
-+    git show HEAD:"$1" > "$1".tmp
- else
--    git show "$2":"$1" > "$1".bak
-+    git show "$2":"$1" > "$1".tmp
- fi
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 new file mode 100755
 index 00000000..f43af40a
@@ -2927,6 +2913,16 @@ index 298b6bc4..163b6a22 100755
  locale-gen en_US.UTF-8
 -
 -./install_hub.sh
+diff --git a/kvmrc/vsd.py b/kvmrc/vsd.py
+index 95a244aa..dedced02 100644
+--- ./kvmrc/vsd.py
++++ ./kvmrc/vsd.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ from lxml import etree
+ import sys
+ 
 diff --git a/kvmrc/vshrink.sh b/kvmrc/vshrink.sh
 index e721fccd..9a7739dd 100755
 --- ./kvmrc/vshrink.sh
@@ -3195,11 +3191,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..fdfa0727
+index 00000000..990857da
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit fdfa0727704dbe9fc7862536a0a9c0985c0e3bf4-dirty
++Subproject commit 990857da1387d2906746009b8705bdd1f8d05e5d-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3290,6 +3286,16 @@ index 8e34f2fa..9deeb31c 100644
  "./running.time"
  .err
 -"./gbra.log"
+diff --git a/prunefix_template.conf b/prunefix_template.conf
+index e5bf5ff5..8d82d7dd 100644
+--- ./prunefix_template.conf
++++ ./prunefix_template.conf
+@@ -1,4 +1,5 @@
+ "./*.diff"
++"./*.fugitiveblame"
+ "./*.log"
+ "./*/running.time"
+ "./cscope.*"
 diff --git a/pythonrc/remove_comments.py b/pythonrc/remove_comments.py
 index 5bccdfa7..0e1c4279 100755
 --- ./pythonrc/remove_comments.py
@@ -3315,11 +3321,11 @@ index 13a0cf4c..9101a8a4 100755
          else:
 diff --git a/rsync b/rsync
 new file mode 160000
-index 00000000..cec3a8f7
+index 00000000..99b9306c
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit cec3a8f76aace5e27f5000f564b6c0b8a60a04fc
++Subproject commit 99b9306c0033af87ff81f730a24e0051d2bbbb32
 diff --git a/set_macos_configuration.sh b/set_macos_configuration.sh
 index cf9a010a..26f18169 100755
 --- ./set_macos_configuration.sh
@@ -3562,12 +3568,12 @@ index 2b1dca6c..4b537fa0 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit 4b537fa01c28f2f7cf249722530561d2e477b49f
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..76db4753 160000
+index cc6342c3..eb0ae14a 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 76db4753ccf956b2046ff46b97f5e354e8e7a9d0
++Subproject commit eb0ae14a550091727fbcb52494fb0bf576b7e6d7
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..64256d0f 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -3618,12 +3624,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..aaea5cf9 160000
+index 8468d6a8..ca8877cd 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit aaea5cf9285c027cb0409c2aa9b2abbcdf013da5
++Subproject commit ca8877cd2b3d94cc306947fd7e5a2d17f04d8162
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -3872,7 +3878,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..f6b74d91 100644
+index d5874fe5..92bf530d 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,17 @@
@@ -3968,13 +3974,7 @@ index d5874fe5..f6b74d91 100644
      endif
  endfunction
  
-@@ -202,12 +207,13 @@ function! s:Gcof(...) abort
-     let b:relativePath = substitute(expand('%:p'), worktree . '/', "", "g")
-     let arg1 = (a:0 >= 1) ? a:1 : ''
-     silent exec '!~/loadrc/gitrc/gcof.sh ' . '"' .  b:relativePath . '" "' .  arg1 . '"'
--    call OpenOrSwitch(expand('%:p') . '.bak', 'vs')
-+    call OpenOrSwitch(expand('%:p') . '.tmp', 'vs')
- endfunction
+@@ -207,7 +212,8 @@ endfunction
  
  function! s:Gpl() abort
      let worktree = Cd2Worktree()
@@ -4024,7 +4024,7 @@ index d5874fe5..f6b74d91 100644
  
      if &diff
          call s:Gs()
-@@ -366,9 +374,8 @@ function! s:Gdi(...) abort
+@@ -366,16 +374,15 @@ function! s:Gdi(...) abort
          if arg1 == ''
              call fugitive#Diffsplit(0, 1, "vert", '', [])
          elseif tolower(arg1) == 'o'
@@ -4036,6 +4036,14 @@ index d5874fe5..f6b74d91 100644
          else
              call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
          endif
+         return 
+     else
+         let arg1 = (a:0 >= 1) ? a:1 : ''
+-        silent exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" HEAD 2>&1 | tee ' . '"' .  output . '"'
++        exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" HEAD 2>&1 | tee ' . '"' .  output . '"'
+     endif
+ 
+     if bufwinnr('^' . output . '$') > 0
 @@ -422,9 +429,9 @@ function! s:Gdi2(...) abort
      endif
  
