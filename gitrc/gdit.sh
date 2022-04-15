@@ -4,6 +4,7 @@ current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
 target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
 remote="$(git config gsync.remote)"
 target="$(git config gsync.target)"
+pullfroms="$(git config --get-all pull.from)"
 
 ~/loadrc/gitrc/discard_unnecessaries.sh
 git checkout -b "$target_branch" "$target"
