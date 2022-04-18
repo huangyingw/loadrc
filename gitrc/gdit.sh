@@ -4,18 +4,12 @@ current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
 target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
 remote="$(git config gsync.remote)"
 target="$(git config gsync.target)"
-pullfroms=($(git config --get-all pull.from))
 
 ~/loadrc/gitrc/discard_unnecessaries.sh
 git checkout -b "$target_branch" "$target"
 git checkout -f "$target_branch"
 git branch -u "$remote/$target_branch"
-
 git merge -X theirs "$target" && \
-    for pullfrom in "${pullfroms[@]}" ; \
-    do \
-        git merge -X theirs "$pullfrom" ; \
-    done && \
     git pull && \
     git checkout "$current_branch" && \
     ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
