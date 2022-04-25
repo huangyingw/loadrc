@@ -1699,12 +1699,12 @@ index 00000000..f90514ae
 +
 +sudo /usr/bin/osascript -e "set Volume 0"
 diff --git a/cscope b/cscope
-index 18a46b20..41fab780 160000
+index 18a46b20..d153a8d8 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 41fab780d1ca14aad7467436000b0a8ec550c09f
++Subproject commit d153a8d8ad751d805d7efb05bbe2523d9164674b
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -3191,11 +3191,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..990857da
+index 00000000..e38a5521
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 990857da1387d2906746009b8705bdd1f8d05e5d-dirty
++Subproject commit e38a55211f694dc6ed333a7e5420c2d68a688c1d-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3307,7 +3307,7 @@ index 5bccdfa7..0e1c4279 100755
  import token
  import tokenize
 diff --git a/pythonrc/vlc.py b/pythonrc/vlc.py
-index 13a0cf4c..9101a8a4 100755
+index 13a0cf4c..d8d70042 100755
 --- ./pythonrc/vlc.py
 +++ ./pythonrc/vlc.py
 @@ -13,7 +13,7 @@ def callvlc(targetFile, start=0):
@@ -3315,17 +3315,17 @@ index 13a0cf4c..9101a8a4 100755
          if platform.system() == 'Darwin':
              if start == 0:
 -                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', targetFile])
-+                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--rate=1.0', targetFile])
++                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--rate=2.0', targetFile])
              else:
                  subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
          else:
 diff --git a/rsync b/rsync
 new file mode 160000
-index 00000000..99b9306c
+index 00000000..cec3a8f7
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit 99b9306c0033af87ff81f730a24e0051d2bbbb32
++Subproject commit cec3a8f76aace5e27f5000f564b6c0b8a60a04fc
 diff --git a/set_macos_configuration.sh b/set_macos_configuration.sh
 index cf9a010a..26f18169 100755
 --- ./set_macos_configuration.sh
@@ -3561,19 +3561,19 @@ index 0c22efb1..00000000
 @@ -1 +0,0 @@
 -Subproject commit 0c22efb1b919573f69ec237e7a8ab7ca1c1ecc03
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..4b537fa0 160000
+index 2b1dca6c..3a913173 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit 4b537fa01c28f2f7cf249722530561d2e477b49f
++Subproject commit 3a913173dcbf7bac303cb5ede8b3a732b6a0a692
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
 index cc6342c3..eb0ae14a 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit eb0ae14a550091727fbcb52494fb0bf576b7e6d7
++Subproject commit eb0ae14a550091727fbcb52494fb0bf576b7e6d7-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..64256d0f 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -3603,12 +3603,12 @@ index 4579327e..4b3a848c 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4b3a848ca36318fc1a82c712c5b5c7ea658e4a86
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..bb9753ce 160000
+index dbe8b1e2..e6bf8619 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit bb9753ceba554d673b04f8b878b2d1f4febf6807
++Subproject commit e6bf8619d6bfd3ec4418a4be3b0f8ad87b1ff57d-dirty
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -3624,12 +3624,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..ca8877cd 160000
+index 8468d6a8..b86b904a 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit ca8877cd2b3d94cc306947fd7e5a2d17f04d8162
++Subproject commit b86b904ae79aad37aac082180bfd251697e5584a-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -3652,12 +3652,12 @@ index 00000000..d6adab9d
 @@ -0,0 +1 @@
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..de73f6d1 160000
+index 3b379635..d38f1bf8 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit de73f6d1b0bf1b2af2d576f3420fc861af14769f
++Subproject commit d38f1bf8575b920042153689492721b80252ae41
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
