@@ -46,7 +46,7 @@ then
     ping mini2
 elif [ "$target" = "mba" ]
 then
-    wakeonlan B0:BE:83:1F:9E:EF #wifi
+    wakeonlan FC:E2:6C:07:12:2E #wifi
     ping mba
 elif [ "$target" = "mbp" ]
 then
