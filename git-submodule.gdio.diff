@@ -68,7 +68,7 @@ index 5ed35a81..92913780 100644
      remote = origin
      merge = refs/heads/dev
 diff --git a/.gitmodules b/.gitmodules
-index e17f9887..45f7aae8 100644
+index e17f9887..51d16e33 100644
 --- ./.gitmodules
 +++ ./.gitmodules
 @@ -58,6 +58,10 @@
@@ -76,8 +76,8 @@ index e17f9887..45f7aae8 100644
      url = git@bitbucket.org:huangyingw/.ssh.git
      branch = dev
 +[submodule "vimrc/.vim/bundle/vim-phpfmt"]
-+    path = vimrc/.vim/bundle/vim-phpfmt
-+    url = git@bitbucket.org:huangyingw/vim-phpfmt.git
++	path = vimrc/.vim/bundle/vim-phpfmt
++	url = git@bitbucket.org:huangyingw/vim-phpfmt.git
 +    branch = dev
  [submodule "vimrc/.vim/bundle/delimitMate"]
      path = vimrc/.vim/bundle/delimitMate
@@ -124,7 +124,7 @@ index e17f9887..45f7aae8 100644
 +	path = rsync
 +	url = git@github.com:huangyingw/WayneD_rsync.git
 diff --git a/.gitrc b/.gitrc
-index 8e753cb1..d416ab62 100755
+index 8e753cb1..e536f2e5 100755
 --- ./.gitrc
 +++ ./.gitrc
 @@ -21,6 +21,7 @@ alias gclean='git clean -fd'
@@ -135,14 +135,16 @@ index 8e753cb1..d416ab62 100755
  alias gctb='$HOME/loadrc/gitrc/gctb.sh'
  alias gdev='$HOME/loadrc/gitrc/gdev.sh'
  alias gdi2='$HOME/loadrc/gitrc/gdi2.sh'
-@@ -64,6 +65,7 @@ alias gstl='$HOME/loadrc/gitrc/gstl.sh'
+@@ -64,7 +65,8 @@ alias gstl='$HOME/loadrc/gitrc/gstl.sh'
  alias gstlv='$HOME/loadrc/gitrc/gstlv.sh'
  alias gstp='$HOME/loadrc/gitrc/gstp.sh'
  alias gstv='$HOME/loadrc/gitrc/gstv.sh'
+-alias gsubmoduleUpdate='$HOME/loadrc/gitrc/submodule_update.sh'
 +alias gsubbr='$HOME/loadrc/gitrc/git_submodules_branch.sh'
- alias gsubmoduleUpdate='$HOME/loadrc/gitrc/submodule_update.sh'
++alias gsubmodule='$HOME/loadrc/gitrc/git-submodule.sh'
  alias gsync='$HOME/loadrc/gitrc/gsync.sh'
  alias gtag='$HOME/loadrc/gitrc/gtag.sh'
+ alias gtg='git tag -l -n1'
 diff --git a/.gorc b/.gorc
 index a51724b9..82a595f3 100644
 --- ./.gorc
@@ -649,16 +651,6 @@ index 0d2de988..4390b138 100755
 +
 +time \
 +    find . -type f -print0 | xargs -0 grep -IZl . > /dev/null 2>&1
-diff --git a/bashrc/change_mac_hostname_test.sh b/bashrc/change_mac_hostname_test.sh
-index 8c8e1dc4..dc42d5a9 100755
---- ./bashrc/change_mac_hostname_test.sh
-+++ ./bashrc/change_mac_hostname_test.sh
-@@ -3,4 +3,4 @@ SCRIPT=$(realpath "$0")
- SCRIPTPATH=$(dirname "$SCRIPT")
- cd "$SCRIPTPATH"
- 
--./change_mac_hostname.sh mbp
-+./change_mac_hostname.sh mba
 diff --git a/bashrc/copy.sh b/bashrc/copy.sh
 index 09330daf..63c0c62f 100755
 --- ./bashrc/copy.sh
@@ -1595,7 +1587,7 @@ index 00000000..af6629ad
 +
 +./vm2img.sh /var/lib/libvirt/images/u2004.qcow2
 diff --git a/bashrc/wol.sh b/bashrc/wol.sh
-index 1e941ff7..b1d88cb4 100755
+index 1e941ff7..aa05d65b 100755
 --- ./bashrc/wol.sh
 +++ ./bashrc/wol.sh
 @@ -8,10 +8,10 @@ then
@@ -1623,7 +1615,7 @@ index 1e941ff7..b1d88cb4 100755
 +    ping mini2
 +elif [ "$target" = "mba" ]
 +then
-+    wakeonlan B0:BE:83:1F:9E:EF #wifi
++    wakeonlan FC:E2:6C:07:12:2E #wifi
 +    ping mba
 +elif [ "$target" = "mbp" ]
 +then
@@ -1985,15 +1977,16 @@ index d81f6f38..5b7555ad 100755
 +
 +git show "$1":COMMIT_EDITMSG > COMMIT_EDITMSG
 diff --git a/gitrc/discard_unnecessaries.sh b/gitrc/discard_unnecessaries.sh
-index dbf809a0..87a8c1b4 100755
+index dbf809a0..e20fc1e4 100755
 --- ./gitrc/discard_unnecessaries.sh
 +++ ./gitrc/discard_unnecessaries.sh
-@@ -1,4 +1,4 @@
+@@ -1,4 +1,5 @@
  #!/bin/zsh
 -git checkout *.gdio.diff
 +git checkout \*.gdio.diff
  git checkout files.proj
  git checkout rsync.files
++git checkout gbil.log
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
 index 4f8edfc6..327c8ebb 100755
 --- ./gitrc/dogdio.sh
@@ -2072,6 +2065,15 @@ index 0be60d68..00000000
 -remote_branch="$(git config gsync.branch)"
 -~/loadrc/gitrc/gbrd.sh "$target_branch"
 -git checkout -b "$target_branch" "$remote/$remote_branch"
+diff --git a/gitrc/gbis.sh b/gitrc/gbis.sh
+index 192ec7a5..6f8c364f 100755
+--- ./gitrc/gbis.sh
++++ ./gitrc/gbis.sh
+@@ -1,3 +1,4 @@
+ #!/bin/zsh
++~/loadrc/gitrc/discard_unnecessaries.sh
+ git bisect skip
+ git bisect log | tee gbil.log
 diff --git a/gitrc/gbrd.sh b/gitrc/gbrd.sh
 index ff263b6d..305c2262 100755
 --- ./gitrc/gbrd.sh
@@ -2242,12 +2244,12 @@ index 700d6af6..c3c54016 100755
      ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
  
 diff --git a/gitrc/git-submodule.sh b/gitrc/git-submodule.sh
-new file mode 100644
-index 00000000..9c882e3d
+new file mode 100755
+index 00000000..a0801523
 --- /dev/null
 +++ ./gitrc/git-submodule.sh
 @@ -0,0 +1,9 @@
-+#!/bin/zsh
++#!/bin/sh
 +
 +git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
 +    while read path_key path
@@ -3226,11 +3228,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..7b1a5cfd
+index 00000000..57c0c165
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 7b1a5cfd083d215ea282c8f86537d83b9c3a7810-dirty
++Subproject commit 57c0c165078a6760878d619b92a5f6a8c12f202c-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3638,12 +3640,12 @@ index 4579327e..4b3a848c 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4b3a848ca36318fc1a82c712c5b5c7ea658e4a86
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..bb9753ce 160000
+index dbe8b1e2..4c7adbfd 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit bb9753ceba554d673b04f8b878b2d1f4febf6807-dirty
++Subproject commit 4c7adbfd4fd5227876b07eec7f9c32e76214daf4
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -3659,12 +3661,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..f484d5d1 160000
+index 8468d6a8..1a575cb9 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit f484d5d1641869c415367c7063d241dab48606e6
++Subproject commit 1a575cb96d66390329126adbea737c985d19782e
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -3687,12 +3689,12 @@ index 00000000..d6adab9d
 @@ -0,0 +1 @@
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..d38f1bf8 160000
+index 3b379635..2f8adae6 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit d38f1bf8575b920042153689492721b80252ae41
++Subproject commit 2f8adae670e3fe262b793885ae5d808d40c6f2ed
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
