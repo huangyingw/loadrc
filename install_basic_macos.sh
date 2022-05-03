@@ -45,6 +45,7 @@ brew install \
     openssl \
     parallel \
     patchutils \
+    php \
     pv \
     rename \
     rsync \
