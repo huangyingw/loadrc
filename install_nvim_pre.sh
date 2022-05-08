@@ -11,6 +11,11 @@ apt-get update && \
     python3-dev \
     python3-pip
 
+rw && \
+    pacman --noconfirm -Syu \
+    cmake \
+    ctags
+
 pip3 install pynvim
 pip3 install jedi
 
