@@ -5,6 +5,5 @@
 **/*.diff
 **/*.findresult
 **/*.git**
-**/*.md
 **/*.runresult
 **/*.tmp
