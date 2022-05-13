@@ -8,6 +8,6 @@ rsync -aHv --force --progress \
     "$host:$rpath"
 
 rsync -aHv --force --progress \
-    --files-from=files.rev \
-    "$host:/" \
+    --files-from files.rev \
+    "$host:$rpath" \
     .
