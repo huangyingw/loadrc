@@ -2804,6 +2804,7 @@
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/matchparen.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/misc.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/motion.vim"
+"./vimrc/.vim/bundle/vimtex/autoload/vimtex/nvim.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/options.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser.vim"
 "./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/auxiliary.vim"
