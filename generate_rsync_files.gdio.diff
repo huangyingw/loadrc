@@ -2239,10 +2239,10 @@ index b0247ec4..07590e7c 100755
 -eval "$COMMAND"
 +eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
-index 700d6af6..c3c54016 100755
+index 700d6af6..717cad55 100755
 --- ./gitrc/gdit.sh
 +++ ./gitrc/gdit.sh
-@@ -3,16 +3,14 @@ output="$1"
+@@ -3,16 +3,15 @@ output="$1"
  current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
  target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
  remote="$(git config gsync.remote)"
@@ -2257,6 +2257,7 @@ index 700d6af6..c3c54016 100755
  git branch -u "$remote/$target_branch"
 -git merge -X theirs "$remote/$remote_branch" && \
 +git merge -X theirs "$target" && \
++    git merge -X theirs "$remote/$target_branch" && \
      git pull && \
 -    git push ; \
      git checkout "$current_branch" && \
@@ -3255,11 +3256,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..61f26095
+index 00000000..aae064dd
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 61f26095813af7f17faceb7ee63516d3141147bc-dirty
++Subproject commit aae064dd8f55e7170b11a0b87e209db4d327a0b1
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3667,12 +3668,12 @@ index 4579327e..4267ae2a 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..e9e6bac1 160000
+index dbe8b1e2..9843bb25 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit e9e6bac1732f87935509520981c666282f100396-dirty
++Subproject commit 9843bb2580b2f53a9362cf422a865f4dca8f06bf
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -3688,12 +3689,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..87297477 160000
+index 8468d6a8..9914e44a 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 87297477d804e27dc38e693606eb55e908a9563f-dirty
++Subproject commit 9914e44afb6615b69c2cbd72cee79dcde3f33c3d
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
