@@ -29,7 +29,9 @@ if [ ${#prune_params[@]} -gt 0 ] ; \
 then \
     find . "(" "${prune_params[@]}" ")" -type f -size -9000k > "$rsyncFiles.diff" && \
     comm -23 <(sort "$rsyncFiles") <(sort "$rsyncFiles".diff) > "$rsyncFiles.tmp" && \
-    cp -fv "$rsyncFiles.tmp" "$rsyncFiles" ; \
+    cp -fv "$rsyncFiles.tmp" "$rsyncFiles" && \
+    comm -23 <(sort "$rsyncFiles") <(sort files.rev) > "$rsyncFiles.tmp" && \
+    cp -fv "$rsyncFiles.tmp" "$rsyncFiles" && \
     fi && \
     if [ ${#include_params[@]} -gt 0 ] ; \
     then \

@@ -27,10 +27,10 @@ index a327085e..812c6e14 100644
 -. $HOME/loadrc/.loadrc
 diff --git a/.dockerignore b/.dockerignore
 new file mode 100644
-index 00000000..995dbd0a
+index 00000000..35ff5e66
 --- /dev/null
 +++ ./.dockerignore
-@@ -0,0 +1,9 @@
+@@ -0,0 +1,10 @@
 +**.cache
 +**.deps
 +**/*.bak
@@ -38,6 +38,7 @@ index 00000000..995dbd0a
 +**/*.diff
 +**/*.findresult
 +**/*.git**
++**/*.md
 +**/*.runresult
 +**/*.tmp
 diff --git a/.envrc b/.envrc
@@ -457,14 +458,10 @@ index c7c0b3ff..88872777 100644
  . $HOME/loadrc/.loadrc
  setopt HIST_IGNORE_ALL_DUPS
 diff --git a/Dockerfile b/Dockerfile
-index 08e0c80b..1886b818 100644
+index 08e0c80b..00eb8ea8 100644
 --- ./Dockerfile
 +++ ./Dockerfile
-@@ -1,17 +1,24 @@
--FROM ubuntu:20.04
-+FROM ubuntu:22.04
- 
- ENV DEBIAN_FRONTEND noninteractive
+@@ -4,14 +4,21 @@ ENV DEBIAN_FRONTEND noninteractive
  WORKDIR /root/loadrc
  
  COPY ./*.sh /root/loadrc/
@@ -920,7 +917,7 @@ index 83e2c748..a194edb1 100755
          echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
          sort -u ~/all.proj -o ~/all.proj
 diff --git a/bashrc/generate_rsync_files.sh b/bashrc/generate_rsync_files.sh
-index d5360ed8..c79f1761 100755
+index d5360ed8..c1186f5e 100755
 --- ./bashrc/generate_rsync_files.sh
 +++ ./bashrc/generate_rsync_files.sh
 @@ -1,6 +1,6 @@
@@ -931,17 +928,6 @@ index d5360ed8..c79f1761 100755
  cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > "$rsyncFiles"
  PRUNE_POSTFIX=prunefix.rsync
  INCLUDE_FILE=includefile.rsync
-@@ -29,7 +29,9 @@ if [ ${#prune_params[@]} -gt 0 ] ; \
- then \
-     find . "(" "${prune_params[@]}" ")" -type f -size -9000k > "$rsyncFiles.diff" && \
-     comm -23 <(sort "$rsyncFiles") <(sort "$rsyncFiles".diff) > "$rsyncFiles.tmp" && \
--    cp -fv "$rsyncFiles.tmp" "$rsyncFiles" ; \
-+    cp -fv "$rsyncFiles.tmp" "$rsyncFiles" && \
-+    comm -23 <(sort "$rsyncFiles") <(sort files.rev) > "$rsyncFiles.tmp" && \
-+    cp -fv "$rsyncFiles.tmp" "$rsyncFiles" && \
-     fi && \
-     if [ ${#include_params[@]} -gt 0 ] ; \
-     then \
 diff --git a/bashrc/get_first_column_of_file.sh b/bashrc/get_first_column_of_file.sh
 index 7b83d343..31d5756a 100755
 --- ./bashrc/get_first_column_of_file.sh
@@ -1428,19 +1414,6 @@ index 00000000..582ea49d
 +else
 +    /usr/bin/find /var/lib/transmission-daemon/ -type f -mtime +$left -name \*.part -delete
 +fi
-diff --git a/bashrc/rsyncFiles.sh b/bashrc/rsyncFiles.sh
-index 36367474..502d81f0 100755
---- ./bashrc/rsyncFiles.sh
-+++ ./bashrc/rsyncFiles.sh
-@@ -8,6 +8,6 @@ rsync -aHv --force --progress \
-     "$host:$rpath"
- 
- rsync -aHv --force --progress \
--    --files-from=files.rev \
--    "$host:/" \
-+    --files-from files.rev \
-+    "$host:$rpath" \
-     .
 diff --git a/bashrc/rsync_basic_options b/bashrc/rsync_basic_options
 new file mode 100644
 index 00000000..77b6e8fa
@@ -2239,10 +2212,10 @@ index b0247ec4..07590e7c 100755
 -eval "$COMMAND"
 +eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
-index 700d6af6..717cad55 100755
+index 700d6af6..c3c54016 100755
 --- ./gitrc/gdit.sh
 +++ ./gitrc/gdit.sh
-@@ -3,16 +3,15 @@ output="$1"
+@@ -3,16 +3,14 @@ output="$1"
  current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
  target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
  remote="$(git config gsync.remote)"
@@ -2257,7 +2230,6 @@ index 700d6af6..717cad55 100755
  git branch -u "$remote/$target_branch"
 -git merge -X theirs "$remote/$remote_branch" && \
 +git merge -X theirs "$target" && \
-+    git merge -X theirs "$remote/$target_branch" && \
      git pull && \
 -    git push ; \
      git checkout "$current_branch" && \
@@ -2265,10 +2237,10 @@ index 700d6af6..717cad55 100755
  
 diff --git a/gitrc/git-submodule.sh b/gitrc/git-submodule.sh
 new file mode 100755
-index 00000000..afd5e387
+index 00000000..13fff224
 --- /dev/null
 +++ ./gitrc/git-submodule.sh
-@@ -0,0 +1,16 @@
+@@ -0,0 +1,12 @@
 +#!/bin/sh
 +
 +git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
@@ -2279,10 +2251,6 @@ index 00000000..afd5e387
 +        branch_key=$(echo $path_key | sed 's/\.path/.branch/')
 +        url=$(git config -f .gitmodules --get "$url_key")
 +        branch=$(git config -f .gitmodules --get "$branch_key" || echo "master")
-+        if [ -d "$path" ] && [ ! $(git config --get "$url_key") ]
-+        then
-+            mv "$path" "$path""_backup_""$(date +'%Y%m%d%H%M%S')";
-+        fi
 +        git submodule add -b $branch --name $name $url $path || continue
 +    done
 diff --git a/gitrc/git_diff_command.sh b/gitrc/git_diff_command.sh
@@ -3256,11 +3224,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..aae064dd
+index 00000000..36b041a6
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit aae064dd8f55e7170b11a0b87e209db4d327a0b1
++Subproject commit 36b041a6f594713de3d2407331f15c12af8cc8a3-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3633,12 +3601,12 @@ index 2b1dca6c..3a913173 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit 3a913173dcbf7bac303cb5ede8b3a732b6a0a692
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..415d40d7 160000
+index cc6342c3..3846fc9d 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 415d40d7dcdb1fb105903551c559125de6badd66
++Subproject commit 3846fc9dd578191f868170aadf8ac13ca80d8126-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..64256d0f 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -3668,12 +3636,12 @@ index 4579327e..4267ae2a 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..9843bb25 160000
+index dbe8b1e2..4c7adbfd 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit 9843bb2580b2f53a9362cf422a865f4dca8f06bf
++Subproject commit 4c7adbfd4fd5227876b07eec7f9c32e76214daf4
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -3689,12 +3657,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..9914e44a 160000
+index 8468d6a8..b8e7eccc 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 9914e44afb6615b69c2cbd72cee79dcde3f33c3d
++Subproject commit b8e7eccce2f39ba055d98b497a49882718e5cbcd-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -3722,7 +3690,7 @@ index 00000000..62d82051
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-php-cs-fixer
 @@ -0,0 +1 @@
-+Subproject commit 62d820512c7c46da791cb66101c1740a90192a3f
++Subproject commit 62d820512c7c46da791cb66101c1740a90192a3f-dirty
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
 index 3b379635..9c92dafe 160000
 --- ./vimrc/.vim/bundle/vim-rails
@@ -5061,7 +5029,7 @@ index e0416589..00000000
 -
 -" }}}
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
-index 777cb3ad..1b355b44 100644
+index 777cb3ad..00300da9 100644
 --- ./vimrc/.vimrc
 +++ ./vimrc/.vimrc
 @@ -28,7 +28,6 @@ inoremap { {}<LEFT>
@@ -5072,7 +5040,7 @@ index 777cb3ad..1b355b44 100644
  " Mapping ESC in insert mode and command mode to double j
  imap jj <C-[>
  " cmap jj  <C-[]]
-@@ -196,12 +195,7 @@ au BufWritePre * call AddToGit()
+@@ -196,14 +195,10 @@ au BufWritePre * call AddToGit()
  let g:pymode_rope = 0
  "To have a space (ASCII 32) considered as a valid character for a file name
  ":set isfname+=32
@@ -5084,9 +5052,13 @@ index 777cb3ad..1b355b44 100644
 -endif
 +
  let g:phpfmt_autosave = 1
- let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
+-let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
++let g:phpfmt_standard = 'PSR2'
++" let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
  
-@@ -277,3 +271,14 @@ let g:tex_flavor = 'latex'
+ let g:ycm_autoclose_preview_window_after_completion = 1
+ 
+@@ -277,3 +272,16 @@ let g:tex_flavor = 'latex'
  " add @ to cfile handle
  set isfname+=@-@
  set history=10000
@@ -5101,6 +5073,8 @@ index 777cb3ad..1b355b44 100644
 +" set shellcmdflag=-ic
 +
 +let g:BASH_AlsoBash = [ '*.lsh' ]
++autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
++let g:php_cs_fixer_rules = "@Symfony"          " options: --rules (default:@PSR2)
 diff --git a/vishrc/cat_play.sh b/vishrc/cat_play.sh
 index ed41d521..71bd07af 100755
 --- ./vishrc/cat_play.sh

@@ -242,3 +242,6 @@
 [submodule "rsync"]
 	path = rsync
 	url = git@github.com:huangyingw/WayneD_rsync.git
+[submodule "vimrc/.vim/bundle/vim-php-cs-fixer"]
+	path = vimrc/.vim/bundle/vim-php-cs-fixer
+	url = https://github.com/stephpy/vim-php-cs-fixer.git
