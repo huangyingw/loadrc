@@ -2239,7 +2239,7 @@ index b0247ec4..07590e7c 100755
 -eval "$COMMAND"
 +eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
-index 700d6af6..717cad55 100755
+index 700d6af6..a529d445 100755
 --- ./gitrc/gdit.sh
 +++ ./gitrc/gdit.sh
 @@ -3,16 +3,15 @@ output="$1"
@@ -2257,7 +2257,7 @@ index 700d6af6..717cad55 100755
  git branch -u "$remote/$target_branch"
 -git merge -X theirs "$remote/$remote_branch" && \
 +git merge -X theirs "$target" && \
-+    git merge -X theirs "$remote/$target_branch" && \
++    git merge -X theirs "$remote/$target_branch" ; \
      git pull && \
 -    git push ; \
      git checkout "$current_branch" && \
@@ -2398,21 +2398,6 @@ index 2198cb7f..1af0b074 100755
 +        git push -v --tag "$ss" &
      done
  fi
-diff --git a/gitrc/gres.sh b/gitrc/gres.sh
-deleted file mode 100755
-index 1de7ff41..00000000
---- ./gitrc/gres.sh
-+++ /dev/null
-@@ -1,9 +0,0 @@
--#!/bin/zsh
--
--conflictArr=($(git status | awk '/both .+:/{print $3}'))
--
--for conflict in "${conflictArr[@]}"
--do
--    git add $conflict
--    git reset HEAD $conflict
--done
 diff --git a/gitrc/gsearch.sh b/gitrc/gsearch.sh
 index b3980c8a..83058fc5 100755
 --- ./gitrc/gsearch.sh
@@ -3256,11 +3241,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..aae064dd
+index 00000000..4a73ade8
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit aae064dd8f55e7170b11a0b87e209db4d327a0b1
++Subproject commit 4a73ade872ccb3771b05329ad86b3a5c89f5a7a1-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3689,12 +3674,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..9914e44a 160000
+index 8468d6a8..c323864e 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 9914e44afb6615b69c2cbd72cee79dcde3f33c3d
++Subproject commit c323864e7b1771c9a4c80604c56693d73eef20e0-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -3964,7 +3949,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..92bf530d 100644
+index d5874fe5..3d402787 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,17 @@
@@ -3985,7 +3970,7 @@ index d5874fe5..92bf530d 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDeleted :execute s:FindDeleted()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
-@@ -27,23 +31,26 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean
+@@ -27,19 +31,23 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gco :execute s:Gco(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcob :execute s:Gcob(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcof :execute s:Gcof(<f-args>)
@@ -4010,11 +3995,7 @@ index d5874fe5..92bf530d 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gmet :execute s:Gmet()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
--command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gres :execute s:Gres()
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
- command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtu :execute s:Grtu()
-@@ -51,25 +58,24 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
+@@ -51,25 +59,24 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :execute s:Gs()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
@@ -4043,7 +4024,7 @@ index d5874fe5..92bf530d 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Split :execute s:Split()
-@@ -111,13 +117,12 @@ endfunction
+@@ -111,13 +118,12 @@ endfunction
  
  function! s:Gkdo() abort
      let worktree = Cd2Worktree()
@@ -4060,7 +4041,7 @@ index d5874fe5..92bf530d 100644
      endif
  endfunction
  
-@@ -207,7 +212,8 @@ endfunction
+@@ -207,7 +213,8 @@ endfunction
  
  function! s:Gpl() abort
      let worktree = Cd2Worktree()
@@ -4070,7 +4051,7 @@ index d5874fe5..92bf530d 100644
  endfunction
  
  function! s:Fsync() abort
-@@ -228,12 +234,14 @@ endfunction
+@@ -228,12 +235,14 @@ endfunction
  
  function! s:Gbib() abort
      let worktree = Cd2Worktree()
@@ -4087,7 +4068,7 @@ index d5874fe5..92bf530d 100644
  endfunction
  
  function! s:Gbil() abort
-@@ -306,7 +314,7 @@ endfunction
+@@ -306,7 +315,7 @@ endfunction
  
  function! s:Gme2(args, ...) abort
      let worktree = Cd2Worktree()
@@ -4096,7 +4077,7 @@ index d5874fe5..92bf530d 100644
      call OpenOrSwitch(worktree . '/' . 'gme2.findresult', 'vs')
  endfunction
  
-@@ -321,11 +329,11 @@ function! s:G(args, ...) abort
+@@ -321,11 +330,11 @@ function! s:G(args, ...) abort
      endif
  
      if &diff
@@ -4110,7 +4091,7 @@ index d5874fe5..92bf530d 100644
  
      if &diff
          call s:Gs()
-@@ -366,16 +374,15 @@ function! s:Gdi(...) abort
+@@ -366,16 +375,15 @@ function! s:Gdi(...) abort
          if arg1 == ''
              call fugitive#Diffsplit(0, 1, "vert", '', [])
          elseif tolower(arg1) == 'o'
@@ -4130,7 +4111,7 @@ index d5874fe5..92bf530d 100644
      endif
  
      if bufwinnr('^' . output . '$') > 0
-@@ -422,9 +429,9 @@ function! s:Gdi2(...) abort
+@@ -422,9 +430,9 @@ function! s:Gdi2(...) abort
      endif
  
      let worktree = Cd2Worktree()
@@ -4142,7 +4123,7 @@ index d5874fe5..92bf530d 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -475,18 +482,17 @@ endfunction
+@@ -475,18 +483,17 @@ endfunction
  
  function! s:Gdif(...) abort
      let worktree = Cd2Worktree()
@@ -4167,7 +4148,7 @@ index d5874fe5..92bf530d 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -516,10 +522,20 @@ endfunction
+@@ -516,10 +523,20 @@ endfunction
  
  function! s:ApplyBranch(args, ...) abort
      let worktree = Cd2Worktree()
@@ -4189,7 +4170,7 @@ index d5874fe5..92bf530d 100644
  function! s:Gshow(args, ...) abort
      let worktree = Cd2Worktree()
      let output = a:args . '.diff'
-@@ -527,7 +543,19 @@ function! s:Gshow(args, ...) abort
+@@ -527,7 +544,19 @@ function! s:Gshow(args, ...) abort
      call OpenOrSwitch(output, 'vs')
  endfunction
  
@@ -4209,7 +4190,7 @@ index d5874fe5..92bf530d 100644
      let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
      exec '!rm ' . newFile
      exec 'w ' . newFile
-@@ -546,6 +574,21 @@ function! s:CatPlay(...) abort
+@@ -546,6 +575,21 @@ function! s:CatPlay(...) abort
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
@@ -4231,7 +4212,7 @@ index d5874fe5..92bf530d 100644
  function! s:CatMove(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -559,6 +602,63 @@ function! s:CatMove(...) abort
+@@ -559,6 +603,63 @@ function! s:CatMove(...) abort
      call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
  endfunction
  
@@ -4295,19 +4276,7 @@ index d5874fe5..92bf530d 100644
  function! s:CatDu(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -585,11 +685,6 @@ function! s:Tail() abort
-     exec '!tail -f ' . expand("%:p")
- endfunction
- 
--function! s:Gres() abort
--    let worktree = Cd2Worktree()
--    exec '!~/loadrc/gitrc/gres.sh'
--endfunction
--
- function! s:Dps() abort
-     let worktree = Cd2Worktree()
-     silent exec '!~/loadrc/dockerrc/dps.sh'
-@@ -640,7 +735,10 @@ function! s:Prune() abort
+@@ -640,7 +741,10 @@ function! s:Prune() abort
      call asyncrun#run('<bang>', '', '~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
  endfunction
  
@@ -4319,7 +4288,7 @@ index d5874fe5..92bf530d 100644
      call Cd2ProjectRoot("files.proj")
  
      if expand('%:t') != 'index'
-@@ -649,14 +747,14 @@ function! s:Fr(find, replace) abort
+@@ -649,14 +753,14 @@ function! s:Fr(find, replace) abort
          let fileList = "files.proj"
      endif
  
@@ -4337,7 +4306,7 @@ index d5874fe5..92bf530d 100644
  endfunction
  
  function! s:Gwap() abort
-@@ -671,13 +769,15 @@ function! s:Gfix() abort
+@@ -671,13 +775,15 @@ function! s:Gfix() abort
  endfunction
  
  function! s:Reapply() abort
@@ -4355,7 +4324,7 @@ index d5874fe5..92bf530d 100644
      call s:Gs()
  endfunction
  
-@@ -701,3 +801,5 @@ function! s:GenerateIpynb() abort
+@@ -701,3 +807,5 @@ function! s:GenerateIpynb() abort
      exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
      w
  endfunction
