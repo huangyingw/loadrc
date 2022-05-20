@@ -68,7 +68,7 @@ index 5ed35a81..92913780 100644
      remote = origin
      merge = refs/heads/dev
 diff --git a/.gitmodules b/.gitmodules
-index e17f9887..51d16e33 100644
+index e17f9887..1de84997 100644
 --- ./.gitmodules
 +++ ./.gitmodules
 @@ -58,6 +58,10 @@
@@ -78,7 +78,7 @@ index e17f9887..51d16e33 100644
 +[submodule "vimrc/.vim/bundle/vim-phpfmt"]
 +	path = vimrc/.vim/bundle/vim-phpfmt
 +	url = git@bitbucket.org:huangyingw/vim-phpfmt.git
-+    branch = dev
++	branch = dev
  [submodule "vimrc/.vim/bundle/delimitMate"]
      path = vimrc/.vim/bundle/delimitMate
      url = git@github.com:Raimondi/delimitMate.git
@@ -2245,18 +2245,21 @@ index 700d6af6..c3c54016 100755
  
 diff --git a/gitrc/git-submodule.sh b/gitrc/git-submodule.sh
 new file mode 100755
-index 00000000..a0801523
+index 00000000..13fff224
 --- /dev/null
 +++ ./gitrc/git-submodule.sh
-@@ -0,0 +1,9 @@
+@@ -0,0 +1,12 @@
 +#!/bin/sh
 +
 +git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
 +    while read path_key path
 +    do
++        name=$(echo $path_key | sed 's/\submodule\.\(.*\)\.path/\1/')
 +        url_key=$(echo $path_key | sed 's/\.path/.url/')
++        branch_key=$(echo $path_key | sed 's/\.path/.branch/')
 +        url=$(git config -f .gitmodules --get "$url_key")
-+        git submodule add $url $path
++        branch=$(git config -f .gitmodules --get "$branch_key" || echo "master")
++        git submodule add -b $branch --name $name $url $path || continue
 +    done
 diff --git a/gitrc/git_diff_command.sh b/gitrc/git_diff_command.sh
 index e2e8aa4b..603f6518 100755
@@ -2729,7 +2732,7 @@ index 34269226..a8a824c3 100755
  ./install_time_machine.sh
  ./enpass_install.sh
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 62d92acb..19c85cd7 100755
+index 62d92acb..a329301e 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
 @@ -8,15 +8,24 @@ then
@@ -2759,7 +2762,7 @@ index 62d92acb..19c85cd7 100755
      dos2unix \
      ffmpeg \
      git \
-@@ -33,17 +42,20 @@ brew install \
+@@ -33,17 +42,21 @@ brew install \
      libtool \
      lynx \
      minikube \
@@ -2767,6 +2770,7 @@ index 62d92acb..19c85cd7 100755
      openssl \
 +    parallel \
 +    patchutils \
++    php \
 +    pv \
      rename \
 -    sshfs \
@@ -3228,11 +3232,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..57c0c165
+index 00000000..ec0f64af
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 57c0c165078a6760878d619b92a5f6a8c12f202c-dirty
++Subproject commit ec0f64afcd319a6886664a7391a8884d3ed82e93
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3605,12 +3609,12 @@ index 2b1dca6c..3a913173 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit 3a913173dcbf7bac303cb5ede8b3a732b6a0a692
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..b8230603 160000
+index cc6342c3..3846fc9d 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit b823060360639085786c3d8dd2d0632a68229f9a
++Subproject commit 3846fc9dd578191f868170aadf8ac13ca80d8126
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..64256d0f 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -3633,12 +3637,12 @@ index a071b6d4..70c4e222 160000
 -Subproject commit a071b6d41b20069a3520e0d101194a752968973b
 +Subproject commit 70c4e222464020edc2809c932b488daaf891eeef
 diff --git a/vimrc/.vim/bundle/vim-anyfold b/vimrc/.vim/bundle/vim-anyfold
-index 4579327e..4b3a848c 160000
+index 4579327e..4267ae2a 160000
 --- ./vimrc/.vim/bundle/vim-anyfold
 +++ ./vimrc/.vim/bundle/vim-anyfold
 @@ -1 +1 @@
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
-+Subproject commit 4b3a848ca36318fc1a82c712c5b5c7ea658e4a86
++Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
 index dbe8b1e2..4c7adbfd 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
@@ -3661,12 +3665,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..1a575cb9 160000
+index 8468d6a8..b8e7eccc 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 1a575cb96d66390329126adbea737c985d19782e
++Subproject commit b8e7eccce2f39ba055d98b497a49882718e5cbcd
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
