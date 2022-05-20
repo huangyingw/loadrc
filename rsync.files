@@ -512,6 +512,7 @@
 ./gitrc/gme2.sh
 ./gitrc/gpl.sh
 ./gitrc/gps.sh
+./gitrc/gres.sh
 ./gitrc/grm.sh
 ./gitrc/grsh.sh
 ./gitrc/gs.sh
@@ -1065,6 +1066,7 @@
 ./vimrc/.vim/bundle/nvim-yarp/autoload/yarp/core.vim
 ./vimrc/.vim/bundle/nvim-yarp/autoload/yarp/pyx.vim
 ./vimrc/.vim/bundle/nvim-yarp/pythonx/yarp.py
+./vimrc/.vim/bundle/nvim-yarp/requirments.txt
 ./vimrc/.vim/bundle/python-mode/.bumpversion.cfg
 ./vimrc/.vim/bundle/python-mode/.gitconfig
 ./vimrc/.vim/bundle/python-mode/.gitignore
@@ -3034,4 +3036,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-php-cs-fixer.gdio.diff
+generate_rsync_files.gdio.diff
