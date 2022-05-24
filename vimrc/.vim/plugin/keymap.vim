@@ -333,6 +333,11 @@ function! VimOpen()
         call asyncrun#run('<bang>', '', '~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
     elseif (expand("%") ==# 'fdocs.list')
         exec '!open ' . '"' .  expand(expand("<cfile>")) . '"'
+    elseif (b:fileName =~ '.*.diff')
+        let b:commit = expand("<cword>")
+        let output = b:commit . '.diff'
+        silent exec '!~/loadrc/gitrc/gshow.sh ' . '"' .  b:commit . '" 2>&1 | tee ' . output
+        call OpenOrSwitch(output, 'vs')
     elseif (&filetype ==# 'fugitiveblame')
         let b:commit = expand("<cword>")
         call Cd2Worktree()
