@@ -3253,11 +3253,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..093d97ed
+index 00000000..2979ebde
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 093d97edf88bf4145635499c7e8c3c795f32bc46-dirty
++Subproject commit 2979ebde32f3ee89035cb45182c168ed93992b26
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3637,12 +3637,12 @@ index b710bf4d..7ae8c7b7 160000
 -Subproject commit b710bf4daccb603a423754794fb446e5fbb59576
 +Subproject commit 7ae8c7b7162df302c441519be537ba92cf650eb7
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..efc240b7 160000
+index cc6342c3..75989215 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit efc240b751b3dcdae14056757aa8d13ec77b3d98-dirty
++Subproject commit 7598921597dd0b79afa308fae5161bae123f0879
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..64256d0f 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -3693,12 +3693,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..9bda4634 160000
+index 8468d6a8..9e6f4e06 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 9bda46342bdb7e700dedf66d86cf18f2ae28737e-dirty
++Subproject commit 9e6f4e066595c944810b644360cef836bd936ac6
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -3747,7 +3747,7 @@ index ed3c5426..a4e76182 160000
 +++ ./vimrc/.vim/bundle/vim-snipmate
 @@ -1 +1 @@
 -Subproject commit ed3c5426a20bf1c06d7980946ada34fd9f93320e
-+Subproject commit a4e7618279d0036a1fbb28bf834647c6c883c1bf
++Subproject commit a4e7618279d0036a1fbb28bf834647c6c883c1bf-dirty
 diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
 index 7d7359a3..27d015ae 100644
 --- ./vimrc/.vim/plugin/ShowVITAG.vim
