@@ -1730,12 +1730,12 @@ index 00000000..f90514ae
 +
 +sudo /usr/bin/osascript -e "set Volume 0"
 diff --git a/cscope b/cscope
-index 18a46b20..41fab780 160000
+index 18a46b20..d153a8d8 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 41fab780d1ca14aad7467436000b0a8ec550c09f
++Subproject commit d153a8d8ad751d805d7efb05bbe2523d9164674b
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -2410,6 +2410,18 @@ index b3980c8a..83058fc5 100755
 +
 +git log --binary --ignore-all-space --ignore-blank-lines --ignore-cr-at-eol --ignore-space-at-eol --ignore-space-change -p -G "$1" &> "$2"
 +# git log --binary --ignore-all-space --ignore-blank-lines --ignore-cr-at-eol --ignore-space-at-eol --ignore-space-change -p master -G "property\(" --author="Ying Huang <yhuang@imvu.com>" --since="2017-08-15" -- rest/service > diff1.log
+diff --git a/gitrc/gsearch.test.sh b/gitrc/gsearch.test.sh
+new file mode 100755
+index 00000000..616acc64
+--- /dev/null
++++ ./gitrc/gsearch.test.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++./gsearch.sh GitSearch ~/loadrc/gitsearch.findresult ~/loadrc/gitsearch.findresult.tmp
 diff --git a/gitrc/gshow.sh b/gitrc/gshow.sh
 index 06604af2..056c7062 100755
 --- ./gitrc/gshow.sh
@@ -3241,11 +3253,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..4a73ade8
+index 00000000..093d97ed
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 4a73ade872ccb3771b05329ad86b3a5c89f5a7a1-dirty
++Subproject commit 093d97edf88bf4145635499c7e8c3c795f32bc46-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3611,19 +3623,26 @@ index 0c22efb1..00000000
 @@ -1 +0,0 @@
 -Subproject commit 0c22efb1b919573f69ec237e7a8ab7ca1c1ecc03
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..3a913173 160000
+index 2b1dca6c..facc3db7 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit 3a913173dcbf7bac303cb5ede8b3a732b6a0a692
++Subproject commit facc3db7c5836fe2424936e8dd06f227e20f96db
+diff --git a/vimrc/.vim/bundle/nvim-yarp b/vimrc/.vim/bundle/nvim-yarp
+index b710bf4d..7ae8c7b7 160000
+--- ./vimrc/.vim/bundle/nvim-yarp
++++ ./vimrc/.vim/bundle/nvim-yarp
+@@ -1 +1 @@
+-Subproject commit b710bf4daccb603a423754794fb446e5fbb59576
++Subproject commit 7ae8c7b7162df302c441519be537ba92cf650eb7
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..415d40d7 160000
+index cc6342c3..efc240b7 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 415d40d7dcdb1fb105903551c559125de6badd66
++Subproject commit efc240b751b3dcdae14056757aa8d13ec77b3d98-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..64256d0f 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -3674,12 +3693,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..c323864e 160000
+index 8468d6a8..9bda4634 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit c323864e7b1771c9a4c80604c56693d73eef20e0-dirty
++Subproject commit 9bda46342bdb7e700dedf66d86cf18f2ae28737e-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
