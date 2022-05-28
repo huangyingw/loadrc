@@ -282,3 +282,6 @@ endif
 " set shellcmdflag=-ic
 
 let g:BASH_AlsoBash = [ '*.lsh' ]
+
+" and don't forget to set the option in your .vimrc
+let g:nb_buffers_to_keep = 50
