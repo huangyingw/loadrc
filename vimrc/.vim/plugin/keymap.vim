@@ -357,12 +357,14 @@ function! VimOpen()
 endfunction
 
 function! GitSearch()
-    normal! gvy<CR>
-    let keyword = GetEscapedKeyword(@@)
+    let keyword = substitute(@/, '\\c', '', '')
+    let keyword = substitute(keyword, '\\<', '', '')
+    let keyword = substitute(keyword, '\\>', '', '')
     let b:result = GetEscapedResult(keyword) . '.findresult'
+    let fileList = expand('%:p')
 
     call Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  keyword . '"' . ' "' .  b:result . '"'
+    silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  keyword . '"' . ' "' .  b:result . '"' . ' ' . '"' .  fileList . '"'
     call OpenOrSwitch(b:result, 'vs')
     call HighlightKeyword(keyword)
 endfunction
