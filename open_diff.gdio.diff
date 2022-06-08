@@ -1443,15 +1443,14 @@ index 36367474..502d81f0 100755
      .
 diff --git a/bashrc/rsync_basic_options b/bashrc/rsync_basic_options
 new file mode 100644
-index 00000000..77b6e8fa
+index 00000000..678478c1
 --- /dev/null
 +++ ./bashrc/rsync_basic_options
-@@ -0,0 +1,5 @@
+@@ -0,0 +1,4 @@
 +-aHSv
 +--progress
 +--force
 +--append-verify
-+--mkpath
 diff --git a/bashrc/select_move.sh b/bashrc/select_move.sh
 new file mode 100755
 index 00000000..2ef72567
@@ -1730,12 +1729,12 @@ index 00000000..f90514ae
 +
 +sudo /usr/bin/osascript -e "set Volume 0"
 diff --git a/cscope b/cscope
-index 18a46b20..d153a8d8 160000
+index 18a46b20..6a688406 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit d153a8d8ad751d805d7efb05bbe2523d9164674b
++Subproject commit 6a6884066a3400dfb5fb76c720cbaf2b1d50731d-dirty
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -2597,10 +2596,18 @@ similarity index 100%
 rename from host_links/movie/etc/network/interfaces
 rename to host_links/movie/etc/network/interfaces_bak
 diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
-index 50886663..8fdc2229 100644
+index 50886663..029b10fa 100644
 --- ./host_links/server/etc/hosts
 +++ ./host_links/server/etc/hosts
-@@ -10,6 +10,9 @@
+@@ -3,13 +3,16 @@
+ 192.168.31.127 u1804
+ 192.168.31.111 u2004
+ 172.27.217.162 localhost.imvu.com
+-192.168.31.140 mini
++192.168.31.201 mini
+ 192.168.123.132 minds
+ 192.168.31.153 gluster00
+ 192.168.31.129 gluster01
  192.168.31.115 gluster02
  192.168.31.99 mldonkey
  192.168.31.147 imacpro
@@ -3253,11 +3260,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..2979ebde
+index 00000000..98de1046
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 2979ebde32f3ee89035cb45182c168ed93992b26
++Subproject commit 98de10464cfef1db81a94b23f8e40fe321d0d0a4
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3672,12 +3679,12 @@ index 4579327e..4267ae2a 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..9843bb25 160000
+index dbe8b1e2..45378d8b 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit 9843bb2580b2f53a9362cf422a865f4dca8f06bf
++Subproject commit 45378d8b2c470263699c44bbf787ab22d7cfbd83
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -3693,12 +3700,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..9e6f4e06 160000
+index 8468d6a8..8adc3173 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 9e6f4e066595c944810b644360cef836bd936ac6
++Subproject commit 8adc31730fbb7147275775639508c9c210903720-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -3747,7 +3754,7 @@ index ed3c5426..a4e76182 160000
 +++ ./vimrc/.vim/bundle/vim-snipmate
 @@ -1 +1 @@
 -Subproject commit ed3c5426a20bf1c06d7980946ada34fd9f93320e
-+Subproject commit a4e7618279d0036a1fbb28bf834647c6c883c1bf-dirty
++Subproject commit a4e7618279d0036a1fbb28bf834647c6c883c1bf
 diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
 index 7d7359a3..27d015ae 100644
 --- ./vimrc/.vim/plugin/ShowVITAG.vim
@@ -4350,7 +4357,7 @@ index d5874fe5..3d402787 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..6bd0756d 100644
+index 5fd4a230..9fe5edfa 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -15,7 +15,11 @@ function! ExFilter()
@@ -4440,7 +4447,19 @@ index 5fd4a230..6bd0756d 100644
  
      let bnr = bufwinnr('^' . currentFile . '$')
      exe bnr . "wincmd w"
-@@ -334,11 +354,11 @@ endfunction
+@@ -313,6 +333,11 @@ function! VimOpen()
+         call asyncrun#run('<bang>', '', '~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
+     elseif (expand("%") ==# 'fdocs.list')
+         exec '!open ' . '"' .  expand(expand("<cfile>")) . '"'
++    elseif (b:fileName =~ '.*.diff')
++        let b:commit = expand("<cword>")
++        let output = b:commit . '.diff'
++        silent exec '!~/loadrc/gitrc/gshow.sh ' . '"' .  b:commit . '" 2>&1 | tee ' . output
++        call OpenOrSwitch(output, 'vs')
+     elseif (&filetype ==# 'fugitiveblame')
+         let b:commit = expand("<cword>")
+         call Cd2Worktree()
+@@ -334,11 +359,11 @@ endfunction
  function! GitSearch()
      normal! gvy<CR>
      let keyword = GetEscapedKeyword(@@)
@@ -4454,7 +4473,7 @@ index 5fd4a230..6bd0756d 100644
      call HighlightKeyword(keyword)
  endfunction
  
-@@ -353,13 +373,6 @@ function! VimSearch()
+@@ -353,13 +378,6 @@ function! VimSearch()
      call HighlightKeyword(keyword)
  endfunction
  
@@ -4468,7 +4487,7 @@ index 5fd4a230..6bd0756d 100644
  function! SwitchWinSize()
      if &winwidth == 1
          set winwidth=999999
-@@ -416,40 +429,21 @@ nnoremap <leader>Y "+yy
+@@ -416,40 +434,21 @@ nnoremap <leader>Y "+yy
  nnoremap <leader>p "+p
  nnoremap <leader>P "+P
  nnoremap tt :Autoformat<CR>:w!<cr>
@@ -4512,7 +4531,7 @@ index 5fd4a230..6bd0756d 100644
  nnoremap mg :call VFilter()<cr>
  nnoremap me :call ExtractHighLight()<cr>
  nnoremap mf :call ExFilter()<cr>
-@@ -462,7 +456,7 @@ nmap <C-@> :call CSCSearch(4)<cr>
+@@ -462,7 +461,7 @@ nmap <C-@> :call CSCSearch(4)<cr>
  nmap <C-f> :call CSCSearch(7)<cr>
  nmap <C-e> :call CSCSearch(1)<cr>
  nmap <C-g> :call CSCSearch(3)<cr>
@@ -4521,7 +4540,7 @@ index 5fd4a230..6bd0756d 100644
  nmap <C-j> :call PlayVideo()<cr>
  nmap <C-p> :call Prune()<cr>
  nmap <C-k> :call KdiffAll()<cr>
-@@ -475,7 +469,8 @@ nnoremap H :call ShowVITAG()<cr>
+@@ -475,7 +474,8 @@ nnoremap H :call ShowVITAG()<cr>
  nnoremap F :call GetFirstColumnOfFile()<cr>
  nnoremap T :vs $HOME/all.proj<cr>
  nnoremap L :vs <C-R>"<cr>
@@ -4531,7 +4550,7 @@ index 5fd4a230..6bd0756d 100644
  map <F3> :call VDebug()<cr>
  " nnoremap gf gF<cr>
  nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
-@@ -490,10 +485,7 @@ function! CutFile2()
+@@ -490,10 +490,7 @@ function! CutFile2()
  endfunc
  
  function! CutCommon()
@@ -4543,7 +4562,7 @@ index 5fd4a230..6bd0756d 100644
  endfunc
  
  nnoremap <leader>2 :call CutCommon()<cr>
-@@ -505,3 +497,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
+@@ -505,3 +502,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
  " open tig with Project root path
  nnoremap <Leader>t :TigOpenProjectRootDir<CR>
  nnoremap <leader>T :TigOpenCurrentFile<CR>
