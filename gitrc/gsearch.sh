@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 filesStr=($(< $3))
 COMMAND="git log --binary \
