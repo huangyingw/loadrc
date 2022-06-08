@@ -364,7 +364,7 @@ function! GitSearch()
     let fileList = expand('%:p')
 
     call Cd2Worktree()
-    silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  keyword . '"' . ' "' .  b:result . '"' . ' ' . '"' .  fileList . '"'
+    exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  keyword . '"' . ' "' .  b:result . '"' . ' ' . '"' .  fileList . '"'
     call OpenOrSwitch(b:result, 'vs')
     call HighlightKeyword(keyword)
 endfunction
