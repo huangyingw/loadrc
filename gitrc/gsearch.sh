@@ -7,5 +7,5 @@ COMMAND="git log --binary \
     --ignore-cr-at-eol \
     --ignore-space-at-eol \
     --ignore-space-change \
-    -p -G $1 -- ${filesStr[@]}"
-eval "$COMMAND" > "$2"
+    -p -G $1 -- ${filesStr[@]} > $2" 
+eval "$COMMAND"
