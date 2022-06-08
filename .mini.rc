@@ -1,1 +1,2 @@
 ~/loadrc/setup_pbpaste-remote.sh
+# export PATH=$HOME/anaconda3/bin:$PATH
