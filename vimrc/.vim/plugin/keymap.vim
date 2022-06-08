@@ -360,7 +360,7 @@ function! GitSearch()
     let keyword = substitute(@/, '\\c', '', '')
     let keyword = substitute(keyword, '\\<', '', '')
     let keyword = substitute(keyword, '\\>', '', '')
-    let b:result = GetEscapedResult(keyword) . '.findresult'
+    let b:result = GetEscapedResult(keyword) . '.runresult'
     let fileList = expand('%:p')
 
     call Cd2Worktree()
