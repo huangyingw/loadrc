@@ -255,11 +255,12 @@ index 514389f0..9ce19350 100755
 +~/loadrc/uninstall_bidirectional_clipboard.sh
 diff --git a/.mini.rc b/.mini.rc
 new file mode 100755
-index 00000000..9e7032fd
+index 00000000..7cf303fa
 --- /dev/null
 +++ ./.mini.rc
-@@ -0,0 +1 @@
+@@ -0,0 +1,2 @@
 +~/loadrc/setup_pbpaste-remote.sh
++# export PATH=$HOME/anaconda3/bin:$PATH
 diff --git a/.mini2.rc b/.mini2.rc
 new file mode 100755
 index 00000000..d20e36a3
@@ -270,13 +271,12 @@ index 00000000..d20e36a3
 +~/loadrc/wifirc/enable.sh
 diff --git a/.pathrc b/.pathrc
 new file mode 100644
-index 00000000..a4b516a8
+index 00000000..32e9ddc1
 --- /dev/null
 +++ ./.pathrc
-@@ -0,0 +1,13 @@
+@@ -0,0 +1,12 @@
 +export PATH=$HOME/Android/sdk/platform-tools:$PATH
 +export PATH=$HOME/Android/sdk/tools:$PATH
-+export PATH=$HOME/anaconda3/bin:$PATH
 +export PATH=$HOME/bin:$PATH
 +export PATH=/Applications/NoMachine.app/Contents/MacOS:$PATH
 +export PATH=/Applications/kdiff3.app/Contents/MacOS:$PATH
@@ -1059,10 +1059,10 @@ index 00000000..ccd1a783
 +./get_rsyncpath.sh ~/loadrc/ mini:~/loadrc/
 +./get_rsyncpath.sh mini:~/loadrc/ ~/loadrc/
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
-index e2137142..86b5db61 100755
+index e2137142..de7f8541 100755
 --- ./bashrc/jdupes.sh
 +++ ./bashrc/jdupes.sh
-@@ -10,7 +10,6 @@ TARGET="$1"
+@@ -10,15 +10,13 @@ TARGET="$1"
  MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
  
  crontab -r
@@ -1070,7 +1070,10 @@ index e2137142..86b5db61 100755
  
  if [ -f ${MIRRORCHECK} ] ; \
  then \
-@@ -20,5 +19,4 @@ then \
+     ~/loadrc/bashrc/move67.sh ; \
+     fi ; \
+-    jdupes -1dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
++    jdupes -dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
      if [ -f ${MIRRORCHECK} ] ; \
      then \
          ~/loadrc/bashrc/sleep.sh ; \
@@ -2400,23 +2403,24 @@ index 2198cb7f..1af0b074 100755
      done
  fi
 diff --git a/gitrc/gsearch.sh b/gitrc/gsearch.sh
-index b3980c8a..e0dcf04f 100755
+index b3980c8a..16e957d2 100755
 --- ./gitrc/gsearch.sh
 +++ ./gitrc/gsearch.sh
-@@ -1,4 +1,10 @@
+@@ -1,4 +1,11 @@
  #!/bin/zsh
 -find_result="$2".gsearch.findresult
 -echo "find_result --> $find_result"
 -git grep -nH -C2 "$1" $(git rev-list --all) &> "$find_result"
 +
 +filesStr=($(< $3))
-+git log --binary \
++COMMAND="git log --binary \
 +    --ignore-all-space \
 +    --ignore-blank-lines \
 +    --ignore-cr-at-eol \
 +    --ignore-space-at-eol \
 +    --ignore-space-change \
-+    -p -G $1 -- "${filesStr[@]}" > "$2"
++    -p -G $1 -- ${filesStr[@]} > $2" 
++eval "$COMMAND"
 diff --git a/gitrc/gsearch.test.sh b/gitrc/gsearch.test.sh
 new file mode 100755
 index 00000000..616acc64
@@ -2604,10 +2608,18 @@ similarity index 100%
 rename from host_links/movie/etc/network/interfaces
 rename to host_links/movie/etc/network/interfaces_bak
 diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
-index 50886663..8fdc2229 100644
+index 50886663..029b10fa 100644
 --- ./host_links/server/etc/hosts
 +++ ./host_links/server/etc/hosts
-@@ -10,6 +10,9 @@
+@@ -3,13 +3,16 @@
+ 192.168.31.127 u1804
+ 192.168.31.111 u2004
+ 172.27.217.162 localhost.imvu.com
+-192.168.31.140 mini
++192.168.31.201 mini
+ 192.168.123.132 minds
+ 192.168.31.153 gluster00
+ 192.168.31.129 gluster01
  192.168.31.115 gluster02
  192.168.31.99 mldonkey
  192.168.31.147 imacpro
@@ -4357,7 +4369,7 @@ index d5874fe5..3d402787 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..4de53d57 100644
+index 5fd4a230..a9c74601 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -15,7 +15,11 @@ function! ExFilter()
@@ -4469,13 +4481,13 @@ index 5fd4a230..4de53d57 100644
 +    let keyword = substitute(@/, '\\c', '', '')
 +    let keyword = substitute(keyword, '\\<', '', '')
 +    let keyword = substitute(keyword, '\\>', '', '')
-+    let b:result = GetEscapedResult(keyword) . '.findresult'
++    let b:result = GetEscapedResult(keyword) . '.runresult'
 +    let fileList = expand('%:p')
  
      call Cd2Worktree()
 -    silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  keyword . '"' . ' "' .  b:result . '"'
 -    call OpenOrSwitch(b:result . '.gsearch.findresult', 'vs')
-+    silent exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  keyword . '"' . ' "' .  b:result . '"' . ' ' . '"' .  fileList . '"'
++    exec '!~/loadrc/gitrc/gsearch.sh ' . '"' .  keyword . '"' . ' "' .  b:result . '"' . ' ' . '"' .  fileList . '"'
 +    call OpenOrSwitch(b:result, 'vs')
      call HighlightKeyword(keyword)
  endfunction
