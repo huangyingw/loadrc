@@ -2259,11 +2259,10 @@ index 700d6af6..a529d445 100755
  git checkout -f "$target_branch"
  git branch -u "$remote/$target_branch"
 -git merge -X theirs "$remote/$remote_branch" && \
--    git pull && \
--    git push ; \
-+git merge -X theirs "$target" ; \
++git merge -X theirs "$target" && \
 +    git merge -X theirs "$remote/$target_branch" ; \
-+    git pull ; \
+     git pull && \
+-    git push ; \
      git checkout "$current_branch" && \
      ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
  
@@ -2413,14 +2412,13 @@ index b3980c8a..240de610 100755
 -git grep -nH -C2 "$1" $(git rev-list --all) &> "$find_result"
 +
 +filesStr=($(< $3))
-+COMMAND="git log --binary \
++git log --binary \
 +    --ignore-all-space \
 +    --ignore-blank-lines \
 +    --ignore-cr-at-eol \
 +    --ignore-space-at-eol \
 +    --ignore-space-change \
-+    -p -G $1 -- ${filesStr[@]} > $2" 
-+eval "$COMMAND"
++    -p -G "$1" -- "${filesStr[@]}" > "$2"
 diff --git a/gitrc/gsearch.test.sh b/gitrc/gsearch.test.sh
 new file mode 100755
 index 00000000..616acc64
@@ -4481,6 +4479,7 @@ index 5fd4a230..637676a9 100644
 +    let keyword = substitute(@/, '\\c', '', '')
 +    let keyword = substitute(keyword, '\\<', '', '')
 +    let keyword = substitute(keyword, '\\>', '', '')
++    let keyword = substitute(keyword, '\\V', '', '')
 +    let b:result = GetEscapedResult(keyword) . '.runresult'
 +    let fileList = expand('%:p')
  
