@@ -360,6 +360,7 @@ function! GitSearch()
     let keyword = substitute(@/, '\\c', '', '')
     let keyword = substitute(keyword, '\\<', '', '')
     let keyword = substitute(keyword, '\\>', '', '')
+    let keyword = substitute(keyword, '\\V', '', '')
     let b:result = GetEscapedResult(keyword) . '.runresult'
     let fileList = expand('%:p')
 
