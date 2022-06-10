@@ -1733,12 +1733,12 @@ index 00000000..f90514ae
 +
 +sudo /usr/bin/osascript -e "set Volume 0"
 diff --git a/cscope b/cscope
-index 18a46b20..0691ccce 160000
+index 18a46b20..12c8130f 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 0691ccceff1ce005c4d2d6b9ee02c652a7397825-dirty
++Subproject commit 12c8130f0e499ad38fb90574ff8866a938769e01
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -2242,7 +2242,7 @@ index b0247ec4..07590e7c 100755
 -eval "$COMMAND"
 +eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
-index 700d6af6..7db5b05e 100755
+index 700d6af6..a529d445 100755
 --- ./gitrc/gdit.sh
 +++ ./gitrc/gdit.sh
 @@ -3,16 +3,15 @@ output="$1"
@@ -2403,10 +2403,10 @@ index 2198cb7f..1af0b074 100755
      done
  fi
 diff --git a/gitrc/gsearch.sh b/gitrc/gsearch.sh
-index b3980c8a..16e957d2 100755
+index b3980c8a..240de610 100755
 --- ./gitrc/gsearch.sh
 +++ ./gitrc/gsearch.sh
-@@ -1,4 +1,11 @@
+@@ -1,4 +1,10 @@
  #!/bin/zsh
 -find_result="$2".gsearch.findresult
 -echo "find_result --> $find_result"
@@ -3272,11 +3272,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..fc68707b
+index 00000000..34bfca4d
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit fc68707b08f05e35c926ccc361c820b11288a2b8-dirty
++Subproject commit 34bfca4d181f583b8c49ca78d063ed9b626dbfda
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3402,11 +3402,11 @@ index 13a0cf4c..d8d70042 100755
          else:
 diff --git a/rsync b/rsync
 new file mode 160000
-index 00000000..cec3a8f7
+index 00000000..99b9306c
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit cec3a8f76aace5e27f5000f564b6c0b8a60a04fc
++Subproject commit 99b9306c0033af87ff81f730a24e0051d2bbbb32
 diff --git a/set_macos_configuration.sh b/set_macos_configuration.sh
 index cf9a010a..26f18169 100755
 --- ./set_macos_configuration.sh
@@ -3649,19 +3649,19 @@ index 2b1dca6c..facc3db7 160000
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
 +Subproject commit facc3db7c5836fe2424936e8dd06f227e20f96db
 diff --git a/vimrc/.vim/bundle/nvim-yarp b/vimrc/.vim/bundle/nvim-yarp
-index b710bf4d..7ae8c7b7 160000
+index b710bf4d..bb5f5e03 160000
 --- ./vimrc/.vim/bundle/nvim-yarp
 +++ ./vimrc/.vim/bundle/nvim-yarp
 @@ -1 +1 @@
 -Subproject commit b710bf4daccb603a423754794fb446e5fbb59576
-+Subproject commit 7ae8c7b7162df302c441519be537ba92cf650eb7
++Subproject commit bb5f5e038bfe119d3b777845a76b0b919b35ebc8
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..75989215 160000
+index cc6342c3..f5345ae4 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 7598921597dd0b79afa308fae5161bae123f0879-dirty
++Subproject commit f5345ae4ddc4227c1737f03da12e6701fd05f855
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..64256d0f 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -3691,12 +3691,12 @@ index 4579327e..4267ae2a 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..45378d8b 160000
+index dbe8b1e2..ad6a9a96 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit 45378d8b2c470263699c44bbf787ab22d7cfbd83
++Subproject commit ad6a9a9672300881ae75444e1203b3435630500a
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -3712,12 +3712,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..6302dc0a 160000
+index 8468d6a8..1c150120 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 6302dc0abd269790b1cbd4bd84279dc3c62e7f6a-dirty
++Subproject commit 1c15012049db78c93a18a50c69f2889b88044100
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -3747,12 +3747,12 @@ index 00000000..62d82051
 @@ -0,0 +1 @@
 +Subproject commit 62d820512c7c46da791cb66101c1740a90192a3f
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..9c92dafe 160000
+index 3b379635..6bc0c782 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit 9c92dafe6894aed3fa81df7ac52cdd8e7a8ea9a6
++Subproject commit 6bc0c7826d68f8c44c8347a3012aa79ade4f0a22
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
@@ -4369,7 +4369,7 @@ index d5874fe5..3d402787 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..a9c74601 100644
+index 5fd4a230..637676a9 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -15,7 +15,11 @@ function! ExFilter()
@@ -4471,7 +4471,7 @@ index 5fd4a230..a9c74601 100644
      elseif (&filetype ==# 'fugitiveblame')
          let b:commit = expand("<cword>")
          call Cd2Worktree()
-@@ -332,13 +357,15 @@ function! VimOpen()
+@@ -332,13 +357,16 @@ function! VimOpen()
  endfunction
  
  function! GitSearch()
@@ -4492,7 +4492,7 @@ index 5fd4a230..a9c74601 100644
      call HighlightKeyword(keyword)
  endfunction
  
-@@ -353,13 +380,6 @@ function! VimSearch()
+@@ -353,13 +381,6 @@ function! VimSearch()
      call HighlightKeyword(keyword)
  endfunction
  
@@ -4506,7 +4506,7 @@ index 5fd4a230..a9c74601 100644
  function! SwitchWinSize()
      if &winwidth == 1
          set winwidth=999999
-@@ -416,40 +436,21 @@ nnoremap <leader>Y "+yy
+@@ -416,40 +437,21 @@ nnoremap <leader>Y "+yy
  nnoremap <leader>p "+p
  nnoremap <leader>P "+P
  nnoremap tt :Autoformat<CR>:w!<cr>
@@ -4550,7 +4550,7 @@ index 5fd4a230..a9c74601 100644
  nnoremap mg :call VFilter()<cr>
  nnoremap me :call ExtractHighLight()<cr>
  nnoremap mf :call ExFilter()<cr>
-@@ -462,7 +463,7 @@ nmap <C-@> :call CSCSearch(4)<cr>
+@@ -462,7 +464,7 @@ nmap <C-@> :call CSCSearch(4)<cr>
  nmap <C-f> :call CSCSearch(7)<cr>
  nmap <C-e> :call CSCSearch(1)<cr>
  nmap <C-g> :call CSCSearch(3)<cr>
@@ -4559,7 +4559,7 @@ index 5fd4a230..a9c74601 100644
  nmap <C-j> :call PlayVideo()<cr>
  nmap <C-p> :call Prune()<cr>
  nmap <C-k> :call KdiffAll()<cr>
-@@ -475,7 +476,8 @@ nnoremap H :call ShowVITAG()<cr>
+@@ -475,7 +477,8 @@ nnoremap H :call ShowVITAG()<cr>
  nnoremap F :call GetFirstColumnOfFile()<cr>
  nnoremap T :vs $HOME/all.proj<cr>
  nnoremap L :vs <C-R>"<cr>
@@ -4569,7 +4569,7 @@ index 5fd4a230..a9c74601 100644
  map <F3> :call VDebug()<cr>
  " nnoremap gf gF<cr>
  nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
-@@ -490,10 +492,7 @@ function! CutFile2()
+@@ -490,10 +493,7 @@ function! CutFile2()
  endfunc
  
  function! CutCommon()
@@ -4581,7 +4581,7 @@ index 5fd4a230..a9c74601 100644
  endfunc
  
  nnoremap <leader>2 :call CutCommon()<cr>
-@@ -505,3 +504,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
+@@ -505,3 +505,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
  " open tig with Project root path
  nnoremap <Leader>t :TigOpenProjectRootDir<CR>
  nnoremap <leader>T :TigOpenCurrentFile<CR>
