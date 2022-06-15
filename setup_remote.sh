@@ -8,8 +8,10 @@ apt-get update && \
     zsh
 
 rw && \
-    pacman --noconfirm -Syu \
+    pacman -Syy && \
+    pacman --noconfirm -Sy \
     mosh \
+    rsync \
     tmux \
     zsh
 
