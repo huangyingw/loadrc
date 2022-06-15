@@ -3495,7 +3495,7 @@ index 00000000..b385cdc6
 +cp -fv ./pbpaste-remote ~/bin/pbpaste-remote
 diff --git a/setup_remote.sh b/setup_remote.sh
 new file mode 100755
-index 00000000..ee824202
+index 00000000..7458b319
 --- /dev/null
 +++ ./setup_remote.sh
 @@ -0,0 +1,23 @@
@@ -3511,10 +3511,10 @@ index 00000000..ee824202
 +rw && \
 +    pacman -Syy && \
 +    pacman --noconfirm -Sy \
++    gcc \
 +    gcc-debug \
 +    mosh \
 +    rsync \
-+    gcc \
 +    tmux \
 +    zsh
 +
