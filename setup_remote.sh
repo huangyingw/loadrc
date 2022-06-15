@@ -10,8 +10,10 @@ apt-get update && \
 rw && \
     pacman -Syy && \
     pacman --noconfirm -Sy \
+    gcc-debug \
     mosh \
     rsync \
+    gcc \
     tmux \
     zsh
 
