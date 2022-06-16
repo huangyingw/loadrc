@@ -2555,10 +2555,10 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..86808503 100644
+index 425c9192..2bf18442 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
-@@ -9,15 +9,22 @@
+@@ -9,15 +9,23 @@
  192.168.122.65 master-node
  192.168.122.136 slave-node
  192.168.122.244 zsh
@@ -2580,6 +2580,7 @@ index 425c9192..86808503 100644
 +192.168.31.99 haikou
 +192.168.31.223 transmission
 +192.168.31.118 mba
++192.168.31.56 pikvm
  
  # The following lines are desirable for IPv6 capable hosts
  ::1     ip6-localhost ip6-loopback
@@ -3270,11 +3271,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..34bfca4d
+index 00000000..9645e210
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 34bfca4d181f583b8c49ca78d063ed9b626dbfda
++Subproject commit 9645e210c568ef463fd308f3fc4d0ad207e9b1fc
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3404,7 +3405,7 @@ index 00000000..99b9306c
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit 99b9306c0033af87ff81f730a24e0051d2bbbb32
++Subproject commit 99b9306c0033af87ff81f730a24e0051d2bbbb32-dirty
 diff --git a/set_macos_configuration.sh b/set_macos_configuration.sh
 index cf9a010a..26f18169 100755
 --- ./set_macos_configuration.sh
@@ -3494,10 +3495,10 @@ index 00000000..b385cdc6
 +cp -fv ./pbpaste-remote ~/bin/pbpaste-remote
 diff --git a/setup_remote.sh b/setup_remote.sh
 new file mode 100755
-index 00000000..c8166159
+index 00000000..7458b319
 --- /dev/null
 +++ ./setup_remote.sh
-@@ -0,0 +1,19 @@
+@@ -0,0 +1,23 @@
 +#!/bin/bash
 +
 +apt-get update && \
@@ -3508,8 +3509,12 @@ index 00000000..c8166159
 +    zsh
 +
 +rw && \
-+    pacman --noconfirm -Syu \
++    pacman -Syy && \
++    pacman --noconfirm -Sy \
++    gcc \
++    gcc-debug \
 +    mosh \
++    rsync \
 +    tmux \
 +    zsh
 +
@@ -3675,12 +3680,12 @@ index 2d520bdf..f4ec3e57 160000
 -Subproject commit 2d520bdf9d2f3838ad3f8f381dd514307a1c90ee
 +Subproject commit f4ec3e57ccad1b9a28b8607c4a56a0affc686583
 diff --git a/vimrc/.vim/bundle/tlib_vim b/vimrc/.vim/bundle/tlib_vim
-index a071b6d4..70c4e222 160000
+index a071b6d4..223c696e 160000
 --- ./vimrc/.vim/bundle/tlib_vim
 +++ ./vimrc/.vim/bundle/tlib_vim
 @@ -1 +1 @@
 -Subproject commit a071b6d41b20069a3520e0d101194a752968973b
-+Subproject commit 70c4e222464020edc2809c932b488daaf891eeef
++Subproject commit 223c696eab4a3a59a33352531e42c74c721510e7
 diff --git a/vimrc/.vim/bundle/vim-anyfold b/vimrc/.vim/bundle/vim-anyfold
 index 4579327e..4267ae2a 160000
 --- ./vimrc/.vim/bundle/vim-anyfold
@@ -3689,12 +3694,12 @@ index 4579327e..4267ae2a 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..ad6a9a96 160000
+index dbe8b1e2..734343a5 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit ad6a9a9672300881ae75444e1203b3435630500a
++Subproject commit 734343a5b8f0f98d073f09f62ddd9e93e26fba1b-dirty
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -3710,12 +3715,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..1c150120 160000
+index 8468d6a8..bcf53a34 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 1c15012049db78c93a18a50c69f2889b88044100
++Subproject commit bcf53a34574a641316379c5ef1f0d409786d4a68
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -3759,12 +3764,12 @@ index bbdfea4b..7657218f 160000
 -Subproject commit bbdfea4b98fdb8866a8a6060ec1294643cfeb413
 +Subproject commit 7657218f14837395a4e6759f15289bad6febd1b4
 diff --git a/vimrc/.vim/bundle/vim-snipmate b/vimrc/.vim/bundle/vim-snipmate
-index ed3c5426..a4e76182 160000
+index ed3c5426..7bd52173 160000
 --- ./vimrc/.vim/bundle/vim-snipmate
 +++ ./vimrc/.vim/bundle/vim-snipmate
 @@ -1 +1 @@
 -Subproject commit ed3c5426a20bf1c06d7980946ada34fd9f93320e
-+Subproject commit a4e7618279d0036a1fbb28bf834647c6c883c1bf
++Subproject commit 7bd521732a0077dd28c1720f0cd009c61dcb6e85
 diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
 index 7d7359a3..27d015ae 100644
 --- ./vimrc/.vim/plugin/ShowVITAG.vim

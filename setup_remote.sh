@@ -8,8 +8,12 @@ apt-get update && \
     zsh
 
 rw && \
-    pacman --noconfirm -Syu \
+    pacman -Syy && \
+    pacman --noconfirm -Sy \
+    gcc \
+    gcc-debug \
     mosh \
+    rsync \
     tmux \
     zsh
 
