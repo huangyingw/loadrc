@@ -7,14 +7,16 @@ apt-get update && \
     tmux \
     zsh
 
-rw && \
+rw ; \
     pacman -Syy && \
     pacman --noconfirm -Sy \
     gcc \
-    gcc-debug \
     mosh \
+    net-tools \
+    openssh \
     rsync \
     tmux \
+    vim \
     zsh
 
 ./deploy_configurations.sh
