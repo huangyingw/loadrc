@@ -7,9 +7,13 @@ apt-get update && \
     tmux \
     zsh
 
-rw && \
-    pacman --noconfirm -Syu \
+rw ; \
+    pacman -Syy && \
+    pacman --noconfirm -Sy \
     mosh \
+    net-tools \
+    openssh \
+    rsync \
     tmux \
     zsh
 

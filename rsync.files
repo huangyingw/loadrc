@@ -412,6 +412,7 @@
 ./cscope/.gitconfig
 ./cscope/.gitignore
 ./cscope/build.sh
+./cscope/build_pre.sh
 ./cscope/contrib/.gitignore
 ./cscope/doc/.gitignore
 ./cscope/src/.gitignore
@@ -717,7 +718,6 @@
 ./musicrc/unrar.sh
 ./musicrc/unrar_test.sh
 ./musicrc/unzip.sh
-./neovim/.deps/build/src/libuv/docs/code/.gitignore
 ./neovim/.gitconfig
 ./neovim/.gitignore
 ./networkrc/ping.sh
@@ -2437,6 +2437,8 @@
 ./vimrc/.vim/bundle/vim-fugitive/ftdetect/fugitive.vim
 ./vimrc/.vim/bundle/vim-fugitive/ftplugin/fugitiveblame.vim
 ./vimrc/.vim/bundle/vim-fugitive/plugin/fugitive.vim
+./vimrc/.vim/bundle/vim-fugitive/rsync.files
+./vimrc/.vim/bundle/vim-fugitive/setup.cfg
 ./vimrc/.vim/bundle/vim-fugitive/syntax/fugitive.vim
 ./vimrc/.vim/bundle/vim-fugitive/syntax/fugitiveblame.vim
 ./vimrc/.vim/bundle/vim-gradle/.gitignore
@@ -3030,8 +3032,6 @@
 ./wifi-auto-reconnect/README.md
 ./wifi-auto-reconnect/install.sh
 ./wifi-auto-reconnect/net.martinsoft.wifiautoreconnect.plist
-./wifi-auto-reconnect/rsync.files
-./wifi-auto-reconnect/setup.cfg
 ./wifi-auto-reconnect/uninstall.sh
 ./wifi-auto-reconnect/wifiautoreconnect.sh
 ./wifirc/autoconnect.sh

@@ -25,6 +25,7 @@
 192.168.31.99 haikou
 192.168.31.223 transmission
 192.168.31.118 mba
+192.168.31.56 pikvm
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
