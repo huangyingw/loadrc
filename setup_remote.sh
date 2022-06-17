@@ -10,13 +10,11 @@ apt-get update && \
 rw ; \
     pacman -Syy && \
     pacman --noconfirm -Sy \
-    gcc \
     mosh \
     net-tools \
     openssh \
     rsync \
     tmux \
-    vim \
     zsh
 
 ./deploy_configurations.sh
