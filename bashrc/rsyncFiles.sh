@@ -9,5 +9,5 @@ rsync -aHv --force --progress \
 
 rsync -aHv --force --progress \
     --files-from files.rev \
-    "$host:$rpath" \
+    "$host:/" \
     .
