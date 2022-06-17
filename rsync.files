@@ -133,6 +133,8 @@
 ./.git/modules/vimrc/.vim/bundle/vim-pbcopy/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-pdf/config
 ./.git/modules/vimrc/.vim/bundle/vim-pdf/info/exclude
+./.git/modules/vimrc/.vim/bundle/vim-phpfmt/config
+./.git/modules/vimrc/.vim/bundle/vim-phpfmt/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-rails/config
 ./.git/modules/vimrc/.vim/bundle/vim-rails/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-scala/config
@@ -2555,6 +2557,7 @@
 ./vimrc/.vim/bundle/vimtex/DOCUMENTATION.md
 ./vimrc/.vim/bundle/vimtex/LICENSE.md
 ./vimrc/.vim/bundle/vimtex/README.md
+./vimrc/.vim/bundle/vimtex/VISUALS.md
 ./vimrc/.vim/bundle/vimtex/after/ftplugin/tex.vim
 ./vimrc/.vim/bundle/vimtex/autoload/health/vimtex.vim
 ./vimrc/.vim/bundle/vimtex/autoload/unite/sources/vimtex.vim
@@ -2808,6 +2811,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/matchparen.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/misc.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/motion.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/nvim.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/options.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/parser/auxiliary.vim
@@ -3039,4 +3043,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-gsearch.gdio.diff
+setup_remote.gdio.diff
