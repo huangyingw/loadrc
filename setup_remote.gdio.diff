@@ -1432,7 +1432,7 @@ index 00000000..582ea49d
 +    /usr/bin/find /var/lib/transmission-daemon/ -type f -mtime +$left -name \*.part -delete
 +fi
 diff --git a/bashrc/rsyncFiles.sh b/bashrc/rsyncFiles.sh
-index 36367474..502d81f0 100755
+index 36367474..bbb1678b 100755
 --- ./bashrc/rsyncFiles.sh
 +++ ./bashrc/rsyncFiles.sh
 @@ -8,6 +8,6 @@ rsync -aHv --force --progress \
@@ -1440,9 +1440,8 @@ index 36367474..502d81f0 100755
  
  rsync -aHv --force --progress \
 -    --files-from=files.rev \
--    "$host:/" \
 +    --files-from files.rev \
-+    "$host:$rpath" \
+     "$host:/" \
      .
 diff --git a/bashrc/rsync_basic_options b/bashrc/rsync_basic_options
 new file mode 100644
@@ -1733,12 +1732,12 @@ index 00000000..f90514ae
 +
 +sudo /usr/bin/osascript -e "set Volume 0"
 diff --git a/cscope b/cscope
-index 18a46b20..578ece02 160000
+index 18a46b20..c3bcd76a 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 578ece0249c532befad8b2269edf2dad0307d5e9
++Subproject commit c3bcd76a3408780fe223b058163ebb37d84ce40b-dirty
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -3785,11 +3784,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..770775b6
+index 00000000..3d1c53bb
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 770775b657b1f0b954c669fe0cd7688e0d0962bf
++Subproject commit 3d1c53bb150b5be49d652376ccc059a0896b515e-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3977,17 +3976,12 @@ index 00000000..93d8270a
 +launchctl start ~/Library/LaunchAgents/pbpaste.plist
 diff --git a/setup_locale.sh b/setup_locale.sh
 new file mode 100755
-index 00000000..7b60188a
+index 00000000..b35d7ef9
 --- /dev/null
 +++ ./setup_locale.sh
-@@ -0,0 +1,9 @@
+@@ -0,0 +1,4 @@
 +#!/bin/zsh
 +
-+LOCALE="en_US.UTF-8"
-+echo "locales locales/default_environment_locale select $LOCALE" | debconf-set-selections
-+echo "locales locales/locales_to_be_generated multiselect $LOCALE UTF-8" | debconf-set-selections
-+rm "/etc/locale.gen"
-+dpkg-reconfigure --frontend noninteractive locales
 +cp -fv ./linux/etc/locale.gen /etc/locale.gen
 +locale-gen
 diff --git a/setup_pbpaste-remote.sh b/setup_pbpaste-remote.sh
@@ -4231,12 +4225,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..dc0081a5 160000
+index 8468d6a8..bda501f0 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit dc0081a58fc807b3cfac1026029831053dbc75b2-dirty
++Subproject commit bda501f0c924ddcd22a6f34701adb4fe0176d777-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -4888,7 +4882,7 @@ index d5874fe5..3d402787 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..637676a9 100644
+index 5fd4a230..bcbec9ba 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -15,7 +15,11 @@ function! ExFilter()
@@ -4978,19 +4972,23 @@ index 5fd4a230..637676a9 100644
  
      let bnr = bufwinnr('^' . currentFile . '$')
      exe bnr . "wincmd w"
-@@ -313,6 +333,11 @@ function! VimOpen()
+@@ -313,6 +333,15 @@ function! VimOpen()
          call asyncrun#run('<bang>', '', '~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
      elseif (expand("%") ==# 'fdocs.list')
          exec '!open ' . '"' .  expand(expand("<cfile>")) . '"'
 +    elseif (b:fileName =~ '.*.diff')
 +        let b:commit = expand("<cword>")
 +        let output = b:commit . '.diff'
-+        silent exec '!~/loadrc/gitrc/gshow.sh ' . '"' .  b:commit . '" 2>&1 | tee ' . output
++
++        if !filereadable(output)
++            silent exec '!~/loadrc/gitrc/gshow.sh ' . '"' .  b:commit . '" 2>&1 | tee ' . output
++        endif
++
 +        call OpenOrSwitch(output, 'vs')
      elseif (&filetype ==# 'fugitiveblame')
          let b:commit = expand("<cword>")
          call Cd2Worktree()
-@@ -332,13 +357,16 @@ function! VimOpen()
+@@ -332,13 +361,16 @@ function! VimOpen()
  endfunction
  
  function! GitSearch()
@@ -5012,7 +5010,7 @@ index 5fd4a230..637676a9 100644
      call HighlightKeyword(keyword)
  endfunction
  
-@@ -353,13 +381,6 @@ function! VimSearch()
+@@ -353,13 +385,6 @@ function! VimSearch()
      call HighlightKeyword(keyword)
  endfunction
  
@@ -5026,7 +5024,7 @@ index 5fd4a230..637676a9 100644
  function! SwitchWinSize()
      if &winwidth == 1
          set winwidth=999999
-@@ -416,40 +437,21 @@ nnoremap <leader>Y "+yy
+@@ -416,40 +441,21 @@ nnoremap <leader>Y "+yy
  nnoremap <leader>p "+p
  nnoremap <leader>P "+P
  nnoremap tt :Autoformat<CR>:w!<cr>
@@ -5044,7 +5042,7 @@ index 5fd4a230..637676a9 100644
 -if has('win32')
 -    nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 -    nmap <leader>cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
- 
+-
 -    " This will copy the path in 8.3 short format, for DOS and Windows 9x
 -    nmap <leader>c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
 -else
@@ -5054,7 +5052,7 @@ index 5fd4a230..637676a9 100644
 -if has('win32')
 -    nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 -    nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
--
+ 
 -    " This will copy the path in 8.3 short format, for DOS and Windows 9x
 -    nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
 -else
@@ -5070,7 +5068,7 @@ index 5fd4a230..637676a9 100644
  nnoremap mg :call VFilter()<cr>
  nnoremap me :call ExtractHighLight()<cr>
  nnoremap mf :call ExFilter()<cr>
-@@ -462,7 +464,7 @@ nmap <C-@> :call CSCSearch(4)<cr>
+@@ -462,7 +468,7 @@ nmap <C-@> :call CSCSearch(4)<cr>
  nmap <C-f> :call CSCSearch(7)<cr>
  nmap <C-e> :call CSCSearch(1)<cr>
  nmap <C-g> :call CSCSearch(3)<cr>
@@ -5079,7 +5077,7 @@ index 5fd4a230..637676a9 100644
  nmap <C-j> :call PlayVideo()<cr>
  nmap <C-p> :call Prune()<cr>
  nmap <C-k> :call KdiffAll()<cr>
-@@ -475,7 +477,8 @@ nnoremap H :call ShowVITAG()<cr>
+@@ -475,7 +481,8 @@ nnoremap H :call ShowVITAG()<cr>
  nnoremap F :call GetFirstColumnOfFile()<cr>
  nnoremap T :vs $HOME/all.proj<cr>
  nnoremap L :vs <C-R>"<cr>
@@ -5089,7 +5087,7 @@ index 5fd4a230..637676a9 100644
  map <F3> :call VDebug()<cr>
  " nnoremap gf gF<cr>
  nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
-@@ -490,10 +493,7 @@ function! CutFile2()
+@@ -490,10 +497,7 @@ function! CutFile2()
  endfunc
  
  function! CutCommon()
@@ -5101,7 +5099,7 @@ index 5fd4a230..637676a9 100644
  endfunc
  
  nnoremap <leader>2 :call CutCommon()<cr>
-@@ -505,3 +505,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
+@@ -505,3 +509,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
  " open tig with Project root path
  nnoremap <Leader>t :TigOpenProjectRootDir<CR>
  nnoremap <leader>T :TigOpenCurrentFile<CR>
