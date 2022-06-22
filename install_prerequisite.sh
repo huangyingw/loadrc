@@ -72,6 +72,11 @@ apt-get install -y \
     wget \
     zsh
 
+pacman -Syy && \
+    pacman --noconfirm -Sy \
+    cryptsetup \
+    gnu-netcat
+
 modprobe wl
 update-initramfs -u
 locale-gen en_US.UTF-8
