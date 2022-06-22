@@ -336,7 +336,11 @@ function! VimOpen()
     elseif (b:fileName =~ '.*.diff')
         let b:commit = expand("<cword>")
         let output = b:commit . '.diff'
-        silent exec '!~/loadrc/gitrc/gshow.sh ' . '"' .  b:commit . '" 2>&1 | tee ' . output
+
+        if !filereadable(output)
+            silent exec '!~/loadrc/gitrc/gshow.sh ' . '"' .  b:commit . '" 2>&1 | tee ' . output
+        endif
+
         call OpenOrSwitch(output, 'vs')
     elseif (&filetype ==# 'fugitiveblame')
         let b:commit = expand("<cword>")

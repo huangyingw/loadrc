@@ -53,6 +53,7 @@
     remote = BareReps
 [pull]
     default = current
+    rebase = false
 [gdif]
     ignore = *.diff
     ignore = .gitconfig
