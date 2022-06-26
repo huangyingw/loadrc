@@ -1,8 +1,3 @@
 #!/bin/zsh
-host=$(git config deploy.host)
-rpath=$(git config deploy.path)
 
-rsync -aHv --force --progress \
-    --files-from rsync.files \
-    . \
-    "$host:$rpath"
+~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_deploy_forward.sh
