@@ -99,3 +99,5 @@ E207: Can't delete backup file
 Error detected while processing function ExFilter:
 line    7:
 E207: Can't delete backup file
+
+redrawtime' exceeded, syntax highlighting disabled
