@@ -1,7 +1,3 @@
 #!/bin/zsh
 
-SOURCEFILE="cscopesourcefile.bak"
-
-cp -fv files.proj "$SOURCEFILE" && \
-    sed -i.bak 's/\\ / /g' "$SOURCEFILE" && \
-    cscope -bq -i "$SOURCEFILE"
+~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_cscope.sh
