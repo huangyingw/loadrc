@@ -783,19 +783,19 @@ index 00000000..b139d078
 +~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_deploy_forward.sh
 diff --git a/bashrc/do_deploy_backward.sh b/bashrc/do_deploy_backward.sh
 new file mode 100755
-index 00000000..098b766f
+index 00000000..2186e4dd
 --- /dev/null
 +++ ./bashrc/do_deploy_backward.sh
 @@ -0,0 +1,6 @@
 +#!/bin/zsh
 +
-+rsync -aHv --force --progress \
++rsync -aHv --force --progress --append-verify \
 +    --files-from files.rev \
 +    "$host:/" \
 +    .
 diff --git a/bashrc/do_deploy_forward.sh b/bashrc/do_deploy_forward.sh
 new file mode 100755
-index 00000000..8b0a1767
+index 00000000..0ca8b165
 --- /dev/null
 +++ ./bashrc/do_deploy_forward.sh
 @@ -0,0 +1,9 @@
@@ -804,7 +804,7 @@ index 00000000..8b0a1767
 +host=$(git config deploy.host)
 +rpath=$(git config deploy.path)
 +
-+rsync -aHv --force --progress \
++rsync -aHv --force --progress --append-verify \
 +    --files-from rsync.files \
 +    . \
 +    "$host:$rpath"
@@ -3863,11 +3863,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..43b3af1f
+index 00000000..07cc15a1
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 43b3af1ff17d9f1c3531789dd14f108dba881b3a-dirty
++Subproject commit 07cc15a1dc7ad3ce520643892f7d39103edbc877
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4286,12 +4286,12 @@ index 4579327e..4267ae2a 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..88124aad 160000
+index dbe8b1e2..24ca67f1 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit 88124aadb6ac3386d5eef52e6fef0df413960031-dirty
++Subproject commit 24ca67f1483bcd71cb10b965d92a50531b208bc3
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -4307,12 +4307,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..337f9965 160000
+index 8468d6a8..1024b928 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 337f9965d0da32e5355769a435a1be638136b98e-dirty
++Subproject commit 1024b9286b3a381fec71e869a6cb30df0a6afec7
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
