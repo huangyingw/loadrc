@@ -1341,17 +1341,16 @@ index 00000000..e46e9472
 +./parse_host.sh "huangyingw@mini:~/loadrc"
 +./parse_host.sh "~/loadrc"
 diff --git a/bashrc/reboot.sh b/bashrc/reboot.sh
-index 1320581d..79cd8072 100755
+index 1320581d..e40cc39b 100755
 --- ./bashrc/reboot.sh
 +++ ./bashrc/reboot.sh
-@@ -1,3 +1,9 @@
+@@ -1,3 +1,8 @@
  #!/bin/zsh
 -#~/loadrc/kvmrc/vsave.sh
 +
 +if [ $(uname) = "Darwin" ]
 +then
 +    sudo fdesetup authrestart -user $(whoami) -inputplist < ~/login.plist
-+
 +else
      reboot
 +fi
@@ -1732,12 +1731,12 @@ index 00000000..f90514ae
 +
 +sudo /usr/bin/osascript -e "set Volume 0"
 diff --git a/cscope b/cscope
-index 18a46b20..65b8f602 160000
+index 18a46b20..c3bcd76a 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 65b8f60243a89338e002e1d6772af52e5845cab8-dirty
++Subproject commit c3bcd76a3408780fe223b058163ebb37d84ce40b
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -1926,10 +1925,18 @@ index 58429e06..51c59336 100755
      find . -type f | sed -e "s/'/'\\\\''/g;s/\(.*\)/file '\1'/" > "$listFile"
  fi
 diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
-index ca91dbaf..83420d0e 100755
+index ca91dbaf..716192b3 100755
 --- ./gitrc/.gitconfig
 +++ ./gitrc/.gitconfig
-@@ -67,6 +67,7 @@
+@@ -53,6 +53,7 @@
+     remote = BareReps
+ [pull]
+     default = current
++    rebase = false
+ [gdif]
+     ignore = *.diff
+     ignore = .gitconfig
+@@ -67,6 +68,7 @@
      ignore = prunefile.conf
      ignore = prunefix.conf
      ignore = prunefix.rsync
@@ -1937,7 +1944,7 @@ index ca91dbaf..83420d0e 100755
      ignore = rsync.files
      ignore = setup.cfg
  [filter "lfs"]
-@@ -90,3 +91,5 @@
+@@ -90,3 +92,5 @@
      prompt = false
  [merge "ours"]
  	driver = true
@@ -2241,7 +2248,7 @@ index b0247ec4..07590e7c 100755
 -eval "$COMMAND"
 +eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
-index 700d6af6..a529d445 100755
+index 700d6af6..7db5b05e 100755
 --- ./gitrc/gdit.sh
 +++ ./gitrc/gdit.sh
 @@ -3,16 +3,15 @@ output="$1"
@@ -2258,10 +2265,11 @@ index 700d6af6..a529d445 100755
  git checkout -f "$target_branch"
  git branch -u "$remote/$target_branch"
 -git merge -X theirs "$remote/$remote_branch" && \
-+git merge -X theirs "$target" && \
-+    git merge -X theirs "$remote/$target_branch" ; \
-     git pull && \
+-    git pull && \
 -    git push ; \
++git merge -X theirs "$target" ; \
++    git merge -X theirs "$remote/$target_branch" ; \
++    git pull ; \
      git checkout "$current_branch" && \
      ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
  
@@ -2925,7 +2933,7 @@ index 2bc75c67..00000000
 -    #brew install --with-toolchain --with-clang llvm
 -fi
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
-index 298b6bc4..163b6a22 100755
+index 298b6bc4..ce8972fb 100755
 --- ./install_prerequisite.sh
 +++ ./install_prerequisite.sh
 @@ -1,21 +1,21 @@
@@ -3000,7 +3008,15 @@ index 298b6bc4..163b6a22 100755
      unrar \
      w3m \
      w3m-img \
-@@ -68,5 +75,3 @@ apt-get install -y \
+@@ -65,8 +72,11 @@ apt-get install -y \
+     wget \
+     zsh
+ 
++pacman -Syy && \
++    pacman --noconfirm -Sy \
++    cryptsetup \
++    gnu-netcat
++
  modprobe wl
  update-initramfs -u
  locale-gen en_US.UTF-8
@@ -3797,11 +3813,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..c5c18113
+index 00000000..6114cce7
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit c5c181134da5d01bbd836f36c68e7e17b4e276de-dirty
++Subproject commit 6114cce7fce205ec3caba05bfc95654d62bc28f6
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3913,25 +3929,28 @@ index 5bccdfa7..0e1c4279 100755
  import token
  import tokenize
 diff --git a/pythonrc/vlc.py b/pythonrc/vlc.py
-index 13a0cf4c..d8d70042 100755
+index 13a0cf4c..6cd6989c 100755
 --- ./pythonrc/vlc.py
 +++ ./pythonrc/vlc.py
-@@ -13,7 +13,7 @@ def callvlc(targetFile, start=0):
+@@ -13,9 +13,9 @@ def callvlc(targetFile, start=0):
      if targetFile:
          if platform.system() == 'Darwin':
              if start == 0:
 -                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', targetFile])
-+                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--rate=2.0', targetFile])
++                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '--sub-language', 'Chinese', '--sub-autodetect-file', '-f', '--macosx-continue-playback=2', '--rate=2.0', targetFile])
              else:
-                 subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
+-                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
++                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '--sub-language', 'Chinese', '--sub-autodetect-file', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
          else:
+             subprocess.check_call(['smplayer', '-fullscreen', targetFile])
+ 
 diff --git a/rsync b/rsync
 new file mode 160000
-index 00000000..99b9306c
+index 00000000..cec3a8f7
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit 99b9306c0033af87ff81f730a24e0051d2bbbb32-dirty
++Subproject commit cec3a8f76aace5e27f5000f564b6c0b8a60a04fc
 diff --git a/set_macos_configuration.sh b/set_macos_configuration.sh
 index cf9a010a..26f18169 100755
 --- ./set_macos_configuration.sh
@@ -3989,17 +4008,12 @@ index 00000000..93d8270a
 +launchctl start ~/Library/LaunchAgents/pbpaste.plist
 diff --git a/setup_locale.sh b/setup_locale.sh
 new file mode 100755
-index 00000000..7b60188a
+index 00000000..b35d7ef9
 --- /dev/null
 +++ ./setup_locale.sh
-@@ -0,0 +1,9 @@
+@@ -0,0 +1,4 @@
 +#!/bin/zsh
 +
-+LOCALE="en_US.UTF-8"
-+echo "locales locales/default_environment_locale select $LOCALE" | debconf-set-selections
-+echo "locales locales/locales_to_be_generated multiselect $LOCALE UTF-8" | debconf-set-selections
-+rm "/etc/locale.gen"
-+dpkg-reconfigure --frontend noninteractive locales
 +cp -fv ./linux/etc/locale.gen /etc/locale.gen
 +locale-gen
 diff --git a/setup_pbpaste-remote.sh b/setup_pbpaste-remote.sh
@@ -4187,12 +4201,12 @@ index b710bf4d..bb5f5e03 160000
 -Subproject commit b710bf4daccb603a423754794fb446e5fbb59576
 +Subproject commit bb5f5e038bfe119d3b777845a76b0b919b35ebc8
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..f5345ae4 160000
+index cc6342c3..2b3af9b4 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit f5345ae4ddc4227c1737f03da12e6701fd05f855
++Subproject commit 2b3af9b4f293fa6d716946ce54a32353bf8bc64d
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..64256d0f 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -4222,12 +4236,12 @@ index 4579327e..4267ae2a 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..734343a5 160000
+index dbe8b1e2..ee2862fc 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit 734343a5b8f0f98d073f09f62ddd9e93e26fba1b-dirty
++Subproject commit ee2862fcf8507a086da3361c2c7846fea7eb750c
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -4243,12 +4257,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..e6172b72 160000
+index 8468d6a8..722e2b6d 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit e6172b72f3436de380796e71f7e4340a602edfe8-dirty
++Subproject commit 722e2b6dbe98d0320647e6fc8a26924a7bd304c8
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -4292,12 +4306,12 @@ index bbdfea4b..7657218f 160000
 -Subproject commit bbdfea4b98fdb8866a8a6060ec1294643cfeb413
 +Subproject commit 7657218f14837395a4e6759f15289bad6febd1b4
 diff --git a/vimrc/.vim/bundle/vim-snipmate b/vimrc/.vim/bundle/vim-snipmate
-index ed3c5426..7bd52173 160000
+index ed3c5426..fe21bcb9 160000
 --- ./vimrc/.vim/bundle/vim-snipmate
 +++ ./vimrc/.vim/bundle/vim-snipmate
 @@ -1 +1 @@
 -Subproject commit ed3c5426a20bf1c06d7980946ada34fd9f93320e
-+Subproject commit 7bd521732a0077dd28c1720f0cd009c61dcb6e85
++Subproject commit fe21bcb98b235d571d5459b7b9f24b6a66009dc4
 diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
 index 7d7359a3..27d015ae 100644
 --- ./vimrc/.vim/plugin/ShowVITAG.vim
@@ -5701,7 +5715,7 @@ index 00000000..edfddbb7
 +printf "%s\n" "${result[@]}" > "$1".tmp
 +cp -fv "$1".tmp "$1"
 diff --git a/vishrc/vlc.sh b/vishrc/vlc.sh
-index 57af963a..b4ad2e35 100755
+index 57af963a..21469ba0 100755
 --- ./vishrc/vlc.sh
 +++ ./vishrc/vlc.sh
 @@ -7,7 +7,7 @@ fi
@@ -5709,12 +5723,12 @@ index 57af963a..b4ad2e35 100755
  if [ $(uname) = "Darwin" ]
  then
 -    /Applications/VLC.app/Contents/MacOS/VLC -f --macosx-continue-playback=2 "$1"
-+    /Applications/VLC.app/Contents/MacOS/VLC -f --macosx-continue-playback=2 --rate=2.0 "$1"
++    /Applications/VLC.app/Contents/MacOS/VLC --sub-language Chinese --sub-autodetect-file -f --macosx-continue-playback=2 --rate=2.0 "$1"
  else
      #smplayer "$1"
      smplayer -fullscreen "$1"
 diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
-index e14de500..b8784f97 100755
+index e14de500..a69c8c02 100755
 --- ./vishrc/vrun.sh
 +++ ./vishrc/vrun.sh
 @@ -14,12 +14,6 @@ then
@@ -5757,6 +5771,15 @@ index e14de500..b8784f97 100755
          else
              SCRIPT=$(realpath "$file")
              SCRIPTPATH=$(dirname "$SCRIPT")
+@@ -93,7 +87,7 @@ case $extension in
+         then
+             ssh -nY "$host" "docker-compose -f $rpath/$rfile up -d"
+         else
+-            docker-compose -f "$file" up -d
++            docker-compose -f "$file" up -d --build
+         fi
+         ;;
+     ymldebug)
 diff --git a/vishrc/vsearch.sh b/vishrc/vsearch.sh
 index 48f7223b..7134d738 100755
 --- ./vishrc/vsearch.sh
