@@ -587,7 +587,7 @@ function! s:SelectMove(...) abort
         call OpenOrSwitch(b:output, 'vs')
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+    silent exec '!~/loadrc/bashrc/update_proj.sh'
 endfunction
 
 function! s:CatMove(...) abort
@@ -600,7 +600,7 @@ function! s:CatMove(...) abort
         exec '!~/loadrc/vishrc/cat_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+    silent exec '!~/loadrc/bashrc/update_proj.sh'
 endfunction
 
 function! s:FileMove(...) abort
@@ -622,7 +622,7 @@ function! s:FileMove(...) abort
 
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+    silent exec '!~/loadrc/bashrc/update_proj.sh'
 endfunction
 
 
@@ -644,7 +644,7 @@ function! s:AppendRate(...) abort
 
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+    silent exec '!~/loadrc/bashrc/update_proj.sh'
 endfunction
 
 function! s:CatRate(...) abort
@@ -657,7 +657,7 @@ function! s:CatRate(...) abort
         exec '!~/loadrc/vishrc/cat_rate.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+    silent exec '!~/loadrc/bashrc/update_proj.sh'
 endfunction
 
 function! s:CatDu(...) abort
