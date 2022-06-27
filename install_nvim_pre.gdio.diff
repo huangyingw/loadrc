@@ -1731,12 +1731,12 @@ index 00000000..f90514ae
 +
 +sudo /usr/bin/osascript -e "set Volume 0"
 diff --git a/cscope b/cscope
-index 18a46b20..c3bcd76a 160000
+index 18a46b20..12c8130f 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit c3bcd76a3408780fe223b058163ebb37d84ce40b
++Subproject commit 12c8130f0e499ad38fb90574ff8866a938769e01
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -3813,11 +3813,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..6114cce7
+index 00000000..ebfea0ad
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 6114cce7fce205ec3caba05bfc95654d62bc28f6
++Subproject commit ebfea0ad4f027be5524c6dd4cb07b4846991a148-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4236,12 +4236,12 @@ index 4579327e..4267ae2a 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..ee2862fc 160000
+index dbe8b1e2..24ca67f1 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit ee2862fcf8507a086da3361c2c7846fea7eb750c
++Subproject commit 24ca67f1483bcd71cb10b965d92a50531b208bc3
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -4306,12 +4306,12 @@ index bbdfea4b..7657218f 160000
 -Subproject commit bbdfea4b98fdb8866a8a6060ec1294643cfeb413
 +Subproject commit 7657218f14837395a4e6759f15289bad6febd1b4
 diff --git a/vimrc/.vim/bundle/vim-snipmate b/vimrc/.vim/bundle/vim-snipmate
-index ed3c5426..fe21bcb9 160000
+index ed3c5426..b8fe3fb6 160000
 --- ./vimrc/.vim/bundle/vim-snipmate
 +++ ./vimrc/.vim/bundle/vim-snipmate
 @@ -1 +1 @@
 -Subproject commit ed3c5426a20bf1c06d7980946ada34fd9f93320e
-+Subproject commit fe21bcb98b235d571d5459b7b9f24b6a66009dc4
++Subproject commit b8fe3fb6b127c417290c0fe1a85a8dd0173cef05
 diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
 index 7d7359a3..27d015ae 100644
 --- ./vimrc/.vim/plugin/ShowVITAG.vim
