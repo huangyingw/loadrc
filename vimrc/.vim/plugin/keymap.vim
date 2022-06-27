@@ -175,7 +175,7 @@ function! VRun()
         call OpenOrSwitch('gbil.log', 'vs')
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+    silent exec '!~/loadrc/bashrc/update_proj.sh'
 endfunction
 
 function! SearchAgain()
@@ -291,7 +291,7 @@ endfunction
 
 function! UpdateProj()
     call Cd2ProjectRoot("files.proj")
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+    silent exec '!~/loadrc/bashrc/update_proj.sh'
     call CHANGE_CURR_DIR()
 endfunction
 
