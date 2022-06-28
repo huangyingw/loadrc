@@ -762,6 +762,33 @@ index a76cbfaf..6f3988bf 100755
 -    . ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/rsyncFiles.sh
 +    ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_deploy.sh
  fi
+diff --git a/bashrc/deploy_backward.sh b/bashrc/deploy_backward.sh
+new file mode 100755
+index 00000000..2186e4dd
+--- /dev/null
++++ ./bashrc/deploy_backward.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++
++rsync -aHv --force --progress --append-verify \
++    --files-from files.rev \
++    "$host:/" \
++    .
+diff --git a/bashrc/deploy_forward.sh b/bashrc/deploy_forward.sh
+new file mode 100755
+index 00000000..0ca8b165
+--- /dev/null
++++ ./bashrc/deploy_forward.sh
+@@ -0,0 +1,9 @@
++#!/bin/zsh
++
++host=$(git config deploy.host)
++rpath=$(git config deploy.path)
++
++rsync -aHv --force --progress --append-verify \
++    --files-from rsync.files \
++    . \
++    "$host:$rpath"
 diff --git a/bashrc/do_deploy.sh b/bashrc/do_deploy.sh
 new file mode 100644
 index 00000000..31a4e098
@@ -4293,7 +4320,7 @@ index 8468d6a8..722e2b6d 160000
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 722e2b6dbe98d0320647e6fc8a26924a7bd304c8
++Subproject commit 722e2b6dbe98d0320647e6fc8a26924a7bd304c8-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
