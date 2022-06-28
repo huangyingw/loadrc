@@ -4321,7 +4321,7 @@ index 8468d6a8..722e2b6d 160000
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 722e2b6dbe98d0320647e6fc8a26924a7bd304c8
++Subproject commit 722e2b6dbe98d0320647e6fc8a26924a7bd304c8-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
