@@ -1,5 +1,6 @@
 #! /bin/zsh
 
+echo  /Users/huangyingw/loadrc/bashrc/fdocs.sh >> ~/loadrc/g.findresult
 FdocsInclude="fdocs.include"
 FdocsExclude="fdocs.exclude"
 TARGET="fdocs.list.tmp"
