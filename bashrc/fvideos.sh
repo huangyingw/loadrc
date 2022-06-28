@@ -1,5 +1,6 @@
 #! /bin/zsh
 
+echo  /Users/huangyingw/loadrc/bashrc/fvideos.sh >> ~/loadrc/g.findresult
 FAVLOG="fav.log.tmp"
 FAVLOGSORT="fav.log.sort.tmp"
 export LC_ALL=C
