@@ -790,15 +790,16 @@ index 00000000..0ca8b165
 +    . \
 +    "$host:$rpath"
 diff --git a/bashrc/do_deploy.sh b/bashrc/do_deploy.sh
-new file mode 100644
-index 00000000..31a4e098
+new file mode 100755
+index 00000000..f9ed3d1c
 --- /dev/null
 +++ ./bashrc/do_deploy.sh
-@@ -0,0 +1,4 @@
+@@ -0,0 +1,5 @@
 +#!/bin/zsh
 +
-+~/loadrc/bashrc/deploy_forward.sh
-+~/loadrc/bashrc/deploy_backward.sh
++parallel ::: \
++    ~/loadrc/bashrc/deploy_forward.sh \
++    ~/loadrc/bashrc/deploy_backward.sh
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
 index 9a6e19c8..50528c4c 100755
 --- ./bashrc/do_update_proj.sh
@@ -4320,7 +4321,7 @@ index 8468d6a8..722e2b6d 160000
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 722e2b6dbe98d0320647e6fc8a26924a7bd304c8-dirty
++Subproject commit 722e2b6dbe98d0320647e6fc8a26924a7bd304c8
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
