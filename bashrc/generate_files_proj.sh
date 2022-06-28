@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-echo  /Users/huangyingw/loadrc/bashrc/generate_files_proj.sh >> ~/loadrc/g.findresult
 if [ -z "$1" ]
 then
     TARGETEDIR=`realpath "$PWD"`
