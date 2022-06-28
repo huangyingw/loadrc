@@ -251,6 +251,9 @@
 ./bashrc/delete_files_with_string.sh
 ./bashrc/deploy.sh
 ./bashrc/deployLoadrc.sh
+./bashrc/deploy_backward.sh
+./bashrc/deploy_forward.sh
+./bashrc/do_deploy.sh
 ./bashrc/do_update_proj.sh
 ./bashrc/echo.sh
 ./bashrc/encrypt.sh
@@ -412,7 +415,6 @@
 ./cscope/.gitconfig
 ./cscope/.gitignore
 ./cscope/build.sh
-./cscope/build_pre.sh
 ./cscope/contrib/.gitignore
 ./cscope/doc/.gitignore
 ./cscope/src/.gitignore
@@ -627,7 +629,6 @@
 ./install_nodejs.sh
 ./install_nvim.sh
 ./install_nvim_post.sh
-./install_nvim_pre.sh
 ./install_nx.sh
 ./install_prerequisite.sh
 ./install_time_machine.sh
@@ -687,6 +688,7 @@
 ./leetcoderc/submit.sh
 ./leetcoderc/submit_delete.sh
 ./linux.conf
+./linux/etc/locale.gen
 ./linux/etc/netplan/00-installer-config.yaml_bak
 ./linux/etc/ssh/ssh_config
 ./linux/etc/ssh/sshd_config
@@ -718,6 +720,7 @@
 ./musicrc/unrar.sh
 ./musicrc/unrar_test.sh
 ./musicrc/unzip.sh
+./neovim/.deps/build/src/libuv/docs/code/.gitignore
 ./neovim/.gitconfig
 ./neovim/.gitignore
 ./networkrc/ping.sh
@@ -3043,4 +3046,4 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-setup_remote.gdio.diff
+parallel.deploy.gdio.diff
