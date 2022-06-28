@@ -87,7 +87,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SvnRev
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SvnSt :execute s:SvnSt()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SvnUp :execute s:SvnUp()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Tail :execute s:Tail()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject UpdateProj :execute s:UpdateProj()
 
 function! s:LogFilter(...) abort
     let worktree = Cd2Worktree()
@@ -331,7 +330,7 @@ function! s:G(args, ...) abort
     endif
 
     if &diff
-        exec '!git reset HEAD ; git add ' . '"' .  expand('%:p') . '"' 
+        exec '!git reset HEAD ; git add ' . '"' .  expand('%:p') . '"'
     endif
 
     let worktree = Cd2Worktree()
@@ -685,12 +684,6 @@ endfunction
 
 function! s:Tail() abort
     exec '!tail -f ' . expand("%:p")
-endfunction
-
-function! s:UpdateProj() abort
-    call Cd2ProjectRoot("files.proj")
-    exec '!~/loadrc/bashrc/update_proj.sh'
-    call CHANGE_CURR_DIR()
 endfunction
 
 function! s:Gres() abort
