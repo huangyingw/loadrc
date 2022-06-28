@@ -690,13 +690,13 @@ index 2c4bf8d7..83b0bbaf 100755
 -dpkg -i $SOFTWARE/nx/nomachine_*.deb
 +./copy.sh ~/loadrc/ ~/loadrc.bak/
 diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
-index 9c24d246..6e6f5e28 100755
+index 9c24d246..df77e235 100755
 --- ./bashrc/cscope.sh
 +++ ./bashrc/cscope.sh
 @@ -1,11 +1,8 @@
  #!/bin/zsh
  
-+echo  /Users/huangyingw/loadrc/bashrc/cscope.sh >> ~/loadrc/g.findresult
++echo  /Users/huangyingw/loadrc/bashrc/cscope.sh >> ~/loadrc/debug.runresult
  SOURCEFILE="cscopesourcefile.bak"
 -CSCOPEFILE="cscopefile.bak"
  
@@ -785,13 +785,13 @@ index 37081d0c..3867ab7b 100755
  mdadm -D "$DEVICE" >> "$logFile"
  blkid >> "$logFile"
 diff --git a/bashrc/fdocs.sh b/bashrc/fdocs.sh
-index bee84cf0..e1e935bb 100755
+index bee84cf0..a8dbf5b7 100755
 --- ./bashrc/fdocs.sh
 +++ ./bashrc/fdocs.sh
 @@ -1,8 +1,9 @@
  #! /bin/zsh
  
-+echo  /Users/huangyingw/loadrc/bashrc/fdocs.sh >> ~/loadrc/g.findresult
++echo  /Users/huangyingw/loadrc/bashrc/fdocs.sh >> ~/loadrc/debug.runresult
  FdocsInclude="fdocs.include"
  FdocsExclude="fdocs.exclude"
 -TARGET="fdocs.list.bak"
@@ -876,7 +876,7 @@ index f58a2ee7..dcc8f356 100755
      xargs sed -i.bak  "s/${FIND}/${REPLACE}/g" < "$3"
 +fi
 diff --git a/bashrc/fvideos.sh b/bashrc/fvideos.sh
-index 38fb060b..afff6629 100755
+index 38fb060b..fa758020 100755
 --- ./bashrc/fvideos.sh
 +++ ./bashrc/fvideos.sh
 @@ -1,7 +1,8 @@
@@ -884,20 +884,20 @@ index 38fb060b..afff6629 100755
  
 -FAVLOG="fav.log.bak"
 -FAVLOGSORT="fav.log.sort.bak"
-+echo  /Users/huangyingw/loadrc/bashrc/fvideos.sh >> ~/loadrc/g.findresult
++echo  /Users/huangyingw/loadrc/bashrc/fvideos.sh >> ~/loadrc/debug.runresult
 +FAVLOG="fav.log.tmp"
 +FAVLOGSORT="fav.log.sort.tmp"
  export LC_ALL=C
  find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
      cp -fv "$FAVLOG" fav.log && \
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
-index 83e2c748..69cc32f5 100755
+index 83e2c748..e1128b5b 100755
 --- ./bashrc/generate_files_proj.sh
 +++ ./bashrc/generate_files_proj.sh
 @@ -1,5 +1,6 @@
  #!/bin/zsh
  
-+echo  /Users/huangyingw/loadrc/bashrc/generate_files_proj.sh >> ~/loadrc/g.findresult
++echo  /Users/huangyingw/loadrc/bashrc/generate_files_proj.sh >> ~/loadrc/debug.runresult
  if [ -z "$1" ]
  then
      TARGETEDIR=`realpath "$PWD"`
@@ -941,14 +941,14 @@ index 83e2c748..69cc32f5 100755
          echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
          sort -u ~/all.proj -o ~/all.proj
 diff --git a/bashrc/generate_rsync_files.sh b/bashrc/generate_rsync_files.sh
-index d5360ed8..ced6838b 100755
+index d5360ed8..98adc4f6 100755
 --- ./bashrc/generate_rsync_files.sh
 +++ ./bashrc/generate_rsync_files.sh
 @@ -1,6 +1,7 @@
  #!/bin/zsh
  
 -rsyncFiles=rsync.files.bak
-+echo  /Users/huangyingw/loadrc/bashrc/generate_rsync_files.sh >> ~/loadrc/g.findresult
++echo  /Users/huangyingw/loadrc/bashrc/generate_rsync_files.sh >> ~/loadrc/debug.runresult
 +rsyncFiles=rsync.files.tmp
  cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > "$rsyncFiles"
  PRUNE_POSTFIX=prunefix.rsync
@@ -1603,13 +1603,13 @@ index 30abd357..31ce354d 100755
 +    "$source/" "$target/" > "$ready_file"
 diff --git a/bashrc/vm2img.sh b/bashrc/vm2img.sh
 new file mode 100755
-index 00000000..b53c8b4d
+index 00000000..e456eda6
 --- /dev/null
 +++ ./bashrc/vm2img.sh
 @@ -0,0 +1,9 @@
 +#!/bin/zsh
 +
-+input=/var/lib/libvirt/images/u2004.qcow2 
++input=/var/lib/libvirt/images/u2004.qcow2
 +output=$(echo "$input" | sed 's/\.qcow2$/\.img/g;s/\.hds$/\.img/g')
 +echo "output --> $output"
 +
@@ -3835,11 +3835,11 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..07cc15a1
+index 00000000..b143a364
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 07cc15a1dc7ad3ce520643892f7d39103edbc877
++Subproject commit b143a3643d450030b40d6eae24c2a5318d101e26
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4228,7 +4228,7 @@ index cc6342c3..2b3af9b4 160000
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 2b3af9b4f293fa6d716946ce54a32353bf8bc64d
++Subproject commit 2b3af9b4f293fa6d716946ce54a32353bf8bc64d-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..64256d0f 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -4279,12 +4279,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..c0a8c4ce 160000
+index 8468d6a8..29258f98 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit c0a8c4cece668de0332ba5931b8b9e6324dee49a
++Subproject commit 29258f98c3223c486ae871946f1d7ba323636020-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -4554,7 +4554,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..da8b2e7d 100644
+index d5874fe5..390af0e4 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,17 @@
@@ -4695,7 +4695,7 @@ index d5874fe5..da8b2e7d 100644
  
      if &diff
 -        exec '!git reset HEAD ; git add %'
-+        exec '!git reset HEAD ; git add ' . '"' .  expand('%:p') . '"' 
++        exec '!git reset HEAD ; git add ' . '"' .  expand('%:p') . '"'
      endif
  
      let worktree = Cd2Worktree()
