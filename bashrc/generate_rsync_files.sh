@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-echo  /Users/huangyingw/loadrc/bashrc/generate_rsync_files.sh >> ~/loadrc/debug.runresult
 rsyncFiles=rsync.files.tmp
 cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > "$rsyncFiles"
 PRUNE_POSTFIX=prunefix.rsync
