@@ -689,6 +689,9 @@ index 2c4bf8d7..83b0bbaf 100755
 -. ~/loadrc/.loadrc
 -dpkg -i $SOFTWARE/nx/nomachine_*.deb
 +./copy.sh ~/loadrc/ ~/loadrc.bak/
+diff --git a/bashrc/create_folders.sh b/bashrc/create_folders.sh
+old mode 100644
+new mode 100755
 diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
 index 9c24d246..2fb9f62d 100755
 --- ./bashrc/cscope.sh
@@ -1399,6 +1402,9 @@ index 00000000..e46e9472
 +./parse_host.sh "mini:~/loadrc"
 +./parse_host.sh "huangyingw@mini:~/loadrc"
 +./parse_host.sh "~/loadrc"
+diff --git a/bashrc/post.sh b/bashrc/post.sh
+old mode 100644
+new mode 100755
 diff --git a/bashrc/reboot.sh b/bashrc/reboot.sh
 index 1320581d..e40cc39b 100755
 --- ./bashrc/reboot.sh
@@ -1414,7 +1420,7 @@ index 1320581d..e40cc39b 100755
      reboot
 +fi
 diff --git a/bashrc/remove_path.sh b/bashrc/remove_path.sh
-new file mode 100644
+new file mode 100755
 index 00000000..10e89a8a
 --- /dev/null
 +++ ./bashrc/remove_path.sh
@@ -2188,6 +2194,9 @@ index e118a4de..e1f58816 100755
  git remote remove origin ; \
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
+diff --git a/gitrc/gcob_test.sh b/gitrc/gcob_test.sh
+old mode 100644
+new mode 100755
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 new file mode 100755
 index 00000000..f43af40a
@@ -2505,6 +2514,9 @@ index 06604af2..056c7062 100755
  #!/bin/zsh
 -git show -w "$1"
 +git show --minimal -w "$1" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
+diff --git a/gitrc/gsquash.sh b/gitrc/gsquash.sh
+old mode 100644
+new mode 100755
 diff --git a/gitrc/gstp.sh b/gitrc/gstp.sh
 index 559b2ec5..15e9fe67 100755
 --- ./gitrc/gstp.sh
@@ -3870,6 +3882,9 @@ index 00000000..0f662165
 +#	PermitTTY no
 +#	ForceCommand cvs server
 +PermitUserEnvironment PATH,LANG
+diff --git a/musicrc/copy_test.sh b/musicrc/copy_test.sh
+old mode 100644
+new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
 index 00000000..b143a364
@@ -3920,7 +3935,7 @@ index 00000000..20099aee
 +    echo "say Timeout."
 +fi
 diff --git a/networkrc/temp.sh b/networkrc/temp.sh
-new file mode 100644
+new file mode 100755
 index 00000000..d44dc276
 --- /dev/null
 +++ ./networkrc/temp.sh
@@ -4316,12 +4331,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..722e2b6d 160000
+index 8468d6a8..f77aea9f 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 722e2b6dbe98d0320647e6fc8a26924a7bd304c8-dirty
++Subproject commit f77aea9f8f7d5cf869fc7b6adf2dc956d92ae404
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
