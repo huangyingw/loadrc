@@ -2320,6 +2320,15 @@ index b0247ec4..07590e7c 100755
  
 -eval "$COMMAND"
 +eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
+diff --git a/gitrc/gdio.sh b/gitrc/gdio.sh
+index 564ef4a9..35317ddb 100755
+--- ./gitrc/gdio.sh
++++ ./gitrc/gdio.sh
+@@ -1,3 +1,3 @@
+ #!/bin/zsh
+ ~/loadrc/gitrc/dogdio.sh
+-git submodule foreach ~/loadrc/gitrc/dogdio.sh &
++git submodule status | awk '{print $2}' | parallel --jobs 0 'cd {}; ~/loadrc/gitrc/dogdio.sh'
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
 index 700d6af6..7db5b05e 100755
 --- ./gitrc/gdit.sh
@@ -2537,14 +2546,15 @@ index 559b2ec5..15e9fe67 100755
 +    git stash show -p stash@{"$1"} | git apply --reject --whitespace=fix --recount && git stash drop stash@{"$1"}
  fi
 diff --git a/gitrc/gsync.sh b/gitrc/gsync.sh
-index 9208b305..a0c47878 100755
+index 9208b305..aa15aff3 100755
 --- ./gitrc/gsync.sh
 +++ ./gitrc/gsync.sh
 @@ -1,3 +1,3 @@
  #!/bin/zsh
- ~/loadrc/gitrc/dogsync.sh &
+-~/loadrc/gitrc/dogsync.sh &
 -git submodule foreach ~/loadrc/gitrc/dogsync.sh &
-+git submodule status | awk '{print $2}' | parallel -j70 'cd {}; ~/loadrc/gitrc/dogsync.sh'
++~/loadrc/gitrc/dogsync.sh
++git submodule status | awk '{print $2}' | parallel --jobs 0 'cd {}; ~/loadrc/gitrc/dogsync.sh'
 diff --git a/gitrc/postCommit.sh b/gitrc/postCommit.sh
 index 3bd9b5b1..08477d81 100755
 --- ./gitrc/postCommit.sh
@@ -4341,7 +4351,7 @@ index 8468d6a8..8e09fbe0 160000
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 8e09fbe0ed977469f219d980f517673f9cdabafa-dirty
++Subproject commit 8e09fbe0ed977469f219d980f517673f9cdabafa
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
