@@ -5,6 +5,7 @@ then
     exit
 fi
 
-~/loadrc/gitrc/gps.sh &
-~/loadrc/gitrc/gpl.sh
-~/loadrc/gitrc/dogdio.sh
+parallel --jobs 0 -k ::: \
+    ~/loadrc/gitrc/gps.sh \
+    ~/loadrc/gitrc/gpl.sh \
+    ~/loadrc/gitrc/dogdio.sh
