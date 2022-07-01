@@ -15,3 +15,13 @@ code change
     "./vimrc/.vim/plugin/keymap.vim"
     "./vimrc/.vim/plugin/auto_cscope.vim"
     "./vimrc/.vim/plugin/auto_deploy.vim"
+    iterm2 move display feature
+        https://gitlab.com/gnachman/iterm2/-/issues/7438
+        https://gitlab.com/gnachman/iterm2/-/issues/7354
+
+training AI from vim:
+    vim demo from Photo
+    this involved some fastai source code change to add cache, so the next time, the same training would not re-run again, to save my money
+
+@mini:"/media/volgrp/myproject/git/Kubernetes/kubernetes-setup/files.proj"
+@mini:"/media/volgrp/myproject/git/AI/setup/files.proj"
