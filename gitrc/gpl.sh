@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+echo "gitrc/gpl.sh" >> ~/loadrc/debug.runresult
 ~/loadrc/gitrc/discard_unnecessaries.sh
 
 if [ -n "$(git status --untracked-files=no --porcelain --ignore-submodules)" ]
