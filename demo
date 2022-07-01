@@ -7,11 +7,17 @@ fugitive
 
 git 
     gdio gdif gdi
+    reapply
+
+"./bashrc/update_proj.sh"
+
+leetcode-cli        
 
 code change
     neovim
     fugitive
     cscope
+    vim-anyfold
     "./vimrc/.vim/plugin/keymap.vim"
     "./vimrc/.vim/plugin/auto_cscope.vim"
     "./vimrc/.vim/plugin/auto_deploy.vim"
@@ -20,6 +26,8 @@ code change
         https://gitlab.com/gnachman/iterm2/-/issues/7354
     leetcode-cli        
         add new features
+    share clip board        
+        from mosh.sh
 
 training AI from vim:
     vim demo from Photo
