@@ -1,4 +1,17 @@
 search
     cscope
+
 filter
+
+fugitive
+
 git 
+    gdio gdif gdi
+
+code change
+    neovim
+    fugitive
+    cscope
+    "./vimrc/.vim/plugin/keymap.vim"
+    "./vimrc/.vim/plugin/auto_cscope.vim"
+    "./vimrc/.vim/plugin/auto_deploy.vim"
