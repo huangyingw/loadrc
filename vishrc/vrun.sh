@@ -93,4 +93,7 @@ case $extension in
     ymldebug)
         docker-compose -f "$file" up --build --force-recreate
         ;;
+    js)
+        node "$file"
+        ;;
 esac
