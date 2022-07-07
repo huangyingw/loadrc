@@ -2,11 +2,11 @@ search
     cscope
 
 filter
-
+SearchAgain
 fugitive
 
 git 
-    gdio gdif gdi
+    gdio gdif gdi gdi2
     reapply
 
 "./bashrc/update_proj.sh"
@@ -33,5 +33,10 @@ training AI from vim:
     vim demo from Photo
     this involved some fastai source code change to add cache, so the next time, the same training would not re-run again, to save my money
 
+kubernetes:
 @mini:"/media/volgrp/myproject/git/Kubernetes/kubernetes-setup/files.proj"
 @mini:"/media/volgrp/myproject/git/AI/setup/files.proj"
+@mini:"/media/volgrp/myproject/git/Kubernetes/bitnami/charts/files.proj"
+
+docker:
+~/loadrc/docker-compose.yml
