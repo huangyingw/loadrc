@@ -12,6 +12,9 @@ git
 "./bashrc/update_proj.sh"
 
 leetcode-cli        
+    commit, code analysis, especially the failed one.
+    search across for while loop
+    search for one question
 
 code change
     neovim
