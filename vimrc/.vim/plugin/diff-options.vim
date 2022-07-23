@@ -1,4 +1,4 @@
-if &filetype !=# python
+if (expand('%:e') !=# 'py')
     set diffopt+=iwhiteall
 endif
 
