@@ -8,6 +8,8 @@ fugitive
 how to maintain mini:/etc, auto add to git only after edit/change a file
     vimrc/.vimrc:167 function AddToGit()
 
+neovim docker
+
 git 
     gdio gdif gdi gdi2
     edit diff file directly, and reapply
