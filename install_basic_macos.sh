@@ -30,6 +30,7 @@ brew install \
     ffmpeg \
     git \
     git-gui \
+    graphviz \
     hg \
     htop \
     hub \
