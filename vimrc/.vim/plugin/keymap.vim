@@ -447,7 +447,6 @@ nnoremap <tab> %
 vnoremap <tab> %
 nnoremap M zM
 nnoremap R zR
-nmap <f2> :set number! number?<cr>
 nmap <leader>w :call WinDo('set wrap!') <cr>
 
 " nnoremap F :echom expand('%:p')<cr>
