@@ -689,6 +689,9 @@ index 2c4bf8d7..83b0bbaf 100755
 -. ~/loadrc/.loadrc
 -dpkg -i $SOFTWARE/nx/nomachine_*.deb
 +./copy.sh ~/loadrc/ ~/loadrc.bak/
+diff --git a/bashrc/create_folders.sh b/bashrc/create_folders.sh
+old mode 100644
+new mode 100755
 diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
 index 9c24d246..2fb9f62d 100755
 --- ./bashrc/cscope.sh
@@ -751,15 +754,74 @@ index 14d8f004..e117f8f1 100755
 -git clone https://github.com/huangyingw/cscope.git
 -./cscope/build_pre.sh
 +./dd.sh /dev/nbd0 /media/volgrp/software/test.img
+diff --git a/bashrc/deploy.sh b/bashrc/deploy.sh
+index a76cbfaf..6f3988bf 100755
+--- ./bashrc/deploy.sh
++++ ./bashrc/deploy.sh
+@@ -11,5 +11,5 @@ fi
+ if [[ -n "$host" ]] && [[ -n "$rpath" ]]
+ then
+     ssh -n "$host" "mkdir -p $rpath"
+-    . ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/rsyncFiles.sh
++    ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_deploy.sh
+ fi
+diff --git a/bashrc/deploy_backward.sh b/bashrc/deploy_backward.sh
+new file mode 100755
+index 00000000..2186e4dd
+--- /dev/null
++++ ./bashrc/deploy_backward.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++
++rsync -aHv --force --progress --append-verify \
++    --files-from files.rev \
++    "$host:/" \
++    .
+diff --git a/bashrc/deploy_forward.sh b/bashrc/deploy_forward.sh
+new file mode 100755
+index 00000000..0ca8b165
+--- /dev/null
++++ ./bashrc/deploy_forward.sh
+@@ -0,0 +1,9 @@
++#!/bin/zsh
++
++host=$(git config deploy.host)
++rpath=$(git config deploy.path)
++
++rsync -aHv --force --progress --append-verify \
++    --files-from rsync.files \
++    . \
++    "$host:$rpath"
+diff --git a/bashrc/do_deploy.sh b/bashrc/do_deploy.sh
+new file mode 100755
+index 00000000..f9ed3d1c
+--- /dev/null
++++ ./bashrc/do_deploy.sh
+@@ -0,0 +1,5 @@
++#!/bin/zsh
++
++parallel ::: \
++    ~/loadrc/bashrc/deploy_forward.sh \
++    ~/loadrc/bashrc/deploy_backward.sh
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
-index 9a6e19c8..f5458e6f 100755
+index 9a6e19c8..50528c4c 100755
 --- ./bashrc/do_update_proj.sh
 +++ ./bashrc/do_update_proj.sh
-@@ -5,3 +5,4 @@
- ~/loadrc/bashrc/fvideos.sh
- ~/loadrc/bashrc/fdocs.sh
- ~/loadrc/bashrc/cscope.sh
-+git remote update &
+@@ -1,7 +1,9 @@
+ #!/bin/zsh
+ 
+-~/loadrc/bashrc/generate_files_proj.sh
+-~/loadrc/bashrc/generate_rsync_files.sh
+-~/loadrc/bashrc/fvideos.sh
+-~/loadrc/bashrc/fdocs.sh
+-~/loadrc/bashrc/cscope.sh
++parallel ::: \
++    ~/loadrc/bashrc/generate_files_proj.sh \
++    ~/loadrc/bashrc/generate_rsync_files.sh \
++    ~/loadrc/bashrc/fvideos.sh \
++    ~/loadrc/bashrc/fdocs.sh \
++    ~/loadrc/bashrc/cscope.sh \
++    'git remote update'
 diff --git a/bashrc/fdisk_log.sh b/bashrc/fdisk_log.sh
 index 37081d0c..3867ab7b 100755
 --- ./bashrc/fdisk_log.sh
@@ -1340,6 +1402,9 @@ index 00000000..e46e9472
 +./parse_host.sh "mini:~/loadrc"
 +./parse_host.sh "huangyingw@mini:~/loadrc"
 +./parse_host.sh "~/loadrc"
+diff --git a/bashrc/post.sh b/bashrc/post.sh
+old mode 100644
+new mode 100755
 diff --git a/bashrc/reboot.sh b/bashrc/reboot.sh
 index 1320581d..e40cc39b 100755
 --- ./bashrc/reboot.sh
@@ -1355,7 +1420,7 @@ index 1320581d..e40cc39b 100755
      reboot
 +fi
 diff --git a/bashrc/remove_path.sh b/bashrc/remove_path.sh
-new file mode 100644
+new file mode 100755
 index 00000000..10e89a8a
 --- /dev/null
 +++ ./bashrc/remove_path.sh
@@ -1581,13 +1646,13 @@ index 30abd357..31ce354d 100755
 +    "$source/" "$target/" > "$ready_file"
 diff --git a/bashrc/vm2img.sh b/bashrc/vm2img.sh
 new file mode 100755
-index 00000000..b53c8b4d
+index 00000000..e456eda6
 --- /dev/null
 +++ ./bashrc/vm2img.sh
 @@ -0,0 +1,9 @@
 +#!/bin/zsh
 +
-+input=/var/lib/libvirt/images/u2004.qcow2 
++input=/var/lib/libvirt/images/u2004.qcow2
 +output=$(echo "$input" | sed 's/\.qcow2$/\.img/g;s/\.hds$/\.img/g')
 +echo "output --> $output"
 +
@@ -1731,12 +1796,12 @@ index 00000000..f90514ae
 +
 +sudo /usr/bin/osascript -e "set Volume 0"
 diff --git a/cscope b/cscope
-index 18a46b20..12c8130f 160000
+index 18a46b20..c3bcd76a 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 12c8130f0e499ad38fb90574ff8866a938769e01
++Subproject commit c3bcd76a3408780fe223b058163ebb37d84ce40b
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -2129,6 +2194,9 @@ index e118a4de..e1f58816 100755
  git remote remove origin ; \
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
+diff --git a/gitrc/gcob_test.sh b/gitrc/gcob_test.sh
+old mode 100644
+new mode 100755
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 new file mode 100755
 index 00000000..f43af40a
@@ -2446,6 +2514,9 @@ index 06604af2..056c7062 100755
  #!/bin/zsh
 -git show -w "$1"
 +git show --minimal -w "$1" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
+diff --git a/gitrc/gsquash.sh b/gitrc/gsquash.sh
+old mode 100644
+new mode 100755
 diff --git a/gitrc/gstp.sh b/gitrc/gstp.sh
 index 559b2ec5..15e9fe67 100755
 --- ./gitrc/gstp.sh
@@ -3811,13 +3882,16 @@ index 00000000..0f662165
 +#	PermitTTY no
 +#	ForceCommand cvs server
 +PermitUserEnvironment PATH,LANG
+diff --git a/musicrc/copy_test.sh b/musicrc/copy_test.sh
+old mode 100644
+new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..ebfea0ad
+index 00000000..b143a364
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit ebfea0ad4f027be5524c6dd4cb07b4846991a148-dirty
++Subproject commit b143a3643d450030b40d6eae24c2a5318d101e26
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3861,7 +3935,7 @@ index 00000000..20099aee
 +    echo "say Timeout."
 +fi
 diff --git a/networkrc/temp.sh b/networkrc/temp.sh
-new file mode 100644
+new file mode 100755
 index 00000000..d44dc276
 --- /dev/null
 +++ ./networkrc/temp.sh
@@ -4236,12 +4310,12 @@ index 4579327e..4267ae2a 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..24ca67f1 160000
+index dbe8b1e2..ee2862fc 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit 24ca67f1483bcd71cb10b965d92a50531b208bc3
++Subproject commit ee2862fcf8507a086da3361c2c7846fea7eb750c
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -4257,12 +4331,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..722e2b6d 160000
+index 8468d6a8..f77aea9f 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 722e2b6dbe98d0320647e6fc8a26924a7bd304c8
++Subproject commit f77aea9f8f7d5cf869fc7b6adf2dc956d92ae404
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -4306,12 +4380,12 @@ index bbdfea4b..7657218f 160000
 -Subproject commit bbdfea4b98fdb8866a8a6060ec1294643cfeb413
 +Subproject commit 7657218f14837395a4e6759f15289bad6febd1b4
 diff --git a/vimrc/.vim/bundle/vim-snipmate b/vimrc/.vim/bundle/vim-snipmate
-index ed3c5426..b8fe3fb6 160000
+index ed3c5426..fe21bcb9 160000
 --- ./vimrc/.vim/bundle/vim-snipmate
 +++ ./vimrc/.vim/bundle/vim-snipmate
 @@ -1 +1 @@
 -Subproject commit ed3c5426a20bf1c06d7980946ada34fd9f93320e
-+Subproject commit b8fe3fb6b127c417290c0fe1a85a8dd0173cef05
++Subproject commit fe21bcb98b235d571d5459b7b9f24b6a66009dc4
 diff --git a/vimrc/.vim/plugin/ShowVITAG.vim b/vimrc/.vim/plugin/ShowVITAG.vim
 index 7d7359a3..27d015ae 100644
 --- ./vimrc/.vim/plugin/ShowVITAG.vim
@@ -4532,7 +4606,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..3d402787 100644
+index d5874fe5..e587c9f5 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,17 @@
@@ -4665,7 +4739,7 @@ index d5874fe5..3d402787 100644
  
      if &diff
 -        exec '!git reset HEAD ; git add %'
-+        exec '!git reset HEAD ; git add ' . '"' .  expand('%:p') . '"' 
++        exec '!git reset HEAD ; git add ' . '"' .  expand('%:p') . '"'
      endif
  
      let worktree = Cd2Worktree()

@@ -690,12 +690,13 @@ index 2c4bf8d7..83b0bbaf 100755
 -dpkg -i $SOFTWARE/nx/nomachine_*.deb
 +./copy.sh ~/loadrc/ ~/loadrc.bak/
 diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
-index 9c24d246..2fb9f62d 100755
+index 9c24d246..6e6f5e28 100755
 --- ./bashrc/cscope.sh
 +++ ./bashrc/cscope.sh
-@@ -1,11 +1,7 @@
+@@ -1,11 +1,8 @@
  #!/bin/zsh
  
++echo  /Users/huangyingw/loadrc/bashrc/cscope.sh >> ~/loadrc/g.findresult
  SOURCEFILE="cscopesourcefile.bak"
 -CSCOPEFILE="cscopefile.bak"
  
@@ -752,14 +753,24 @@ index 14d8f004..e117f8f1 100755
 -./cscope/build_pre.sh
 +./dd.sh /dev/nbd0 /media/volgrp/software/test.img
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
-index 9a6e19c8..f5458e6f 100755
+index 9a6e19c8..50528c4c 100755
 --- ./bashrc/do_update_proj.sh
 +++ ./bashrc/do_update_proj.sh
-@@ -5,3 +5,4 @@
- ~/loadrc/bashrc/fvideos.sh
- ~/loadrc/bashrc/fdocs.sh
- ~/loadrc/bashrc/cscope.sh
-+git remote update &
+@@ -1,7 +1,9 @@
+ #!/bin/zsh
+ 
+-~/loadrc/bashrc/generate_files_proj.sh
+-~/loadrc/bashrc/generate_rsync_files.sh
+-~/loadrc/bashrc/fvideos.sh
+-~/loadrc/bashrc/fdocs.sh
+-~/loadrc/bashrc/cscope.sh
++parallel ::: \
++    ~/loadrc/bashrc/generate_files_proj.sh \
++    ~/loadrc/bashrc/generate_rsync_files.sh \
++    ~/loadrc/bashrc/fvideos.sh \
++    ~/loadrc/bashrc/fdocs.sh \
++    ~/loadrc/bashrc/cscope.sh \
++    'git remote update'
 diff --git a/bashrc/fdisk_log.sh b/bashrc/fdisk_log.sh
 index 37081d0c..3867ab7b 100755
 --- ./bashrc/fdisk_log.sh
@@ -774,11 +785,13 @@ index 37081d0c..3867ab7b 100755
  mdadm -D "$DEVICE" >> "$logFile"
  blkid >> "$logFile"
 diff --git a/bashrc/fdocs.sh b/bashrc/fdocs.sh
-index bee84cf0..2ed8004b 100755
+index bee84cf0..e1e935bb 100755
 --- ./bashrc/fdocs.sh
 +++ ./bashrc/fdocs.sh
-@@ -2,7 +2,7 @@
+@@ -1,8 +1,9 @@
+ #! /bin/zsh
  
++echo  /Users/huangyingw/loadrc/bashrc/fdocs.sh >> ~/loadrc/g.findresult
  FdocsInclude="fdocs.include"
  FdocsExclude="fdocs.exclude"
 -TARGET="fdocs.list.bak"
@@ -863,24 +876,32 @@ index f58a2ee7..dcc8f356 100755
      xargs sed -i.bak  "s/${FIND}/${REPLACE}/g" < "$3"
 +fi
 diff --git a/bashrc/fvideos.sh b/bashrc/fvideos.sh
-index 38fb060b..0390e708 100755
+index 38fb060b..afff6629 100755
 --- ./bashrc/fvideos.sh
 +++ ./bashrc/fvideos.sh
-@@ -1,7 +1,7 @@
+@@ -1,7 +1,8 @@
  #! /bin/zsh
  
 -FAVLOG="fav.log.bak"
 -FAVLOGSORT="fav.log.sort.bak"
++echo  /Users/huangyingw/loadrc/bashrc/fvideos.sh >> ~/loadrc/g.findresult
 +FAVLOG="fav.log.tmp"
 +FAVLOGSORT="fav.log.sort.tmp"
  export LC_ALL=C
  find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
      cp -fv "$FAVLOG" fav.log && \
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
-index 83e2c748..a194edb1 100755
+index 83e2c748..69cc32f5 100755
 --- ./bashrc/generate_files_proj.sh
 +++ ./bashrc/generate_files_proj.sh
-@@ -15,12 +15,14 @@ then
+@@ -1,5 +1,6 @@
+ #!/bin/zsh
+ 
++echo  /Users/huangyingw/loadrc/bashrc/generate_files_proj.sh >> ~/loadrc/g.findresult
+ if [ -z "$1" ]
+ then
+     TARGETEDIR=`realpath "$PWD"`
+@@ -15,12 +16,14 @@ then
      exit 1
  fi
  
@@ -896,7 +917,7 @@ index 83e2c748..a194edb1 100755
  PRUNE_POSTFIX=prunefix.conf
  PRUNE_FILE=prunefile.conf
  INCLUDE_FILE=includefile.conf
-@@ -45,16 +47,16 @@ done < "$INCLUDE_FILE"
+@@ -45,16 +48,16 @@ done < "$INCLUDE_FILE"
  
  export LC_ALL=C
  
@@ -920,18 +941,19 @@ index 83e2c748..a194edb1 100755
          echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
          sort -u ~/all.proj -o ~/all.proj
 diff --git a/bashrc/generate_rsync_files.sh b/bashrc/generate_rsync_files.sh
-index d5360ed8..c79f1761 100755
+index d5360ed8..ced6838b 100755
 --- ./bashrc/generate_rsync_files.sh
 +++ ./bashrc/generate_rsync_files.sh
-@@ -1,6 +1,6 @@
+@@ -1,6 +1,7 @@
  #!/bin/zsh
  
 -rsyncFiles=rsync.files.bak
++echo  /Users/huangyingw/loadrc/bashrc/generate_rsync_files.sh >> ~/loadrc/g.findresult
 +rsyncFiles=rsync.files.tmp
  cat files.proj | sed 's/^"//g;s/"$//g;s/\\ / /g' > "$rsyncFiles"
  PRUNE_POSTFIX=prunefix.rsync
  INCLUDE_FILE=includefile.rsync
-@@ -29,7 +29,9 @@ if [ ${#prune_params[@]} -gt 0 ] ; \
+@@ -29,7 +30,9 @@ if [ ${#prune_params[@]} -gt 0 ] ; \
  then \
      find . "(" "${prune_params[@]}" ")" -type f -size -9000k > "$rsyncFiles.diff" && \
      comm -23 <(sort "$rsyncFiles") <(sort "$rsyncFiles".diff) > "$rsyncFiles.tmp" && \
@@ -4206,7 +4228,7 @@ index cc6342c3..2b3af9b4 160000
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 2b3af9b4f293fa6d716946ce54a32353bf8bc64d
++Subproject commit 2b3af9b4f293fa6d716946ce54a32353bf8bc64d-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..64256d0f 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -4236,12 +4258,12 @@ index 4579327e..4267ae2a 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..24ca67f1 160000
+index dbe8b1e2..ee2862fc 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit 24ca67f1483bcd71cb10b965d92a50531b208bc3
++Subproject commit ee2862fcf8507a086da3361c2c7846fea7eb750c
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -4262,7 +4284,7 @@ index 8468d6a8..722e2b6d 160000
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 722e2b6dbe98d0320647e6fc8a26924a7bd304c8
++Subproject commit 722e2b6dbe98d0320647e6fc8a26924a7bd304c8-dirty
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -4532,7 +4554,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..3d402787 100644
+index d5874fe5..da8b2e7d 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,17 @@
@@ -4607,7 +4629,15 @@ index d5874fe5..3d402787 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Split :execute s:Split()
-@@ -111,13 +118,12 @@ endfunction
+@@ -80,6 +87,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SvnRev
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SvnSt :execute s:SvnSt()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SvnUp :execute s:SvnUp()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Tail :execute s:Tail()
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject UpdateProj :execute s:UpdateProj()
+ 
+ function! s:LogFilter(...) abort
+     let worktree = Cd2Worktree()
+@@ -111,13 +119,12 @@ endfunction
  
  function! s:Gkdo() abort
      let worktree = Cd2Worktree()
@@ -4624,7 +4654,7 @@ index d5874fe5..3d402787 100644
      endif
  endfunction
  
-@@ -207,7 +213,8 @@ endfunction
+@@ -207,7 +214,8 @@ endfunction
  
  function! s:Gpl() abort
      let worktree = Cd2Worktree()
@@ -4634,7 +4664,7 @@ index d5874fe5..3d402787 100644
  endfunction
  
  function! s:Fsync() abort
-@@ -228,12 +235,14 @@ endfunction
+@@ -228,12 +236,14 @@ endfunction
  
  function! s:Gbib() abort
      let worktree = Cd2Worktree()
@@ -4651,7 +4681,7 @@ index d5874fe5..3d402787 100644
  endfunction
  
  function! s:Gbil() abort
-@@ -306,7 +315,7 @@ endfunction
+@@ -306,7 +316,7 @@ endfunction
  
  function! s:Gme2(args, ...) abort
      let worktree = Cd2Worktree()
@@ -4660,7 +4690,7 @@ index d5874fe5..3d402787 100644
      call OpenOrSwitch(worktree . '/' . 'gme2.findresult', 'vs')
  endfunction
  
-@@ -321,11 +330,11 @@ function! s:G(args, ...) abort
+@@ -321,11 +331,11 @@ function! s:G(args, ...) abort
      endif
  
      if &diff
@@ -4674,7 +4704,7 @@ index d5874fe5..3d402787 100644
  
      if &diff
          call s:Gs()
-@@ -366,16 +375,15 @@ function! s:Gdi(...) abort
+@@ -366,16 +376,15 @@ function! s:Gdi(...) abort
          if arg1 == ''
              call fugitive#Diffsplit(0, 1, "vert", '', [])
          elseif tolower(arg1) == 'o'
@@ -4694,7 +4724,7 @@ index d5874fe5..3d402787 100644
      endif
  
      if bufwinnr('^' . output . '$') > 0
-@@ -422,9 +430,9 @@ function! s:Gdi2(...) abort
+@@ -422,9 +431,9 @@ function! s:Gdi2(...) abort
      endif
  
      let worktree = Cd2Worktree()
@@ -4706,7 +4736,7 @@ index d5874fe5..3d402787 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -475,18 +483,17 @@ endfunction
+@@ -475,18 +484,17 @@ endfunction
  
  function! s:Gdif(...) abort
      let worktree = Cd2Worktree()
@@ -4731,7 +4761,7 @@ index d5874fe5..3d402787 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -516,10 +523,20 @@ endfunction
+@@ -516,10 +524,20 @@ endfunction
  
  function! s:ApplyBranch(args, ...) abort
      let worktree = Cd2Worktree()
@@ -4753,7 +4783,7 @@ index d5874fe5..3d402787 100644
  function! s:Gshow(args, ...) abort
      let worktree = Cd2Worktree()
      let output = a:args . '.diff'
-@@ -527,7 +544,19 @@ function! s:Gshow(args, ...) abort
+@@ -527,7 +545,19 @@ function! s:Gshow(args, ...) abort
      call OpenOrSwitch(output, 'vs')
  endfunction
  
@@ -4773,7 +4803,7 @@ index d5874fe5..3d402787 100644
      let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
      exec '!rm ' . newFile
      exec 'w ' . newFile
-@@ -546,6 +575,21 @@ function! s:CatPlay(...) abort
+@@ -546,6 +576,21 @@ function! s:CatPlay(...) abort
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
@@ -4795,7 +4825,7 @@ index d5874fe5..3d402787 100644
  function! s:CatMove(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -559,6 +603,63 @@ function! s:CatMove(...) abort
+@@ -559,6 +604,63 @@ function! s:CatMove(...) abort
      call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
  endfunction
  
@@ -4859,7 +4889,20 @@ index d5874fe5..3d402787 100644
  function! s:CatDu(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -640,7 +741,10 @@ function! s:Prune() abort
+@@ -585,6 +687,12 @@ function! s:Tail() abort
+     exec '!tail -f ' . expand("%:p")
+ endfunction
+ 
++function! s:UpdateProj() abort
++    call Cd2ProjectRoot("files.proj")
++    exec '!~/loadrc/bashrc/update_proj.sh'
++    call CHANGE_CURR_DIR()
++endfunction
++
+ function! s:Gres() abort
+     let worktree = Cd2Worktree()
+     exec '!~/loadrc/gitrc/gres.sh'
+@@ -640,7 +748,10 @@ function! s:Prune() abort
      call asyncrun#run('<bang>', '', '~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
  endfunction
  
@@ -4871,7 +4914,7 @@ index d5874fe5..3d402787 100644
      call Cd2ProjectRoot("files.proj")
  
      if expand('%:t') != 'index'
-@@ -649,14 +753,14 @@ function! s:Fr(find, replace) abort
+@@ -649,14 +760,14 @@ function! s:Fr(find, replace) abort
          let fileList = "files.proj"
      endif
  
@@ -4889,7 +4932,7 @@ index d5874fe5..3d402787 100644
  endfunction
  
  function! s:Gwap() abort
-@@ -671,13 +775,15 @@ function! s:Gfix() abort
+@@ -671,13 +782,15 @@ function! s:Gfix() abort
  endfunction
  
  function! s:Reapply() abort
@@ -4907,7 +4950,7 @@ index d5874fe5..3d402787 100644
      call s:Gs()
  endfunction
  
-@@ -701,3 +807,5 @@ function! s:GenerateIpynb() abort
+@@ -701,3 +814,5 @@ function! s:GenerateIpynb() abort
      exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
      w
  endfunction

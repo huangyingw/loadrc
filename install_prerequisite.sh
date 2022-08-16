@@ -24,6 +24,7 @@ apt-get install -y \
     git \
     git-gui \
     gparted \
+    graphviz \
     hashcat \
     hfsprogs \
     htop \
@@ -71,6 +72,11 @@ apt-get install -y \
     wakeonlan \
     wget \
     zsh
+
+pacman -Syy && \
+    pacman --noconfirm -Sy \
+    cryptsetup \
+    gnu-netcat
 
 modprobe wl
 update-initramfs -u

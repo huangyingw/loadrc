@@ -689,6 +689,9 @@ index 2c4bf8d7..83b0bbaf 100755
 -. ~/loadrc/.loadrc
 -dpkg -i $SOFTWARE/nx/nomachine_*.deb
 +./copy.sh ~/loadrc/ ~/loadrc.bak/
+diff --git a/bashrc/create_folders.sh b/bashrc/create_folders.sh
+old mode 100644
+new mode 100755
 diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
 index 9c24d246..2fb9f62d 100755
 --- ./bashrc/cscope.sh
@@ -751,15 +754,77 @@ index 14d8f004..e117f8f1 100755
 -git clone https://github.com/huangyingw/cscope.git
 -./cscope/build_pre.sh
 +./dd.sh /dev/nbd0 /media/volgrp/software/test.img
+diff --git a/bashrc/deploy.sh b/bashrc/deploy.sh
+index a76cbfaf..6f3988bf 100755
+--- ./bashrc/deploy.sh
++++ ./bashrc/deploy.sh
+@@ -11,5 +11,5 @@ fi
+ if [[ -n "$host" ]] && [[ -n "$rpath" ]]
+ then
+     ssh -n "$host" "mkdir -p $rpath"
+-    . ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/rsyncFiles.sh
++    ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_deploy.sh
+ fi
+diff --git a/bashrc/deploy_backward.sh b/bashrc/deploy_backward.sh
+new file mode 100755
+index 00000000..de9dd49f
+--- /dev/null
++++ ./bashrc/deploy_backward.sh
+@@ -0,0 +1,9 @@
++#!/bin/zsh
++
++host=$(git config deploy.host)
++rpath=$(git config deploy.path)
++
++rsync -aHv --force --progress \
++    --files-from files.rev \
++    "$host:/" \
++    .
+diff --git a/bashrc/deploy_forward.sh b/bashrc/deploy_forward.sh
+new file mode 100755
+index 00000000..8b0a1767
+--- /dev/null
++++ ./bashrc/deploy_forward.sh
+@@ -0,0 +1,9 @@
++#!/bin/zsh
++
++host=$(git config deploy.host)
++rpath=$(git config deploy.path)
++
++rsync -aHv --force --progress \
++    --files-from rsync.files \
++    . \
++    "$host:$rpath"
+diff --git a/bashrc/do_deploy.sh b/bashrc/do_deploy.sh
+new file mode 100755
+index 00000000..7807874b
+--- /dev/null
++++ ./bashrc/do_deploy.sh
+@@ -0,0 +1,5 @@
++#!/bin/zsh
++
++parallel --jobs 0 -k ::: \
++    ~/loadrc/bashrc/deploy_forward.sh \
++    ~/loadrc/bashrc/deploy_backward.sh
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
-index 9a6e19c8..f5458e6f 100755
+index 9a6e19c8..517ec6dd 100755
 --- ./bashrc/do_update_proj.sh
 +++ ./bashrc/do_update_proj.sh
-@@ -5,3 +5,4 @@
- ~/loadrc/bashrc/fvideos.sh
- ~/loadrc/bashrc/fdocs.sh
- ~/loadrc/bashrc/cscope.sh
-+git remote update &
+@@ -1,7 +1,9 @@
+ #!/bin/zsh
+ 
+-~/loadrc/bashrc/generate_files_proj.sh
+-~/loadrc/bashrc/generate_rsync_files.sh
+-~/loadrc/bashrc/fvideos.sh
+-~/loadrc/bashrc/fdocs.sh
+-~/loadrc/bashrc/cscope.sh
++parallel --jobs 0 -k ::: \
++    ~/loadrc/bashrc/generate_files_proj.sh \
++    ~/loadrc/bashrc/generate_rsync_files.sh \
++    ~/loadrc/bashrc/fvideos.sh \
++    ~/loadrc/bashrc/fdocs.sh \
++    ~/loadrc/bashrc/cscope.sh \
++    'git remote update'
 diff --git a/bashrc/fdisk_log.sh b/bashrc/fdisk_log.sh
 index 37081d0c..3867ab7b 100755
 --- ./bashrc/fdisk_log.sh
@@ -1340,6 +1405,9 @@ index 00000000..e46e9472
 +./parse_host.sh "mini:~/loadrc"
 +./parse_host.sh "huangyingw@mini:~/loadrc"
 +./parse_host.sh "~/loadrc"
+diff --git a/bashrc/post.sh b/bashrc/post.sh
+old mode 100644
+new mode 100755
 diff --git a/bashrc/reboot.sh b/bashrc/reboot.sh
 index 1320581d..e40cc39b 100755
 --- ./bashrc/reboot.sh
@@ -1355,7 +1423,7 @@ index 1320581d..e40cc39b 100755
      reboot
 +fi
 diff --git a/bashrc/remove_path.sh b/bashrc/remove_path.sh
-new file mode 100644
+new file mode 100755
 index 00000000..10e89a8a
 --- /dev/null
 +++ ./bashrc/remove_path.sh
@@ -1581,13 +1649,13 @@ index 30abd357..31ce354d 100755
 +    "$source/" "$target/" > "$ready_file"
 diff --git a/bashrc/vm2img.sh b/bashrc/vm2img.sh
 new file mode 100755
-index 00000000..b53c8b4d
+index 00000000..e456eda6
 --- /dev/null
 +++ ./bashrc/vm2img.sh
 @@ -0,0 +1,9 @@
 +#!/bin/zsh
 +
-+input=/var/lib/libvirt/images/u2004.qcow2 
++input=/var/lib/libvirt/images/u2004.qcow2
 +output=$(echo "$input" | sed 's/\.qcow2$/\.img/g;s/\.hds$/\.img/g')
 +echo "output --> $output"
 +
@@ -2040,17 +2108,19 @@ index 4f8edfc6..327c8ebb 100755
 -exit 0
 +~/loadrc/gitrc/gdi.sh "$target" 2>&1 | tee "$output"
 diff --git a/gitrc/dogsync.sh b/gitrc/dogsync.sh
-index 6e5ba70f..b2d70447 100755
+index 6e5ba70f..9f872d17 100755
 --- ./gitrc/dogsync.sh
 +++ ./gitrc/dogsync.sh
-@@ -5,6 +5,6 @@ then
+@@ -5,6 +5,7 @@ then
      exit
  fi
  
-+~/loadrc/gitrc/gps.sh &
- ~/loadrc/gitrc/gpl.sh
+-~/loadrc/gitrc/gpl.sh
 -~/loadrc/gitrc/gps.sh
- ~/loadrc/gitrc/dogdio.sh
++parallel --jobs 0 -k ::: \
++    ~/loadrc/gitrc/gps.sh \
++    ~/loadrc/gitrc/gpl.sh \
+     ~/loadrc/gitrc/dogdio.sh
 diff --git a/gitrc/g.sh b/gitrc/g.sh
 index 8de34e76..2477da66 100755
 --- ./gitrc/g.sh
@@ -2129,6 +2199,9 @@ index e118a4de..e1f58816 100755
  git remote remove origin ; \
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
+diff --git a/gitrc/gcob_test.sh b/gitrc/gcob_test.sh
+old mode 100644
+new mode 100755
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 new file mode 100755
 index 00000000..f43af40a
@@ -2247,6 +2320,15 @@ index b0247ec4..07590e7c 100755
  
 -eval "$COMMAND"
 +eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
+diff --git a/gitrc/gdio.sh b/gitrc/gdio.sh
+index 564ef4a9..35317ddb 100755
+--- ./gitrc/gdio.sh
++++ ./gitrc/gdio.sh
+@@ -1,3 +1,3 @@
+ #!/bin/zsh
+ ~/loadrc/gitrc/dogdio.sh
+-git submodule foreach ~/loadrc/gitrc/dogdio.sh &
++git submodule status | awk '{print $2}' | parallel --jobs 0 'cd {}; ~/loadrc/gitrc/dogdio.sh'
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
 index 700d6af6..7db5b05e 100755
 --- ./gitrc/gdit.sh
@@ -2391,7 +2473,7 @@ index fa900e00..4cb43793 100755
 +    git merge "$target"
  fi
 diff --git a/gitrc/gps.sh b/gitrc/gps.sh
-index 2198cb7f..1af0b074 100755
+index 2198cb7f..d4e493b4 100755
 --- ./gitrc/gps.sh
 +++ ./gitrc/gps.sh
 @@ -1,11 +1,11 @@
@@ -2404,8 +2486,8 @@ index 2198cb7f..1af0b074 100755
      for ss in $(git config --get-all push.remote)
      do
 -        git push --all -v "$ss" && git push -v --tag "$ss" &
-+        git push --all -v "$ss" &
-+        git push -v --tag "$ss" &
++        git push --all -v "$ss"
++        git push -v --tag "$ss"
      done
  fi
 diff --git a/gitrc/gsearch.sh b/gitrc/gsearch.sh
@@ -2446,6 +2528,9 @@ index 06604af2..056c7062 100755
  #!/bin/zsh
 -git show -w "$1"
 +git show --minimal -w "$1" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
+diff --git a/gitrc/gsquash.sh b/gitrc/gsquash.sh
+old mode 100644
+new mode 100755
 diff --git a/gitrc/gstp.sh b/gitrc/gstp.sh
 index 559b2ec5..15e9fe67 100755
 --- ./gitrc/gstp.sh
@@ -2461,20 +2546,22 @@ index 559b2ec5..15e9fe67 100755
 +    git stash show -p stash@{"$1"} | git apply --reject --whitespace=fix --recount && git stash drop stash@{"$1"}
  fi
 diff --git a/gitrc/gsync.sh b/gitrc/gsync.sh
-index 9208b305..a0c47878 100755
+index 9208b305..aa15aff3 100755
 --- ./gitrc/gsync.sh
 +++ ./gitrc/gsync.sh
 @@ -1,3 +1,3 @@
  #!/bin/zsh
- ~/loadrc/gitrc/dogsync.sh &
+-~/loadrc/gitrc/dogsync.sh &
 -git submodule foreach ~/loadrc/gitrc/dogsync.sh &
-+git submodule status | awk '{print $2}' | parallel -j70 'cd {}; ~/loadrc/gitrc/dogsync.sh'
++~/loadrc/gitrc/dogsync.sh
++git submodule status | awk '{print $2}' | parallel --jobs 0 'cd {}; ~/loadrc/gitrc/dogsync.sh'
 diff --git a/gitrc/postCommit.sh b/gitrc/postCommit.sh
-index 3bd9b5b1..08477d81 100755
+index 3bd9b5b1..8ad9bedc 100755
 --- ./gitrc/postCommit.sh
 +++ ./gitrc/postCommit.sh
-@@ -1,2 +1,3 @@
+@@ -1,2 +1,4 @@
  #!/bin/zsh
++
  ~/loadrc/gitrc/gsync.sh
 +~/loadrc/bashrc/update_proj.sh
 diff --git a/gitrc/reapply.sh b/gitrc/reapply.sh
@@ -3811,13 +3898,16 @@ index 00000000..0f662165
 +#	PermitTTY no
 +#	ForceCommand cvs server
 +PermitUserEnvironment PATH,LANG
+diff --git a/musicrc/copy_test.sh b/musicrc/copy_test.sh
+old mode 100644
+new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..ebfea0ad
+index 00000000..039e9010
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit ebfea0ad4f027be5524c6dd4cb07b4846991a148-dirty
++Subproject commit 039e901037de25a1c9afa3d1aab9fcadd0746381-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -3861,7 +3951,7 @@ index 00000000..20099aee
 +    echo "say Timeout."
 +fi
 diff --git a/networkrc/temp.sh b/networkrc/temp.sh
-new file mode 100644
+new file mode 100755
 index 00000000..d44dc276
 --- /dev/null
 +++ ./networkrc/temp.sh
@@ -4206,7 +4296,7 @@ index cc6342c3..2b3af9b4 160000
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit 2b3af9b4f293fa6d716946ce54a32353bf8bc64d
++Subproject commit 2b3af9b4f293fa6d716946ce54a32353bf8bc64d-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 index 7ef452b4..64256d0f 160000
 --- ./vimrc/.vim/bundle/swift.vim
@@ -4236,12 +4326,12 @@ index 4579327e..4267ae2a 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..24ca67f1 160000
+index dbe8b1e2..ee2862fc 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit 24ca67f1483bcd71cb10b965d92a50531b208bc3
++Subproject commit ee2862fcf8507a086da3361c2c7846fea7eb750c
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -4257,12 +4347,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..722e2b6d 160000
+index 8468d6a8..8e09fbe0 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 722e2b6dbe98d0320647e6fc8a26924a7bd304c8
++Subproject commit 8e09fbe0ed977469f219d980f517673f9cdabafa
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -4532,7 +4622,7 @@ index 00000000..a154e243
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..3d402787 100644
+index d5874fe5..e587c9f5 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,17 @@
@@ -4665,7 +4755,7 @@ index d5874fe5..3d402787 100644
  
      if &diff
 -        exec '!git reset HEAD ; git add %'
-+        exec '!git reset HEAD ; git add ' . '"' .  expand('%:p') . '"' 
++        exec '!git reset HEAD ; git add ' . '"' .  expand('%:p') . '"'
      endif
  
      let worktree = Cd2Worktree()

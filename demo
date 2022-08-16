@@ -1,0 +1,50 @@
+search
+    cscope
+"./bashrc/do_update_proj.sh"
+
+filter
+SearchAgain
+fugitive
+how to maintain mini:/etc, auto add to git only after edit/change a file
+    vimrc/.vimrc:167 function AddToGit()
+
+neovim docker
+
+git 
+    gdio gdif gdi gdi2
+    edit diff file directly, and reapply
+
+"./bashrc/update_proj.sh"
+
+leetcode-cli        
+    commit, code analysis, especially the failed one.
+    search across for while loop
+    search for one question
+
+code change
+    neovim
+    fugitive
+    cscope
+    vim-anyfold
+    "./vimrc/.vim/plugin/keymap.vim"
+    "./vimrc/.vim/plugin/auto_cscope.vim"
+    "./vimrc/.vim/plugin/auto_deploy.vim"
+    iterm2 move display feature
+        https://gitlab.com/gnachman/iterm2/-/issues/7438
+        https://gitlab.com/gnachman/iterm2/-/issues/7354
+    leetcode-cli        
+        add new features
+    share clip board        
+        from mosh.sh
+
+training AI from vim:
+    vim demo from Photo
+    this involved some fastai source code change to add cache, so the next time, the same training would not re-run again, to save my money
+
+kubernetes:
+@mini:"/media/volgrp/myproject/git/Kubernetes/kubernetes-setup/files.proj"
+@mini:"/media/volgrp/myproject/git/AI/setup/files.proj"
+@mini:"/media/volgrp/myproject/git/Kubernetes/bitnami/charts/files.proj"
+
+docker:
+~/loadrc/docker-compose.yml

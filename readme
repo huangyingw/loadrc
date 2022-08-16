@@ -1,56 +1,15 @@
-I add some logs, and deliberately bring down the wifi interface: 
-```
-watch ifconfig wlan0 down
-```
+what's loadrc?
+    I don't know...
+    It's my highly customized vim implementation.
+    But it's not only an editor. I used it to do everything.
 
-```
-transmissionrc/auto_reboot.sh
-#!/bin/zsh
-
-echo "" > /root/loadrc/crontab.log
-
-/root/loadrc/networkrc/ping.sh 
-rc=$?
-
-if [[ $rc -eq 0 ]]
-then
-    echo "say The internet is back up."
-else
-    reboot
-fi
-```
-
-```
-networkrc/ping.sh
-#!/bin/zsh
-((count = 10))                           # Maximum number to try.
-
-
-while [[ $count -ne 0 ]] ; do
-    /usr/bin/ping -c 1 8.8.8.8 >> /root/loadrc/crontab.log 2>&1 
-    echo "step --> 2" >> /root/loadrc/crontab.log  
-    rc=$?
-
-    if [[ $rc -eq 0 ]] ; then
-        echo "step --> 3" >> /root/loadrc/crontab.log
-        ((count = 1))                    # If okay, flag loop exit.
-    else
-        echo "step --> 4" >> /root/loadrc/crontab.log
-        sleep 1                          # Minimise network storm.
-    fi
-    ((count = count - 1))                # So we don't go forever.
-done
-
-exit $rc
-```
-
-```
-/root/loadrc/crontab.log 
-/usr/bin/ping: connect: Network is unreachable
-step --> 2
-step --> 3
-```
-which means, in the crontab mode, even the ping test fail, the return code is still zero.
-
-so the quesiton come to 
-how to test network connection in crontab mode?
+Project history:
+    in the begining, I just saved some useful bash script for later re-use.
+    I just installed some wonderful vim plugins, and some simple vim configuration.
+    gradually, I found I could merge them together.
+    and later, I found, I could merge almost everything I need into vim.
+    and now, it is everything I think useful, I will try to merge them together seamlessly.
+    now, it includes:
+        automatic environment setup.
+        wonderful git process and script.
+            what's the perfect git process? I have my own answer.

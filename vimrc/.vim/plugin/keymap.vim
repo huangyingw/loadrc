@@ -86,16 +86,16 @@ endfunction
 
 function! ShowRemember()
     let b:csdbpath = Cd2ProjectRoot("files.proj")
-    let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
+    " let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
 
-    echom relativePath
+    " echom relativePath
     call SendTextToPbCopy(expand('%:p'))
 
-    if &clipboard == 'unnamed'
-        let @* = relativePath
-    else
-        let @+ = relativePath
-    endif
+    " if &clipboard == 'unnamed'
+    "     let @* = relativePath
+    " else
+    "     let @+ = relativePath
+    " endif
 endfunction
 
 function! Filter()
@@ -447,7 +447,6 @@ nnoremap <tab> %
 vnoremap <tab> %
 nnoremap M zM
 nnoremap R zR
-nmap <f2> :set number! number?<cr>
 nmap <leader>w :call WinDo('set wrap!') <cr>
 
 " nnoremap F :echom expand('%:p')<cr>

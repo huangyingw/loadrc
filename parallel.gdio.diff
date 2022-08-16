@@ -752,14 +752,24 @@ index 14d8f004..e117f8f1 100755
 -./cscope/build_pre.sh
 +./dd.sh /dev/nbd0 /media/volgrp/software/test.img
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
-index 9a6e19c8..f5458e6f 100755
+index 9a6e19c8..50528c4c 100755
 --- ./bashrc/do_update_proj.sh
 +++ ./bashrc/do_update_proj.sh
-@@ -5,3 +5,4 @@
- ~/loadrc/bashrc/fvideos.sh
- ~/loadrc/bashrc/fdocs.sh
- ~/loadrc/bashrc/cscope.sh
-+git remote update &
+@@ -1,7 +1,9 @@
+ #!/bin/zsh
+ 
+-~/loadrc/bashrc/generate_files_proj.sh
+-~/loadrc/bashrc/generate_rsync_files.sh
+-~/loadrc/bashrc/fvideos.sh
+-~/loadrc/bashrc/fdocs.sh
+-~/loadrc/bashrc/cscope.sh
++parallel ::: \
++    ~/loadrc/bashrc/generate_files_proj.sh \
++    ~/loadrc/bashrc/generate_rsync_files.sh \
++    ~/loadrc/bashrc/fvideos.sh \
++    ~/loadrc/bashrc/fdocs.sh \
++    ~/loadrc/bashrc/cscope.sh \
++    'git remote update'
 diff --git a/bashrc/fdisk_log.sh b/bashrc/fdisk_log.sh
 index 37081d0c..3867ab7b 100755
 --- ./bashrc/fdisk_log.sh
@@ -4236,12 +4246,12 @@ index 4579327e..4267ae2a 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..24ca67f1 160000
+index dbe8b1e2..ee2862fc 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit 24ca67f1483bcd71cb10b965d92a50531b208bc3
++Subproject commit ee2862fcf8507a086da3361c2c7846fea7eb750c
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator

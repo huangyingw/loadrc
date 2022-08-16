@@ -1,2 +1,2 @@
-0 23,0-10 * * * /Users/huangyingw/loadrc/crontabrc/silent.sh
-0 23,0-10 * * * /Users/yhuang/loadrc/crontabrc/silent.sh
+0 22-23,0-9 * * * /Users/huangyingw/loadrc/crontabrc/silent.sh
+0 22-23,0-9 * * * /Users/yhuang/loadrc/crontabrc/silent.sh

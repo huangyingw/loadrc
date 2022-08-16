@@ -330,7 +330,7 @@ function! s:G(args, ...) abort
     endif
 
     if &diff
-        exec '!git reset HEAD ; git add ' . '"' .  expand('%:p') . '"' 
+        exec '!git reset HEAD ; git add ' . '"' .  expand('%:p') . '"'
     endif
 
     let worktree = Cd2Worktree()

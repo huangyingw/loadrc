@@ -21,6 +21,13 @@ rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$file" "files.proj")
 rfile=$(realpath --relative-to="$rootFolder" "$file")
 rfolder=$(realpath --relative-to="$rootFolder" $(dirname "$file"))
 
+if [[ "$file" = *'_test.py' ]]
+then
+    cd "$rootFolder"
+    pytest $file
+    exit 0
+fi
+
 if [[ "$file" = *'Dockerfile'* ]]
 then
     cd "$rootFolder"
@@ -92,5 +99,8 @@ case $extension in
         ;;
     ymldebug)
         docker-compose -f "$file" up --build --force-recreate
+        ;;
+    js)
+        node "$file"
         ;;
 esac
