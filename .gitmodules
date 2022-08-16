@@ -245,3 +245,6 @@
 [submodule "vimrc/.vim/bundle/vim-php-cs-fixer"]
 	path = vimrc/.vim/bundle/vim-php-cs-fixer
 	url = https://github.com/stephpy/vim-php-cs-fixer.git
+[submodule "vimrc/.vim/bundle/cql-vim"]
+	path = vimrc/.vim/bundle/cql-vim
+	url = git@github.com:elubow/cql-vim.git
