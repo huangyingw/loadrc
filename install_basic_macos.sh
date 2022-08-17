@@ -49,6 +49,7 @@ brew install \
     pv \
     rename \
     rsync \
+    sbt \
     sponge \
     tig \
     w3m \
