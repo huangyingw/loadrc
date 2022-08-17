@@ -24,6 +24,7 @@ apt-get install -y \
     git \
     git-gui \
     gparted \
+    graphviz \
     hashcat \
     hfsprogs \
     htop \
