@@ -721,7 +721,6 @@
 "./musicrc/unrar.sh"
 "./musicrc/unrar_test.sh"
 "./musicrc/unzip.sh"
-"./neovim/.deps/build/src/libuv/docs/code/.gitignore"
 "./neovim/.gitconfig"
 "./neovim/.gitignore"
 "./networkrc/ping.sh"
@@ -3047,4 +3046,4 @@
 "./zerotierrc/install.sh"
 "./zerotierrc/restart.sh"
 "./zerotierrc/zerotierrc.conf"
-"replace_all_background.gdio.diff"
+"michip.gdio.diff"

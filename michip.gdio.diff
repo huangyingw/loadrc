@@ -1814,7 +1814,7 @@ index 18a46b20..12c8130f 160000
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 12c8130f0e499ad38fb90574ff8866a938769e01-dirty
++Subproject commit 12c8130f0e499ad38fb90574ff8866a938769e01
 diff --git a/demo b/demo
 new file mode 100644
 index 00000000..a0724cef
@@ -2929,7 +2929,7 @@ index 34269226..a8a824c3 100755
  ./install_time_machine.sh
  ./enpass_install.sh
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 62d92acb..a329301e 100755
+index 62d92acb..b78bf471 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
 @@ -8,15 +8,24 @@ then
@@ -2959,7 +2959,7 @@ index 62d92acb..a329301e 100755
      dos2unix \
      ffmpeg \
      git \
-@@ -33,17 +42,21 @@ brew install \
+@@ -33,17 +42,22 @@ brew install \
      libtool \
      lynx \
      minikube \
@@ -2972,6 +2972,7 @@ index 62d92acb..a329301e 100755
      rename \
 -    sshfs \
 +    rsync \
++    sbt \
 +    sponge \
      tig \
 -    tmux \
@@ -4362,12 +4363,12 @@ index cc6342c3..bd5422d9 160000
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
 +Subproject commit bd5422d9e40c732b010dcd4da3eafda81b3b1d54
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
-index 7ef452b4..64256d0f 160000
+index 7ef452b4..3e0529e1 160000
 --- ./vimrc/.vim/bundle/swift.vim
 +++ ./vimrc/.vim/bundle/swift.vim
 @@ -1 +1 @@
 -Subproject commit 7ef452b47f14a2bfed26324793777cf12d2a8d78
-+Subproject commit 64256d0f2c410d35ac1752aa2a2f7ade3a04695e
++Subproject commit 3e0529e1a97e3da24aabd18daf8ed92c6da8c68b
 diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
 index 2d520bdf..f4ec3e57 160000
 --- ./vimrc/.vim/bundle/tig-explorer.vim
@@ -4446,12 +4447,12 @@ index 00000000..62d82051
 @@ -0,0 +1 @@
 +Subproject commit 62d820512c7c46da791cb66101c1740a90192a3f
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..6bc0c782 160000
+index 3b379635..936c4a17 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit 6bc0c7826d68f8c44c8347a3012aa79ade4f0a22
++Subproject commit 936c4a170bf25dda16cb091537c8377d98f38525
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
