@@ -5,10 +5,14 @@ search
 filter
 SearchAgain
 fugitive
+smart add
 how to maintain mini:/etc, auto add to git only after edit/change a file
     vimrc/.vimrc:167 function AddToGit()
 
+universal clipboard    
+
 neovim docker
+play video
 
 git 
     gdio gdif gdi gdi2
