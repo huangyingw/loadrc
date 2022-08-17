@@ -1,3 +1,3 @@
 #!/bin/zsh
 
-/usr/local/bin/brightness -m 0.08
+/usr/local/bin/brightness -m 0.082765
