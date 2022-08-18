@@ -2549,10 +2549,10 @@ index fa900e00..4cb43793 100755
 +    git merge "$target"
  fi
 diff --git a/gitrc/gps.sh b/gitrc/gps.sh
-index 2198cb7f..d4e493b4 100755
+index 2198cb7f..5feb6111 100755
 --- ./gitrc/gps.sh
 +++ ./gitrc/gps.sh
-@@ -1,11 +1,11 @@
+@@ -1,11 +1,13 @@
  #!/bin/zsh
 -currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
  ~/loadrc/gitrc/include_gitconfig.sh
@@ -2725,10 +2725,10 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..2bf18442 100644
+index 425c9192..d4a03a0e 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
-@@ -9,15 +9,23 @@
+@@ -9,15 +9,22 @@
  192.168.122.65 master-node
  192.168.122.136 slave-node
  192.168.122.244 zsh
@@ -4458,12 +4458,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..00dcfedd 160000
+index 8468d6a8..5a3dfaa5 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 00dcfedd251088d1d0078081dbaff7b93cdfbf82-dirty
++Subproject commit 5a3dfaa5a4657d50c07e142d4ec4c4cdcd0286cd
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
