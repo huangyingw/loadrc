@@ -19,12 +19,11 @@
 192.168.31.41 u2004
 10.211.55.5 macos
 192.168.123.177 ubuntu20.04
-# 172.27.174.184 mbp
-192.168.31.168 mbp
+192.168.31.96 mbp
 192.168.123.80 u2110
 192.168.31.99 haikou
 192.168.31.223 transmission
-192.168.31.118 mba
+192.168.31.29 mba
 192.168.31.56 pikvm
 
 # The following lines are desirable for IPv6 capable hosts
