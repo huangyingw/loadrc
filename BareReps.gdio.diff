@@ -2275,6 +2275,21 @@ index e118a4de..e1f58816 100755
  git remote remove origin ; \
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
+diff --git a/gitrc/gclb.sh b/gitrc/gclb.sh
+index cde18db7..7d31d179 100755
+--- ./gitrc/gclb.sh
++++ ./gitrc/gclb.sh
+@@ -1,4 +1,10 @@
+ #!/bin/zsh
++
++if (git remote | grep -q BareReps)
++then
++    return
++fi
++
+ x=`pwd`
+ x=`echo "$x" | sed -e "s|myproject|BareReps/myproject|"`
+ x=`echo "$x" | sed -e "s|loadrc|BareReps/loadrc|"`
 diff --git a/gitrc/gcob_test.sh b/gitrc/gcob_test.sh
 old mode 100644
 new mode 100755
@@ -2566,6 +2581,8 @@ index 2198cb7f..5feb6111 100755
 +        git push -v --tag "$ss"
      done
  fi
++
++git push --all -v BareReps && git push -v --tag BareReps
 diff --git a/gitrc/gsearch.sh b/gitrc/gsearch.sh
 index b3980c8a..240de610 100755
 --- ./gitrc/gsearch.sh
@@ -2744,12 +2761,11 @@ index 425c9192..d4a03a0e 100644
 +192.168.31.41 u2004
  10.211.55.5 macos
 +192.168.123.177 ubuntu20.04
-+# 172.27.174.184 mbp
-+192.168.31.168 mbp
++192.168.31.96 mbp
 +192.168.123.80 u2110
 +192.168.31.99 haikou
 +192.168.31.223 transmission
-+192.168.31.118 mba
++192.168.31.29 mba
 +192.168.31.56 pikvm
  
  # The following lines are desirable for IPv6 capable hosts
