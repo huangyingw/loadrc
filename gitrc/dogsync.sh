@@ -5,6 +5,7 @@ then
     exit
 fi
 
+~/loadrc/gitrc/gclb.sh
 ~/loadrc/gitrc/gps.sh &
 ~/loadrc/gitrc/gpl.sh
 ~/loadrc/gitrc/dogdio.sh
