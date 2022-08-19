@@ -244,22 +244,26 @@ index 00000000..9ce19350
 +~/loadrc/setup_pbpaste-remote.sh
 +~/loadrc/uninstall_bidirectional_clipboard.sh
 diff --git a/.mbp.rc b/.mbp.rc
-deleted file mode 100755
-index 514389f0..00000000
+index 514389f0..9ce19350 100755
 --- ./.mbp.rc
-+++ /dev/null
-@@ -1,11 +0,0 @@
--#!/bin/zsh
++++ ./.mbp.rc
+@@ -1,11 +1,9 @@
+ #!/bin/zsh
 -#alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
 -alias restartBluetooth='$HOME/loadrc/osxrc/restart_bluetooth.sh'
--
+ 
 -if [ $(uname) = "Darwin" ]
--then
++if ! (sudo systemsetup -getcomputersleep | grep -q Never)
+ then
 -    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
 -        then \
 -        sudo systemsetup -setcomputersleep Never; \
 -        fi
--fi
++    sudo systemsetup -setcomputersleep Never
+ fi
++
++~/loadrc/setup_pbpaste-remote.sh
++~/loadrc/uninstall_bidirectional_clipboard.sh
 diff --git a/.mini.rc b/.mini.rc
 new file mode 100755
 index 00000000..7cf303fa
@@ -1816,12 +1820,12 @@ index 00000000..f90514ae
 +
 +sudo /usr/bin/osascript -e "set Volume 0"
 diff --git a/cscope b/cscope
-index 18a46b20..12c8130f 160000
+index 18a46b20..65b8f602 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 12c8130f0e499ad38fb90574ff8866a938769e01-dirty
++Subproject commit 65b8f60243a89338e002e1d6772af52e5845cab8
 diff --git a/demo b/demo
 new file mode 100644
 index 00000000..9cfef3c5
@@ -2549,10 +2553,10 @@ index fa900e00..4cb43793 100755
 +    git merge "$target"
  fi
 diff --git a/gitrc/gps.sh b/gitrc/gps.sh
-index 2198cb7f..d4e493b4 100755
+index 2198cb7f..5feb6111 100755
 --- ./gitrc/gps.sh
 +++ ./gitrc/gps.sh
-@@ -1,11 +1,11 @@
+@@ -1,11 +1,13 @@
  #!/bin/zsh
 -currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
  ~/loadrc/gitrc/include_gitconfig.sh
@@ -2566,6 +2570,8 @@ index 2198cb7f..d4e493b4 100755
 +        git push -v --tag "$ss"
      done
  fi
++
++git push --all -v BareReps && git push -v --tag BareReps
 diff --git a/gitrc/gsearch.sh b/gitrc/gsearch.sh
 index b3980c8a..240de610 100755
 --- ./gitrc/gsearch.sh
@@ -2725,10 +2731,10 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..2bf18442 100644
+index 425c9192..d4a03a0e 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
-@@ -9,15 +9,23 @@
+@@ -9,15 +9,22 @@
  192.168.122.65 master-node
  192.168.122.136 slave-node
  192.168.122.244 zsh
@@ -2744,12 +2750,11 @@ index 425c9192..2bf18442 100644
 +192.168.31.41 u2004
  10.211.55.5 macos
 +192.168.123.177 ubuntu20.04
-+# 172.27.174.184 mbp
-+192.168.31.168 mbp
++192.168.31.96 mbp
 +192.168.123.80 u2110
 +192.168.31.99 haikou
 +192.168.31.223 transmission
-+192.168.31.118 mba
++192.168.31.29 mba
 +192.168.31.56 pikvm
  
  # The following lines are desirable for IPv6 capable hosts
@@ -3783,14 +3788,16 @@ similarity index 100%
 rename from hosts/server/etc/netplan/00-installer-config.yaml
 rename to linux/etc/netplan/00-installer-config.yaml_bak
 diff --git a/linux_links/etc/crypttab b/linux_links/etc/crypttab
-index 191dd600..ed19136d 100644
+index 191dd600..e4492180 100644
 --- ./linux_links/etc/crypttab
 +++ ./linux_links/etc/crypttab
-@@ -7,6 +7,9 @@ raid6_crypt      /dev/disk/by-uuid/6eeb5df9-3399-40dc-b11c-f81aa773ae92  /root/l
+@@ -6,7 +6,10 @@ mirror2      /dev/disk/by-uuid/695d4b27-0a6e-4563-a738-a6f1de7d8de6  /root/loadr
+ raid6_crypt      /dev/disk/by-uuid/6eeb5df9-3399-40dc-b11c-f81aa773ae92  /root/loadrc/keys/keyfile   luks
  usb_archive      /dev/disk/by-uuid/e6addd78-0027-4f36-9251-0788301303c6  /root/loadrc/keys/keyfile   luks
  usb_backup_crypt_4T      /dev/disk/by-uuid/4e0d72a2-2f98-4c11-becd-beaa21ec1957  /root/loadrc/keys/keyfile   luks
- usb_backup_crypt_5T_1      /dev/disk/by-uuid/5d5e3fde-814f-4018-a103-2789c84d43e2  /root/loadrc/keys/keyfile   luks
+-usb_backup_crypt_5T_1      /dev/disk/by-uuid/5d5e3fde-814f-4018-a103-2789c84d43e2  /root/loadrc/keys/keyfile   luks
 -zarchive      /dev/disk/by-uuid/a840176a-b76a-4d0f-962c-439e68107670  /root/loadrc/keys/keyfile   luks
++usb_backup_crypt_5T_1      /dev/disk/by-uuid/c6de509f-5af1-461b-bf8d-31365f0be897  /root/loadrc/keys/keyfile   luks
 +transmission      /dev/disk/by-uuid/a840176a-b76a-4d0f-962c-439e68107670  /root/loadrc/keys/keyfile   luks
  vserver_crypt      /dev/disk/by-uuid/a4ff213e-f734-4c88-aba9-2ce733d0de76  /root/loadrc/keys/keyfile   luks
 -usb_backup_crypt_8T      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
@@ -3986,11 +3993,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..afe9db61
+index 00000000..85c22aa8
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit afe9db61f3851e5579577069c8da03f173b42549
++Subproject commit 85c22aa89740ddf28ef1a99fc17d06815313f2dd-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4119,11 +4126,11 @@ index 13a0cf4c..6cd6989c 100755
  
 diff --git a/rsync b/rsync
 new file mode 160000
-index 00000000..cec3a8f7
+index 00000000..99b9306c
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit cec3a8f76aace5e27f5000f564b6c0b8a60a04fc
++Subproject commit 99b9306c0033af87ff81f730a24e0051d2bbbb32-dirty
 diff --git a/set_macos_configuration.sh b/set_macos_configuration.sh
 index cf9a010a..26f18169 100755
 --- ./set_macos_configuration.sh
@@ -4458,12 +4465,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..00dcfedd 160000
+index 8468d6a8..5a3dfaa5 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 00dcfedd251088d1d0078081dbaff7b93cdfbf82-dirty
++Subproject commit 5a3dfaa5a4657d50c07e142d4ec4c4cdcd0286cd
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -4493,12 +4500,12 @@ index 00000000..62d82051
 @@ -0,0 +1 @@
 +Subproject commit 62d820512c7c46da791cb66101c1740a90192a3f
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..6bc0c782 160000
+index 3b379635..60300991 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit 6bc0c7826d68f8c44c8347a3012aa79ade4f0a22
++Subproject commit 60300991aec65c11b252e58c84cffd07463b5adb
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
