@@ -2279,6 +2279,21 @@ index e118a4de..e1f58816 100755
  git remote remove origin ; \
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
+diff --git a/gitrc/gclb.sh b/gitrc/gclb.sh
+index cde18db7..7d31d179 100755
+--- ./gitrc/gclb.sh
++++ ./gitrc/gclb.sh
+@@ -1,4 +1,10 @@
+ #!/bin/zsh
++
++if (git remote | grep -q BareReps)
++then
++    return
++fi
++
+ x=`pwd`
+ x=`echo "$x" | sed -e "s|myproject|BareReps/myproject|"`
+ x=`echo "$x" | sed -e "s|loadrc|BareReps/loadrc|"`
 diff --git a/gitrc/gcob_test.sh b/gitrc/gcob_test.sh
 old mode 100644
 new mode 100755

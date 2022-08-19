@@ -1,9 +1,0 @@
-#!/bin/zsh
-
-if ! (sudo systemsetup -getcomputersleep | grep -q Never)
-then
-    sudo systemsetup -setcomputersleep Never
-fi
-
-~/loadrc/setup_pbpaste-remote.sh
-~/loadrc/uninstall_bidirectional_clipboard.sh
