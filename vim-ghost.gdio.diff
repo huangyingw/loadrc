@@ -67,7 +67,7 @@ index 5ed35a81..92913780 100644
      remote = origin
      merge = refs/heads/dev
 diff --git a/.gitmodules b/.gitmodules
-index e17f9887..f86b5268 100644
+index e17f9887..cce45d49 100644
 --- ./.gitmodules
 +++ ./.gitmodules
 @@ -133,10 +133,6 @@
@@ -91,7 +91,7 @@ index e17f9887..f86b5268 100644
  [submodule "vimrc/.vim/bundle/neco-syntax"]
      path = vimrc/.vim/bundle/neco-syntax
      url = git@github.com:Shougo/neco-syntax.git
-@@ -231,3 +226,34 @@
+@@ -231,3 +226,37 @@
  [submodule "vimrc/.vim/bundle/bclose.vim"]
      path = vimrc/.vim/bundle/bclose.vim
      url = git@github.com:rbgrouleff/bclose.vim.git
@@ -126,6 +126,9 @@ index e17f9887..f86b5268 100644
 +[submodule "vimrc/.vim/bundle/plantuml-syntax"]
 +	path = vimrc/.vim/bundle/plantuml-syntax
 +	url = https://github.com/aklt/plantuml-syntax.git
++[submodule "vimrc/.vim/bundle/vim-ghost"]
++	path = vimrc/.vim/bundle/vim-ghost
++	url = git@github.com:raghur/vim-ghost.git
 diff --git a/.gitrc b/.gitrc
 index 8e753cb1..e536f2e5 100755
 --- ./.gitrc
@@ -244,26 +247,22 @@ index 00000000..9ce19350
 +~/loadrc/setup_pbpaste-remote.sh
 +~/loadrc/uninstall_bidirectional_clipboard.sh
 diff --git a/.mbp.rc b/.mbp.rc
-index 514389f0..9ce19350 100755
+deleted file mode 100755
+index 514389f0..00000000
 --- ./.mbp.rc
-+++ ./.mbp.rc
-@@ -1,11 +1,9 @@
- #!/bin/zsh
++++ /dev/null
+@@ -1,11 +0,0 @@
+-#!/bin/zsh
 -#alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
 -alias restartBluetooth='$HOME/loadrc/osxrc/restart_bluetooth.sh'
- 
+-
 -if [ $(uname) = "Darwin" ]
-+if ! (sudo systemsetup -getcomputersleep | grep -q Never)
- then
+-then
 -    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
 -        then \
 -        sudo systemsetup -setcomputersleep Never; \
 -        fi
-+    sudo systemsetup -setcomputersleep Never
- fi
-+
-+~/loadrc/setup_pbpaste-remote.sh
-+~/loadrc/uninstall_bidirectional_clipboard.sh
+-fi
 diff --git a/.mini.rc b/.mini.rc
 new file mode 100755
 index 00000000..7cf303fa
@@ -398,7 +397,7 @@ index 00000000..3d146d68
 +#!/bin/zsh
 +~/loadrc/setup_pbpaste-remote.sh
 diff --git a/.shellrc b/.shellrc
-index 52d99984..9071f838 100755
+index 52d99984..e76732bf 100755
 --- ./.shellrc
 +++ ./.shellrc
 @@ -1,6 +1,5 @@
@@ -418,7 +417,15 @@ index 52d99984..9071f838 100755
  alias deploy='$HOME/loadrc/bashrc/deploy.sh'
  alias encrypt='$HOME/loadrc/bashrc/encrypt.sh'
  alias envSync='$HOME/loadrc/bashrc/envSync.sh'
-@@ -74,7 +73,6 @@ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
+@@ -35,6 +34,7 @@ alias flink='$HOME/loadrc/bashrc/flink.sh'
+ alias fnine='$HOME/loadrc/bashrc/fnine.sh'
+ alias fnotinuse='$HOME/loadrc/bashrc/fnotinuse.sh'
+ alias fr='$HOME/loadrc/bashrc/fr.sh'
++alias fvideos='$HOME/loadrc/bashrc/fvideos.sh'
+ alias fwt='$HOME/loadrc/bashrc/fwt.sh'
+ alias fzw='$HOME/loadrc/bashrc/fzw.sh'
+ alias glink='$HOME/loadrc/bashrc/glink.sh'
+@@ -74,7 +74,6 @@ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
  alias selectCopy='$HOME/loadrc/bashrc/select_copy.sh'
  alias selectmirror='$HOME/loadrc/bashrc/selectmirror.sh'
  alias sleep='$HOME/loadrc/bashrc/sleep.sh'
@@ -426,7 +433,7 @@ index 52d99984..9071f838 100755
  alias smount='$HOME/loadrc/bashrc/smount.sh'
  alias split='$HOME/loadrc/bashrc/split.sh'
  alias ssh='$HOME/loadrc/bashrc/ssh.sh'
-@@ -100,7 +98,6 @@ alias ubak='$HOME/loadrc/bashrc/ubak.sh'
+@@ -100,7 +99,6 @@ alias ubak='$HOME/loadrc/bashrc/ubak.sh'
  alias ufind='$HOME/loadrc/bashrc/ufind.sh'
  alias umlet='$HOME/loadrc/bashrc/umlet.sh'
  alias umletc='$HOME/loadrc/bashrc/umletc.sh'
@@ -1820,12 +1827,12 @@ index 00000000..f90514ae
 +
 +sudo /usr/bin/osascript -e "set Volume 0"
 diff --git a/cscope b/cscope
-index 18a46b20..12c8130f 160000
+index 18a46b20..0a384883 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 12c8130f0e499ad38fb90574ff8866a938769e01-dirty
++Subproject commit 0a3848832a97406727cdf7c85ac0c78837c634c9
 diff --git a/demo b/demo
 new file mode 100644
 index 00000000..9cfef3c5
@@ -2189,13 +2196,14 @@ index 4f8edfc6..327c8ebb 100755
 -exit 0
 +~/loadrc/gitrc/gdi.sh "$target" 2>&1 | tee "$output"
 diff --git a/gitrc/dogsync.sh b/gitrc/dogsync.sh
-index 6e5ba70f..b2d70447 100755
+index 6e5ba70f..f3b1b6ac 100755
 --- ./gitrc/dogsync.sh
 +++ ./gitrc/dogsync.sh
-@@ -5,6 +5,6 @@ then
+@@ -5,6 +5,7 @@ then
      exit
  fi
  
++~/loadrc/gitrc/gclb.sh
 +~/loadrc/gitrc/gps.sh &
  ~/loadrc/gitrc/gpl.sh
 -~/loadrc/gitrc/gps.sh
@@ -2278,6 +2286,21 @@ index e118a4de..e1f58816 100755
  git remote remove origin ; \
      $HOME/loadrc/gitrc/gcob.sh dev && \
      $HOME/loadrc/gitrc/gdev.sh && \
+diff --git a/gitrc/gclb.sh b/gitrc/gclb.sh
+index cde18db7..7d31d179 100755
+--- ./gitrc/gclb.sh
++++ ./gitrc/gclb.sh
+@@ -1,4 +1,10 @@
+ #!/bin/zsh
++
++if (git remote | grep -q BareReps)
++then
++    return
++fi
++
+ x=`pwd`
+ x=`echo "$x" | sed -e "s|myproject|BareReps/myproject|"`
+ x=`echo "$x" | sed -e "s|loadrc|BareReps/loadrc|"`
 diff --git a/gitrc/gcob_test.sh b/gitrc/gcob_test.sh
 old mode 100644
 new mode 100755
@@ -2552,10 +2575,10 @@ index fa900e00..4cb43793 100755
 +    git merge "$target"
  fi
 diff --git a/gitrc/gps.sh b/gitrc/gps.sh
-index 2198cb7f..d4e493b4 100755
+index 2198cb7f..5feb6111 100755
 --- ./gitrc/gps.sh
 +++ ./gitrc/gps.sh
-@@ -1,11 +1,11 @@
+@@ -1,11 +1,13 @@
  #!/bin/zsh
 -currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
  ~/loadrc/gitrc/include_gitconfig.sh
@@ -2569,6 +2592,8 @@ index 2198cb7f..d4e493b4 100755
 +        git push -v --tag "$ss"
      done
  fi
++
++git push --all -v BareReps && git push -v --tag BareReps
 diff --git a/gitrc/gsearch.sh b/gitrc/gsearch.sh
 index b3980c8a..240de610 100755
 --- ./gitrc/gsearch.sh
@@ -2728,10 +2753,10 @@ index 82bc6cb7..00000000
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..2bf18442 100644
+index 425c9192..d4a03a0e 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
-@@ -9,15 +9,23 @@
+@@ -9,15 +9,22 @@
  192.168.122.65 master-node
  192.168.122.136 slave-node
  192.168.122.244 zsh
@@ -2747,12 +2772,11 @@ index 425c9192..2bf18442 100644
 +192.168.31.41 u2004
  10.211.55.5 macos
 +192.168.123.177 ubuntu20.04
-+# 172.27.174.184 mbp
-+192.168.31.168 mbp
++192.168.31.96 mbp
 +192.168.123.80 u2110
 +192.168.31.99 haikou
 +192.168.31.223 transmission
-+192.168.31.118 mba
++192.168.31.29 mba
 +192.168.31.56 pikvm
  
  # The following lines are desirable for IPv6 capable hosts
@@ -3989,11 +4013,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..afe9db61
+index 00000000..b68f1e50
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit afe9db61f3851e5579577069c8da03f173b42549-dirty
++Subproject commit b68f1e508ffff0cdaedc9cce254ec6d44cc324ed-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4334,6 +4358,13 @@ index 86d744c6..2a31e6bc 160000
 @@ -1 +1 @@
 -Subproject commit 86d744c6e4731d0014ef469f019a305e2d7baac0
 +Subproject commit 2a31e6bcea5977209c05c728c4253d82fd873c82
+diff --git a/vimrc/.vim/bundle/LargeFile b/vimrc/.vim/bundle/LargeFile
+index 3941a37b..18407c43 160000
+--- ./vimrc/.vim/bundle/LargeFile
++++ ./vimrc/.vim/bundle/LargeFile
+@@ -1 +1 @@
+-Subproject commit 3941a37b2b0288524300348a39521a46539bf9f6
++Subproject commit 18407c43846edea7b7964b0b99226ec04d00931f
 diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
 index 1d4a909f..537b2a38 160000
 --- ./vimrc/.vim/bundle/bash-support.vim
@@ -4461,12 +4492,19 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..08e3be05 160000
+index 8468d6a8..5a3dfaa5 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 08e3be05d7f642d25fa68a9db409c3c5b272316a
++Subproject commit 5a3dfaa5a4657d50c07e142d4ec4c4cdcd0286cd
+diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
+new file mode 160000
+index 00000000..115e2600
+--- /dev/null
++++ ./vimrc/.vim/bundle/vim-ghost
+@@ -0,0 +1 @@
++Subproject commit 115e2600481c92c0bfb69d82ccbd8af7dc052a03
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -4496,12 +4534,12 @@ index 00000000..62d82051
 @@ -0,0 +1 @@
 +Subproject commit 62d820512c7c46da791cb66101c1740a90192a3f
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..936c4a17 160000
+index 3b379635..60300991 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit 936c4a170bf25dda16cb091537c8377d98f38525
++Subproject commit 60300991aec65c11b252e58c84cffd07463b5adb
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
@@ -5130,7 +5168,7 @@ index d5874fe5..e587c9f5 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..5e2f71c4 100644
+index 5fd4a230..a9942978 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -15,7 +15,11 @@ function! ExFilter()
@@ -5157,19 +5195,18 @@ index 5fd4a230..5e2f71c4 100644
  endfunction
  
  function! ShowRemember()
--    let @+=expand('%:p')
--    echom expand('%:p')
 +    let b:csdbpath = Cd2ProjectRoot("files.proj")
 +    " let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
 +
 +    " echom relativePath
 +    call SendTextToPbCopy(expand('%:p'))
 +
-+    " if &clipboard == 'unnamed'
-+    "     let @* = relativePath
-+    " else
-+    "     let @+ = relativePath
-+    " endif
++    if &clipboard == 'unnamed'
++        let @* = expand('%:p')
++    else
+         let @+ = expand('%:p')
+-    echom expand('%:p')
++    endif
  endfunction
  
  function! Filter()
@@ -5290,7 +5327,7 @@ index 5fd4a230..5e2f71c4 100644
 -if has('win32')
 -    nmap <leader>cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 -    nmap <leader>cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
- 
+-
 -    " This will copy the path in 8.3 short format, for DOS and Windows 9x
 -    nmap <leader>c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
 -else
@@ -5300,7 +5337,7 @@ index 5fd4a230..5e2f71c4 100644
 -if has('win32')
 -    nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 -    nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
--
+ 
 -    " This will copy the path in 8.3 short format, for DOS and Windows 9x
 -    nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
 -else
