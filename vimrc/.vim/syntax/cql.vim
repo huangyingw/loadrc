@@ -71,7 +71,7 @@ syn match cqlComment /'\zs\%(\\.\|[^\\']\)*\ze'/ contained
 syn match cqlComment /"\zs\%(\\.\|[^\\"]\)*\ze"/ contained
 syn match cqlComment "--.*$" contains=cqlComment
 syn match cqlComment "//.*$" contains=cqlComment
-syn match cqlComment "/\*\*/" 
+syn match cqlComment "/\*\*/"
 
 " Special values
 syn keyword cqlSpecial         false null true
@@ -128,4 +128,3 @@ if version >= 508 || !exists("did_cql_syn_inits")
 endif
 
 let b:current_syntax = "cql"
-

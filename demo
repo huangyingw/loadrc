@@ -9,18 +9,18 @@ smart add
 how to maintain mini:/etc, auto add to git only after edit/change a file
     vimrc/.vimrc:167 function AddToGit()
 
-universal clipboard    
+universal clipboard
 
 neovim docker
 play video
 
-git 
+git
     gdio gdif gdi gdi2
     edit diff file directly, and reapply
 
 "./bashrc/update_proj.sh"
 
-leetcode-cli        
+leetcode-cli
     commit, code analysis, especially the failed one.
     search across for while loop
     search for one question
@@ -36,9 +36,9 @@ code change
     iterm2 move display feature
         https://gitlab.com/gnachman/iterm2/-/issues/7438
         https://gitlab.com/gnachman/iterm2/-/issues/7354
-    leetcode-cli        
+    leetcode-cli
         add new features
-    share clip board        
+    share clip board
         from mosh.sh
 
 training AI from vim:

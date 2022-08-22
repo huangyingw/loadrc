@@ -1,10 +1,10 @@
 #!/bin/zsh
 
-~/loadrc/gitrc/checkGitStatus.sh
+clean=$(git status --porcelain)
 
-if [ $? -ne 0 ]
+if [ -n "$clean" ]
 then
-  exit 1
+    git stash
 fi
 
 git remote update
@@ -39,3 +39,8 @@ do \
     git show "$BRANCH":"$targetFile" > "$targetFile" && \
         rm "$ss"
 done
+
+if [ -n "$clean" ]
+then
+    git stash pop stash@{0}
+fi

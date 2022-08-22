@@ -67,7 +67,7 @@ index 5ed35a81..92913780 100644
      remote = origin
      merge = refs/heads/dev
 diff --git a/.gitmodules b/.gitmodules
-index e17f9887..f86b5268 100644
+index e17f9887..56ca1457 100644
 --- ./.gitmodules
 +++ ./.gitmodules
 @@ -133,10 +133,6 @@
@@ -91,7 +91,7 @@ index e17f9887..f86b5268 100644
  [submodule "vimrc/.vim/bundle/neco-syntax"]
      path = vimrc/.vim/bundle/neco-syntax
      url = git@github.com:Shougo/neco-syntax.git
-@@ -231,3 +226,34 @@
+@@ -231,3 +226,37 @@
  [submodule "vimrc/.vim/bundle/bclose.vim"]
      path = vimrc/.vim/bundle/bclose.vim
      url = git@github.com:rbgrouleff/bclose.vim.git
@@ -126,6 +126,9 @@ index e17f9887..f86b5268 100644
 +[submodule "vimrc/.vim/bundle/plantuml-syntax"]
 +	path = vimrc/.vim/bundle/plantuml-syntax
 +	url = https://github.com/aklt/plantuml-syntax.git
++[submodule "vimrc/.vim/bundle/firenvim"]
++	path = vimrc/.vim/bundle/firenvim
++	url = git@github.com:glacambre/firenvim.git
 diff --git a/.gitrc b/.gitrc
 index 8e753cb1..e536f2e5 100755
 --- ./.gitrc
@@ -2389,10 +2392,10 @@ index b720ac69..8fcc4eed 100755
 -eval "$COMMAND"
 +eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index dbcf937b..165476af 100755
+index dbcf937b..0071ea99 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
-@@ -17,21 +18,42 @@ fi
+@@ -17,21 +18,40 @@ fi
  
  targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
  
@@ -2414,7 +2417,6 @@ index dbcf937b..165476af 100755
 +
 +if [ -z $(cat $GDITDIFF) ]
 +then
-+    . ~/loadrc/imvurc/ghypo.sh "$targetBranch"
 +    exit 0
 +fi
 +
@@ -2437,7 +2439,7 @@ index dbcf937b..165476af 100755
 +    git commit  --no-verify -am "$commit_message" && \
          git pull ; \
          git push ; \
-         . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
+-    . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
          ~/loadrc/gitrc/gfix.sh
 +fi
 diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
@@ -4041,11 +4043,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..df891b01
+index 00000000..db473cfe
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit df891b01e3cac82c98db981f9d9eb692f724dba3-dirty
++Subproject commit db473cfe08dbbf29d1e048c44edbceb6b95daf1c-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4407,6 +4409,13 @@ index 00000000..6f61df5a
 +++ ./vimrc/.vim/bundle/cql-vim
 @@ -0,0 +1 @@
 +Subproject commit 6f61df5a633c3a91edea7bcb5d5772648df19d1a
+diff --git a/vimrc/.vim/bundle/firenvim b/vimrc/.vim/bundle/firenvim
+new file mode 160000
+index 00000000..56a49d79
+--- /dev/null
++++ ./vimrc/.vim/bundle/firenvim
+@@ -0,0 +1 @@
++Subproject commit 56a49d79904921a8b4405786e12b4e12fbbf171b
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 index 5617a1cf..7753505f 160000
 --- ./vimrc/.vim/bundle/indentLine
