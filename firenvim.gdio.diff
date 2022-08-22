@@ -2392,10 +2392,10 @@ index b720ac69..8fcc4eed 100755
 -eval "$COMMAND"
 +eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index dbcf937b..165476af 100755
+index dbcf937b..0071ea99 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
-@@ -17,21 +18,42 @@ fi
+@@ -17,21 +18,40 @@ fi
  
  targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
  
@@ -2417,7 +2417,6 @@ index dbcf937b..165476af 100755
 +
 +if [ -z $(cat $GDITDIFF) ]
 +then
-+    . ~/loadrc/imvurc/ghypo.sh "$targetBranch"
 +    exit 0
 +fi
 +
@@ -2440,7 +2439,7 @@ index dbcf937b..165476af 100755
 +    git commit  --no-verify -am "$commit_message" && \
          git pull ; \
          git push ; \
-         . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
+-    . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
          ~/loadrc/gitrc/gfix.sh
 +fi
 diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
@@ -4044,11 +4043,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..88af6664
+index 00000000..db473cfe
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 88af6664d38c7aa9fccb24afb3373abdacded61f
++Subproject commit db473cfe08dbbf29d1e048c44edbceb6b95daf1c-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
