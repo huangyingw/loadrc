@@ -1,1 +1,1 @@
-*/10 * * * * "/usr/bin/dropbox start"
+*/10 * * * * /root/loadrc/dropboxrc/dropbox_start.sh
