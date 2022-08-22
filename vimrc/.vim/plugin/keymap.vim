@@ -91,11 +91,11 @@ function! ShowRemember()
     " echom relativePath
     call SendTextToPbCopy(expand('%:p'))
 
-    " if &clipboard == 'unnamed'
-    "     let @* = relativePath
-    " else
-    "     let @+ = relativePath
-    " endif
+    if &clipboard == 'unnamed'
+        let @* = expand('%:p')
+    else
+        let @+ = expand('%:p')
+    endif
 endfunction
 
 function! Filter()
