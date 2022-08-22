@@ -1,4 +1,10 @@
 #!/bin/zsh
+
+if (git remote | grep -q BareReps)
+then
+    return
+fi
+
 x=`pwd`
 x=`echo "$x" | sed -e "s|myproject|BareReps/myproject|"`
 x=`echo "$x" | sed -e "s|loadrc|BareReps/loadrc|"`
