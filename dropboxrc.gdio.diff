@@ -1832,7 +1832,7 @@ index 18a46b20..0a384883 160000
 +Subproject commit 0a3848832a97406727cdf7c85ac0c78837c634c9
 diff --git a/demo b/demo
 new file mode 100644
-index 00000000..87081191
+index 00000000..9cfef3c5
 --- /dev/null
 +++ ./demo
 @@ -0,0 +1,54 @@
@@ -1847,18 +1847,18 @@ index 00000000..87081191
 +how to maintain mini:/etc, auto add to git only after edit/change a file
 +    vimrc/.vimrc:167 function AddToGit()
 +
-+universal clipboard
++universal clipboard    
 +
 +neovim docker
 +play video
 +
-+git
++git 
 +    gdio gdif gdi gdi2
 +    edit diff file directly, and reapply
 +
 +"./bashrc/update_proj.sh"
 +
-+leetcode-cli
++leetcode-cli        
 +    commit, code analysis, especially the failed one.
 +    search across for while loop
 +    search for one question
@@ -1874,9 +1874,9 @@ index 00000000..87081191
 +    iterm2 move display feature
 +        https://gitlab.com/gnachman/iterm2/-/issues/7438
 +        https://gitlab.com/gnachman/iterm2/-/issues/7354
-+    leetcode-cli
++    leetcode-cli        
 +        add new features
-+    share clip board
++    share clip board        
 +        from mosh.sh
 +
 +training AI from vim:
@@ -2117,20 +2117,11 @@ index ca91dbaf..716192b3 100755
 +[credential "https://github.com"]
 +	helper = !gh auth git-credential
 diff --git a/gitrc/apply_branch.sh b/gitrc/apply_branch.sh
-index 15190e93..89ce9ced 100755
+index 15190e93..b05c70a7 100755
 --- ./gitrc/apply_branch.sh
 +++ ./gitrc/apply_branch.sh
-@@ -1,15 +1,24 @@
- #!/bin/zsh
- 
--~/loadrc/gitrc/checkGitStatus.sh
-+clean=$(git status --porcelain)
- 
--if [ $? -ne 0 ]
-+if [ -n "$clean" ]
- then
--  exit 1
-+    git stash
+@@ -7,9 +7,18 @@ then
+   exit 1
  fi
  
 +git remote update
@@ -2149,15 +2140,6 @@ index 15190e93..89ce9ced 100755
  BRANCH_DIFF="$BRANCH_DIFF.gdio.diff"
  echo "BRANCH --> $BRANCH"
  echo "BRANCH_DIFF --> $BRANCH_DIFF"
-@@ -30,3 +39,8 @@ do \
-     git show "$BRANCH":"$targetFile" > "$targetFile" && \
-         rm "$ss"
- done
-+
-+if [ -n "$clean" ]
-+then
-+    git stash pop stash@{0}
-+fi
 diff --git a/gitrc/checkGitStatus.sh b/gitrc/checkGitStatus.sh
 index 2b929a6c..1565c80c 100755
 --- ./gitrc/checkGitStatus.sh
@@ -4041,11 +4023,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..df891b01
+index 00000000..afe9db61
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit df891b01e3cac82c98db981f9d9eb692f724dba3-dirty
++Subproject commit afe9db61f3851e5579577069c8da03f173b42549
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4386,13 +4368,6 @@ index 86d744c6..2a31e6bc 160000
 @@ -1 +1 @@
 -Subproject commit 86d744c6e4731d0014ef469f019a305e2d7baac0
 +Subproject commit 2a31e6bcea5977209c05c728c4253d82fd873c82
-diff --git a/vimrc/.vim/bundle/LargeFile b/vimrc/.vim/bundle/LargeFile
-index 3941a37b..18407c43 160000
---- ./vimrc/.vim/bundle/LargeFile
-+++ ./vimrc/.vim/bundle/LargeFile
-@@ -1 +1 @@
--Subproject commit 3941a37b2b0288524300348a39521a46539bf9f6
-+Subproject commit 18407c43846edea7b7964b0b99226ec04d00931f
 diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
 index 1d4a909f..537b2a38 160000
 --- ./vimrc/.vim/bundle/bash-support.vim
@@ -4555,12 +4530,12 @@ index 00000000..62d82051
 @@ -0,0 +1 @@
 +Subproject commit 62d820512c7c46da791cb66101c1740a90192a3f
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..60300991 160000
+index 3b379635..6bc0c782 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit 60300991aec65c11b252e58c84cffd07463b5adb
++Subproject commit 6bc0c7826d68f8c44c8347a3012aa79ade4f0a22
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
@@ -5512,10 +5487,10 @@ index 41afb6c6..55b41320 100644
 +"set iskeyword-=_
 diff --git a/vimrc/.vim/syntax/cql.vim b/vimrc/.vim/syntax/cql.vim
 new file mode 100644
-index 00000000..0f7e2011
+index 00000000..450d46ac
 --- /dev/null
 +++ ./vimrc/.vim/syntax/cql.vim
-@@ -0,0 +1,130 @@
+@@ -0,0 +1,131 @@
 +" Vim syntax file
 +" Language:     cql
 +" Maintainer:   Eric Lubow <eric@lubow.org
@@ -5589,7 +5564,7 @@ index 00000000..0f7e2011
 +syn match cqlComment /"\zs\%(\\.\|[^\\"]\)*\ze"/ contained
 +syn match cqlComment "--.*$" contains=cqlComment
 +syn match cqlComment "//.*$" contains=cqlComment
-+syn match cqlComment "/\*\*/"
++syn match cqlComment "/\*\*/" 
 +
 +" Special values
 +syn keyword cqlSpecial         false null true
@@ -5646,6 +5621,7 @@ index 00000000..0f7e2011
 +endif
 +
 +let b:current_syntax = "cql"
++
 diff --git a/vimrc/.vim/syntax/python.vim b/vimrc/.vim/syntax/python.vim
 deleted file mode 100644
 index e0416589..00000000

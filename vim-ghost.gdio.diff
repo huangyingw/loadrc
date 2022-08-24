@@ -67,7 +67,7 @@ index 5ed35a81..92913780 100644
      remote = origin
      merge = refs/heads/dev
 diff --git a/.gitmodules b/.gitmodules
-index e17f9887..f86b5268 100644
+index e17f9887..cce45d49 100644
 --- ./.gitmodules
 +++ ./.gitmodules
 @@ -133,10 +133,6 @@
@@ -91,7 +91,7 @@ index e17f9887..f86b5268 100644
  [submodule "vimrc/.vim/bundle/neco-syntax"]
      path = vimrc/.vim/bundle/neco-syntax
      url = git@github.com:Shougo/neco-syntax.git
-@@ -231,3 +226,34 @@
+@@ -231,3 +226,37 @@
  [submodule "vimrc/.vim/bundle/bclose.vim"]
      path = vimrc/.vim/bundle/bclose.vim
      url = git@github.com:rbgrouleff/bclose.vim.git
@@ -126,6 +126,9 @@ index e17f9887..f86b5268 100644
 +[submodule "vimrc/.vim/bundle/plantuml-syntax"]
 +	path = vimrc/.vim/bundle/plantuml-syntax
 +	url = https://github.com/aklt/plantuml-syntax.git
++[submodule "vimrc/.vim/bundle/vim-ghost"]
++	path = vimrc/.vim/bundle/vim-ghost
++	url = git@github.com:raghur/vim-ghost.git
 diff --git a/.gitrc b/.gitrc
 index 8e753cb1..e536f2e5 100755
 --- ./.gitrc
@@ -1832,7 +1835,7 @@ index 18a46b20..0a384883 160000
 +Subproject commit 0a3848832a97406727cdf7c85ac0c78837c634c9
 diff --git a/demo b/demo
 new file mode 100644
-index 00000000..87081191
+index 00000000..9cfef3c5
 --- /dev/null
 +++ ./demo
 @@ -0,0 +1,54 @@
@@ -1847,18 +1850,18 @@ index 00000000..87081191
 +how to maintain mini:/etc, auto add to git only after edit/change a file
 +    vimrc/.vimrc:167 function AddToGit()
 +
-+universal clipboard
++universal clipboard    
 +
 +neovim docker
 +play video
 +
-+git
++git 
 +    gdio gdif gdi gdi2
 +    edit diff file directly, and reapply
 +
 +"./bashrc/update_proj.sh"
 +
-+leetcode-cli
++leetcode-cli        
 +    commit, code analysis, especially the failed one.
 +    search across for while loop
 +    search for one question
@@ -1874,9 +1877,9 @@ index 00000000..87081191
 +    iterm2 move display feature
 +        https://gitlab.com/gnachman/iterm2/-/issues/7438
 +        https://gitlab.com/gnachman/iterm2/-/issues/7354
-+    leetcode-cli
++    leetcode-cli        
 +        add new features
-+    share clip board
++    share clip board        
 +        from mosh.sh
 +
 +training AI from vim:
@@ -2061,19 +2064,6 @@ index 889b85af..a0cd5228 100755
 -  -it "$CONTAINERID" bash
 +docker exec -it "$CONTAINERID" zsh || \
 +    docker exec -it "$CONTAINERID" bash
-diff --git a/dropboxrc/install.sh b/dropboxrc/install.sh
-new file mode 100755
-index 00000000..45ee7e69
---- /dev/null
-+++ ./dropboxrc/install.sh
-@@ -0,0 +1,7 @@
-+#!/bin/zsh
-+SCRIPT=$(realpath "$0")
-+SCRIPTPATH=$(dirname "$SCRIPT")
-+cd "$SCRIPTPATH"
-+
-+wget --content-disposition -nc "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb"
-+dpkg -i dropbox_*_amd64.deb
 diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
 index 58429e06..51c59336 100755
 --- ./ffmpegrc/concat.sh
@@ -2117,20 +2107,11 @@ index ca91dbaf..716192b3 100755
 +[credential "https://github.com"]
 +	helper = !gh auth git-credential
 diff --git a/gitrc/apply_branch.sh b/gitrc/apply_branch.sh
-index 15190e93..89ce9ced 100755
+index 15190e93..b05c70a7 100755
 --- ./gitrc/apply_branch.sh
 +++ ./gitrc/apply_branch.sh
-@@ -1,15 +1,24 @@
- #!/bin/zsh
- 
--~/loadrc/gitrc/checkGitStatus.sh
-+clean=$(git status --porcelain)
- 
--if [ $? -ne 0 ]
-+if [ -n "$clean" ]
- then
--  exit 1
-+    git stash
+@@ -7,9 +7,18 @@ then
+   exit 1
  fi
  
 +git remote update
@@ -2149,15 +2130,6 @@ index 15190e93..89ce9ced 100755
  BRANCH_DIFF="$BRANCH_DIFF.gdio.diff"
  echo "BRANCH --> $BRANCH"
  echo "BRANCH_DIFF --> $BRANCH_DIFF"
-@@ -30,3 +39,8 @@ do \
-     git show "$BRANCH":"$targetFile" > "$targetFile" && \
-         rm "$ss"
- done
-+
-+if [ -n "$clean" ]
-+then
-+    git stash pop stash@{0}
-+fi
 diff --git a/gitrc/checkGitStatus.sh b/gitrc/checkGitStatus.sh
 index 2b929a6c..1565c80c 100755
 --- ./gitrc/checkGitStatus.sh
@@ -4041,11 +4013,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..df891b01
+index 00000000..b68f1e50
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit df891b01e3cac82c98db981f9d9eb692f724dba3-dirty
++Subproject commit b68f1e508ffff0cdaedc9cce254ec6d44cc324ed-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4526,6 +4498,13 @@ index 8468d6a8..5a3dfaa5 160000
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
 +Subproject commit 5a3dfaa5a4657d50c07e142d4ec4c4cdcd0286cd
+diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
+new file mode 160000
+index 00000000..115e2600
+--- /dev/null
++++ ./vimrc/.vim/bundle/vim-ghost
+@@ -0,0 +1 @@
++Subproject commit 115e2600481c92c0bfb69d82ccbd8af7dc052a03
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
 index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
@@ -5512,10 +5491,10 @@ index 41afb6c6..55b41320 100644
 +"set iskeyword-=_
 diff --git a/vimrc/.vim/syntax/cql.vim b/vimrc/.vim/syntax/cql.vim
 new file mode 100644
-index 00000000..0f7e2011
+index 00000000..450d46ac
 --- /dev/null
 +++ ./vimrc/.vim/syntax/cql.vim
-@@ -0,0 +1,130 @@
+@@ -0,0 +1,131 @@
 +" Vim syntax file
 +" Language:     cql
 +" Maintainer:   Eric Lubow <eric@lubow.org
@@ -5589,7 +5568,7 @@ index 00000000..0f7e2011
 +syn match cqlComment /"\zs\%(\\.\|[^\\"]\)*\ze"/ contained
 +syn match cqlComment "--.*$" contains=cqlComment
 +syn match cqlComment "//.*$" contains=cqlComment
-+syn match cqlComment "/\*\*/"
++syn match cqlComment "/\*\*/" 
 +
 +" Special values
 +syn keyword cqlSpecial         false null true
@@ -5646,6 +5625,7 @@ index 00000000..0f7e2011
 +endif
 +
 +let b:current_syntax = "cql"
++
 diff --git a/vimrc/.vim/syntax/python.vim b/vimrc/.vim/syntax/python.vim
 deleted file mode 100644
 index e0416589..00000000

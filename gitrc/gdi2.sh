@@ -34,7 +34,6 @@ GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
 
 if [ -z $(cat $GDITDIFF) ]
 then
-    . ~/loadrc/imvurc/ghypo.sh "$targetBranch"
     exit 0
 fi
 
@@ -54,6 +53,5 @@ then
     git commit  --no-verify -am "$commit_message" && \
         git pull ; \
         git push ; \
-        . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
         ~/loadrc/gitrc/gfix.sh
 fi
