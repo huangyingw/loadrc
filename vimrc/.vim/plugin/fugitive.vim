@@ -654,10 +654,8 @@ function! s:CatBadFiles() abort
         return 0
     endif
 
-    if a:0 >= 1
-        exec '!~/loadrc/ffmpegrc/cat_bad_files.sh ' . '"' .  expand("%:p") . '"'
-    endif
-
+    exec '!~/loadrc/ffmpegrc/cat_bad_files.sh ' . '"' .  expand("%:p") . '" 2>&1 | tee cat_bad_files.runresult'
+    call OpenOrSwitch('cat_bad_files.runresult', 'vs')
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
 endfunction
 
