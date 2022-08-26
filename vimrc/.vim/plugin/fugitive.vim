@@ -655,7 +655,7 @@ function! s:CatBadFiles() abort
     endif
 
     if a:0 >= 1
-        exec '!~/loadrc/ffmpegrc/append_bad_files.sh ' . '"' .  expand("%:p") . '"'
+        exec '!~/loadrc/ffmpegrc/cat_bad_files.sh ' . '"' .  expand("%:p") . '"'
     endif
 
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
