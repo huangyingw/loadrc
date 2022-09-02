@@ -333,7 +333,7 @@ function! VimOpen()
         call asyncrun#run('<bang>', '', '~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
     elseif (expand("%") ==# 'fdocs.list')
         exec '!open ' . '"' .  expand(expand("<cfile>")) . '"'
-    elseif (b:fileName =~ '.*.diff')
+    elseif (b:fileName =~ '.*.diff$')
         let b:commit = expand("<cword>")
         let output = b:commit . '.diff'
 
