@@ -47,6 +47,7 @@ brew install \
     parallel \
     patchutils \
     php \
+    poppler \
     pv \
     rename \
     rsync \
