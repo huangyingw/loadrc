@@ -2114,14 +2114,15 @@ index 00000000..45ee7e69
 +dpkg -i dropbox_*_amd64.deb
 diff --git a/ffmpegrc/cat_bad_files.sh b/ffmpegrc/cat_bad_files.sh
 new file mode 100755
-index 00000000..02af40f3
+index 00000000..2546cb7a
 --- /dev/null
 +++ ./ffmpegrc/cat_bad_files.sh
-@@ -0,0 +1,9 @@
+@@ -0,0 +1,10 @@
 +#!/bin/zsh
 +
 +while read ss
 +do
++    echo "now checking --> $ss"
 +    if ! (~/loadrc/ffmpegrc/check_moov_atom.sh "$ss")
 +    then
 +        ~/loadrc/bashrc/append_rate.sh $ss 66
