@@ -409,7 +409,7 @@ index 00000000..3d146d68
 +#!/bin/zsh
 +~/loadrc/setup_pbpaste-remote.sh
 diff --git a/.shellrc b/.shellrc
-index 52d99984..e76732bf 100755
+index 52d99984..9971f51d 100755
 --- ./.shellrc
 +++ ./.shellrc
 @@ -1,6 +1,5 @@
@@ -429,7 +429,15 @@ index 52d99984..e76732bf 100755
  alias deploy='$HOME/loadrc/bashrc/deploy.sh'
  alias encrypt='$HOME/loadrc/bashrc/encrypt.sh'
  alias envSync='$HOME/loadrc/bashrc/envSync.sh'
-@@ -35,6 +34,7 @@ alias flink='$HOME/loadrc/bashrc/flink.sh'
+@@ -27,6 +26,7 @@ alias fflink='$HOME/loadrc/bashrc/fflink.sh'
+ alias ffp='$HOME/loadrc/bashrc/ffp.sh'
+ alias fgh='$HOME/loadrc/bashrc/fgh.sh'
+ alias findProjects='$HOME/loadrc/bashrc/find_projects.sh'
++alias find_and_label_bad_files='$HOME/loadrc/ffmpegrc/find_and_label_bad_files.sh'
+ alias fjar='$HOME/loadrc/bashrc/fjar.sh'
+ alias flarge='$HOME/loadrc/bashrc/flarge.sh'
+ alias flargest='$HOME/loadrc/bashrc/flargest.sh'
+@@ -35,6 +35,7 @@ alias flink='$HOME/loadrc/bashrc/flink.sh'
  alias fnine='$HOME/loadrc/bashrc/fnine.sh'
  alias fnotinuse='$HOME/loadrc/bashrc/fnotinuse.sh'
  alias fr='$HOME/loadrc/bashrc/fr.sh'
@@ -437,7 +445,7 @@ index 52d99984..e76732bf 100755
  alias fwt='$HOME/loadrc/bashrc/fwt.sh'
  alias fzw='$HOME/loadrc/bashrc/fzw.sh'
  alias glink='$HOME/loadrc/bashrc/glink.sh'
-@@ -74,7 +74,6 @@ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
+@@ -74,7 +75,6 @@ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
  alias selectCopy='$HOME/loadrc/bashrc/select_copy.sh'
  alias selectmirror='$HOME/loadrc/bashrc/selectmirror.sh'
  alias sleep='$HOME/loadrc/bashrc/sleep.sh'
@@ -445,7 +453,7 @@ index 52d99984..e76732bf 100755
  alias smount='$HOME/loadrc/bashrc/smount.sh'
  alias split='$HOME/loadrc/bashrc/split.sh'
  alias ssh='$HOME/loadrc/bashrc/ssh.sh'
-@@ -100,7 +99,6 @@ alias ubak='$HOME/loadrc/bashrc/ubak.sh'
+@@ -100,7 +100,6 @@ alias ubak='$HOME/loadrc/bashrc/ubak.sh'
  alias ufind='$HOME/loadrc/bashrc/ufind.sh'
  alias umlet='$HOME/loadrc/bashrc/umlet.sh'
  alias umletc='$HOME/loadrc/bashrc/umletc.sh'
@@ -2103,10 +2111,10 @@ index 00000000..396eb8fe
 +/usr/bin/dropbox start 2>&1 | tee /root/loadrc/cron.log
 diff --git a/dropboxrc/install.sh b/dropboxrc/install.sh
 new file mode 100755
-index 00000000..45ee7e69
+index 00000000..9fd3ccad
 --- /dev/null
 +++ ./dropboxrc/install.sh
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,8 @@
 +#!/bin/zsh
 +SCRIPT=$(realpath "$0")
 +SCRIPTPATH=$(dirname "$SCRIPT")
@@ -2114,6 +2122,7 @@ index 00000000..45ee7e69
 +
 +wget --content-disposition -nc "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb"
 +dpkg -i dropbox_*_amd64.deb
++apt --fix-broken install -y
 diff --git a/ffmpegrc/cat_bad_files.sh b/ffmpegrc/cat_bad_files.sh
 new file mode 100755
 index 00000000..2546cb7a
@@ -2161,6 +2170,29 @@ index 58429e06..51c59336 100755
  else
      find . -type f | sed -e "s/'/'\\\\''/g;s/\(.*\)/file '\1'/" > "$listFile"
  fi
+diff --git a/ffmpegrc/find_and_label_bad_files.sh b/ffmpegrc/find_and_label_bad_files.sh
+new file mode 100755
+index 00000000..1c942139
+--- /dev/null
++++ ./ffmpegrc/find_and_label_bad_files.sh
+@@ -0,0 +1,17 @@
++#!/bin/zsh
++
++if [ -z "$1" ]
++then
++    target=.
++else
++    target="$1"
++fi
++
++find "$target" -type f -size +100M -exec du -h {} + | sort -r -h | cut -f 2 | while read ss
++do
++    echo "now checking --> $ss"
++    if (ffprobe  -print_format json -show_format -show_streams "$ss" 2>&1 | grep -q 'moov atom not found')
++    then
++        ~/loadrc/bashrc/append_rate.sh $ss 66
++    fi
++done
 diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
 index ca91dbaf..716192b3 100755
 --- ./gitrc/.gitconfig
@@ -3076,7 +3108,7 @@ index 34269226..a8a824c3 100755
  ./install_time_machine.sh
  ./enpass_install.sh
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 62d92acb..a96adc64 100755
+index 62d92acb..f5e4bd5d 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
 @@ -8,19 +8,29 @@ then
@@ -3111,7 +3143,7 @@ index 62d92acb..a96adc64 100755
      hg \
      htop \
      hub \
-@@ -33,17 +43,22 @@ brew install \
+@@ -33,17 +43,23 @@ brew install \
      libtool \
      lynx \
      minikube \
@@ -3120,6 +3152,7 @@ index 62d92acb..a96adc64 100755
 +    parallel \
 +    patchutils \
 +    php \
++    poppler \
 +    pv \
      rename \
 -    sshfs \
@@ -4134,11 +4167,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..c25a7dfd
+index 00000000..555db167
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit c25a7dfd18ebeacca28c3449a0d7d5676209f2c8
++Subproject commit 555db16731745376a36428b39cf267c1dd0cd72e
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4508,12 +4541,12 @@ index 00000000..56a49d79
 @@ -0,0 +1 @@
 +Subproject commit 56a49d79904921a8b4405786e12b4e12fbbf171b
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
-index 5617a1cf..7753505f 160000
+index 5617a1cf..d15d63bf 160000
 --- ./vimrc/.vim/bundle/indentLine
 +++ ./vimrc/.vim/bundle/indentLine
 @@ -1 +1 @@
 -Subproject commit 5617a1cf7d315e6e6f84d825c85e3b669d220bfa
-+Subproject commit 7753505f3c500ec88d11e9373d05250f49c1d900
++Subproject commit d15d63bf9c4a74a02470d4bc8ecce53df13e3a75
 diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
 index 3de17695..24d77cd5 160000
 --- ./vimrc/.vim/bundle/ncm2
@@ -6166,7 +6199,7 @@ index e0416589..00000000
 -
 -" }}}
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
-index 777cb3ad..1b355b44 100644
+index 777cb3ad..62fb98a8 100644
 --- ./vimrc/.vimrc
 +++ ./vimrc/.vimrc
 @@ -28,7 +28,6 @@ inoremap { {}<LEFT>
@@ -6191,7 +6224,7 @@ index 777cb3ad..1b355b44 100644
  let g:phpfmt_autosave = 1
  let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
  
-@@ -277,3 +271,14 @@ let g:tex_flavor = 'latex'
+@@ -277,3 +271,22 @@ let g:tex_flavor = 'latex'
  " add @ to cfile handle
  set isfname+=@-@
  set history=10000
@@ -6206,6 +6239,14 @@ index 777cb3ad..1b355b44 100644
 +" set shellcmdflag=-ic
 +
 +let g:BASH_AlsoBash = [ '*.lsh' ]
++
++if !has('nvim')
++    set viminfo+=n~/vim/viminfo
++else
++    " Do nothing here to use the neovim default
++    " or do soemething like:
++    set viminfo+=n~/.shada
++endif
 diff --git a/vishrc/cat_play.sh b/vishrc/cat_play.sh
 index ed41d521..71bd07af 100755
 --- ./vishrc/cat_play.sh
