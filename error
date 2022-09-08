@@ -99,3 +99,7 @@ E207: Can't delete backup file
 Error detected while processing function ExFilter:
 line    7:
 E207: Can't delete backup file
+
+E576: Error while reading ShaDa file: last entry specified that it occupies 142 bytes, but file ended earlier
+E136: Did not rename /Users/huangyingw/.viminfo.tmp.h because /Users/huangyingw/.viminfo does not look like a ShaDa file
+E136: Do not forget to remove /Users/huangyingw/.viminfo.tmp.h or rename it manually to /Users/huangyingw/.viminfo.
