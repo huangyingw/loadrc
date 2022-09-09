@@ -14,7 +14,8 @@ then
         cp -nv "$TARGET" "$TARGET".bak
     elif [ -d "$TARGET" ]
     then
-        ~/loadrc/bashrc/move.sh "$TARGET" "$TARGET".bak
+        rsync -aHv --progress --remove-source-files "$TARGET" "$TARGET".bak ; \
+        ~/loadrc/bashrc/rmEmpty.sh "$TARGET" 
     fi
 
     ln -fs "$SOURCE" "$TARGET"
