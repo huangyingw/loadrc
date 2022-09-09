@@ -23,16 +23,43 @@ index 263407f8..00000000
 -export PATH="$HOME/Android/sdk/tools:$PATH"
 -export PATH="$HOME/Android/sdk/platform-tools:$PATH"
 diff --git a/.bashrc b/.bashrc
-index a327085e..812c6e14 100644
+index a327085e..a6d2bae9 100644
 --- ./.bashrc
 +++ ./.bashrc
-@@ -148,6 +148,3 @@ fi
+@@ -148,6 +148,4 @@ fi
  #if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
  #    . /etc/bash_completion
  #fi
 -
 -export PATH=/usr/local/bin:$PATH
--. $HOME/loadrc/.loadrc
+ . $HOME/loadrc/.loadrc
+diff --git a/.cohesityrc b/.cohesityrc
+new file mode 100644
+index 00000000..d81f328f
+--- /dev/null
++++ ./.cohesityrc
+@@ -0,0 +1,21 @@
++#GO settings for cohesity
++export REPO=restricted
++export SOFTWARE_VERSION=6.5
++export TC_BASE="/home/cohesity/software/toolchain/x86_64-linux"
++export TOP=$HOME/workspace
++export GOROOT=$TC_BASE/$SOFTWARE_VERSION/golang/go
++export GOBIN=$GOROOT/bin
++export GOPATH=$TOP/$REPO/.go:$TOP/$REPO/build/.go:$TOP/$REPO/qa/lib/go_from_protos
++
++GOLANGDIR=$TC_BASE/$SOFTWARE_VERSION/golang
++for dir in `ls $GOLANGDIR`;
++do
++  # GOROOT should not be part of GOPATH. Intellij complains.
++  if [ "$GOLANGDIR/$dir" != "$GOROOT" ]; then
++    export GOPATH=$GOPATH:$GOLANGDIR/$dir
++  fi
++done
++export PATH=$GOBIN:$PATH:$TC_BASE/$SOFTWARE_VERSION/bin
++export CGO_CFLAGS="-I$TOP/$REPO -I$TOP/$REPO/build"
++
++GO3RDPARTY=$TC_BASE/$TC_VERSION/golang/go-martini:$TC_BASE/$TC_VERSION/golang/go-gorilla:$TC_BASE/$TC_VERSION/golang/termbox-go:$TC_BASE/$TC_VERSION/golang/elastigo:$TC_BASE/$TC_VERSION/golang/go-inject
 diff --git a/.dockerignore b/.dockerignore
 new file mode 100644
 index 00000000..995dbd0a
@@ -1584,15 +1611,14 @@ index 36367474..bbb1678b 100755
      .
 diff --git a/bashrc/rsync_basic_options b/bashrc/rsync_basic_options
 new file mode 100644
-index 00000000..77b6e8fa
+index 00000000..678478c1
 --- /dev/null
 +++ ./bashrc/rsync_basic_options
-@@ -0,0 +1,5 @@
+@@ -0,0 +1,4 @@
 +-aHSv
 +--progress
 +--force
 +--append-verify
-+--mkpath
 diff --git a/bashrc/select_move.sh b/bashrc/select_move.sh
 new file mode 100755
 index 00000000..2ef72567
@@ -4192,7 +4218,7 @@ index 00000000..258e8058
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 258e80586dbf22a807f74639d514fe623b3fff5e
++Subproject commit 258e80586dbf22a807f74639d514fe623b3fff5e-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
