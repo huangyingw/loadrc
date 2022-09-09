@@ -6,6 +6,14 @@ index 90ce3cd4..71517e53 100644
  eval `ssh-agent -s`
  ssh-add /Users/yhuang/.ssh/github_id_rsa
 +~/loadrc/setup_pbpaste-remote.sh
+diff --git a/.COH-LC172TVQ6J.rc b/.COH-LC172TVQ6J.rc
+new file mode 100644
+index 00000000..4ea0a805
+--- /dev/null
++++ ./.COH-LC172TVQ6J.rc
+@@ -0,0 +1,2 @@
++eval `ssh-agent -s`
++ssh-add /Users/ying.huang/.ssh/id_rsa
 diff --git a/.androidrc b/.androidrc
 deleted file mode 100644
 index 263407f8..00000000
@@ -4167,11 +4175,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..555db167
+index 00000000..258e8058
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 555db16731745376a36428b39cf267c1dd0cd72e
++Subproject commit 258e80586dbf22a807f74639d514fe623b3fff5e
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4653,12 +4661,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..edfdb9a4 160000
+index 8468d6a8..9d5f2158 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit edfdb9a409801bb1d1c1697a2ef3779c37ee649f
++Subproject commit 9d5f2158af13fc95b70bc772fc608b11f2a917f8
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 index 00000000..115e2600
@@ -4695,12 +4703,12 @@ index 00000000..62d82051
 @@ -0,0 +1 @@
 +Subproject commit 62d820512c7c46da791cb66101c1740a90192a3f
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..83e17679 160000
+index 3b379635..0c4f91dc 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit 83e17679f82e526c55e0d670ef0ad8d97a5fd4f5
++Subproject commit 0c4f91dcba7da0a1003469cbfd477e98322d9f1e
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
@@ -6199,7 +6207,7 @@ index e0416589..00000000
 -
 -" }}}
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
-index 777cb3ad..62fb98a8 100644
+index 777cb3ad..1b355b44 100644
 --- ./vimrc/.vimrc
 +++ ./vimrc/.vimrc
 @@ -28,7 +28,6 @@ inoremap { {}<LEFT>
@@ -6224,7 +6232,7 @@ index 777cb3ad..62fb98a8 100644
  let g:phpfmt_autosave = 1
  let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
  
-@@ -277,3 +271,22 @@ let g:tex_flavor = 'latex'
+@@ -277,3 +271,14 @@ let g:tex_flavor = 'latex'
  " add @ to cfile handle
  set isfname+=@-@
  set history=10000
@@ -6239,14 +6247,6 @@ index 777cb3ad..62fb98a8 100644
 +" set shellcmdflag=-ic
 +
 +let g:BASH_AlsoBash = [ '*.lsh' ]
-+
-+if !has('nvim')
-+    set viminfo+=n~/vim/viminfo
-+else
-+    " Do nothing here to use the neovim default
-+    " or do soemething like:
-+    set viminfo+=n~/.shada
-+endif
 diff --git a/vishrc/cat_play.sh b/vishrc/cat_play.sh
 index ed41d521..71bd07af 100755
 --- ./vishrc/cat_play.sh
