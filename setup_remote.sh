@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo apt-get update && \
-    apt-get install -y \
+    sudo apt-get install -y \
     mosh \
     ssh \
     tmux \
