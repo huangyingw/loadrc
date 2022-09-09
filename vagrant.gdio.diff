@@ -4186,11 +4186,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..1cc13ca4
+index 00000000..f70ecb98
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 1cc13ca428844d99a216a24b992cbad5d6d90ac3-dirty
++Subproject commit f70ecb9875c7cf80cd5cfea6d7a4ebc30bc29f00-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4410,10 +4410,10 @@ index 00000000..b385cdc6
 +cp -fv ./pbpaste-remote ~/bin/pbpaste-remote
 diff --git a/setup_remote.sh b/setup_remote.sh
 new file mode 100755
-index 00000000..56e480a9
+index 00000000..634e3d64
 --- /dev/null
 +++ ./setup_remote.sh
-@@ -0,0 +1,26 @@
+@@ -0,0 +1,23 @@
 +#!/bin/bash
 +
 +apt-get update && \
@@ -4433,12 +4433,9 @@ index 00000000..56e480a9
 +    tmux \
 +    zsh
 +
-+echo "deploy_configurations --> "
 +./deploy_configurations.sh
 +~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
-+echo "setup_locale --> "
 +./setup_locale.sh
-+echo "swith-2-zsh --> "
 +./swith-2-zsh.sh
 diff --git a/sqlrc/xsql.sh b/sqlrc/xsql.sh
 index 0aae8085..2d88e3a8 100755
@@ -4675,12 +4672,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..120ae9b5 160000
+index 8468d6a8..9d5f2158 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 120ae9b53cc78d360af72b262a578223a98b7d3a-dirty
++Subproject commit 9d5f2158af13fc95b70bc772fc608b11f2a917f8
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 index 00000000..115e2600
@@ -4717,12 +4714,12 @@ index 00000000..62d82051
 @@ -0,0 +1 @@
 +Subproject commit 62d820512c7c46da791cb66101c1740a90192a3f
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..83e17679 160000
+index 3b379635..0c4f91dc 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit 83e17679f82e526c55e0d670ef0ad8d97a5fd4f5
++Subproject commit 0c4f91dcba7da0a1003469cbfd477e98322d9f1e
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
