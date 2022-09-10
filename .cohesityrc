@@ -1,7 +1,7 @@
 #GO settings for cohesity
 export REPO=restricted
 export SOFTWARE_VERSION=6.5
-export TC_BASE="/home/Ying.Huang/software/toolchain/x86_64-linux "
+export TC_BASE="/home/cohesity/software/toolchain/x86_64-linux"
 export TOP=$HOME/workspace
 export GOROOT=$TC_BASE/$SOFTWARE_VERSION/golang/go
 export GOBIN=$GOROOT/bin
