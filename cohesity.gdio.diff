@@ -35,14 +35,14 @@ index a327085e..a6d2bae9 100644
  . $HOME/loadrc/.loadrc
 diff --git a/.cohesityrc b/.cohesityrc
 new file mode 100644
-index 00000000..d81f328f
+index 00000000..1b7da49d
 --- /dev/null
 +++ ./.cohesityrc
 @@ -0,0 +1,21 @@
 +#GO settings for cohesity
 +export REPO=restricted
 +export SOFTWARE_VERSION=6.5
-+export TC_BASE="/home/cohesity/software/toolchain/x86_64-linux"
++export TC_BASE="/home/Ying.Huang/software/toolchain/x86_64-linux "
 +export TOP=$HOME/workspace
 +export GOROOT=$TC_BASE/$SOFTWARE_VERSION/golang/go
 +export GOBIN=$GOROOT/bin
@@ -758,19 +758,19 @@ index 09330daf..63c0c62f 100755
 +    "$iconvs" \
 +    "$rsyncpath" \
 +    "$source/" "$target/"
-diff --git a/nxrc/install.sh b/bashrc/copy.test.sh
-similarity index 60%
-rename from nxrc/install.sh
+diff --git a/install_nvim.sh b/bashrc/copy.test.sh
+similarity index 65%
+rename from install_nvim.sh
 rename to bashrc/copy.test.sh
-index 2c4bf8d7..83b0bbaf 100755
---- ./nxrc/install.sh
+index 76ffdaf5..83b0bbaf 100755
+--- ./install_nvim.sh
 +++ ./bashrc/copy.test.sh
 @@ -3,5 +3,4 @@ SCRIPT=$(realpath "$0")
  SCRIPTPATH=$(dirname "$SCRIPT")
  cd "$SCRIPTPATH"
  
--. ~/loadrc/.loadrc
--dpkg -i $SOFTWARE/nx/nomachine_*.deb
+-./install_nvim_pre.sh
+-./install_nvim_post.sh
 +./copy.sh ~/loadrc/ ~/loadrc.bak/
 diff --git a/bashrc/create_folders.sh b/bashrc/create_folders.sh
 old mode 100644
@@ -823,19 +823,19 @@ index 26ad90c3..447bace9 100755
 +then
 +    (pv -n "$input" | gzip -c1 | dd of="$output" bs=128M conv=notrunc,noerror) 2>&1 | dialog --gauge "Running dd command (cloning), please wait..." 10 70 0
 +fi
-diff --git a/install_cscope.sh b/bashrc/dd.test.sh
-similarity index 53%
-rename from install_cscope.sh
+diff --git a/nxrc/install.sh b/bashrc/dd.test.sh
+similarity index 60%
+rename from nxrc/install.sh
 rename to bashrc/dd.test.sh
-index 14d8f004..e117f8f1 100755
---- ./install_cscope.sh
+index 2c4bf8d7..e117f8f1 100755
+--- ./nxrc/install.sh
 +++ ./bashrc/dd.test.sh
 @@ -3,5 +3,4 @@ SCRIPT=$(realpath "$0")
  SCRIPTPATH=$(dirname "$SCRIPT")
  cd "$SCRIPTPATH"
  
--git clone https://github.com/huangyingw/cscope.git
--./cscope/build_pre.sh
+-. ~/loadrc/.loadrc
+-dpkg -i $SOFTWARE/nx/nomachine_*.deb
 +./dd.sh /dev/nbd0 /media/volgrp/software/test.img
 diff --git a/bashrc/deploy.sh b/bashrc/deploy.sh
 index a76cbfaf..6f3988bf 100755
@@ -1245,10 +1245,10 @@ index e2137142..707d4029 100755
 -        nvim ~/loadrc/jdupes.log
 +jdupes -dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log
 diff --git a/bashrc/ln_fs.sh b/bashrc/ln_fs.sh
-index 8946ff3e..cf2ded66 100755
+index 8946ff3e..1a6a5a97 100755
 --- ./bashrc/ln_fs.sh
 +++ ./bashrc/ln_fs.sh
-@@ -9,11 +9,12 @@ then
+@@ -9,11 +9,13 @@ then
      if [ -L "$TARGET" ]
      then
          rm "$TARGET"
@@ -1260,7 +1260,8 @@ index 8946ff3e..cf2ded66 100755
          cp -nv "$TARGET" "$TARGET".bak
 +    elif [ -d "$TARGET" ]
 +    then
-+        ~/loadrc/bashrc/move.sh "$TARGET" "$TARGET".bak
++        rsync -aHv --progress --remove-source-files "$TARGET"/ "$TARGET".bak/ ; \
++        ~/loadrc/bashrc/rmEmpty.sh "$TARGET" 
      fi
  
      ln -fs "$SOURCE" "$TARGET"
@@ -1760,17 +1761,19 @@ index 00000000..e456eda6
 +#qemu-img convert "$input" -O raw "$output"
 +
 +(qemu-img convert "$input" -O raw "$output") 2>&1 | dialog --gauge "Running dd command (cloning), please wait..." 10 70 0
-diff --git a/bashrc/vm2img.test.sh b/bashrc/vm2img.test.sh
-new file mode 100755
-index 00000000..af6629ad
---- /dev/null
+diff --git a/install_cscope.sh b/bashrc/vm2img.test.sh
+similarity index 53%
+rename from install_cscope.sh
+rename to bashrc/vm2img.test.sh
+index 14d8f004..af6629ad 100755
+--- ./install_cscope.sh
 +++ ./bashrc/vm2img.test.sh
-@@ -0,0 +1,6 @@
-+#!/bin/zsh
-+SCRIPT=$(realpath "$0")
-+SCRIPTPATH=$(dirname "$SCRIPT")
-+cd "$SCRIPTPATH"
-+
+@@ -3,5 +3,4 @@ SCRIPT=$(realpath "$0")
+ SCRIPTPATH=$(dirname "$SCRIPT")
+ cd "$SCRIPTPATH"
+ 
+-git clone https://github.com/huangyingw/cscope.git
+-./cscope/build_pre.sh
 +./vm2img.sh /var/lib/libvirt/images/u2004.qcow2
 diff --git a/bashrc/wol.sh b/bashrc/wol.sh
 index 1e941ff7..aa05d65b 100755
@@ -1964,6 +1967,19 @@ index 00000000..87081191
 +
 +docker:
 +~/loadrc/docker-compose.yml
+diff --git a/deploy_configurations.sh b/deploy_configurations.sh
+index c0f7848b..a12d202b 100755
+--- ./deploy_configurations.sh
++++ ./deploy_configurations.sh
+@@ -21,7 +21,7 @@ fi
+ mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/."`hostname`".theanorc  ~/.theanorc
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.config/git/gitk  ~/.config/git/gitk
+-# ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
++~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.tmux.conf ~/.tmux.conf
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/gitrc/.gitconfig ~/.gitconfig
+ ~/loadrc/bashrc/ln_fs.sh ~/loadrc/gitrc/.globalgitignore ~/.globalgitignore
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
 index 00000000..e922ab44
@@ -3253,35 +3269,23 @@ index c3036dee..09b82d56 100755
 +then
 +    mv -v "$OTHER_NODE" "$OTHER_NODE".bak
 +fi
-diff --git a/install_nvim.sh b/install_nvim.sh
-index 76ffdaf5..331f2bbd 100755
---- ./install_nvim.sh
-+++ ./install_nvim.sh
-@@ -3,5 +3,5 @@ SCRIPT=$(realpath "$0")
- SCRIPTPATH=$(dirname "$SCRIPT")
- cd "$SCRIPTPATH"
- 
--./install_nvim_pre.sh
-+./neovim/install.sh
- ./install_nvim_post.sh
 diff --git a/install_nvim_post.sh b/install_nvim_post.sh
-index 756816d8..2660866e 100755
+deleted file mode 100755
+index 756816d8..00000000
 --- ./install_nvim_post.sh
-+++ ./install_nvim_post.sh
-@@ -4,8 +4,8 @@ SCRIPTPATH=$(dirname "$SCRIPT")
- cd "$SCRIPTPATH"
- 
- mkdir -p ~/.config/nvim/
++++ /dev/null
+@@ -1,11 +0,0 @@
+-#!/bin/zsh
+-SCRIPT=$(realpath "$0")
+-SCRIPTPATH=$(dirname "$SCRIPT")
+-cd "$SCRIPTPATH"
+-
+-mkdir -p ~/.config/nvim/
 -~/loadrc/bashrc/ln_fs.sh ~/loadrc/vimrc/.vim ~/.vim
 -~/loadrc/bashrc/ln_fs.sh ~/loadrc/vimrc/.vimrc ~/.vimrc
 -~/loadrc/bashrc/ln_fs.sh ~/loadrc/.config/nvim/init.vim ~/.config/nvim/init.vim
 -rm -fv ~/.viminfo*
 -./gitrc/gclean.sh
-+~/loadrc/bashrc/ln_fs.sh ~/loadrc/vimrc/.vim ~/.vim || true
-+~/loadrc/bashrc/ln_fs.sh ~/loadrc/vimrc/.vimrc ~/.vimrc || true
-+~/loadrc/bashrc/ln_fs.sh ~/loadrc/.config/nvim/init.vim ~/.config/nvim/init.vim || true
-+rm -fv ~/.viminfo* || true
-+./gitrc/gclean.sh || true
 diff --git a/install_nvim_pre.sh b/install_nvim_pre.sh
 deleted file mode 100755
 index 2bc75c67..00000000
@@ -4214,11 +4218,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..258e8058
+index 00000000..d99fb0b9
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 258e80586dbf22a807f74639d514fe623b3fff5e-dirty
++Subproject commit d99fb0b93f2d6567f0fd0c9d8dba259a7f179dca-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4409,14 +4413,14 @@ index 00000000..93d8270a
 +launchctl start ~/Library/LaunchAgents/pbpaste.plist
 diff --git a/setup_locale.sh b/setup_locale.sh
 new file mode 100755
-index 00000000..b35d7ef9
+index 00000000..9e481b26
 --- /dev/null
 +++ ./setup_locale.sh
 @@ -0,0 +1,4 @@
 +#!/bin/zsh
 +
-+cp -fv ./linux/etc/locale.gen /etc/locale.gen
-+locale-gen
++sudo cp -fv ./linux/etc/locale.gen /etc/locale.gen
++sudo locale-gen
 diff --git a/setup_pbpaste-remote.sh b/setup_pbpaste-remote.sh
 new file mode 100755
 index 00000000..b385cdc6
@@ -4438,14 +4442,14 @@ index 00000000..b385cdc6
 +cp -fv ./pbpaste-remote ~/bin/pbpaste-remote
 diff --git a/setup_remote.sh b/setup_remote.sh
 new file mode 100755
-index 00000000..634e3d64
+index 00000000..8813d4a5
 --- /dev/null
 +++ ./setup_remote.sh
-@@ -0,0 +1,23 @@
+@@ -0,0 +1,22 @@
 +#!/bin/bash
 +
-+apt-get update && \
-+    apt-get install -y \
++sudo apt-get update && \
++    sudo apt-get install -y \
 +    mosh \
 +    ssh \
 +    tmux \
@@ -4462,7 +4466,6 @@ index 00000000..634e3d64
 +    zsh
 +
 +./deploy_configurations.sh
-+~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
 +./setup_locale.sh
 +./swith-2-zsh.sh
 diff --git a/sqlrc/xsql.sh b/sqlrc/xsql.sh
@@ -4490,6 +4493,19 @@ index 0aae8085..2d88e3a8 100755
  cd "$(dirname "$file")"
 -mysql -v -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
 +mysql -v "$option" -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
+diff --git a/swith-2-zsh.sh b/swith-2-zsh.sh
+index 541ae968..0996eeeb 100755
+--- ./swith-2-zsh.sh
++++ ./swith-2-zsh.sh
+@@ -4,6 +4,6 @@ ZSH=$(which zsh)
+ 
+ if [ "$ZSH" != "$SHELL" ]
+ then
+-    chsh -s "$ZSH"
+-    reboot
++    sudo chsh -s "$ZSH"
++    sudo reboot
+ fi
 diff --git a/transmissionrc/auto_reboot.sh b/transmissionrc/auto_reboot.sh
 new file mode 100755
 index 00000000..837984a4
@@ -4679,12 +4695,12 @@ index 4579327e..4267ae2a 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..ee2862fc 160000
+index dbe8b1e2..8745d13c 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit ee2862fcf8507a086da3361c2c7846fea7eb750c
++Subproject commit 8745d13c85e7c34c0d6492717a14fb6fb575cf88
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
