@@ -14,6 +14,7 @@
 . $HOME/loadrc/.macosrc
 . $HOME/loadrc/.mindsrc
 . $HOME/loadrc/.gorc
+. $HOME/loadrc/.cohesityrc
 
 HOSTRC=$HOME/loadrc/."`hostname`".rc
 
