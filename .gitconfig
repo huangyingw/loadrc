@@ -4,13 +4,9 @@
 [remote "gitlab"]
     url = git@gitlab.com:huangyingw/loadrc.git
     fetch = +refs/heads/*:refs/remotes/gitlab/*
-[remote "github"]
-    url = git@github.com:huangyingw/loadrc.git
-    fetch = +refs/heads/*:refs/remotes/github/*
 [push]
     remote = origin
     remote = gitlab
-    remote = github
 [branch "cscope/cscope_dynamic"]
     remote = origin
     merge = refs/heads/cscope/cscope_dynamic

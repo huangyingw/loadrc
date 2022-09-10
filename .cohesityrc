@@ -1,0 +1,21 @@
+#GO settings for cohesity
+export REPO=restricted
+export SOFTWARE_VERSION=6.5
+export TC_BASE="/home/Ying.Huang/software/toolchain/x86_64-linux "
+export TOP=$HOME/workspace
+export GOROOT=$TC_BASE/$SOFTWARE_VERSION/golang/go
+export GOBIN=$GOROOT/bin
+export GOPATH=$TOP/$REPO/.go:$TOP/$REPO/build/.go:$TOP/$REPO/qa/lib/go_from_protos
+
+GOLANGDIR=$TC_BASE/$SOFTWARE_VERSION/golang
+for dir in `ls $GOLANGDIR`;
+do
+  # GOROOT should not be part of GOPATH. Intellij complains.
+  if [ "$GOLANGDIR/$dir" != "$GOROOT" ]; then
+    export GOPATH=$GOPATH:$GOLANGDIR/$dir
+  fi
+done
+export PATH=$GOBIN:$PATH:$TC_BASE/$SOFTWARE_VERSION/bin
+export CGO_CFLAGS="-I$TOP/$REPO -I$TOP/$REPO/build"
+
+GO3RDPARTY=$TC_BASE/$TC_VERSION/golang/go-martini:$TC_BASE/$TC_VERSION/golang/go-gorilla:$TC_BASE/$TC_VERSION/golang/termbox-go:$TC_BASE/$TC_VERSION/golang/elastigo:$TC_BASE/$TC_VERSION/golang/go-inject

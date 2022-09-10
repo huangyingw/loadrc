@@ -1,7 +1,7 @@
 #!/bin/bash
 
-apt-get update && \
-    apt-get install -y \
+sudo apt-get update && \
+    sudo apt-get install -y \
     mosh \
     ssh \
     tmux \
@@ -18,6 +18,5 @@ rw ; \
     zsh
 
 ./deploy_configurations.sh
-~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
 ./setup_locale.sh
 ./swith-2-zsh.sh
