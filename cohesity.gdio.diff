@@ -1584,15 +1584,14 @@ index 36367474..bbb1678b 100755
      .
 diff --git a/bashrc/rsync_basic_options b/bashrc/rsync_basic_options
 new file mode 100644
-index 00000000..77b6e8fa
+index 00000000..678478c1
 --- /dev/null
 +++ ./bashrc/rsync_basic_options
-@@ -0,0 +1,5 @@
+@@ -0,0 +1,4 @@
 +-aHSv
 +--progress
 +--force
 +--append-verify
-+--mkpath
 diff --git a/bashrc/select_move.sh b/bashrc/select_move.sh
 new file mode 100755
 index 00000000..2ef72567
@@ -4188,11 +4187,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..258e8058
+index 00000000..f70ecb98
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 258e80586dbf22a807f74639d514fe623b3fff5e
++Subproject commit f70ecb9875c7cf80cd5cfea6d7a4ebc30bc29f00
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
