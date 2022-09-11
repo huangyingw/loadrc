@@ -94,7 +94,7 @@ case $extension in
         then
             ssh -nY "$host" "docker-compose -f $rpath/$rfile up -d"
         else
-            docker-compose -f "$file" up -d --build
+            docker-compose -f "$file" up -d --build --force-recreate
         fi
         ;;
     ymldebug)
