@@ -35,3 +35,4 @@ mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 ./set_linux_configuration.sh
 ./set_macos_configuration.sh
 ./set_host_configuration.sh
+./neovim/post.sh
