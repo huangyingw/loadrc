@@ -4,6 +4,6 @@ ZSH=$(which zsh)
 
 if [ "$ZSH" != "$SHELL" ]
 then
-    chsh -s "$ZSH"
-    reboot
+    sudo chsh -s "$ZSH"
+    sudo reboot
 fi

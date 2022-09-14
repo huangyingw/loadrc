@@ -1,4 +1,4 @@
 #!/bin/zsh
 
-cp -fv ./linux/etc/locale.gen /etc/locale.gen
-locale-gen
+sudo cp -fv ./linux/etc/locale.gen /etc/locale.gen
+sudo locale-gen

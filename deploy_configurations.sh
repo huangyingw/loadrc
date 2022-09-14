@@ -21,7 +21,7 @@ fi
 mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/."`hostname`".theanorc  ~/.theanorc
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.config/git/gitk  ~/.config/git/gitk
-# ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
+~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.tmux.conf ~/.tmux.conf
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/gitrc/.gitconfig ~/.gitconfig
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/gitrc/.globalgitignore ~/.globalgitignore
@@ -35,3 +35,4 @@ mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 ./set_linux_configuration.sh
 ./set_macos_configuration.sh
 ./set_host_configuration.sh
+./neovim/post.sh
