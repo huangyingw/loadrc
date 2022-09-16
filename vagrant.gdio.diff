@@ -4353,11 +4353,11 @@ index 13a0cf4c..6cd6989c 100755
  
 diff --git a/rsync b/rsync
 new file mode 160000
-index 00000000..b79c430d
+index 00000000..e153d75a
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit b79c430d0001647c7c83cc3d541470b7ca7946d9
++Subproject commit e153d75abf2a1f4ce7bc9d5f1d28b7cf431a7862
 diff --git a/set_macos_configuration.sh b/set_macos_configuration.sh
 index cf9a010a..26f18169 100755
 --- ./set_macos_configuration.sh
