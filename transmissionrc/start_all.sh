@@ -1,3 +1,3 @@
 #!/bin/zsh
 
-transmission-remote --start all
+transmission-remote -n 'transmission:transmission' --torrent all --start
