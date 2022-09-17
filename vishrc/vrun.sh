@@ -38,7 +38,7 @@ fi
 if [[ $(basename "$file") = 'Vagrantfile' ]]
 then
     cd "$rfolder"
-    vagrant reload
+    vagrant reload || vagrant up
     exit 0
 fi
 
