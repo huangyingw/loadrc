@@ -1670,13 +1670,14 @@ index 8f22cb80..3b76862c 100755
      df -H
  fi
 diff --git a/bashrc/ssh.sh b/bashrc/ssh.sh
-index 7042dce9..867503a8 100755
+index 7042dce9..d6a54c12 100755
 --- ./bashrc/ssh.sh
 +++ ./bashrc/ssh.sh
-@@ -1,11 +1,6 @@
+@@ -1,11 +1,10 @@
  #! /bin/zsh
  target=$(echo "$1" | sed  -e "s/\/$//g")
--
++tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
+ 
 -if ( ssh "$target" "uname" | grep -q Darwin )
 -then
 -    tmuxAction='/usr/local/bin/tmux new-session -A -s ssh'
@@ -1684,10 +1685,12 @@ index 7042dce9..867503a8 100755
 -    tmuxAction='/usr/bin/tmux new-session -A -s ssh'
 -fi
 -
-+tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
-+ssh -fnN -R 2224:localhost:2224 "$target" &
-+ssh -fnN -R 2225:localhost:2225 "$target" &
- ssh -Y "$target" -t -- ${tmuxAction}
++while true
++do
++    ssh -fnN -R 2224:localhost:2224 "$target" &
++    ssh -fnN -R 2225:localhost:2225 "$target" &
+     ssh -Y "$target" -t -- ${tmuxAction}
++done
 diff --git a/bashrc/tmirror.sh b/bashrc/tmirror.sh
 index 30abd357..31ce354d 100755
 --- ./bashrc/tmirror.sh
@@ -2952,10 +2955,10 @@ similarity index 100%
 rename from host_links/movie/etc/network/interfaces
 rename to host_links/movie/etc/network/interfaces_bak
 diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
-index 50886663..029b10fa 100644
+index 50886663..a36f9ac3 100644
 --- ./host_links/server/etc/hosts
 +++ ./host_links/server/etc/hosts
-@@ -3,13 +3,16 @@
+@@ -3,13 +3,17 @@
  192.168.31.127 u1804
  192.168.31.111 u2004
  172.27.217.162 localhost.imvu.com
@@ -2969,6 +2972,7 @@ index 50886663..029b10fa 100644
  192.168.31.147 imacpro
 +172.27.68.119 imac
 +192.168.31.96 mbp
++192.168.31.154 mbp2
 +192.168.31.88 transmission
  
  # The following lines are desirable for IPv6 capable hosts
@@ -2997,6 +3001,17 @@ index 00000000..12b4045b
 @@ -0,0 +1 @@
 +3c406cd616:0:35b1d5aca7458f28bdc13c2a0072ab8d6569e2703d06ded63185335bd55ef7037ea25275ad76ff70fa4cac760507a8dca84cd48a86a0d2f582cf684565b1affc:c7395f2c12e36b151dd0b358005b1e86d0ee0bca5488c19fc3d1bf317473359a578d6ed7404035f8ece286115ef60a9ef33667f4cdc6adb607edeaf640780089
 \ No newline at end of file
+diff --git a/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.public b/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.public
+new file mode 100644
+index 00000000..2e736125
+--- /dev/null
++++ ./hosts/mbp2/Library/Application Support/ZeroTier/One/identity.public	
+@@ -0,0 +1 @@
++1e95a2d9fe:0:8034bed74da2e9afccdc3e92957bb5d0cc632b03f1eac11f79166c5a51d1c30e22907658b0726436934d77b39e6646705c0fd9f9473344dd730ba1f18225a4a0
+\ No newline at end of file
+diff --git a/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.secret b/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.secret
+new file mode 100644
+index 00000000..1e7f6d4c
 diff --git a/hosts/server/var/lib/zerotier-one/identity.public b/hosts/server/var/lib/zerotier-one/identity.public
 index 55095016..d55d1f79 100644
 --- ./hosts/server/var/lib/zerotier-one/identity.public
@@ -3116,14 +3131,16 @@ index 34269226..a8a824c3 100755
  ./install_time_machine.sh
  ./enpass_install.sh
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 62d92acb..f5e4bd5d 100755
+index 62d92acb..d3484672 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
-@@ -8,19 +8,29 @@ then
+@@ -8,19 +8,31 @@ then
      exit 0
  fi
  
 -/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
++xcode-select --install
++
 +/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 +git -C $(brew --repository homebrew/core) checkout master
  brew update
@@ -3151,7 +3168,7 @@ index 62d92acb..f5e4bd5d 100755
      hg \
      htop \
      hub \
-@@ -33,17 +43,23 @@ brew install \
+@@ -33,17 +45,24 @@ brew install \
      libtool \
      lynx \
      minikube \
@@ -3166,6 +3183,7 @@ index 62d92acb..f5e4bd5d 100755
 -    sshfs \
 +    rsync \
 +    sbt \
++    slurm \
 +    sponge \
      tig \
 -    tmux \
@@ -4175,11 +4193,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..258e8058
+index 00000000..dfc464ce
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 258e80586dbf22a807f74639d514fe623b3fff5e
++Subproject commit dfc464ce3cd3f3c309ffd68c34489bd7b006790f-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4640,12 +4658,12 @@ index 4579327e..4267ae2a 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..ee2862fc 160000
+index dbe8b1e2..8745d13c 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit ee2862fcf8507a086da3361c2c7846fea7eb750c
++Subproject commit 8745d13c85e7c34c0d6492717a14fb6fb575cf88
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -4703,12 +4721,12 @@ index 00000000..62d82051
 @@ -0,0 +1 @@
 +Subproject commit 62d820512c7c46da791cb66101c1740a90192a3f
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..0c4f91dc 160000
+index 3b379635..5cac1af8 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit 0c4f91dcba7da0a1003469cbfd477e98322d9f1e
++Subproject commit 5cac1af8775a801f469dbd8f2654450553d104ed
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
@@ -5349,7 +5367,7 @@ index d5874fe5..64bf906f 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..b9fdd6fe 100644
+index 5fd4a230..e424d829 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -15,7 +15,11 @@ function! ExFilter()
@@ -5391,22 +5409,22 @@ index 5fd4a230..b9fdd6fe 100644
  endfunction
  
  function! Filter()
-@@ -135,8 +152,12 @@ function! VRun()
+@@ -135,7 +152,13 @@ function! VRun()
      let b:file_name = expand('%:t')
      let b:to_run = expand("%:p")
  
 -    if filereadable(b:to_run . '.sh')
--        let b:to_run = b:to_run . '.sh'
 +    if (expand('%:e') ==# 'php')
 +        exec '!~/loadrc/imvurc/generate.sh ' . '"' .  expand('%:p') . '"'
 +    endif
 +
 +    if filereadable(b:to_run . '.lsh')
 +        let b:to_run = b:to_run . '.lsh'
++    elseif filereadable(b:to_run . '.sh') 
+         let b:to_run = b:to_run . '.sh'
      endif
  
-     let b:csdbpath = Cd2Worktree()
-@@ -149,7 +170,7 @@ function! VRun()
+@@ -149,7 +172,7 @@ function! VRun()
      endif
  
      if b:to_run != 'gbil.log'
@@ -5415,7 +5433,7 @@ index 5fd4a230..b9fdd6fe 100644
      else
          call OpenOrSwitch('gbil.log', 'vs')
      endif
-@@ -172,9 +193,8 @@ function! GetFirstColumnOfFile()
+@@ -172,9 +195,8 @@ function! GetFirstColumnOfFile()
          return 0
      endif
  
@@ -5426,7 +5444,7 @@ index 5fd4a230..b9fdd6fe 100644
  endfunction
  
  function! CSCSearch(num)
-@@ -233,9 +253,9 @@ function! OpenAll()
+@@ -233,9 +255,9 @@ function! OpenAll()
          let line = substitute(line, '"', '', "g")
          exec 'vs ' . currentDir . '/' . line
      endfor
@@ -5438,7 +5456,16 @@ index 5fd4a230..b9fdd6fe 100644
  
      let bnr = bufwinnr('^' . currentFile . '$')
      exe bnr . "wincmd w"
-@@ -313,6 +333,15 @@ function! VimOpen()
+@@ -279,7 +301,7 @@ function! VimOpen()
+     let b:fileName = expand(expand("<cfile>"))
+     let b:filePath = fnamemodify(expand(expand("<cfile>")), ":p:h")
+ 
+-    if b:fileName =~? '\.\(pdf\|pptx\|doc\|docx\)$'
++    if b:fileName =~? '\.\(pptx\|doc\|docx\)$'
+         exec '!open ' . '"' .  b:fileName . '"'
+         return
+     endif
+@@ -313,6 +335,15 @@ function! VimOpen()
          call asyncrun#run('<bang>', '', '~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
      elseif (expand("%") ==# 'fdocs.list')
          exec '!open ' . '"' .  expand(expand("<cfile>")) . '"'
@@ -5454,7 +5481,7 @@ index 5fd4a230..b9fdd6fe 100644
      elseif (&filetype ==# 'fugitiveblame')
          let b:commit = expand("<cword>")
          call Cd2Worktree()
-@@ -332,13 +361,16 @@ function! VimOpen()
+@@ -332,13 +363,16 @@ function! VimOpen()
  endfunction
  
  function! GitSearch()
@@ -5476,7 +5503,7 @@ index 5fd4a230..b9fdd6fe 100644
      call HighlightKeyword(keyword)
  endfunction
  
-@@ -353,13 +385,6 @@ function! VimSearch()
+@@ -353,13 +387,6 @@ function! VimSearch()
      call HighlightKeyword(keyword)
  endfunction
  
@@ -5490,7 +5517,7 @@ index 5fd4a230..b9fdd6fe 100644
  function! SwitchWinSize()
      if &winwidth == 1
          set winwidth=999999
-@@ -416,40 +441,20 @@ nnoremap <leader>Y "+yy
+@@ -416,40 +443,20 @@ nnoremap <leader>Y "+yy
  nnoremap <leader>p "+p
  nnoremap <leader>P "+P
  nnoremap tt :Autoformat<CR>:w!<cr>
@@ -5534,7 +5561,7 @@ index 5fd4a230..b9fdd6fe 100644
  nnoremap mg :call VFilter()<cr>
  nnoremap me :call ExtractHighLight()<cr>
  nnoremap mf :call ExFilter()<cr>
-@@ -462,7 +467,7 @@ nmap <C-@> :call CSCSearch(4)<cr>
+@@ -462,7 +469,7 @@ nmap <C-@> :call CSCSearch(4)<cr>
  nmap <C-f> :call CSCSearch(7)<cr>
  nmap <C-e> :call CSCSearch(1)<cr>
  nmap <C-g> :call CSCSearch(3)<cr>
@@ -5543,7 +5570,7 @@ index 5fd4a230..b9fdd6fe 100644
  nmap <C-j> :call PlayVideo()<cr>
  nmap <C-p> :call Prune()<cr>
  nmap <C-k> :call KdiffAll()<cr>
-@@ -475,7 +480,8 @@ nnoremap H :call ShowVITAG()<cr>
+@@ -475,7 +482,8 @@ nnoremap H :call ShowVITAG()<cr>
  nnoremap F :call GetFirstColumnOfFile()<cr>
  nnoremap T :vs $HOME/all.proj<cr>
  nnoremap L :vs <C-R>"<cr>
@@ -5553,7 +5580,7 @@ index 5fd4a230..b9fdd6fe 100644
  map <F3> :call VDebug()<cr>
  " nnoremap gf gF<cr>
  nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
-@@ -490,10 +496,7 @@ function! CutFile2()
+@@ -490,10 +498,7 @@ function! CutFile2()
  endfunc
  
  function! CutCommon()
@@ -5565,7 +5592,7 @@ index 5fd4a230..b9fdd6fe 100644
  endfunc
  
  nnoremap <leader>2 :call CutCommon()<cr>
-@@ -505,3 +508,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
+@@ -505,3 +510,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
  " open tig with Project root path
  nnoremap <Leader>t :TigOpenProjectRootDir<CR>
  nnoremap <leader>T :TigOpenCurrentFile<CR>
