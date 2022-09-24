@@ -179,8 +179,8 @@ endfunction
 
 function! s:Glf() abort
     let worktree = Cd2Worktree()
-    silent exec '!git ls-files | tee glf.findresult'
-    call OpenOrSwitch('glf.findresult', 'vs')
+    silent exec '!git ls-files | tee glf.runresult'
+    call OpenOrSwitch('glf.runresult', 'vs')
 endfunction
 
 function! s:Glg() abort
