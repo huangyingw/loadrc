@@ -8,7 +8,7 @@ fi
 
 inputFile="$1"
 inputBak="$inputFile".tmp
-awk -F":| " '{print $1}' "$inputFile" > "$inputBak"
+awk -F":" '{print $1}' "$inputFile" > "$inputBak"
 sed -i.bak "/^$/d" "$inputBak"
 sort -u "$inputBak" -o "$inputBak"
 echo "$inputBak"
