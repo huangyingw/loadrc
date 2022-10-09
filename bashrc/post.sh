@@ -22,3 +22,11 @@ curl \
             "is_purchasable": true
         }' \
     https://api.imvu.com/product > product-create.json
+
+curl \
+   -H "Accept: application/json" \
+   -H "Content-Type: application/json" \
+   -H "x-imvu-sauce: $SAUCE" \
+   -H "Cookie: osCsid=$OSCSID" \
+   -d @body.json \
+   https://api.imvu.com/gift > gift.json       
