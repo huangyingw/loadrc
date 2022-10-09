@@ -14,8 +14,8 @@ then
     sshfs "$remoteServer":/media/ ~/"$remoteServer"
     df -TH
 else
-    sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/"$remoteServer" || \
-        sshfs "$remoteServer":/ ~/"$remoteServer"
-
+    diskutil unmount force ~/"$remoteServer" 
+    ps ax | awk '/sshfs '$remoteServer'/NR > 1 {print $1}' | xargs kill -9
+    sshfs "$remoteServer":/ ~/"$remoteServer"
     df -H
 fi
