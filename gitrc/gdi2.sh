@@ -23,9 +23,6 @@ then
     echo -e "${red}gsync.target is not configured ... ${NC}"
 fi
 
-host=$(git config deploy.host)
-rpath=$(git config deploy.path)
-
 remote="$(git config gsync.remote)"
 
 git push "$remote" "$targetBranch"
@@ -50,8 +47,9 @@ fi
 
 if [ $retVal -eq 0 ] || [ "$1" = "f" ]
 then
-    git commit  --no-verify -am "$commit_message" && \
+    git commit  --no-verify -am "$commit_message" ; \
+        echo > COMMIT_EDITMSG ; \
         git pull ; \
-        git push ; \
+        git push "$remote" "$targetBranch" ; \
         ~/loadrc/gitrc/gfix.sh
 fi
