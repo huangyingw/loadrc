@@ -62,7 +62,8 @@ brew install \
     watch \
     wget \
     xclip \
-    xmlto
+    xmlto \
+    yq
 
 brew cask install \
     kdiff3 \
