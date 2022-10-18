@@ -23,6 +23,7 @@ brew install \
 brew install \
     Caskroom/cask/xquartz \
     astyle \
+    azure-cli \
     blueutil \
     brightness \
     clipper \
