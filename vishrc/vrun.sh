@@ -110,4 +110,8 @@ case $extension in
     js)
         node "$file"
         ;;
+    ps1)
+        cd "$rootFolder"
+        pwsh "$file"
+        ;;
 esac
