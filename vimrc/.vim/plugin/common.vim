@@ -240,7 +240,8 @@ function! RunShell(shell, ...)
             exec '!' . run_string
         endif
     endif
-    silent exec '!cp' . ' ' . '"' .  temp_log . '"' . ' ' . '"' .  arg2 . '"'
+    silent exec '!cp' . ' -fv ' . '"' .  temp_log . '"' . ' ' . '"' .  arg2 . '"'
+    silent exec '!~/loadrc/bashrc/removing_ansi_color_codes.sh' . ' ' . '"' .  arg2 . '"'
 endfunc
 
 function! Filter2Findresult()
