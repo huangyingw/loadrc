@@ -2284,17 +2284,9 @@ index 00000000..1c942139
 +    fi
 +done
 diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
-index ca91dbaf..e1bc31b3 100755
+index ca91dbaf..716192b3 100755
 --- ./gitrc/.gitconfig
 +++ ./gitrc/.gitconfig
-@@ -1,6 +1,6 @@
- [user]
-     name = Ying Huang
--    email = huangyingw@gmail.com
-+	email = ying.huang@cohesity.com
- [color]
-     ui = auto
- [color "branch"]
 @@ -53,6 +53,7 @@
      remote = BareReps
  [pull]
@@ -2611,10 +2603,10 @@ index b720ac69..8fcc4eed 100755
 -eval "$COMMAND"
 +eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index dbcf937b..e9ddcef1 100755
+index dbcf937b..0071ea99 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
-@@ -17,21 +18,38 @@ fi
+@@ -17,21 +18,40 @@ fi
  
  targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
  
@@ -2625,12 +2617,13 @@ index dbcf937b..e9ddcef1 100755
 +    echo -e "${red}gsync.target is not configured ... ${NC}"
  fi
  
--host=$(git config deploy.host)
--rpath=$(git config deploy.path)
+ host=$(git config deploy.host)
+ rpath=$(git config deploy.path)
+ 
 +remote="$(git config gsync.remote)"
 +
 +git push "$remote" "$targetBranch"
- 
++
  GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
 +
 +if [ -z $(cat $GDITDIFF) ]
@@ -2642,6 +2635,7 @@ index dbcf937b..e9ddcef1 100755
      git checkout -f "$targetBranch" ; \
 -    git apply --index --reject --whitespace=fix "$GDITDIFF" ; \
 -    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
+-    git commit  --no-verify -am "$commit_message" ; \
 +    git apply --reject --whitespace=fix --recount --index "$GDITDIFF"
 +
 +retVal=$?
@@ -2653,12 +2647,10 @@ index dbcf937b..e9ddcef1 100755
 +
 +if [ $retVal -eq 0 ] || [ "$1" = "f" ]
 +then
-     git commit  --no-verify -am "$commit_message" ; \
-+        echo > COMMIT_EDITMSG ; \
++    git commit  --no-verify -am "$commit_message" && \
          git pull ; \
--    git push ; \
+         git push ; \
 -    . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
-+        git push "$remote" "$targetBranch" ; \
          ~/loadrc/gitrc/gfix.sh
 +fi
 diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
