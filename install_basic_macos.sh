@@ -23,6 +23,7 @@ brew install \
 brew install \
     Caskroom/cask/xquartz \
     astyle \
+    azure-cli \
     blueutil \
     brightness \
     clipper \
@@ -62,7 +63,8 @@ brew install \
     watch \
     wget \
     xclip \
-    xmlto
+    xmlto \
+    yq
 
 brew cask install \
     kdiff3 \
