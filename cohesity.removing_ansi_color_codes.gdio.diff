@@ -4602,6 +4602,74 @@ index 541ae968..0996eeeb 100755
 +    sudo chsh -s "$ZSH"
 +    sudo reboot
  fi
+diff --git a/synergy.conf b/synergy.conf
+new file mode 100644
+index 00000000..c96a6de7
+--- /dev/null
++++ ./synergy.conf
+@@ -0,0 +1,62 @@
++section: screens
++	imacpro:
++		halfDuplexCapsLock = false
++		halfDuplexNumLock = false
++		halfDuplexScrollLock = false
++		xtestIsXineramaUnaware = false
++		switchCorners = none 
++		switchCornerSize = 0
++	COH-LC172TVQ6J:
++		halfDuplexCapsLock = false
++		halfDuplexNumLock = false
++		halfDuplexScrollLock = false
++		xtestIsXineramaUnaware = false
++		switchCorners = none 
++		switchCornerSize = 0
++	mbp2:
++		halfDuplexCapsLock = false
++		halfDuplexNumLock = false
++		halfDuplexScrollLock = false
++		xtestIsXineramaUnaware = false
++		switchCorners = none 
++		switchCornerSize = 0
++	mba:
++		halfDuplexCapsLock = false
++		halfDuplexNumLock = false
++		halfDuplexScrollLock = false
++		xtestIsXineramaUnaware = false
++		switchCorners = none 
++		switchCornerSize = 0
++end
++
++section: aliases
++end
++
++section: links
++	imacpro:
++		down = mbp2
++	COH-LC172TVQ6J:
++		right = mbp2
++	mbp2:
++		right = mba
++		left = COH-LC172TVQ6J
++		up = imacpro
++	mba:
++		left = mbp2
++end
++
++section: options
++	relativeMouseMoves = false
++	win32KeepForeground = false
++	disableLockToScreen = false
++	clipboardSharing = false
++	clipboardSharingSize = 3072
++	switchDelay = 9999
++	switchCorners = none 
++	switchCornerSize = 0
++	keystroke(Control+1) = switchToScreen(mbp2)
++	keystroke(Control+2) = switchToScreen(mba)
++	keystroke(Control+3) = switchToScreen(COH-LC172TVQ6J)
++	keystroke(Alt+Control+r) = restartServer(restart)
++end
++
 diff --git a/transmissionrc/auto_reboot.sh b/transmissionrc/auto_reboot.sh
 new file mode 100755
 index 00000000..837984a4
