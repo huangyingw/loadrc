@@ -1552,12 +1552,13 @@ index 00000000..10e89a8a
 +export PATH=$(echo $PATH | tr ":" "\n" | grep -v "anaconda3" | tr "\n" ":")
 diff --git a/bashrc/removing_ansi_color_codes.sh b/bashrc/removing_ansi_color_codes.sh
 new file mode 100755
-index 00000000..033ca4a1
+index 00000000..f8d5096a
 --- /dev/null
 +++ ./bashrc/removing_ansi_color_codes.sh
-@@ -0,0 +1,2 @@
+@@ -0,0 +1,3 @@
 +#!/bin/zsh
-+perl -pe 's/\e\[[0-9;]*m(?:\e\[K)?//g' "$1" > "$1" 
++perl -pe 's/\e\[[0-9;]*m(?:\e\[K)?//g' "$1" > "$1".bak
++cp -fv "$1".bak "$1"
 diff --git a/bashrc/rename.sh b/bashrc/rename.sh
 new file mode 100755
 index 00000000..d3a5e9de
