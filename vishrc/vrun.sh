@@ -35,6 +35,13 @@ then
     exit 0
 fi
 
+if [[ $(basename "$file") = 'Vagrantfile' ]]
+then
+    cd "$rfolder"
+    vagrant reload || vagrant up
+    exit 0
+fi
+
 case $extension in
     hs)
         runghc "$file"
@@ -102,5 +109,9 @@ case $extension in
         ;;
     js)
         node "$file"
+        ;;
+    ps1)
+        cd "$rootFolder"
+        pwsh "$file"
         ;;
 esac

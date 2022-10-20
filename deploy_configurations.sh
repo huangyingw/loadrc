@@ -28,7 +28,7 @@ mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/pythonrc/setup.cfg  ~/setup.cfg
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.hgrc ~/.hgrc
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.hgignore ~/.hgignore
-# cp -fv ~/loadrc/bashrc/ln_fs.sh ~/loadrc/Library/Preferences/org.videolan.vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
+# ~/loadrc/bashrc/ln_fs.sh ~/loadrc/Library/Preferences/org.videolan.vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/iterm2rc/movescreen.py ~/Library/ApplicationSupport/iTerm2/Scripts/movescreen/movescreen/movescreen.py
 # ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.kdiff3rc ~/.kdiff3rc
 

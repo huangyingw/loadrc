@@ -8,6 +8,8 @@ then
     exit 0
 fi
 
+xcode-select --install
+
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 git -C $(brew --repository homebrew/core) checkout master
 brew update
@@ -21,6 +23,7 @@ brew install \
 brew install \
     Caskroom/cask/xquartz \
     astyle \
+    azure-cli \
     blueutil \
     brightness \
     clipper \
@@ -52,6 +55,7 @@ brew install \
     rename \
     rsync \
     sbt \
+    slurm \
     sponge \
     tig \
     w3m \
@@ -59,7 +63,8 @@ brew install \
     watch \
     wget \
     xclip \
-    xmlto
+    xmlto \
+    yq
 
 brew cask install \
     kdiff3 \

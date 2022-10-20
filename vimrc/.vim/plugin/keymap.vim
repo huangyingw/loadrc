@@ -343,7 +343,7 @@ function! VimOpen()
             silent exec '!~/loadrc/gitrc/gshow.sh ' . '"' .  b:commit . '" 2>&1 | tee ' . output
         endif
 
-        call OpenOrSwitch(output, 'vs')
+        call OpenOrSwitch(b:fileName, 'vs')
     elseif (&filetype ==# 'fugitiveblame')
         let b:commit = expand("<cword>")
         call Cd2Worktree()
