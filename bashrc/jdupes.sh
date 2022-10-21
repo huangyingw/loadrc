@@ -7,4 +7,6 @@ then
 fi
 
 TARGET="$1"
-jdupes -dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log
+dt=$(date '+%m_%d_%Y_%H_%M_%S');
+logFile="$TARGET/jdupes.$dt.log"
+jdupes -dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee "$logFile"
