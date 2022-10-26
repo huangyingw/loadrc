@@ -179,6 +179,7 @@
 ./.macos.rc
 ./.macosrc
 ./.mba.rc
+./.mbp2.rc
 ./.mindsrc
 ./.mini.rc
 ./.mini2.rc
@@ -3087,6 +3088,7 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/csquotes.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/dot2texi.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/fixme.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/fontawesome5.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/geometry.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/glossaries.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/glossaries_extra.vim
@@ -3237,6 +3239,7 @@
 ./vishrc/lc_test.template
 ./vishrc/prune.sh
 ./vishrc/prune_test.sh
+./vishrc/rm_cat.sh
 ./vishrc/sort_entries.sh
 ./vishrc/sort_entries.test.sh
 ./vishrc/vaa_test.sh
