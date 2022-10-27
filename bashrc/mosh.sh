@@ -12,7 +12,6 @@ fi
 
 while true
 do
-    ~/loadrc/bashrc/ports_forward.sh "$target"
     ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
     mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
 done
