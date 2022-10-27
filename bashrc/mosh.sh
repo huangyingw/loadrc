@@ -12,8 +12,7 @@ fi
 
 while true
 do
-    ssh -fnN -R 2224:localhost:2224 "$target" &
-    ssh -fnN -R 2225:localhost:2225 "$target" &
+    ~/loadrc/bashrc/ports_forward.sh "$target"
     ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
     mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
 done
