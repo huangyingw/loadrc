@@ -459,7 +459,7 @@ index 00000000..3d146d68
 +#!/bin/zsh
 +~/loadrc/setup_pbpaste-remote.sh
 diff --git a/.shellrc b/.shellrc
-index 52d99984..6f16dfad 100755
+index 52d99984..9971f51d 100755
 --- ./.shellrc
 +++ ./.shellrc
 @@ -1,6 +1,5 @@
@@ -495,15 +495,7 @@ index 52d99984..6f16dfad 100755
  alias fwt='$HOME/loadrc/bashrc/fwt.sh'
  alias fzw='$HOME/loadrc/bashrc/fzw.sh'
  alias glink='$HOME/loadrc/bashrc/glink.sh'
-@@ -60,6 +61,7 @@ alias ntp='$HOME/loadrc/bashrc/ntp.sh'
- alias nubak='$HOME/loadrc/bashrc/nubak.sh'
- alias osmirror='$HOME/loadrc/bashrc/osmirror.sh'
- alias pm-suspend='$HOME/loadrc/bashrc/sleep.sh'
-+alias portsForward='$HOME/loadrc/bashrc/ports_forward.sh'
- alias r='$HOME/loadrc/bashrc/run.sh'
- alias rb='$HOME/loadrc/bashrc/runb.sh'
- alias reboot='$HOME/loadrc/bashrc/reboot.sh'
-@@ -74,7 +76,6 @@ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
+@@ -74,7 +75,6 @@ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
  alias selectCopy='$HOME/loadrc/bashrc/select_copy.sh'
  alias selectmirror='$HOME/loadrc/bashrc/selectmirror.sh'
  alias sleep='$HOME/loadrc/bashrc/sleep.sh'
@@ -511,7 +503,7 @@ index 52d99984..6f16dfad 100755
  alias smount='$HOME/loadrc/bashrc/smount.sh'
  alias split='$HOME/loadrc/bashrc/split.sh'
  alias ssh='$HOME/loadrc/bashrc/ssh.sh'
-@@ -100,7 +101,6 @@ alias ubak='$HOME/loadrc/bashrc/ubak.sh'
+@@ -100,7 +100,6 @@ alias ubak='$HOME/loadrc/bashrc/ubak.sh'
  alias ufind='$HOME/loadrc/bashrc/ufind.sh'
  alias umlet='$HOME/loadrc/bashrc/umlet.sh'
  alias umletc='$HOME/loadrc/bashrc/umletc.sh'
@@ -1544,20 +1536,35 @@ index 00000000..e46e9472
 +./parse_host.sh "mini:~/loadrc"
 +./parse_host.sh "huangyingw@mini:~/loadrc"
 +./parse_host.sh "~/loadrc"
+diff --git a/bashrc/ports_forward.hosts b/bashrc/ports_forward.hosts
+new file mode 100644
+index 00000000..05c7e9f4
+--- /dev/null
++++ ./bashrc/ports_forward.hosts
+@@ -0,0 +1,6 @@
++imacpro
++mba
++mini
++pikvm
++server
++work
 diff --git a/bashrc/ports_forward.sh b/bashrc/ports_forward.sh
 new file mode 100755
-index 00000000..df73bb1c
+index 00000000..3b953711
 --- /dev/null
 +++ ./bashrc/ports_forward.sh
-@@ -0,0 +1,8 @@
+@@ -0,0 +1,11 @@
 +#!/bin/zsh
 +
-+for port in \
-+    2224 \
-+    2225
++while read host
 +do
-+    ssh -fnN -R "$port":localhost:"$port" "$1" &
-+done
++    for port in \
++        2224 \
++        2225
++    do
++        ssh -fnN -R "$port":localhost:"$port" "$host" &
++    done
++done < ~/loadrc/bashrc/ports_forward.hosts
 diff --git a/bashrc/post.sh b/bashrc/post.sh
 old mode 100644
 new mode 100755
@@ -1922,6 +1929,13 @@ index 9d256165..abc440c5 100644
 @@ -1 +1 @@
 -0 * * * * sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
 +*/10 * * * * /root/loadrc/dropboxrc/dropbox_start.sh
+diff --git a/crontabrc/.mbp2.cron b/crontabrc/.mbp2.cron
+new file mode 100644
+index 00000000..191a9428
+--- /dev/null
++++ ./crontabrc/.mbp2.cron
+@@ -0,0 +1 @@
++*/10 * * * * /Users/huangyingw/loadrc/bashrc/ports_forward.sh
 diff --git a/crontabrc/.mini.cron b/crontabrc/.mini.cron
 index d8126721..e1be5066 100644
 --- ./crontabrc/.mini.cron
