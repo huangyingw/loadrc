@@ -1,8 +1,11 @@
 #!/bin/zsh
 
-for port in \
-    2224 \
-    2225
+while read host
 do
-    ssh -fnN -R "$port":localhost:"$port" "$1" &
-done
+    for port in \
+        2224 \
+        2225
+    do
+        ssh -fnN -R "$port":localhost:"$port" "$host" &
+    done
+done < ~/loadrc/bashrc/ports_forward.hosts
