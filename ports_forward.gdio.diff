@@ -1393,10 +1393,10 @@ index 889ade9a..96dc7a46 100755
      then \
          ~/loadrc/bashrc/sleep.sh ; \
 diff --git a/bashrc/mosh.sh b/bashrc/mosh.sh
-index 2727f361..2d1bfe73 100755
+index 2727f361..e2470e8b 100755
 --- ./bashrc/mosh.sh
 +++ ./bashrc/mosh.sh
-@@ -1,18 +1,18 @@
+@@ -1,18 +1,17 @@
  #!/bin/bash
  target=$(echo "$1" | sed  -e "s/\/$//g")
 -mkdir "$target"
@@ -1419,7 +1419,6 @@ index 2727f361..2d1bfe73 100755
  while true
  do
 -    ssh "$target" "~/loadrc/macosrc/configure_mosh.sh" &
-+    ~/loadrc/bashrc/ports_forward.sh "$target"
 +    ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
      mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
  done
@@ -1931,11 +1930,11 @@ index 9d256165..abc440c5 100644
 +*/10 * * * * /root/loadrc/dropboxrc/dropbox_start.sh
 diff --git a/crontabrc/.mbp2.cron b/crontabrc/.mbp2.cron
 new file mode 100644
-index 00000000..191a9428
+index 00000000..b1f64130
 --- /dev/null
 +++ ./crontabrc/.mbp2.cron
 @@ -0,0 +1 @@
-+*/10 * * * * /Users/huangyingw/loadrc/bashrc/ports_forward.sh
++* * * * * /Users/huangyingw/loadrc/bashrc/ports_forward.sh > /Users/huangyingw/loadrc/ports_forward.log 2>&1
 diff --git a/crontabrc/.mini.cron b/crontabrc/.mini.cron
 index d8126721..e1be5066 100644
 --- ./crontabrc/.mini.cron
