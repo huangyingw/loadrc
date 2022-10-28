@@ -56,6 +56,7 @@ apt-get install -y \
     pwgen \
     python3-autopep8 \
     python3-software-properties \
+    rarcrack \
     resolvconf \
     rsync \
     slurm \
