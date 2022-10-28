@@ -1,0 +1,96 @@
+[user]
+	name = Ying Huang
+	email = ying.huang@cohesity.com
+[color]
+    ui = auto
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[core]
+    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+[diff]
+    tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = nvim -R -f -d \
+        -c 'set winwidth=1' \
+        -c 'wincmd l' -c 'cd $GIT_PREFIX' \
+        "$LOCAL" "$REMOTE"
+[alias]
+    ad = add
+    bi = bisect
+    ci = commit
+    co = checkout
+    rs = reset --hard
+    sm = submodule
+    st = status
+    sta = stash
+    tg = tag -l -n1
+    vd = difftool
+[difftool]
+    prompt = false
+[core]
+    excludesfile = "~/.globalgitignore"
+    mergeoptions = --no-edit
+    fileMode = true
+    editor = nvim
+[giggle]
+    main-window-maximized = true
+    main-window-geometry = 700x550+0+55
+    history-view-vpane-position = 403
+    main-window-view = HistoryView
+    file-view-vpane-position = 609
+[filter "media"]
+    clean = git media clean %f
+    smudge = git media smudge %f
+    required = true
+[push]
+    default = current
+    remote = BareReps
+[pull]
+    default = current
+    rebase = false
+[gdif]
+    ignore = *.diff
+    ignore = .gitconfig
+    ignore = .login
+    ignore = COMMIT_EDITMSG
+    ignore = change
+    ignore = files.proj
+    ignore = files.rev
+    ignore = gbil.log
+    ignore = includefile.conf
+    ignore = includefile.rsync
+    ignore = prunefile.conf
+    ignore = prunefix.conf
+    ignore = prunefix.rsync
+    ignore = readme
+    ignore = rsync.files
+    ignore = setup.cfg
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[diff "nodiff"]
+    command = /usr/bin/true
+# define command which will be used when "nvim" is set as a merge tool
+# https://www.grzegorowski.com/using-vim-or-neovim-nvim-as-a-git-mergetool
+[mergetool "nvim"]
+    cmd = nvim -f \
+        -c 'set winwidth=1' \
+        -c \"Gvdiffsplit!\" \"$MERGED\"
+# set "nvim" as tool for merging
+[merge]
+    tool = kdiff3
+# automatically launch merge tool without displaying a prompt
+[mergetool]
+    prompt = false
+[merge "ours"]
+	driver = true
+[credential "https://github.com"]
+	helper = !gh auth git-credential
