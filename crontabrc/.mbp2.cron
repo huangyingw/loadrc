@@ -1,1 +1,1 @@
-* * * * * /Users/huangyingw/loadrc/bashrc/ports_forward.sh
+* * * * * /Users/huangyingw/loadrc/bashrc/ports_forward.sh > /Users/huangyingw/loadrc/ports_forward.log 2>&1
