@@ -8,23 +8,12 @@ then
 fi
 
 commit_message=$(cat COMMIT_EDITMSG)
-
-if [ -z "$commit_message" ]
-then
-    echo -e "${red}Must provide the commit message ... ${NC}"
-    echo -e "${red}Please edit COMMIT_EDITMSG to provide commit message ... ${NC}"
-    exit 1
-fi
-
 targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
 
 if [ -z $(git config gsync.target) ]
 then
     echo -e "${red}gsync.target is not configured ... ${NC}"
 fi
-
-host=$(git config deploy.host)
-rpath=$(git config deploy.path)
 
 remote="$(git config gsync.remote)"
 
@@ -37,9 +26,9 @@ then
     exit 0
 fi
 
-~/loadrc/gitrc/discard_unnecessaries.sh ; \
-    git checkout -f "$targetBranch" ; \
-    git apply --reject --whitespace=fix --recount --index "$GDITDIFF"
+~/loadrc/gitrc/discard_unnecessaries.sh
+git checkout -f "$targetBranch"
+git apply --reject --whitespace=fix --recount --index "$GDITDIFF"
 
 retVal=$?
 
@@ -50,8 +39,16 @@ fi
 
 if [ $retVal -eq 0 ] || [ "$1" = "f" ]
 then
-    git commit  --no-verify -am "$commit_message" && \
-        git pull ; \
-        git push ; \
-        ~/loadrc/gitrc/gfix.sh
+    if [ -z "$commit_message" ]
+    then
+        echo -e "${red}Must provide the commit message ... ${NC}"
+        echo -e "${red}Please edit COMMIT_EDITMSG to provide commit message ... ${NC}"
+        exit 1
+    fi
+
+    git commit  --no-verify -am "$commit_message"
+    git pull
+    ~/loadrc/gitrc/gfix.sh
+    echo > COMMIT_EDITMSG
+    git push "$remote" "$targetBranch"
 fi
