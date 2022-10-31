@@ -310,6 +310,21 @@ index 514389f0..00000000
 -        sudo systemsetup -setcomputersleep Never; \
 -        fi
 -fi
+diff --git a/.mbp2.rc b/.mbp2.rc
+new file mode 100755
+index 00000000..f95f5979
+--- /dev/null
++++ ./.mbp2.rc
+@@ -0,0 +1,9 @@
++#!/bin/zsh
++# alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
++
++if ! (sudo systemsetup -getcomputersleep | grep -q Never)
++then
++    sudo systemsetup -setcomputersleep Never
++fi
++
++~/loadrc/setup_bidirectional_clipboard.sh
 diff --git a/.mini.rc b/.mini.rc
 new file mode 100755
 index 00000000..7cf303fa
@@ -1236,10 +1251,10 @@ index 00000000..ccd1a783
 +./get_rsyncpath.sh ~/loadrc/ mini:~/loadrc/
 +./get_rsyncpath.sh mini:~/loadrc/ ~/loadrc/
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
-index e2137142..707d4029 100755
+index e2137142..792deb22 100755
 --- ./bashrc/jdupes.sh
 +++ ./bashrc/jdupes.sh
-@@ -7,18 +7,4 @@ then
+@@ -7,18 +7,6 @@ then
  fi
  
  TARGET="$1"
@@ -1258,7 +1273,9 @@ index e2137142..707d4029 100755
 -        ~/loadrc/bashrc/sleep.sh ; \
 -        fi ; \
 -        nvim ~/loadrc/jdupes.log
-+jdupes -dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log
++dt=$(date '+%m_%d_%Y_%H_%M_%S');
++logFile="$TARGET/jdupes.$dt.log"
++jdupes -dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee "$logFile"
 diff --git a/bashrc/ln_fs.sh b/bashrc/ln_fs.sh
 index 8946ff3e..1a6a5a97 100755
 --- ./bashrc/ln_fs.sh
@@ -1520,6 +1537,20 @@ index 00000000..e46e9472
 +./parse_host.sh "mini:~/loadrc"
 +./parse_host.sh "huangyingw@mini:~/loadrc"
 +./parse_host.sh "~/loadrc"
+diff --git a/bashrc/ports_forward.sh b/bashrc/ports_forward.sh
+new file mode 100755
+index 00000000..2580d359
+--- /dev/null
++++ ./bashrc/ports_forward.sh
+@@ -0,0 +1,8 @@
++#!/bin/zsh
++
++for port in \
++    2224 \
++    2225
++do
++    ssh -fnN -R "$port":localhost:"$port" "$1"
++done
 diff --git a/bashrc/post.sh b/bashrc/post.sh
 old mode 100644
 new mode 100755
@@ -3139,6 +3170,11 @@ index 00000000..2e736125
 diff --git a/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.secret b/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.secret
 new file mode 100644
 index 00000000..1e7f6d4c
+--- /dev/null
++++ ./hosts/mbp2/Library/Application Support/ZeroTier/One/identity.secret	
+@@ -0,0 +1 @@
++1e95a2d9fe:0:8034bed74da2e9afccdc3e92957bb5d0cc632b03f1eac11f79166c5a51d1c30e22907658b0726436934d77b39e6646705c0fd9f9473344dd730ba1f18225a4a0:f6b50f5dcac2647699d089e2bb353dba00869a34bee41e2f8d3eeef1b0ff64dcb6e8ffd07bde5d094aa76a211917c1f237038780f431e0e486bd280a4e825590
+\ No newline at end of file
 diff --git a/hosts/server/var/lib/zerotier-one/identity.public b/hosts/server/var/lib/zerotier-one/identity.public
 index 55095016..d55d1f79 100644
 --- ./hosts/server/var/lib/zerotier-one/identity.public
@@ -4315,11 +4351,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..f85bb531
+index 00000000..3a8b6668
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit f85bb531d21cb975d1598603ac760929b1054450-dirty
++Subproject commit 3a8b66688c385dbe6fcd17f118a4b36504d060d7-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4605,10 +4641,10 @@ index 541ae968..0996eeeb 100755
  fi
 diff --git a/synergy.conf b/synergy.conf
 new file mode 100644
-index 00000000..c96a6de7
+index 00000000..6396b2cb
 --- /dev/null
 +++ ./synergy.conf
-@@ -0,0 +1,62 @@
+@@ -0,0 +1,63 @@
 +section: screens
 +	imacpro:
 +		halfDuplexCapsLock = false
@@ -4668,6 +4704,7 @@ index 00000000..c96a6de7
 +	keystroke(Control+1) = switchToScreen(mbp2)
 +	keystroke(Control+2) = switchToScreen(mba)
 +	keystroke(Control+3) = switchToScreen(COH-LC172TVQ6J)
++	keystroke(Control+4) = switchToScreen(imacpro)
 +	keystroke(Alt+Control+r) = restartServer(restart)
 +end
 +
@@ -4772,11 +4809,11 @@ index 00000000..6f61df5a
 +Subproject commit 6f61df5a633c3a91edea7bcb5d5772648df19d1a
 diff --git a/vimrc/.vim/bundle/firenvim b/vimrc/.vim/bundle/firenvim
 new file mode 160000
-index 00000000..21dd0c7b
+index 00000000..2f0ee858
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit 21dd0c7b416c5c140f80208d4c957ec3ca794a2c
++Subproject commit 2f0ee858c3eb5c9d306523cc054047eda2e6a3a2
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 index 5617a1cf..d15d63bf 160000
 --- ./vimrc/.vim/bundle/indentLine
