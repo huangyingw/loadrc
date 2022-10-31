@@ -3,7 +3,7 @@
 192.168.31.127 u1804
 192.168.31.111 u2004
 172.27.217.162 localhost.imvu.com
-192.168.31.201 mini
+192.168.31.140 mini
 192.168.123.132 minds
 192.168.31.153 gluster00
 192.168.31.129 gluster01
@@ -12,7 +12,7 @@
 192.168.31.147 imacpro
 172.27.68.119 imac
 192.168.31.96 mbp
-192.168.31.154 mbp2
+192.168.31.162 mbp2
 192.168.31.88 transmission
 
 # The following lines are desirable for IPv6 capable hosts
