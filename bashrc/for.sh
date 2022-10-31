@@ -26,11 +26,11 @@ do
 done
 
 function copyFiles() {
-   arr=("$@")
-   for i in "${arr[@]}";
-      do
-          echo "$i"
-      done
+    arr=("$@")
+    for i in "${arr[@]}";
+    do
+        echo "$i"
+    done
 
 }
 
