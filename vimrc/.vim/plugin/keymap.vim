@@ -158,6 +158,8 @@ function! VRun()
 
     if filereadable(b:to_run . '.lsh')
         let b:to_run = b:to_run . '.lsh'
+    elseif filereadable(b:to_run . '.sh') 
+        let b:to_run = b:to_run . '.sh'
     endif
 
     let b:csdbpath = Cd2Worktree()
@@ -341,7 +343,7 @@ function! VimOpen()
             silent exec '!~/loadrc/gitrc/gshow.sh ' . '"' .  b:commit . '" 2>&1 | tee ' . output
         endif
 
-        call OpenOrSwitch(output, 'vs')
+        call OpenOrSwitch(b:fileName, 'vs')
     elseif (&filetype ==# 'fugitiveblame')
         let b:commit = expand("<cword>")
         call Cd2Worktree()

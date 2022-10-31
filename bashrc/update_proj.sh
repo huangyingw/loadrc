@@ -6,4 +6,10 @@ then
     exit 1
 fi
 
+if (~/loadrc/bashrc/check_remote_mounted.sh)
+then
+    echo -e "${red}running on remote mounted file system would be extremely slow ... ${NC}"
+    exit 1
+fi
+
 ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_update_proj.sh

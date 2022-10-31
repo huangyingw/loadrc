@@ -77,6 +77,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RmCat :execute s:RmCat(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute s:SelectMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
@@ -179,8 +180,8 @@ endfunction
 
 function! s:Glf() abort
     let worktree = Cd2Worktree()
-    silent exec '!git ls-files | tee glf.findresult'
-    call OpenOrSwitch('glf.findresult', 'vs')
+    silent exec '!git ls-files | tee glf.runresult'
+    call OpenOrSwitch('glf.runresult', 'vs')
 endfunction
 
 function! s:Glg() abort
@@ -670,6 +671,17 @@ function! s:CatRate(...) abort
     endif
 
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+endfunction
+
+function! s:RmCat(...) abort
+    if &modified
+        echom 'Please check and save your file first!!!'
+        return 0
+    endif
+
+    let b:output = expand("%:p") . '.runresult'
+    call RunShell('~/loadrc/vishrc/rm_cat.sh', expand("%:p"), b:output)
+    call OpenOrSwitch(b:output, 'vs')
 endfunction
 
 function! s:CatDu(...) abort

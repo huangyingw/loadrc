@@ -24,7 +24,7 @@ then
         # The process is not running
         # Echo current PID into lock file
         echo $$ > "${LCK_FILE}"
-        "$SCRIPT" "$2" "$3"
+        "$SCRIPT" "$2" "$3" "$4"
     else
         # the process IS running
         # handle it
