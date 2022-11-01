@@ -310,21 +310,6 @@ index 514389f0..00000000
 -        sudo systemsetup -setcomputersleep Never; \
 -        fi
 -fi
-diff --git a/.mbp2.rc b/.mbp2.rc
-new file mode 100755
-index 00000000..f95f5979
---- /dev/null
-+++ ./.mbp2.rc
-@@ -0,0 +1,9 @@
-+#!/bin/zsh
-+# alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
-+
-+if ! (sudo systemsetup -getcomputersleep | grep -q Never)
-+then
-+    sudo systemsetup -setcomputersleep Never
-+fi
-+
-+~/loadrc/setup_bidirectional_clipboard.sh
 diff --git a/.mini.rc b/.mini.rc
 new file mode 100755
 index 00000000..7cf303fa
@@ -744,20 +729,6 @@ index 8c8e1dc4..dc42d5a9 100755
  
 -./change_mac_hostname.sh mbp
 +./change_mac_hostname.sh mba
-diff --git a/bashrc/check_remote_mounted.sh b/bashrc/check_remote_mounted.sh
-new file mode 100755
-index 00000000..ac3b7013
---- /dev/null
-+++ ./bashrc/check_remote_mounted.sh
-@@ -0,0 +1,8 @@
-+#!/bin/zsh
-+
-+if (df -P . | sed -n '$s/[[:blank:]].*//p' | grep -q ':')
-+then
-+    return 0
-+else
-+    return 1
-+fi
 diff --git a/bashrc/copy.sh b/bashrc/copy.sh
 index 09330daf..63c0c62f 100755
 --- ./bashrc/copy.sh
@@ -1251,10 +1222,10 @@ index 00000000..ccd1a783
 +./get_rsyncpath.sh ~/loadrc/ mini:~/loadrc/
 +./get_rsyncpath.sh mini:~/loadrc/ ~/loadrc/
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
-index e2137142..792deb22 100755
+index e2137142..707d4029 100755
 --- ./bashrc/jdupes.sh
 +++ ./bashrc/jdupes.sh
-@@ -7,18 +7,6 @@ then
+@@ -7,18 +7,4 @@ then
  fi
  
  TARGET="$1"
@@ -1273,9 +1244,7 @@ index e2137142..792deb22 100755
 -        ~/loadrc/bashrc/sleep.sh ; \
 -        fi ; \
 -        nvim ~/loadrc/jdupes.log
-+dt=$(date '+%m_%d_%Y_%H_%M_%S');
-+logFile="$TARGET/jdupes.$dt.log"
-+jdupes -dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee "$logFile"
++jdupes -dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log
 diff --git a/bashrc/ln_fs.sh b/bashrc/ln_fs.sh
 index 8946ff3e..1a6a5a97 100755
 --- ./bashrc/ln_fs.sh
@@ -1537,20 +1506,6 @@ index 00000000..e46e9472
 +./parse_host.sh "mini:~/loadrc"
 +./parse_host.sh "huangyingw@mini:~/loadrc"
 +./parse_host.sh "~/loadrc"
-diff --git a/bashrc/ports_forward.sh b/bashrc/ports_forward.sh
-new file mode 100755
-index 00000000..2580d359
---- /dev/null
-+++ ./bashrc/ports_forward.sh
-@@ -0,0 +1,8 @@
-+#!/bin/zsh
-+
-+for port in \
-+    2224 \
-+    2225
-+do
-+    ssh -fnN -R "$port":localhost:"$port" "$1"
-+done
 diff --git a/bashrc/post.sh b/bashrc/post.sh
 old mode 100644
 new mode 100755
@@ -1597,13 +1552,13 @@ index 00000000..10e89a8a
 +export PATH=$(echo $PATH | tr ":" "\n" | grep -v "anaconda3" | tr "\n" ":")
 diff --git a/bashrc/removing_ansi_color_codes.sh b/bashrc/removing_ansi_color_codes.sh
 new file mode 100755
-index 00000000..9efc06a0
+index 00000000..f8d5096a
 --- /dev/null
 +++ ./bashrc/removing_ansi_color_codes.sh
 @@ -0,0 +1,3 @@
 +#!/bin/zsh
-+perl -pe 's/\e\[[0-9;]*m(?:\e\[K)?//g' "$1" > "$1".tmp
-+cp -fv "$1".tmp "$1"
++perl -pe 's/\e\[[0-9;]*m(?:\e\[K)?//g' "$1" > "$1".bak
++cp -fv "$1".bak "$1"
 diff --git a/bashrc/rename.sh b/bashrc/rename.sh
 new file mode 100755
 index 00000000..d3a5e9de
@@ -1819,21 +1774,6 @@ index 30abd357..31ce354d 100755
 +    "$iconvs" \
 +    "$rsyncpath" \
 +    "$source/" "$target/" > "$ready_file"
-diff --git a/bashrc/update_proj.sh b/bashrc/update_proj.sh
-index 923ffff4..0fd99801 100755
---- ./bashrc/update_proj.sh
-+++ ./bashrc/update_proj.sh
-@@ -6,4 +6,10 @@ then
-     exit 1
- fi
- 
-+if (~/loadrc/bashrc/check_remote_mounted.sh)
-+then
-+    echo -e "${red}running on remote mounted file system would be extremely slow ... ${NC}"
-+    exit 1
-+fi
-+
- ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_update_proj.sh
 diff --git a/bashrc/vm2img.sh b/bashrc/vm2img.sh
 new file mode 100755
 index 00000000..e456eda6
@@ -1973,12 +1913,12 @@ index 00000000..3b3a29d9
 +/usr/local/bin/brightness -m 0.082765
 diff --git a/crontabrc/silent.cron b/crontabrc/silent.cron
 new file mode 100644
-index 00000000..fe024f19
+index 00000000..1fdab15a
 --- /dev/null
 +++ ./crontabrc/silent.cron
 @@ -0,0 +1,2 @@
-+0 23,0-8 * * * /Users/huangyingw/loadrc/crontabrc/silent.sh
-+0 23,0-8 * * * /Users/yhuang/loadrc/crontabrc/silent.sh
++0 22-23,0-8 * * * /Users/huangyingw/loadrc/crontabrc/silent.sh
++0 22-23,0-8 * * * /Users/yhuang/loadrc/crontabrc/silent.sh
 diff --git a/crontabrc/silent.sh b/crontabrc/silent.sh
 new file mode 100755
 index 00000000..f90514ae
@@ -2344,9 +2284,17 @@ index 00000000..1c942139
 +    fi
 +done
 diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
-index ca91dbaf..716192b3 100755
+index ca91dbaf..01ecb2b5 100755
 --- ./gitrc/.gitconfig
 +++ ./gitrc/.gitconfig
+@@ -1,6 +1,6 @@
+ [user]
+ 	name = Ying Huang
+-    email = huangyingw@gmail.com
++	email = ying.huang@cohesity.com
+ [color]
+     ui = auto
+ [color "branch"]
 @@ -53,6 +53,7 @@
      remote = BareReps
  [pull]
@@ -2424,13 +2372,14 @@ index 2b929a6c..1565c80c 100755
      echo -e "${red}the git repository is unclean, please check it before continuing... ${NC}"
      exit 1
 diff --git a/gitrc/checkout_rejs.sh b/gitrc/checkout_rejs.sh
-index d81f6f38..5b7555ad 100755
+index d81f6f38..19c42bf8 100755
 --- ./gitrc/checkout_rejs.sh
 +++ ./gitrc/checkout_rejs.sh
-@@ -2,6 +3,13 @@
+@@ -2,6 +3,14 @@
  for ss in $(git status | grep \.rej$) ; \
  do \
      targetFile=$(echo "$ss" | sed 's/\.rej$//g')
++    targetFile=$(echo "$targetFile" | sed 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/;s/ /\\ /g')
 +    if [ "$2" = "f" ]
 +    then
          git checkout "$1" "$targetFile" && \
@@ -2439,7 +2388,7 @@ index d81f6f38..5b7555ad 100755
 +        git show "$1":"$targetFile" > "$ss"
 +    fi
  done
-+
++ 
 +git show "$1":COMMIT_EDITMSG > COMMIT_EDITMSG
 diff --git a/gitrc/discard_unnecessaries.sh b/gitrc/discard_unnecessaries.sh
 index dbf809a0..e20fc1e4 100755
@@ -2663,41 +2612,53 @@ index b720ac69..8fcc4eed 100755
 -eval "$COMMAND"
 +eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index dbcf937b..0071ea99 100755
+index dbcf937b..4cb829aa 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
-@@ -17,21 +18,40 @@ fi
+@@ -8,30 +8,47 @@ then
+ fi
  
- targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
- 
--if [ -z $(git config gsync.remote) ]
+ commit_message=$(cat COMMIT_EDITMSG)
+-if [ -z "$commit_message" ]
++targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
++
 +if [ -z $(git config gsync.target) ]
  then
--    echo -e "${red}gsync.remote is not configured ... ${NC}"
+-    echo -e "${red}Must provide the commit message ... ${NC}"
+-    echo -e "${red}Please edit COMMIT_EDITMSG to provide commit message ... ${NC}"
+-    exit 1
 +    echo -e "${red}gsync.target is not configured ... ${NC}"
  fi
  
- host=$(git config deploy.host)
- rpath=$(git config deploy.path)
- 
+-targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
 +remote="$(git config gsync.remote)"
 +
 +git push "$remote" "$targetBranch"
 +
- GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
-+
++GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
+ 
+-if [ -z $(git config gsync.remote) ]
 +if [ -z $(cat $GDITDIFF) ]
-+then
+ then
+-    echo -e "${red}gsync.remote is not configured ... ${NC}"
 +    exit 0
-+fi
-+
- ~/loadrc/gitrc/discard_unnecessaries.sh ; \
-     git checkout -f "$targetBranch" ; \
+ fi
+ 
+-host=$(git config deploy.host)
+-rpath=$(git config deploy.path)
++~/loadrc/gitrc/discard_unnecessaries.sh
++git checkout -f "$targetBranch"
++git apply --reject --whitespace=fix --recount --index "$GDITDIFF"
+ 
+-GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
+-    ~/loadrc/gitrc/discard_unnecessaries.sh ; \
+-    git checkout -f "$targetBranch" ; \
 -    git apply --index --reject --whitespace=fix "$GDITDIFF" ; \
 -    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
 -    git commit  --no-verify -am "$commit_message" ; \
-+    git apply --reject --whitespace=fix --recount --index "$GDITDIFF"
-+
+-    git pull ; \
+-    git push ; \
+-    . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
 +retVal=$?
 +
 +if [ $retVal -ne 0 ]
@@ -2705,13 +2666,20 @@ index dbcf937b..0071ea99 100755
 +    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" "$1"
 +fi
 +
++if [ -z "$commit_message" ]
++then
++    echo -e "${red}Must provide the commit message ... ${NC}"
++    echo -e "${red}Please edit COMMIT_EDITMSG to provide commit message ... ${NC}"
++    exit 1
++fi
++
 +if [ $retVal -eq 0 ] || [ "$1" = "f" ]
 +then
-+    git commit  --no-verify -am "$commit_message" && \
-         git pull ; \
-         git push ; \
--    . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
-         ~/loadrc/gitrc/gfix.sh
++    git commit  --no-verify -am "$commit_message"
++    git pull
++    git push "$remote" "$targetBranch"
+     ~/loadrc/gitrc/gfix.sh
++    echo > COMMIT_EDITMSG
 +fi
 diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
 index b0247ec4..07590e7c 100755
@@ -3449,7 +3417,7 @@ index 2bc75c67..00000000
 -    #brew install --with-toolchain --with-clang llvm
 -fi
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
-index 298b6bc4..7e23fbce 100755
+index 298b6bc4..bc7b8987 100755
 --- ./install_prerequisite.sh
 +++ ./install_prerequisite.sh
 @@ -1,21 +1,21 @@
@@ -3493,7 +3461,7 @@ index 298b6bc4..7e23fbce 100755
      kdiff3 \
      libsecret-1-dev \
      libsecret-tools \
-@@ -37,27 +40,33 @@ apt-get install -y \
+@@ -37,12 +40,16 @@ apt-get install -y \
      manpages-fr-extra \
      manpages-pl \
      mdadm \
@@ -3511,12 +3479,7 @@ index 298b6bc4..7e23fbce 100755
      perl \
      pm-utils \
      pv \
-     pwgen \
-     python3-autopep8 \
-     python3-software-properties \
-+    rarcrack \
-     resolvconf \
-     rsync \
+@@ -54,10 +61,11 @@ apt-get install -y \
      slurm \
      smplayer \
      software-properties-common \
@@ -3530,7 +3493,7 @@ index 298b6bc4..7e23fbce 100755
      unrar \
      w3m \
      w3m-img \
-@@ -65,8 +74,11 @@ apt-get install -y \
+@@ -65,8 +73,11 @@ apt-get install -y \
      wget \
      zsh
  
@@ -4351,11 +4314,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..3a8b6668
+index 00000000..0e290648
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 3a8b66688c385dbe6fcd17f118a4b36504d060d7-dirty
++Subproject commit 0e290648c5e484dba5d889b8178b5a1d8bc2d843-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4641,10 +4604,10 @@ index 541ae968..0996eeeb 100755
  fi
 diff --git a/synergy.conf b/synergy.conf
 new file mode 100644
-index 00000000..6396b2cb
+index 00000000..c96a6de7
 --- /dev/null
 +++ ./synergy.conf
-@@ -0,0 +1,63 @@
+@@ -0,0 +1,62 @@
 +section: screens
 +	imacpro:
 +		halfDuplexCapsLock = false
@@ -4704,7 +4667,6 @@ index 00000000..6396b2cb
 +	keystroke(Control+1) = switchToScreen(mbp2)
 +	keystroke(Control+2) = switchToScreen(mba)
 +	keystroke(Control+3) = switchToScreen(COH-LC172TVQ6J)
-+	keystroke(Control+4) = switchToScreen(imacpro)
 +	keystroke(Alt+Control+r) = restartServer(restart)
 +end
 +
@@ -4809,11 +4771,11 @@ index 00000000..6f61df5a
 +Subproject commit 6f61df5a633c3a91edea7bcb5d5772648df19d1a
 diff --git a/vimrc/.vim/bundle/firenvim b/vimrc/.vim/bundle/firenvim
 new file mode 160000
-index 00000000..2f0ee858
+index 00000000..21dd0c7b
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit 2f0ee858c3eb5c9d306523cc054047eda2e6a3a2
++Subproject commit 21dd0c7b416c5c140f80208d4c957ec3ca794a2c
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 index 5617a1cf..d15d63bf 160000
 --- ./vimrc/.vim/bundle/indentLine
@@ -5231,7 +5193,7 @@ index 00000000..6bf0e4ae
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..17269a36 100644
+index d5874fe5..26abdf03 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,18 @@
@@ -5278,7 +5240,7 @@ index d5874fe5..17269a36 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gmet :execute s:Gmet()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
-@@ -51,25 +60,25 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
+@@ -51,25 +60,24 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :execute s:Gs()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
@@ -5303,12 +5265,11 @@ index d5874fe5..17269a36 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
-+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RmCat :execute s:RmCat(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute s:SelectMove(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Split :execute s:Split()
-@@ -111,13 +120,12 @@ endfunction
+@@ -111,13 +119,12 @@ endfunction
  
  function! s:Gkdo() abort
      let worktree = Cd2Worktree()
@@ -5325,7 +5286,7 @@ index d5874fe5..17269a36 100644
      endif
  endfunction
  
-@@ -172,8 +180,8 @@ endfunction
+@@ -172,8 +179,8 @@ endfunction
  
  function! s:Glf() abort
      let worktree = Cd2Worktree()
@@ -5336,7 +5297,7 @@ index d5874fe5..17269a36 100644
  endfunction
  
  function! s:Glg() abort
-@@ -207,7 +215,8 @@ endfunction
+@@ -207,7 +214,8 @@ endfunction
  
  function! s:Gpl() abort
      let worktree = Cd2Worktree()
@@ -5346,7 +5307,7 @@ index d5874fe5..17269a36 100644
  endfunction
  
  function! s:Fsync() abort
-@@ -228,12 +237,14 @@ endfunction
+@@ -228,12 +236,14 @@ endfunction
  
  function! s:Gbib() abort
      let worktree = Cd2Worktree()
@@ -5363,7 +5324,7 @@ index d5874fe5..17269a36 100644
  endfunction
  
  function! s:Gbil() abort
-@@ -306,7 +317,7 @@ endfunction
+@@ -306,7 +316,7 @@ endfunction
  
  function! s:Gme2(args, ...) abort
      let worktree = Cd2Worktree()
@@ -5372,7 +5333,7 @@ index d5874fe5..17269a36 100644
      call OpenOrSwitch(worktree . '/' . 'gme2.findresult', 'vs')
  endfunction
  
-@@ -321,11 +332,11 @@ function! s:G(args, ...) abort
+@@ -321,11 +331,11 @@ function! s:G(args, ...) abort
      endif
  
      if &diff
@@ -5386,7 +5347,7 @@ index d5874fe5..17269a36 100644
  
      if &diff
          call s:Gs()
-@@ -366,16 +377,15 @@ function! s:Gdi(...) abort
+@@ -366,16 +376,15 @@ function! s:Gdi(...) abort
          if arg1 == ''
              call fugitive#Diffsplit(0, 1, "vert", '', [])
          elseif tolower(arg1) == 'o'
@@ -5406,7 +5367,7 @@ index d5874fe5..17269a36 100644
      endif
  
      if bufwinnr('^' . output . '$') > 0
-@@ -422,9 +432,9 @@ function! s:Gdi2(...) abort
+@@ -422,9 +431,9 @@ function! s:Gdi2(...) abort
      endif
  
      let worktree = Cd2Worktree()
@@ -5418,7 +5379,7 @@ index d5874fe5..17269a36 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -475,18 +485,17 @@ endfunction
+@@ -475,18 +484,17 @@ endfunction
  
  function! s:Gdif(...) abort
      let worktree = Cd2Worktree()
@@ -5443,7 +5404,7 @@ index d5874fe5..17269a36 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -516,10 +525,20 @@ endfunction
+@@ -516,10 +524,20 @@ endfunction
  
  function! s:ApplyBranch(args, ...) abort
      let worktree = Cd2Worktree()
@@ -5465,7 +5426,7 @@ index d5874fe5..17269a36 100644
  function! s:Gshow(args, ...) abort
      let worktree = Cd2Worktree()
      let output = a:args . '.diff'
-@@ -527,7 +546,19 @@ function! s:Gshow(args, ...) abort
+@@ -527,7 +545,19 @@ function! s:Gshow(args, ...) abort
      call OpenOrSwitch(output, 'vs')
  endfunction
  
@@ -5485,7 +5446,7 @@ index d5874fe5..17269a36 100644
      let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
      exec '!rm ' . newFile
      exec 'w ' . newFile
-@@ -546,6 +577,21 @@ function! s:CatPlay(...) abort
+@@ -546,6 +576,21 @@ function! s:CatPlay(...) abort
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
@@ -5507,7 +5468,7 @@ index d5874fe5..17269a36 100644
  function! s:CatMove(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -559,6 +605,85 @@ function! s:CatMove(...) abort
+@@ -559,6 +604,74 @@ function! s:CatMove(...) abort
      call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
  endfunction
  
@@ -5579,21 +5540,10 @@ index d5874fe5..17269a36 100644
 +    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
 +endfunction
 +
-+function! s:RmCat(...) abort
-+    if &modified
-+        echom 'Please check and save your file first!!!'
-+        return 0
-+    endif
-+
-+    let b:output = expand("%:p") . '.runresult'
-+    call RunShell('~/loadrc/vishrc/rm_cat.sh', expand("%:p"), b:output)
-+    call OpenOrSwitch(b:output, 'vs')
-+endfunction
-+
  function! s:CatDu(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -640,7 +765,10 @@ function! s:Prune() abort
+@@ -640,7 +753,10 @@ function! s:Prune() abort
      call asyncrun#run('<bang>', '', '~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
  endfunction
  
@@ -5605,7 +5555,7 @@ index d5874fe5..17269a36 100644
      call Cd2ProjectRoot("files.proj")
  
      if expand('%:t') != 'index'
-@@ -649,14 +777,14 @@ function! s:Fr(find, replace) abort
+@@ -649,14 +765,14 @@ function! s:Fr(find, replace) abort
          let fileList = "files.proj"
      endif
  
@@ -5623,7 +5573,7 @@ index d5874fe5..17269a36 100644
  endfunction
  
  function! s:Gwap() abort
-@@ -671,13 +799,15 @@ function! s:Gfix() abort
+@@ -671,13 +787,15 @@ function! s:Gfix() abort
  endfunction
  
  function! s:Reapply() abort
@@ -5641,7 +5591,7 @@ index d5874fe5..17269a36 100644
      call s:Gs()
  endfunction
  
-@@ -701,3 +831,5 @@ function! s:GenerateIpynb() abort
+@@ -701,3 +819,5 @@ function! s:GenerateIpynb() abort
      exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
      w
  endfunction
@@ -6592,19 +6542,6 @@ index 00000000..edfddbb7
 +
 +printf "%s\n" "${result[@]}" > "$1".tmp
 +cp -fv "$1".tmp "$1"
-diff --git a/vishrc/rm_cat.sh b/vishrc/rm_cat.sh
-new file mode 100755
-index 00000000..42980873
---- /dev/null
-+++ ./vishrc/rm_cat.sh
-@@ -0,0 +1,7 @@
-+#!/bin/zsh
-+
-+while read ss
-+do
-+    ss=$(echo "$ss" | sed 's/"//g')
-+    rm "$ss"
-+done < "$1"
 diff --git a/vishrc/vlc.sh b/vishrc/vlc.sh
 index 57af963a..21469ba0 100755
 --- ./vishrc/vlc.sh
