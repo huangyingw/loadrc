@@ -12,7 +12,6 @@ target=$2
 iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
 rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source" "$target")
 rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
-# mapfile -t rsync_basic_options < rsync_basic_options
 
 rsync \
     "${rsync_basic_options[@]}" \
