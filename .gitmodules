@@ -263,3 +263,6 @@
 [submodule "vimrc/.vim/bundle/firenvim"]
 	path = vimrc/.vim/bundle/firenvim
 	url = git@github.com:glacambre/firenvim.git
+[submodule "vimrc/.vim/bundle/vim-ps1"]
+	path = vimrc/.vim/bundle/vim-ps1
+	url = git@github.com:PProvost/vim-ps1.git
