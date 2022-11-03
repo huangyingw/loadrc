@@ -38,7 +38,8 @@ fi
 if [[ $(basename "$file") = 'Vagrantfile' ]]
 then
     cd "$rfolder"
-    vagrant reload || vagrant up
+    vagrant reload
+    vagrant up
     exit 0
 fi
 
@@ -55,13 +56,13 @@ case $extension in
         fi
         ;;
     bak)
-       zsh "$file"
+        zsh "$file"
         ;;
     findresult)
-       zsh "$file"
+        zsh "$file"
         ;;
     vdiff)
-       zsh "$file"
+        zsh "$file"
         ;;
     sh)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
