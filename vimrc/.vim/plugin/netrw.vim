@@ -65,5 +65,6 @@ fun! LocalRename() range
     let nxtline = substitute(nxtline, "\"$", "", "")
     exec '!~/loadrc/bashrc/rename.sh ' . '"' .  curline . '"'  . ' ' . '"' .  nxtline . '"'
     normal dd
+    w
     call UpdateProj()
 endfun
