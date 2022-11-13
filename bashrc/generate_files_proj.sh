@@ -52,7 +52,7 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
     then \
         find . "(" "${include_params[@]}" ")" -type f -size -9000k >> ${TARGET} ; \
         fi && \
-        echo "$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" >> ${TARGET} && \
+        echo "./$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" >> ${TARGET} && \
         sed -i.bak 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/;s/ /\\ /g' "$TARGET" && \
         comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
         cp -fv "$TARGET.tmp" "$TARGET" && \
