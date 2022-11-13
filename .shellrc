@@ -67,7 +67,6 @@ alias rmEmpty='$HOME/loadrc/bashrc/rmEmpty.sh'
 alias rse='rsync -aH -e ssh --progress'
 alias rsleep='$HOME/loadrc/bashrc/rsleep.sh'
 alias rssh='$HOME/loadrc/bashrc/rssh.sh'
-alias rsyncFiles='$HOME/loadrc/bashrc/rsyncFiles.sh'
 alias rsync_svn='$HOME/loadrc/bashrc/rsync_svn.sh'
 alias rsynctype='$HOME/loadrc/bashrc/rsynctype.sh'
 alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
