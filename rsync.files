@@ -147,6 +147,8 @@
 ./.git/modules/vimrc/.vim/bundle/vim-pdf/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-phpfmt/config
 ./.git/modules/vimrc/.vim/bundle/vim-phpfmt/info/exclude
+./.git/modules/vimrc/.vim/bundle/vim-ps1/config
+./.git/modules/vimrc/.vim/bundle/vim-ps1/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-rails/config
 ./.git/modules/vimrc/.vim/bundle/vim-rails/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-scala/config
@@ -202,11 +204,8 @@
 ./.ssh/environment
 ./.ssh/github_id_rsa
 ./.ssh/github_id_rsa.pub
-./.ssh/id_dsa
-./.ssh/id_dsa.pub
 ./.ssh/id_rsa
 ./.ssh/id_rsa.pub
-./.ssh/id_rsa_cit
 ./.ssh/known_hosts
 ./.subversion/README.txt
 ./.subversion/auth/svn.simple/6146213a2dda95c6394ae9ae66ab729c
@@ -414,6 +413,7 @@
 ./bashrc/wol.sh
 ./bashrc/zsh.test.sh
 ./chrome_install.sh
+./cohesity.merge.gdio.diff
 ./config/iTerm/com.googlecode.iterm2.plist
 ./configure_gitk.sh
 ./crontabrc/.imacpro.cron
@@ -582,6 +582,7 @@
 ./gpurc/kill_nvidia.sh
 ./gpurc/restart.sh
 ./hgrc/hdi.sh
+./host_links/COH-LC172TVQ6J/Users/ying.huang/.gitconfig
 ./host_links/lint-sandbox/etc/hosts
 ./host_links/lint-sandbox/etc/network/interfaces_bak
 ./host_links/mini/etc/default/isc-dhcp-server
@@ -729,6 +730,7 @@
 ./macosrc/configure_ssh.sh
 ./macosrc/enable_screen_sharing.sh
 ./macosrc/etc/ssh/sshd_config
+./macosrc/restart_ssh.sh
 ./macrc/mac_sync.list
 ./macrc/mac_sync.sh
 ./macrc/mac_sync_test.sh
@@ -747,8 +749,6 @@
 ./neovim/.deps/build/src/libuv/.git/config
 ./neovim/.deps/build/src/libuv/.git/info/exclude
 ./neovim/.deps/build/src/libuv/docs/code/.gitignore
-./neovim/.deps/build/src/treesitter-lua/.gitignore
-./neovim/.deps/build/src/treesitter-vim/.gitignore
 ./neovim/.gitconfig
 ./neovim/.gitignore
 ./networkrc/ping.sh
@@ -934,6 +934,7 @@
 ./vimrc/.vim/bundle/firenvim/.github/FUNDING.yml
 ./vimrc/.vim/bundle/firenvim/.github/ISSUE_TEMPLATE.md
 ./vimrc/.vim/bundle/firenvim/.github/dependabot.yml
+./vimrc/.vim/bundle/firenvim/.github/workflows/codeql.yml
 ./vimrc/.vim/bundle/firenvim/.github/workflows/luacheck.yml
 ./vimrc/.vim/bundle/firenvim/.github/workflows/shellcheck.yml
 ./vimrc/.vim/bundle/firenvim/.github/workflows/stale.yml
@@ -967,12 +968,10 @@
 ./vimrc/.vim/bundle/firenvim/src/background.ts
 ./vimrc/.vim/bundle/firenvim/src/browserAction.html
 ./vimrc/.vim/bundle/firenvim/src/browserAction.ts
-./vimrc/.vim/bundle/firenvim/src/compose.ts
 ./vimrc/.vim/bundle/firenvim/src/content.ts
 ./vimrc/.vim/bundle/firenvim/src/firenvim.d.ts
 ./vimrc/.vim/bundle/firenvim/src/frame.ts
 ./vimrc/.vim/bundle/firenvim/src/index.html
-./vimrc/.vim/bundle/firenvim/src/input.ts
 ./vimrc/.vim/bundle/firenvim/src/manifest.json
 ./vimrc/.vim/bundle/firenvim/src/options.html
 ./vimrc/.vim/bundle/firenvim/src/page.ts
@@ -2684,6 +2683,19 @@
 ./vimrc/.vim/bundle/vim-pdf/doc/tags
 ./vimrc/.vim/bundle/vim-pdf/doc/vim-pdf.txt
 ./vimrc/.vim/bundle/vim-pdf/plugin/vim-pdf.vim
+./vimrc/.vim/bundle/vim-ps1/.gitignore
+./vimrc/.vim/bundle/vim-ps1/README.markdown
+./vimrc/.vim/bundle/vim-ps1/compiler/powershell.vim
+./vimrc/.vim/bundle/vim-ps1/doc/ps1.txt
+./vimrc/.vim/bundle/vim-ps1/doc/tags
+./vimrc/.vim/bundle/vim-ps1/ftdetect/ps1.vim
+./vimrc/.vim/bundle/vim-ps1/ftdetect/ps1xml.vim
+./vimrc/.vim/bundle/vim-ps1/ftdetect/xml.vim
+./vimrc/.vim/bundle/vim-ps1/ftplugin/ps1.vim
+./vimrc/.vim/bundle/vim-ps1/ftplugin/ps1xml.vim
+./vimrc/.vim/bundle/vim-ps1/indent/ps1.vim
+./vimrc/.vim/bundle/vim-ps1/syntax/ps1.vim
+./vimrc/.vim/bundle/vim-ps1/syntax/ps1xml.vim
 ./vimrc/.vim/bundle/vim-rails/.github/FUNDING.yml
 ./vimrc/.vim/bundle/vim-rails/.gitignore
 ./vimrc/.vim/bundle/vim-rails/CONTRIBUTING.markdown
@@ -3272,4 +3284,3 @@
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotierrc.conf
-ports_forward.gdio.diff
