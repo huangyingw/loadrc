@@ -1,5 +1,5 @@
 #!/bin/zsh
-git branch -D "$1"
+git branch -d "$1"
 
 for ss in $(git remote)
 do
