@@ -4555,7 +4555,7 @@ index 00000000..a6ce37b7
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit a6ce37b7174d27294e3eca3cd456fb22b9877e30
++Subproject commit a6ce37b7174d27294e3eca3cd456fb22b9877e30-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4684,11 +4684,11 @@ index 13a0cf4c..6cd6989c 100755
  
 diff --git a/rsync b/rsync
 new file mode 160000
-index 00000000..4f460ac4
+index 00000000..146f2583
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit 4f460ac41dd0748c5f433cbd694f9eb4b1e6feb1-dirty
++Subproject commit 146f2583c7b2e1f33a0c46828e278504b6088f62
 diff --git a/set_macos_configuration.sh b/set_macos_configuration.sh
 index cf9a010a..26f18169 100755
 --- ./set_macos_configuration.sh
@@ -5009,11 +5009,11 @@ index 00000000..6f61df5a
 +Subproject commit 6f61df5a633c3a91edea7bcb5d5772648df19d1a
 diff --git a/vimrc/.vim/bundle/firenvim b/vimrc/.vim/bundle/firenvim
 new file mode 160000
-index 00000000..eeaddd0b
+index 00000000..17a189f0
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit eeaddd0b503f841fa24f60cebd14fa93d2b33f77
++Subproject commit 17a189f0f1e2d4197e00cd56dbeaed8c268bac8c
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 index 5617a1cf..d15d63bf 160000
 --- ./vimrc/.vim/bundle/indentLine
@@ -5078,12 +5078,12 @@ index cc6342c3..bd5422d9 160000
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
 +Subproject commit bd5422d9e40c732b010dcd4da3eafda81b3b1d54
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
-index 7ef452b4..3e0529e1 160000
+index 7ef452b4..ba6f6cef 160000
 --- ./vimrc/.vim/bundle/swift.vim
 +++ ./vimrc/.vim/bundle/swift.vim
 @@ -1 +1 @@
 -Subproject commit 7ef452b47f14a2bfed26324793777cf12d2a8d78
-+Subproject commit 3e0529e1a97e3da24aabd18daf8ed92c6da8c68b
++Subproject commit ba6f6cef58d08ac741aaf1626d3799d476cd43b6
 diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
 index 2d520bdf..f4ec3e57 160000
 --- ./vimrc/.vim/bundle/tig-explorer.vim
@@ -5104,7 +5104,7 @@ index 4579327e..4267ae2a 160000
 +++ ./vimrc/.vim/bundle/vim-anyfold
 @@ -1 +1 @@
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
-+Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
++Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431-dirty
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
 index dbe8b1e2..8745d13c 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
@@ -5127,12 +5127,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..2afab50a 160000
+index 8468d6a8..124f02da 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 2afab50ab732bb9944ab9c30f3f812a0ea025576
++Subproject commit 124f02dad720c403d05b976a38e15177c4fd56dd
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 index 00000000..115e2600
