@@ -459,7 +459,7 @@ index 00000000..3d146d68
 +#!/bin/zsh
 +~/loadrc/setup_pbpaste-remote.sh
 diff --git a/.shellrc b/.shellrc
-index 52d99984..9971f51d 100755
+index 52d99984..679a4f89 100755
 --- ./.shellrc
 +++ ./.shellrc
 @@ -1,6 +1,5 @@
@@ -469,7 +469,7 @@ index 52d99984..9971f51d 100755
  #alias tmux='$HOME/loadrc/bashrc/tmux.sh'
  alias apf='$HOME/loadrc/bashrc/apf.sh'
  alias api='apt-get install -y'
-@@ -13,8 +12,8 @@ alias ca='$HOME/loadrc/bashrc/ca.sh'
+@@ -13,13 +12,12 @@ alias ca='$HOME/loadrc/bashrc/ca.sh'
  alias clearDNS='$HOME/loadrc/bashrc/clearDNS.sh'
  alias copy='$HOME/loadrc/bashrc/copy.sh'
  alias csr='$HOME/loadrc/bashrc/csr.sh'
@@ -479,7 +479,12 @@ index 52d99984..9971f51d 100755
  alias deploy='$HOME/loadrc/bashrc/deploy.sh'
  alias encrypt='$HOME/loadrc/bashrc/encrypt.sh'
  alias envSync='$HOME/loadrc/bashrc/envSync.sh'
-@@ -27,6 +26,7 @@ alias fflink='$HOME/loadrc/bashrc/fflink.sh'
+ alias exiso='$HOME/loadrc/bashrc/exiso.sh'
+-alias fav='$HOME/loadrc/bashrc/fav.sh'
+ alias fc='$HOME/loadrc/bashrc/fc.sh'
+ alias fcscope='$HOME/loadrc/bashrc/fcscope.sh'
+ alias fdisklog='$HOME/loadrc/bashrc/fdisk_log.sh'
+@@ -27,6 +25,7 @@ alias fflink='$HOME/loadrc/bashrc/fflink.sh'
  alias ffp='$HOME/loadrc/bashrc/ffp.sh'
  alias fgh='$HOME/loadrc/bashrc/fgh.sh'
  alias findProjects='$HOME/loadrc/bashrc/find_projects.sh'
@@ -487,7 +492,7 @@ index 52d99984..9971f51d 100755
  alias fjar='$HOME/loadrc/bashrc/fjar.sh'
  alias flarge='$HOME/loadrc/bashrc/flarge.sh'
  alias flargest='$HOME/loadrc/bashrc/flargest.sh'
-@@ -35,6 +35,7 @@ alias flink='$HOME/loadrc/bashrc/flink.sh'
+@@ -35,6 +34,7 @@ alias flink='$HOME/loadrc/bashrc/flink.sh'
  alias fnine='$HOME/loadrc/bashrc/fnine.sh'
  alias fnotinuse='$HOME/loadrc/bashrc/fnotinuse.sh'
  alias fr='$HOME/loadrc/bashrc/fr.sh'
@@ -495,7 +500,7 @@ index 52d99984..9971f51d 100755
  alias fwt='$HOME/loadrc/bashrc/fwt.sh'
  alias fzw='$HOME/loadrc/bashrc/fzw.sh'
  alias glink='$HOME/loadrc/bashrc/glink.sh'
-@@ -74,7 +75,6 @@ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
+@@ -74,7 +74,6 @@ alias sancho=/opt/sancho-0.9.4-59-linux-gtk/sancho
  alias selectCopy='$HOME/loadrc/bashrc/select_copy.sh'
  alias selectmirror='$HOME/loadrc/bashrc/selectmirror.sh'
  alias sleep='$HOME/loadrc/bashrc/sleep.sh'
@@ -503,7 +508,7 @@ index 52d99984..9971f51d 100755
  alias smount='$HOME/loadrc/bashrc/smount.sh'
  alias split='$HOME/loadrc/bashrc/split.sh'
  alias ssh='$HOME/loadrc/bashrc/ssh.sh'
-@@ -100,7 +100,6 @@ alias ubak='$HOME/loadrc/bashrc/ubak.sh'
+@@ -100,7 +99,6 @@ alias ubak='$HOME/loadrc/bashrc/ubak.sh'
  alias ufind='$HOME/loadrc/bashrc/ufind.sh'
  alias umlet='$HOME/loadrc/bashrc/umlet.sh'
  alias umletc='$HOME/loadrc/bashrc/umletc.sh'
@@ -758,6 +763,19 @@ index 00000000..ac3b7013
 +else
 +    return 1
 +fi
+diff --git a/bashrc/check_running.sh b/bashrc/check_running.sh
+index 638490ac..8701cadf 100755
+--- ./bashrc/check_running.sh
++++ ./bashrc/check_running.sh
+@@ -24,7 +24,7 @@ then
+         # The process is not running
+         # Echo current PID into lock file
+         echo $$ > "${LCK_FILE}"
+-        "$SCRIPT" "$2" "$3"
++        "$SCRIPT" "$2" "$3" "$4"
+     else
+         # the process IS running
+         # handle it
 diff --git a/bashrc/copy.sh b/bashrc/copy.sh
 index 09330daf..63c0c62f 100755
 --- ./bashrc/copy.sh
@@ -918,6 +936,23 @@ index 00000000..7807874b
 +parallel --jobs 0 -k ::: \
 +    ~/loadrc/bashrc/deploy_forward.sh \
 +    ~/loadrc/bashrc/deploy_backward.sh
+diff --git a/bashrc/do_ports_forward.sh b/bashrc/do_ports_forward.sh
+new file mode 100755
+index 00000000..7bea91ab
+--- /dev/null
++++ ./bashrc/do_ports_forward.sh
+@@ -0,0 +1,11 @@
++#!/bin/zsh
++
++while read host
++do
++    for port in \
++        2224 \
++        2225
++    do
++        ssh -fnN -R "$port":localhost:"$port" "$host"
++    done
++done < ~/loadrc/bashrc/ports_forward.hosts
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
 index 9a6e19c8..14156f4d 100755
 --- ./bashrc/do_update_proj.sh
@@ -938,17 +973,23 @@ index 9a6e19c8..14156f4d 100755
 +    ~/loadrc/bashrc/cscope.sh \
 +    'git remote update'
 diff --git a/bashrc/fav.sh b/bashrc/fav.sh
-index 87df8df9..85b4e3e8 100755
+deleted file mode 100755
+index 87df8df9..00000000
 --- ./bashrc/fav.sh
-+++ ./bashrc/fav.sh
-@@ -9,4 +8,7 @@ then
-     find . -type f -size +10M -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log 
-     find . -type f -size +10M -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log.sort
-     touch files.proj
-+    cd -
- fi
-+
-+~/loadrc/bashrc/fvideos.sh
++++ /dev/null
+@@ -1,12 +0,0 @@
+-#! /bin/zsh
+-
+-FAV=/media/volgrp/mirror1/av/
+-
+-if [ -d "$FAV" ]
+-then
+-    cd "$FAV"
+-
+-    find . -type f -size +10M -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log 
+-    find . -type f -size +10M -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > fav.log.sort
+-    touch files.proj
+-fi
 diff --git a/bashrc/fdisk_log.sh b/bashrc/fdisk_log.sh
 index 37081d0c..3867ab7b 100755
 --- ./bashrc/fdisk_log.sh
@@ -1052,10 +1093,10 @@ index f58a2ee7..dcc8f356 100755
      xargs sed -i.bak  "s/${FIND}/${REPLACE}/g" < "$3"
 +fi
 diff --git a/bashrc/fvideos.sh b/bashrc/fvideos.sh
-index 38fb060b..0390e708 100755
+index 38fb060b..23804242 100755
 --- ./bashrc/fvideos.sh
 +++ ./bashrc/fvideos.sh
-@@ -1,7 +1,7 @@
+@@ -1,9 +1,13 @@
  #! /bin/zsh
  
 -FAVLOG="fav.log.bak"
@@ -1063,8 +1104,16 @@ index 38fb060b..0390e708 100755
 +FAVLOG="fav.log.tmp"
 +FAVLOGSORT="fav.log.sort.tmp"
  export LC_ALL=C
- find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
+-find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
++
++cd "$1"
++find . -type f -size +10M -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
      cp -fv "$FAVLOG" fav.log && \
+-    find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
++    find . -type f -size +10M -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
+     cp -fv "$FAVLOGSORT" fav.log.sort
++
++cd -
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
 index 83e2c748..003698c8 100755
 --- ./bashrc/generate_files_proj.sh
@@ -1537,33 +1586,27 @@ index 00000000..e46e9472
 +./parse_host.sh "~/loadrc"
 diff --git a/bashrc/ports_forward.hosts b/bashrc/ports_forward.hosts
 new file mode 100644
-index 00000000..05c7e9f4
+index 00000000..c509d791
 --- /dev/null
 +++ ./bashrc/ports_forward.hosts
-@@ -0,0 +1,6 @@
+@@ -0,0 +1,8 @@
++work
 +imacpro
 +mba
++mbp
 +mini
 +pikvm
++sb
 +server
-+work
 diff --git a/bashrc/ports_forward.sh b/bashrc/ports_forward.sh
 new file mode 100755
-index 00000000..3b953711
+index 00000000..457733ac
 --- /dev/null
 +++ ./bashrc/ports_forward.sh
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,3 @@
 +#!/bin/zsh
 +
-+while read host
-+do
-+    for port in \
-+        2224 \
-+        2225
-+    do
-+        ssh -fnN -R "$port":localhost:"$port" "$host" &
-+    done
-+done < ~/loadrc/bashrc/ports_forward.hosts
++~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_ports_forward.sh
 diff --git a/bashrc/post.sh b/bashrc/post.sh
 old mode 100644
 new mode 100755
@@ -1930,11 +1973,11 @@ index 9d256165..abc440c5 100644
 +*/10 * * * * /root/loadrc/dropboxrc/dropbox_start.sh
 diff --git a/crontabrc/.mbp2.cron b/crontabrc/.mbp2.cron
 new file mode 100644
-index 00000000..b1f64130
+index 00000000..345a7b1d
 --- /dev/null
 +++ ./crontabrc/.mbp2.cron
 @@ -0,0 +1 @@
-+* * * * * /Users/huangyingw/loadrc/bashrc/ports_forward.sh > /Users/huangyingw/loadrc/ports_forward.log 2>&1
++*/10 * * * * /Users/huangyingw/loadrc/bashrc/ports_forward.sh > /Users/huangyingw/loadrc/ports_forward.log 2>&1
 diff --git a/crontabrc/.mini.cron b/crontabrc/.mini.cron
 index d8126721..e1be5066 100644
 --- ./crontabrc/.mini.cron
@@ -2362,7 +2405,7 @@ index 00000000..1c942139
 +    fi
 +done
 diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
-index ca91dbaf..716192b3 100755
+index ca91dbaf..b224e10e 100755
 --- ./gitrc/.gitconfig
 +++ ./gitrc/.gitconfig
 @@ -53,6 +53,7 @@
@@ -2381,12 +2424,14 @@ index ca91dbaf..716192b3 100755
      ignore = rsync.files
      ignore = setup.cfg
  [filter "lfs"]
-@@ -90,3 +92,5 @@
+@@ -90,3 +92,7 @@
      prompt = false
  [merge "ours"]
  	driver = true
 +[credential "https://github.com"]
 +	helper = !gh auth git-credential
++[safe]
++	directory = *
 diff --git a/gitrc/apply_branch.sh b/gitrc/apply_branch.sh
 index 15190e93..89ce9ced 100755
 --- ./gitrc/apply_branch.sh
@@ -2442,13 +2487,14 @@ index 2b929a6c..1565c80c 100755
      echo -e "${red}the git repository is unclean, please check it before continuing... ${NC}"
      exit 1
 diff --git a/gitrc/checkout_rejs.sh b/gitrc/checkout_rejs.sh
-index d81f6f38..5b7555ad 100755
+index d81f6f38..43079a15 100755
 --- ./gitrc/checkout_rejs.sh
 +++ ./gitrc/checkout_rejs.sh
-@@ -2,6 +3,13 @@
+@@ -2,6 +3,14 @@
  for ss in $(git status | grep \.rej$) ; \
  do \
      targetFile=$(echo "$ss" | sed 's/\.rej$//g')
++    targetFile=$(echo "$targetFile" | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g')
 +    if [ "$2" = "f" ]
 +    then
          git checkout "$1" "$targetFile" && \
@@ -2457,7 +2503,7 @@ index d81f6f38..5b7555ad 100755
 +        git show "$1":"$targetFile" > "$ss"
 +    fi
  done
-+
++ 
 +git show "$1":COMMIT_EDITMSG > COMMIT_EDITMSG
 diff --git a/gitrc/discard_unnecessaries.sh b/gitrc/discard_unnecessaries.sh
 index dbf809a0..e20fc1e4 100755
@@ -2681,41 +2727,53 @@ index b720ac69..8fcc4eed 100755
 -eval "$COMMAND"
 +eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index dbcf937b..0071ea99 100755
+index dbcf937b..f487ff77 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
-@@ -17,21 +18,40 @@ fi
+@@ -8,30 +8,47 @@ then
+ fi
  
- targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
- 
--if [ -z $(git config gsync.remote) ]
+ commit_message=$(cat COMMIT_EDITMSG)
+-if [ -z "$commit_message" ]
++targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
++
 +if [ -z $(git config gsync.target) ]
  then
--    echo -e "${red}gsync.remote is not configured ... ${NC}"
+-    echo -e "${red}Must provide the commit message ... ${NC}"
+-    echo -e "${red}Please edit COMMIT_EDITMSG to provide commit message ... ${NC}"
+-    exit 1
 +    echo -e "${red}gsync.target is not configured ... ${NC}"
  fi
  
- host=$(git config deploy.host)
- rpath=$(git config deploy.path)
- 
+-targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
 +remote="$(git config gsync.remote)"
 +
 +git push "$remote" "$targetBranch"
 +
- GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
-+
++GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
+ 
+-if [ -z $(git config gsync.remote) ]
 +if [ -z $(cat $GDITDIFF) ]
-+then
+ then
+-    echo -e "${red}gsync.remote is not configured ... ${NC}"
 +    exit 0
-+fi
-+
- ~/loadrc/gitrc/discard_unnecessaries.sh ; \
-     git checkout -f "$targetBranch" ; \
+ fi
+ 
+-host=$(git config deploy.host)
+-rpath=$(git config deploy.path)
++~/loadrc/gitrc/discard_unnecessaries.sh
++git checkout -f "$targetBranch"
++git apply --reject --whitespace=fix --recount --index "$GDITDIFF"
+ 
+-GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
+-    ~/loadrc/gitrc/discard_unnecessaries.sh ; \
+-    git checkout -f "$targetBranch" ; \
 -    git apply --index --reject --whitespace=fix "$GDITDIFF" ; \
 -    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" && \
 -    git commit  --no-verify -am "$commit_message" ; \
-+    git apply --reject --whitespace=fix --recount --index "$GDITDIFF"
-+
+-    git pull ; \
+-    git push ; \
+-    . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
 +retVal=$?
 +
 +if [ $retVal -ne 0 ]
@@ -2725,11 +2783,18 @@ index dbcf937b..0071ea99 100755
 +
 +if [ $retVal -eq 0 ] || [ "$1" = "f" ]
 +then
-+    git commit  --no-verify -am "$commit_message" && \
-         git pull ; \
-         git push ; \
--    . ~/loadrc/imvurc/ghypo.sh "$targetBranch" ; \
-         ~/loadrc/gitrc/gfix.sh
++    if [ -z "$commit_message" ]
++    then
++        echo -e "${red}Must provide the commit message ... ${NC}"
++        echo -e "${red}Please edit COMMIT_EDITMSG to provide commit message ... ${NC}"
++        exit 1
++    fi
++
++    git commit  --no-verify -am "$commit_message"
++    git pull
+     ~/loadrc/gitrc/gfix.sh
++    echo > COMMIT_EDITMSG
++    git push "$remote" "$targetBranch"
 +fi
 diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
 index b0247ec4..07590e7c 100755
@@ -3051,6 +3116,108 @@ index 8be8d98c..6026d401 100644
  export LD_LIBRARY_PATH=/usr/local/cuda-9.1/lib64:$LD_LIBRARY_PATH
 -export PATH="/usr/local/bin:/opt/local/sbin:$PATH"
 -export PATH=/usr/local/cuda/bin:$PATH
+diff --git a/host_links/COH-LC172TVQ6J/Users/ying.huang/.gitconfig b/host_links/COH-LC172TVQ6J/Users/ying.huang/.gitconfig
+new file mode 100755
+index 00000000..01ecb2b5
+--- /dev/null
++++ ./host_links/COH-LC172TVQ6J/Users/ying.huang/.gitconfig
+@@ -0,0 +1,96 @@
++[user]
++	name = Ying Huang
++	email = ying.huang@cohesity.com
++[color]
++    ui = auto
++[color "branch"]
++    current = yellow reverse
++    local = yellow
++    remote = green
++[color "status"]
++    added = yellow
++    changed = green
++    untracked = cyan
++[core]
++    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
++[diff]
++    tool = nvimdiff
++[difftool "nvimdiff"]
++    cmd = nvim -R -f -d \
++        -c 'set winwidth=1' \
++        -c 'wincmd l' -c 'cd $GIT_PREFIX' \
++        "$LOCAL" "$REMOTE"
++[alias]
++    ad = add
++    bi = bisect
++    ci = commit
++    co = checkout
++    rs = reset --hard
++    sm = submodule
++    st = status
++    sta = stash
++    tg = tag -l -n1
++    vd = difftool
++[difftool]
++    prompt = false
++[core]
++    excludesfile = "~/.globalgitignore"
++    mergeoptions = --no-edit
++    fileMode = true
++    editor = nvim
++[giggle]
++    main-window-maximized = true
++    main-window-geometry = 700x550+0+55
++    history-view-vpane-position = 403
++    main-window-view = HistoryView
++    file-view-vpane-position = 609
++[filter "media"]
++    clean = git media clean %f
++    smudge = git media smudge %f
++    required = true
++[push]
++    default = current
++    remote = BareReps
++[pull]
++    default = current
++    rebase = false
++[gdif]
++    ignore = *.diff
++    ignore = .gitconfig
++    ignore = .login
++    ignore = COMMIT_EDITMSG
++    ignore = change
++    ignore = files.proj
++    ignore = files.rev
++    ignore = gbil.log
++    ignore = includefile.conf
++    ignore = includefile.rsync
++    ignore = prunefile.conf
++    ignore = prunefix.conf
++    ignore = prunefix.rsync
++    ignore = readme
++    ignore = rsync.files
++    ignore = setup.cfg
++[filter "lfs"]
++    clean = git-lfs clean -- %f
++    smudge = git-lfs smudge -- %f
++    process = git-lfs filter-process
++    required = true
++[diff "nodiff"]
++    command = /usr/bin/true
++# define command which will be used when "nvim" is set as a merge tool
++# https://www.grzegorowski.com/using-vim-or-neovim-nvim-as-a-git-mergetool
++[mergetool "nvim"]
++    cmd = nvim -f \
++        -c 'set winwidth=1' \
++        -c \"Gvdiffsplit!\" \"$MERGED\"
++# set "nvim" as tool for merging
++[merge]
++    tool = kdiff3
++# automatically launch merge tool without displaying a prompt
++[mergetool]
++    prompt = false
++[merge "ours"]
++	driver = true
++[credential "https://github.com"]
++	helper = !gh auth git-credential
 diff --git a/host_links/imac/Users/huangyingw/.bashrc b/host_links/imac/Users/huangyingw/.bashrc
 deleted file mode 100644
 index 82bc6cb7..00000000
@@ -3131,24 +3298,16 @@ similarity index 100%
 rename from host_links/movie/etc/network/interfaces
 rename to host_links/movie/etc/network/interfaces_bak
 diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
-index 50886663..a36f9ac3 100644
+index 50886663..6d13b8f2 100644
 --- ./host_links/server/etc/hosts
 +++ ./host_links/server/etc/hosts
-@@ -3,13 +3,17 @@
- 192.168.31.127 u1804
- 192.168.31.111 u2004
- 172.27.217.162 localhost.imvu.com
--192.168.31.140 mini
-+192.168.31.201 mini
- 192.168.123.132 minds
- 192.168.31.153 gluster00
- 192.168.31.129 gluster01
+@@ -10,6 +10,10 @@
  192.168.31.115 gluster02
  192.168.31.99 mldonkey
  192.168.31.147 imacpro
 +172.27.68.119 imac
 +192.168.31.96 mbp
-+192.168.31.154 mbp2
++192.168.31.162 mbp2
 +192.168.31.88 transmission
  
  # The following lines are desirable for IPv6 capable hosts
@@ -4827,11 +4986,11 @@ index 00000000..6f61df5a
 +Subproject commit 6f61df5a633c3a91edea7bcb5d5772648df19d1a
 diff --git a/vimrc/.vim/bundle/firenvim b/vimrc/.vim/bundle/firenvim
 new file mode 160000
-index 00000000..2f0ee858
+index 00000000..b8f8645b
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit 2f0ee858c3eb5c9d306523cc054047eda2e6a3a2
++Subproject commit b8f8645bd1bc809929ac6d3e560ac93c39aada4a
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 index 5617a1cf..d15d63bf 160000
 --- ./vimrc/.vim/bundle/indentLine
@@ -4854,12 +5013,12 @@ index 0c22efb1..00000000
 @@ -1 +0,0 @@
 -Subproject commit 0c22efb1b919573f69ec237e7a8ab7ca1c1ecc03
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..facc3db7 160000
+index 2b1dca6c..d43fa219 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit facc3db7c5836fe2424936e8dd06f227e20f96db
++Subproject commit d43fa219390094ce2a8f5c929331f0a9e2f666d1
 diff --git a/vimrc/.vim/bundle/nvim-yarp b/vimrc/.vim/bundle/nvim-yarp
 index b710bf4d..bb5f5e03 160000
 --- ./vimrc/.vim/bundle/nvim-yarp
@@ -4945,12 +5104,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..9d5f2158 160000
+index 8468d6a8..cbcd6c99 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 9d5f2158af13fc95b70bc772fc608b11f2a917f8
++Subproject commit cbcd6c99001063246a38c96afe59b592e0a5c6c6-dirty
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 index 00000000..115e2600
@@ -6637,7 +6796,7 @@ index 57af963a..21469ba0 100755
      #smplayer "$1"
      smplayer -fullscreen "$1"
 diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
-index e14de500..b58518c5 100755
+index e14de500..82470f88 100755
 --- ./vishrc/vrun.sh
 +++ ./vishrc/vrun.sh
 @@ -14,12 +14,6 @@ then
@@ -6653,7 +6812,7 @@ index e14de500..b58518c5 100755
  extension=${file##*.}
  host=$(git config deploy.host)
  rpath=$(git config deploy.path)
-@@ -27,13 +21,27 @@ rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$file" "files.proj")
+@@ -27,13 +21,28 @@ rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$file" "files.proj")
  rfile=$(realpath --relative-to="$rootFolder" "$file")
  rfolder=$(realpath --relative-to="$rootFolder" $(dirname "$file"))
  
@@ -6675,14 +6834,15 @@ index e14de500..b58518c5 100755
 +if [[ $(basename "$file") = 'Vagrantfile' ]]
 +then
 +    cd "$rfolder"
-+    vagrant reload || vagrant up
++    vagrant reload
++    vagrant up
 +    exit 0
 +fi
 +
  case $extension in
      hs)
          runghc "$file"
-@@ -58,7 +66,7 @@ case $extension in
+@@ -58,7 +67,7 @@ case $extension in
      sh)
          if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
          then
@@ -6691,7 +6851,7 @@ index e14de500..b58518c5 100755
          else
              "$file"
          fi
-@@ -69,7 +77,7 @@ case $extension in
+@@ -69,7 +78,7 @@ case $extension in
      py)
          if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
          then
@@ -6700,7 +6860,7 @@ index e14de500..b58518c5 100755
          else
              SCRIPT=$(realpath "$file")
              SCRIPTPATH=$(dirname "$SCRIPT")
-@@ -93,10 +101,17 @@ case $extension in
+@@ -93,10 +102,17 @@ case $extension in
          then
              ssh -nY "$host" "docker-compose -f $rpath/$rfile up -d"
          else

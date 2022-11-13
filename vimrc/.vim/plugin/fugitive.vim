@@ -641,6 +641,7 @@ function! s:AppendRate(...) abort
             let newname = substitute(system("~/loadrc/bashrc/append_num.sh " . '"' . oldname . '"' . ' ' . '"' . a:1 . '"'), '\n', '', '')
             let newname = substitute(newname, getcwd(), '.', 'e')
             call setline('.', '"' . newname . '"')
+            w
             call UpdateProj()
         endif
 

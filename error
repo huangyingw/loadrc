@@ -103,3 +103,14 @@ E207: Can't delete backup file
 E576: Error while reading ShaDa file: last entry specified that it occupies 142 bytes, but file ended earlier
 E136: Did not rename /Users/huangyingw/.viminfo.tmp.h because /Users/huangyingw/.viminfo does not look like a ShaDa file
 E136: Do not forget to remove /Users/huangyingw/.viminfo.tmp.h or rename it manually to /Users/huangyingw/.viminfo.
+
+zrecompile:99: fork failed: resource temporarily unavailable
+/Users/huangyingw/.oh-my-zsh/plugins/helm/helm.plugin.zsh:12: fork failed: resource temporarily unavailable
+nvm_supports_source_options:2: fork failed: resource temporarily unavailable
+_zsh_nvm_rename_function:1: fork failed: resource temporarily unavailable
+/Users/huangyingw/loadrc/.envrc:3: fork failed: resource temporarily unavailable
+/Users/huangyingw/loadrc/.mbp2.rc:4: fork failed: resource temporarily unavailable
+2022-10-29 10:46:08.292 systemsetup[35401:3283514] ### Error:-99 File:/AppleInternal/Library/BuildRoots/810eba08-405a-11ed-86e9-6af958a02716/Library/Cac
+hes/com.apple.xbs/Sources/Admin/InternetServices.m Line:379
+setcomputersleep: Never
+➜  ~ 
