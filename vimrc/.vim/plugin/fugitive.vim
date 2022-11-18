@@ -641,7 +641,6 @@ function! s:AppendRate(...) abort
             let newname = substitute(system("~/loadrc/bashrc/append_num.sh " . '"' . oldname . '"' . ' ' . '"' . a:1 . '"'), '\n', '', '')
             let newname = substitute(newname, getcwd(), '.', 'e')
             call setline('.', '"' . newname . '"')
-            w!
             call UpdateProj()
         endif
 
@@ -677,6 +676,11 @@ endfunction
 function! s:RmCat(...) abort
     if &modified
         echom 'Please check and save your file first!!!'
+        return 0
+    endif
+
+    if expand('%:e') != "findresult"
+        echom 'Please only run this command in findresult file'
         return 0
     endif
 
