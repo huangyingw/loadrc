@@ -526,6 +526,13 @@ index 52d99984..165909ed 100755
  alias updateProj='$HOME/loadrc/bashrc/update_proj.sh'
  alias ures='$HOME/loadrc/bashrc/ures.sh'
  alias usync='$HOME/loadrc/bashrc/usync.sh'
+diff --git a/.tigrc b/.tigrc
+index d909cd68..7f333b28 100644
+--- ./.tigrc
++++ ./.tigrc
+@@ -1 +1 @@
+-bind generic 9 !@sh -c "echo -n %(commit) | xclip -selection c"
++bind generic 9 @sh -c "echo -n %(commit) | xclip -selection c"
 diff --git a/.ubuntu.rc b/.ubuntu.rc
 new file mode 100644
 index 00000000..9e7032fd
@@ -1813,7 +1820,7 @@ index 1d01bc62..00000000
 -  . $HOME/loadrc/.loadrc
 -fi
 diff --git a/bashrc/smount.sh b/bashrc/smount.sh
-index 8f22cb80..79fdb8ee 100755
+index 8f22cb80..73f12816 100755
 --- ./bashrc/smount.sh
 +++ ./bashrc/smount.sh
 @@ -7,14 +8,16 @@ fi
@@ -1833,7 +1840,7 @@ index 8f22cb80..79fdb8ee 100755
 +    diskutil unmount force ~/"$remoteServer" 
 +    ps ax | awk '/sshfs '$remoteServer'/NR > 1 {print $1}' | xargs kill -9
      sshfs "$remoteServer":/ ~/"$remoteServer"
-+    sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/nfs/"$remoteServer"
++    sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/nfs/"$remoteServer" &
      df -H
  fi
 diff --git a/bashrc/ssh.sh b/bashrc/ssh.sh
@@ -2176,10 +2183,10 @@ index 00000000..87081191
 +docker:
 +~/loadrc/docker-compose.yml
 diff --git a/deploy_configurations.sh b/deploy_configurations.sh
-index c0f7848b..8629ce45 100755
+index c0f7848b..46c4258b 100755
 --- ./deploy_configurations.sh
 +++ ./deploy_configurations.sh
-@@ -21,17 +21,18 @@ fi
+@@ -21,17 +21,19 @@ fi
  mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
  ~/loadrc/bashrc/ln_fs.sh ~/loadrc/."`hostname`".theanorc  ~/.theanorc
  ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.config/git/gitk  ~/.config/git/gitk
@@ -2195,6 +2202,7 @@ index c0f7848b..8629ce45 100755
 +# ~/loadrc/bashrc/ln_fs.sh ~/loadrc/Library/Preferences/org.videolan.vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
  ~/loadrc/bashrc/ln_fs.sh ~/loadrc/iterm2rc/movescreen.py ~/Library/ApplicationSupport/iTerm2/Scripts/movescreen/movescreen/movescreen.py
  # ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.kdiff3rc ~/.kdiff3rc
++~/loadrc/bashrc/ln_fs.sh ~/loadrc/.tigrc ~/.tigrc
  
  ./set_linux_configuration.sh
  ./set_macos_configuration.sh
@@ -2663,6 +2671,14 @@ index 192ec7a5..6f8c364f 100755
 +~/loadrc/gitrc/discard_unnecessaries.sh
  git bisect skip
  git bisect log | tee gbil.log
+diff --git a/gitrc/gbr.sh b/gitrc/gbr.sh
+index 3307cc1e..fc04fb47 100755
+--- ./gitrc/gbr.sh
++++ ./gitrc/gbr.sh
+@@ -1,2 +1,2 @@
+ #!/bin/zsh
+-git branch | tee gbr.findresult 
++git branch --sort=-committerdate | tee gbr.findresult 
 diff --git a/gitrc/gbrd.sh b/gitrc/gbrd.sh
 index ff263b6d..6ca0ebac 100755
 --- ./gitrc/gbrd.sh
@@ -4735,11 +4751,11 @@ index 13a0cf4c..6cd6989c 100755
  
 diff --git a/rsync b/rsync
 new file mode 160000
-index 00000000..01750eed
+index 00000000..225fa6ae
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit 01750eeda45416f2b9528c78aa99e2f195cea0cc
++Subproject commit 225fa6ae800f56197ce7887216f3b2aa4f4110f0-dirty
 diff --git a/set_macos_configuration.sh b/set_macos_configuration.sh
 index cf9a010a..26f18169 100755
 --- ./set_macos_configuration.sh
