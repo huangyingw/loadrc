@@ -18,6 +18,6 @@ else
     diskutil unmount force ~/"$remoteServer" 
     ps ax | awk '/sshfs '$remoteServer'/NR > 1 {print $1}' | xargs kill -9
     sshfs "$remoteServer":/ ~/"$remoteServer"
-    sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/nfs/"$remoteServer"
+    sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/nfs/"$remoteServer" &
     df -H
 fi
