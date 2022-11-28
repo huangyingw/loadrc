@@ -15,6 +15,7 @@ then
     sshfs "$remoteServer":/media/ ~/"$remoteServer"
     df -TH
 else
+    diskutil unmount force ~/nfs/"$remoteServer"
     diskutil unmount force ~/"$remoteServer" 
     ps ax | awk '/sshfs '$remoteServer'/NR > 1 {print $1}' | xargs kill -9
     sshfs "$remoteServer":/ ~/"$remoteServer"
