@@ -49,7 +49,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkdo :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glf :execute s:Glf()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glg :execute s:Glg()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gme2 :execute s:Gme2(<q-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gmet :execute s:Gmet()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gres :execute s:Gres()
@@ -641,7 +640,6 @@ function! s:AppendRate(...) abort
             let newname = substitute(system("~/loadrc/bashrc/append_num.sh " . '"' . oldname . '"' . ' ' . '"' . a:1 . '"'), '\n', '', '')
             let newname = substitute(newname, getcwd(), '.', 'e')
             call setline('.', '"' . newname . '"')
-            w
             call UpdateProj()
         endif
 
@@ -677,6 +675,11 @@ endfunction
 function! s:RmCat(...) abort
     if &modified
         echom 'Please check and save your file first!!!'
+        return 0
+    endif
+
+    if expand('%:e') != "findresult"
+        echom 'Please only run this command in findresult file'
         return 0
     endif
 
