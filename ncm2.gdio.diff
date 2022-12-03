@@ -462,7 +462,7 @@ index 00000000..3d146d68
 +#!/bin/zsh
 +~/loadrc/setup_pbpaste-remote.sh
 diff --git a/.shellrc b/.shellrc
-index 52d99984..165909ed 100755
+index 52d99984..899d368b 100755
 --- ./.shellrc
 +++ ./.shellrc
 @@ -1,6 +1,5 @@
@@ -503,6 +503,15 @@ index 52d99984..165909ed 100755
  alias fwt='$HOME/loadrc/bashrc/fwt.sh'
  alias fzw='$HOME/loadrc/bashrc/fzw.sh'
  alias glink='$HOME/loadrc/bashrc/glink.sh'
+@@ -43,7 +43,7 @@ alias jdupes='$HOME/loadrc/bashrc/jdupes.sh'
+ alias jformat='$HOME/loadrc/bashrc/jformat.sh'
+ alias jupytext='$HOME/loadrc/ipynbrc/jupytext.sh'
+ alias killPort='$HOME/loadrc/bashrc/kill_port.sh'
+-alias l='ls -aclt'
++alias l='ls -aclrt'
+ alias la='ls -A'
+ alias ll='ls -alF'
+ alias loadrc='. $HOME/loadrc/.loadrc'
 @@ -67,14 +67,12 @@ alias rmEmpty='$HOME/loadrc/bashrc/rmEmpty.sh'
  alias rse='rsync -aH -e ssh --progress'
  alias rsleep='$HOME/loadrc/bashrc/rsleep.sh'
@@ -2050,11 +2059,10 @@ index 1e941ff7..aa05d65b 100755
  fi
 diff --git a/crontabrc/.imacpro.cron b/crontabrc/.imacpro.cron
 new file mode 100644
-index 00000000..0e6a973f
+index 00000000..345a7b1d
 --- /dev/null
 +++ ./crontabrc/.imacpro.cron
-@@ -0,0 +1,2 @@
-+* * * * * /Users/huangyingw/loadrc/crontabrc/set_brightness.sh
+@@ -0,0 +1 @@
 +*/10 * * * * /Users/huangyingw/loadrc/bashrc/ports_forward.sh > /Users/huangyingw/loadrc/ports_forward.log 2>&1
 diff --git a/crontabrc/.mbp.cron b/crontabrc/.mbp.cron
 index 9d256165..abc440c5 100644
@@ -4794,7 +4802,7 @@ index 00000000..2cb1a15f
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit 2cb1a15f08c57a4a93e691af7f8ab948ee9bc5e9
++Subproject commit 2cb1a15f08c57a4a93e691af7f8ab948ee9bc5e9-dirty
 diff --git a/set_linux_configuration.sh b/set_linux_configuration.sh
 index ced4c25c..ce42e8a4 100755
 --- ./set_linux_configuration.sh
@@ -4968,10 +4976,10 @@ index 541ae968..0996eeeb 100755
  fi
 diff --git a/synergy.conf b/synergy.conf
 new file mode 100644
-index 00000000..6396b2cb
+index 00000000..c77b506c
 --- /dev/null
 +++ ./synergy.conf
-@@ -0,0 +1,63 @@
+@@ -0,0 +1,73 @@
 +section: screens
 +	imacpro:
 +		halfDuplexCapsLock = false
@@ -5001,6 +5009,13 @@ index 00000000..6396b2cb
 +		xtestIsXineramaUnaware = false
 +		switchCorners = none 
 +		switchCornerSize = 0
++	studio:
++		halfDuplexCapsLock = false
++		halfDuplexNumLock = false
++		halfDuplexScrollLock = false
++		xtestIsXineramaUnaware = false
++		switchCorners = none 
++		switchCornerSize = 0
 +end
 +
 +section: aliases
@@ -5015,8 +5030,11 @@ index 00000000..6396b2cb
 +		right = mba
 +		left = COH-LC172TVQ6J
 +		up = imacpro
++		down = studio
 +	mba:
 +		left = mbp2
++	studio:
++		up = mbp2
 +end
 +
 +section: options
@@ -5259,7 +5277,7 @@ index 8468d6a8..803b5ea6 160000
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 803b5ea6a1376d3ca30764d2e71605a002433eee
++Subproject commit 803b5ea6a1376d3ca30764d2e71605a002433eee-dirty
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 index 00000000..115e2600
