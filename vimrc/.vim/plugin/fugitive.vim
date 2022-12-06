@@ -588,6 +588,10 @@ function! s:SelectMove(...) abort
         call OpenOrSwitch(b:output, 'vs')
     endif
 
+    if a:0 >= 2
+        exec '!' . '"' . a:2 . '"'
+    endif
+
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
 endfunction
 

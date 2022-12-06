@@ -3,7 +3,6 @@ archive2_crypt      /dev/disk/by-uuid/766063ea-304e-4fef-9954-7a638c946229  /roo
 mldonkey      /dev/disk/by-uuid/17a98493-8e53-449e-bdfb-4358aceac548  /root/loadrc/keys/keyfile   luks
 mirror1      /dev/disk/by-uuid/1557210c-fd5f-4e61-9880-02b754f69dd6  /root/loadrc/keys/keyfile   luks
 mirror2      /dev/disk/by-uuid/695d4b27-0a6e-4563-a738-a6f1de7d8de6  /root/loadrc/keys/keyfile   luks
-raid6_crypt      /dev/disk/by-uuid/6eeb5df9-3399-40dc-b11c-f81aa773ae92  /root/loadrc/keys/keyfile   luks
 usb_archive      /dev/disk/by-uuid/e6addd78-0027-4f36-9251-0788301303c6  /root/loadrc/keys/keyfile   luks
 usb_backup_crypt_4T      /dev/disk/by-uuid/4e0d72a2-2f98-4c11-becd-beaa21ec1957  /root/loadrc/keys/keyfile   luks
 usb_backup_crypt_5T_1      /dev/disk/by-uuid/c6de509f-5af1-461b-bf8d-31365f0be897  /root/loadrc/keys/keyfile   luks
@@ -13,4 +12,10 @@ usb_backup_crypt_8T_1      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80a
 usb_backup_crypt_8T_2      /dev/disk/by-uuid/4e1163f1-0df8-4416-9afd-b674808f87f9  /root/loadrc/keys/keyfile   luks
 timemachine      /dev/disk/by-uuid/72eff5fa-e188-4b1a-8760-5f5ff828aa37  /root/loadrc/keys/keyfile   luks
 zarchive      /dev/disk/by-uuid/69251abc-347f-4b64-be99-809da622893a  /root/loadrc/keys/keyfile   luks
+usb_zarchive1      /dev/disk/by-uuid/723f12b0-24a9-4ad0-a1ca-04cc8ee38bfd  /root/loadrc/keys/keyfile   luks
+av91 /dev/disk/by-uuid/4211b914-5367-403f-aaa2-3dba45f41209  /root/loadrc/keys/keyfile   luks 
+av81 /dev/disk/by-uuid/75ee8da8-8454-4b2c-96ca-d88ef135657e  /root/loadrc/keys/keyfile   luks 
+av71 /dev/disk/by-uuid/3410d798-71e6-4131-bbcb-1fa07a98320d  /root/loadrc/keys/keyfile   luks 
+av92 /dev/disk/by-uuid/7e2f0dc4-86e1-41a1-ba81-f20288d82c85  /root/loadrc/keys/keyfile   luks 
+av82 /dev/disk/by-uuid/824d11c2-e8af-4502-8717-46b6e283d790  /root/loadrc/keys/keyfile   luks 
 115_disk      /dev/disk/by-uuid/723f12b0-24a9-4ad0-a1ca-04cc8ee38bfd  /root/loadrc/keys/keyfile   luks
