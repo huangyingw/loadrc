@@ -2154,6 +2154,14 @@ index 00000000..f90514ae
 +#!/bin/zsh
 +
 +sudo /usr/bin/osascript -e "set Volume 0"
+diff --git a/crontabrc/ssh.cron b/crontabrc/ssh.cron
+new file mode 100644
+index 00000000..cc6f4270
+--- /dev/null
++++ ./crontabrc/ssh.cron
+@@ -0,0 +1,2 @@
++*/10 * * * * /Users/huangyingw/loadrc/macosrc/restart_ssh.sh
++*/10 * * * * /Users/ying.huang/loadrc/macosrc/restart_ssh.sh
 diff --git a/cscope b/cscope
 index 18a46b20..0a384883 160000
 --- ./cscope
@@ -4680,11 +4688,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..f85bb531
+index 00000000..a6ce37b7
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit f85bb531d21cb975d1598603ac760929b1054450-dirty
++Subproject commit a6ce37b7174d27294e3eca3cd456fb22b9877e30-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4813,11 +4821,11 @@ index 13a0cf4c..6cd6989c 100755
  
 diff --git a/rsync b/rsync
 new file mode 160000
-index 00000000..bf385032
+index 00000000..10e31bf0
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit bf38503215a14522454d0c4398f5cb71124da6ef-dirty
++Subproject commit 10e31bf01467bc3a1bd7e8a33260ce23a36d9123
 diff --git a/set_linux_configuration.sh b/set_linux_configuration.sh
 index ced4c25c..ce42e8a4 100755
 --- ./set_linux_configuration.sh
@@ -5144,12 +5152,12 @@ index 86d744c6..2a31e6bc 160000
 -Subproject commit 86d744c6e4731d0014ef469f019a305e2d7baac0
 +Subproject commit 2a31e6bcea5977209c05c728c4253d82fd873c82
 diff --git a/vimrc/.vim/bundle/LargeFile b/vimrc/.vim/bundle/LargeFile
-index 3941a37b..18407c43 160000
+index 3941a37b..3d45b67c 160000
 --- ./vimrc/.vim/bundle/LargeFile
 +++ ./vimrc/.vim/bundle/LargeFile
 @@ -1 +1 @@
 -Subproject commit 3941a37b2b0288524300348a39521a46539bf9f6
-+Subproject commit 18407c43846edea7b7964b0b99226ec04d00931f
++Subproject commit 3d45b67c54aa57d601dc0b0bf5ae5e0b9b909914
 diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
 index 1d4a909f..537b2a38 160000
 --- ./vimrc/.vim/bundle/bash-support.vim
@@ -5289,7 +5297,7 @@ index 8468d6a8..c7c76b8d 160000
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit c7c76b8dbf783454b3d3a60526f7ffd6a5421fb2
++Subproject commit c7c76b8dbf783454b3d3a60526f7ffd6a5421fb2-dirty
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 index 00000000..115e2600
