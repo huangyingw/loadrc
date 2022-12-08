@@ -772,8 +772,8 @@ endfunction
 
 function! s:Portsforward() abort
     call Cd2Worktree()
-    exec '!~/loadrc/bashrc/ports_forward.sh 2>&1 | tee ports_forward.runresult' 
-    call OpenOrSwitch('ports_forward.runresult', 'vs')
+    exec '!~/loadrc/bashrc/do_ports_forward.sh 2>&1 | tee do_ports_forward.runresult' 
+    call OpenOrSwitch('do_ports_forward.runresult', 'vs')
 endfunction
 
 function! s:Prune() abort
