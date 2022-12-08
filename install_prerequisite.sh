@@ -48,6 +48,8 @@ apt-get install -y \
     nfs-kernel-server \
     npm \
     openvpn \
+    p7zip-full \
+    p7zip-rar \
     parallel \
     patchutils \
     perl \
