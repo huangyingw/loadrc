@@ -1,2 +1,2 @@
 #!/bin/zsh
-git branch | tee gbr.findresult 
+git branch --sort=-committerdate | tee gbr.findresult 

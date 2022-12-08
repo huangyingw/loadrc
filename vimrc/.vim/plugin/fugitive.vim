@@ -49,7 +49,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkdo :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glf :execute s:Glf()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glg :execute s:Glg()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gme2 :execute s:Gme2(<q-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gmet :execute s:Gmet()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gres :execute s:Gres()
@@ -75,6 +74,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Jforma
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject KdiffFile :execute s:KdiffFile()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest :execute s:LcTest()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Portsforward :execute s:Portsforward()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RmCat :execute s:RmCat(<f-args>)
@@ -382,7 +382,7 @@ function! s:Gdi(...) abort
         else
             call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
         endif
-        return 
+        return
     else
         let arg1 = (a:0 >= 1) ? a:1 : ''
         exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" HEAD 2>&1 | tee ' . '"' .  output . '"'
@@ -589,6 +589,10 @@ function! s:SelectMove(...) abort
         call OpenOrSwitch(b:output, 'vs')
     endif
 
+    if a:0 >= 2
+        exec '!' . '"' . a:2 . '"'
+    endif
+
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
 endfunction
 
@@ -602,7 +606,7 @@ function! s:CatMove(...) abort
         exec '!~/loadrc/vishrc/cat_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
 endfunction
 
 function! s:FileMove(...) abort
@@ -764,6 +768,12 @@ function! s:LcTest() abort
     endif
     silent exec '!~/loadrc/vishrc/lc_test.sh ' . '"' .  expand('%:p') . '"'
     call OpenOrSwitch(expand('%:p') . '.sh', 'vs')
+endfunction
+
+function! s:Portsforward() abort
+    call Cd2Worktree()
+    exec '!~/loadrc/bashrc/do_ports_forward.sh 2>&1 | tee do_ports_forward.runresult' 
+    call OpenOrSwitch('do_ports_forward.runresult', 'vs')
 endfunction
 
 function! s:Prune() abort

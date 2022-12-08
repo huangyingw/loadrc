@@ -52,6 +52,7 @@ brew install \
     php \
     poppler \
     pv \
+    redis \
     rename \
     rsync \
     sbt \
@@ -71,6 +72,9 @@ brew cask install \
     libreoffice \
     lynxlet \
     wkhtmltopdf
+
+brew tap redis-stack/redis-stack
+brew install --cask redis-stack
 
 sudo easy_install pip
 sudo pip install --upgrade pip

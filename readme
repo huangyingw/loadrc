@@ -14,6 +14,4 @@ Project history:
         wonderful git process and script.
             what's the perfect git process? I have my own answer.
 
-
-
-
+bind generic 9 !sh -c "echo -n %(commit) | xclip -selection c && echo Copied %(commit) to clipboard"
