@@ -4,6 +4,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
 cat ~/loadrc/crontabrc/silent.cron > crontab_file
+cat ~/loadrc/crontabrc/ssh.cron >> crontab_file
 CRONRC=$HOME/loadrc/crontabrc/."`hostname`".cron
 
 if [ -f "$CRONRC" ]
