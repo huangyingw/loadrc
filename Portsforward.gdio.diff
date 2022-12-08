@@ -956,7 +956,7 @@ index 00000000..7807874b
 +    ~/loadrc/bashrc/deploy_backward.sh
 diff --git a/bashrc/do_ports_forward.sh b/bashrc/do_ports_forward.sh
 new file mode 100755
-index 00000000..7bea91ab
+index 00000000..3b953711
 --- /dev/null
 +++ ./bashrc/do_ports_forward.sh
 @@ -0,0 +1,11 @@
@@ -968,7 +968,7 @@ index 00000000..7bea91ab
 +        2224 \
 +        2225
 +    do
-+        ssh -fnN -R "$port":localhost:"$port" "$host"
++        ssh -fnN -R "$port":localhost:"$port" "$host" &
 +    done
 +done < ~/loadrc/bashrc/ports_forward.hosts
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
@@ -5289,7 +5289,7 @@ index 8468d6a8..c7c76b8d 160000
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit c7c76b8dbf783454b3d3a60526f7ffd6a5421fb2-dirty
++Subproject commit c7c76b8dbf783454b3d3a60526f7ffd6a5421fb2
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 index 00000000..115e2600
@@ -5592,7 +5592,7 @@ index 00000000..6bf0e4ae
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..41887337 100644
+index d5874fe5..6c095c44 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,18 @@
@@ -5971,8 +5971,8 @@ index d5874fe5..41887337 100644
  
 +function! s:Portsforward() abort
 +    call Cd2Worktree()
-+    exec '!~/loadrc/bashrc/ports_forward.sh 2>&1 | tee ports_forward.runresult' 
-+    call OpenOrSwitch('ports_forward.runresult', 'vs')
++    exec '!~/loadrc/bashrc/do_ports_forward.sh 2>&1 | tee do_ports_forward.runresult' 
++    call OpenOrSwitch('do_ports_forward.runresult', 'vs')
 +endfunction
 +
  function! s:Prune() abort
