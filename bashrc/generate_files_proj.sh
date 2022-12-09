@@ -15,8 +15,6 @@ then
     exit 1
 fi
 
-git init
-
 TARGETEDIR=`realpath "$PWD"`
 cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
 cp -nv ~/loadrc/prunefile_template.conf ./prunefile.conf
