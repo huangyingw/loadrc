@@ -143,12 +143,16 @@ function! GetWorktree()
 endfunction
 
 function! OpenOrSwitch(buffername, openMode, ...)
+    let fileName = a:buffername
+
     if !filereadable(a:buffername)
         let curline = getline(line("."))
+        let curline = substitute(curline, '\\', '', 'g')
         let curline = substitute(curline, "^\"", "", "")
-        let fileName = substitute(curline, "\"$", "", "")
-    else
-        let fileName = a:buffername
+        let curline = substitute(curline, "\"$", "", "")
+        if filereadable(curline)
+            let fileName = curline
+        endif
     endif
 
     let topleft = (a:0 >= 1) ? a:1 : 'topleft'
