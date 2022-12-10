@@ -13,7 +13,6 @@ then
     git stash
 fi
 
-~/loadrc/gitrc/discard_unnecessaries.sh
 current_branch=$(~/loadrc/gitrc/get_current_branch.sh)
 
 TARGET_BRANCH="$1"
