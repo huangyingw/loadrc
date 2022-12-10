@@ -143,12 +143,24 @@ function! GetWorktree()
 endfunction
 
 function! OpenOrSwitch(buffername, openMode, ...)
+    let fileName = a:buffername
+
+    if !filereadable(a:buffername)
+        let curline = getline(line("."))
+        let curline = substitute(curline, '\\', '', 'g')
+        let curline = substitute(curline, "^\"", "", "")
+        let curline = substitute(curline, "\"$", "", "")
+        if filereadable(curline)
+            let fileName = curline
+        endif
+    endif
+
     let topleft = (a:0 >= 1) ? a:1 : 'topleft'
 
     if a:openMode ==? "goto"
-        call fetch#cfile(a:buffername, 'e')
+        call fetch#cfile(fileName, 'e')
     else
-        call fetch#cfile(a:buffername, 'vs')
+        call fetch#cfile(fileName, 'vs')
     endif
 endfunction
 
