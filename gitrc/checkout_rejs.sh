@@ -12,5 +12,3 @@ do \
         git show "$1":"$targetFile" > "$ss"
     fi
 done
- 
-git show "$1":COMMIT_EDITMSG > COMMIT_EDITMSG
