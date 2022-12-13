@@ -28,7 +28,7 @@ function! RemovePairs()
         if l:original_pos == l:new_pos
             execute "normal! a\<BS>"
             return
-        end
+        endif
 
         let l:line2 = getline(".")
         if len(l:line2) == col(".")
@@ -37,11 +37,11 @@ function! RemovePairs()
         else
             " 如果右括号不是当前行最后一个字符
             execute "normal! v%xi"
-        end
+        endif
 
     else
         execute "normal! a\<BS>"
-    end
+    endif
 endfunction
 
 function! RemoveNextDoubleChar(char)
@@ -52,7 +52,7 @@ function! RemoveNextDoubleChar(char)
         execute "normal! l"
     else
         execute "normal! i" . a:char . ""
-    end
+    endif
 endfunction
 
 " 获取当前路径，将$HOME转化为~
