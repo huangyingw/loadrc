@@ -181,7 +181,7 @@ function! Windowdir()
 
         if unislash =~ '^fugitive:/'
             let unislash = substitute(unislash, '^fugitive:\/\/', '', 'g')
-            let unislash = substitute(unislash, '.git.*', '', 'g') 
+            let unislash = substitute(unislash, '.git.*', '', 'g')
         endif
     endif
 
@@ -205,30 +205,33 @@ endfunc
 
 function! GetEscapedResult(keywordStr)
     let result = a:keywordStr
-    let result = substitute(result, " ", "", "g")
-    let result = substitute(result, "/", "", "g")
-    let result = substitute(result, "|", "", "g")
-    let result = substitute(result, "(", "", "g")
-    let result = substitute(result, ")", "", "g")
-    let result = substitute(result, '\\c', '', 'g')
-    let result = substitute(result, '\\V', '', 'g')
-    let result = substitute(result, '\"', '', 'g')
-    let result = substitute(result, '\,', '', 'g')
-    let result = substitute(result, '\\', '', 'g')
-    let result = substitute(result, '\$', '', 'g')
-    let result = substitute(result, '#', '', 'g')
-    let result = substitute(result, '!', '', 'g')
-    let result = substitute(result, "<", "", "g")
-    let result = substitute(result, ">", "", "g")
-    let result = substitute(result, "~", "", "g")
-    let result = substitute(result, "*", "", "g")
-    let result = substitute(result, "%", "", "g")
-    let result = substitute(result, ":", "", "g")
-    let result = substitute(result, "[", "_", "g")
-    let result = substitute(result, "]", "_", "g")
-    let result = substitute(result, "+", "_", "g")
-    let result = substitute(result, "-", "_", "g")
-    return result
+    try
+        let result = substitute(result, " ", "", "g")
+        let result = substitute(result, "/", "", "g")
+        let result = substitute(result, "|", "", "g")
+        let result = substitute(result, "(", "", "g")
+        let result = substitute(result, ")", "", "g")
+        let result = substitute(result, '\\c', '', 'g')
+        let result = substitute(result, '\\V', '', 'g')
+        let result = substitute(result, '\"', '', 'g')
+        let result = substitute(result, '\,', '', 'g')
+        let result = substitute(result, '\\', '', 'g')
+        let result = substitute(result, '\$', '', 'g')
+        let result = substitute(result, '#', '', 'g')
+        let result = substitute(result, '!', '', 'g')
+        let result = substitute(result, "<", "", "g")
+        let result = substitute(result, ">", "", "g")
+        let result = substitute(result, "~", "", "g")
+        let result = substitute(result, "*", "", "g")
+        let result = substitute(result, "%", "", "g")
+        let result = substitute(result, ":", "", "g")
+        let result = substitute(result, "[", "_", "g")
+        let result = substitute(result, "]", "_", "g")
+        let result = substitute(result, "+", "_", "g")
+        let result = substitute(result, "-", "_", "g")
+        return result
+    catch /./
+    endtry
 endfunc
 
 function! VsMax(fileName)
