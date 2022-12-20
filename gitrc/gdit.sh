@@ -7,7 +7,7 @@ target="$(git config gsync.target)"
 
 ~/loadrc/gitrc/discard_unnecessaries.sh
 git branch "$target_branch" "$target"
-    git fetch "$remote" "$target_branch":"$target_branch" ; \
+git fetch "$remote" "$target_branch":"$target_branch" ; \
     git fetch "$remote" "$target":"$target_branch" && \
     ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
 
