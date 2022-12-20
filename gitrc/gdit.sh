@@ -6,14 +6,11 @@ remote="$(git config gsync.remote)"
 target="$(git config gsync.target)"
 
 ~/loadrc/gitrc/discard_unnecessaries.sh
-git checkout -b "$target_branch" "$target"
-git checkout -f "$target_branch"
-git branch -u "$remote/$target_branch"
-git merge -X theirs "$target" ; \
-    git merge -X theirs "$remote/$target_branch" ; \
-    git pull ; \
-    git checkout "$current_branch" && \
+git branch "$target_branch" "$target"
+    git fetch "$remote" "$target_branch":"$target_branch" ; \
+    git fetch "$remote" "$target":"$target_branch" && \
     ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
+
 
 if [ $? -ne 0 ]
 then
