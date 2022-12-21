@@ -10,9 +10,9 @@ fi
 find "$TARGETEDIR" -type f -iname \*.7z | \
     while read ss
     do
-        echo "ss unrar --> $ss"
+        echo "ss un7z --> $ss"
         ss="$(realpath "$ss")"
         cd "$(dirname "$ss")"
-        unrar x -r -p- -o+ "$ss" && rm "$ss"
+        7z e "$ss" && rm "$ss"
         cd -
     done
