@@ -2602,18 +2602,19 @@ index 2b929a6c..1565c80c 100755
      echo -e "${red}the git repository is unclean, please check it before continuing... ${NC}"
      exit 1
 diff --git a/gitrc/checkout_rejs.sh b/gitrc/checkout_rejs.sh
-index d81f6f38..b832b74c 100755
+index d81f6f38..136e5de1 100755
 --- ./gitrc/checkout_rejs.sh
 +++ ./gitrc/checkout_rejs.sh
-@@ -2,6 +3,12 @@
+@@ -2,6 +3,13 @@
  for ss in $(git status | grep \.rej$) ; \
  do \                                     
      targetFile=$(echo "$ss" | sed 's/\.rej$//g')
 +    targetFile=$(echo "$targetFile" | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g')
-+    if [ "$2" = "f" ] || [ $(git config checkoutrejs.force) ]
++    if [ "$2" = "f" ] || [ -n $(git config checkoutrejs.force) ] ; \
 +    then
          git checkout "$1" "$targetFile" && \
              rm "$ss"
++
 +    else
 +        git show "$1":"$targetFile" > "$ss"
 +    fi
@@ -2943,17 +2944,17 @@ index 564ef4a9..35317ddb 100755
 -git submodule foreach ~/loadrc/gitrc/dogdio.sh &
 +git submodule status | awk '{print $2}' | parallel --jobs 0 'cd {}; ~/loadrc/gitrc/dogdio.sh'
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
-index 700d6af6..9400b67c 100755
+index 700d6af6..2177a0d2 100755
 --- ./gitrc/gdit.sh
 +++ ./gitrc/gdit.sh
-@@ -3,19 +3,15 @@ output="$1"
+@@ -3,21 +3,16 @@ output="$1"
  current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
  target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
  remote="$(git config gsync.remote)"
 -remote_branch="$(git config gsync.branch)"
 +target="$(git config gsync.target)"
  
- ~/loadrc/gitrc/discard_unnecessaries.sh
+-~/loadrc/gitrc/discard_unnecessaries.sh
 -git checkout -b "$target_branch" "$remote/$target_branch"
 -git checkout -b "$target_branch" "$remote/$remote_branch"
 -git checkout -f "$target_branch"
@@ -2962,15 +2963,19 @@ index 700d6af6..9400b67c 100755
 -    git pull && \
 -    git push ; \
 -    git checkout "$current_branch" && \
+-    ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
 +git branch "$target_branch" "$target"
-+git fetch "$remote" "$target_branch":"$target_branch" ; \
-+    git fetch "$remote" "$target":"$target_branch" && \
-     ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
++git fetch "$remote" "$target_branch":"$target_branch"
++remote_branch=$(echo "$target" | sed "s/^$remote\///g")
++git fetch "$remote" "$remote_branch":"$target_branch"
++~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" > "$output" 2>&1
  
-+
  if [ $? -ne 0 ]
  then
-     echo -e "${red}most probably sth wrong in git merge... ${NC}" 2>&1 | tee "$output"
+-    echo -e "${red}most probably sth wrong in git merge... ${NC}" 2>&1 | tee "$output"
++    echo -e "${red}most probably sth wrong in git merge... ${NC}" > "$output" 2>&1 
+     exit 1
+ fi
 diff --git a/gitrc/git-submodule.sh b/gitrc/git-submodule.sh
 new file mode 100755
 index 00000000..a11fd250
@@ -5655,7 +5660,7 @@ index 00000000..6bf0e4ae
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..f66303a8 100644
+index d5874fe5..776ff9dc 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,18 @@
@@ -5838,7 +5843,23 @@ index d5874fe5..f66303a8 100644
      endif
  
      if bufwinnr('^' . output . '$') > 0
-@@ -422,9 +432,9 @@ function! s:Gdi2(...) abort
+@@ -391,13 +401,14 @@ function! s:Gdit() abort
+     let current_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
+     let output = current_branch . '.gdit.diff'
+     let output = substitute(output, "/", "_", "g")
+-    exec '!~/loadrc/gitrc/gdit.sh' . ' ' . '"' .  output . '"'
++    exec '!~/loadrc/gitrc/gdit.sh' . ' ' . '"' .  output . '" 2>&1 | tee ' . 'gdit.runresult' 
+ 
+     if bufwinnr('^' . output . '$') > 0
+         exe "bd!" . output
+     endif
+ 
+     let worktree = Cd2Worktree()
++    call OpenOrSwitch('gdit.runresult', 'vs')
+     call OpenOrSwitch(output, 'vs')
+ endfunction
+ 
+@@ -422,9 +433,9 @@ function! s:Gdi2(...) abort
      endif
  
      let worktree = Cd2Worktree()
@@ -5850,7 +5871,7 @@ index d5874fe5..f66303a8 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -475,18 +485,17 @@ endfunction
+@@ -475,18 +486,17 @@ endfunction
  
  function! s:Gdif(...) abort
      let worktree = Cd2Worktree()
@@ -5875,7 +5896,7 @@ index d5874fe5..f66303a8 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -516,10 +525,20 @@ endfunction
+@@ -516,10 +526,20 @@ endfunction
  
  function! s:ApplyBranch(args, ...) abort
      let worktree = Cd2Worktree()
@@ -5897,7 +5918,7 @@ index d5874fe5..f66303a8 100644
  function! s:Gshow(args, ...) abort
      let worktree = Cd2Worktree()
      let output = a:args . '.diff'
-@@ -527,7 +546,19 @@ function! s:Gshow(args, ...) abort
+@@ -527,7 +547,19 @@ function! s:Gshow(args, ...) abort
      call OpenOrSwitch(output, 'vs')
  endfunction
  
@@ -5917,7 +5938,7 @@ index d5874fe5..f66303a8 100644
      let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
      exec '!rm ' . newFile
      exec 'w ' . newFile
-@@ -546,6 +577,25 @@ function! s:CatPlay(...) abort
+@@ -546,6 +578,25 @@ function! s:CatPlay(...) abort
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
@@ -5943,7 +5964,7 @@ index d5874fe5..f66303a8 100644
  function! s:CatMove(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -559,6 +609,90 @@ function! s:CatMove(...) abort
+@@ -559,6 +610,90 @@ function! s:CatMove(...) abort
      call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
  endfunction
  
@@ -6034,7 +6055,7 @@ index d5874fe5..f66303a8 100644
  function! s:CatDu(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -636,11 +770,20 @@ function! s:LcTest() abort
+@@ -636,11 +771,20 @@ function! s:LcTest() abort
      call OpenOrSwitch(expand('%:p') . '.sh', 'vs')
  endfunction
  
@@ -6056,7 +6077,7 @@ index d5874fe5..f66303a8 100644
      call Cd2ProjectRoot("files.proj")
  
      if expand('%:t') != 'index'
-@@ -649,14 +792,14 @@ function! s:Fr(find, replace) abort
+@@ -649,14 +793,14 @@ function! s:Fr(find, replace) abort
          let fileList = "files.proj"
      endif
  
@@ -6074,7 +6095,7 @@ index d5874fe5..f66303a8 100644
  endfunction
  
  function! s:Gwap() abort
-@@ -671,13 +814,15 @@ function! s:Gfix() abort
+@@ -671,13 +815,15 @@ function! s:Gfix() abort
  endfunction
  
  function! s:Reapply() abort
@@ -6092,7 +6113,7 @@ index d5874fe5..f66303a8 100644
      call s:Gs()
  endfunction
  
-@@ -701,3 +846,5 @@ function! s:GenerateIpynb() abort
+@@ -701,3 +847,5 @@ function! s:GenerateIpynb() abort
      exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
      w
  endfunction
