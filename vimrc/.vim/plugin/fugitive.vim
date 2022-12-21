@@ -74,6 +74,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Jforma
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject KdiffFile :execute s:KdiffFile()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest :execute s:LcTest()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Portsforward :execute s:Portsforward()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RmCat :execute s:RmCat(<f-args>)
@@ -174,7 +175,7 @@ endfunction
 function! s:Fdisklog() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/bashrc/fdisk_log.sh'
-    call OpenOrSwitch('~/loadrc/fdisk.log', 'vs')
+    call OpenOrSwitch(expand("$HOME") . '/loadrc/fdisk.log', 'vs')
 endfunction
 
 function! s:Glf() abort
@@ -381,7 +382,7 @@ function! s:Gdi(...) abort
         else
             call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
         endif
-        return 
+        return
     else
         let arg1 = (a:0 >= 1) ? a:1 : ''
         exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" HEAD 2>&1 | tee ' . '"' .  output . '"'
@@ -605,7 +606,7 @@ function! s:CatMove(...) abort
         exec '!~/loadrc/vishrc/cat_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh') 
+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
 endfunction
 
 function! s:FileMove(...) abort
@@ -767,6 +768,12 @@ function! s:LcTest() abort
     endif
     silent exec '!~/loadrc/vishrc/lc_test.sh ' . '"' .  expand('%:p') . '"'
     call OpenOrSwitch(expand('%:p') . '.sh', 'vs')
+endfunction
+
+function! s:Portsforward() abort
+    call Cd2Worktree()
+    exec '!~/loadrc/bashrc/do_ports_forward.sh 2>&1 | tee do_ports_forward.runresult' 
+    call OpenOrSwitch('do_ports_forward.runresult', 'vs')
 endfunction
 
 function! s:Prune() abort

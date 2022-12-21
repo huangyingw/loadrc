@@ -12,5 +12,5 @@ git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
         then
             mv "$path" "$path""_backup_""$(date +'%Y%m%d%H%M%S')";
         fi
-        git submodule add -b $branch --name $name $url $path || continue
+        git submodule add -b $branch $url $path || continue
     done

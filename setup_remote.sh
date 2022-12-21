@@ -17,6 +17,8 @@ rw ; \
     tmux \
     zsh
 
+pacman -Syu
+
 ./deploy_configurations.sh
 ./setup_locale.sh
 ./swith-2-zsh.sh

@@ -1,231 +1,231 @@
 [submodule "keys"]
-    path = keys
-    url = git@bitbucket.org:huangyingw/keys.git
-    branch = dev
+	path = keys
+	url = git@bitbucket.org:huangyingw/keys.git
+	branch = dev
 [submodule "vimrc/.vim/bundle/swift.vim"]
-    path = vimrc/.vim/bundle/swift.vim
-    url = git@github.com:keith/swift.vim.git
-    branch = master
+	path = vimrc/.vim/bundle/swift.vim
+	url = git@github.com:keith/swift.vim.git
+	branch = master
 [submodule "vimrc/.vim/bundle/indentLine"]
-    path = vimrc/.vim/bundle/indentLine
-    url = git@github.com:Yggdroot/indentLine.git
-    branch = master
+	path = vimrc/.vim/bundle/indentLine
+	url = git@github.com:Yggdroot/indentLine.git
+	branch = master
 [submodule "vimrc/.vim/bundle/bash-support.vim"]
-    path = vimrc/.vim/bundle/bash-support.vim
-    url = git@bitbucket.org:huangyingw/bash-support.vim.git
-    branch = dev
+	path = vimrc/.vim/bundle/bash-support.vim
+	url = git@bitbucket.org:huangyingw/bash-support.vim.git
+	branch = dev
 [submodule "vimrc/.vim/bundle/vim-docker-compose-syntax"]
-    path = vimrc/.vim/bundle/vim-docker-compose-syntax
-    url = git@github.com:NLKNguyen/vim-docker-compose-syntax.git
-    branch = master
+	path = vimrc/.vim/bundle/vim-docker-compose-syntax
+	url = git@github.com:NLKNguyen/vim-docker-compose-syntax.git
+	branch = master
 [submodule "vimrc/.vim/bundle/python-mode"]
-    path = vimrc/.vim/bundle/python-mode
-    url = git@bitbucket.org:huangyingw/python-mode.git
-    branch = dev
+	path = vimrc/.vim/bundle/python-mode
+	url = git@bitbucket.org:huangyingw/python-mode.git
+	branch = dev
 [submodule "vimrc/.vim/bundle/Dockerfile.vim"]
-    path = vimrc/.vim/bundle/Dockerfile.vim
-    url = git@github.com:ekalinin/Dockerfile.vim.git
-    branch = master
+	path = vimrc/.vim/bundle/Dockerfile.vim
+	url = git@github.com:ekalinin/Dockerfile.vim.git
+	branch = master
 [submodule "vimrc/.vim/bundle/vim-autoformat"]
-    path = vimrc/.vim/bundle/vim-autoformat
-    url = git@bitbucket.org:huangyingw/vim-autoformat.git
-    branch = dev
+	path = vimrc/.vim/bundle/vim-autoformat
+	url = git@bitbucket.org:huangyingw/vim-autoformat.git
+	branch = dev
 [submodule "vimrc/.vim/bundle/vim-gradle"]
-    path = vimrc/.vim/bundle/vim-gradle
-    url = git@github.com:tfnico/vim-gradle.git
-    branch = master
+	path = vimrc/.vim/bundle/vim-gradle
+	url = git@github.com:tfnico/vim-gradle.git
+	branch = master
 [submodule "vimrc/.vim/bundle/vim-javascript-syntax"]
-    path = vimrc/.vim/bundle/vim-javascript-syntax
-    url = git@bitbucket.org:huangyingw/vim-javascript-syntax.git
-    branch = dev
+	path = vimrc/.vim/bundle/vim-javascript-syntax
+	url = git@bitbucket.org:huangyingw/vim-javascript-syntax.git
+	branch = dev
 [submodule "vimrc/.vim/bundle/vim-log-syntax"]
-    path = vimrc/.vim/bundle/vim-log-syntax
-    url = git@bitbucket.org:huangyingw/vim-log-syntax.git
-    branch = dev
+	path = vimrc/.vim/bundle/vim-log-syntax
+	url = git@bitbucket.org:huangyingw/vim-log-syntax.git
+	branch = dev
 [submodule "vimrc/.vim/bundle/vim-rails"]
-    path = vimrc/.vim/bundle/vim-rails
-    url = git@github.com:tpope/vim-rails.git
-    branch = master
+	path = vimrc/.vim/bundle/vim-rails
+	url = git@github.com:tpope/vim-rails.git
+	branch = master
 [submodule "vimrc/.vim/bundle/vim-scala"]
-    path = vimrc/.vim/bundle/vim-scala
-    url = git@github.com:derekwyatt/vim-scala.git
-    branch = master
+	path = vimrc/.vim/bundle/vim-scala
+	url = git@github.com:derekwyatt/vim-scala.git
+	branch = master
 [submodule "vimrc/.vim/bundle/vundle.vim"]
-    path = vimrc/.vim/bundle/vundle.vim
-    url = git@github.com:VundleVim/Vundle.vim.git
-    branch = master
+	path = vimrc/.vim/bundle/vundle.vim
+	url = git@github.com:VundleVim/Vundle.vim.git
+	branch = master
 [submodule ".ssh"]
-    path = .ssh
-    url = git@bitbucket.org:huangyingw/.ssh.git
-    branch = dev
+	path = .ssh
+	url = git@bitbucket.org:huangyingw/.ssh.git
+	branch = dev
 [submodule "vimrc/.vim/bundle/delimitMate"]
-    path = vimrc/.vim/bundle/delimitMate
-    url = git@github.com:Raimondi/delimitMate.git
-    branch = master
+	path = vimrc/.vim/bundle/delimitMate
+	url = git@github.com:Raimondi/delimitMate.git
+	branch = master
 [submodule "vimrc/.vim/bundle/vim-anyfold"]
-    path = vimrc/.vim/bundle/vim-anyfold
-    url = git@bitbucket.org:huangyingw/vim-anyfold.git
-    branch = dev
+	path = vimrc/.vim/bundle/vim-anyfold
+	url = git@bitbucket.org:huangyingw/vim-anyfold.git
+	branch = dev
 [submodule "vimrc/.vim/bundle/LargeFile"]
-    path = vimrc/.vim/bundle/LargeFile
-    url = https://github.com/vim-scripts/LargeFile.git
+	path = vimrc/.vim/bundle/LargeFile
+	url = https://github.com/vim-scripts/LargeFile.git
 [submodule "vimrc/.vim/bundle/vim-buffergator"]
-    path = vimrc/.vim/bundle/vim-buffergator
-    url = git@bitbucket.org:huangyingw/vim-buffergator.git
-    branch = dev
+	path = vimrc/.vim/bundle/vim-buffergator
+	url = git@bitbucket.org:huangyingw/vim-buffergator.git
+	branch = dev
 [submodule "vimrc/.vim/bundle/vala.vim"]
-    path = vimrc/.vim/bundle/vala.vim
-    url = git@github.com:arrufat/vala.vim.git
-    branch = master
+	path = vimrc/.vim/bundle/vala.vim
+	url = git@github.com:arrufat/vala.vim.git
+	branch = master
 [submodule "vimrc/.vim/bundle/asyncrun.vim"]
-    path = vimrc/.vim/bundle/asyncrun.vim
-    url = git@github.com:huangyingw/asyncrun.vim.git
-    branch = dev
+	path = vimrc/.vim/bundle/asyncrun.vim
+	url = git@github.com:huangyingw/asyncrun.vim.git
+	branch = dev
 [submodule "vimrc/.vim/bundle/nvim-yarp"]
-    path = vimrc/.vim/bundle/nvim-yarp
-    url = https://github.com/roxma/nvim-yarp.git
-    branch = master
+	path = vimrc/.vim/bundle/nvim-yarp
+	url = https://github.com/roxma/nvim-yarp.git
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2"]
-    path = vimrc/.vim/bundle/ncm2
-    url = https://github.com/ncm2/ncm2.git
-    branch = master
+	path = vimrc/.vim/bundle/ncm2
+	url = https://github.com/ncm2/ncm2.git
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-bufword"]
-    path = vimrc/.vim/bundle/ncm2-bufword
-    url = https://github.com/ncm2/ncm2-bufword.git
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-bufword
+	url = https://github.com/ncm2/ncm2-bufword.git
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-path"]
-    path = vimrc/.vim/bundle/ncm2-path
-    url = https://github.com/ncm2/ncm2-path.git
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-path
+	url = https://github.com/ncm2/ncm2-path.git
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-github"]
-    path = vimrc/.vim/bundle/ncm2-github
-    url = https://github.com/ncm2/ncm2-github.git
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-github
+	url = https://github.com/ncm2/ncm2-github.git
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-tmux"]
-    path = vimrc/.vim/bundle/ncm2-tmux
-    url = https://github.com/ncm2/ncm2-tmux.git
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-tmux
+	url = https://github.com/ncm2/ncm2-tmux.git
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-tagprefix"]
-    path = vimrc/.vim/bundle/ncm2-tagprefix
-    url = https://github.com/ncm2/ncm2-tagprefix.git
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-tagprefix
+	url = https://github.com/ncm2/ncm2-tagprefix.git
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-look.vim"]
-    path = vimrc/.vim/bundle/ncm2-look.vim
-    url = https://github.com/filipekiss/ncm2-look.vim.git
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-look.vim
+	url = https://github.com/filipekiss/ncm2-look.vim.git
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-syntax"]
-    path = vimrc/.vim/bundle/ncm2-syntax
-    url = https://github.com/ncm2/ncm2-syntax
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-syntax
+	url = https://github.com/ncm2/ncm2-syntax
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-neoinclude"]
-    path = vimrc/.vim/bundle/ncm2-neoinclude
-    url = https://github.com/ncm2/ncm2-neoinclude
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-neoinclude
+	url = https://github.com/ncm2/ncm2-neoinclude
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-cssomni"]
-    path = vimrc/.vim/bundle/ncm2-cssomni
-    url = https://github.com/ncm2/ncm2-cssomni
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-cssomni
+	url = https://github.com/ncm2/ncm2-cssomni
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-jedi"]
-    path = vimrc/.vim/bundle/ncm2-jedi
-    url = https://github.com/ncm2/ncm2-jedi
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-jedi
+	url = https://github.com/ncm2/ncm2-jedi
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-racer"]
-    path = vimrc/.vim/bundle/ncm2-racer
-    url = https://github.com/ncm2/ncm2-racer
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-racer
+	url = https://github.com/ncm2/ncm2-racer
+	branch = master
 [submodule "vimrc/.vim/bundle/vimtex"]
-    path = vimrc/.vim/bundle/vimtex
-    url = https://github.com/lervag/vimtex
-    branch = master
+	path = vimrc/.vim/bundle/vimtex
+	url = https://github.com/lervag/vimtex
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-vim"]
-    path = vimrc/.vim/bundle/ncm2-vim
-    url = https://github.com/ncm2/ncm2-vim
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-vim
+	url = https://github.com/ncm2/ncm2-vim
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-go"]
-    path = vimrc/.vim/bundle/ncm2-go
-    url = https://github.com/ncm2/ncm2-go
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-go
+	url = https://github.com/ncm2/ncm2-go
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-snipmate"]
-    path = vimrc/.vim/bundle/ncm2-snipmate
-    url = https://github.com/ncm2/ncm2-snipmate.git
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-snipmate
+	url = https://github.com/ncm2/ncm2-snipmate.git
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-html-subscope"]
-    path = vimrc/.vim/bundle/ncm2-html-subscope
-    url = https://github.com/ncm2/ncm2-html-subscope.git
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-html-subscope
+	url = https://github.com/ncm2/ncm2-html-subscope.git
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-markdown-subscope"]
-    path = vimrc/.vim/bundle/ncm2-markdown-subscope
-    url = https://github.com/ncm2/ncm2-markdown-subscope.git
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-markdown-subscope
+	url = https://github.com/ncm2/ncm2-markdown-subscope.git
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-rst-subscope"]
-    path = vimrc/.vim/bundle/ncm2-rst-subscope
-    url = https://github.com/ncm2/ncm2-rst-subscope.git
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-rst-subscope
+	url = https://github.com/ncm2/ncm2-rst-subscope.git
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-match-highlight"]
-    path = vimrc/.vim/bundle/ncm2-match-highlight
-    url = https://github.com/ncm2/ncm2-match-highlight
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-match-highlight
+	url = https://github.com/ncm2/ncm2-match-highlight
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-highprio-pop"]
-    path = vimrc/.vim/bundle/ncm2-highprio-pop
-    url = https://github.com/ncm2/ncm2-highprio-pop
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-highprio-pop
+	url = https://github.com/ncm2/ncm2-highprio-pop
+	branch = master
 [submodule "vimrc/.vim/bundle/tlib_vim"]
-    path = vimrc/.vim/bundle/tlib_vim
-    url = git@github.com:tomtom/tlib_vim.git
-    branch = master
+	path = vimrc/.vim/bundle/tlib_vim
+	url = git@github.com:tomtom/tlib_vim.git
+	branch = master
 [submodule "vimrc/.vim/bundle/vim-addon-mw-utils"]
-    path = vimrc/.vim/bundle/vim-addon-mw-utils
-    url = git@github.com:marcweber/vim-addon-mw-utils.git
-    branch = master
+	path = vimrc/.vim/bundle/vim-addon-mw-utils
+	url = git@github.com:marcweber/vim-addon-mw-utils.git
+	branch = master
 [submodule "vimrc/.vim/bundle/vim-snipmate"]
-    path = vimrc/.vim/bundle/vim-snipmate
+	path = vimrc/.vim/bundle/vim-snipmate
 	url = git@github.com:huangyingw/vim-snipmate.git
 [submodule "vimrc/.vim/bundle/neco-syntax"]
-    path = vimrc/.vim/bundle/neco-syntax
-    url = git@github.com:Shougo/neco-syntax.git
-    branch = master
+	path = vimrc/.vim/bundle/neco-syntax
+	url = git@github.com:Shougo/neco-syntax.git
+	branch = master
 [submodule "cscope"]
-    path = cscope
-    url = git@github.com:huangyingw/cscope.git
-    branch = dev
+	path = cscope
+	url = git@github.com:huangyingw/cscope.git
+	branch = dev
 [submodule "jdupes"]
-    path = jdupes
-    url = git@github.com:huangyingw/jdupes.git
-    branch = dev
+	path = jdupes
+	url = git@github.com:huangyingw/jdupes.git
+	branch = dev
 [submodule "vimrc/.vim/bundle/neoinclude.vim"]
-    path = vimrc/.vim/bundle/neoinclude.vim
-    url = git@github.com:Shougo/neoinclude.vim.git
-    branch = master
+	path = vimrc/.vim/bundle/neoinclude.vim
+	url = git@github.com:Shougo/neoinclude.vim.git
+	branch = master
 [submodule "vimrc/.vim/bundle/vim-fugitive"]
-    path = vimrc/.vim/bundle/vim-fugitive
-    url = git@bitbucket.org:huangyingw/vim-fugitive.git
-    branch = dev
+	path = vimrc/.vim/bundle/vim-fugitive
+	url = git@bitbucket.org:huangyingw/vim-fugitive.git
+	branch = dev
 [submodule "vimrc/.vim/bundle/split-term.vim"]
-    path = vimrc/.vim/bundle/split-term.vim
-    url = git@bitbucket.org:huangyingw/split-term.vim.git
-    branch = dev
+	path = vimrc/.vim/bundle/split-term.vim
+	url = git@bitbucket.org:huangyingw/split-term.vim.git
+	branch = dev
 [submodule "vimrc/.vim/bundle/neco-vim"]
-    path = vimrc/.vim/bundle/neco-vim
-    url = git@github.com:Shougo/neco-vim.git
-    branch = master
+	path = vimrc/.vim/bundle/neco-vim
+	url = git@github.com:Shougo/neco-vim.git
+	branch = master
 [submodule "vimrc/.vim/bundle/ncm2-otherbuf"]
-    path = vimrc/.vim/bundle/ncm2-otherbuf
-    url = https://github.com/fgrsnau/ncm2-otherbuf.git
-    branch = master
+	path = vimrc/.vim/bundle/ncm2-otherbuf
+	url = https://github.com/fgrsnau/ncm2-otherbuf.git
+	branch = master
 [submodule "vimrc/.vim/bundle/vim-pdf"]
-    path = vimrc/.vim/bundle/vim-pdf
-    url = https://github.com/makerj/vim-pdf.git
-    branch = master
+	path = vimrc/.vim/bundle/vim-pdf
+	url = https://github.com/makerj/vim-pdf.git
+	branch = master
 [submodule "oh-my-zsh"]
-    path = oh-my-zsh
-    url = git@github.com:huangyingw/oh-my-zsh.git
-    branch = dev
+	path = oh-my-zsh
+	url = git@github.com:huangyingw/oh-my-zsh.git
+	branch = dev
 [submodule "vimrc/.vim/bundle/tig-explorer.vim"]
-    path = vimrc/.vim/bundle/tig-explorer.vim
-    url = git@github.com:iberianpig/tig-explorer.vim.git
+	path = vimrc/.vim/bundle/tig-explorer.vim
+	url = git@github.com:iberianpig/tig-explorer.vim.git
 [submodule "vimrc/.vim/bundle/bclose.vim"]
-    path = vimrc/.vim/bundle/bclose.vim
-    url = git@github.com:rbgrouleff/bclose.vim.git
+	path = vimrc/.vim/bundle/bclose.vim
+	url = git@github.com:rbgrouleff/bclose.vim.git
 [submodule "vimrc/.vim/bundle/vim-pbcopy"]
 	path = vimrc/.vim/bundle/vim-pbcopy
 	url = git@github.com:huangyingw/vim-pbcopy.git
@@ -235,7 +235,7 @@
 [submodule "vimrc/.vim/bundle/vim-fetch"]
 	path = vimrc/.vim/bundle/vim-fetch
 	url = git@github.com:huangyingw/vim-fetch.git
-    branch = OpenOrSwitch
+	branch = OpenOrSwitch
 [submodule "wifi-auto-reconnect"]
 	path = wifi-auto-reconnect
 	url = git@github.com:huangyingw/martinsoft_wifi-auto-reconnect.git
