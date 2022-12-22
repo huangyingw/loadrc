@@ -839,7 +839,6 @@
 "./vimrc/.vim/bundle/Dockerfile.vim/snippets/docker-compose.snippets"
 "./vimrc/.vim/bundle/Dockerfile.vim/syntax/Dockerfile.vim"
 "./vimrc/.vim/bundle/Dockerfile.vim/syntax/docker-compose.vim"
-"./vimrc/.vim/bundle/LargeFile/.gitconfig"
 "./vimrc/.vim/bundle/LargeFile/README"
 "./vimrc/.vim/bundle/LargeFile/doc/LargeFile.txt"
 "./vimrc/.vim/bundle/LargeFile/doc/tags"
