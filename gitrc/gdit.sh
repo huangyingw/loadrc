@@ -6,8 +6,10 @@ remote="$(git config gsync.remote)"
 target="$(git config gsync.target)"
 
 git branch "$target_branch" "$target"
+echo git fetch "$remote" "$target_branch":"$target_branch"
 git fetch "$remote" "$target_branch":"$target_branch"
 remote_branch=$(echo "$target" | sed "s/^$remote\///g")
+echo git fetch "$remote" "$remote_branch":"$target_branch"
 git fetch "$remote" "$remote_branch":"$target_branch"
 ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" > "$output" 2>&1
 
