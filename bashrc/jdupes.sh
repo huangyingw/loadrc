@@ -10,3 +10,10 @@ TARGET="$1"
 dt=$(date '+%m_%d_%Y_%H_%M_%S');
 logFile="$TARGET/jdupes.$dt.log"
 jdupes -dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee "$logFile"
+
+MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
+
+if [ -f ${MIRRORCHECK} ] ; \
+then \
+    ~/loadrc/bashrc/sleep.sh ; \
+fi

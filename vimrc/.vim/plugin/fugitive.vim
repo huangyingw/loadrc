@@ -175,7 +175,7 @@ endfunction
 function! s:Fdisklog() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/bashrc/fdisk_log.sh'
-    call OpenOrSwitch('~/loadrc/fdisk.log', 'vs')
+    call OpenOrSwitch(expand("$HOME") . '/loadrc/fdisk.log', 'vs')
 endfunction
 
 function! s:Glf() abort
