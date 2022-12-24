@@ -18,9 +18,10 @@ fi
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.profile ~/.profile
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/oh-my-zsh ~/.oh-my-zsh
 
-mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
+# mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/."`hostname`".theanorc  ~/.theanorc
-~/loadrc/bashrc/ln_fs.sh ~/loadrc/.config/git/gitk  ~/.config/git/gitk
+# ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.config/git/gitk  ~/.config/git/gitk
+# sed -i.bak "s/set ignorespace 0/set ignorespace 1/g" $(which gitk)
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.tmux.conf ~/.tmux.conf
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/gitrc/.gitconfig ~/.gitconfig
