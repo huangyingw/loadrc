@@ -222,7 +222,8 @@
 	branch = dev
 [submodule "vimrc/.vim/bundle/tig-explorer.vim"]
 	path = vimrc/.vim/bundle/tig-explorer.vim
-	url = git@github.com:iberianpig/tig-explorer.vim.git
+	url = git@github.com:huangyingw/tig-explorer.vim.git
+	branch = dev
 [submodule "vimrc/.vim/bundle/bclose.vim"]
 	path = vimrc/.vim/bundle/bclose.vim
 	url = git@github.com:rbgrouleff/bclose.vim.git
