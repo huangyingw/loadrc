@@ -226,7 +226,6 @@
 ./Library/LaunchAgents/pbcopy.plist
 ./Library/LaunchAgents/pbpaste.plist
 ./Library/Preferences/org.videolan.vlc/vlcrc
-./LocalRename.gdio.diff
 ./bashrc/HuangYings-MacBook-Pro.local.csc.properties
 ./bashrc/apf.sh
 ./bashrc/app_list
@@ -397,6 +396,7 @@
 ./bashrc/umlet.sh
 ./bashrc/umletc.sh
 ./bashrc/umount.sh
+./bashrc/un7z.sh
 ./bashrc/unrar.sh
 ./bashrc/unzip.sh
 ./bashrc/update_proj.sh
@@ -419,11 +419,11 @@
 ./chrome_install.sh
 ./config/iTerm/com.googlecode.iterm2.plist
 ./configure_gitk.sh
-./crontabrc/.imacpro.cron
 ./crontabrc/.mbp.cron
 ./crontabrc/.mbp2.cron
 ./crontabrc/.mini.cron
 ./crontabrc/.mldonkey.cron
+./crontabrc/.studio.cron
 ./crontabrc/.vserver.cron
 ./crontabrc/install.sh
 ./crontabrc/mldonkey_start.sh
@@ -432,6 +432,7 @@
 ./crontabrc/set_brightness.sh
 ./crontabrc/silent.cron
 ./crontabrc/silent.sh
+./crontabrc/ssh.cron
 ./crontabrc/zerotier.cron
 ./cscope/.gitconfig
 ./cscope/.gitignore
@@ -612,8 +613,6 @@
 ./hosts/lint-sandbox/var/lib/zerotier-one/identity.secret
 ./hosts/mba/Library/Application Support/ZeroTier/One/identity.public
 ./hosts/mba/Library/Application Support/ZeroTier/One/identity.secret
-./hosts/mbp/Library/Application Support/ZeroTier/One/identity.public
-./hosts/mbp/Library/Application Support/ZeroTier/One/identity.secret
 ./hosts/mbp2/Library/Application Support/ZeroTier/One/identity.public
 ./hosts/mbp2/Library/Application Support/ZeroTier/One/identity.secret
 ./hosts/mini/var/lib/zerotier-one/identity.public
@@ -626,6 +625,7 @@
 ./hosts/sandbox/var/lib/zerotier-one/identity.secret
 ./hosts/server/var/lib/zerotier-one/identity.public
 ./hosts/server/var/lib/zerotier-one/identity.secret
+./hosts/studio/Library/Application Support/ZeroTier/One/identity.public
 ./hosts/toshiba/var/lib/zerotier-one/identity.public
 ./hosts/toshiba/var/lib/zerotier-one/identity.secret
 ./hosts/u1604/var/lib/zerotier-one/identity.public
@@ -749,6 +749,7 @@
 ./musicrc/unrar.sh
 ./musicrc/unrar_test.sh
 ./musicrc/unzip.sh
+./neovim/.deps/build/src/libuv/docs/code/.gitignore
 ./neovim/.deps/build/src/treesitter-help/.gitignore
 ./neovim/.deps/build/src/treesitter-lua/.gitignore
 ./neovim/.deps/build/src/treesitter-vim/.gitignore
@@ -811,6 +812,8 @@
 ./svnrc/svnvdiff.sh
 ./swith-2-zsh.sh
 ./synergy.conf
+./test.fix.gdio.diff
+./tests/space in dir name/test.txt
 ./timemachinerc/deletelocalsnapshots.sh
 ./timemachinerc/etc/netatalk/AppleVolumes.default
 ./timemachinerc/etc/nsswitch.conf
@@ -2460,6 +2463,7 @@
 ./vimrc/.vim/bundle/taglist-plus/doc/taglist-plus.txt
 ./vimrc/.vim/bundle/taglist-plus/doc/tags
 ./vimrc/.vim/bundle/taglist-plus/plugin/taglist-plus.vim
+./vimrc/.vim/bundle/tig-explorer.vim/.gitconfig
 ./vimrc/.vim/bundle/tig-explorer.vim/LICENSE
 ./vimrc/.vim/bundle/tig-explorer.vim/README.md
 ./vimrc/.vim/bundle/tig-explorer.vim/autoload/tig_explorer.vim
@@ -3274,4 +3278,5 @@
 ./zerotierrc/configure.sh
 ./zerotierrc/install.sh
 ./zerotierrc/restart.sh
+./zerotierrc/zerotier.sh
 ./zerotierrc/zerotierrc.conf
