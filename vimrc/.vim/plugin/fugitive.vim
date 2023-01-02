@@ -401,13 +401,14 @@ function! s:Gdit() abort
     let current_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
     let output = current_branch . '.gdit.diff'
     let output = substitute(output, "/", "_", "g")
-    exec '!~/loadrc/gitrc/gdit.sh' . ' ' . '"' .  output . '"'
+    exec '!~/loadrc/gitrc/gdit.sh' . ' ' . '"' .  output . '" 2>&1 | tee ' . 'gdit.runresult' 
 
     if bufwinnr('^' . output . '$') > 0
         exe "bd!" . output
     endif
 
     let worktree = Cd2Worktree()
+    call OpenOrSwitch('gdit.runresult', 'vs')
     call OpenOrSwitch(output, 'vs')
 endfunction
 
