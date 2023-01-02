@@ -7078,7 +7078,7 @@ index e0416589..00000000
 -
 -" }}}
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
-index 777cb3ad..38453da6 100644
+index 777cb3ad..ad4d24ef 100644
 --- ./vimrc/.vimrc
 +++ ./vimrc/.vimrc
 @@ -28,7 +28,6 @@ inoremap { {}<LEFT>
@@ -7089,24 +7089,20 @@ index 777cb3ad..38453da6 100644
  " Mapping ESC in insert mode and command mode to double j
  imap jj <C-[>
  " cmap jj  <C-[]]
-@@ -177,8 +176,14 @@ function AddToGit()
+@@ -177,8 +176,10 @@ function AddToGit()
      endif
  
      let worktree = Cd2Worktree()
 -    let relativePath = substitute(system('realpath --relative-to="' . worktree . '" ' . expand('%:p')), '\n', '', '')
 -    silent exec '!~/loadrc/gitrc/autoadd.sh ' . '"' .  relativePath . '"'
 +    let relativePath = expand('%:p')
-+    echom 'relativePath 1 --> ' . relativePath
 +    let relativePath = substitute(relativePath, '\_s', '\\ ', "g") 
-+    " let relativePath = substitute(relativePath, '\_s\+', '\\ ', "g") 
-+    echom 'relativePath 2 --> ' . relativePath
 +    let relativePath = substitute(system('realpath --relative-to="' . worktree . '" ' . relativePath), '\n', '', '')
-+    echom 'relativePath 3 --> ' . relativePath
 +    exec '!~/loadrc/gitrc/autoadd.sh ' . '"' .  relativePath . '"'
  endfunction
  
  function TrimEndLines()
-@@ -196,12 +201,7 @@ au BufWritePre * call AddToGit()
+@@ -196,12 +197,7 @@ au BufWritePre * call AddToGit()
  let g:pymode_rope = 0
  "To have a space (ASCII 32) considered as a valid character for a file name
  ":set isfname+=32
@@ -7120,7 +7116,7 @@ index 777cb3ad..38453da6 100644
  let g:phpfmt_autosave = 1
  let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
  
-@@ -214,9 +214,6 @@ endif
+@@ -214,9 +210,6 @@ endif
  " configuration for cscope_dynamic
  let cscopedb_auto_files=0
  
@@ -7130,7 +7126,7 @@ index 777cb3ad..38453da6 100644
  " :help Ncm2PopupOpen for more information
  set completeopt=noinsert,menuone,noselect
  " Use <TAB> to select the popup menu:
-@@ -254,10 +251,6 @@ endfunction
+@@ -254,10 +247,6 @@ endfunction
  " configuration for fugitive
  autocmd FileType fugitive set bufhidden=
  
@@ -7141,7 +7137,7 @@ index 777cb3ad..38453da6 100644
  " Automatically change the current directoryEdit
  " Sometimes it is helpful if your working directory is always the same as the file you are editing. To achieve this, put the following in your vimrc:
  " set autochdir
-@@ -277,3 +270,14 @@ let g:tex_flavor = 'latex'
+@@ -277,3 +266,14 @@ let g:tex_flavor = 'latex'
  " add @ to cfile handle
  set isfname+=@-@
  set history=10000
