@@ -179,7 +179,7 @@ function AddToGit()
     let relativePath = expand('%:p')
     let relativePath = substitute(relativePath, '\_s', '\\ ', "g") 
     let relativePath = substitute(system('realpath --relative-to="' . worktree . '" ' . relativePath), '\n', '', '')
-    exec '!~/loadrc/gitrc/autoadd.sh ' . '"' .  relativePath . '"'
+    silent exec '!~/loadrc/gitrc/autoadd.sh ' . '"' .  relativePath . '"'
 endfunction
 
 function TrimEndLines()
