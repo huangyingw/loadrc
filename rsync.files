@@ -39,6 +39,8 @@
 ./.git/modules/vimrc/.vim/bundle/bash-support.vim/info/exclude
 ./.git/modules/vimrc/.vim/bundle/bclose.vim/config
 ./.git/modules/vimrc/.vim/bundle/bclose.vim/info/exclude
+./.git/modules/vimrc/.vim/bundle/cql-vim/config
+./.git/modules/vimrc/.vim/bundle/cql-vim/info/exclude
 ./.git/modules/vimrc/.vim/bundle/delimitMate/config
 ./.git/modules/vimrc/.vim/bundle/delimitMate/info/exclude
 ./.git/modules/vimrc/.vim/bundle/firenvim/config
@@ -145,8 +147,12 @@
 ./.git/modules/vimrc/.vim/bundle/vim-pbcopy/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-pdf/config
 ./.git/modules/vimrc/.vim/bundle/vim-pdf/info/exclude
+./.git/modules/vimrc/.vim/bundle/vim-php-cs-fixer/config
+./.git/modules/vimrc/.vim/bundle/vim-php-cs-fixer/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-phpfmt/config
 ./.git/modules/vimrc/.vim/bundle/vim-phpfmt/info/exclude
+./.git/modules/vimrc/.vim/bundle/vim-ps1/config
+./.git/modules/vimrc/.vim/bundle/vim-ps1/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-rails/config
 ./.git/modules/vimrc/.vim/bundle/vim-rails/info/exclude
 ./.git/modules/vimrc/.vim/bundle/vim-scala/config
@@ -222,6 +228,7 @@
 ./.vserver.rc
 ./.vserver.theanorc
 ./.zshrc
+./CopyLineInfo.gdio.diff
 ./Dockerfile
 ./Library/LaunchAgents/pbcopy.plist
 ./Library/LaunchAgents/pbpaste.plist
@@ -812,7 +819,6 @@
 ./svnrc/svnvdiff.sh
 ./swith-2-zsh.sh
 ./synergy.conf
-./test.fix.gdio.diff
 ./tests/dirname/spaces  in dir name.txt
 ./tests/space in dir name/test.txt
 ./timemachinerc/deletelocalsnapshots.sh
