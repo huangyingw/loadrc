@@ -52,6 +52,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gme2 :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gres :execute s:Gres()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GrevApply :execute s:GrevApply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtu :execute s:Grtu()
@@ -723,6 +724,10 @@ endfunction
 function! s:Gres() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/gres.sh'
+endfunction
+
+function! s:GrevApply() abort
+    exec '!git apply --reverse --reject --whitespace=fix --recount ' . '"' .  expand('%:p') . '"'
 endfunction
 
 function! s:Dps() abort
