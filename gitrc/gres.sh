@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-conflictArr=($(git status | awk '/both .+:/{print $3}'))
 IFS=$'\n'
+conflictArr=($(git status | awk '/both .+:/{print $3}'))
 
 for conflict in "${conflictArr[@]}"
 do
