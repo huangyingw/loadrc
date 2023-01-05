@@ -7,6 +7,7 @@ then
     COMMAND="$COMMAND --cached HEAD"
 else
     COMMAND="$COMMAND $1 $2"
+    IFS=$'\n'
 
     for ss in $(git config --get-all gdif.ignore)
     do
