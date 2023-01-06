@@ -5115,7 +5115,11 @@ index 00000000..c4d4a292
 +
 diff --git a/tests/space in dir name/test.txt b/tests/space in dir name/test.txt
 new file mode 100644
-index 00000000..e69de29b
+index 00000000..9ab9c680
+--- /dev/null
++++ ./tests/space in dir name/test.txt	
+@@ -0,0 +1 @@
++a txt file under folder with space in folder name.
 diff --git a/transmissionrc/auto_reboot.sh b/transmissionrc/auto_reboot.sh
 new file mode 100755
 index 00000000..837984a4
@@ -5328,12 +5332,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..64b1d9c1 160000
+index 8468d6a8..bff6e955 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 64b1d9c16694bec66b0529d843aeff66cbadafd0-dirty
++Subproject commit bff6e955337076ebfd6a9f9909656e2f0071d4f3-dirty
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 index 00000000..115e2600
