@@ -16,7 +16,7 @@ Project history:
 
 bind generic 9 !sh -c "echo -n %(commit) | xclip -selection c && echo Copied %(commit) to clipboard"
 
-vimrc/.vim/bundle/tig-explorer.vim/autoload/tig_explorer.vim:301   let git_dir = findfile('.git', current_file_dir . ';')
+vimrc/.vim/bundle/tig-explorer.vim/autoload/tig_explorer.vim:303   let git_dir = findfile('.git', current_file_dir . ';')
 
 vimrc/.vim/plugin/common.vim:280 function! Cd2ProjectRoot(filename)
 vimrc/.vim/plugin/common.vim:289 function! Cd2Worktree()
