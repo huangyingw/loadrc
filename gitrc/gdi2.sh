@@ -37,7 +37,7 @@ then
     ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" "$1"
 fi
 
-if [ $retVal -eq 0 ] || [ "$1" = "f" ]
+if [ $retVal -eq 0 ] || [ "$1" = "f" ] || [ $(git config checkoutrejs.force) ]
 then
     if [ -z "$commit_message" ]
     then

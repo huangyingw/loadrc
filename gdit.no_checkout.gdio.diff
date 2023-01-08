@@ -1,0 +1,60 @@
+diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
+index 2e325ba5..3841c4d7 100755
+--- ./gitrc/gdi2.sh
++++ ./gitrc/gdi2.sh
+@@ -25,6 +25,9 @@ fi
+ 
+ host=$(git config deploy.host)
+ rpath=$(git config deploy.path)
++remote="$(git config gsync.remote)"
++
++git push
+ 
+ GDITDIFF=$(echo "$currentBranch.gdit.diff" | sed 's/\//_/g')
+ 
+@@ -36,6 +39,7 @@ fi
+ 
+ ~/loadrc/gitrc/discard_unnecessaries.sh ; \
+     git checkout -f "$targetBranch" ; \
++    git push --set-upstream "$remote" "$targetBranch" ; \
+     git apply --index --reject --whitespace=fix "$GDITDIFF"
+ 
+ retVal=$?
+diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
+index ad9a7f1a..14903e47 100755
+--- ./gitrc/gdit.sh
++++ ./gitrc/gdit.sh
+@@ -6,15 +6,12 @@ remote="$(git config gsync.remote)"
+ target="$(git config gsync.target)"
+ 
+ ~/loadrc/gitrc/discard_unnecessaries.sh
+-git checkout -b "$target_branch" "$target"
+-git checkout -f "$target_branch"
+-git branch -u "$remote/$target_branch"
+-git merge -X theirs "$target" && \
+-    git pull && \
+-    git push ; \
+-    git checkout "$current_branch" && \
++git branch "$target_branch" "$target"
++    git fetch "$remote" "$target_branch":"$target_branch" ; \
++    git fetch "$remote" "$target":"$target_branch" && \
+     ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
+ 
++
+ if [ $? -ne 0 ]
+ then
+     echo -e "${red}most probably sth wrong in git merge... ${NC}" 2>&1 | tee "$output"
+diff --git a/neovim b/neovim
+index f16cce94..08668a44 160000
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit f16cce94d86633caaf03a926644bd6ab106dfd5b
++Subproject commit 08668a444f14648df9c4c387a36fa29e5b62263c-dirty
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+index 4df402c7..d0bffe96 160000
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 4df402c79236515bef110da033e322904360aaaf
++Subproject commit d0bffe963d64a9899d16b5237edb5c304ddc0ae4-dirty

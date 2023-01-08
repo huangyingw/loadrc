@@ -52,6 +52,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gme2 :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gres :execute s:Gres()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GrevApply :execute s:GrevApply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtu :execute s:Grtu()
@@ -175,7 +176,7 @@ endfunction
 function! s:Fdisklog() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/bashrc/fdisk_log.sh'
-    call OpenOrSwitch('~/loadrc/fdisk.log', 'vs')
+    call OpenOrSwitch(expand("$HOME") . '/loadrc/fdisk.log', 'vs')
 endfunction
 
 function! s:Glf() abort
@@ -401,13 +402,14 @@ function! s:Gdit() abort
     let current_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
     let output = current_branch . '.gdit.diff'
     let output = substitute(output, "/", "_", "g")
-    exec '!~/loadrc/gitrc/gdit.sh' . ' ' . '"' .  output . '"'
+    exec '!~/loadrc/gitrc/gdit.sh' . ' ' . '"' .  output . '" 2>&1 | tee ' . 'gdit.runresult' 
 
     if bufwinnr('^' . output . '$') > 0
         exe "bd!" . output
     endif
 
     let worktree = Cd2Worktree()
+    call OpenOrSwitch('gdit.runresult', 'vs')
     call OpenOrSwitch(output, 'vs')
 endfunction
 
@@ -722,6 +724,10 @@ endfunction
 function! s:Gres() abort
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/gres.sh'
+endfunction
+
+function! s:GrevApply() abort
+    exec '!git apply --reverse --reject --whitespace=fix --recount ' . '"' .  expand('%:p') . '"'
 endfunction
 
 function! s:Dps() abort

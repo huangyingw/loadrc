@@ -37,14 +37,12 @@ apt-get install -y \
     libsecret-1-dev \
     libsecret-tools \
     locales \
-    manpages-fr-extra \
     manpages-pl \
     mdadm \
     moreutils \
     mplayer \
     mysql-client \
     net-tools \
-    netcat \
     nfs-kernel-server \
     npm \
     openvpn \
@@ -75,6 +73,10 @@ apt-get install -y \
     wakeonlan \
     wget \
     zsh
+
+apt-get install -y \
+    manpages-fr-extra \
+    netcat
 
 pacman -Syy && \
     pacman --noconfirm -Sy \

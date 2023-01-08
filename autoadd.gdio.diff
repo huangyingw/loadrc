@@ -2870,17 +2870,10 @@ index b467b11a..8fd4e857 100755
 -    && git config --file .gitconfig deploy.path "~/myproject/$(realpath --relative-to=$HOME/myproject $PWD)"
 +    && git config --file .gitconfig deploy.path "~/$(realpath --relative-to=$HOME/ $PWD)"
 diff --git a/gitrc/gdi.sh b/gitrc/gdi.sh
-index b720ac69..84f4cd32 100755
+index b720ac69..8fcc4eed 100755
 --- ./gitrc/gdi.sh
 +++ ./gitrc/gdi.sh
-@@ -7,10 +7,11 @@ then
-     COMMAND="$COMMAND --cached HEAD"
- else
-     COMMAND="$COMMAND $1 $2"
-+    IFS=$'\n'
- 
-     for ss in $(git config --get-all gdif.ignore)
-     do
+@@ -13,4 +13,4 @@ else
          COMMAND="$COMMAND  ':(exclude)$ss'"
      done
  fi
@@ -3145,22 +3138,6 @@ index 2198cb7f..d4e493b4 100755
 +        git push -v --tag "$ss"
      done
  fi
-diff --git a/gitrc/gres.sh b/gitrc/gres.sh
-index 1de7ff41..8fbe7af2 100755
---- ./gitrc/gres.sh
-+++ ./gitrc/gres.sh
-@@ -1,7 +1,10 @@
- #!/bin/zsh
- 
- conflictArr=($(git status | awk '/both .+:/{print $3}'))
--
-+#       git status | sed -e '/both modified:/!d;s/both modified://;s/^[\s\t]*//g;s/\ /\\ /g'
-+#       both modified:   Solutions/CohesitySecurity/Data Connectors/Helios2Sentinel/IncidentProducer/IncidentProducer.cs
-+#       both modified:   Solutions/CohesitySecurity/Data Connectors/Helios2Sentinel/IncidentProducer/local.settings.json
-+#       both added:      Solutions/CohesitySecurity/Data Connectors/Helios2Sentinel/azuredeploy.json
- for conflict in "${conflictArr[@]}"
- do
-     git add $conflict
 diff --git a/gitrc/gsearch.sh b/gitrc/gsearch.sh
 index b3980c8a..240de610 100755
 --- ./gitrc/gsearch.sh
@@ -3582,11 +3559,6 @@ index 00000000..980abc3c
 diff --git a/hosts/studio/Library/Application Support/ZeroTier/One/identity.secret b/hosts/studio/Library/Application Support/ZeroTier/One/identity.secret
 new file mode 100644
 index 00000000..e24cf6cd
---- /dev/null
-+++ ./hosts/studio/Library/Application Support/ZeroTier/One/identity.secret	
-@@ -0,0 +1 @@
-+1a4f35693a:0:6f7068f883c9b26fdb6fd56cb7b1e0a365438b6ad2fa23d97dc52bc7a55494201f35ba3fa2e11151b6ff48337fbb823fc676e6edcc4d2b9b857e3b7021c04bbe:e75398cc2af984a61ea2db61d500c6968d50e23c3cf30d41fdca99507bdc972608c3b2075d29b17f443f41c2b118ad5daf10d71374f536442dbd4ae703100784
-\ No newline at end of file
 diff --git a/hosts/u2004/var/lib/zerotier-one/identity.public b/hosts/u2004/var/lib/zerotier-one/identity.public
 new file mode 100644
 index 00000000..0cd205f6
@@ -4917,11 +4889,11 @@ index 13a0cf4c..6cd6989c 100755
  
 diff --git a/rsync b/rsync
 new file mode 160000
-index 00000000..10e31bf0
+index 00000000..d1f9dfd5
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit 10e31bf01467bc3a1bd7e8a33260ce23a36d9123
++Subproject commit d1f9dfd52c9cc890a7a934aaaecda7a3d34e9f02-dirty
 diff --git a/set_linux_configuration.sh b/set_linux_configuration.sh
 index ced4c25c..ce42e8a4 100755
 --- ./set_linux_configuration.sh
@@ -5166,13 +5138,12 @@ index 00000000..c4d4a292
 +
 diff --git a/tests/dirname/spaces  in dir name.txt b/tests/dirname/spaces  in dir name.txt
 new file mode 100644
-index 00000000..43d2d4f3
+index 00000000..5fe6769a
 --- /dev/null
 +++ ./tests/dirname/spaces  in dir name.txt	
-@@ -0,0 +1,3 @@
+@@ -0,0 +1,2 @@
 +multiple spaces in file name.
 +add one more line, to test the auto add feature.
-+one more line to test ml command.
 diff --git a/tests/space in dir name/test.txt b/tests/space in dir name/test.txt
 new file mode 100644
 index 00000000..a63e3b03
@@ -5258,6 +5229,13 @@ index 86d744c6..2a31e6bc 160000
 @@ -1 +1 @@
 -Subproject commit 86d744c6e4731d0014ef469f019a305e2d7baac0
 +Subproject commit 2a31e6bcea5977209c05c728c4253d82fd873c82
+diff --git a/vimrc/.vim/bundle/LargeFile b/vimrc/.vim/bundle/LargeFile
+index 3941a37b..18407c43 160000
+--- ./vimrc/.vim/bundle/LargeFile
++++ ./vimrc/.vim/bundle/LargeFile
+@@ -1 +1 @@
+-Subproject commit 3941a37b2b0288524300348a39521a46539bf9f6
++Subproject commit 18407c43846edea7b7964b0b99226ec04d00931f
 diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
 index 1d4a909f..537b2a38 160000
 --- ./vimrc/.vim/bundle/bash-support.vim
@@ -5271,14 +5249,14 @@ index 00000000..6f61df5a
 --- /dev/null
 +++ ./vimrc/.vim/bundle/cql-vim
 @@ -0,0 +1 @@
-+Subproject commit 6f61df5a633c3a91edea7bcb5d5772648df19d1a
++Subproject commit 6f61df5a633c3a91edea7bcb5d5772648df19d1a-dirty
 diff --git a/vimrc/.vim/bundle/firenvim b/vimrc/.vim/bundle/firenvim
 new file mode 160000
-index 00000000..d9a2a73a
+index 00000000..c9cab43d
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit d9a2a73a1783fcdcd76b6f488578c020111d3fad
++Subproject commit c9cab43d62919c5fd34ebe33270a227a11442e12
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 index 5617a1cf..d15d63bf 160000
 --- ./vimrc/.vim/bundle/indentLine
@@ -5350,12 +5328,12 @@ index 7ef452b4..ba6f6cef 160000
 -Subproject commit 7ef452b47f14a2bfed26324793777cf12d2a8d78
 +Subproject commit ba6f6cef58d08ac741aaf1626d3799d476cd43b6
 diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
-index 2d520bdf..677391a1 160000
+index 2d520bdf..ef03b2f4 160000
 --- ./vimrc/.vim/bundle/tig-explorer.vim
 +++ ./vimrc/.vim/bundle/tig-explorer.vim
 @@ -1 +1 @@
 -Subproject commit 2d520bdf9d2f3838ad3f8f381dd514307a1c90ee
-+Subproject commit 677391a11050f968c04e4c334a1fc329c6159c4d
++Subproject commit ef03b2f438ead4730f39d8ce23ed17247774fb78
 diff --git a/vimrc/.vim/bundle/tlib_vim b/vimrc/.vim/bundle/tlib_vim
 index a071b6d4..d3bdad7b 160000
 --- ./vimrc/.vim/bundle/tlib_vim
@@ -5392,12 +5370,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..95dda4db 160000
+index 8468d6a8..bff6e955 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 95dda4dbbd0d27ff0ecdce59ce7d2d629c54cba1
++Subproject commit bff6e955337076ebfd6a9f9909656e2f0071d4f3-dirty
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 index 00000000..115e2600
@@ -5428,18 +5406,18 @@ index 00000000..d6adab9d
 +Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
 diff --git a/vimrc/.vim/bundle/vim-php-cs-fixer b/vimrc/.vim/bundle/vim-php-cs-fixer
 new file mode 160000
-index 00000000..62d82051
+index 00000000..c993a138
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-php-cs-fixer
 @@ -0,0 +1 @@
-+Subproject commit 62d820512c7c46da791cb66101c1740a90192a3f
++Subproject commit c993a1381454e97048383a8ff6f18eecafc763dc-dirty
 diff --git a/vimrc/.vim/bundle/vim-ps1 b/vimrc/.vim/bundle/vim-ps1
 new file mode 160000
 index 00000000..e7cc3b08
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-ps1
 @@ -0,0 +1 @@
-+Subproject commit e7cc3b08f6f9e2dc1909f397aa3d5b0a7acb661c
++Subproject commit e7cc3b08f6f9e2dc1909f397aa3d5b0a7acb661c-dirty
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
 index 3b379635..a6d2bac9 160000
 --- ./vimrc/.vim/bundle/vim-rails
@@ -6211,7 +6189,7 @@ index d5874fe5..776ff9dc 100644
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..18e93c76 100644
+index 5fd4a230..d3b5ce53 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -15,7 +15,11 @@ function! ExFilter()
@@ -6272,7 +6250,7 @@ index 5fd4a230..18e93c76 100644
 +
 +    if filereadable(b:to_run . '.lsh')
 +        let b:to_run = b:to_run . '.lsh'
-+    elseif filereadable(b:to_run . '.sh')
++    elseif filereadable(b:to_run . '.sh') 
          let b:to_run = b:to_run . '.sh'
      endif
  
@@ -6444,7 +6422,7 @@ index 5fd4a230..18e93c76 100644
  endfunc
  
  nnoremap <leader>2 :call CutCommon()<cr>
-@@ -505,3 +511,38 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
+@@ -505,3 +511,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
  " open tig with Project root path
  nnoremap <Leader>t :TigOpenProjectRootDir<CR>
  nnoremap <leader>T :TigOpenCurrentFile<CR>
@@ -6453,9 +6431,7 @@ index 5fd4a230..18e93c76 100644
 +function! CopyLineInfo()
 +    normal yy
 +    let b:csdbpath = Cd2ProjectRoot("files.proj")
-+    let relativePath = expand('%:p')
-+    let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" "' . relativePath . '"'), '\n', '', '')
-+    let relativePath = substitute(relativePath, '\_s', '\\ ', "g")
++    let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
 +    let content = relativePath . ':' . line('.') . ' ' . @"
 +    let @" = content
 +endfunction
@@ -7102,7 +7078,7 @@ index e0416589..00000000
 -
 -" }}}
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
-index 777cb3ad..405dc5b2 100644
+index 777cb3ad..ad4d24ef 100644
 --- ./vimrc/.vimrc
 +++ ./vimrc/.vimrc
 @@ -28,7 +28,6 @@ inoremap { {}<LEFT>
@@ -7113,17 +7089,19 @@ index 777cb3ad..405dc5b2 100644
  " Mapping ESC in insert mode and command mode to double j
  imap jj <C-[>
  " cmap jj  <C-[]]
-@@ -177,7 +176,9 @@ function AddToGit()
+@@ -177,8 +176,10 @@ function AddToGit()
      endif
  
      let worktree = Cd2Worktree()
 -    let relativePath = substitute(system('realpath --relative-to="' . worktree . '" ' . expand('%:p')), '\n', '', '')
+-    silent exec '!~/loadrc/gitrc/autoadd.sh ' . '"' .  relativePath . '"'
 +    let relativePath = expand('%:p')
 +    let relativePath = substitute(relativePath, '\_s', '\\ ', "g") 
 +    let relativePath = substitute(system('realpath --relative-to="' . worktree . '" ' . relativePath), '\n', '', '')
-     silent exec '!~/loadrc/gitrc/autoadd.sh ' . '"' .  relativePath . '"'
++    exec '!~/loadrc/gitrc/autoadd.sh ' . '"' .  relativePath . '"'
  endfunction
  
+ function TrimEndLines()
 @@ -196,12 +197,7 @@ au BufWritePre * call AddToGit()
  let g:pymode_rope = 0
  "To have a space (ASCII 32) considered as a valid character for a file name
