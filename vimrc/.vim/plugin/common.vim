@@ -279,6 +279,9 @@ endfunc
 
 function! Cd2ProjectRoot(filename)
     let csdbpath = Find_in_parent(a:filename, getcwd(), "/")
+    let current_file_dir = expand('%:p:h')
+    let current_file_dir = substitute(current_file_dir, '\_s', '\\ ', "g")
+    let csdbpath = findfile(a:filename, current_file_dir . ';')
 
     if csdbpath != "Nothing"
         exec "cd " . csdbpath
