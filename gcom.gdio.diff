@@ -2094,6 +2094,12 @@ index d8126721..a09ce6be 100644
 -0 22-23,0-8 * * * /root/loadrc/crontabrc/mldonkey_start.sh
 +* * * * * /root/loadrc/bashrc/retire_parts.sh >> /root/loadrc/retire_parts.log 2>&1
 +*/10 * * * * /root/loadrc/dropboxrc/dropbox_start.sh
+diff --git a/crontabrc/.server.cron b/crontabrc/.server.cron
+index e69de29b..b743d5e5 100644
+--- ./crontabrc/.server.cron
++++ ./crontabrc/.server.cron
+@@ -0,0 +1 @@
++* * * * * /root/loadrc/bashrc/watch_fvideos.sh >> /root/loadrc/watch_fvideos.log 2>&1 
 diff --git a/crontabrc/.studio.cron b/crontabrc/.studio.cron
 new file mode 100644
 index 00000000..bb6db6be
@@ -4786,11 +4792,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..0d29a625
+index 00000000..cac03665
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 0d29a6259eb38a7e2bdb85b8dfca408aaa50163b-dirty
++Subproject commit cac036652b85af828397726799de63b38adc7446
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4919,11 +4925,11 @@ index 13a0cf4c..6cd6989c 100755
  
 diff --git a/rsync b/rsync
 new file mode 160000
-index 00000000..d1f9dfd5
+index 00000000..d8336c42
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit d1f9dfd52c9cc890a7a934aaaecda7a3d34e9f02-dirty
++Subproject commit d8336c42def6a7b26fcc2336422d566767aca16d
 diff --git a/set_linux_configuration.sh b/set_linux_configuration.sh
 index ced4c25c..ce42e8a4 100755
 --- ./set_linux_configuration.sh
@@ -5281,14 +5287,14 @@ index 00000000..6f61df5a
 --- /dev/null
 +++ ./vimrc/.vim/bundle/cql-vim
 @@ -0,0 +1 @@
-+Subproject commit 6f61df5a633c3a91edea7bcb5d5772648df19d1a-dirty
++Subproject commit 6f61df5a633c3a91edea7bcb5d5772648df19d1a
 diff --git a/vimrc/.vim/bundle/firenvim b/vimrc/.vim/bundle/firenvim
 new file mode 160000
-index 00000000..d9a2a73a
+index 00000000..d1909c7a
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit d9a2a73a1783fcdcd76b6f488578c020111d3fad
++Subproject commit d1909c7abbc1857cc8b67e0234d7932ad7825644
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 index 5617a1cf..d15d63bf 160000
 --- ./vimrc/.vim/bundle/indentLine
@@ -5333,11 +5339,11 @@ index 00000000..7d4c1d81
 +Subproject commit 7d4c1d8198e889d513a030b5a83faa07606bac27
 diff --git a/vimrc/.vim/bundle/plantuml-previewer.vim b/vimrc/.vim/bundle/plantuml-previewer.vim
 new file mode 160000
-index 00000000..74483d5d
+index 00000000..eb760911
 --- /dev/null
 +++ ./vimrc/.vim/bundle/plantuml-previewer.vim
 @@ -0,0 +1 @@
-+Subproject commit 74483d5d01042db5de6f89aaba64376d87effaff
++Subproject commit eb76091148562c644dd32e4a20d37ce1b45eb21a
 diff --git a/vimrc/.vim/bundle/plantuml-syntax b/vimrc/.vim/bundle/plantuml-syntax
 new file mode 160000
 index 00000000..845abb56
@@ -5442,21 +5448,21 @@ index 00000000..c993a138
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-php-cs-fixer
 @@ -0,0 +1 @@
-+Subproject commit c993a1381454e97048383a8ff6f18eecafc763dc-dirty
++Subproject commit c993a1381454e97048383a8ff6f18eecafc763dc
 diff --git a/vimrc/.vim/bundle/vim-ps1 b/vimrc/.vim/bundle/vim-ps1
 new file mode 160000
 index 00000000..e7cc3b08
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-ps1
 @@ -0,0 +1 @@
-+Subproject commit e7cc3b08f6f9e2dc1909f397aa3d5b0a7acb661c-dirty
++Subproject commit e7cc3b08f6f9e2dc1909f397aa3d5b0a7acb661c
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..a6d2bac9 160000
+index 3b379635..959e94b7 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit a6d2bac95b446a5c23eff4638eca164b0d77454a
++Subproject commit 959e94b76e6ebdf984acef61649ba7d0f62bd425
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
