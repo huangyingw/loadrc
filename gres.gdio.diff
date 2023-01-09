@@ -111,7 +111,7 @@ index 8f92760e..87239405 100644
  *.log
  *.pkg
 diff --git a/.gitmodules b/.gitmodules
-index e17f9887..8008ff14 100644
+index e17f9887..72fa51be 100644
 --- ./.gitmodules
 +++ ./.gitmodules
 @@ -133,10 +133,6 @@
@@ -135,7 +135,13 @@ index e17f9887..8008ff14 100644
  [submodule "vimrc/.vim/bundle/neco-syntax"]
  	path = vimrc/.vim/bundle/neco-syntax
  	url = git@github.com:Shougo/neco-syntax.git
-@@ -231,3 +226,43 @@
+@@ -227,7 +222,48 @@
+ 	branch = dev
+ [submodule "vimrc/.vim/bundle/tig-explorer.vim"]
+ 	path = vimrc/.vim/bundle/tig-explorer.vim
+-    url = git@github.com:iberianpig/tig-explorer.vim.git
++	url = git@github.com:huangyingw/tig-explorer.vim.git
++	branch = dev
  [submodule "vimrc/.vim/bundle/bclose.vim"]
  	path = vimrc/.vim/bundle/bclose.vim
  	url = git@github.com:rbgrouleff/bclose.vim.git
@@ -1615,10 +1621,10 @@ index 00000000..e46e9472
 +./parse_host.sh "~/loadrc"
 diff --git a/bashrc/ports_forward.hosts b/bashrc/ports_forward.hosts
 new file mode 100644
-index 00000000..9188b07a
+index 00000000..6d6aafab
 --- /dev/null
 +++ ./bashrc/ports_forward.hosts
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,8 @@
 +work
 +mba
 +mbp
@@ -1626,6 +1632,7 @@ index 00000000..9188b07a
 +pikvm
 +sb
 +server
++imacpro
 diff --git a/bashrc/ports_forward.sh b/bashrc/ports_forward.sh
 new file mode 100755
 index 00000000..457733ac
@@ -2165,12 +2172,12 @@ index 00000000..cc6f4270
 +*/10 * * * * /Users/huangyingw/loadrc/macosrc/restart_ssh.sh
 +*/10 * * * * /Users/ying.huang/loadrc/macosrc/restart_ssh.sh
 diff --git a/cscope b/cscope
-index 18a46b20..65b8f602 160000
+index 18a46b20..0a384883 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 65b8f60243a89338e002e1d6772af52e5845cab8
++Subproject commit 0a3848832a97406727cdf7c85ac0c78837c634c9
 diff --git a/demo b/demo
 new file mode 100644
 index 00000000..87081191
@@ -2596,6 +2603,18 @@ index 15190e93..89ce9ced 100755
 +then
 +    git stash pop stash@{0}
 +fi
+diff --git a/gitrc/autoadd.sh b/gitrc/autoadd.sh
+index 9c6d0caf..e50b2f19 100755
+--- ./gitrc/autoadd.sh
++++ ./gitrc/autoadd.sh
+@@ -4,6 +4,7 @@ fileName="$1"
+ if [[ "$fileName" != *"../"* ]]
+ then
+     filesProj=$(~/loadrc/bashrc/find_up.sh $(pwd) "files.proj")
++    fileName=$(echo $fileName | sed 's/ /\\ /g')
+ 
+     if ( grep -Fxq "\"./$fileName\"" "$filesProj" ) && ( ! git ls-files --error-unmatch "$fileName" )
+     then
 diff --git a/gitrc/checkGitStatus.sh b/gitrc/checkGitStatus.sh
 index 2b929a6c..1565c80c 100755
 --- ./gitrc/checkGitStatus.sh
@@ -2609,18 +2628,19 @@ index 2b929a6c..1565c80c 100755
      echo -e "${red}the git repository is unclean, please check it before continuing... ${NC}"
      exit 1
 diff --git a/gitrc/checkout_rejs.sh b/gitrc/checkout_rejs.sh
-index d81f6f38..006b41ed 100755
+index d81f6f38..136e5de1 100755
 --- ./gitrc/checkout_rejs.sh
 +++ ./gitrc/checkout_rejs.sh
-@@ -2,6 +3,12 @@
+@@ -2,6 +3,13 @@
  for ss in $(git status | grep \.rej$) ; \
- do \
+ do \                                     
      targetFile=$(echo "$ss" | sed 's/\.rej$//g')
 +    targetFile=$(echo "$targetFile" | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g')
-+    if [ "$2" = "f" ]
++    if [ "$2" = "f" ] || [ -n $(git config checkoutrejs.force) ] ; \
 +    then
          git checkout "$1" "$targetFile" && \
              rm "$ss"
++
 +    else
 +        git show "$1":"$targetFile" > "$ss"
 +    fi
@@ -2851,17 +2871,24 @@ index b467b11a..8fd4e857 100755
 -    && git config --file .gitconfig deploy.path "~/myproject/$(realpath --relative-to=$HOME/myproject $PWD)"
 +    && git config --file .gitconfig deploy.path "~/$(realpath --relative-to=$HOME/ $PWD)"
 diff --git a/gitrc/gdi.sh b/gitrc/gdi.sh
-index b720ac69..8fcc4eed 100755
+index b720ac69..84f4cd32 100755
 --- ./gitrc/gdi.sh
 +++ ./gitrc/gdi.sh
-@@ -13,4 +13,4 @@ else
+@@ -7,10 +7,11 @@ then
+     COMMAND="$COMMAND --cached HEAD"
+ else
+     COMMAND="$COMMAND $1 $2"
++    IFS=$'\n'
+ 
+     for ss in $(git config --get-all gdif.ignore)
+     do
          COMMAND="$COMMAND  ':(exclude)$ss'"
      done
  fi
 -eval "$COMMAND"
 +eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index dbcf937b..f487ff77 100755
+index dbcf937b..02f4befa 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
 @@ -8,30 +8,47 @@ then
@@ -2915,7 +2942,7 @@ index dbcf937b..f487ff77 100755
 +    ~/loadrc/gitrc/checkout_rejs.sh "$currentBranch" "$1"
 +fi
 +
-+if [ $retVal -eq 0 ] || [ "$1" = "f" ]
++if [ $retVal -eq 0 ] || [ "$1" = "f" ] || [ $(git config checkoutrejs.force) ]
 +then
 +    if [ -z "$commit_message" ]
 +    then
@@ -2950,31 +2977,40 @@ index 564ef4a9..35317ddb 100755
 -git submodule foreach ~/loadrc/gitrc/dogdio.sh &
 +git submodule status | awk '{print $2}' | parallel --jobs 0 'cd {}; ~/loadrc/gitrc/dogdio.sh'
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
-index 700d6af6..7db5b05e 100755
+index 700d6af6..c4d35c11 100755
 --- ./gitrc/gdit.sh
 +++ ./gitrc/gdit.sh
-@@ -3,16 +3,15 @@ output="$1"
+@@ -3,21 +3,18 @@ output="$1"
  current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
  target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
  remote="$(git config gsync.remote)"
 -remote_branch="$(git config gsync.branch)"
 +target="$(git config gsync.target)"
  
- ~/loadrc/gitrc/discard_unnecessaries.sh
+-~/loadrc/gitrc/discard_unnecessaries.sh
 -git checkout -b "$target_branch" "$remote/$target_branch"
 -git checkout -b "$target_branch" "$remote/$remote_branch"
-+git checkout -b "$target_branch" "$target"
- git checkout -f "$target_branch"
- git branch -u "$remote/$target_branch"
+-git checkout -f "$target_branch"
+-git branch -u "$remote/$target_branch"
 -git merge -X theirs "$remote/$remote_branch" && \
 -    git pull && \
 -    git push ; \
-+git merge -X theirs "$target" ; \
-+    git merge -X theirs "$remote/$target_branch" ; \
-+    git pull ; \
-     git checkout "$current_branch" && \
-     ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
+-    git checkout "$current_branch" && \
+-    ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" 2>&1 | tee "$output"
++git branch "$target_branch" "$target"
++echo git fetch "$remote" "$target_branch":"$target_branch"
++git fetch "$remote" "$target_branch":"$target_branch"
++remote_branch=$(echo "$target" | sed "s/^$remote\///g")
++echo git fetch "$remote" "$remote_branch":"$target_branch"
++git fetch "$remote" "$remote_branch":"$target_branch"
++~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" > "$output" 2>&1
  
+ if [ $? -ne 0 ]
+ then
+-    echo -e "${red}most probably sth wrong in git merge... ${NC}" 2>&1 | tee "$output"
++    echo -e "${red}most probably sth wrong in git merge... ${NC}" > "$output" 2>&1 
+     exit 1
+ fi
 diff --git a/gitrc/git-submodule.sh b/gitrc/git-submodule.sh
 new file mode 100755
 index 00000000..a11fd250
@@ -3110,6 +3146,18 @@ index 2198cb7f..d4e493b4 100755
 +        git push -v --tag "$ss"
      done
  fi
+diff --git a/gitrc/gres.sh b/gitrc/gres.sh
+index 1de7ff41..54d99709 100755
+--- ./gitrc/gres.sh
++++ ./gitrc/gres.sh
+@@ -1,6 +1,7 @@
+ #!/bin/zsh
+ 
+ conflictArr=($(git status | awk '/both .+:/{print $3}'))
++IFS=$'\n'
+ 
+ for conflict in "${conflictArr[@]}"
+ do
 diff --git a/gitrc/gsearch.sh b/gitrc/gsearch.sh
 index b3980c8a..240de610 100755
 --- ./gitrc/gsearch.sh
@@ -4733,11 +4781,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..0d01d8f4
+index 00000000..0d29a625
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 0d01d8f42d793365ef1e9198989d053ca2732801-dirty
++Subproject commit 0d29a6259eb38a7e2bdb85b8dfca408aaa50163b-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4866,11 +4914,11 @@ index 13a0cf4c..6cd6989c 100755
  
 diff --git a/rsync b/rsync
 new file mode 160000
-index 00000000..d1f9dfd5
+index 00000000..10e31bf0
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit d1f9dfd52c9cc890a7a934aaaecda7a3d34e9f02-dirty
++Subproject commit 10e31bf01467bc3a1bd7e8a33260ce23a36d9123
 diff --git a/set_linux_configuration.sh b/set_linux_configuration.sh
 index ced4c25c..ce42e8a4 100755
 --- ./set_linux_configuration.sh
@@ -4902,19 +4950,20 @@ index cf9a010a..26f18169 100755
  ./macosrc/configure_mosh.sh
 +# ./macosrc/configure_ssh.sh
 diff --git a/setup.sh b/setup.sh
-index cc9fd3f1..7d9c8333 100755
+index cc9fd3f1..15b3360f 100755
 --- ./setup.sh
 +++ ./setup.sh
-@@ -1,4 +1,4 @@
+@@ -1,15 +1,16 @@
 -#!/bin/zsh
 +#!/bin/bash
  SCRIPT=$(realpath "$0") && \
      SCRIPTPATH=$(dirname "$SCRIPT") && \
      cd "$SCRIPTPATH" || cd ~/loadrc/
-@@ -6,10 +6,11 @@ SCRIPT=$(realpath "$0") && \
+ 
  ./install_basic.sh
  ~/loadrc/gitrc/gpl.sh
- ./install_nvim.sh
+-./install_nvim.sh
++./neovim/install.sh
 +./rsync/install.sh
  ./gpurc/install.sh
  ./install_vagrant.sh
@@ -5113,13 +5162,22 @@ index 00000000..c4d4a292
 +	keystroke(Alt+Control+r) = restartServer(restart)
 +end
 +
+diff --git a/tests/dirname/spaces  in dir name.txt b/tests/dirname/spaces  in dir name.txt
+new file mode 100644
+index 00000000..43d2d4f3
+--- /dev/null
++++ ./tests/dirname/spaces  in dir name.txt	
+@@ -0,0 +1,3 @@
++multiple spaces in file name.
++add one more line, to test the auto add feature.
++one more line to test ml command.
 diff --git a/tests/space in dir name/test.txt b/tests/space in dir name/test.txt
 new file mode 100644
-index 00000000..9ab9c680
+index 00000000..a63e3b03
 --- /dev/null
 +++ ./tests/space in dir name/test.txt	
 @@ -0,0 +1 @@
-+a txt file under folder with space in folder name.
++a txt file under folder with space in folder name. make some changes.
 diff --git a/transmissionrc/auto_reboot.sh b/transmissionrc/auto_reboot.sh
 new file mode 100755
 index 00000000..837984a4
@@ -5214,11 +5272,11 @@ index 00000000..6f61df5a
 +Subproject commit 6f61df5a633c3a91edea7bcb5d5772648df19d1a
 diff --git a/vimrc/.vim/bundle/firenvim b/vimrc/.vim/bundle/firenvim
 new file mode 160000
-index 00000000..eeaddd0b
+index 00000000..d9a2a73a
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit eeaddd0b503f841fa24f60cebd14fa93d2b33f77
++Subproject commit d9a2a73a1783fcdcd76b6f488578c020111d3fad
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 index 5617a1cf..d15d63bf 160000
 --- ./vimrc/.vim/bundle/indentLine
@@ -5263,11 +5321,11 @@ index 00000000..7d4c1d81
 +Subproject commit 7d4c1d8198e889d513a030b5a83faa07606bac27
 diff --git a/vimrc/.vim/bundle/plantuml-previewer.vim b/vimrc/.vim/bundle/plantuml-previewer.vim
 new file mode 160000
-index 00000000..887d55f9
+index 00000000..74483d5d
 --- /dev/null
 +++ ./vimrc/.vim/bundle/plantuml-previewer.vim
 @@ -0,0 +1 @@
-+Subproject commit 887d55f912be965e9a24aa61d744fc8b9ed0d7d1
++Subproject commit 74483d5d01042db5de6f89aaba64376d87effaff
 diff --git a/vimrc/.vim/bundle/plantuml-syntax b/vimrc/.vim/bundle/plantuml-syntax
 new file mode 160000
 index 00000000..845abb56
@@ -5290,12 +5348,12 @@ index 7ef452b4..ba6f6cef 160000
 -Subproject commit 7ef452b47f14a2bfed26324793777cf12d2a8d78
 +Subproject commit ba6f6cef58d08ac741aaf1626d3799d476cd43b6
 diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
-index 2d520bdf..f4ec3e57 160000
+index 2d520bdf..677391a1 160000
 --- ./vimrc/.vim/bundle/tig-explorer.vim
 +++ ./vimrc/.vim/bundle/tig-explorer.vim
 @@ -1 +1 @@
 -Subproject commit 2d520bdf9d2f3838ad3f8f381dd514307a1c90ee
-+Subproject commit f4ec3e57ccad1b9a28b8607c4a56a0affc686583
++Subproject commit 677391a11050f968c04e4c334a1fc329c6159c4d
 diff --git a/vimrc/.vim/bundle/tlib_vim b/vimrc/.vim/bundle/tlib_vim
 index a071b6d4..d3bdad7b 160000
 --- ./vimrc/.vim/bundle/tlib_vim
@@ -5332,12 +5390,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..bff6e955 160000
+index 8468d6a8..95dda4db 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit bff6e955337076ebfd6a9f9909656e2f0071d4f3-dirty
++Subproject commit 95dda4dbbd0d27ff0ecdce59ce7d2d629c54cba1
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 index 00000000..115e2600
@@ -5691,7 +5749,7 @@ index 00000000..6bf0e4ae
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..f66303a8 100644
+index d5874fe5..776ff9dc 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,18 @@
@@ -5874,7 +5932,23 @@ index d5874fe5..f66303a8 100644
      endif
  
      if bufwinnr('^' . output . '$') > 0
-@@ -422,9 +432,9 @@ function! s:Gdi2(...) abort
+@@ -391,13 +401,14 @@ function! s:Gdit() abort
+     let current_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
+     let output = current_branch . '.gdit.diff'
+     let output = substitute(output, "/", "_", "g")
+-    exec '!~/loadrc/gitrc/gdit.sh' . ' ' . '"' .  output . '"'
++    exec '!~/loadrc/gitrc/gdit.sh' . ' ' . '"' .  output . '" 2>&1 | tee ' . 'gdit.runresult' 
+ 
+     if bufwinnr('^' . output . '$') > 0
+         exe "bd!" . output
+     endif
+ 
+     let worktree = Cd2Worktree()
++    call OpenOrSwitch('gdit.runresult', 'vs')
+     call OpenOrSwitch(output, 'vs')
+ endfunction
+ 
+@@ -422,9 +433,9 @@ function! s:Gdi2(...) abort
      endif
  
      let worktree = Cd2Worktree()
@@ -5886,7 +5960,7 @@ index d5874fe5..f66303a8 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -475,18 +485,17 @@ endfunction
+@@ -475,18 +486,17 @@ endfunction
  
  function! s:Gdif(...) abort
      let worktree = Cd2Worktree()
@@ -5911,7 +5985,7 @@ index d5874fe5..f66303a8 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -516,10 +525,20 @@ endfunction
+@@ -516,10 +526,20 @@ endfunction
  
  function! s:ApplyBranch(args, ...) abort
      let worktree = Cd2Worktree()
@@ -5933,7 +6007,7 @@ index d5874fe5..f66303a8 100644
  function! s:Gshow(args, ...) abort
      let worktree = Cd2Worktree()
      let output = a:args . '.diff'
-@@ -527,7 +546,19 @@ function! s:Gshow(args, ...) abort
+@@ -527,7 +547,19 @@ function! s:Gshow(args, ...) abort
      call OpenOrSwitch(output, 'vs')
  endfunction
  
@@ -5953,7 +6027,7 @@ index d5874fe5..f66303a8 100644
      let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
      exec '!rm ' . newFile
      exec 'w ' . newFile
-@@ -546,6 +577,25 @@ function! s:CatPlay(...) abort
+@@ -546,6 +578,25 @@ function! s:CatPlay(...) abort
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
@@ -5979,7 +6053,7 @@ index d5874fe5..f66303a8 100644
  function! s:CatMove(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -559,6 +609,90 @@ function! s:CatMove(...) abort
+@@ -559,6 +610,90 @@ function! s:CatMove(...) abort
      call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
  endfunction
  
@@ -6070,7 +6144,7 @@ index d5874fe5..f66303a8 100644
  function! s:CatDu(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -636,11 +770,20 @@ function! s:LcTest() abort
+@@ -636,11 +771,20 @@ function! s:LcTest() abort
      call OpenOrSwitch(expand('%:p') . '.sh', 'vs')
  endfunction
  
@@ -6092,7 +6166,7 @@ index d5874fe5..f66303a8 100644
      call Cd2ProjectRoot("files.proj")
  
      if expand('%:t') != 'index'
-@@ -649,14 +792,14 @@ function! s:Fr(find, replace) abort
+@@ -649,14 +793,14 @@ function! s:Fr(find, replace) abort
          let fileList = "files.proj"
      endif
  
@@ -6110,7 +6184,7 @@ index d5874fe5..f66303a8 100644
  endfunction
  
  function! s:Gwap() abort
-@@ -671,13 +814,15 @@ function! s:Gfix() abort
+@@ -671,13 +815,15 @@ function! s:Gfix() abort
  endfunction
  
  function! s:Reapply() abort
@@ -6128,14 +6202,14 @@ index d5874fe5..f66303a8 100644
      call s:Gs()
  endfunction
  
-@@ -701,3 +846,5 @@ function! s:GenerateIpynb() abort
+@@ -701,3 +847,5 @@ function! s:GenerateIpynb() abort
      exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
      w
  endfunction
 +
 +let g:fugitive_legacy_commands = 1
 diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
-index 5fd4a230..d3b5ce53 100644
+index 5fd4a230..18e93c76 100644
 --- ./vimrc/.vim/plugin/keymap.vim
 +++ ./vimrc/.vim/plugin/keymap.vim
 @@ -15,7 +15,11 @@ function! ExFilter()
@@ -6196,7 +6270,7 @@ index 5fd4a230..d3b5ce53 100644
 +
 +    if filereadable(b:to_run . '.lsh')
 +        let b:to_run = b:to_run . '.lsh'
-+    elseif filereadable(b:to_run . '.sh') 
++    elseif filereadable(b:to_run . '.sh')
          let b:to_run = b:to_run . '.sh'
      endif
  
@@ -6368,7 +6442,7 @@ index 5fd4a230..d3b5ce53 100644
  endfunc
  
  nnoremap <leader>2 :call CutCommon()<cr>
-@@ -505,3 +511,36 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
+@@ -505,3 +511,38 @@ set pastetoggle=<F3>            " when in insert mode, press <F3> to go to
  " open tig with Project root path
  nnoremap <Leader>t :TigOpenProjectRootDir<CR>
  nnoremap <leader>T :TigOpenCurrentFile<CR>
@@ -6377,7 +6451,9 @@ index 5fd4a230..d3b5ce53 100644
 +function! CopyLineInfo()
 +    normal yy
 +    let b:csdbpath = Cd2ProjectRoot("files.proj")
-+    let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
++    let relativePath = expand('%:p')
++    let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" "' . relativePath . '"'), '\n', '', '')
++    let relativePath = substitute(relativePath, '\_s', '\\ ', "g")
 +    let content = relativePath . ':' . line('.') . ' ' . @"
 +    let @" = content
 +endfunction
@@ -7024,7 +7100,7 @@ index e0416589..00000000
 -
 -" }}}
 diff --git a/vimrc/.vimrc b/vimrc/.vimrc
-index 777cb3ad..c8227aba 100644
+index 777cb3ad..405dc5b2 100644
 --- ./vimrc/.vimrc
 +++ ./vimrc/.vimrc
 @@ -28,7 +28,6 @@ inoremap { {}<LEFT>
@@ -7035,7 +7111,18 @@ index 777cb3ad..c8227aba 100644
  " Mapping ESC in insert mode and command mode to double j
  imap jj <C-[>
  " cmap jj  <C-[]]
-@@ -196,12 +195,7 @@ au BufWritePre * call AddToGit()
+@@ -177,7 +176,9 @@ function AddToGit()
+     endif
+ 
+     let worktree = Cd2Worktree()
+-    let relativePath = substitute(system('realpath --relative-to="' . worktree . '" ' . expand('%:p')), '\n', '', '')
++    let relativePath = expand('%:p')
++    let relativePath = substitute(relativePath, '\_s', '\\ ', "g") 
++    let relativePath = substitute(system('realpath --relative-to="' . worktree . '" ' . relativePath), '\n', '', '')
+     silent exec '!~/loadrc/gitrc/autoadd.sh ' . '"' .  relativePath . '"'
+ endfunction
+ 
+@@ -196,12 +197,7 @@ au BufWritePre * call AddToGit()
  let g:pymode_rope = 0
  "To have a space (ASCII 32) considered as a valid character for a file name
  ":set isfname+=32
@@ -7049,7 +7136,7 @@ index 777cb3ad..c8227aba 100644
  let g:phpfmt_autosave = 1
  let g:phpfmt_standard = '$HOME/loadrc/vimrc/.vim/bundle/vim-phpfmt/ruleset.xml'
  
-@@ -214,9 +208,6 @@ endif
+@@ -214,9 +210,6 @@ endif
  " configuration for cscope_dynamic
  let cscopedb_auto_files=0
  
@@ -7059,7 +7146,7 @@ index 777cb3ad..c8227aba 100644
  " :help Ncm2PopupOpen for more information
  set completeopt=noinsert,menuone,noselect
  " Use <TAB> to select the popup menu:
-@@ -254,10 +245,6 @@ endfunction
+@@ -254,10 +247,6 @@ endfunction
  " configuration for fugitive
  autocmd FileType fugitive set bufhidden=
  
@@ -7070,7 +7157,7 @@ index 777cb3ad..c8227aba 100644
  " Automatically change the current directoryEdit
  " Sometimes it is helpful if your working directory is always the same as the file you are editing. To achieve this, put the following in your vimrc:
  " set autochdir
-@@ -277,3 +264,14 @@ let g:tex_flavor = 'latex'
+@@ -277,3 +266,14 @@ let g:tex_flavor = 'latex'
  " add @ to cfile handle
  set isfname+=@-@
  set history=10000
