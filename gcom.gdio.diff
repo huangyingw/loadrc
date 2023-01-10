@@ -2839,11 +2839,17 @@ old mode 100644
 new mode 100755
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 new file mode 100755
-index 00000000..54035cd9
+index 00000000..04db1b6e
 --- /dev/null
 +++ ./gitrc/gcom.sh
-@@ -0,0 +1,40 @@
+@@ -0,0 +1,46 @@
 +#!/bin/zsh
++
++if [[ "$(git config gcom.disabled)" = "true" ]]
++then
++    echo -e "${red}gcom is disabled... ${NC}"
++    exit 1
++fi
 +
 +if [ -z "$1" ]
 +then
@@ -4827,11 +4833,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..4c2dc97f
+index 00000000..90476237
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 4c2dc97fac89a56e1dd651d39de4999e4735bdac
++Subproject commit 90476237688f8c14f1d2bc0c9415f62c0bcff4b9-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4960,11 +4966,11 @@ index 13a0cf4c..6cd6989c 100755
  
 diff --git a/rsync b/rsync
 new file mode 160000
-index 00000000..d8336c42
+index 00000000..c74f3cc1
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit d8336c42def6a7b26fcc2336422d566767aca16d
++Subproject commit c74f3cc1b5bd7567bbdf4ac9218c5eb7cbf3b873
 diff --git a/set_linux_configuration.sh b/set_linux_configuration.sh
 index ced4c25c..ce42e8a4 100755
 --- ./set_linux_configuration.sh
@@ -5325,11 +5331,11 @@ index 00000000..6f61df5a
 +Subproject commit 6f61df5a633c3a91edea7bcb5d5772648df19d1a
 diff --git a/vimrc/.vim/bundle/firenvim b/vimrc/.vim/bundle/firenvim
 new file mode 160000
-index 00000000..d1909c7a
+index 00000000..b6be2e07
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit d1909c7abbc1857cc8b67e0234d7932ad7825644
++Subproject commit b6be2e074b8f62815a45e31eb0966b4dd5e57810
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 index 5617a1cf..d15d63bf 160000
 --- ./vimrc/.vim/bundle/indentLine
@@ -5352,12 +5358,12 @@ index 0c22efb1..00000000
 @@ -1 +0,0 @@
 -Subproject commit 0c22efb1b919573f69ec237e7a8ab7ca1c1ecc03
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..7fb5b638 160000
+index 2b1dca6c..6c581808 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit 7fb5b63881a25c3d5a8321f8dae21737a1b01634
++Subproject commit 6c581808ac3179ea0c640e43c77de48bbbec4fbc
 diff --git a/vimrc/.vim/bundle/nvim-yarp b/vimrc/.vim/bundle/nvim-yarp
 index b710bf4d..bb5f5e03 160000
 --- ./vimrc/.vim/bundle/nvim-yarp
@@ -5422,12 +5428,12 @@ index 4579327e..4267ae2a 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..8745d13c 160000
+index dbe8b1e2..32589b15 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit 8745d13c85e7c34c0d6492717a14fb6fb575cf88
++Subproject commit 32589b15623915a4a5626533df35c8811f46085f-dirty
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
