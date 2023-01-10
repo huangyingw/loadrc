@@ -1,9 +1,9 @@
 #!/bin/zsh
 
+IFS=$'\n'
 for ss in $(git status | grep \.rej$) ; \
 do \                                     
-    targetFile=$(echo "$ss" | sed 's/\.rej$//g')
-    targetFile=$(echo "$targetFile" | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g')
+    targetFile=$(echo "$ss" | sed 's/\.rej$//g;s/^[[:space:]]//g')
     if [ "$2" = "f" ] || [ -n $(git config checkoutrejs.force) ] ; \
     then
         git checkout "$1" "$targetFile" && \
