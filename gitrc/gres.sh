@@ -1,10 +1,10 @@
 #!/bin/zsh
 
 IFS=$'\n'
-conflictArr=($(git status | awk '/both .+:/{print $3}'))
+conflictArr=$(git status | sed -e '/both modified:/!d;s/both modified:\s*//;s/^[[:space:]]//g')
 
 for conflict in "${conflictArr[@]}"
 do
-    git add $conflict
-    git reset HEAD $conflict
+    git add "$conflict"
+    git reset HEAD "$conflict"
 done
