@@ -1,5 +1,11 @@
 #!/bin/zsh
 
+if [[ "$(git config gcom.disabled)" = "true" ]]
+then
+    echo -e "${red}gcom is disabled... ${NC}"
+    exit 1
+fi
+
 if [ -z "$1" ]
 then
     echo -e "${red}Please provide target_branch... ${NC}"
