@@ -2,8 +2,10 @@
 
 IFS=$'\n'
 for ss in $(git status | grep \.rej$) ; \
-do \                                     
+do \
     targetFile=$(echo "$ss" | sed 's/\.rej$//g;s/^[[:space:]]//g')
+    ss=$(echo "$ss" | sed 's/^[[:space:]]//g')
+
     if [ "$2" = "f" ] || [ -n $(git config checkoutrejs.force) ] ; \
     then
         git checkout "$1" "$targetFile" && \
