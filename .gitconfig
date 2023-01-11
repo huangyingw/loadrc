@@ -78,3 +78,5 @@
 [branch "term"]
     remote = origin
     merge = refs/heads/term
+[gcom]
+    disabled = false

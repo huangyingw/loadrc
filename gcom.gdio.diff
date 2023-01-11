@@ -225,24 +225,22 @@ index a0d25e95..d053c758 100755
 +
 +~/loadrc/wifi-auto-reconnect/install.sh
 diff --git a/.imacpro.rc b/.imacpro.rc
-index a0d25e95..f95f5979 100755
+old mode 100755
+new mode 100644
+index a0d25e95..e69de29b
 --- ./.imacpro.rc
 +++ ./.imacpro.rc
-@@ -1,10 +1,9 @@
- #!/bin/zsh
- # alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
- 
+@@ -1,10 +0,0 @@
+-#!/bin/zsh
+-#alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
+-
 -if [ $(uname) = "Darwin" ]
-+if ! (sudo systemsetup -getcomputersleep | grep -q Never)
- then
+-then
 -    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
 -        then \
 -        sudo systemsetup -setcomputersleep Never; \
 -        fi
-+    sudo systemsetup -setcomputersleep Never
- fi
-+
-+~/loadrc/setup_bidirectional_clipboard.sh
+-fi
 diff --git a/.loadrc b/.loadrc
 index 17e45232..14ec11eb 100755
 --- ./.loadrc
@@ -1133,10 +1131,10 @@ index f58a2ee7..dcc8f356 100755
      xargs sed -i.bak  "s/${FIND}/${REPLACE}/g" < "$3"
 +fi
 diff --git a/bashrc/fvideos.sh b/bashrc/fvideos.sh
-index 38fb060b..16bea66e 100755
+index 38fb060b..aa6d4188 100755
 --- ./bashrc/fvideos.sh
 +++ ./bashrc/fvideos.sh
-@@ -1,9 +1,13 @@
+@@ -1,9 +1,21 @@
  #! /bin/zsh
  
 -FAVLOG="fav.log.bak"
@@ -1146,11 +1144,19 @@ index 38fb060b..16bea66e 100755
  export LC_ALL=C
 -find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
 +
++if [ -n "$2" ]
++then
++    SIZE_OPTION="+$2M"
++else
++    SIZE_OPTION="+10M"
++fi
++
 +cd "$1"
-+find . -type f -size +100M -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
++echo "SIZE_OPTION --> $SIZE_OPTION"
++find . -type f -size "$SIZE_OPTION" -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
      cp -fv "$FAVLOG" fav.log && \
 -    find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
-+    find . -type f -size +100M -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
++    find . -type f -size "$SIZE_OPTION" -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
      cp -fv "$FAVLOGSORT" fav.log.sort
 +
 +cd -
@@ -2027,6 +2033,15 @@ index 14d8f004..af6629ad 100755
 -git clone https://github.com/huangyingw/cscope.git
 -./cscope/build_pre.sh
 +./vm2img.sh /var/lib/libvirt/images/u2004.qcow2
+diff --git a/bashrc/watch_fvideos.sh b/bashrc/watch_fvideos.sh
+new file mode 100755
+index 00000000..b3640bda
+--- /dev/null
++++ ./bashrc/watch_fvideos.sh
+@@ -0,0 +1,3 @@
++#!/bin/zsh
++
++/root/loadrc/bashrc/check_running.sh /root/loadrc/bashrc/fvideos.sh /media/ 100
 diff --git a/bashrc/wol.sh b/bashrc/wol.sh
 index 1e941ff7..aa05d65b 100755
 --- ./bashrc/wol.sh
@@ -2086,14 +2101,21 @@ index 00000000..345a7b1d
 @@ -0,0 +1 @@
 +*/10 * * * * /Users/huangyingw/loadrc/bashrc/ports_forward.sh > /Users/huangyingw/loadrc/ports_forward.log 2>&1
 diff --git a/crontabrc/.mini.cron b/crontabrc/.mini.cron
-index d8126721..a09ce6be 100644
+index d8126721..3be8c3e2 100644
 --- ./crontabrc/.mini.cron
 +++ ./crontabrc/.mini.cron
-@@ -1,2 +1,3 @@
+@@ -1,2 +1,4 @@
  */10 * * * * /usr/bin/expressvpn connect smart
 -0 22-23,0-8 * * * /root/loadrc/crontabrc/mldonkey_start.sh
 +* * * * * /root/loadrc/bashrc/retire_parts.sh >> /root/loadrc/retire_parts.log 2>&1
 +*/10 * * * * /root/loadrc/dropboxrc/dropbox_start.sh
++* * * * * /root/loadrc/bashrc/watch_fvideos.sh >> /root/loadrc/watch_fvideos.log 2>&1 
+diff --git a/crontabrc/.server.cron b/crontabrc/.server.cron
+index e69de29b..b743d5e5 100644
+--- ./crontabrc/.server.cron
++++ ./crontabrc/.server.cron
+@@ -0,0 +1 @@
++* * * * * /root/loadrc/bashrc/watch_fvideos.sh >> /root/loadrc/watch_fvideos.log 2>&1 
 diff --git a/crontabrc/.studio.cron b/crontabrc/.studio.cron
 new file mode 100644
 index 00000000..bb6db6be
@@ -2817,11 +2839,17 @@ old mode 100644
 new mode 100755
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 new file mode 100755
-index 00000000..54035cd9
+index 00000000..04db1b6e
 --- /dev/null
 +++ ./gitrc/gcom.sh
-@@ -0,0 +1,40 @@
+@@ -0,0 +1,46 @@
 +#!/bin/zsh
++
++if [[ "$(git config gcom.disabled)" = "true" ]]
++then
++    echo -e "${red}gcom is disabled... ${NC}"
++    exit 1
++fi
 +
 +if [ -z "$1" ]
 +then
@@ -3148,21 +3176,16 @@ index 2198cb7f..d4e493b4 100755
      done
  fi
 diff --git a/gitrc/gres.sh b/gitrc/gres.sh
-index 1de7ff41..8fbe7af2 100755
+index 1de7ff41..0c746af7 100755
 --- ./gitrc/gres.sh
 +++ ./gitrc/gres.sh
-@@ -1,7 +1,10 @@
+@@ -1,5 +1,6 @@
  #!/bin/zsh
  
++IFS=$'\n'
  conflictArr=($(git status | awk '/both .+:/{print $3}'))
--
-+#       git status | sed -e '/both modified:/!d;s/both modified://;s/^[\s\t]*//g;s/\ /\\ /g'
-+#       both modified:   Solutions/CohesitySecurity/Data Connectors/Helios2Sentinel/IncidentProducer/IncidentProducer.cs
-+#       both modified:   Solutions/CohesitySecurity/Data Connectors/Helios2Sentinel/IncidentProducer/local.settings.json
-+#       both added:      Solutions/CohesitySecurity/Data Connectors/Helios2Sentinel/azuredeploy.json
+ 
  for conflict in "${conflictArr[@]}"
- do
-     git add $conflict
 diff --git a/gitrc/gsearch.sh b/gitrc/gsearch.sh
 index b3980c8a..240de610 100755
 --- ./gitrc/gsearch.sh
@@ -3507,6 +3530,14 @@ diff --git a/host_links/ubuntu/etc/network/interfaces b/host_links/ubuntu/etc/ne
 similarity index 100%
 rename from host_links/ubuntu/etc/network/interfaces
 rename to host_links/ubuntu/etc/network/interfaces_bak
+diff --git a/hosts/imacpro/Library/Application Support/ZeroTier/One/identity.public b/hosts/imacpro/var/lib/zerotier-one/identity.public
+similarity index 100%
+rename from hosts/imacpro/Library/Application Support/ZeroTier/One/identity.public
+rename to hosts/imacpro/var/lib/zerotier-one/identity.public
+diff --git a/hosts/imacpro/Library/Application Support/ZeroTier/One/identity.secret b/hosts/imacpro/var/lib/zerotier-one/identity.secret
+similarity index 100%
+rename from hosts/imacpro/Library/Application Support/ZeroTier/One/identity.secret
+rename to hosts/imacpro/var/lib/zerotier-one/identity.secret
 diff --git a/hosts/mba/Library/Application Support/ZeroTier/One/identity.public b/hosts/mba/Library/Application Support/ZeroTier/One/identity.public
 new file mode 100644
 index 00000000..4db8d9ce
@@ -3554,6 +3585,22 @@ index 00000000..1e7f6d4c
 +++ ./hosts/mbp2/Library/Application Support/ZeroTier/One/identity.secret	
 @@ -0,0 +1 @@
 +1e95a2d9fe:0:8034bed74da2e9afccdc3e92957bb5d0cc632b03f1eac11f79166c5a51d1c30e22907658b0726436934d77b39e6646705c0fd9f9473344dd730ba1f18225a4a0:f6b50f5dcac2647699d089e2bb353dba00869a34bee41e2f8d3eeef1b0ff64dcb6e8ffd07bde5d094aa76a211917c1f237038780f431e0e486bd280a4e825590
+\ No newline at end of file
+diff --git a/hosts/pikvm/var/lib/zerotier-one/identity.public b/hosts/pikvm/var/lib/zerotier-one/identity.public
+new file mode 100644
+index 00000000..d7661195
+--- /dev/null
++++ ./hosts/pikvm/var/lib/zerotier-one/identity.public
+@@ -0,0 +1 @@
++c3ac8da1fa:0:7af52fe48ed1613731078324d9af26220b18ed7b481725929f4ffa93e984460c4d6e5cb6a7325490be71d937a87e0ca796ebc39a24f9ed9145f1b1bc0817d157
+\ No newline at end of file
+diff --git a/hosts/pikvm/var/lib/zerotier-one/identity.secret b/hosts/pikvm/var/lib/zerotier-one/identity.secret
+new file mode 100644
+index 00000000..cf521956
+--- /dev/null
++++ ./hosts/pikvm/var/lib/zerotier-one/identity.secret
+@@ -0,0 +1 @@
++c3ac8da1fa:0:7af52fe48ed1613731078324d9af26220b18ed7b481725929f4ffa93e984460c4d6e5cb6a7325490be71d937a87e0ca796ebc39a24f9ed9145f1b1bc0817d157:44a4a32f4690d9393311149be68a2be9769aa70830b36e73c443dec25168cc67ba9fc494599f19fccc2abbc0348519c8e1d590b6636c090ea975f354e912f911
 \ No newline at end of file
 diff --git a/hosts/server/var/lib/zerotier-one/identity.public b/hosts/server/var/lib/zerotier-one/identity.public
 index 55095016..d55d1f79 100644
@@ -4786,11 +4833,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..0d29a625
+index 00000000..90476237
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 0d29a6259eb38a7e2bdb85b8dfca408aaa50163b-dirty
++Subproject commit 90476237688f8c14f1d2bc0c9415f62c0bcff4b9-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4919,11 +4966,11 @@ index 13a0cf4c..6cd6989c 100755
  
 diff --git a/rsync b/rsync
 new file mode 160000
-index 00000000..d1f9dfd5
+index 00000000..c74f3cc1
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit d1f9dfd52c9cc890a7a934aaaecda7a3d34e9f02-dirty
++Subproject commit c74f3cc1b5bd7567bbdf4ac9218c5eb7cbf3b873
 diff --git a/set_linux_configuration.sh b/set_linux_configuration.sh
 index ced4c25c..ce42e8a4 100755
 --- ./set_linux_configuration.sh
@@ -5281,14 +5328,14 @@ index 00000000..6f61df5a
 --- /dev/null
 +++ ./vimrc/.vim/bundle/cql-vim
 @@ -0,0 +1 @@
-+Subproject commit 6f61df5a633c3a91edea7bcb5d5772648df19d1a-dirty
++Subproject commit 6f61df5a633c3a91edea7bcb5d5772648df19d1a
 diff --git a/vimrc/.vim/bundle/firenvim b/vimrc/.vim/bundle/firenvim
 new file mode 160000
-index 00000000..d9a2a73a
+index 00000000..b6be2e07
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit d9a2a73a1783fcdcd76b6f488578c020111d3fad
++Subproject commit b6be2e074b8f62815a45e31eb0966b4dd5e57810
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 index 5617a1cf..d15d63bf 160000
 --- ./vimrc/.vim/bundle/indentLine
@@ -5311,12 +5358,12 @@ index 0c22efb1..00000000
 @@ -1 +0,0 @@
 -Subproject commit 0c22efb1b919573f69ec237e7a8ab7ca1c1ecc03
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..7fb5b638 160000
+index 2b1dca6c..6c581808 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit 7fb5b63881a25c3d5a8321f8dae21737a1b01634
++Subproject commit 6c581808ac3179ea0c640e43c77de48bbbec4fbc
 diff --git a/vimrc/.vim/bundle/nvim-yarp b/vimrc/.vim/bundle/nvim-yarp
 index b710bf4d..bb5f5e03 160000
 --- ./vimrc/.vim/bundle/nvim-yarp
@@ -5333,11 +5380,11 @@ index 00000000..7d4c1d81
 +Subproject commit 7d4c1d8198e889d513a030b5a83faa07606bac27
 diff --git a/vimrc/.vim/bundle/plantuml-previewer.vim b/vimrc/.vim/bundle/plantuml-previewer.vim
 new file mode 160000
-index 00000000..74483d5d
+index 00000000..eb760911
 --- /dev/null
 +++ ./vimrc/.vim/bundle/plantuml-previewer.vim
 @@ -0,0 +1 @@
-+Subproject commit 74483d5d01042db5de6f89aaba64376d87effaff
++Subproject commit eb76091148562c644dd32e4a20d37ce1b45eb21a
 diff --git a/vimrc/.vim/bundle/plantuml-syntax b/vimrc/.vim/bundle/plantuml-syntax
 new file mode 160000
 index 00000000..845abb56
@@ -5381,12 +5428,12 @@ index 4579327e..4267ae2a 160000
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
 +Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..8745d13c 160000
+index dbe8b1e2..32589b15 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit 8745d13c85e7c34c0d6492717a14fb6fb575cf88
++Subproject commit 32589b15623915a4a5626533df35c8811f46085f-dirty
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
@@ -5442,21 +5489,21 @@ index 00000000..c993a138
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-php-cs-fixer
 @@ -0,0 +1 @@
-+Subproject commit c993a1381454e97048383a8ff6f18eecafc763dc-dirty
++Subproject commit c993a1381454e97048383a8ff6f18eecafc763dc
 diff --git a/vimrc/.vim/bundle/vim-ps1 b/vimrc/.vim/bundle/vim-ps1
 new file mode 160000
 index 00000000..e7cc3b08
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-ps1
 @@ -0,0 +1 @@
-+Subproject commit e7cc3b08f6f9e2dc1909f397aa3d5b0a7acb661c-dirty
++Subproject commit e7cc3b08f6f9e2dc1909f397aa3d5b0a7acb661c
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..a6d2bac9 160000
+index 3b379635..959e94b7 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit a6d2bac95b446a5c23eff4638eca164b0d77454a
++Subproject commit 959e94b76e6ebdf984acef61649ba7d0f62bd425
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
@@ -5761,7 +5808,7 @@ index 00000000..6bf0e4ae
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..776ff9dc 100644
+index d5874fe5..27304add 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,18 @@
@@ -5783,7 +5830,7 @@ index d5874fe5..776ff9dc 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDeleted :execute s:FindDeleted()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
-@@ -27,20 +32,23 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean
+@@ -27,23 +32,27 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gclean
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gco :execute s:Gco(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcob :execute s:Gcob(<f-args>)
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gcof :execute s:Gcof(<f-args>)
@@ -5809,7 +5856,11 @@ index d5874fe5..776ff9dc 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gres :execute s:Gres()
-@@ -51,25 +59,26 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GrevApply :execute s:GrevApply()
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
+ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtu :execute s:Grtu()
+@@ -51,25 +60,26 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtv :
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gs :execute s:Gs()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gsave :execute s:Gsave()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gshow :execute s:Gshow(<q-args>)
@@ -5840,7 +5891,7 @@ index d5874fe5..776ff9dc 100644
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
  command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Split :execute s:Split()
-@@ -111,13 +120,12 @@ endfunction
+@@ -111,13 +121,12 @@ endfunction
  
  function! s:Gkdo() abort
      let worktree = Cd2Worktree()
@@ -5857,7 +5908,7 @@ index d5874fe5..776ff9dc 100644
      endif
  endfunction
  
-@@ -167,13 +175,13 @@ endfunction
+@@ -167,13 +176,13 @@ endfunction
  function! s:Fdisklog() abort
      let worktree = Cd2Worktree()
      exec '!~/loadrc/bashrc/fdisk_log.sh'
@@ -5874,7 +5925,7 @@ index d5874fe5..776ff9dc 100644
  endfunction
  
  function! s:Glg() abort
-@@ -207,7 +215,8 @@ endfunction
+@@ -207,7 +216,8 @@ endfunction
  
  function! s:Gpl() abort
      let worktree = Cd2Worktree()
@@ -5884,7 +5935,7 @@ index d5874fe5..776ff9dc 100644
  endfunction
  
  function! s:Fsync() abort
-@@ -228,12 +237,14 @@ endfunction
+@@ -228,12 +238,14 @@ endfunction
  
  function! s:Gbib() abort
      let worktree = Cd2Worktree()
@@ -5901,7 +5952,7 @@ index d5874fe5..776ff9dc 100644
  endfunction
  
  function! s:Gbil() abort
-@@ -306,7 +317,7 @@ endfunction
+@@ -306,7 +318,7 @@ endfunction
  
  function! s:Gme2(args, ...) abort
      let worktree = Cd2Worktree()
@@ -5910,7 +5961,7 @@ index d5874fe5..776ff9dc 100644
      call OpenOrSwitch(worktree . '/' . 'gme2.findresult', 'vs')
  endfunction
  
-@@ -321,11 +332,11 @@ function! s:G(args, ...) abort
+@@ -321,11 +333,11 @@ function! s:G(args, ...) abort
      endif
  
      if &diff
@@ -5924,7 +5975,7 @@ index d5874fe5..776ff9dc 100644
  
      if &diff
          call s:Gs()
-@@ -366,16 +377,15 @@ function! s:Gdi(...) abort
+@@ -366,16 +378,15 @@ function! s:Gdi(...) abort
          if arg1 == ''
              call fugitive#Diffsplit(0, 1, "vert", '', [])
          elseif tolower(arg1) == 'o'
@@ -5944,7 +5995,7 @@ index d5874fe5..776ff9dc 100644
      endif
  
      if bufwinnr('^' . output . '$') > 0
-@@ -391,13 +401,14 @@ function! s:Gdit() abort
+@@ -391,13 +402,14 @@ function! s:Gdit() abort
      let current_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
      let output = current_branch . '.gdit.diff'
      let output = substitute(output, "/", "_", "g")
@@ -5960,7 +6011,7 @@ index d5874fe5..776ff9dc 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -422,9 +433,9 @@ function! s:Gdi2(...) abort
+@@ -422,9 +434,9 @@ function! s:Gdi2(...) abort
      endif
  
      let worktree = Cd2Worktree()
@@ -5972,7 +6023,7 @@ index d5874fe5..776ff9dc 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -475,18 +486,17 @@ endfunction
+@@ -475,18 +487,17 @@ endfunction
  
  function! s:Gdif(...) abort
      let worktree = Cd2Worktree()
@@ -5997,7 +6048,7 @@ index d5874fe5..776ff9dc 100644
      call OpenOrSwitch(output, 'vs')
  endfunction
  
-@@ -516,10 +526,20 @@ endfunction
+@@ -516,10 +527,20 @@ endfunction
  
  function! s:ApplyBranch(args, ...) abort
      let worktree = Cd2Worktree()
@@ -6019,7 +6070,7 @@ index d5874fe5..776ff9dc 100644
  function! s:Gshow(args, ...) abort
      let worktree = Cd2Worktree()
      let output = a:args . '.diff'
-@@ -527,7 +547,19 @@ function! s:Gshow(args, ...) abort
+@@ -527,7 +548,19 @@ function! s:Gshow(args, ...) abort
      call OpenOrSwitch(output, 'vs')
  endfunction
  
@@ -6039,7 +6090,7 @@ index d5874fe5..776ff9dc 100644
      let newFile = (a:0 >= 1) ? a:1 : expand("%:p") . '.bak'
      exec '!rm ' . newFile
      exec 'w ' . newFile
-@@ -546,6 +578,25 @@ function! s:CatPlay(...) abort
+@@ -546,6 +579,25 @@ function! s:CatPlay(...) abort
      call OpenOrSwitch(b:output, 'vs')
  endfunction
  
@@ -6065,7 +6116,7 @@ index d5874fe5..776ff9dc 100644
  function! s:CatMove(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -559,6 +610,90 @@ function! s:CatMove(...) abort
+@@ -559,6 +611,90 @@ function! s:CatMove(...) abort
      call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
  endfunction
  
@@ -6156,7 +6207,18 @@ index d5874fe5..776ff9dc 100644
  function! s:CatDu(...) abort
      if &modified
          echom 'Please check and save your file first!!!'
-@@ -636,11 +771,20 @@ function! s:LcTest() abort
+@@ -590,6 +726,10 @@ function! s:Gres() abort
+     exec '!~/loadrc/gitrc/gres.sh'
+ endfunction
+ 
++function! s:GrevApply() abort
++    exec '!git apply --reverse --reject --whitespace=fix --recount ' . '"' .  expand('%:p') . '"'
++endfunction
++
+ function! s:Dps() abort
+     let worktree = Cd2Worktree()
+     silent exec '!~/loadrc/dockerrc/dps.sh'
+@@ -636,11 +776,20 @@ function! s:LcTest() abort
      call OpenOrSwitch(expand('%:p') . '.sh', 'vs')
  endfunction
  
@@ -6178,7 +6240,7 @@ index d5874fe5..776ff9dc 100644
      call Cd2ProjectRoot("files.proj")
  
      if expand('%:t') != 'index'
-@@ -649,14 +793,14 @@ function! s:Fr(find, replace) abort
+@@ -649,14 +798,14 @@ function! s:Fr(find, replace) abort
          let fileList = "files.proj"
      endif
  
@@ -6196,7 +6258,7 @@ index d5874fe5..776ff9dc 100644
  endfunction
  
  function! s:Gwap() abort
-@@ -671,13 +815,15 @@ function! s:Gfix() abort
+@@ -671,13 +820,15 @@ function! s:Gfix() abort
  endfunction
  
  function! s:Reapply() abort
@@ -6214,7 +6276,7 @@ index d5874fe5..776ff9dc 100644
      call s:Gs()
  endfunction
  
-@@ -701,3 +847,5 @@ function! s:GenerateIpynb() abort
+@@ -701,3 +852,5 @@ function! s:GenerateIpynb() abort
      exec '!~/loadrc/ipynbrc/generate_ipynb.sh ' . '"' .  expand('%:p') . '"'
      w
  endfunction
@@ -7371,6 +7433,19 @@ index 430298e0..cb9795ec 100755
 +        sleep 5
          nmcli con up uuid $CONNECTION_UUID
      fi
+ fi
+diff --git a/zerotierrc/install.sh b/zerotierrc/install.sh
+index 349a4798..d2c8b56f 100755
+--- ./zerotierrc/install.sh
++++ ./zerotierrc/install.sh
+@@ -6,5 +6,8 @@ cd "$SCRIPTPATH"
+ if [ $(uname) != "Darwin" ]
+ then
+     curl -s https://install.zerotier.com/ | bash
++    pacman --noconfirm -Sy zerotier-one
++    systemctl enable zerotier-one.service
++    systemctl start zerotier-one.service
+     zerotier-cli join 93afae5963560e41
  fi
 diff --git a/zerotierrc/zerotier.sh b/zerotierrc/zerotier.sh
 new file mode 100755
