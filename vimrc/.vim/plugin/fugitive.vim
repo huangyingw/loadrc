@@ -504,7 +504,8 @@ endfunction
 function! s:Gco(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gco.sh ' . '"' .  arg1 . '"')
+    exec '!~/loadrc/gitrc/gco.sh ' . '"' .  arg1 . '" 2>&1 | tee ' . 'gco.runresult'  
+    call OpenOrSwitch('gco.runresult', 'vs')
 endfunction
 
 function! s:Gcob(...) abort
