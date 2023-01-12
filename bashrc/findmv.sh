@@ -1,5 +1,17 @@
 #!/bin/zsh
 
+if [ -z "$1" ]
+then
+    echo -e "${red}Please provide the SOURCE... ${NC}"
+    exit 1
+fi
+
+if [ -z "$2" ]
+then
+    echo -e "${red}Please provide the TARGET... ${NC}"
+    exit 1
+fi
+
 SOURCE="$1"
 TARGET="$2"
 
