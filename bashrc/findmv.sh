@@ -1,11 +1,15 @@
 #!/bin/zsh
 
-source="/media/mapper/115_disk/av/av91/av"
-target="/media/mapper/115_disk/av"
-file="/media/mapper/115_disk/av/av91/av/zunsafe/旬果/ssis-506-4k/7 ssis-506-4k.mp4"
+source="$1"
+target="$2"
 
-echo "file --> $file"
+echo "ss --> $ss"
 echo "target --> $target"
-new_file=$(echo "$file" | sed -e "s#$source#$target#g")
-mkdir -p "$(dirname "$new_file")"
-mv -v "$file" "$new_file"
+
+find "$source" -type f | \
+    while read ss
+    do
+        new_ss=$(echo "$ss" | sed -e "s#$source#$target#g")
+        mkdir -p "$(dirname "$new_ss")"
+        mv -v "$ss" "$new_ss"
+    done
