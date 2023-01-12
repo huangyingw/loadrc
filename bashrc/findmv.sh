@@ -1,15 +1,13 @@
 #!/bin/zsh
 
-source="$1"
-target="$2"
+SOURCE="$1"
+TARGET="$2"
 
-echo "ss --> $ss"
-echo "target --> $target"
 
-find "$source" -type f | \
+find "$SOURCE" -type f | \
     while read ss
     do
-        new_ss=$(echo "$ss" | sed -e "s#$source#$target#g")
+        new_ss=$(echo "$ss" | sed -e "s#$SOURCE#$TARGET#g")
         mkdir -p "$(dirname "$new_ss")"
-        mv -v "$ss" "$new_ss"
+        mv -nv "$ss" "$new_ss"
     done
