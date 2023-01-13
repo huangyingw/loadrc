@@ -23,3 +23,5 @@ find "$SOURCE" -type f | \
         mkdir -p "$(dirname "$new_ss")"
         mv -nv "$ss" "$new_ss"
     done
+
+~/loadrc/bashrc/move.sh "$SOURCE" "$TARGET"
