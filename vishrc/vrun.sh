@@ -115,4 +115,8 @@ case $extension in
         cd "$rootFolder"
         pwsh "$file"
         ;;
+    sln)
+        cd "$rootFolder"
+        dotnet build "$file"
+        ;;
 esac
