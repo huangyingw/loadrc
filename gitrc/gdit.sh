@@ -15,6 +15,6 @@ git fetch "$remote" "$remote_branch":"$target_branch"
 
 if [ $? -ne 0 ]
 then
-    echo -e "${red}most probably sth wrong in git merge... ${NC}" > "$output" 2>&1 
+    echo -e "${red}most probably sth wrong in git merge... ${NC}" > "$output" 2>&1
     exit 1
 fi
