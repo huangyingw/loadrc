@@ -119,7 +119,7 @@ case $extension in
         cd "$rootFolder"
         dotnet build "$file"
         ;;
-    cs)
+    cs|csproj)
         SCRIPT=$(realpath "$file")
         SCRIPTPATH=$(dirname "$SCRIPT")
         cd "$SCRIPTPATH"
