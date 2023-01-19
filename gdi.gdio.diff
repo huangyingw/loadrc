@@ -963,7 +963,7 @@ diff --git a/bashrc/encrypt.sh b/bashrc/encrypt.sh
      exit 1
  fi
  cryptsetup -h sha256 -c aes-cbc-essiv:sha256 -s 256 luksFormat "$1"
-+cryptsetup luksAddKey "$1" /root/loadrc/keys/keyfile  
++cryptsetup luksAddKey "$1" /root/loadrc/keys/keyfile
 diff --git a/bashrc/fav.sh b/bashrc/fav.sh
 deleted file mode 100755
 --- ./bashrc/fav.sh
@@ -1353,7 +1353,7 @@ diff --git a/bashrc/ln_fs.sh b/bashrc/ln_fs.sh
 +    elif [ -d "$TARGET" ]
 +    then
 +        rsync -aHv --progress --remove-source-files "$TARGET"/ "$TARGET".bak/ ; \
-+        ~/loadrc/bashrc/rmEmpty.sh "$TARGET" 
++        ~/loadrc/bashrc/rmEmpty.sh "$TARGET"
      fi
  
      ln -fs "$SOURCE" "$TARGET"
@@ -1623,7 +1623,7 @@ new mode 100755
 +   -H "x-imvu-sauce: $SAUCE" \
 +   -H "Cookie: osCsid=$OSCSID" \
 +   -d @body.json \
-+   https://api.imvu.com/gift > gift.json       
++   https://api.imvu.com/gift > gift.json
 diff --git a/bashrc/reboot.sh b/bashrc/reboot.sh
 --- ./bashrc/reboot.sh
 +++ ./bashrc/reboot.sh
@@ -1797,7 +1797,7 @@ diff --git a/bashrc/smount.sh b/bashrc/smount.sh
  
  remoteServer=$(echo "$1" | sed  -e "s/\/$//g")
  mkdir -p ~/"$remoteServer"
-+mkdir -p ~/nfs/"$remoteServer" 
++mkdir -p ~/nfs/"$remoteServer"
  
  if [ $(uname) = "Linux" ]
  then
@@ -1808,7 +1808,7 @@ diff --git a/bashrc/smount.sh b/bashrc/smount.sh
  else
 -    diskutil unmountDisk force ~/"$remoteServer"
 +    diskutil unmount force ~/nfs/"$remoteServer"
-+    diskutil unmount force ~/"$remoteServer" 
++    diskutil unmount force ~/"$remoteServer"
 +    ps ax | awk '/sshfs '$remoteServer'/NR > 1 {print $1}' | xargs kill -9
      sshfs "$remoteServer":/ ~/"$remoteServer"
 +    sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/nfs/"$remoteServer" &
@@ -2046,7 +2046,7 @@ diff --git a/crontabrc/.server.cron b/crontabrc/.server.cron
 --- ./crontabrc/.server.cron
 +++ ./crontabrc/.server.cron
 @@ -0,0 +1 @@
-+* * * * * /root/loadrc/bashrc/watch_fvideos.sh >> /root/loadrc/watch_fvideos.log 2>&1 
++* * * * * /root/loadrc/bashrc/watch_fvideos.sh >> /root/loadrc/watch_fvideos.log 2>&1
 diff --git a/crontabrc/.studio.cron b/crontabrc/.studio.cron
 new file mode 100644
 --- /dev/null
@@ -2576,8 +2576,8 @@ diff --git a/gitrc/checkout_rejs.sh b/gitrc/checkout_rejs.sh
  for ss in $(git status | grep \.rej$) ; \
  do \
 -    targetFile=$(echo "$ss" | sed 's/\.rej$//g')
-+    targetFile=$(echo "$ss" | sed 's/\.rej$//g;s/^[[:space:]]//g')
-+    ss=$(echo "$ss" | sed 's/^[[:space:]]//g')
++    targetFile=$(echo "$ss" | sed 's/\.rej$//g;s/^[[:space:]]*//g')
++    ss=$(echo "$ss" | sed 's/^[[:space:]]*//g')
 +
 +    if [ "$2" = "f" ] || [ -n $(git config checkoutrejs.force) ] ; \
 +    then
@@ -2977,7 +2977,7 @@ diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
  if [ $? -ne 0 ]
  then
 -    echo -e "${red}most probably sth wrong in git merge... ${NC}" 2>&1 | tee "$output"
-+    echo -e "${red}most probably sth wrong in git merge... ${NC}" > "$output" 2>&1 
++    echo -e "${red}most probably sth wrong in git merge... ${NC}" > "$output" 2>&1
      exit 1
  fi
 diff --git a/gitrc/git-submodule.sh b/gitrc/git-submodule.sh
@@ -3110,23 +3110,23 @@ diff --git a/gitrc/gps.sh b/gitrc/gps.sh
      done
  fi
 diff --git a/gitrc/gres.sh b/gitrc/gres.sh
-index 1de7ff41..8fbe7af2 100755
 --- ./gitrc/gres.sh
 +++ ./gitrc/gres.sh
-@@ -1,7 +1,10 @@
+@@ -1,9 +1,10 @@
  #!/bin/zsh
  
- conflictArr=($(git status | awk '/both .+:/{print $3}'))
--
-+#       git status | sed -e '/both modified:/!d;s/both modified://;s/^[\s\t]*//g;s/\ /\\ /g'
-+#       both modified:   Solutions/CohesitySecurity/Data Connectors/Helios2Sentinel/IncidentProducer/IncidentProducer.cs
-+#       both modified:   Solutions/CohesitySecurity/Data Connectors/Helios2Sentinel/IncidentProducer/local.settings.json
-+#       both added:      Solutions/CohesitySecurity/Data Connectors/Helios2Sentinel/azuredeploy.json
+-conflictArr=($(git status | awk '/both .+:/{print $3}'))
++IFS=$'\n'
++conflictArr=($(git status | sed -e '/both modified:/!d;s/both modified:\s*//;s/^[[:space:]]*//g'))
+ 
  for conflict in "${conflictArr[@]}"
  do
-     git add $conflict
+-    git add $conflict
+-    git reset HEAD $conflict
++    git add "$conflict"
++    git reset HEAD "$conflict"
+ done
 diff --git a/gitrc/gsearch.sh b/gitrc/gsearch.sh
-index b3980c8a..240de610 100755
 --- ./gitrc/gsearch.sh
 +++ ./gitrc/gsearch.sh
 @@ -1,4 +1,10 @@
@@ -3145,7 +3145,6 @@ index b3980c8a..240de610 100755
 +    -p -G "$1" -- "${filesStr[@]}" > "$2"
 diff --git a/gitrc/gsearch.test.sh b/gitrc/gsearch.test.sh
 new file mode 100755
-index 00000000..616acc64
 --- /dev/null
 +++ ./gitrc/gsearch.test.sh
 @@ -0,0 +1,6 @@
@@ -3156,7 +3155,6 @@ index 00000000..616acc64
 +
 +./gsearch.sh GitSearch ~/loadrc/gitsearch.findresult ~/loadrc/gitsearch.findresult.tmp
 diff --git a/gitrc/gshow.sh b/gitrc/gshow.sh
-index 06604af2..056c7062 100755
 --- ./gitrc/gshow.sh
 +++ ./gitrc/gshow.sh
 @@ -1,2 +1,2 @@
@@ -3167,7 +3165,6 @@ diff --git a/gitrc/gsquash.sh b/gitrc/gsquash.sh
 old mode 100644
 new mode 100755
 diff --git a/gitrc/gstp.sh b/gitrc/gstp.sh
-index 559b2ec5..15e9fe67 100755
 --- ./gitrc/gstp.sh
 +++ ./gitrc/gstp.sh
 @@ -1,7 +1,7 @@
@@ -3181,7 +3178,6 @@ index 559b2ec5..15e9fe67 100755
 +    git stash show -p stash@{"$1"} | git apply --reject --whitespace=fix --recount && git stash drop stash@{"$1"}
  fi
 diff --git a/gitrc/gsync.sh b/gitrc/gsync.sh
-index 9208b305..06422338 100755
 --- ./gitrc/gsync.sh
 +++ ./gitrc/gsync.sh
 @@ -1,3 +1,3 @@
@@ -3191,7 +3187,6 @@ index 9208b305..06422338 100755
 +~/loadrc/gitrc/dogsync.sh
 +git submodule status | awk '{print $2}' | parallel --jobs 0 'cd {}; ~/loadrc/gitrc/dogsync.sh; cd -'
 diff --git a/gitrc/postCommit.sh b/gitrc/postCommit.sh
-index 3bd9b5b1..8ad9bedc 100755
 --- ./gitrc/postCommit.sh
 +++ ./gitrc/postCommit.sh
 @@ -1,2 +1,4 @@
@@ -3200,7 +3195,6 @@ index 3bd9b5b1..8ad9bedc 100755
  ~/loadrc/gitrc/gsync.sh
 +~/loadrc/bashrc/update_proj.sh
 diff --git a/gitrc/reapply.sh b/gitrc/reapply.sh
-index d1ffbd95..3e44709b 100755
 --- ./gitrc/reapply.sh
 +++ ./gitrc/reapply.sh
 @@ -1,12 +1,22 @@
@@ -3235,7 +3229,6 @@ index d1ffbd95..3e44709b 100755
  fi
 diff --git a/gitrc/rediff.sh b/gitrc/rediff.sh
 new file mode 100755
-index 00000000..8c70d0cc
 --- /dev/null
 +++ ./gitrc/rediff.sh
 @@ -0,0 +1,4 @@
@@ -3245,7 +3238,6 @@ index 00000000..8c70d0cc
 +rediff "$DIFF_FILE" | sponge "$DIFF_FILE"
 diff --git a/gitrc/restore.sh b/gitrc/restore.sh
 new file mode 100755
-index 00000000..bbc0817e
 --- /dev/null
 +++ ./gitrc/restore.sh
 @@ -0,0 +1,7 @@
@@ -3257,7 +3249,6 @@ index 00000000..bbc0817e
 +    echo "git reverse apply failed" && \
 +    exit 1
 diff --git a/gpurc/.gpurc b/gpurc/.gpurc
-index 8be8d98c..6026d401 100644
 --- ./gpurc/.gpurc
 +++ ./gpurc/.gpurc
 @@ -1,4 +1,2 @@
@@ -3267,7 +3258,6 @@ index 8be8d98c..6026d401 100644
 -export PATH=/usr/local/cuda/bin:$PATH
 diff --git a/host_links/COH-LC172TVQ6J/Users/ying.huang/.gitconfig b/host_links/COH-LC172TVQ6J/Users/ying.huang/.gitconfig
 new file mode 100755
-index 00000000..01ecb2b5
 --- /dev/null
 +++ ./host_links/COH-LC172TVQ6J/Users/ying.huang/.gitconfig
 @@ -0,0 +1,96 @@
@@ -3369,7 +3359,6 @@ index 00000000..01ecb2b5
 +	helper = !gh auth git-credential
 diff --git a/host_links/imac/Users/huangyingw/.bashrc b/host_links/imac/Users/huangyingw/.bashrc
 deleted file mode 100644
-index 82bc6cb7..00000000
 --- ./host_links/imac/Users/huangyingw/.bashrc
 +++ /dev/null
 @@ -1,2 +0,0 @@
@@ -3377,7 +3366,6 @@ index 82bc6cb7..00000000
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/imacpro/Users/huangyingw/.bashrc b/host_links/imacpro/Users/huangyingw/.bashrc
 deleted file mode 100644
-index 82bc6cb7..00000000
 --- ./host_links/imacpro/Users/huangyingw/.bashrc
 +++ /dev/null
 @@ -1,2 +0,0 @@
@@ -3389,14 +3377,12 @@ rename from host_links/lint-sandbox/etc/network/interfaces
 rename to host_links/lint-sandbox/etc/network/interfaces_bak
 diff --git a/host_links/mbp/Users/huangyingw/.bashrc b/host_links/mbp/Users/huangyingw/.bashrc
 deleted file mode 100644
-index 82bc6cb7..00000000
 --- ./host_links/mbp/Users/huangyingw/.bashrc
 +++ /dev/null
 @@ -1,2 +0,0 @@
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..d4a03a0e 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
 @@ -9,15 +9,22 @@
@@ -3426,7 +3412,6 @@ index 425c9192..d4a03a0e 100644
  ::1     ip6-localhost ip6-loopback
 diff --git a/host_links/mini/etc/netplan/00-installer-config.yaml_bak b/host_links/mini/etc/netplan/00-installer-config.yaml_bak
 new file mode 100644
-index 00000000..cc10a1ad
 --- /dev/null
 +++ ./host_links/mini/etc/netplan/00-installer-config.yaml_bak
 @@ -0,0 +1,12 @@
@@ -3447,7 +3432,6 @@ similarity index 100%
 rename from host_links/movie/etc/network/interfaces
 rename to host_links/movie/etc/network/interfaces_bak
 diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
-index 50886663..6d13b8f2 100644
 --- ./host_links/server/etc/hosts
 +++ ./host_links/server/etc/hosts
 @@ -10,6 +10,10 @@
@@ -3469,9 +3453,16 @@ diff --git a/host_links/ubuntu/etc/network/interfaces b/host_links/ubuntu/etc/ne
 similarity index 100%
 rename from host_links/ubuntu/etc/network/interfaces
 rename to host_links/ubuntu/etc/network/interfaces_bak
+diff --git a/hosts/imacpro/Library/Application Support/ZeroTier/One/identity.public b/hosts/imacpro/var/lib/zerotier-one/identity.public
+similarity index 100%
+rename from hosts/imacpro/Library/Application Support/ZeroTier/One/identity.public
+rename to hosts/imacpro/var/lib/zerotier-one/identity.public
+diff --git a/hosts/imacpro/Library/Application Support/ZeroTier/One/identity.secret b/hosts/imacpro/var/lib/zerotier-one/identity.secret
+similarity index 100%
+rename from hosts/imacpro/Library/Application Support/ZeroTier/One/identity.secret
+rename to hosts/imacpro/var/lib/zerotier-one/identity.secret
 diff --git a/hosts/mba/Library/Application Support/ZeroTier/One/identity.public b/hosts/mba/Library/Application Support/ZeroTier/One/identity.public
 new file mode 100644
-index 00000000..4db8d9ce
 --- /dev/null
 +++ ./hosts/mba/Library/Application Support/ZeroTier/One/identity.public	
 @@ -0,0 +1 @@
@@ -3479,7 +3470,6 @@ index 00000000..4db8d9ce
 \ No newline at end of file
 diff --git a/hosts/mba/Library/Application Support/ZeroTier/One/identity.secret b/hosts/mba/Library/Application Support/ZeroTier/One/identity.secret
 new file mode 100644
-index 00000000..12b4045b
 --- /dev/null
 +++ ./hosts/mba/Library/Application Support/ZeroTier/One/identity.secret	
 @@ -0,0 +1 @@
@@ -3487,7 +3477,6 @@ index 00000000..12b4045b
 \ No newline at end of file
 diff --git a/hosts/mbp/Library/Application Support/ZeroTier/One/identity.public b/hosts/mbp/Library/Application Support/ZeroTier/One/identity.public
 deleted file mode 100644
-index 3980820a..00000000
 --- ./hosts/mbp/Library/Application Support/ZeroTier/One/identity.public	
 +++ /dev/null
 @@ -1 +0,0 @@
@@ -3495,7 +3484,6 @@ index 3980820a..00000000
 \ No newline at end of file
 diff --git a/hosts/mbp/Library/Application Support/ZeroTier/One/identity.secret b/hosts/mbp/Library/Application Support/ZeroTier/One/identity.secret
 deleted file mode 100644
-index b61c722f..00000000
 --- ./hosts/mbp/Library/Application Support/ZeroTier/One/identity.secret	
 +++ /dev/null
 @@ -1 +0,0 @@
@@ -3503,7 +3491,6 @@ index b61c722f..00000000
 \ No newline at end of file
 diff --git a/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.public b/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.public
 new file mode 100644
-index 00000000..2e736125
 --- /dev/null
 +++ ./hosts/mbp2/Library/Application Support/ZeroTier/One/identity.public	
 @@ -0,0 +1 @@
@@ -3511,14 +3498,26 @@ index 00000000..2e736125
 \ No newline at end of file
 diff --git a/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.secret b/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.secret
 new file mode 100644
-index 00000000..1e7f6d4c
 --- /dev/null
 +++ ./hosts/mbp2/Library/Application Support/ZeroTier/One/identity.secret	
 @@ -0,0 +1 @@
 +1e95a2d9fe:0:8034bed74da2e9afccdc3e92957bb5d0cc632b03f1eac11f79166c5a51d1c30e22907658b0726436934d77b39e6646705c0fd9f9473344dd730ba1f18225a4a0:f6b50f5dcac2647699d089e2bb353dba00869a34bee41e2f8d3eeef1b0ff64dcb6e8ffd07bde5d094aa76a211917c1f237038780f431e0e486bd280a4e825590
 \ No newline at end of file
+diff --git a/hosts/pikvm/var/lib/zerotier-one/identity.public b/hosts/pikvm/var/lib/zerotier-one/identity.public
+new file mode 100644
+--- /dev/null
++++ ./hosts/pikvm/var/lib/zerotier-one/identity.public
+@@ -0,0 +1 @@
++c3ac8da1fa:0:7af52fe48ed1613731078324d9af26220b18ed7b481725929f4ffa93e984460c4d6e5cb6a7325490be71d937a87e0ca796ebc39a24f9ed9145f1b1bc0817d157
+\ No newline at end of file
+diff --git a/hosts/pikvm/var/lib/zerotier-one/identity.secret b/hosts/pikvm/var/lib/zerotier-one/identity.secret
+new file mode 100644
+--- /dev/null
++++ ./hosts/pikvm/var/lib/zerotier-one/identity.secret
+@@ -0,0 +1 @@
++c3ac8da1fa:0:7af52fe48ed1613731078324d9af26220b18ed7b481725929f4ffa93e984460c4d6e5cb6a7325490be71d937a87e0ca796ebc39a24f9ed9145f1b1bc0817d157:44a4a32f4690d9393311149be68a2be9769aa70830b36e73c443dec25168cc67ba9fc494599f19fccc2abbc0348519c8e1d590b6636c090ea975f354e912f911
+\ No newline at end of file
 diff --git a/hosts/server/var/lib/zerotier-one/identity.public b/hosts/server/var/lib/zerotier-one/identity.public
-index 55095016..d55d1f79 100644
 --- ./hosts/server/var/lib/zerotier-one/identity.public
 +++ ./hosts/server/var/lib/zerotier-one/identity.public
 @@ -1 +1 @@
@@ -3527,7 +3526,6 @@ index 55095016..d55d1f79 100644
 +ed0979a312:0:5d0f17fa53c4e624bdfdeaaf7860a0fcbf252acaf54e87c5603a9369ab50a32f0a582d713b3e5bdb8080f90ecc5e1970fcb04b2820fa4d40ba779e67e3fd882f
 \ No newline at end of file
 diff --git a/hosts/server/var/lib/zerotier-one/identity.secret b/hosts/server/var/lib/zerotier-one/identity.secret
-index 5882ce82..4419cb23 100644
 --- ./hosts/server/var/lib/zerotier-one/identity.secret
 +++ ./hosts/server/var/lib/zerotier-one/identity.secret
 @@ -1 +1 @@
@@ -3537,7 +3535,6 @@ index 5882ce82..4419cb23 100644
 \ No newline at end of file
 diff --git a/hosts/studio/Library/Application Support/ZeroTier/One/identity.public b/hosts/studio/Library/Application Support/ZeroTier/One/identity.public
 new file mode 100644
-index 00000000..980abc3c
 --- /dev/null
 +++ ./hosts/studio/Library/Application Support/ZeroTier/One/identity.public	
 @@ -0,0 +1 @@
@@ -3545,7 +3542,6 @@ index 00000000..980abc3c
 \ No newline at end of file
 diff --git a/hosts/studio/Library/Application Support/ZeroTier/One/identity.secret b/hosts/studio/Library/Application Support/ZeroTier/One/identity.secret
 new file mode 100644
-index 00000000..e24cf6cd
 --- /dev/null
 +++ ./hosts/studio/Library/Application Support/ZeroTier/One/identity.secret	
 @@ -0,0 +1 @@
@@ -3553,7 +3549,6 @@ index 00000000..e24cf6cd
 \ No newline at end of file
 diff --git a/hosts/u2004/var/lib/zerotier-one/identity.public b/hosts/u2004/var/lib/zerotier-one/identity.public
 new file mode 100644
-index 00000000..0cd205f6
 --- /dev/null
 +++ ./hosts/u2004/var/lib/zerotier-one/identity.public
 @@ -0,0 +1 @@
@@ -3561,14 +3556,12 @@ index 00000000..0cd205f6
 \ No newline at end of file
 diff --git a/hosts/u2004/var/lib/zerotier-one/identity.secret b/hosts/u2004/var/lib/zerotier-one/identity.secret
 new file mode 100644
-index 00000000..a8969b40
 --- /dev/null
 +++ ./hosts/u2004/var/lib/zerotier-one/identity.secret
 @@ -0,0 +1 @@
 +8414efd65b:0:1ae70e353e7b0e3dc9be1630ee0f3fd28849a1342f45fa289ff1a3cdd362677208029a287017e897cb076a0e0ee34f8f16084ddd365fbd40cba0583d3ab200d1:0db6a42863a1f6a1619ea0eff9501c27d31616a1dfb051f6d657f0d5b2e1dd5f68c7e0f029c78449470c27bc2b3b3acfbdcab05133df9d9ca6238aeaec053b70
 \ No newline at end of file
 diff --git a/imvurc/generate.sh b/imvurc/generate.sh
-index c278d081..c627c53d 100755
 --- ./imvurc/generate.sh
 +++ ./imvurc/generate.sh
 @@ -1,7 +1,7 @@
@@ -3581,7 +3574,6 @@ index c278d081..c627c53d 100755
  if [ ! -f "$target" ]
  then
 diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
-index ea2bc967..b7adab11 100755
 --- ./imvurc/ghypo.sh
 +++ ./imvurc/ghypo.sh
 @@ -1,4 +1,11 @@
@@ -3607,7 +3599,6 @@ index ea2bc967..b7adab11 100755
      fi
  fi
 diff --git a/install_basic.sh b/install_basic.sh
-index aeaf8ba1..42dea60c 100755
 --- ./install_basic.sh
 +++ ./install_basic.sh
 @@ -1,4 +1,4 @@
@@ -3631,7 +3622,6 @@ index aeaf8ba1..42dea60c 100755
  
  npm -g install \
 diff --git a/install_basic_linux.sh b/install_basic_linux.sh
-index 34269226..a8a824c3 100755
 --- ./install_basic_linux.sh
 +++ ./install_basic_linux.sh
 @@ -1,4 +1,4 @@
@@ -3652,7 +3642,6 @@ index 34269226..a8a824c3 100755
  ./install_time_machine.sh
  ./enpass_install.sh
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 62d92acb..91b8e4b8 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
 @@ -8,19 +8,32 @@ then
@@ -3733,7 +3722,6 @@ index 62d92acb..91b8e4b8 100755
  
 diff --git a/install_cubbit.sh b/install_cubbit.sh
 new file mode 100755
-index 00000000..836c58f7
 --- /dev/null
 +++ ./install_cubbit.sh
 @@ -0,0 +1,3 @@
@@ -3742,7 +3730,6 @@ index 00000000..836c58f7
 +bash -c "echo $(curl -fsSl https://get.cubbit.io/desktop/linux/)"
 diff --git a/install_gh.sh b/install_gh.sh
 new file mode 100755
-index 00000000..c3363697
 --- /dev/null
 +++ ./install_gh.sh
 @@ -0,0 +1,6 @@
@@ -3753,7 +3740,6 @@ index 00000000..c3363697
 +apt update
 +apt install gh
 diff --git a/install_nodejs.sh b/install_nodejs.sh
-index c3036dee..09b82d56 100755
 --- ./install_nodejs.sh
 +++ ./install_nodejs.sh
 @@ -5,3 +5,9 @@ cd "$SCRIPTPATH"
@@ -3768,7 +3754,6 @@ index c3036dee..09b82d56 100755
 +fi
 diff --git a/install_nvim_post.sh b/install_nvim_post.sh
 deleted file mode 100755
-index 756816d8..00000000
 --- ./install_nvim_post.sh
 +++ /dev/null
 @@ -1,11 +0,0 @@
@@ -3785,7 +3770,6 @@ index 756816d8..00000000
 -./gitrc/gclean.sh
 diff --git a/install_nvim_pre.sh b/install_nvim_pre.sh
 deleted file mode 100755
-index 2bc75c67..00000000
 --- ./install_nvim_pre.sh
 +++ /dev/null
 @@ -1,28 +0,0 @@
@@ -3818,7 +3802,6 @@ index 2bc75c67..00000000
 -    #brew install --with-toolchain --with-clang llvm
 -fi
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
-index 298b6bc4..5d8434a2 100755
 --- ./install_prerequisite.sh
 +++ ./install_prerequisite.sh
 @@ -1,21 +1,21 @@
