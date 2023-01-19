@@ -29,4 +29,4 @@ curl \
    -H "x-imvu-sauce: $SAUCE" \
    -H "Cookie: osCsid=$OSCSID" \
    -d @body.json \
-   https://api.imvu.com/gift > gift.json       
+   https://api.imvu.com/gift > gift.json
