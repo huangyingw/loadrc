@@ -15,3 +15,9 @@ Project history:
             what's the perfect git process? I have my own answer.
 
 bind generic 9 !sh -c "echo -n %(commit) | xclip -selection c && echo Copied %(commit) to clipboard"
+use this one to re-write the go to git function
+vimrc/.vim/bundle/tig-explorer.vim/autoload/tig_explorer.vim:301   let git_dir = findfile('.git', current_file_dir . ';')
+
+vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim:7216:  call s:Map('n', 'P',    ':<C-U>exe <SID>BlameJump("^".v:count1)<CR>', '<silent>', ft)
+vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim:7221:  call s:Map('n', 'p',    ':<C-U>exe <SID>BlameCommit("pedit")<CR>', '<silent>', ft)
+vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim:7636:      exe s:Map('n', 'p',    ':<C-U>0,1Git blame!' . blame_tail, '<silent>')
