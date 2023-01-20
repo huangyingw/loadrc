@@ -24,4 +24,4 @@ find "$SOURCE" -type f | \
         mv -nv "$ss" "$new_ss"
     done
 
-# ~/loadrc/bashrc/move.sh "$SOURCE" "$TARGET"
+~/loadrc/bashrc/move.sh "$SOURCE" "$TARGET"
