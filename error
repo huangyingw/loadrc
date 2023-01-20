@@ -113,9 +113,10 @@ _zsh_nvm_rename_function:1: fork failed: resource temporarily unavailable
 2022-10-29 10:46:08.292 systemsetup[35401:3283514] ### Error:-99 File:/AppleInternal/Library/BuildRoots/810eba08-405a-11ed-86e9-6af958a02716/Library/Cac
 hes/com.apple.xbs/Sources/Admin/InternetServices.m Line:379
 setcomputersleep: Never
-➜  ~ 
 
-Error detected while processing function CSCSearch[12]..GetEscapedResult:
-line   17:
-E33: No previous substitute regular expression
-[ncm2_core@yarp] try_notify on_warmup failed, job is dead
+Error detected while processing function tig_explorer#open_current_file[2]..tig_explorer#open[1]..<SNR>189_exec_tig_command[11]..function tig_explorer#open_current_file[2
+]..tig_explorer#open[1]..<SNR>189 exec_tig_command:
+vimrc/.vim/bundle/tig-explorer.vim/autoload/tig_explorer.vim:235 function! s:exec_tig_command(tig_args) abort
+line    9:
+tig-explorer.vim: Not a git repository: /Users/huangyingw/loadrc/tests/space in dir name
+tig: No revisions match the given arguments.
