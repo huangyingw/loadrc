@@ -5,7 +5,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatDu 
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatMove :execute s:CatMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatPlay :execute s:CatPlay(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRate :execute s:CatRate(<f-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatBadFiles :execute s:CatBadFiles()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatBadFiles :execute s:CatBadFiles(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject CatRun :execute s:CatRun(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Copy :execute s:Copy(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Dodev :execute s:Dodev()
@@ -257,7 +257,7 @@ endfunction
 function! s:Gbr() abort
     let worktree = Cd2Worktree()
     silent exec '!~/loadrc/gitrc/gbr.sh'
-    call OpenOrSwitch('gbr.findresult', 'vs')
+    call OpenOrSwitch('gbr.log', 'vs')
 endfunction
 
 function! s:Gclean() abort
@@ -656,13 +656,18 @@ function! s:AppendRate(...) abort
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
 endfunction
 
-function! s:CatBadFiles() abort
+function! s:CatBadFiles(...) abort
     if &modified
         echom 'Please check and save your file first!!!'
         return 0
     endif
 
     exec '!~/loadrc/ffmpegrc/cat_bad_files.sh ' . '"' .  expand("%:p") . '" 2>&1 | tee cat_bad_files.runresult'
+
+    if a:0 >= 1
+        exec '!' . '"' . a:1 . '"'
+    endif
+
     call OpenOrSwitch('cat_bad_files.runresult', 'vs')
     call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
 endfunction

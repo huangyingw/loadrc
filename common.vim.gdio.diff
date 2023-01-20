@@ -1127,7 +1127,7 @@ index f58a2ee7..dcc8f356 100755
      xargs sed -i.bak  "s/${FIND}/${REPLACE}/g" < "$3"
 +fi
 diff --git a/bashrc/fvideos.sh b/bashrc/fvideos.sh
-index 38fb060b..23804242 100755
+index 38fb060b..16bea66e 100755
 --- ./bashrc/fvideos.sh
 +++ ./bashrc/fvideos.sh
 @@ -1,9 +1,13 @@
@@ -1141,10 +1141,10 @@ index 38fb060b..23804242 100755
 -find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
 +
 +cd "$1"
-+find . -type f -size +10M -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
++find . -type f -size +100M -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
      cp -fv "$FAVLOG" fav.log && \
 -    find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
-+    find . -type f -size +10M -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
++    find . -type f -size +100M -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
      cp -fv "$FAVLOGSORT" fav.log.sort
 +
 +cd -
@@ -1327,31 +1327,33 @@ index 00000000..ccd1a783
 +./get_rsyncpath.sh ~/loadrc/ mini:~/loadrc/
 +./get_rsyncpath.sh mini:~/loadrc/ ~/loadrc/
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
-index e2137142..792deb22 100755
+index e2137142..e8902ab8 100755
 --- ./bashrc/jdupes.sh
 +++ ./bashrc/jdupes.sh
-@@ -7,18 +7,6 @@ then
+@@ -7,18 +7,13 @@ then
  fi
  
  TARGET="$1"
 -MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
--
++dt=$(date '+%m_%d_%Y_%H_%M_%S');
++logFile="$TARGET/jdupes.$dt.log"
++jdupes -dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee "$logFile"
+ 
 -crontab -r
 -echo idle > /sys/block/md0/md/sync_action
--
++MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
+ 
 -if [ -f ${MIRRORCHECK} ] ; \
 -then \
 -    ~/loadrc/bashrc/move67.sh ; \
 -    fi ; \
 -    jdupes -1dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee ~/loadrc/jdupes.log && \
--    if [ -f ${MIRRORCHECK} ] ; \
--    then \
--        ~/loadrc/bashrc/sleep.sh ; \
+ if [ -f ${MIRRORCHECK} ] ; \
+ then \
+     ~/loadrc/bashrc/sleep.sh ; \
 -        fi ; \
 -        nvim ~/loadrc/jdupes.log
-+dt=$(date '+%m_%d_%Y_%H_%M_%S');
-+logFile="$TARGET/jdupes.$dt.log"
-+jdupes -dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee "$logFile"
++fi
 diff --git a/bashrc/ln_fs.sh b/bashrc/ln_fs.sh
 index 8946ff3e..1a6a5a97 100755
 --- ./bashrc/ln_fs.sh
@@ -1764,14 +1766,13 @@ index 36367474..bbb1678b 100755
      .
 diff --git a/bashrc/rsync_basic_options b/bashrc/rsync_basic_options
 new file mode 100644
-index 00000000..678478c1
+index 00000000..6c1733e0
 --- /dev/null
 +++ ./bashrc/rsync_basic_options
-@@ -0,0 +1,4 @@
+@@ -0,0 +1,3 @@
 +-aHSv
 +--progress
 +--force
-+--append-verify
 diff --git a/bashrc/select_move.sh b/bashrc/select_move.sh
 new file mode 100755
 index 00000000..2ef72567
@@ -2164,12 +2165,12 @@ index 00000000..cc6f4270
 +*/10 * * * * /Users/huangyingw/loadrc/macosrc/restart_ssh.sh
 +*/10 * * * * /Users/ying.huang/loadrc/macosrc/restart_ssh.sh
 diff --git a/cscope b/cscope
-index 18a46b20..65b8f602 160000
+index 18a46b20..0a384883 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 65b8f60243a89338e002e1d6772af52e5845cab8
++Subproject commit 0a3848832a97406727cdf7c85ac0c78837c634c9
 diff --git a/demo b/demo
 new file mode 100644
 index 00000000..87081191
@@ -3463,6 +3464,22 @@ index 00000000..12b4045b
 @@ -0,0 +1 @@
 +3c406cd616:0:35b1d5aca7458f28bdc13c2a0072ab8d6569e2703d06ded63185335bd55ef7037ea25275ad76ff70fa4cac760507a8dca84cd48a86a0d2f582cf684565b1affc:c7395f2c12e36b151dd0b358005b1e86d0ee0bca5488c19fc3d1bf317473359a578d6ed7404035f8ece286115ef60a9ef33667f4cdc6adb607edeaf640780089
 \ No newline at end of file
+diff --git a/hosts/mbp/Library/Application Support/ZeroTier/One/identity.public b/hosts/mbp/Library/Application Support/ZeroTier/One/identity.public
+deleted file mode 100644
+index 3980820a..00000000
+--- ./hosts/mbp/Library/Application Support/ZeroTier/One/identity.public	
++++ /dev/null
+@@ -1 +0,0 @@
+-170c76e237:0:56832ab573c6c139a1669997b400c7c0e101a105e93ced5cd8830cb3d37be940657d657cf607d9ed2b486c7388c8ba6ffe284507d392657e4ff4c6bc2234be5a
+\ No newline at end of file
+diff --git a/hosts/mbp/Library/Application Support/ZeroTier/One/identity.secret b/hosts/mbp/Library/Application Support/ZeroTier/One/identity.secret
+deleted file mode 100644
+index b61c722f..00000000
+--- ./hosts/mbp/Library/Application Support/ZeroTier/One/identity.secret	
++++ /dev/null
+@@ -1 +0,0 @@
+-170c76e237:0:56832ab573c6c139a1669997b400c7c0e101a105e93ced5cd8830cb3d37be940657d657cf607d9ed2b486c7388c8ba6ffe284507d392657e4ff4c6bc2234be5a:5d2a4565b66035dc3698f40f0f67e40d805cb2217b4d769c010c89fe151861044952d7f804ec74fd1a3697240639cbaf5c394182edbaade2e815a1909e8d30b3
+\ No newline at end of file
 diff --git a/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.public b/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.public
 new file mode 100644
 index 00000000..2e736125
@@ -3764,7 +3781,7 @@ index 2bc75c67..00000000
 -    #brew install --with-toolchain --with-clang llvm
 -fi
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
-index 298b6bc4..57f12077 100755
+index 298b6bc4..5d8434a2 100755
 --- ./install_prerequisite.sh
 +++ ./install_prerequisite.sh
 @@ -1,21 +1,21 @@
@@ -3792,7 +3809,7 @@ index 298b6bc4..57f12077 100755
      dkms \
      dos2unix \
      exuberant-ctags \
-@@ -24,12 +24,15 @@ apt-get install -y \
+@@ -24,40 +24,49 @@ apt-get install -y \
      git \
      git-gui \
      gparted \
@@ -3808,8 +3825,8 @@ index 298b6bc4..57f12077 100755
      kdiff3 \
      libsecret-1-dev \
      libsecret-tools \
-@@ -37,27 +40,35 @@ apt-get install -y \
-     manpages-fr-extra \
+     locales \
+-    manpages-fr-extra \
      manpages-pl \
      mdadm \
 -    mosh \
@@ -3817,7 +3834,7 @@ index 298b6bc4..57f12077 100755
      mplayer \
 +    mysql-client \
      net-tools \
-     netcat \
+-    netcat \
 +    nfs-kernel-server \
      npm \
      openvpn \
@@ -3847,10 +3864,14 @@ index 298b6bc4..57f12077 100755
      unrar \
      w3m \
      w3m-img \
-@@ -65,8 +76,11 @@ apt-get install -y \
+@@ -65,8 +74,15 @@ apt-get install -y \
      wget \
      zsh
  
++apt-get install -y \
++    manpages-fr-extra \
++    netcat
++
 +pacman -Syy && \
 +    pacman --noconfirm -Sy \
 +    cryptsetup \
@@ -4452,7 +4473,7 @@ similarity index 100%
 rename from hosts/server/etc/netplan/00-installer-config.yaml
 rename to linux/etc/netplan/00-installer-config.yaml_bak
 diff --git a/linux_links/etc/crypttab b/linux_links/etc/crypttab
-index 191dd600..7b017219 100644
+index 191dd600..a67a71d6 100644
 --- ./linux_links/etc/crypttab
 +++ ./linux_links/etc/crypttab
 @@ -3,10 +3,19 @@ archive2_crypt      /dev/disk/by-uuid/766063ea-304e-4fef-9954-7a638c946229  /roo
@@ -4464,7 +4485,7 @@ index 191dd600..7b017219 100644
  usb_backup_crypt_4T      /dev/disk/by-uuid/4e0d72a2-2f98-4c11-becd-beaa21ec1957  /root/loadrc/keys/keyfile   luks
 -usb_backup_crypt_5T_1      /dev/disk/by-uuid/5d5e3fde-814f-4018-a103-2789c84d43e2  /root/loadrc/keys/keyfile   luks
 -zarchive      /dev/disk/by-uuid/a840176a-b76a-4d0f-962c-439e68107670  /root/loadrc/keys/keyfile   luks
-+usb_backup_crypt_5T_1      /dev/disk/by-uuid/c6de509f-5af1-461b-bf8d-31365f0be897  /root/loadrc/keys/keyfile   luks
++usb_backup_crypt_5T_1      /dev/disk/by-uuid/2d5978f9-063c-48af-b270-1cf69672d92a  /root/loadrc/keys/keyfile   luks
 +transmission      /dev/disk/by-uuid/a840176a-b76a-4d0f-962c-439e68107670  /root/loadrc/keys/keyfile   luks
  vserver_crypt      /dev/disk/by-uuid/a4ff213e-f734-4c88-aba9-2ce733d0de76  /root/loadrc/keys/keyfile   luks
 -usb_backup_crypt_8T      /dev/disk/by-uuid/e1a69d4d-dacb-413b-8361-d59b401b80ad  /root/loadrc/keys/keyfile   luks
@@ -4472,13 +4493,13 @@ index 191dd600..7b017219 100644
 +usb_backup_crypt_8T_2      /dev/disk/by-uuid/4e1163f1-0df8-4416-9afd-b674808f87f9  /root/loadrc/keys/keyfile   luks
 +timemachine      /dev/disk/by-uuid/72eff5fa-e188-4b1a-8760-5f5ff828aa37  /root/loadrc/keys/keyfile   luks
 +zarchive      /dev/disk/by-uuid/69251abc-347f-4b64-be99-809da622893a  /root/loadrc/keys/keyfile   luks
-+usb_zarchive1      /dev/disk/by-uuid/723f12b0-24a9-4ad0-a1ca-04cc8ee38bfd  /root/loadrc/keys/keyfile   luks
 +av91 /dev/disk/by-uuid/4211b914-5367-403f-aaa2-3dba45f41209  /root/loadrc/keys/keyfile   luks 
 +av81 /dev/disk/by-uuid/75ee8da8-8454-4b2c-96ca-d88ef135657e  /root/loadrc/keys/keyfile   luks 
 +av71 /dev/disk/by-uuid/3410d798-71e6-4131-bbcb-1fa07a98320d  /root/loadrc/keys/keyfile   luks 
 +av92 /dev/disk/by-uuid/7e2f0dc4-86e1-41a1-ba81-f20288d82c85  /root/loadrc/keys/keyfile   luks 
 +av82 /dev/disk/by-uuid/824d11c2-e8af-4502-8717-46b6e283d790  /root/loadrc/keys/keyfile   luks 
 +115_disk      /dev/disk/by-uuid/723f12b0-24a9-4ad0-a1ca-04cc8ee38bfd  /root/loadrc/keys/keyfile   luks
++116_disk      /dev/disk/by-uuid/1e7ecbca-28bd-454b-903c-8c81af5de753  /root/loadrc/keys/keyfile   luks
 diff --git a/linux_links/etc/resolvconf/resolv.conf.d/base b/linux_links/etc/resolvconf/resolv.conf.d/base_bak
 similarity index 100%
 rename from linux_links/etc/resolvconf/resolv.conf.d/base
@@ -4690,11 +4711,11 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..65bf65ad
+index 00000000..c221c3b5
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 65bf65ad96f6a74af77f3ee492a1e34e554a392e-dirty
++Subproject commit c221c3b5b7790bc531941738fa040223f1096e63-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 index 00000000..25b0c5df
@@ -4823,11 +4844,11 @@ index 13a0cf4c..6cd6989c 100755
  
 diff --git a/rsync b/rsync
 new file mode 160000
-index 00000000..889d76e2
+index 00000000..d1f9dfd5
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit 889d76e2d246a7ffab69d892e5a456048ebf60cd
++Subproject commit d1f9dfd52c9cc890a7a934aaaecda7a3d34e9f02-dirty
 diff --git a/set_linux_configuration.sh b/set_linux_configuration.sh
 index ced4c25c..ce42e8a4 100755
 --- ./set_linux_configuration.sh
@@ -4935,10 +4956,10 @@ index 00000000..b385cdc6
 +cp -fv ./pbpaste-remote ~/bin/pbpaste-remote
 diff --git a/setup_remote.sh b/setup_remote.sh
 new file mode 100755
-index 00000000..8813d4a5
+index 00000000..6d35cca8
 --- /dev/null
 +++ ./setup_remote.sh
-@@ -0,0 +1,22 @@
+@@ -0,0 +1,24 @@
 +#!/bin/bash
 +
 +sudo apt-get update && \
@@ -4957,6 +4978,8 @@ index 00000000..8813d4a5
 +    rsync \
 +    tmux \
 +    zsh
++
++pacman -Syu
 +
 +./deploy_configurations.sh
 +./setup_locale.sh
@@ -5146,6 +5169,13 @@ index 86d744c6..2a31e6bc 160000
 @@ -1 +1 @@
 -Subproject commit 86d744c6e4731d0014ef469f019a305e2d7baac0
 +Subproject commit 2a31e6bcea5977209c05c728c4253d82fd873c82
+diff --git a/vimrc/.vim/bundle/LargeFile b/vimrc/.vim/bundle/LargeFile
+index 3941a37b..18407c43 160000
+--- ./vimrc/.vim/bundle/LargeFile
++++ ./vimrc/.vim/bundle/LargeFile
+@@ -1 +1 @@
+-Subproject commit 3941a37b2b0288524300348a39521a46539bf9f6
++Subproject commit 18407c43846edea7b7964b0b99226ec04d00931f
 diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
 index 1d4a909f..537b2a38 160000
 --- ./vimrc/.vim/bundle/bash-support.vim
@@ -5162,11 +5192,11 @@ index 00000000..6f61df5a
 +Subproject commit 6f61df5a633c3a91edea7bcb5d5772648df19d1a
 diff --git a/vimrc/.vim/bundle/firenvim b/vimrc/.vim/bundle/firenvim
 new file mode 160000
-index 00000000..eeaddd0b
+index 00000000..17a189f0
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit eeaddd0b503f841fa24f60cebd14fa93d2b33f77
++Subproject commit 17a189f0f1e2d4197e00cd56dbeaed8c268bac8c
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 index 5617a1cf..d15d63bf 160000
 --- ./vimrc/.vim/bundle/indentLine
@@ -5211,11 +5241,11 @@ index 00000000..7d4c1d81
 +Subproject commit 7d4c1d8198e889d513a030b5a83faa07606bac27
 diff --git a/vimrc/.vim/bundle/plantuml-previewer.vim b/vimrc/.vim/bundle/plantuml-previewer.vim
 new file mode 160000
-index 00000000..887d55f9
+index 00000000..74483d5d
 --- /dev/null
 +++ ./vimrc/.vim/bundle/plantuml-previewer.vim
 @@ -0,0 +1 @@
-+Subproject commit 887d55f912be965e9a24aa61d744fc8b9ed0d7d1
++Subproject commit 74483d5d01042db5de6f89aaba64376d87effaff
 diff --git a/vimrc/.vim/bundle/plantuml-syntax b/vimrc/.vim/bundle/plantuml-syntax
 new file mode 160000
 index 00000000..845abb56
@@ -5280,12 +5310,12 @@ index 00000000..c8887b12
 @@ -0,0 +1 @@
 +Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..c7c76b8d 160000
+index 8468d6a8..2d3d4dcb 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit c7c76b8dbf783454b3d3a60526f7ffd6a5421fb2-dirty
++Subproject commit 2d3d4dcb9ea3ed6620727c488285974bc5b4ec8a
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 index 00000000..115e2600
@@ -5382,7 +5412,7 @@ index 00000000..dfb309e2
 +set shortmess+=A
 +command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
-index 63869eb8..273752e2 100644
+index 63869eb8..d601e4c0 100644
 --- ./vimrc/.vim/plugin/common.vim
 +++ ./vimrc/.vim/plugin/common.vim
 @@ -28,7 +28,7 @@ function! RemovePairs()
@@ -5438,7 +5468,12 @@ index 63869eb8..273752e2 100644
 -    let bnr = bufwinnr('^' . realpath . '$')
 +function! OpenOrSwitch(buffername, openMode, ...)
 +    let fileName = a:buffername
-+
+ 
+-    if bnr > 0
+-        exe bnr . "wincmd w"
+-        exec 'e'
+-    elseif a:openMode ==? "goto"
+-        silent exec 'e ' . a:buffername
 +    if !filereadable(a:buffername)
 +        let curline = getline(line("."))
 +        let curline = substitute(curline, '\\', '', 'g')
@@ -5450,12 +5485,7 @@ index 63869eb8..273752e2 100644
 +    endif
 +
 +    let topleft = (a:0 >= 1) ? a:1 : 'topleft'
- 
--    if bnr > 0
--        exe bnr . "wincmd w"
--        exec 'e'
--    elseif a:openMode ==? "goto"
--        silent exec 'e ' . a:buffername
++
 +    if a:openMode ==? "goto"
 +        call fetch#cfile(fileName, 'e')
      else
@@ -5464,16 +5494,33 @@ index 63869eb8..273752e2 100644
      endif
  endfunction
  
-@@ -208,7 +220,7 @@ function! GetEscapedResult(keywordStr)
-     let result = substitute(result, '!', '', 'g')
-     let result = substitute(result, "<", "", "g")
-     let result = substitute(result, ">", "", "g")
+@@ -193,6 +205,7 @@ endfunc
+ 
+ function! GetEscapedResult(keywordStr)
+     let result = a:keywordStr
++    try
+         let result = substitute(result, " ", "", "g")
+         let result = substitute(result, "/", "", "g")
+         let result = substitute(result, "|", "", "g")
+@@ -208,7 +221,7 @@ function! GetEscapedResult(keywordStr)
+         let result = substitute(result, '!', '', 'g')
+         let result = substitute(result, "<", "", "g")
+         let result = substitute(result, ">", "", "g")
 -    let result = substitute(result, "\~", "", "g")
-+    let result = substitute(result, "~", "", "g")
-     let result = substitute(result, "*", "", "g")
-     let result = substitute(result, "%", "", "g")
-     let result = substitute(result, ":", "", "g")
-@@ -240,7 +252,8 @@ function! RunShell(shell, ...)
++        let result = substitute(result, "~", "", "g")
+         let result = substitute(result, "*", "", "g")
+         let result = substitute(result, "%", "", "g")
+         let result = substitute(result, ":", "", "g")
+@@ -217,6 +230,8 @@ function! GetEscapedResult(keywordStr)
+         let result = substitute(result, "+", "_", "g")
+         let result = substitute(result, "-", "_", "g")
+         return result
++    catch /./
++    endtry
+ endfunc
+ 
+ function! VsMax(fileName)
+@@ -240,7 +255,8 @@ function! RunShell(shell, ...)
              exec '!' . run_string
          endif
      endif
@@ -5483,7 +5530,7 @@ index 63869eb8..273752e2 100644
  endfunc
  
  function! Filter2Findresult()
-@@ -250,20 +263,19 @@ function! Filter2Findresult()
+@@ -250,20 +266,19 @@ function! Filter2Findresult()
  
      if expand('%:e') != "findresult"
          let buffername = b:result . '.findresult'
@@ -5506,7 +5553,7 @@ index 63869eb8..273752e2 100644
  
      if csdbpath != "Nothing"
          exec "cd " . csdbpath
-@@ -277,7 +289,6 @@ function! Cd2Worktree()
+@@ -277,7 +292,6 @@ function! Cd2Worktree()
      try
          exec "cd " . fnameescape(worktree)
      catch /./
@@ -5622,7 +5669,7 @@ index 00000000..6bf0e4ae
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..6c095c44 100644
+index d5874fe5..f66303a8 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,18 @@
@@ -5718,7 +5765,13 @@ index d5874fe5..6c095c44 100644
      endif
  endfunction
  
-@@ -172,8 +180,8 @@ endfunction
+@@ -167,13 +175,13 @@ endfunction
+ function! s:Fdisklog() abort
+     let worktree = Cd2Worktree()
+     exec '!~/loadrc/bashrc/fdisk_log.sh'
+-    call OpenOrSwitch('~/loadrc/fdisk.log', 'vs')
++    call OpenOrSwitch(expand("$HOME") . '/loadrc/fdisk.log', 'vs')
+ endfunction
  
  function! s:Glf() abort
      let worktree = Cd2Worktree()
@@ -7198,3 +7251,384 @@ index 430298e0..cb9795ec 100755
          nmcli con up uuid $CONNECTION_UUID
      fi
  fi
+diff --git a/zerotierrc/zerotier.sh b/zerotierrc/zerotier.sh
+new file mode 100755
+index 00000000..af381958
+--- /dev/null
++++ ./zerotierrc/zerotier.sh
+@@ -0,0 +1,375 @@
++#!/bin/bash
++<<ENDOFSIGSTART=
++-----BEGIN PGP SIGNED MESSAGE-----
++Hash: SHA256
++
++ENDOFSIGSTART=
++
++export PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin
++
++#
++# ZeroTier install script
++#
++# All this script does is determine your OS and/or distribution and then add the correct
++# repository or download the correct package and install it. It then starts the service
++# and prints your device's ZeroTier address.
++#
++
++# Base URL for download.zerotier.com tree; see https://github.com/zerotier/download.zerotier.com if you want to mirror.
++# Some things want http, some https, so we must specify both. Must include trailing /
++ZT_BASE_URL_HTTPS='https://download.zerotier.com/'
++ZT_BASE_URL_HTTP='http://download.zerotier.com/'
++
++echo
++echo '*** ZeroTier Service Quick Install for Unix-like Systems'
++echo
++echo '*** Tested OSes / distributions:'
++echo
++echo '***   MacOS (10.13+) (just installs ZeroTier One.pkg)'
++echo '***   Debian Linux (7+)'
++echo '***   RedHat/CentOS Linux (6+)'
++echo '***   Fedora Linux (16+)'
++echo '***   SuSE Linux (12+)'
++echo '***   Mint Linux (18+)'
++echo
++echo '*** Supported architectures vary by OS / distribution. We try to support'
++echo '*** every system architecture supported by the target.'
++echo
++echo '*** Please report problems to contact@zerotier.com and we will try to fix.'
++echo
++
++SUDO=
++if [ "$UID" != "0" ]; then
++	if [ -e /usr/bin/sudo -o -e /bin/sudo ]; then
++		SUDO=sudo
++	else
++		echo '*** This quick installer script requires root privileges.'
++		exit 0
++	fi
++fi
++
++# Detect MacOS and install .pkg file there
++if [ -e /usr/bin/uname ]; then
++	if [ "`/usr/bin/uname -s`" = "Darwin" ]; then
++		echo '*** Detected MacOS / Darwin, downloading and installing Mac .pkg...'
++		$SUDO rm -f "/tmp/ZeroTier One.pkg"
++		curl -s ${ZT_BASE_URL_HTTPS}dist/ZeroTier%20One.pkg >"/tmp/ZeroTier One.pkg"
++		$SUDO installer -pkg "/tmp/ZeroTier One.pkg" -target /
++
++		echo
++		echo '*** Waiting for identity generation...'
++
++		while [ ! -f "/Library/Application Support/ZeroTier/One/identity.secret" ]; do
++			sleep 1
++		done
++
++		echo
++		echo "*** Success! You are connected to port `cat '/Library/Application Support/ZeroTier/One/identity.public' | cut -d : -f 1` of Earth's planetary smart switch."
++		echo
++
++		exit 0
++	fi
++fi
++
++# Detect already-installed on Linux
++if [ -f /usr/sbin/zerotier-one ]; then
++	echo '*** ZeroTier appears to already be installed.'
++	exit 0
++fi
++
++rm -f /tmp/zt-gpg-key
++echo '-----BEGIN PGP PUBLIC KEY BLOCK-----' >/tmp/zt-gpg-key
++cat >>/tmp/zt-gpg-key << END_OF_KEY
++Comment: GPGTools - https://gpgtools.org
++
++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
++=JgAv
++END_OF_KEY
++echo '-----END PGP PUBLIC KEY BLOCK-----' >>/tmp/zt-gpg-key
++
++echo '*** Detecting Linux Distribution'
++echo
++
++if [ -f /etc/debian_version ]; then
++	dvers=`cat /etc/debian_version | cut -d '.' -f 1 | cut -d '/' -f 1`
++	$SUDO rm -f /tmp/zt-sources-list
++
++	if [ -f /etc/lsb-release -a -n "`cat /etc/lsb-release 2>/dev/null | grep -F -i LinuxMint`" ]; then
++		# Linux Mint -> Ubuntu 'xenial'
++		echo '*** Found Linux Mint, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/xenial xenial main" >/tmp/zt-sources-list
++	elif [ -f /etc/lsb-release -a -n "`cat /etc/lsb-release 2>/dev/null | grep -F trusty`" ]; then
++		# Ubuntu 'trusty'
++		echo '*** Found Ubuntu, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/trusty trusty main" >/tmp/zt-sources-list
++	elif [ -f /etc/lsb-release -a -n "`cat /etc/lsb-release 2>/dev/null | grep -F wily`" ]; then
++		# Ubuntu 'wily'
++		echo '*** Found Ubuntu, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/wily wily main" >/tmp/zt-sources-list
++	elif [ -f /etc/lsb-release -a -n "`cat /etc/lsb-release 2>/dev/null | grep -F xenial`" ]; then
++		# Ubuntu 'xenial'
++		echo '*** Found Ubuntu, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/xenial xenial main" >/tmp/zt-sources-list
++	elif [ -f /etc/lsb-release -a -n "`cat /etc/lsb-release 2>/dev/null | grep -F zesty`" ]; then
++		# Ubuntu 'zesty'
++		echo '*** Found Ubuntu, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/zesty zesty main" >/tmp/zt-sources-list
++	elif [ -f /etc/lsb-release -a -n "`cat /etc/lsb-release 2>/dev/null | grep -F precise`" ]; then
++		# Ubuntu 'precise'
++		echo '*** Found Ubuntu, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/precise precise main" >/tmp/zt-sources-list
++	elif [ -f /etc/lsb-release -a -n "`cat /etc/lsb-release 2>/dev/null | grep -F artful`" ]; then
++		# Ubuntu 'artful'
++		echo '*** Found Ubuntu, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/artful artful main" >/tmp/zt-sources-list
++	elif [ -f /etc/lsb-release -a -n "`cat /etc/lsb-release 2>/dev/null | grep -F bionic`" ]; then
++		# Ubuntu 'bionic'
++		echo '*** Found Ubuntu, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/bionic bionic main" >/tmp/zt-sources-list
++	elif [ -f /etc/lsb-release -a -n "`cat /etc/lsb-release 2>/dev/null | grep -F yakkety`" ]; then
++		# Ubuntu 'yakkety'
++		echo '*** Found Ubuntu, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/yakkety yakkety main" >/tmp/zt-sources-list
++	elif [ -f /etc/lsb-release -a -n "`cat /etc/lsb-release 2>/dev/null | grep -F disco`" ]; then
++		# Ubuntu 'disco'
++		echo '*** Found Ubuntu, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/disco disco main" >/tmp/zt-sources-list
++	elif [ -f /etc/lsb-release -a -n "`cat /etc/lsb-release 2>/dev/null | grep -F focal`" ]; then
++		# Ubuntu 'focal'
++		echo '*** Found Ubuntu, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/focal focal main" >/tmp/zt-sources-list
++	elif [ -f /etc/lsb-release -a -n "`cat /etc/lsb-release 2>/dev/null | grep -F hirsute`" ]; then
++		# Ubuntu 'hirsute'
++		echo '*** Found Ubuntu, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/bionic bionic main" >/tmp/zt-sources-list
++	elif [ -f /etc/lsb-release -a -n "`cat /etc/lsb-release 2>/dev/null | grep -F impish`" ]; then
++		# Ubuntu 'impish'
++		echo '*** Found Ubuntu, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/bionic bionic main" >/tmp/zt-sources-list
++	elif [ -f /etc/lsb-release -a '(' -n "`cat /etc/lsb-release 2>/dev/null | grep -F jammy`" -o -n "`cat /etc/lsb-release 2>/dev/null | grep -F kinetic`" ')' ]; then
++		# Ubuntu 'jammy' or 'kinetic'
++		echo '*** Found Ubuntu, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/jammy jammy main" >/tmp/zt-sources-list
++	elif [ "$dvers" = "6" -o "$dvers" = "squeeze" ]; then
++		# Debian 'squeeze'
++		echo '*** Found Debian, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/squeeze squeeze main" >/tmp/zt-sources-list
++	elif [ "$dvers" = "7" -o "$dvers" = "wheezy" ]; then
++		# Debian 'wheezy'
++		echo '*** Found Debian, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/wheezy wheezy main" >/tmp/zt-sources-list
++	elif [ "$dvers" = "8" -o "$dvers" = "jessie" ]; then
++		# Debian 'jessie'
++		echo '*** Found Debian, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/jessie jessie main" >/tmp/zt-sources-list
++	elif [ "$dvers" = "9" -o "$dvers" = "stretch" ]; then
++		# Debian 'stretch'
++		echo '*** Found Debian, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/stretch stretch main" >/tmp/zt-sources-list
++	elif [ "$dvers" = "10" -o "$dvers" = "buster" -o "$dvers" = "parrot" ]; then
++		# Debian 'buster'
++		echo '*** Found Debian, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/buster buster main" >/tmp/zt-sources-list
++	elif [ "$dvers" = "11" -o "$dvers" = "bullseye" ]; then
++		# Debian 'bullseye'
++		echo '*** Found Debian, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/bullseye bullseye main" >/tmp/zt-sources-list
++	elif [ "$dvers" = "testing" -o "$dvers" = "sid" -o "$dvers" = "bookworm" ]; then
++		# Debian 'testing', 'sid', and 'bookworm' -> Debian 'bookworm'
++		echo '*** Found Debian, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/bookworm bookworm main" >/tmp/zt-sources-list
++	else
++		# Use Debian "buster" for unrecognized Debians
++		echo '*** Found Debian or Debian derivative, creating /etc/apt/sources.list.d/zerotier.list'
++		echo "deb ${ZT_BASE_URL_HTTP}debian/buster buster main" >/tmp/zt-sources-list
++	fi
++
++	$SUDO apt-get update -y
++	$SUDO apt-get install -y gpg
++	$SUDO mv -f /tmp/zt-sources-list /etc/apt/sources.list.d/zerotier.list
++	$SUDO chown 0 /etc/apt/sources.list.d/zerotier.list
++	$SUDO chgrp 0 /etc/apt/sources.list.d/zerotier.list
++
++	$SUDO chmod a+r /tmp/zt-gpg-key
++	if [ -d /etc/apt/trusted.gpg.d ]; then
++		$SUDO gpg --dearmor < /tmp/zt-gpg-key > /etc/apt/trusted.gpg.d/zerotier-debian-package-key.gpg
++	else
++		$SUDO apt-key add /tmp/zt-gpg-key
++	fi
++	$SUDO rm -f /tmp/zt-gpg-key
++
++	echo
++	echo '*** Installing zerotier-one package...'
++
++	# Pre-1.1.6 Debian package did not properly enumerate its files, causing
++	# problems when we try to replace it. So just delete them to force.
++	if [ -d /var/lib/zerotier-one ]; then
++		$SUDO rm -f /etc/init.d/zerotier-one /etc/systemd/system/multi-user.target.wants/zerotier-one.service /var/lib/zerotier-one/zerotier-one /usr/local/bin/zerotier-cli /usr/bin/zerotier-cli /usr/local/bin/zero
++	fi
++
++	cat /dev/null | $SUDO apt-get update
++	cat /dev/null | $SUDO apt-get install -y zerotier-one
++elif [ -f /etc/SuSE-release -o -f /etc/suse-release -o -f /etc/SUSE-brand -o -f /etc/SuSE-brand -o -f /etc/suse-brand ]; then
++	echo '*** Found SuSE, adding zypper YUM repo...'
++	cat /dev/null | $SUDO zypper addrepo -t YUM -g ${ZT_BASE_URL_HTTP}redhat/el/7 zerotier
++	cat /dev/null | $SUDO rpm --import /tmp/zt-gpg-key
++
++	echo
++	echo '*** Installing zeortier-one package...'
++
++	cat /dev/null | $SUDO zypper install -y zerotier-one
++elif [ -d /etc/yum.repos.d ]; then
++	baseurl="${ZT_BASE_URL_HTTP}redhat/el/7"
++	if [ -n "`cat /etc/redhat-release 2>/dev/null | grep -i fedora`" ]; then
++		echo "*** Found Fedora, creating /etc/yum.repos.d/zerotier.repo"
++		fedora_release="`cat /etc/os-release | grep -F VERSION_ID= | cut -d = -f 2`"
++		if [ -n "$fedora_release" ]; then
++			baseurl="${ZT_BASE_URL_HTTP}redhat/fc/$fedora_release"
++		else
++			baseurl="${ZT_BASE_URL_HTTP}redhat/fc/22"
++		fi
++	elif [ -n "`cat /etc/redhat-release 2>/dev/null | grep -i centos`" -o -n "`cat /etc/redhat-release 2>/dev/null | grep -i enterprise`" -o -n "`cat /etc/redhat-release 2>/dev/null | grep -i rocky`" ]; then
++		echo "*** Found RHEL/CentOS/Rocky, creating /etc/yum.repos.d/zerotier.repo"
++		baseurl="${ZT_BASE_URL_HTTP}redhat/el/\$releasever"
++	elif [ -n "`cat /etc/system-release 2>/dev/null | grep -i amazon`" ]; then
++		echo "*** Found Amazon (CentOS/RHEL based), creating /etc/yum.repos.d/zerotier.repo"
++		if [ -n "`cat /etc/system-release 2>/dev/null | grep -F 'Amazon Linux 2'`" ]; then
++			baseurl="${ZT_BASE_URL_HTTP}redhat/el/7"
++		else
++			baseurl="${ZT_BASE_URL_HTTP}redhat/amzn1/2016.03"
++		fi
++	else
++		echo "*** Found unknown yum-based repo, using el/7, creating /etc/yum.repos.d/zerotier.repo"
++	fi
++
++	$SUDO rpm --import /tmp/zt-gpg-key
++
++	$SUDO rm -f /tmp/zerotier.repo
++	echo '[zerotier]' >/tmp/zerotier.repo
++	echo 'name=ZeroTier, Inc. RPM Release Repository' >>/tmp/zerotier.repo
++	echo "baseurl=$baseurl" >>/tmp/zerotier.repo
++	echo 'enabled=1' >>/tmp/zerotier.repo
++	echo 'gpgcheck=1' >>/tmp/zerotier.repo
++
++	$SUDO mv -f /tmp/zerotier.repo /etc/yum.repos.d/zerotier.repo
++	$SUDO chown 0 /etc/yum.repos.d/zerotier.repo
++	$SUDO chgrp 0 /etc/yum.repos.d/zerotier.repo
++
++	echo
++	echo '*** Installing ZeroTier service package...'
++
++	if [ -e /usr/bin/dnf ]; then
++		cat /dev/null | $SUDO dnf install -y zerotier-one
++	else
++		cat /dev/null | $SUDO yum install -y zerotier-one
++	fi
++fi
++
++$SUDO rm -f /tmp/zt-gpg-key
++
++if [ ! -e /usr/sbin/zerotier-one ]; then
++	echo
++	echo '*** Package installation failed! Unfortunately there may not be a package'
++	echo '*** for your architecture or distribution. For the source go to:'
++	echo '*** https://github.com/zerotier/ZeroTierOne'
++	echo
++	exit 1
++fi
++
++echo
++echo '*** Enabling and starting ZeroTier service...'
++
++if [ -e /usr/bin/systemctl -o -e /usr/sbin/systemctl -o -e /sbin/systemctl -o -e /bin/systemctl ]; then
++	$SUDO systemctl enable zerotier-one
++	$SUDO systemctl start zerotier-one
++	if [ "$?" != "0" ]; then
++		echo
++		echo '*** Package installed but cannot start service! You may be in a Docker'
++		echo '*** container or using a non-standard init service.'
++		echo
++		exit 1
++	fi
++else
++	if [ -e /sbin/update-rc.d -o -e /usr/sbin/update-rc.d -o -e /bin/update-rc.d -o -e /usr/bin/update-rc.d ]; then
++		$SUDO update-rc.d zerotier-one defaults
++	else
++		$SUDO chkconfig zerotier-one on
++	fi
++	$SUDO /etc/init.d/zerotier-one start
++fi
++
++echo
++echo '*** Waiting for identity generation...'
++
++while [ ! -f /var/lib/zerotier-one/identity.secret ]; do
++	sleep 1
++done
++
++echo
++echo "*** Success! You are ZeroTier address [ `cat /var/lib/zerotier-one/identity.public | cut -d : -f 1` ]."
++echo
++
++exit 0
++-----BEGIN PGP SIGNATURE-----
++
++iQJJBAEBCAAzFiEEdKXpxFjhpDHx2lenFlcZiCPlKmEFAmN3xcoVHGNvbnRhY3RA
++emVyb3RpZXIuY29tAAoJEBZXGYgj5Sph6pkP/R8rfdgtJ+2B5nJ8fciSzrq2hCE+
++FfTvKsV6k8c+X38QLfU8kwjBNVGrAG+9kswnZPE5Gzg7Af0lIxZudQNgfVa6jfhj
+++tyWTGu+LhLhRKfpjderpBO+2SoksVMwY3U+F0T5ueFwgheSC66s/WK7SwHM9ZDE
++j4b032k7EGAUh4phQ4xhoqlyLnkBqvKIeJmW1a/HxVJ3qEotCDL+AU25lWHVrJ9v
++Il9PJBhtQw43crVIy6Ipu9oNTXhiJVpjJk3K39pVZj1lqg2EwRCBTDDnI+qN2AT4
++FAxp5PPzC3+26X9CCjGDn3adxOkY8+SUQTi10SpJLCazi9qteZPnEtn8UgPFQUMN
++LxxCJIyAzAiYvzlxj7UNSBunbhnTLtSsMeZ37kVX3h9rYexrqOW8RM9rlHMITeep
++tOATZoxm5kMIvulmGVYhDzv7m6rJu8lbwQPOF+Hw/e4ZSUdTPLx/dNUNb0cXYPFF
++8f7z7p8P9qItWZTCcw8lG/YBjEBGyAuEajF8qq2rZm41ZL4esj+ThaH15OQW2qIj
++tsESY6ypk3DH2WXzoAaBaP3sZPOKL8BjnkQEWOO2xwSJFsDPVWHpP84Sc/oQNgM9
++YaNkeb01Akdedi0QWEAnUIVoxgKGYkZ5FeHiBDdPXOIAplQEOQtQMub4eVqzisa7
++3mJESd3mq+3T9m19
++=iE9H
++-----END PGP SIGNATURE-----
