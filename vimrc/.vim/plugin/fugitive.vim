@@ -402,7 +402,7 @@ function! s:Gdit() abort
     let current_branch = substitute(system("~/loadrc/gitrc/get_current_branch.sh"), '\n', '', '')
     let output = current_branch . '.gdit.diff'
     let output = substitute(output, "/", "_", "g")
-    exec '!~/loadrc/gitrc/gdit.sh' . ' ' . '"' .  output . '" 2>&1 | tee ' . 'gdit.runresult' 
+    exec '!~/loadrc/gitrc/gdit.sh' . ' ' . '"' .  output . '" 2>&1 | tee ' . 'gdit.runresult'
 
     if bufwinnr('^' . output . '$') > 0
         exe "bd!" . output
@@ -504,7 +504,7 @@ endfunction
 function! s:Gco(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    exec '!~/loadrc/gitrc/gco.sh ' . '"' .  arg1 . '" 2>&1 | tee ' . 'gco.runresult'  
+    exec '!~/loadrc/gitrc/gco.sh ' . '"' .  arg1 . '" 2>&1 | tee ' . 'gco.runresult'
     call OpenOrSwitch('gco.runresult', 'vs')
 endfunction
 
@@ -784,7 +784,7 @@ endfunction
 
 function! s:Portsforward() abort
     call Cd2Worktree()
-    exec '!~/loadrc/bashrc/do_ports_forward.sh 2>&1 | tee do_ports_forward.runresult' 
+    exec '!~/loadrc/bashrc/do_ports_forward.sh 2>&1 | tee do_ports_forward.runresult'
     call OpenOrSwitch('do_ports_forward.runresult', 'vs')
 endfunction
 

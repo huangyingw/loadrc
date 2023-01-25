@@ -6,4 +6,5 @@ echo git diff \
     --ignore-blank-lines \
     --ignore-cr-at-eol \
     --ignore-space-at-eol \
-    --ignore-space-change
+    --ignore-space-change \
+    --minimal

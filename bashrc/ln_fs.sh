@@ -15,7 +15,7 @@ then
     elif [ -d "$TARGET" ]
     then
         rsync -aHv --progress --remove-source-files "$TARGET"/ "$TARGET".bak/ ; \
-        ~/loadrc/bashrc/rmEmpty.sh "$TARGET" 
+        ~/loadrc/bashrc/rmEmpty.sh "$TARGET"
     fi
 
     ln -fs "$SOURCE" "$TARGET"
