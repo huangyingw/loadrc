@@ -4802,7 +4802,7 @@ index 5bccdfa7..0e1c4279 100755
  import token
  import tokenize
 diff --git a/pythonrc/vlc.py b/pythonrc/vlc.py
-index 13a0cf4c..6cd6989c 100755
+index 13a0cf4c..469a2baa 100755
 --- ./pythonrc/vlc.py
 +++ ./pythonrc/vlc.py
 @@ -13,9 +13,9 @@ def callvlc(targetFile, start=0):
@@ -4810,7 +4810,7 @@ index 13a0cf4c..6cd6989c 100755
          if platform.system() == 'Darwin':
              if start == 0:
 -                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', targetFile])
-+                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '--sub-language', 'Chinese', '--sub-autodetect-file', '-f', '--macosx-continue-playback=2', '--rate=2.0', targetFile])
++                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '--sub-language', 'Chinese', '--sub-autodetect-file', '-f', '--macosx-continue-playback=2', '--rate=1.0', targetFile])
              else:
 -                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
 +                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '--sub-language', 'Chinese', '--sub-autodetect-file', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
@@ -5214,11 +5214,11 @@ index 00000000..7d4c1d81
 +Subproject commit 7d4c1d8198e889d513a030b5a83faa07606bac27
 diff --git a/vimrc/.vim/bundle/plantuml-previewer.vim b/vimrc/.vim/bundle/plantuml-previewer.vim
 new file mode 160000
-index 00000000..887d55f9
+index 00000000..74483d5d
 --- /dev/null
 +++ ./vimrc/.vim/bundle/plantuml-previewer.vim
 @@ -0,0 +1 @@
-+Subproject commit 887d55f912be965e9a24aa61d744fc8b9ed0d7d1
++Subproject commit 74483d5d01042db5de6f89aaba64376d87effaff
 diff --git a/vimrc/.vim/bundle/plantuml-syntax b/vimrc/.vim/bundle/plantuml-syntax
 new file mode 160000
 index 00000000..845abb56
@@ -5385,7 +5385,7 @@ index 00000000..dfb309e2
 +set shortmess+=A
 +command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
-index 63869eb8..01f351f9 100644
+index 63869eb8..707dfb17 100644
 --- ./vimrc/.vim/plugin/common.vim
 +++ ./vimrc/.vim/plugin/common.vim
 @@ -97,7 +97,11 @@ endfunction
@@ -5400,7 +5400,7 @@ index 63869eb8..01f351f9 100644
          return 1
      endif
  endfunction
-@@ -138,17 +142,21 @@ function! GetWorktree()
+@@ -138,17 +142,25 @@ function! GetWorktree()
      return substitute(system("~/loadrc/gitrc/get_worktree.sh " . '"' . expand('%:p') . '"'), '\n', '', '')
  endfunction
  
@@ -5408,12 +5408,16 @@ index 63869eb8..01f351f9 100644
 -    let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
 -    let bnr = bufwinnr('^' . realpath . '$')
 +function! OpenOrSwitch(buffername, openMode, ...)
++    let fileName = a:buffername
++
 +    if !filereadable(a:buffername)
 +        let curline = getline(line("."))
++        let curline = substitute(curline, '\\', '', 'g')
 +        let curline = substitute(curline, "^\"", "", "")
-+        let fileName = substitute(curline, "\"$", "", "")
-+    else
-+        let fileName = a:buffername
++        let curline = substitute(curline, "\"$", "", "")
++        if filereadable(curline)
++            let fileName = curline
++        endif
 +    endif
 +
 +    let topleft = (a:0 >= 1) ? a:1 : 'topleft'
@@ -5431,7 +5435,7 @@ index 63869eb8..01f351f9 100644
      endif
  endfunction
  
-@@ -208,7 +216,7 @@ function! GetEscapedResult(keywordStr)
+@@ -208,7 +220,7 @@ function! GetEscapedResult(keywordStr)
      let result = substitute(result, '!', '', 'g')
      let result = substitute(result, "<", "", "g")
      let result = substitute(result, ">", "", "g")
@@ -5440,7 +5444,7 @@ index 63869eb8..01f351f9 100644
      let result = substitute(result, "*", "", "g")
      let result = substitute(result, "%", "", "g")
      let result = substitute(result, ":", "", "g")
-@@ -240,7 +248,8 @@ function! RunShell(shell, ...)
+@@ -240,7 +252,8 @@ function! RunShell(shell, ...)
              exec '!' . run_string
          endif
      endif
@@ -5450,7 +5454,7 @@ index 63869eb8..01f351f9 100644
  endfunc
  
  function! Filter2Findresult()
-@@ -250,20 +259,19 @@ function! Filter2Findresult()
+@@ -250,20 +263,19 @@ function! Filter2Findresult()
  
      if expand('%:e') != "findresult"
          let buffername = b:result . '.findresult'
@@ -5473,7 +5477,7 @@ index 63869eb8..01f351f9 100644
  
      if csdbpath != "Nothing"
          exec "cd " . csdbpath
-@@ -277,7 +285,6 @@ function! Cd2Worktree()
+@@ -277,7 +289,6 @@ function! Cd2Worktree()
      try
          exec "cd " . fnameescape(worktree)
      catch /./

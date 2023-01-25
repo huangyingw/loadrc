@@ -38,7 +38,6 @@ function! RemovePairs()
             " 如果右括号不是当前行最后一个字符
             execute "normal! v%xi"
         endif
-
     else
         execute "normal! a\<BS>"
     endif
