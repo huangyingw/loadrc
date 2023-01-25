@@ -1,5 +1,4 @@
 diff --git a/.AF052336.rc b/.AF052336.rc
-index 90ce3cd4..71517e53 100644
 --- ./.AF052336.rc
 +++ ./.AF052336.rc
 @@ -1,2 +1,3 @@
@@ -8,7 +7,6 @@ index 90ce3cd4..71517e53 100644
 +~/loadrc/setup_pbpaste-remote.sh
 diff --git a/.COH-LC172TVQ6J.rc b/.COH-LC172TVQ6J.rc
 new file mode 100644
-index 00000000..4ea0a805
 --- /dev/null
 +++ ./.COH-LC172TVQ6J.rc
 @@ -0,0 +1,2 @@
@@ -16,14 +14,12 @@ index 00000000..4ea0a805
 +ssh-add /Users/ying.huang/.ssh/id_rsa
 diff --git a/.androidrc b/.androidrc
 deleted file mode 100644
-index 263407f8..00000000
 --- ./.androidrc
 +++ /dev/null
 @@ -1,2 +0,0 @@
 -export PATH="$HOME/Android/sdk/tools:$PATH"
 -export PATH="$HOME/Android/sdk/platform-tools:$PATH"
 diff --git a/.bashrc b/.bashrc
-index a327085e..812c6e14 100644
 --- ./.bashrc
 +++ ./.bashrc
 @@ -148,6 +148,3 @@ fi
@@ -35,7 +31,6 @@ index a327085e..812c6e14 100644
 -. $HOME/loadrc/.loadrc
 diff --git a/.cohesityrc b/.cohesityrc
 new file mode 100644
-index 00000000..d81f328f
 --- /dev/null
 +++ ./.cohesityrc
 @@ -0,0 +1,21 @@
@@ -62,7 +57,6 @@ index 00000000..d81f328f
 +GO3RDPARTY=$TC_BASE/$TC_VERSION/golang/go-martini:$TC_BASE/$TC_VERSION/golang/go-gorilla:$TC_BASE/$TC_VERSION/golang/termbox-go:$TC_BASE/$TC_VERSION/golang/elastigo:$TC_BASE/$TC_VERSION/golang/go-inject
 diff --git a/.dockerignore b/.dockerignore
 new file mode 100644
-index 00000000..995dbd0a
 --- /dev/null
 +++ ./.dockerignore
 @@ -0,0 +1,9 @@
@@ -76,7 +70,6 @@ index 00000000..995dbd0a
 +**/*.runresult
 +**/*.tmp
 diff --git a/.envrc b/.envrc
-index 47a567de..cbf2b86e 100755
 --- ./.envrc
 +++ ./.envrc
 @@ -24,6 +24,3 @@ export LSCOLORS=Exfxcxdxbxegedabagacad
@@ -87,7 +80,6 @@ index 47a567de..cbf2b86e 100755
 -export PATH=/usr/local/bin:$PATH
 -export PATH=~/bin:$PATH
 diff --git a/.gitconfig_sample b/.gitconfig_sample
-index 5ed35a81..92913780 100644
 --- ./.gitconfig_sample
 +++ ./.gitconfig_sample
 @@ -8,9 +8,7 @@
@@ -102,7 +94,6 @@ index 5ed35a81..92913780 100644
      remote = origin
      merge = refs/heads/dev
 diff --git a/.gitignore b/.gitignore
-index 8f92760e..87239405 100644
 --- ./.gitignore
 +++ ./.gitignore
 @@ -1,3 +1,4 @@
@@ -110,8 +101,15 @@ index 8f92760e..87239405 100644
  *.list
  *.log
  *.pkg
+@@ -6,6 +7,7 @@ bashrc/.bash_history
+ bashrc/copy_files.log
+ bashrc/output
+ crontabrc/crontab_file
++files.proj
+ gstv.ready
+ host_links/ubuntu/home/parallels/.config/smplayer/smplayer.ini
+ kvmrc/.ropeproject/
 diff --git a/.gitmodules b/.gitmodules
-index e17f9887..72fa51be 100644
 --- ./.gitmodules
 +++ ./.gitmodules
 @@ -133,10 +133,6 @@
@@ -186,7 +184,6 @@ index e17f9887..72fa51be 100644
 +	path = vimrc/.vim/bundle/vim-ps1
 +	url = git@github.com:PProvost/vim-ps1.git
 diff --git a/.gitrc b/.gitrc
-index 8e753cb1..e536f2e5 100755
 --- ./.gitrc
 +++ ./.gitrc
 @@ -21,6 +21,7 @@ alias gclean='git clean -fd'
@@ -208,14 +205,12 @@ index 8e753cb1..e536f2e5 100755
  alias gtag='$HOME/loadrc/gitrc/gtag.sh'
  alias gtg='git tag -l -n1'
 diff --git a/.gorc b/.gorc
-index a51724b9..82a595f3 100644
 --- ./.gorc
 +++ ./.gorc
 @@ -1,2 +1 @@
  export GOPATH=$HOME/go
 -export PATH=$PATH:/usr/local/go/bin
 diff --git a/.imac.rc b/.imac.rc
-index a0d25e95..d053c758 100755
 --- ./.imac.rc
 +++ ./.imac.rc
 @@ -8,3 +8,5 @@ then
@@ -225,26 +220,22 @@ index a0d25e95..d053c758 100755
 +
 +~/loadrc/wifi-auto-reconnect/install.sh
 diff --git a/.imacpro.rc b/.imacpro.rc
-index a0d25e95..f95f5979 100755
+old mode 100755
+new mode 100644
 --- ./.imacpro.rc
 +++ ./.imacpro.rc
-@@ -1,10 +1,9 @@
- #!/bin/zsh
- # alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
- 
+@@ -1,10 +0,0 @@
+-#!/bin/zsh
+-#alias restartWifi='$HOME/loadrc/osxrc/restart_wifi.sh'
+-
 -if [ $(uname) = "Darwin" ]
-+if ! (sudo systemsetup -getcomputersleep | grep -q Never)
- then
+-then
 -    if ! (sudo systemsetup -getcomputersleep | grep -q Never) ; \
 -        then \
 -        sudo systemsetup -setcomputersleep Never; \
 -        fi
-+    sudo systemsetup -setcomputersleep Never
- fi
-+
-+~/loadrc/setup_bidirectional_clipboard.sh
+-fi
 diff --git a/.loadrc b/.loadrc
-index 17e45232..14ec11eb 100755
 --- ./.loadrc
 +++ ./.loadrc
 @@ -1,5 +1,5 @@
@@ -256,7 +247,6 @@ index 17e45232..14ec11eb 100755
  . $HOME/loadrc/.gitrc
 diff --git a/.macmini.rc b/.macmini.rc
 new file mode 100644
-index 00000000..a3b313b1
 --- /dev/null
 +++ ./.macmini.rc
 @@ -0,0 +1,9 @@
@@ -271,13 +261,11 @@ index 00000000..a3b313b1
 +~/loadrc/setup_pbpaste-remote.sh
 diff --git a/.macos.rc b/.macos.rc
 new file mode 100644
-index 00000000..9e7032fd
 --- /dev/null
 +++ ./.macos.rc
 @@ -0,0 +1 @@
 +~/loadrc/setup_pbpaste-remote.sh
 diff --git a/.macosrc b/.macosrc
-index de211c97..1298e4e5 100644
 --- ./.macosrc
 +++ ./.macosrc
 @@ -1,6 +1,4 @@
@@ -289,7 +277,6 @@ index de211c97..1298e4e5 100644
  fi
 diff --git a/.mba.rc b/.mba.rc
 new file mode 100644
-index 00000000..9ce19350
 --- /dev/null
 +++ ./.mba.rc
 @@ -0,0 +1,9 @@
@@ -304,7 +291,6 @@ index 00000000..9ce19350
 +~/loadrc/uninstall_bidirectional_clipboard.sh
 diff --git a/.mbp.rc b/.mbp.rc
 deleted file mode 100755
-index 514389f0..00000000
 --- ./.mbp.rc
 +++ /dev/null
 @@ -1,11 +0,0 @@
@@ -321,7 +307,6 @@ index 514389f0..00000000
 -fi
 diff --git a/.mbp2.rc b/.mbp2.rc
 new file mode 100755
-index 00000000..f95f5979
 --- /dev/null
 +++ ./.mbp2.rc
 @@ -0,0 +1,9 @@
@@ -336,7 +321,6 @@ index 00000000..f95f5979
 +~/loadrc/setup_bidirectional_clipboard.sh
 diff --git a/.mini.rc b/.mini.rc
 new file mode 100755
-index 00000000..7cf303fa
 --- /dev/null
 +++ ./.mini.rc
 @@ -0,0 +1,2 @@
@@ -344,7 +328,6 @@ index 00000000..7cf303fa
 +# export PATH=$HOME/anaconda3/bin:$PATH
 diff --git a/.mini2.rc b/.mini2.rc
 new file mode 100755
-index 00000000..d20e36a3
 --- /dev/null
 +++ ./.mini2.rc
 @@ -0,0 +1,2 @@
@@ -352,7 +335,6 @@ index 00000000..d20e36a3
 +~/loadrc/wifirc/enable.sh
 diff --git a/.pathrc b/.pathrc
 new file mode 100644
-index 00000000..32e9ddc1
 --- /dev/null
 +++ ./.pathrc
 @@ -0,0 +1,12 @@
@@ -369,7 +351,6 @@ index 00000000..32e9ddc1
 +export PATH=/usr/local/cuda/bin:$PATH
 +export PATH=/usr/local/go/bin:$PATH
 diff --git a/.profile b/.profile
-index 10952fbd..c0ecb98c 100755
 --- ./.profile
 +++ ./.profile
 @@ -16,20 +16,5 @@ if [ -n "$BASH_VERSION" ]; then
@@ -395,7 +376,6 @@ index 10952fbd..c0ecb98c 100755
 -. $HOME/loadrc/.loadrc
 diff --git a/.scl-1yihuang-m.corporate.localrc b/.scl-1yihuang-m.corporate.localrc
 deleted file mode 100755
-index 13bad558..00000000
 --- ./.scl-1yihuang-m.corporate.localrc
 +++ /dev/null
 @@ -1,60 +0,0 @@
@@ -461,14 +441,12 @@ index 13bad558..00000000
 -export PATH=/usr/local/Cellar/ctags/5.8/bin:${PATH}
 diff --git a/.server.rc b/.server.rc
 new file mode 100644
-index 00000000..3d146d68
 --- /dev/null
 +++ ./.server.rc
 @@ -0,0 +1,2 @@
 +#!/bin/zsh
 +~/loadrc/setup_pbpaste-remote.sh
 diff --git a/.shellrc b/.shellrc
-index 52d99984..899d368b 100755
 --- ./.shellrc
 +++ ./.shellrc
 @@ -1,6 +1,5 @@
@@ -493,15 +471,16 @@ index 52d99984..899d368b 100755
  alias fc='$HOME/loadrc/bashrc/fc.sh'
  alias fcscope='$HOME/loadrc/bashrc/fcscope.sh'
  alias fdisklog='$HOME/loadrc/bashrc/fdisk_log.sh'
-@@ -27,6 +25,7 @@ alias fflink='$HOME/loadrc/bashrc/fflink.sh'
+@@ -27,6 +25,8 @@ alias fflink='$HOME/loadrc/bashrc/fflink.sh'
  alias ffp='$HOME/loadrc/bashrc/ffp.sh'
  alias fgh='$HOME/loadrc/bashrc/fgh.sh'
  alias findProjects='$HOME/loadrc/bashrc/find_projects.sh'
 +alias find_and_label_bad_files='$HOME/loadrc/ffmpegrc/find_and_label_bad_files.sh'
++alias fmv='$HOME/loadrc/bashrc/findmv.sh'
  alias fjar='$HOME/loadrc/bashrc/fjar.sh'
  alias flarge='$HOME/loadrc/bashrc/flarge.sh'
  alias flargest='$HOME/loadrc/bashrc/flargest.sh'
-@@ -35,6 +34,7 @@ alias flink='$HOME/loadrc/bashrc/flink.sh'
+@@ -35,6 +35,7 @@ alias flink='$HOME/loadrc/bashrc/flink.sh'
  alias fnine='$HOME/loadrc/bashrc/fnine.sh'
  alias fnotinuse='$HOME/loadrc/bashrc/fnotinuse.sh'
  alias fr='$HOME/loadrc/bashrc/fr.sh'
@@ -509,7 +488,7 @@ index 52d99984..899d368b 100755
  alias fwt='$HOME/loadrc/bashrc/fwt.sh'
  alias fzw='$HOME/loadrc/bashrc/fzw.sh'
  alias glink='$HOME/loadrc/bashrc/glink.sh'
-@@ -43,7 +43,7 @@ alias jdupes='$HOME/loadrc/bashrc/jdupes.sh'
+@@ -43,7 +44,7 @@ alias jdupes='$HOME/loadrc/bashrc/jdupes.sh'
  alias jformat='$HOME/loadrc/bashrc/jformat.sh'
  alias jupytext='$HOME/loadrc/ipynbrc/jupytext.sh'
  alias killPort='$HOME/loadrc/bashrc/kill_port.sh'
@@ -518,7 +497,7 @@ index 52d99984..899d368b 100755
  alias la='ls -A'
  alias ll='ls -alF'
  alias loadrc='. $HOME/loadrc/.loadrc'
-@@ -67,14 +67,12 @@ alias rmEmpty='$HOME/loadrc/bashrc/rmEmpty.sh'
+@@ -67,14 +68,12 @@ alias rmEmpty='$HOME/loadrc/bashrc/rmEmpty.sh'
  alias rse='rsync -aH -e ssh --progress'
  alias rsleep='$HOME/loadrc/bashrc/rsleep.sh'
  alias rssh='$HOME/loadrc/bashrc/rssh.sh'
@@ -533,7 +512,7 @@ index 52d99984..899d368b 100755
  alias smount='$HOME/loadrc/bashrc/smount.sh'
  alias split='$HOME/loadrc/bashrc/split.sh'
  alias ssh='$HOME/loadrc/bashrc/ssh.sh'
-@@ -100,7 +98,6 @@ alias ubak='$HOME/loadrc/bashrc/ubak.sh'
+@@ -100,7 +99,6 @@ alias ubak='$HOME/loadrc/bashrc/ubak.sh'
  alias ufind='$HOME/loadrc/bashrc/ufind.sh'
  alias umlet='$HOME/loadrc/bashrc/umlet.sh'
  alias umletc='$HOME/loadrc/bashrc/umletc.sh'
@@ -542,7 +521,6 @@ index 52d99984..899d368b 100755
  alias ures='$HOME/loadrc/bashrc/ures.sh'
  alias usync='$HOME/loadrc/bashrc/usync.sh'
 diff --git a/.tigrc b/.tigrc
-index d909cd68..7f333b28 100644
 --- ./.tigrc
 +++ ./.tigrc
 @@ -1 +1 @@
@@ -550,13 +528,11 @@ index d909cd68..7f333b28 100644
 +bind generic 9 @sh -c "echo -n %(commit) | xclip -selection c"
 diff --git a/.ubuntu.rc b/.ubuntu.rc
 new file mode 100644
-index 00000000..9e7032fd
 --- /dev/null
 +++ ./.ubuntu.rc
 @@ -0,0 +1 @@
 +~/loadrc/setup_pbpaste-remote.sh
 diff --git a/.zshrc b/.zshrc
-index c7c0b3ff..88872777 100644
 --- ./.zshrc
 +++ ./.zshrc
 @@ -1,5 +1,4 @@
@@ -582,7 +558,6 @@ index c7c0b3ff..88872777 100644
  . $HOME/loadrc/.loadrc
  setopt HIST_IGNORE_ALL_DUPS
 diff --git a/Dockerfile b/Dockerfile
-index 08e0c80b..1886b818 100644
 --- ./Dockerfile
 +++ ./Dockerfile
 @@ -1,17 +1,24 @@
@@ -615,7 +590,6 @@ index 08e0c80b..1886b818 100644
  RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 diff --git a/Library/LaunchAgents/pbcopy.plist b/Library/LaunchAgents/pbcopy.plist
 new file mode 100644
-index 00000000..f7b23edf
 --- /dev/null
 +++ ./Library/LaunchAgents/pbcopy.plist
 @@ -0,0 +1,29 @@
@@ -650,7 +624,6 @@ index 00000000..f7b23edf
 +</plist>
 diff --git a/Library/LaunchAgents/pbpaste.plist b/Library/LaunchAgents/pbpaste.plist
 new file mode 100644
-index 00000000..392c21db
 --- /dev/null
 +++ ./Library/LaunchAgents/pbpaste.plist
 @@ -0,0 +1,29 @@
@@ -685,7 +658,6 @@ index 00000000..392c21db
 +</plist>
 diff --git a/bashrc/append_num.sh b/bashrc/append_num.sh
 new file mode 100755
-index 00000000..67fd9240
 --- /dev/null
 +++ ./bashrc/append_num.sh
 @@ -0,0 +1,3 @@
@@ -694,7 +666,6 @@ index 00000000..67fd9240
 +echo "$1" | sed "s/\/[6-9]\([^0-9][^\/]*$\)/\/\1/g;s/\/\([^\/]*$\)/\/$2 \1/g;s/\"//g" | tr -s ' '
 diff --git a/bashrc/append_rate.sh b/bashrc/append_rate.sh
 new file mode 100755
-index 00000000..c0515d20
 --- /dev/null
 +++ ./bashrc/append_rate.sh
 @@ -0,0 +1,6 @@
@@ -706,7 +677,6 @@ index 00000000..c0515d20
 +mv -nv "$source" "$target"
 diff --git a/bashrc/backup_with_time.sh b/bashrc/backup_with_time.sh
 new file mode 100755
-index 00000000..ace48405
 --- /dev/null
 +++ ./bashrc/backup_with_time.sh
 @@ -0,0 +1,12 @@
@@ -724,7 +694,6 @@ index 00000000..ace48405
 +    "${source}/" "${target}/"
 diff --git a/bashrc/backup_with_time.test.sh b/bashrc/backup_with_time.test.sh
 new file mode 100755
-index 00000000..3ea958e8
 --- /dev/null
 +++ ./bashrc/backup_with_time.test.sh
 @@ -0,0 +1,6 @@
@@ -735,7 +704,6 @@ index 00000000..3ea958e8
 +
 +./backup_with_time.sh /var/lib/transmission-daemon/.config/transmission-daemon
 diff --git a/bashrc/best_find.sh b/bashrc/best_find.sh
-index 0d2de988..4390b138 100755
 --- ./bashrc/best_find.sh
 +++ ./bashrc/best_find.sh
 @@ -3,12 +3,26 @@ SCRIPT=$(realpath "$0")
@@ -772,7 +740,6 @@ index 0d2de988..4390b138 100755
 +time \
 +    find . -type f -print0 | xargs -0 grep -IZl . > /dev/null 2>&1
 diff --git a/bashrc/change_mac_hostname_test.sh b/bashrc/change_mac_hostname_test.sh
-index 8c8e1dc4..dc42d5a9 100755
 --- ./bashrc/change_mac_hostname_test.sh
 +++ ./bashrc/change_mac_hostname_test.sh
 @@ -3,4 +3,4 @@ SCRIPT=$(realpath "$0")
@@ -783,7 +750,6 @@ index 8c8e1dc4..dc42d5a9 100755
 +./change_mac_hostname.sh mba
 diff --git a/bashrc/check_remote_mounted.sh b/bashrc/check_remote_mounted.sh
 new file mode 100755
-index 00000000..ac3b7013
 --- /dev/null
 +++ ./bashrc/check_remote_mounted.sh
 @@ -0,0 +1,8 @@
@@ -796,7 +762,6 @@ index 00000000..ac3b7013
 +    return 1
 +fi
 diff --git a/bashrc/check_running.sh b/bashrc/check_running.sh
-index 638490ac..8701cadf 100755
 --- ./bashrc/check_running.sh
 +++ ./bashrc/check_running.sh
 @@ -24,7 +24,7 @@ then
@@ -809,7 +774,6 @@ index 638490ac..8701cadf 100755
          # the process IS running
          # handle it
 diff --git a/bashrc/copy.sh b/bashrc/copy.sh
-index 09330daf..3c7ae927 100755
 --- ./bashrc/copy.sh
 +++ ./bashrc/copy.sh
 @@ -6,13 +6,15 @@ then
@@ -840,7 +804,6 @@ diff --git a/install_nvim.sh b/bashrc/copy.test.sh
 similarity index 65%
 rename from install_nvim.sh
 rename to bashrc/copy.test.sh
-index 76ffdaf5..83b0bbaf 100755
 --- ./install_nvim.sh
 +++ ./bashrc/copy.test.sh
 @@ -3,5 +3,4 @@ SCRIPT=$(realpath "$0")
@@ -854,7 +817,6 @@ diff --git a/bashrc/create_folders.sh b/bashrc/create_folders.sh
 old mode 100644
 new mode 100755
 diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
-index 9c24d246..2fb9f62d 100755
 --- ./bashrc/cscope.sh
 +++ ./bashrc/cscope.sh
 @@ -1,11 +1,7 @@
@@ -872,7 +834,6 @@ index 9c24d246..2fb9f62d 100755
 +    cscope -bq -i "$SOURCEFILE"
 diff --git a/bashrc/cutcommon.sh b/bashrc/cutcommon.sh
 new file mode 100755
-index 00000000..c66a8e4c
 --- /dev/null
 +++ ./bashrc/cutcommon.sh
 @@ -0,0 +1,7 @@
@@ -884,7 +845,6 @@ index 00000000..c66a8e4c
 +cp -fv "$1".findresult "$1"
 +cp -fv "$2".findresult "$2"
 diff --git a/bashrc/dd.sh b/bashrc/dd.sh
-index 26ad90c3..447bace9 100755
 --- ./bashrc/dd.sh
 +++ ./bashrc/dd.sh
 @@ -1,2 +1,12 @@
@@ -905,7 +865,6 @@ diff --git a/nxrc/install.sh b/bashrc/dd.test.sh
 similarity index 60%
 rename from nxrc/install.sh
 rename to bashrc/dd.test.sh
-index 2c4bf8d7..e117f8f1 100755
 --- ./nxrc/install.sh
 +++ ./bashrc/dd.test.sh
 @@ -3,5 +3,4 @@ SCRIPT=$(realpath "$0")
@@ -916,7 +875,6 @@ index 2c4bf8d7..e117f8f1 100755
 -dpkg -i $SOFTWARE/nx/nomachine_*.deb
 +./dd.sh /dev/nbd0 /media/volgrp/software/test.img
 diff --git a/bashrc/deploy.sh b/bashrc/deploy.sh
-index a76cbfaf..6f3988bf 100755
 --- ./bashrc/deploy.sh
 +++ ./bashrc/deploy.sh
 @@ -11,5 +11,5 @@ fi
@@ -928,7 +886,6 @@ index a76cbfaf..6f3988bf 100755
  fi
 diff --git a/bashrc/deploy_backward.sh b/bashrc/deploy_backward.sh
 new file mode 100755
-index 00000000..de9dd49f
 --- /dev/null
 +++ ./bashrc/deploy_backward.sh
 @@ -0,0 +1,9 @@
@@ -943,7 +900,6 @@ index 00000000..de9dd49f
 +    .
 diff --git a/bashrc/deploy_forward.sh b/bashrc/deploy_forward.sh
 new file mode 100755
-index 00000000..8b0a1767
 --- /dev/null
 +++ ./bashrc/deploy_forward.sh
 @@ -0,0 +1,9 @@
@@ -958,7 +914,6 @@ index 00000000..8b0a1767
 +    "$host:$rpath"
 diff --git a/bashrc/do_deploy.sh b/bashrc/do_deploy.sh
 new file mode 100755
-index 00000000..7807874b
 --- /dev/null
 +++ ./bashrc/do_deploy.sh
 @@ -0,0 +1,5 @@
@@ -969,7 +924,6 @@ index 00000000..7807874b
 +    ~/loadrc/bashrc/deploy_backward.sh
 diff --git a/bashrc/do_ports_forward.sh b/bashrc/do_ports_forward.sh
 new file mode 100755
-index 00000000..3b953711
 --- /dev/null
 +++ ./bashrc/do_ports_forward.sh
 @@ -0,0 +1,11 @@
@@ -985,7 +939,6 @@ index 00000000..3b953711
 +    done
 +done < ~/loadrc/bashrc/ports_forward.hosts
 diff --git a/bashrc/do_update_proj.sh b/bashrc/do_update_proj.sh
-index 9a6e19c8..14156f4d 100755
 --- ./bashrc/do_update_proj.sh
 +++ ./bashrc/do_update_proj.sh
 @@ -1,7 +1,9 @@
@@ -1004,17 +957,15 @@ index 9a6e19c8..14156f4d 100755
 +    ~/loadrc/bashrc/cscope.sh \
 +    'git remote update'
 diff --git a/bashrc/encrypt.sh b/bashrc/encrypt.sh
-index 42060e4e..6a06ea7c 100755
 --- ./bashrc/encrypt.sh
 +++ ./bashrc/encrypt.sh
 @@ -5,3 +5,4 @@ then
      exit 1
  fi
  cryptsetup -h sha256 -c aes-cbc-essiv:sha256 -s 256 luksFormat "$1"
-+cryptsetup luksAddKey "$1" /root/loadrc/keys/keyfile  
++cryptsetup luksAddKey "$1" /root/loadrc/keys/keyfile
 diff --git a/bashrc/fav.sh b/bashrc/fav.sh
 deleted file mode 100755
-index 87df8df9..00000000
 --- ./bashrc/fav.sh
 +++ /dev/null
 @@ -1,12 +0,0 @@
@@ -1031,7 +982,6 @@ index 87df8df9..00000000
 -    touch files.proj
 -fi
 diff --git a/bashrc/fdisk_log.sh b/bashrc/fdisk_log.sh
-index 37081d0c..3867ab7b 100755
 --- ./bashrc/fdisk_log.sh
 +++ ./bashrc/fdisk_log.sh
 @@ -4,7 +4,7 @@ logFile=~/loadrc/fdisk.log
@@ -1044,7 +994,6 @@ index 37081d0c..3867ab7b 100755
  mdadm -D "$DEVICE" >> "$logFile"
  blkid >> "$logFile"
 diff --git a/bashrc/fdocs.sh b/bashrc/fdocs.sh
-index bee84cf0..2ed8004b 100755
 --- ./bashrc/fdocs.sh
 +++ ./bashrc/fdocs.sh
 @@ -2,7 +2,7 @@
@@ -1058,7 +1007,6 @@ index bee84cf0..2ed8004b 100755
  then
 diff --git a/bashrc/file_move.sh b/bashrc/file_move.sh
 new file mode 100755
-index 00000000..889a9697
 --- /dev/null
 +++ ./bashrc/file_move.sh
 @@ -0,0 +1,9 @@
@@ -1073,7 +1021,6 @@ index 00000000..889a9697
 +mv -nv "$ss" "$2"
 diff --git a/bashrc/find_text.sh b/bashrc/find_text.sh
 new file mode 100755
-index 00000000..67f0fa92
 --- /dev/null
 +++ ./bashrc/find_text.sh
 @@ -0,0 +1,34 @@
@@ -1111,8 +1058,39 @@ index 00000000..67f0fa92
 +fun3
 +fun4
 +fun5
+diff --git a/bashrc/findmv.sh b/bashrc/findmv.sh
+new file mode 100755
+--- /dev/null
++++ ./bashrc/findmv.sh
+@@ -0,0 +1,27 @@
++#!/bin/zsh
++
++if [ -z "$1" ]
++then
++    echo -e "${red}Please provide the SOURCE... ${NC}"
++    exit 1
++fi
++
++if [ -z "$2" ]
++then
++    echo -e "${red}Please provide the TARGET... ${NC}"
++    exit 1
++fi
++
++SOURCE="$1"
++TARGET="$2"
++
++
++find "$SOURCE" -type f | \
++    while read ss
++    do
++        new_ss=$(echo "$ss" | sed -e "s#$SOURCE#$TARGET#g")
++        mkdir -p "$(dirname "$new_ss")"
++        mv -nv "$ss" "$new_ss"
++    done
++
++# ~/loadrc/bashrc/move.sh "$SOURCE" "$TARGET"
 diff --git a/bashrc/fr.sh b/bashrc/fr.sh
-index f58a2ee7..dcc8f356 100755
 --- ./bashrc/fr.sh
 +++ ./bashrc/fr.sh
 @@ -1,4 +1,16 @@
@@ -1133,10 +1111,9 @@ index f58a2ee7..dcc8f356 100755
      xargs sed -i.bak  "s/${FIND}/${REPLACE}/g" < "$3"
 +fi
 diff --git a/bashrc/fvideos.sh b/bashrc/fvideos.sh
-index 38fb060b..16bea66e 100755
 --- ./bashrc/fvideos.sh
 +++ ./bashrc/fvideos.sh
-@@ -1,9 +1,13 @@
+@@ -1,9 +1,21 @@
  #! /bin/zsh
  
 -FAVLOG="fav.log.bak"
@@ -1146,16 +1123,23 @@ index 38fb060b..16bea66e 100755
  export LC_ALL=C
 -find . -type f -size +500k -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
 +
++if [ -n "$2" ]
++then
++    SIZE_OPTION="+$2M"
++else
++    SIZE_OPTION="+10M"
++fi
++
 +cd "$1"
-+find . -type f -size +100M -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
++echo "SIZE_OPTION --> $SIZE_OPTION"
++find . -type f -size "$SIZE_OPTION" -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
      cp -fv "$FAVLOG" fav.log && \
 -    find . -type f -size +500k -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
-+    find . -type f -size +100M -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
++    find . -type f -size "$SIZE_OPTION" -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
      cp -fv "$FAVLOGSORT" fav.log.sort
 +
 +cd -
 diff --git a/bashrc/generate_files_proj.sh b/bashrc/generate_files_proj.sh
-index 83e2c748..2a6a0a9f 100755
 --- ./bashrc/generate_files_proj.sh
 +++ ./bashrc/generate_files_proj.sh
 @@ -20,7 +20,7 @@ cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
@@ -1193,7 +1177,6 @@ index 83e2c748..2a6a0a9f 100755
 +        sort -u ~/all.proj -o ~/all.proj.tmp && \
 +        cp -fv ~/all.proj.tmp ~/all.proj
 diff --git a/bashrc/generate_rsync_files.sh b/bashrc/generate_rsync_files.sh
-index d5360ed8..c79f1761 100755
 --- ./bashrc/generate_rsync_files.sh
 +++ ./bashrc/generate_rsync_files.sh
 @@ -1,6 +1,6 @@
@@ -1216,7 +1199,6 @@ index d5360ed8..c79f1761 100755
      if [ ${#include_params[@]} -gt 0 ] ; \
      then \
 diff --git a/bashrc/get_first_column_of_file.sh b/bashrc/get_first_column_of_file.sh
-index 7b83d343..2ed3ae50 100755
 --- ./bashrc/get_first_column_of_file.sh
 +++ ./bashrc/get_first_column_of_file.sh
 @@ -7,8 +7,8 @@ then
@@ -1233,7 +1215,6 @@ index 7b83d343..2ed3ae50 100755
  echo "$inputBak"
 diff --git a/bashrc/get_iconv.test.sh b/bashrc/get_iconv.test.sh
 new file mode 100755
-index 00000000..60512395
 --- /dev/null
 +++ ./bashrc/get_iconv.test.sh
 @@ -0,0 +1,8 @@
@@ -1247,7 +1228,6 @@ index 00000000..60512395
 +./get_iconv.sh "~/loadrc"
 diff --git a/bashrc/get_iconvs.sh b/bashrc/get_iconvs.sh
 new file mode 100755
-index 00000000..5c80ad37
 --- /dev/null
 +++ ./bashrc/get_iconvs.sh
 @@ -0,0 +1,33 @@
@@ -1286,7 +1266,6 @@ index 00000000..5c80ad37
 +fi
 diff --git a/bashrc/get_rsyncpath.sh b/bashrc/get_rsyncpath.sh
 new file mode 100755
-index 00000000..b1cde219
 --- /dev/null
 +++ ./bashrc/get_rsyncpath.sh
 @@ -0,0 +1,26 @@
@@ -1318,7 +1297,6 @@ index 00000000..b1cde219
 +fi
 diff --git a/bashrc/get_rsyncpath.test.sh b/bashrc/get_rsyncpath.test.sh
 new file mode 100755
-index 00000000..ccd1a783
 --- /dev/null
 +++ ./bashrc/get_rsyncpath.test.sh
 @@ -0,0 +1,10 @@
@@ -1333,7 +1311,6 @@ index 00000000..ccd1a783
 +./get_rsyncpath.sh ~/loadrc/ mini:~/loadrc/
 +./get_rsyncpath.sh mini:~/loadrc/ ~/loadrc/
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
-index e2137142..e8902ab8 100755
 --- ./bashrc/jdupes.sh
 +++ ./bashrc/jdupes.sh
 @@ -7,18 +7,13 @@ then
@@ -1361,7 +1338,6 @@ index e2137142..e8902ab8 100755
 -        nvim ~/loadrc/jdupes.log
 +fi
 diff --git a/bashrc/ln_fs.sh b/bashrc/ln_fs.sh
-index 8946ff3e..1a6a5a97 100755
 --- ./bashrc/ln_fs.sh
 +++ ./bashrc/ln_fs.sh
 @@ -9,11 +9,13 @@ then
@@ -1377,13 +1353,12 @@ index 8946ff3e..1a6a5a97 100755
 +    elif [ -d "$TARGET" ]
 +    then
 +        rsync -aHv --progress --remove-source-files "$TARGET"/ "$TARGET".bak/ ; \
-+        ~/loadrc/bashrc/rmEmpty.sh "$TARGET" 
++        ~/loadrc/bashrc/rmEmpty.sh "$TARGET"
      fi
  
      ln -fs "$SOURCE" "$TARGET"
 diff --git a/bashrc/ln_fs.test.sh b/bashrc/ln_fs.test.sh
 new file mode 100755
-index 00000000..006dc346
 --- /dev/null
 +++ ./bashrc/ln_fs.test.sh
 @@ -0,0 +1,27 @@
@@ -1415,7 +1390,6 @@ index 00000000..006dc346
 +ls -al lib
 +echo
 diff --git a/bashrc/mirror.sh b/bashrc/mirror.sh
-index 889ade9a..96dc7a46 100755
 --- ./bashrc/mirror.sh
 +++ ./bashrc/mirror.sh
 @@ -6,38 +6,42 @@ then
@@ -1477,7 +1451,6 @@ index 889ade9a..96dc7a46 100755
      then \
          ~/loadrc/bashrc/sleep.sh ; \
 diff --git a/bashrc/mosh.sh b/bashrc/mosh.sh
-index 2727f361..e2470e8b 100755
 --- ./bashrc/mosh.sh
 +++ ./bashrc/mosh.sh
 @@ -1,18 +1,17 @@
@@ -1508,7 +1481,6 @@ index 2727f361..e2470e8b 100755
  done
 diff --git a/bashrc/mount_samba.sh b/bashrc/mount_samba.sh
 deleted file mode 100755
-index fba69a67..00000000
 --- ./bashrc/mount_samba.sh
 +++ /dev/null
 @@ -1,6 +0,0 @@
@@ -1519,7 +1491,6 @@ index fba69a67..00000000
 -    sshfs -o idmap=user huangyingw@vdonkey:/media/ /media/samba/
 -fi
 diff --git a/bashrc/move.sh b/bashrc/move.sh
-index 84be1e2f..6c51f5c7 100755
 --- ./bashrc/move.sh
 +++ ./bashrc/move.sh
 @@ -6,23 +6,27 @@ then
@@ -1564,7 +1535,6 @@ index 84be1e2f..6c51f5c7 100755
      exit 1
  fi
 diff --git a/bashrc/move67.sh b/bashrc/move67.sh
-index 22da4353..30c75290 100755
 --- ./bashrc/move67.sh
 +++ ./bashrc/move67.sh
 @@ -1,3 +1,14 @@
@@ -1585,7 +1555,6 @@ index 22da4353..30c75290 100755
 +    fi
 +done
 diff --git a/bashrc/osmirror_exclude b/bashrc/osmirror_exclude
-index cd9fe5f8..d00ebc3a 100644
 --- ./bashrc/osmirror_exclude
 +++ ./bashrc/osmirror_exclude
 @@ -9,6 +9,7 @@
@@ -1598,7 +1567,6 @@ index cd9fe5f8..d00ebc3a 100644
  etc/hosts
 diff --git a/bashrc/parse_host.sh b/bashrc/parse_host.sh
 new file mode 100755
-index 00000000..9ffc3f7b
 --- /dev/null
 +++ ./bashrc/parse_host.sh
 @@ -0,0 +1,3 @@
@@ -1607,7 +1575,6 @@ index 00000000..9ffc3f7b
 +echo "$1" | sed 's/^[^:]*$/localhost/g;s/\([^:]*\):.*$/\1/g'
 diff --git a/bashrc/parse_host.test.sh b/bashrc/parse_host.test.sh
 new file mode 100755
-index 00000000..e46e9472
 --- /dev/null
 +++ ./bashrc/parse_host.test.sh
 @@ -0,0 +1,8 @@
@@ -1621,10 +1588,9 @@ index 00000000..e46e9472
 +./parse_host.sh "~/loadrc"
 diff --git a/bashrc/ports_forward.hosts b/bashrc/ports_forward.hosts
 new file mode 100644
-index 00000000..9188b07a
 --- /dev/null
 +++ ./bashrc/ports_forward.hosts
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,8 @@
 +work
 +mba
 +mbp
@@ -1632,9 +1598,9 @@ index 00000000..9188b07a
 +pikvm
 +sb
 +server
++imacpro
 diff --git a/bashrc/ports_forward.sh b/bashrc/ports_forward.sh
 new file mode 100755
-index 00000000..457733ac
 --- /dev/null
 +++ ./bashrc/ports_forward.sh
 @@ -0,0 +1,3 @@
@@ -1644,7 +1610,6 @@ index 00000000..457733ac
 diff --git a/bashrc/post.sh b/bashrc/post.sh
 old mode 100644
 new mode 100755
-index cfd7548a..8850d12b
 --- ./bashrc/post.sh
 +++ ./bashrc/post.sh
 @@ -22,3 +22,11 @@ curl \
@@ -1658,9 +1623,8 @@ index cfd7548a..8850d12b
 +   -H "x-imvu-sauce: $SAUCE" \
 +   -H "Cookie: osCsid=$OSCSID" \
 +   -d @body.json \
-+   https://api.imvu.com/gift > gift.json       
++   https://api.imvu.com/gift > gift.json
 diff --git a/bashrc/reboot.sh b/bashrc/reboot.sh
-index 1320581d..e40cc39b 100755
 --- ./bashrc/reboot.sh
 +++ ./bashrc/reboot.sh
 @@ -1,3 +1,8 @@
@@ -1675,7 +1639,6 @@ index 1320581d..e40cc39b 100755
 +fi
 diff --git a/bashrc/remove_path.sh b/bashrc/remove_path.sh
 new file mode 100755
-index 00000000..10e89a8a
 --- /dev/null
 +++ ./bashrc/remove_path.sh
 @@ -0,0 +1,6 @@
@@ -1687,7 +1650,6 @@ index 00000000..10e89a8a
 +export PATH=$(echo $PATH | tr ":" "\n" | grep -v "anaconda3" | tr "\n" ":")
 diff --git a/bashrc/removing_ansi_color_codes.sh b/bashrc/removing_ansi_color_codes.sh
 new file mode 100755
-index 00000000..9efc06a0
 --- /dev/null
 +++ ./bashrc/removing_ansi_color_codes.sh
 @@ -0,0 +1,3 @@
@@ -1696,7 +1658,6 @@ index 00000000..9efc06a0
 +cp -fv "$1".tmp "$1"
 diff --git a/bashrc/rename.sh b/bashrc/rename.sh
 new file mode 100755
-index 00000000..d3a5e9de
 --- /dev/null
 +++ ./bashrc/rename.sh
 @@ -0,0 +1,6 @@
@@ -1708,7 +1669,6 @@ index 00000000..d3a5e9de
 +mv -nv "$source" "$target"
 diff --git a/bashrc/retire_parts.sh b/bashrc/retire_parts.sh
 new file mode 100755
-index 00000000..582ea49d
 --- /dev/null
 +++ ./bashrc/retire_parts.sh
 @@ -0,0 +1,46 @@
@@ -1759,7 +1719,6 @@ index 00000000..582ea49d
 +    /usr/bin/find /var/lib/transmission-daemon/ -type f -mtime +$left -name \*.part -delete
 +fi
 diff --git a/bashrc/rsyncFiles.sh b/bashrc/rsyncFiles.sh
-index 36367474..bbb1678b 100755
 --- ./bashrc/rsyncFiles.sh
 +++ ./bashrc/rsyncFiles.sh
 @@ -8,6 +8,6 @@ rsync -aHv --force --progress \
@@ -1772,7 +1731,6 @@ index 36367474..bbb1678b 100755
      .
 diff --git a/bashrc/rsync_basic_options b/bashrc/rsync_basic_options
 new file mode 100644
-index 00000000..6c1733e0
 --- /dev/null
 +++ ./bashrc/rsync_basic_options
 @@ -0,0 +1,3 @@
@@ -1781,7 +1739,6 @@ index 00000000..6c1733e0
 +--force
 diff --git a/bashrc/select_move.sh b/bashrc/select_move.sh
 new file mode 100755
-index 00000000..2ef72567
 --- /dev/null
 +++ ./bashrc/select_move.sh
 @@ -0,0 +1,8 @@
@@ -1795,7 +1752,6 @@ index 00000000..2ef72567
 +    "$2"
 diff --git a/bashrc/setup.sh b/bashrc/setup.sh
 deleted file mode 100755
-index a7a35d8f..00000000
 --- ./bashrc/setup.sh
 +++ /dev/null
 @@ -1,10 +0,0 @@
@@ -1810,7 +1766,6 @@ index a7a35d8f..00000000
 -
 -apt-get install "${app_list[@]}" --force-yes -y
 diff --git a/bashrc/sleep.sh b/bashrc/sleep.sh
-index 4f4f20d8..68683380 100755
 --- ./bashrc/sleep.sh
 +++ ./bashrc/sleep.sh
 @@ -5,6 +5,6 @@ then
@@ -1823,7 +1778,6 @@ index 4f4f20d8..68683380 100755
  fi
 diff --git a/bashrc/sload.sh b/bashrc/sload.sh
 deleted file mode 100755
-index 1d01bc62..00000000
 --- ./bashrc/sload.sh
 +++ /dev/null
 @@ -1,9 +0,0 @@
@@ -1837,14 +1791,13 @@ index 1d01bc62..00000000
 -  . $HOME/loadrc/.loadrc
 -fi
 diff --git a/bashrc/smount.sh b/bashrc/smount.sh
-index 8f22cb80..6308bd28 100755
 --- ./bashrc/smount.sh
 +++ ./bashrc/smount.sh
 @@ -7,14 +8,17 @@ fi
  
  remoteServer=$(echo "$1" | sed  -e "s/\/$//g")
  mkdir -p ~/"$remoteServer"
-+mkdir -p ~/nfs/"$remoteServer" 
++mkdir -p ~/nfs/"$remoteServer"
  
  if [ $(uname) = "Linux" ]
  then
@@ -1855,14 +1808,13 @@ index 8f22cb80..6308bd28 100755
  else
 -    diskutil unmountDisk force ~/"$remoteServer"
 +    diskutil unmount force ~/nfs/"$remoteServer"
-+    diskutil unmount force ~/"$remoteServer" 
++    diskutil unmount force ~/"$remoteServer"
 +    ps ax | awk '/sshfs '$remoteServer'/NR > 1 {print $1}' | xargs kill -9
      sshfs "$remoteServer":/ ~/"$remoteServer"
 +    sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/nfs/"$remoteServer" &
      df -H
  fi
 diff --git a/bashrc/ssh.sh b/bashrc/ssh.sh
-index 7042dce9..55d1e24e 100755
 --- ./bashrc/ssh.sh
 +++ ./bashrc/ssh.sh
 @@ -1,11 +1,8 @@
@@ -1882,7 +1834,6 @@ index 7042dce9..55d1e24e 100755
      ssh -Y "$target" -t -- ${tmuxAction}
 +done
 diff --git a/bashrc/tmirror.sh b/bashrc/tmirror.sh
-index 30abd357..31ce354d 100755
 --- ./bashrc/tmirror.sh
 +++ ./bashrc/tmirror.sh
 @@ -1,13 +1,17 @@
@@ -1914,7 +1865,6 @@ index 30abd357..31ce354d 100755
 +    "$source/" "$target/" > "$ready_file"
 diff --git a/bashrc/un7z.sh b/bashrc/un7z.sh
 new file mode 100755
-index 00000000..9ab602e9
 --- /dev/null
 +++ ./bashrc/un7z.sh
 @@ -0,0 +1,18 @@
@@ -1938,7 +1888,6 @@ index 00000000..9ab602e9
 +    done
 diff --git a/bashrc/unrar.sh b/bashrc/unrar.sh
 new file mode 100755
-index 00000000..1655e19f
 --- /dev/null
 +++ ./bashrc/unrar.sh
 @@ -0,0 +1,18 @@
@@ -1962,7 +1911,6 @@ index 00000000..1655e19f
 +    done
 diff --git a/bashrc/unzip.sh b/bashrc/unzip.sh
 new file mode 100755
-index 00000000..30de5c69
 --- /dev/null
 +++ ./bashrc/unzip.sh
 @@ -0,0 +1,16 @@
@@ -1983,7 +1931,6 @@ index 00000000..30de5c69
 +            rm "$ss"
 +        done
 diff --git a/bashrc/update_proj.sh b/bashrc/update_proj.sh
-index 923ffff4..0fd99801 100755
 --- ./bashrc/update_proj.sh
 +++ ./bashrc/update_proj.sh
 @@ -6,4 +6,10 @@ then
@@ -1999,7 +1946,6 @@ index 923ffff4..0fd99801 100755
  ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_update_proj.sh
 diff --git a/bashrc/vm2img.sh b/bashrc/vm2img.sh
 new file mode 100755
-index 00000000..e456eda6
 --- /dev/null
 +++ ./bashrc/vm2img.sh
 @@ -0,0 +1,9 @@
@@ -2016,7 +1962,6 @@ diff --git a/install_cscope.sh b/bashrc/vm2img.test.sh
 similarity index 53%
 rename from install_cscope.sh
 rename to bashrc/vm2img.test.sh
-index 14d8f004..af6629ad 100755
 --- ./install_cscope.sh
 +++ ./bashrc/vm2img.test.sh
 @@ -3,5 +3,4 @@ SCRIPT=$(realpath "$0")
@@ -2026,8 +1971,15 @@ index 14d8f004..af6629ad 100755
 -git clone https://github.com/huangyingw/cscope.git
 -./cscope/build_pre.sh
 +./vm2img.sh /var/lib/libvirt/images/u2004.qcow2
+diff --git a/bashrc/watch_fvideos.sh b/bashrc/watch_fvideos.sh
+new file mode 100755
+--- /dev/null
++++ ./bashrc/watch_fvideos.sh
+@@ -0,0 +1,3 @@
++#!/bin/zsh
++
++/root/loadrc/bashrc/check_running.sh /root/loadrc/bashrc/fvideos.sh /media/ 100
 diff --git a/bashrc/wol.sh b/bashrc/wol.sh
-index 1e941ff7..aa05d65b 100755
 --- ./bashrc/wol.sh
 +++ ./bashrc/wol.sh
 @@ -8,10 +8,10 @@ then
@@ -2071,7 +2023,6 @@ similarity index 100%
 rename from vimrc/.vim/plugin/command.vim
 rename to crontabrc/.imacpro.cron
 diff --git a/crontabrc/.mbp.cron b/crontabrc/.mbp.cron
-index 9d256165..abc440c5 100644
 --- ./crontabrc/.mbp.cron
 +++ ./crontabrc/.mbp.cron
 @@ -1 +1 @@
@@ -2079,13 +2030,11 @@ index 9d256165..abc440c5 100644
 +*/10 * * * * /root/loadrc/dropboxrc/dropbox_start.sh
 diff --git a/crontabrc/.mbp2.cron b/crontabrc/.mbp2.cron
 new file mode 100644
-index 00000000..345a7b1d
 --- /dev/null
 +++ ./crontabrc/.mbp2.cron
 @@ -0,0 +1 @@
 +*/10 * * * * /Users/huangyingw/loadrc/bashrc/ports_forward.sh > /Users/huangyingw/loadrc/ports_forward.log 2>&1
 diff --git a/crontabrc/.mini.cron b/crontabrc/.mini.cron
-index d8126721..a09ce6be 100644
 --- ./crontabrc/.mini.cron
 +++ ./crontabrc/.mini.cron
 @@ -1,2 +1,3 @@
@@ -2093,15 +2042,18 @@ index d8126721..a09ce6be 100644
 -0 22-23,0-8 * * * /root/loadrc/crontabrc/mldonkey_start.sh
 +* * * * * /root/loadrc/bashrc/retire_parts.sh >> /root/loadrc/retire_parts.log 2>&1
 +*/10 * * * * /root/loadrc/dropboxrc/dropbox_start.sh
+diff --git a/crontabrc/.server.cron b/crontabrc/.server.cron
+--- ./crontabrc/.server.cron
++++ ./crontabrc/.server.cron
+@@ -0,0 +1 @@
++* * * * * /root/loadrc/bashrc/watch_fvideos.sh >> /root/loadrc/watch_fvideos.log 2>&1
 diff --git a/crontabrc/.studio.cron b/crontabrc/.studio.cron
 new file mode 100644
-index 00000000..bb6db6be
 --- /dev/null
 +++ ./crontabrc/.studio.cron
 @@ -0,0 +1 @@
 +*/5 * * * * /Users/huangyingw/loadrc/bashrc/ports_forward.sh > /Users/huangyingw/loadrc/ports_forward.log 2>&1
 diff --git a/crontabrc/install.sh b/crontabrc/install.sh
-index bb10bf3c..b1a3c089 100755
 --- ./crontabrc/install.sh
 +++ ./crontabrc/install.sh
 @@ -3,6 +3,15 @@ SCRIPT=$(realpath "$0")
@@ -2138,7 +2090,6 @@ index bb10bf3c..b1a3c089 100755
      echo2crontab "$line"
 diff --git a/crontabrc/set_brightness.sh b/crontabrc/set_brightness.sh
 new file mode 100755
-index 00000000..3b3a29d9
 --- /dev/null
 +++ ./crontabrc/set_brightness.sh
 @@ -0,0 +1,3 @@
@@ -2147,7 +2098,6 @@ index 00000000..3b3a29d9
 +/usr/local/bin/brightness -m 0.082765
 diff --git a/crontabrc/silent.cron b/crontabrc/silent.cron
 new file mode 100644
-index 00000000..fe024f19
 --- /dev/null
 +++ ./crontabrc/silent.cron
 @@ -0,0 +1,2 @@
@@ -2155,7 +2105,6 @@ index 00000000..fe024f19
 +0 23,0-8 * * * /Users/yhuang/loadrc/crontabrc/silent.sh
 diff --git a/crontabrc/silent.sh b/crontabrc/silent.sh
 new file mode 100755
-index 00000000..f90514ae
 --- /dev/null
 +++ ./crontabrc/silent.sh
 @@ -0,0 +1,3 @@
@@ -2164,22 +2113,19 @@ index 00000000..f90514ae
 +sudo /usr/bin/osascript -e "set Volume 0"
 diff --git a/crontabrc/ssh.cron b/crontabrc/ssh.cron
 new file mode 100644
-index 00000000..cc6f4270
 --- /dev/null
 +++ ./crontabrc/ssh.cron
 @@ -0,0 +1,2 @@
 +*/10 * * * * /Users/huangyingw/loadrc/macosrc/restart_ssh.sh
 +*/10 * * * * /Users/ying.huang/loadrc/macosrc/restart_ssh.sh
 diff --git a/cscope b/cscope
-index 18a46b20..0a384883 160000
 --- ./cscope
 +++ ./cscope
 @@ -1 +1 @@
 -Subproject commit 18a46b2030e874db39398af1bcfdd460cc121f12
-+Subproject commit 0a3848832a97406727cdf7c85ac0c78837c634c9
++Subproject commit 0a3848832a97406727cdf7c85ac0c78837c634c9-dirty
 diff --git a/demo b/demo
 new file mode 100644
-index 00000000..87081191
 --- /dev/null
 +++ ./demo
 @@ -0,0 +1,54 @@
@@ -2238,7 +2184,6 @@ index 00000000..87081191
 +docker:
 +~/loadrc/docker-compose.yml
 diff --git a/deploy_configurations.sh b/deploy_configurations.sh
-index c0f7848b..4c6fae22 100755
 --- ./deploy_configurations.sh
 +++ ./deploy_configurations.sh
 @@ -18,20 +18,23 @@ fi
@@ -2271,7 +2216,6 @@ index c0f7848b..4c6fae22 100755
 +./neovim/post.sh
 diff --git a/do_install_cubbit.sh b/do_install_cubbit.sh
 new file mode 100755
-index 00000000..e922ab44
 --- /dev/null
 +++ ./do_install_cubbit.sh
 @@ -0,0 +1,105 @@
@@ -2381,7 +2325,6 @@ index 00000000..e922ab44
 +xdg-open $download_folder &>/dev/null
 +clog "[✓] Cubbit desktop client downloaded into your 'Downloads' folder!"
 diff --git a/docker-compose.yml b/docker-compose.yml
-index 4a15eb71..ddd176a8 100644
 --- ./docker-compose.yml
 +++ ./docker-compose.yml
 @@ -5,7 +5,6 @@ services:
@@ -2403,7 +2346,6 @@ index 4a15eb71..ddd176a8 100644
              - FILENAME="~/.bashrc"
          command: /bin/sh -c "/entrypoint.sh 2>&1 | tee /var/logs/containner.log"
 diff --git a/dockerrc/cleandocker.sh b/dockerrc/cleandocker.sh
-index dd7d981a..7c6f78bc 100755
 --- ./dockerrc/cleandocker.sh
 +++ ./dockerrc/cleandocker.sh
 @@ -1,21 +1,2 @@
@@ -2429,7 +2371,6 @@ index dd7d981a..7c6f78bc 100755
 -set -o nounset                              # Treat unset variables as an error
  docker rmi -f $(docker images -a | grep '<none>' | tr -s ' ' | cut -d ' ' -f 3)
 diff --git a/dockerrc/edocker.sh b/dockerrc/edocker.sh
-index 889b85af..a0cd5228 100755
 --- ./dockerrc/edocker.sh
 +++ ./dockerrc/edocker.sh
 @@ -4,5 +4,5 @@ SCRIPTPATH=$(dirname "$SCRIPT")
@@ -2442,7 +2383,6 @@ index 889b85af..a0cd5228 100755
 +    docker exec -it "$CONTAINERID" bash
 diff --git a/dropboxrc/dropbox_start.sh b/dropboxrc/dropbox_start.sh
 new file mode 100755
-index 00000000..396eb8fe
 --- /dev/null
 +++ ./dropboxrc/dropbox_start.sh
 @@ -0,0 +1,2 @@
@@ -2450,7 +2390,6 @@ index 00000000..396eb8fe
 +/usr/bin/dropbox start 2>&1 | tee /root/loadrc/cron.log
 diff --git a/dropboxrc/install.sh b/dropboxrc/install.sh
 new file mode 100755
-index 00000000..9fd3ccad
 --- /dev/null
 +++ ./dropboxrc/install.sh
 @@ -0,0 +1,8 @@
@@ -2464,7 +2403,6 @@ index 00000000..9fd3ccad
 +apt --fix-broken install -y
 diff --git a/ffmpegrc/cat_bad_files.sh b/ffmpegrc/cat_bad_files.sh
 new file mode 100755
-index 00000000..2546cb7a
 --- /dev/null
 +++ ./ffmpegrc/cat_bad_files.sh
 @@ -0,0 +1,10 @@
@@ -2480,7 +2418,6 @@ index 00000000..2546cb7a
 +done < "$1"
 diff --git a/ffmpegrc/check_moov_atom.sh b/ffmpegrc/check_moov_atom.sh
 new file mode 100755
-index 00000000..4ec06ac5
 --- /dev/null
 +++ ./ffmpegrc/check_moov_atom.sh
 @@ -0,0 +1,9 @@
@@ -2494,7 +2431,6 @@ index 00000000..4ec06ac5
 +    exit 1
 +fi
 diff --git a/ffmpegrc/concat.sh b/ffmpegrc/concat.sh
-index 58429e06..51c59336 100755
 --- ./ffmpegrc/concat.sh
 +++ ./ffmpegrc/concat.sh
 @@ -2,9 +2,10 @@
@@ -2511,7 +2447,6 @@ index 58429e06..51c59336 100755
  fi
 diff --git a/ffmpegrc/find_and_label_bad_files.sh b/ffmpegrc/find_and_label_bad_files.sh
 new file mode 100755
-index 00000000..1c942139
 --- /dev/null
 +++ ./ffmpegrc/find_and_label_bad_files.sh
 @@ -0,0 +1,17 @@
@@ -2533,7 +2468,6 @@ index 00000000..1c942139
 +    fi
 +done
 diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
-index ca91dbaf..b224e10e 100755
 --- ./gitrc/.gitconfig
 +++ ./gitrc/.gitconfig
 @@ -53,6 +53,7 @@
@@ -2560,8 +2494,16 @@ index ca91dbaf..b224e10e 100755
 +	helper = !gh auth git-credential
 +[safe]
 +	directory = *
+diff --git a/gitrc/.globalgitignore b/gitrc/.globalgitignore
+--- ./gitrc/.globalgitignore
++++ ./gitrc/.globalgitignore
+@@ -71,3 +71,5 @@ rsync.files
+ ncscopefile.*
+ gbra.log
+ *.js_eslint_tmp_*.js
++files.proj
++rsync.files
 diff --git a/gitrc/apply_branch.sh b/gitrc/apply_branch.sh
-index 15190e93..89ce9ced 100755
 --- ./gitrc/apply_branch.sh
 +++ ./gitrc/apply_branch.sh
 @@ -1,15 +1,24 @@
@@ -2603,7 +2545,6 @@ index 15190e93..89ce9ced 100755
 +    git stash pop stash@{0}
 +fi
 diff --git a/gitrc/autoadd.sh b/gitrc/autoadd.sh
-index 9c6d0caf..e50b2f19 100755
 --- ./gitrc/autoadd.sh
 +++ ./gitrc/autoadd.sh
 @@ -4,6 +4,7 @@ fileName="$1"
@@ -2615,7 +2556,6 @@ index 9c6d0caf..e50b2f19 100755
      if ( grep -Fxq "\"./$fileName\"" "$filesProj" ) && ( ! git ls-files --error-unmatch "$fileName" )
      then
 diff --git a/gitrc/checkGitStatus.sh b/gitrc/checkGitStatus.sh
-index 2b929a6c..1565c80c 100755
 --- ./gitrc/checkGitStatus.sh
 +++ ./gitrc/checkGitStatus.sh
 @@ -1,5 +1,6 @@
@@ -2627,14 +2567,18 @@ index 2b929a6c..1565c80c 100755
      echo -e "${red}the git repository is unclean, please check it before continuing... ${NC}"
      exit 1
 diff --git a/gitrc/checkout_rejs.sh b/gitrc/checkout_rejs.sh
-index d81f6f38..136e5de1 100755
 --- ./gitrc/checkout_rejs.sh
 +++ ./gitrc/checkout_rejs.sh
-@@ -2,6 +3,13 @@
+@@ -1,7 +1,17 @@
+ #!/bin/zsh
++
++IFS=$'\n'
  for ss in $(git status | grep \.rej$) ; \
- do \                                     
-     targetFile=$(echo "$ss" | sed 's/\.rej$//g')
-+    targetFile=$(echo "$targetFile" | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g')
+ do \
+-    targetFile=$(echo "$ss" | sed 's/\.rej$//g')
++    targetFile=$(echo "$ss" | sed 's/\.rej$//g;s/^[[:space:]]*//g')
++    ss=$(echo "$ss" | sed 's/^[[:space:]]*//g')
++
 +    if [ "$2" = "f" ] || [ -n $(git config checkoutrejs.force) ] ; \
 +    then
          git checkout "$1" "$targetFile" && \
@@ -2645,7 +2589,6 @@ index d81f6f38..136e5de1 100755
 +    fi
  done
 diff --git a/gitrc/discard_unnecessaries.sh b/gitrc/discard_unnecessaries.sh
-index dbf809a0..e20fc1e4 100755
 --- ./gitrc/discard_unnecessaries.sh
 +++ ./gitrc/discard_unnecessaries.sh
 @@ -1,4 +1,5 @@
@@ -2656,7 +2599,6 @@ index dbf809a0..e20fc1e4 100755
  git checkout rsync.files
 +git checkout gbil.log
 diff --git a/gitrc/dogdio.sh b/gitrc/dogdio.sh
-index 4f8edfc6..327c8ebb 100755
 --- ./gitrc/dogdio.sh
 +++ ./gitrc/dogdio.sh
 @@ -1,5 +1,6 @@
@@ -2680,7 +2622,6 @@ index 4f8edfc6..327c8ebb 100755
 -exit 0
 +~/loadrc/gitrc/gdi.sh "$target" 2>&1 | tee "$output"
 diff --git a/gitrc/dogsync.sh b/gitrc/dogsync.sh
-index 6e5ba70f..f3b1b6ac 100755
 --- ./gitrc/dogsync.sh
 +++ ./gitrc/dogsync.sh
 @@ -5,6 +5,7 @@ then
@@ -2693,7 +2634,6 @@ index 6e5ba70f..f3b1b6ac 100755
 -~/loadrc/gitrc/gps.sh
  ~/loadrc/gitrc/dogdio.sh
 diff --git a/gitrc/g.sh b/gitrc/g.sh
-index 8de34e76..2477da66 100755
 --- ./gitrc/g.sh
 +++ ./gitrc/g.sh
 @@ -1,7 +1,22 @@
@@ -2723,7 +2663,6 @@ index 8de34e76..2477da66 100755
  ~/loadrc/gitrc/postCommit.sh
 diff --git a/gitrc/gbak.sh b/gitrc/gbak.sh
 deleted file mode 100755
-index 0be60d68..00000000
 --- ./gitrc/gbak.sh
 +++ /dev/null
 @@ -1,7 +0,0 @@
@@ -2735,7 +2674,6 @@ index 0be60d68..00000000
 -~/loadrc/gitrc/gbrd.sh "$target_branch"
 -git checkout -b "$target_branch" "$remote/$remote_branch"
 diff --git a/gitrc/gbis.sh b/gitrc/gbis.sh
-index 192ec7a5..6f8c364f 100755
 --- ./gitrc/gbis.sh
 +++ ./gitrc/gbis.sh
 @@ -1,3 +1,4 @@
@@ -2744,15 +2682,13 @@ index 192ec7a5..6f8c364f 100755
  git bisect skip
  git bisect log | tee gbil.log
 diff --git a/gitrc/gbr.sh b/gitrc/gbr.sh
-index 3307cc1e..fc04fb47 100755
 --- ./gitrc/gbr.sh
 +++ ./gitrc/gbr.sh
 @@ -1,2 +1,2 @@
  #!/bin/zsh
 -git branch | tee gbr.findresult 
-+git branch --sort=-committerdate | tee gbr.findresult 
++git branch --sort=-committerdate | tee gbr.log
 diff --git a/gitrc/gbrd.sh b/gitrc/gbrd.sh
-index ff263b6d..75510788 100755
 --- ./gitrc/gbrd.sh
 +++ ./gitrc/gbrd.sh
 @@ -1,7 +1,11 @@
@@ -2770,7 +2706,6 @@ index ff263b6d..75510788 100755
      done
 +fi
 diff --git a/gitrc/gcl.sh b/gitrc/gcl.sh
-index e118a4de..828e3eae 100755
 --- ./gitrc/gcl.sh
 +++ ./gitrc/gcl.sh
 @@ -18,7 +18,10 @@ urlVar=$(echo "$urlVar" | sed 's/\//\\\//g')
@@ -2792,7 +2727,6 @@ index e118a4de..828e3eae 100755
 -    hub create "${author}_${repo}" && \
      ~/loadrc/gitrc/gclb.sh
 diff --git a/gitrc/gclb.sh b/gitrc/gclb.sh
-index cde18db7..2b45972d 100755
 --- ./gitrc/gclb.sh
 +++ ./gitrc/gclb.sh
 @@ -1,8 +1,14 @@
@@ -2811,16 +2745,57 @@ index cde18db7..2b45972d 100755
  mkdir -p $(dirname "$x")
  x=$(realpath --relative-to="$PWD" "$x")
  echo "BareReps location --> $x"
+diff --git a/gitrc/gco.sh b/gitrc/gco.sh
+--- ./gitrc/gco.sh
++++ ./gitrc/gco.sh
+@@ -1,15 +1,27 @@
+ #!/bin/zsh
+-branch="$1"
+-echo "branch --> $branch"
+ 
++~/loadrc/gitrc/discard_unnecessaries.sh
+ git remote update
+-remoteBranch=$(~/loadrc/gitrc/get_remote_branch.sh "$branch")
+-localBranch=$(git branch | grep "$branch" |  sed -e 's/^[* \t]*//')
++TARGET_BRANCH="$1"
++TARGET_BRANCH=$(echo "$TARGET_BRANCH" | sed 's/remotes\///g')
++TARGET_BRANCH="$TARGET_BRANCH"
++
++for remote in $(git remote)
++do
++    TARGET_BRANCH=$(echo "$TARGET_BRANCH" | sed "s/^$remote\///g")
++done
++
++echo "TARGET_BRANCH --> $TARGET_BRANCH"
++
++remoteBranch=$(~/loadrc/gitrc/get_remote_branch.sh "$TARGET_BRANCH")
++echo "remoteBranch --> $remoteBranch"
++localBranch=$(git branch | grep "$TARGET_BRANCH" |  sed -e 's/^[* \t]*//')
++echo "localBranch --> $localBranch"
+ 
+ if [ -n "$localBranch" ]
+ then
+     git checkout "$localBranch"
+ elif [ -n "$remoteBranch" ]
+ then
+-    git checkout -b "$branch" "$remoteBranch"
++    git checkout -b "$TARGET_BRANCH" "$remoteBranch"
+ fi
 diff --git a/gitrc/gcob_test.sh b/gitrc/gcob_test.sh
 old mode 100644
 new mode 100755
 diff --git a/gitrc/gcom.sh b/gitrc/gcom.sh
 new file mode 100755
-index 00000000..7bf23131
 --- /dev/null
 +++ ./gitrc/gcom.sh
-@@ -0,0 +1,39 @@
+@@ -0,0 +1,46 @@
 +#!/bin/zsh
++
++if [[ "$(git config gcom.disabled)" = "true" ]]
++then
++    echo -e "${red}gcom is disabled... ${NC}"
++    exit 1
++fi
 +
 +if [ -z "$1" ]
 +then
@@ -2848,6 +2823,7 @@ index 00000000..7bf23131
 +
 +echo "TARGET_BRANCH --> $TARGET_BRANCH"
 +
++git branch -d "$TARGET_BRANCH"
 +git checkout -b "$TARGET_BRANCH" || \
 +    git checkout "$TARGET_BRANCH" &&
 +    git merge "$current_branch"
@@ -2860,7 +2836,6 @@ index 00000000..7bf23131
 +    git stash pop stash@{0}
 +fi
 diff --git a/gitrc/gdev.sh b/gitrc/gdev.sh
-index b467b11a..8fd4e857 100755
 --- ./gitrc/gdev.sh
 +++ ./gitrc/gdev.sh
 @@ -1,4 +1,4 @@
@@ -2870,7 +2845,6 @@ index b467b11a..8fd4e857 100755
 -    && git config --file .gitconfig deploy.path "~/myproject/$(realpath --relative-to=$HOME/myproject $PWD)"
 +    && git config --file .gitconfig deploy.path "~/$(realpath --relative-to=$HOME/ $PWD)"
 diff --git a/gitrc/gdi.sh b/gitrc/gdi.sh
-index b720ac69..84f4cd32 100755
 --- ./gitrc/gdi.sh
 +++ ./gitrc/gdi.sh
 @@ -7,10 +7,11 @@ then
@@ -2885,9 +2859,8 @@ index b720ac69..84f4cd32 100755
      done
  fi
 -eval "$COMMAND"
-+eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
++eval "$COMMAND" | sed 's/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g;/^index [0-9a-f]*[0-9a-f]*/d'
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
-index dbcf937b..02f4befa 100755
 --- ./gitrc/gdi2.sh
 +++ ./gitrc/gdi2.sh
 @@ -8,30 +8,47 @@ then
@@ -2957,7 +2930,6 @@ index dbcf937b..02f4befa 100755
 +    git push "$remote" "$targetBranch"
 +fi
 diff --git a/gitrc/gdif.sh b/gitrc/gdif.sh
-index b0247ec4..07590e7c 100755
 --- ./gitrc/gdif.sh
 +++ ./gitrc/gdif.sh
 @@ -30,4 +30,4 @@ do
@@ -2967,7 +2939,6 @@ index b0247ec4..07590e7c 100755
 -eval "$COMMAND"
 +eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
 diff --git a/gitrc/gdio.sh b/gitrc/gdio.sh
-index 564ef4a9..35317ddb 100755
 --- ./gitrc/gdio.sh
 +++ ./gitrc/gdio.sh
 @@ -1,3 +1,3 @@
@@ -2976,7 +2947,6 @@ index 564ef4a9..35317ddb 100755
 -git submodule foreach ~/loadrc/gitrc/dogdio.sh &
 +git submodule status | awk '{print $2}' | parallel --jobs 0 'cd {}; ~/loadrc/gitrc/dogdio.sh'
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
-index 700d6af6..c4d35c11 100755
 --- ./gitrc/gdit.sh
 +++ ./gitrc/gdit.sh
 @@ -3,21 +3,18 @@ output="$1"
@@ -3007,12 +2977,11 @@ index 700d6af6..c4d35c11 100755
  if [ $? -ne 0 ]
  then
 -    echo -e "${red}most probably sth wrong in git merge... ${NC}" 2>&1 | tee "$output"
-+    echo -e "${red}most probably sth wrong in git merge... ${NC}" > "$output" 2>&1 
++    echo -e "${red}most probably sth wrong in git merge... ${NC}" > "$output" 2>&1
      exit 1
  fi
 diff --git a/gitrc/git-submodule.sh b/gitrc/git-submodule.sh
 new file mode 100755
-index 00000000..a11fd250
 --- /dev/null
 +++ ./gitrc/git-submodule.sh
 @@ -0,0 +1,16 @@
@@ -3033,10 +3002,9 @@ index 00000000..a11fd250
 +        git submodule add -b $branch $url $path || continue
 +    done
 diff --git a/gitrc/git_diff_command.sh b/gitrc/git_diff_command.sh
-index e2e8aa4b..603f6518 100755
 --- ./gitrc/git_diff_command.sh
 +++ ./gitrc/git_diff_command.sh
-@@ -1,3 +1,9 @@
+@@ -1,3 +1,10 @@
  #!/bin/zsh
  
 -echo "git diff --ignore-space-at-eol -b -w --ignore-blank-lines --binary"
@@ -3046,10 +3014,10 @@ index e2e8aa4b..603f6518 100755
 +    --ignore-blank-lines \
 +    --ignore-cr-at-eol \
 +    --ignore-space-at-eol \
-+    --ignore-space-change
++    --ignore-space-change \
++    --minimal
 diff --git a/gitrc/git_submodules_branch.sh b/gitrc/git_submodules_branch.sh
 new file mode 100755
-index 00000000..538f2109
 --- /dev/null
 +++ ./gitrc/git_submodules_branch.sh
 @@ -0,0 +1,2 @@
@@ -3057,14 +3025,12 @@ index 00000000..538f2109
 +git submodule foreach git branch
 diff --git a/gitrc/gitapply.sh b/gitrc/gitapply.sh
 deleted file mode 100755
-index 02b92af6..00000000
 --- ./gitrc/gitapply.sh
 +++ /dev/null
 @@ -1,2 +0,0 @@
 -#!/bin/zsh
 -git apply svn.diff
 diff --git a/gitrc/gme2.sh b/gitrc/gme2.sh
-index 20dd9aa3..0f505a1e 100755
 --- ./gitrc/gme2.sh
 +++ ./gitrc/gme2.sh
 @@ -1,5 +1,4 @@
@@ -3080,7 +3046,6 @@ index 20dd9aa3..0f505a1e 100755
 +CURRENT_BRANCH=$(~/loadrc/gitrc/get_current_branch.sh)
  git fetch . "$CURRENT_BRANCH":"$1"
 diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
-index fa900e00..4cb43793 100755
 --- ./gitrc/gpl.sh
 +++ ./gitrc/gpl.sh
 @@ -1,28 +1,31 @@
@@ -3128,7 +3093,6 @@ index fa900e00..4cb43793 100755
 +    git merge "$target"
  fi
 diff --git a/gitrc/gps.sh b/gitrc/gps.sh
-index 2198cb7f..d4e493b4 100755
 --- ./gitrc/gps.sh
 +++ ./gitrc/gps.sh
 @@ -1,11 +1,11 @@
@@ -3146,23 +3110,23 @@ index 2198cb7f..d4e493b4 100755
      done
  fi
 diff --git a/gitrc/gres.sh b/gitrc/gres.sh
-index 1de7ff41..8fbe7af2 100755
 --- ./gitrc/gres.sh
 +++ ./gitrc/gres.sh
-@@ -1,7 +1,10 @@
+@@ -1,9 +1,10 @@
  #!/bin/zsh
  
- conflictArr=($(git status | awk '/both .+:/{print $3}'))
--
-+#       git status | sed -e '/both modified:/!d;s/both modified://;s/^[\s\t]*//g;s/\ /\\ /g'
-+#       both modified:   Solutions/CohesitySecurity/Data Connectors/Helios2Sentinel/IncidentProducer/IncidentProducer.cs
-+#       both modified:   Solutions/CohesitySecurity/Data Connectors/Helios2Sentinel/IncidentProducer/local.settings.json
-+#       both added:      Solutions/CohesitySecurity/Data Connectors/Helios2Sentinel/azuredeploy.json
+-conflictArr=($(git status | awk '/both .+:/{print $3}'))
++IFS=$'\n'
++conflictArr=($(git status | sed -e '/both modified:/!d;s/both modified:\s*//;s/^[[:space:]]*//g'))
+ 
  for conflict in "${conflictArr[@]}"
  do
-     git add $conflict
+-    git add $conflict
+-    git reset HEAD $conflict
++    git add "$conflict"
++    git reset HEAD "$conflict"
+ done
 diff --git a/gitrc/gsearch.sh b/gitrc/gsearch.sh
-index b3980c8a..240de610 100755
 --- ./gitrc/gsearch.sh
 +++ ./gitrc/gsearch.sh
 @@ -1,4 +1,10 @@
@@ -3181,7 +3145,6 @@ index b3980c8a..240de610 100755
 +    -p -G "$1" -- "${filesStr[@]}" > "$2"
 diff --git a/gitrc/gsearch.test.sh b/gitrc/gsearch.test.sh
 new file mode 100755
-index 00000000..616acc64
 --- /dev/null
 +++ ./gitrc/gsearch.test.sh
 @@ -0,0 +1,6 @@
@@ -3192,7 +3155,6 @@ index 00000000..616acc64
 +
 +./gsearch.sh GitSearch ~/loadrc/gitsearch.findresult ~/loadrc/gitsearch.findresult.tmp
 diff --git a/gitrc/gshow.sh b/gitrc/gshow.sh
-index 06604af2..056c7062 100755
 --- ./gitrc/gshow.sh
 +++ ./gitrc/gshow.sh
 @@ -1,2 +1,2 @@
@@ -3203,7 +3165,6 @@ diff --git a/gitrc/gsquash.sh b/gitrc/gsquash.sh
 old mode 100644
 new mode 100755
 diff --git a/gitrc/gstp.sh b/gitrc/gstp.sh
-index 559b2ec5..15e9fe67 100755
 --- ./gitrc/gstp.sh
 +++ ./gitrc/gstp.sh
 @@ -1,7 +1,7 @@
@@ -3217,7 +3178,6 @@ index 559b2ec5..15e9fe67 100755
 +    git stash show -p stash@{"$1"} | git apply --reject --whitespace=fix --recount && git stash drop stash@{"$1"}
  fi
 diff --git a/gitrc/gsync.sh b/gitrc/gsync.sh
-index 9208b305..06422338 100755
 --- ./gitrc/gsync.sh
 +++ ./gitrc/gsync.sh
 @@ -1,3 +1,3 @@
@@ -3227,7 +3187,6 @@ index 9208b305..06422338 100755
 +~/loadrc/gitrc/dogsync.sh
 +git submodule status | awk '{print $2}' | parallel --jobs 0 'cd {}; ~/loadrc/gitrc/dogsync.sh; cd -'
 diff --git a/gitrc/postCommit.sh b/gitrc/postCommit.sh
-index 3bd9b5b1..8ad9bedc 100755
 --- ./gitrc/postCommit.sh
 +++ ./gitrc/postCommit.sh
 @@ -1,2 +1,4 @@
@@ -3236,7 +3195,6 @@ index 3bd9b5b1..8ad9bedc 100755
  ~/loadrc/gitrc/gsync.sh
 +~/loadrc/bashrc/update_proj.sh
 diff --git a/gitrc/reapply.sh b/gitrc/reapply.sh
-index d1ffbd95..3e44709b 100755
 --- ./gitrc/reapply.sh
 +++ ./gitrc/reapply.sh
 @@ -1,12 +1,22 @@
@@ -3271,7 +3229,6 @@ index d1ffbd95..3e44709b 100755
  fi
 diff --git a/gitrc/rediff.sh b/gitrc/rediff.sh
 new file mode 100755
-index 00000000..8c70d0cc
 --- /dev/null
 +++ ./gitrc/rediff.sh
 @@ -0,0 +1,4 @@
@@ -3281,7 +3238,6 @@ index 00000000..8c70d0cc
 +rediff "$DIFF_FILE" | sponge "$DIFF_FILE"
 diff --git a/gitrc/restore.sh b/gitrc/restore.sh
 new file mode 100755
-index 00000000..bbc0817e
 --- /dev/null
 +++ ./gitrc/restore.sh
 @@ -0,0 +1,7 @@
@@ -3293,7 +3249,6 @@ index 00000000..bbc0817e
 +    echo "git reverse apply failed" && \
 +    exit 1
 diff --git a/gpurc/.gpurc b/gpurc/.gpurc
-index 8be8d98c..6026d401 100644
 --- ./gpurc/.gpurc
 +++ ./gpurc/.gpurc
 @@ -1,4 +1,2 @@
@@ -3303,7 +3258,6 @@ index 8be8d98c..6026d401 100644
 -export PATH=/usr/local/cuda/bin:$PATH
 diff --git a/host_links/COH-LC172TVQ6J/Users/ying.huang/.gitconfig b/host_links/COH-LC172TVQ6J/Users/ying.huang/.gitconfig
 new file mode 100755
-index 00000000..01ecb2b5
 --- /dev/null
 +++ ./host_links/COH-LC172TVQ6J/Users/ying.huang/.gitconfig
 @@ -0,0 +1,96 @@
@@ -3405,7 +3359,6 @@ index 00000000..01ecb2b5
 +	helper = !gh auth git-credential
 diff --git a/host_links/imac/Users/huangyingw/.bashrc b/host_links/imac/Users/huangyingw/.bashrc
 deleted file mode 100644
-index 82bc6cb7..00000000
 --- ./host_links/imac/Users/huangyingw/.bashrc
 +++ /dev/null
 @@ -1,2 +0,0 @@
@@ -3413,7 +3366,6 @@ index 82bc6cb7..00000000
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/imacpro/Users/huangyingw/.bashrc b/host_links/imacpro/Users/huangyingw/.bashrc
 deleted file mode 100644
-index 82bc6cb7..00000000
 --- ./host_links/imacpro/Users/huangyingw/.bashrc
 +++ /dev/null
 @@ -1,2 +0,0 @@
@@ -3425,14 +3377,12 @@ rename from host_links/lint-sandbox/etc/network/interfaces
 rename to host_links/lint-sandbox/etc/network/interfaces_bak
 diff --git a/host_links/mbp/Users/huangyingw/.bashrc b/host_links/mbp/Users/huangyingw/.bashrc
 deleted file mode 100644
-index 82bc6cb7..00000000
 --- ./host_links/mbp/Users/huangyingw/.bashrc
 +++ /dev/null
 @@ -1,2 +0,0 @@
 -export PATH=/usr/local/bin:$PATH
 -. $HOME/loadrc/.loadrc
 diff --git a/host_links/mini/etc/hosts b/host_links/mini/etc/hosts
-index 425c9192..d4a03a0e 100644
 --- ./host_links/mini/etc/hosts
 +++ ./host_links/mini/etc/hosts
 @@ -9,15 +9,22 @@
@@ -3462,7 +3412,6 @@ index 425c9192..d4a03a0e 100644
  ::1     ip6-localhost ip6-loopback
 diff --git a/host_links/mini/etc/netplan/00-installer-config.yaml_bak b/host_links/mini/etc/netplan/00-installer-config.yaml_bak
 new file mode 100644
-index 00000000..cc10a1ad
 --- /dev/null
 +++ ./host_links/mini/etc/netplan/00-installer-config.yaml_bak
 @@ -0,0 +1,12 @@
@@ -3483,7 +3432,6 @@ similarity index 100%
 rename from host_links/movie/etc/network/interfaces
 rename to host_links/movie/etc/network/interfaces_bak
 diff --git a/host_links/server/etc/hosts b/host_links/server/etc/hosts
-index 50886663..6d13b8f2 100644
 --- ./host_links/server/etc/hosts
 +++ ./host_links/server/etc/hosts
 @@ -10,6 +10,10 @@
@@ -3505,9 +3453,16 @@ diff --git a/host_links/ubuntu/etc/network/interfaces b/host_links/ubuntu/etc/ne
 similarity index 100%
 rename from host_links/ubuntu/etc/network/interfaces
 rename to host_links/ubuntu/etc/network/interfaces_bak
+diff --git a/hosts/imacpro/Library/Application Support/ZeroTier/One/identity.public b/hosts/imacpro/var/lib/zerotier-one/identity.public
+similarity index 100%
+rename from hosts/imacpro/Library/Application Support/ZeroTier/One/identity.public
+rename to hosts/imacpro/var/lib/zerotier-one/identity.public
+diff --git a/hosts/imacpro/Library/Application Support/ZeroTier/One/identity.secret b/hosts/imacpro/var/lib/zerotier-one/identity.secret
+similarity index 100%
+rename from hosts/imacpro/Library/Application Support/ZeroTier/One/identity.secret
+rename to hosts/imacpro/var/lib/zerotier-one/identity.secret
 diff --git a/hosts/mba/Library/Application Support/ZeroTier/One/identity.public b/hosts/mba/Library/Application Support/ZeroTier/One/identity.public
 new file mode 100644
-index 00000000..4db8d9ce
 --- /dev/null
 +++ ./hosts/mba/Library/Application Support/ZeroTier/One/identity.public	
 @@ -0,0 +1 @@
@@ -3515,7 +3470,6 @@ index 00000000..4db8d9ce
 \ No newline at end of file
 diff --git a/hosts/mba/Library/Application Support/ZeroTier/One/identity.secret b/hosts/mba/Library/Application Support/ZeroTier/One/identity.secret
 new file mode 100644
-index 00000000..12b4045b
 --- /dev/null
 +++ ./hosts/mba/Library/Application Support/ZeroTier/One/identity.secret	
 @@ -0,0 +1 @@
@@ -3523,7 +3477,6 @@ index 00000000..12b4045b
 \ No newline at end of file
 diff --git a/hosts/mbp/Library/Application Support/ZeroTier/One/identity.public b/hosts/mbp/Library/Application Support/ZeroTier/One/identity.public
 deleted file mode 100644
-index 3980820a..00000000
 --- ./hosts/mbp/Library/Application Support/ZeroTier/One/identity.public	
 +++ /dev/null
 @@ -1 +0,0 @@
@@ -3531,7 +3484,6 @@ index 3980820a..00000000
 \ No newline at end of file
 diff --git a/hosts/mbp/Library/Application Support/ZeroTier/One/identity.secret b/hosts/mbp/Library/Application Support/ZeroTier/One/identity.secret
 deleted file mode 100644
-index b61c722f..00000000
 --- ./hosts/mbp/Library/Application Support/ZeroTier/One/identity.secret	
 +++ /dev/null
 @@ -1 +0,0 @@
@@ -3539,7 +3491,6 @@ index b61c722f..00000000
 \ No newline at end of file
 diff --git a/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.public b/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.public
 new file mode 100644
-index 00000000..2e736125
 --- /dev/null
 +++ ./hosts/mbp2/Library/Application Support/ZeroTier/One/identity.public	
 @@ -0,0 +1 @@
@@ -3547,14 +3498,26 @@ index 00000000..2e736125
 \ No newline at end of file
 diff --git a/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.secret b/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.secret
 new file mode 100644
-index 00000000..1e7f6d4c
 --- /dev/null
 +++ ./hosts/mbp2/Library/Application Support/ZeroTier/One/identity.secret	
 @@ -0,0 +1 @@
 +1e95a2d9fe:0:8034bed74da2e9afccdc3e92957bb5d0cc632b03f1eac11f79166c5a51d1c30e22907658b0726436934d77b39e6646705c0fd9f9473344dd730ba1f18225a4a0:f6b50f5dcac2647699d089e2bb353dba00869a34bee41e2f8d3eeef1b0ff64dcb6e8ffd07bde5d094aa76a211917c1f237038780f431e0e486bd280a4e825590
 \ No newline at end of file
+diff --git a/hosts/pikvm/var/lib/zerotier-one/identity.public b/hosts/pikvm/var/lib/zerotier-one/identity.public
+new file mode 100644
+--- /dev/null
++++ ./hosts/pikvm/var/lib/zerotier-one/identity.public
+@@ -0,0 +1 @@
++c3ac8da1fa:0:7af52fe48ed1613731078324d9af26220b18ed7b481725929f4ffa93e984460c4d6e5cb6a7325490be71d937a87e0ca796ebc39a24f9ed9145f1b1bc0817d157
+\ No newline at end of file
+diff --git a/hosts/pikvm/var/lib/zerotier-one/identity.secret b/hosts/pikvm/var/lib/zerotier-one/identity.secret
+new file mode 100644
+--- /dev/null
++++ ./hosts/pikvm/var/lib/zerotier-one/identity.secret
+@@ -0,0 +1 @@
++c3ac8da1fa:0:7af52fe48ed1613731078324d9af26220b18ed7b481725929f4ffa93e984460c4d6e5cb6a7325490be71d937a87e0ca796ebc39a24f9ed9145f1b1bc0817d157:44a4a32f4690d9393311149be68a2be9769aa70830b36e73c443dec25168cc67ba9fc494599f19fccc2abbc0348519c8e1d590b6636c090ea975f354e912f911
+\ No newline at end of file
 diff --git a/hosts/server/var/lib/zerotier-one/identity.public b/hosts/server/var/lib/zerotier-one/identity.public
-index 55095016..d55d1f79 100644
 --- ./hosts/server/var/lib/zerotier-one/identity.public
 +++ ./hosts/server/var/lib/zerotier-one/identity.public
 @@ -1 +1 @@
@@ -3563,7 +3526,6 @@ index 55095016..d55d1f79 100644
 +ed0979a312:0:5d0f17fa53c4e624bdfdeaaf7860a0fcbf252acaf54e87c5603a9369ab50a32f0a582d713b3e5bdb8080f90ecc5e1970fcb04b2820fa4d40ba779e67e3fd882f
 \ No newline at end of file
 diff --git a/hosts/server/var/lib/zerotier-one/identity.secret b/hosts/server/var/lib/zerotier-one/identity.secret
-index 5882ce82..4419cb23 100644
 --- ./hosts/server/var/lib/zerotier-one/identity.secret
 +++ ./hosts/server/var/lib/zerotier-one/identity.secret
 @@ -1 +1 @@
@@ -3573,7 +3535,6 @@ index 5882ce82..4419cb23 100644
 \ No newline at end of file
 diff --git a/hosts/studio/Library/Application Support/ZeroTier/One/identity.public b/hosts/studio/Library/Application Support/ZeroTier/One/identity.public
 new file mode 100644
-index 00000000..980abc3c
 --- /dev/null
 +++ ./hosts/studio/Library/Application Support/ZeroTier/One/identity.public	
 @@ -0,0 +1 @@
@@ -3581,7 +3542,6 @@ index 00000000..980abc3c
 \ No newline at end of file
 diff --git a/hosts/studio/Library/Application Support/ZeroTier/One/identity.secret b/hosts/studio/Library/Application Support/ZeroTier/One/identity.secret
 new file mode 100644
-index 00000000..e24cf6cd
 --- /dev/null
 +++ ./hosts/studio/Library/Application Support/ZeroTier/One/identity.secret	
 @@ -0,0 +1 @@
@@ -3589,7 +3549,6 @@ index 00000000..e24cf6cd
 \ No newline at end of file
 diff --git a/hosts/u2004/var/lib/zerotier-one/identity.public b/hosts/u2004/var/lib/zerotier-one/identity.public
 new file mode 100644
-index 00000000..0cd205f6
 --- /dev/null
 +++ ./hosts/u2004/var/lib/zerotier-one/identity.public
 @@ -0,0 +1 @@
@@ -3597,14 +3556,12 @@ index 00000000..0cd205f6
 \ No newline at end of file
 diff --git a/hosts/u2004/var/lib/zerotier-one/identity.secret b/hosts/u2004/var/lib/zerotier-one/identity.secret
 new file mode 100644
-index 00000000..a8969b40
 --- /dev/null
 +++ ./hosts/u2004/var/lib/zerotier-one/identity.secret
 @@ -0,0 +1 @@
 +8414efd65b:0:1ae70e353e7b0e3dc9be1630ee0f3fd28849a1342f45fa289ff1a3cdd362677208029a287017e897cb076a0e0ee34f8f16084ddd365fbd40cba0583d3ab200d1:0db6a42863a1f6a1619ea0eff9501c27d31616a1dfb051f6d657f0d5b2e1dd5f68c7e0f029c78449470c27bc2b3b3acfbdcab05133df9d9ca6238aeaec053b70
 \ No newline at end of file
 diff --git a/imvurc/generate.sh b/imvurc/generate.sh
-index c278d081..c627c53d 100755
 --- ./imvurc/generate.sh
 +++ ./imvurc/generate.sh
 @@ -1,7 +1,7 @@
@@ -3617,7 +3574,6 @@ index c278d081..c627c53d 100755
  if [ ! -f "$target" ]
  then
 diff --git a/imvurc/ghypo.sh b/imvurc/ghypo.sh
-index ea2bc967..b7adab11 100755
 --- ./imvurc/ghypo.sh
 +++ ./imvurc/ghypo.sh
 @@ -1,4 +1,11 @@
@@ -3643,7 +3599,6 @@ index ea2bc967..b7adab11 100755
      fi
  fi
 diff --git a/install_basic.sh b/install_basic.sh
-index aeaf8ba1..42dea60c 100755
 --- ./install_basic.sh
 +++ ./install_basic.sh
 @@ -1,4 +1,4 @@
@@ -3667,7 +3622,6 @@ index aeaf8ba1..42dea60c 100755
  
  npm -g install \
 diff --git a/install_basic_linux.sh b/install_basic_linux.sh
-index 34269226..a8a824c3 100755
 --- ./install_basic_linux.sh
 +++ ./install_basic_linux.sh
 @@ -1,4 +1,4 @@
@@ -3688,7 +3642,6 @@ index 34269226..a8a824c3 100755
  ./install_time_machine.sh
  ./enpass_install.sh
 diff --git a/install_basic_macos.sh b/install_basic_macos.sh
-index 62d92acb..91b8e4b8 100755
 --- ./install_basic_macos.sh
 +++ ./install_basic_macos.sh
 @@ -8,19 +8,32 @@ then
@@ -3769,7 +3722,6 @@ index 62d92acb..91b8e4b8 100755
  
 diff --git a/install_cubbit.sh b/install_cubbit.sh
 new file mode 100755
-index 00000000..836c58f7
 --- /dev/null
 +++ ./install_cubbit.sh
 @@ -0,0 +1,3 @@
@@ -3778,7 +3730,6 @@ index 00000000..836c58f7
 +bash -c "echo $(curl -fsSl https://get.cubbit.io/desktop/linux/)"
 diff --git a/install_gh.sh b/install_gh.sh
 new file mode 100755
-index 00000000..c3363697
 --- /dev/null
 +++ ./install_gh.sh
 @@ -0,0 +1,6 @@
@@ -3789,7 +3740,6 @@ index 00000000..c3363697
 +apt update
 +apt install gh
 diff --git a/install_nodejs.sh b/install_nodejs.sh
-index c3036dee..09b82d56 100755
 --- ./install_nodejs.sh
 +++ ./install_nodejs.sh
 @@ -5,3 +5,9 @@ cd "$SCRIPTPATH"
@@ -3804,7 +3754,6 @@ index c3036dee..09b82d56 100755
 +fi
 diff --git a/install_nvim_post.sh b/install_nvim_post.sh
 deleted file mode 100755
-index 756816d8..00000000
 --- ./install_nvim_post.sh
 +++ /dev/null
 @@ -1,11 +0,0 @@
@@ -3821,7 +3770,6 @@ index 756816d8..00000000
 -./gitrc/gclean.sh
 diff --git a/install_nvim_pre.sh b/install_nvim_pre.sh
 deleted file mode 100755
-index 2bc75c67..00000000
 --- ./install_nvim_pre.sh
 +++ /dev/null
 @@ -1,28 +0,0 @@
@@ -3854,7 +3802,6 @@ index 2bc75c67..00000000
 -    #brew install --with-toolchain --with-clang llvm
 -fi
 diff --git a/install_prerequisite.sh b/install_prerequisite.sh
-index 298b6bc4..5d8434a2 100755
 --- ./install_prerequisite.sh
 +++ ./install_prerequisite.sh
 @@ -1,21 +1,21 @@
@@ -3956,7 +3903,6 @@ index 298b6bc4..5d8434a2 100755
 -
 -./install_hub.sh
 diff --git a/kvmrc/vsd.py b/kvmrc/vsd.py
-index 95a244aa..dedced02 100644
 --- ./kvmrc/vsd.py
 +++ ./kvmrc/vsd.py
 @@ -1,4 +1,4 @@
@@ -3966,7 +3912,6 @@ index 95a244aa..dedced02 100644
  import sys
  
 diff --git a/kvmrc/vshrink.sh b/kvmrc/vshrink.sh
-index e721fccd..9a7739dd 100755
 --- ./kvmrc/vshrink.sh
 +++ ./kvmrc/vshrink.sh
 @@ -6,7 +6,7 @@ then
@@ -3980,7 +3925,6 @@ index e721fccd..9a7739dd 100755
      && qemu-img convert -O qcow2 -c "$BAK" "$TARGET" \
 diff --git a/leetcoderc/do_post_submit.sh b/leetcoderc/do_post_submit.sh
 new file mode 100755
-index 00000000..09669214
 --- /dev/null
 +++ ./leetcoderc/do_post_submit.sh
 @@ -0,0 +1,6 @@
@@ -3991,7 +3935,6 @@ index 00000000..09669214
 +~/loadrc/leetcoderc/restore.sh "$NUM"
 +~/loadrc/leetcoderc/remove_dup.sh "$NUM"
 diff --git a/leetcoderc/post_submit.sh b/leetcoderc/post_submit.sh
-index 63212f85..7da20781 100755
 --- ./leetcoderc/post_submit.sh
 +++ ./leetcoderc/post_submit.sh
 @@ -2,6 +2,4 @@
@@ -4003,7 +3946,6 @@ index 63212f85..7da20781 100755
 -~/loadrc/leetcoderc/remove_dup.sh "$NUM"
 +~/loadrc/bashrc/check_running.sh ~/loadrc/leetcoderc/do_post_submit.sh "$NUM"
 diff --git a/leetcoderc/remove_dup.sh b/leetcoderc/remove_dup.sh
-index dce2e372..e1d41eb7 100755
 --- ./leetcoderc/remove_dup.sh
 +++ ./leetcoderc/remove_dup.sh
 @@ -1,8 +1,7 @@
@@ -4017,7 +3959,6 @@ index dce2e372..e1d41eb7 100755
  find . -type f \( -name \*.orig -o -name \*.bak \) -delete
  jdupes -1dNr .
 diff --git a/leetcoderc/restore.sh b/leetcoderc/restore.sh
-index 328d9be3..4aaa0f8c 100755
 --- ./leetcoderc/restore.sh
 +++ ./leetcoderc/restore.sh
 @@ -2,6 +2,5 @@
@@ -4030,7 +3971,6 @@ index 328d9be3..4aaa0f8c 100755
 +    ../submissions/"$NUM"/
 diff --git a/linux/etc/locale.gen b/linux/etc/locale.gen
 new file mode 100644
-index 00000000..b775e3fc
 --- /dev/null
 +++ ./linux/etc/locale.gen
 @@ -0,0 +1,507 @@
@@ -4546,7 +4486,6 @@ similarity index 100%
 rename from hosts/server/etc/netplan/00-installer-config.yaml
 rename to linux/etc/netplan/00-installer-config.yaml_bak
 diff --git a/linux_links/etc/crypttab b/linux_links/etc/crypttab
-index 191dd600..a67a71d6 100644
 --- ./linux_links/etc/crypttab
 +++ ./linux_links/etc/crypttab
 @@ -3,10 +3,19 @@ archive2_crypt      /dev/disk/by-uuid/766063ea-304e-4fef-9954-7a638c946229  /roo
@@ -4566,11 +4505,11 @@ index 191dd600..a67a71d6 100644
 +usb_backup_crypt_8T_2      /dev/disk/by-uuid/4e1163f1-0df8-4416-9afd-b674808f87f9  /root/loadrc/keys/keyfile   luks
 +timemachine      /dev/disk/by-uuid/72eff5fa-e188-4b1a-8760-5f5ff828aa37  /root/loadrc/keys/keyfile   luks
 +zarchive      /dev/disk/by-uuid/69251abc-347f-4b64-be99-809da622893a  /root/loadrc/keys/keyfile   luks
-+av91 /dev/disk/by-uuid/4211b914-5367-403f-aaa2-3dba45f41209  /root/loadrc/keys/keyfile   luks 
-+av81 /dev/disk/by-uuid/75ee8da8-8454-4b2c-96ca-d88ef135657e  /root/loadrc/keys/keyfile   luks 
-+av71 /dev/disk/by-uuid/3410d798-71e6-4131-bbcb-1fa07a98320d  /root/loadrc/keys/keyfile   luks 
-+av92 /dev/disk/by-uuid/7e2f0dc4-86e1-41a1-ba81-f20288d82c85  /root/loadrc/keys/keyfile   luks 
-+av82 /dev/disk/by-uuid/824d11c2-e8af-4502-8717-46b6e283d790  /root/loadrc/keys/keyfile   luks 
++av91 /dev/disk/by-uuid/4211b914-5367-403f-aaa2-3dba45f41209  /root/loadrc/keys/keyfile   luks
++av81 /dev/disk/by-uuid/75ee8da8-8454-4b2c-96ca-d88ef135657e  /root/loadrc/keys/keyfile   luks
++av71 /dev/disk/by-uuid/3410d798-71e6-4131-bbcb-1fa07a98320d  /root/loadrc/keys/keyfile   luks
++av92 /dev/disk/by-uuid/7e2f0dc4-86e1-41a1-ba81-f20288d82c85  /root/loadrc/keys/keyfile   luks
++av82 /dev/disk/by-uuid/824d11c2-e8af-4502-8717-46b6e283d790  /root/loadrc/keys/keyfile   luks
 +115_disk      /dev/disk/by-uuid/723f12b0-24a9-4ad0-a1ca-04cc8ee38bfd  /root/loadrc/keys/keyfile   luks
 +116_disk      /dev/disk/by-uuid/1e7ecbca-28bd-454b-903c-8c81af5de753  /root/loadrc/keys/keyfile   luks
 diff --git a/linux_links/etc/resolvconf/resolv.conf.d/base b/linux_links/etc/resolvconf/resolv.conf.d/base_bak
@@ -4582,7 +4521,6 @@ similarity index 100%
 rename from linux_links/etc/resolvconf/resolv.conf.d/head
 rename to linux_links/etc/resolvconf/resolv.conf.d/head_bak
 diff --git a/macos/etc/sudoers b/macos/etc/sudoers
-index 60b6bbcc..09abfee7 100644
 --- ./macos/etc/sudoers
 +++ ./macos/etc/sudoers
 @@ -44,5 +44,5 @@ root	ALL=(ALL) ALL
@@ -4593,7 +4531,6 @@ index 60b6bbcc..09abfee7 100644
  admin     ALL=(ALL)       NOPASSWD: ALL
 +ying.huang     ALL=(ALL)       NOPASSWD: ALL
 diff --git a/macosrc/configure_mosh.sh b/macosrc/configure_mosh.sh
-index bb27cd34..b6ca2646 100755
 --- ./macosrc/configure_mosh.sh
 +++ ./macosrc/configure_mosh.sh
 @@ -1,13 +1,13 @@
@@ -4617,7 +4554,6 @@ index bb27cd34..b6ca2646 100755
 +/usr/bin/sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 diff --git a/macosrc/configure_ssh.sh b/macosrc/configure_ssh.sh
 new file mode 100755
-index 00000000..757311c4
 --- /dev/null
 +++ ./macosrc/configure_ssh.sh
 @@ -0,0 +1,7 @@
@@ -4630,7 +4566,6 @@ index 00000000..757311c4
 +sudo cp -fv ./etc/ssh/sshd_config /etc/ssh/sshd_config
 diff --git a/macosrc/enable_screen_sharing.sh b/macosrc/enable_screen_sharing.sh
 new file mode 100755
-index 00000000..57dc5697
 --- /dev/null
 +++ ./macosrc/enable_screen_sharing.sh
 @@ -0,0 +1,7 @@
@@ -4643,7 +4578,6 @@ index 00000000..57dc5697
 +sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.screensharing.plist
 diff --git a/macosrc/etc/ssh/sshd_config b/macosrc/etc/ssh/sshd_config
 new file mode 100644
-index 00000000..0f662165
 --- /dev/null
 +++ ./macosrc/etc/ssh/sshd_config
 @@ -0,0 +1,120 @@
@@ -4769,14 +4703,13 @@ index 00000000..0f662165
 +PermitUserEnvironment PATH,LANG
 diff --git a/macosrc/restart_ssh.sh b/macosrc/restart_ssh.sh
 new file mode 100755
-index 00000000..765892a0
 --- /dev/null
 +++ ./macosrc/restart_ssh.sh
 @@ -0,0 +1,6 @@
 +#!/bin/zsh
 +
 +sudo launchctl unload /System/Library/LaunchDaemons/ssh.plist
-+sudo launchctl load -w /System/Library/LaunchDaemons/ssh.plist 
++sudo launchctl load -w /System/Library/LaunchDaemons/ssh.plist
 +sudo launchctl stop com.openssh.sshd
 +sudo launchctl start com.openssh.sshd
 diff --git a/musicrc/copy_test.sh b/musicrc/copy_test.sh
@@ -4784,14 +4717,12 @@ old mode 100644
 new mode 100755
 diff --git a/neovim b/neovim
 new file mode 160000
-index 00000000..0d29a625
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
 +Subproject commit 0d29a6259eb38a7e2bdb85b8dfca408aaa50163b-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
-index 00000000..25b0c5df
 --- /dev/null
 +++ ./networkrc/ping.sh
 @@ -0,0 +1,16 @@
@@ -4813,7 +4744,6 @@ index 00000000..25b0c5df
 +exit $rc
 diff --git a/networkrc/ping.test.sh b/networkrc/ping.test.sh
 new file mode 100755
-index 00000000..20099aee
 --- /dev/null
 +++ ./networkrc/ping.test.sh
 @@ -0,0 +1,14 @@
@@ -4833,7 +4763,6 @@ index 00000000..20099aee
 +fi
 diff --git a/networkrc/temp.sh b/networkrc/temp.sh
 new file mode 100755
-index 00000000..d44dc276
 --- /dev/null
 +++ ./networkrc/temp.sh
 @@ -0,0 +1,9 @@
@@ -4848,14 +4777,12 @@ index 00000000..d44dc276
 +fi
 diff --git a/pbpaste-remote b/pbpaste-remote
 new file mode 100755
-index 00000000..80d3b345
 --- /dev/null
 +++ ./pbpaste-remote
 @@ -0,0 +1,2 @@
 +#!/bin/sh
 +nc localhost 2225
 diff --git a/post_setup.sh b/post_setup.sh
-index 2cc2f2d0..c9969cf8 100755
 --- ./post_setup.sh
 +++ ./post_setup.sh
 @@ -7,4 +7,7 @@ if [ $(uname) = "Darwin" ]
@@ -4867,7 +4794,6 @@ index 2cc2f2d0..c9969cf8 100755
 +chown $(whoami) -R ~/loadrc/oh-my-zsh/
 +chown $(whoami) ~/.ssh/config
 diff --git a/prunefile_template.conf b/prunefile_template.conf
-index 8e34f2fa..9deeb31c 100644
 --- ./prunefile_template.conf
 +++ ./prunefile_template.conf
 @@ -1,6 +1,7 @@
@@ -4880,7 +4806,6 @@ index 8e34f2fa..9deeb31c 100644
  .err
 -"./gbra.log"
 diff --git a/prunefix_template.conf b/prunefix_template.conf
-index e5bf5ff5..8d82d7dd 100644
 --- ./prunefix_template.conf
 +++ ./prunefix_template.conf
 @@ -1,4 +1,5 @@
@@ -4890,7 +4815,6 @@ index e5bf5ff5..8d82d7dd 100644
  "./*/running.time"
  "./cscope.*"
 diff --git a/pythonrc/remove_comments.py b/pythonrc/remove_comments.py
-index 5bccdfa7..0e1c4279 100755
 --- ./pythonrc/remove_comments.py
 +++ ./pythonrc/remove_comments.py
 @@ -1,4 +1,4 @@
@@ -4900,7 +4824,6 @@ index 5bccdfa7..0e1c4279 100755
  import token
  import tokenize
 diff --git a/pythonrc/vlc.py b/pythonrc/vlc.py
-index 13a0cf4c..6cd6989c 100755
 --- ./pythonrc/vlc.py
 +++ ./pythonrc/vlc.py
 @@ -13,9 +13,9 @@ def callvlc(targetFile, start=0):
@@ -4917,13 +4840,11 @@ index 13a0cf4c..6cd6989c 100755
  
 diff --git a/rsync b/rsync
 new file mode 160000
-index 00000000..10e31bf0
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit 10e31bf01467bc3a1bd7e8a33260ce23a36d9123
++Subproject commit 595d1b723ab9d7ac1349f2eb296eef751511d916-dirty
 diff --git a/set_linux_configuration.sh b/set_linux_configuration.sh
-index ced4c25c..ce42e8a4 100755
 --- ./set_linux_configuration.sh
 +++ ./set_linux_configuration.sh
 @@ -10,13 +10,13 @@ fi
@@ -4944,7 +4865,6 @@ index ced4c25c..ce42e8a4 100755
 +sudo grub-mkconfig -o /boot/grub/grub.cfg
  gsettings set org.gnome.desktop.lockdown disable-lock-screen 'true'
 diff --git a/set_macos_configuration.sh b/set_macos_configuration.sh
-index cf9a010a..26f18169 100755
 --- ./set_macos_configuration.sh
 +++ ./set_macos_configuration.sh
 @@ -19,3 +19,4 @@ do \
@@ -4953,19 +4873,19 @@ index cf9a010a..26f18169 100755
  ./macosrc/configure_mosh.sh
 +# ./macosrc/configure_ssh.sh
 diff --git a/setup.sh b/setup.sh
-index cc9fd3f1..7d9c8333 100755
 --- ./setup.sh
 +++ ./setup.sh
-@@ -1,4 +1,4 @@
+@@ -1,15 +1,16 @@
 -#!/bin/zsh
 +#!/bin/bash
  SCRIPT=$(realpath "$0") && \
      SCRIPTPATH=$(dirname "$SCRIPT") && \
      cd "$SCRIPTPATH" || cd ~/loadrc/
-@@ -6,10 +6,11 @@ SCRIPT=$(realpath "$0") && \
+ 
  ./install_basic.sh
  ~/loadrc/gitrc/gpl.sh
- ./install_nvim.sh
+-./install_nvim.sh
++./neovim/install.sh
 +./rsync/install.sh
  ./gpurc/install.sh
  ./install_vagrant.sh
@@ -4977,7 +4897,6 @@ index cc9fd3f1..7d9c8333 100755
  ./kvmrc/install.sh
 diff --git a/setup_bidirectional_clipboard.sh b/setup_bidirectional_clipboard.sh
 new file mode 100755
-index 00000000..93d8270a
 --- /dev/null
 +++ ./setup_bidirectional_clipboard.sh
 @@ -0,0 +1,17 @@
@@ -5000,7 +4919,6 @@ index 00000000..93d8270a
 +launchctl start ~/Library/LaunchAgents/pbpaste.plist
 diff --git a/setup_locale.sh b/setup_locale.sh
 new file mode 100755
-index 00000000..9e481b26
 --- /dev/null
 +++ ./setup_locale.sh
 @@ -0,0 +1,4 @@
@@ -5010,7 +4928,6 @@ index 00000000..9e481b26
 +sudo locale-gen
 diff --git a/setup_pbpaste-remote.sh b/setup_pbpaste-remote.sh
 new file mode 100755
-index 00000000..b385cdc6
 --- /dev/null
 +++ ./setup_pbpaste-remote.sh
 @@ -0,0 +1,13 @@
@@ -5029,7 +4946,6 @@ index 00000000..b385cdc6
 +cp -fv ./pbpaste-remote ~/bin/pbpaste-remote
 diff --git a/setup_remote.sh b/setup_remote.sh
 new file mode 100755
-index 00000000..6d35cca8
 --- /dev/null
 +++ ./setup_remote.sh
 @@ -0,0 +1,24 @@
@@ -5058,7 +4974,6 @@ index 00000000..6d35cca8
 +./setup_locale.sh
 +./swith-2-zsh.sh
 diff --git a/sqlrc/xsql.sh b/sqlrc/xsql.sh
-index 0aae8085..2d88e3a8 100755
 --- ./sqlrc/xsql.sh
 +++ ./sqlrc/xsql.sh
 @@ -12,6 +12,8 @@ user=`cat ${loginFile} |awk -F'=' '/user/{print $2}'`
@@ -5083,7 +4998,6 @@ index 0aae8085..2d88e3a8 100755
 -mysql -v -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
 +mysql -v "$option" -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
 diff --git a/swith-2-zsh.sh b/swith-2-zsh.sh
-index 541ae968..0996eeeb 100755
 --- ./swith-2-zsh.sh
 +++ ./swith-2-zsh.sh
 @@ -4,6 +4,6 @@ ZSH=$(which zsh)
@@ -5097,38 +5011,37 @@ index 541ae968..0996eeeb 100755
  fi
 diff --git a/synergy.conf b/synergy.conf
 new file mode 100644
-index 00000000..c4d4a292
 --- /dev/null
 +++ ./synergy.conf
-@@ -0,0 +1,63 @@
+@@ -0,0 +1,62 @@
 +section: screens
 +	imacpro:
 +		halfDuplexCapsLock = false
 +		halfDuplexNumLock = false
 +		halfDuplexScrollLock = false
 +		xtestIsXineramaUnaware = false
-+		switchCorners = none 
++		switchCorners = none
 +		switchCornerSize = 0
 +	COH-LC172TVQ6J:
 +		halfDuplexCapsLock = false
 +		halfDuplexNumLock = false
 +		halfDuplexScrollLock = false
 +		xtestIsXineramaUnaware = false
-+		switchCorners = none 
++		switchCorners = none
 +		switchCornerSize = 0
 +	studio:
 +		halfDuplexCapsLock = false
 +		halfDuplexNumLock = false
 +		halfDuplexScrollLock = false
 +		xtestIsXineramaUnaware = false
-+		switchCorners = none 
++		switchCorners = none
 +		switchCornerSize = 0
 +	mba:
 +		halfDuplexCapsLock = false
 +		halfDuplexNumLock = false
 +		halfDuplexScrollLock = false
 +		xtestIsXineramaUnaware = false
-+		switchCorners = none 
++		switchCorners = none
 +		switchCornerSize = 0
 +end
 +
@@ -5155,7 +5068,7 @@ index 00000000..c4d4a292
 +	clipboardSharing = false
 +	clipboardSharingSize = 3072
 +	switchDelay = 9999
-+	switchCorners = none 
++	switchCorners = none
 +	switchCornerSize = 0
 +	keystroke(Control+1) = switchToScreen(studio)
 +	keystroke(Control+2) = switchToScreen(mba)
@@ -5163,10 +5076,8 @@ index 00000000..c4d4a292
 +	keystroke(Control+4) = switchToScreen(imacpro)
 +	keystroke(Alt+Control+r) = restartServer(restart)
 +end
-+
 diff --git a/tests/dirname/spaces  in dir name.txt b/tests/dirname/spaces  in dir name.txt
 new file mode 100644
-index 00000000..43d2d4f3
 --- /dev/null
 +++ ./tests/dirname/spaces  in dir name.txt	
 @@ -0,0 +1,3 @@
@@ -5175,14 +5086,12 @@ index 00000000..43d2d4f3
 +one more line to test ml command.
 diff --git a/tests/space in dir name/test.txt b/tests/space in dir name/test.txt
 new file mode 100644
-index 00000000..a63e3b03
 --- /dev/null
 +++ ./tests/space in dir name/test.txt	
 @@ -0,0 +1 @@
 +a txt file under folder with space in folder name. make some changes.
 diff --git a/transmissionrc/auto_reboot.sh b/transmissionrc/auto_reboot.sh
 new file mode 100755
-index 00000000..837984a4
 --- /dev/null
 +++ ./transmissionrc/auto_reboot.sh
 @@ -0,0 +1,11 @@
@@ -5199,7 +5108,6 @@ index 00000000..837984a4
 +fi
 diff --git a/transmissionrc/auto_restart.sh b/transmissionrc/auto_restart.sh
 new file mode 100755
-index 00000000..3c517d67
 --- /dev/null
 +++ ./transmissionrc/auto_restart.sh
 @@ -0,0 +1,6 @@
@@ -5211,7 +5119,6 @@ index 00000000..3c517d67
 +done
 diff --git a/transmissionrc/restart.sh b/transmissionrc/restart.sh
 new file mode 100755
-index 00000000..88344b4c
 --- /dev/null
 +++ ./transmissionrc/restart.sh
 @@ -0,0 +1,3 @@
@@ -5220,7 +5127,6 @@ index 00000000..88344b4c
 +/etc/init.d/transmission-daemon restart
 diff --git a/transmissionrc/start_all.sh b/transmissionrc/start_all.sh
 new file mode 100755
-index 00000000..92d7e082
 --- /dev/null
 +++ ./transmissionrc/start_all.sh
 @@ -0,0 +1,3 @@
@@ -5229,7 +5135,6 @@ index 00000000..92d7e082
 +transmission-remote -n 'transmission:transmission' --torrent all --start
 diff --git a/uninstall_bidirectional_clipboard.sh b/uninstall_bidirectional_clipboard.sh
 new file mode 100755
-index 00000000..92c29592
 --- /dev/null
 +++ ./uninstall_bidirectional_clipboard.sh
 @@ -0,0 +1,18 @@
@@ -5252,42 +5157,36 @@ index 00000000..92c29592
 +rm ~/Library/LaunchAgents/pbcopy.plist
 +rm ~/Library/LaunchAgents/pbpaste.plist
 diff --git a/vimrc/.vim/bundle/Dockerfile.vim b/vimrc/.vim/bundle/Dockerfile.vim
-index 86d744c6..2a31e6bc 160000
 --- ./vimrc/.vim/bundle/Dockerfile.vim
 +++ ./vimrc/.vim/bundle/Dockerfile.vim
 @@ -1 +1 @@
 -Subproject commit 86d744c6e4731d0014ef469f019a305e2d7baac0
 +Subproject commit 2a31e6bcea5977209c05c728c4253d82fd873c82
 diff --git a/vimrc/.vim/bundle/bash-support.vim b/vimrc/.vim/bundle/bash-support.vim
-index 1d4a909f..537b2a38 160000
 --- ./vimrc/.vim/bundle/bash-support.vim
 +++ ./vimrc/.vim/bundle/bash-support.vim
 @@ -1 +1 @@
 -Subproject commit 1d4a909f46698906b16d711aeb260663f4c4794a
-+Subproject commit 537b2a38560042dfcb134ed8cdfdb77e3c649e6e
++Subproject commit 537b2a38560042dfcb134ed8cdfdb77e3c649e6e-dirty
 diff --git a/vimrc/.vim/bundle/cql-vim b/vimrc/.vim/bundle/cql-vim
 new file mode 160000
-index 00000000..6f61df5a
 --- /dev/null
 +++ ./vimrc/.vim/bundle/cql-vim
 @@ -0,0 +1 @@
 +Subproject commit 6f61df5a633c3a91edea7bcb5d5772648df19d1a
 diff --git a/vimrc/.vim/bundle/firenvim b/vimrc/.vim/bundle/firenvim
 new file mode 160000
-index 00000000..d9a2a73a
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit d9a2a73a1783fcdcd76b6f488578c020111d3fad
++Subproject commit b6be2e074b8f62815a45e31eb0966b4dd5e57810
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
-index 5617a1cf..d15d63bf 160000
 --- ./vimrc/.vim/bundle/indentLine
 +++ ./vimrc/.vim/bundle/indentLine
 @@ -1 +1 @@
 -Subproject commit 5617a1cf7d315e6e6f84d825c85e3b669d220bfa
 +Subproject commit d15d63bf9c4a74a02470d4bc8ecce53df13e3a75
 diff --git a/vimrc/.vim/bundle/ncm2 b/vimrc/.vim/bundle/ncm2
-index 3de17695..24d77cd5 160000
 --- ./vimrc/.vim/bundle/ncm2
 +++ ./vimrc/.vim/bundle/ncm2
 @@ -1 +1 @@
@@ -5295,20 +5194,17 @@ index 3de17695..24d77cd5 160000
 +Subproject commit 24d77cd5206438a6670ff1cf8d1628532910e14e
 diff --git a/vimrc/.vim/bundle/ncm2-pyclang b/vimrc/.vim/bundle/ncm2-pyclang
 deleted file mode 160000
-index 0c22efb1..00000000
 --- ./vimrc/.vim/bundle/ncm2-pyclang
 +++ /dev/null
 @@ -1 +0,0 @@
 -Subproject commit 0c22efb1b919573f69ec237e7a8ab7ca1c1ecc03
 diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
-index 2b1dca6c..7fb5b638 160000
 --- ./vimrc/.vim/bundle/neco-vim
 +++ ./vimrc/.vim/bundle/neco-vim
 @@ -1 +1 @@
 -Subproject commit 2b1dca6ca16d6f5655748fcd4d54d772fcfd0d81
-+Subproject commit 7fb5b63881a25c3d5a8321f8dae21737a1b01634
++Subproject commit 6c581808ac3179ea0c640e43c77de48bbbec4fbc
 diff --git a/vimrc/.vim/bundle/nvim-yarp b/vimrc/.vim/bundle/nvim-yarp
-index b710bf4d..bb5f5e03 160000
 --- ./vimrc/.vim/bundle/nvim-yarp
 +++ ./vimrc/.vim/bundle/nvim-yarp
 @@ -1 +1 @@
@@ -5316,154 +5212,132 @@ index b710bf4d..bb5f5e03 160000
 +Subproject commit bb5f5e038bfe119d3b777845a76b0b919b35ebc8
 diff --git a/vimrc/.vim/bundle/open-browser.vim b/vimrc/.vim/bundle/open-browser.vim
 new file mode 160000
-index 00000000..7d4c1d81
 --- /dev/null
 +++ ./vimrc/.vim/bundle/open-browser.vim
 @@ -0,0 +1 @@
 +Subproject commit 7d4c1d8198e889d513a030b5a83faa07606bac27
 diff --git a/vimrc/.vim/bundle/plantuml-previewer.vim b/vimrc/.vim/bundle/plantuml-previewer.vim
 new file mode 160000
-index 00000000..74483d5d
 --- /dev/null
 +++ ./vimrc/.vim/bundle/plantuml-previewer.vim
 @@ -0,0 +1 @@
-+Subproject commit 74483d5d01042db5de6f89aaba64376d87effaff
++Subproject commit 9bf4c4fd31f5f7feaa59dc4c644d43f32883c2e0
 diff --git a/vimrc/.vim/bundle/plantuml-syntax b/vimrc/.vim/bundle/plantuml-syntax
 new file mode 160000
-index 00000000..845abb56
 --- /dev/null
 +++ ./vimrc/.vim/bundle/plantuml-syntax
 @@ -0,0 +1 @@
 +Subproject commit 845abb56dcd3f12afa6eb47684ef5ba3055802b8
 diff --git a/vimrc/.vim/bundle/python-mode b/vimrc/.vim/bundle/python-mode
-index cc6342c3..bd5422d9 160000
 --- ./vimrc/.vim/bundle/python-mode
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -1 +1 @@
 -Subproject commit cc6342c3d28f4b36fa8d7c15f04f7cab1e836cab
-+Subproject commit bd5422d9e40c732b010dcd4da3eafda81b3b1d54
++Subproject commit bd5422d9e40c732b010dcd4da3eafda81b3b1d54-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
-index 7ef452b4..ba6f6cef 160000
 --- ./vimrc/.vim/bundle/swift.vim
 +++ ./vimrc/.vim/bundle/swift.vim
 @@ -1 +1 @@
 -Subproject commit 7ef452b47f14a2bfed26324793777cf12d2a8d78
 +Subproject commit ba6f6cef58d08ac741aaf1626d3799d476cd43b6
 diff --git a/vimrc/.vim/bundle/tig-explorer.vim b/vimrc/.vim/bundle/tig-explorer.vim
-index 2d520bdf..677391a1 160000
 --- ./vimrc/.vim/bundle/tig-explorer.vim
 +++ ./vimrc/.vim/bundle/tig-explorer.vim
 @@ -1 +1 @@
 -Subproject commit 2d520bdf9d2f3838ad3f8f381dd514307a1c90ee
-+Subproject commit 677391a11050f968c04e4c334a1fc329c6159c4d
++Subproject commit 677391a11050f968c04e4c334a1fc329c6159c4d-dirty
 diff --git a/vimrc/.vim/bundle/tlib_vim b/vimrc/.vim/bundle/tlib_vim
-index a071b6d4..d3bdad7b 160000
 --- ./vimrc/.vim/bundle/tlib_vim
 +++ ./vimrc/.vim/bundle/tlib_vim
 @@ -1 +1 @@
 -Subproject commit a071b6d41b20069a3520e0d101194a752968973b
 +Subproject commit d3bdad7b5e4253dc7ce6793342d7b8755c67ff0c
 diff --git a/vimrc/.vim/bundle/vim-anyfold b/vimrc/.vim/bundle/vim-anyfold
-index 4579327e..4267ae2a 160000
 --- ./vimrc/.vim/bundle/vim-anyfold
 +++ ./vimrc/.vim/bundle/vim-anyfold
 @@ -1 +1 @@
 -Subproject commit 4579327e2f73dbf1018d58df9bd356d140059d2b
-+Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431
++Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431-dirty
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
-index dbe8b1e2..8745d13c 160000
 --- ./vimrc/.vim/bundle/vim-autoformat
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -1 +1 @@
 -Subproject commit dbe8b1e21e987866bde27a008deda5d0d767bee3
-+Subproject commit 8745d13c85e7c34c0d6492717a14fb6fb575cf88
++Subproject commit 32589b15623915a4a5626533df35c8811f46085f-dirty
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
-index cfac13ef..c663ae0c 160000
 --- ./vimrc/.vim/bundle/vim-buffergator
 +++ ./vimrc/.vim/bundle/vim-buffergator
 @@ -1 +1 @@
 -Subproject commit cfac13efd7832866c134e6fa1b213940e8c0c4d7
-+Subproject commit c663ae0cf3e9337d4639ad3bb3235fdfccb4e488
++Subproject commit c663ae0cf3e9337d4639ad3bb3235fdfccb4e488-dirty
 diff --git a/vimrc/.vim/bundle/vim-fetch b/vimrc/.vim/bundle/vim-fetch
 new file mode 160000
-index 00000000..c8887b12
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-fetch
 @@ -0,0 +1 @@
-+Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1
++Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1-dirty
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
-index 8468d6a8..95dda4db 160000
 --- ./vimrc/.vim/bundle/vim-fugitive
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -1 +1 @@
 -Subproject commit 8468d6a8a9dd53cf4cf1fa742b6d64cc440b2a62
-+Subproject commit 95dda4dbbd0d27ff0ecdce59ce7d2d629c54cba1
++Subproject commit c3da0bd1a950c3d7b9f546b5e34dd2e0354e0aed-dirty
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
-index 00000000..115e2600
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-ghost
 @@ -0,0 +1 @@
 +Subproject commit 115e2600481c92c0bfb69d82ccbd8af7dc052a03
 diff --git a/vimrc/.vim/bundle/vim-javascript-syntax b/vimrc/.vim/bundle/vim-javascript-syntax
-index ffd0b1da..939d84b5 160000
 --- ./vimrc/.vim/bundle/vim-javascript-syntax
 +++ ./vimrc/.vim/bundle/vim-javascript-syntax
 @@ -1 +1 @@
 -Subproject commit ffd0b1da4fdd57c30bc7828af94252a3637ffa10
-+Subproject commit 939d84b538480e7cb7810fde5ad807e9ecb477f6
++Subproject commit 939d84b538480e7cb7810fde5ad807e9ecb477f6-dirty
 diff --git a/vimrc/.vim/bundle/vim-log-syntax b/vimrc/.vim/bundle/vim-log-syntax
-index 2f38eef5..6c244f27 160000
 --- ./vimrc/.vim/bundle/vim-log-syntax
 +++ ./vimrc/.vim/bundle/vim-log-syntax
 @@ -1 +1 @@
 -Subproject commit 2f38eef548f37f784f685c7a102132acf9eb1cfa
-+Subproject commit 6c244f27dc552b6093b851f9070c3d22e3a38523
++Subproject commit 6c244f27dc552b6093b851f9070c3d22e3a38523-dirty
 diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
 new file mode 160000
-index 00000000..d6adab9d
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-pbcopy
 @@ -0,0 +1 @@
-+Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7
++Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7-dirty
 diff --git a/vimrc/.vim/bundle/vim-php-cs-fixer b/vimrc/.vim/bundle/vim-php-cs-fixer
 new file mode 160000
-index 00000000..62d82051
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-php-cs-fixer
 @@ -0,0 +1 @@
-+Subproject commit 62d820512c7c46da791cb66101c1740a90192a3f
++Subproject commit c993a1381454e97048383a8ff6f18eecafc763dc
 diff --git a/vimrc/.vim/bundle/vim-ps1 b/vimrc/.vim/bundle/vim-ps1
 new file mode 160000
-index 00000000..e7cc3b08
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-ps1
 @@ -0,0 +1 @@
-+Subproject commit e7cc3b08f6f9e2dc1909f397aa3d5b0a7acb661c
++Subproject commit 502590f90a21f0de2b7664d6d0dcc90e5bb28a9c
 diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
-index 3b379635..a6d2bac9 160000
 --- ./vimrc/.vim/bundle/vim-rails
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -1 +1 @@
 -Subproject commit 3b3796352a6f1a68e54e5f7ae5e0c1b9103fab0e
-+Subproject commit a6d2bac95b446a5c23eff4638eca164b0d77454a
++Subproject commit 959e94b76e6ebdf984acef61649ba7d0f62bd425
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
-index bbdfea4b..7657218f 160000
 --- ./vimrc/.vim/bundle/vim-scala
 +++ ./vimrc/.vim/bundle/vim-scala
 @@ -1 +1 @@
 -Subproject commit bbdfea4b98fdb8866a8a6060ec1294643cfeb413
 +Subproject commit 7657218f14837395a4e6759f15289bad6febd1b4
 diff --git a/vimrc/.vim/bundle/vim-snipmate b/vimrc/.vim/bundle/vim-snipmate
-index ed3c5426..b8fe3fb6 160000
 --- ./vimrc/.vim/bundle/vim-snipmate
 +++ ./vimrc/.vim/bundle/vim-snipmate
 @@ -1 +1 @@
 -Subproject commit ed3c5426a20bf1c06d7980946ada34fd9f93320e
-+Subproject commit b8fe3fb6b127c417290c0fe1a85a8dd0173cef05
++Subproject commit b8fe3fb6b127c417290c0fe1a85a8dd0173cef05-dirty
 diff --git a/vimrc/.vim/ftdetect/cql.vim b/vimrc/.vim/ftdetect/cql.vim
 new file mode 100644
-index 00000000..5ff09234
 --- /dev/null
 +++ ./vimrc/.vim/ftdetect/cql.vim
 @@ -0,0 +1,3 @@
@@ -5472,7 +5346,6 @@ index 00000000..5ff09234
 +endif
 diff --git a/vimrc/.vim/plugin/clipboard.vim b/vimrc/.vim/plugin/clipboard.vim
 new file mode 100644
-index 00000000..6ccf639b
 --- /dev/null
 +++ ./vimrc/.vim/plugin/clipboard.vim
 @@ -0,0 +1,7 @@
@@ -5485,7 +5358,6 @@ index 00000000..6ccf639b
 +endif
 diff --git a/vimrc/.vim/plugin/commands.vim b/vimrc/.vim/plugin/commands.vim
 new file mode 100644
-index 00000000..dfb309e2
 --- /dev/null
 +++ ./vimrc/.vim/plugin/commands.vim
 @@ -0,0 +1,4 @@
@@ -5494,7 +5366,6 @@ index 00000000..dfb309e2
 +set shortmess+=A
 +command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
-index 63869eb8..d601e4c0 100644
 --- ./vimrc/.vim/plugin/common.vim
 +++ ./vimrc/.vim/plugin/common.vim
 @@ -28,7 +28,7 @@ function! RemovePairs()
@@ -5506,13 +5377,13 @@ index 63869eb8..d601e4c0 100644
  
          let l:line2 = getline(".")
          if len(l:line2) == col(".")
-@@ -37,11 +37,11 @@ function! RemovePairs()
+@@ -37,11 +37,10 @@ function! RemovePairs()
          else
              " 如果右括号不是当前行最后一个字符
              execute "normal! v%xi"
 -        end
+-
 +        endif
- 
      else
          execute "normal! a\<BS>"
 -    end
@@ -5520,7 +5391,7 @@ index 63869eb8..d601e4c0 100644
  endfunction
  
  function! RemoveNextDoubleChar(char)
-@@ -52,7 +52,7 @@ function! RemoveNextDoubleChar(char)
+@@ -52,7 +51,7 @@ function! RemoveNextDoubleChar(char)
          execute "normal! l"
      else
          execute "normal! i" . a:char . ""
@@ -5529,7 +5400,7 @@ index 63869eb8..d601e4c0 100644
  endfunction
  
  " 获取当前路径，将$HOME转化为~
-@@ -97,7 +97,11 @@ endfunction
+@@ -97,7 +96,11 @@ endfunction
  
  function! ResCur()
      if line("'\"") <= line("$")
@@ -5541,7 +5412,7 @@ index 63869eb8..d601e4c0 100644
          return 1
      endif
  endfunction
-@@ -138,17 +142,25 @@ function! GetWorktree()
+@@ -138,17 +141,25 @@ function! GetWorktree()
      return substitute(system("~/loadrc/gitrc/get_worktree.sh " . '"' . expand('%:p') . '"'), '\n', '', '')
  endfunction
  
@@ -5550,12 +5421,7 @@ index 63869eb8..d601e4c0 100644
 -    let bnr = bufwinnr('^' . realpath . '$')
 +function! OpenOrSwitch(buffername, openMode, ...)
 +    let fileName = a:buffername
- 
--    if bnr > 0
--        exe bnr . "wincmd w"
--        exec 'e'
--    elseif a:openMode ==? "goto"
--        silent exec 'e ' . a:buffername
++
 +    if !filereadable(a:buffername)
 +        let curline = getline(line("."))
 +        let curline = substitute(curline, '\\', '', 'g')
@@ -5567,7 +5433,12 @@ index 63869eb8..d601e4c0 100644
 +    endif
 +
 +    let topleft = (a:0 >= 1) ? a:1 : 'topleft'
-+
+ 
+-    if bnr > 0
+-        exe bnr . "wincmd w"
+-        exec 'e'
+-    elseif a:openMode ==? "goto"
+-        silent exec 'e ' . a:buffername
 +    if a:openMode ==? "goto"
 +        call fetch#cfile(fileName, 'e')
      else
@@ -5576,7 +5447,7 @@ index 63869eb8..d601e4c0 100644
      endif
  endfunction
  
-@@ -193,6 +205,7 @@ endfunc
+@@ -193,6 +204,7 @@ endfunc
  
  function! GetEscapedResult(keywordStr)
      let result = a:keywordStr
@@ -5584,7 +5455,7 @@ index 63869eb8..d601e4c0 100644
          let result = substitute(result, " ", "", "g")
          let result = substitute(result, "/", "", "g")
          let result = substitute(result, "|", "", "g")
-@@ -208,7 +221,7 @@ function! GetEscapedResult(keywordStr)
+@@ -208,7 +220,7 @@ function! GetEscapedResult(keywordStr)
          let result = substitute(result, '!', '', 'g')
          let result = substitute(result, "<", "", "g")
          let result = substitute(result, ">", "", "g")
@@ -5593,7 +5464,7 @@ index 63869eb8..d601e4c0 100644
          let result = substitute(result, "*", "", "g")
          let result = substitute(result, "%", "", "g")
          let result = substitute(result, ":", "", "g")
-@@ -217,6 +230,8 @@ function! GetEscapedResult(keywordStr)
+@@ -217,6 +229,8 @@ function! GetEscapedResult(keywordStr)
          let result = substitute(result, "+", "_", "g")
          let result = substitute(result, "-", "_", "g")
          return result
@@ -5602,7 +5473,7 @@ index 63869eb8..d601e4c0 100644
  endfunc
  
  function! VsMax(fileName)
-@@ -240,7 +255,8 @@ function! RunShell(shell, ...)
+@@ -240,7 +254,8 @@ function! RunShell(shell, ...)
              exec '!' . run_string
          endif
      endif
@@ -5612,7 +5483,7 @@ index 63869eb8..d601e4c0 100644
  endfunc
  
  function! Filter2Findresult()
-@@ -250,20 +266,19 @@ function! Filter2Findresult()
+@@ -250,20 +265,19 @@ function! Filter2Findresult()
  
      if expand('%:e') != "findresult"
          let buffername = b:result . '.findresult'
@@ -5635,7 +5506,7 @@ index 63869eb8..d601e4c0 100644
  
      if csdbpath != "Nothing"
          exec "cd " . csdbpath
-@@ -277,7 +292,6 @@ function! Cd2Worktree()
+@@ -277,7 +291,6 @@ function! Cd2Worktree()
      try
          exec "cd " . fnameescape(worktree)
      catch /./
@@ -5645,7 +5516,6 @@ index 63869eb8..d601e4c0 100644
      return worktree
 diff --git a/vimrc/.vim/plugin/copypath.vim b/vimrc/.vim/plugin/copypath.vim
 deleted file mode 100755
-index 65740cb6..00000000
 --- ./vimrc/.vim/plugin/copypath.vim
 +++ /dev/null
 @@ -1,88 +0,0 @@
@@ -5739,7 +5609,6 @@ index 65740cb6..00000000
 -" vim: set ts=4 sts=4 sw=4 et nowrap :
 diff --git a/vimrc/.vim/plugin/diff-options.vim b/vimrc/.vim/plugin/diff-options.vim
 new file mode 100644
-index 00000000..6bf0e4ae
 --- /dev/null
 +++ ./vimrc/.vim/plugin/diff-options.vim
 @@ -0,0 +1,7 @@
@@ -5751,7 +5620,6 @@ index 00000000..6bf0e4ae
 +set diffopt+=algorithm:patience
 +set diffopt+=indent-heuristic
 diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
-index d5874fe5..776ff9dc 100644
 --- ./vimrc/.vim/plugin/fugitive.vim
 +++ ./vimrc/.vim/plugin/fugitive.vim
 @@ -1,13 +1,18 @@

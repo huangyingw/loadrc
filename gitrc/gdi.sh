@@ -14,4 +14,4 @@ else
         COMMAND="$COMMAND  ':(exclude)$ss'"
     done
 fi
-eval "$COMMAND" | sed "s/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g"
+eval "$COMMAND" | sed 's/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g;/^index [0-9a-f]*[0-9a-f]*/d'

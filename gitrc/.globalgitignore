@@ -71,5 +71,3 @@ rsync.files
 ncscopefile.*
 gbra.log
 *.js_eslint_tmp_*.js
-files.proj
-rsync.files

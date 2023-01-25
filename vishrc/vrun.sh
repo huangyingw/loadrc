@@ -119,4 +119,11 @@ case $extension in
         cd "$rootFolder"
         dotnet build "$file"
         ;;
+    cs|csproj)
+        SCRIPT=$(realpath "$file")
+        SCRIPTPATH=$(dirname "$SCRIPT")
+        cd "$SCRIPTPATH"
+        dotnet build
+        dotnet run
+        ;;
 esac

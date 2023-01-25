@@ -15,7 +15,7 @@ echo "TARGET_BRANCH --> $TARGET_BRANCH"
 
 remoteBranch=$(~/loadrc/gitrc/get_remote_branch.sh "$TARGET_BRANCH")
 echo "remoteBranch --> $remoteBranch"
-localBranch=$(git branch | grep "$TARGET_BRANCH" |  sed -e 's/^[* \t]*//')
+localBranch=$(git branch | grep "$TARGET_BRANCH" |  sed -e 's/^[* ]*//')
 echo "localBranch --> $localBranch"
 
 if [ -n "$localBranch" ]
