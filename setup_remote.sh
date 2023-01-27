@@ -8,8 +8,8 @@ sudo apt-get update && \
     zsh
 
 rw ; \
-    pacman -Syy && \
-    pacman --noconfirm -Sy \
+    sudo pacman -Syy ; \
+    sudo pacman --noconfirm -Sy \
     mosh \
     net-tools \
     openssh \
