@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 sudo cp -fv ./linux/etc/locale.gen /etc/locale.gen
 sudo locale-gen
