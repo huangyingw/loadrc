@@ -49,7 +49,7 @@
     merge = refs/heads/findresult
 [gsync]
     remote = origin
-    target = origin/master
+    target = 638c5602f4efdd1deb6691734c02dd0fa0986c7c
 [gdif]
     ignore = ./bashrc/cscope_old.sh
     ignore = ./bashrc/update_proj_old.sh
@@ -79,4 +79,4 @@
     remote = origin
     merge = refs/heads/term
 [gcom]
-    disabled = true
+    disabled = false

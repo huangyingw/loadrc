@@ -1,2 +1,2 @@
 #!/bin/zsh
-git branch --sort=-committerdate | tee gbra.log
+git branch --sort=-committerdate -a | tee gbra.log

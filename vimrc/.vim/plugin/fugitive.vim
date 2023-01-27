@@ -386,7 +386,7 @@ function! s:Gdi(...) abort
         return
     else
         let arg1 = (a:0 >= 1) ? a:1 : ''
-        exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" HEAD 2>&1 | tee ' . '"' .  output . '"'
+        exec '!~/loadrc/gitrc/gdi.sh HEAD ' . '"' .  arg1 . '" 2>&1 | tee ' . '"' .  output . '"'
     endif
 
     if bufwinnr('^' . output . '$') > 0
@@ -533,11 +533,6 @@ function! s:ApplyBranch(args, ...) abort
 endfunction
 
 function! s:Gcom(args, ...) abort
-    if (expand("%") != 'index')
-        echom 'Please only run on index!!!'
-        return 0
-    endif
-
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"'
 endfunction
