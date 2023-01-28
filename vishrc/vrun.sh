@@ -18,8 +18,8 @@ extension=${file##*.}
 host=$(git config deploy.host)
 rpath=$(git config deploy.path)
 rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$file" "files.proj")
-rfile=$(realpath --relative-to="$rootFolder" "$file")
-rfolder=$(realpath --relative-to="$rootFolder" $(dirname "$file"))
+rfile=$(realpath --relative-to="$rootFolder" "$file" | sed 's/ /\\ /g')
+rfolder=$(realpath --relative-to="$rootFolder" $(dirname "$file") | sed 's/ /\\ /g')
 
 if [[ "$file" = *'_test.py' ]]
 then
