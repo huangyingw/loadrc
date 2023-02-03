@@ -77,7 +77,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Portsforward :execute s:Portsforward()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RmCat :execute s:RmCat(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute s:SelectMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
@@ -385,8 +384,11 @@ function! s:Gdi(...) abort
         endif
         return
     else
-        let arg1 = (a:0 >= 1) ? a:1 : ''
-        exec '!~/loadrc/gitrc/gdi.sh ' . '"' .  arg1 . '" HEAD 2>&1 | tee ' . '"' .  output . '"'
+        if a:0 >= 1
+            exec '!~/loadrc/gitrc/gdi.sh HEAD ' . '"' .  a:1 . '" 2>&1 | tee ' . '"' .  output . '"'
+        else
+            exec '!~/loadrc/gitrc/gdi.sh 2>&1 | tee ' . '"' .  output . '"'
+        endif
     endif
 
     if bufwinnr('^' . output . '$') > 0
@@ -533,11 +535,6 @@ function! s:ApplyBranch(args, ...) abort
 endfunction
 
 function! s:Gcom(args, ...) abort
-    if (expand("%") != 'index')
-        echom 'Please only run on index!!!'
-        return 0
-    endif
-
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"'
 endfunction

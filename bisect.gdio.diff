@@ -12829,8 +12829,8 @@ new file mode 100644
 --- /dev/null
 +++ ./crontabrc/ssh.cron
 @@ -0,0 +1,2 @@
-+*/10 * * * * /Users/huangyingw/loadrc/macosrc/restart_ssh.sh
-+*/10 * * * * /Users/ying.huang/loadrc/macosrc/restart_ssh.sh
++* * * * * /Users/huangyingw/loadrc/macosrc/restart_ssh.sh
++* * * * * /Users/ying.huang/loadrc/macosrc/restart_ssh.sh
 diff --git a/crontabrc/zerotier.cron b/crontabrc/zerotier.cron
 new file mode 100644
 --- /dev/null
@@ -13472,7 +13472,7 @@ diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/.gitconfig
-@@ -0,0 +1,98 @@
+@@ -0,0 +1,99 @@
 +[user]
 +	name = Ying Huang
 +    email = huangyingw@gmail.com
@@ -13513,6 +13513,7 @@ new file mode 100755
 +    mergeoptions = --no-edit
 +    fileMode = true
 +    editor = nvim
++	ignorecase = false
 +[giggle]
 +    main-window-maximized = true
 +    main-window-geometry = 700x550+0+55
@@ -13769,9 +13770,8 @@ diff --git a/gitrc/discard_unnecessaries.sh b/gitrc/discard_unnecessaries.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/discard_unnecessaries.sh
-@@ -0,0 +1,5 @@
+@@ -0,0 +1,4 @@
 +#!/bin/zsh
-+git checkout \*.gdio.diff
 +git checkout files.proj
 +git checkout rsync.files
 +git checkout gbil.log
@@ -13805,10 +13805,10 @@ new file mode 100755
 +    exit
 +fi
 +
++~/loadrc/gitrc/dogdio.sh
 +~/loadrc/gitrc/gclb.sh
 +~/loadrc/gitrc/gps.sh &
 +~/loadrc/gitrc/gpl.sh
-+~/loadrc/gitrc/dogdio.sh
 diff --git a/gitrc/fetch_all.sh b/gitrc/fetch_all.sh
 new file mode 100755
 --- /dev/null
@@ -15406,7 +15406,7 @@ diff --git a/host_links/COH-LC172TVQ6J/Users/ying.huang/.gitconfig b/host_links/
 new file mode 100755
 --- /dev/null
 +++ ./host_links/COH-LC172TVQ6J/Users/ying.huang/.gitconfig
-@@ -0,0 +1,96 @@
+@@ -0,0 +1,97 @@
 +[user]
 +	name = Ying Huang
 +	email = ying.huang@cohesity.com
@@ -15447,6 +15447,7 @@ new file mode 100755
 +    mergeoptions = --no-edit
 +    fileMode = true
 +    editor = nvim
++	ignorecase = false
 +[giggle]
 +    main-window-maximized = true
 +    main-window-geometry = 700x550+0+55
@@ -28540,7 +28541,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -0,0 +1 @@
-+Subproject commit bd5422d9e40c732b010dcd4da3eafda81b3b1d54
++Subproject commit bd5422d9e40c732b010dcd4da3eafda81b3b1d54-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 new file mode 160000
 --- /dev/null
@@ -34825,7 +34826,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -0,0 +1 @@
-+Subproject commit 32589b15623915a4a5626533df35c8811f46085f
++Subproject commit 32589b15623915a4a5626533df35c8811f46085f-dirty
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 new file mode 160000
 --- /dev/null
@@ -34849,7 +34850,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -0,0 +1 @@
-+Subproject commit c3da0bd1a950c3d7b9f546b5e34dd2e0354e0aed
++Subproject commit c3da0bd1a950c3d7b9f546b5e34dd2e0354e0aed-dirty
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 --- /dev/null
@@ -34885,7 +34886,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-pdf
 @@ -0,0 +1 @@
-+Subproject commit 4e7a8d39a4ace365e17962245c7f3f69bffec50f
++Subproject commit af556f163ed5a8c7687b4d606894d12a38c20528
 diff --git a/vimrc/.vim/bundle/vim-php-cs-fixer b/vimrc/.vim/bundle/vim-php-cs-fixer
 new file mode 160000
 --- /dev/null
@@ -57850,8 +57851,8 @@ new file mode 100755
 +host=$(git config deploy.host)
 +rpath=$(git config deploy.path)
 +rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$file" "files.proj")
-+rfile=$(realpath --relative-to="$rootFolder" "$file")
-+rfolder=$(realpath --relative-to="$rootFolder" $(dirname "$file"))
++rfile=$(realpath --relative-to="$rootFolder" "$file" | sed 's/ /\\ /g')
++rfolder=$(realpath --relative-to="$rootFolder" $(dirname "$file") | sed 's/ /\\ /g')
 +
 +if [[ "$file" = *'_test.py' ]]
 +then

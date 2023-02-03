@@ -38,6 +38,7 @@
     mergeoptions = --no-edit
     fileMode = true
     editor = nvim
+	ignorecase = false
 [giggle]
     main-window-maximized = true
     main-window-geometry = 700x550+0+55
