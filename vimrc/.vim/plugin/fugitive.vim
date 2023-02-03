@@ -385,8 +385,11 @@ function! s:Gdi(...) abort
         endif
         return
     else
-        let arg1 = (a:0 >= 1) ? a:1 : ''
-        exec '!~/loadrc/gitrc/gdi.sh HEAD ' . '"' .  arg1 . '" 2>&1 | tee ' . '"' .  output . '"'
+        if a:0 >= 1
+            exec '!~/loadrc/gitrc/gdi.sh HEAD ' . '"' .  a:1 . '" 2>&1 | tee ' . '"' .  output . '"'
+        else
+            exec '!~/loadrc/gitrc/gdi.sh 2>&1 | tee ' . '"' .  output . '"'
+        endif
     endif
 
     if bufwinnr('^' . output . '$') > 0
