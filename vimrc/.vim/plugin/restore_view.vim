@@ -3,7 +3,7 @@
 "    Maintainer: Yichao Zhou (broken.zhou AT gmail dot com)
 "       Created: 2012-02-27 16:12:12
 " Last Modified: 2012 Apr 18 14:06:11
-"   Description: 
+"   Description:
 "       This is a simple script to autosave cursor position and fold
 "       information using vim's mkview.  Although you can easily do this job by
 "       just add serveral line to {.,_}vimrc, write a script plugin can make it
@@ -15,7 +15,7 @@
 " Suggested Setting:
 "       Please put them in you vimrc file.
 "           set viewoptions=cursor,folds,slash,unix
-"       
+"
 "       Set it in a plugin file looks dirty to me.  So you'd better do it your
 "       self.  This only keywords not in viewoptions is "options". I believe it
 "       does not belong to a view.  If you think you need it, feel free to
