@@ -1,12 +1,12 @@
-#!/bin/zsh 
-SOURCE=/media/volgrp/slink/media/`hostname`/ 
+#!/bin/zsh
+SOURCE=/media/volgrp/slink/media/`hostname`/
 TARGET=/
 if [ -n "$1" ]
-then 
+then
   SOURCE="$1"
 fi
 if [ -n "$2" ]
-then 
+then
   TARGET="$2"
 fi
 echo $SOURCE
