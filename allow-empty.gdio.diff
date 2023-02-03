@@ -14458,7 +14458,7 @@ new file mode 100755
 +
 +~/loadrc/gitrc/discard_unnecessaries.sh
 +git checkout -f "$targetBranch"
-+git apply --reject --whitespace=fix --recount --index "$GDITDIFF"
++git apply --reject --whitespace=fix --recount --allow-empty --index "$GDITDIFF"
 +
 +retVal=$?
 +
@@ -15052,9 +15052,9 @@ new file mode 100755
 +#!/bin/zsh
 +if [ -z "$1" ]
 +then
-+    git stash show -p stash@{0} | git apply --reject --whitespace=fix --recount && git stash drop stash@{0}
++    git stash show -p stash@{0} | git apply --reject --whitespace=fix --recount --allow-empty && git stash drop stash@{0}
 +else
-+    git stash show -p stash@{"$1"} | git apply --reject --whitespace=fix --recount && git stash drop stash@{"$1"}
++    git stash show -p stash@{"$1"} | git apply --reject --whitespace=fix --recount --allow-empty && git stash drop stash@{"$1"}
 +fi
 diff --git a/gitrc/gstv.sh b/gitrc/gstv.sh
 new file mode 100755
@@ -15199,7 +15199,7 @@ new file mode 100755
 +~/loadrc/gitrc/restore.sh
 +cp -fv "$DIFF".tmp "$DIFF"
 +
-+git apply --reject --whitespace=fix --recount "$DIFF" || \
++git apply --reject --whitespace=fix --recount --allow-empty "$DIFF" || \
 +    echo "git apply failed" && \
 +    exit 1
 +
@@ -15225,7 +15225,7 @@ new file mode 100755
 +
 +CURRET_BRANCH_DIFF="$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff"
 +~/loadrc/gitrc/gdio.sh
-+git apply --reject --whitespace=fix --recount --reverse "$CURRET_BRANCH_DIFF" || \
++git apply --reject --whitespace=fix --recount --allow-empty --reverse "$CURRET_BRANCH_DIFF" || \
 +    echo "git reverse apply failed" && \
 +    exit 1
 diff --git a/gitrc/restore_deleted.sh b/gitrc/restore_deleted.sh
