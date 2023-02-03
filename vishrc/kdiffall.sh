@@ -1,6 +1,6 @@
 #!/bin/zsh
 IFS=$'\n' lines=($(cat $1))
- 
+
 for index in {1..$#lines}
 do
     for ((next = $index + 1; next <= $#lines; next++));

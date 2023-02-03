@@ -9,7 +9,7 @@ DEV=$(
     for dev in `ls /sys/class/net`; do
         [ -d "/sys/class/net/$dev/wireless" ] && echo "$dev"
     done
-) 
+)
 
 TARGET_ID=$(nmcli connection show | grep wifi | sed 's/.*[^0-9a-z]\(\([0-9a-z]*-\)\{4\}[0-9a-z]*\).*/\1/g')
 
