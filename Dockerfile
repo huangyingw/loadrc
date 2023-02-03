@@ -9,7 +9,7 @@ COPY ./gitrc/*.sh /root/loadrc/gitrc/
 COPY ./.ssh/id_* /root/.ssh/
 COPY ./entrypoint.sh /entrypoint.sh
 
-RUN /root/loadrc/fix_resolvconf_in_docker.sh 
+RUN /root/loadrc/fix_resolvconf_in_docker.sh
 RUN /root/loadrc/install_prerequisite.sh
 RUN /root/loadrc/setup_locale.sh
 RUN chmod 400 /root/.ssh/id_rsa

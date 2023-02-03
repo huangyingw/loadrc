@@ -13,7 +13,7 @@ nbd0p=$(df -TH | awk '/\/dev\/nbd0.*ext4/{print $7}')
 
 if [ -n "$nbd0p" ]
 then
-    mkdir -p "$nbd0p"/root/loadrc/ 
+    mkdir -p "$nbd0p"/root/loadrc/
     rsync -aHSv --progress --delete-before --force ~/.ssh/ "$nbd0p"/root/.ssh/
     rsync -aHSv --progress ~/loadrc/.tmux.conf "$nbd0p"/root/
     rsync -aHSv --progress ~/loadrc/ "$nbd0p"/root/loadrc/

@@ -1,6 +1,6 @@
-#!/bin/zsh 
+#!/bin/zsh
 
-if [ $(~/loadrc/gitrc/git_ready.sh) ] 
+if [ $(~/loadrc/gitrc/git_ready.sh) ]
 then
     echo true
 else
