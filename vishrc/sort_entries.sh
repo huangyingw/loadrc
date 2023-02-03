@@ -13,7 +13,7 @@ then
     ls -t $(cat "$FILE" | sed 's/^"//g;s/"$//g;s/\\ / /g') > "$FILE"
 elif [ "$PARAM" = "size" ]
 then
-    ls -S $(cat "$FILE" | sed 's/^"//g;s/"$//g;s/\\ / /g') > "$FILE" 
+    ls -S $(cat "$FILE" | sed 's/^"//g;s/"$//g;s/\\ / /g') > "$FILE"
 fi
 
-sed -i.bak 's/\(["\]\)/\\\1/g;s/.*/"&"/' "$FILE"  
+sed -i.bak 's/\(["\]\)/\\\1/g;s/.*/"&"/' "$FILE"

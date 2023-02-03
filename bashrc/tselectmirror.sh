@@ -1,4 +1,4 @@
-#!/bin/zsh 
+#!/bin/zsh
 
 if [ "$#" -lt 2 ]
 then
@@ -10,4 +10,4 @@ SOURCE="$1"
 TARGET="$2"
 ready_file="$SOURCE/tselectmirror.ready"
 
-rsync -aHvn --exclude-from="$SOURCE"/excludeFile --delete-during --force "$SOURCE"/  "$TARGET"/  > "$ready_file" 
+rsync -aHvn --exclude-from="$SOURCE"/excludeFile --delete-during --force "$SOURCE"/  "$TARGET"/  > "$ready_file"

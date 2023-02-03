@@ -1,7 +1,7 @@
 #! /bin/zsh
 TARGET=exp
 if [ -n "$1" ]
-then 
+then
   TARGET="$1"
 fi
 echo $TARGET
@@ -17,4 +17,4 @@ while read suf
 do
     include_params+=( "--include=$suf" )
 done < "$UBAKIN"
-rsync -aHinv --force -e ssh "${exclude_params[@]}" "${include_params[@]}" /home/huangyingw/ "${TARGET}":/home/huangyingw/> find.findresult 
+rsync -aHinv --force -e ssh "${exclude_params[@]}" "${include_params[@]}" /home/huangyingw/ "${TARGET}":/home/huangyingw/> find.findresult

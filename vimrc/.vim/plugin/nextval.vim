@@ -267,4 +267,3 @@ function s:nexthex(value,operator)
 	endif
 	return prefix . newhex . suffix
 endfunction
-

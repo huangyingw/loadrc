@@ -3,7 +3,7 @@
 " Date:		Dec 23, 2009
 " Version:	1.1
 " Last Modification By:	Arno <arenevier@fdn.fr>
-" Original Author: That file is based on autoload/zip.vim from 
+" Original Author: That file is based on autoload/zip.vim from
 "                  Charles E Campbell, Jr <NdrOchip@ScampbellPfamily.AbizM-NOSPAM>
 " License:	    Vim License  (see vim's :help license)
 " Copyright:    Copyright (C) 2008-2009 Arno
