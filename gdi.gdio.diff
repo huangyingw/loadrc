@@ -14080,8 +14080,9 @@ diff --git a/gitrc/gbra.sh b/gitrc/gbra.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/gbra.sh
-@@ -0,0 +1,2 @@
+@@ -0,0 +1,3 @@
 +#!/bin/zsh
++git remote update
 +git branch --sort=-committerdate -a | tee gbra.log
 diff --git a/gitrc/gbrd.sh b/gitrc/gbrd.sh
 new file mode 100755
@@ -19827,7 +19828,7 @@ new file mode 160000
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit afa6603e6d5fece82331db5470d0f35ad1f703eb-dirty
++Subproject commit a53bdd98dcb87ddb6d1cef19811aaf188d12fd93
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 --- /dev/null
@@ -41009,7 +41010,7 @@ diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -0,0 +1,860 @@
+@@ -0,0 +1,859 @@
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject AppendRate :execute s:AppendRate(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject ApplyBranch :execute s:ApplyBranch(<q-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject BinaryGrep :execute s:BinaryGrep(<f-args>)
@@ -41089,7 +41090,6 @@ new file mode 100644
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Portsforward :execute s:Portsforward()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
-+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RmCat :execute s:RmCat(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute s:SelectMove(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
