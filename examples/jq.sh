@@ -2,4 +2,4 @@
 
 az storage account list \
     -g "$resourcegroup" \
-    | jq --arg v "$1" '.[] | select(.name|test($v)) | .name'
+    | jq --arg v "$resourcegroup" '.[] | select(.name|test($v)) | .name'
