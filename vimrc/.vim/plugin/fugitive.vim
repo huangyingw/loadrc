@@ -733,7 +733,7 @@ function! s:Gres() abort
 endfunction
 
 function! s:GrevApply() abort
-    exec '!git apply --reverse --reject --whitespace=fix --recount ' . '"' .  expand('%:p') . '"'
+    exec '!git apply --reverse --reject --whitespace=fix --recount --allow-empty ' . '"' .  expand('%:p') . '"'
 endfunction
 
 function! s:Dps() abort
