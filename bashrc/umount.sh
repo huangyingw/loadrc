@@ -11,10 +11,10 @@ remoteServer=$(echo "$1" | sed  -e "s/\/$//g")
 if [ $(uname) = "Linux" ]
 then
     umount -l ~/"$remoteServer"
-    ~/loadrc/bashrc/rsleep.sh "$remoteServer" &
+    # ~/loadrc/bashrc/rsleep.sh "$remoteServer" &
     df -TH
 else
     diskutil unmountDisk force ~/"$remoteServer"
-    ~/loadrc/bashrc/rsleep.sh "$remoteServer" &
+    # ~/loadrc/bashrc/rsleep.sh "$remoteServer" &
     df -H
 fi
