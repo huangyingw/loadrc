@@ -491,7 +491,7 @@ function! s:Gdif(...) abort
     let worktree = Cd2Worktree()
     let target = substitute(system("git config gsync.target"), '\n', '', '')
     let target = (a:0 >= 1) ? a:1 : target
-    let reverse = (a:0 >= 2) ? a:2 : ''
+    let reverse = (a:0 >= 2) ? a:2 : '-r'
 
     if target ==# '-r'
         let target = substitute(system("git config gsync.target"), '\n', '', '')
