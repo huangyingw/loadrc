@@ -11,7 +11,7 @@
 "                  - Author: Charles E. Campbell, Jr.
 "                  - http://www.vim.org/script.php?script_id=294
 "   Documentation:
-"        :h SQLUtilities.txt 
+"        :h SQLUtilities.txt
 "
 
 " Prevent duplicate loading
@@ -94,8 +94,8 @@ if !exists('g:sqlutil_col_list_terminators')
     "     check contraints
     "     table contraints
     "     foreign keys
-    " 
-    let g:sqlutil_col_list_terminators = 
+    "
+    let g:sqlutil_col_list_terminators =
                 \ 'primary\s\+key.*(' .
                 \ ',references' .
                 \ ',match' .
@@ -107,7 +107,7 @@ endif
 
 if !exists('g:sqlutil_use_syntax_support')
     " This controls whether search and replace
-    " of various keywords as part of the formatting 
+    " of various keywords as part of the formatting
     " of sql statements should use Vim's built in
     " syntax support.
     " The default to use the syntax id to help
@@ -128,49 +128,49 @@ endif
 let s:sqlutil_menus_created = 0
 
 " Public Interface:
-command! -range=% -nargs=* SQLUFormatStmts <line1>,<line2> 
+command! -range=% -nargs=* SQLUFormatStmts <line1>,<line2>
             \ call SQLUtilities#SQLU_FormatStmts(<q-args>)
-command! -range -nargs=* SQLUFormatter <line1>,<line2> 
+command! -range -nargs=* SQLUFormatter <line1>,<line2>
             \ call SQLUtilities#SQLU_Formatter(<q-args>)
-command!        -nargs=* SQLUCreateColumnList  
+command!        -nargs=* SQLUCreateColumnList
             \ call SQLU_CreateColumnList(<f-args>)
-command!        -nargs=* SQLUGetColumnDef 
+command!        -nargs=* SQLUGetColumnDef
             \ call SQLU_GetColumnDef(<f-args>)
-command!        -nargs=* SQLUGetColumnDataType 
+command!        -nargs=* SQLUGetColumnDataType
             \ call SQLU_GetColumnDef(expand("<cword>"), 1)
-command!        -nargs=* SQLUCreateProcedure 
+command!        -nargs=* SQLUCreateProcedure
             \ call SQLU_CreateProcedure(<f-args>)
-command!        -nargs=* SQLUToggleValue 
+command!        -nargs=* SQLUToggleValue
             \ call SQLU_ToggleValue(<f-args>)
 
 if !exists("g:sqlutil_load_default_maps")
     let g:sqlutil_load_default_maps = 1
-endif 
+endif
 
 if(g:sqlutil_load_default_maps == 1)
     if !hasmapto('<Plug>SQLUFormatStmts')
         nmap <unique> <Leader>sfr <Plug>SQLUFormatStmts
         vmap <unique> <Leader>sfr <Plug>SQLUFormatStmts
-    endif 
+    endif
     if !hasmapto('<Plug>SQLUFormatter')
         nmap <unique> <Leader>sfs <Plug>SQLUFormatter
         vmap <unique> <Leader>sfs <Plug>SQLUFormatter
         nmap <unique> <Leader>sf <Plug>SQLUFormatter
         vmap <unique> <Leader>sf <Plug>SQLUFormatter
-    endif 
+    endif
     if !hasmapto('<Plug>SQLUCreateColumnList')
         nmap <unique> <Leader>scl <Plug>SQLUCreateColumnList
-    endif 
+    endif
     if !hasmapto('<Plug>SQLUGetColumnDef')
         nmap <unique> <Leader>scd <Plug>SQLUGetColumnDef
-    endif 
+    endif
     if !hasmapto('<Plug>SQLUGetColumnDataType')
         nmap <unique> <Leader>scdt <Plug>SQLUGetColumnDataType
-    endif 
+    endif
     if !hasmapto('<Plug>SQLUCreateProcedure')
         nmap <unique> <Leader>scp <Plug>SQLUCreateProcedure
-    endif 
-endif 
+    endif
+endif
 
 if exists("g:loaded_sqlutilities_global_maps")
     vunmap <unique> <script> <Plug>SQLUFormatStmts
@@ -220,21 +220,21 @@ function! SQLU_Menu()
         endif
         let leader = escape(leader, '\')
 
-        if s:sqlutil_menus_created == 0 
+        if s:sqlutil_menus_created == 0
             exec 'vnoremenu <script> '.menuPriority.' '.menuRoot.'.Format\ Range\ Stmts<TAB>'.leader.'sfr :SQLUFormatStmts<CR>'
             exec 'noremenu  <script> '.menuPriority.' '.menuRoot.'.Format\ Range\ Stmts<TAB>'.leader.'sfr :SQLUFormatStmts<CR>'
             exec 'vnoremenu <script> '.menuPriority.' '.menuRoot.'.Format\ Statement<TAB>'.leader.'sfs :SQLUFormatter<CR>'
             exec 'noremenu  <script> '.menuPriority.' '.menuRoot.'.Format\ Statement<TAB>'.leader.'sfs :SQLUFormatter<CR>'
             exec 'noremenu  <script> '.menuPriority.' '.menuRoot.'.Create\ Procedure<TAB>'.leader.'scp :SQLUCreateProcedure<CR>'
-            exec 'inoremenu <script> '.menuPriority.' '.menuRoot.'.Create\ Procedure<TAB>'.leader.'scp  
+            exec 'inoremenu <script> '.menuPriority.' '.menuRoot.'.Create\ Procedure<TAB>'.leader.'scp
                         \ <C-O>:SQLUCreateProcedure<CR>'
-            exec 'noremenu  <script> '.menuPriority.' '.menuRoot.'.Create\ Column\ List<TAB>'.leader.'sl   
+            exec 'noremenu  <script> '.menuPriority.' '.menuRoot.'.Create\ Column\ List<TAB>'.leader.'sl
                         \ :SQLUCreateColumnList<CR>'
-            exec 'inoremenu <script> '.menuPriority.' '.menuRoot.'.Create\ Column\ List<TAB>'.leader.'sl 
+            exec 'inoremenu <script> '.menuPriority.' '.menuRoot.'.Create\ Column\ List<TAB>'.leader.'sl
                         \ <C-O>:SQLUCreateColumnList<CR>'
-            exec 'noremenu  <script> '.menuPriority.' '.menuRoot.'.Column\ Definition<TAB>'.leader.'scd 
+            exec 'noremenu  <script> '.menuPriority.' '.menuRoot.'.Column\ Definition<TAB>'.leader.'scd
                         \ :SQLUGetColumnDef<CR>'
-            exec 'inoremenu <script> '.menuPriority.' '.menuRoot.'.Column\ Definition<TAB>'.leader.'scd 
+            exec 'inoremenu <script> '.menuPriority.' '.menuRoot.'.Column\ Definition<TAB>'.leader.'scd
                         \ <C-O>:SQLUGetColumnDef<CR>'
             exec 'noremenu  <script> '.menuPriority.' '.menuRoot.'.Column\ Datatype<TAB>'.leader.'scdt
                         \ :SQLUGetColumnDataType<CR>'
@@ -279,9 +279,9 @@ endfunction
 " It assumes that each column is on a separate line
 " It places the column list in unnamed buffer
 function! SQLU_CreateColumnList(...)
-    if(a:0 > 1) 
+    if(a:0 > 1)
         call SQLUtilities#SQLU_CreateColumnList(a:1, a:2)
-    elseif(a:0 > 0) 
+    elseif(a:0 > 0)
         call SQLUtilities#SQLU_CreateColumnList(a:1)
     else
         call SQLUtilities#SQLU_CreateColumnList()
@@ -300,9 +300,9 @@ endfunction
 " It assumes that each column is on a separate line
 " It places the column list in unnamed buffer
 function! SQLU_GetColumnDef( ... )
-    if(a:0 > 1) 
+    if(a:0 > 1)
         return SQLUtilities#SQLU_GetColumnDef(a:1, a:2)
-    elseif(a:0 > 0) 
+    elseif(a:0 > 0)
         return SQLUtilities#SQLU_GetColumnDef(a:1)
     else
         return SQLUtilities#SQLU_GetColumnDef()
@@ -311,10 +311,10 @@ endfunction
 
 
 
-" Creates a procedure defintion into the unnamed buffer for the 
+" Creates a procedure defintion into the unnamed buffer for the
 " table that the cursor is currently under.
 function! SQLU_CreateProcedure(...)
-    if(a:0 > 0) 
+    if(a:0 > 0)
         return SQLUtilities#SQLU_CreateProcedure(a:1)
     else
         return SQLUtilities#SQLU_CreateProcedure()
@@ -323,7 +323,7 @@ endfunction
 
 
 
-" Compares two strings, and will remove all names from the first 
+" Compares two strings, and will remove all names from the first
 " parameter, if the same name exists in the second column name.
 " The 2 parameters take comma separated lists
 function! SQLU_RemoveMatchingColumns( full_col_list, dup_col_list )
@@ -340,11 +340,11 @@ function! SQLU_ToggleValue( ... )
         echomsg "SQLUToggle value requires at least 1 parameter"
         echohl None
     elseif (a:0 == 1)
-        if exists('{a:1}') 
+        if exists('{a:1}')
             let {a:1} = (({a:1} == 0)?1:0)
         endif
     else
-        if exists('{a:1}') 
+        if exists('{a:1}')
             " Use defaults as the default for this function
             if a:2 == 'default'
                 let {a:1} = ''
