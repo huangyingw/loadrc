@@ -12703,10 +12703,6 @@ diff --git a/crontabrc/.imacpro.cron b/crontabrc/.imacpro.cron
 new file mode 100644
 diff --git a/crontabrc/.mbp.cron b/crontabrc/.mbp.cron
 new file mode 100644
---- /dev/null
-+++ ./crontabrc/.mbp.cron
-@@ -0,0 +1 @@
-+*/10 * * * * /root/loadrc/dropboxrc/dropbox_start.sh
 diff --git a/crontabrc/.mbp2.cron b/crontabrc/.mbp2.cron
 new file mode 100644
 --- /dev/null
@@ -19829,7 +19825,7 @@ new file mode 160000
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 1fdc55b33596765b1a7f23f61716bc0191dee6c1
++Subproject commit 6c274377490920ffdcfd7a9cf72d9010f83212dc
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 --- /dev/null
