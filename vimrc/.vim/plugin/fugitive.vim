@@ -77,6 +77,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Portsforward :execute s:Portsforward()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RmCat :execute s:RmCat(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute s:SelectMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
@@ -491,7 +492,7 @@ function! s:Gdif(...) abort
     let worktree = Cd2Worktree()
     let target = substitute(system("git config gsync.target"), '\n', '', '')
     let target = (a:0 >= 1) ? a:1 : target
-    let reverse = (a:0 >= 2) ? a:2 : ''
+    let reverse = (a:0 >= 2) ? a:2 : '-r'
 
     if target ==# '-r'
         let target = substitute(system("git config gsync.target"), '\n', '', '')
