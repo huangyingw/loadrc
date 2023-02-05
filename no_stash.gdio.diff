@@ -12841,7 +12841,7 @@ new file mode 160000
 --- /dev/null
 +++ ./cscope
 @@ -0,0 +1 @@
-+Subproject commit 67ce7975795dae6c46c3c0fc39a9837248cb2d1b
++Subproject commit 0a3848832a97406727cdf7c85ac0c78837c634c9-dirty
 diff --git a/demo b/demo
 new file mode 100644
 --- /dev/null
@@ -19803,7 +19803,7 @@ new file mode 160000
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit e1a67bd20043cfb8cb4a5c26c2d418ba048f8f97
++Subproject commit 0d29a6259eb38a7e2bdb85b8dfca408aaa50163b-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 --- /dev/null
@@ -20354,7 +20354,7 @@ new file mode 160000
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit 30128bbc6916b25b42a95316cca04b90a119c104
++Subproject commit 595d1b723ab9d7ac1349f2eb296eef751511d916-dirty
 diff --git a/ruleref.list b/ruleref.list
 new file mode 100644
 --- /dev/null
