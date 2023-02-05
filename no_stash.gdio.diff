@@ -20589,8 +20589,8 @@ new file mode 100755
 +    zsh
 +
 +rw ; \
-+    pacman -Syy && \
-+    pacman --noconfirm -Sy \
++    pacman -Syy && \         
++    pacman --noconfirm -Sy \ 
 +    mosh \
 +    net-tools \
 +    openssh \
@@ -40982,7 +40982,7 @@ diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -0,0 +1,860 @@
+@@ -0,0 +1,865 @@
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject AppendRate :execute s:AppendRate(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject ApplyBranch :execute s:ApplyBranch(<q-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject BinaryGrep :execute s:BinaryGrep(<f-args>)
@@ -41718,6 +41718,7 @@ new file mode 100644
 +function! s:GrevApply() abort
 +    exec '!git apply --reverse --reject --whitespace=fix --recount --allow-empty ' . '"' .  expand('%:p') . '"'
 +endfunction
++
 +
 +function! s:Dps() abort
 +    let worktree = Cd2Worktree()
