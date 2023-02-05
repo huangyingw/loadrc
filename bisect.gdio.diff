@@ -9790,9 +9790,10 @@ diff --git a/bashrc/removing_ansi_color_codes.sh b/bashrc/removing_ansi_color_co
 new file mode 100755
 --- /dev/null
 +++ ./bashrc/removing_ansi_color_codes.sh
-@@ -0,0 +1,3 @@
+@@ -0,0 +1,4 @@
 +#!/bin/zsh
 +perl -pe 's/\e\[[0-9;]*m(?:\e\[K)?//g' "$1" > "$1".tmp
++sed -i.bak "s/\r//g" "$1".tmp 
 +cp -fv "$1".tmp "$1"
 diff --git a/bashrc/rename.sh b/bashrc/rename.sh
 new file mode 100755
@@ -12829,8 +12830,8 @@ new file mode 100644
 --- /dev/null
 +++ ./crontabrc/ssh.cron
 @@ -0,0 +1,2 @@
-+* * * * * /Users/huangyingw/loadrc/macosrc/restart_ssh.sh
-+* * * * * /Users/ying.huang/loadrc/macosrc/restart_ssh.sh
++*/3 * * * * /Users/huangyingw/loadrc/macosrc/restart_ssh.sh
++*/3 * * * * /Users/ying.huang/loadrc/macosrc/restart_ssh.sh
 diff --git a/crontabrc/zerotier.cron b/crontabrc/zerotier.cron
 new file mode 100644
 --- /dev/null
@@ -13341,6 +13342,16 @@ new file mode 100644
 +[netatalk]
 +    path = target_dir_var
 +    time machine = yes
+diff --git a/examples/jq.sh b/examples/jq.sh
+new file mode 100644
+--- /dev/null
++++ ./examples/jq.sh
+@@ -0,0 +1,5 @@
++#!/bin/zsh
++
++az storage account list \
++    -g "$resourcegroup" \
++    | jq --arg v "$resourcegroup" '.[] | select(.name|test($v)) | .name'
 diff --git a/fdocs.exclude b/fdocs.exclude
 new file mode 100644
 --- /dev/null
@@ -28361,7 +28372,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit b6be2e074b8f62815a45e31eb0966b4dd5e57810
++Subproject commit 35b34ba566d9d9f6761cde3574f668d505c5137f
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 new file mode 160000
 --- /dev/null
@@ -41500,7 +41511,7 @@ new file mode 100644
 +    let worktree = Cd2Worktree()
 +    let target = substitute(system("git config gsync.target"), '\n', '', '')
 +    let target = (a:0 >= 1) ? a:1 : target
-+    let reverse = (a:0 >= 2) ? a:2 : ''
++    let reverse = (a:0 >= 2) ? a:2 : '-r'
 +
 +    if target ==# '-r'
 +        let target = substitute(system("git config gsync.target"), '\n', '', '')
