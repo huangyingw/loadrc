@@ -20324,7 +20324,7 @@ new file mode 100755
 +    if targetFile:
 +        if platform.system() == 'Darwin':
 +            if start == 0:
-+                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '--sub-language', 'Chinese', '--sub-autodetect-file', '-f', '--macosx-continue-playback=2', '--rate=2.0', '--volume=0', targetFile])
++                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '--sub-language', 'Chinese', '--sub-autodetect-file', '-f', '--macosx-continue-playback=2', '--rate=2.0', targetFile])
 +            else:
 +                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '--sub-language', 'Chinese', '--sub-autodetect-file', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
 +        else:
@@ -20589,8 +20589,8 @@ new file mode 100755
 +    zsh
 +
 +rw ; \
-+    pacman -Syy && \
-+    pacman --noconfirm -Sy \
++    sudo pacman -Syy ; \
++    sudo pacman --noconfirm -Sy \
 +    mosh \
 +    net-tools \
 +    openssh \
@@ -24391,7 +24391,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/LargeFile
 @@ -0,0 +1 @@
-+Subproject commit 18407c43846edea7b7964b0b99226ec04d00931f
++Subproject commit 3941a37b2b0288524300348a39521a46539bf9f6
 diff --git a/vimrc/.vim/bundle/SQLUtilities/README b/vimrc/.vim/bundle/SQLUtilities/README
 new file mode 100644
 --- /dev/null
@@ -28313,7 +28313,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/bash-support.vim
 @@ -0,0 +1 @@
-+Subproject commit 876ff2804b05354ee8deefb30443c09514f02402
++Subproject commit 537b2a38560042dfcb134ed8cdfdb77e3c649e6e-dirty
 diff --git a/vimrc/.vim/bundle/bclose.vim b/vimrc/.vim/bundle/bclose.vim
 new file mode 160000
 --- /dev/null
@@ -28517,7 +28517,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -0,0 +1 @@
-+Subproject commit 425fb8e641ebbe7165ca2c6ebce866eeb8d35377
++Subproject commit bd5422d9e40c732b010dcd4da3eafda81b3b1d54-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 new file mode 160000
 --- /dev/null
@@ -34771,7 +34771,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/tig-explorer.vim
 @@ -0,0 +1 @@
-+Subproject commit 84790204eb9eed4be698bff9147bfcd211fc1956
++Subproject commit 677391a11050f968c04e4c334a1fc329c6159c4d-dirty
 diff --git a/vimrc/.vim/bundle/tlib_vim b/vimrc/.vim/bundle/tlib_vim
 new file mode 160000
 --- /dev/null
@@ -34795,19 +34795,19 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-anyfold
 @@ -0,0 +1 @@
-+Subproject commit d3383b97c003e102ab6f0eed29290e938d217fcb
++Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431-dirty
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
 new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -0,0 +1 @@
-+Subproject commit 2781b2ba4a36a961657edac17aba52e2c5c1dd2a
++Subproject commit 32589b15623915a4a5626533df35c8811f46085f-dirty
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-buffergator
 @@ -0,0 +1 @@
-+Subproject commit 204f808532d6e166c36c03218ddac4a04d53acbb
++Subproject commit c663ae0cf3e9337d4639ad3bb3235fdfccb4e488-dirty
 diff --git a/vimrc/.vim/bundle/vim-docker-compose-syntax b/vimrc/.vim/bundle/vim-docker-compose-syntax
 new file mode 160000
 --- /dev/null
@@ -34819,13 +34819,13 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-fetch
 @@ -0,0 +1 @@
-+Subproject commit 65f55f6a30a3d367248ec1edd56aa33a6c24b6ad
++Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1-dirty
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
 new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -0,0 +1 @@
-+Subproject commit 285871c7cfc4d33a95dd874136651bfd25abe5c6
++Subproject commit c3da0bd1a950c3d7b9f546b5e34dd2e0354e0aed-dirty
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 --- /dev/null
@@ -34843,19 +34843,19 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-javascript-syntax
 @@ -0,0 +1 @@
-+Subproject commit 0704495f0dd1336a42fa2fdeefb6e2d85ae0fdd4
++Subproject commit 939d84b538480e7cb7810fde5ad807e9ecb477f6-dirty
 diff --git a/vimrc/.vim/bundle/vim-log-syntax b/vimrc/.vim/bundle/vim-log-syntax
 new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-log-syntax
 @@ -0,0 +1 @@
-+Subproject commit 79cd9b16eadefadf9a6c370674422a91d43ed1f0
++Subproject commit 6c244f27dc552b6093b851f9070c3d22e3a38523-dirty
 diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
 new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-pbcopy
 @@ -0,0 +1 @@
-+Subproject commit 9fddbc447d31bdbc893aa62d9f2eea1a5f8a2134
++Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7-dirty
 diff --git a/vimrc/.vim/bundle/vim-pdf b/vimrc/.vim/bundle/vim-pdf
 new file mode 160000
 --- /dev/null
@@ -34891,7 +34891,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-snipmate
 @@ -0,0 +1 @@
-+Subproject commit 225f7fca7b95d66d234a2f587fcf3b7465928d86
++Subproject commit b8fe3fb6b127c417290c0fe1a85a8dd0173cef05-dirty
 diff --git a/vimrc/.vim/bundle/vundle.vim b/vimrc/.vim/bundle/vundle.vim
 new file mode 160000
 --- /dev/null
@@ -40982,7 +40982,7 @@ diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -0,0 +1,860 @@
+@@ -0,0 +1,865 @@
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject AppendRate :execute s:AppendRate(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject ApplyBranch :execute s:ApplyBranch(<q-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject BinaryGrep :execute s:BinaryGrep(<f-args>)
@@ -41037,6 +41037,7 @@ new file mode 100644
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gres :execute s:Gres()
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gapply :execute s:Gapply()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GrevApply :execute s:GrevApply()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
@@ -41717,6 +41718,10 @@ new file mode 100644
 +
 +function! s:GrevApply() abort
 +    exec '!git apply --reverse --reject --whitespace=fix --recount --allow-empty ' . '"' .  expand('%:p') . '"'
++endfunction
++
++function! s:Gapply() abort
++    exec '!git apply --reject --whitespace=fix --recount --allow-empty ' . '"' .  expand('%:p') . '"'
 +endfunction
 +
 +function! s:Dps() abort
@@ -57961,7 +57966,7 @@ new file mode 160000
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
-+Subproject commit df2a07ac0b7392dacd6795ed85e31cb873e6ba17
++Subproject commit a30c815b53b8fa0f0ca23680f5671deda334cacd-dirty
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 new file mode 100755
 --- /dev/null
