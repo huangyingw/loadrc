@@ -52,6 +52,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gme2 :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gres :execute s:Gres()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gapply :execute s:Gapply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GrevApply :execute s:GrevApply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
@@ -732,6 +733,10 @@ endfunction
 
 function! s:GrevApply() abort
     exec '!git apply --reverse --reject --whitespace=fix --recount --allow-empty ' . '"' .  expand('%:p') . '"'
+endfunction
+
+function! s:Gapply() abort
+    exec '!git apply --reject --whitespace=fix --recount --allow-empty ' . '"' .  expand('%:p') . '"'
 endfunction
 
 function! s:Dps() abort
