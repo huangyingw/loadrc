@@ -12,7 +12,7 @@ fi
 ~/loadrc/gitrc/restore.sh
 cp -fv "$DIFF".tmp "$DIFF"
 
-git apply --reject --whitespace=fix --recount "$DIFF" || \
+git apply --reject --whitespace=fix --recount --allow-empty "$DIFF" || \
     echo "git apply failed" && \
     exit 1
 

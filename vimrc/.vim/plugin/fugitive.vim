@@ -385,8 +385,11 @@ function! s:Gdi(...) abort
         endif
         return
     else
-        let arg1 = (a:0 >= 1) ? a:1 : ''
-        exec '!~/loadrc/gitrc/gdi.sh HEAD ' . '"' .  arg1 . '" 2>&1 | tee ' . '"' .  output . '"'
+        if a:0 >= 1
+            exec '!~/loadrc/gitrc/gdi.sh HEAD ' . '"' .  a:1 . '" 2>&1 | tee ' . '"' .  output . '"'
+        else
+            exec '!~/loadrc/gitrc/gdi.sh 2>&1 | tee ' . '"' .  output . '"'
+        endif
     endif
 
     if bufwinnr('^' . output . '$') > 0
@@ -489,7 +492,7 @@ function! s:Gdif(...) abort
     let worktree = Cd2Worktree()
     let target = substitute(system("git config gsync.target"), '\n', '', '')
     let target = (a:0 >= 1) ? a:1 : target
-    let reverse = (a:0 >= 2) ? a:2 : ''
+    let reverse = (a:0 >= 2) ? a:2 : '-r'
 
     if target ==# '-r'
         let target = substitute(system("git config gsync.target"), '\n', '', '')
@@ -728,7 +731,7 @@ function! s:Gres() abort
 endfunction
 
 function! s:GrevApply() abort
-    exec '!git apply --reverse --reject --whitespace=fix --recount ' . '"' .  expand('%:p') . '"'
+    exec '!git apply --reverse --reject --whitespace=fix --recount --allow-empty ' . '"' .  expand('%:p') . '"'
 endfunction
 
 function! s:Dps() abort

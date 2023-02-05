@@ -168,9 +168,9 @@ function AddToGit()
     if (expand('%:e') ==# 'findresult' || expand('%:p') =~ '.*\.git/.*' || expand('%:e') ==# 'diff')
         return
     endif
-     
+
     let inGit = substitute(system('[ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1 && echo inGit'), '\n', '', '')
-    
+
     if inGit != 'inGit'
         return
     endif
@@ -254,7 +254,7 @@ autocmd FileType fugitive set bufhidden=
 let g:indexed_search_dont_move = 1
 
 " autocmd OptionSet diff call s:ToggleOnDiff()
-" 
+"
 " function! s:ToggleOnDiff()
 "     if &diff
 "         set wrap

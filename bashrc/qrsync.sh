@@ -1,12 +1,11 @@
-#!/bin/zsh 
+#!/bin/zsh
 SOURCE=$1
 TARGET=$2
 
 if [ ! -d "${TARGET}" ]
-then   
+then
     mkdir -p "${TARGET}"
 fi
 
 rsync -aH --delete-after \
 "${SOURCE}" "${TARGET}"
-

@@ -1,7 +1,7 @@
 #! /bin/zsh
 TARGET=/media/volgrp/media/`hostname`/
 if [ -n "$1" ]
-then 
+then
   TARGET="$1"
 fi
 echo $TARGET
