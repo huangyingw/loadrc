@@ -13339,6 +13339,16 @@ new file mode 100644
 +[netatalk]
 +    path = target_dir_var
 +    time machine = yes
+diff --git a/examples/jq.sh b/examples/jq.sh
+new file mode 100644
+--- /dev/null
++++ ./examples/jq.sh
+@@ -0,0 +1,5 @@
++#!/bin/zsh
++
++az storage account list \
++    -g "$resourcegroup" \
++    | jq --arg v "$resourcegroup" '.[] | select(.name|test($v)) | .name'
 diff --git a/fdocs.exclude b/fdocs.exclude
 new file mode 100644
 --- /dev/null
@@ -41004,7 +41014,7 @@ diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -0,0 +1,859 @@
+@@ -0,0 +1,860 @@
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject AppendRate :execute s:AppendRate(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject ApplyBranch :execute s:ApplyBranch(<q-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject BinaryGrep :execute s:BinaryGrep(<f-args>)
@@ -41084,6 +41094,7 @@ new file mode 100644
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Portsforward :execute s:Portsforward()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RmCat :execute s:RmCat(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute s:SelectMove(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
@@ -41498,7 +41509,7 @@ new file mode 100644
 +    let worktree = Cd2Worktree()
 +    let target = substitute(system("git config gsync.target"), '\n', '', '')
 +    let target = (a:0 >= 1) ? a:1 : target
-+    let reverse = (a:0 >= 2) ? a:2 : ''
++    let reverse = (a:0 >= 2) ? a:2 : '-r'
 +
 +    if target ==# '-r'
 +        let target = substitute(system("git config gsync.target"), '\n', '', '')

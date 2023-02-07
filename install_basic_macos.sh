@@ -67,6 +67,7 @@ brew install \
     xmlto \
     yq
 
+brew install --cask kdiff3
 brew cask install \
     kdiff3 \
     libreoffice \

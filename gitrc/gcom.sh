@@ -12,12 +12,6 @@ then
     exit 1
 fi
 
-clean=$(git status --porcelain)
-
-if [ -n "$clean" ]
-then
-    git stash
-fi
 
 current_branch=$(~/loadrc/gitrc/get_current_branch.sh)
 
@@ -39,8 +33,3 @@ git checkout -b "$TARGET_BRANCH" || \
 
 git merge "$1"
 ~/loadrc/gitrc/gpl.sh
-
-if [ -n "$clean" ]
-then
-    git stash pop stash@{0}
-fi

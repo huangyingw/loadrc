@@ -1,12 +1,5 @@
 #!/bin/zsh
 
-clean=$(git status --porcelain)
-
-if [ -n "$clean" ]
-then
-    git stash
-fi
-
 git remote update
 
 BRANCH="$1"
@@ -39,8 +32,3 @@ do \
     git show "$BRANCH":"$targetFile" > "$targetFile" && \
         rm "$ss"
 done
-
-if [ -n "$clean" ]
-then
-    git stash pop stash@{0}
-fi

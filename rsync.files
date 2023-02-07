@@ -426,7 +426,6 @@
 ./chrome_install.sh
 ./config/iTerm/com.googlecode.iterm2.plist
 ./configure_gitk.sh
-./crontabrc/.mbp.cron
 ./crontabrc/.mbp2.cron
 ./crontabrc/.mini.cron
 ./crontabrc/.mldonkey.cron
@@ -472,6 +471,7 @@
 ./entrypoint.sh
 ./error
 ./etc/netatalk/afp.conf
+./examples/jq.sh
 ./fdocs.exclude
 ./fdocs.include
 ./fdocs.list
@@ -593,7 +593,6 @@
 ./gpurc/install_driver.sh
 ./gpurc/kill_nvidia.sh
 ./gpurc/restart.sh
-./gres.gdio.diff
 ./hgrc/hdi.sh
 ./host_links/COH-LC172TVQ6J/Users/ying.huang/.gitconfig
 ./host_links/lint-sandbox/etc/hosts
@@ -770,6 +769,7 @@
 ./networkrc/ping.sh
 ./networkrc/ping.test.sh
 ./networkrc/temp.sh
+./no_stash.gdio.diff
 ./oh-my-zsh/.gitconfig
 ./oh-my-zsh/.gitignore
 ./oh-my-zsh/custom/plugins/zsh-nvm/.gitignore

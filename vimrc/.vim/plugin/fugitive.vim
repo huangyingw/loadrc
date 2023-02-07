@@ -52,6 +52,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gme2 :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gres :execute s:Gres()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gapply :execute s:Gapply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GrevApply :execute s:GrevApply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
@@ -77,6 +78,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Portsforward :execute s:Portsforward()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RmCat :execute s:RmCat(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute s:SelectMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
@@ -491,7 +493,7 @@ function! s:Gdif(...) abort
     let worktree = Cd2Worktree()
     let target = substitute(system("git config gsync.target"), '\n', '', '')
     let target = (a:0 >= 1) ? a:1 : target
-    let reverse = (a:0 >= 2) ? a:2 : ''
+    let reverse = (a:0 >= 2) ? a:2 : '-r'
 
     if target ==# '-r'
         let target = substitute(system("git config gsync.target"), '\n', '', '')
@@ -731,6 +733,10 @@ endfunction
 
 function! s:GrevApply() abort
     exec '!git apply --reverse --reject --whitespace=fix --recount --allow-empty ' . '"' .  expand('%:p') . '"'
+endfunction
+
+function! s:Gapply() abort
+    exec '!git apply --reject --whitespace=fix --recount --allow-empty ' . '"' .  expand('%:p') . '"'
 endfunction
 
 function! s:Dps() abort

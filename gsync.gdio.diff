@@ -19825,7 +19825,7 @@ new file mode 160000
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 0d29a6259eb38a7e2bdb85b8dfca408aaa50163b-dirty
++Subproject commit 36d575f310c58292bdcff02db9ce8d8e71c94007-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 --- /dev/null
@@ -20376,7 +20376,7 @@ new file mode 160000
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit 595d1b723ab9d7ac1349f2eb296eef751511d916-dirty
++Subproject commit 722e846d30d1b6a0c3707479a9b53cca1907210c-dirty
 diff --git a/ruleref.list b/ruleref.list
 new file mode 100644
 --- /dev/null
@@ -20611,8 +20611,8 @@ new file mode 100755
 +    zsh
 +
 +rw ; \
-+    pacman -Syy && \
-+    pacman --noconfirm -Sy \
++    sudo pacman -Syy ; \
++    sudo pacman --noconfirm -Sy \
 +    mosh \
 +    net-tools \
 +    openssh \
@@ -24413,7 +24413,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/LargeFile
 @@ -0,0 +1 @@
-+Subproject commit 3941a37b2b0288524300348a39521a46539bf9f6
++Subproject commit 18407c43846edea7b7964b0b99226ec04d00931f
 diff --git a/vimrc/.vim/bundle/SQLUtilities/README b/vimrc/.vim/bundle/SQLUtilities/README
 new file mode 100644
 --- /dev/null
@@ -28540,7 +28540,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -0,0 +1 @@
-+Subproject commit bd5422d9e40c732b010dcd4da3eafda81b3b1d54
++Subproject commit bd5422d9e40c732b010dcd4da3eafda81b3b1d54-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 new file mode 160000
 --- /dev/null
@@ -34825,7 +34825,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -0,0 +1 @@
-+Subproject commit 32589b15623915a4a5626533df35c8811f46085f
++Subproject commit 32589b15623915a4a5626533df35c8811f46085f-dirty
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 new file mode 160000
 --- /dev/null
@@ -34849,7 +34849,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -0,0 +1 @@
-+Subproject commit c3da0bd1a950c3d7b9f546b5e34dd2e0354e0aed
++Subproject commit c3da0bd1a950c3d7b9f546b5e34dd2e0354e0aed-dirty
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 --- /dev/null
@@ -57820,7 +57820,7 @@ new file mode 100755
 +
 +if [ $(uname) = "Darwin" ]
 +then
-+    /Applications/VLC.app/Contents/MacOS/VLC --sub-language Chinese --sub-autodetect-file -f --macosx-continue-playback=2 --rate=4.0 "$1"
++    /Applications/VLC.app/Contents/MacOS/VLC --sub-language Chinese --sub-autodetect-file -f --macosx-continue-playback=2 --rate=2.0 "$1"
 +else
 +    #smplayer "$1"
 +    smplayer -fullscreen "$1"
