@@ -19,8 +19,7 @@ done
 
 for ss in $(git config --get-all pull.from)
 do
-    COMMAND="git merge $ss"
-    eval "$COMMAND"
+    git merge "$ss"
 done
 
 target=$(git config gsync.target)
