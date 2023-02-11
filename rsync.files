@@ -314,6 +314,7 @@
 ./bashrc/hardseed.sh
 ./bashrc/heritrix.sh
 ./bashrc/includeFrom
+./bashrc/iperf_test.sh
 ./bashrc/jdupes.sh
 ./bashrc/jformat.sh
 ./bashrc/kdisk.sh
@@ -3267,6 +3268,7 @@
 ./vishrc/vlc.sh
 ./vishrc/vrun.sh
 ./vishrc/vsearch.sh
+./vrun.gdio.diff
 ./wifi-auto-reconnect/.gitconfig
 ./wifi-auto-reconnect/.gitignore
 ./wifi-auto-reconnect/LICENSE
