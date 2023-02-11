@@ -8987,6 +8987,22 @@ new file mode 100644
 +++ ./bashrc/includeFrom
 @@ -0,0 +1 @@
 +vimrc/.vim/plugin/command.vim
+diff --git a/bashrc/iperf_test.sh b/bashrc/iperf_test.sh
+new file mode 100755
+--- /dev/null
++++ ./bashrc/iperf_test.sh
+@@ -0,0 +1,11 @@
++#!/bin/zsh
++
++for (( c=1; c<=500; c++ ))
++do
++    for ip in \
++        192.168.31.140 \
++        192.168.86.24
++    do
++        iperf -f MBytes -c $ip >> ~/loadrc/$ip.log
++    done
++done
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
 new file mode 100755
 --- /dev/null
