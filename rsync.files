@@ -224,7 +224,6 @@
 ./Library/LaunchAgents/pbcopy.plist
 ./Library/LaunchAgents/pbpaste.plist
 ./Library/Preferences/org.videolan.vlc/vlcrc
-./allow-empty.gdio.diff
 ./bashrc/HuangYings-MacBook-Pro.local.csc.properties
 ./bashrc/apf.sh
 ./bashrc/app_list
@@ -477,7 +476,6 @@
 ./ffmpegrc/split.sh
 ./files.rev
 ./fix_resolvconf_in_docker.sh
-./gdit.gdio.diff
 ./gitrc/.gitconfig
 ./gitrc/.globalgitignore
 ./gitrc/apply_branch.sh
@@ -820,7 +818,11 @@
 ./svnrc/svnvdiff.sh
 ./swith-2-zsh.sh
 ./synergy.conf
+./tests/.git/config
+./tests/.git/info/exclude
 ./tests/dirname/spaces  in dir name.txt
+./tests/rsync.files
+./tests/setup.cfg
 ./tests/space in dir name/test.txt
 ./timemachinerc/deletelocalsnapshots.sh
 ./timemachinerc/etc/netatalk/AppleVolumes.default
@@ -3280,6 +3282,7 @@
 ./vishrc/vlc.sh
 ./vishrc/vrun.sh
 ./vishrc/vsearch.sh
+./vsearch.gdio.diff
 ./wifi-auto-reconnect/.gitconfig
 ./wifi-auto-reconnect/.gitignore
 ./wifi-auto-reconnect/LICENSE
