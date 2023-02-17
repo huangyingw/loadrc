@@ -12841,7 +12841,7 @@ new file mode 160000
 --- /dev/null
 +++ ./cscope
 @@ -0,0 +1 @@
-+Subproject commit 0a3848832a97406727cdf7c85ac0c78837c634c9-dirty
++Subproject commit 67ce7975795dae6c46c3c0fc39a9837248cb2d1b
 diff --git a/demo b/demo
 new file mode 100644
 --- /dev/null
@@ -19803,7 +19803,7 @@ new file mode 160000
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 0d29a6259eb38a7e2bdb85b8dfca408aaa50163b-dirty
++Subproject commit e1a67bd20043cfb8cb4a5c26c2d418ba048f8f97
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 --- /dev/null
@@ -20324,7 +20324,7 @@ new file mode 100755
 +    if targetFile:
 +        if platform.system() == 'Darwin':
 +            if start == 0:
-+                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '--sub-language', 'Chinese', '--sub-autodetect-file', '-f', '--macosx-continue-playback=2', '--rate=2.0', '--volume=0', targetFile])
++                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '--sub-language', 'Chinese', '--sub-autodetect-file', '-f', '--macosx-continue-playback=2', '--rate=2.0', '--no-volume-save', '--volume', '0', targetFile])
 +            else:
 +                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '--sub-language', 'Chinese', '--sub-autodetect-file', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
 +        else:
@@ -20354,7 +20354,7 @@ new file mode 160000
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit 595d1b723ab9d7ac1349f2eb296eef751511d916-dirty
++Subproject commit 30128bbc6916b25b42a95316cca04b90a119c104
 diff --git a/ruleref.list b/ruleref.list
 new file mode 100644
 --- /dev/null
@@ -20889,7 +20889,7 @@ new file mode 100644
 +		xtestIsXineramaUnaware = false
 +		switchCorners = none
 +		switchCornerSize = 0
-+	studio:
++	mbp2:
 +		halfDuplexCapsLock = false
 +		halfDuplexNumLock = false
 +		halfDuplexScrollLock = false
@@ -20910,15 +20910,15 @@ new file mode 100644
 +
 +section: links
 +	imacpro:
-+		down = studio
++		down = mbp2
 +	COH-LC172TVQ6J:
-+		right = studio
-+	studio:
++		right = mbp2
++	mbp2:
 +		right = mba
 +		left = COH-LC172TVQ6J
 +		up = imacpro
 +	mba:
-+		left = studio
++		left = mbp2
 +end
 +
 +section: options
@@ -20930,7 +20930,7 @@ new file mode 100644
 +	switchDelay = 9999
 +	switchCorners = none
 +	switchCornerSize = 0
-+	keystroke(Control+1) = switchToScreen(studio)
++	keystroke(Control+1) = switchToScreen(mbp2)
 +	keystroke(Control+2) = switchToScreen(mba)
 +	keystroke(Control+3) = switchToScreen(COH-LC172TVQ6J)
 +	keystroke(Control+4) = switchToScreen(imacpro)
