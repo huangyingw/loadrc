@@ -1,5 +1,6 @@
 #!/bin/zsh
-output="$1"
+
+# output="$1"
 current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
 target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
 remote="$(git config gsync.remote)"
@@ -14,7 +15,9 @@ git fetch "$remote" "$remote_branch":"$target_branch"
 
 for ss in $(git config --get-all gdit.from)
 do
-    git fetch "$remote" "$ss":"$target_branch"
+    ss=$(echo $ss | sed 's/\(^[^\/]*\)\//\1 /g')
+    COMMAND="git fetch $ss:$target_branch"
+    eval "$COMMAND"
 done
 
 ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" > "$output" 2>&1
