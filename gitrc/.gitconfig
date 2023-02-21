@@ -57,7 +57,6 @@
     rebase = false
 [gdif]
     ignore = *.diff
-    ignore = .gitconfig
     ignore = .login
     ignore = COMMIT_EDITMSG
     ignore = change
