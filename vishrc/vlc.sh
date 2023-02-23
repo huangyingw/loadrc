@@ -7,6 +7,7 @@ fi
 
 if [ $(uname) = "Darwin" ]
 then
+    osascript -e 'set volume 0'
     /Applications/VLC.app/Contents/MacOS/VLC --sub-language Chinese --sub-autodetect-file -f --macosx-continue-playback=2 --rate=2.0 "$1"
 else
     #smplayer "$1"
