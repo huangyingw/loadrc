@@ -25,3 +25,6 @@ then
     echo -e "${red}most probably sth wrong in git merge... ${NC}" > "$output" 2>&1
     exit 1
 fi
+
+remote="$(git config gdi2.remote)"
+git push "$remote" "$target_branch"
