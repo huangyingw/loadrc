@@ -375,7 +375,13 @@ function! s:Gdi(...) abort
     let arg1 = (a:0 >= 1) ? a:1 : ''
     let output = 'gdi.diff'
 
-    if expand('%:t') != 'index'
+    if expand("%:t") ==# 'index' || expand("%:t") ==# 'gbr.log' || expand("%:t") ==# 'gbra.log'
+        if a:0 >= 1
+            exec '!~/loadrc/gitrc/gdi.sh HEAD ' . '"' .  a:1 . '" 2>&1 | tee ' . '"' .  output . '"'
+        else
+            exec '!~/loadrc/gitrc/gdi.sh 2>&1 | tee ' . '"' .  output . '"'
+        endif
+    elseif expand('%:t') != 'index'
         if arg1 == ''
             call fugitive#Diffsplit(0, 1, "vert", '', [])
         elseif tolower(arg1) == 'o'
@@ -385,12 +391,6 @@ function! s:Gdi(...) abort
             call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
         endif
         return
-    else
-        if a:0 >= 1
-            exec '!~/loadrc/gitrc/gdi.sh HEAD ' . '"' .  a:1 . '" 2>&1 | tee ' . '"' .  output . '"'
-        else
-            exec '!~/loadrc/gitrc/gdi.sh 2>&1 | tee ' . '"' .  output . '"'
-        endif
     endif
 
     if bufwinnr('^' . output . '$') > 0
