@@ -79,6 +79,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFil
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Portsforward :execute s:Portsforward()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RelativePath :execute s:RelativePath()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RmCat :execute s:RmCat(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute s:SelectMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
@@ -839,6 +840,12 @@ function! s:Reapply() abort
     exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"' . ' 2>&1 | tee ' . '"' .  output . '"'
     call OpenOrSwitch(output, 'vs')
     call s:Gs()
+endfunction
+
+function! s:RelativePath() abort
+    let worktree = Cd2Worktree()
+    let relativePath = substitute(system('realpath --relative-to="' . expand("%:h") . '" "' . getline(line(".")) . '"'), '\n', '', '')
+    call setline('.', relativePath)
 endfunction
 
 function! s:Split() abort
