@@ -17,7 +17,7 @@ do
     git remote prune $remote
 done
 
-for ss in $(git config --get-all pull.from)
+for ss in $(git config --get-all merge.from)
 do
     git merge "$ss"
 done
