@@ -70,7 +70,7 @@
 [branch "gdif"]
     remote = origin
     merge = refs/heads/gdif
-[pull]
+[merge]
     from = origin/dev
 [branch "mirror"]
     remote = origin

@@ -382,7 +382,7 @@ function! VimSearch()
     call Cd2ProjectRoot('files.proj')
     let keyword = GetEscapedKeyword(@@)
     let b:result = GetEscapedResult(keyword)
-    silent exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "w" ' . '"' . b:result . '"'
+    exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "w" ' . '"' . b:result . '"'
     call OpenOrSwitch(b:result . '.findresult', 'vs')
     exec 'e'
     call HighlightKeyword(keyword)
