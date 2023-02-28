@@ -1,3 +1,2 @@
 */10 * * * * /usr/bin/expressvpn connect smart
 * * * * * /root/loadrc/bashrc/retire_parts.sh >> /root/loadrc/retire_parts.log 2>&1
-*/10 * * * * /root/loadrc/dropboxrc/dropbox_start.sh
