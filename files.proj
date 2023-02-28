@@ -595,6 +595,7 @@
 "./gpurc/install_driver.sh"
 "./gpurc/kill_nvidia.sh"
 "./gpurc/restart.sh"
+"./gsync.gdio.diff"
 "./hgrc/hdi.sh"
 "./host_links/COH-LC172TVQ6J/Users/ying.huang/.gitconfig"
 "./host_links/lint-sandbox/etc/hosts"
