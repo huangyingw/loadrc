@@ -55,7 +55,7 @@
 [pull]
     default = current
     rebase = false
-[gdif]
+[gdio]
     ignore = *.diff
     ignore = .gitconfig
     ignore = .login
