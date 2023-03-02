@@ -18,7 +18,7 @@ do
     eval "$COMMAND"
 done
 
-~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" > "$output" 2>&1
+~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" "gdit" > "$output" 2>&1
 
 if [ $? -ne 0 ]
 then
