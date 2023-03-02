@@ -376,7 +376,7 @@ function! s:Gdi(...) abort
     let arg1 = (a:0 >= 1) ? a:1 : ''
     let output = 'gdi.diff'
 
-    if expand("%:t") ==# 'index' || expand("%:t") ==# 'gbr.log' || expand("%:t") ==# 'gbra.log'
+    if expand("%:t") ==# 'index' || expand("%:t") ==# 'gbr.log' || expand("%:t") ==# 'gbra.log' || expand('%:e') ==# 'findresult' || expand('%:e') ==# 'runresult' || expand('%:e') ==# 'bak'
         if a:0 >= 1
             exec '!~/loadrc/gitrc/gdi.sh HEAD ' . '"' .  a:1 . '" 2>&1 | tee ' . '"' .  output . '"'
         else
@@ -434,10 +434,6 @@ function! s:Gdio(...) abort
 endfunction
 
 function! s:Gdi2(...) abort
-    if (expand("%") !~ '.*fix.gdit.diff')
-        return
-    endif
-
     let worktree = Cd2Worktree()
     let output = 'gdi2.runresult'
     let arg1 = (a:0 >= 1) ? a:1 : ''
