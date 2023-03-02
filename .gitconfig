@@ -50,7 +50,7 @@
 [gsync]
     remote = origin
     target = 638c5602f4efdd1deb6691734c02dd0fa0986c7c
-[gdif]
+[gdio]
     ignore = ./bashrc/cscope_old.sh
     ignore = ./bashrc/update_proj_old.sh
     ignore = .ssh
