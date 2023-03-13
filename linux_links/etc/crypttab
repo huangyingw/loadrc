@@ -19,4 +19,5 @@ av92 /dev/disk/by-uuid/7e2f0dc4-86e1-41a1-ba81-f20288d82c85  /root/loadrc/keys/k
 av82 /dev/disk/by-uuid/824d11c2-e8af-4502-8717-46b6e283d790  /root/loadrc/keys/keyfile   luks
 115_disk      /dev/disk/by-uuid/723f12b0-24a9-4ad0-a1ca-04cc8ee38bfd  /root/loadrc/keys/keyfile   luks
 116_disk      /dev/disk/by-uuid/1e7ecbca-28bd-454b-903c-8c81af5de753  /root/loadrc/keys/keyfile   luks
-av16      /dev/disk/by-uuid/1090f9a4-92b5-4fd0-91d5-2b32c6967c8d  /root/loadrc/keys/keyfile   luks
+av161      /dev/disk/by-uuid/1090f9a4-92b5-4fd0-91d5-2b32c6967c8d  /root/loadrc/keys/keyfile   luks
+av162      /dev/disk/by-uuid/db69cdb4-ef3f-442f-9693-65132f6df720  /root/loadrc/keys/keyfile   luks
