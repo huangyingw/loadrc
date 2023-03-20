@@ -18,6 +18,7 @@ pip install \
 pip3 install \
     autoflake \
     autopep8 \
+    black \
     ipynb-py-convert \
     pdftotext \
     proxybroker
