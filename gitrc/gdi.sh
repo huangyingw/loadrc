@@ -1,6 +1,15 @@
 #!/bin/zsh
 
-COMMAND=$(~/loadrc/gitrc/git_diff_command.sh)
+if [[ -n "$3" ]] && [[ "$3" = "gdit" ]]
+then
+    COMMAND="git diff \
+    --binary \
+    --ignore-blank-lines \
+    --ignore-cr-at-eol \
+    --minimal"
+else
+    COMMAND=$(~/loadrc/gitrc/git_diff_command.sh)
+fi
 
 if [ -z "$1" ]
 then

@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 volume=$(osascript -e 'output volume of (get volume settings)')
-osascript -e 'set volume 0'
+osascript -e 'set volume 0' &
 
 while read ss
 do
@@ -11,4 +11,4 @@ do
     ~/loadrc/vishrc/vlc.sh "$ss"
 done < "$1"
 
-osascript -e "set volume $volume"
+osascript -e "set volume $volume" &
