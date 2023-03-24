@@ -1,5 +1,7 @@
 if (expand('%:e') !=# 'py')
     set diffopt+=iwhiteall
+else
+    set diffopt-=iwhiteall
 endif
 
 set diffopt+=iblank
