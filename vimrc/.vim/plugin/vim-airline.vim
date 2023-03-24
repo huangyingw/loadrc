@@ -1,1 +1,1 @@
-let g:airline#extensions#branch#show_always = 1
+let g:airline#extensions#branch#enabled = 1
