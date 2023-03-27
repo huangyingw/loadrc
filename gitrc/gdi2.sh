@@ -7,7 +7,8 @@ then
     exit 1
 fi
 
-commit_message=$(cat COMMIT_EDITMSG)
+git_directory=$(git rev-parse --git-dir)
+commit_message=$(cat "$git_directory/COMMIT_EDITMSG")
 targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
 
 if [ -z $(git config gsync.target) ]
