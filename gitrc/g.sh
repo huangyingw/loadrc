@@ -1,9 +1,14 @@
 #!/bin/zsh
 ~/loadrc/gitrc/include_gitconfig.sh
 
-if [ -f COMMIT_EDITMSG ]
+git_dir=$(git rev-parse --git-dir)
+
+if [ -f "$git_dir/MERGE_MSG" ] && [ -s "$git_dir/MERGE_MSG" ]
 then
-    commit_message=$(cat COMMIT_EDITMSG)
+    commit_message=$(cat "$git_dir/MERGE_MSG")
+elif [ -f "$git_dir/COMMIT_EDITMSG" ]
+then
+    commit_message=$(cat "$git_dir/COMMIT_EDITMSG")
 fi
 
 if [ -n "$1" ]
