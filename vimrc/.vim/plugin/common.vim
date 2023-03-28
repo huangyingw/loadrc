@@ -142,7 +142,14 @@ function! GetWorktree()
 endfunction
 
 function! OpenOrSwitch(buffername, openMode, ...)
+    "if buffername is "./vimrc/.vimrc:55", don't cut
     let fileName = a:buffername
+
+    " Add the following lines to split the buffername
+    let parts = split(fileName, ':')
+    if len(parts) > 1 && parts[1] !~ '^\d\+$'
+        let fileName = parts[0]
+    endif
 
     if !filereadable(a:buffername)
         let curline = getline(line("."))

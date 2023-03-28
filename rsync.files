@@ -323,7 +323,6 @@
 ./bashrc/hardseed.sh
 ./bashrc/heritrix.sh
 ./bashrc/includeFrom
-./bashrc/iperf_test.sh
 ./bashrc/jdupes.sh
 ./bashrc/jformat.sh
 ./bashrc/kdisk.sh
@@ -3280,6 +3279,8 @@
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/glossaries_extra.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/gnuplottex.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/hyperref.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/ieeeconf.vim
+./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/ieeetran.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/ieeetrantools.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/listings.vim
 ./vimrc/.vim/bundle/vimtex/autoload/vimtex/syntax/p/luacode.vim
