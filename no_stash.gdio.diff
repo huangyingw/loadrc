@@ -12841,7 +12841,7 @@ new file mode 160000
 --- /dev/null
 +++ ./cscope
 @@ -0,0 +1 @@
-+Subproject commit 0a3848832a97406727cdf7c85ac0c78837c634c9-dirty
++Subproject commit 67ce7975795dae6c46c3c0fc39a9837248cb2d1b
 diff --git a/demo b/demo
 new file mode 100644
 --- /dev/null
@@ -19803,7 +19803,7 @@ new file mode 160000
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 0d29a6259eb38a7e2bdb85b8dfca408aaa50163b-dirty
++Subproject commit e1a67bd20043cfb8cb4a5c26c2d418ba048f8f97
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 --- /dev/null
@@ -20324,7 +20324,7 @@ new file mode 100755
 +    if targetFile:
 +        if platform.system() == 'Darwin':
 +            if start == 0:
-+                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '--sub-language', 'Chinese', '--sub-autodetect-file', '-f', '--macosx-continue-playback=2', '--rate=2.0', targetFile])
++                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '--sub-language', 'Chinese', '--sub-autodetect-file', '-f', '--macosx-continue-playback=2', '--rate=2.0', '--no-volume-save', '--volume', '0', targetFile])
 +            else:
 +                subprocess.check_call(['/Applications/VLC.app/Contents/MacOS/VLC', '--sub-language', 'Chinese', '--sub-autodetect-file', '-f', '--macosx-continue-playback=2', '--start-time=' + str(start), targetFile])
 +        else:
@@ -20354,7 +20354,7 @@ new file mode 160000
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit 595d1b723ab9d7ac1349f2eb296eef751511d916-dirty
++Subproject commit 30128bbc6916b25b42a95316cca04b90a119c104
 diff --git a/ruleref.list b/ruleref.list
 new file mode 100644
 --- /dev/null
@@ -20889,7 +20889,7 @@ new file mode 100644
 +		xtestIsXineramaUnaware = false
 +		switchCorners = none
 +		switchCornerSize = 0
-+	studio:
++	mbp2:
 +		halfDuplexCapsLock = false
 +		halfDuplexNumLock = false
 +		halfDuplexScrollLock = false
@@ -20910,15 +20910,15 @@ new file mode 100644
 +
 +section: links
 +	imacpro:
-+		down = studio
++		down = mbp2
 +	COH-LC172TVQ6J:
-+		right = studio
-+	studio:
++		right = mbp2
++	mbp2:
 +		right = mba
 +		left = COH-LC172TVQ6J
 +		up = imacpro
 +	mba:
-+		left = studio
++		left = mbp2
 +end
 +
 +section: options
@@ -20930,7 +20930,7 @@ new file mode 100644
 +	switchDelay = 9999
 +	switchCorners = none
 +	switchCornerSize = 0
-+	keystroke(Control+1) = switchToScreen(studio)
++	keystroke(Control+1) = switchToScreen(mbp2)
 +	keystroke(Control+2) = switchToScreen(mba)
 +	keystroke(Control+3) = switchToScreen(COH-LC172TVQ6J)
 +	keystroke(Control+4) = switchToScreen(imacpro)
@@ -24391,7 +24391,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/LargeFile
 @@ -0,0 +1 @@
-+Subproject commit 3941a37b2b0288524300348a39521a46539bf9f6
++Subproject commit 18407c43846edea7b7964b0b99226ec04d00931f
 diff --git a/vimrc/.vim/bundle/SQLUtilities/README b/vimrc/.vim/bundle/SQLUtilities/README
 new file mode 100644
 --- /dev/null
@@ -28313,7 +28313,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/bash-support.vim
 @@ -0,0 +1 @@
-+Subproject commit 537b2a38560042dfcb134ed8cdfdb77e3c649e6e-dirty
++Subproject commit 876ff2804b05354ee8deefb30443c09514f02402
 diff --git a/vimrc/.vim/bundle/bclose.vim b/vimrc/.vim/bundle/bclose.vim
 new file mode 160000
 --- /dev/null
@@ -28517,7 +28517,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -0,0 +1 @@
-+Subproject commit bd5422d9e40c732b010dcd4da3eafda81b3b1d54-dirty
++Subproject commit 425fb8e641ebbe7165ca2c6ebce866eeb8d35377
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 new file mode 160000
 --- /dev/null
@@ -34771,7 +34771,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/tig-explorer.vim
 @@ -0,0 +1 @@
-+Subproject commit 677391a11050f968c04e4c334a1fc329c6159c4d-dirty
++Subproject commit 84790204eb9eed4be698bff9147bfcd211fc1956
 diff --git a/vimrc/.vim/bundle/tlib_vim b/vimrc/.vim/bundle/tlib_vim
 new file mode 160000
 --- /dev/null
@@ -34795,19 +34795,19 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-anyfold
 @@ -0,0 +1 @@
-+Subproject commit 4267ae2acc11f7b1e5832617f2e79996f309c431-dirty
++Subproject commit d3383b97c003e102ab6f0eed29290e938d217fcb
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
 new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -0,0 +1 @@
-+Subproject commit 32589b15623915a4a5626533df35c8811f46085f-dirty
++Subproject commit 2781b2ba4a36a961657edac17aba52e2c5c1dd2a
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-buffergator
 @@ -0,0 +1 @@
-+Subproject commit c663ae0cf3e9337d4639ad3bb3235fdfccb4e488-dirty
++Subproject commit 204f808532d6e166c36c03218ddac4a04d53acbb
 diff --git a/vimrc/.vim/bundle/vim-docker-compose-syntax b/vimrc/.vim/bundle/vim-docker-compose-syntax
 new file mode 160000
 --- /dev/null
@@ -34819,13 +34819,13 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-fetch
 @@ -0,0 +1 @@
-+Subproject commit c8887b12b17bc9b52164a5d6f9f11ab0d19a47d1-dirty
++Subproject commit 65f55f6a30a3d367248ec1edd56aa33a6c24b6ad
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
 new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -0,0 +1 @@
-+Subproject commit c3da0bd1a950c3d7b9f546b5e34dd2e0354e0aed-dirty
++Subproject commit 285871c7cfc4d33a95dd874136651bfd25abe5c6
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 --- /dev/null
@@ -34843,19 +34843,19 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-javascript-syntax
 @@ -0,0 +1 @@
-+Subproject commit 939d84b538480e7cb7810fde5ad807e9ecb477f6-dirty
++Subproject commit 0704495f0dd1336a42fa2fdeefb6e2d85ae0fdd4
 diff --git a/vimrc/.vim/bundle/vim-log-syntax b/vimrc/.vim/bundle/vim-log-syntax
 new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-log-syntax
 @@ -0,0 +1 @@
-+Subproject commit 6c244f27dc552b6093b851f9070c3d22e3a38523-dirty
++Subproject commit 79cd9b16eadefadf9a6c370674422a91d43ed1f0
 diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
 new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-pbcopy
 @@ -0,0 +1 @@
-+Subproject commit d6adab9d76d3d1ac6e85680f8579b543733ed3d7-dirty
++Subproject commit 9fddbc447d31bdbc893aa62d9f2eea1a5f8a2134
 diff --git a/vimrc/.vim/bundle/vim-pdf b/vimrc/.vim/bundle/vim-pdf
 new file mode 160000
 --- /dev/null
@@ -34891,7 +34891,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-snipmate
 @@ -0,0 +1 @@
-+Subproject commit b8fe3fb6b127c417290c0fe1a85a8dd0173cef05-dirty
++Subproject commit 225f7fca7b95d66d234a2f587fcf3b7465928d86
 diff --git a/vimrc/.vim/bundle/vundle.vim b/vimrc/.vim/bundle/vundle.vim
 new file mode 160000
 --- /dev/null
@@ -57966,7 +57966,7 @@ new file mode 160000
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
-+Subproject commit a30c815b53b8fa0f0ca23680f5671deda334cacd-dirty
++Subproject commit df2a07ac0b7392dacd6795ed85e31cb873e6ba17
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 new file mode 100755
 --- /dev/null
