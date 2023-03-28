@@ -10,8 +10,5 @@ then
     exit 1
 fi
 
-while true
-do
-    ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
-    mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
-done
+ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
+mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}

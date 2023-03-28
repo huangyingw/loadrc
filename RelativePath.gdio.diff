@@ -8767,7 +8767,7 @@ new file mode 100755
 +inputFile="$1"
 +inputBak="$inputFile".tmp
 +awk -F":" '{print $1}' "$inputFile" > "$inputBak"
-+sed -i.bak "/^$/d;s/\\ / /g" "$inputBak"
++sed -i.bak "/^$/d" "$inputBak"
 +sort -u "$inputBak" -o "$inputBak"
 +echo "$inputBak"
 diff --git a/bashrc/get_first_column_of_file_test.sh b/bashrc/get_first_column_of_file_test.sh
@@ -8987,22 +8987,6 @@ new file mode 100644
 +++ ./bashrc/includeFrom
 @@ -0,0 +1 @@
 +vimrc/.vim/plugin/command.vim
-diff --git a/bashrc/iperf_test.sh b/bashrc/iperf_test.sh
-new file mode 100755
---- /dev/null
-+++ ./bashrc/iperf_test.sh
-@@ -0,0 +1,11 @@
-+#!/bin/zsh
-+
-+for (( c=1; c<=500; c++ ))
-+do
-+    for ip in \
-+        192.168.31.140 \
-+        192.168.86.24
-+    do
-+        iperf -f MBytes -c $ip >> ~/loadrc/$ip.log
-+    done
-+done
 diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
 new file mode 100755
 --- /dev/null
@@ -9352,7 +9336,7 @@ diff --git a/bashrc/mosh.sh b/bashrc/mosh.sh
 new file mode 100755
 --- /dev/null
 +++ ./bashrc/mosh.sh
-@@ -0,0 +1,17 @@
+@@ -0,0 +1,14 @@
 +#!/bin/bash
 +target=$(echo "$1" | sed  -e "s/\/$//g")
 +
@@ -9365,11 +9349,8 @@ new file mode 100755
 +    exit 1
 +fi
 +
-+while true
-+do
-+    ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
-+    mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
-+done
++ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
++mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
 diff --git a/bashrc/move.sh b/bashrc/move.sh
 new file mode 100755
 --- /dev/null
@@ -10164,15 +10145,12 @@ diff --git a/bashrc/ssh.sh b/bashrc/ssh.sh
 new file mode 100755
 --- /dev/null
 +++ ./bashrc/ssh.sh
-@@ -0,0 +1,8 @@
+@@ -0,0 +1,5 @@
 +#! /bin/zsh
 +target=$(echo "$1" | sed  -e "s/\/$//g")
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
 +
-+while true
-+do
-+    ssh -Y "$target" -t -- ${tmuxAction}
-+done
++ssh -Y "$target" -t -- ${tmuxAction}
 diff --git a/bashrc/tcopy.sh b/bashrc/tcopy.sh
 new file mode 100755
 --- /dev/null
@@ -13496,7 +13474,7 @@ diff --git a/gitrc/.gitconfig b/gitrc/.gitconfig
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/.gitconfig
-@@ -0,0 +1,98 @@
+@@ -0,0 +1,99 @@
 +[user]
 +	name = Ying Huang
 +    email = huangyingw@gmail.com
@@ -13556,6 +13534,7 @@ new file mode 100755
 +    rebase = false
 +[gdif]
 +    ignore = *.diff
++    ignore = .gitconfig
 +    ignore = .login
 +    ignore = COMMIT_EDITMSG
 +    ignore = change
@@ -13781,9 +13760,8 @@ diff --git a/gitrc/discard_unnecessaries.sh b/gitrc/discard_unnecessaries.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/discard_unnecessaries.sh
-@@ -0,0 +1,5 @@
+@@ -0,0 +1,4 @@
 +#!/bin/zsh
-+git checkout \*.gdio.diff
 +git checkout files.proj
 +git checkout rsync.files
 +git checkout gbil.log
@@ -13817,10 +13795,10 @@ new file mode 100755
 +    exit
 +fi
 +
++~/loadrc/gitrc/dogdio.sh
 +~/loadrc/gitrc/gclb.sh
 +~/loadrc/gitrc/gps.sh &
 +~/loadrc/gitrc/gpl.sh
-+~/loadrc/gitrc/dogdio.sh
 diff --git a/gitrc/fetch_all.sh b/gitrc/fetch_all.sh
 new file mode 100755
 --- /dev/null
@@ -14091,11 +14069,10 @@ diff --git a/gitrc/gbra.sh b/gitrc/gbra.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/gbra.sh
-@@ -0,0 +1,4 @@
+@@ -0,0 +1,3 @@
 +#!/bin/zsh
 +git remote update
 +git branch --sort=-committerdate -a | tee gbra.log
-+sed -i.bak 's/[[:space:]]*remotes\///g;s/[[:space:]]*//g' gbra.log
 diff --git a/gitrc/gbrd.sh b/gitrc/gbrd.sh
 new file mode 100755
 --- /dev/null
@@ -14236,7 +14213,7 @@ diff --git a/gitrc/gco.sh b/gitrc/gco.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/gco.sh
-@@ -0,0 +1,20 @@
+@@ -0,0 +1,27 @@
 +#!/bin/zsh
 +
 +~/loadrc/gitrc/discard_unnecessaries.sh
@@ -14254,9 +14231,16 @@ new file mode 100755
 +
 +remoteBranch=$(~/loadrc/gitrc/get_remote_branch.sh "$TARGET_BRANCH")
 +echo "remoteBranch --> $remoteBranch"
++localBranch=$(git branch | grep "$TARGET_BRANCH" |  sed -e 's/^[* ]*//')
++echo "localBranch --> $localBranch"
 +
-+git checkout -b "$TARGET_BRANCH" "$remoteBranch" \
-+    || git checkout "$TARGET_BRANCH"
++if [ -n "$localBranch" ]
++then
++    git checkout "$localBranch"
++elif [ -n "$remoteBranch" ]
++then
++    git checkout -b "$TARGET_BRANCH" "$remoteBranch"
++fi
 diff --git a/gitrc/gco_test.sh b/gitrc/gco_test.sh
 new file mode 100755
 --- /dev/null
@@ -14434,7 +14418,7 @@ new file mode 100755
 +    echo -e "${red}gsync.target is not configured ... ${NC}"
 +fi
 +
-+remote="$(git config gdi2.remote)"
++remote="$(git config gsync.remote)"
 +
 +git push "$remote" "$targetBranch"
 +
@@ -14521,10 +14505,9 @@ diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/gdit.sh
-@@ -0,0 +1,29 @@
+@@ -0,0 +1,20 @@
 +#!/bin/zsh
-+
-+# output="$1"
++output="$1"
 +current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
 +target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
 +remote="$(git config gsync.remote)"
@@ -14536,14 +14519,6 @@ new file mode 100755
 +remote_branch=$(echo "$target" | sed "s/^$remote\///g")
 +echo git fetch "$remote" "$remote_branch":"$target_branch"
 +git fetch "$remote" "$remote_branch":"$target_branch"
-+
-+for ss in $(git config --get-all gdit.from)
-+do
-+    ss=$(echo $ss | sed 's/\(^[^\/]*\)\//\1 /g')
-+    COMMAND="git fetch $ss:$target_branch"
-+    eval "$COMMAND"
-+done
-+
 +~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" > "$output" 2>&1
 +
 +if [ $? -ne 0 ]
@@ -14833,7 +14808,7 @@ diff --git a/gitrc/gpl.sh b/gitrc/gpl.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/gpl.sh
-@@ -0,0 +1,30 @@
+@@ -0,0 +1,31 @@
 +#!/bin/zsh
 +
 +~/loadrc/gitrc/discard_unnecessaries.sh
@@ -14855,7 +14830,8 @@ new file mode 100755
 +
 +for ss in $(git config --get-all pull.from)
 +do
-+    git merge "$ss"
++    COMMAND="git merge $ss"
++    eval "$COMMAND"
 +done
 +
 +target=$(git config gsync.target)
@@ -16835,28 +16811,14 @@ new file mode 100644
 --- /dev/null
 +++ ./hosts/mba/Library/Application Support/ZeroTier/One/identity.public	
 @@ -0,0 +1 @@
-+23e43c0b72:0:b1f84798965add7cf80a0fd30e1cb67614ee7599c39c556a3fc53728bfeb402f5a1849fea574c925bcd542cb397bf00ac21b064b1e60a755d72c23400efc1571
++3c406cd616:0:35b1d5aca7458f28bdc13c2a0072ab8d6569e2703d06ded63185335bd55ef7037ea25275ad76ff70fa4cac760507a8dca84cd48a86a0d2f582cf684565b1affc
 \ No newline at end of file
 diff --git a/hosts/mba/Library/Application Support/ZeroTier/One/identity.secret b/hosts/mba/Library/Application Support/ZeroTier/One/identity.secret
 new file mode 100644
 --- /dev/null
 +++ ./hosts/mba/Library/Application Support/ZeroTier/One/identity.secret	
 @@ -0,0 +1 @@
-+23e43c0b72:0:b1f84798965add7cf80a0fd30e1cb67614ee7599c39c556a3fc53728bfeb402f5a1849fea574c925bcd542cb397bf00ac21b064b1e60a755d72c23400efc1571:edf4b41682cf1c824aec53d00ba40e5504e40a732591be3aa3601b182b5515abb162c92faa7614f18dcf702cb9d16e92b6d7f2ddc89c3186a281536459f340a2
-\ No newline at end of file
-diff --git a/hosts/mbp/var/lib/zerotier-one/identity.public b/hosts/mbp/var/lib/zerotier-one/identity.public
-new file mode 100644
---- /dev/null
-+++ ./hosts/mbp/var/lib/zerotier-one/identity.public
-@@ -0,0 +1 @@
-+f8ad3bdafc:0:507659a3080dfa7c4a1b45223c640ca24d1f57e2403d86619c7cfc0398d67270c869b8e89be8e0b8400b41618449ed2f837a92086b10ac641fbe49db612d2e4f
-\ No newline at end of file
-diff --git a/hosts/mbp/var/lib/zerotier-one/identity.secret b/hosts/mbp/var/lib/zerotier-one/identity.secret
-new file mode 100644
---- /dev/null
-+++ ./hosts/mbp/var/lib/zerotier-one/identity.secret
-@@ -0,0 +1 @@
-+f8ad3bdafc:0:507659a3080dfa7c4a1b45223c640ca24d1f57e2403d86619c7cfc0398d67270c869b8e89be8e0b8400b41618449ed2f837a92086b10ac641fbe49db612d2e4f:caccae3f0afef778acd365606883ba5f92e3e51f441fe46731c7b6c1bd440cea20e6111eefd37ec5d7502ca896ce997e3292491c7741443f339922a611eef24c
++3c406cd616:0:35b1d5aca7458f28bdc13c2a0072ab8d6569e2703d06ded63185335bd55ef7037ea25275ad76ff70fa4cac760507a8dca84cd48a86a0d2f582cf684565b1affc:c7395f2c12e36b151dd0b358005b1e86d0ee0bca5488c19fc3d1bf317473359a578d6ed7404035f8ece286115ef60a9ef33667f4cdc6adb607edeaf640780089
 \ No newline at end of file
 diff --git a/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.public b/hosts/mbp2/Library/Application Support/ZeroTier/One/identity.public
 new file mode 100644
@@ -17373,7 +17335,7 @@ diff --git a/install_basic_macos.sh b/install_basic_macos.sh
 new file mode 100755
 --- /dev/null
 +++ ./install_basic_macos.sh
-@@ -0,0 +1,83 @@
+@@ -0,0 +1,82 @@
 +#!/bin/zsh
 +SCRIPT=$(realpath "$0") && \
 +    SCRIPTPATH=$(dirname "$SCRIPT") && \
@@ -17443,7 +17405,6 @@ new file mode 100755
 +    xmlto \
 +    yq
 +
-+brew install --cask kdiff3
 +brew cask install \
 +    kdiff3 \
 +    libreoffice \
@@ -19836,7 +19797,7 @@ new file mode 160000
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 0d29a6259eb38a7e2bdb85b8dfca408aaa50163b-dirty
++Subproject commit a8aef66fb434c95df0cbf4cd54d2c95b407c11ac-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 --- /dev/null
@@ -20387,7 +20348,7 @@ new file mode 160000
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit c87f2b43bcd1e7d934e20fa38ba0358833d6fa46-dirty
++Subproject commit a3afa46f0b10675193e6455a0f2c44c14e03aa4e
 diff --git a/ruleref.list b/ruleref.list
 new file mode 100644
 --- /dev/null
@@ -24424,7 +24385,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/LargeFile
 @@ -0,0 +1 @@
-+Subproject commit 3941a37b2b0288524300348a39521a46539bf9f6
++Subproject commit 18407c43846edea7b7964b0b99226ec04d00931f
 diff --git a/vimrc/.vim/bundle/SQLUtilities/README b/vimrc/.vim/bundle/SQLUtilities/README
 new file mode 100644
 --- /dev/null
@@ -28370,7 +28331,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit dca3e56021cb5c39f401c9d83531743416c3365f
++Subproject commit a71616074c1f626a2955e835c1f092901d166853
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 new file mode 160000
 --- /dev/null
@@ -42272,7 +42233,7 @@ new file mode 100644
 +    call Cd2ProjectRoot('files.proj')
 +    let keyword = GetEscapedKeyword(@@)
 +    let b:result = GetEscapedResult(keyword)
-+    exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "w" ' . '"' . b:result . '"'
++    silent exec '!~/loadrc/vishrc/vsearch.sh ' . "files.proj" . ' "' .  keyword . '"' . ' "w" ' . '"' . b:result . '"'
 +    call OpenOrSwitch(b:result . '.findresult', 'vs')
 +    exec 'e'
 +    call HighlightKeyword(keyword)
@@ -57567,8 +57528,11 @@ diff --git a/vishrc/cat_play.sh b/vishrc/cat_play.sh
 new file mode 100755
 --- /dev/null
 +++ ./vishrc/cat_play.sh
-@@ -0,0 +1,9 @@
+@@ -0,0 +1,14 @@
 +#!/bin/zsh
++
++volume=$(osascript -e 'output volume of (get volume settings)')
++osascript -e 'set volume 0'
 +
 +while read ss
 +do
@@ -57577,6 +57541,8 @@ new file mode 100755
 +    echo "$ss"
 +    ~/loadrc/vishrc/vlc.sh "$ss"
 +done < "$1"
++
++osascript -e "set volume $volume"
 diff --git a/vishrc/cat_rate.sh b/vishrc/cat_rate.sh
 new file mode 100755
 --- /dev/null
@@ -57975,7 +57941,7 @@ diff --git a/vishrc/vsearch.sh b/vishrc/vsearch.sh
 new file mode 100755
 --- /dev/null
 +++ ./vishrc/vsearch.sh
-@@ -0,0 +1,19 @@
+@@ -0,0 +1,18 @@
 +#!/bin/zsh
 +keyword=$(echo "$2" | sed -e "s/ \+/ \\\+/g;s/\[/\\\[/g;s/\]/\\\]/g;s/\\\c//g;s/\\\V//g")
 +find_result="$4".findresult
@@ -57983,8 +57949,7 @@ new file mode 100755
 +
 +if [[ "$3" == "w" ]]
 +then
-+    sed 's/\\ / /g' "$inputFile" > "$inputFile".tmp
-+    xargs grep -inH -- "$keyword" < "$inputFile".tmp > "$find_result"
++    xargs grep -inH -- "$keyword" < "$inputFile" > "$find_result"
 +else
 +    cscope -CdL -f cscope.out -"$3""$keyword" > "$find_result"
 +fi

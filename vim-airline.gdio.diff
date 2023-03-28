@@ -422,6 +422,93 @@ new file mode 100644
 +++ ./.gitattributes
 @@ -0,0 +1 @@
 +.subversion/README.txt  diff=nodiff
+diff --git a/.gitconfig b/.gitconfig
+new file mode 100644
+--- /dev/null
++++ ./.gitconfig
+@@ -0,0 +1,82 @@
++[remote "origin"]
++    url = ssh://git@bitbucket.org/huangyingw/loadrc.git
++    fetch = +refs/heads/*:refs/remotes/origin/*
++[remote "gitlab"]
++    url = git@gitlab.com:huangyingw/loadrc.git
++    fetch = +refs/heads/*:refs/remotes/gitlab/*
++[remote "github"]
++    url = git@github.com:huangyingw/loadrc.git
++    fetch = +refs/heads/*:refs/remotes/github/*
++[push]
++    remote = origin
++    remote = gitlab
++    remote = github
++[branch "cscope/cscope_dynamic"]
++    remote = origin
++    merge = refs/heads/cscope/cscope_dynamic
++[branch "cscope"]
++    remote = origin
++    merge = refs/heads/cscope
++[branch "master"]
++    remote = origin
++    merge = refs/heads/master
++[branch "dev"]
++    remote = origin
++    merge = refs/heads/dev
++[branch "zsh"]
++    remote = origin
++    merge = refs/heads/zsh
++[branch "remove/nvim"]
++    remote = origin
++    merge = refs/heads/remove/nvim
++[branch "IndexedSearch/dev"]
++    remote = origin
++    merge = refs/heads/IndexedSearch/dev
++[branch "cscope/autoload"]
++    remote = origin
++    merge = refs/heads/cscope/autoload
++[branch "RunShell"]
++    remote = origin
++    merge = refs/heads/RunShell
++[branch "async"]
++    remote = origin
++    merge = refs/heads/async
++[deploy]
++    host = localhost
++    path = ~/loadrc
++[branch "findresult"]
++    remote = origin
++    merge = refs/heads/findresult
++[gsync]
++    remote = origin
++    target = 638c5602f4efdd1deb6691734c02dd0fa0986c7c
++[gdio]
++    ignore = ./bashrc/cscope_old.sh
++    ignore = ./bashrc/update_proj_old.sh
++    ignore = .ssh
++    ignore = error
++    ignore = jdupes
++    ignore = oh-my-zsh
++    ignore = readme
++    ignore = rsync.files
++    ignore = vimrc/.vim/bundle/split-term.vim
++    ignore = vimrc/.vim/bundle/vimtex
++[branch "gdi2"]
++    remote = origin
++    merge = refs/heads/gdi2
++[branch "fvideos"]
++    remote = origin
++    merge = refs/heads/fvideos
++[branch "gdif"]
++    remote = origin
++    merge = refs/heads/gdif
++[merge]
++    from = origin/dev
++[branch "mirror"]
++    remote = origin
++    merge = refs/heads/mirror
++[branch "term"]
++    remote = origin
++    merge = refs/heads/term
++[gcom]
++    disabled = false
 diff --git a/.gitconfig_sample b/.gitconfig_sample
 new file mode 100644
 --- /dev/null
@@ -444,13 +531,13 @@ new file mode 100644
 +[branch "master"]
 +    remote = origin
 +    merge = refs/heads/master
-+[gdif]
++[gdio]
 +    ignore = *.gdio.diff
 diff --git a/.gitignore b/.gitignore
 new file mode 100644
 --- /dev/null
 +++ ./.gitignore
-@@ -0,0 +1,21 @@
+@@ -0,0 +1,22 @@
 +*.deb
 +*.list
 +*.log
@@ -472,11 +559,12 @@ new file mode 100644
 +vimrc/.vim/spell/en.utf-8.add.spl
 +vimrc/.vim/view/
 +zerotierrc/crontab_file
++var/
 diff --git a/.gitmodules b/.gitmodules
 new file mode 100644
 --- /dev/null
 +++ ./.gitmodules
-@@ -0,0 +1,269 @@
+@@ -0,0 +1,272 @@
 +[submodule "keys"]
 +	path = keys
 +	url = git@bitbucket.org:huangyingw/keys.git
@@ -746,6 +834,9 @@ new file mode 100644
 +[submodule "vimrc/.vim/bundle/vim-ps1"]
 +	path = vimrc/.vim/bundle/vim-ps1
 +	url = git@github.com:PProvost/vim-ps1.git
++[submodule "vimrc/.vim/bundle/vim-airline"]
++	path = vimrc/.vim/bundle/vim-airline
++	url = https://github.com/vim-airline/vim-airline.git
 diff --git a/.gitrc b/.gitrc
 --- ./.gitrc
 +++ ./.gitrc
@@ -9352,7 +9443,7 @@ diff --git a/bashrc/mosh.sh b/bashrc/mosh.sh
 new file mode 100755
 --- /dev/null
 +++ ./bashrc/mosh.sh
-@@ -0,0 +1,17 @@
+@@ -0,0 +1,14 @@
 +#!/bin/bash
 +target=$(echo "$1" | sed  -e "s/\/$//g")
 +
@@ -9365,11 +9456,8 @@ new file mode 100755
 +    exit 1
 +fi
 +
-+while true
-+do
-+    ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
-+    mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
-+done
++ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
++mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
 diff --git a/bashrc/move.sh b/bashrc/move.sh
 new file mode 100755
 --- /dev/null
@@ -10164,15 +10252,12 @@ diff --git a/bashrc/ssh.sh b/bashrc/ssh.sh
 new file mode 100755
 --- /dev/null
 +++ ./bashrc/ssh.sh
-@@ -0,0 +1,8 @@
+@@ -0,0 +1,5 @@
 +#! /bin/zsh
 +target=$(echo "$1" | sed  -e "s/\/$//g")
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s ssh"
 +
-+while true
-+do
-+    ssh -Y "$target" -t -- ${tmuxAction}
-+done
++ssh -Y "$target" -t -- ${tmuxAction}
 diff --git a/bashrc/tcopy.sh b/bashrc/tcopy.sh
 new file mode 100755
 --- /dev/null
@@ -12729,10 +12814,9 @@ diff --git a/crontabrc/.mini.cron b/crontabrc/.mini.cron
 new file mode 100644
 --- /dev/null
 +++ ./crontabrc/.mini.cron
-@@ -0,0 +1,3 @@
+@@ -0,0 +1,2 @@
 +*/10 * * * * /usr/bin/expressvpn connect smart
 +* * * * * /root/loadrc/bashrc/retire_parts.sh >> /root/loadrc/retire_parts.log 2>&1
-+*/10 * * * * /root/loadrc/dropboxrc/dropbox_start.sh
 diff --git a/crontabrc/.mldonkey.cron b/crontabrc/.mldonkey.cron
 new file mode 100644
 --- /dev/null
@@ -12857,7 +12941,7 @@ new file mode 160000
 --- /dev/null
 +++ ./cscope
 @@ -0,0 +1 @@
-+Subproject commit 67ce7975795dae6c46c3c0fc39a9837248cb2d1b
++Subproject commit 8e4a299319082acb562ac73322e71ea9c2edf2bf-dirty
 diff --git a/demo b/demo
 new file mode 100644
 --- /dev/null
@@ -13554,7 +13638,7 @@ new file mode 100755
 +[pull]
 +    default = current
 +    rebase = false
-+[gdif]
++[gdio]
 +    ignore = *.diff
 +    ignore = .login
 +    ignore = COMMIT_EDITMSG
@@ -13599,7 +13683,7 @@ diff --git a/gitrc/.globalgitignore b/gitrc/.globalgitignore
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/.globalgitignore
-@@ -0,0 +1,73 @@
+@@ -0,0 +1,74 @@
 +*.#*
 +*.bak
 +*.bin
@@ -13673,6 +13757,7 @@ new file mode 100755
 +ncscopefile.*
 +gbra.log
 +*.js_eslint_tmp_*.js
++gbr.log
 diff --git a/gitrc/apply_branch.sh b/gitrc/apply_branch.sh
 new file mode 100755
 --- /dev/null
@@ -14100,18 +14185,14 @@ diff --git a/gitrc/gbrd.sh b/gitrc/gbrd.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/gbrd.sh
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,7 @@
 +#!/bin/zsh
 +git branch -d "$1"
-+retVal=$?
 +
-+if [ $retVal -eq 0 ]
-+then
-+    for ss in $(git remote)
-+    do
-+        git push "$ss" --delete "$1" || true
-+    done
-+fi
++for ss in $(git remote)
++do
++    git push "$ss" --delete "$1" || true
++done
 diff --git a/gitrc/gbrm.sh b/gitrc/gbrm.sh
 new file mode 100755
 --- /dev/null
@@ -14394,7 +14475,7 @@ diff --git a/gitrc/gdi.sh b/gitrc/gdi.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/gdi.sh
-@@ -0,0 +1,17 @@
+@@ -0,0 +1,26 @@
 +#!/bin/zsh
 +
 +COMMAND=$(~/loadrc/gitrc/git_diff_command.sh)
@@ -14406,11 +14487,20 @@ new file mode 100755
 +    COMMAND="$COMMAND $1 $2"
 +    IFS=$'\n'
 +
-+    for ss in $(git config --get-all gdif.ignore)
++    for ss in $(git config --get-all gdio.ignore)
 +    do
 +        COMMAND="$COMMAND  ':(exclude)$ss'"
 +    done
 +fi
++
++if [[ -n "$3" ]] && [[ "$3" = "gdit" ]]
++then
++    for ss in $(git config --get-all gdit.ignore)
++    do
++        COMMAND="$COMMAND  ':(exclude)$ss'"
++    done
++fi
++
 +eval "$COMMAND" | sed 's/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g;/^index [0-9a-f]*[0-9a-f]*/d'
 diff --git a/gitrc/gdi2.sh b/gitrc/gdi2.sh
 new file mode 100755
@@ -14521,36 +14611,37 @@ diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/gdit.sh
-@@ -0,0 +1,29 @@
+@@ -0,0 +1,30 @@
 +#!/bin/zsh
 +
-+# output="$1"
++output="$1"
 +current_branch="$(~/loadrc/gitrc/get_current_branch.sh)"
 +target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
 +remote="$(git config gsync.remote)"
 +target="$(git config gsync.target)"
 +
 +git branch "$target_branch" "$target"
-+echo git fetch "$remote" "$target_branch":"$target_branch"
 +git fetch "$remote" "$target_branch":"$target_branch"
 +remote_branch=$(echo "$target" | sed "s/^$remote\///g")
-+echo git fetch "$remote" "$remote_branch":"$target_branch"
 +git fetch "$remote" "$remote_branch":"$target_branch"
 +
-+for ss in $(git config --get-all gdit.from)
++for ss in $(git config --get-all fetch.from)
 +do
 +    ss=$(echo $ss | sed 's/\(^[^\/]*\)\//\1 /g')
 +    COMMAND="git fetch $ss:$target_branch"
 +    eval "$COMMAND"
 +done
 +
-+~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" > "$output" 2>&1
++~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" "gdit" > "$output" 2>&1
 +
 +if [ $? -ne 0 ]
 +then
 +    echo -e "${red}most probably sth wrong in git merge... ${NC}" > "$output" 2>&1
 +    exit 1
 +fi
++
++remote="$(git config gdi2.remote)"
++git push "$remote" "$target_branch"
 diff --git a/gitrc/get_current_branch.sh b/gitrc/get_current_branch.sh
 new file mode 100755
 --- /dev/null
@@ -14853,7 +14944,7 @@ new file mode 100755
 +    git remote prune $remote
 +done
 +
-+for ss in $(git config --get-all pull.from)
++for ss in $(git config --get-all merge.from)
 +do
 +    git merge "$ss"
 +done
@@ -14884,11 +14975,12 @@ diff --git a/gitrc/gres.sh b/gitrc/gres.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/gres.sh
-@@ -0,0 +1,10 @@
+@@ -0,0 +1,11 @@
 +#!/bin/zsh
 +
 +IFS=$'\n'
 +conflictArr=($(git status | sed -e '/both modified:/!d;s/both modified:\s*//;s/^[[:space:]]*//g'))
++conflictArr+=($(git status | sed -e '/both added:/!d;s/both added:\s*//;s/^[[:space:]]*//g'))
 +
 +for conflict in "${conflictArr[@]}"
 +do
@@ -15401,7 +15493,7 @@ diff --git a/host_links/COH-LC172TVQ6J/Users/ying.huang/.gitconfig b/host_links/
 new file mode 100755
 --- /dev/null
 +++ ./host_links/COH-LC172TVQ6J/Users/ying.huang/.gitconfig
-@@ -0,0 +1,97 @@
+@@ -0,0 +1,96 @@
 +[user]
 +	name = Ying Huang
 +	email = ying.huang@cohesity.com
@@ -15459,9 +15551,8 @@ new file mode 100755
 +[pull]
 +    default = current
 +    rebase = false
-+[gdif]
++[gdio]
 +    ignore = *.diff
-+    ignore = .gitconfig
 +    ignore = .login
 +    ignore = COMMIT_EDITMSG
 +    ignore = change
@@ -15726,7 +15817,7 @@ new file mode 100644
 +192.168.122.244 zsh
 +192.168.31.191 work
 +172.27.217.162 localhost.imvu.com
-+192.168.31.31 server
++192.168.31.30 server
 +192.168.31.147 imacpro
 +172.27.68.119 imac
 +172.27.118.58 vagrant
@@ -19306,7 +19397,7 @@ diff --git a/linux_links/etc/crypttab b/linux_links/etc/crypttab
 new file mode 100644
 --- /dev/null
 +++ ./linux_links/etc/crypttab
-@@ -0,0 +1,21 @@
+@@ -0,0 +1,22 @@
 +archive1_crypt      /dev/disk/by-uuid/12d4b3f6-8ce1-49bc-ac5b-10a081822f90  /root/loadrc/keys/keyfile   luks
 +archive2_crypt      /dev/disk/by-uuid/766063ea-304e-4fef-9954-7a638c946229  /root/loadrc/keys/keyfile   luks
 +mldonkey      /dev/disk/by-uuid/17a98493-8e53-449e-bdfb-4358aceac548  /root/loadrc/keys/keyfile   luks
@@ -19328,6 +19419,7 @@ new file mode 100644
 +av82 /dev/disk/by-uuid/824d11c2-e8af-4502-8717-46b6e283d790  /root/loadrc/keys/keyfile   luks
 +115_disk      /dev/disk/by-uuid/723f12b0-24a9-4ad0-a1ca-04cc8ee38bfd  /root/loadrc/keys/keyfile   luks
 +116_disk      /dev/disk/by-uuid/1e7ecbca-28bd-454b-903c-8c81af5de753  /root/loadrc/keys/keyfile   luks
++av16      /dev/disk/by-uuid/1090f9a4-92b5-4fd0-91d5-2b32c6967c8d  /root/loadrc/keys/keyfile   luks
 diff --git a/linux_links/etc/default/grub b/linux_links/etc/default/grub
 new file mode 100644
 --- /dev/null
@@ -20387,7 +20479,7 @@ new file mode 160000
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit c87f2b43bcd1e7d934e20fa38ba0358833d6fa46-dirty
++Subproject commit 509b6b591d0eb70365e89cfa20f35f3f5b5e1df8-dirty
 diff --git a/ruleref.list b/ruleref.list
 new file mode 100644
 --- /dev/null
@@ -28346,7 +28438,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/bash-support.vim
 @@ -0,0 +1 @@
-+Subproject commit 876ff2804b05354ee8deefb30443c09514f02402
++Subproject commit 45354fbe3a76888083fdf5fa5498bdbef0cdc65d-dirty
 diff --git a/vimrc/.vim/bundle/bclose.vim b/vimrc/.vim/bundle/bclose.vim
 new file mode 160000
 --- /dev/null
@@ -28370,7 +28462,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit dca3e56021cb5c39f401c9d83531743416c3365f
++Subproject commit 49c330bf746e6f06863bac069e579e4072a3c8ac
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 new file mode 160000
 --- /dev/null
@@ -28538,7 +28630,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/plantuml-previewer.vim
 @@ -0,0 +1 @@
-+Subproject commit 192cbc2349d4a5c772089b4ea72e085fa61790ff
++Subproject commit 1dd4d0f2b09cd80a217f76d82f93830dbbe689b3
 diff --git a/vimrc/.vim/bundle/plantuml-syntax b/vimrc/.vim/bundle/plantuml-syntax
 new file mode 160000
 --- /dev/null
@@ -28550,7 +28642,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/python-mode
 @@ -0,0 +1 @@
-+Subproject commit 425fb8e641ebbe7165ca2c6ebce866eeb8d35377
++Subproject commit 48113219c303bc3ffc83865e9444fb44f171707b-dirty
 diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
 new file mode 160000
 --- /dev/null
@@ -34804,7 +34896,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/tig-explorer.vim
 @@ -0,0 +1 @@
-+Subproject commit 84790204eb9eed4be698bff9147bfcd211fc1956
++Subproject commit cf5373ecdc42d177d331d6a3a4b3fb3cfe8fd84b
 diff --git a/vimrc/.vim/bundle/tlib_vim b/vimrc/.vim/bundle/tlib_vim
 new file mode 160000
 --- /dev/null
@@ -34823,24 +34915,30 @@ new file mode 160000
 +++ ./vimrc/.vim/bundle/vim-addon-mw-utils
 @@ -0,0 +1 @@
 +Subproject commit 6aaf4fee472db7cbec6d2c8eea69fdf3a8f8a75d
+diff --git a/vimrc/.vim/bundle/vim-airline b/vimrc/.vim/bundle/vim-airline
+new file mode 160000
+--- /dev/null
++++ ./vimrc/.vim/bundle/vim-airline
+@@ -0,0 +1 @@
++Subproject commit 038e3a6ca59f11b3bb6a94087c1792322d1a1d5c
 diff --git a/vimrc/.vim/bundle/vim-anyfold b/vimrc/.vim/bundle/vim-anyfold
 new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-anyfold
 @@ -0,0 +1 @@
-+Subproject commit d3383b97c003e102ab6f0eed29290e938d217fcb
++Subproject commit abef8b5411164960505d7947220248118082cc9e
 diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
 new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -0,0 +1 @@
-+Subproject commit 2781b2ba4a36a961657edac17aba52e2c5c1dd2a
++Subproject commit fac89c476438c9a4ba2ca9191fa6e1634d2d53e5
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-buffergator
 @@ -0,0 +1 @@
-+Subproject commit 204f808532d6e166c36c03218ddac4a04d53acbb
++Subproject commit b461a302b95cbcb701e1c63838ca65f6c29369a9
 diff --git a/vimrc/.vim/bundle/vim-docker-compose-syntax b/vimrc/.vim/bundle/vim-docker-compose-syntax
 new file mode 160000
 --- /dev/null
@@ -34852,13 +34950,13 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-fetch
 @@ -0,0 +1 @@
-+Subproject commit 65f55f6a30a3d367248ec1edd56aa33a6c24b6ad
++Subproject commit 5e179fd1ab2b98da8a76adfd9a4a9bae39d7a77e-dirty
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
 new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -0,0 +1 @@
-+Subproject commit 955ba835333c405f7317acbb990398171e764254
++Subproject commit 71049dc6a2db91dfaa320e850a896e2aee74edc5-dirty
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 --- /dev/null
@@ -34876,19 +34974,19 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-javascript-syntax
 @@ -0,0 +1 @@
-+Subproject commit 0704495f0dd1336a42fa2fdeefb6e2d85ae0fdd4
++Subproject commit 2a93944ceed3a9f11b32ae2b43dd69063753524e
 diff --git a/vimrc/.vim/bundle/vim-log-syntax b/vimrc/.vim/bundle/vim-log-syntax
 new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-log-syntax
 @@ -0,0 +1 @@
-+Subproject commit 79cd9b16eadefadf9a6c370674422a91d43ed1f0
++Subproject commit 9f339f85f89c7cf3cdfc039a87bd7af859813e40
 diff --git a/vimrc/.vim/bundle/vim-pbcopy b/vimrc/.vim/bundle/vim-pbcopy
 new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-pbcopy
 @@ -0,0 +1 @@
-+Subproject commit 9fddbc447d31bdbc893aa62d9f2eea1a5f8a2134
++Subproject commit 3b254e4b986e59469262a5ce85a8aee0854914c1
 diff --git a/vimrc/.vim/bundle/vim-pdf b/vimrc/.vim/bundle/vim-pdf
 new file mode 160000
 --- /dev/null
@@ -34924,7 +35022,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-snipmate
 @@ -0,0 +1 @@
-+Subproject commit 225f7fca7b95d66d234a2f587fcf3b7465928d86
++Subproject commit 98353b68ca4d62f625dacc84b1cf1f71e4711312
 diff --git a/vimrc/.vim/bundle/vundle.vim b/vimrc/.vim/bundle/vundle.vim
 new file mode 160000
 --- /dev/null
@@ -41015,7 +41113,7 @@ diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -0,0 +1,865 @@
+@@ -0,0 +1,868 @@
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject AppendRate :execute s:AppendRate(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject ApplyBranch :execute s:ApplyBranch(<q-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject BinaryGrep :execute s:BinaryGrep(<f-args>)
@@ -41097,6 +41195,7 @@ new file mode 100644
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Portsforward :execute s:Portsforward()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RelativePath :execute s:RelativePath()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RmCat :execute s:RmCat(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute s:SelectMove(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
@@ -41393,7 +41492,13 @@ new file mode 100644
 +    let arg1 = (a:0 >= 1) ? a:1 : ''
 +    let output = 'gdi.diff'
 +
-+    if expand('%:t') != 'index'
++    if expand("%:t") ==# 'index' || expand("%:t") ==# 'gbr.log' || expand("%:t") ==# 'gbra.log' || expand('%:e') ==# 'findresult' || expand('%:e') ==# 'runresult' || expand('%:e') ==# 'bak'
++        if a:0 >= 1
++            exec '!~/loadrc/gitrc/gdi.sh HEAD ' . '"' .  a:1 . '" 2>&1 | tee ' . '"' .  output . '"'
++        else
++            exec '!~/loadrc/gitrc/gdi.sh 2>&1 | tee ' . '"' .  output . '"'
++        endif
++    elseif expand('%:t') != 'index'
 +        if arg1 == ''
 +            call fugitive#Diffsplit(0, 1, "vert", '', [])
 +        elseif tolower(arg1) == 'o'
@@ -41403,12 +41508,6 @@ new file mode 100644
 +            call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
 +        endif
 +        return
-+    else
-+        if a:0 >= 1
-+            exec '!~/loadrc/gitrc/gdi.sh HEAD ' . '"' .  a:1 . '" 2>&1 | tee ' . '"' .  output . '"'
-+        else
-+            exec '!~/loadrc/gitrc/gdi.sh 2>&1 | tee ' . '"' .  output . '"'
-+        endif
 +    endif
 +
 +    if bufwinnr('^' . output . '$') > 0
@@ -41451,10 +41550,6 @@ new file mode 100644
 +endfunction
 +
 +function! s:Gdi2(...) abort
-+    if (expand("%") !~ '.*fix.gdit.diff')
-+        return
-+    endif
-+
 +    let worktree = Cd2Worktree()
 +    let output = 'gdi2.runresult'
 +    let arg1 = (a:0 >= 1) ? a:1 : ''
@@ -41857,6 +41952,12 @@ new file mode 100644
 +    exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"' . ' 2>&1 | tee ' . '"' .  output . '"'
 +    call OpenOrSwitch(output, 'vs')
 +    call s:Gs()
++endfunction
++
++function! s:RelativePath() abort
++    let worktree = Cd2Worktree()
++    let relativePath = substitute(system('realpath --relative-to="' . expand("%:h") . '" "' . getline(line(".")) . '"'), '\n', '', '')
++    call setline('.', relativePath)
 +endfunction
 +
 +function! s:Split() abort
@@ -52232,6 +52333,12 @@ new file mode 100644
 +
 +set wrap
 +"set iskeyword-=_
+diff --git a/vimrc/.vim/plugin/vim-airline.vim b/vimrc/.vim/plugin/vim-airline.vim
+new file mode 100644
+--- /dev/null
++++ ./vimrc/.vim/plugin/vim-airline.vim
+@@ -0,0 +1 @@
++let g:airline#extensions#branch#show_always = 1
 diff --git a/vimrc/.vim/plugin/vsearch.vim b/vimrc/.vim/plugin/vsearch.vim
 new file mode 100644
 --- /dev/null
@@ -57567,8 +57674,11 @@ diff --git a/vishrc/cat_play.sh b/vishrc/cat_play.sh
 new file mode 100755
 --- /dev/null
 +++ ./vishrc/cat_play.sh
-@@ -0,0 +1,9 @@
+@@ -0,0 +1,14 @@
 +#!/bin/zsh
++
++volume=$(osascript -e 'output volume of (get volume settings)')
++osascript -e 'set volume 0'
 +
 +while read ss
 +do
@@ -57577,6 +57687,8 @@ new file mode 100755
 +    echo "$ss"
 +    ~/loadrc/vishrc/vlc.sh "$ss"
 +done < "$1"
++
++osascript -e "set volume $volume"
 diff --git a/vishrc/cat_rate.sh b/vishrc/cat_rate.sh
 new file mode 100755
 --- /dev/null
@@ -58000,7 +58112,7 @@ new file mode 160000
 --- /dev/null
 +++ ./wifi-auto-reconnect
 @@ -0,0 +1 @@
-+Subproject commit df2a07ac0b7392dacd6795ed85e31cb873e6ba17
++Subproject commit f91da61ddccf4deb92d75a141ba1d9ea0677c069
 diff --git a/wifirc/autoconnect.sh b/wifirc/autoconnect.sh
 new file mode 100755
 --- /dev/null

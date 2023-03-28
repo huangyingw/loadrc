@@ -7,7 +7,8 @@ then
     exit 1
 fi
 
-commit_message=$(cat COMMIT_EDITMSG)
+git_directory=$(git rev-parse --git-dir)
+commit_message=$(cat "$git_directory/COMMIT_EDITMSG")
 targetBranch=$(echo "$currentBranch" | sed 's/\.fix$//g')
 
 if [ -z $(git config gsync.target) ]
@@ -15,7 +16,7 @@ then
     echo -e "${red}gsync.target is not configured ... ${NC}"
 fi
 
-remote="$(git config gsync.remote)"
+remote="$(git config gdi2.remote)"
 
 git push "$remote" "$targetBranch"
 
