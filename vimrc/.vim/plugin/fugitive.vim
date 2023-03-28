@@ -79,6 +79,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFil
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Portsforward :execute s:Portsforward()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RelativePath :execute s:RelativePath()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RmCat :execute s:RmCat(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute s:SelectMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
@@ -375,7 +376,13 @@ function! s:Gdi(...) abort
     let arg1 = (a:0 >= 1) ? a:1 : ''
     let output = 'gdi.diff'
 
-    if expand('%:t') != 'index'
+    if expand("%:t") ==# 'index' || expand("%:t") ==# 'gbr.log' || expand("%:t") ==# 'gbra.log' || expand('%:e') ==# 'findresult' || expand('%:e') ==# 'runresult' || expand('%:e') ==# 'bak'
+        if a:0 >= 1
+            exec '!~/loadrc/gitrc/gdi.sh HEAD ' . '"' .  a:1 . '" 2>&1 | tee ' . '"' .  output . '"'
+        else
+            exec '!~/loadrc/gitrc/gdi.sh 2>&1 | tee ' . '"' .  output . '"'
+        endif
+    elseif expand('%:t') != 'index'
         if arg1 == ''
             call fugitive#Diffsplit(0, 1, "vert", '', [])
         elseif tolower(arg1) == 'o'
@@ -385,12 +392,6 @@ function! s:Gdi(...) abort
             call fugitive#Diffsplit(0, 1, "vert", arg1, [arg1])
         endif
         return
-    else
-        if a:0 >= 1
-            exec '!~/loadrc/gitrc/gdi.sh HEAD ' . '"' .  a:1 . '" 2>&1 | tee ' . '"' .  output . '"'
-        else
-            exec '!~/loadrc/gitrc/gdi.sh 2>&1 | tee ' . '"' .  output . '"'
-        endif
     endif
 
     if bufwinnr('^' . output . '$') > 0
@@ -433,10 +434,6 @@ function! s:Gdio(...) abort
 endfunction
 
 function! s:Gdi2(...) abort
-    if (expand("%") !~ '.*fix.gdit.diff')
-        return
-    endif
-
     let worktree = Cd2Worktree()
     let output = 'gdi2.runresult'
     let arg1 = (a:0 >= 1) ? a:1 : ''
@@ -839,6 +836,12 @@ function! s:Reapply() abort
     exec '!~/loadrc/gitrc/reapply.sh ' . '"' .  expand("%:p") . '"' . ' 2>&1 | tee ' . '"' .  output . '"'
     call OpenOrSwitch(output, 'vs')
     call s:Gs()
+endfunction
+
+function! s:RelativePath() abort
+    let worktree = Cd2Worktree()
+    let relativePath = substitute(system('realpath --relative-to="' . expand("%:h") . '" "' . getline(line(".")) . '"'), '\n', '', '')
+    call setline('.', relativePath)
 endfunction
 
 function! s:Split() abort

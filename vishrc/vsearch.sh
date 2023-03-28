@@ -5,7 +5,8 @@ inputFile=$(~/loadrc/bashrc/get_first_column_of_file.sh "$1")
 
 if [[ "$3" == "w" ]]
 then
-    xargs grep -inH -- "$keyword" < "$inputFile" > "$find_result"
+    sed 's/\\ / /g' "$inputFile" > "$inputFile".tmp
+    xargs grep -inH -- "$keyword" < "$inputFile".tmp > "$find_result"
 else
     cscope -CdL -f cscope.out -"$3""$keyword" > "$find_result"
 fi

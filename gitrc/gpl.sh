@@ -17,10 +17,9 @@ do
     git remote prune $remote
 done
 
-for ss in $(git config --get-all pull.from)
+for ss in $(git config --get-all merge.from)
 do
-    COMMAND="git merge $ss"
-    eval "$COMMAND"
+    git merge "$ss"
 done
 
 target=$(git config gsync.target)

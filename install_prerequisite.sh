@@ -29,6 +29,7 @@ apt-get install -y \
     hfsprogs \
     htop \
     inetutils-traceroute \
+    ifenslave \
     iperf \
     iperf3 \
     iputils-ping \
@@ -77,6 +78,7 @@ apt-get install -y \
 apt-get install -y \
     manpages-fr-extra \
     netcat
+
 
 pacman -Syy && \
     pacman --noconfirm -Sy \
