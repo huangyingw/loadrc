@@ -3,12 +3,12 @@
 set statusline=%r%h
 set statusline +=\ %.55F            "full path
 set statusline +=\ %{WordCount()}\ words,
+set statusline +=\ %{GitBranch()},
 set statusline +=%=        " Switch to the right side
 set statusline +=\ %{strftime('%m/%d/%y\ %H:%M:%S',getftime(expand('%')))} " file last modified time
 set statusline +=\ %l             "current line
 set statusline +=/%L               "total lines
 set statusline +=\ %v             "virtual column number
-set statusline +=\ %f
 set statusline +=\ %m                "modified flag
 "set statusline +=%1*\ %n\ %*            "buffer number
 "set statusline +=%5*%{&ff}%*            "file format
@@ -39,3 +39,8 @@ endif
 
 set wrap
 "set iskeyword-=_
+
+function! GitBranch()
+    let branch = FugitiveHead(0)
+    return branch !=# '' ? ' (' . branch . ')' : ''
+endfunction
