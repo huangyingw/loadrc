@@ -1,3 +1,8 @@
+function! GitBranch()
+    let branch = FugitiveHead(0)
+    return branch !=# '' ? ' (' . branch . ')' : ''
+endfunction
+
 set statusline=%r%h
 set statusline +=\ %.55F            "full path
 set statusline +=\ %{WordCount()}\ words,
