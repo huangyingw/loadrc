@@ -5,11 +5,11 @@ function! FileTimestamp()
     return ''
 endfunction
 
-let g:airline_section_z = airline#section#create_right(['%{FileTimestamp()}'])
-let g:airline_extensions = ['branch']
+"let g:airline_section_z = airline#section#create_right(['%{FileTimestamp()}'])
+"let g:airline_extensions = ['branch']
 
 " Enable git branch information in vim-airline
-let g:airline#extensions#branch#enabled = 1
+"let g:airline#extensions#branch#enabled = 1
 
 "" Custom function to display git status information
 "function! AirlineGitStatus()
