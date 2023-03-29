@@ -3,6 +3,38 @@ function! GitBranch()
     return branch !=# '' ? ' (' . branch . ')' : ''
 endfunction
 
+function! GitFileStatus()
+    let status = fugitive#statusline()
+    if status ==# ''
+        return ''
+    endif
+
+    let items = {
+                \ 'A': 'Added',
+                \ 'M': 'Modified',
+                \ 'D': 'Deleted',
+                \ '?': 'Untracked',
+                \ 'U': 'Unmerged',
+                \ 'T': 'Type Changed',
+                \ 'R': 'Renamed',
+                \ 'C': 'Copied'
+                \ }
+
+    let result = []
+    for [abbr, text] in items
+        if status =~# abbr
+            call add(result, text)
+        endif
+    endfor
+    return join(result, ', ')
+endfunction
+
+function! GitFileInfo()
+    let info = GitFileStatus()
+    return info !=# '' ? ' [' . info . ']' : ''
+endfunction
+
+
 set statusline=%r%h
 set statusline +=\ %.55F            "full path
 set statusline +=\ %{WordCount()}\ words,
