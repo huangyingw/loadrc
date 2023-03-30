@@ -6,12 +6,14 @@ git_directory=$(git rev-parse --git-dir)
 
 commit_message=""
 
-if [ -n "$1" ]; then
-    commit_message="$1"
-elif [ -f "$git_directory/MERGE_MSG" ] && [ -s "$git_directory/MERGE_MSG" ]; then
+if [ -f "$git_directory/MERGE_MSG" ] && [ -s "$git_directory/MERGE_MSG" ]; then
     commit_message=$(cat "$git_directory/MERGE_MSG")
 elif [ -f "$git_directory/COMMIT_EDITMSG" ]; then
     commit_message=$(cat "$git_directory/COMMIT_EDITMSG")
+fi
+
+if [ -n "$1" ]; then
+    commit_message="$1"
 fi
 
 if [ -z "$commit_message" ]; then

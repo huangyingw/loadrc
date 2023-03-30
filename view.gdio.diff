@@ -564,7 +564,7 @@ diff --git a/.gitmodules b/.gitmodules
 new file mode 100644
 --- /dev/null
 +++ ./.gitmodules
-@@ -0,0 +1,272 @@
+@@ -0,0 +1,269 @@
 +[submodule "keys"]
 +	path = keys
 +	url = git@bitbucket.org:huangyingw/keys.git
@@ -834,9 +834,6 @@ new file mode 100644
 +[submodule "vimrc/.vim/bundle/vim-ps1"]
 +	path = vimrc/.vim/bundle/vim-ps1
 +	url = git@github.com:PProvost/vim-ps1.git
-+[submodule "vimrc/.vim/bundle/vim-airline"]
-+	path = vimrc/.vim/bundle/vim-airline
-+	url = https://github.com/vim-airline/vim-airline.git
 diff --git a/.gitrc b/.gitrc
 --- ./.gitrc
 +++ ./.gitrc
@@ -14019,7 +14016,7 @@ diff --git a/gitrc/g.sh b/gitrc/g.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/g.sh
-@@ -0,0 +1,23 @@
+@@ -0,0 +1,25 @@
 +#!/bin/zsh
 +
 +~/loadrc/gitrc/include_gitconfig.sh
@@ -14028,12 +14025,14 @@ new file mode 100755
 +
 +commit_message=""
 +
-+if [ -n "$1" ]; then
-+    commit_message="$1"
-+elif [ -f "$git_directory/MERGE_MSG" ] && [ -s "$git_directory/MERGE_MSG" ]; then
++if [ -f "$git_directory/MERGE_MSG" ] && [ -s "$git_directory/MERGE_MSG" ]; then
 +    commit_message=$(cat "$git_directory/MERGE_MSG")
 +elif [ -f "$git_directory/COMMIT_EDITMSG" ]; then
 +    commit_message=$(cat "$git_directory/COMMIT_EDITMSG")
++fi
++
++if [ -n "$1" ]; then
++    commit_message="$1"
 +fi
 +
 +if [ -z "$commit_message" ]; then
@@ -19945,7 +19944,7 @@ new file mode 160000
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit afa6603e6d5fece82331db5470d0f35ad1f703eb
++Subproject commit 0d29a6259eb38a7e2bdb85b8dfca408aaa50163b-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 --- /dev/null
@@ -20517,7 +20516,7 @@ new file mode 160000
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit 0de21870d03accdd9c5a12e0615eaa119caa1962-dirty
++Subproject commit daba0802f94e3ad2d6f2c81949d1184c820404b4
 diff --git a/ruleref.list b/ruleref.list
 new file mode 100644
 --- /dev/null
@@ -24554,7 +24553,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/LargeFile
 @@ -0,0 +1 @@
-+Subproject commit 18407c43846edea7b7964b0b99226ec04d00931f
++Subproject commit 3941a37b2b0288524300348a39521a46539bf9f6
 diff --git a/vimrc/.vim/bundle/SQLUtilities/README b/vimrc/.vim/bundle/SQLUtilities/README
 new file mode 100644
 --- /dev/null
@@ -28500,7 +28499,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit 12003d9727bc5074ccb405b3d80e691c72d4859b
++Subproject commit d35d9e61a1ff4bb8b505ae80d3856b72b4ee7d71
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 new file mode 160000
 --- /dev/null
@@ -34953,12 +34952,6 @@ new file mode 160000
 +++ ./vimrc/.vim/bundle/vim-addon-mw-utils
 @@ -0,0 +1 @@
 +Subproject commit 6aaf4fee472db7cbec6d2c8eea69fdf3a8f8a75d
-diff --git a/vimrc/.vim/bundle/vim-airline b/vimrc/.vim/bundle/vim-airline
-new file mode 160000
---- /dev/null
-+++ ./vimrc/.vim/bundle/vim-airline
-@@ -0,0 +1 @@
-+Subproject commit a532fed72ace069e61c0132125b728316f9abd3c
 diff --git a/vimrc/.vim/bundle/vim-anyfold b/vimrc/.vim/bundle/vim-anyfold
 new file mode 160000
 --- /dev/null
@@ -34970,7 +34963,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -0,0 +1 @@
-+Subproject commit ba9381f5588ad00732c4a93e36d1df693603ac19
++Subproject commit fac89c476438c9a4ba2ca9191fa6e1634d2d53e5-dirty
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 new file mode 160000
 --- /dev/null
@@ -34988,7 +34981,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-fetch
 @@ -0,0 +1 @@
-+Subproject commit 5e179fd1ab2b98da8a76adfd9a4a9bae39d7a77e
++Subproject commit f84a5adc2733e765e791f97da0f8cac1f17d7689
 diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
 new file mode 160000
 --- /dev/null
@@ -40822,7 +40815,7 @@ diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vim/plugin/common.vim
-@@ -0,0 +1,315 @@
+@@ -0,0 +1,305 @@
 +function! CHANGE_CURR_DIR()
 +    let _dir = expand("%:p:h")
 +
@@ -40967,17 +40960,7 @@ new file mode 100644
 +endfunction
 +
 +function! OpenOrSwitch(buffername, openMode, ...)
-+    "if buffername is "./vimrc/.vimrc:55", don't cut
 +    let fileName = a:buffername
-+
-+    " Use a single regex to conditionally cut the buffername
-+    " Regex explanation:
-+    " ^\(.\{-}\): Start of the line, capture any character sequence (non-greedy) up to a colon
-+    " \(\d\+\)\@!: Negative lookahead for one or more digits after the colon
-+    " Examples:
-+    " "./vimrc/.vimrc:/root/.vimrc" -> "./vimrc/.vimrc"
-+    " "./vimrc/.vimrc:55" -> "./vimrc/.vimrc:55"
-+    let fileName = substitute(fileName, '^\(.\{-}\):\(\d\+\)\@!', '\1', '')
 +
 +    if !filereadable(a:buffername)
 +        let curline = getline(line("."))
@@ -52351,7 +52334,7 @@ diff --git a/vimrc/.vim/plugin/view.vim b/vimrc/.vim/plugin/view.vim
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vim/plugin/view.vim
-@@ -0,0 +1,41 @@
+@@ -0,0 +1,47 @@
 +" set statusline=[%n]\ %f%m%r%h\ \|\ \ pwd:\ %{CurDir()}\ \ \|%=\|\ %l,%c\ %p%%\ \|\ ascii=%b,hex=%b%{((&fenc==\"\")?\"\":\"\ \|\ \".&fenc)}\ \|\ %{$USER}\ @\ %{hostname()}\
 +"set statusline=[%n]\%f%m%r%h
 +set statusline=%r%h
@@ -52375,6 +52358,7 @@ new file mode 100644
 +else
 +    set statusline+=\%{strftime(\"%m/%d/%y\ %H:%M:%S\")}
 +endif
++set statusline +=\ %{GitBranch()}
 +syn match ipaddr /\(\(25\_[0-5]\|2\_[0-4]\_[0-9]\|\_[01]\?\_[0-9]\_[0-9]\?\)\.\)\{3\}\(25\_[0-5]\|2\_[0-4]\_[0-9]\|\_[01]\?\_[0-9]\_[0-9]\?\)/
 +hi link ipaddr Identifier
 +set completeopt-=preview
@@ -52393,13 +52377,16 @@ new file mode 100644
 +
 +set wrap
 +"set iskeyword-=_
++
++function! GitBranch()
++    let branch = FugitiveHead(0)
++    return branch !=# '' ? ' (' . branch . ')' : ''
++endfunction
 diff --git a/vimrc/.vim/plugin/vim-airline.vim b/vimrc/.vim/plugin/vim-airline.vim
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vim/plugin/vim-airline.vim
-@@ -0,0 +1,10 @@
-+let g:airline#extensions#branch#enabled = 1
-+
+@@ -0,0 +1,29 @@
 +function! FileTimestamp()
 +    if !empty(getftime(expand('%')))
 +        return strftime('%Y-%m-%d %H:%M', getftime(expand('%')))
@@ -52407,7 +52394,28 @@ new file mode 100644
 +    return ''
 +endfunction
 +
-+let g:airline_section_z = airline#section#create_right(['%{FileTimestamp()}'])
++"let g:airline_section_z = airline#section#create_right(['%{FileTimestamp()}'])
++"let g:airline_extensions = ['branch']
++
++" Enable git branch information in vim-airline
++"let g:airline#extensions#branch#enabled = 1
++
++"" Custom function to display git status information
++"function! AirlineGitStatus()
++"    if !exists("*fugitive#statusline")
++"        return ''
++"    endif
++"
++"    let l:status = fugitive#statusline()
++"
++"    " Remove the branch name, since it's already displayed by vim-airline
++"    let l:branch_removed = substitute(l:status, '\(.\{-}∙\s\?\)', '', '')
++"    " return l:branch_removed
++"    return l:status
++"endfunction
++"
++"" Add git status to airline section
++"let g:airline_section_y = airline#section#create(['%{AirlineGitStatus()}'])
 diff --git a/vimrc/.vim/plugin/vim-autoformat.vim b/vimrc/.vim/plugin/vim-autoformat.vim
 new file mode 100644
 --- /dev/null

@@ -11,4 +11,10 @@ then
 fi
 
 ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
-mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
+
+while true
+do
+    mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
+    echo "Connection lost. Retrying in 3 minutes..."
+    sleep 180
+done
