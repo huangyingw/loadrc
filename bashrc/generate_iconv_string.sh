@@ -6,7 +6,7 @@ source_directory="$1"
 destination_directory="$2"
 
 # Function to check if a directory is a remote path and detect the OS
-check_remote_and_detect_os() {
+function check_remote_and_detect_os() {
     local directory="$1"
     local os=""
 
