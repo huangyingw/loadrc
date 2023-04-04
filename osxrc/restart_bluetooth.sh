@@ -6,7 +6,7 @@ keep_connect() {
     local id="$1"
     local elapsed_time=0
 
-    while ! blueutil --is-connected "$id" && [[ $elapsed_time -lt $TIMEOUT ]]; do
+    while [[ $(blueutil --is-connected "$id") != 1 ]] && [[ $elapsed_time -lt $TIMEOUT ]]; do
         blueutil -p 1
         blueutil --connect "$id"
         sleep 1
