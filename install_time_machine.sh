@@ -3,7 +3,7 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-TARGET_DIR="/media/volgrp/"
+TARGET_DIR="/media/volgrp/time_machine/"
 TARGET_DIR_FOR_SED=$(echo "$TARGET_DIR" | sed 's/\//\\\//g')
 apt install -y netatalk avahi-daemon
 cp -fv ./etc/netatalk/afp.conf /etc/netatalk/afp.conf

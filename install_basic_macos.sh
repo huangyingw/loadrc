@@ -56,6 +56,7 @@ brew install \
     rename \
     rsync \
     sbt \
+    shfmt \
     slurm \
     sponge \
     tig \
