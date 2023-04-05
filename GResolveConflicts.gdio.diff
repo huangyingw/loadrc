@@ -14983,27 +14983,6 @@ new file mode 100755
 +        git push -v --tag "$ss"
 +    done
 +fi
-diff --git a/gitrc/gres.sh b/gitrc/gres.sh
-new file mode 100755
---- /dev/null
-+++ ./gitrc/gres.sh
-@@ -0,0 +1,16 @@
-+#!/bin/zsh
-+
-+IFS=$'\n'
-+conflictArr=($(git status | awk '/both (modified|added):/ { sub(/both (modified|added):[[:space:]]*/, ""); print }'))
-+
-+# Remove leading and trailing whitespaces from each element in conflictArr
-+for i in {1..${#conflictArr[@]}}; do
-+    conflictArr[i]=$(echo "${conflictArr[i]}" | xargs)
-+done
-+
-+for conflict in "${conflictArr[@]}"
-+do
-+    git restore --staged "$conflict"
-+done
-+
-+git commit -F .git/MERGE_MSG
 diff --git a/gitrc/grm.sh b/gitrc/grm.sh
 new file mode 100755
 --- /dev/null
@@ -15313,6 +15292,25 @@ new file mode 100755
 +
 +DIFF_FILE="$1"
 +rediff "$DIFF_FILE" | sponge "$DIFF_FILE"
+diff --git a/gitrc/resolve_merge_conflicts.sh b/gitrc/resolve_merge_conflicts.sh
+new file mode 100755
+--- /dev/null
++++ ./gitrc/resolve_merge_conflicts.sh
+@@ -0,0 +1,14 @@
++#!/bin/zsh
++
++IFS=$'\n'
++conflictArr=($(git status | awk '/both (modified|added):/ { sub(/both (modified|added):[[:space:]]*/, ""); print }'))
++
++# Remove leading and trailing whitespaces from each element in conflictArr
++for i in {1..${#conflictArr[@]}}; do
++    conflictArr[i]=$(echo "${conflictArr[i]}" | xargs)
++done
++
++for conflict in "${conflictArr[@]}"
++do
++    git restore --staged "$conflict"
++done
 diff --git a/gitrc/restore.sh b/gitrc/restore.sh
 new file mode 100755
 --- /dev/null
@@ -20521,7 +20519,7 @@ new file mode 160000
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit daba0802f94e3ad2d6f2c81949d1184c820404b4
++Subproject commit d3a65b67e54e10baf71da1cd211bbc6f80455388
 diff --git a/ruleref.list b/ruleref.list
 new file mode 100644
 --- /dev/null
@@ -28504,7 +28502,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit d35d9e61a1ff4bb8b505ae80d3856b72b4ee7d71
++Subproject commit ee4ef314bd990b2b05b7fbd95b857159e444a2fe
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 new file mode 160000
 --- /dev/null
@@ -28690,7 +28688,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/swift.vim
 @@ -0,0 +1 @@
-+Subproject commit ba6f6cef58d08ac741aaf1626d3799d476cd43b6
++Subproject commit 51108a710e194c0c75f1cf4683650faa407fab6b
 diff --git a/vimrc/.vim/bundle/taglist-plus/README.md b/vimrc/.vim/bundle/taglist-plus/README.md
 new file mode 100644
 --- /dev/null
@@ -34992,7 +34990,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -0,0 +1 @@
-+Subproject commit a5feb70e55c013bff2003d41592222cd75d0c9b2
++Subproject commit 1d178d6a27277dc473530b08216781ce432c7d64-dirty
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 --- /dev/null
@@ -41209,7 +41207,7 @@ new file mode 100644
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gme2 :execute s:Gme2(<q-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
-+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gres :execute s:Gres()
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GResolveConflicts :execute s:GResolveConflicts()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gapply :execute s:Gapply()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GrevApply :execute s:GrevApply()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
@@ -41881,9 +41879,9 @@ new file mode 100644
 +    exec '!tail -f ' . expand("%:p")
 +endfunction
 +
-+function! s:Gres() abort
++function! s:GResolveConflicts() abort
 +    let worktree = Cd2Worktree()
-+    exec '!~/loadrc/gitrc/gres.sh'
++    exec '!~/loadrc/gitrc/resolve_merge_conflicts.sh'
 +endfunction
 +
 +function! s:GrevApply() abort
