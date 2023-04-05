@@ -12,5 +12,3 @@ for conflict in "${conflictArr[@]}"
 do
     git restore --staged "$conflict"
 done
-
-git commit -F .git/MERGE_MSG
