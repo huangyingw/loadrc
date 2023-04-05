@@ -1,11 +1,16 @@
 #!/bin/zsh
 
 IFS=$'\n'
-conflictArr=($(git status | sed -e '/both modified:/!d;s/both modified:\s*//;s/^[[:space:]]*//g'))
-conflictArr+=($(git status | sed -e '/both added:/!d;s/both added:\s*//;s/^[[:space:]]*//g'))
+conflictArr=($(git status | awk '/both (modified|added):/ { sub(/both (modified|added):[[:space:]]*/, ""); print }'))
+
+# Remove leading and trailing whitespaces from each element in conflictArr
+for i in {1..${#conflictArr[@]}}; do
+    conflictArr[i]=$(echo "${conflictArr[i]}" | xargs)
+done
 
 for conflict in "${conflictArr[@]}"
 do
-    git add "$conflict"
-    git reset HEAD "$conflict"
+    git restore --staged "$conflict"
 done
+
+git commit -F .git/MERGE_MSG
