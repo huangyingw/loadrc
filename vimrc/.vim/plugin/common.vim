@@ -137,8 +137,21 @@ function! Find_in_parent(fln, flsrt, flstp)
     return "Nothing"
 endfunc
 
-function! GetWorktree()
-    return substitute(system("~/loadrc/gitrc/get_worktree.sh " . '"' . expand('%:p') . '"'), '\n', '', '')
+function! GetGitWorkDirOrCurrentDir()
+    " Get the absolute path of the current file's directory
+    let l:current_dir = expand('%:p:h')
+
+    " Execute 'git rev-parse --show-toplevel' and get the output
+    let l:git_work_dir = system('git -C ' . l:current_dir . ' rev-parse --show-toplevel')
+
+    " Check if the command executed successfully
+    if v:shell_error == 0
+        " Remove the trailing newline character
+        return substitute(l:git_work_dir, '\n\+$', '', '')
+    else
+        " If not inside a git repo, return the current directory
+        return l:current_dir
+    endif
 endfunction
 
 function! OpenOrSwitch(buffername, openMode, ...)
@@ -293,7 +306,7 @@ function! Cd2ProjectRoot(filename)
 endfunc
 
 function! Cd2Worktree()
-    let worktree = GetWorktree()
+    let worktree = GetGitWorkDirOrCurrentDir()
 
     try
         exec "cd " . fnameescape(worktree)

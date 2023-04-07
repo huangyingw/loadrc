@@ -308,7 +308,7 @@ function! VimOpen()
     endif
 
     if (expand("%") ==# 'index')
-        let realFile = GetWorktree() . '/' . b:fileName . ''
+        let realFile = GetGitWorkDirOrCurrentDir() . '/' . b:fileName . ''
         let indexFile = getcwd() . '/../' . b:fileName . '/.git/index'
         let moduleIndexFile = getcwd() . '/modules/' . b:fileName . '/index'
 
