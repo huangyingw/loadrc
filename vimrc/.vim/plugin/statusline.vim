@@ -34,11 +34,15 @@ function! GitFileInfo()
     return info !=# '' ? ' [' . info . ']' : ''
 endfunction
 
+function! GitStatus()
+    let [a,m,r] = GitGutterGetHunkSummary()
+    return printf('+%d ~%d -%d', a, m, r)
+endfunction
 
 set statusline=%r%h
 set statusline +=\ %.55F            "full path
 set statusline +=\ %{WordCount()}\ words,
-set statusline +=\ %{GitFileInfo()}\ ,
+set statusline +=\ %{GitStatus()}\ ,
 set statusline +=%=        " Switch to the right side
 set statusline +=\ %{strftime('%m/%d/%y\ %H:%M:%S',getftime(expand('%')))} " file last modified time
 set statusline +=\ %l             "current line
