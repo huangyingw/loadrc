@@ -11,7 +11,19 @@ fi
 
 # Get Git directory and commit message
 git_directory=$(git rev-parse --git-dir)
-commit_message=$(cat "$git_directory/COMMIT_EDITMSG")
+commit_message_file="$git_directory/COMMIT_EDITMSG"
+commit_message=$(cat "$commit_message_file")
+
+# Check if the COMMIT_EDITMSG file is older than 30 minutes
+current_time=$(date +%s)
+file_modification_time=$(stat -c %Y "$commit_message_file")
+time_diff=$((current_time - file_modification_time))
+time_limit=$((30 * 60))
+
+if [ $time_diff -gt $time_limit ]; then
+    echo -e "${red}COMMIT_EDITMSG is older than 30 minutes. Please update the commit message...${NC}"
+    exit 1
+fi
 
 # Determine the target branch
 target_branch=$(echo "$current_branch" | sed 's/\.fix$//g')
@@ -58,6 +70,5 @@ if [ $ret_val -eq 0 ] || [ "$1" = "f" ] || [ $(git config checkoutrejs.force) ];
     git commit  --no-verify -am "$commit_message"
     git pull
     ~/loadrc/gitrc/gfix.sh
-    echo > COMMIT_EDITMSG
     git push "$remote" "$target_branch"
 fi
