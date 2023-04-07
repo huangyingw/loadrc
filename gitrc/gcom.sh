@@ -1,35 +1,35 @@
 #!/bin/zsh
 
-if [[ "$(git config gcom.disabled)" = "true" ]]
-then
-    echo -e "${red}gcom is disabled... ${NC}"
+# Check if gcom is disabled
+if [[ "$(git config gcom.disabled)" = "true" ]]; then
+    echo -e "${RED}gcom is disabled... ${NC}"
     exit 1
 fi
 
-if [ -z "$1" ]
-then
-    echo -e "${red}Please provide target_branch... ${NC}"
+# Check if target_branch is provided
+if [ -z "$1" ]; then
+    echo -e "${RED}Please provide target_branch... ${NC}"
     exit 1
 fi
 
-
+# Retrieve the current branch and target branch
 current_branch=$(~/loadrc/gitrc/get_current_branch.sh)
+target_branch="$1"
+target_branch=$(echo "$target_branch" | sed 's/remotes\///g')
 
-TARGET_BRANCH="$1"
-TARGET_BRANCH=$(echo "$TARGET_BRANCH" | sed 's/remotes\///g')
-TARGET_BRANCH="$TARGET_BRANCH"
-
-for remote in $(git remote)
-do
-    TARGET_BRANCH=$(echo "$TARGET_BRANCH" | sed "s/^$remote\///g")
+# Remove remote prefix from target_branch
+for remote in $(git remote); do
+    target_branch=$(echo "$target_branch" | sed "s/^$remote\///g")
 done
 
-echo "TARGET_BRANCH --> $TARGET_BRANCH"
+echo "TARGET_BRANCH --> $target_branch"
 
-git branch -d "$TARGET_BRANCH"
-git checkout -b "$TARGET_BRANCH" || \
-    git checkout "$TARGET_BRANCH" &&
-    git merge "$current_branch"
+# Perform branch operations
+git branch -d "$target_branch"
+git checkout -b "$target_branch" 2> /dev/null || git checkout "$target_branch"
+~/loadrc/gitrc/discard_unnecessaries.sh
+git merge "$current_branch"
 
+# Merge target branch and run gpl script
 git merge "$1"
 ~/loadrc/gitrc/gpl.sh
