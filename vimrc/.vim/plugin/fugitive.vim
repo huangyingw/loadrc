@@ -17,7 +17,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDe
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fsync :execute s:Fsync()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject G :execute s:G(<q-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject G :execute s:G()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Ga :execute s:Ga(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbib :execute s:Gbib()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbidebug :execute s:Gbidebug()
@@ -324,7 +324,9 @@ function! s:Gme2(args, ...) abort
     call OpenOrSwitch(worktree . '/' . 'gme2.findresult', 'vs')
 endfunction
 
-function! s:G(args, ...) abort
+function! s:G() abort
+    " Prompt for the commit message
+    let msg = input('Enter commit message: ')
     if &modified
         echom 'Please check and save your file first!!!'
         return 0
@@ -339,7 +341,7 @@ function! s:G(args, ...) abort
     endif
 
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  a:args . '" 2>&1 | tee g.runresult')
+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  msg . '" 2>&1 | tee g.runresult')
 
     if &diff
         call s:Gs()
