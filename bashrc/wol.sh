@@ -7,6 +7,8 @@ then
     wakeonlan 10:7b:44:f0:e7:2f #server mother board Ethernet
     wakeonlan 00:e0:4c:68:03:cd
     wakeonlan 00:e0:4c:00:07:a8
+    wakeonlan 88:c9:b3:b0:e9:1e
+    wakeonlan 88:c9:b3:b0:e9:1f
     ping server
 elif [ "$target" = "haikou" ]
 then
