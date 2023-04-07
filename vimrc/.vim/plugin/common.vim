@@ -141,28 +141,22 @@ function! GetGitWorkDirOrCurrentDir()
     " Get the absolute path of the current file's directory
     let l:current_dir = expand('%:p:h')
 
-    " Execute 'git rev-parse --show-toplevel' and get the output
-    let l:git_work_dir = system('git -C ' . l:current_dir . ' rev-parse --show-toplevel')
+    " Execute 'git rev-parse --absolute-git-dir' and get the output
+    let l:absolute_git_dir = system('git -C ' . l:current_dir . ' rev-parse --absolute-git-dir')
 
     " Check if the command executed successfully
     if v:shell_error == 0
         " Remove the trailing newline character
-        return substitute(l:git_work_dir, '\n\+$', '', '')
+        let l:absolute_git_dir = substitute(l:absolute_git_dir, '\n\+$', '', '')
+
+        " Get the parent directory of the .git folder
+        let l:parent_dir = fnamemodify(l:absolute_git_dir, ':h')
+
+        " Return the parent directory
+        return l:parent_dir
     else
-        " Check if inside the .git folder
-        let l:git_folder = system('git -C ' . l:current_dir . ' rev-parse --git-dir')
-
-        " Remove the trailing newline character
-        let l:git_folder = substitute(l:git_folder, '\n\+$', '', '')
-
-        " Check if the command executed successfully and the path ends with '/.git'
-        if v:shell_error == 0 && l:git_folder =~ '/.git$'
-            " Remove '/.git' from the path
-            return substitute(l:git_folder, '/.git$', '', '')
-        else
-            " If not inside a git repo or .git folder, return the current directory
-            return l:current_dir
-        endif
+        " If not inside a git repo, return the current directory
+        return l:current_dir
     endif
 endfunction
 
