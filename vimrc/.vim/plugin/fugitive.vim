@@ -51,7 +51,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glg :e
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gme2 :execute s:Gme2(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gres :execute s:Gres()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GResolveConflicts :execute s:GResolveConflicts()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gapply :execute s:Gapply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GrevApply :execute s:GrevApply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
@@ -723,9 +723,9 @@ function! s:Tail() abort
     exec '!tail -f ' . expand("%:p")
 endfunction
 
-function! s:Gres() abort
+function! s:GResolveConflicts() abort
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/gres.sh'
+    exec '!~/loadrc/gitrc/resolve_merge_conflicts.sh'
 endfunction
 
 function! s:GrevApply() abort
