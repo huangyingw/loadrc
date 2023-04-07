@@ -105,37 +105,27 @@ function! ResCur()
     endif
 endfunction
 
-"==
-" Find_in_parent
-" find the file argument and returns the path to it.
-" Starting with the current working dir, it walks up the parent folders
-" until it finds the file, or it hits the stop dir.
-" If it doesn't find it, it returns "Nothing"
-function! Find_in_parent(fln, flsrt, flstp)
-    let here = a:flsrt
+function! FindFileUpwards(file, stopdir) abort
+    let l:cwd = getcwd()
+    let l:current_dir = l:cwd
 
-    while ( strlen( here) > 0 )
-        if filereadable( here . "/" . a:fln )
-            return here
-        elseif isdirectory( here . "/" . a:fln )
-            return here
-        endif
+    while !filereadable(l:current_dir . '/' . a:file)
+        let l:parent_dir = fnamemodify(l:current_dir, ':h')
 
-        let fr = match(here, "/[^/]*$")
-
-        if fr == -1
+        if l:parent_dir == l:current_dir || l:parent_dir == a:stopdir
             break
         endif
 
-        let here = strpart(here, 0, fr)
-
-        if here == a:flstp
-            break
-        endif
+        let l:current_dir = l:parent_dir
     endwhile
 
-    return "Nothing"
-endfunc
+    if filereadable(l:current_dir . '/' . a:file)
+        return l:current_dir . '/' . a:file
+    else
+        return l:cwd
+    endif
+endfunction
+
 
 function! GetGitWorkDirOrCurrentDir()
     " Get the absolute path of the current file's directory
@@ -303,7 +293,7 @@ function! Filter2Findresult()
 endfunc
 
 function! Cd2ProjectRoot(filename)
-    let csdbpath = Find_in_parent(a:filename, getcwd(), "/")
+    let csdbpath = FindFileUpwards(a:filename, "/")
 
     if csdbpath != "Nothing"
         exec "cd " . csdbpath
