@@ -270,3 +270,4 @@
 [submodule "vimrc/.vim/bundle/vim-gitgutter"]
 	path = vimrc/.vim/bundle/vim-gitgutter
 	url = git@github.com:airblade/vim-gitgutter.git
+	branch = master
