@@ -267,3 +267,6 @@
 [submodule "vimrc/.vim/bundle/vim-ps1"]
 	path = vimrc/.vim/bundle/vim-ps1
 	url = git@github.com:PProvost/vim-ps1.git
+[submodule "vimrc/.vim/bundle/vim-gitgutter"]
+	path = vimrc/.vim/bundle/vim-gitgutter
+	url = git@github.com:airblade/vim-gitgutter.git
