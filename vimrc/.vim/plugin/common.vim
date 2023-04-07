@@ -149,8 +149,20 @@ function! GetGitWorkDirOrCurrentDir()
         " Remove the trailing newline character
         return substitute(l:git_work_dir, '\n\+$', '', '')
     else
-        " If not inside a git repo, return the current directory
-        return l:current_dir
+        " Check if inside the .git folder
+        let l:git_folder = system('git -C ' . l:current_dir . ' rev-parse --git-dir')
+
+        " Remove the trailing newline character
+        let l:git_folder = substitute(l:git_folder, '\n\+$', '', '')
+
+        " Check if the command executed successfully and the path ends with '/.git'
+        if v:shell_error == 0 && l:git_folder =~ '/.git$'
+            " Remove '/.git' from the path
+            return substitute(l:git_folder, '/.git$', '', '')
+        else
+            " If not inside a git repo or .git folder, return the current directory
+            return l:current_dir
+        endif
     endif
 endfunction
 
