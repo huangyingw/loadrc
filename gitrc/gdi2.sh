@@ -16,7 +16,20 @@ commit_message=$(cat "$commit_message_file")
 
 # Check if the COMMIT_EDITMSG file is older than 30 minutes
 current_time=$(date +%s)
-file_modification_time=$(stat -c %Y "$commit_message_file")
+
+# Detect the operating system
+os=$(uname)
+
+# Get the file modification time based on the operating system
+if [[ "$os" == "Linux" ]]; then
+    file_modification_time=$(stat -c %Y "$commit_message_file")
+elif [[ "$os" == "Darwin" ]]; then
+    file_modification_time=$(stat -f %m "$commit_message_file")
+else
+    echo -e "${red}Unsupported operating system...${NC}"
+    exit 1
+fi
+
 time_diff=$((current_time - file_modification_time))
 time_limit=$((30 * 60))
 
