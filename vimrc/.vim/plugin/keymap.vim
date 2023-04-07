@@ -85,8 +85,7 @@ function! VFilter()
 endfunction
 
 function! ShowRemember()
-    let b:csdbpath = Cd2ProjectRoot("files.proj")
-    " let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
+    call Cd2ProjectRoot("files.proj")
 
     " echom relativePath
     call SendTextToPbCopy(expand('%:p'))
