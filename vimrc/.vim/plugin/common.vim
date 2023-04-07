@@ -293,11 +293,8 @@ endfunc
 
 function! Cd2ProjectRoot(filename)
     let csdbpath = FindFileUpwards(a:filename, "/")
-
-    if csdbpath != "Nothing"
-        exec "cd " . csdbpath
-        return csdbpath
-    endif
+    exec "cd " . csdbpath
+    return csdbpath
 endfunc
 
 function! Cd2Worktree()
