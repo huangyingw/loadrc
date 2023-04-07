@@ -120,12 +120,11 @@ function! FindFileUpwards(file, stopdir) abort
     endwhile
 
     if filereadable(l:current_dir . '/' . a:file)
-        return l:current_dir . '/' . a:file
+        return l:current_dir
     else
         return l:cwd
     endif
 endfunction
-
 
 function! GetGitWorkDirOrCurrentDir()
     " Get the absolute path of the current file's directory
