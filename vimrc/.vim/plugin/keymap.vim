@@ -85,8 +85,7 @@ function! VFilter()
 endfunction
 
 function! ShowRemember()
-    let b:csdbpath = Cd2ProjectRoot("files.proj")
-    " let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" ' . expand('%:p')), '\n', '', '')
+    call Cd2ProjectRoot("files.proj")
 
     " echom relativePath
     call SendTextToPbCopy(expand('%:p'))
@@ -308,7 +307,7 @@ function! VimOpen()
     endif
 
     if (expand("%") ==# 'index')
-        let realFile = GetWorktree() . '/' . b:fileName . ''
+        let realFile = GetGitWorkDirOrCurrentDir() . '/' . b:fileName . ''
         let indexFile = getcwd() . '/../' . b:fileName . '/.git/index'
         let moduleIndexFile = getcwd() . '/modules/' . b:fileName . '/index'
 

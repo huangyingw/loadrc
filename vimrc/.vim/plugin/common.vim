@@ -105,44 +105,59 @@ function! ResCur()
     endif
 endfunction
 
-"==
-" Find_in_parent
-" find the file argument and returns the path to it.
-" Starting with the current working dir, it walks up the parent folders
-" until it finds the file, or it hits the stop dir.
-" If it doesn't find it, it returns "Nothing"
-function! Find_in_parent(fln, flsrt, flstp)
-    let here = a:flsrt
+function! FindFileUpwards(file, stopdir) abort
+    let l:cwd = getcwd()
+    let l:current_dir = l:cwd
 
-    while ( strlen( here) > 0 )
-        if filereadable( here . "/" . a:fln )
-            return here
-        elseif isdirectory( here . "/" . a:fln )
-            return here
-        endif
+    while !filereadable(l:current_dir . '/' . a:file)
+        let l:parent_dir = fnamemodify(l:current_dir, ':h')
 
-        let fr = match(here, "/[^/]*$")
-
-        if fr == -1
+        if l:parent_dir == l:current_dir || l:parent_dir == a:stopdir
             break
         endif
 
-        let here = strpart(here, 0, fr)
-
-        if here == a:flstp
-            break
-        endif
+        let l:current_dir = l:parent_dir
     endwhile
 
-    return "Nothing"
-endfunc
+    if filereadable(l:current_dir . '/' . a:file)
+        return l:current_dir
+    else
+        return l:cwd
+    endif
+endfunction
 
-function! GetWorktree()
-    return substitute(system("~/loadrc/gitrc/get_worktree.sh " . '"' . expand('%:p') . '"'), '\n', '', '')
+function! GetGitWorkDirOrCurrentDir()
+    " Get the absolute path of the current file's directory
+    let l:current_dir = expand('%:p:h')
+
+    " Execute 'git rev-parse --absolute-git-dir' and get the output
+    let l:absolute_git_dir = system('git -C ' . l:current_dir . ' rev-parse --absolute-git-dir')
+
+    " Check if the command executed successfully
+    if v:shell_error == 0
+        " Remove the trailing newline character
+        let l:absolute_git_dir = substitute(l:absolute_git_dir, '\n\+$', '', '')
+
+        " Get the parent directory of the .git folder
+        let l:parent_dir = fnamemodify(l:absolute_git_dir, ':h')
+
+        " Return the parent directory
+        return l:parent_dir
+    else
+        " If not inside a git repo, return the current directory
+        return l:current_dir
+    endif
 endfunction
 
 function! OpenOrSwitch(buffername, openMode, ...)
+    "if buffername is "./vimrc/.vimrc:55", don't cut
     let fileName = a:buffername
+
+    " Add the following lines to split the buffername
+    let parts = split(fileName, ':')
+    if len(parts) > 1 && parts[1] !~ '^\d\+$'
+        let fileName = parts[0]
+    endif
 
     if !filereadable(a:buffername)
         let curline = getline(line("."))
@@ -277,16 +292,13 @@ function! Filter2Findresult()
 endfunc
 
 function! Cd2ProjectRoot(filename)
-    let csdbpath = Find_in_parent(a:filename, getcwd(), "/")
-
-    if csdbpath != "Nothing"
-        exec "cd " . csdbpath
-        return csdbpath
-    endif
+    let csdbpath = FindFileUpwards(a:filename, "/")
+    exec "cd " . csdbpath
+    return csdbpath
 endfunc
 
 function! Cd2Worktree()
-    let worktree = GetWorktree()
+    let worktree = GetGitWorkDirOrCurrentDir()
 
     try
         exec "cd " . fnameescape(worktree)
