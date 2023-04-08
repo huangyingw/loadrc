@@ -537,7 +537,9 @@ endfunction
 
 function! s:Gcom(args, ...) abort
     let worktree = Cd2Worktree()
-    exec '!~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"'
+    let output = 'gcom.runresult'
+    exec '!~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"' . ' 2>&1 | tee ' . '"' .  output . '"' 
+    call OpenOrSwitch(output, 'vs')
 endfunction
 
 function! s:Gshow(args, ...) abort
