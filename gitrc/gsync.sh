@@ -4,7 +4,7 @@
 dogsync_script="$HOME/loadrc/gitrc/dogsync.sh"
 git_submodule_status_cmd="git submodule status"
 awk_cmd="awk '{print $2}'"
-parallel_cmd="parallel --jobs 0 --ungroup"
+parallel_cmd="parallel --jobs 10 --ungroup"
 
 # Execute the dogsync script
 source "$dogsync_script"
