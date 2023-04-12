@@ -42,4 +42,4 @@ if [[ $MERGE_OUTPUT == *"error:"* ]]; then
     fi
 else
     echo "Merge completed without conflicts."
-    fi
+fi
