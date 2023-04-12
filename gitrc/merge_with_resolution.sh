@@ -16,7 +16,7 @@ if [[ $MERGE_OUTPUT == *"error:"* ]]; then
         echo "Untracked working tree files would be overwritten by merge. Renaming them to *.bak."
 
         # Parse untracked file names from merge output
-        UNTRACKED_FILES=$(echo "$MERGE_OUTPUT" | awk '/^    / {print substr($0, 9)}')
+        UNTRACKED_FILES=$(echo "$MERGE_OUTPUT" | awk '/^error: The following untracked working tree files would be overwritten by merge:/,/^Aborting/ {if (match($0, /^ /)) print substr($0, 2)}')
 
         # Rename untracked files to *.bak
         for FILE in ${(f)UNTRACKED_FILES}; do
@@ -25,7 +25,7 @@ if [[ $MERGE_OUTPUT == *"error:"* ]]; then
 
         # Attempt the merge again
         MERGE_OUTPUT=$(git merge "$BRANCH_TO_MERGE" --strategy ort 2>&1)
-    fi
+        fi
 
     # Check if merge failed due to conflicts
     if [[ $MERGE_OUTPUT == *"error:"* ]]; then
@@ -42,4 +42,4 @@ if [[ $MERGE_OUTPUT == *"error:"* ]]; then
     fi
 else
     echo "Merge completed without conflicts."
-fi
+    fi
