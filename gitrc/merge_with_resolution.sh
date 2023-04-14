@@ -16,7 +16,7 @@ if [[ $MERGE_OUTPUT == *"error:"* ]]; then
         echo "Untracked working tree files would be overwritten by merge. Renaming them to *.bak."
 
         # Parse untracked file names from merge output
-        UNTRACKED_FILES=$(echo "$MERGE_OUTPUT" | awk '/^error: The following untracked working tree files would be overwritten by merge:/,/^Aborting/ {if (match($0, /^	/)) print substr($0, 2)}' RS=)
+        UNTRACKED_FILES=$(echo "$MERGE_OUTPUT" | sed -n -e '/^error: The following untracked working tree files would be overwritten by merge:/,/Aborting/p' | grep -oP '^\t\K.+')
 
         # Rename untracked files to *.bak
         for FILE in ${(f)UNTRACKED_FILES}; do
