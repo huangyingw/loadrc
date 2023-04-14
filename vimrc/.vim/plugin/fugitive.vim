@@ -868,7 +868,7 @@ function! s:GenerateIpynb() abort
     w
 endfunction
 
-function! MergeWithResolution(branch_to_merge)
+function! s:MergeWithResolution(branch_to_merge)
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/merge_with_resolution.sh ' . '"' .  a:branch_to_merge . '" 2>&1 | tee ' . 'merge_with_resolution.runresult'
     call OpenOrSwitch('merge_with_resolution.runresult', 'vs')
