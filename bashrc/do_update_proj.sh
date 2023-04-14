@@ -2,7 +2,7 @@
 
 # Define the list of commands to run in parallel
 commands=(
-    "~/loadrc/bashrc/generate_files_proj.sh"
+    "~/loadrc/bashrc/generate_file_index.sh"
     "~/loadrc/bashrc/generate_rsync_files.sh"
     "~/loadrc/bashrc/fvideos.sh"
     "~/loadrc/bashrc/fdocs.sh"
