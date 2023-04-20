@@ -498,7 +498,7 @@ function! CutFile2()
 endfunc
 
 function! CutCommon()
-    exec '!~/loadrc/bashrc/cutcommon.sh ' . '"' .  @" . '"'  . ' ' . '"' .  expand("%:p") . '"'
+    exec '!~/loadrc/bashrc/compare_unique_lines_sort.sh ' . '"' .  @" . '"'  . ' ' . '"' .  expand("%:p") . '"'
 endfunc
 
 nnoremap <leader>2 :call CutCommon()<cr>
