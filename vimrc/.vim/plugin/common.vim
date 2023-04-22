@@ -130,8 +130,11 @@ function! GetGitWorkDirOrCurrentDir()
     " Get the absolute path of the current file's directory
     let l:current_dir = expand('%:p:h')
 
+    " Wrap the current directory path with single quotes
+    let l:current_dir_quoted = "'" . l:current_dir . "'"
+
     " Execute 'git rev-parse --absolute-git-dir' and get the output
-    let l:absolute_git_dir = system('git -C ' . l:current_dir . ' rev-parse --absolute-git-dir')
+    let l:absolute_git_dir = system('git -C ' . l:current_dir_quoted . ' rev-parse --absolute-git-dir')
 
     " Check if the command executed successfully
     if v:shell_error == 0
