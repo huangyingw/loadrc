@@ -28,8 +28,8 @@ apt-get install -y \
     hashcat \
     hfsprogs \
     htop \
-    inetutils-traceroute \
     ifenslave \
+    inetutils-traceroute \
     iperf \
     iperf3 \
     iputils-ping \
@@ -56,6 +56,7 @@ apt-get install -y \
     pv \
     pwgen \
     python3-autopep8 \
+    python3-pynvim \
     python3-software-properties \
     rarcrack \
     resolvconf \
