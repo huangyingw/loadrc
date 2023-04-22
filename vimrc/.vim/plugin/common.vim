@@ -141,11 +141,20 @@ function! GetGitWorkDirOrCurrentDir()
         " Remove the trailing newline character
         let l:absolute_git_dir = substitute(l:absolute_git_dir, '\n\+$', '', '')
 
-        " Get the parent directory of the .git folder
-        let l:parent_dir = fnamemodify(l:absolute_git_dir, ':h')
+        " Check if it's a submodule by looking for '/modules/' in the absolute_git_dir
+        if l:absolute_git_dir =~ '/modules/'
+            " Get the submodule path
+            let l:submodule_path = substitute(l:absolute_git_dir, '/\.git/modules/[^/]*', '', '')
 
-        " Return the parent directory
-        return l:parent_dir
+            " Return the submodule path
+            return l:submodule_path
+        else
+            " Get the parent directory of the .git folder
+            let l:parent_dir = fnamemodify(l:absolute_git_dir, ':h')
+
+            " Return the parent directory
+            return l:parent_dir
+        endif
     else
         " If not inside a git repo, return the current directory
         return l:current_dir
