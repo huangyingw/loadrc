@@ -16,7 +16,7 @@ fi
 if [ -n "$1" ]; then
     git commit -m "$1"
 else
-    git commit --no-edit
+    git commit --no-edit || git commit -m "fallback commit message"
 fi
 
 # Run post-commit script
