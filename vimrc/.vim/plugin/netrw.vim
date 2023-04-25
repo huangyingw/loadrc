@@ -53,18 +53,29 @@ fun! ComposePath(base, subdir)
     endif
 
     return ret
-endfun
-fun! LocalRename() range
-    let curline = getline(line("."))
-    let nxtline = getline(line(".") + 1)
+endfunction
 
-    let curline = substitute(curline, '\\', '', 'g')
-    let curline = substitute(curline, "^\"", "", "")
-    let curline = substitute(curline, "\"$", "", "")
-    let nxtline = substitute(nxtline, '\_s\+$', '', 'g')
-    let nxtline = substitute(nxtline, "^\"", "", "")
-    let nxtline = substitute(nxtline, "\"$", "", "")
-    exec '!~/loadrc/bashrc/rename.sh ' . '"' .  curline . '"'  . ' ' . '"' .  nxtline . '"'
-    normal dd
+function! LocalRename() range
+    " Get the current line and the next line
+    let current_line = getline(line("."))
+    let next_line = getline(line(".") + 1)
+
+    " Remove backslashes and quotes from the current line
+    let current_line = substitute(current_line, '\\', '', 'g')
+    let current_line = substitute(current_line, '^"', '', '')
+    let current_line = substitute(current_line, '"$', '', '')
+
+    " Remove trailing whitespace, backslashes, and quotes from the next line
+    let next_line = substitute(next_line, '\_s\+$', '', 'g')
+    let next_line = substitute(next_line, '^"', '', '')
+    let next_line = substitute(next_line, '"$', '', '')
+
+    " Execute the rename script with the processed lines as arguments
+    execute '!~/loadrc/bashrc/rename.sh "' . current_line . '" "' . next_line . '"'
+
+    " Delete the current line in the buffer
+    normal! dd
+
+    " Call the UpdateProj() function
     call UpdateProj()
-endfun
+endfunction
