@@ -13,7 +13,7 @@ function! ExFilter()
         return
     endif
 
-    call Filter2Findresult()
+    call Filter2FindResult()
     silent exec 'g/' . @/ . '/d'
 
     try
@@ -27,7 +27,7 @@ function! ExtractHighLight()
         return
     endif
 
-    call Filter2Findresult()
+    call Filter2FindResult()
     silent exec '%s/.*\(' . @/ . '\).*/\1/g'
     w!
 endfunction
@@ -38,7 +38,7 @@ function! Vdelete()
         return
     endif
 
-    call Filter2Findresult()
+    call Filter2FindResult()
     silent exec '%s/' . @/ . '//g'
     w!
 endfunction
@@ -75,7 +75,7 @@ function! VFilter()
         return
     endif
 
-    call Filter2Findresult()
+    call Filter2FindResult()
     silent exec 'g!/' . @/ . '/d'
 
     try
