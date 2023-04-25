@@ -285,23 +285,23 @@ function! RunShell(shell, ...)
     silent exec '!~/loadrc/bashrc/removing_ansi_color_codes.sh' . ' ' . '"' .  arg2 . '"'
 endfunc
 
-function! Filter2Findresult()
+function! Filter2FindResult()
     let worktree = Cd2Worktree()
     let keyword = @/
     let b:result = GetEscapedResult(keyword)
 
-    if expand('%:e') != "findresult"
+    if expand('%:e') != 'findresult'
         let buffername = b:result . '.findresult'
 
         if bufexists(buffername)
-            exe "bd!" . buffername
+            exe 'bd!' . buffername
         endif
 
-        silent exec '!cp -fv ' . ' ' . '"' .  expand('%:p') . '"' . ' ' . '"' .  buffername . '"'
+        silent exec '!cp -fv ' . '"' . expand('%:p') . '"' . ' ' . '"' . buffername . '"'
         let worktree = Cd2Worktree()
         call OpenOrSwitch(buffername, 'vs')
     endif
-endfunc
+endfunction
 
 function! Cd2ProjectRoot(filename)
     let csdbpath = FindFileUpwards(a:filename, "/")
