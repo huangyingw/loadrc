@@ -1,13 +1,13 @@
 #!/bin/zsh
 
-if [ -z "$1" ]
-then
+# Check if the SOURCE is provided, otherwise exit with an error message
+if [ -z "$1" ]; then
     echo -e "${red}Please provide the SOURCE... ${NC}"
     exit 1
 fi
 
-if [ -z "$2" ]
-then
+# Check if the TARGET is provided, otherwise exit with an error message
+if [ -z "$2" ]; then
     echo -e "${red}Please provide the TARGET... ${NC}"
     exit 1
 fi
@@ -15,12 +15,16 @@ fi
 SOURCE="$1"
 TARGET="$2"
 
-
+# Find all files in the SOURCE directory
 find "$SOURCE" -type f | \
-    while read ss
-    do
+    while read ss; do
+        # Replace the SOURCE path with the TARGET path in the file's path
         new_ss=$(echo "$ss" | sed -e "s#$SOURCE#$TARGET#g")
+
+        # Create the target directory if it doesn't exist
         mkdir -p "$(dirname "$new_ss")"
+
+        # Move the file to the new location
         mv -nv "$ss" "$new_ss"
     done
 
