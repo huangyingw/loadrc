@@ -17,7 +17,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDe
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fsync :execute s:Fsync()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject G :execute s:G()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject G call s:G(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Ga :execute s:Ga(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbib :execute s:Gbib()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbidebug :execute s:Gbidebug()
@@ -325,9 +325,9 @@ function! s:Gme2(args, ...) abort
     call OpenOrSwitch(worktree . '/' . 'gme2.findresult', 'vs')
 endfunction
 
-function! s:G() abort
-    " Prompt for the commit message
-    let msg = input('Enter commit message: ')
+function! s:G(message) abort
+    let msg = empty(a:message) ? '' : input('Enter commit message: ')
+
     if &modified
         echom 'Please check and save your file first!!!'
         return 0
@@ -539,7 +539,7 @@ endfunction
 function! s:Gcom(args, ...) abort
     let worktree = Cd2Worktree()
     let output = 'gcom.runresult'
-    exec '!~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"' . ' 2>&1 | tee ' . '"' .  output . '"' 
+    exec '!~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"' . ' 2>&1 | tee ' . '"' .  output . '"'
     call OpenOrSwitch(output, 'vs')
 endfunction
 
