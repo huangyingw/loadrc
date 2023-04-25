@@ -15,6 +15,17 @@ fi
 SOURCE="$1"
 TARGET="$2"
 
+# Check if the TARGET is a symbolic link and resolve the actual path
+if [ -L "$TARGET" ]; then
+    TARGET="$(readlink -f "$TARGET")"
+fi
+
+# If the real target is the same as the source, exit with an error message
+if [ "$SOURCE" = "$TARGET" ]; then
+    echo -e "${red}The real TARGET is the same as the SOURCE. Aborting...${NC}"
+    exit 1
+fi
+
 # Find all files in the SOURCE directory
 find "$SOURCE" -type f | \
     while read ss; do
@@ -28,4 +39,5 @@ find "$SOURCE" -type f | \
         mv -nv "$ss" "$new_ss"
     done
 
+# Call move.sh with the updated SOURCE and TARGET
 ~/loadrc/bashrc/move.sh "$SOURCE" "$TARGET"
