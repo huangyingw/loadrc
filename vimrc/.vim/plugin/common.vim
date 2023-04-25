@@ -162,28 +162,31 @@ function! GetGitWorkDirOrCurrentDir()
 endfunction
 
 function! OpenOrSwitch(buffername, openMode, ...)
-    "if buffername is "./vimrc/.vimrc:55", don't cut
+    " If buffername is "./vimrc/.vimrc:55", don't cut
     let fileName = a:buffername
 
-    " Add the following lines to split the buffername
+    " Split the buffer name and check if the second part is not a number
     let parts = split(fileName, ':')
     if len(parts) > 1 && parts[1] !~ '^\d\+$'
         let fileName = parts[0]
     endif
 
+    " Check if the file is readable, otherwise try to get the file name from the current line
     if !filereadable(a:buffername)
         let curline = getline(line("."))
         let curline = substitute(curline, '\\', '', 'g')
-        let curline = substitute(curline, "^\"", "", "")
-        let curline = substitute(curline, "\"$", "", "")
+        let curline = substitute(curline, '^"', '', '')
+        let curline = substitute(curline, '"$', '', '')
         if filereadable(curline)
             let fileName = curline
         endif
     endif
 
+    " Use the topleft argument if provided, otherwise default to 'topleft'
     let topleft = (a:0 >= 1) ? a:1 : 'topleft'
 
-    if a:openMode ==? "goto"
+    " Open the file in the specified mode ('goto' or 'vs')
+    if a:openMode ==? 'goto'
         call fetch#cfile(fileName, 'e')
     else
         call fetch#cfile(fileName, 'vs')
