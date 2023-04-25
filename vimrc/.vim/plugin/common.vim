@@ -297,7 +297,12 @@ function! Filter2FindResult()
             exe 'bd!' . buffername
         endif
 
-        silent exec '!cp -fv ' . '"' . expand('%:p') . '"' . ' ' . '"' . buffername . '"'
+        " Save the current buffer content in a variable
+        let buffer_content = join(getline(1, '$'), "\n")
+
+        " Create or overwrite the buffer with the new content
+        call writefile(split(buffer_content, "\n"), buffername)
+
         let worktree = Cd2Worktree()
         call OpenOrSwitch(buffername, 'vs')
     endif
