@@ -141,10 +141,10 @@ function! GetGitWorkDirOrCurrentDir()
         " Remove the trailing newline character
         let l:absolute_git_dir = substitute(l:absolute_git_dir, '\n\+$', '', '')
 
-        " Check if it's a submodule by looking for '/modules/' in the absolute_git_dir
-        if l:absolute_git_dir =~ '/modules/'
+        " Check if it's a submodule by looking for '/modules/' or '/.git/modules/' in the absolute_git_dir
+        if l:absolute_git_dir =~ '/modules/\|/\.git/modules/'
             " Get the submodule path
-            let l:submodule_path = substitute(l:absolute_git_dir, '/\.git/modules/[^/]*', '', '')
+            let l:submodule_path = substitute(l:absolute_git_dir, '/\.git/modules/\{-}[^/]*', '', '')
 
             " Return the submodule path
             return l:submodule_path
