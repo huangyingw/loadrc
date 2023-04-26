@@ -56,7 +56,6 @@ apt-get install -y \
     pv \
     pwgen \
     python3-autopep8 \
-    python3-pynvim \
     python3-software-properties \
     rarcrack \
     resolvconf \
