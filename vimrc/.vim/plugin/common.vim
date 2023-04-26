@@ -296,6 +296,10 @@ function! Filter2FindResult()
     if expand('%:e') != 'findresult'
         let buffername = b:result . '.findresult'
 
+        if bufexists(buffername)
+            exe 'bd!' . buffername
+        endif
+
         " Save the current buffer content in a variable
         let buffer_content = join(getline(1, '$'), "\n")
 
