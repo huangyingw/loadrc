@@ -97,12 +97,12 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Tail :
 function! s:LogFilter(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/logFilter.sh ' . '"' .  expand('%:p') . '" "' .  arg1 . '"')
+    call AsyncRunShellCommand('~/loadrc/bashrc/logFilter.sh ' . '"' .  expand('%:p') . '" "' .  arg1 . '"')
 endfunction
 
 function! s:Jformat(...) abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/jformat.sh ')
+    call AsyncRunShellCommand('~/loadrc/bashrc/jformat.sh')
 endfunction
 
 function! s:Gkd(...) abort
@@ -110,15 +110,15 @@ function! s:Gkd(...) abort
 
     if expand('%:t') != 'index'
         if a:0 == 0
-            call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . 'HEAD ' . '"' .  expand('%:p') . '"')
+            call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . 'HEAD ' . '"' .  expand('%:p') . '"')
         else
             let arg1 = (a:0 >= 1) ? a:1 : ''
-            call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  expand('%:p') . '"')
+            call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  expand('%:p') . '"')
         endif
     else
         let arg1 = (a:0 >= 1) ? a:1 : ''
         let arg2 = (a:0 >= 2) ? a:2 : ''
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
+        call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
     endif
 endfunction
 
@@ -127,9 +127,9 @@ function! s:Gkdo() abort
     let target = substitute(system("git config gsync.target"), '\n', '', '')
 
     if expand('%:t') != 'index'
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '" "' .  expand('%:p') . '"')
+        call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . '"' .  target . '" "' .  expand('%:p') . '"')
     else
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '"')
+        call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . '"' .  target . '"')
     endif
 endfunction
 
@@ -342,8 +342,7 @@ function! s:G(message) abort
     endif
 
     let worktree = Cd2Worktree()
-    let cmd = '~/loadrc/gitrc/g.sh ' . shellescape(msg) . ' 2>&1 | tee g.runresult'
-    call AsyncRunShellCommand(cmd)
+    call AsyncRunShellCommand('~/loadrc/gitrc/g.sh ' . shellescape(msg) . ' 2>&1 | tee g.runresult')
 
     if &diff
         call s:Gs()
