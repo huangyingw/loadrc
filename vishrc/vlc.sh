@@ -1,14 +1,16 @@
 #!/bin/zsh
 
-if [ ! -f "$1" ]
+if [ ! -d "$1" ]
 then
     exit
 fi
 
-if [ $(uname) = "Darwin" ]
-then
-    /Applications/VLC.app/Contents/MacOS/VLC --sub-language Chinese --sub-autodetect-file -f --macosx-continue-playback=2 --rate=2.0 "$1"
-else
-    #smplayer "$1"
-    smplayer -fullscreen "$1"
-fi
+directory="$1"
+line="$2"
+
+# Use regex to match the timestamp at the end of the string
+file_path=$(echo "$line" | sed -E 's/(:[0-9]{2}:[0-9]{2}(:[0-9]{2})?)$//')
+timestamp=$(echo "$line" | sed -E 's/.*[^0-9:]([0-9]{1,2}:[0-9]{2}(:[0-9]{2})?)$/\1/')
+
+echo "file_path --> $file_path"
+echo "timestamp --> $timestamp"
