@@ -338,11 +338,12 @@ function! s:G(message) abort
     endif
 
     if &diff
-        exec '!git reset HEAD ; git add ' . '"' .  expand('%:p') . '"'
+        exec '!git reset HEAD ; git add ' . shellescape(expand('%:p'))
     endif
 
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  msg . '" 2>&1 | tee g.runresult')
+    let cmd = '~/loadrc/gitrc/g.sh ' . shellescape(msg) . ' 2>&1 | tee g.runresult'
+    call AsyncRunShellCommand(cmd)
 
     if &diff
         call s:Gs()
