@@ -20272,7 +20272,7 @@ new file mode 160000
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 7e20bedcaa277abfd192e58e568596ea1111b8fa-dirty
++Subproject commit 8d0854fbf2fd377b8cc2a1c07ad2da04049e9765-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 --- /dev/null
@@ -20856,7 +20856,7 @@ new file mode 160000
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit d3a65b67e54e10baf71da1cd211bbc6f80455388
++Subproject commit 0de21870d03accdd9c5a12e0615eaa119caa1962
 diff --git a/ruleref.list b/ruleref.list
 new file mode 100644
 --- /dev/null
@@ -28867,7 +28867,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit ee4ef314bd990b2b05b7fbd95b857159e444a2fe
++Subproject commit 12003d9727bc5074ccb405b3d80e691c72d4859b
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 new file mode 160000
 --- /dev/null
@@ -29053,7 +29053,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/swift.vim
 @@ -0,0 +1 @@
-+Subproject commit 51108a710e194c0c75f1cf4683650faa407fab6b
++Subproject commit ba6f6cef58d08ac741aaf1626d3799d476cd43b6
 diff --git a/vimrc/.vim/bundle/taglist-plus/README.md b/vimrc/.vim/bundle/taglist-plus/README.md
 new file mode 100644
 --- /dev/null
@@ -35355,7 +35355,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -0,0 +1 @@
-+Subproject commit dacffc9f06eee05fe29fabf0c216d532de5d2433
++Subproject commit a5feb70e55c013bff2003d41592222cd75d0c9b2
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 --- /dev/null
@@ -41132,7 +41132,7 @@ new file mode 100644
 +        return
 +    endif
 +
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
++    call AsyncRunShellCommand('~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
 +    call CHANGE_CURR_DIR()
 +endfunction
 +
@@ -41576,7 +41576,7 @@ diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -0,0 +1,880 @@
+@@ -0,0 +1,879 @@
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject AppendRate :execute s:AppendRate(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject ApplyBranch :execute s:ApplyBranch(<q-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject BinaryGrep :execute s:BinaryGrep(<f-args>)
@@ -41676,12 +41676,12 @@ new file mode 100644
 +function! s:LogFilter(...) abort
 +    let worktree = Cd2Worktree()
 +    let arg1 = (a:0 >= 1) ? a:1 : ''
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/logFilter.sh ' . '"' .  expand('%:p') . '" "' .  arg1 . '"')
++    call AsyncRunShellCommand('~/loadrc/bashrc/logFilter.sh ' . '"' .  expand('%:p') . '" "' .  arg1 . '"')
 +endfunction
 +
 +function! s:Jformat(...) abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/jformat.sh ')
++    call AsyncRunShellCommand('~/loadrc/bashrc/jformat.sh')
 +endfunction
 +
 +function! s:Gkd(...) abort
@@ -41689,15 +41689,15 @@ new file mode 100644
 +
 +    if expand('%:t') != 'index'
 +        if a:0 == 0
-+            call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . 'HEAD ' . '"' .  expand('%:p') . '"')
++            call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . 'HEAD ' . '"' .  expand('%:p') . '"')
 +        else
 +            let arg1 = (a:0 >= 1) ? a:1 : ''
-+            call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  expand('%:p') . '"')
++            call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  expand('%:p') . '"')
 +        endif
 +    else
 +        let arg1 = (a:0 >= 1) ? a:1 : ''
 +        let arg2 = (a:0 >= 2) ? a:2 : ''
-+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
++        call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
 +    endif
 +endfunction
 +
@@ -41706,9 +41706,9 @@ new file mode 100644
 +    let target = substitute(system("git config gsync.target"), '\n', '', '')
 +
 +    if expand('%:t') != 'index'
-+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '" "' .  expand('%:p') . '"')
++        call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . '"' .  target . '" "' .  expand('%:p') . '"')
 +    else
-+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '"')
++        call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . '"' .  target . '"')
 +    endif
 +endfunction
 +
@@ -41921,8 +41921,7 @@ new file mode 100644
 +    endif
 +
 +    let worktree = Cd2Worktree()
-+    let cmd = '~/loadrc/gitrc/g.sh ' . shellescape(msg) . ' 2>&1 | tee g.runresult'
-+    call AsyncRunShellCommand(cmd)
++    call AsyncRunShellCommand('~/loadrc/gitrc/g.sh ' . shellescape(msg) . ' 2>&1 | tee g.runresult')
 +
 +    if &diff
 +        call s:Gs()
