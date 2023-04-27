@@ -103,15 +103,19 @@ function! Filter()
 endfunction
 
 function! PlayVideo()
+    " Return early if the buffer type is a terminal
     if &buftype ==# "terminal"
         return 0
     endif
 
+    " Get the current line and remove trailing spaces
     let line = getline('.')
     let line = substitute(line, '\_s\+$', '', 'g')
     let line = substitute(line, '^[^"]', '"' . line[0], '')
     let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
-    call asyncrun#run('<bang>', '', '~/loadrc/pythonrc/vlc.py ' . '"' . expand("%:p") . '"' .  ' ' . line)
+
+    " Run the vlc.sh script with the current file's directory and the modified line as arguments
+    exec '!~/loadrc/vishrc/vlc.sh "' . expand("%:p:h") . '" ' . line
 endfunction
 
 function! VDebug()
