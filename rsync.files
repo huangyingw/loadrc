@@ -71,11 +71,11 @@
 ./.vserver.rc
 ./.vserver.theanorc
 ./.zshrc
+./AsyncRunShellCommand.gdio.diff
 ./Dockerfile
 ./Library/LaunchAgents/pbcopy.plist
 ./Library/LaunchAgents/pbpaste.plist
 ./Library/Preferences/org.videolan.vlc/vlcrc
-./OpenOrSwitch.gdio.diff
 ./bashrc/HuangYings-MacBook-Pro.local.csc.properties
 ./bashrc/apf.sh
 ./bashrc/app_list
@@ -3113,6 +3113,7 @@
 ./vimrc/.vim/plugin/SQLUtilities.vim
 ./vimrc/.vim/plugin/ShowVITAG.vim
 ./vimrc/.vim/plugin/WordCount.vim
+./vimrc/.vim/plugin/async_shell.vim
 ./vimrc/.vim/plugin/auto_cscope.vim
 ./vimrc/.vim/plugin/auto_deploy.vim
 ./vimrc/.vim/plugin/buffergator.vim
