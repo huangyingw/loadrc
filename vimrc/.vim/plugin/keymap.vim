@@ -488,7 +488,7 @@ map <F3> :call VDebug()<cr>
 " nnoremap gf gF<cr>
 nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
 map oo :call VimOpen()<cr>
-nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
+nnoremap <silent> <leader>g :call AsyncRunShellCommand('gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
 nnoremap <leader>1 :let @" = expand("%:p")<CR>
 
 function! CutFile2()
