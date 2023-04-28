@@ -5,7 +5,7 @@ function! s:auto_deploy_augroup()
         return
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
+    call AsyncRunShellCommand('~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
     call CHANGE_CURR_DIR()
 endfunction
 

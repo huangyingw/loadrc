@@ -276,7 +276,7 @@ function! RunShell(shell, ...)
     let run_string = a:shell . ' ' . '"' .  arg1 . '"' .  ' ' . '2>&1 | tee' . ' ' . temp_log
 
     if async ==? "true"
-        call asyncrun#run('<bang>', '', ' ' . run_string)
+        call AsyncRunShellCommand(' ' . run_string)
     else
         if silent ==? "true"
             silent exec '!' . run_string
