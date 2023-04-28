@@ -338,7 +338,7 @@ function! s:G(message) abort
     endif
 
     if &diff
-        exec '!git reset HEAD ; git add ' . '"' .  expand('%:p') . '"'
+        silent exec '!git reset HEAD ; git add ' . shellescape(expand('%:p'))
     endif
 
     let worktree = Cd2Worktree()
