@@ -41488,7 +41488,7 @@ new file mode 100644
 +    let run_string = a:shell . ' ' . '"' .  arg1 . '"' .  ' ' . '2>&1 | tee' . ' ' . temp_log
 +
 +    if async ==? "true"
-+        call asyncrun#run('<bang>', '', ' ' . run_string)
++        call AsyncRunShellCommand(' ' . run_string)
 +    else
 +        if silent ==? "true"
 +            silent exec '!' . run_string
@@ -42041,7 +42041,7 @@ new file mode 100644
 +
 +function! s:Gmet() abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', 'git mergetool')
++    call AsyncRunShellCommand('git mergetool')
 +endfunction
 +
 +function! s:Gicb() abort
@@ -42053,7 +42053,7 @@ new file mode 100644
 +    let worktree = Cd2Worktree()
 +    let arg1 = (a:0 >= 1) ? a:1 : ''
 +    let arg2 = (a:0 >= 2) ? a:2 : ''
-+    call asyncrun#run('<bang>', '', 'gitk ' . '"' .  arg1 . '"' . ' ' . '"' .  arg2 . '"')
++    call AsyncRunShellCommand('gitk ' . '"' .  arg1 . '"' . ' ' . '"' .  arg2 . '"')
 +endfunction
 +
 +function! s:Gbrm(...) abort
@@ -42953,7 +42953,7 @@ new file mode 100644
 +" nnoremap gf gF<cr>
 +nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
 +map oo :call VimOpen()<cr>
-+nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
++nnoremap <silent> <leader>g :call AsyncRunShellCommand('gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
 +nnoremap <leader>1 :let @" = expand("%:p")<CR>
 +
 +function! CutFile2()
