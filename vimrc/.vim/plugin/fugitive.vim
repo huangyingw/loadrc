@@ -345,14 +345,11 @@ function! s:G(message) abort
     call AsyncRunShellCommand('~/loadrc/gitrc/g.sh ' . shellescape(msg) . ' 2>&1 | tee g.runresult')
 
     if &diff
-        call s:Gs()
-        on
         set winwidth=999999
         wincmd |
         syntax on
         windo diffoff
         windo set wrap
-        e
     endif
 endfunction
 
