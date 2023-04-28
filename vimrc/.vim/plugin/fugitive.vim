@@ -462,7 +462,7 @@ endfunction
 
 function! s:Gmet() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'git mergetool')
+    call AsyncRunShellCommand('git mergetool')
 endfunction
 
 function! s:Gicb() abort
@@ -474,7 +474,7 @@ function! s:Gitk(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
     let arg2 = (a:0 >= 2) ? a:2 : ''
-    call asyncrun#run('<bang>', '', 'gitk ' . '"' .  arg1 . '"' . ' ' . '"' .  arg2 . '"')
+    call AsyncRunShellCommand('gitk ' . '"' .  arg1 . '"' . ' ' . '"' .  arg2 . '"')
 endfunction
 
 function! s:Gbrm(...) abort
