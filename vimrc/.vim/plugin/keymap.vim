@@ -113,9 +113,7 @@ function! PlayVideo()
     let line = substitute(line, '\_s\+$', '', 'g')
     let line = substitute(line, '^[^"]', '"' . line[0], '')
     let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
-
-    " Run the vlc.sh script with the current file's directory and the modified line as arguments
-    exec '!~/loadrc/vishrc/vlc.sh "' . expand("%:p:h") . '" ' . line
+    call AsyncRunShellCommand('~/loadrc/pythonrc/vlc.sh ' . '"' . expand("%:p") . '"' .  ' ' . line)
 endfunction
 
 function! VDebug()
@@ -172,7 +170,7 @@ function! VRun()
     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
 
     if (expand("%") =~ '.*leetcode.*')
-        call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/post_submit.sh ' . '"' .  b:file_name . '"' . ' 2>&1 | tee post_submit.log')
+        call AsyncRunShellCommand('~/loadrc/leetcoderc/post_submit.sh ' . '"' .  b:file_name . '"' . ' 2>&1 | tee post_submit.log')
     endif
 
     if b:to_run != 'gbil.log'
@@ -181,7 +179,7 @@ function! VRun()
         call OpenOrSwitch('gbil.log', 'vs')
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+    call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 endfunction
 
 function! SearchAgain()
@@ -232,7 +230,7 @@ endfunction
 
 function! ShowDiff()
     let b:commit = expand("<cword>")
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"')
+    call AsyncRunShellCommand('~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"')
 endfunction
 
 function! Prune()
@@ -292,12 +290,12 @@ function! KdiffAll()
 
     only
     call asyncrun#stop('<bang>')
-    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
+    call AsyncRunShellCommand('~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
 endfunction
 
 function! UpdateProj()
     call Cd2ProjectRoot("files.proj")
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+    call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
     call CHANGE_CURR_DIR()
 endfunction
 
@@ -336,7 +334,7 @@ function! VimOpen()
         exec '!git checkout ' . '"' .  b:commit . '"'
     elseif (expand("%") ==# 'dps.findresult')
         let b:commit = expand("<cword>")
-        call asyncrun#run('<bang>', '', '~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
+        call AsyncRunShellCommand('~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
     elseif (expand("%") ==# 'fdocs.list')
         exec '!open ' . '"' .  expand(expand("<cfile>")) . '"'
     elseif (b:fileName =~ '.*.diff$')
@@ -492,7 +490,7 @@ map <F3> :call VDebug()<cr>
 " nnoremap gf gF<cr>
 nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
 map oo :call VimOpen()<cr>
-nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
+nnoremap <silent> <leader>g :call AsyncRunShellCommand('gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
 nnoremap <leader>1 :let @" = expand("%:p")<CR>
 
 function! CutFile2()
