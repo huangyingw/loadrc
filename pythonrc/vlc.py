@@ -1,51 +1,31 @@
 #!/usr/bin/env python3
-from handle_vtt import *
-from os import path
-import platform
-import subprocess
-import sys
-
-fileVar = sys.argv[1]
-lineVar = sys.argv[2]
-targetFile = path.dirname(fileVar) + "/" + lineVar
+# vlc.py
+import re
 
 
-def callvlc(targetFile, start=0):
-    if targetFile:
-        if platform.system() == "Darwin":
-            if start == 0:
-                subprocess.check_call(
-                    [
-                        "/Applications/VLC.app/Contents/MacOS/VLC",
-                        "--sub-language",
-                        "Chinese",
-                        "--sub-autodetect-file",
-                        "-f",
-                        "--macosx-continue-playback=2",
-                        "--rate=2.0",
-                        targetFile,
-                    ]
-                )
-            else:
-                subprocess.check_call(
-                    [
-                        "/Applications/VLC.app/Contents/MacOS/VLC",
-                        "--sub-language",
-                        "Chinese",
-                        "--sub-autodetect-file",
-                        "-f",
-                        "--macosx-continue-playback=2",
-                        "--start-time=" + str(start),
-                        targetFile,
-                    ]
-                )
-        else:
-            subprocess.check_call(["smplayer", "-fullscreen", targetFile])
+def split_string(string):
+    # Split string into path and time using regex
+    pattern = r"^(.*?)(?::(\d{1,2}:\d{1,2}(?::\d{1,2})?))$"
+    match = re.match(pattern, string)
+    if match:
+        path = match.group(1)
+        time = match.group(2)
+        return path, time
+    else:
+        return None
 
 
-if path.exists(targetFile):
-    callvlc(targetFile)
-else:
-    start = parse_vtt_str(lineVar)
-    targetFile = find_vtt_video(fileVar)
-    callvlc(targetFile, start)
+# Example usage
+string = "./mapper/usb_backup_crypt_8T_1/115download/[7sht.me]MKBD-S118-C/9 MKBD-S118-C.mp4:32:57"
+path, time = split_string(string)
+print(
+    path
+)  # ./mapper/usb_backup_crypt_8T_1/115download/[7sht.me]MKBD-S118-C/9 MKBD-S118-C.mp4
+print(time)  # 32:57
+
+string = "./mapper/usb_backup_crypt_8T_1/115download/031215_043-1pon-1080p.mp4/9 uncensored 031215_043-1pon-1080p:02:17:17"
+path, time = split_string(string)
+print(
+    path
+)  # ./mapper/usb_backup_crypt_8T_1/115download/031215_043-1pon-1080p.mp4/9 uncensored 031215_043-1pon-1080p
+print(time)  # 02:17:17
