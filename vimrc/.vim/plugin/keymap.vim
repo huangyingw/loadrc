@@ -113,7 +113,7 @@ function! PlayVideo()
     let line = substitute(line, '\_s\+$', '', 'g')
     let line = substitute(line, '^[^"]', '"' . line[0], '')
     let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
-    call AsyncRunShellCommand('~/loadrc/pythonrc/vlc.sh ' . '"' . expand("%:p") . '"' .  ' ' . line)
+    call AsyncRunShellCommand('~/loadrc/pythonrc/vlc.py ' . '"' . expand("%:p") . '"' .  ' ' . line)
 endfunction
 
 function! VDebug()
