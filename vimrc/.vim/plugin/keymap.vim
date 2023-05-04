@@ -103,10 +103,12 @@ function! Filter()
 endfunction
 
 function! PlayVideo()
+    " Return early if the buffer type is a terminal
     if &buftype ==# "terminal"
         return 0
     endif
 
+    " Get the current line and remove trailing spaces
     let line = getline('.')
     let line = substitute(line, '\_s\+$', '', 'g')
     let line = substitute(line, '^[^"]', '"' . line[0], '')
