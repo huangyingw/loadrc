@@ -20,7 +20,7 @@ else
 
     for ss in $(git config --get-all gdio.ignore)
     do
-        COMMAND="$COMMAND  ':(exclude)$ss'"
+        COMMAND="$COMMAND -- ':(exclude)$ss'"
     done
 fi
 
@@ -28,16 +28,19 @@ if [[ -n "$3" ]] && [[ "$3" = "gdit" ]]
 then
     for ss in $(git config --get-all gdit.ignore)
     do
-        COMMAND="$COMMAND  ':(exclude)$ss'"
+        COMMAND="$COMMAND -- ':(exclude)$ss'"
     done
 fi
 
-# Check if a git config with a relative path is set
-relative_path=$(git config --get custom.relative-path)
+scope_path=$(git config --get scope.path)
 
-if [[ -n "$relative_path" ]]
+if [[ -n "$scope_path" ]]
 then
-    COMMAND="$COMMAND -- $relative_path"
+    COMMAND="$COMMAND -- $scope_path"
 fi
 
+# Disable filename expansion
+setopt NO_NOMATCH
 eval "$COMMAND" | sed 's/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g;/^index [0-9a-f]*[0-9a-f]*/d'
+# Enable filename expansion
+unsetopt NO_NOMATCH
