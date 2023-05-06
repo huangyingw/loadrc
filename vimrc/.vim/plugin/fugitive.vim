@@ -366,7 +366,7 @@ function! s:Hdi() abort
     silent exec '!~/loadrc/hgrc/hdi.sh' . ' HEAD 2>&1 | tee ' . '"' .  output . '"'
 
     if bufwinnr('^' . output . '$') > 0
-        exe "bd!" . output
+        silent exec "bd!" . output
     endif
 
     call OpenOrSwitch(output, 'vs')
@@ -396,7 +396,7 @@ function! s:Gdi(...) abort
     endif
 
     if bufwinnr('^' . output . '$') > 0
-        exe "bd!" . output
+        silent exec "bd!" . output
     endif
 
     let worktree = Cd2Worktree()
@@ -411,7 +411,7 @@ function! s:Gdit() abort
     exec '!~/loadrc/gitrc/gdit.sh' . ' ' . '"' .  output . '" 2>&1 | tee ' . 'gdit.runresult'
 
     if bufwinnr('^' . output . '$') > 0
-        exe "bd!" . output
+        silent exec "bd!" . output
     endif
 
     let worktree = Cd2Worktree()
@@ -427,7 +427,7 @@ function! s:Gdio(...) abort
     exec '!~/loadrc/gitrc/gdio.sh'
 
     if bufwinnr('^' . output . '$') > 0
-        exe "bd!" . output
+        silent exec "bd!" . output
     endif
 
     let worktree = Cd2Worktree()
@@ -852,8 +852,24 @@ endfunction
 
 function! s:RelativePath() abort
     let worktree = Cd2Worktree()
-    let relativePath = substitute(system('realpath --relative-to="' . expand("%:h") . '" "' . getline(line(".")) . '"'), '\n', '', '')
-    call setline('.', relativePath)
+    let file_path = getline(line("."))
+    let file_path = substitute(file_path, '\\', '/', 'g') " Replace backslashes with forward slashes
+
+    python3 << EOF
+import os
+import vim
+
+file_path = vim.eval('file_path')
+current_dir = vim.eval('expand("%:p:h")')
+
+try:
+    relative_path = os.path.relpath(file_path, current_dir)
+    relative_path = relative_path.replace('/ ', '\\ ')
+    vim.command("call setline('.', '{}')".format(relative_path))
+except Exception as e:
+    vim.command("echo 'Error: {}'".format(str(e)))
+EOF
+
 endfunction
 
 function! s:Split() abort
