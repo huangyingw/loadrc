@@ -20,7 +20,8 @@ else
 
     for ss in $(git config --get-all gdio.ignore)
     do
-        COMMAND="$COMMAND -- ':(exclude)$ss'"
+        ss=${ss//\"/\\\"}
+        COMMAND="$COMMAND \":(exclude)$ss\""
     done
 fi
 
@@ -28,7 +29,8 @@ if [[ -n "$3" ]] && [[ "$3" = "gdit" ]]
 then
     for ss in $(git config --get-all gdit.ignore)
     do
-        COMMAND="$COMMAND -- ':(exclude)$ss'"
+        ss=${ss//\"/\\\"}
+        COMMAND="$COMMAND \":(exclude)$ss\""
     done
 fi
 
@@ -36,11 +38,21 @@ scope_path=$(git config --get scope.path)
 
 if [[ -n "$scope_path" ]]
 then
-    COMMAND="$COMMAND -- $scope_path"
+    COMMAND="$COMMAND -- \"$scope_path\""
+else
+    COMMAND="$COMMAND -- :/"
 fi
 
-# Disable filename expansion
-setopt NO_NOMATCH
-eval "$COMMAND" | sed 's/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g;/^index [0-9a-f]*[0-9a-f]*/d'
-# Enable filename expansion
-unsetopt NO_NOMATCH
+# Save the current options
+SAVED_OPTS=$(setopt | grep NOMATCH)
+# Temporarily disable filename expansion
+setopt LOCAL_OPTIONS NO_NOMATCH
+
+# Run the command without stderr output
+diff_output=$(eval "$COMMAND" 2>/dev/null)
+
+# Restore the previous options
+if [[ -n "$SAVED_OPTS" ]]; then setopt $SAVED_OPTS; else unsetopt NOMATCH; fi
+
+# Process the diff output
+echo "$diff_output" | sed 's/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g;/^index [0-9a-f]*[0-9a-f]*/d'
