@@ -843,6 +843,7 @@ function! s:Reapply() abort
 endfunction
 
 function! s:GetOldestCommitByMe() abort
+    let worktree = Cd2Worktree()
     let l:script_path = "~/loadrc/gitrc/oldest_commit_by_me.sh"
     let l:output = "oldest_commit_by_me.runresult"
     
