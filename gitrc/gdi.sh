@@ -32,4 +32,12 @@ then
     done
 fi
 
+# Check if a git config with a relative path is set
+relative_path=$(git config --get custom.relative-path)
+
+if [[ -n "$relative_path" ]]
+then
+    COMMAND="$COMMAND -- $relative_path"
+fi
+
 eval "$COMMAND" | sed 's/^--- a\//--- \.\//g;s/^+++ b\//+++ \.\//g;/^index [0-9a-f]*[0-9a-f]*/d'
