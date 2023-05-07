@@ -19,12 +19,13 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotin
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fsync :execute s:Fsync()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject G call s:G(<q-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GResolveConflicts :execute s:GResolveConflicts()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Ga :execute s:Ga(<q-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gapply :execute s:Gapply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbib :execute s:Gbib()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbidebug :execute s:Gbidebug()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbig :execute s:Gbig()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbil :execute s:Gbil()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GetOldestCommitByMe :execute s:GetOldestCommitByMe()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbis :execute s:Gbis()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbr :execute s:Gbr()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbra :execute s:Gbra()
@@ -43,12 +44,11 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdif :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdio :execute s:Gdio(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdit :execute s:Gdit()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GenerateIpynb :execute s:GenerateIpynb()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GetOldestCommitByMe :execute s:GetOldestCommitByMe()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gfix :execute s:Gfix()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gicb :execute s:Gicb()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gitk :execute s:Gitk(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkd :execute s:Gkd(<f-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GResolveConflicts :execute s:GResolveConflicts()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gapply :execute s:Gapply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkdo :execute s:Gkdo()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glf :execute s:Glf()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glg :execute s:Glg()
@@ -56,7 +56,6 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gme2 :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GrevApply :execute s:GrevApply()
-command! -bang -bar -nargs=1 -complete=customlist,fugitive#CompleteObject Gmrg :execute s:MergeWithResolution(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtu :execute s:Grtu()
@@ -79,6 +78,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Jforma
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject KdiffFile :execute s:KdiffFile()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest :execute s:LcTest()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject MigrateFolders call s:FolderContentMigrator()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Portsforward :execute s:Portsforward()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
@@ -95,6 +95,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SvnRev
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SvnSt :execute s:SvnSt()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SvnUp :execute s:SvnUp()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Tail :execute s:Tail()
+command! -bang -bar -nargs=1 -complete=customlist,fugitive#CompleteObject Gmrg :execute s:MergeWithResolution(<f-args>)
 
 function! s:LogFilter(...) abort
     let worktree = Cd2Worktree()
@@ -909,5 +910,30 @@ function! s:CustomFolderFinder(search_directory, folder_name)
     execute l:command
     call OpenOrSwitch('custom_folder_finder.runresult', 'vs')
 endfunction
+
+function! s:FolderContentMigrator()
+    " Get the lines from the current buffer
+    let lines = getline(1, '$')
+
+    " Check if there are at least two lines
+    if len(lines) < 2
+        echo "Error: Not enough lines in the buffer."
+        return
+    endif
+
+    " Get the source and target folders
+    let target_folder = lines[0]
+    let source_folders = lines[1:]
+
+    " Call the folder_content_migrator.zsh script for each source folder
+    let script_path = "~/loadrc/zshrc/folder_content_migrator.zsh"
+    for source_folder in source_folders
+        let command = '!' . l:script_path . ' ' . l:source_folder . ' ' . l:target_folder . ' 2>&1 | tee ' . 'folder_content_migrator.runresult'
+        execute command
+    endfor
+    call OpenOrSwitch('folder_content_migrator.runresult', 'vs')
+endfunction
+
+
 
 let g:fugitive_legacy_commands = 1
