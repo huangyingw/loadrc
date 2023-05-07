@@ -14,9 +14,9 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fcscop
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fdisklog :execute s:Fdisklog()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FileMove :execute s:FileMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDeleted :execute s:FindDeleted()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindFolder call s:CustomFolderFinder(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GetOldestCommitByMe :execute s:GetOldestCommitByMe()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fsync :execute s:Fsync()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject G call s:G(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Ga :execute s:Ga(<q-args>)
@@ -24,6 +24,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbib :
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbidebug :execute s:Gbidebug()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbig :execute s:Gbig()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbil :execute s:Gbil()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GetOldestCommitByMe :execute s:GetOldestCommitByMe()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbis :execute s:Gbis()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbr :execute s:Gbr()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbra :execute s:Gbra()
@@ -899,6 +900,14 @@ function! s:MergeWithResolution(branch_to_merge)
     let worktree = Cd2Worktree()
     exec '!~/loadrc/gitrc/merge_with_resolution.sh ' . '"' .  a:branch_to_merge . '" 2>&1 | tee ' . 'merge_with_resolution.runresult'
     call OpenOrSwitch('merge_with_resolution.runresult', 'vs')
+endfunction
+
+function! s:CustomFolderFinder(search_directory, folder_name)
+    let worktree = Cd2Worktree()
+    let l:script_path = "~/loadrc/zshrc/custom_folder_finder.zsh"
+    let l:command = '!' . l:script_path . ' ' . a:search_directory . ' ' . a:folder_name . ' 2>&1 | tee ' . 'custom_folder_finder.runresult'
+    execute l:command
+    call OpenOrSwitch('custom_folder_finder.runresult', 'vs')
 endfunction
 
 let g:fugitive_legacy_commands = 1
