@@ -16,8 +16,9 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FileMo
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDeleted :execute s:FindDeleted()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GetOldestCommitByMe :execute s:GetOldestCommitByMe()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fsync :execute s:Fsync()
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject G :execute s:G()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject G call s:G(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Ga :execute s:Ga(<q-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbib :execute s:Gbib()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbidebug :execute s:Gbidebug()
@@ -97,12 +98,12 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Tail :
 function! s:LogFilter(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/logFilter.sh ' . '"' .  expand('%:p') . '" "' .  arg1 . '"')
+    call AsyncRunShellCommand('~/loadrc/bashrc/logFilter.sh ' . '"' .  expand('%:p') . '" "' .  arg1 . '"')
 endfunction
 
 function! s:Jformat(...) abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/jformat.sh ')
+    call AsyncRunShellCommand('~/loadrc/bashrc/jformat.sh')
 endfunction
 
 function! s:Gkd(...) abort
@@ -110,15 +111,15 @@ function! s:Gkd(...) abort
 
     if expand('%:t') != 'index'
         if a:0 == 0
-            call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . 'HEAD ' . '"' .  expand('%:p') . '"')
+            call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . 'HEAD ' . '"' .  expand('%:p') . '"')
         else
             let arg1 = (a:0 >= 1) ? a:1 : ''
-            call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  expand('%:p') . '"')
+            call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  expand('%:p') . '"')
         endif
     else
         let arg1 = (a:0 >= 1) ? a:1 : ''
         let arg2 = (a:0 >= 2) ? a:2 : ''
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
+        call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
     endif
 endfunction
 
@@ -127,38 +128,38 @@ function! s:Gkdo() abort
     let target = substitute(system("git config gsync.target"), '\n', '', '')
 
     if expand('%:t') != 'index'
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '" "' .  expand('%:p') . '"')
+        call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . '"' .  target . '" "' .  expand('%:p') . '"')
     else
-        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '"')
+        call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . '"' .  target . '"')
     endif
 endfunction
 
 function! s:Ga(args, ...) abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/ga.sh ' . '"' .  a:args . '"')
+    call AsyncRunShellCommand('~/loadrc/gitrc/ga.sh ' . '"' .  a:args . '"')
 endfunction
 
 function! s:Gsave() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsave.sh')
+    call AsyncRunShellCommand('~/loadrc/gitrc/gsave.sh')
 endfunction
 
 function! s:Gst() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gst.sh')
+    call AsyncRunShellCommand('~/loadrc/gitrc/gst.sh')
 endfunction
 
 function! s:Gcp(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
     let arg2 = (a:0 >= 2) ? a:2 : ''
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gcp.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
+    call AsyncRunShellCommand('~/loadrc/gitrc/gcp.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
 endfunction
 
 function! s:BinaryGrep(...) abort
     call Cd2ProjectRoot("files.proj")
     let b:keyword = (a:0 >= 1) ? a:1 : ''
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/binaryGrep.sh ' . '"' .  b:keyword . '"')
+    call AsyncRunShellCommand('~/loadrc/bashrc/binaryGrep.sh ' . '"' .  b:keyword . '"')
     let b:keyword = substitute(b:keyword, " ", "_", "g")
     let b:keyword = substitute(b:keyword, "/", "_", "g")
     call OpenOrSwitch(b:keyword . '.binaryGrep.findresult', 'vs')
@@ -166,13 +167,13 @@ endfunction
 
 function! s:Fnotinuse() abort
     call Cd2ProjectRoot("files.proj")
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fnotinuse.sh')
+    call AsyncRunShellCommand('~/loadrc/bashrc/fnotinuse.sh')
     call OpenOrSwitch('fnotinuse.findresult', 'vs')
 endfunction
 
 function! s:Fcscope() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fcscope.sh')
+    call AsyncRunShellCommand('~/loadrc/bashrc/fcscope.sh')
 endfunction
 
 
@@ -196,17 +197,17 @@ endfunction
 
 function! s:Gps() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gps.sh 2>&1 | tee gps.findresult')
+    call AsyncRunShellCommand('~/loadrc/gitrc/gps.sh 2>&1 | tee gps.findresult')
 endfunction
 
 function! s:Gstp(args, ...) abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gstp.sh ' . '"' .  a:args . '"')
+    call AsyncRunShellCommand('~/loadrc/gitrc/gstp.sh ' . '"' .  a:args . '"')
 endfunction
 
 function! s:Gstv(args, ...) abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gstv.sh ' . '"' .  a:args . '"')
+    call AsyncRunShellCommand('~/loadrc/gitrc/gstv.sh ' . '"' .  a:args . '"')
 endfunction
 
 function! s:Gcof(...) abort
@@ -225,7 +226,7 @@ endfunction
 
 function! s:Fsync() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/fsync.sh 2>&1 | tee fsync.findresult')
+    call AsyncRunShellCommand('~/loadrc/gitrc/fsync.sh 2>&1 | tee fsync.findresult')
     call OpenOrSwitch('fsync.findresult', 'vs')
 endfunction
 
@@ -287,7 +288,7 @@ endfunction
 
 function! s:Gsync() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsync.sh 2>&1 | tee gsync.findresult')
+    call AsyncRunShellCommand('~/loadrc/gitrc/gsync.sh 2>&1 | tee gsync.findresult')
     call OpenOrSwitch('gsync.findresult', 'vs')
 endfunction
 
@@ -305,7 +306,7 @@ endfunction
 
 function! s:Gsti() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsti.sh')
+    call AsyncRunShellCommand('~/loadrc/gitrc/gsti.sh')
 endfunction
 
 function! s:Gstl() abort
@@ -316,7 +317,7 @@ endfunction
 
 function! s:Gstlv() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gstlv.sh')
+    call AsyncRunShellCommand('~/loadrc/gitrc/gstlv.sh')
 endfunction
 
 function! s:Gme2(args, ...) abort
@@ -325,9 +326,9 @@ function! s:Gme2(args, ...) abort
     call OpenOrSwitch(worktree . '/' . 'gme2.findresult', 'vs')
 endfunction
 
-function! s:G() abort
-    " Prompt for the commit message
-    let msg = input('Enter commit message: ')
+function! s:G(message) abort
+    let msg = empty(a:message) ? '' : input('Enter commit message: ')
+
     if &modified
         echom 'Please check and save your file first!!!'
         return 0
@@ -338,27 +339,25 @@ function! s:G() abort
     endif
 
     if &diff
-        exec '!git reset HEAD ; git add ' . '"' .  expand('%:p') . '"'
+        silent exec '!git reset HEAD ; git add ' . shellescape(expand('%:p'))
     endif
 
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  msg . '" 2>&1 | tee g.runresult')
+    call AsyncRunShellCommand('~/loadrc/gitrc/g.sh ' . shellescape(msg) . ' 2>&1 | tee g.runresult')
 
     if &diff
-        call s:Gs()
         on
         set winwidth=999999
         wincmd |
         syntax on
         windo diffoff
         windo set wrap
-        e
     endif
 endfunction
 
 function! s:Gdev() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gdev.sh')
+    call AsyncRunShellCommand('~/loadrc/gitrc/gdev.sh')
 endfunction
 
 function! s:Hdi() abort
@@ -368,7 +367,7 @@ function! s:Hdi() abort
     silent exec '!~/loadrc/hgrc/hdi.sh' . ' HEAD 2>&1 | tee ' . '"' .  output . '"'
 
     if bufwinnr('^' . output . '$') > 0
-        exe "bd!" . output
+        silent exec "bd!" . output
     endif
 
     call OpenOrSwitch(output, 'vs')
@@ -398,7 +397,7 @@ function! s:Gdi(...) abort
     endif
 
     if bufwinnr('^' . output . '$') > 0
-        exe "bd!" . output
+        silent exec "bd!" . output
     endif
 
     let worktree = Cd2Worktree()
@@ -413,7 +412,7 @@ function! s:Gdit() abort
     exec '!~/loadrc/gitrc/gdit.sh' . ' ' . '"' .  output . '" 2>&1 | tee ' . 'gdit.runresult'
 
     if bufwinnr('^' . output . '$') > 0
-        exe "bd!" . output
+        silent exec "bd!" . output
     endif
 
     let worktree = Cd2Worktree()
@@ -429,7 +428,7 @@ function! s:Gdio(...) abort
     exec '!~/loadrc/gitrc/gdio.sh'
 
     if bufwinnr('^' . output . '$') > 0
-        exe "bd!" . output
+        silent exec "bd!" . output
     endif
 
     let worktree = Cd2Worktree()
@@ -462,19 +461,19 @@ endfunction
 
 function! s:Gmet() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', 'git mergetool')
+    call AsyncRunShellCommand('git mergetool')
 endfunction
 
 function! s:Gicb() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gicb.sh')
+    call AsyncRunShellCommand('~/loadrc/gitrc/gicb.sh')
 endfunction
 
 function! s:Gitk(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
     let arg2 = (a:0 >= 2) ? a:2 : ''
-    call asyncrun#run('<bang>', '', 'gitk ' . '"' .  arg1 . '"' . ' ' . '"' .  arg2 . '"')
+    call AsyncRunShellCommand('gitk ' . '"' .  arg1 . '"' . ' ' . '"' .  arg2 . '"')
 endfunction
 
 function! s:Gbrm(...) abort
@@ -516,7 +515,7 @@ function! s:Gcob(...) abort
     let worktree = Cd2Worktree()
     let arg1 = (a:0 >= 1) ? a:1 : ''
     let arg2 = (a:0 >= 2) ? a:2 : ''
-    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gcob.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
+    call AsyncRunShellCommand('~/loadrc/gitrc/gcob.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
 endfunction
 
 function! s:Dodev() abort
@@ -527,7 +526,7 @@ endfunction
 function! s:KdiffFile() abort
     only
     call asyncrun#stop('<bang>')
-    call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/KdiffFile.py ' . '"' .  expand("%:p") . '"')
+    call AsyncRunShellCommand('~/loadrc/leetcoderc/KdiffFile.py ' . '"' .  expand("%:p") . '"')
 endfunction
 
 function! s:ApplyBranch(args, ...) abort
@@ -539,7 +538,7 @@ endfunction
 function! s:Gcom(args, ...) abort
     let worktree = Cd2Worktree()
     let output = 'gcom.runresult'
-    exec '!~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"' . ' 2>&1 | tee ' . '"' .  output . '"' 
+    exec '!~/loadrc/gitrc/gcom.sh ' . '"' .  a:args . '"' . ' 2>&1 | tee ' . '"' .  output . '"'
     call OpenOrSwitch(output, 'vs')
 endfunction
 
@@ -577,7 +576,7 @@ function! s:CatPlay(...) abort
 
     call asyncrun#stop('<bang>')
     let b:output = expand("%:p") . '.runresult'
-    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output)
+    call AsyncRunShellCommand('~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output)
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
@@ -597,7 +596,7 @@ function! s:SelectMove(...) abort
         exec '!' . '"' . a:2 . '"'
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+    call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 endfunction
 
 function! s:CatMove(...) abort
@@ -610,7 +609,7 @@ function! s:CatMove(...) abort
         exec '!~/loadrc/vishrc/cat_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+    call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 endfunction
 
 function! s:FileMove(...) abort
@@ -632,7 +631,7 @@ function! s:FileMove(...) abort
 
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+    call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 endfunction
 
 
@@ -654,7 +653,7 @@ function! s:AppendRate(...) abort
 
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+    call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 endfunction
 
 function! s:CatBadFiles(...) abort
@@ -670,7 +669,7 @@ function! s:CatBadFiles(...) abort
     endif
 
     call OpenOrSwitch('cat_bad_files.runresult', 'vs')
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+    call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 endfunction
 
 function! s:CatRate(...) abort
@@ -683,7 +682,7 @@ function! s:CatRate(...) abort
         exec '!~/loadrc/vishrc/cat_rate.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
     endif
 
-    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
+    call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 endfunction
 
 function! s:RmCat(...) abort
@@ -749,7 +748,7 @@ endfunction
 
 function! s:SvnUp() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/svnrc/svnup.sh')
+    call AsyncRunShellCommand('~/loadrc/svnrc/svnup.sh')
 endfunction
 
 function! s:SvnReset() abort
@@ -760,7 +759,7 @@ endfunction
 
 function! s:SvnRevert() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/svnrc/svnrevert.sh ' . '"' .  expand('%:p') . '"')
+    call AsyncRunShellCommand('~/loadrc/svnrc/svnrevert.sh ' . '"' .  expand('%:p') . '"')
 endfunction
 
 function! s:SvnSt() abort
@@ -771,12 +770,12 @@ endfunction
 
 function! s:SvnApply() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/svnrc/svnapply.sh')
+    call AsyncRunShellCommand('~/loadrc/svnrc/svnapply.sh')
 endfunction
 
 function! s:SvnDiff() abort
     let worktree = Cd2Worktree()
-    call asyncrun#run('<bang>', '', '~/loadrc/svnrc/svndiff.sh ' . '"' .  expand('%:p') . '"')
+    call AsyncRunShellCommand('~/loadrc/svnrc/svndiff.sh ' . '"' .  expand('%:p') . '"')
 endfunction
 
 function! s:LcTest() abort
@@ -794,7 +793,7 @@ function! s:Portsforward() abort
 endfunction
 
 function! s:Prune() abort
-    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
+    call AsyncRunShellCommand('~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
 endfunction
 
 function! s:Fr(...) abort
@@ -843,10 +842,36 @@ function! s:Reapply() abort
     call s:Gs()
 endfunction
 
+function! s:GetOldestCommitByMe() abort
+    let worktree = Cd2Worktree()
+    let l:script_path = "~/loadrc/gitrc/oldest_commit_by_me.sh"
+    let l:output = "oldest_commit_by_me.runresult"
+    
+    silent exec "! " . l:script_path . " 2>&1 | tee " . l:output
+    
+    call OpenOrSwitch(l:output, 'vs')
+endfunction
+
 function! s:RelativePath() abort
     let worktree = Cd2Worktree()
-    let relativePath = substitute(system('realpath --relative-to="' . expand("%:h") . '" "' . getline(line(".")) . '"'), '\n', '', '')
-    call setline('.', relativePath)
+    let file_path = getline(line("."))
+    let file_path = substitute(file_path, '\\', '/', 'g') " Replace backslashes with forward slashes
+
+    python3 << EOF
+import os
+import vim
+
+file_path = vim.eval('file_path')
+current_dir = vim.eval('expand("%:p:h")')
+
+try:
+    relative_path = os.path.relpath(file_path, current_dir)
+    relative_path = relative_path.replace('/ ', '\\ ')
+    vim.command("call setline('.', '{}')".format(relative_path))
+except Exception as e:
+    vim.command("echo 'Error: {}'".format(str(e)))
+EOF
+
 endfunction
 
 function! s:Split() abort

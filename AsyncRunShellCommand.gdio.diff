@@ -14150,7 +14150,7 @@ diff --git a/gitrc/g.sh b/gitrc/g.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/g.sh
-@@ -0,0 +1,23 @@
+@@ -0,0 +1,49 @@
 +#!/bin/zsh
 +
 +# Include git configuration
@@ -14165,15 +14165,41 @@ new file mode 100755
 +    exit 1
 +fi
 +
++# Initialize commit message variable
++commit_message=""
++
++# Check if there is an ongoing merge
++if [ -f "$git_directory/MERGE_MSG" ] && [ -s "$git_directory/MERGE_MSG" ]; then
++    commit_message=$(cat "$git_directory/MERGE_MSG")
++    # Check if there is a COMMIT_EDITMSG file
++elif [ -f "$git_directory/COMMIT_EDITMSG" ]; then
++    commit_message=$(cat "$git_directory/COMMIT_EDITMSG")
++fi
++
 +# Use the first argument as the commit message if provided
 +if [ -n "$1" ]; then
-+    git commit -m "$1"
-+else
-+    git commit --no-edit || git commit -m "fallback commit message"
++    commit_message="$1"
 +fi
++
++# Use a default commit message if none is set
++if [ -z "$commit_message" ]; then
++    commit_message="n"
++fi
++
++# Try committing without editing the message or use the provided message
++git commit --no-edit || git commit -m "$commit_message"
 +
 +# Run post-commit script
 +~/loadrc/gitrc/postCommit.sh
++
++# Empty the COMMIT_EDITMSG and MERGE_MSG files after a successful commit
++if [ -f "$git_directory/COMMIT_EDITMSG" ]; then
++    echo "" > "$git_directory/COMMIT_EDITMSG"
++fi
++
++if [ -f "$git_directory/MERGE_MSG" ]; then
++    echo "" > "$git_directory/MERGE_MSG"
++fi
 diff --git a/gitrc/ga.sh b/gitrc/ga.sh
 new file mode 100755
 --- /dev/null
@@ -17920,7 +17946,7 @@ diff --git a/install_prerequisite.sh b/install_prerequisite.sh
 new file mode 100755
 --- /dev/null
 +++ ./install_prerequisite.sh
-@@ -0,0 +1,91 @@
+@@ -0,0 +1,90 @@
 +#!/bin/bash
 +
 +apt-get upgrade -y
@@ -17979,7 +18005,6 @@ new file mode 100755
 +    pv \
 +    pwgen \
 +    python3-autopep8 \
-+    python3-pynvim \
 +    python3-software-properties \
 +    rarcrack \
 +    resolvconf \
@@ -20831,7 +20856,7 @@ new file mode 160000
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit d3a65b67e54e10baf71da1cd211bbc6f80455388
++Subproject commit 0de21870d03accdd9c5a12e0615eaa119caa1962
 diff --git a/ruleref.list b/ruleref.list
 new file mode 100644
 --- /dev/null
@@ -28842,7 +28867,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit ee4ef314bd990b2b05b7fbd95b857159e444a2fe
++Subproject commit 12003d9727bc5074ccb405b3d80e691c72d4859b
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 new file mode 160000
 --- /dev/null
@@ -29028,7 +29053,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/swift.vim
 @@ -0,0 +1 @@
-+Subproject commit 51108a710e194c0c75f1cf4683650faa407fab6b
++Subproject commit ba6f6cef58d08ac741aaf1626d3799d476cd43b6
 diff --git a/vimrc/.vim/bundle/taglist-plus/README.md b/vimrc/.vim/bundle/taglist-plus/README.md
 new file mode 100644
 --- /dev/null
@@ -35330,7 +35355,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -0,0 +1 @@
-+Subproject commit dacffc9f06eee05fe29fabf0c216d532de5d2433
++Subproject commit a5feb70e55c013bff2003d41592222cd75d0c9b2
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 --- /dev/null
@@ -41062,6 +41087,26 @@ new file mode 100644
 +augroup WordCounter
 +  au! CursorHold,CursorHoldI * call UpdateWordCount()
 +augroup END
+diff --git a/vimrc/.vim/plugin/async_shell.vim b/vimrc/.vim/plugin/async_shell.vim
+new file mode 100644
+--- /dev/null
++++ ./vimrc/.vim/plugin/async_shell.vim
+@@ -0,0 +1,15 @@
++function! AsyncRunShellCommand(cmd)
++  let jobid = jobstart(a:cmd, {'on_stdout': 'AsyncRunShellCommand_on_stdout', 'on_stderr': 'AsyncRunShellCommand_on_stderr', 'on_exit': 'AsyncRunShellCommand_on_exit'})
++endfunction
++
++function! AsyncRunShellCommand_on_stdout(jobid, data, event)
++  " process stdout data if needed
++endfunction
++
++function! AsyncRunShellCommand_on_stderr(jobid, data, event)
++  " process stderr data if needed
++endfunction
++
++function! AsyncRunShellCommand_on_exit(jobid, exitcode, event)
++  " process exit event if needed
++endfunction
 diff --git a/vimrc/.vim/plugin/auto_cscope.vim b/vimrc/.vim/plugin/auto_cscope.vim
 new file mode 100644
 --- /dev/null
@@ -41087,7 +41132,7 @@ new file mode 100644
 +        return
 +    endif
 +
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
++    call AsyncRunShellCommand('~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult')
 +    call CHANGE_CURR_DIR()
 +endfunction
 +
@@ -41164,7 +41209,7 @@ diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vim/plugin/common.vim
-@@ -0,0 +1,333 @@
+@@ -0,0 +1,337 @@
 +function! CHANGE_CURR_DIR()
 +    let _dir = expand("%:p:h")
 +
@@ -41308,10 +41353,10 @@ new file mode 100644
 +        " Remove the trailing newline character
 +        let l:absolute_git_dir = substitute(l:absolute_git_dir, '\n\+$', '', '')
 +
-+        " Check if it's a submodule by looking for '/modules/' in the absolute_git_dir
-+        if l:absolute_git_dir =~ '/modules/'
++        " Check if it's a submodule by looking for '/modules/' or '/.git/modules/' in the absolute_git_dir
++        if l:absolute_git_dir =~ '/modules/\|/\.git/modules/'
 +            " Get the submodule path
-+            let l:submodule_path = substitute(l:absolute_git_dir, '/\.git/modules/[^/]*', '', '')
++            let l:submodule_path = substitute(l:absolute_git_dir, '/\.git/modules/\{-}[^/]*', '', '')
 +
 +            " Return the submodule path
 +            return l:submodule_path
@@ -41443,7 +41488,7 @@ new file mode 100644
 +    let run_string = a:shell . ' ' . '"' .  arg1 . '"' .  ' ' . '2>&1 | tee' . ' ' . temp_log
 +
 +    if async ==? "true"
-+        call asyncrun#run('<bang>', '', ' ' . run_string)
++        call AsyncRunShellCommand(' ' . run_string)
 +    else
 +        if silent ==? "true"
 +            silent exec '!' . run_string
@@ -41462,6 +41507,10 @@ new file mode 100644
 +
 +    if expand('%:e') != 'findresult'
 +        let buffername = b:result . '.findresult'
++
++        if bufexists(buffername)
++            exe 'bd!' . buffername
++        endif
 +
 +        " Save the current buffer content in a variable
 +        let buffer_content = join(getline(1, '$'), "\n")
@@ -41627,12 +41676,12 @@ new file mode 100644
 +function! s:LogFilter(...) abort
 +    let worktree = Cd2Worktree()
 +    let arg1 = (a:0 >= 1) ? a:1 : ''
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/logFilter.sh ' . '"' .  expand('%:p') . '" "' .  arg1 . '"')
++    call AsyncRunShellCommand('~/loadrc/bashrc/logFilter.sh ' . '"' .  expand('%:p') . '" "' .  arg1 . '"')
 +endfunction
 +
 +function! s:Jformat(...) abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/jformat.sh ')
++    call AsyncRunShellCommand('~/loadrc/bashrc/jformat.sh')
 +endfunction
 +
 +function! s:Gkd(...) abort
@@ -41640,15 +41689,15 @@ new file mode 100644
 +
 +    if expand('%:t') != 'index'
 +        if a:0 == 0
-+            call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . 'HEAD ' . '"' .  expand('%:p') . '"')
++            call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . 'HEAD ' . '"' .  expand('%:p') . '"')
 +        else
 +            let arg1 = (a:0 >= 1) ? a:1 : ''
-+            call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  expand('%:p') . '"')
++            call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  expand('%:p') . '"')
 +        endif
 +    else
 +        let arg1 = (a:0 >= 1) ? a:1 : ''
 +        let arg2 = (a:0 >= 2) ? a:2 : ''
-+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
++        call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
 +    endif
 +endfunction
 +
@@ -41657,38 +41706,38 @@ new file mode 100644
 +    let target = substitute(system("git config gsync.target"), '\n', '', '')
 +
 +    if expand('%:t') != 'index'
-+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '" "' .  expand('%:p') . '"')
++        call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . '"' .  target . '" "' .  expand('%:p') . '"')
 +    else
-+        call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gkd.sh ' . '"' .  target . '"')
++        call AsyncRunShellCommand('~/loadrc/gitrc/gkd.sh ' . '"' .  target . '"')
 +    endif
 +endfunction
 +
 +function! s:Ga(args, ...) abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/ga.sh ' . '"' .  a:args . '"')
++    call AsyncRunShellCommand('~/loadrc/gitrc/ga.sh ' . '"' .  a:args . '"')
 +endfunction
 +
 +function! s:Gsave() abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsave.sh')
++    call AsyncRunShellCommand('~/loadrc/gitrc/gsave.sh')
 +endfunction
 +
 +function! s:Gst() abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gst.sh')
++    call AsyncRunShellCommand('~/loadrc/gitrc/gst.sh')
 +endfunction
 +
 +function! s:Gcp(...) abort
 +    let worktree = Cd2Worktree()
 +    let arg1 = (a:0 >= 1) ? a:1 : ''
 +    let arg2 = (a:0 >= 2) ? a:2 : ''
-+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gcp.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
++    call AsyncRunShellCommand('~/loadrc/gitrc/gcp.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
 +endfunction
 +
 +function! s:BinaryGrep(...) abort
 +    call Cd2ProjectRoot("files.proj")
 +    let b:keyword = (a:0 >= 1) ? a:1 : ''
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/binaryGrep.sh ' . '"' .  b:keyword . '"')
++    call AsyncRunShellCommand('~/loadrc/bashrc/binaryGrep.sh ' . '"' .  b:keyword . '"')
 +    let b:keyword = substitute(b:keyword, " ", "_", "g")
 +    let b:keyword = substitute(b:keyword, "/", "_", "g")
 +    call OpenOrSwitch(b:keyword . '.binaryGrep.findresult', 'vs')
@@ -41696,13 +41745,13 @@ new file mode 100644
 +
 +function! s:Fnotinuse() abort
 +    call Cd2ProjectRoot("files.proj")
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fnotinuse.sh')
++    call AsyncRunShellCommand('~/loadrc/bashrc/fnotinuse.sh')
 +    call OpenOrSwitch('fnotinuse.findresult', 'vs')
 +endfunction
 +
 +function! s:Fcscope() abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/fcscope.sh')
++    call AsyncRunShellCommand('~/loadrc/bashrc/fcscope.sh')
 +endfunction
 +
 +
@@ -41726,17 +41775,17 @@ new file mode 100644
 +
 +function! s:Gps() abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gps.sh 2>&1 | tee gps.findresult')
++    call AsyncRunShellCommand('~/loadrc/gitrc/gps.sh 2>&1 | tee gps.findresult')
 +endfunction
 +
 +function! s:Gstp(args, ...) abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gstp.sh ' . '"' .  a:args . '"')
++    call AsyncRunShellCommand('~/loadrc/gitrc/gstp.sh ' . '"' .  a:args . '"')
 +endfunction
 +
 +function! s:Gstv(args, ...) abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gstv.sh ' . '"' .  a:args . '"')
++    call AsyncRunShellCommand('~/loadrc/gitrc/gstv.sh ' . '"' .  a:args . '"')
 +endfunction
 +
 +function! s:Gcof(...) abort
@@ -41755,7 +41804,7 @@ new file mode 100644
 +
 +function! s:Fsync() abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/fsync.sh 2>&1 | tee fsync.findresult')
++    call AsyncRunShellCommand('~/loadrc/gitrc/fsync.sh 2>&1 | tee fsync.findresult')
 +    call OpenOrSwitch('fsync.findresult', 'vs')
 +endfunction
 +
@@ -41817,7 +41866,7 @@ new file mode 100644
 +
 +function! s:Gsync() abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsync.sh 2>&1 | tee gsync.findresult')
++    call AsyncRunShellCommand('~/loadrc/gitrc/gsync.sh 2>&1 | tee gsync.findresult')
 +    call OpenOrSwitch('gsync.findresult', 'vs')
 +endfunction
 +
@@ -41835,7 +41884,7 @@ new file mode 100644
 +
 +function! s:Gsti() abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gsti.sh')
++    call AsyncRunShellCommand('~/loadrc/gitrc/gsti.sh')
 +endfunction
 +
 +function! s:Gstl() abort
@@ -41846,7 +41895,7 @@ new file mode 100644
 +
 +function! s:Gstlv() abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gstlv.sh')
++    call AsyncRunShellCommand('~/loadrc/gitrc/gstlv.sh')
 +endfunction
 +
 +function! s:Gme2(args, ...) abort
@@ -41868,11 +41917,11 @@ new file mode 100644
 +    endif
 +
 +    if &diff
-+        exec '!git reset HEAD ; git add ' . '"' .  expand('%:p') . '"'
++        exec '!git reset HEAD ; git add ' . shellescape(expand('%:p'))
 +    endif
 +
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/g.sh ' . '"' .  msg . '" 2>&1 | tee g.runresult')
++    call AsyncRunShellCommand('~/loadrc/gitrc/g.sh ' . shellescape(msg) . ' 2>&1 | tee g.runresult')
 +
 +    if &diff
 +        call s:Gs()
@@ -41888,7 +41937,7 @@ new file mode 100644
 +
 +function! s:Gdev() abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gdev.sh')
++    call AsyncRunShellCommand('~/loadrc/gitrc/gdev.sh')
 +endfunction
 +
 +function! s:Hdi() abort
@@ -41992,19 +42041,19 @@ new file mode 100644
 +
 +function! s:Gmet() abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', 'git mergetool')
++    call AsyncRunShellCommand('git mergetool')
 +endfunction
 +
 +function! s:Gicb() abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gicb.sh')
++    call AsyncRunShellCommand('~/loadrc/gitrc/gicb.sh')
 +endfunction
 +
 +function! s:Gitk(...) abort
 +    let worktree = Cd2Worktree()
 +    let arg1 = (a:0 >= 1) ? a:1 : ''
 +    let arg2 = (a:0 >= 2) ? a:2 : ''
-+    call asyncrun#run('<bang>', '', 'gitk ' . '"' .  arg1 . '"' . ' ' . '"' .  arg2 . '"')
++    call AsyncRunShellCommand('gitk ' . '"' .  arg1 . '"' . ' ' . '"' .  arg2 . '"')
 +endfunction
 +
 +function! s:Gbrm(...) abort
@@ -42046,7 +42095,7 @@ new file mode 100644
 +    let worktree = Cd2Worktree()
 +    let arg1 = (a:0 >= 1) ? a:1 : ''
 +    let arg2 = (a:0 >= 2) ? a:2 : ''
-+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gcob.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
++    call AsyncRunShellCommand('~/loadrc/gitrc/gcob.sh ' . '"' .  arg1 . '" "' .  arg2 . '"')
 +endfunction
 +
 +function! s:Dodev() abort
@@ -42057,7 +42106,7 @@ new file mode 100644
 +function! s:KdiffFile() abort
 +    only
 +    call asyncrun#stop('<bang>')
-+    call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/KdiffFile.py ' . '"' .  expand("%:p") . '"')
++    call AsyncRunShellCommand('~/loadrc/leetcoderc/KdiffFile.py ' . '"' .  expand("%:p") . '"')
 +endfunction
 +
 +function! s:ApplyBranch(args, ...) abort
@@ -42107,7 +42156,7 @@ new file mode 100644
 +
 +    call asyncrun#stop('<bang>')
 +    let b:output = expand("%:p") . '.runresult'
-+    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output)
++    call AsyncRunShellCommand('~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output)
 +    call OpenOrSwitch(b:output, 'vs')
 +endfunction
 +
@@ -42127,7 +42176,7 @@ new file mode 100644
 +        exec '!' . '"' . a:2 . '"'
 +    endif
 +
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
++    call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 +endfunction
 +
 +function! s:CatMove(...) abort
@@ -42140,7 +42189,7 @@ new file mode 100644
 +        exec '!~/loadrc/vishrc/cat_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
 +    endif
 +
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
++    call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 +endfunction
 +
 +function! s:FileMove(...) abort
@@ -42162,7 +42211,7 @@ new file mode 100644
 +
 +    endif
 +
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
++    call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 +endfunction
 +
 +
@@ -42184,7 +42233,7 @@ new file mode 100644
 +
 +    endif
 +
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
++    call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 +endfunction
 +
 +function! s:CatBadFiles(...) abort
@@ -42200,7 +42249,7 @@ new file mode 100644
 +    endif
 +
 +    call OpenOrSwitch('cat_bad_files.runresult', 'vs')
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
++    call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 +endfunction
 +
 +function! s:CatRate(...) abort
@@ -42213,7 +42262,7 @@ new file mode 100644
 +        exec '!~/loadrc/vishrc/cat_rate.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '"'
 +    endif
 +
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
++    call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 +endfunction
 +
 +function! s:RmCat(...) abort
@@ -42279,7 +42328,7 @@ new file mode 100644
 +
 +function! s:SvnUp() abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/svnrc/svnup.sh')
++    call AsyncRunShellCommand('~/loadrc/svnrc/svnup.sh')
 +endfunction
 +
 +function! s:SvnReset() abort
@@ -42290,7 +42339,7 @@ new file mode 100644
 +
 +function! s:SvnRevert() abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/svnrc/svnrevert.sh ' . '"' .  expand('%:p') . '"')
++    call AsyncRunShellCommand('~/loadrc/svnrc/svnrevert.sh ' . '"' .  expand('%:p') . '"')
 +endfunction
 +
 +function! s:SvnSt() abort
@@ -42301,12 +42350,12 @@ new file mode 100644
 +
 +function! s:SvnApply() abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/svnrc/svnapply.sh')
++    call AsyncRunShellCommand('~/loadrc/svnrc/svnapply.sh')
 +endfunction
 +
 +function! s:SvnDiff() abort
 +    let worktree = Cd2Worktree()
-+    call asyncrun#run('<bang>', '', '~/loadrc/svnrc/svndiff.sh ' . '"' .  expand('%:p') . '"')
++    call AsyncRunShellCommand('~/loadrc/svnrc/svndiff.sh ' . '"' .  expand('%:p') . '"')
 +endfunction
 +
 +function! s:LcTest() abort
@@ -42324,7 +42373,7 @@ new file mode 100644
 +endfunction
 +
 +function! s:Prune() abort
-+    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
++    call AsyncRunShellCommand('~/loadrc/vishrc/prune.sh ' . '"' .  expand('%:p') . '"')
 +endfunction
 +
 +function! s:Fr(...) abort
@@ -42527,7 +42576,7 @@ new file mode 100644
 +    let line = substitute(line, '\_s\+$', '', 'g')
 +    let line = substitute(line, '^[^"]', '"' . line[0], '')
 +    let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
-+    call asyncrun#run('<bang>', '', '~/loadrc/pythonrc/vlc.py ' . '"' . expand("%:p") . '"' .  ' ' . line)
++    call AsyncRunShellCommand('~/loadrc/pythonrc/vlc.py ' . '"' . expand("%:p") . '"' .  ' ' . line)
 +endfunction
 +
 +function! VDebug()
@@ -42584,7 +42633,7 @@ new file mode 100644
 +    call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
 +
 +    if (expand("%") =~ '.*leetcode.*')
-+        call asyncrun#run('<bang>', '', '~/loadrc/leetcoderc/post_submit.sh ' . '"' .  b:file_name . '"' . ' 2>&1 | tee post_submit.log')
++        call AsyncRunShellCommand('~/loadrc/leetcoderc/post_submit.sh ' . '"' .  b:file_name . '"' . ' 2>&1 | tee post_submit.log')
 +    endif
 +
 +    if b:to_run != 'gbil.log'
@@ -42593,7 +42642,7 @@ new file mode 100644
 +        call OpenOrSwitch('gbil.log', 'vs')
 +    endif
 +
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
++    call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 +endfunction
 +
 +function! SearchAgain()
@@ -42644,7 +42693,7 @@ new file mode 100644
 +
 +function! ShowDiff()
 +    let b:commit = expand("<cword>")
-+    call asyncrun#run('<bang>', '', '~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"')
++    call AsyncRunShellCommand('~/loadrc/gitrc/gvlg.sh ' . '"' .  b:commit . '"')
 +endfunction
 +
 +function! Prune()
@@ -42704,12 +42753,12 @@ new file mode 100644
 +
 +    only
 +    call asyncrun#stop('<bang>')
-+    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
++    call AsyncRunShellCommand('~/loadrc/vishrc/kdiffall.sh ' . '"' .  expand('%:p') . '"')
 +endfunction
 +
 +function! UpdateProj()
 +    call Cd2ProjectRoot("files.proj")
-+    call asyncrun#run('<bang>', '', '~/loadrc/bashrc/update_proj.sh')
++    call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 +    call CHANGE_CURR_DIR()
 +endfunction
 +
@@ -42748,7 +42797,7 @@ new file mode 100644
 +        exec '!git checkout ' . '"' .  b:commit . '"'
 +    elseif (expand("%") ==# 'dps.findresult')
 +        let b:commit = expand("<cword>")
-+        call asyncrun#run('<bang>', '', '~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
++        call AsyncRunShellCommand('~/loadrc/dockerrc/edocker.sh ' . '"' .  b:commit . '"')
 +    elseif (expand("%") ==# 'fdocs.list')
 +        exec '!open ' . '"' .  expand(expand("<cfile>")) . '"'
 +    elseif (b:fileName =~ '.*.diff$')
@@ -42904,7 +42953,7 @@ new file mode 100644
 +" nnoremap gf gF<cr>
 +nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
 +map oo :call VimOpen()<cr>
-+nnoremap <silent> <leader>g :call asyncrun#run('<bang>', '', 'gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
++nnoremap <silent> <leader>g :call AsyncRunShellCommand('gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
 +nnoremap <leader>1 :let @" = expand("%:p")<CR>
 +
 +function! CutFile2()

@@ -38,3 +38,12 @@ git commit --no-edit || git commit -m "$commit_message"
 
 # Run post-commit script
 ~/loadrc/gitrc/postCommit.sh
+
+# Empty the COMMIT_EDITMSG and MERGE_MSG files after a successful commit
+if [ -f "$git_directory/COMMIT_EDITMSG" ]; then
+    echo "" > "$git_directory/COMMIT_EDITMSG"
+fi
+
+if [ -f "$git_directory/MERGE_MSG" ]; then
+    echo "" > "$git_directory/MERGE_MSG"
+fi
