@@ -27,7 +27,6 @@ main() {
     search_folder "$search_directory" "$folder_name" | sort_results
 }
 
-# Change search_directory to "/media", not passed in
-search_directory="/media"
-folder_name="myproject"
+search_directory="$1"
+folder_name="$2"
 main "$search_directory" "$folder_name"
