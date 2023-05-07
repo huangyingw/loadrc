@@ -64,7 +64,7 @@ case $extension in
     vdiff)
         zsh "$file"
         ;;
-    sh)
+    sh|zsh)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
             ssh -nY "$host" "cd $rpath ; . ~/loadrc/.pathrc ; $rpath/$rfile"
