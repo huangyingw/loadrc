@@ -13,7 +13,7 @@ sort_results() {
         folder_size=$(du -sb "$line" | awk '{print $1}')
         folder_length=$(echo -n "$line" | wc -m | tr -d '[:space:]')
         echo -e "$folder_length\t$folder_size\t$line"
-    done | sort -k1,1n -k2,2nr
+    done | sort -k1,1n -k2,2nr | awk '{print $3}'
 }
 
 main() {
@@ -27,8 +27,9 @@ main() {
     search_folder "$search_directory" "$folder_name" | sort_results
 }
 
-# Test code
+# Change search_directory to "/media", not passed in
 search_directory="/media"
 folder_name="myproject"
 echo "Searching for folder '$folder_name' in '$search_directory'"
 main "$search_directory" "$folder_name"
+
