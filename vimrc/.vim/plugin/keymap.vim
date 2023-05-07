@@ -456,7 +456,7 @@ nmap <leader>w :call WinDo('set wrap!') <cr>
 " nnoremap F :echom expand('%:p')<cr>
 vnoremap <silent>f :call VimSearch()<cr>
 vnoremap <silent>s :call GitSearch()<cr>
-vnoremap <silent>t :call SearchAgain()<cr>
+nnoremap mt :call SearchAgain()<cr>
 nnoremap mc :set cursorline!<cr>
 " nnoremap mc :set hlsearch!<cr>
 nnoremap mg :call VFilter()<cr>
