@@ -30,6 +30,4 @@ main() {
 # Change search_directory to "/media", not passed in
 search_directory="/media"
 folder_name="myproject"
-echo "Searching for folder '$folder_name' in '$search_directory'"
 main "$search_directory" "$folder_name"
-
