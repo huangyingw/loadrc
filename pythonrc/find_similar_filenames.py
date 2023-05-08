@@ -1,4 +1,5 @@
-# find_similar_filenames.py
+#!/usr/bin/env python3
+
 import argparse
 import difflib
 import os
@@ -26,7 +27,7 @@ def find_close_files(file_names, keywords):
     close_files = {kw: [] for kw in keywords}
 
     for kw in keywords:
-        for file_name, file_path in zip(file_names, file_paths):
+        for file_name, file_path in zip(file_names, file_names): # Fixed here
             if kw.lower() in file_name.lower():
                 close_files[kw].append(file_path)
 
