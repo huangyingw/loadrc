@@ -34,8 +34,5 @@ main() {
     move_folders "$source_folder" "$target_folder"
 }
 
-# Test code
-source_folder="/media/sda1/home/huangyingw/Dropbox/myproject"
-target_folder="/media/sda1/root/Dropbox/myproject"
-echo "Moving contents from '$source_folder' to '$target_folder'"
-main "$source_folder" "$target_folder"
+# Call the main function with the provided arguments
+main "$@"
