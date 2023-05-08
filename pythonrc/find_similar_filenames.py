@@ -1,7 +1,8 @@
+# find_similar_filenames.py
+import argparse
 import difflib
 import os
 import re
-import nltk
 
 def get_file_size(file_path, default_size=0):
     try:
@@ -9,24 +10,13 @@ def get_file_size(file_path, default_size=0):
     except FileNotFoundError:
         return default_size
 
-file_paths = [
-    "./mapper/usb_backup_crypt_8T_1/115download/abp-566-4K.mp4",
-    "./huangyingw/761f02d8-0d60-43b3-a6fb-0a97746dc0da/115download/abp-566-4K.mp4",
-    "./mapper/usb_backup_crypt_8T_1/115download/ABP-566.mp4",
-    "./huangyingw/761f02d8-0d60-43b3-a6fb-0a97746dc0da/115download/MXGS-884-4K.mp4",
-    "./huangyingw/761f02d8-0d60-43b3-a6fb-0a97746dc0da/115download/MXGS-5664K.mp4"
-]
-
 def extract_file_name(file_path):
     return file_path.split("/")[-1].lower()
-
-file_names = [extract_file_name(fp) for fp in file_paths]
 
 def extract_keywords(file_names):
     pattern = re.compile(r'\b(?:\d+|[a-z]+(?:\d+[a-z]*)?)\b', re.IGNORECASE)
     keywords = set()
     for file_name in file_names:
-        # Remove file extension
         name_without_ext = os.path.splitext(file_name)[0]
         matches = pattern.findall(name_without_ext)
         keywords.update(matches)
@@ -42,13 +32,22 @@ def find_close_files(file_names, keywords):
 
     return close_files
 
-keywords = extract_keywords(file_names)
-close_files = find_close_files(file_names, keywords)
+def main(file_paths):
+    file_names = [extract_file_name(fp) for fp in file_paths]
+    keywords = extract_keywords(file_names)
+    close_files = find_close_files(file_names, keywords)
 
-for keyword in keywords:
-    keyword_files = list(set(close_files[keyword]))
-    keyword_files.sort(key=lambda x: get_file_size(x))
-    print(f"{keyword}:")
-    for file_path in keyword_files:
-        print(f'"{file_path}",')
-    print()
+    for keyword in keywords:
+        keyword_files = list(set(close_files[keyword]))
+        keyword_files.sort(key=lambda x: get_file_size(x))
+        print(f"{keyword}:")
+        for file_path in keyword_files:
+            print(f'"{file_path}",')
+        print()
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("file_paths", nargs="*", help="List of file paths")
+    args = parser.parse_args()
+
+    main(args.file_paths)
