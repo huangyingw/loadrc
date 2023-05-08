@@ -12,15 +12,14 @@ move_folders() {
         if [[ "$(df -P "$source_folder" | tail -1 | awk '{print $1}')" == "$(df -P "$target_folder" | tail -1 | awk '{print $1}')" ]]; then
             # Use 'mv' if the source and target folders are on the same partition.
             find "$source_folder" \( -type f -o -type l \) -exec zsh -c 'src=$1; tgt="${src/#$2/$3}"; mkdir -p "$(dirname "$tgt")"; mv -v "$src" "$tgt"' zsh '{}' "$source_folder" "$target_folder" \;
-        else
-            # Use 'rsync' for folders on different partitions.
-            rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
-            rsync "${rsync_basic_options[@]}" \
-                  --remove-source-files \
-                  --info=progress2 \
-                  "$source_folder/" \
-                  "$target_folder/"
         fi
+        
+        rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
+        rsync "${rsync_basic_options[@]}" \
+                --remove-source-files \
+                --info=progress2 \
+                "$source_folder/" \
+                "$target_folder/"
         # Remove empty directories after the move
         find "$source_folder" -type d -empty -delete
     else
