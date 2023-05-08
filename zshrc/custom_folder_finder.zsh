@@ -5,7 +5,7 @@
 # It sorts the output by length and for the same length, it sorts by size (bigger first).
 
 search_folder() {
-    find "$1" -type d -name "$2"  -maxdepth 5 2>/dev/null
+    find "$1" -type d -name "$2"  -maxdepth 10 2>/dev/null
 }
 
 sort_results() {
