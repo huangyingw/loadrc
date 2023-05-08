@@ -5,11 +5,19 @@ import difflib
 import os
 import re
 
+file_size_cache = {}
+
 def get_file_size(file_path, default_size=0):
+    if file_path in file_size_cache:
+        return file_size_cache[file_path]
+
     try:
-        return os.path.getsize(file_path)
+        size = os.path.getsize(file_path)
     except FileNotFoundError:
-        return default_size
+        size = default_size
+
+    file_size_cache[file_path] = size
+    return size
 
 def extract_file_name(file_path):
     return file_path.split("/")[-1].lower()
