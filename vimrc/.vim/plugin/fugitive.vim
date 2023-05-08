@@ -14,6 +14,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fcscop
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fdisklog :execute s:Fdisklog()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FileMove :execute s:FileMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDeleted :execute s:FindDeleted()
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindSimilarFiles call s:FindSimilarFilenames(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindFolder call s:CustomFolderFinder(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
@@ -932,6 +933,14 @@ function! s:FolderContentMigrator()
         execute command
     endfor
     call OpenOrSwitch('folder_content_migrator.runresult', 'vs')
+endfunction
+
+function! s:FindSimilarFilenames()
+    let l:file_paths = join(getline(1, '$'), "\n")
+    let l:script_path = "~/loadrc/pythonrc/find_similar_filenames.py"
+    let l:command = '!' . l:script_path . ' ' . l:file_paths . ' 2>&1 | tee ' . 'find_similar_filenames.runresult'
+    execute l:command
+    call OpenOrSwitch('find_similar_filenames.runresult', 'vs')
 endfunction
 
 let g:fugitive_legacy_commands = 1
