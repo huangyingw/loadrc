@@ -32,23 +32,18 @@ def extract_keywords(file_names):
         keywords.update(matches)
     return list(keywords)
 
-def find_close_files(file_names, keywords, threshold=0.8):
+def find_close_files(file_names, keywords):
     close_files = {kw: [] for kw in keywords}
 
-    for i, file_name_1 in enumerate(file_names):
-        for j, file_name_2 in enumerate(file_names):
-            if i != j:
-                similarity = difflib.SequenceMatcher(None, file_name_1, file_name_2).ratio()
-                if similarity >= threshold:
-                    for kw in keywords:
-                        if kw in file_name_1 and kw in file_name_2:
-                            close_files[kw].extend([file_paths[i], file_paths[j]])
+    for kw in keywords:
+        for file_name, file_path in zip(file_names, file_paths):
+            if kw.lower() in file_name.lower():
+                close_files[kw].append(file_path)
 
     return close_files
 
 keywords = extract_keywords(file_names)
-threshold = 0.8
-close_files = find_close_files(file_names, keywords, threshold)
+close_files = find_close_files(file_names, keywords)
 
 for keyword in keywords:
     keyword_files = list(set(close_files[keyword]))
