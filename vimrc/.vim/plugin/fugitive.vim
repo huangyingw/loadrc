@@ -934,6 +934,4 @@ function! s:FolderContentMigrator()
     call OpenOrSwitch('folder_content_migrator.runresult', 'vs')
 endfunction
 
-
-
 let g:fugitive_legacy_commands = 1
