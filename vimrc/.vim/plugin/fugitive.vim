@@ -936,11 +936,12 @@ function! s:FolderContentMigrator()
 endfunction
 
 function! s:FindSimilarFilenames()
-    let l:file_paths = join(getline(1, '$'), "\n")
-    let l:script_path = "~/loadrc/pythonrc/find_similar_filenames.py"
-    let l:command = '!' . l:script_path . ' ' . l:file_paths . ' 2>&1 | tee ' . 'find_similar_filenames.runresult'
-    execute l:command
-    call OpenOrSwitch('find_similar_filenames.runresult', 'vs')
+  let l:file_paths = join(getline(1, '$'), "\n")
+  let l:encoded_file_paths = substitute(l:file_paths, '\n', '\\n', 'g')
+  let l:script_path = "~/loadrc/pythonrc/find_similar_filenames.py"
+  let l:command = '!' . l:script_path . ' --file-paths ' . shellescape(l:encoded_file_paths) . ' 2>&1 | tee ' . 'find_similar_filenames.runresult'
+  execute l:command
+  call OpenOrSwitch('find_similar_filenames.runresult', 'vs')
 endfunction
 
 let g:fugitive_legacy_commands = 1
