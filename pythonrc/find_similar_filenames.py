@@ -50,9 +50,10 @@ def main(file_paths):
         keyword_files = list(set(close_files[keyword]))
         keyword_files.sort(key=lambda x: get_file_size(x))
         if 2 <= len(keyword_files) <= 10:
+            print(f"{keyword}.txt")
             with open(f"{keyword}.txt", "w") as f:
                 for file_path in keyword_files:
-                    f.write(f"{file_path}\n")
+                    f.write(file_path + "\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
