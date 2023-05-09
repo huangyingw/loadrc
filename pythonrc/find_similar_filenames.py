@@ -55,6 +55,7 @@ def main(file_paths):
         if 2 <= len(keyword_files) <= 10:
             print(f"{keyword}.txt")
             with open(f"{keyword}.txt", "w") as f:
+                f.write(keyword + "\n")
                 for file_path in keyword_files:
                     f.write(file_path + "\n")
 
