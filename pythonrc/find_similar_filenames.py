@@ -46,7 +46,10 @@ def main(file_paths):
     keywords = extract_keywords(file_names)
     close_files = find_close_files(file_names, file_paths, keywords)
 
-    for keyword in keywords:
+    # Sort the keywords by the length of their corresponding keyword_files in descending order
+    sorted_keywords = sorted(keywords, key=lambda kw: len(close_files[kw]), reverse=True)
+
+    for keyword in sorted_keywords:
         keyword_files = list(set(close_files[keyword]))
         keyword_files.sort(key=lambda x: get_file_size(x))
         if 2 <= len(keyword_files) <= 10:
