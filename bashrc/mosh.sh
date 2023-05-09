@@ -13,6 +13,6 @@ ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
 
 while true; do
     mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
-    echo "Connection lost. Retrying in 30 seconds..."
-    sleep 30
+    echo "Connection lost. Retrying in 5 seconds..."
+    sleep 5
 done
