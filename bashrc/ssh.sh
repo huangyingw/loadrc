@@ -5,6 +5,6 @@ tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s
 while true
 do
     ssh -Y "$target" -t -- ${tmuxAction}
-    echo "Connection lost. Retrying in 3 minutes..."
-    sleep 180
+    echo "Connection lost. Retrying in 5 seconds..."
+    sleep 5
 done
