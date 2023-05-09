@@ -35,7 +35,7 @@ def find_close_files(file_names, keywords):
     close_files = {kw: [] for kw in keywords}
 
     for kw in keywords:
-        for file_name, file_path in zip(file_names, file_names): # Fixed here
+        for file_name, file_path in zip(file_names, file_names):
             if kw.lower() in file_name.lower():
                 close_files[kw].append(file_path)
 
@@ -56,14 +56,10 @@ def main(file_paths):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    # Replace this line
-    # parser.add_argument("file_paths", nargs="*", help="List of file paths")
-    # With this line
-    parser.add_argument("--file-paths", help="Newline-separated file paths as a string")
+    parser.add_argument("--file", help="A file containing newline-separated file paths")
     args = parser.parse_args()
 
-    # Replace this line
-    # main(args.file_paths)
-    # With these lines
-    file_paths = args.file_paths.split('\\n')
+    with open(args.file, 'r') as file:
+        file_paths = [line.strip() for line in file.readlines()]
+
     main(file_paths)
