@@ -56,7 +56,14 @@ def main(file_paths):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("file_paths", nargs="*", help="List of file paths")
+    # Replace this line
+    # parser.add_argument("file_paths", nargs="*", help="List of file paths")
+    # With this line
+    parser.add_argument("--file-paths", help="Newline-separated file paths as a string")
     args = parser.parse_args()
 
-    main(args.file_paths)
+    # Replace this line
+    # main(args.file_paths)
+    # With these lines
+    file_paths = args.file_paths.split('\\n')
+    main(file_paths)
