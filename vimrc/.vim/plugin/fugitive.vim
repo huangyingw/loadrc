@@ -15,7 +15,7 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fdiskl
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FileMove :execute s:FileMove(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDeleted :execute s:FindDeleted()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindSimilarFiles call s:FindSimilarFilenames(<f-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindFolder call s:CustomFolderFinder(<f-args>)
+command! -bang -bar -nargs=+ -complete=customlist,fugitive#CompleteObject FindFolder call s:CustomFolderFinder(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fsync :execute s:Fsync()
@@ -904,10 +904,17 @@ function! s:MergeWithResolution(branch_to_merge)
     call OpenOrSwitch('merge_with_resolution.runresult', 'vs')
 endfunction
 
-function! s:CustomFolderFinder(search_directory, folder_name)
+function! s:CustomFolderFinder(search_directory, folder_name, ...)
     let worktree = Cd2Worktree()
     let l:script_path = "~/loadrc/zshrc/custom_folder_finder.zsh"
-    let l:command = '!' . l:script_path . ' ' . a:search_directory . ' ' . a:folder_name . ' 2>&1 | tee ' . 'custom_folder_finder.runresult'
+    let l:command = '!' . l:script_path . ' ' . a:search_directory . ' ' . a:folder_name
+
+    " Check if the maxdepth parameter is provided and append it to the command
+    if a:0 > 0
+        let l:command .= ' ' . a:1
+    endif
+
+    let l:command .= ' 2>&1 | tee ' . 'custom_folder_finder.runresult'
     execute l:command
     call OpenOrSwitch('custom_folder_finder.runresult', 'vs')
 endfunction
