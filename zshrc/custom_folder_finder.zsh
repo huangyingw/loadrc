@@ -5,7 +5,7 @@
 # It sorts the output by length and for the same length, it sorts by size (bigger first).
 
 search_folder() {
-    find "$1" -type d -name "$2"  -maxdepth 10 2>/dev/null
+    find "$1" -type d -name "$2" -maxdepth "$3" 2>/dev/null
 }
 
 sort_results() {
@@ -18,15 +18,17 @@ sort_results() {
 
 main() {
     if [ -z "$1" ] || [ -z "$2" ]; then
-        echo "Usage: $0 search_directory folder_name"
+        echo "Usage: $0 search_directory folder_name [maxdepth]"
         exit 1
     fi
 
     search_directory="$1"
     folder_name="$2"
-    search_folder "$search_directory" "$folder_name" | sort_results
+    maxdepth="${3:-5}"
+    search_folder "$search_directory" "$folder_name" "$maxdepth" | sort_results
 }
 
 search_directory="$1"
 folder_name="$2"
-main "$search_directory" "$folder_name"
+maxdepth="${3:-5}"
+main "$search_directory" "$folder_name" "$maxdepth"
