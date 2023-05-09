@@ -31,11 +31,11 @@ def extract_keywords(file_names):
         keywords.update(matches)
     return list(keywords)
 
-def find_close_files(file_names, keywords):
+def find_close_files(file_names, file_paths, keywords):
     close_files = {kw: [] for kw in keywords}
 
     for kw in keywords:
-        for file_name, file_path in zip(file_names, file_names):
+        for file_name, file_path in zip(file_names, file_paths):
             if kw.lower() in file_name.lower():
                 close_files[kw].append(file_path)
 
@@ -44,7 +44,7 @@ def find_close_files(file_names, keywords):
 def main(file_paths):
     file_names = [extract_file_name(fp) for fp in file_paths]
     keywords = extract_keywords(file_names)
-    close_files = find_close_files(file_names, keywords)
+    close_files = find_close_files(file_names, file_paths, keywords)
 
     for keyword in keywords:
         keyword_files = list(set(close_files[keyword]))
