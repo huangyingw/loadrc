@@ -51,7 +51,7 @@ def main(file_paths):
 
     for keyword in sorted_keywords:
         keyword_files = list(set(close_files[keyword]))
-        keyword_files.sort(key=lambda x: get_file_size(x))
+        keyword_files.sort(key=lambda x: get_file_size(x), reverse=True)  # Updated line
         if 2 <= len(keyword_files) <= 10:
             print(f"{keyword}.txt")
             with open(f"{keyword}.txt", "w") as f:
