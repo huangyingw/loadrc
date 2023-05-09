@@ -23,7 +23,7 @@ def extract_file_name(file_path):
     return file_path.split("/")[-1].lower()
 
 def extract_keywords(file_names):
-    pattern = re.compile(r'\b(?:\d+|[a-z]+(?:\d+[a-z]*)?)\b', re.IGNORECASE)
+    pattern = re.compile(r'\b(?:\d{2}\.\d{2}\.\d{2}|(?:\d+|[a-z]+(?:\d+[a-z]*)?))\b', re.IGNORECASE)
     keywords = set()
     for file_name in file_names:
         name_without_ext = os.path.splitext(file_name)[0]
