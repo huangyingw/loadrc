@@ -51,7 +51,7 @@ def main(file_paths):
         keyword_files.sort(key=lambda x: get_file_size(x))
         print(f"{keyword}:")
         for file_path in keyword_files:
-            print(f'"{file_path}",')
+            print(f'"{file_path}"')
         print()
 
 if __name__ == "__main__":
