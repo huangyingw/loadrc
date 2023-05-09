@@ -12,12 +12,16 @@ move_folders() {
         if [[ "$(df -P "$source_folder" | tail -1 | awk '{print $1}')" == "$(df -P "$target_folder" | tail -1 | awk '{print $1}')" ]]; then
             # Use 'mv' if the source and target folders are on the same partition.
             find "$source_folder" \( -type f -o -type l \) -exec zsh -c 'src=$1; tgt="${src/#$2/$3}"; mkdir -p "$(dirname "$tgt")"; mv -v "$src" "$tgt"' zsh '{}' "$source_folder" "$target_folder" \;
-            find "$source_folder" -type d -empty -delete
-        else
-            # Use 'rsync' for folders on different partitions.
-            rsync -a --remove-source-files --info=progress2 "$source_folder/" "$target_folder/"
-            find "$source_folder" -type d -empty -delete
         fi
+        
+        rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
+        rsync "${rsync_basic_options[@]}" \
+                --remove-source-files \
+                --info=progress2 \
+                "$source_folder/" \
+                "$target_folder/"
+        # Remove empty directories after the move
+        find "$source_folder" -type d -empty -delete
     else
         echo "Source or target folder does not exist."
     fi
@@ -34,8 +38,5 @@ main() {
     move_folders "$source_folder" "$target_folder"
 }
 
-# Test code
-source_folder="/media/sda1/home/huangyingw/Dropbox/myproject"
-target_folder="/media/sda1/root/Dropbox/myproject"
-echo "Moving contents from '$source_folder' to '$target_folder'"
-main "$source_folder" "$target_folder"
+# Call the main function with the provided arguments
+main "$@"

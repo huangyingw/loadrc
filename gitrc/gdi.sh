@@ -11,10 +11,17 @@ else
     COMMAND=$(~/loadrc/gitrc/git_diff_command.sh)
 fi
 
+scope_path=$(git config --get scope.path)
+
 if [ -z "$1" ]
 then
     COMMAND="$COMMAND --cached HEAD"
 else
+    if [[ -n "$scope_path" ]]
+    then
+        COMMAND="$COMMAND -- $scope_path"
+    fi
+
     COMMAND="$COMMAND $1 $2"
     IFS=$'\n'
 

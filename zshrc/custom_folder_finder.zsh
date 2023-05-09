@@ -5,7 +5,7 @@
 # It sorts the output by length and for the same length, it sorts by size (bigger first).
 
 search_folder() {
-    find "$1" -type d -name "$2"  -maxdepth 5 2>/dev/null
+    find "$1" -type d -name "$2"  -maxdepth 10 2>/dev/null
 }
 
 sort_results() {
@@ -13,7 +13,7 @@ sort_results() {
         folder_size=$(du -sb "$line" | awk '{print $1}')
         folder_length=$(echo -n "$line" | wc -m | tr -d '[:space:]')
         echo -e "$folder_length\t$folder_size\t$line"
-    done | sort -k1,1n -k2,2nr
+    done | sort -k1,1n -k2,2nr | awk '{print $3}'
 }
 
 main() {
@@ -27,8 +27,6 @@ main() {
     search_folder "$search_directory" "$folder_name" | sort_results
 }
 
-# Test code
-search_directory="/media"
-folder_name="myproject"
-echo "Searching for folder '$folder_name' in '$search_directory'"
+search_directory="$1"
+folder_name="$2"
 main "$search_directory" "$folder_name"
