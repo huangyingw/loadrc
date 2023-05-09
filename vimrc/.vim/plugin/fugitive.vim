@@ -943,16 +943,10 @@ function! s:FolderContentMigrator()
 endfunction
 
 function! s:FindSimilarFilenames()
-    " Write the current buffer to a temporary file
-    let l:temp_file = tempname()
-    silent execute 'write! ' . l:temp_file
-
     let l:script_path = "~/loadrc/pythonrc/find_similar_filenames.py"
-    let l:command = '!' . l:script_path . ' --file ' . shellescape(l:temp_file) . ' 2>&1 | tee ' . 'find_similar_filenames.runresult'
+    let l:current_file = expand('%:p')
+    let l:command = '!' . l:script_path . ' --file ' . shellescape(l:current_file) . ' 2>&1 | tee ' . 'find_similar_filenames.runresult'
     execute l:command
-
-    " Delete the temporary file
-    silent call delete(l:temp_file)
 
     call OpenOrSwitch('find_similar_filenames.runresult', 'vs')
 endfunction
