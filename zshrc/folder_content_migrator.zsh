@@ -20,12 +20,8 @@ move_folders() {
                 zsh '{}' "$source_folder" "$target_folder" \;
         fi
         
-        rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
-        rsync "${rsync_basic_options[@]}" \
-                --remove-source-files \
-                --info=progress2 \
-                "$source_folder/" \
-                "$target_folder/"
+        # Call the rsync_content_migrator script
+        ~/loadrc/zshrc/rsync_content_migrator.zsh "$source_folder" "$target_folder"
         # Remove empty directories after the move
         find "$source_folder" -type d -empty -delete
     else
