@@ -15,8 +15,11 @@ then
     elif [ -d "$TARGET" ]
     then
         rsync -aHv --progress --remove-source-files "$TARGET"/ "$TARGET".bak/ ; \
-        ~/loadrc/bashrc/rmEmpty.sh "$TARGET"
+            ~/loadrc/bashrc/rmEmpty.sh "$TARGET"
     fi
+
+    # Create the target directory if it doesn't exist
+    mkdir -p "$(dirname "$TARGET")"
 
     ln -fs "$SOURCE" "$TARGET"
 fi
