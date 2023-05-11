@@ -297,7 +297,7 @@ function! Filter2FindResult()
         let buffername = b:result . '.findresult'
 
         if bufexists(buffername)
-            exe 'bd!' . buffername
+            exec 'bd!' . buffername
         endif
 
         " Save the current buffer content in a variable

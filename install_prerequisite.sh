@@ -77,7 +77,8 @@ apt-get install -y \
 
 apt-get install -y \
     manpages-fr-extra \
-    netcat
+    netcat \
+    python3-nltk
 
 
 pacman -Syy && \

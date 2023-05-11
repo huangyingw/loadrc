@@ -103,10 +103,12 @@ function! Filter()
 endfunction
 
 function! PlayVideo()
+    " Return early if the buffer type is a terminal
     if &buftype ==# "terminal"
         return 0
     endif
 
+    " Get the current line and remove trailing spaces
     let line = getline('.')
     let line = substitute(line, '\_s\+$', '', 'g')
     let line = substitute(line, '^[^"]', '"' . line[0], '')
@@ -454,7 +456,7 @@ nmap <leader>w :call WinDo('set wrap!') <cr>
 " nnoremap F :echom expand('%:p')<cr>
 vnoremap <silent>f :call VimSearch()<cr>
 vnoremap <silent>s :call GitSearch()<cr>
-vnoremap <silent>t :call SearchAgain()<cr>
+nnoremap mt :call SearchAgain()<cr>
 nnoremap mc :set cursorline!<cr>
 " nnoremap mc :set hlsearch!<cr>
 nnoremap mg :call VFilter()<cr>

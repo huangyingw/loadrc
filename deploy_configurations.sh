@@ -24,6 +24,7 @@ fi
 # sed -i.bak "s/set ignorespace 0/set ignorespace 1/g" $(which gitk)
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.tmux.conf ~/.tmux.conf
+~/loadrc/bashrc/ln_fs.sh ~/loadrc/.config/tig/config ~/.config/tig/config
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/gitrc/.gitconfig ~/.gitconfig
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/gitrc/.globalgitignore ~/.globalgitignore
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/pythonrc/setup.cfg  ~/setup.cfg
