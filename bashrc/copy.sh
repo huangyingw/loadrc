@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+# Script Name: copy.sh
+
 if [ -z "$1" ] || [ -z "$2" ]
 then
     echo -e "${red}Please provide both source and target parameters... ${NC}"
