@@ -1,5 +1,10 @@
 #!/bin/zsh
 
+# Script Name: move.sh
+# Description: This script is designed to move files and directories from a source location to a target location.
+# It uses the rsync command for the movement of files. The script ensures both source and target directories are provided and
+# they are not the same. After the files are moved, it removes any empty directories left at the source.
+
 # Check if both source and target parameters are provided
 if [ -z "$1" ] || [ -z "$2" ]; then
     echo -e "${red}Please provide both source and target parameters... ${NC}"
