@@ -12,4 +12,4 @@ source="$1"
 target="$2"
 
 # Call the rsync_content_migrator.zsh script with source, target, and the mode set to 'copy'
-~/path/to/rsync_content_migrator.zsh "$source" "$target" "copy"
+~/loadrc/zshrc/rsync_content_migrator.zsh "$source" "$target" "copy"
