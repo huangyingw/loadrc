@@ -30,13 +30,11 @@ rsync_move() {
         rsync_options+=("--delete-before")
     fi
 
-    # Check if target rsync version supports --mkpath option
-    if rsync --version | grep -q -- --mkpath; then
-        rsync_options+=("--mkpath")
+    # Perform rsync with --mkpath option first
+    if ! rsync "${rsync_options[@]}" --mkpath "$source_folder/" "$target_folder/"; then
+        # If rsync with --mkpath option fails, try again without the option
+        rsync "${rsync_options[@]}" "$source_folder/" "$target_folder/"
     fi
-
-    # Perform rsync with appropriate options
-    rsync "${rsync_options[@]}" "$source_folder/" "$target_folder/"
 }
 
 main() {
