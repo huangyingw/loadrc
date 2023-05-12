@@ -1,10 +1,15 @@
 #!/bin/zsh
 
 # rsync_content_migrator.zsh
+# A script to move the contents of one folder into another using rsync while maintaining the tree structure.
 
 rsync_move() {
     source_folder="$1"
     target_folder="$2"
+
+    # Get the real paths for source and target
+    realpath "$source_folder" && source_folder=$(realpath "$source_folder")
+    realpath "$target_folder" && target_folder=$(realpath "$target_folder")
 
     if [ "$(readlink -f "$source_folder")" = "$(readlink -f "$target_folder")" ]; then
         echo "Source and target folders are identical or just soft links to each other. Aborting."
