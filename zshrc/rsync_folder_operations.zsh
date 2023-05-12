@@ -32,10 +32,15 @@ rsync_operations() {
         rsync_options+=("-in" "--delete-before")
     fi
 
-    # Perform rsync with --mkpath option first
-    if ! rsync "${rsync_options[@]}" --mkpath "$source_folder/" "$target_folder/"; then
-        # If rsync with --mkpath option fails, try again without the option
-        rsync "${rsync_options[@]}" "$source_folder/" "$target_folder/"
+    if [ "$mode" = "tmirror" ]; then
+        ready_file="$source_folder/tmirror.ready"
+        rsync "${rsync_options[@]}" "$source_folder/" "$target_folder/" > "$ready_file"
+    else
+        # Perform rsync with --mkpath option first
+        if ! rsync "${rsync_options[@]}" --mkpath "$source_folder/" "$target_folder/"; then
+            # If rsync with --mkpath option fails, try again without the option
+            rsync "${rsync_options[@]}" "$source_folder/" "$target_folder/"
+        fi
     fi
 }
 
