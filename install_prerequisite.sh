@@ -73,6 +73,7 @@ apt-get install -y \
     w3m-img \
     wakeonlan \
     wget \
+    xclip \
     zsh
 
 apt-get install -y \
