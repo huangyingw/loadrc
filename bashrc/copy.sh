@@ -2,26 +2,14 @@
 
 # Script Name: copy.sh
 
-if [ -z "$1" ] || [ -z "$2" ]
-then
+# Check if both source and target parameters are provided
+if [ -z "$1" ] || [ -z "$2" ]; then
     echo -e "${red}Please provide both source and target parameters... ${NC}"
     exit 1
 fi
 
-source=$1
-target=$2
+source="$1"
+target="$2"
 
-if [[ "$target" != *":"* ]] && [[ ! -d "$target" ]]
-then
-    mkdir -p "$target"
-fi
-
-iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
-rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source" "$target")
-rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
-
-rsync \
-    "${rsync_basic_options[@]}" \
-    "$iconvs" \
-    "$rsyncpath" \
-    "$source/" "$target/"
+# Call the rsync_content_migrator.zsh script with source, target, and the mode set to 'copy'
+~/path/to/rsync_content_migrator.zsh "$source" "$target" "copy"
