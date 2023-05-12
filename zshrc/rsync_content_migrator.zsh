@@ -1,7 +1,6 @@
 #!/bin/zsh
 
 # rsync_content_migrator.zsh
-# A script to move the contents of one folder into another using rsync while maintaining the tree structure.
 
 rsync_move() {
     source_folder="$1"
