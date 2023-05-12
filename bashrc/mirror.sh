@@ -20,8 +20,8 @@ then
     exit 1
 fi
 
-# Call the rsync_content_migrator.zsh script with source, target, and the mode set to 'mirror'
-~/loadrc/zshrc/rsync_content_migrator.zsh "$source" "$target" "mirror" && \
+# Call the rsync_folder_operations.zsh script with source, target, and the mode set to 'mirror'
+~/loadrc/zshrc/rsync_folder_operations.zsh "$source" "$target" "mirror" && \
     rm "$ready_file" && \
     if [ -f "${MIRRORCHECK}" ]; then
         ~/loadrc/bashrc/sleep.sh
