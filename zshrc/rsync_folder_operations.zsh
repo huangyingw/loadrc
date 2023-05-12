@@ -3,7 +3,7 @@
 # rsync_folder_operations.zsh
 # A script to move, copy, or mirror the contents of one folder into another using rsync while maintaining the tree structure.
 
-rsync_move() {
+rsync_operations() {
     source_folder="$1"
     target_folder="$2"
     mode="$3"
@@ -22,12 +22,14 @@ rsync_move() {
     rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source_folder" "$target_folder")
     rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 
-    # Set rsync options based on the mode (move, copy, or mirror)
+    # Set rsync options based on the mode (move, copy, mirror, or tmirror)
     rsync_options=("${rsync_basic_options[@]}" "$iconvs" "$rsyncpath")
     if [ "$mode" = "move" ]; then
         rsync_options+=("--remove-source-files")
     elif [ "$mode" = "mirror" ]; then
         rsync_options+=("--delete-before")
+    elif [ "$mode" = "tmirror" ]; then
+        rsync_options+=("-in" "--delete-before")
     fi
 
     # Perform rsync with --mkpath option first
@@ -47,7 +49,7 @@ main() {
     source_folder="$1"
     target_folder="$2"
     mode="$3"
-    rsync_move "$source_folder" "$target_folder" "$mode"
+    rsync_operations "$source_folder" "$target_folder" "$mode"
 }
 
 # Call the main function with the provided arguments
