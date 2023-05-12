@@ -1,15 +1,18 @@
 #!/bin/zsh
 
 # Script Name: move.sh
-# Description: This script is designed to move files and directories from a source location to a target location.
-# It uses the rsync_content_migrator.zsh script to perform the move operation.
 
-# Get the real paths for source and target
+# Check if both source and target parameters are provided
+if [ -z "$1" ] || [ -z "$2" ]; then
+    echo -e "${red}Please provide both source and target parameters... ${NC}"
+    exit 1
+fi
+
 source="$1"
 target="$2"
 
-# Call the rsync_content_migrator.zsh script with source and target
-~/loadrc/zshrc/rsync_content_migrator.zsh "$source" "$target"
+# Call the rsync_content_migrator.zsh script with source, target, and the mode set to 'move'
+~/loadrc/zshrc/rsync_content_migrator.zsh "$source" "$target" "move"
 
 # Remove empty directories from the source
 ~/loadrc/bashrc/rmEmpty.sh "$source"
