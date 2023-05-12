@@ -849,9 +849,9 @@ function! s:GetOldestCommitByMe() abort
     let worktree = Cd2Worktree()
     let l:script_path = "~/loadrc/gitrc/oldest_commit_by_me.sh"
     let l:output = "oldest_commit_by_me.runresult"
-    
+
     silent exec "! " . l:script_path . " 2>&1 | tee " . l:output
-    
+
     call OpenOrSwitch(l:output, 'vs')
 endfunction
 
