@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# rsync_content_migrator.zsh
+# rsync_folder_operations.zsh
 # A script to move, copy, or mirror the contents of one folder into another using rsync while maintaining the tree structure.
 
 rsync_move() {
