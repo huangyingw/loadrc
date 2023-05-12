@@ -11,5 +11,5 @@ fi
 source="$1"
 target="$2"
 
-# Call the rsync_content_migrator.zsh script with source, target, and the mode set to 'copy'
-~/loadrc/zshrc/rsync_content_migrator.zsh "$source" "$target" "copy"
+# Call the rsync_folder_operations.zsh script with source, target, and the mode set to 'copy'
+~/loadrc/zshrc/rsync_folder_operations.zsh "$source" "$target" "copy"
