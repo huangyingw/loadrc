@@ -19,9 +19,9 @@ move_folders() {
                     mv -v "$src" "$tgt"' \
                 zsh '{}' "$source_folder" "$target_folder" \;
         fi
-        
-        # Call the rsync_content_migrator script
-        ~/loadrc/zshrc/rsync_content_migrator.zsh "$source_folder" "$target_folder"
+
+        # Call the rsync_folder_operations script
+        ~/loadrc/zshrc/rsync_folder_operations.zsh "$source_folder" "$target_folder"
         # Remove empty directories after the move
         find "$source_folder" -type d -empty -delete
     else
