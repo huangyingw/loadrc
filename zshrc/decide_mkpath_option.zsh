@@ -12,7 +12,7 @@ get_rsync_version() {
     host=$(echo "$host_info" | cut -d ':' -f 1)
     cmd=$(get_rsync_version_command)
 
-    if [ -z "$host" ]; then
+    if [ -z "$host" ] || [[ "$host_info" != *":"* ]]; then
         rsync_version=$(eval "$cmd")
     else
         rsync_version=$(ssh "$host" "$cmd")
