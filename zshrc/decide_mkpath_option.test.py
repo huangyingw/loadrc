@@ -62,9 +62,8 @@ class TestDecideMkpathOption(unittest.TestCase):
         mock_run.return_value.stdout.strip.return_value = "3.2.0"
 
         source_folder = "user@example.com:/path/to/source_folder"
-        target_folder = "user@example.com:/path/to/target_folder"
 
-        host = source_folder.split(":")[0]
+        host = "user@example.com"
         remote_rsync_version = subprocess.run(
             f"source {SCRIPT_PATH}; get_rsync_version {source_folder}",
             capture_output=True,
