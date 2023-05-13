@@ -5,6 +5,7 @@ test_rsync_folder_operations.py
 
 This script tests the functionality of the rsync_folder_operations.zsh script.
 It checks that the rsync command is executed with the correct options for each operation mode ('move', 'copy', 'mirror', 'tmirror').
+Also, it tests that the script correctly handles the case where the source and target directories are identical or symbolic links to each other.
 """
 
 import subprocess
@@ -24,6 +25,8 @@ class TestRsyncFolderOperations(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(self.source_folder)
         shutil.rmtree(self.target_folder)
+        if os.path.islink(self.target_folder):
+            os.unlink(self.target_folder)
 
     def test_move_mode(self):
         result = subprocess.run(
@@ -58,6 +61,21 @@ class TestRsyncFolderOperations(unittest.TestCase):
         )
         self.assertIn("--delete-before", result.stdout)
         self.assertIn("-in", result.stdout)
+
+    def test_identical_source_and_target(self):
+        # Make the target a symlink to the source
+        os.unlink(self.target_folder)
+        os.symlink(self.source_folder, self.target_folder)
+
+        result = subprocess.run(
+            [SCRIPT_PATH, self.source_folder, self.target_folder, "copy"],
+            capture_output=True,
+            text=True,
+        )
+        self.assertIn(
+            "Source and target folders are identical or just soft links to each other. Aborting.",
+            result.stderr,
+        )
 
 
 if __name__ == "__main__":
