@@ -69,7 +69,7 @@ class TestRsyncFolderOperations(unittest.TestCase):
         os.symlink(self.source_folder, temp_dir)
 
         result = subprocess.run(
-            [SCRIPT_PATH, self.source_folder, temp_dir, "copy"],
+            [SCRIPT_PATH, self.source_folder, temp_dir, "move"],
             capture_output=True,
             text=True,
         )
@@ -83,7 +83,7 @@ class TestRsyncFolderOperations(unittest.TestCase):
 
     def test_source_and_target_are_same(self):
         result = subprocess.run(
-            [SCRIPT_PATH, self.source_folder, self.source_folder, "copy"],
+            [SCRIPT_PATH, self.source_folder, self.source_folder, "move"],
             capture_output=True,
             text=True,
         )
