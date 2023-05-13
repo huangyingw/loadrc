@@ -77,6 +77,17 @@ class TestRsyncFolderOperations(unittest.TestCase):
             result.stderr,
         )
 
+    def test_source_and_target_are_same(self):
+        result = subprocess.run(
+            [SCRIPT_PATH, self.source_folder, self.source_folder, "copy"],
+            capture_output=True,
+            text=True,
+        )
+        self.assertIn(
+            "Source and target folders are identical or just soft links to each other. Aborting.",
+            result.stderr,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
