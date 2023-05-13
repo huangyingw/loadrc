@@ -81,7 +81,7 @@ class TestDecideMkpathOption(unittest.TestCase):
             shell=True,
         ).stdout.strip()
 
-        if LooseVersion(remote_rsync_version) >= LooseVersion("3.2.0"):
+        if parse_version(remote_rsync_version) >= parse_version("3.2.0"):
             self.assertEqual(output.stdout.strip(), "--mkpath")
         else:
             self.assertEqual(output.stdout.strip(), "")
