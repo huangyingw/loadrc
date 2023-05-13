@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 import subprocess
-from distutils.version import LooseVersion
+from packaging.version import parse as parse_version
 
 SCRIPT_PATH = "~/loadrc/zshrc/decide_mkpath_option.zsh"
 
@@ -25,7 +25,7 @@ class TestDecideMkpathOption(unittest.TestCase):
             shell=True,
         ).stdout.strip()
 
-        if LooseVersion(local_rsync_version) >= LooseVersion("3.2.0"):
+        if parse_version(local_rsync_version) >= parse_version("3.2.0"):
             self.assertEqual(output.stdout.strip(), "--mkpath")
         else:
             self.assertEqual(output.stdout.strip(), "")
