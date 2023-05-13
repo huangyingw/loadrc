@@ -63,19 +63,23 @@ class TestRsyncFolderOperations(unittest.TestCase):
         self.assertIn("-in", result.stdout)
 
     def test_identical_source_and_target(self):
-        # Make the target a symlink to the source
-        os.unlink(self.target_folder)
-        os.symlink(self.source_folder, self.target_folder)
+        # Create a new temporary directory, remove it, and make a symlink to the source folder
+        temp_dir = tempfile.mkdtemp()
+        os.rmdir(temp_dir)
+        os.symlink(self.source_folder, temp_dir)
 
         result = subprocess.run(
-            [SCRIPT_PATH, self.source_folder, self.target_folder, "copy"],
+            [SCRIPT_PATH, self.source_folder, temp_dir, "copy"],
             capture_output=True,
             text=True,
         )
         self.assertIn(
             "Source and target folders are identical or just soft links to each other. Aborting.",
-            result.stderr,
+            result.stdout,
         )
+
+        # Clean up the symlink
+        os.unlink(temp_dir)
 
     def test_source_and_target_are_same(self):
         result = subprocess.run(
