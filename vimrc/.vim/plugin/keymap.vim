@@ -102,6 +102,7 @@ function! Filter()
     exec '%g!/' . b:keyword . '/d'
 endfunction
 
+
 function! PlayVideo()
     " Return early if the buffer type is a terminal
     if &buftype ==# "terminal"
