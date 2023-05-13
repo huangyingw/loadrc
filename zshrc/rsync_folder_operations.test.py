@@ -1,34 +1,71 @@
-import os
+#!/usr/bin/env python3
+
+"""
+rsync_folder_operations.test.py
+
+This script tests the functionality of the rsync_folder_operations.zsh script.
+It checks that the rsync command is executed with the correct options for each operation mode ('move', 'copy', 'mirror', 'tmirror').
+"""
+
 import subprocess
-import tempfile
+import unittest
 
 
-def test_rsync_folder_operations(mode, expected_options):
-    source_folder = tempfile.mkdtemp()
-    target_folder = tempfile.mkdtemp()
+class TestRsyncFolderOperations(unittest.TestCase):
+    def test_move_mode(self):
+        result = subprocess.run(
+            [
+                "~/loadrc/zshrc/rsync_folder_operations.zsh",
+                "source_folder",
+                "target_folder",
+                "move",
+            ],
+            capture_output=True,
+            text=True,
+        )
+        self.assertIn("--remove-source-files", result.stdout)
 
-    with open(os.path.join(source_folder, "test_file.txt"), "w") as f:
-        f.write("test_file")
+    def test_copy_mode(self):
+        result = subprocess.run(
+            [
+                "~/loadrc/zshrc/rsync_folder_operations.zsh",
+                "source_folder",
+                "target_folder",
+                "copy",
+            ],
+            capture_output=True,
+            text=True,
+        )
+        self.assertNotIn("--remove-source-files", result.stdout)
+        self.assertNotIn("--delete-before", result.stdout)
 
-    command = f"~/loadrc/zshrc/rsync_folder_operations.zsh {source_folder} {target_folder} {mode}"
-    output = subprocess.check_output(
-        command, shell=True, text=True, stderr=subprocess.STDOUT
-    )
+    def test_mirror_mode(self):
+        result = subprocess.run(
+            [
+                "~/loadrc/zshrc/rsync_folder_operations.zsh",
+                "source_folder",
+                "target_folder",
+                "mirror",
+            ],
+            capture_output=True,
+            text=True,
+        )
+        self.assertIn("--delete-before", result.stdout)
 
-    if expected_options in output:
-        print(f"[{mode}] Test Passed")
-    else:
-        print(f"[{mode}] Test Failed")
-        print(f"Expected: {expected_options}")
-        print(f"Actual: {output}")
-
-    # Cleanup
-    subprocess.run(f"rm -rf {source_folder}", shell=True)
-    subprocess.run(f"rm -rf {target_folder}", shell=True)
+    def test_tmirror_mode(self):
+        result = subprocess.run(
+            [
+                "~/loadrc/zshrc/rsync_folder_operations.zsh",
+                "source_folder",
+                "target_folder",
+                "tmirror",
+            ],
+            capture_output=True,
+            text=True,
+        )
+        self.assertIn("--delete-before", result.stdout)
+        self.assertIn("-in", result.stdout)
 
 
 if __name__ == "__main__":
-    test_rsync_folder_operations("move", "--remove-source-files")
-    test_rsync_folder_operations("copy", "")
-    test_rsync_folder_operations("mirror", "--delete-before")
-    test_rsync_folder_operations("tmirror", "-in --delete-before")
+    unittest.main()
