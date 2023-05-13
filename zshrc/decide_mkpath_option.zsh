@@ -1,0 +1,55 @@
+#!/bin/zsh
+
+# decide_mkpath_option.zsh
+# A script to determine if the --mkpath option should be used with rsync based on the version of rsync on both source and target systems.
+
+get_rsync_version() {
+    host="$1"
+
+    if [ -z "$host" ]; then
+        rsync_version=$(rsync --version | head -n 1 | awk '{print $3}')
+    else
+        rsync_version=$(ssh "$host" 'rsync --version' | head -n 1 | awk '{print $3}')
+    fi
+
+    echo "$rsync_version"
+}
+
+check_rsync_version() {
+    rsync_version="$1"
+
+    if [[ $(echo "$rsync_version >= 3.2.0" | bc -l) -eq 1 ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+decide_mkpath_option() {
+    source_folder="$1"
+    target_folder="$2"
+
+    source_rsync_version=$(get_rsync_version "$source_folder")
+    target_rsync_version=$(get_rsync_version "$target_folder")
+
+    if check_rsync_version "$source_rsync_version" && check_rsync_version "$target_rsync_version"; then
+        echo "--mkpath"
+    else
+        echo ""
+    fi
+}
+
+main() {
+    if [ -z "$1" ] || [ -z "$2" ]; then
+        echo "Usage: $0 source_folder target_folder"
+        exit 1
+    fi
+
+    source_folder="$1"
+    target_folder="$2"
+    mkpath_option=$(decide_mkpath_option "$source_folder" "$target_folder")
+    echo "$mkpath_option"
+}
+
+# Call the main function with the provided arguments
+main "$@"
