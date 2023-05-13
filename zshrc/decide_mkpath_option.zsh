@@ -58,6 +58,6 @@ main() {
 }
 
 # Call the main function with the provided arguments only when the script is not being sourced
-if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
+if [[ $_ == $0 ]]; then
     main "$@"
 fi
