@@ -55,6 +55,8 @@ class TestRsyncFolderOperations(unittest.TestCase):
             text=True,
         )
         self.assertIn("--delete-before", result.stdout)
+        self.assertNotIn("--remove-source-files", result.stdout)
+        self.assertNotIn("-in", result.stdout)
 
     def test_tmirror_mode(self):
         result = subprocess.run(
@@ -64,6 +66,7 @@ class TestRsyncFolderOperations(unittest.TestCase):
         )
         self.assertIn("--delete-before", result.stdout)
         self.assertIn("-in", result.stdout)
+        self.assertNotIn("--remove-source-files", result.stdout)
 
     def test_identical_source_and_target(self):
         # Create a new temporary directory, remove it, and make a symlink to the source folder
