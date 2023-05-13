@@ -43,11 +43,13 @@ class TestDecideMkpathOption(unittest.TestCase):
             self.assertEqual(output.stdout.strip(), "")
 
     def test_get_rsync_version_local(self):
+        source_folder = "./source_folder"
         local_rsync_version = subprocess.run(
-            f"source {SCRIPT_PATH}; get_rsync_version",
+            f"source {SCRIPT_PATH}; get_rsync_version {source_folder}",
             capture_output=True,
             text=True,
             shell=True,
+            executable="/bin/zsh",
         ).stdout.strip()
 
         actual_rsync_version = subprocess.run(
