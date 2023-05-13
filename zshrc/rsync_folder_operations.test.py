@@ -13,6 +13,9 @@ import tempfile
 import shutil
 import unittest
 import os
+from unittest.mock import patch, MagicMock
+from unittest.mock import patch
+import tempfile
 
 SCRIPT_PATH = os.path.expanduser("~/loadrc/zshrc/rsync_folder_operations.zsh")
 
@@ -112,6 +115,45 @@ class TestRsyncFolderOperations(unittest.TestCase):
 
         # Clean up the tmirror.ready file
         os.remove(ready_file)
+
+    def test_mkpath_fails_then_succeeds_without_mkpath(self):
+        mkpath_failure_triggered = False
+
+        def run_side_effect(*args, **kwargs):
+            nonlocal mkpath_failure_triggered
+            cmd = args[0]
+            print(f"Command received by run_side_effect: {cmd}")
+            if "--mkpath" in cmd:
+                # Mock the case when rsync with --mkpath fails
+                mkpath_failure_triggered = True
+                raise FileNotFoundError("Mocked --mkpath failure")
+            else:
+                # Mock the case when rsync without --mkpath succeeds
+                print("Triggering success without --mkpath")
+                return subprocess.CompletedProcess(
+                    args,
+                    returncode=0,
+                    stdout="Mocked success without --mkpath",
+                    stderr="",
+                )
+        with patch("subprocess.run", side_effect=run_side_effect):
+            cmd = (
+                f"{SCRIPT_PATH} {self.source_folder} {self.target_folder} copy"
+            )
+            output = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                shell=True,
+            )
+
+        print(f"Entire output: {output}")
+        self.assertTrue(mkpath_failure_triggered)
+        without_mkpath_line_index = output.stdout.find(
+            "rsync options (without --mkpath):"
+        )
+        self.assertNotEqual(without_mkpath_line_index, -1)
+        self.assertNotIn("--mkpath", output.stdout[without_mkpath_line_index:])
 
 
 if __name__ == "__main__":
