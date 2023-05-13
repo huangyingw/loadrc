@@ -4,7 +4,8 @@
 # A script to determine if the --mkpath option should be used with rsync based on the version of rsync on both source and target systems.
 
 get_rsync_version() {
-    host="$1"
+    host_info="$1"
+    host=$(echo "$host_info" | cut -d ':' -f 1)
 
     if [ -z "$host" ]; then
         rsync_version=$(rsync --version | head -n 1 | awk '{print $3}')
