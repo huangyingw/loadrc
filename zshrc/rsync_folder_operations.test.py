@@ -89,7 +89,7 @@ class TestRsyncFolderOperations(unittest.TestCase):
         )
         self.assertIn(
             "Source and target folders are identical or just soft links to each other. Aborting.",
-            result.stderr,
+            result.stdout,
         )
 
 
