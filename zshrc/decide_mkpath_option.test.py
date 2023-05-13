@@ -64,16 +64,9 @@ class TestDecideMkpathOption(unittest.TestCase):
         source_folder = "user@example.com:/path/to/source_folder"
         target_folder = "user@example.com:/path/to/target_folder"
 
-        output = subprocess.run(
-            f"{SCRIPT_PATH} {source_folder} {target_folder}",
-            capture_output=True,
-            text=True,
-            shell=True,
-        )
-
         host = source_folder.split(":")[0]
         remote_rsync_version = subprocess.run(
-            f"ssh {host} 'rsync --version' | head -n 1 | awk '{{print $3}}'",
+            f"source {SCRIPT_PATH}; get_rsync_version {host}",
             capture_output=True,
             text=True,
             shell=True,
