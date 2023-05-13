@@ -98,6 +98,21 @@ class TestRsyncFolderOperations(unittest.TestCase):
             result.stdout,
         )
 
+    def test_tmirror_ready_file_created(self):
+        result = subprocess.run(
+            [SCRIPT_PATH, self.source_folder, self.target_folder, "tmirror"],
+            capture_output=True,
+            text=True,
+        )
+
+        ready_file = os.path.join(self.source_folder, "tmirror.ready")
+        self.assertTrue(
+            os.path.isfile(ready_file), "tmirror.ready file not created"
+        )
+
+        # Clean up the tmirror.ready file
+        os.remove(ready_file)
+
 
 if __name__ == "__main__":
     unittest.main()
