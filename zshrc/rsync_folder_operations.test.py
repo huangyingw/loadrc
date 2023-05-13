@@ -1,25 +1,33 @@
 #!/usr/bin/env python3
 
 """
-rsync_folder_operations.test.py
+test_rsync_folder_operations.py
 
 This script tests the functionality of the rsync_folder_operations.zsh script.
 It checks that the rsync command is executed with the correct options for each operation mode ('move', 'copy', 'mirror', 'tmirror').
 """
 
 import subprocess
+import tempfile
+import shutil
 import unittest
+import os
+
+SCRIPT_PATH = os.path.expanduser("~/loadrc/zshrc/rsync_folder_operations.zsh")
 
 
 class TestRsyncFolderOperations(unittest.TestCase):
+    def setUp(self):
+        self.source_folder = tempfile.mkdtemp()
+        self.target_folder = tempfile.mkdtemp()
+
+    def tearDown(self):
+        shutil.rmtree(self.source_folder)
+        shutil.rmtree(self.target_folder)
+
     def test_move_mode(self):
         result = subprocess.run(
-            [
-                "~/loadrc/zshrc/rsync_folder_operations.zsh",
-                "source_folder",
-                "target_folder",
-                "move",
-            ],
+            [SCRIPT_PATH, self.source_folder, self.target_folder, "move"],
             capture_output=True,
             text=True,
         )
@@ -27,12 +35,7 @@ class TestRsyncFolderOperations(unittest.TestCase):
 
     def test_copy_mode(self):
         result = subprocess.run(
-            [
-                "~/loadrc/zshrc/rsync_folder_operations.zsh",
-                "source_folder",
-                "target_folder",
-                "copy",
-            ],
+            [SCRIPT_PATH, self.source_folder, self.target_folder, "copy"],
             capture_output=True,
             text=True,
         )
@@ -41,12 +44,7 @@ class TestRsyncFolderOperations(unittest.TestCase):
 
     def test_mirror_mode(self):
         result = subprocess.run(
-            [
-                "~/loadrc/zshrc/rsync_folder_operations.zsh",
-                "source_folder",
-                "target_folder",
-                "mirror",
-            ],
+            [SCRIPT_PATH, self.source_folder, self.target_folder, "mirror"],
             capture_output=True,
             text=True,
         )
@@ -54,12 +52,7 @@ class TestRsyncFolderOperations(unittest.TestCase):
 
     def test_tmirror_mode(self):
         result = subprocess.run(
-            [
-                "~/loadrc/zshrc/rsync_folder_operations.zsh",
-                "source_folder",
-                "target_folder",
-                "tmirror",
-            ],
+            [SCRIPT_PATH, self.source_folder, self.target_folder, "tmirror"],
             capture_output=True,
             text=True,
         )
