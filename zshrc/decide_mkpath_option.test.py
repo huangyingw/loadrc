@@ -1,7 +1,7 @@
 import unittest
 import subprocess
 
-SCRIPT_PATH = "./decide_mkpath_option.zsh"
+SCRIPT_PATH = "~/loadrc/zshrc/decide_mkpath_option.zsh"
 
 
 class TestDecideMkpathOption(unittest.TestCase):
