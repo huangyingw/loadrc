@@ -35,6 +35,8 @@ class TestRsyncFolderOperations(unittest.TestCase):
             text=True,
         )
         self.assertIn("--remove-source-files", result.stdout)
+        self.assertNotIn("--delete-before", result.stdout)
+        self.assertNotIn("-in", result.stdout)
 
     def test_copy_mode(self):
         result = subprocess.run(
@@ -44,6 +46,7 @@ class TestRsyncFolderOperations(unittest.TestCase):
         )
         self.assertNotIn("--remove-source-files", result.stdout)
         self.assertNotIn("--delete-before", result.stdout)
+        self.assertNotIn("-in", result.stdout)
 
     def test_mirror_mode(self):
         result = subprocess.run(
