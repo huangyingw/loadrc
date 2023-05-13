@@ -29,6 +29,23 @@ class TestDecideMkpathOption(unittest.TestCase):
         else:
             self.assertEqual(output.stdout.strip(), "")
 
+    def test_get_rsync_version_local(self):
+        local_rsync_version = subprocess.run(
+            f"source {SCRIPT_PATH}; get_rsync_version",
+            capture_output=True,
+            text=True,
+            shell=True,
+        ).stdout.strip()
+
+        actual_rsync_version = subprocess.run(
+            "rsync --version | head -n 1 | awk '{print $3}'",
+            capture_output=True,
+            text=True,
+            shell=True,
+        ).stdout.strip()
+
+        self.assertEqual(local_rsync_version, actual_rsync_version)
+
     @patch("subprocess.run")
     def test_remote_mkpath_option(self, mock_run):
         # Test if the --mkpath option is used with remote folders
