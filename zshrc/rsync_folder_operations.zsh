@@ -18,7 +18,7 @@ rsync_operations() {
     fi
 
     # Get necessary parameters for rsync
-    iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source_folder" "$target_folder")
+    iconvs=$(~/loadrc/zshrc/rsync_iconv_options.zsh "$source_folder" "$target_folder")
     rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source_folder" "$target_folder")
     rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
 
