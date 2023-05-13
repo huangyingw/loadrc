@@ -3,14 +3,19 @@
 # decide_mkpath_option.zsh
 # A script to determine if the --mkpath option should be used with rsync based on the version of rsync on both source and target systems.
 
+get_rsync_version_command() {
+    echo "rsync --version | head -n 1 | awk '{print \$3}'"
+}
+
 get_rsync_version() {
     host_info="$1"
     host=$(echo "$host_info" | cut -d ':' -f 1)
+    cmd=$(get_rsync_version_command)
 
     if [ -z "$host" ]; then
-        rsync_version=$(rsync --version | head -n 1 | awk '{print $3}')
+        rsync_version=$(eval "$cmd")
     else
-        rsync_version=$(ssh "$host" 'rsync --version' | head -n 1 | awk '{print $3}')
+        rsync_version=$(ssh "$host" "$cmd")
     fi
 
     echo "$rsync_version"
