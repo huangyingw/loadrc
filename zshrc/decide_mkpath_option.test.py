@@ -1,9 +1,17 @@
 import unittest
 from unittest.mock import patch
 import subprocess
+import re
 from packaging.version import parse as parse_version
 
 SCRIPT_PATH = "~/loadrc/zshrc/decide_mkpath_option.zsh"
+
+
+def extract_version(version_str):
+    match = re.match(r"(\d+\.\d+\.\d+)", version_str)
+    if match:
+        return match.group(1)
+    return None
 
 
 class TestDecideMkpathOption(unittest.TestCase):
@@ -25,7 +33,11 @@ class TestDecideMkpathOption(unittest.TestCase):
             shell=True,
         ).stdout.strip()
 
-        if parse_version(local_rsync_version) >= parse_version("3.2.0"):
+        extracted_version = extract_version(local_rsync_version)
+
+        if extracted_version and parse_version(
+            extracted_version
+        ) >= parse_version("3.2.0"):
             self.assertEqual(output.stdout.strip(), "--mkpath")
         else:
             self.assertEqual(output.stdout.strip(), "")
