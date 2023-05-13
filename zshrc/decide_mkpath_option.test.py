@@ -56,7 +56,11 @@ class TestDecideMkpathOption(unittest.TestCase):
         else:
             self.assertEqual(output.stdout.strip(), "")
 
-    def test_get_rsync_version(self):
+    @patch("subprocess.run")
+    def test_get_rsync_version(self, mock_run):
+        # Mock the ssh response
+        mock_run.return_value.stdout.strip.return_value = "3.2.0"
+
         source_folder = "user@example.com:/path/to/source_folder"
         target_folder = "user@example.com:/path/to/target_folder"
 
