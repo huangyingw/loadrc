@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 import subprocess
 
 SCRIPT_PATH = "~/loadrc/zshrc/decide_mkpath_option.zsh"
@@ -28,9 +29,12 @@ class TestDecideMkpathOption(unittest.TestCase):
         else:
             self.assertEqual(output.stdout.strip(), "")
 
-    def test_remote_mkpath_option(self):
+    @patch("subprocess.run")
+    def test_remote_mkpath_option(self, mock_run):
         # Test if the --mkpath option is used with remote folders
-        # Replace 'user@example.com' with a valid remote user and host
+        # Mock the response of the ssh command
+        mock_run.return_value.stdout.strip.return_value = "3.2.0"
+
         source_folder = "user@example.com:/path/to/source_folder"
         target_folder = "user@example.com:/path/to/target_folder"
         output = subprocess.run(
