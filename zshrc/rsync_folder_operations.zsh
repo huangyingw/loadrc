@@ -32,14 +32,19 @@ rsync_operations() {
         rsync_options+=("-in" "--delete-before")
     fi
 
+    # Perform rsync with --mkpath option first
+    rsync_options+=("--mkpath")
+    echo "rsync options: ${rsync_options[@]}"
+
     if [ "$mode" = "tmirror" ]; then
         ready_file="$source_folder/tmirror.ready"
         rsync "${rsync_options[@]}" "$source_folder/" "$target_folder/" > "$ready_file"
     else
-        # Perform rsync with --mkpath option first
-        if ! rsync "${rsync_options[@]}" --mkpath "$source_folder/" "$target_folder/"; then
+        if ! rsync "${rsync_options[@]}" "$source_folder/" "$target_folder/"; then
             # If rsync with --mkpath option fails, try again without the option
-            rsync "${rsync_options[@]}" "$source_folder/" "$target_folder/"
+            rsync_options=("${rsync_options[@]:0:-1}")  # remove --mkpath from options
+                echo "rsync options (without --mkpath): ${rsync_options[@]}"
+                rsync "${rsync_options[@]}" "$source_folder/" "$target_folder/"
         fi
     fi
 }
@@ -47,7 +52,7 @@ rsync_operations() {
 main() {
     if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
         echo "Usage: $0 source_folder target_folder mode"
-        echo "mode: 'move', 'copy', or 'mirror'"
+        echo "mode: 'move', 'copy', 'mirror', or 'tmirror'"
         exit 1
     fi
 
