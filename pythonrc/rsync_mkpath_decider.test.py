@@ -24,15 +24,15 @@ class TestRsyncMkpathDecider(unittest.TestCase):
             cmd, shell=True, text=True
         ).strip()
         self.assertEqual(
-            get_rsync_version("./source_folder"), local_rsync_version
+            get_rsync_version("./target_folder"), local_rsync_version
         )
 
     @patch("subprocess.check_output")
     def test_get_rsync_version_remote(self, mock_check_output):
         mock_version = "3.2.0"
         mock_check_output.return_value = mock_version
-        source_folder = "user@example.com:/path/to/source_folder"
-        self.assertEqual(get_rsync_version(source_folder), mock_version)
+        target_folder = "user@example.com:/path/to/target_folder"
+        self.assertEqual(get_rsync_version(target_folder), mock_version)
 
     def test_check_rsync_version(self):
         self.assertTrue(check_rsync_version("3.2.0"))
@@ -42,24 +42,30 @@ class TestRsyncMkpathDecider(unittest.TestCase):
         self.assertFalse(check_rsync_version("2.6.9"))
 
     @patch("rsync_mkpath_decider.get_rsync_version")
-    def test_decide_mkpath_option_newer_to_older(self, mock_get_rsync_version):
-        mock_get_rsync_version.side_effect = ["3.2.1", "3.1.9"]
-        self.assertEqual(decide_mkpath_option("source", "target"), "")
+    def test_decide_mkpath_option(self, mock_get_rsync_version):
+        mock_get_rsync_version.return_value = "3.2.0"
+        self.assertEqual(decide_mkpath_option("target"), "--mkpath")
 
-    @patch("rsync_mkpath_decider.get_rsync_version")
-    def test_decide_mkpath_option_older_to_newer(self, mock_get_rsync_version):
-        mock_get_rsync_version.side_effect = ["3.1.9", "3.2.1"]
-        self.assertEqual(decide_mkpath_option("source", "target"), "--mkpath")
+        mock_get_rsync_version.return_value = "3.1.9"
+        self.assertEqual(decide_mkpath_option("target"), "")
+
+    @patch("sys.stdout", new_callable=StringIO)
+    def test_main(self, mock_stdout):
+        test_args = ("./target_folder",)
+        with patch.object(sys, "argv", ["script_name"] + list(test_args)):
+            main(test_args)
+            output = mock_stdout.getvalue().strip()
+            self.assertIn(output, ("", "--mkpath"))
 
 
 class TestExtractHost(unittest.TestCase):
     def test_extract_host(self):
         self.assertEqual(
-            extract_host("user@example.com:/path/to/source_folder"),
+            extract_host("user@example.com:/path/to/target_folder"),
             "user@example.com",
         )
         self.assertEqual(
-            extract_host("example.com:/path/to/source_folder"), "example.com"
+            extract_host("example.com:/path/to/target_folder"), "example.com"
         )
         self.assertEqual(extract_host("mini:~/loadrc/"), "mini")
         self.assertEqual(
