@@ -18,11 +18,12 @@ def parse_host(path):
 
 
 def get_rsyncpath(host):
+    command = ". ~/loadrc/.pathrc; which rsync"
     if host == "localhost":
-        return "/usr/bin/rsync"
+        return subprocess.check_output(command, shell=True, text=True).strip()
     else:
         return subprocess.check_output(
-            ["ssh", host, ". ~/loadrc/.pathrc; which rsync"], text=True
+            ["ssh", host, command], text=True
         ).strip()
 
 
