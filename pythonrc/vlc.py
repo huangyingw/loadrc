@@ -46,6 +46,7 @@ def open_in_vlc(file_path, cur_line):
                 "--sub-autodetect-file",
                 "-f",
                 "--macosx-continue-playback=2",
+                "--rate=2.0",
                 "--start-time=" + str(time),
                 cur_line,
             ]
@@ -59,6 +60,7 @@ def open_in_vlc(file_path, cur_line):
                 "--sub-autodetect-file",
                 "-f",
                 "--macosx-continue-playback=2",
+                "--rate=2.0",
                 cur_line,
             ]
         )
