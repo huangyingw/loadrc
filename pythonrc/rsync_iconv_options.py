@@ -49,7 +49,7 @@ def generate_iconv_options(source_dir, destination_dir):
         dst_encoding = local_encoding
 
     rsync_options = f"--iconv={src_encoding},{dst_encoding}"
-    print(rsync_options)
+    return rsync_options  # Replace the print statement with a return statement
 
 
 def main():
