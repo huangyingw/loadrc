@@ -9,6 +9,7 @@ from rsync_mkpath_decider import (
     check_rsync_version,
     decide_mkpath_option,
     main,
+    extract_host,
 )
 
 
@@ -19,8 +20,12 @@ class TestRsyncMkpathDecider(unittest.TestCase):
 
     def test_get_rsync_version_local(self):
         cmd = get_rsync_version_command()
-        local_rsync_version = subprocess.check_output(cmd, shell=True, text=True).strip()
-        self.assertEqual(get_rsync_version("./source_folder"), local_rsync_version)
+        local_rsync_version = subprocess.check_output(
+            cmd, shell=True, text=True
+        ).strip()
+        self.assertEqual(
+            get_rsync_version("./source_folder"), local_rsync_version
+        )
 
     @patch("subprocess.check_output")
     def test_get_rsync_version_remote(self, mock_check_output):
@@ -51,6 +56,20 @@ class TestRsyncMkpathDecider(unittest.TestCase):
             main(test_args)
             output = mock_stdout.getvalue().strip()
             self.assertIn(output, ("", "--mkpath"))
+
+
+class TestExtractHost(unittest.TestCase):
+    def test_extract_host(self):
+        self.assertEqual(
+            extract_host("user@example.com:/path/to/source_folder"),
+            "user@example.com",
+        )
+        self.assertEqual(
+            extract_host("example.com:/path/to/source_folder"), "example.com"
+        )
+        self.assertEqual(
+            extract_host("/path/to/local/folder"), "/path/to/local/folder"
+        )
 
 
 if __name__ == "__main__":
