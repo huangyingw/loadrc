@@ -42,20 +42,14 @@ class TestRsyncMkpathDecider(unittest.TestCase):
         self.assertFalse(check_rsync_version("2.6.9"))
 
     @patch("rsync_mkpath_decider.get_rsync_version")
-    def test_decide_mkpath_option(self, mock_get_rsync_version):
-        mock_get_rsync_version.return_value = "3.2.0"
-        self.assertEqual(decide_mkpath_option("source", "target"), "--mkpath")
-
-        mock_get_rsync_version.return_value = "3.1.9"
+    def test_decide_mkpath_option_newer_to_older(self, mock_get_rsync_version):
+        mock_get_rsync_version.side_effect = ["3.2.1", "3.1.9"]
         self.assertEqual(decide_mkpath_option("source", "target"), "")
 
-    @patch("sys.stdout", new_callable=StringIO)
-    def test_main(self, mock_stdout):
-        test_args = ("./source_folder", "./target_folder")
-        with patch.object(sys, "argv", ["script_name"] + list(test_args)):
-            main(test_args)
-            output = mock_stdout.getvalue().strip()
-            self.assertIn(output, ("", "--mkpath"))
+    @patch("rsync_mkpath_decider.get_rsync_version")
+    def test_decide_mkpath_option_older_to_newer(self, mock_get_rsync_version):
+        mock_get_rsync_version.side_effect = ["3.1.9", "3.2.1"]
+        self.assertEqual(decide_mkpath_option("source", "target"), "--mkpath")
 
 
 class TestExtractHost(unittest.TestCase):
