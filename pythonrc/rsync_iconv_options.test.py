@@ -40,7 +40,11 @@ class TestRsyncIconvOptions(unittest.TestCase):
             with patch(
                 "rsync_iconv_options.get_remote_encoding"
             ) as mock_get_remote_encoding:
-                mock_get_remote_encoding.side_effect = ["utf-8", "utf-8-mac"]
+                mock_get_remote_encoding.side_effect = (
+                    lambda path: "utf-8"
+                    if path == "local_source_folder"
+                    else "utf-8-mac"
+                )
                 iconv_options = generate_iconv_options(
                     "local_source_folder", "user@remote_host:/remote/path"
                 )
@@ -51,7 +55,11 @@ class TestRsyncIconvOptions(unittest.TestCase):
             with patch(
                 "rsync_iconv_options.get_remote_encoding"
             ) as mock_get_remote_encoding:
-                mock_get_remote_encoding.side_effect = ["utf-8-mac", "utf-8"]
+                mock_get_remote_encoding.side_effect = (
+                    lambda path: "utf-8-mac"
+                    if path == "local_source_folder"
+                    else "utf-8"
+                )
                 iconv_options = generate_iconv_options(
                     "local_source_folder", "user@remote_host:/remote/path"
                 )
