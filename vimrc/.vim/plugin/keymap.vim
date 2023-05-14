@@ -114,11 +114,6 @@ function! PlayVideo()
     let line = substitute(line, '^[^"]', '"' . line[0], '')
     let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
     
-    " Use osascript to exit full-screen mode in iTerm2
-    silent execute "!osascript -e 'tell application \"System Events\" to keystroke return using command down' &"
-    sleep 1
-    
-    " Call vlc.py script
     call AsyncRunShellCommand('~/loadrc/pythonrc/vlc.py ' . '"' . expand("%:p") . '"' .  ' ' . line)
 endfunction
 
