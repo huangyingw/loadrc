@@ -9,6 +9,7 @@ import subprocess
 from pathlib import Path
 from rsync_path_resolver import resolve_rsync_path
 from rsync_mkpath_decider import decide_mkpath_option
+from rsync_iconv_options import generate_iconv_options
 
 
 def rsync_operations(source_folder, target_folder, mode):
@@ -23,9 +24,7 @@ def rsync_operations(source_folder, target_folder, mode):
         return 1
 
     # Get necessary parameters for rsync
-    iconvs = subprocess.check_output(
-        ["./rsync_iconv_options.zsh", source_folder, target_folder], text=True
-    ).strip()
+    iconvs = generate_iconv_options(source_folder, target_folder)
     rsync_path_option = resolve_rsync_path(source_folder, target_folder)
     mkpath_option = decide_mkpath_option(source_folder, target_folder)
 
