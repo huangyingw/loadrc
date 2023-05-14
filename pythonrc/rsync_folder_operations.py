@@ -8,6 +8,7 @@ import sys
 import subprocess
 from pathlib import Path
 from rsync_path_resolver import resolve_rsync_path
+from rsync_mkpath_decider import decide_mkpath_option
 
 
 def rsync_operations(source_folder, target_folder, mode):
@@ -26,12 +27,17 @@ def rsync_operations(source_folder, target_folder, mode):
         ["./rsync_iconv_options.zsh", source_folder, target_folder], text=True
     ).strip()
     rsync_path_option = resolve_rsync_path(source_folder, target_folder)
+    mkpath_option = decide_mkpath_option(source_folder, target_folder)
 
     with open("./rsync_basic_options", "r") as file:
         rsync_basic_options = file.read().split()
 
     # Set rsync options based on the mode (move, copy, mirror, or tmirror)
-    rsync_options = rsync_basic_options + [iconvs, rsync_path_option]
+    rsync_options = rsync_basic_options + [
+        iconvs,
+        rsync_path_option,
+        mkpath_option,
+    ]
     if mode == "move":
         rsync_options.append("--remove-source-files")
     elif mode == "mirror":
@@ -39,8 +45,6 @@ def rsync_operations(source_folder, target_folder, mode):
     elif mode == "tmirror":
         rsync_options.extend(["-in", "--delete-before"])
 
-    # Perform rsync with --mkpath option first
-    rsync_options.append("--mkpath")
     print(f"rsync options: {rsync_options}")
 
     if mode == "tmirror":
@@ -53,20 +57,11 @@ def rsync_operations(source_folder, target_folder, mode):
                 stdout=outfile,
             )
     else:
-        result = subprocess.run(
+        subprocess.run(
             ["rsync"]
             + rsync_options
             + [f"{source_folder}/", f"{target_folder}/"]
         )
-        if result.returncode != 0:
-            # If rsync with --mkpath option fails, try again without the option
-            rsync_options = rsync_options[:-1]  # remove --mkpath from options
-            print(f"rsync options (without --mkpath): {rsync_options}")
-            subprocess.run(
-                ["rsync"]
-                + rsync_options
-                + [f"{source_folder}/", f"{target_folder}/"]
-            )
 
 
 def main():
