@@ -49,6 +49,7 @@ class TestRsyncFolderOperations(TestCase):
             self.source_folder, self.target_folder, "move"
         )
         self.assertIn("--remove-source-files", rsync_options)
+        self.assertNotIn("--delete-before", rsync_options)
 
     def test_rsync_copy(self):
         print("\nTesting mode: copy")
@@ -57,19 +58,23 @@ class TestRsyncFolderOperations(TestCase):
         )
         self.assertNotIn("--remove-source-files", rsync_options)
         self.assertNotIn("--delete-before", rsync_options)
+        self.assertNotIn("-in", rsync_options)
 
     def test_rsync_mirror(self):
         print("\nTesting mode: mirror")
         rsync_options = rsync_operations(
             self.source_folder, self.target_folder, "mirror"
         )
+        self.assertNotIn("--remove-source-files", rsync_options)
         self.assertIn("--delete-before", rsync_options)
+        self.assertNotIn("-in", rsync_options)
 
     def test_rsync_tmirror(self):
         print("\nTesting mode: tmirror")
         rsync_options = rsync_operations(
             self.source_folder, self.target_folder, "tmirror"
         )
+        self.assertNotIn("--remove-source-files", rsync_options)
         self.assertIn("-in", rsync_options)
         self.assertIn("--delete-before", rsync_options)
 
