@@ -26,7 +26,7 @@ def rsync_operations(source_folder, target_folder, mode):
     # Get necessary parameters for rsync
     iconvs = generate_iconv_options(source_folder, target_folder)
     rsync_path_option = resolve_rsync_path(source_folder, target_folder)
-    mkpath_option = decide_mkpath_option(source_folder, target_folder)
+    mkpath_option = decide_mkpath_option(target_folder)
 
     rsync_basic_options_path = os.path.expanduser(
         "~/loadrc/bashrc/rsync_basic_options"
