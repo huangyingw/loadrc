@@ -28,7 +28,10 @@ def rsync_operations(source_folder, target_folder, mode):
     rsync_path_option = resolve_rsync_path(source_folder, target_folder)
     mkpath_option = decide_mkpath_option(source_folder, target_folder)
 
-    with open("~/loadrc/bashrc/rsync_basic_options", "r") as file:
+    rsync_basic_options_path = os.path.expanduser(
+        "~/loadrc/bashrc/rsync_basic_options"
+    )  # Add this line
+    with open(rsync_basic_options_path, "r") as file:  # Update this line
         rsync_basic_options = file.read().split()
 
     # Set rsync options based on the mode (move, copy, mirror, or tmirror)
