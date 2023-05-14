@@ -35,10 +35,12 @@ def rsync_operations(source_folder, target_folder, mode):
         rsync_basic_options = file.read().split()
 
     # Set rsync options based on the mode (move, copy, mirror, or tmirror)
-    rsync_options = rsync_basic_options + [
-        iconvs,
-        rsync_path_option,
-        mkpath_option,
+    rsync_options = [
+        option
+        for option in (
+            rsync_basic_options + [iconvs, rsync_path_option, mkpath_option]
+        )
+        if option is not None  # Filter out None values
     ]
     if mode == "move":
         rsync_options.append("--remove-source-files")
@@ -46,8 +48,6 @@ def rsync_operations(source_folder, target_folder, mode):
         rsync_options.append("--delete-before")
     elif mode == "tmirror":
         rsync_options.extend(["-in", "--delete-before"])
-
-    print(f"rsync options: {rsync_options}")
 
     if mode == "tmirror":
         ready_file = os.path.join(source_folder, "tmirror.ready")
