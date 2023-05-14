@@ -4,6 +4,7 @@ A script to move, copy, or mirror the contents of one folder into another using 
 """
 
 import os
+import stat
 import sys
 import subprocess
 from pathlib import Path
@@ -17,11 +18,11 @@ def rsync_operations(source_folder, target_folder, mode):
     source_folder = os.path.realpath(source_folder)
     target_folder = os.path.realpath(target_folder)
 
-    # Resolve the paths using abspath for comparison
-    source_folder_abs = os.path.abspath(source_folder)
-    target_folder_abs = os.path.abspath(target_folder)
+    # Get the inode numbers for source and target
+    source_inode = os.stat(source_folder)[stat.ST_INO]
+    target_inode = os.stat(target_folder)[stat.ST_INO]
 
-    if os.path.samefile(source_folder_abs, target_folder_abs):
+    if source_inode == target_inode:
         print(
             "Source and target folders are identical or just soft links to each other. Aborting."
         )
