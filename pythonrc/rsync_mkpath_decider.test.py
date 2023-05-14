@@ -67,6 +67,7 @@ class TestExtractHost(unittest.TestCase):
         self.assertEqual(
             extract_host("example.com:/path/to/source_folder"), "example.com"
         )
+        self.assertEqual(extract_host("mini:~/loadrc/"), "mini")
         self.assertEqual(
             extract_host("/path/to/local/folder"), "/path/to/local/folder"
         )
