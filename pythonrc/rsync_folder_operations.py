@@ -61,6 +61,7 @@ def rsync_operations(source_folder, target_folder, mode):
             + rsync_options
             + [f"{source_folder}/", f"{target_folder}/"]
         )
+    return rsync_options  # Add this line to return rsync_options
 
 
 def main():
@@ -75,7 +76,9 @@ def main():
     target_folder = sys.argv[2]
     mode = sys.argv[3]
 
-    rsync_operations(source_folder, target_folder, mode)
+    rsync_operations(
+        source_folder, target_folder, mode
+    )  # Remove return value since it's not needed in main()
 
 
 if __name__ == "__main__":
