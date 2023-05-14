@@ -45,23 +45,33 @@ class TestRsyncFolderOperations(TestCase):
 
     def test_rsync_move(self):
         print("\nTesting mode: move")
-        rsync_operations(self.source_folder, self.target_folder, "move")
-        # Add assertions for the move mode here.
+        rsync_options = rsync_operations(
+            self.source_folder, self.target_folder, "move"
+        )
+        self.assertIn("--remove-source-files", rsync_options)
 
     def test_rsync_copy(self):
         print("\nTesting mode: copy")
-        rsync_operations(self.source_folder, self.target_folder, "copy")
-        # Add assertions for the copy mode here.
+        rsync_options = rsync_operations(
+            self.source_folder, self.target_folder, "copy"
+        )
+        self.assertNotIn("--remove-source-files", rsync_options)
+        self.assertNotIn("--delete-before", rsync_options)
 
     def test_rsync_mirror(self):
         print("\nTesting mode: mirror")
-        rsync_operations(self.source_folder, self.target_folder, "mirror")
-        # Add assertions for the mirror mode here.
+        rsync_options = rsync_operations(
+            self.source_folder, self.target_folder, "mirror"
+        )
+        self.assertIn("--delete-before", rsync_options)
 
     def test_rsync_tmirror(self):
         print("\nTesting mode: tmirror")
-        rsync_operations(self.source_folder, self.target_folder, "tmirror")
-        # Add assertions for the tmirror mode here.
+        rsync_options = rsync_operations(
+            self.source_folder, self.target_folder, "tmirror"
+        )
+        self.assertIn("-in", rsync_options)
+        self.assertIn("--delete-before", rsync_options)
 
 
 if __name__ == "__main__":
