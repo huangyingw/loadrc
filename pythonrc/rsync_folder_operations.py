@@ -21,7 +21,9 @@ def rsync_operations(source_folder, target_folder, mode):
         print(
             "Source and target folders are identical or just soft links to each other. Aborting."
         )
-        return 1
+        raise ValueError(
+            "Source and target folders cannot be the same."
+        )  # Add this line
 
     # Get necessary parameters for rsync
     iconvs = generate_iconv_options(source_folder, target_folder)
