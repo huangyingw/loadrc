@@ -78,6 +78,11 @@ class TestRsyncFolderOperations(TestCase):
         self.assertIn("-in", rsync_options)
         self.assertIn("--delete-before", rsync_options)
 
+    def test_rsync_same_source_and_target(self):
+        print("\nTesting same source and target folders")
+        with self.assertRaises(ValueError):
+            rsync_operations(self.source_folder, self.source_folder, "copy")
+
 
 if __name__ == "__main__":
     unittest_main()
