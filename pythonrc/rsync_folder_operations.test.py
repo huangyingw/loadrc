@@ -83,6 +83,29 @@ class TestRsyncFolderOperations(TestCase):
         with self.assertRaises(ValueError):
             rsync_operations(self.source_folder, self.source_folder, "move")
 
+    def test_rsync_soft_link_target(self):
+        print("\nTesting when target folder is a soft link to source folder")
+        soft_link_target = os.path.join(self.base_folder, "target_soft_link")
+        os.symlink(self.source_folder, soft_link_target)
+        with self.assertRaises(ValueError):
+            rsync_operations(self.source_folder, soft_link_target, "move")
+        os.unlink(soft_link_target)
+
+    def test_rsync_hard_link_target(self):
+        print("\nTesting when target folder is a hard link to source folder")
+        hard_link_target = os.path.join(self.base_folder, "target_hard_link")
+        try:
+            os.link(self.source_folder, hard_link_target)
+        except OSError:
+            print(
+                "Note: The hard link test case is only valid for file systems that support hard links for directories."
+            )
+            return
+
+        with self.assertRaises(ValueError):
+            rsync_operations(self.source_folder, hard_link_target, "move")
+        os.unlink(hard_link_target)
+
 
 if __name__ == "__main__":
     unittest_main()
