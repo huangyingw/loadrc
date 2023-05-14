@@ -19,7 +19,7 @@ def parse_host(path):
 
 def get_rsyncpath(host):
     if host == "localhost":
-        return str(Path.home() / "loadrc" / ".pathrc")
+        return "/usr/bin/rsync"
     else:
         return subprocess.check_output(
             ["ssh", host, ". ~/loadrc/.pathrc; which rsync"], text=True
