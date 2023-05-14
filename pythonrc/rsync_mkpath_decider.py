@@ -27,7 +27,15 @@ def get_rsync_version(host_info: str) -> str:
 
 
 def check_rsync_version(rsync_version: str) -> bool:
-    return tuple(map(int, rsync_version.split("."))) >= (3, 2, 0)
+    try:
+        version_numbers = tuple(map(int, rsync_version.split(".")))
+    except ValueError:
+        # Extract only numeric parts of the version string
+        version_numbers = tuple(map(int, re.findall(r"\d+", rsync_version)))
+        if not version_numbers:
+            return False
+
+    return version_numbers >= (3, 2, 0)
 
 
 def decide_mkpath_option(source_folder: str, target_folder: str) -> str:
