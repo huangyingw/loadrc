@@ -17,7 +17,11 @@ def rsync_operations(source_folder, target_folder, mode):
     source_folder = os.path.realpath(source_folder)
     target_folder = os.path.realpath(target_folder)
 
-    if os.path.samefile(source_folder, target_folder):
+    # Resolve the paths using abspath for comparison
+    source_folder_abs = os.path.abspath(source_folder)
+    target_folder_abs = os.path.abspath(target_folder)
+
+    if os.path.samefile(source_folder_abs, target_folder_abs):
         print(
             "Source and target folders are identical or just soft links to each other. Aborting."
         )
