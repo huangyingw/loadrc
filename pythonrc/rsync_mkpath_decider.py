@@ -42,7 +42,7 @@ def check_rsync_version(rsync_version: str) -> bool:
     return version_numbers >= (3, 2, 0)
 
 
-def decide_mkpath_option(source, target):
+def decide_mkpath_option(target):
     target_version = get_rsync_version(target)
 
     if check_rsync_version(target_version):
@@ -51,15 +51,15 @@ def decide_mkpath_option(source, target):
         return ""
 
 
-def main(args: Tuple[str, str]) -> None:
-    source_folder, target_folder = args
-    mkpath_option = decide_mkpath_option(source_folder, target_folder)
+def main(args: Tuple[str]) -> None:
+    target_folder = args[0]
+    mkpath_option = decide_mkpath_option(target_folder)
     print(mkpath_option)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print(f"Usage: {sys.argv[0]} source_folder target_folder")
+    if len(sys.argv) < 2:
+        print(f"Usage: {sys.argv[0]} target_folder")
         sys.exit(1)
 
     main(tuple(sys.argv[1:]))
