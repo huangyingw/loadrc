@@ -10,8 +10,12 @@ def get_rsync_version_command() -> str:
     return "rsync --version | head -n 1 | awk '{print $3}'"
 
 
+def extract_host(host_info: str) -> str:
+    return host_info.split(":", 1)[0]
+
+
 def get_rsync_version(host_info: str) -> str:
-    host = host_info.split(":", 1)[0]
+    host = extract_host(host_info)
     cmd = get_rsync_version_command()
 
     if not host or ":" not in host_info:
