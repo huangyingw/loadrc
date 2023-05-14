@@ -8,10 +8,11 @@ A script to determine the appropriate --iconv option for rsync based on the sour
 import sys
 import re
 import subprocess
+from rsync_path_resolver import parse_host
 
 
 def get_remote_encoding(remote_path):
-    remote_host = remote_path.split(":", 1)[0]
+    remote_host = parse_host(remote_path)
     remote_os = subprocess.check_output(
         [
             "ssh",
