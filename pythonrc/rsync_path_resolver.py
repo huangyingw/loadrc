@@ -12,7 +12,7 @@ from pathlib import Path
 
 
 def parse_host(remote_path):
-    match = re.match(r"^(.*@)?([^:]+):", remote_path)
+    match = re.match(r"^(.*@)?([^:/]+):", remote_path)
     if match:
         host = match.group(2)
     else:
