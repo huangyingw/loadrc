@@ -21,7 +21,7 @@ pip3 install \
     autopep8 \
     black \
     ipynb-py-convert \
-    packaging \ 
+    packaging \
     pdftotext \
     proxybroker \
     pyautogui
