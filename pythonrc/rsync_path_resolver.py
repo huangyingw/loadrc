@@ -12,10 +12,13 @@ from pathlib import Path
 
 
 def parse_host(remote_path):
-    match = re.match(r"^(.*@)?([^:/]+):", remote_path)
+    match = re.match(r"^(.*@)?([^:]+):", remote_path)
     if match:
-        return match.group(2)
-    return None
+        host = match.group(2)
+    else:
+        host = None
+
+    return host
 
 
 def get_rsyncpath(host):
