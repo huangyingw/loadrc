@@ -19,6 +19,10 @@ def rsync_operations(source_folder, target_folder, mode):
     source_folder = os.path.realpath(source_folder)
     target_folder = os.path.realpath(target_folder)
 
+    # Create target folder if it doesn't exist
+    if not os.path.exists(target_folder):
+        os.makedirs(target_folder)
+
     # Get the inode numbers for source and target
     source_inode = os.stat(source_folder)[stat.ST_INO]
     target_inode = os.stat(target_folder)[stat.ST_INO]
