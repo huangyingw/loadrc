@@ -84,12 +84,16 @@ class TestRsyncFolderOperations(TestCase):
             rsync_operations(self.source_folder, self.source_folder, "move")
 
     def test_rsync_soft_link_target(self):
-        print("\nTesting when target folder is a soft link to source folder")
+        print("\nTesting soft link target folders")
         soft_link_target = os.path.join(self.base_folder, "target_soft_link")
+        if os.path.exists(soft_link_target):
+            os.remove(soft_link_target)
         os.symlink(self.source_folder, soft_link_target)
+
         with self.assertRaises(ValueError):
             rsync_operations(self.source_folder, soft_link_target, "move")
-        os.unlink(soft_link_target)
+
+        os.remove(soft_link_target)
 
     def test_rsync_hard_link_target(self):
         print("\nTesting when target folder is a hard link to source folder")
