@@ -18,7 +18,6 @@ def get_remote_encoding(remote_path):
     remote_os = subprocess.check_output(
         [
             "ssh",
-            "-q",
             "-o",
             "BatchMode=yes",
             "-o",
