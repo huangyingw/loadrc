@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 rsync_folder_operations.py
 A script to move, copy, or mirror the contents of one folder into another using rsync while maintaining the tree structure.
