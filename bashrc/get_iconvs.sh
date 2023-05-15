@@ -35,6 +35,6 @@ function main() {
 
 main "$@"
 #main ~/loadrc/ mini:~/loadrc/
-#main mini:~/loadrc/ ~/loadrc/ 
-#main ~/loadrc/ ~/loadrc/ 
-#main mini:~/loadrc/ mini:~/loadrc/ 
+#main mini:~/loadrc/ ~/loadrc/
+#main ~/loadrc/ ~/loadrc/
+#main mini:~/loadrc/ mini:~/loadrc/
