@@ -13,6 +13,8 @@ from rsync_path_resolver import parse_host
 
 def get_remote_encoding(remote_path):
     remote_host = parse_host(remote_path)
+    if remote_host is None:
+        raise ValueError(f"Invalid remote path: {remote_path}")
     remote_os = subprocess.check_output(
         [
             "ssh",
