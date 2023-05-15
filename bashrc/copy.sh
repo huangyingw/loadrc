@@ -12,4 +12,4 @@ source="$1"
 target="$2"
 
 # Call the rsync_folder_operations.zsh script with source, target, and the mode set to 'copy'
-~/loadrc/zshrc/rsync_folder_operations.zsh "$source" "$target" "copy"
+~/loadrc/pythonrc/rsync_folder_operations.py "$source" "$target" "copy"
