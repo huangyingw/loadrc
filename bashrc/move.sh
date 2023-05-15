@@ -11,8 +11,8 @@ fi
 source="$1"
 target="$2"
 
-# Call the rsync_folder_operations.zsh script with source, target, and the mode set to 'move'
-~/loadrc/zshrc/rsync_folder_operations.zsh "$source" "$target" "move"
+# Call the rsync_folder_operations.py script with source, target, and the mode set to 'move'
+~/loadrc/pythonrc/rsync_folder_operations.py "$source" "$target" "move"
 
 # Remove empty directories from the source
 ~/loadrc/bashrc/rmEmpty.sh "$source"
