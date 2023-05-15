@@ -5,16 +5,18 @@ rsync_path_resolver.py
 A script to determine the appropriate --rsync-path option for rsync based on the source and target hosts.
 """
 
+import re
 import sys
 import subprocess
 from pathlib import Path
 
 
-def parse_host(path):
-    if ":" in path:
-        return path.split(":", 1)[0]
+def parse_host(remote_path):
+    match = re.match(r"^(.*@)?([^:]+):", remote_path)
+    if match:
+        return match.group(2)
     else:
-        return "localhost"
+        raise ValueError("Invalid remote path")
 
 
 def get_rsyncpath(host):
