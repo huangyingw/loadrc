@@ -44,14 +44,17 @@ def resolve_rsync_path(source, target):
     shost = parse_host(source)
     thost = parse_host(target)
 
-    if shost != "localhost":
+    if shost and shost != "localhost":
         rsyncpath = get_rsyncpath(shost)
-    elif thost != "localhost":
+    elif thost and thost != "localhost":
         rsyncpath = get_rsyncpath(thost)
     else:
         rsyncpath = get_rsyncpath("localhost")
 
-    return f"--rsync-path={rsyncpath}"
+    if rsyncpath:
+        return f"--rsync-path={rsyncpath}"
+    else:
+        return None
 
 
 def main():
