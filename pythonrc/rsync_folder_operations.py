@@ -31,9 +31,7 @@ def rsync_operations(source_folder, target_folder, mode):
         print(
             "Source and target folders are identical or just soft links to each other. Aborting."
         )
-        raise ValueError(
-            "Source and target folders cannot be the same."
-        )  # Add this line
+        raise ValueError("Source and target folders cannot be the same.")
 
     # Get necessary parameters for rsync
     iconvs = generate_iconv_options(source_folder, target_folder)
@@ -42,8 +40,8 @@ def rsync_operations(source_folder, target_folder, mode):
 
     rsync_basic_options_path = os.path.expanduser(
         "~/loadrc/bashrc/rsync_basic_options"
-    )  # Add this line
-    with open(rsync_basic_options_path, "r") as file:  # Update this line
+    )
+    with open(rsync_basic_options_path, "r") as file:
         rsync_basic_options = file.read().split()
 
     # Set rsync options based on the mode (move, copy, mirror, or tmirror)
@@ -76,7 +74,7 @@ def rsync_operations(source_folder, target_folder, mode):
             + rsync_options
             + [f"{source_folder}/", f"{target_folder}/"]
         )
-    return rsync_options  # Add this line to return rsync_options
+    return rsync_options
 
 
 def main():
