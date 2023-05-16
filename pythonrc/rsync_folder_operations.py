@@ -18,8 +18,11 @@ def validate_input(mode, source_folder, target_folder):
         raise ValueError(
             "Invalid mode. Valid modes are 'move', 'copy', 'mirror', and 'tmirror'."
         )
-    if os.path.samefile(source_folder, target_folder):
-        raise ValueError("Source and target folders cannot be the same.")
+
+    # Check if source and target are the same for local paths only
+    if (":" not in source_folder) and (":" not in target_folder):
+        if os.path.samefile(source_folder, target_folder):
+            raise ValueError("Source and target folders cannot be the same.")
 
 
 def get_rsync_options(mode, source_folder, target_folder):
