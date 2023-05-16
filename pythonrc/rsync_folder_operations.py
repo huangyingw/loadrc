@@ -55,6 +55,9 @@ def execute_rsync(mode, rsync_options, source_folder, target_folder):
     source = f"{source_folder}/"
     target = f"{target_folder}/"
 
+    print("rsync options:", rsync_options)
+    print("source:", source)
+    print("target:", target)
     if mode == "tmirror":
         ready_file = os.path.join(target_folder, "tmirror.ready")
         with open(ready_file, "w") as outfile:
