@@ -41,12 +41,15 @@ def get_local_encoding():
 
 
 def generate_iconv_options(source_dir, destination_dir):
-    if re.match(r"^(.*@)?[^:]+:", source_dir):
+    is_source_remote = re.match(r"^(.*@)?[^:]+:", source_dir)
+    is_destination_remote = re.match(r"^(.*@)?[^:]+:", destination_dir)
+
+    if is_source_remote:
         src_encoding = get_remote_encoding(source_dir)
     else:
         src_encoding = get_local_encoding()
 
-    if re.match(r"^(.*@)?[^:]+:", destination_dir):
+    if is_destination_remote:
         dst_encoding = get_remote_encoding(destination_dir)
     else:
         dst_encoding = get_local_encoding()
