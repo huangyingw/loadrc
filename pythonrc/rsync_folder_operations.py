@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 """
 rsync_folder_operations.py
 A script to move, copy, or mirror the contents of one folder into another using rsync while maintaining the tree structure.
@@ -8,7 +9,6 @@ import os
 import stat
 import sys
 import subprocess
-from pathlib import Path
 from rsync_path_resolver import resolve_rsync_path
 from rsync_mkpath_decider import decide_mkpath_option
 from rsync_iconv_options import generate_iconv_options
@@ -19,18 +19,17 @@ def rsync_operations(source_folder, target_folder, mode):
     source_folder = os.path.realpath(source_folder)
     target_folder = os.path.realpath(target_folder)
 
-    # Create target folder if it doesn't exist
-    if not os.path.exists(target_folder):
-        os.makedirs(target_folder)
-
-    # Get the inode numbers for source and target
-    source_inode = os.stat(source_folder)[stat.ST_INO]
-    target_inode = os.stat(target_folder)[stat.ST_INO]
-
-    if source_inode == target_inode:
-        print(
-            "Source and target folders are identical or just soft links to each other. Aborting."
+    # Validate input mode
+    if mode not in ["move", "copy", "mirror", "tmirror"]:
+        raise ValueError(
+            "Invalid mode. Valid modes are 'move', 'copy', 'mirror', and 'tmirror'."
         )
+
+    # Create target folder if it doesn't exist
+    os.makedirs(target_folder, exist_ok=True)
+
+    # Check if source and target folders are the same
+    if os.path.samefile(source_folder, target_folder):
         raise ValueError("Source and target folders cannot be the same.")
 
     # Get necessary parameters for rsync
@@ -38,13 +37,14 @@ def rsync_operations(source_folder, target_folder, mode):
     rsync_path_option = resolve_rsync_path(source_folder, target_folder)
     mkpath_option = decide_mkpath_option(target_folder)
 
+    # Load basic rsync options
     rsync_basic_options_path = os.path.expanduser(
         "~/loadrc/bashrc/rsync_basic_options"
     )
     with open(rsync_basic_options_path, "r") as file:
         rsync_basic_options = file.read().split()
 
-    # Set rsync options based on the mode (move, copy, mirror, or tmirror)
+    # Set rsync options based on the mode
     rsync_options = [
         option
         for option in (
@@ -52,6 +52,7 @@ def rsync_operations(source_folder, target_folder, mode):
         )
         if option is not None  # Filter out None values
     ]
+
     if mode == "move":
         rsync_options.append("--remove-source-files")
     elif mode == "mirror":
@@ -59,6 +60,7 @@ def rsync_operations(source_folder, target_folder, mode):
     elif mode == "tmirror":
         rsync_options.extend(["-in", "--delete-before"])
 
+    # Execute rsync command
     if mode == "tmirror":
         ready_file = os.path.join(source_folder, "tmirror.ready")
         with open(ready_file, "w") as outfile:
@@ -74,6 +76,7 @@ def rsync_operations(source_folder, target_folder, mode):
             + rsync_options
             + [f"{source_folder}/", f"{target_folder}/"]
         )
+
     return rsync_options
 
 
@@ -89,9 +92,7 @@ def main():
     target_folder = sys.argv[2]
     mode = sys.argv[3]
 
-    rsync_operations(
-        source_folder, target_folder, mode
-    )  # Remove return value since it's not needed in main()
+    rsync_operations(source_folder, target_folder, mode)
 
 
 if __name__ == "__main__":
