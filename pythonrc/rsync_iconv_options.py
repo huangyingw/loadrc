@@ -33,24 +33,30 @@ def get_remote_encoding(remote_path):
         return "utf-8"
 
 
-def generate_iconv_options(source_dir, destination_dir):
+def get_local_encoding():
     if sys.platform == "darwin":
-        local_encoding = "utf-8-mac"
+        return "utf-8-mac"
     else:
-        local_encoding = "utf-8"
+        return "utf-8"
 
+
+def generate_iconv_options(source_dir, destination_dir):
     if re.match(r"^(.*@)?[^:]+:", source_dir):
         src_encoding = get_remote_encoding(source_dir)
     else:
-        src_encoding = local_encoding
+        src_encoding = get_local_encoding()
 
     if re.match(r"^(.*@)?[^:]+:", destination_dir):
         dst_encoding = get_remote_encoding(destination_dir)
     else:
-        dst_encoding = local_encoding
+        dst_encoding = get_local_encoding()
 
-    rsync_options = f"--iconv={src_encoding},{dst_encoding}"
-    return rsync_options  # Replace the print statement with a return statement
+    if src_encoding != dst_encoding:
+        rsync_options = f"--iconv={src_encoding},{dst_encoding}"
+    else:
+        rsync_options = ""
+
+    return rsync_options
 
 
 def main():
@@ -62,7 +68,8 @@ def main():
 
     source_dir = sys.argv[1]
     destination_dir = sys.argv[2]
-    generate_iconv_options(source_dir, destination_dir)
+    iconv_options = generate_iconv_options(source_dir, destination_dir)
+    print(iconv_options)
 
 
 if __name__ == "__main__":
