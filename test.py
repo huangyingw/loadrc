@@ -25,6 +25,3 @@ for script in test_scripts:
     if result.returncode != 0:
         print(f"Test {script} failed. Aborting.")
         sys.exit(1)
-
-# Navigate back to the original directory
-os.chdir("-")
