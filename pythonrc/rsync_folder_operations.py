@@ -6,7 +6,6 @@ A script to move, copy, or mirror the contents of one folder into another using 
 """
 
 import os
-import stat
 import sys
 import subprocess
 from rsync_path_resolver import resolve_rsync_path
@@ -14,43 +13,32 @@ from rsync_mkpath_decider import decide_mkpath_option
 from rsync_iconv_options import generate_iconv_options
 
 
-def rsync_operations(source_folder, target_folder, mode):
-    # Get the real paths for source and target
-    source_folder = os.path.realpath(source_folder)
-    target_folder = os.path.realpath(target_folder)
-
-    # Validate input mode
+def validate_input(mode, source_folder, target_folder):
     if mode not in ["move", "copy", "mirror", "tmirror"]:
         raise ValueError(
             "Invalid mode. Valid modes are 'move', 'copy', 'mirror', and 'tmirror'."
         )
-
-    # Create target folder if it doesn't exist
-    os.makedirs(target_folder, exist_ok=True)
-
-    # Check if source and target folders are the same
     if os.path.samefile(source_folder, target_folder):
         raise ValueError("Source and target folders cannot be the same.")
 
-    # Get necessary parameters for rsync
+
+def get_rsync_options(mode, source_folder, target_folder):
     iconvs = generate_iconv_options(source_folder, target_folder)
     rsync_path_option = resolve_rsync_path(source_folder, target_folder)
     mkpath_option = decide_mkpath_option(target_folder)
 
-    # Load basic rsync options
     rsync_basic_options_path = os.path.expanduser(
         "~/loadrc/bashrc/rsync_basic_options"
     )
     with open(rsync_basic_options_path, "r") as file:
         rsync_basic_options = file.read().split()
 
-    # Set rsync options based on the mode
     rsync_options = [
         option
         for option in (
             rsync_basic_options + [iconvs, rsync_path_option, mkpath_option]
         )
-        if option is not None  # Filter out None values
+        if option is not None
     ]
 
     if mode == "move":
@@ -60,7 +48,10 @@ def rsync_operations(source_folder, target_folder, mode):
     elif mode == "tmirror":
         rsync_options.extend(["-in", "--delete-before"])
 
-    # Execute rsync command
+    return rsync_options
+
+
+def execute_rsync(mode, rsync_options, source_folder, target_folder):
     if mode == "tmirror":
         ready_file = os.path.join(source_folder, "tmirror.ready")
         with open(ready_file, "w") as outfile:
@@ -76,6 +67,17 @@ def rsync_operations(source_folder, target_folder, mode):
             + rsync_options
             + [f"{source_folder}/", f"{target_folder}/"]
         )
+
+
+def rsync_operations(source_folder, target_folder, mode):
+    source_folder = os.path.realpath(source_folder)
+    target_folder = os.path.realpath(target_folder)
+
+    validate_input(mode, source_folder, target_folder)
+    os.makedirs(target_folder, exist_ok=True)
+
+    rsync_options = get_rsync_options(mode, source_folder, target_folder)
+    execute_rsync(mode, rsync_options, source_folder, target_folder)
 
     return rsync_options
 
