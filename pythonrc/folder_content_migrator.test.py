@@ -54,6 +54,14 @@ class TestFolderContentMigrator(unittest.TestCase):
         with open(os.path.join(non_empty_dir_path, "file.txt"), "w") as f:
             f.write("Hello!")
 
+        # Create a file with the same name in the target folder
+        duplicate_file_path = os.path.join(
+            self.target_folder, "non_empty_dir", "file.txt"
+        )
+        os.makedirs(os.path.dirname(duplicate_file_path), exist_ok=True)
+        with open(duplicate_file_path, "w") as f:
+            f.write("Hello, Universe!")
+
         move_folders(self.source_folder, self.target_folder)
 
         # Check that the empty directory has been removed
