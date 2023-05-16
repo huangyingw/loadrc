@@ -3,6 +3,8 @@ import re
 import sys
 import subprocess
 import os
+import pyautogui
+import time
 
 
 def time_to_seconds(time_string):
@@ -36,7 +38,7 @@ def open_in_vlc(file_path, cur_line):
     print("Opening in VLC: " + cur_line + " at " + str(time) + "")
 
     if time:
-        subprocess.check_call(
+        subprocess.run(
             [
                 "/Applications/VLC.app/Contents/MacOS/VLC",
                 "--sub-language",
@@ -44,12 +46,13 @@ def open_in_vlc(file_path, cur_line):
                 "--sub-autodetect-file",
                 "-f",
                 "--macosx-continue-playback=2",
+                "--rate=2.0",
                 "--start-time=" + str(time),
                 cur_line,
             ]
         )
     else:
-        subprocess.check_call(
+        subprocess.run(
             [
                 "/Applications/VLC.app/Contents/MacOS/VLC",
                 "--sub-language",
@@ -57,9 +60,13 @@ def open_in_vlc(file_path, cur_line):
                 "--sub-autodetect-file",
                 "-f",
                 "--macosx-continue-playback=2",
+                "--rate=2.0",
                 cur_line,
             ]
         )
+
+    # Exit iTerm2 full screen mode
+    pyautogui.hotkey("command", "enter")
 
 
 if __name__ == "__main__":

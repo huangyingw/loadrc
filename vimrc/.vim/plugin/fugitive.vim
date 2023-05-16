@@ -849,9 +849,9 @@ function! s:GetOldestCommitByMe() abort
     let worktree = Cd2Worktree()
     let l:script_path = "~/loadrc/gitrc/oldest_commit_by_me.sh"
     let l:output = "oldest_commit_by_me.runresult"
-    
+
     silent exec "! " . l:script_path . " 2>&1 | tee " . l:output
-    
+
     call OpenOrSwitch(l:output, 'vs')
 endfunction
 
@@ -933,8 +933,8 @@ function! s:FolderContentMigrator()
     let target_folder = lines[0]
     let source_folders = lines[1:]
 
-    " Call the folder_content_migrator.zsh script for each source folder
-    let script_path = "~/loadrc/zshrc/folder_content_migrator.zsh"
+    " Call the folder_content_migrator.py script for each source folder
+    let script_path = "~/loadrc/pythonrc/folder_content_migrator.py"
     for source_folder in source_folders
         let command = '!' . l:script_path . ' ' . l:source_folder . ' ' . l:target_folder . ' 2>&1 | tee ' . 'folder_content_migrator.runresult'
         execute command

@@ -1,6 +1,6 @@
 #!/bin/bash
-SCRIPT=$(realpath "$0") && \
-    SCRIPTPATH=$(dirname "$SCRIPT") && \
+SCRIPT=$(realpath "$0") &&
+    SCRIPTPATH=$(dirname "$SCRIPT") &&
     cd "$SCRIPTPATH" || cd ~/loadrc/
 
 ./install_basic_linux.sh
@@ -13,15 +13,18 @@ pip install \
     autopep8 \
     ipynb-py-convert \
     pdftotext \
-    proxybroker
+    proxybroker \
+    pyautogui
 
 pip3 install \
     autoflake \
     autopep8 \
     black \
     ipynb-py-convert \
+    packaging \
     pdftotext \
-    proxybroker
+    proxybroker \
+    pyautogui
 
 pip3 install git+https://github.com/gaborvecsei/pdf-split-merge.git
 
