@@ -11,24 +11,33 @@ import subprocess
 from pathlib import Path
 
 
-def parse_host(remote_path):
-    match = re.match(r"^(.*@)?([^:/]+):", remote_path)
+def parse_host(path):
+    match = re.match(r"^([^@]+@)?([^:]+):", path)
     if match:
-        host = match.group(2)
-    else:
-        host = None
-
-    return host
+        return match.group(2)
+    return None
 
 
 def get_rsyncpath(host):
     command = ". ~/loadrc/.pathrc; which rsync"
     if host == "localhost":
-        return subprocess.check_output(command, shell=True, text=True).strip()
+        try:
+            rsyncpath = subprocess.check_output(
+                command, shell=True, text=True
+            ).strip()
+        except subprocess.CalledProcessError as e:
+            print(f"Error while getting rsync path: {e}")
+            sys.exit(1)
     else:
-        return subprocess.check_output(
-            ["ssh", host, command], text=True
-        ).strip()
+        try:
+            rsyncpath = subprocess.check_output(
+                ["ssh", host, command], text=True
+            ).strip()
+        except subprocess.CalledProcessError as e:
+            print(f"Error while getting rsync path: {e}")
+            sys.exit(1)
+
+    return rsyncpath
 
 
 def resolve_rsync_path(source, target):
