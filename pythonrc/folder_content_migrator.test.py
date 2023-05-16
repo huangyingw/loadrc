@@ -43,6 +43,25 @@ class TestFolderContentMigrator(unittest.TestCase):
             content = f.read()
         self.assertEqual(content, "Hello, Universe!")
 
+    def test_empty_directories_removed(self):
+        # Create an empty directory in the source folder
+        empty_dir_path = os.path.join(self.source_folder, "empty_dir")
+        os.makedirs(empty_dir_path)
+
+        # Create a non-empty directory in the source folder
+        non_empty_dir_path = os.path.join(self.source_folder, "non_empty_dir")
+        os.makedirs(non_empty_dir_path)
+        with open(os.path.join(non_empty_dir_path, "file.txt"), "w") as f:
+            f.write("Hello!")
+
+        move_folders(self.source_folder, self.target_folder)
+
+        # Check that the empty directory has been removed
+        self.assertFalse(os.path.exists(empty_dir_path))
+
+        # Check that the non-empty directory has not been removed
+        self.assertTrue(os.path.exists(non_empty_dir_path))
+
 
 if __name__ == "__main__":
     unittest.main()
