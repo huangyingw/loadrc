@@ -15,7 +15,7 @@ def parse_host(path):
     match = re.match(r"^(([^@]+@)?[^:]+):", path)
     if match:
         return match.group(1)
-    return None
+    return "localhost"
 
 
 def get_rsyncpath(host):
