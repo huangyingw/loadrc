@@ -26,3 +26,6 @@ for script in test_scripts:
     if result.returncode != 0:
         print(f"Test {script} failed. Aborting.")
         sys.exit(1)
+
+# If all test scripts pass (the script has not yet exited), print a success message
+print("All test scripts passed successfully.")
