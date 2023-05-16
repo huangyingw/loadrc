@@ -38,7 +38,7 @@ def get_rsync_options(mode, source_folder, target_folder):
         for option in (
             rsync_basic_options + [iconvs, rsync_path_option, mkpath_option]
         )
-        if option is not None
+        if option
     ]
 
     if mode == "move":
