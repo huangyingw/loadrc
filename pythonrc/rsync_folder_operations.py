@@ -70,8 +70,12 @@ def execute_rsync(mode, rsync_options, source_folder, target_folder):
 
 
 def rsync_operations(source_folder, target_folder, mode):
-    source_folder = os.path.realpath(source_folder)
-    target_folder = os.path.realpath(target_folder)
+    # Get the real paths for source and target
+    if not (source_folder.startswith(("~", "/")) or ":" in source_folder):
+        source_folder = os.path.realpath(source_folder)
+
+    if not (target_folder.startswith(("~", "/")) or ":" in target_folder):
+        target_folder = os.path.realpath(target_folder)
 
     validate_input(mode, source_folder, target_folder)
     os.makedirs(target_folder, exist_ok=True)
