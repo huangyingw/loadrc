@@ -46,7 +46,7 @@ def get_rsync_options(mode, source_folder, target_folder):
     elif mode == "mirror":
         rsync_options.append("--delete-before")
     elif mode == "tmirror":
-        rsync_options.extend(["-n", "--delete-before"])
+        rsync_options.extend(["-in", "--delete-before"])
 
     return rsync_options
 
