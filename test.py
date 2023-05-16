@@ -11,6 +11,7 @@ os.chdir(dir_path)
 
 # List of python test scripts
 test_scripts = [
+    "./pythonrc/folder_content_migrator.test.py",
     "./pythonrc/rsync_folder_operations.test.py",
     "./pythonrc/rsync_iconv_options.test.py",
     "./pythonrc/rsync_mkpath_decider.test.py",
