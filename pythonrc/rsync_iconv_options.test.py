@@ -59,7 +59,7 @@ class TestRsyncIconvOptions(unittest.TestCase):
         iconv_options = generate_iconv_options(
             "user@remote_host:/remote/path", "local_source_folder"
         )
-        self.assertEqual(iconv_options, "--iconv=utf-8-mac,utf-8")
+        self.assertEqual(iconv_options, "--iconv=utf-8,utf-8-mac")
 
     @patch("rsync_iconv_options.get_local_encoding", return_value="utf-8-mac")
     @patch("rsync_iconv_options.get_remote_encoding", return_value="utf-8")
@@ -69,7 +69,7 @@ class TestRsyncIconvOptions(unittest.TestCase):
         iconv_options = generate_iconv_options(
             "user@remote_host:/remote/path", "local_source_folder"
         )
-        self.assertEqual(iconv_options, "--iconv=utf-8,utf-8-mac")
+        self.assertEqual(iconv_options, "--iconv=utf-8-mac,utf-8")
 
 
 if __name__ == "__main__":
