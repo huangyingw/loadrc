@@ -1,6 +1,7 @@
 import os
 import subprocess
 import sys
+import glob
 
 # Get the absolute path of the current script
 script_path = os.path.realpath(__file__)
@@ -9,14 +10,8 @@ dir_path = os.path.dirname(script_path)
 # Navigate to the script directory
 os.chdir(dir_path)
 
-# List of python test scripts
-test_scripts = [
-    "./pythonrc/folder_content_migrator.test.py",
-    "./pythonrc/rsync_folder_operations.test.py",
-    "./pythonrc/rsync_iconv_options.test.py",
-    "./pythonrc/rsync_mkpath_decider.test.py",
-    "./pythonrc/rsync_path_resolver.test.py",
-]
+# Find all python test scripts in the 'pythonrc' directory
+test_scripts = glob.glob("./pythonrc/*.test.py")
 
 # Execute each test
 for script in test_scripts:
