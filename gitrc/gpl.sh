@@ -35,7 +35,7 @@ wait
 
 # Merge branches specified in the 'merge.from' configuration
 for ss in $(git config --get-all merge.from); do
-    git merge "$ss"
+    ~/loadrc/gitrc/merge_with_resolution.sh "$ss"
 done
 
 # Get the 'gsync.target' configuration value
@@ -43,5 +43,5 @@ target=$(git config gsync.target)
 
 # Merge the target branch if specified
 if [ -n "$target" ]; then
-    git merge "$target"
+    ~/loadrc/gitrc/merge_with_resolution.sh "$target"
 fi
