@@ -2,29 +2,42 @@ import unittest
 from unittest.mock import patch
 from rsync_iconv_options import generate_iconv_options, get_remote_encoding
 
+from contextlib import contextmanager
+import sys
+
+
+@contextmanager
+def mock_sys_platform(platform_name):
+    original_platform = sys.platform
+    sys.platform = platform_name
+    try:
+        yield
+    finally:
+        sys.platform = original_platform
+
 
 class TestRsyncIconvOptions(unittest.TestCase):
-    @patch("sys.platform", "darwin")
     def test_generate_iconv_options_local_mac(self):
-        with patch(
-            "rsync_iconv_options.get_remote_encoding"
-        ) as mock_get_remote_encoding:
-            mock_get_remote_encoding.return_value = "utf-8-mac"
-            iconv_options = generate_iconv_options(
-                "local_source_folder", "local_destination_folder"
-            )
-            self.assertEqual(iconv_options, "--iconv=utf-8-mac,utf-8-mac")
+        with mock_sys_platform("darwin"):
+            with patch(
+                "rsync_iconv_options.get_remote_encoding"
+            ) as mock_get_remote_encoding:
+                mock_get_remote_encoding.return_value = "utf-8-mac"
+                iconv_options = generate_iconv_options(
+                    "local_source_folder", "local_destination_folder"
+                )
+                self.assertEqual(iconv_options, "--iconv=utf-8-mac,utf-8-mac")
 
-    @patch("sys.platform", "linux")
     def test_generate_iconv_options_local_linux(self):
-        with patch(
-            "rsync_iconv_options.get_remote_encoding"
-        ) as mock_get_remote_encoding:
-            mock_get_remote_encoding.return_value = "utf-8"
-            iconv_options = generate_iconv_options(
-                "local_source_folder", "local_destination_folder"
-            )
-            self.assertEqual(iconv_options, "--iconv=utf-8,utf-8")
+        with mock_sys_platform("linux"):
+            with patch(
+                "rsync_iconv_options.get_remote_encoding"
+            ) as mock_get_remote_encoding:
+                mock_get_remote_encoding.return_value = "utf-8"
+                iconv_options = generate_iconv_options(
+                    "local_source_folder", "local_destination_folder"
+                )
+                self.assertEqual(iconv_options, "--iconv=utf-8,utf-8")
 
     def test_get_remote_encoding(self):
         with patch("subprocess.check_output") as mock_check_output:
