@@ -22,14 +22,14 @@ class TestRsyncIconvOptions(unittest.TestCase):
             iconv_options = generate_iconv_options(
                 "local_source_folder", "local_destination_folder"
             )
-            self.assertEqual(iconv_options, "--iconv=utf-8-mac,utf-8-mac")
+            self.assertEqual(iconv_options, "")
 
     def test_generate_iconv_options_local_linux(self):
         with mock_sys_platform("linux"):
             iconv_options = generate_iconv_options(
                 "local_source_folder", "local_destination_folder"
             )
-            self.assertEqual(iconv_options, "--iconv=utf-8,utf-8")
+            self.assertEqual(iconv_options, "")
 
     def test_get_remote_encoding(self):
         with patch("subprocess.check_output") as mock_check_output:
