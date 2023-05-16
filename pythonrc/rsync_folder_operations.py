@@ -80,6 +80,12 @@ def rsync_operations(source_folder, target_folder, mode):
     if not (":" in target_folder):
         target_folder = os.path.realpath(target_folder)
 
+    # Add trailing slash if not present
+    if not source_folder.endswith("/"):
+        source_folder += "/"
+    if not target_folder.endswith("/"):
+        target_folder += "/"
+
     validate_input(mode, source_folder, target_folder)
     os.makedirs(target_folder, exist_ok=True)
 
