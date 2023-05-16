@@ -30,6 +30,19 @@ class TestFolderContentMigrator(unittest.TestCase):
             os.path.exists(os.path.join(self.target_folder, "testfile.txt"))
         )
 
+    def test_no_overwriting(self):
+        # Create a file with the same name in the target folder
+        duplicate_file_path = os.path.join(self.target_folder, "testfile.txt")
+        with open(duplicate_file_path, "w") as f:
+            f.write("Hello, Universe!")
+
+        move_folders(self.source_folder, self.target_folder)
+
+        # Check that the original file was not overwritten
+        with open(duplicate_file_path, "r") as f:
+            content = f.read()
+        self.assertEqual(content, "Hello, Universe!")
+
 
 if __name__ == "__main__":
     unittest.main()
