@@ -52,21 +52,20 @@ def get_rsync_options(mode, source_folder, target_folder):
 
 
 def execute_rsync(mode, rsync_options, source_folder, target_folder):
+    source = f"{source_folder}/"
+    target = f"{target_folder}/"
+
     if mode == "tmirror":
-        ready_file = os.path.join(source_folder, "tmirror.ready")
+        ready_file = os.path.join(target_folder, "tmirror.ready")
         with open(ready_file, "w") as outfile:
             subprocess.run(
-                ["rsync"]
+                ["rsync", "-n", "--delete-before"]
                 + rsync_options
-                + [f"{source_folder}/", f"{target_folder}/"],
+                + [source, target],
                 stdout=outfile,
             )
     else:
-        subprocess.run(
-            ["rsync"]
-            + rsync_options
-            + [f"{source_folder}/", f"{target_folder}/"]
-        )
+        subprocess.run(["rsync"] + rsync_options + [source, target])
 
 
 def rsync_operations(source_folder, target_folder, mode):
