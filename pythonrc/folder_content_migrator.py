@@ -34,6 +34,7 @@ def move_folders(source_folder, target_folder):
                     "~/loadrc/pythonrc/rsync_folder_operations.py",
                     source_folder,
                     target_folder,
+                    "move",
                 ]
             )
 
