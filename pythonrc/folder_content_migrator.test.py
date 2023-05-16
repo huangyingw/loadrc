@@ -48,15 +48,25 @@ class TestFolderContentMigrator(unittest.TestCase):
         empty_dir_path = os.path.join(self.source_folder, "empty_dir")
         os.makedirs(empty_dir_path)
 
-        # Create a non-empty directory in the source folder
-        non_empty_dir_path = os.path.join(self.source_folder, "non_empty_dir")
-        os.makedirs(non_empty_dir_path)
-        with open(os.path.join(non_empty_dir_path, "file.txt"), "w") as f:
+        # Create first non-empty directory in the source folder
+        non_empty_dir_path_1 = os.path.join(
+            self.source_folder, "non_empty_dir_1"
+        )
+        os.makedirs(non_empty_dir_path_1)
+        with open(os.path.join(non_empty_dir_path_1, "file.txt"), "w") as f:
+            f.write("Hello!")
+
+        # Create second non-empty directory in the source folder
+        non_empty_dir_path_2 = os.path.join(
+            self.source_folder, "non_empty_dir_2"
+        )
+        os.makedirs(non_empty_dir_path_2)
+        with open(os.path.join(non_empty_dir_path_2, "file.txt"), "w") as f:
             f.write("Hello!")
 
         # Create a file with the same name in the target folder
         duplicate_file_path = os.path.join(
-            self.target_folder, "non_empty_dir", "file.txt"
+            self.target_folder, "non_empty_dir_1", "file.txt"
         )
         os.makedirs(os.path.dirname(duplicate_file_path), exist_ok=True)
         with open(duplicate_file_path, "w") as f:
@@ -67,8 +77,11 @@ class TestFolderContentMigrator(unittest.TestCase):
         # Check that the empty directory has been removed
         self.assertFalse(os.path.exists(empty_dir_path))
 
-        # Check that the non-empty directory has not been removed
-        self.assertTrue(os.path.exists(non_empty_dir_path))
+        # Check that the first non-empty directory has not been removed
+        self.assertTrue(os.path.exists(non_empty_dir_path_1))
+
+        # Check that the second non-empty directory has been removed
+        self.assertFalse(os.path.exists(non_empty_dir_path_2))
 
 
 if __name__ == "__main__":
