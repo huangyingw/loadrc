@@ -11,13 +11,6 @@ git fetch "$remote" "$target_branch":"$target_branch"
 remote_branch=$(echo "$target" | sed "s/^$remote\///g")
 git fetch "$remote" "$remote_branch":"$target_branch"
 
-for ss in $(git config --get-all fetch.from)
-do
-    ss=$(echo $ss | sed 's/\(^[^\/]*\)\//\1 /g')
-    COMMAND="git fetch $ss:$target_branch"
-    eval "$COMMAND"
-done
-
 ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" "gdit" > "$output" 2>&1
 
 if [ $? -ne 0 ]
