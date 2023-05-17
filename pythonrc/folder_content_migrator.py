@@ -26,7 +26,11 @@ def move_folders(source_folder, target_folder):
                         target_folder, os.path.relpath(src, source_folder)
                     )
                     os.makedirs(os.path.dirname(tgt), exist_ok=True)
-                    shutil.move(src, tgt)
+                    shutil.move(src, tgt) if not os.path.exists(
+                        tgt
+                    ) else print(
+                        "Target file already exists, not overwriting."
+                    )
         else:
             # Call the rsync_folder_operations script
             call(
@@ -34,6 +38,7 @@ def move_folders(source_folder, target_folder):
                     "~/loadrc/pythonrc/rsync_folder_operations.py",
                     source_folder,
                     target_folder,
+                    "move",
                 ]
             )
 

@@ -12,10 +12,10 @@ from pathlib import Path
 
 
 def parse_host(path):
-    match = re.match(r"^([^@]+@)?([^:]+):", path)
+    match = re.match(r"^(([^@]+@)?[^:]+):", path)
     if match:
-        return match.group(2)
-    return None
+        return match.group(1)
+    return "localhost"
 
 
 def get_rsyncpath(host):

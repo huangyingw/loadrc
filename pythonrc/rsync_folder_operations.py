@@ -18,11 +18,8 @@ def validate_input(mode, source_folder, target_folder):
         raise ValueError(
             "Invalid mode. Valid modes are 'move', 'copy', 'mirror', and 'tmirror'."
         )
-
-    # Check if source and target are the same for local paths only
-    if (":" not in source_folder) and (":" not in target_folder):
-        if os.path.samefile(source_folder, target_folder):
-            raise ValueError("Source and target folders cannot be the same.")
+    if os.path.abspath(source_folder) == os.path.abspath(target_folder):
+        raise ValueError("Source and target folders cannot be the same.")
 
 
 def get_rsync_options(mode, source_folder, target_folder):
@@ -49,29 +46,28 @@ def get_rsync_options(mode, source_folder, target_folder):
     elif mode == "mirror":
         rsync_options.append("--delete-before")
     elif mode == "tmirror":
-        rsync_options.extend(["-n", "--delete-before"])
+        rsync_options.extend(["-in", "--delete-before"])
 
     return rsync_options
 
 
 def execute_rsync(mode, rsync_options, source_folder, target_folder):
-    source = f"{source_folder}/"
-    target = f"{target_folder}/"
-
-    print("rsync options:", rsync_options)
-    print("source:", source)
-    print("target:", target)
     if mode == "tmirror":
-        ready_file = os.path.join(target_folder, "tmirror.ready")
+        ready_file = os.path.join(source_folder, "tmirror.ready")
+        print(f"Creating ready_file: {ready_file}")
         with open(ready_file, "w") as outfile:
             subprocess.run(
-                ["rsync", "-n", "--delete-before"]
+                ["rsync"]
                 + rsync_options
-                + [source, target],
+                + [f"{source_folder}/", f"{target_folder}/"],
                 stdout=outfile,
             )
     else:
-        subprocess.run(["rsync"] + rsync_options + [source, target])
+        subprocess.run(
+            ["rsync"]
+            + rsync_options
+            + [f"{source_folder}/", f"{target_folder}/"]
+        )
 
 
 def rsync_operations(source_folder, target_folder, mode):
