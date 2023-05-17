@@ -33,11 +33,6 @@ done
 # Wait for all background processes to finish
 wait
 
-# Merge branches specified in the 'merge.from' configuration
-for ss in $(git config --get-all merge.from); do
-    ~/loadrc/gitrc/merge_with_resolution.sh "$ss"
-done
-
 # Get the 'gsync.target' configuration value
 target=$(git config gsync.target)
 
