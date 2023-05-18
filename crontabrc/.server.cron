@@ -1,1 +1,2 @@
 * * * * * /root/loadrc/bashrc/watch_fvideos.sh >> /root/loadrc/watch_fvideos.log 2>&1
+* * * * * /root/loadrc/bashrc/watch_jdupes.sh >> /root/loadrc/watch_jdupes.log 2>&1
