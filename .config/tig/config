@@ -1,1 +1,1 @@
-bind generic Y !sh -c "echo '%(commit)' | (uname | grep -q Darwin && pbcopy || xclip -selection clipboard)"
+bind generic Y !sh -c "echo '%(commit).diff' | (uname | grep -q Darwin && pbcopy || xclip -selection clipboard)"
