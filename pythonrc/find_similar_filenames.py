@@ -22,14 +22,8 @@ def get_file_size(file_path, default_size=0):
         if os.path.isfile(file_path):
             size = os.path.getsize(file_path)
         else:
-            print(f"File does not exist: {file_path}")
-            print("Absolute path:", os.path.abspath(file_path))
-            print("Current directory:", os.getcwd())
             size = default_size
     except FileNotFoundError:
-        print(f"File not found: {file_path}")
-        print("Absolute path:", os.path.abspath(file_path))
-        print("Current directory:", os.getcwd())
         size = default_size
 
     file_size_cache[file_path] = size
