@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+"""
+find_similar_filenames.py
+"""
+
 import argparse
 import difflib
 import os
@@ -8,12 +12,24 @@ import re
 file_size_cache = {}
 
 def get_file_size(file_path, default_size=0):
+    # Remove quotation marks from the file path
+    file_path = file_path.replace('"', '')
+
     if file_path in file_size_cache:
         return file_size_cache[file_path]
 
     try:
-        size = os.path.getsize(file_path)
+        if os.path.isfile(file_path):
+            size = os.path.getsize(file_path)
+        else:
+            print(f"File does not exist: {file_path}")
+            print("Absolute path:", os.path.abspath(file_path))
+            print("Current directory:", os.getcwd())
+            size = default_size
     except FileNotFoundError:
+        print(f"File not found: {file_path}")
+        print("Absolute path:", os.path.abspath(file_path))
+        print("Current directory:", os.getcwd())
         size = default_size
 
     file_size_cache[file_path] = size
@@ -52,7 +68,7 @@ def main(file_paths):
     for keyword in sorted_keywords:
         keyword_files = list(set(close_files[keyword]))
         keyword_files.sort(key=lambda x: get_file_size(x), reverse=True)  # Updated line
-        if 2 <= len(keyword_files) <= 10:
+        if 2 <= len(keyword_files) <= 30:
             print(f"{keyword}.txt")
             with open(f"{keyword}.txt", "w") as f:
                 f.write(keyword + "\n")
