@@ -61,13 +61,14 @@ def main(file_paths):
 
     for keyword in sorted_keywords:
         keyword_files = list(set(close_files[keyword]))
-        keyword_files.sort(key=lambda x: get_file_size(x), reverse=True)  # Updated line
+        keyword_files.sort(key=lambda x: get_file_size(x), reverse=True)
         if 2 <= len(keyword_files) <= 30:
             print(f"{keyword}.txt")
             with open(f"{keyword}.txt", "w") as f:
                 f.write(keyword + "\n")
                 for file_path in keyword_files:
-                    f.write(file_path + "\n")
+                    if get_file_size(file_path) > 0:  # only write file_path to the file if its size is not zero
+                        f.write(file_path + "\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
