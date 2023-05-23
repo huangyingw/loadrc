@@ -33,6 +33,7 @@ apt-get install -y \
     iperf \
     iperf3 \
     iputils-ping \
+    jdupes \
     jq \
     kdiff3 \
     libsecret-1-dev \
