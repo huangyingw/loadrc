@@ -67,8 +67,9 @@ def main(file_paths):
             with open(f"{keyword}.txt", "w") as f:
                 f.write(keyword + "\n")
                 for file_path in keyword_files:
-                    if get_file_size(file_path) > 0:  # only write file_path to the file if its size is not zero
-                        f.write(file_path + "\n")
+                    file_size = get_file_size(file_path)
+                    if file_size > 0:  # only write file_path to the file if its size is not zero
+                        f.write(f"{file_path}, {file_size}\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
