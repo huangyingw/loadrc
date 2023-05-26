@@ -110,9 +110,8 @@ function! PlayVideo()
 
     " Get the current line and remove trailing spaces
     let line = getline('.')
-    let line = substitute(line, '\_s\+$', '', 'g')
-    let line = substitute(line, '^[^"]', '"' . line[0], '')
-    let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
+    let line = substitute(line, '\"\(.*\)\"', '\1', '')  " remove any inner quotes
+    let line = '"' . line . '"'
 
     call AsyncRunShellCommand('~/loadrc/pythonrc/vlc.py ' . '"' . expand("%:p") . '"' .  ' ' . line)
 endfunction
