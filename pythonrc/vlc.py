@@ -74,4 +74,9 @@ if __name__ == "__main__":
     file_path = sys.argv[1]
     cur_line = sys.argv[2]
 
+
+    # Split the cur_line string by comma and take the second part, only if a comma is present
+    if "," in cur_line:
+        cur_line = cur_line.split(",", 1)[1]
+
     open_in_vlc(file_path, cur_line)
