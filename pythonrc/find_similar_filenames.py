@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+"""
+find_similar_filenames.py
+"""
+
 import argparse
 import difflib
 import os
@@ -8,11 +12,17 @@ import re
 file_size_cache = {}
 
 def get_file_size(file_path, default_size=0):
+    # Remove quotation marks from the file path
+    file_path = file_path.replace('"', '')
+
     if file_path in file_size_cache:
         return file_size_cache[file_path]
 
     try:
-        size = os.path.getsize(file_path)
+        if os.path.isfile(file_path):
+            size = os.path.getsize(file_path)
+        else:
+            size = default_size
     except FileNotFoundError:
         size = default_size
 
@@ -51,13 +61,14 @@ def main(file_paths):
 
     for keyword in sorted_keywords:
         keyword_files = list(set(close_files[keyword]))
-        keyword_files.sort(key=lambda x: get_file_size(x), reverse=True)  # Updated line
-        if 2 <= len(keyword_files) <= 10:
+        keyword_files.sort(key=lambda x: get_file_size(x), reverse=True)
+        if 2 <= len(keyword_files) <= 30:
             print(f"{keyword}.txt")
             with open(f"{keyword}.txt", "w") as f:
                 f.write(keyword + "\n")
                 for file_path in keyword_files:
-                    f.write(file_path + "\n")
+                    if get_file_size(file_path) > 0:  # only write file_path to the file if its size is not zero
+                        f.write(file_path + "\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
