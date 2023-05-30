@@ -120,3 +120,7 @@ vimrc/.vim/bundle/tig-explorer.vim/autoload/tig_explorer.vim:235 function! s:exe
 line    9:
 tig-explorer.vim: Not a git repository: /Users/huangyingw/loadrc/tests/space in dir name
 tig: No revisions match the given arguments.
+
+Error detected while processing function VRun[34]..OpenOrSwitch[18]..fetch#cfile[28]..<SNR>151_setpos:
+line    2:
+"helio_query.lsh.runresult" 3L, 315B
