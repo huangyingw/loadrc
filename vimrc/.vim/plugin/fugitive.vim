@@ -579,7 +579,10 @@ function! s:CatPlay(...) abort
 
     call asyncrun#stop('<bang>')
     let b:output = expand("%:p") . '.runresult'
-    call AsyncRunShellCommand('~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output)
+    let file = readfile(expand("%:p"))
+    for line in file
+        call PlayVideo(line)
+    endfor
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
