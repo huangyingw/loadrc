@@ -652,8 +652,8 @@ function! s:AppendRate(...) abort
             exec '!~/loadrc/bashrc/append_rate.sh ' . '"' .  oldname . '"' . ' ' . '"' . a:1 . '"'
             let newname = substitute(system("~/loadrc/bashrc/append_num.sh " . '"' . oldname . '"' . ' ' . '"' . a:1 . '"'), '\n', '', '')
             let newname = substitute(newname, getcwd(), '.', 'e')
-            let newname = split_curword[0] . "," . newname " Concatenate the number back to newname
-            call setline('.', '"' . newname . '"')
+            let newname = split_curword[0] . "," . '"' . newname . '"' " Concatenate the number back to newname
+            call setline('.', newname)
             call UpdateProj()
         endif
     endif
