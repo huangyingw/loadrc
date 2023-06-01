@@ -15,11 +15,11 @@ git branch "$target_branch" "$target"
 git remote update
 
 # Merge the first branch
-git merge "$remote/$target_branch"
+~/loadrc/gitrc/merge_with_resolution.sh "$remote/$target_branch"
 
 # Merge the second branch
 remote_branch=$(echo "$target" | sed "s/^$remote\///g")
-git merge "$remote/$remote_branch"
+~/loadrc/gitrc/merge_with_resolution.sh "$remote/$remote_branch"
 
 # Switch back to the current branch
 ~/loadrc/gitrc/gco.sh "$current_branch" 
