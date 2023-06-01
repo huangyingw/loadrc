@@ -9,7 +9,7 @@ target="$(git config gsync.target)"
 git branch "$target_branch" "$target"
 
 # Switch to the target branch
-git checkout "$target_branch"
+~/loadrc/gitrc/gco.sh "$target_branch" 
 
 # Update all branches from all remotes
 git remote update
@@ -22,7 +22,7 @@ remote_branch=$(echo "$target" | sed "s/^$remote\///g")
 git merge "$remote/$remote_branch"
 
 # Switch back to the current branch
-git checkout "$current_branch"
+~/loadrc/gitrc/gco.sh "$current_branch" 
 
 ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" "gdit" > "$output" 2>&1
 
