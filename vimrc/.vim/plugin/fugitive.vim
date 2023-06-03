@@ -579,6 +579,12 @@ function! s:CatPlay(...) abort
 
     let b:output = expand("%:p") . '.runresult'
     let file = expand("%:p")
+
+    " If b:output file exists, delete it
+    if filereadable(b:output)
+        call delete(b:output)
+    endif
+
     call AsyncRunShellCommand('python3 ~/loadrc/pythonrc/line_video_player.py ' . shellescape(file) . ' 2>&1 | tee -a ' . b:output)
     call OpenOrSwitch(b:output, 'vs')
 endfunction
