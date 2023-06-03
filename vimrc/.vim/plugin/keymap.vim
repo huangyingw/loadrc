@@ -472,6 +472,7 @@ nnoremap mf :call ExFilter()<cr>
 nnoremap md :call Vdelete()<cr>
 nnoremap mo :call OpenAll()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
+vnoremap <silent>m :s/ //<CR>
 nmap <C-s> :call CSCSearch(0)<cr>
 nnoremap <c-space> :call CSCSearch(4)<cr>
 nmap <C-@> :call CSCSearch(4)<cr>
