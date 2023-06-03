@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-import re
-import sys
-import subprocess
+import json
 import os
 import pyautogui
+import re
+import subprocess
+import sys
 import time
-import json
 
 
 def time_to_seconds(time_string):
@@ -56,6 +56,7 @@ def open_in_vlc(file_path, cur_line):
     time = split_string(file_full_path)
     print("Opening in VLC: " + file_full_path + " at " + str(time) + "")
 
+
     if time:
         subprocess.run(
             [
@@ -68,7 +69,9 @@ def open_in_vlc(file_path, cur_line):
                 "--rate=2.0",
                 "--start-time=" + str(time),
                 file_full_path,
-            ]
+            ],
+            stdout=subprocess.DEVNULL,  # Redirect stdout to DEVNULL
+            stderr=subprocess.DEVNULL,  # Redirect stderr to DEVNULL
         )
     else:
         subprocess.run(
@@ -81,10 +84,11 @@ def open_in_vlc(file_path, cur_line):
                 "--macosx-continue-playback=2",
                 "--rate=2.0",
                 file_full_path,
-            ]
+            ],
+            stdout=subprocess.DEVNULL,  # Redirect stdout to DEVNULL
+            stderr=subprocess.DEVNULL,  # Redirect stderr to DEVNULL
         )
 
-    # Exit iTerm2 full screen mode
     pyautogui.hotkey("command", "enter")
 
 
