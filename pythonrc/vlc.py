@@ -5,6 +5,7 @@ import subprocess
 import os
 import pyautogui
 import time
+import json
 
 
 def time_to_seconds(time_string):
@@ -36,6 +37,9 @@ def split_string(string):
 
 def open_in_vlc(file_path, cur_line):
     print("Opening file in VLC: %s" % file_path)
+
+    # Remove outer quotes from the current line and unescape unicode characters
+    cur_line = json.loads(cur_line)
 
     # Get the directory containing the text file
     dir_path = os.path.dirname(file_path)
