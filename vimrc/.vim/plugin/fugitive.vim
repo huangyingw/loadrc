@@ -623,7 +623,7 @@ endfunction
 
 function! s:FileMove(...) abort
     if a:0 >= 1
-        let curword = GetWord()
+        let curword = GetCleanLine()
         let b:netrw_curdir = getcwd()
         let map_escape = "<|\n\r\\\<C-V>\""
         let mapsafecurdir = escape(b:netrw_curdir, map_escape)
@@ -645,7 +645,7 @@ endfunction
 
 function! s:AppendRate(...) abort
     if a:0 >= 1
-        let curword = GetWord()
+        let curword = GetCleanLine()
         " Split curword by comma and pick the second part
         let split_curword = split(curword, ",")
         let curword = split_curword[1]
