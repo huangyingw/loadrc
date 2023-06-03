@@ -577,12 +577,9 @@ function! s:CatPlay(...) abort
         return 0
     endif
 
-    call asyncrun#stop('<bang>')
     let b:output = expand("%:p") . '.runresult'
-    let file = readfile(expand("%:p"))
-    for line in file
-        call PlayVideo(line)
-    endfor
+    let file = expand("%:p")
+    call AsyncRunShellCommand('python3 ~/loadrc/pythonrc/line_video_player.py ' . shellescape(file) . ' 2>&1 | tee -a ' . b:output)
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
