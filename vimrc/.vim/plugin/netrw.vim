@@ -1,4 +1,4 @@
-fun! GetWord()
+fun! GetCleanLine()
     setl nosol
     let dirname = getline('.')
     let dirname = substitute(dirname, '\s\+$', '', 'e')
