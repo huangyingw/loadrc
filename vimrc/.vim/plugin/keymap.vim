@@ -119,7 +119,8 @@ function! PlayVideo(...) abort
     let line = substitute(line, '\"\(.*\)\"', '\1', '')  " remove any inner quotes
     let line = '"' . line . '"'
 
-    exec '!python3 ~/loadrc/pythonrc/vlc.py ' . shellescape(expand("%:p")) . ' ' . line . ' | tee ' . expand("%:p") . '.runresult'
+    let line = system('echo ' . shellescape(line) . ' | python3 ~/loadrc/pythonrc/json_dumps.py')
+    silent exec '!python3 ~/loadrc/pythonrc/vlc.py ' . shellescape(expand("%:p")) . ' ' . line
 endfunction
 
 function! VDebug()
