@@ -451,7 +451,7 @@ nnoremap X :x<cr>
 nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
-nnoremap tt :Autoformat<CR>:w!<cr>
+nnoremap tt :Autoformat<CR>:w!<cr><cr>
 nnoremap D :call OpenDup()<CR>
 " Quickly open current dir in current windows
 nnoremap <tab> %
