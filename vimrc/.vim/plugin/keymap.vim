@@ -118,10 +118,10 @@ function! PlayVideo(...) abort
     " Process the line
     let line = substitute(line, '\"\(.*\)\"', '\1', '')  " remove any inner quotes
     let line = '"' . line . '"'
-    echo "Before JSON conversion: " . line  " <- Debugging line
+    echo 'Before JSON conversion: ' . line
 
     let line = system('echo ' . shellescape(line) . ' | python3 ~/loadrc/pythonrc/json_dumps.py')
-    echo "After JSON conversion: " . line  " <- Debugging line
+    echo 'After JSON conversion: ' . line
 
     exec '!python3 ~/loadrc/pythonrc/vlc.py ' . shellescape(expand("%:p")) . ' ' . line
 endfunction
