@@ -15,11 +15,16 @@ def main():
             line = line.strip()  # strip() removes leading/trailing white space
             if line:  # skip empty lines
                 print(f"Playing: {line}")  # echo the current playing line
+
+                # Convert filename and line to valid JSON strings
+                filename_json = json.dumps(filename)
+                line_json = json.dumps(line.strip(), ensure_ascii=False)
+
                 # Call vlc.py script for each line
-                subprocess.run(
-                    f"~/loadrc/pythonrc/vlc.py {json.dumps(filename)} {json.dumps(line)}",
-                    shell=True,
-                )
+                command = f"python3 ~/loadrc/pythonrc/vlc.py {filename_json} {line_json}"
+                print("Executing command:", command)
+                subprocess.run(command, shell=True)
+
     return 0
 
 
