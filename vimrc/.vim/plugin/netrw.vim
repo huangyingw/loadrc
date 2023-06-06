@@ -1,10 +1,11 @@
-fun! GetWord()
+fun! GetCleanLine()
     setl nosol
     let dirname = getline('.')
     let dirname = substitute(dirname, '\s\+$', '', 'e')
     let dirname = substitute(dirname, "@$", "", "")
     let dirname = substitute(dirname, "\*$", "", "")
     let dirname = substitute(dirname, "^\"", "", "")
+    let dirname = substitute(dirname, ",\"", ",", "")
     let dirname = substitute(dirname, "\"$", "", "")
     return dirname
 endfun
@@ -55,10 +56,15 @@ fun! ComposePath(base, subdir)
     return ret
 endfunction
 
+
 function! LocalRename() range
     " Get the current line and the next line
     let current_line = getline(line("."))
     let next_line = getline(line(".") + 1)
+
+    " Remove leading number and comma from the current line and the next line
+    let current_line = substitute(current_line, '^[0-9]*,', '', '')
+    let next_line = substitute(next_line, '^[0-9]*,', '', '')
 
     " Remove backslashes and quotes from the current line
     let current_line = substitute(current_line, '\\', '', 'g')

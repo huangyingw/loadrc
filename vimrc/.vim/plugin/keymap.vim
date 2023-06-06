@@ -9,10 +9,6 @@ function! RememberQuit()
 endfunction
 
 function! ExFilter()
-    if (expand("%") ==# 'fav.log.sort')
-        return
-    endif
-
     call Filter2FindResult()
     silent exec 'g/' . @/ . '/d'
 
@@ -23,10 +19,6 @@ function! ExFilter()
 endfunction
 
 function! ExtractHighLight()
-    if (expand("%") ==# 'fav.log.sort')
-        return
-    endif
-
     call Filter2FindResult()
     silent exec '%s/.*\(' . @/ . '\).*/\1/g'
     w!
@@ -34,10 +26,6 @@ endfunction
 
 
 function! Vdelete()
-    if (expand("%") ==# 'fav.log.sort')
-        return
-    endif
-
     call Filter2FindResult()
     silent exec '%s/' . @/ . '//g'
     w!
@@ -71,10 +59,6 @@ function! HighlightKeyword(keyword)
 endfunction
 
 function! VFilter()
-    if (expand("%") ==# 'fav.log.sort')
-        return
-    endif
-
     call Filter2FindResult()
     silent exec 'g!/' . @/ . '/d'
 
@@ -102,18 +86,24 @@ function! Filter()
     exec '%g!/' . b:keyword . '/d'
 endfunction
 
-function! PlayVideo()
+function! PlayVideo(...) abort
     " Return early if the buffer type is a terminal
     if &buftype ==# "terminal"
         return 0
     endif
 
-    " Get the current line and remove trailing spaces
+    " If no line argument is passed, use the current line
+    if a:0 > 0
+        let line = a:1
+    else
+        let line = getline('.')
+    endif
+
     let line = getline('.')
     let line = substitute(line, '\_s\+$', '', 'g')
     let line = substitute(line, '^[^"]', '"' . line[0], '')
     let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
-
+    let line = substitute(line, ",\"", ",", "")
     call AsyncRunShellCommand('~/loadrc/pythonrc/vlc.py ' . '"' . expand("%:p") . '"' .  ' ' . line)
 endfunction
 
@@ -466,6 +456,7 @@ nnoremap mf :call ExFilter()<cr>
 nnoremap md :call Vdelete()<cr>
 nnoremap mo :call OpenAll()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
+vnoremap <silent>m :s/ //<CR>
 nmap <C-s> :call CSCSearch(0)<cr>
 nnoremap <c-space> :call CSCSearch(4)<cr>
 nmap <C-@> :call CSCSearch(4)<cr>
@@ -486,7 +477,7 @@ nnoremap F :call GetFirstColumnOfFile()<cr>
 nnoremap T :vs $HOME/all.proj<cr>
 nnoremap L :vs <C-R>"<cr>
 nnoremap <leader>r :call Reverse()<cr>
-map <F5> :call VRun()<cr><cr>
+map <F5> :call VRun()<cr>
 map <F3> :call VDebug()<cr>
 " nnoremap gf gF<cr>
 nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
