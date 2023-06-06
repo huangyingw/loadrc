@@ -708,7 +708,7 @@ function! s:RmCat(...) abort
     endif
 
     let b:output = expand("%:p") . '.runresult'
-    call RunShell('~/loadrc/vishrc/rm_cat.sh', expand("%:p"), b:output)
+    exec '!~/loadrc/vishrc/rm_cat.sh ' . shellescape(expand("%:p")) . ' ' . shellescape(b:output)
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
