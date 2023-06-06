@@ -2,4 +2,8 @@
 import json
 import sys
 
-print(json.dumps(sys.stdin.read().strip()))
+input_string = sys.stdin.read().strip()
+# Do not escape unicode characters and avoid double quoting
+json_string = json.dumps(input_string, ensure_ascii=False)
+# Print without surrounding quotes
+print(json_string[1:-1])
