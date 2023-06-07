@@ -660,6 +660,8 @@ function! s:AppendRate(...) abort
             let newname = substitute(newname, getcwd(), '.', 'e')
             if len(split_curword) > 1
                 let newname = split_curword[0] . "," . '"' . newname . '"' " Concatenate the number back to newname if comma existed originally
+            else
+                let newname = '"' . newname . '"'
             endif
             call setline('.', newname)
             call UpdateProj()
