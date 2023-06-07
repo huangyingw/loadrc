@@ -8,13 +8,4 @@ then
 fi
 
 fix_branch=`git branch |awk '/^\*/{print $2}'`.fix
-
-if ( git branch|grep -q "$fix_branch" )
-then
-    ~/loadrc/gitrc/discard_unnecessaries.sh
-    ~/loadrc/gitrc/gclean.sh
-    git checkout "$fix_branch"
-    exit 0
-fi
-
-git checkout -b "$fix_branch"
+~/loadrc/gitrc/gco.sh "$fix_branch"

@@ -3,6 +3,13 @@
 # Discard unnecessary files
 ~/loadrc/gitrc/discard_unnecessaries.sh
 
+# Check for changes in the working directory
+changes=$(git status --untracked-files=no --porcelain --ignore-submodules)
+
+if [ -n "$changes" ]; then
+    return
+fi
+
 # Include git configuration
 ~/loadrc/gitrc/include_gitconfig.sh
 
