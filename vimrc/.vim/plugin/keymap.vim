@@ -103,6 +103,7 @@ function! PlayVideo(...) abort
     let line = substitute(line, '\_s\+$', '', 'g')
     let line = substitute(line, '^[^"]', '"' . line[0], '')
     let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
+    let line = substitute(line, ",\"", ",", "")
 
     call AsyncRunShellCommand('~/loadrc/pythonrc/vlc.py ' . '"' . expand("%:p") . '"' .  ' ' . line)
 endfunction
@@ -477,7 +478,7 @@ nnoremap F :call GetFirstColumnOfFile()<cr>
 nnoremap T :vs $HOME/all.proj<cr>
 nnoremap L :vs <C-R>"<cr>
 nnoremap <leader>r :call Reverse()<cr>
-map <F5> :call VRun()<cr>
+map <F5> :call VRun()<cr><cr>
 map <F3> :call VDebug()<cr>
 " nnoremap gf gF<cr>
 nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
@@ -525,7 +526,7 @@ function! OpenDup()
         let to_open = substitute(expand('%:p'), '\.rej', '', '')
         silent exec 'vs ' . to_open
     else
-        vs %:p
+        silent exec 'vs ' . expand("%:p") . '.bak'
     endif
 
     set winwidth=1
