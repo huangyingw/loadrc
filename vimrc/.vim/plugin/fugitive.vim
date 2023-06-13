@@ -643,12 +643,13 @@ function! s:FileMove(...) abort
     call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 endfunction
 
+
 function! s:AppendRate(...) abort
     if a:0 >= 1
         let curword = GetCleanLine()
-        " Split curword by comma and pick the second part
-        let split_curword = split(curword, ",")
-        let curword = split_curword[1]
+        " Split curword by comma and pick the second part if comma exists
+        let split_curword = (curword =~ ',') ? split(curword, ",") : [curword]
+        let curword = split_curword[-1] " pick the last part whether split or not
         let b:netrw_curdir = getcwd()
         let map_escape = "<|\n\r\\\<C-V>\""
         let mapsafecurdir = escape(b:netrw_curdir, map_escape)
@@ -658,10 +659,15 @@ function! s:AppendRate(...) abort
             exec '!~/loadrc/bashrc/append_rate.sh ' . '"' .  oldname . '"' . ' ' . '"' . a:1 . '"'
             let newname = substitute(system("~/loadrc/bashrc/append_num.sh " . '"' . oldname . '"' . ' ' . '"' . a:1 . '"'), '\n', '', '')
             let newname = substitute(newname, getcwd(), '.', 'e')
-            let newname = split_curword[0] . "," . '"' . newname . '"' " Concatenate the number back to newname
+            if len(split_curword) > 1
+                let newname = split_curword[0] . "," . '"' . newname . '"' " Concatenate the number back to newname if comma existed originally
+            else
+                let newname = '"' . newname . '"'
+            endif
             call setline('.', newname)
             call UpdateProj()
         endif
+
     endif
 
     call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
@@ -708,7 +714,7 @@ function! s:RmCat(...) abort
     endif
 
     let b:output = expand("%:p") . '.runresult'
-    call RunShell('~/loadrc/vishrc/rm_cat.sh', expand("%:p"), b:output)
+    exec '!~/loadrc/vishrc/rm_cat.sh ' . shellescape(expand("%:p")) . ' ' . shellescape(b:output)
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 

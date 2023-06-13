@@ -9,10 +9,6 @@ function! RememberQuit()
 endfunction
 
 function! ExFilter()
-    if (expand("%") ==# 'fav.log.sort')
-        return
-    endif
-
     call Filter2FindResult()
     silent exec 'g/' . @/ . '/d'
 
@@ -23,10 +19,6 @@ function! ExFilter()
 endfunction
 
 function! ExtractHighLight()
-    if (expand("%") ==# 'fav.log.sort')
-        return
-    endif
-
     call Filter2FindResult()
     silent exec '%s/.*\(' . @/ . '\).*/\1/g'
     w!
@@ -34,10 +26,6 @@ endfunction
 
 
 function! Vdelete()
-    if (expand("%") ==# 'fav.log.sort')
-        return
-    endif
-
     call Filter2FindResult()
     silent exec '%s/' . @/ . '//g'
     w!
@@ -71,10 +59,6 @@ function! HighlightKeyword(keyword)
 endfunction
 
 function! VFilter()
-    if (expand("%") ==# 'fav.log.sort')
-        return
-    endif
-
     call Filter2FindResult()
     silent exec 'g!/' . @/ . '/d'
 
@@ -115,12 +99,12 @@ function! PlayVideo(...) abort
         let line = getline('.')
     endif
 
-    " Process the line
-    let line = substitute(line, '\"\(.*\)\"', '\1', '')  " remove any inner quotes
-    let line = '"' . line . '"'
+    let line = getline('.')
+    let line = substitute(line, '\_s\+$', '', 'g')
+    let line = substitute(line, '^[^"]', '"' . line[0], '')
+    let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
 
-    let line = system('echo ' . shellescape(line) . ' | python3 ~/loadrc/pythonrc/json_dumps.py')
-    silent exec '!python3 ~/loadrc/pythonrc/vlc.py ' . shellescape(expand("%:p")) . ' ' . line
+    call AsyncRunShellCommand('~/loadrc/pythonrc/vlc.py ' . '"' . expand("%:p") . '"' .  ' ' . line)
 endfunction
 
 function! VDebug()
