@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 import json
 import os
-import pyautogui
 import re
 import subprocess
 import sys
-import time
 
 
 def time_to_seconds(time_string):
