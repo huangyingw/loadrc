@@ -643,6 +643,7 @@ function! s:FileMove(...) abort
     call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
 endfunction
 
+
 function! s:AppendRate(...) abort
     if a:0 >= 1
         let curword = GetCleanLine()
@@ -666,6 +667,7 @@ function! s:AppendRate(...) abort
             call setline('.', newname)
             call UpdateProj()
         endif
+
     endif
 
     call AsyncRunShellCommand('~/loadrc/bashrc/update_proj.sh')
