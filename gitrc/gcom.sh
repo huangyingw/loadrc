@@ -26,6 +26,7 @@ echo "TARGET_BRANCH --> $target_branch"
 
 # Perform branch operations
 git branch -d "$target_branch"
+~/loadrc/gitrc/discard_unnecessaries.sh
 git checkout -b "$target_branch" 2> /dev/null || git checkout "$target_branch"
 ~/loadrc/gitrc/merge_with_resolution.sh "$current_branch"
 
