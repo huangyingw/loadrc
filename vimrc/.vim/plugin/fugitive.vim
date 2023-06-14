@@ -577,9 +577,15 @@ function! s:CatPlay(...) abort
         return 0
     endif
 
-    call asyncrun#stop('<bang>')
     let b:output = expand("%:p") . '.runresult'
-    call AsyncRunShellCommand('~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output)
+    let file = expand("%:p")
+
+    " If b:output file exists, delete it
+    if filereadable(b:output)
+        call delete(b:output)
+    endif
+
+    call AsyncRunShellCommand('python3 ~/loadrc/pythonrc/line_video_player.py ' . shellescape(file) . ' 2>&1 | tee -a ' . b:output)
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
@@ -617,7 +623,7 @@ endfunction
 
 function! s:FileMove(...) abort
     if a:0 >= 1
-        let curword = GetWord()
+        let curword = GetCleanLine()
         let b:netrw_curdir = getcwd()
         let map_escape = "<|\n\r\\\<C-V>\""
         let mapsafecurdir = escape(b:netrw_curdir, map_escape)
