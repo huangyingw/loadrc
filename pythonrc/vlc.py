@@ -3,8 +3,9 @@ import re
 import sys
 import subprocess
 import os
-import pyautogui
-import time
+import re
+import subprocess
+import sys
 
 
 def time_to_seconds(time_string):
@@ -33,9 +34,32 @@ def split_string(string):
 
 
 def open_in_vlc(file_path, cur_line):
-    os.chdir(os.path.dirname(file_path))
-    time = split_string(cur_line)
-    print("Opening in VLC: " + cur_line + " at " + str(time) + "")
+    print("Opening file in VLC: %s" % file_path)
+
+    # Convert the input string to a valid JSON string
+    cur_line = json.dumps(cur_line)
+
+    # Remove outer quotes from the current line and unescape unicode characters
+    cur_line = json.loads(cur_line).strip().strip('"')
+
+    # If the path starts with "./", remove it
+    if cur_line.startswith("./"):
+        cur_line = cur_line[2:]
+
+    # Get the directory containing the text file
+    dir_path = os.path.dirname(file_path)
+
+    # Append cur_line to the directory path
+    file_full_path = os.path.join(dir_path, cur_line)
+
+    # Check if the file exists
+    if not os.path.isfile(file_full_path):
+        print(f'The file "{file_full_path}" does not exist.')
+        print(f"Current directory: {os.getcwd()}")
+        return
+
+    time = split_string(file_full_path)
+    print("Opening in VLC: " + file_full_path + " at " + str(time))
 
     if time:
         subprocess.run(
@@ -64,9 +88,6 @@ def open_in_vlc(file_path, cur_line):
                 cur_line,
             ]
         )
-
-    # Exit iTerm2 full screen mode
-    pyautogui.hotkey("command", "enter")
 
 
 if __name__ == "__main__":
