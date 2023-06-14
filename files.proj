@@ -3151,6 +3151,7 @@
 "./vimrc/.vim/plugin/netrw.vim"
 "./vimrc/.vim/plugin/nextval.vim"
 "./vimrc/.vim/plugin/pbpaste.vim"
+"./vimrc/.vim/plugin/pymode.vim"
 "./vimrc/.vim/plugin/python-mode.vim"
 "./vimrc/.vim/plugin/repeat.vim"
 "./vimrc/.vim/plugin/restore_view.vim"
