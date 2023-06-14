@@ -7,15 +7,28 @@ remote="$(git config gsync.remote)"
 target="$(git config gsync.target)"
 
 git branch "$target_branch" "$target"
-git fetch "$remote" "$target_branch":"$target_branch"
+
+# Switch to the target branch
+~/loadrc/gitrc/gco.sh "$target_branch"
+
+# Update all branches from all remotes
+git remote update
+
+# Merge the first branch
+~/loadrc/gitrc/merge_with_resolution.sh "$remote/$target_branch"
+
+# Merge the second branch
 remote_branch=$(echo "$target" | sed "s/^$remote\///g")
-git fetch "$remote" "$remote_branch":"$target_branch"
+~/loadrc/gitrc/merge_with_resolution.sh "$remote/$remote_branch"
+
+# Switch back to the current branch
+~/loadrc/gitrc/gco.sh "$current_branch"
 
 ~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" "gdit" > "$output" 2>&1
 
 if [ $? -ne 0 ]
 then
-    echo -e "${red}most probably sth wrong in git merge... ${NC}" > "$output" 2>&1
+    echo -e "${red}most probably something went wrong in git merge... ${NC}" > "$output" 2>&1
     exit 1
 fi
 
