@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-import re
-import sys
-import subprocess
+import json
 import os
 import re
 import subprocess
@@ -9,6 +7,7 @@ import sys
 
 
 def time_to_seconds(time_string):
+    print("Converting time string to seconds: %s" % time_string)
     time_parts = time_string.split(":")
     if len(time_parts) == 3:
         hours, minutes, seconds = map(int, time_parts)
@@ -22,6 +21,7 @@ def time_to_seconds(time_string):
 
 
 def split_string(string):
+    print("Splitting string: %s" % string)
     # Split string into path and time using regex
     pattern = r"^(.*?)(?::(\d{1,2}:\d{1,2}(?::\d{1,2})?))$"
     match = re.match(pattern, string)
@@ -72,8 +72,10 @@ def open_in_vlc(file_path, cur_line):
                 "--macosx-continue-playback=2",
                 "--rate=2.0",
                 "--start-time=" + str(time),
-                cur_line,
-            ]
+                file_full_path,
+            ],
+            stdout=subprocess.DEVNULL,  # Redirect stdout to DEVNULL
+            stderr=subprocess.DEVNULL,  # Redirect stderr to DEVNULL
         )
     else:
         subprocess.run(
@@ -85,14 +87,21 @@ def open_in_vlc(file_path, cur_line):
                 "-f",
                 "--macosx-continue-playback=2",
                 "--rate=2.0",
-                cur_line,
-            ]
+                file_full_path,
+            ],
+            stdout=subprocess.DEVNULL,  # Redirect stdout to DEVNULL
+            stderr=subprocess.DEVNULL,  # Redirect stderr to DEVNULL
         )
 
 
 if __name__ == "__main__":
+    print("Script started with arguments: %s" % sys.argv)
     # Use the command line arguments to get the file path and line
     file_path = sys.argv[1]
     cur_line = sys.argv[2]
+
+    # Split the cur_line string by comma and take the second part, only if a comma is present
+    if "," in cur_line:
+        cur_line = cur_line.split(",", 1)[1]
 
     open_in_vlc(file_path, cur_line)
