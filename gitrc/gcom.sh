@@ -26,10 +26,10 @@ echo "TARGET_BRANCH --> $target_branch"
 
 # Perform branch operations
 git branch -d "$target_branch"
-git checkout -b "$target_branch" 2> /dev/null || git checkout "$target_branch"
 ~/loadrc/gitrc/discard_unnecessaries.sh
-git merge "$current_branch"
+git checkout -b "$target_branch" 2> /dev/null || git checkout "$target_branch"
+~/loadrc/gitrc/merge_with_resolution.sh "$current_branch"
 
 # Merge target branch and run gpl script
-git merge "$1"
+~/loadrc/gitrc/merge_with_resolution.sh "$1"
 ~/loadrc/gitrc/gpl.sh
