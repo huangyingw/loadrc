@@ -629,6 +629,7 @@
 "./pythonrc/handle_vtt_test.py"
 "./pythonrc/json_dumps.py"
 "./pythonrc/line_video_player.py"
+"./pythonrc/play_video.sh"
 "./pythonrc/remove-unuses.sh"
 "./pythonrc/remove_comments.py"
 "./pythonrc/rsync_folder_operations.py"
