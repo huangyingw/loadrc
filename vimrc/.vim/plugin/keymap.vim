@@ -246,8 +246,30 @@ function! OpenAll()
 
     on
     for line in lines
+        " Debug: Print line before substitution
+        echo "Before substitution: " . line
+
         let line = substitute(line, '"', '', "g")
-        exec 'vs ' . currentDir . '/' . line
+
+        " Debug: Print line after substitution
+        echo "After substitution: " . line
+
+        " Check if the line starts with "/"
+        if line[0] == "/"
+            let filePath = line
+        else
+            let filePath = currentDir . '/' . line
+        endif
+
+        " Debug: Print the final file path
+        echo "Final file path: " . filePath
+
+        if filereadable(filePath)
+            exec 'vs ' . filePath
+        else
+            " Debug: Print if the file is not readable or doesn't exist
+            echo "The file " . filePath . " is not readable or does not exist."
+        endif
     endfor
     windo set nowrap
     " set winwidth=999999
