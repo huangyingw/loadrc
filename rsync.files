@@ -8,6 +8,7 @@
 ./.cohesityrc
 ./.config/git/gitk
 ./.config/nvim/init.vim
+./.config/tig/config
 ./.dockerignore
 ./.dockerrc
 ./.envrc
@@ -65,7 +66,6 @@
 ./.subversion/svndiffwrapper.sh
 ./.svnrc
 ./.theanorc
-./.tigrc
 ./.tmux.conf
 ./.ubuntu.rc
 ./.vserver.rc
@@ -75,6 +75,7 @@
 ./Library/LaunchAgents/pbcopy.plist
 ./Library/LaunchAgents/pbpaste.plist
 ./Library/Preferences/org.videolan.vlc/vlcrc
+./PlayVideo.gdio.diff
 ./bashrc/HuangYings-MacBook-Pro.local.csc.properties
 ./bashrc/apf.sh
 ./bashrc/app_list
@@ -150,13 +151,11 @@
 ./bashrc/fr.sh
 ./bashrc/fvideos.sh
 ./bashrc/generate_file_index.sh
-./bashrc/generate_iconv_string.sh
 ./bashrc/generate_iconv_string.test.sh
 ./bashrc/generate_rsync_files.sh
 ./bashrc/get_first_column_of_file.sh
 ./bashrc/get_first_column_of_file_test.sh
 ./bashrc/get_iconv.test.sh
-./bashrc/get_iconvs.sh
 ./bashrc/get_rsyncpath.sh
 ./bashrc/get_rsyncpath.test.sh
 ./bashrc/getopts.sh
@@ -185,7 +184,6 @@
 ./bashrc/mosh.sh
 ./bashrc/move.sh
 ./bashrc/move67.sh
-./bashrc/move_files_with_structure.sh
 ./bashrc/netbak.sh
 ./bashrc/netsync.sh
 ./bashrc/netsync_ex
@@ -266,6 +264,7 @@
 ./bashrc/wait_for_pid.test.sh
 ./bashrc/watch_copy.sh
 ./bashrc/watch_fvideos.sh
+./bashrc/watch_jdupes.sh
 ./bashrc/while_copy.sh
 ./bashrc/whole_ures_ex
 ./bashrc/wol.sh
@@ -324,7 +323,6 @@
 ./ffmpegrc/split.sh
 ./files.rev
 ./fix_resolvconf_in_docker.sh
-./get_commit_message.gdio.diff
 ./gitrc/.gitconfig
 ./gitrc/.globalgitignore
 ./gitrc/apply_branch.sh
@@ -340,6 +338,7 @@
 ./gitrc/find_deleted.sh
 ./gitrc/find_files.sh
 ./gitrc/find_files_test.sh
+./gitrc/find_rename_commit.sh
 ./gitrc/fsync.sh
 ./gitrc/g.sh
 ./gitrc/ga.sh
@@ -619,12 +618,32 @@
 ./prunefix.conf
 ./prunefix_template.conf
 ./pythonrc/autopep8-ipynb.py
+./pythonrc/exit_fullscreen.py
+./pythonrc/exit_fullscreen_and_play.sh
+./pythonrc/find_similar_filenames.py
+./pythonrc/folder_content_migrator.py
+./pythonrc/folder_content_migrator.test.py
+./pythonrc/gdit.py
+./pythonrc/gdit.test.py
 ./pythonrc/handle_vtt.py
 ./pythonrc/handle_vtt_test.py
+./pythonrc/json_dumps.py
+./pythonrc/line_video_player.py
+./pythonrc/play_video.sh
 ./pythonrc/remove-unuses.sh
 ./pythonrc/remove_comments.py
+./pythonrc/rsync_folder_operations.py
+./pythonrc/rsync_folder_operations.test.py
+./pythonrc/rsync_iconv_options.py
+./pythonrc/rsync_iconv_options.py.sh
+./pythonrc/rsync_iconv_options.test.py
+./pythonrc/rsync_mkpath_decider.py
+./pythonrc/rsync_mkpath_decider.test.py
+./pythonrc/rsync_path_resolver.py
+./pythonrc/rsync_path_resolver.test.py
 ./pythonrc/setup.cfg
 ./pythonrc/setup.cfg.src
+./pythonrc/toggle_fullscreen_and_play.py
 ./pythonrc/vlc.py
 ./pythonrc/vlc.py.sh
 ./readme
@@ -652,6 +671,7 @@
 ./svnrc/svnvdiff.sh
 ./swith-2-zsh.sh
 ./synergy.conf
+./test.py
 ./tests/dirname/spaces  in dir name.txt
 ./tests/space in dir name/test.txt
 ./timemachinerc/deletelocalsnapshots.sh
@@ -3131,6 +3151,7 @@
 ./vimrc/.vim/plugin/netrw.vim
 ./vimrc/.vim/plugin/nextval.vim
 ./vimrc/.vim/plugin/pbpaste.vim
+./vimrc/.vim/plugin/pymode.vim
 ./vimrc/.vim/plugin/python-mode.vim
 ./vimrc/.vim/plugin/repeat.vim
 ./vimrc/.vim/plugin/restore_view.vim
@@ -3191,3 +3212,4 @@
 ./zerotierrc/restart.sh
 ./zerotierrc/zerotier.sh
 ./zerotierrc/zerotierrc.conf
+./zshrc/custom_folder_finder.zsh

@@ -9,10 +9,6 @@ function! RememberQuit()
 endfunction
 
 function! ExFilter()
-    if (expand("%") ==# 'fav.log.sort')
-        return
-    endif
-
     call Filter2FindResult()
     silent exec 'g/' . @/ . '/d'
 
@@ -23,10 +19,6 @@ function! ExFilter()
 endfunction
 
 function! ExtractHighLight()
-    if (expand("%") ==# 'fav.log.sort')
-        return
-    endif
-
     call Filter2FindResult()
     silent exec '%s/.*\(' . @/ . '\).*/\1/g'
     w!
@@ -34,10 +26,6 @@ endfunction
 
 
 function! Vdelete()
-    if (expand("%") ==# 'fav.log.sort')
-        return
-    endif
-
     call Filter2FindResult()
     silent exec '%s/' . @/ . '//g'
     w!
@@ -71,10 +59,6 @@ function! HighlightKeyword(keyword)
 endfunction
 
 function! VFilter()
-    if (expand("%") ==# 'fav.log.sort')
-        return
-    endif
-
     call Filter2FindResult()
     silent exec 'g!/' . @/ . '/d'
 
@@ -102,17 +86,24 @@ function! Filter()
     exec '%g!/' . b:keyword . '/d'
 endfunction
 
-function! PlayVideo()
+function! PlayVideo(...) abort
     " Return early if the buffer type is a terminal
     if &buftype ==# "terminal"
         return 0
     endif
 
-    " Get the current line and remove trailing spaces
+    " If no line argument is passed, use the current line
+    if a:0 > 0
+        let line = a:1
+    else
+        let line = getline('.')
+    endif
+
     let line = getline('.')
     let line = substitute(line, '\_s\+$', '', 'g')
     let line = substitute(line, '^[^"]', '"' . line[0], '')
     let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
+    let line = substitute(line, ",\"", ",", "")
 
     call AsyncRunShellCommand('~/loadrc/pythonrc/vlc.py ' . '"' . expand("%:p") . '"' .  ' ' . line)
 endfunction
@@ -255,8 +246,30 @@ function! OpenAll()
 
     on
     for line in lines
+        " Debug: Print line before substitution
+        echo "Before substitution: " . line
+
         let line = substitute(line, '"', '', "g")
-        exec 'vs ' . currentDir . '/' . line
+
+        " Debug: Print line after substitution
+        echo "After substitution: " . line
+
+        " Check if the line starts with "/"
+        if line[0] == "/"
+            let filePath = line
+        else
+            let filePath = currentDir . '/' . line
+        endif
+
+        " Debug: Print the final file path
+        echo "Final file path: " . filePath
+
+        if filereadable(filePath)
+            exec 'vs ' . filePath
+        else
+            " Debug: Print if the file is not readable or doesn't exist
+            echo "The file " . filePath . " is not readable or does not exist."
+        endif
     endfor
     windo set nowrap
     " set winwidth=999999
@@ -445,7 +458,7 @@ nnoremap X :x<cr>
 nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
-nnoremap tt :Autoformat<CR>:w!<cr>
+nnoremap tt :Autoformat<CR>:w!<cr><cr>
 nnoremap D :call OpenDup()<CR>
 " Quickly open current dir in current windows
 nnoremap <tab> %
@@ -466,6 +479,7 @@ nnoremap mf :call ExFilter()<cr>
 nnoremap md :call Vdelete()<cr>
 nnoremap mo :call OpenAll()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
+vnoremap <silent>m :s/ //<CR>
 nmap <C-s> :call CSCSearch(0)<cr>
 nnoremap <c-space> :call CSCSearch(4)<cr>
 nmap <C-@> :call CSCSearch(4)<cr>
@@ -534,7 +548,7 @@ function! OpenDup()
         let to_open = substitute(expand('%:p'), '\.rej', '', '')
         silent exec 'vs ' . to_open
     else
-        vs %:p
+        silent exec 'vs ' . expand("%:p") . '.bak'
     endif
 
     set winwidth=1

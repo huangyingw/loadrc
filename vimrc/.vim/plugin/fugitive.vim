@@ -577,9 +577,15 @@ function! s:CatPlay(...) abort
         return 0
     endif
 
-    call asyncrun#stop('<bang>')
     let b:output = expand("%:p") . '.runresult'
-    call AsyncRunShellCommand('~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output)
+    let file = expand("%:p")
+
+    " If b:output file exists, delete it
+    if filereadable(b:output)
+        call delete(b:output)
+    endif
+
+    call AsyncRunShellCommand('python3 ~/loadrc/pythonrc/line_video_player.py ' . shellescape(file) . ' 2>&1 | tee -a ' . b:output)
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
@@ -617,7 +623,7 @@ endfunction
 
 function! s:FileMove(...) abort
     if a:0 >= 1
-        let curword = GetWord()
+        let curword = GetCleanLine()
         let b:netrw_curdir = getcwd()
         let map_escape = "<|\n\r\\\<C-V>\""
         let mapsafecurdir = escape(b:netrw_curdir, map_escape)
@@ -640,7 +646,10 @@ endfunction
 
 function! s:AppendRate(...) abort
     if a:0 >= 1
-        let curword = GetWord()
+        let curword = GetCleanLine()
+        " Split curword by comma and pick the second part if comma exists
+        let split_curword = (curword =~ ',') ? split(curword, ",") : [curword]
+        let curword = split_curword[-1] " pick the last part whether split or not
         let b:netrw_curdir = getcwd()
         let map_escape = "<|\n\r\\\<C-V>\""
         let mapsafecurdir = escape(b:netrw_curdir, map_escape)
@@ -650,7 +659,12 @@ function! s:AppendRate(...) abort
             exec '!~/loadrc/bashrc/append_rate.sh ' . '"' .  oldname . '"' . ' ' . '"' . a:1 . '"'
             let newname = substitute(system("~/loadrc/bashrc/append_num.sh " . '"' . oldname . '"' . ' ' . '"' . a:1 . '"'), '\n', '', '')
             let newname = substitute(newname, getcwd(), '.', 'e')
-            call setline('.', '"' . newname . '"')
+            if len(split_curword) > 1
+                let newname = split_curword[0] . "," . '"' . newname . '"' " Concatenate the number back to newname if comma existed originally
+            else
+                let newname = '"' . newname . '"'
+            endif
+            call setline('.', newname)
             call UpdateProj()
         endif
 
@@ -700,7 +714,7 @@ function! s:RmCat(...) abort
     endif
 
     let b:output = expand("%:p") . '.runresult'
-    call RunShell('~/loadrc/vishrc/rm_cat.sh', expand("%:p"), b:output)
+    exec '!~/loadrc/vishrc/rm_cat.sh ' . shellescape(expand("%:p")) . ' ' . shellescape(b:output)
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
