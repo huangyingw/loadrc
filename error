@@ -120,3 +120,22 @@ vimrc/.vim/bundle/tig-explorer.vim/autoload/tig_explorer.vim:235 function! s:exe
 line    9:
 tig-explorer.vim: Not a git repository: /Users/huangyingw/loadrc/tests/space in dir name
 tig: No revisions match the given arguments.
+
+Error detected while processing CursorMoved Autocommands for "<buffer=5>"..script /root/loadrc/vimrc/.vim/bundle/python-mode/autoload/pymode/lint.vim[1]..function provider#python3#Ca
+ll:
+line   18:
+Error invoking 'python_execute' on channel 3 (python3-script-host):
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/root/loadrc/vimrc/.vim/bundle/python-mode/pymode/lint.py", line 9, in <module>
+    from pylama.lint.extensions import LINTERS
+  File "/root/loadrc/vimrc/.vim/bundle/python-mode/pymode/libs/pylama/lint/extensions.py", line 38, in <module>
+    from pkg_resources import iter_entry_points
+  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 82, in <module>
+    from pkg_resources.extern import platformdirs
+  File "/usr/lib/python3/dist-packages/pkg_resources/extern/__init__.py", line 52, in create_module
+    return self.load_module(spec.name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/pkg_resources/extern/__init__.py", line 44, in load_module
+    raise ImportError(
+ImportError: The 'platformdirs' package is required; normally this is bundled with this package so if you get this warning, consult the packager of your distribution.
