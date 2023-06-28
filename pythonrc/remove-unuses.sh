@@ -6,4 +6,4 @@ then
 fi
 
 TARGET="$1"
-autoflake --in-place --remove-all-unused-imports "$TARGET"
+# autoflake --in-place --remove-all-unused-imports "$TARGET"
