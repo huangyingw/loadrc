@@ -15231,20 +15231,17 @@ diff --git a/gitrc/gsync.sh b/gitrc/gsync.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/gsync.sh
-@@ -0,0 +1,13 @@
+@@ -0,0 +1,10 @@
 +#!/bin/zsh
 +
 +# Define variables
 +dogsync_script="$HOME/loadrc/gitrc/dogsync.sh"
-+git_submodule_status_cmd="git submodule status"
-+awk_cmd="awk '{print $2}'"
-+parallel_cmd="parallel --jobs 10 --ungroup"
 +
 +# Execute the dogsync script
 +source "$dogsync_script"
 +
 +# Execute the dogsync script for each submodule
-+$git_submodule_status_cmd | $awk_cmd | $parallel_cmd "cd {}; source $dogsync_script; cd -"
++$(git submodule status) | $(awk '{print $2}') | $(parallel --jobs 10 --ungroup "cd {}; source $dogsync_script; cd -")
 diff --git a/gitrc/gtag.sh b/gitrc/gtag.sh
 new file mode 100755
 --- /dev/null
@@ -20180,7 +20177,7 @@ new file mode 160000
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 4cfd663121cb95ea6ff27ce73fc48f041cfe0ccc-dirty
++Subproject commit e3beba0d186b34654dd4f6e19a7fbe7a39282d57-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 --- /dev/null
@@ -20553,7 +20550,7 @@ new file mode 100755
 +    for keyword in sorted_keywords:
 +        keyword_files = list(set(close_files[keyword]))
 +        keyword_files.sort(key=lambda x: get_file_size(x), reverse=True)
-+        if 2 <= len(keyword_files) <= 30:
++        if 2 <= len(keyword_files):
 +            print(f"{keyword}.txt")
 +            with open(f"{keyword}.txt", "w") as f:
 +                f.write(keyword + "\n")
@@ -20984,8 +20981,9 @@ diff --git a/pythonrc/remove-unuses.sh b/pythonrc/remove-unuses.sh
 new file mode 100755
 --- /dev/null
 +++ ./pythonrc/remove-unuses.sh
-@@ -0,0 +1,9 @@
+@@ -0,0 +1,10 @@
 +#!/bin/zsh
++
 +if [ -z "$1" ]
 +then
 +    echo -e "${red}Please provide TARGET ... ${NC}"
@@ -20993,7 +20991,7 @@ new file mode 100755
 +fi
 +
 +TARGET="$1"
-+autoflake --in-place --remove-all-unused-imports "$TARGET"
++# autoflake --in-place --remove-all-unused-imports "$TARGET"
 diff --git a/pythonrc/remove_comments.py b/pythonrc/remove_comments.py
 new file mode 100755
 --- /dev/null
@@ -22014,7 +22012,7 @@ new file mode 160000
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit 0de21870d03accdd9c5a12e0615eaa119caa1962
++Subproject commit b3482cce9c8254fbfef298409614be97d5d7a3c2
 diff --git a/ruleref.list b/ruleref.list
 new file mode 100644
 --- /dev/null
@@ -30035,7 +30033,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/bash-support.vim
 @@ -0,0 +1 @@
-+Subproject commit dfdf0d49556f2cb2c5768e1629819e89f25e8ed2
++Subproject commit f7097c7e3fed38f5baffa6eb0aa8dfb1081d7dcb-dirty
 diff --git a/vimrc/.vim/bundle/bclose.vim b/vimrc/.vim/bundle/bclose.vim
 new file mode 160000
 --- /dev/null
@@ -30059,7 +30057,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/firenvim
 @@ -0,0 +1 @@
-+Subproject commit 12003d9727bc5074ccb405b3d80e691c72d4859b
++Subproject commit ee4ef314bd990b2b05b7fbd95b857159e444a2fe
 diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
 new file mode 160000
 --- /dev/null
@@ -30245,7 +30243,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/swift.vim
 @@ -0,0 +1 @@
-+Subproject commit ba6f6cef58d08ac741aaf1626d3799d476cd43b6
++Subproject commit 51108a710e194c0c75f1cf4683650faa407fab6b
 diff --git a/vimrc/.vim/bundle/taglist-plus/README.md b/vimrc/.vim/bundle/taglist-plus/README.md
 new file mode 100644
 --- /dev/null
@@ -36523,7 +36521,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -0,0 +1 @@
-+Subproject commit ba9381f5588ad00732c4a93e36d1df693603ac19-dirty
++Subproject commit ba9381f5588ad00732c4a93e36d1df693603ac19
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 new file mode 160000
 --- /dev/null
@@ -36559,7 +36557,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-gitgutter
 @@ -0,0 +1 @@
-+Subproject commit 44dbd57dd19e8ec58b2a50c787c8ae7bb231c145
++Subproject commit 2ee95686c5944f99b42dd04fec005b30497006de
 diff --git a/vimrc/.vim/bundle/vim-gradle b/vimrc/.vim/bundle/vim-gradle
 new file mode 160000
 --- /dev/null
@@ -36607,7 +36605,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-rails
 @@ -0,0 +1 @@
-+Subproject commit 959e94b76e6ebdf984acef61649ba7d0f62bd425
++Subproject commit 2b8c4fc831e0de2681beda0a2f48222812920a1d
 diff --git a/vimrc/.vim/bundle/vim-scala b/vimrc/.vim/bundle/vim-scala
 new file mode 160000
 --- /dev/null
