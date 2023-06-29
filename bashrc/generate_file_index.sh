@@ -45,17 +45,27 @@ done < "$INCLUDE_FILE"
 
 export LC_ALL=C
 
-find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + > "$TARGET" ; \
-    if [ ${#include_params[@]} -gt 0 ] ; \
-    then \
-        find . "(" "${include_params[@]}" ")" -type f -size -9000k >> ${TARGET} ; \
-        fi && \
-        echo "./$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" >> ${TARGET} && \
-        sed -i.bak 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/;s/ /\\ /g' "$TARGET" && \
-        comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp" && \
-        cp -fv "$TARGET.tmp" "$TARGET" && \
-        sort -u "$TARGET" -o "$TARGET" && \
-        cp -fv "$TARGET" files.proj && \
-        echo "$TARGETEDIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/' >> ~/all.proj && \
-        sort -u ~/all.proj -o ~/all.proj.tmp && \
-        cp -fv ~/all.proj.tmp ~/all.proj
+# Perform the find operation and output to target file
+find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + > "$TARGET"
+
+# If include parameters exist, perform additional find operation
+if [ ${#include_params[@]} -gt 0 ]; then
+    find . "(" "${include_params[@]}" ")" -type f -size -9000k >> "$TARGET"
+fi
+
+# Post-processing
+echo "./$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" >> "$TARGET"
+sed -i.bak 's/\(["'\''\]\)/\\\1/g;s/.*/"&"/;s/ /\\ /g' "$TARGET"
+comm -23 <(sort "$TARGET") <(sort "$PRUNE_FILE") > "$TARGET.tmp"
+cp -fv "$TARGET.tmp" "$TARGET"
+sort -u "$TARGET" -o "$TARGET"
+cp -fv "$TARGET" files.proj
+
+new_entry=$(echo "$TARGETEDIR/files.proj" | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/')
+
+# Check if new_entry exists in ~/all.proj, only update if not exists
+if ! grep -q -F "$new_entry" ~/all.proj; then
+    echo "$new_entry" >> ~/all.proj
+    sort -u ~/all.proj -o ~/all.proj.tmp
+    cp -fv ~/all.proj.tmp ~/all.proj
+fi
