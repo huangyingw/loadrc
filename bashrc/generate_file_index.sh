@@ -50,7 +50,7 @@ find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il
 
 # If include parameters exist, perform additional find operation
 if [ ${#include_params[@]} -gt 0 ]; then
-    find . "(" "${include_params[@]}" ")" -type f -size -9000k >> "$TARGET"
+    find . "(" "${include_params[@]}" ")" -type f -size -9000k -exec grep -Il "" {} + >> "$TARGET"
 fi
 
 # Post-processing
