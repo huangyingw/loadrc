@@ -165,21 +165,25 @@ filetype plugin on
 filetype plugin indent on
 
 function AddToGit()
-    if (expand('%:e') ==# 'findresult' || expand('%:p') =~ '.*\.git/.*' || expand('%:e') ==# 'diff')
-        return
-    endif
+    try
+        if (expand('%:e') ==# 'findresult' || expand('%:p') =~ '.*\.git/.*' || expand('%:e') ==# 'diff')
+            return
+        endif
 
-    let inGit = substitute(system('[ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1 && echo inGit'), '\n', '', '')
+        let inGit = substitute(system('[ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1 && echo inGit'), '\n', '', '')
 
-    if inGit != 'inGit'
-        return
-    endif
+        if inGit != 'inGit'
+            return
+        endif
 
-    let worktree = Cd2Worktree()
-    let relativePath = expand('%:p')
-    let relativePath = substitute(relativePath, '\_s', '\\ ', "g")
-    let relativePath = substitute(system('realpath --relative-to="' . worktree . '" ' . relativePath), '\n', '', '')
-    silent exec '!~/loadrc/gitrc/autoadd.sh ' . '"' .  relativePath . '"'
+        let worktree = Cd2Worktree()
+        let relativePath = expand('%:p')
+        let relativePath = substitute(relativePath, '\_s', '\\ ', "g")
+        let relativePath = substitute(system('realpath --relative-to="' . worktree . '" ' . relativePath), '\n', '', '')
+        echom "Running autoadd.sh with argument: " . relativePath
+        exec '!~/loadrc/gitrc/autoadd.sh ' . '"' .  relativePath . '"'
+    catch /./
+    endtry
 endfunction
 
 function TrimEndLines()
