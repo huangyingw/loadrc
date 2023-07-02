@@ -33,6 +33,7 @@ brew install \
     ffmpeg \
     git \
     git-gui \
+    gnupg \
     graphviz \
     hg \
     htop \
