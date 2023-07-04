@@ -347,6 +347,7 @@ function! s:G(message) abort
 
     let worktree = Cd2Worktree()
     call AsyncRunShellCommand('~/loadrc/gitrc/g.sh ' . shellescape(msg) . ' 2>&1 | tee g.runresult')
+    "exec '!~/loadrc/gitrc/g.sh ' . shellescape(msg) . ' 2>&1 | tee g.runresult'
 
     if &diff
         on
