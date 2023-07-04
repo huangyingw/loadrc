@@ -14,7 +14,7 @@ if [ $(uname) = "Linux" ]
 then
     sshfs "$remoteServer":/media/ ~/"$remoteServer"
     df -TH
-    ssh  "$remoteServer" 'zsh ~/loadrc/bashrc/kill_top_io_processes.sh'
+    #ssh  "$remoteServer" 'zsh ~/loadrc/bashrc/kill_top_io_processes.sh'
 else
     diskutil unmount force ~/nfs/"$remoteServer"
     diskutil unmount force ~/"$remoteServer"
