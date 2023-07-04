@@ -70,7 +70,7 @@ def open_in_vlc(file_path, cur_line):
                 "--sub-autodetect-file",
                 "-f",
                 "--macosx-continue-playback=2",
-                "--rate=4.0",
+                "--rate=2.0",
                 "--start-time=" + str(time),
                 file_full_path,
             ],
@@ -86,7 +86,7 @@ def open_in_vlc(file_path, cur_line):
                 "--sub-autodetect-file",
                 "-f",
                 "--macosx-continue-playback=2",
-                "--rate=4.0",
+                "--rate=2.0",
                 file_full_path,
             ],
             stdout=subprocess.DEVNULL,  # Redirect stdout to DEVNULL
