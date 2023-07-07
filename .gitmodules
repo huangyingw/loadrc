@@ -271,3 +271,6 @@
 	path = vimrc/.vim/bundle/vim-gitgutter
 	url = git@github.com:airblade/vim-gitgutter.git
 	branch = master
+[submodule "vimrc/.vim/bundle/nvim-ghost.nvim"]
+	path = vimrc/.vim/bundle/nvim-ghost.nvim
+	url = git@github.com:subnut/nvim-ghost.nvim.git
