@@ -10,13 +10,13 @@ for PID in ${(z)PIDS}; do
     if [[ "$PID" =~ ^[0-9]+$ ]]; then
         # Get the process name
         PNAME=$(ps -p $PID -o comm=)
-        # Check if the process name is sftp-server, if so, skip the kill
-        if [[ "$PNAME" != "sftp-server" ]]; then
+        # Check if the process name is sftp-server or rsync, if so, skip the kill
+        if [[ "$PNAME" != "sftp-server" && "$PNAME" != "rsync" ]]; then
             echo "Killing PID $PID: $PNAME"
             kill $PID
             sleep 1 # Pause for a moment in case you need to stop the script
         else
-            echo "Skipping sftp-server process"
+            echo "Skipping $PNAME process"
         fi
     fi
 done
