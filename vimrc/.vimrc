@@ -178,7 +178,7 @@ function AddToGit()
     let worktree = Cd2Worktree()
     let relativePath = expand('%:p')
     let relativePath = substitute(relativePath, '\_s', '\\ ', "g")
-    let relativePath = substitute(system('realpath --relative-to="' . worktree . '" ' . relativePath), '\n', '', '')
+    let relativePath = substitute(relativePath, worktree.'/', '', '')
     silent exec '!~/loadrc/gitrc/autoadd.sh ' . '"' .  relativePath . '"'
 endfunction
 

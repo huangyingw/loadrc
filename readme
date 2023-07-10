@@ -21,3 +21,15 @@ vimrc/.vim/bundle/tig-explorer.vim/autoload/tig_explorer.vim:301   let git_dir =
 vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim:7216:  call s:Map('n', 'P',    ':<C-U>exe <SID>BlameJump("^".v:count1)<CR>', '<silent>', ft)
 vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim:7221:  call s:Map('n', 'p',    ':<C-U>exe <SID>BlameCommit("pedit")<CR>', '<silent>', ft)
 vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim:7636:      exe s:Map('n', 'p',    ':<C-U>0,1Git blame!' . blame_tail, '<silent>')
+
+todo:
+vimrc/.vim/bundle/vim-pdf/plugin/vim-pdf.vim:33     execute "silent setlocal nowrite"
+/Users/huangyingw/loadrc/gitrc/gsync.sh:13: command not found: git submodule status
+
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+" 插件列表在这里开始
+" ...
+" 插件列表在这里结束
+call vundle#end()
+
