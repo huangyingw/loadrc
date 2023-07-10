@@ -30,6 +30,7 @@ apt-get install -y \
     htop \
     ifenslave \
     inetutils-traceroute \
+    iotop \
     iperf \
     iperf3 \
     iputils-ping \
