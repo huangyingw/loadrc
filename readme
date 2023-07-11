@@ -25,11 +25,3 @@ vimrc/.vim/bundle/vim-fugitive/autoload/fugitive.vim:7636:      exe s:Map('n', '
 todo:
 vimrc/.vim/bundle/vim-pdf/plugin/vim-pdf.vim:33     execute "silent setlocal nowrite"
 /Users/huangyingw/loadrc/gitrc/gsync.sh:13: command not found: git submodule status
-
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-" 插件列表在这里开始
-" ...
-" 插件列表在这里结束
-call vundle#end()
-
