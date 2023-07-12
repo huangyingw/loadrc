@@ -59,7 +59,8 @@ def open_in_vlc(file_path, cur_line):
         return
 
     time = split_string(file_full_path)
-    print("Opening in VLC: " + file_full_path + " at " + str(time))
+    print(f'Opening in VLC at {time}:')
+    print(f'"./{cur_line}"')
 
     if time:
         subprocess.run(
