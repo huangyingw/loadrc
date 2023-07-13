@@ -586,7 +586,8 @@ function! s:CatPlay(...) abort
         call delete(b:output)
     endif
 
-    call AsyncRunShellCommand('python3 ~/loadrc/pythonrc/line_video_player.py ' . shellescape(file) . ' 2>&1 | tee -a ' . b:output)
+    call asyncrun#stop('<bang>')
+    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output) 
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
