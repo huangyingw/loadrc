@@ -581,11 +581,6 @@ function! s:CatPlay(...) abort
     let b:output = expand("%:p") . '.runresult'
     let file = expand("%:p")
 
-    " If b:output file exists, delete it
-    if filereadable(b:output)
-        call delete(b:output)
-    endif
-
     call asyncrun#stop('<bang>')
     call asyncrun#run('<bang>', '', '~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output) 
     call OpenOrSwitch(b:output, 'vs')
