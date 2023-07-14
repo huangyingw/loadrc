@@ -21,7 +21,6 @@ def time_to_seconds(time_string):
 
 
 def split_string(string):
-    print("Splitting string: %s" % string)
     # Split string into path and time using regex
     pattern = r"^(.*?)(?::(\d{1,2}:\d{1,2}(?::\d{1,2})?))$"
     match = re.match(pattern, string)
@@ -34,7 +33,6 @@ def split_string(string):
 
 
 def open_in_vlc(file_path, cur_line):
-    print("Opening file in VLC: %s" % file_path)
 
     # Convert the input string to a valid JSON string
     cur_line = json.dumps(cur_line)
@@ -59,8 +57,6 @@ def open_in_vlc(file_path, cur_line):
         return
 
     time = split_string(file_full_path)
-    print(f'Opening in VLC at {time}:')
-    print(f'"./{cur_line}"')
 
     if time:
         subprocess.run(
@@ -96,8 +92,6 @@ def open_in_vlc(file_path, cur_line):
 
 
 if __name__ == "__main__":
-    print("Script started with arguments: %s" % sys.argv)
-    # Use the command line arguments to get the file path and line
     file_path = sys.argv[1]
     cur_line = sys.argv[2]
 
