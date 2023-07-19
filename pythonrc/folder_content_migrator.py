@@ -34,6 +34,7 @@ def move_folders(source_folder, target_folder):
                         )
                     except OSError as e:
                         print(f"Cannot create directory {os.path.dirname(tgt)}: {e}")
+
         # Call the rsync_folder_operations script
         rsync_script_path = os.path.join(os.path.expanduser('~'), "loadrc/pythonrc/rsync_folder_operations.py")
         call(
@@ -51,6 +52,10 @@ def move_folders(source_folder, target_folder):
                 dir_path = os.path.join(root, directory)
                 if os.path.isdir(dir_path) and not os.listdir(dir_path):
                     os.rmdir(dir_path)
+
+        # Check if source_folder is empty and remove it
+        if not os.listdir(source_folder):
+            os.rmdir(source_folder)
 
 
 def main():
