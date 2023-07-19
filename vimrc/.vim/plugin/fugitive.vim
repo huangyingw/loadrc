@@ -945,6 +945,9 @@ function! s:FolderContentMigrator()
         return
     endif
 
+    " Clear the content of the log file before starting the loop
+    silent !echo "" > folder_content_migrator.runresult
+
     " Get the source and target folders
     let target_folder = lines[0]
     let source_folders = lines[1:]
@@ -952,7 +955,7 @@ function! s:FolderContentMigrator()
     " Call the folder_content_migrator.py script for each source folder
     let script_path = "~/loadrc/pythonrc/folder_content_migrator.py"
     for source_folder in source_folders
-        let command = '!' . l:script_path . ' ' . l:source_folder . ' ' . l:target_folder . ' 2>&1 | tee ' . 'folder_content_migrator.runresult'
+        let command = '!' . l:script_path . ' ' . l:source_folder . ' ' . l:target_folder . ' 2>&1 | tee -a ' . 'folder_content_migrator.runresult'
         execute command
     endfor
     call OpenOrSwitch('folder_content_migrator.runresult', 'vs')
