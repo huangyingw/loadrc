@@ -45,14 +45,12 @@ def move_folders(source_folder, target_folder):
             ]
         )
 
-    # Remove empty directories after the move
+        # Remove empty directories after the move
         for root, dirs, _ in os.walk(source_folder, topdown=False):
             for directory in dirs:
                 dir_path = os.path.join(root, directory)
                 if os.path.isdir(dir_path) and not os.listdir(dir_path):
                     os.rmdir(dir_path)
-                else:
-                    print("Source or target folder does not exist.")
 
 
 def main():
