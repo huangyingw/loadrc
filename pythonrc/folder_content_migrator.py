@@ -25,31 +25,34 @@ def move_folders(source_folder, target_folder):
                     tgt = os.path.join(
                         target_folder, os.path.relpath(src, source_folder)
                     )
-                    os.makedirs(os.path.dirname(tgt), exist_ok=True)
-                    shutil.move(src, tgt) if not os.path.exists(
-                        tgt
-                    ) else print(
-                        "Target file already exists, not overwriting."
-                    )
-        else:
-            # Call the rsync_folder_operations script
-            call(
-                [
-                    "~/loadrc/pythonrc/rsync_folder_operations.py",
-                    source_folder,
-                    target_folder,
-                    "move",
-                ]
-            )
+                    try:
+                        os.makedirs(os.path.dirname(tgt), exist_ok=True)
+                        shutil.move(src, tgt) if not os.path.exists(
+                            tgt
+                        ) else print(
+                            "Target file already exists, not overwriting."
+                        )
+                    except OSError as e:
+                        print(f"Cannot create directory {os.path.dirname(tgt)}: {e}")
+        # Call the rsync_folder_operations script
+        rsync_script_path = os.path.join(os.path.expanduser('~'), "loadrc/pythonrc/rsync_folder_operations.py")
+        call(
+            [
+                rsync_script_path,
+                source_folder,
+                target_folder,
+                "move",
+            ]
+        )
 
-        # Remove empty directories after the move
+    # Remove empty directories after the move
         for root, dirs, _ in os.walk(source_folder, topdown=False):
             for directory in dirs:
                 dir_path = os.path.join(root, directory)
-                if not os.listdir(dir_path):
+                if os.path.isdir(dir_path) and not os.listdir(dir_path):
                     os.rmdir(dir_path)
-    else:
-        print("Source or target folder does not exist.")
+                else:
+                    print("Source or target folder does not exist.")
 
 
 def main():
