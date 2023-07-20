@@ -30,7 +30,7 @@ function main() {
 
     eval "${find_cmd} -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOG}\"" && \
         cp -fv "${FAVLOG}" fav.log && \
-        eval "${find_cmd} -exec ls -t {} + | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\"" && \
+        eval "${find_cmd} -printf '%T+ %p\\n' | sort -r | cut -d' ' -f2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\"" && \
         cp -fv "${FAVLOGSORT}" fav.log.sort
 
     cd -
