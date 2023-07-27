@@ -12,7 +12,7 @@ echo "target --> $target"
 
 if [ ! -z "$2" ]  # If second parameter is provided
 then
-    git clone -b $2 "$1" "$target"
+    git clone -b "$2" "$1" "$target"
 else
     git clone "$1" "$target"
 fi
