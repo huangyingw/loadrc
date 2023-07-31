@@ -313,6 +313,15 @@ new file mode 100644
 +set geometry(botheight) 883
 +set permviews {}
 +set ignorespace 1
+diff --git a/.config/nvim/init.lua b/.config/nvim/init.lua
+new file mode 100644
+--- /dev/null
++++ ./.config/nvim/init.lua
+@@ -0,0 +1,4 @@
++-- init.lua
++vim.cmd 'set runtimepath^=~/.vim runtimepath+=~/.vim/after'
++vim.cmd 'let &packpath = &runtimepath'
++vim.cmd 'source ~/.vimrc'
 diff --git a/.config/nvim/init.vim b/.config/nvim/init.vim
 new file mode 100644
 --- /dev/null
@@ -321,6 +330,34 @@ new file mode 100644
 +set runtimepath^=~/.vim runtimepath+=~/.vim/after
 +let &packpath = &runtimepath
 +source ~/.vimrc
+diff --git a/.config/nvim/lua/plugins.lua b/.config/nvim/lua/plugins.lua
+new file mode 100644
+--- /dev/null
++++ ./.config/nvim/lua/plugins.lua
+@@ -0,0 +1,17 @@
++-- plugins.lua
++return require('packer').startup(function()
++    use 'wbthomason/packer.nvim'    -- Packer can manage itself
++    use 'neovim/nvim-lspconfig'     -- Collection of configurations for built-in LSP client
++    use({
++        "jackMort/ChatGPT.nvim",
++        config = function()
++            require("chatgpt").setup()
++        end,
++        requires = {
++            "MunifTanjim/nui.nvim",
++            "nvim-lua/plenary.nvim",
++            "nvim-telescope/telescope.nvim"
++        }
++    })
++    use('folke/which-key.nvim')
++end)
+diff --git a/.config/tig/config b/.config/tig/config
+new file mode 100644
+--- /dev/null
++++ ./.config/tig/config
+@@ -0,0 +1 @@
++bind generic Y !sh -c "echo '%(commit).diff' | (uname | grep -q Darwin && pbcopy || xclip -selection clipboard)"
 diff --git a/.dockerignore b/.dockerignore
 new file mode 100644
 --- /dev/null
@@ -408,7 +445,7 @@ diff --git a/.envrc b/.envrc
 -PROMPT_COMMAND='history -a'
 +export CLICOLOR=1
 +export EDITOR="nvim"
-+export GREP_COLOR='1;31'
++export GREP_COLORS='mt=1;31'
 +export LANG="en_US.UTF-8"
 +export LANGUAGE="en_US:en"
 +export LC_ALL="en_US.UTF-8"
@@ -564,7 +601,7 @@ diff --git a/.gitmodules b/.gitmodules
 new file mode 100644
 --- /dev/null
 +++ ./.gitmodules
-@@ -0,0 +1,273 @@
+@@ -0,0 +1,276 @@
 +[submodule "keys"]
 +	path = keys
 +	url = git@bitbucket.org:huangyingw/keys.git
@@ -838,6 +875,9 @@ new file mode 100644
 +	path = vimrc/.vim/bundle/vim-gitgutter
 +	url = git@github.com:airblade/vim-gitgutter.git
 +	branch = master
++[submodule "vimrc/.vim/bundle/nvim-ghost.nvim"]
++	path = vimrc/.vim/bundle/nvim-ghost.nvim
++	url = git@github.com:subnut/nvim-ghost.nvim.git
 diff --git a/.gitrc b/.gitrc
 --- ./.gitrc
 +++ ./.gitrc
@@ -1453,7 +1493,7 @@ new file mode 100644
 diff --git a/.shellrc b/.shellrc
 --- ./.shellrc
 +++ ./.shellrc
-@@ -1,87 +1,111 @@
+@@ -1,87 +1,110 @@
 -alias apf='apt-get update && aptitude full-upgrade'
 -alias api='apt-get install'
 -alias aps='$HOME/bashrc/aps.sh'
@@ -1517,7 +1557,6 @@ diff --git a/.shellrc b/.shellrc
 +alias fgh='$HOME/loadrc/bashrc/fgh.sh'
 +alias findProjects='$HOME/loadrc/bashrc/find_projects.sh'
 +alias find_and_label_bad_files='$HOME/loadrc/ffmpegrc/find_and_label_bad_files.sh'
-+alias fmv='$HOME/loadrc/bashrc/move_files_with_structure.sh'
 +alias fjar='$HOME/loadrc/bashrc/fjar.sh'
 +alias flarge='$HOME/loadrc/bashrc/flarge.sh'
 +alias flargest='$HOME/loadrc/bashrc/flargest.sh'
@@ -1562,7 +1601,7 @@ diff --git a/.shellrc b/.shellrc
 +alias ntp='$HOME/loadrc/bashrc/ntp.sh'
 +alias nubak='$HOME/loadrc/bashrc/nubak.sh'
 +alias osmirror='$HOME/loadrc/bashrc/osmirror.sh'
-+alias pm-suspend='$HOME/loadrc/bashrc/sleep.sh'
++# alias pm-suspend='$HOME/loadrc/bashrc/sleep.sh'
 +alias r='$HOME/loadrc/bashrc/run.sh'
 +alias rb='$HOME/loadrc/bashrc/runb.sh'
 +alias reboot='$HOME/loadrc/bashrc/reboot.sh'
@@ -1651,6 +1690,19 @@ diff --git a/.sqlrc b/.sqlrc
 +alias fsql='$HOME/loadrc/sqlrc/fsql.sh'
 +alias mysqlback='$HOME/loadrc/sqlrc/mysqlback.sh'
 +alias xsql='$HOME/loadrc/sqlrc/xsql.sh'
+diff --git a/.studio.rc b/.studio.rc
+new file mode 100644
+--- /dev/null
++++ ./.studio.rc
+@@ -0,0 +1,8 @@
++#!/bin/zsh
++
++if ! (sudo systemsetup -getcomputersleep | grep -q Never)
++then
++    sudo systemsetup -setcomputersleep Never
++fi
++
++~/loadrc/setup_pbpaste-remote.sh
 diff --git a/.subversion/auth/svn.simple/6146213a2dda95c6394ae9ae66ab729c b/.subversion/auth/svn.simple/6146213a2dda95c6394ae9ae66ab729c
 new file mode 100644
 --- /dev/null
@@ -2234,12 +2286,6 @@ new file mode 100644
 +
 +[cuda]
 +root = /usr/local/cuda
-diff --git a/.tigrc b/.tigrc
-new file mode 100644
---- /dev/null
-+++ ./.tigrc
-@@ -0,0 +1 @@
-+bind main y !git show -s --format=%H %(commit) | pbcopy
 diff --git a/.tmux.conf b/.tmux.conf
 new file mode 100644
 --- /dev/null
@@ -2282,7 +2328,7 @@ diff --git a/.zshrc b/.zshrc
 new file mode 100644
 --- /dev/null
 +++ ./.zshrc
-@@ -0,0 +1,101 @@
+@@ -0,0 +1,120 @@
 +# If you come from bash you might have to change your $PATH.
 +
 +# Path to your oh-my-zsh installation.
@@ -2384,6 +2430,25 @@ new file mode 100644
 +
 +. $HOME/loadrc/.loadrc
 +setopt HIST_IGNORE_ALL_DUPS
++
++# opam configuration
++[[ ! -r /root/.opam/opam-init/init.zsh ]] || source /root/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
++
++# >>> conda initialize >>>
++# !! Contents within this block are managed by 'conda init' !!
++__conda_setup="$('/root/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
++if [ $? -eq 0 ]; then
++    eval "$__conda_setup"
++else
++    if [ -f "/root/anaconda3/etc/profile.d/conda.sh" ]; then
++        . "/root/anaconda3/etc/profile.d/conda.sh"
++    else
++        export PATH="/root/anaconda3/bin:$PATH"
++    fi
++fi
++unset __conda_setup
++# <<< conda initialize <<<
++
 diff --git a/Dockerfile b/Dockerfile
 new file mode 100644
 --- /dev/null
@@ -7763,32 +7828,22 @@ diff --git a/bashrc/copy.sh b/bashrc/copy.sh
 new file mode 100755
 --- /dev/null
 +++ ./bashrc/copy.sh
-@@ -0,0 +1,25 @@
+@@ -0,0 +1,15 @@
 +#!/bin/zsh
 +
-+if [ -z "$1" ] || [ -z "$2" ]
-+then
++# Script Name: copy.sh
++
++# Check if both source and target parameters are provided
++if [ -z "$1" ] || [ -z "$2" ]; then
 +    echo -e "${red}Please provide both source and target parameters... ${NC}"
 +    exit 1
 +fi
 +
-+source=$1
-+target=$2
++source="$1"
++target="$2"
 +
-+if [[ "$target" != *":"* ]] && [[ ! -d "$target" ]]
-+then
-+    mkdir -p "$target"
-+fi
-+
-+iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
-+rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source" "$target")
-+rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
-+
-+rsync \
-+    "${rsync_basic_options[@]}" \
-+    "$iconvs" \
-+    "$rsyncpath" \
-+    "$source/" "$target/"
++# Call the rsync_folder_operations.zsh script with source, target, and the mode set to 'copy'
++~/loadrc/pythonrc/rsync_folder_operations.py "$source" "$target" "copy"
 diff --git a/bashrc/copy.test.sh b/bashrc/copy.test.sh
 new file mode 100755
 --- /dev/null
@@ -7854,14 +7909,28 @@ diff --git a/bashrc/cscope.sh b/bashrc/cscope.sh
 new file mode 100755
 --- /dev/null
 +++ ./bashrc/cscope.sh
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,21 @@
 +#!/bin/zsh
 +
 +SOURCEFILE="cscopesourcefile.bak"
++TEMP_CSCOPE_OUT="cscope.out.bak"
++TEMP_CSCOPE_IN="cscope.in.out.bak"
++TEMP_CSCOPE_PO="cscope.po.out.bak"
 +
++# Build the index in temporary files
 +cp -fv files.proj "$SOURCEFILE" && \
 +    sed -i.bak 's/\\ / /g' "$SOURCEFILE" && \
-+    cscope -bq -i "$SOURCEFILE"
++    cscope -bq -i "$SOURCEFILE" -f "$TEMP_CSCOPE_OUT" && \
++    echo "Temporary cscope index files created successfully."
++
++# Replace the real index files with temporary files
++cp -fv "$TEMP_CSCOPE_OUT" cscope.out && \
++    cp -fv "$TEMP_CSCOPE_IN" cscope.in.out && \
++    cp -fv "$TEMP_CSCOPE_PO" cscope.po.out && \
++    echo "Cscope index files updated successfully."
++
++# Clean up the temporary and backup files
++rm -f "$SOURCEFILE.bak" "$TEMP_CSCOPE_OUT" "$TEMP_CSCOPE_IN" "$TEMP_CSCOPE_PO"
 diff --git a/bashrc/csr.sh b/bashrc/csr.sh
 new file mode 100755
 --- /dev/null
@@ -8705,81 +8774,105 @@ diff --git a/bashrc/fvideos.sh b/bashrc/fvideos.sh
 new file mode 100755
 --- /dev/null
 +++ ./bashrc/fvideos.sh
-@@ -0,0 +1,21 @@
-+#! /bin/zsh
+@@ -0,0 +1,39 @@
++#!/bin/zsh
 +
-+FAVLOG="fav.log.tmp"
-+FAVLOGSORT="fav.log.sort.tmp"
-+export LC_ALL=C
++function main() {
++    FAVLOG="fav.log.tmp"
++    FAVLOGSORT="fav.log.sort.tmp"
++    export LC_ALL=C
++    EXCLUDE_FILE="exclude_patterns.txt"
 +
-+if [ -n "$2" ]
-+then
-+    SIZE_OPTION="+$2M"
-+else
-+    SIZE_OPTION="+10M"
-+fi
++    if [ -n "$2" ]
++    then
++        SIZE_OPTION="+${2}M"
++    else
++        SIZE_OPTION="+10M"
++    fi
 +
-+cd "$1"
-+echo "SIZE_OPTION --> $SIZE_OPTION"
-+find . -type f -size "$SIZE_OPTION" -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOG" && \
-+    cp -fv "$FAVLOG" fav.log && \
-+    find . -type f -size "$SIZE_OPTION" -exec ls -t {} \+ | sed 's/\(["\]\)/\\\1/g;s/.*/"&"/' > "$FAVLOGSORT" && \
-+    cp -fv "$FAVLOGSORT" fav.log.sort
++    cd "$1"
++    echo "SIZE_OPTION --> $SIZE_OPTION"
 +
-+cd -
++    # Build the find command with exclusion patterns from the EXCLUDE_FILE
++    find_cmd="find . -type f -size \"${SIZE_OPTION}\""
++
++    # If the exclude file exists, then process it
++    if [ -f "${EXCLUDE_FILE}" ]
++    then
++        while IFS= read -r line
++        do
++            find_cmd+=" ! -path \"${line}\""
++        done < "${EXCLUDE_FILE}"
++    fi
++
++    eval "${find_cmd} -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOG}\"" && \
++        cp -fv "${FAVLOG}" fav.log && \
++        eval "${find_cmd} -printf '%T+ %p\\n' | sort -r | cut -d' ' -f2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\"" && \
++        cp -fv "${FAVLOGSORT}" fav.log.sort
++
++    cd -
++}
++
++main "$1" "$2"
 diff --git a/bashrc/generate_file_index.sh b/bashrc/generate_file_index.sh
 new file mode 100755
 --- /dev/null
 +++ ./bashrc/generate_file_index.sh
-@@ -0,0 +1,64 @@
+@@ -0,0 +1,71 @@
 +#!/bin/zsh
 +
-+# Check if a directory is provided as an argument, otherwise use the current directory
-+if [ -z "$1" ]; then
-+    TARGET_DIR=$(realpath "$PWD")
-+else
-+    TARGET_DIR=$(realpath "$1")
-+fi
++# If no argument is provided, use the current directory as target directory.
++# Otherwise, use the provided argument as target directory.
++TARGETEDIR=${1:-$(realpath "$PWD")}
 +
-+cd "$TARGET_DIR"
++# Change the working directory to the target directory.
++cd "$TARGETEDIR" || exit
 +
-+# Check for the existence of files.proj file
-+if [ ! -f files.proj ]; then
++# If there is no 'files.proj' file in the target directory, exit the script.
++if [ ! -f files.proj ]
++then
 +    echo -e "${red}No files.proj file here, will not build the index ... ${NC}"
 +    exit 1
 +fi
 +
-+# Copy the necessary configuration files
++# Copy the configuration files from the source to the target directory.
 +cp -nv ~/loadrc/prunefix_template.conf ./prunefix.conf
 +cp -nv ~/loadrc/prunefile_template.conf ./prunefile.conf
 +cp -nv ~/loadrc/includefile_template.conf ./includefile.conf
 +
-+# Set variables
++# Define variables
 +TARGET=files.proj.tmp
 +PRUNE_POSTFIX=prunefix.conf
 +PRUNE_FILE=prunefile.conf
 +INCLUDE_FILE=includefile.conf
 +
-+# Read the prune postfix configuration
-+or=""
-+[ -f "$PRUNE_POSTFIX" ] && while read suf; do
-+suf=$(echo "$suf" | sed 's/"//g')
-+prune_params+=( $or "-wholename" "$suf" )
-+or="-o"
++or="";
++
++[ -f "$PRUNE_POSTFIX" ] && while read suf
++do
++    suf=$(echo "$suf" | sed 's/"//g')
++    prune_params+=( $or "-wholename" "$suf" )
++    or="-o"
 +done < "$PRUNE_POSTFIX"
 +
-+# Read the include file configuration
-+or=""
-+[ -f "$INCLUDE_FILE" ] && while read suf; do
-+suf=$(echo "$suf" | sed 's/"//g')
-+include_params+=( $or "-wholename" "$suf" )
-+or="-o"
++or="";
++
++[ -f "$INCLUDE_FILE" ] && while read suf
++do
++    suf=$(echo "$suf" | sed 's/"//g')
++    include_params+=( $or "-wholename" "$suf" )
++    or="-o"
 +done < "$INCLUDE_FILE"
 +
 +export LC_ALL=C
 +
-+# Find and process files, combining prune and include operations
-+find . "(" "${prune_params[@]}" ")" -a -prune -o -type f "(" -size +0 -o "${include_params[@]}" ")" -exec grep -Il "" {} + > "$TARGET"
++# Perform the find operation and output to target file
++find . "(" "${prune_params[@]}" ")" -a -prune -o -size +0 -type f -exec grep -Il "" {} + > "$TARGET"
++
++# If include parameters exist, perform additional find operation
++if [ ${#include_params[@]} -gt 0 ]; then
++    find . "(" "${include_params[@]}" ")" -type f -size -9000k -exec grep -Il "" {} + >> "$TARGET"
++fi
 +
 +# Post-processing
 +echo "./$(~/loadrc/gitrc/get_current_branch.sh).gdio.diff" >> "$TARGET"
@@ -8788,64 +8881,14 @@ new file mode 100755
 +cp -fv "$TARGET.tmp" "$TARGET"
 +sort -u "$TARGET" -o "$TARGET"
 +cp -fv "$TARGET" files.proj
-+new_entry="$(echo "$TARGET_DIR"/files.proj | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/')"
++
++new_entry=$(echo "$TARGETEDIR/files.proj" | sed 's/\(["'\''\]\)/\\\1/g;s/ /\\ /g;s/.*/"&"/')
 +
 +# Check if new_entry exists in ~/all.proj, only update if not exists
 +if ! grep -q -F "$new_entry" ~/all.proj; then
 +    echo "$new_entry" >> ~/all.proj
 +    sort -u ~/all.proj -o ~/all.proj.tmp
 +    cp -fv ~/all.proj.tmp ~/all.proj
-+fi
-diff --git a/bashrc/generate_iconv_string.sh b/bashrc/generate_iconv_string.sh
-new file mode 100755
---- /dev/null
-+++ ./bashrc/generate_iconv_string.sh
-@@ -0,0 +1,46 @@
-+#!/bin/zsh
-+
-+source_directory="$1"
-+destination_directory="$2"
-+
-+function check_remote_and_detect_os() {
-+    echo "check_remote_and_detect_os --> "
-+    local directory="$1"
-+    local os=""
-+
-+    if [[ $directory =~ ^[^:]+:[^:]+$ ]]; then
-+        # Extract user and host from the remote path
-+        local user_host="${directory%%:*}"
-+        os_info=$(ssh "$user_host" "uname")
-+        if [[ $os_info == "Darwin" ]]; then
-+            os="macOS"
-+        elif [[ $os_info == "Linux" ]]; then
-+            os="Linux"
-+        else
-+            echo "Unsupported operating system: $os_info"
-+            exit 1
-+        fi
-+    else
-+        os=$(uname)
-+        if [[ $os != "Darwin" ]] && [[ $os != "Linux" ]]; then
-+            echo "Unsupported operating system: $os"
-+            exit 1
-+        fi
-+    fi
-+
-+    echo "$os"
-+}
-+
-+# Detect the source and destination OS
-+echo "source_directory --> $source_directory"
-+source_os=$(check_remote_and_detect_os "$source_directory")
-+echo "destination_directory --> $destination_directory"
-+destination_os=$(check_remote_and_detect_os "$destination_directory")
-+
-+if [ "$source_os" = "macOS" ] && [ "$destination_os" = "Linux" ]; then
-+    echo "--iconv=utf-8,utf-8-mac"
-+elif [ "$source_os" = "Linux" ] && [ "$destination_os" = "macOS" ]; then
-+    echo "--iconv=utf-8-mac,utf-8"
-+else
-+    echo ""
 +fi
 diff --git a/bashrc/generate_iconv_string.test.sh b/bashrc/generate_iconv_string.test.sh
 new file mode 100755
@@ -8952,44 +8995,6 @@ new file mode 100755
 +./get_iconv.sh "u2004:~/loadrc"
 +./get_iconv.sh "huangyingw@mbp:~/loadrc"
 +./get_iconv.sh "~/loadrc"
-diff --git a/bashrc/get_iconvs.sh b/bashrc/get_iconvs.sh
-new file mode 100755
---- /dev/null
-+++ ./bashrc/get_iconvs.sh
-@@ -0,0 +1,33 @@
-+#!/bin/zsh
-+
-+source=$1
-+target=$2
-+
-+shost=$(~/loadrc/bashrc/parse_host.sh "$source")
-+thost=$(~/loadrc/bashrc/parse_host.sh "$target")
-+
-+function get_utf_8_str()
-+{
-+    host=$1
-+
-+    if ( ssh -q "$host" "uname" | grep -q Darwin )
-+    then
-+        echo "utf-8-mac"
-+    else
-+        echo "utf-8"
-+    fi
-+}
-+
-+local_utf_8_str=$(get_utf_8_str "localhost")
-+
-+if [ "$shost" != "localhost" ]
-+then
-+    remote_utf_8_str=$(get_utf_8_str $shost)
-+    echo "--iconv=$local_utf_8_str,$remote_utf_8_str"
-+elif [ "$thost" != "localhost" ]
-+then
-+    remote_utf_8_str=$(get_utf_8_str $thost)
-+    echo "--iconv=$local_utf_8_str,$remote_utf_8_str"
-+else
-+    echo "--iconv=$local_utf_8_str,$local_utf_8_str"
-+fi
 diff --git a/bashrc/get_rsyncpath.sh b/bashrc/get_rsyncpath.sh
 new file mode 100755
 --- /dev/null
@@ -9162,7 +9167,7 @@ diff --git a/bashrc/jdupes.sh b/bashrc/jdupes.sh
 new file mode 100755
 --- /dev/null
 +++ ./bashrc/jdupes.sh
-@@ -0,0 +1,19 @@
+@@ -0,0 +1,12 @@
 +#!/bin/zsh
 +
 +if [ -z "$1" ]
@@ -9175,13 +9180,6 @@ new file mode 100755
 +dt=$(date '+%m_%d_%Y_%H_%M_%S');
 +logFile="$TARGET/jdupes.$dt.log"
 +jdupes -dNr -X size+:100m -X nostr:/.git/ "$TARGET" 2>&1 | tee "$logFile"
-+
-+MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
-+
-+if [ -f ${MIRRORCHECK} ] ; \
-+then \
-+    ~/loadrc/bashrc/sleep.sh ; \
-+fi
 diff --git a/bashrc/jformat.sh b/bashrc/jformat.sh
 new file mode 100755
 --- /dev/null
@@ -9214,6 +9212,33 @@ new file mode 100755
 +then
 +    lsof -i :"$1" | awk 'NR > 1 {print $2}' | while read ss; do kill -9 "$ss"; done
 +fi
+diff --git a/bashrc/kill_top_io_processes.sh b/bashrc/kill_top_io_processes.sh
+new file mode 100755
+--- /dev/null
++++ ./bashrc/kill_top_io_processes.sh
+@@ -0,0 +1,22 @@
++#!/bin/zsh
++
++crontab -r
++
++# Get the PIDs of the top 10 I/O-consuming processes
++PIDS=$(iotop -b -n 1 -o -k | awk 'NR>2 {print $1, $10}' | sort -k2 -nr | head -n 10 | awk '{print $1}')
++
++for PID in ${(z)PIDS}; do
++    # Validate that this is a number
++    if [[ "$PID" =~ ^[0-9]+$ ]]; then
++        # Get the process name
++        PNAME=$(ps -p $PID -o comm=)
++        # Check if the process name is sftp-server or rsync, if so, skip the kill
++        if [[ "$PNAME" != "sftp-server" && "$PNAME" != "rsync" ]]; then
++            echo "Killing PID $PID: $PNAME"
++            kill $PID
++            sleep 1 # Pause for a moment in case you need to stop the script
++        else
++            echo "Skipping $PNAME process"
++        fi
++    fi
++done
 diff --git a/bashrc/kill_top_processes.sh b/bashrc/kill_top_processes.sh
 new file mode 100755
 --- /dev/null
@@ -9225,7 +9250,7 @@ diff --git a/bashrc/ln_fs.sh b/bashrc/ln_fs.sh
 new file mode 100755
 --- /dev/null
 +++ ./bashrc/ln_fs.sh
-@@ -0,0 +1,22 @@
+@@ -0,0 +1,25 @@
 +#!/bin/zsh
 +
 +SOURCE="$1"
@@ -9243,8 +9268,11 @@ new file mode 100755
 +    elif [ -d "$TARGET" ]
 +    then
 +        rsync -aHv --progress --remove-source-files "$TARGET"/ "$TARGET".bak/ ; \
-+        ~/loadrc/bashrc/rmEmpty.sh "$TARGET"
++            ~/loadrc/bashrc/rmEmpty.sh "$TARGET"
 +    fi
++
++    # Create the target directory if it doesn't exist
++    mkdir -p "$(dirname "$TARGET")"
 +
 +    ln -fs "$SOURCE" "$TARGET"
 +fi
@@ -9423,17 +9451,19 @@ diff --git a/bashrc/mirror.sh b/bashrc/mirror.sh
 new file mode 100755
 --- /dev/null
 +++ ./bashrc/mirror.sh
-@@ -0,0 +1,48 @@
+@@ -0,0 +1,28 @@
 +#!/bin/zsh
 +
-+if [ -z "$1" ] || [ -z "$2" ]
-+then
++# Script Name: mirror.sh
++
++# Check if both source and target parameters are provided
++if [ -z "$1" ] || [ -z "$2" ]; then
 +    echo -e "${red}Please provide both source and target parameters... ${NC}"
 +    exit 1
 +fi
 +
-+source=$1
-+target=$2
++source="$1"
++target="$2"
 +
 +ready_file="$source"/"tmirror.ready"
 +MIRRORCHECK=$HOME/loadrc/."`hostname`".mirror.check
@@ -9444,33 +9474,11 @@ new file mode 100755
 +    exit 1
 +fi
 +
-+if [ -z "$source" ]
-+then
-+    echo -e "${red}source could not be none... ${NC}"
-+    exit 1
-+fi
-+
-+if [ -z "$target" ]
-+then
-+    echo -e "${red}target could not be none... ${NC}"
-+    exit 1
-+fi
-+
-+rm "$ready_file"
-+
-+iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
-+rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source" "$target")
-+rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
-+
-+rsync \
-+    --delete-before \
-+    "${rsync_basic_options[@]}" \
-+    "$iconvs" \
-+    "$rsyncpath" \
-+    "$source/" "$target/" && \
-+    if [ -f "${MIRRORCHECK}" ] ; \
-+    then \
-+        ~/loadrc/bashrc/sleep.sh ; \
++# Call the rsync_folder_operations.zsh script with source, target, and the mode set to 'mirror'
++~/loadrc/pythonrc/rsync_folder_operations.py "$source" "$target" "mirror" && \
++    rm "$ready_file" && \
++    if [ -f "${MIRRORCHECK}" ]; then
++        ~/loadrc/bashrc/sleep.sh
 +    fi
 diff --git a/bashrc/mklnk.sh b/bashrc/mklnk.sh
 new file mode 100755
@@ -9507,33 +9515,28 @@ diff --git a/bashrc/mosh.sh b/bashrc/mosh.sh
 new file mode 100755
 --- /dev/null
 +++ ./bashrc/mosh.sh
-@@ -0,0 +1,20 @@
+@@ -0,0 +1,13 @@
 +#!/bin/bash
-+target=$(echo "$1" | sed  -e "s/\/$//g")
++target=$(echo "$1" | sed -e "s/\/$//g")
 +
 +MOSHSERVER=$(ssh "$target" ". ~/loadrc/.pathrc ; which mosh-server")
 +tmuxAction="$(ssh "$target" ". ~/loadrc/.pathrc ; which tmux") new-session -A -s mosh"
 +
-+if ( nc -vz "$target" 22 2>&1 | grep -q succeeded ) && [ -z "$MOSHSERVER" ] || [ -z "$tmuxAction" ]
-+then
-+    echo -e "${red}please check connection, mosh and tmux setting of $target first... ${NC}"
-+    exit 1
-+fi
-+
 +ssh "$target" ". ~/loadrc/.pathrc ; ~/loadrc/macosrc/configure_mosh.sh" &
 +
-+while true
-+do
++while true; do
 +    mosh --server="$MOSHSERVER" "$target" -- ${tmuxAction}
-+    echo "Connection lost. Retrying in 3 minutes..."
-+    sleep 180
++    echo "Connection lost. Retrying in 5 seconds..."
++    sleep 5
 +done
 diff --git a/bashrc/move.sh b/bashrc/move.sh
 new file mode 100755
 --- /dev/null
 +++ ./bashrc/move.sh
-@@ -0,0 +1,38 @@
+@@ -0,0 +1,18 @@
 +#!/bin/zsh
++
++# Script Name: move.sh
 +
 +# Check if both source and target parameters are provided
 +if [ -z "$1" ] || [ -z "$2" ]; then
@@ -9541,36 +9544,14 @@ new file mode 100755
 +    exit 1
 +fi
 +
-+# Get the real paths for source and target
 +source="$1"
-+realpath "$1" && source=$(realpath "$1")
-+
 +target="$2"
-+realpath "$2" && target=$(realpath "$2")
 +
-+# Only proceed if source and target are not the same
-+if [ -n "$source" ] && [ -n "$target" ] && [ "$source" != "$target" ]; then
-+    # Get necessary parameters for rsync
-+    iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
-+    rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source" "$target")
-+    rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
++# Call the rsync_folder_operations.py script with source, target, and the mode set to 'move'
++~/loadrc/pythonrc/rsync_folder_operations.py "$source" "$target" "move"
 +
-+    # Perform rsync with appropriate options
-+    rsync \
-+        --remove-source-files \
-+        "${rsync_basic_options[@]}" \
-+        "$iconvs" \
-+        "$rsyncpath" \
-+        "$source/" "$target/"
-+
-+    # Remove empty directories from the source
-+    ~/loadrc/bashrc/rmEmpty.sh "$source"
-+else
-+    # Print error message and exit if source and target are the same
-+    echo -e "${red}same dir --> ${source} ... ${NC}"
-+    echo -e "${red}please choose a different dir! ... ${NC}"
-+    exit 1
-+fi
++# Remove empty directories from the source
++~/loadrc/bashrc/rmEmpty.sh "$source"
 diff --git a/bashrc/move67.sh b/bashrc/move67.sh
 new file mode 100755
 --- /dev/null
@@ -9590,54 +9571,6 @@ new file mode 100755
 +        mv -nv "$source" "$target"
 +    fi
 +done
-diff --git a/bashrc/move_files_with_structure.sh b/bashrc/move_files_with_structure.sh
-new file mode 100755
---- /dev/null
-+++ ./bashrc/move_files_with_structure.sh
-@@ -0,0 +1,43 @@
-+#!/bin/zsh
-+
-+# Check if the SOURCE is provided, otherwise exit with an error message
-+if [ -z "$1" ]; then
-+    echo -e "${red}Please provide the SOURCE... ${NC}"
-+    exit 1
-+fi
-+
-+# Check if the TARGET is provided, otherwise exit with an error message
-+if [ -z "$2" ]; then
-+    echo -e "${red}Please provide the TARGET... ${NC}"
-+    exit 1
-+fi
-+
-+SOURCE="$1"
-+TARGET="$2"
-+
-+# Check if the TARGET is a symbolic link and resolve the actual path
-+if [ -L "$TARGET" ]; then
-+    TARGET="$(readlink -f "$TARGET")"
-+fi
-+
-+# If the real target is the same as the source, exit with an error message
-+if [ "$SOURCE" = "$TARGET" ]; then
-+    echo -e "${red}The real TARGET is the same as the SOURCE. Aborting...${NC}"
-+    exit 1
-+fi
-+
-+# Find all files in the SOURCE directory
-+find "$SOURCE" -type f | \
-+    while read ss; do
-+        # Replace the SOURCE path with the TARGET path in the file's path
-+        new_ss=$(echo "$ss" | sed -e "s#$SOURCE#$TARGET#g")
-+
-+        # Create the target directory if it doesn't exist
-+        mkdir -p "$(dirname "$new_ss")"
-+
-+        # Move the file to the new location
-+        mv -nv "$ss" "$new_ss"
-+    done
-+
-+# Call move.sh with the updated SOURCE and TARGET
-+~/loadrc/bashrc/move.sh "$SOURCE" "$TARGET"
 diff --git a/bashrc/netbak.sh b/bashrc/netbak.sh
 new file mode 100755
 --- /dev/null
@@ -10339,7 +10272,7 @@ diff --git a/bashrc/smount.sh b/bashrc/smount.sh
 new file mode 100755
 --- /dev/null
 +++ ./bashrc/smount.sh
-@@ -0,0 +1,24 @@
+@@ -0,0 +1,25 @@
 +#!/bin/zsh
 +
 +if [ -z "$1" ]
@@ -10356,6 +10289,7 @@ new file mode 100755
 +then
 +    sshfs "$remoteServer":/media/ ~/"$remoteServer"
 +    df -TH
++    #ssh  "$remoteServer" 'zsh ~/loadrc/bashrc/kill_top_io_processes.sh'
 +else
 +    diskutil unmount force ~/nfs/"$remoteServer"
 +    diskutil unmount force ~/"$remoteServer"
@@ -10384,8 +10318,8 @@ new file mode 100755
 +while true
 +do
 +    ssh -Y "$target" -t -- ${tmuxAction}
-+    echo "Connection lost. Retrying in 3 minutes..."
-+    sleep 180
++    echo "Connection lost. Retrying in 5 seconds..."
++    sleep 5
 +done
 diff --git a/bashrc/tcopy.sh b/bashrc/tcopy.sh
 new file mode 100755
@@ -10428,24 +10362,16 @@ diff --git a/bashrc/tmirror.sh b/bashrc/tmirror.sh
 new file mode 100755
 --- /dev/null
 +++ ./bashrc/tmirror.sh
-@@ -0,0 +1,17 @@
+@@ -0,0 +1,9 @@
 +#!/bin/zsh
++
++# Script Name: tmirror.sh
++
 +source=$1
 +target=$2
 +
-+ready_file="$source"/"tmirror.ready"
-+
-+iconvs=$(~/loadrc/bashrc/get_iconvs.sh "$source" "$target")
-+rsyncpath=$(~/loadrc/bashrc/get_rsyncpath.sh "$source" "$target")
-+rsync_basic_options=($(< ~/loadrc/bashrc/rsync_basic_options))
-+
-+rsync \
-+    -in \
-+    --delete-before \
-+    "${rsync_basic_options[@]}" \
-+    "$iconvs" \
-+    "$rsyncpath" \
-+    "$source/" "$target/" > "$ready_file"
++# Call the rsync_folder_operations.zsh script with source, target, and mode set to 'tmirror'
++~/loadrc/pythonrc/rsync_folder_operations.py "$source" "$target" "tmirror"
 diff --git a/bashrc/tmove.sh b/bashrc/tmove.sh
 new file mode 100755
 --- /dev/null
@@ -11111,6 +11037,14 @@ new file mode 100755
 +#!/bin/zsh
 +
 +/root/loadrc/bashrc/check_running.sh /root/loadrc/bashrc/fvideos.sh /media/ 100
+diff --git a/bashrc/watch_jdupes.sh b/bashrc/watch_jdupes.sh
+new file mode 100755
+--- /dev/null
++++ ./bashrc/watch_jdupes.sh
+@@ -0,0 +1,3 @@
++#!/bin/zsh
++
++/root/loadrc/bashrc/check_running.sh /root/loadrc/bashrc/jdupes.sh /media/
 diff --git a/bashrc/while_copy.sh b/bashrc/while_copy.sh
 new file mode 100755
 --- /dev/null
@@ -12960,8 +12894,9 @@ diff --git a/crontabrc/.server.cron b/crontabrc/.server.cron
 new file mode 100644
 --- /dev/null
 +++ ./crontabrc/.server.cron
-@@ -0,0 +1 @@
+@@ -0,0 +1,2 @@
 +* * * * * /root/loadrc/bashrc/watch_fvideos.sh >> /root/loadrc/watch_fvideos.log 2>&1
++* * * * * /root/loadrc/bashrc/watch_jdupes.sh >> /root/loadrc/watch_jdupes.log 2>&1
 diff --git a/crontabrc/.studio.cron b/crontabrc/.studio.cron
 new file mode 100644
 --- /dev/null
@@ -13137,7 +13072,7 @@ diff --git a/deploy_configurations.sh b/deploy_configurations.sh
 new file mode 100755
 --- /dev/null
 +++ ./deploy_configurations.sh
-@@ -0,0 +1,40 @@
+@@ -0,0 +1,42 @@
 +#!/bin/zsh
 +SCRIPT=$(realpath "$0")
 +SCRIPTPATH=$(dirname "$SCRIPT")
@@ -13164,6 +13099,9 @@ new file mode 100755
 +# sed -i.bak "s/set ignorespace 0/set ignorespace 1/g" $(which gitk)
 +~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
 +~/loadrc/bashrc/ln_fs.sh ~/loadrc/.tmux.conf ~/.tmux.conf
++~/loadrc/bashrc/ln_fs.sh ~/loadrc/.config/tig/config ~/.config/tig/config
++~/loadrc/bashrc/ln_fs.sh ~/loadrc/.config/nvim/init.lua ~/.config/nvim/init.lua
++~/loadrc/bashrc/ln_fs.sh ~/loadrc/.config/nvim/lua/plugins.lua ~/.config/nvim/lua/plugins.lua
 +~/loadrc/bashrc/ln_fs.sh ~/loadrc/gitrc/.gitconfig ~/.gitconfig
 +~/loadrc/bashrc/ln_fs.sh ~/loadrc/gitrc/.globalgitignore ~/.globalgitignore
 +~/loadrc/bashrc/ln_fs.sh ~/loadrc/pythonrc/setup.cfg  ~/setup.cfg
@@ -13172,7 +13110,6 @@ new file mode 100755
 +# ~/loadrc/bashrc/ln_fs.sh ~/loadrc/Library/Preferences/org.videolan.vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
 +~/loadrc/bashrc/ln_fs.sh ~/loadrc/iterm2rc/movescreen.py ~/Library/ApplicationSupport/iTerm2/Scripts/movescreen/movescreen/movescreen.py
 +# ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.kdiff3rc ~/.kdiff3rc
-+~/loadrc/bashrc/ln_fs.sh ~/loadrc/.tigrc ~/.tigrc
 +
 +./set_linux_configuration.sh
 +./set_macos_configuration.sh
@@ -14103,6 +14040,37 @@ new file mode 100755
 +
 +cd ..
 +./gitrc/find_files.sh gitrc
+diff --git a/gitrc/find_rename_commit.sh b/gitrc/find_rename_commit.sh
+new file mode 100755
+--- /dev/null
++++ ./gitrc/find_rename_commit.sh
+@@ -0,0 +1,26 @@
++#!/usr/bin/env zsh
++
++old_file_name="rsync_content_migrator.zsh"
++
++echo "Looking for the commit where the file was renamed..."
++
++# Get all commit hashes
++commits=$(git rev-list --all)
++
++for commit in ${(f)commits}
++do
++    # Check if the old file name is in the rename section of the commit's changes
++    rename_info=$(git diff-tree --no-commit-id --name-status -r $commit | grep ^R.*$old_file_name)
++
++    if [ -n "$rename_info" ]
++    then
++        new_file_name=$(echo $rename_info | cut -d ' ' -f 3)
++        echo "File was renamed in commit $commit"
++        echo "New file name: $new_file_name"
++        echo "Details of the commit:"
++        git show --name-status $commit
++        exit 0
++    fi
++done
++
++echo "No commit found where
 diff --git a/gitrc/fsync.sh b/gitrc/fsync.sh
 new file mode 100755
 --- /dev/null
@@ -14150,31 +14118,11 @@ diff --git a/gitrc/g.sh b/gitrc/g.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/g.sh
-@@ -0,0 +1,49 @@
+@@ -0,0 +1,30 @@
 +#!/bin/zsh
 +
-+# Include git configuration
-+~/loadrc/gitrc/include_gitconfig.sh
-+
-+# Get the Git directory
-+git_directory=$(git rev-parse --git-dir 2>/dev/null)
-+
-+# Check if the command was successful
-+if [ $? -ne 0 ]; then
-+    echo "Error: Not a Git repository or any of the parent directories."
-+    exit 1
-+fi
-+
-+# Initialize commit message variable
-+commit_message=""
-+
-+# Check if there is an ongoing merge
-+if [ -f "$git_directory/MERGE_MSG" ] && [ -s "$git_directory/MERGE_MSG" ]; then
-+    commit_message=$(cat "$git_directory/MERGE_MSG")
-+    # Check if there is a COMMIT_EDITMSG file
-+elif [ -f "$git_directory/COMMIT_EDITMSG" ]; then
-+    commit_message=$(cat "$git_directory/COMMIT_EDITMSG")
-+fi
++# Get the commit message
++commit_message=$(~/loadrc/gitrc/get_commit_message.sh)
 +
 +# Use the first argument as the commit message if provided
 +if [ -n "$1" ]; then
@@ -14193,6 +14141,7 @@ new file mode 100755
 +~/loadrc/gitrc/postCommit.sh
 +
 +# Empty the COMMIT_EDITMSG and MERGE_MSG files after a successful commit
++git_directory=$(git rev-parse --git-dir 2>/dev/null)
 +if [ -f "$git_directory/COMMIT_EDITMSG" ]; then
 +    echo "" > "$git_directory/COMMIT_EDITMSG"
 +fi
@@ -14456,7 +14405,7 @@ new file mode 100755
 +x=`echo "$x" | sed -e "s|loadrc|BareReps/loadrc|"`
 +x=`echo "$x" | sed -e "s|workspace|BareReps/workspace|"`
 +mkdir -p $(dirname "$x")
-+x=$(realpath --relative-to="$PWD" "$x")
++x=$(python3 -c "import os.path; print(os.path.relpath('${x}', '${PWD}'))")
 +echo "BareReps location --> $x"
 +
 +if [ ! -d "$x" ]
@@ -14476,15 +14425,20 @@ diff --git a/gitrc/gco.sh b/gitrc/gco.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/gco.sh
-@@ -0,0 +1,20 @@
+@@ -0,0 +1,30 @@
 +#!/bin/zsh
 +
++# Load necessary scripts
 +~/loadrc/gitrc/discard_unnecessaries.sh
++
++# Update remote references
 +git remote update
++
++# Process the target branch name
 +TARGET_BRANCH="$1"
 +TARGET_BRANCH=$(echo "$TARGET_BRANCH" | sed 's/remotes\///g')
-+TARGET_BRANCH="$TARGET_BRANCH"
 +
++# Remove remote name from target branch name
 +for remote in $(git remote)
 +do
 +    TARGET_BRANCH=$(echo "$TARGET_BRANCH" | sed "s/^$remote\///g")
@@ -14492,9 +14446,14 @@ new file mode 100755
 +
 +echo "TARGET_BRANCH --> $TARGET_BRANCH"
 +
++# Get the corresponding remote branch
 +remoteBranch=$(~/loadrc/gitrc/get_remote_branch.sh "$TARGET_BRANCH")
 +echo "remoteBranch --> $remoteBranch"
 +
++# Try to delete TARGET_BRANCH, will continue regardless of success
++git branch -d "$TARGET_BRANCH"
++
++# Try to checkout to a new branch, if it fails then checkout to the existing branch
 +git checkout -b "$TARGET_BRANCH" "$remoteBranch" \
 +    || git checkout "$TARGET_BRANCH"
 diff --git a/gitrc/gco_test.sh b/gitrc/gco_test.sh
@@ -14596,12 +14555,12 @@ new file mode 100755
 +
 +# Perform branch operations
 +git branch -d "$target_branch"
-+git checkout -b "$target_branch" 2> /dev/null || git checkout "$target_branch"
 +~/loadrc/gitrc/discard_unnecessaries.sh
-+git merge "$current_branch"
++git checkout -b "$target_branch" 2> /dev/null || git checkout "$target_branch"
++~/loadrc/gitrc/merge_with_resolution.sh "$current_branch"
 +
 +# Merge target branch and run gpl script
-+git merge "$1"
++~/loadrc/gitrc/merge_with_resolution.sh "$1"
 +~/loadrc/gitrc/gpl.sh
 diff --git a/gitrc/gcp.sh b/gitrc/gcp.sh
 new file mode 100755
@@ -14621,7 +14580,7 @@ new file mode 100755
 +#!/bin/zsh
 +touch files.proj \
 +    && git config --file .gitconfig deploy.host localhost \
-+    && git config --file .gitconfig deploy.path "~/$(realpath --relative-to=$HOME/ $PWD)"
++    && git config --file .gitconfig deploy.path "~/${PWD#$HOME/}"
 diff --git a/gitrc/gdev_test.sh b/gitrc/gdev_test.sh
 new file mode 100755
 --- /dev/null
@@ -14811,15 +14770,16 @@ diff --git a/gitrc/gdio.sh b/gitrc/gdio.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/gdio.sh
-@@ -0,0 +1,3 @@
+@@ -0,0 +1,4 @@
 +#!/bin/zsh
++
 +~/loadrc/gitrc/dogdio.sh
 +git submodule status | awk '{print $2}' | parallel --jobs 0 'cd {}; ~/loadrc/gitrc/dogdio.sh'
 diff --git a/gitrc/gdit.sh b/gitrc/gdit.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/gdit.sh
-@@ -0,0 +1,30 @@
+@@ -0,0 +1,36 @@
 +#!/bin/zsh
 +
 +output="$1"
@@ -14829,27 +14789,64 @@ new file mode 100755
 +target="$(git config gsync.target)"
 +
 +git branch "$target_branch" "$target"
-+git fetch "$remote" "$target_branch":"$target_branch"
-+remote_branch=$(echo "$target" | sed "s/^$remote\///g")
-+git fetch "$remote" "$remote_branch":"$target_branch"
 +
-+for ss in $(git config --get-all fetch.from)
-+do
-+    ss=$(echo $ss | sed 's/\(^[^\/]*\)\//\1 /g')
-+    COMMAND="git fetch $ss:$target_branch"
-+    eval "$COMMAND"
-+done
++# Switch to the target branch
++~/loadrc/gitrc/gco.sh "$target_branch"
++
++# Update all branches from all remotes
++git remote update
++
++# Merge the first branch
++~/loadrc/gitrc/merge_with_resolution.sh "$remote/$target_branch"
++
++# Merge the second branch
++remote_branch=$(echo "$target" | sed "s/^$remote\///g")
++~/loadrc/gitrc/merge_with_resolution.sh "$remote/$remote_branch"
++
++# Switch back to the current branch
++~/loadrc/gitrc/gco.sh "$current_branch"
 +
 +~/loadrc/gitrc/gdi.sh "$target_branch " "$current_branch" "gdit" > "$output" 2>&1
 +
 +if [ $? -ne 0 ]
 +then
-+    echo -e "${red}most probably sth wrong in git merge... ${NC}" > "$output" 2>&1
++    echo -e "${red}most probably something went wrong in git merge... ${NC}" > "$output" 2>&1
 +    exit 1
 +fi
 +
 +remote="$(git config gdi2.remote)"
 +git push "$remote" "$target_branch"
+diff --git a/gitrc/get_commit_message.sh b/gitrc/get_commit_message.sh
+new file mode 100755
+--- /dev/null
++++ ./gitrc/get_commit_message.sh
+@@ -0,0 +1,26 @@
++#!/bin/zsh
++
++# Include git configuration
++~/loadrc/gitrc/include_gitconfig.sh
++
++# Get the Git directory
++git_directory=$(git rev-parse --git-dir 2>/dev/null)
++
++# Check if the command was successful
++if [ $? -ne 0 ]; then
++    echo "Error: Not a Git repository or any of the parent directories."
++    exit 1
++fi
++
++# Initialize commit message variable
++commit_message=""
++
++# Check if there is an ongoing merge
++if [ -f "$git_directory/MERGE_MSG" ] && [ -s "$git_directory/MERGE_MSG" ]; then
++    commit_message=$(cat "$git_directory/MERGE_MSG")
++    # Check if there is a COMMIT_EDITMSG file
++elif [ -f "$git_directory/COMMIT_EDITMSG" ]; then
++    commit_message=$(cat "$git_directory/COMMIT_EDITMSG")
++fi
++
++echo "$commit_message"
 diff --git a/gitrc/get_current_branch.sh b/gitrc/get_current_branch.sh
 new file mode 100755
 --- /dev/null
@@ -14952,7 +14949,7 @@ diff --git a/gitrc/gfix.sh b/gitrc/gfix.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/gfix.sh
-@@ -0,0 +1,20 @@
+@@ -0,0 +1,11 @@
 +#!/bin/zsh
 +currentBranch=$(~/loadrc/gitrc/get_current_branch.sh)
 +
@@ -14963,16 +14960,7 @@ new file mode 100755
 +fi
 +
 +fix_branch=`git branch |awk '/^\*/{print $2}'`.fix
-+
-+if ( git branch|grep -q "$fix_branch" )
-+then
-+    ~/loadrc/gitrc/discard_unnecessaries.sh
-+    ~/loadrc/gitrc/gclean.sh
-+    git checkout "$fix_branch"
-+    exit 0
-+fi
-+
-+git checkout -b "$fix_branch"
++~/loadrc/gitrc/gco.sh "$fix_branch"
 diff --git a/gitrc/gicb.sh b/gitrc/gicb.sh
 new file mode 100755
 --- /dev/null
@@ -15149,7 +15137,7 @@ new file mode 100755
 +
 +# Merge branches specified in the 'merge.from' configuration
 +for ss in $(git config --get-all merge.from); do
-+    git merge "$ss"
++    ~/loadrc/gitrc/merge_with_resolution.sh "$ss"
 +done
 +
 +# Get the 'gsync.target' configuration value
@@ -15157,7 +15145,7 @@ new file mode 100755
 +
 +# Merge the target branch if specified
 +if [ -n "$target" ]; then
-+    git merge "$target"
++    ~/loadrc/gitrc/merge_with_resolution.sh "$target"
 +fi
 diff --git a/gitrc/gps.sh b/gitrc/gps.sh
 new file mode 100755
@@ -15352,20 +15340,17 @@ diff --git a/gitrc/gsync.sh b/gitrc/gsync.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/gsync.sh
-@@ -0,0 +1,13 @@
+@@ -0,0 +1,10 @@
 +#!/bin/zsh
 +
 +# Define variables
 +dogsync_script="$HOME/loadrc/gitrc/dogsync.sh"
-+git_submodule_status_cmd="git submodule status"
-+awk_cmd="awk '{print $2}'"
-+parallel_cmd="parallel --jobs 10 --ungroup"
 +
 +# Execute the dogsync script
 +source "$dogsync_script"
 +
 +# Execute the dogsync script for each submodule
-+$git_submodule_status_cmd | $awk_cmd | $parallel_cmd "cd {}; source $dogsync_script; cd -"
++git submodule status | awk '{print $2}' | parallel --jobs 10 --ungroup "cd {}; source $dogsync_script; cd -"
 diff --git a/gitrc/gtag.sh b/gitrc/gtag.sh
 new file mode 100755
 --- /dev/null
@@ -15429,15 +15414,17 @@ diff --git a/gitrc/include_gitconfig.sh b/gitrc/include_gitconfig.sh
 new file mode 100755
 --- /dev/null
 +++ ./gitrc/include_gitconfig.sh
-@@ -0,0 +1,8 @@
+@@ -0,0 +1,10 @@
 +#!/bin/zsh
++
 +if [ ! -f .gitconfig ]
 +then
 +    exit 0
 +fi
 +
 +config=$(~/loadrc/gitrc/get_git.sh)
-+git config --local include.path $(realpath --relative-to="$config" .gitconfig)
++relative_path=$(python3 -c "import os.path; print(os.path.relpath('.gitconfig', '${config}'))")
++git config --local include.path $relative_path
 diff --git a/gitrc/merge_with_resolution.sh b/gitrc/merge_with_resolution.sh
 new file mode 100755
 --- /dev/null
@@ -17644,7 +17631,7 @@ new file mode 100755
 +then
 +    cp -nv ~/loadrc/imvurc/generate_sh.template "$target"
 +    rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$file" "files.proj")
-+    relative_path=$(realpath --relative-to="$rootFolder" "$file")
++    relative_path="${file#$rootFolder/}"
 +    relative_path=$(echo "$relative_path" | sed 's/\//\\\//g')
 +    sed -i.bak "s/relative_path_var/$relative_path/g" "$target"
 +fi
@@ -17736,10 +17723,10 @@ diff --git a/install_basic.sh b/install_basic.sh
 new file mode 100755
 --- /dev/null
 +++ ./install_basic.sh
-@@ -0,0 +1,35 @@
+@@ -0,0 +1,38 @@
 +#!/bin/bash
-+SCRIPT=$(realpath "$0") && \
-+    SCRIPTPATH=$(dirname "$SCRIPT") && \
++SCRIPT=$(realpath "$0") &&
++    SCRIPTPATH=$(dirname "$SCRIPT") &&
 +    cd "$SCRIPTPATH" || cd ~/loadrc/
 +
 +./install_basic_linux.sh
@@ -17752,15 +17739,18 @@ new file mode 100755
 +    autopep8 \
 +    ipynb-py-convert \
 +    pdftotext \
-+    proxybroker
++    proxybroker \
++    pyautogui
 +
 +pip3 install \
 +    autoflake \
 +    autopep8 \
 +    black \
 +    ipynb-py-convert \
++    packaging \
 +    pdftotext \
-+    proxybroker
++    proxybroker \
++    pyautogui
 +
 +pip3 install git+https://github.com/gaborvecsei/pdf-split-merge.git
 +
@@ -17804,7 +17794,7 @@ diff --git a/install_basic_macos.sh b/install_basic_macos.sh
 new file mode 100755
 --- /dev/null
 +++ ./install_basic_macos.sh
-@@ -0,0 +1,84 @@
+@@ -0,0 +1,85 @@
 +#!/bin/zsh
 +SCRIPT=$(realpath "$0") && \
 +    SCRIPTPATH=$(dirname "$SCRIPT") && \
@@ -17840,6 +17830,7 @@ new file mode 100755
 +    ffmpeg \
 +    git \
 +    git-gui \
++    gnupg \
 +    graphviz \
 +    hg \
 +    htop \
@@ -17969,7 +17960,7 @@ diff --git a/install_prerequisite.sh b/install_prerequisite.sh
 new file mode 100755
 --- /dev/null
 +++ ./install_prerequisite.sh
-@@ -0,0 +1,90 @@
+@@ -0,0 +1,94 @@
 +#!/bin/bash
 +
 +apt-get upgrade -y
@@ -18002,9 +17993,11 @@ new file mode 100755
 +    htop \
 +    ifenslave \
 +    inetutils-traceroute \
++    iotop \
 +    iperf \
 +    iperf3 \
 +    iputils-ping \
++    jdupes \
 +    jq \
 +    kdiff3 \
 +    libsecret-1-dev \
@@ -18045,11 +18038,13 @@ new file mode 100755
 +    w3m-img \
 +    wakeonlan \
 +    wget \
++    xclip \
 +    zsh
 +
 +apt-get install -y \
 +    manpages-fr-extra \
-+    netcat
++    netcat \
++    python3-nltk
 +
 +
 +pacman -Syy && \
@@ -19740,7 +19735,7 @@ diff --git a/linux_links/etc/crypttab b/linux_links/etc/crypttab
 new file mode 100644
 --- /dev/null
 +++ ./linux_links/etc/crypttab
-@@ -0,0 +1,23 @@
+@@ -0,0 +1,24 @@
 +archive1_crypt      /dev/disk/by-uuid/12d4b3f6-8ce1-49bc-ac5b-10a081822f90  /root/loadrc/keys/keyfile   luks
 +archive2_crypt      /dev/disk/by-uuid/766063ea-304e-4fef-9954-7a638c946229  /root/loadrc/keys/keyfile   luks
 +mldonkey      /dev/disk/by-uuid/17a98493-8e53-449e-bdfb-4358aceac548  /root/loadrc/keys/keyfile   luks
@@ -19764,6 +19759,7 @@ new file mode 100644
 +116_disk      /dev/disk/by-uuid/1e7ecbca-28bd-454b-903c-8c81af5de753  /root/loadrc/keys/keyfile   luks
 +av161      /dev/disk/by-uuid/1090f9a4-92b5-4fd0-91d5-2b32c6967c8d  /root/loadrc/keys/keyfile   luks
 +av162      /dev/disk/by-uuid/db69cdb4-ef3f-442f-9693-65132f6df720  /root/loadrc/keys/keyfile   luks
++av18      /dev/disk/by-uuid/8949b031-eb23-4b7c-b33d-5407dc59a8f4  /root/loadrc/keys/keyfile   luks
 diff --git a/linux_links/etc/default/grub b/linux_links/etc/default/grub
 new file mode 100644
 --- /dev/null
@@ -20295,7 +20291,7 @@ new file mode 160000
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 8d0854fbf2fd377b8cc2a1c07ad2da04049e9765-dirty
++Subproject commit e3beba0d186b34654dd4f6e19a7fbe7a39282d57-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 --- /dev/null
@@ -20389,7 +20385,7 @@ new file mode 100755
 +    done
 +}
 +
-+DEVICE_ID="c8-7b-23-cd-44-ba" # Bose QC Earbuds II
++DEVICE_ID="ac-bf-71-46-77-65" # Blue Bose QC Earbuds II
 +
 +blueutil -p 0
 +ensure_power_on
@@ -20565,41 +20561,422 @@ new file mode 100644
 +        c['source'] = pep8_cell
 +
 +json.dump(notebook, open(file_path, "w"))
+diff --git a/pythonrc/exit_fullscreen.py b/pythonrc/exit_fullscreen.py
+new file mode 100755
+--- /dev/null
++++ ./pythonrc/exit_fullscreen.py
+@@ -0,0 +1,14 @@
++import pyautogui
++import time
++
++
++def exit_fullscreen():
++    # Add a short delay to ensure the script has focus
++    time.sleep(1)
++
++    # Exit iTerm2 full screen mode
++    pyautogui.hotkey("command", "enter")
++
++
++if __name__ == "__main__":
++    exit_fullscreen()
+diff --git a/pythonrc/exit_fullscreen_and_play.sh b/pythonrc/exit_fullscreen_and_play.sh
+new file mode 100755
+--- /dev/null
++++ ./pythonrc/exit_fullscreen_and_play.sh
+@@ -0,0 +1,10 @@
++#!/bin/bash
++
++# Send the command + enter hotkey using osascript
++osascript -e 'tell application "System Events" to keystroke return using command down'
++
++# Add a short delay to ensure the keystroke is sent
++sleep 1
++
++# Call the Python script
++python3 ~/loadrc/pythonrc/vlc.py "$1" "$2"
 diff --git a/pythonrc/find_similar_filenames.py b/pythonrc/find_similar_filenames.py
-new file mode 100644
+new file mode 100755
 --- /dev/null
 +++ ./pythonrc/find_similar_filenames.py
-@@ -0,0 +1,30 @@
-+import difflib
+@@ -0,0 +1,82 @@
++#!/usr/bin/env python3
 +
-+file_paths = [
-+    "./mapper/usb_backup_crypt_8T_1/115download/abp-566-4K.mp4",
-+    "./huangyingw/761f02d8-0d60-43b3-a6fb-0a97746dc0da/115download/abp-566-4K.mp4",
-+    "./mapper/usb_backup_crypt_8T_1/115download/ABP-566.mp4",
-+    "./huangyingw/761f02d8-0d60-43b3-a6fb-0a97746dc0da/115download/MXGS-884-4K.mp4",
-+    "./huangyingw/761f02d8-0d60-43b3-a6fb-0a97746dc0da/115download/MXGS-5664K.mp4"
-+]
++"""
++find_similar_filenames.py
++"""
++
++import argparse
++import difflib
++import os
++import re
++
++file_size_cache = {}
++
++def get_file_size(file_path, default_size=0):
++    # Remove quotation marks from the file path
++    file_path = file_path.replace('"', '')
++
++    if file_path in file_size_cache:
++        return file_size_cache[file_path]
++
++    try:
++        if os.path.isfile(file_path):
++            size = os.path.getsize(file_path)
++        else:
++            size = default_size
++    except FileNotFoundError:
++        size = default_size
++
++    file_size_cache[file_path] = size
++    return size
 +
 +def extract_file_name(file_path):
 +    return file_path.split("/")[-1].lower()
 +
-+file_names = [extract_file_name(fp) for fp in file_paths]
++def extract_keywords(file_names):
++    pattern = re.compile(r'\b(?:\d{2}\.\d{2}\.\d{2}|(?:\d+|[a-z]+(?:\d+[a-z]*)?))\b', re.IGNORECASE)
++    keywords = set()
++    for file_name in file_names:
++        name_without_ext = os.path.splitext(file_name)[0]
++        matches = pattern.findall(name_without_ext)
++        keywords.update(matches)
++    return list(keywords)
 +
-+def find_close_files(file_names, threshold=0.8):
-+    close_files = []
++def find_close_files(file_names, file_paths, keywords):
++    close_files = {kw: [] for kw in keywords}
 +
-+    for i, file_name_1 in enumerate(file_names):
-+        for j, file_name_2 in enumerate(file_names):
-+            if i != j:
-+                similarity = difflib.SequenceMatcher(None, file_name_1, file_name_2).ratio()
-+                if similarity >= threshold:
-+                    close_files.append((file_name_1, file_name_2))
++    for kw in keywords:
++        for file_name, file_path in zip(file_names, file_paths):
++            if kw.lower() in file_name.lower():
++                close_files[kw].append(file_path)
 +
 +    return close_files
 +
-+threshold = 0.8
-+close_files = find_close_files(file_names, threshold)
-+print(close_files)
++def main(file_paths):
++    file_names = [extract_file_name(fp) for fp in file_paths]
++    keywords = extract_keywords(file_names)
++    close_files = find_close_files(file_names, file_paths, keywords)
++
++    # Sort the keywords by the length of their corresponding keyword_files in descending order
++    sorted_keywords = sorted(keywords, key=lambda kw: len(close_files[kw]), reverse=True)
++
++    for keyword in sorted_keywords:
++        keyword_files = list(set(close_files[keyword]))
++        keyword_files.sort(key=lambda x: get_file_size(x), reverse=True)
++        if 2 <= len(keyword_files):
++            print(f"{keyword}.txt")
++            with open(f"{keyword}.txt", "w") as f:
++                f.write(keyword + "\n")
++                for file_path in keyword_files:
++                    file_size = get_file_size(file_path)
++                    if file_size > 0:  # only write file_path to the file if its size is not zero
++                        f.write(f"{file_size},{file_path}\n")
++
++if __name__ == "__main__":
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--file", help="A file containing newline-separated file paths")
++    args = parser.parse_args()
++
++    with open(args.file, 'r') as file:
++        file_paths = [line.strip() for line in file.readlines()]
++
++    main(file_paths)
+diff --git a/pythonrc/folder_content_migrator.py b/pythonrc/folder_content_migrator.py
+new file mode 100755
+--- /dev/null
++++ ./pythonrc/folder_content_migrator.py
+@@ -0,0 +1,72 @@
++#!/usr/bin/env python3
++
++# folder_content_migrator.py
++# A script to move the contents of one folder into another while maintaining the tree structure.
++# It moves the content efficiently using 'shutil.move' if the source and target folders are on the same partition, and 'rsync' for the rest.
++
++import os
++import sys
++import shutil
++from subprocess import call
++from pathlib import Path
++
++
++def same_partition(source_folder, target_folder):
++    return os.stat(source_folder).st_dev == os.stat(target_folder).st_dev
++
++
++def move_folders(source_folder, target_folder):
++    if os.path.isdir(source_folder) and os.path.isdir(target_folder):
++        if same_partition(source_folder, target_folder):
++            # Use 'shutil.move' if the source and target folders are on the same partition.
++            for root, _, files in os.walk(source_folder):
++                for file in files:
++                    src = os.path.join(root, file)
++                    tgt = os.path.join(
++                        target_folder, os.path.relpath(src, source_folder)
++                    )
++                    try:
++                        os.makedirs(os.path.dirname(tgt), exist_ok=True)
++                        shutil.move(src, tgt) if not os.path.exists(
++                            tgt
++                        ) else print(
++                            "Target file already exists, not overwriting."
++                        )
++                    except OSError as e:
++                        print(f"Cannot create directory {os.path.dirname(tgt)}: {e}")
++
++        # Call the rsync_folder_operations script
++        rsync_script_path = os.path.join(os.path.expanduser('~'), "loadrc/pythonrc/rsync_folder_operations.py")
++        call(
++            [
++                rsync_script_path,
++                source_folder,
++                target_folder,
++                "move",
++            ]
++        )
++
++        # Remove empty directories after the move
++        for root, dirs, _ in os.walk(source_folder, topdown=False):
++            for directory in dirs:
++                dir_path = os.path.join(root, directory)
++                if os.path.isdir(dir_path) and not os.listdir(dir_path):
++                    os.rmdir(dir_path)
++
++        # Check if source_folder is empty and remove it
++        if not os.listdir(source_folder):
++            os.rmdir(source_folder)
++
++
++def main():
++    if len(sys.argv) != 3:
++        print("Usage: {} source_folder target_folder".format(sys.argv[0]))
++        sys.exit(1)
++
++    source_folder = os.path.abspath(sys.argv[1])
++    target_folder = os.path.abspath(sys.argv[2])
++    move_folders(source_folder, target_folder)
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/pythonrc/folder_content_migrator.test.py b/pythonrc/folder_content_migrator.test.py
+new file mode 100644
+--- /dev/null
++++ ./pythonrc/folder_content_migrator.test.py
+@@ -0,0 +1,88 @@
++import os
++import unittest
++import tempfile
++import shutil
++from folder_content_migrator import move_folders
++
++
++class TestFolderContentMigrator(unittest.TestCase):
++    def setUp(self):
++        # Create a temporary directory
++        self.source_folder = tempfile.mkdtemp()
++        self.target_folder = tempfile.mkdtemp()
++
++        # Create a file in the source folder
++        self.file_path = os.path.join(self.source_folder, "testfile.txt")
++        with open(self.file_path, "w") as f:
++            f.write("Hello, World!")
++
++    def tearDown(self):
++        # Remove temporary directories
++        shutil.rmtree(self.source_folder)
++        shutil.rmtree(self.target_folder)
++
++    def test_move_folders(self):
++        move_folders(self.source_folder, self.target_folder)
++
++        # Check if the file has been moved
++        self.assertFalse(os.path.exists(self.file_path))
++        self.assertTrue(
++            os.path.exists(os.path.join(self.target_folder, "testfile.txt"))
++        )
++
++    def test_no_overwriting(self):
++        # Create a file with the same name in the target folder
++        duplicate_file_path = os.path.join(self.target_folder, "testfile.txt")
++        with open(duplicate_file_path, "w") as f:
++            f.write("Hello, Universe!")
++
++        move_folders(self.source_folder, self.target_folder)
++
++        # Check that the original file was not overwritten
++        with open(duplicate_file_path, "r") as f:
++            content = f.read()
++        self.assertEqual(content, "Hello, Universe!")
++
++    def test_empty_directories_removed(self):
++        # Create an empty directory in the source folder
++        empty_dir_path = os.path.join(self.source_folder, "empty_dir")
++        os.makedirs(empty_dir_path)
++
++        # Create first non-empty directory in the source folder
++        non_empty_dir_path_1 = os.path.join(
++            self.source_folder, "non_empty_dir_1"
++        )
++        os.makedirs(non_empty_dir_path_1)
++        with open(os.path.join(non_empty_dir_path_1, "file.txt"), "w") as f:
++            f.write("Hello!")
++
++        # Create second non-empty directory in the source folder
++        non_empty_dir_path_2 = os.path.join(
++            self.source_folder, "non_empty_dir_2"
++        )
++        os.makedirs(non_empty_dir_path_2)
++        with open(os.path.join(non_empty_dir_path_2, "file.txt"), "w") as f:
++            f.write("Hello!")
++
++        # Create a file with the same name in the target folder
++        duplicate_file_path = os.path.join(
++            self.target_folder, "non_empty_dir_1", "file.txt"
++        )
++        os.makedirs(os.path.dirname(duplicate_file_path), exist_ok=True)
++        with open(duplicate_file_path, "w") as f:
++            f.write("Hello, Universe!")
++
++        move_folders(self.source_folder, self.target_folder)
++
++        # Check that the empty directory has been removed
++        self.assertFalse(os.path.exists(empty_dir_path))
++
++        # Check that the first non-empty directory has not been removed
++        self.assertTrue(os.path.exists(non_empty_dir_path_1))
++
++        # Check that the second non-empty directory has been removed
++        self.assertFalse(os.path.exists(non_empty_dir_path_2))
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/pythonrc/gdit.py b/pythonrc/gdit.py
+new file mode 100644
+--- /dev/null
++++ ./pythonrc/gdit.py
+@@ -0,0 +1,58 @@
++#!/usr/bin/env python3
++
++# gdit.py
++
++import subprocess
++import os
++import sys
++import re
++from configparser import ConfigParser
++
++
++def execute_command(cmd):
++    output, error = subprocess.Popen(
++        cmd,
++        universal_newlines=True,
++        shell=True,
++        stdout=subprocess.PIPE,
++        stderr=subprocess.PIPE,
++    ).communicate()
++    return output, error, output == ""
++
++
++def get_git_config(key):
++    output, error, failed = execute_command(f"git config {key}")
++    if failed:
++        return None
++    return output.strip()
++
++
++def git_sync(output):
++    current_branch = execute_command("~/loadrc/gitrc/get_current_branch.sh")[
++        0
++    ].strip()
++    target_branch = re.sub(r"\.fix$", "", current_branch)
++    remote = get_git_config("gsync.remote")
++    target = get_git_config("gsync.target")
++
++    execute_command(f"git branch {target_branch} {target}")
++    execute_command(f"git fetch {remote} {target_branch}:{target_branch}")
++
++    remote_branch = re.sub(f"^{remote}/", "", target)
++    execute_command(f"git fetch {remote} {remote_branch}:{target_branch}")
++
++    _, _, failed = execute_command(
++        f"~/loadrc/gitrc/gdi.sh {target_branch} {current_branch} gdit > {output} 2>&1"
++    )
++
++    if failed:
++        with open(output, "w") as f:
++            f.write("most probably sth wrong in git merge...")
++        return
++
++    remote = get_git_config("gdi2.remote")
++    execute_command(f"git push {remote} {target_branch}")
++
++
++if __name__ == "__main__":
++    git_sync(sys.argv[1])
+diff --git a/pythonrc/gdit.test.py b/pythonrc/gdit.test.py
+new file mode 100644
+--- /dev/null
++++ ./pythonrc/gdit.test.py
+@@ -0,0 +1,57 @@
++#!/usr/bin/env python3
++
++# gdit.test.py
++
++import unittest
++from unittest.mock import patch, Mock
++import gdit
++
++
++class TestGdit(unittest.TestCase):
++    @patch("gdit.execute_command")
++    @patch("gdit.get_git_config")
++    def test_git_sync(self, mock_get_git_config, mock_execute_command):
++        # Mock the execute_command function to return specific values
++        mock_execute_command.side_effect = lambda x: {
++            "~/loadrc/gitrc/get_current_branch.sh": ("main.fix", "", 0),
++            "~/loadrc/gitrc/gdi.sh main main gdit > output.txt 2>&1": (
++                "",
++                "",
++                0,
++            ),
++            "git branch main main": ("", "", 0),
++            "git fetch origin main:main": ("", "", 0),
++            "git fetch origin main:main": ("", "", 0),
++            "git push origin main": ("", "", 0),
++        }.get(x, ("", "", 0))
++
++        # Mock the get_git_config function to return specific values for certain keys
++        mock_get_git_config.side_effect = lambda x: {
++            "gsync.remote": "origin",
++            "gsync.target": "main",
++            "fetch.from": "origin/main",
++            "gdi2.remote": "origin",
++        }.get(x, None)
++
++        gdit.git_sync("output.txt")
++
++        # Check if execute_command and get_git_config were called with the correct arguments
++        mock_execute_command.assert_any_call(
++            "~/loadrc/gitrc/get_current_branch.sh"
++        )
++        mock_execute_command.assert_any_call("git branch main main")
++        mock_execute_command.assert_any_call("git fetch origin main:main")
++        mock_execute_command.assert_any_call("git fetch origin main:main")
++        mock_execute_command.assert_any_call(
++            "~/loadrc/gitrc/gdi.sh main main gdit > output.txt 2>&1"
++        )
++        mock_execute_command.assert_any_call("git push origin main")
++
++        mock_get_git_config.assert_any_call("gsync.remote")
++        mock_get_git_config.assert_any_call("gsync.target")
++        mock_get_git_config.assert_any_call("fetch.from")
++        mock_get_git_config.assert_any_call("gdi2.remote")
++
++
++if __name__ == "__main__":
++    unittest.main()
 diff --git a/pythonrc/handle_vtt.py b/pythonrc/handle_vtt.py
 new file mode 100755
 --- /dev/null
@@ -20654,12 +21031,79 @@ new file mode 100644
 +
 +if __name__ == '__main__':
 +    unittest.main()
+diff --git a/pythonrc/json_dumps.py b/pythonrc/json_dumps.py
+new file mode 100755
+--- /dev/null
++++ ./pythonrc/json_dumps.py
+@@ -0,0 +1,9 @@
++#!/usr/bin/env python3
++import json
++import sys
++
++input_string = sys.stdin.read().strip()
++# Do not escape unicode characters and avoid double quoting
++json_string = json.dumps(input_string, ensure_ascii=False)
++# Print without surrounding quotes
++print(json_string[1:-1])
+diff --git a/pythonrc/line_video_player.py b/pythonrc/line_video_player.py
+new file mode 100755
+--- /dev/null
++++ ./pythonrc/line_video_player.py
+@@ -0,0 +1,32 @@
++#!/usr/bin/env python3
++import sys
++import subprocess
++import json
++
++
++def main():
++    if len(sys.argv) != 2:
++        print(f"Usage: {sys.argv[0]} <filename>")
++        return 1
++
++    filename = sys.argv[1]  # sys.argv[1] is already a Python string
++    with open(filename, "r") as f:
++        for line in f:
++            line = line.strip()  # strip() removes leading/trailing white space
++            if line:  # skip empty lines
++                print(f"Playing: {line}")  # echo the current playing line
++
++                # Convert filename and line to valid JSON strings
++                filename_json = json.dumps(filename)
++                line_json = json.dumps(line.strip(), ensure_ascii=False)
++
++                # Call vlc.py script for each line
++                command = f"python3 ~/loadrc/pythonrc/vlc.py {filename_json} {line_json}"
++                print("Executing command:", command)
++                subprocess.run(command, shell=True)
++
++    return 0
++
++
++if __name__ == "__main__":
++    sys.exit(main())
+diff --git a/pythonrc/play_video.sh b/pythonrc/play_video.sh
+new file mode 100755
+--- /dev/null
++++ ./pythonrc/play_video.sh
+@@ -0,0 +1,10 @@
++#!/bin/bash
++
++# Call the modified Python script
++python3 ~/loadrc/pythonrc/vlc.py "$1" "$2"
++
++## Add a delay (e.g., 10 seconds) before sending the keystroke
++#sleep 10
++#
++## Send the command + enter hotkey using osascript
++#osascript -e 'tell application "System Events" to keystroke return using command down'
 diff --git a/pythonrc/remove-unuses.sh b/pythonrc/remove-unuses.sh
 new file mode 100755
 --- /dev/null
 +++ ./pythonrc/remove-unuses.sh
-@@ -0,0 +1,9 @@
+@@ -0,0 +1,10 @@
 +#!/bin/zsh
++
 +if [ -z "$1" ]
 +then
 +    echo -e "${red}Please provide TARGET ... ${NC}"
@@ -20667,7 +21111,7 @@ new file mode 100755
 +fi
 +
 +TARGET="$1"
-+autoflake --in-place --remove-all-unused-imports "$TARGET"
++# autoflake --in-place --remove-all-unused-imports "$TARGET"
 diff --git a/pythonrc/remove_comments.py b/pythonrc/remove_comments.py
 new file mode 100755
 --- /dev/null
@@ -20716,6 +21160,687 @@ new file mode 100755
 +
 +if __name__ == '__main__':
 +    do_file(sys.argv[1])
+diff --git a/pythonrc/rsync_folder_operations.py b/pythonrc/rsync_folder_operations.py
+new file mode 100755
+--- /dev/null
++++ ./pythonrc/rsync_folder_operations.py
+@@ -0,0 +1,115 @@
++#!/usr/bin/env python3
++
++"""
++rsync_folder_operations.py
++A script to move, copy, or mirror the contents of one folder into another using rsync while maintaining the tree structure.
++"""
++
++import os
++import sys
++import subprocess
++from rsync_path_resolver import resolve_rsync_path
++from rsync_mkpath_decider import decide_mkpath_option
++from rsync_iconv_options import generate_iconv_options
++
++
++def validate_input(mode, source_folder, target_folder):
++    if mode not in ["move", "copy", "mirror", "tmirror"]:
++        raise ValueError(
++            "Invalid mode. Valid modes are 'move', 'copy', 'mirror', and 'tmirror'."
++        )
++    if os.path.abspath(source_folder) == os.path.abspath(target_folder):
++        raise ValueError("Source and target folders cannot be the same.")
++
++
++def get_rsync_options(mode, source_folder, target_folder):
++    iconvs = generate_iconv_options(source_folder, target_folder)
++    rsync_path_option = resolve_rsync_path(source_folder, target_folder)
++    mkpath_option = decide_mkpath_option(target_folder)
++
++    rsync_basic_options_path = os.path.expanduser(
++        "~/loadrc/bashrc/rsync_basic_options"
++    )
++    with open(rsync_basic_options_path, "r") as file:
++        rsync_basic_options = file.read().split()
++
++    rsync_options = [
++        option
++        for option in (
++            rsync_basic_options + [iconvs, rsync_path_option, mkpath_option]
++        )
++        if option
++    ]
++
++    if mode == "move":
++        rsync_options.append("--remove-source-files")
++    elif mode == "mirror":
++        rsync_options.append("--delete-before")
++    elif mode == "tmirror":
++        rsync_options.extend(["-in", "--delete-before"])
++
++    return rsync_options
++
++
++def execute_rsync(mode, rsync_options, source_folder, target_folder):
++    if mode == "tmirror":
++        ready_file = os.path.join(source_folder, "tmirror.ready")
++        print(f"Creating ready_file: {ready_file}")
++        with open(ready_file, "w") as outfile:
++            subprocess.run(
++                ["rsync"]
++                + rsync_options
++                + [f"{source_folder}/", f"{target_folder}/"],
++                stdout=outfile,
++            )
++    else:
++        subprocess.run(
++            ["rsync"]
++            + rsync_options
++            + [f"{source_folder}/", f"{target_folder}/"]
++        )
++
++
++def rsync_operations(source_folder, target_folder, mode):
++    # Get the real paths for source and target
++    source_folder = os.path.expanduser(source_folder)
++    target_folder = os.path.expanduser(target_folder)
++
++    if not (":" in source_folder):
++        source_folder = os.path.realpath(source_folder)
++
++    if not (":" in target_folder):
++        target_folder = os.path.realpath(target_folder)
++
++    # Add trailing slash if not present
++    if not source_folder.endswith("/"):
++        source_folder += "/"
++    if not target_folder.endswith("/"):
++        target_folder += "/"
++
++    validate_input(mode, source_folder, target_folder)
++    os.makedirs(target_folder, exist_ok=True)
++
++    rsync_options = get_rsync_options(mode, source_folder, target_folder)
++    execute_rsync(mode, rsync_options, source_folder, target_folder)
++
++    return rsync_options
++
++
++def main():
++    if len(sys.argv) != 4:
++        print(
++            "Usage: python rsync_folder_operations.py source_folder target_folder mode"
++        )
++        print("mode: 'move', 'copy', 'mirror', or 'tmirror'")
++        sys.exit(1)
++
++    source_folder = sys.argv[1]
++    target_folder = sys.argv[2]
++    mode = sys.argv[3]
++
++    rsync_operations(source_folder, target_folder, mode)
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/pythonrc/rsync_folder_operations.test.py b/pythonrc/rsync_folder_operations.test.py
+new file mode 100755
+--- /dev/null
++++ ./pythonrc/rsync_folder_operations.test.py
+@@ -0,0 +1,117 @@
++"""
++test_rsync_folder_operations.py
++A script to test the functionality of rsync_folder_operations.py by creating sample folders and files and testing different modes.
++"""
++
++import os
++import shutil
++from unittest import TestCase, main as unittest_main
++from rsync_folder_operations import rsync_operations
++
++
++def create_sample_folders(base_folder):
++    os.makedirs(os.path.join(base_folder, "source_folder/subfolder1"))
++    os.makedirs(os.path.join(base_folder, "source_folder/subfolder2"))
++    os.makedirs(os.path.join(base_folder, "target_folder"))
++
++    with open(os.path.join(base_folder, "source_folder/file1.txt"), "w") as f:
++        f.write("This is file1 in source_folder.")
++
++    with open(
++        os.path.join(base_folder, "source_folder/subfolder1/file2.txt"), "w"
++    ) as f:
++        f.write("This is file2 in subfolder1 of source_folder.")
++
++    with open(
++        os.path.join(base_folder, "source_folder/subfolder2/file3.txt"), "w"
++    ) as f:
++        f.write("This is file3 in subfolder2 of source_folder.")
++
++
++def cleanup_sample_folders(base_folder):
++    shutil.rmtree(os.path.join(base_folder, "source_folder"))
++    shutil.rmtree(os.path.join(base_folder, "target_folder"))
++
++
++class TestRsyncFolderOperations(TestCase):
++    def setUp(self):
++        self.base_folder = "test_folders"
++        create_sample_folders(self.base_folder)
++        self.source_folder = os.path.join(self.base_folder, "source_folder")
++        self.target_folder = os.path.join(self.base_folder, "target_folder")
++
++    def tearDown(self):
++        cleanup_sample_folders(self.base_folder)
++
++    def test_rsync_move(self):
++        print("\nTesting mode: move")
++        rsync_options = rsync_operations(
++            self.source_folder, self.target_folder, "move"
++        )
++        self.assertIn("--remove-source-files", rsync_options)
++        self.assertNotIn("--delete-before", rsync_options)
++
++    def test_rsync_copy(self):
++        print("\nTesting mode: copy")
++        rsync_options = rsync_operations(
++            self.source_folder, self.target_folder, "copy"
++        )
++        self.assertNotIn("--remove-source-files", rsync_options)
++        self.assertNotIn("--delete-before", rsync_options)
++        self.assertNotIn("-in", rsync_options)
++
++    def test_rsync_mirror(self):
++        print("\nTesting mode: mirror")
++        rsync_options = rsync_operations(
++            self.source_folder, self.target_folder, "mirror"
++        )
++        self.assertNotIn("--remove-source-files", rsync_options)
++        self.assertIn("--delete-before", rsync_options)
++        self.assertNotIn("-in", rsync_options)
++
++    def test_rsync_tmirror(self):
++        print("\nTesting mode: tmirror")
++        rsync_options = rsync_operations(
++            self.source_folder, self.target_folder, "tmirror"
++        )
++        self.assertNotIn("--remove-source-files", rsync_options)
++        self.assertIn("-in", rsync_options)
++        self.assertIn("--delete-before", rsync_options)
++
++    def test_rsync_same_source_and_target(self):
++        print("\nTesting same source and target folders")
++        with self.assertRaises(ValueError):
++            rsync_operations(self.source_folder, self.source_folder, "move")
++
++    def test_rsync_soft_link_target(self):
++        print("\nTesting soft link target folders")
++        soft_link_target = os.path.join(self.base_folder, "target_soft_link")
++        try:
++            os.remove(soft_link_target)
++        except FileNotFoundError:
++            pass
++        os.symlink(os.path.abspath(self.source_folder), soft_link_target)
++
++        with self.assertRaises(ValueError):
++            rsync_operations(self.source_folder, soft_link_target, "move")
++
++        os.remove(soft_link_target)
++
++    def test_rsync_hard_link_target(self):
++        print("\nTesting when target folder is a hard link to source folder")
++        hard_link_target = os.path.join(self.base_folder, "target_hard_link")
++        try:
++            os.link(self.source_folder, hard_link_target)
++        except OSError:
++            print(
++                "Note: The hard link test case is only valid for file systems that support hard links for directories."
++            )
++            return
++
++        with self.assertRaises(ValueError):
++            rsync_operations(self.source_folder, hard_link_target, "move")
++        os.unlink(hard_link_target)
++
++
++if __name__ == "__main__":
++    unittest_main()
+diff --git a/pythonrc/rsync_iconv_options.py b/pythonrc/rsync_iconv_options.py
+new file mode 100644
+--- /dev/null
++++ ./pythonrc/rsync_iconv_options.py
+@@ -0,0 +1,78 @@
++#!/usr/bin/env python3
++
++"""
++rsync_iconv_options.py
++A script to determine the appropriate --iconv option for rsync based on the source and destination encoding.
++"""
++
++import sys
++import re
++import subprocess
++from rsync_path_resolver import parse_host
++
++
++def get_remote_encoding(remote_path):
++    remote_host = parse_host(remote_path)
++    if remote_host is None:
++        raise ValueError(f"Invalid remote path: {remote_path}")
++    remote_os = subprocess.check_output(
++        [
++            "ssh",
++            "-o",
++            "BatchMode=yes",
++            "-o",
++            "StrictHostKeyChecking=no",
++            remote_host,
++            "uname",
++        ],
++        text=True,
++    ).strip()
++    if remote_os == "Darwin":
++        return "utf-8-mac"
++    else:
++        return "utf-8"
++
++
++def get_local_encoding():
++    if sys.platform == "darwin":
++        return "utf-8-mac"
++    else:
++        return "utf-8"
++
++
++def generate_iconv_options(source_dir, destination_dir):
++    is_source_remote = re.match(r"^(.*@)?[^:]+:", source_dir)
++    is_destination_remote = re.match(r"^(.*@)?[^:]+:", destination_dir)
++
++    src_encoding = get_local_encoding()
++    dst_encoding = get_local_encoding()
++
++    if is_source_remote:
++        dst_encoding = get_remote_encoding(source_dir)
++
++    if is_destination_remote:
++        dst_encoding = get_remote_encoding(destination_dir)
++
++    if src_encoding != dst_encoding:
++        rsync_options = f"--iconv={src_encoding},{dst_encoding}"
++    else:
++        rsync_options = ""
++
++    return rsync_options
++
++
++def main():
++    if len(sys.argv) != 3:
++        print(
++            "Usage: python rsync_iconv_options.py <source_directory> <destination_directory>"
++        )
++        sys.exit(1)
++
++    source_dir = sys.argv[1]
++    destination_dir = sys.argv[2]
++    iconv_options = generate_iconv_options(source_dir, destination_dir)
++    print(iconv_options)
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/pythonrc/rsync_iconv_options.py.sh b/pythonrc/rsync_iconv_options.py.sh
+new file mode 100755
+--- /dev/null
++++ ./pythonrc/rsync_iconv_options.py.sh
+@@ -0,0 +1,6 @@
++#!/bin/zsh
++SCRIPT=$(realpath "$0")
++SCRIPTPATH=$(dirname "$SCRIPT")
++cd "$SCRIPTPATH"
++
++python3 ./rsync_iconv_options.test.py
+diff --git a/pythonrc/rsync_iconv_options.test.py b/pythonrc/rsync_iconv_options.test.py
+new file mode 100755
+--- /dev/null
++++ ./pythonrc/rsync_iconv_options.test.py
+@@ -0,0 +1,76 @@
++import sys
++import unittest
++from contextlib import contextmanager
++from unittest.mock import patch, MagicMock
++
++from rsync_iconv_options import generate_iconv_options, get_remote_encoding
++
++
++class TestRsyncIconvOptions(unittest.TestCase):
++    @patch("rsync_iconv_options.get_local_encoding", return_value="utf-8-mac")
++    def test_generate_iconv_options_on_mac(self, mock_get_local_encoding):
++        iconv_options = generate_iconv_options(
++            "local_source_folder", "local_destination_folder"
++        )
++        self.assertEqual(iconv_options, "")
++
++    @patch("rsync_iconv_options.get_local_encoding", return_value="utf-8")
++    def test_generate_iconv_options_on_linux(self, mock_get_local_encoding):
++        iconv_options = generate_iconv_options(
++            "local_source_folder", "local_destination_folder"
++        )
++        self.assertEqual(iconv_options, "")
++
++    @patch("subprocess.check_output")
++    def test_get_remote_encoding(self, mock_check_output):
++        mock_check_output.return_value = "Darwin\n"
++        result = get_remote_encoding("user@remote_host:/remote/path")
++        self.assertEqual(result, "utf-8-mac")
++
++        mock_check_output.return_value = "Linux\n"
++        result = get_remote_encoding("user@remote_host:/remote/path")
++        self.assertEqual(result, "utf-8")
++
++    @patch("rsync_iconv_options.get_local_encoding", return_value="utf-8")
++    @patch("rsync_iconv_options.get_remote_encoding", return_value="utf-8-mac")
++    def test_generate_iconv_options_from_linux_to_mac(
++        self, mock_get_remote_encoding, mock_get_local_encoding
++    ):
++        iconv_options = generate_iconv_options(
++            "local_source_folder", "user@remote_host:/remote/path"
++        )
++        self.assertEqual(iconv_options, "--iconv=utf-8,utf-8-mac")
++
++    @patch("rsync_iconv_options.get_local_encoding", return_value="utf-8-mac")
++    @patch("rsync_iconv_options.get_remote_encoding", return_value="utf-8")
++    def test_generate_iconv_options_from_mac_to_linux(
++        self, mock_get_remote_encoding, mock_get_local_encoding
++    ):
++        iconv_options = generate_iconv_options(
++            "local_source_folder", "user@remote_host:/remote/path"
++        )
++        self.assertEqual(iconv_options, "--iconv=utf-8-mac,utf-8")
++
++    @patch("rsync_iconv_options.get_local_encoding", return_value="utf-8")
++    @patch("rsync_iconv_options.get_remote_encoding", return_value="utf-8-mac")
++    def test_generate_iconv_options_from_mac_to_linux_reverse(
++        self, mock_get_remote_encoding, mock_get_local_encoding
++    ):
++        iconv_options = generate_iconv_options(
++            "user@remote_host:/remote/path", "local_source_folder"
++        )
++        self.assertEqual(iconv_options, "--iconv=utf-8,utf-8-mac")
++
++    @patch("rsync_iconv_options.get_local_encoding", return_value="utf-8-mac")
++    @patch("rsync_iconv_options.get_remote_encoding", return_value="utf-8")
++    def test_generate_iconv_options_from_linux_to_mac_reverse(
++        self, mock_get_remote_encoding, mock_get_local_encoding
++    ):
++        iconv_options = generate_iconv_options(
++            "user@remote_host:/remote/path", "local_source_folder"
++        )
++        self.assertEqual(iconv_options, "--iconv=utf-8-mac,utf-8")
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/pythonrc/rsync_mkpath_decider.py b/pythonrc/rsync_mkpath_decider.py
+new file mode 100644
+--- /dev/null
++++ ./pythonrc/rsync_mkpath_decider.py
+@@ -0,0 +1,65 @@
++#!/usr/bin/env python3
++
++import sys
++import subprocess
++import re
++from typing import Tuple
++
++
++def get_rsync_version_command() -> str:
++    return "rsync --version | head -n 1 | awk '{print $3}'"
++
++
++def extract_host(host_info: str) -> str:
++    return host_info.split(":", 1)[0]
++
++
++def get_rsync_version(host_info: str) -> str:
++    host = extract_host(host_info)
++    cmd = get_rsync_version_command()
++
++    if not host or ":" not in host_info:
++        rsync_version = subprocess.check_output(
++            cmd, shell=True, text=True
++        ).strip()
++    else:
++        rsync_version = subprocess.check_output(
++            f"ssh {host} {cmd}", shell=True, text=True
++        ).strip()
++
++    return rsync_version
++
++
++def check_rsync_version(rsync_version: str) -> bool:
++    try:
++        version_numbers = tuple(map(int, rsync_version.split(".")))
++    except ValueError:
++        # Extract only numeric parts of the version string
++        version_numbers = tuple(map(int, re.findall(r"\d+", rsync_version)))
++        if not version_numbers:
++            return False
++
++    return version_numbers >= (3, 2, 0)
++
++
++def decide_mkpath_option(target):
++    target_version = get_rsync_version(target)
++
++    if check_rsync_version(target_version):
++        return "--mkpath"
++    else:
++        return ""
++
++
++def main(args: Tuple[str]) -> None:
++    target_folder = args[0]
++    mkpath_option = decide_mkpath_option(target_folder)
++    print(mkpath_option)
++
++
++if __name__ == "__main__":
++    if len(sys.argv) < 2:
++        print(f"Usage: {sys.argv[0]} target_folder")
++        sys.exit(1)
++
++    main(tuple(sys.argv[1:]))
+diff --git a/pythonrc/rsync_mkpath_decider.test.py b/pythonrc/rsync_mkpath_decider.test.py
+new file mode 100755
+--- /dev/null
++++ ./pythonrc/rsync_mkpath_decider.test.py
+@@ -0,0 +1,77 @@
++import unittest
++from unittest.mock import patch
++import subprocess
++import sys
++from io import StringIO
++from rsync_mkpath_decider import (
++    get_rsync_version_command,
++    get_rsync_version,
++    check_rsync_version,
++    decide_mkpath_option,
++    main,
++    extract_host,
++)
++
++
++class TestRsyncMkpathDecider(unittest.TestCase):
++    def test_get_rsync_version_command(self):
++        expected_cmd = "rsync --version | head -n 1 | awk '{print $3}'"
++        self.assertEqual(get_rsync_version_command(), expected_cmd)
++
++    def test_get_rsync_version_local(self):
++        cmd = get_rsync_version_command()
++        local_rsync_version = subprocess.check_output(
++            cmd, shell=True, text=True
++        ).strip()
++        self.assertEqual(
++            get_rsync_version("./target_folder"), local_rsync_version
++        )
++
++    @patch("subprocess.check_output")
++    def test_get_rsync_version_remote(self, mock_check_output):
++        mock_version = "3.2.0"
++        mock_check_output.return_value = mock_version
++        target_folder = "user@example.com:/path/to/target_folder"
++        self.assertEqual(get_rsync_version(target_folder), mock_version)
++
++    def test_check_rsync_version(self):
++        self.assertTrue(check_rsync_version("3.2.0"))
++        self.assertTrue(check_rsync_version("3.2.1"))
++        self.assertTrue(check_rsync_version("3.3.0"))
++        self.assertFalse(check_rsync_version("3.1.9"))
++        self.assertFalse(check_rsync_version("2.6.9"))
++
++    @patch("rsync_mkpath_decider.get_rsync_version")
++    def test_decide_mkpath_option(self, mock_get_rsync_version):
++        mock_get_rsync_version.return_value = "3.2.0"
++        self.assertEqual(decide_mkpath_option("target"), "--mkpath")
++
++        mock_get_rsync_version.return_value = "3.1.9"
++        self.assertEqual(decide_mkpath_option("target"), "")
++
++    @patch("sys.stdout", new_callable=StringIO)
++    def test_main(self, mock_stdout):
++        test_args = ("./target_folder",)
++        with patch.object(sys, "argv", ["script_name"] + list(test_args)):
++            main(test_args)
++            output = mock_stdout.getvalue().strip()
++            self.assertIn(output, ("", "--mkpath"))
++
++
++class TestExtractHost(unittest.TestCase):
++    def test_extract_host(self):
++        self.assertEqual(
++            extract_host("user@example.com:/path/to/target_folder"),
++            "user@example.com",
++        )
++        self.assertEqual(
++            extract_host("example.com:/path/to/target_folder"), "example.com"
++        )
++        self.assertEqual(extract_host("mini:~/loadrc/"), "mini")
++        self.assertEqual(
++            extract_host("/path/to/local/folder"), "/path/to/local/folder"
++        )
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/pythonrc/rsync_path_resolver.py b/pythonrc/rsync_path_resolver.py
+new file mode 100644
+--- /dev/null
++++ ./pythonrc/rsync_path_resolver.py
+@@ -0,0 +1,72 @@
++#!/usr/bin/env python3
++
++"""
++rsync_path_resolver.py
++A script to determine the appropriate --rsync-path option for rsync based on the source and target hosts.
++"""
++
++import re
++import sys
++import subprocess
++from pathlib import Path
++
++
++def parse_host(path):
++    match = re.match(r"^(([^@]+@)?[^:]+):", path)
++    if match:
++        return match.group(1)
++    return "localhost"
++
++
++def get_rsyncpath(host):
++    command = ". ~/loadrc/.pathrc; which rsync"
++    if host == "localhost":
++        try:
++            rsyncpath = subprocess.check_output(
++                command, shell=True, text=True
++            ).strip()
++        except subprocess.CalledProcessError as e:
++            print(f"Error while getting rsync path: {e}")
++            sys.exit(1)
++    else:
++        try:
++            rsyncpath = subprocess.check_output(
++                ["ssh", host, command], text=True
++            ).strip()
++        except subprocess.CalledProcessError as e:
++            print(f"Error while getting rsync path: {e}")
++            sys.exit(1)
++
++    return rsyncpath
++
++
++def resolve_rsync_path(source, target):
++    shost = parse_host(source)
++    thost = parse_host(target)
++
++    if shost and shost != "localhost":
++        rsyncpath = get_rsyncpath(shost)
++    elif thost and thost != "localhost":
++        rsyncpath = get_rsyncpath(thost)
++    else:
++        rsyncpath = get_rsyncpath("localhost")
++
++    if rsyncpath:
++        return f"--rsync-path={rsyncpath}"
++    else:
++        return None
++
++
++def main():
++    if len(sys.argv) != 3:
++        print("Usage: python rsync_path_resolver.py <source> <target>")
++        sys.exit(1)
++
++    source = sys.argv[1]
++    target = sys.argv[2]
++    rsync_path_option = resolve_rsync_path(source, target)
++    print(rsync_path_option)
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/pythonrc/rsync_path_resolver.test.py b/pythonrc/rsync_path_resolver.test.py
+new file mode 100755
+--- /dev/null
++++ ./pythonrc/rsync_path_resolver.test.py
+@@ -0,0 +1,30 @@
++import unittest
++from unittest.mock import patch
++from rsync_path_resolver import resolve_rsync_path, parse_host, get_rsyncpath
++
++
++class TestRsyncPathResolver(unittest.TestCase):
++    def test_parse_host(self):
++        self.assertEqual(parse_host("localhost:/path"), "localhost")
++        self.assertEqual(
++            parse_host("user@remotehost:/path"), "user@remotehost"
++        )
++        self.assertEqual(parse_host("/local/path"), "localhost")
++
++    @patch("subprocess.check_output")
++    def test_get_rsyncpath(self, mock_check_output):
++        mock_check_output.return_value = "/usr/bin/rsync\n"
++        self.assertEqual(get_rsyncpath("localhost"), "/usr/bin/rsync")
++        self.assertEqual(get_rsyncpath("user@remotehost"), "/usr/bin/rsync")
++
++    def test_resolve_rsync_path(self):
++        with patch("rsync_path_resolver.get_rsyncpath") as mock_get_rsyncpath:
++            mock_get_rsyncpath.return_value = "/usr/bin/rsync"
++            rsync_path_option = resolve_rsync_path(
++                "local_source_folder", "user@remotehost:/remote/path"
++            )
++            self.assertEqual(rsync_path_option, "--rsync-path=/usr/bin/rsync")
++
++
++if __name__ == "__main__":
++    unittest.main()
 diff --git a/pythonrc/setup.cfg b/pythonrc/setup.cfg
 new file mode 100644
 --- /dev/null
@@ -20841,19 +21966,58 @@ new file mode 100644
 +W603 	‘<>’ is deprecated, use ‘!=’
 +W604 	backticks are deprecated, use ‘repr()’
 +W605 	invalid escape sequence ‘x’
+diff --git a/pythonrc/toggle_fullscreen_and_play.py b/pythonrc/toggle_fullscreen_and_play.py
+new file mode 100755
+--- /dev/null
++++ ./pythonrc/toggle_fullscreen_and_play.py
+@@ -0,0 +1,32 @@
++import sys
++import time
++import osascript
++import subprocess
++import vlc
++
++
++def toggle_fullscreen():
++    code, result, err = osascript.run(
++        'tell application "System Events" to keystroke return using command down'
++    )
++    if code != 0:
++        print(f"Error: {err}")
++    else:
++        print("Toggled full-screen mode")
++
++
++def play_video(file_path, cur_line):
++    vlc.open_in_vlc(file_path, cur_line)
++
++
++if __name__ == "__main__":
++    # Use the command line arguments to get the file path and line
++    file_path = sys.argv[1]
++    cur_line = sys.argv[2]
++
++    # Toggle full-screen mode in iTerm2
++    toggle_fullscreen()
++    time.sleep(1)
++
++    # Play the video
++    play_video(file_path, cur_line)
 diff --git a/pythonrc/vlc.py b/pythonrc/vlc.py
 new file mode 100755
 --- /dev/null
 +++ ./pythonrc/vlc.py
-@@ -0,0 +1,70 @@
+@@ -0,0 +1,108 @@
 +#!/usr/bin/env python3
-+import re
-+import sys
-+import subprocess
++import json
 +import os
++import re
++import subprocess
++import sys
 +
 +
 +def time_to_seconds(time_string):
++    print("Converting time string to seconds: %s" % time_string)
 +    time_parts = time_string.split(":")
 +    if len(time_parts) == 3:
 +        hours, minutes, seconds = map(int, time_parts)
@@ -20867,6 +22031,7 @@ new file mode 100755
 +
 +
 +def split_string(string):
++    print("Splitting string: %s" % string)
 +    # Split string into path and time using regex
 +    pattern = r"^(.*?)(?::(\d{1,2}:\d{1,2}(?::\d{1,2})?))$"
 +    match = re.match(pattern, string)
@@ -20879,12 +22044,36 @@ new file mode 100755
 +
 +
 +def open_in_vlc(file_path, cur_line):
-+    os.chdir(os.path.dirname(file_path))
-+    time = split_string(cur_line)
-+    print("Opening in VLC: " + cur_line + " at " + str(time) + "")
++    print("Opening file in VLC: %s" % file_path)
++
++    # Convert the input string to a valid JSON string
++    cur_line = json.dumps(cur_line)
++
++    # Remove outer quotes from the current line and unescape unicode characters
++    cur_line = json.loads(cur_line).strip().strip('"')
++
++    # If the path starts with "./", remove it
++    if cur_line.startswith("./"):
++        cur_line = cur_line[2:]
++
++    # Get the directory containing the text file
++    dir_path = os.path.dirname(file_path)
++
++    # Append cur_line to the directory path
++    file_full_path = os.path.join(dir_path, cur_line)
++
++    # Check if the file exists
++    if not os.path.isfile(file_full_path):
++        print(f'The file "{file_full_path}" does not exist.')
++        print(f"Current directory: {os.getcwd()}")
++        return
++
++    time = split_string(file_full_path)
++    print(f'Opening in VLC at {time}:')
++    print(f'"./{cur_line}"')
 +
 +    if time:
-+        subprocess.check_call(
++        subprocess.run(
 +            [
 +                "/Applications/VLC.app/Contents/MacOS/VLC",
 +                "--sub-language",
@@ -20892,12 +22081,15 @@ new file mode 100755
 +                "--sub-autodetect-file",
 +                "-f",
 +                "--macosx-continue-playback=2",
++                "--rate=2.0",
 +                "--start-time=" + str(time),
-+                cur_line,
-+            ]
++                file_full_path,
++            ],
++            stdout=subprocess.DEVNULL,  # Redirect stdout to DEVNULL
++            stderr=subprocess.DEVNULL,  # Redirect stderr to DEVNULL
 +        )
 +    else:
-+        subprocess.check_call(
++        subprocess.run(
 +            [
 +                "/Applications/VLC.app/Contents/MacOS/VLC",
 +                "--sub-language",
@@ -20905,15 +22097,23 @@ new file mode 100755
 +                "--sub-autodetect-file",
 +                "-f",
 +                "--macosx-continue-playback=2",
-+                cur_line,
-+            ]
++                "--rate=2.0",
++                file_full_path,
++            ],
++            stdout=subprocess.DEVNULL,  # Redirect stdout to DEVNULL
++            stderr=subprocess.DEVNULL,  # Redirect stderr to DEVNULL
 +        )
 +
 +
 +if __name__ == "__main__":
++    print("Script started with arguments: %s" % sys.argv)
 +    # Use the command line arguments to get the file path and line
 +    file_path = sys.argv[1]
 +    cur_line = sys.argv[2]
++
++    # Split the cur_line string by comma and take the second part, only if a comma is present
++    if "," in cur_line:
++        cur_line = cur_line.split(",", 1)[1]
 +
 +    open_in_vlc(file_path, cur_line)
 diff --git a/pythonrc/vlc.py.sh b/pythonrc/vlc.py.sh
@@ -20933,7 +22133,7 @@ new file mode 160000
 --- /dev/null
 +++ ./rsync
 @@ -0,0 +1 @@
-+Subproject commit 0de21870d03accdd9c5a12e0615eaa119caa1962
++Subproject commit 08049f94f42763b9b8f737153f68db5c61232a4d
 diff --git a/ruleref.list b/ruleref.list
 new file mode 100644
 --- /dev/null
@@ -21515,6 +22715,40 @@ new file mode 100644
 +	keystroke(Control+4) = switchToScreen(imacpro)
 +	keystroke(Alt+Control+r) = restartServer(restart)
 +end
+diff --git a/test.py b/test.py
+new file mode 100644
+--- /dev/null
++++ ./test.py
+@@ -0,0 +1,29 @@
++import os
++import subprocess
++import sys
++import glob
++
++# Get the absolute path of the current script
++script_path = os.path.realpath(__file__)
++dir_path = os.path.dirname(script_path)
++
++# Navigate to the script directory
++os.chdir(dir_path)
++
++# Find all python test scripts in the 'pythonrc' directory
++test_scripts = glob.glob("./pythonrc/*.test.py")
++
++# Execute each test
++for script in test_scripts:
++    print(f"Starting test: {script}")
++    result = subprocess.run(["python3", script])
++
++    # If the test script fails (non-zero exit status), abort immediately
++    if result.returncode != 0:
++        print(f"Test {script} failed. Aborting.")
++        sys.exit(1)
++    else:
++        print(f"Finished test: {script}")
++
++# If all test scripts pass (the script has not yet exited), print a success message
++print("All test scripts passed successfully.")
 diff --git a/tests/dirname/spaces  in dir name.txt b/tests/dirname/spaces  in dir name.txt
 new file mode 100644
 --- /dev/null
@@ -28920,7 +30154,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/bash-support.vim
 @@ -0,0 +1 @@
-+Subproject commit dfdf0d49556f2cb2c5768e1629819e89f25e8ed2
++Subproject commit dfdf0d49556f2cb2c5768e1629819e89f25e8ed2-dirty
 diff --git a/vimrc/.vim/bundle/bclose.vim b/vimrc/.vim/bundle/bclose.vim
 new file mode 160000
 --- /dev/null
@@ -29095,6 +30329,12 @@ new file mode 160000
 +++ ./vimrc/.vim/bundle/neoinclude.vim
 @@ -0,0 +1 @@
 +Subproject commit 954cfc9dfdb303f2c2fa867b9cf949dd74512628
+diff --git a/vimrc/.vim/bundle/nvim-ghost.nvim b/vimrc/.vim/bundle/nvim-ghost.nvim
+new file mode 160000
+--- /dev/null
++++ ./vimrc/.vim/bundle/nvim-ghost.nvim
+@@ -0,0 +1 @@
++Subproject commit a1ca0b2dac59881066d7ac9373cf64d59ba29d6a
 diff --git a/vimrc/.vim/bundle/nvim-yarp b/vimrc/.vim/bundle/nvim-yarp
 new file mode 160000
 --- /dev/null
@@ -35408,7 +36648,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-autoformat
 @@ -0,0 +1 @@
-+Subproject commit ba9381f5588ad00732c4a93e36d1df693603ac19-dirty
++Subproject commit ba9381f5588ad00732c4a93e36d1df693603ac19
 diff --git a/vimrc/.vim/bundle/vim-buffergator b/vimrc/.vim/bundle/vim-buffergator
 new file mode 160000
 --- /dev/null
@@ -35432,7 +36672,7 @@ new file mode 160000
 --- /dev/null
 +++ ./vimrc/.vim/bundle/vim-fugitive
 @@ -0,0 +1 @@
-+Subproject commit a5feb70e55c013bff2003d41592222cd75d0c9b2
++Subproject commit 64324e2c4cb9afd11839395ffe56c3e4f334f681-dirty
 diff --git a/vimrc/.vim/bundle/vim-ghost b/vimrc/.vim/bundle/vim-ghost
 new file mode 160000
 --- /dev/null
@@ -41278,11 +42518,29 @@ diff --git a/vimrc/.vim/plugin/commands.vim b/vimrc/.vim/plugin/commands.vim
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vim/plugin/commands.vim
-@@ -0,0 +1,4 @@
+@@ -0,0 +1,22 @@
 +au BufEnter * set noro
 +" Don't let Vim's "Found a swap file" message block input
 +set shortmess+=A
 +command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
++
++" Define a new command that calls ExecuteScriptInLoop function
++command! StartScriptLoop call ExecuteScriptInLoop()
++
++" The function to execute the script in a loop
++function! ExecuteScriptInLoop()
++  while 1
++    " Check if there's an open file, if not, break the loop
++    if bufname('%') == ''
++      break
++    endif
++    " Execute your script and pass the current filename
++    let s:output = system('/root/loadrc/bashrc/check_running.sh ' . shellescape(bufname('%')))
++    echo s:output
++    " Pause for 2 seconds
++    sleep 2
++  endwhile
++endfunction
 diff --git a/vimrc/.vim/plugin/common.vim b/vimrc/.vim/plugin/common.vim
 new file mode 100644
 --- /dev/null
@@ -41636,7 +42894,7 @@ diff --git a/vimrc/.vim/plugin/diff-options.vim b/vimrc/.vim/plugin/diff-options
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vim/plugin/diff-options.vim
-@@ -0,0 +1,16 @@
+@@ -0,0 +1,15 @@
 +function! SetUpDiffOptions()
 +    let l:file_ext = expand('%:e')
 +    let l:file_name = expand('%:t')
@@ -41647,7 +42905,6 @@ new file mode 100644
 +        set diffopt-=iwhiteall
 +    endif
 +
-+    set diffopt+=iblank
 +    set diffopt+=algorithm:patience
 +    set diffopt+=indent-heuristic
 +endfunction
@@ -41657,7 +42914,7 @@ diff --git a/vimrc/.vim/plugin/fugitive.vim b/vimrc/.vim/plugin/fugitive.vim
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vim/plugin/fugitive.vim
-@@ -0,0 +1,913 @@
+@@ -0,0 +1,973 @@
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject AppendRate :execute s:AppendRate(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject ApplyBranch :execute s:ApplyBranch(<q-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject BinaryGrep :execute s:BinaryGrep(<f-args>)
@@ -41674,17 +42931,19 @@ new file mode 100644
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fdisklog :execute s:Fdisklog()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FileMove :execute s:FileMove(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindDeleted :execute s:FindDeleted()
-+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindFolder call s:CustomFolderFinder(<f-args>)
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject FindSimilarFiles call s:FindSimilarFilenames(<f-args>)
++command! -bang -bar -nargs=+ -complete=customlist,fugitive#CompleteObject FindFolder call s:CustomFolderFinder(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fnotinuse :execute s:Fnotinuse()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fr :execute s:Fr(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Fsync :execute s:Fsync()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject G call s:G(<q-args>)
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GResolveConflicts :execute s:GResolveConflicts()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Ga :execute s:Ga(<q-args>)
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gapply :execute s:Gapply()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbib :execute s:Gbib()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbidebug :execute s:Gbidebug()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbig :execute s:Gbig()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbil :execute s:Gbil()
-+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GetOldestCommitByMe :execute s:GetOldestCommitByMe()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbis :execute s:Gbis()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbr :execute s:Gbr()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gbra :execute s:Gbra()
@@ -41703,12 +42962,11 @@ new file mode 100644
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdio :execute s:Gdio(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gdit :execute s:Gdit()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GenerateIpynb :execute s:GenerateIpynb()
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GetOldestCommitByMe :execute s:GetOldestCommitByMe()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gfix :execute s:Gfix()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gicb :execute s:Gicb()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gitk :execute s:Gitk(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkd :execute s:Gkd(<f-args>)
-+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GResolveConflicts :execute s:GResolveConflicts()
-+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gapply :execute s:Gapply()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gkdo :execute s:Gkdo()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glf :execute s:Glf()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Glg :execute s:Glg()
@@ -41716,7 +42974,6 @@ new file mode 100644
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gpl :execute s:Gpl()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Gps :execute s:Gps()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject GrevApply :execute s:GrevApply()
-+command! -bang -bar -nargs=1 -complete=customlist,fugitive#CompleteObject Gmrg :execute s:MergeWithResolution(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grsh :execute s:Grsh(<q-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grta :execute s:Grta(<f-args>)
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Grtu :execute s:Grtu()
@@ -41739,6 +42996,7 @@ new file mode 100644
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject KdiffFile :execute s:KdiffFile()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LcTest :execute s:LcTest()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject LogFilter :execute s:LogFilter(<f-args>)
++command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject MigrateFolders call s:FolderContentMigrator()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Portsforward :execute s:Portsforward()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune :execute s:Prune()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
@@ -41755,6 +43013,7 @@ new file mode 100644
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SvnSt :execute s:SvnSt()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SvnUp :execute s:SvnUp()
 +command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Tail :execute s:Tail()
++command! -bang -bar -nargs=1 -complete=customlist,fugitive#CompleteObject Gmrg :execute s:MergeWithResolution(<f-args>)
 +
 +function! s:LogFilter(...) abort
 +    let worktree = Cd2Worktree()
@@ -42005,6 +43264,7 @@ new file mode 100644
 +
 +    let worktree = Cd2Worktree()
 +    call AsyncRunShellCommand('~/loadrc/gitrc/g.sh ' . shellescape(msg) . ' 2>&1 | tee g.runresult')
++    "exec '!~/loadrc/gitrc/g.sh ' . shellescape(msg) . ' 2>&1 | tee g.runresult'
 +
 +    if &diff
 +        on
@@ -42235,9 +43495,16 @@ new file mode 100644
 +        return 0
 +    endif
 +
-+    call asyncrun#stop('<bang>')
 +    let b:output = expand("%:p") . '.runresult'
-+    call AsyncRunShellCommand('~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output)
++    let file = expand("%:p")
++
++    " If b:output file exists, delete it
++    if filereadable(b:output)
++        call delete(b:output)
++    endif
++
++    call asyncrun#stop('<bang>')
++    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output) 
 +    call OpenOrSwitch(b:output, 'vs')
 +endfunction
 +
@@ -42275,7 +43542,7 @@ new file mode 100644
 +
 +function! s:FileMove(...) abort
 +    if a:0 >= 1
-+        let curword = GetWord()
++        let curword = GetCleanLine()
 +        let b:netrw_curdir = getcwd()
 +        let map_escape = "<|\n\r\\\<C-V>\""
 +        let mapsafecurdir = escape(b:netrw_curdir, map_escape)
@@ -42298,7 +43565,10 @@ new file mode 100644
 +
 +function! s:AppendRate(...) abort
 +    if a:0 >= 1
-+        let curword = GetWord()
++        let curword = GetCleanLine()
++        " Split curword by comma and pick the second part if comma exists
++        let split_curword = (curword =~ ',') ? split(curword, ",") : [curword]
++        let curword = split_curword[-1] " pick the last part whether split or not
 +        let b:netrw_curdir = getcwd()
 +        let map_escape = "<|\n\r\\\<C-V>\""
 +        let mapsafecurdir = escape(b:netrw_curdir, map_escape)
@@ -42308,7 +43578,12 @@ new file mode 100644
 +            exec '!~/loadrc/bashrc/append_rate.sh ' . '"' .  oldname . '"' . ' ' . '"' . a:1 . '"'
 +            let newname = substitute(system("~/loadrc/bashrc/append_num.sh " . '"' . oldname . '"' . ' ' . '"' . a:1 . '"'), '\n', '', '')
 +            let newname = substitute(newname, getcwd(), '.', 'e')
-+            call setline('.', '"' . newname . '"')
++            if len(split_curword) > 1
++                let newname = split_curword[0] . "," . '"' . newname . '"' " Concatenate the number back to newname if comma existed originally
++            else
++                let newname = '"' . newname . '"'
++            endif
++            call setline('.', newname)
 +            call UpdateProj()
 +        endif
 +
@@ -42358,7 +43633,7 @@ new file mode 100644
 +    endif
 +
 +    let b:output = expand("%:p") . '.runresult'
-+    call RunShell('~/loadrc/vishrc/rm_cat.sh', expand("%:p"), b:output)
++    exec '!~/loadrc/vishrc/rm_cat.sh ' . shellescape(expand("%:p")) . ' ' . shellescape(b:output)
 +    call OpenOrSwitch(b:output, 'vs')
 +endfunction
 +
@@ -42507,9 +43782,9 @@ new file mode 100644
 +    let worktree = Cd2Worktree()
 +    let l:script_path = "~/loadrc/gitrc/oldest_commit_by_me.sh"
 +    let l:output = "oldest_commit_by_me.runresult"
-+    
++
 +    silent exec "! " . l:script_path . " 2>&1 | tee " . l:output
-+    
++
 +    call OpenOrSwitch(l:output, 'vs')
 +endfunction
 +
@@ -42562,12 +43837,54 @@ new file mode 100644
 +    call OpenOrSwitch('merge_with_resolution.runresult', 'vs')
 +endfunction
 +
-+function! s:CustomFolderFinder(search_directory, folder_name)
++function! s:CustomFolderFinder(search_directory, folder_name, ...)
 +    let worktree = Cd2Worktree()
 +    let l:script_path = "~/loadrc/zshrc/custom_folder_finder.zsh"
-+    let l:command = '!' . l:script_path . ' ' . a:search_directory . ' ' . a:folder_name . ' 2>&1 | tee ' . 'custom_folder_finder.runresult'
++    let l:command = '!' . l:script_path . ' ' . a:search_directory . ' ' . a:folder_name
++
++    " Check if the maxdepth parameter is provided and append it to the command
++    if a:0 > 0
++        let l:command .= ' ' . a:1
++    endif
++
++    let l:command .= ' 2>&1 | tee ' . a:folder_name . '.runresult'
 +    execute l:command
-+    call OpenOrSwitch('custom_folder_finder.runresult', 'vs')
++    call OpenOrSwitch(a:folder_name . '.runresult', 'vs')
++endfunction
++
++function! s:FolderContentMigrator()
++    " Get the lines from the current buffer
++    let lines = getline(1, '$')
++
++    " Check if there are at least two lines
++    if len(lines) < 2
++        echo "Error: Not enough lines in the buffer."
++        return
++    endif
++
++    " Clear the content of the log file before starting the loop
++    silent !echo "" > folder_content_migrator.runresult
++
++    " Get the source and target folders
++    let target_folder = lines[0]
++    let source_folders = lines[1:]
++
++    " Call the folder_content_migrator.py script for each source folder
++    let script_path = "~/loadrc/pythonrc/folder_content_migrator.py"
++    for source_folder in source_folders
++        let command = '!' . l:script_path . ' ' . l:source_folder . ' ' . l:target_folder . ' 2>&1 | tee -a ' . 'folder_content_migrator.runresult'
++        execute command
++    endfor
++    call OpenOrSwitch('folder_content_migrator.runresult', 'vs')
++endfunction
++
++function! s:FindSimilarFilenames()
++    let l:script_path = "~/loadrc/pythonrc/find_similar_filenames.py"
++    let l:current_file = expand('%:p')
++    let l:command = '!' . l:script_path . ' --file ' . shellescape(l:current_file) . ' 2>&1 | tee ' . 'find_similar_filenames.runresult'
++    execute l:command
++
++    call OpenOrSwitch('find_similar_filenames.runresult', 'vs')
 +endfunction
 +
 +let g:fugitive_legacy_commands = 1
@@ -42577,7 +43894,7 @@ diff --git a/vimrc/.vim/plugin/keymap.vim b/vimrc/.vim/plugin/keymap.vim
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vim/plugin/keymap.vim
-@@ -0,0 +1,549 @@
+@@ -0,0 +1,564 @@
 +function! RememberQuit()
 +    let @" = expand("%:p")
 +
@@ -42589,10 +43906,6 @@ new file mode 100644
 +endfunction
 +
 +function! ExFilter()
-+    if (expand("%") ==# 'fav.log.sort')
-+        return
-+    endif
-+
 +    call Filter2FindResult()
 +    silent exec 'g/' . @/ . '/d'
 +
@@ -42603,10 +43916,6 @@ new file mode 100644
 +endfunction
 +
 +function! ExtractHighLight()
-+    if (expand("%") ==# 'fav.log.sort')
-+        return
-+    endif
-+
 +    call Filter2FindResult()
 +    silent exec '%s/.*\(' . @/ . '\).*/\1/g'
 +    w!
@@ -42614,10 +43923,6 @@ new file mode 100644
 +
 +
 +function! Vdelete()
-+    if (expand("%") ==# 'fav.log.sort')
-+        return
-+    endif
-+
 +    call Filter2FindResult()
 +    silent exec '%s/' . @/ . '//g'
 +    w!
@@ -42651,10 +43956,6 @@ new file mode 100644
 +endfunction
 +
 +function! VFilter()
-+    if (expand("%") ==# 'fav.log.sort')
-+        return
-+    endif
-+
 +    call Filter2FindResult()
 +    silent exec 'g!/' . @/ . '/d'
 +
@@ -42682,17 +43983,25 @@ new file mode 100644
 +    exec '%g!/' . b:keyword . '/d'
 +endfunction
 +
-+function! PlayVideo()
++function! PlayVideo(...) abort
 +    " Return early if the buffer type is a terminal
 +    if &buftype ==# "terminal"
 +        return 0
 +    endif
 +
-+    " Get the current line and remove trailing spaces
++    " If no line argument is passed, use the current line
++    if a:0 > 0
++        let line = a:1
++    else
++        let line = getline('.')
++    endif
++
 +    let line = getline('.')
 +    let line = substitute(line, '\_s\+$', '', 'g')
 +    let line = substitute(line, '^[^"]', '"' . line[0], '')
 +    let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
++    let line = substitute(line, ",\"", ",", "")
++
 +    call AsyncRunShellCommand('~/loadrc/pythonrc/vlc.py ' . '"' . expand("%:p") . '"' .  ' ' . line)
 +endfunction
 +
@@ -42834,8 +44143,30 @@ new file mode 100644
 +
 +    on
 +    for line in lines
++        " Debug: Print line before substitution
++        echo "Before substitution: " . line
++
 +        let line = substitute(line, '"', '', "g")
-+        exec 'vs ' . currentDir . '/' . line
++
++        " Debug: Print line after substitution
++        echo "After substitution: " . line
++
++        " Check if the line starts with "/"
++        if line[0] == "/"
++            let filePath = line
++        else
++            let filePath = currentDir . '/' . line
++        endif
++
++        " Debug: Print the final file path
++        echo "Final file path: " . filePath
++
++        if filereadable(filePath)
++            exec 'vs ' . filePath
++        else
++            " Debug: Print if the file is not readable or doesn't exist
++            echo "The file " . filePath . " is not readable or does not exist."
++        endif
 +    endfor
 +    windo set nowrap
 +    " set winwidth=999999
@@ -43024,7 +44355,7 @@ new file mode 100644
 +nnoremap <leader>Y "+yy
 +nnoremap <leader>p "+p
 +nnoremap <leader>P "+P
-+nnoremap tt :Autoformat<CR>:w!<cr>
++nnoremap tt :Autoformat<CR>:w!<cr><cr>
 +nnoremap D :call OpenDup()<CR>
 +" Quickly open current dir in current windows
 +nnoremap <tab> %
@@ -43045,6 +44376,7 @@ new file mode 100644
 +nnoremap md :call Vdelete()<cr>
 +nnoremap mo :call OpenAll()<cr>
 +vnoremap <silent>o :call SearchOpen()<cr>
++vnoremap <silent>m :s/ //<CR>
 +nmap <C-s> :call CSCSearch(0)<cr>
 +nnoremap <c-space> :call CSCSearch(4)<cr>
 +nmap <C-@> :call CSCSearch(4)<cr>
@@ -43098,7 +44430,7 @@ new file mode 100644
 +    normal yy
 +    let b:csdbpath = Cd2ProjectRoot("files.proj")
 +    let relativePath = expand('%:p')
-+    let relativePath = substitute(system('realpath --relative-to="' . b:csdbpath . '" "' . relativePath . '"'), '\n', '', '')
++    let relativePath = substitute(relativePath, b:csdbpath.'/', '', '')
 +    let relativePath = substitute(relativePath, '\_s', '\\ ', "g")
 +    let content = relativePath . ':' . line('.') . ' ' . @"
 +    let @" = content
@@ -43113,7 +44445,7 @@ new file mode 100644
 +        let to_open = substitute(expand('%:p'), '\.rej', '', '')
 +        silent exec 'vs ' . to_open
 +    else
-+        vs %:p
++        silent exec 'vs ' . expand("%:p") . '.bak'
 +    endif
 +
 +    set winwidth=1
@@ -43143,14 +44475,15 @@ diff --git a/vimrc/.vim/plugin/netrw.vim b/vimrc/.vim/plugin/netrw.vim
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vim/plugin/netrw.vim
-@@ -0,0 +1,81 @@
-+fun! GetWord()
+@@ -0,0 +1,87 @@
++fun! GetCleanLine()
 +    setl nosol
 +    let dirname = getline('.')
 +    let dirname = substitute(dirname, '\s\+$', '', 'e')
 +    let dirname = substitute(dirname, "@$", "", "")
 +    let dirname = substitute(dirname, "\*$", "", "")
 +    let dirname = substitute(dirname, "^\"", "", "")
++    let dirname = substitute(dirname, ",\"", ",", "")
 +    let dirname = substitute(dirname, "\"$", "", "")
 +    return dirname
 +endfun
@@ -43201,10 +44534,15 @@ new file mode 100644
 +    return ret
 +endfunction
 +
++
 +function! LocalRename() range
 +    " Get the current line and the next line
 +    let current_line = getline(line("."))
 +    let next_line = getline(line(".") + 1)
++
++    " Remove leading number and comma from the current line and the next line
++    let current_line = substitute(current_line, '^[0-9]*,', '', '')
++    let next_line = substitute(next_line, '^[0-9]*,', '', '')
 +
 +    " Remove backslashes and quotes from the current line
 +    let current_line = substitute(current_line, '\\', '', 'g')
@@ -43521,6 +44859,12 @@ new file mode 100644
 +
 +nnoremap <silent> cp :call PopulatePasteBufferFromOSX('n')<cr>
 +vnoremap <silent> cp :call PopulatePasteBufferFromOSX('v')<cr>
+diff --git a/vimrc/.vim/plugin/pymode.vim b/vimrc/.vim/plugin/pymode.vim
+new file mode 100644
+--- /dev/null
++++ ./vimrc/.vim/plugin/pymode.vim
+@@ -0,0 +1 @@
++let g:pymode_lint_message = 0
 diff --git a/vimrc/.vim/plugin/python-mode.vim b/vimrc/.vim/plugin/python-mode.vim
 new file mode 100644
 --- /dev/null
@@ -58217,7 +59561,7 @@ new file mode 100644
 +    let worktree = Cd2Worktree()
 +    let relativePath = expand('%:p')
 +    let relativePath = substitute(relativePath, '\_s', '\\ ', "g")
-+    let relativePath = substitute(system('realpath --relative-to="' . worktree . '" ' . relativePath), '\n', '', '')
++    let relativePath = substitute(relativePath, worktree.'/', '', '')
 +    silent exec '!~/loadrc/gitrc/autoadd.sh ' . '"' .  relativePath . '"'
 +endfunction
 +
@@ -58358,21 +59702,16 @@ diff --git a/vishrc/cat_play.sh b/vishrc/cat_play.sh
 new file mode 100755
 --- /dev/null
 +++ ./vishrc/cat_play.sh
-@@ -0,0 +1,14 @@
+@@ -0,0 +1,9 @@
 +#!/bin/zsh
-+
-+volume=$(osascript -e 'output volume of (get volume settings)')
-+osascript -e 'set volume 0' &
 +
 +while read ss
 +do
 +    ss=$(echo "$ss" | sed 's/"//g')
 +    echo "now playing"
-+    echo "$ss"
-+    ~/loadrc/vishrc/vlc.sh "$ss"
++    echo "\"${ss#*,}\""
++    ~/loadrc/pythonrc/vlc.py "$1" "$ss"
 +done < "$1"
-+
-+osascript -e "set volume $volume" &
 diff --git a/vishrc/cat_rate.sh b/vishrc/cat_rate.sh
 new file mode 100755
 --- /dev/null
@@ -58492,7 +59831,7 @@ new file mode 100755
 +currentFile="$1"
 +rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$currentFile" "prunefile.conf")
 +prunefile="$rootFolder/prunefile.conf"
-+line=$(realpath --relative-to="$rootFolder" "$currentFile")
++line=$(echo "${currentFile#$rootFolder/}")
 +line=$(echo "$line" | sed 's/.*/"\.\/&"/')
 +echo "$line" >> "$prunefile"
 +sort -u "$prunefile" -o "$prunefile"
@@ -58519,7 +59858,7 @@ new file mode 100755
 +
 +while read ss
 +do
-+    ss=$(echo "$ss" | sed 's/"//g')
++    ss=$(echo "$ss" | sed 's/"//g' | sed 's/^[0-9]*,//')
 +    rm "$ss"
 +done < "$1"
 diff --git a/vishrc/sort_entries.sh b/vishrc/sort_entries.sh
@@ -58633,7 +59972,7 @@ diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
 new file mode 100755
 --- /dev/null
 +++ ./vishrc/vrun.sh
-@@ -0,0 +1,129 @@
+@@ -0,0 +1,130 @@
 +#!/bin/zsh
 +file="$1"
 +
@@ -58654,8 +59993,9 @@ new file mode 100755
 +host=$(git config deploy.host)
 +rpath=$(git config deploy.path)
 +rootFolder=$(~/loadrc/bashrc/find_up_folder.sh "$file" "files.proj")
-+rfile=$(realpath --relative-to="$rootFolder" "$file" | sed 's/ /\\ /g')
-+rfolder=$(realpath --relative-to="$rootFolder" $(dirname "$file") | sed 's/ /\\ /g')
++# Use python3 to get the relative path instead of realpath
++rfile=$(python3 -c "import os.path; print(os.path.relpath('$file', '$rootFolder'))" | sed 's/ /\\ /g')
++rfolder=$(python3 -c "import os.path; print(os.path.relpath('$(dirname "$file")', '$rootFolder'))" | sed 's/ /\\ /g')
 +
 +if [[ "$file" = *'_test.py' ]]
 +then
@@ -59329,7 +60669,7 @@ diff --git a/zshrc/custom_folder_finder.zsh b/zshrc/custom_folder_finder.zsh
 new file mode 100755
 --- /dev/null
 +++ ./zshrc/custom_folder_finder.zsh
-@@ -0,0 +1,32 @@
+@@ -0,0 +1,34 @@
 +#!/bin/zsh
 +
 +# custom_folder_finder.zsh
@@ -59337,7 +60677,7 @@ new file mode 100755
 +# It sorts the output by length and for the same length, it sorts by size (bigger first).
 +
 +search_folder() {
-+    find "$1" -type d -name "$2"  -maxdepth 5 2>/dev/null
++    find "$1" -type d -iname "*$2*" -maxdepth "$3" 2>/dev/null
 +}
 +
 +sort_results() {
@@ -59350,61 +60690,17 @@ new file mode 100755
 +
 +main() {
 +    if [ -z "$1" ] || [ -z "$2" ]; then
-+        echo "Usage: $0 search_directory folder_name"
++        echo "Usage: $0 search_directory folder_name [maxdepth]"
 +        exit 1
 +    fi
 +
 +    search_directory="$1"
 +    folder_name="$2"
-+    search_folder "$search_directory" "$folder_name" | sort_results
++    maxdepth="${3:-5}"
++    search_folder "$search_directory" "$folder_name" "$maxdepth" | sort_results
 +}
 +
 +search_directory="$1"
 +folder_name="$2"
-+main "$search_directory" "$folder_name"
-diff --git a/zshrc/folder_content_migrator.zsh b/zshrc/folder_content_migrator.zsh
-new file mode 100755
---- /dev/null
-+++ ./zshrc/folder_content_migrator.zsh
-@@ -0,0 +1,41 @@
-+#!/bin/zsh
-+
-+# folder_content_migrator.zsh
-+# A script to move the contents of one folder into another while maintaining the tree structure.
-+# It moves the content efficiently using 'mv' if the source and target folders are on the same partition, and 'rsync' for the rest.
-+
-+move_folders() {
-+    source_folder="$1"
-+    target_folder="$2"
-+
-+    if [ -d "$source_folder" ] && [ -d "$target_folder" ]; then
-+        if [[ "$(df -P "$source_folder" | tail -1 | awk '{print $1}')" == "$(df -P "$target_folder" | tail -1 | awk '{print $1}')" ]]; then
-+            # Use 'mv' if the source and target folders are on the same partition.
-+            find "$source_folder" \( -type f -o -type l \) -exec zsh -c 'src=$1; tgt="${src/#$2/$3}"; mkdir -p "$(dirname "$tgt")"; mv -v "$src" "$tgt"' zsh '{}' "$source_folder" "$target_folder" \;
-+            find "$source_folder" -type d -empty -delete
-+        else
-+            # Use 'rsync' for folders on different partitions.
-+            rsync -a --remove-source-files --info=progress2 "$source_folder/" "$target_folder/"
-+            find "$source_folder" -type d -empty -delete
-+        fi
-+    else
-+        echo "Source or target folder does not exist."
-+    fi
-+}
-+
-+main() {
-+    if [ -z "$1" ] || [ -z "$2" ]; then
-+        echo "Usage: $0 source_folder target_folder"
-+        exit 1
-+    fi
-+
-+    source_folder="$1"
-+    target_folder="$2"
-+    move_folders "$source_folder" "$target_folder"
-+}
-+
-+# Test code
-+source_folder="/media/sda1/home/huangyingw/Dropbox/myproject"
-+target_folder="/media/sda1/root/Dropbox/myproject"
-+echo "Moving contents from '$source_folder' to '$target_folder'"
-+main "$source_folder" "$target_folder"
++maxdepth="${3:-5}"
++main "$search_directory" "$folder_name" "$maxdepth"
