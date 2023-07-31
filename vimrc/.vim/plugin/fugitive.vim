@@ -930,9 +930,9 @@ function! s:CustomFolderFinder(search_directory, folder_name, ...)
         let l:command .= ' ' . a:1
     endif
 
-    let l:command .= ' 2>&1 | tee ' . 'custom_folder_finder.runresult'
+    let l:command .= ' 2>&1 | tee ' . a:folder_name . '.runresult'
     execute l:command
-    call OpenOrSwitch('custom_folder_finder.runresult', 'vs')
+    call OpenOrSwitch(a:folder_name . '.runresult', 'vs')
 endfunction
 
 function! s:FolderContentMigrator()
