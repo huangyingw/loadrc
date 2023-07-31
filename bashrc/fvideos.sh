@@ -18,14 +18,19 @@ function main() {
 
     # Build the find command with exclusion patterns from the EXCLUDE_FILE
     find_cmd="find . -type f -size \"${SIZE_OPTION}\""
-    while IFS= read -r line
-    do
-        find_cmd+=" ! -path \"${line}\""
-    done < "${EXCLUDE_FILE}"
+
+    # If the exclude file exists, then process it
+    if [ -f "${EXCLUDE_FILE}" ]
+    then
+        while IFS= read -r line
+        do
+            find_cmd+=" ! -path \"${line}\""
+        done < "${EXCLUDE_FILE}"
+    fi
 
     eval "${find_cmd} -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOG}\"" && \
         cp -fv "${FAVLOG}" fav.log && \
-        eval "${find_cmd} -exec ls -t {} + | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\"" && \
+        eval "${find_cmd} -printf '%T+ %p\\n' | sort -r | cut -d' ' -f2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\"" && \
         cp -fv "${FAVLOGSORT}" fav.log.sort
 
     cd -
