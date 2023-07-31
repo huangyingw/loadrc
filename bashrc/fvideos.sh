@@ -28,10 +28,19 @@ function main() {
         done < "${EXCLUDE_FILE}"
     fi
 
-    eval "${find_cmd} -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOG}\"" && \
-        cp -fv "${FAVLOG}" fav.log && \
-        eval "${find_cmd} -printf '%T+ %p\\n' | sort -r | cut -d' ' -f2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\"" && \
-        cp -fv "${FAVLOGSORT}" fav.log.sort
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # Mac OSX
+        eval "${find_cmd} -exec du -k {} + | sort -rn | cut -f 2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOG}\"" && \
+            cp -fv "${FAVLOG}" fav.log && \
+            eval "${find_cmd} -exec stat -f '%m %N' {} \; | sort -rn | cut -d' ' -f2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\"" && \
+            cp -fv "${FAVLOGSORT}" fav.log.sort
+    else
+        # Linux
+        eval "${find_cmd} -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOG}\"" && \
+            cp -fv "${FAVLOG}" fav.log && \
+            eval "${find_cmd} -printf '%T+ %p\\n' | sort -r | cut -d' ' -f2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\"" && \
+            cp -fv "${FAVLOGSORT}" fav.log.sort
+    fi
 
     cd -
 }
