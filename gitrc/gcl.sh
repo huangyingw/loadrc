@@ -10,8 +10,14 @@ fi
 target="${author}/${repo}"
 echo "target --> $target"
 
-git clone "$1" "$target" ; \
-    cp -v ~/loadrc/.gitconfig_sample "$target"/.gitconfig
+if [ ! -z "$2" ]  # If second parameter is provided
+then
+    git clone -b "$2" "$1" "$target"
+else
+    git clone "$1" "$target"
+fi
+
+cp -v ~/loadrc/.gitconfig_sample "$target"/.gitconfig
 
 urlVar="$1"
 urlVar=$(echo "$urlVar" | sed 's/\//\\\//g')
