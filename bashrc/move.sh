@@ -12,7 +12,7 @@ source="$1"
 target="$2"
 
 # Call the rsync_folder_operations.py script with source, target, and the mode set to 'move'
-~/loadrc/pythonrc/rsync_folder_operations.py "$source" "$target" "move"
+~/loadrc/pythonrc/folder_content_migrator.py "$source" "$target"
 
 # Remove empty directories from the source
 ~/loadrc/bashrc/rmEmpty.sh "$source"
