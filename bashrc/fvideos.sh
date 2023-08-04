@@ -8,16 +8,19 @@ function main() {
 
     if [ -n "$2" ]
     then
-        SIZE_OPTION="+${2}M"
+        SIZE_OPTION="${2}"
     else
-        SIZE_OPTION="+10M"
+        SIZE_OPTION="10"
     fi
 
+    BYTE_SIZE_OPTION=$((SIZE_OPTION * 1024 * 1024))
+
     cd "$1"
-    echo "SIZE_OPTION --> $SIZE_OPTION"
+    echo "SIZE_OPTION --> $SIZE_OPTION M"
+    echo "BYTE_SIZE_OPTION --> $BYTE_SIZE_OPTION bytes"
 
     # Build the find command with exclusion patterns from the EXCLUDE_FILE
-    find_cmd="find . -type f -size \"${SIZE_OPTION}\""
+    find_cmd="find . -type f -size +${SIZE_OPTION}M"
 
     # If the exclude file exists, then process it
     if [ -f "${EXCLUDE_FILE}" ]
@@ -28,6 +31,8 @@ function main() {
         done < "${EXCLUDE_FILE}"
     fi
 
+    echo "find_cmd --> $find_cmd"
+
     if [[ "$OSTYPE" == "darwin"* ]]; then
         # Mac OSX
         eval "${find_cmd} -exec du -k {} + | sort -rn | cut -f 2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOG}\"" && \
@@ -36,7 +41,7 @@ function main() {
             cp -fv "${FAVLOGSORT}" fav.log.sort
     else
         # Linux
-        eval "${find_cmd} -exec du -h {} + | sort -r -h | cut -f 2 | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOG}\"" && \
+        eval "${find_cmd} -exec sh -c 'du -b \"{}\" | awk \"{if (\\\$1 > $BYTE_SIZE_OPTION) {size=\\\$1; \\\$1=\\\"\\\"; gsub(/^ /, \\\"\\\", \\\$0); print size\\\",\\\\\\\"'\"{}\"'\\\\\\\"\\\"}}\"' \; | sort -rn > \"${FAVLOG}\"" && \
             cp -fv "${FAVLOG}" fav.log && \
             eval "${find_cmd} -printf '%T+ %p\\n' | sort -r | cut -d' ' -f2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\"" && \
             cp -fv "${FAVLOGSORT}" fav.log.sort

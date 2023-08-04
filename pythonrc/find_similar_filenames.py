@@ -71,12 +71,18 @@ def main(file_paths):
                     if file_size > 0:  # only write file_path to the file if its size is not zero
                         f.write(f"{file_size},{file_path}\n")
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--file", help="A file containing newline-separated file paths")
     args = parser.parse_args()
 
+    file_paths = []
     with open(args.file, 'r') as file:
-        file_paths = [line.strip() for line in file.readlines()]
+        for line in file.readlines():
+            line = line.strip()
+            # Use regex to remove leading number and comma
+            line = re.sub(r'^\d+,', '', line)
+            file_paths.append(line)
 
     main(file_paths)
