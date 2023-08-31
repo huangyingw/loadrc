@@ -3,22 +3,23 @@
 function main() {
     FAVLOG="fav.log.tmp"
     FAVLOGSORT="fav.log.sort.tmp"
+    LOCKDIR="fav.lock"
     export LC_ALL=C
     EXCLUDE_FILE="exclude_patterns.txt"
 
-    if [ -n "$2" ]
-    then
-        SIZE_OPTION="${2}"
-    else
-        SIZE_OPTION="10"
-    fi
-
+    SIZE_OPTION="${2:-200}"
     BYTE_SIZE_OPTION=$((SIZE_OPTION * 1024 * 1024))
 
-    cd "$1"
+    cd "$1" || exit
     echo "SIZE_OPTION --> $SIZE_OPTION M"
     echo "BYTE_SIZE_OPTION --> $BYTE_SIZE_OPTION bytes"
 
+    # Attempt to acquire a lock
+    if ! mkdir "${LOCKDIR}" 2>/dev/null; then
+        echo "Another process is running. Exiting."
+        exit 1
+    fi
+    
     # Build the find command with exclusion patterns from the EXCLUDE_FILE
     find_cmd="find . -type f -size +${SIZE_OPTION}M"
 
@@ -35,17 +36,20 @@ function main() {
 
     if [[ "$OSTYPE" == "darwin"* ]]; then
         # Mac OSX
-        eval "${find_cmd} -exec du -k {} + | sort -rn | cut -f 2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOG}\"" && \
-            cp -fv "${FAVLOG}" fav.log && \
-            eval "${find_cmd} -exec stat -f '%m %N' {} \; | sort -rn | cut -d' ' -f2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\"" && \
-            cp -fv "${FAVLOGSORT}" fav.log.sort
+        eval "${find_cmd} -exec du -k {} + | sort -rn | cut -f 2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOG}\""
+        cp -fv "${FAVLOG}" fav.log
+        eval "${find_cmd} -exec stat -f '%m %N' {} \; | sort -rn | cut -d' ' -f2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\""
+        cp -fv "${FAVLOGSORT}" fav.log.sort
     else
         # Linux
-        eval "${find_cmd} -exec sh -c 'du -b \"{}\" | awk \"{if (\\\$1 > $BYTE_SIZE_OPTION) {size=\\\$1; \\\$1=\\\"\\\"; gsub(/^ /, \\\"\\\", \\\$0); print size\\\",\\\\\\\"'\"{}\"'\\\\\\\"\\\"}}\"' \; | sort -rn > \"${FAVLOG}\"" && \
-            cp -fv "${FAVLOG}" fav.log && \
-            eval "${find_cmd} -printf '%T+ %p\\n' | sort -r | cut -d' ' -f2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\"" && \
-            cp -fv "${FAVLOGSORT}" fav.log.sort
+        eval "${find_cmd} -exec sh -c 'du -b \"{}\" | awk \"{if (\\\$1 > $BYTE_SIZE_OPTION) {size=\\\$1; \\\$1=\\\"\\\"; gsub(/^ /, \\\"\\\", \\\$0); print size\\\",\\\\\\\"'\"{}\"'\\\\\\\"\\\"}}\"' \; | sort -rn > \"${FAVLOG}\""
+        cp -fv "${FAVLOG}" fav.log
+        eval "${find_cmd} -printf '%T+ %p\\n' | sort -r | cut -d' ' -f2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\""
+        cp -fv "${FAVLOGSORT}" fav.log.sort
     fi
+
+    # Release the lock
+    rmdir "${LOCKDIR}"
 
     cd -
 }
