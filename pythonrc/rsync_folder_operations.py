@@ -88,7 +88,11 @@ def rsync_operations(source_folder, target_folder, mode):
         target_folder += "/"
 
     validate_input(mode, source_folder, target_folder)
-    os.makedirs(target_folder, exist_ok=True)
+
+    if not os.path.exists(target_folder):
+        os.makedirs(target_folder, exist_ok=True)
+    elif not os.path.isdir(target_folder):
+        os.makedirs(os.path.dirname(target_folder), exist_ok=True)
 
     rsync_options = get_rsync_options(mode, source_folder, target_folder)
     execute_rsync(mode, rsync_options, source_folder, target_folder)
