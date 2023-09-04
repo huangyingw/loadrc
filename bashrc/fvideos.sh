@@ -3,7 +3,6 @@
 function main() {
     FAVLOG="fav.log.tmp"
     FAVLOGSORT="fav.log.sort.tmp"
-    LOCKDIR="fav.lock"
     export LC_ALL=C
     EXCLUDE_FILE="exclude_patterns.txt"
 
@@ -14,12 +13,6 @@ function main() {
     echo "SIZE_OPTION --> $SIZE_OPTION M"
     echo "BYTE_SIZE_OPTION --> $BYTE_SIZE_OPTION bytes"
 
-    # Attempt to acquire a lock
-    if ! mkdir "${LOCKDIR}" 2>/dev/null; then
-        echo "Another process is running. Exiting."
-        exit 1
-    fi
-    
     # Build the find command with exclusion patterns from the EXCLUDE_FILE
     find_cmd="find . -type f -size +${SIZE_OPTION}M"
 
@@ -42,14 +35,11 @@ function main() {
         cp -fv "${FAVLOGSORT}" fav.log.sort
     else
         # Linux
-        eval "${find_cmd} -exec sh -c 'du -b \"{}\" | awk \"{if (\\\$1 > $BYTE_SIZE_OPTION) {size=\\\$1; \\\$1=\\\"\\\"; gsub(/^ /, \\\"\\\", \\\$0); print size\\\",\\\\\\\"'\"{}\"'\\\\\\\"\\\"}}\"' \; | sort -rn > \"${FAVLOG}\""
-        cp -fv "${FAVLOG}" fav.log
         eval "${find_cmd} -printf '%T+ %p\\n' | sort -r | cut -d' ' -f2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\""
         cp -fv "${FAVLOGSORT}" fav.log.sort
+        eval "${find_cmd} -exec sh -c 'du -b \"{}\" | awk \"{if (\\\$1 > $BYTE_SIZE_OPTION) {size=\\\$1; \\\$1=\\\"\\\"; gsub(/^ /, \\\"\\\", \\\$0); print size\\\",\\\\\\\"'\"{}\"'\\\\\\\"\\\"}}\"' \; | sort -rn > \"${FAVLOG}\""
+        cp -fv "${FAVLOG}" fav.log
     fi
-
-    # Release the lock
-    rmdir "${LOCKDIR}"
 
     cd -
 }
