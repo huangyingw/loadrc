@@ -1,3 +1,3 @@
 #!/bin/zsh
 
-/root/loadrc/bashrc/check_running.sh /root/loadrc/bashrc/fvideos.sh /media/ 1000
+/root/loadrc/bashrc/check_running.sh /root/loadrc/bashrc/fvideos.sh /media/ 200
