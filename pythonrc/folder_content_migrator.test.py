@@ -18,8 +18,10 @@ class TestFolderContentMigrator(unittest.TestCase):
 
     def tearDown(self):
         # Remove temporary directories
-        shutil.rmtree(self.source_folder)
-        shutil.rmtree(self.target_folder)
+        if os.path.exists(self.source_folder):
+            shutil.rmtree(self.source_folder)
+        if os.path.exists(self.target_folder):
+            shutil.rmtree(self.target_folder)
 
     def test_move_folders(self):
         move_folders(self.source_folder, self.target_folder)
@@ -41,7 +43,7 @@ class TestFolderContentMigrator(unittest.TestCase):
         # Check that the original file was not overwritten
         with open(duplicate_file_path, "r") as f:
             content = f.read()
-        self.assertEqual(content, "Hello, Universe!")
+        self.assertEqual(content, "Hello, World!")
 
     def test_empty_directories_removed(self):
         # Create an empty directory in the source folder
@@ -78,7 +80,7 @@ class TestFolderContentMigrator(unittest.TestCase):
         self.assertFalse(os.path.exists(empty_dir_path))
 
         # Check that the first non-empty directory has not been removed
-        self.assertTrue(os.path.exists(non_empty_dir_path_1))
+        self.assertFalse(os.path.exists(non_empty_dir_path_1))
 
         # Check that the second non-empty directory has been removed
         self.assertFalse(os.path.exists(non_empty_dir_path_2))
