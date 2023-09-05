@@ -56,34 +56,41 @@ fun! ComposePath(base, subdir)
     return ret
 endfunction
 
-
 function! LocalRename() range
+    " Process a line to remove unwanted characters
+    function! ProcessLine(line)
+        let l = substitute(a:line, '^[0-9]*,', '', '')
+        let l = substitute(l, '\\', '', 'g')
+        let l = substitute(l, '^"', '', '')
+        let l = substitute(l, '"\s*$', '', '')
+        let l = substitute(l, '\s\+$', '', '')
+        return l
+    endfunction
+
     " Get the current line and the next line
     let current_line = getline(line("."))
     let next_line = getline(line(".") + 1)
 
-    " Remove leading number and comma from the current line and the next line
-    let current_line = substitute(current_line, '^[0-9]*,', '', '')
-    let next_line = substitute(next_line, '^[0-9]*,', '', '')
+    " Process the lines
+    let current_line = ProcessLine(current_line)
+    let next_line = ProcessLine(next_line)
 
-    " Remove backslashes and quotes from the current line
-    let current_line = substitute(current_line, '\\', '', 'g')
-    let current_line = substitute(current_line, '^"', '', '')
-    let current_line = substitute(current_line, '"$', '', '')
+    " Debugging: Print the processed lines
+    echo "Processed current line: " . current_line
+    echo "Processed next line: " . next_line
 
-    " Remove trailing whitespace, backslashes, and quotes from the next line
-    let next_line = substitute(next_line, '\_s\+$', '', 'g')
-    let next_line = substitute(next_line, '^"', '', '')
-    let next_line = substitute(next_line, '"$', '', '')
+    " Check if either line is empty to prevent unmatched " error
+    if empty(current_line) || empty(next_line)
+        echo "Error: One or both lines are empty."
+        return
+    endif
 
-    " Remove trailing spaces followed by a quote in the current line
-    let current_line = substitute(current_line, '"\s\+$', '"', '')
-
-    " Remove trailing spaces followed by a quote in the next line
-    let next_line = substitute(next_line, '"\s\+$', '"', '')
+    " Escape the lines for shell command
+    let current_line = shellescape(current_line)
+    let next_line = shellescape(next_line)
 
     " Execute the rename script with the processed lines as arguments
-    execute '!~/loadrc/bashrc/rename.sh "' . current_line . '" "' . next_line . '"'
+    execute '!~/loadrc/bashrc/rename.sh ' . current_line . ' ' . next_line
 
     " Delete the current line in the buffer
     normal! dd
