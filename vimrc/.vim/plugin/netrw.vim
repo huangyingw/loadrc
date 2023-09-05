@@ -76,6 +76,12 @@ function! LocalRename() range
     let next_line = substitute(next_line, '^"', '', '')
     let next_line = substitute(next_line, '"$', '', '')
 
+    " Remove trailing spaces followed by a quote in the current line
+    let current_line = substitute(current_line, '"\s\+$', '"', '')
+
+    " Remove trailing spaces followed by a quote in the next line
+    let next_line = substitute(next_line, '"\s\+$', '"', '')
+
     " Execute the rename script with the processed lines as arguments
     execute '!~/loadrc/bashrc/rename.sh "' . current_line . '" "' . next_line . '"'
 
