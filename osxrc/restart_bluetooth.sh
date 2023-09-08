@@ -23,6 +23,7 @@ ensure_power_on() {
     done
 }
 
+#DEVICE_ID="c8-7b-23-cd-44-ba" # Black Bose QC Earbuds II
 DEVICE_ID="ac-bf-71-46-77-65" # Blue Bose QC Earbuds II
 
 blueutil -p 0
