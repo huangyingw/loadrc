@@ -8,77 +8,113 @@ import os
 import sys
 import shutil
 from subprocess import call
+import subprocess
 from pathlib import Path
 
 
+# Check if the folder is a remote folder
+def is_remote_folder(folder):
+    return ":" in folder  # Updated condition
+
+
+# Check if the source and target folders are on the same partition
 def same_partition(source_folder, target_folder):
-    print(f"Checking if {source_folder} and {target_folder} are on the same partition...")
-    return os.stat(source_folder).st_dev == os.stat(target_folder).st_dev
+    print(
+        f"Checking if {source_folder} and {target_folder} are on the same partition..."
+    )
+
+    if is_remote_folder(source_folder) or is_remote_folder(target_folder):
+        print("One or both folders are remote. Cannot check partition.")
+        return False
+    try:
+        return os.stat(source_folder).st_dev == os.stat(target_folder).st_dev
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
+        return False
+
+
+# Remove empty directories using shell commands
+def remove_empty_dirs_with_shell(target_folder):
+    print(
+        f"Efficiently removing empty directories in {target_folder} using shell commands..."
+    )
+    subprocess.run(["find", target_folder, "-type", "d", "-empty", "-delete"])
+    subprocess.run(["rmdir", target_folder])
 
 
 def move_folders(source_folder, target_folder):
     print(f"Moving contents from {source_folder} to {target_folder}...")
-    if os.path.isdir(source_folder):
-        if not os.path.isdir(target_folder):
-            print(f"Target folder {target_folder} does not exist. Creating it...")
-            os.makedirs(target_folder, exist_ok=True)
+    if not os.path.isdir(target_folder):
+        print(f"Target folder {target_folder} does not exist. Creating it...")
+        os.makedirs(target_folder, exist_ok=True)
 
-        if same_partition(source_folder, target_folder):
-            print("Source and target folders are on the same partition. Using 'shutil.move'...")
-            for root, _, files in os.walk(source_folder):
-                for file in files:
-                    src = os.path.join(root, file)
-                    tgt = os.path.join(
-                        target_folder, os.path.relpath(src, source_folder)
-                    )
-                    try:
-                        print(f"Creating directories for {tgt} if they don't exist...")
-                        os.makedirs(os.path.dirname(tgt), exist_ok=True)
-                        print(f"Moving {src} to {tgt}...")
-                        shutil.move(src, tgt) if not os.path.exists(
-                            tgt
-                        ) else print(
-                            "Target file already exists, not overwriting."
-                        )
-                    except OSError as e:
-                        print(f"Cannot create directory {os.path.dirname(tgt)}: {e}")
-
-        # Call the rsync_folder_operations script
-        print("Source and target folders are on different partitions. Using 'rsync'...")
-        rsync_script_path = os.path.join(os.path.expanduser('~'), "loadrc/pythonrc/rsync_folder_operations.py")
-        call(
-            [
-                rsync_script_path,
-                source_folder,
-                target_folder,
-                "move",
-            ]
+    if same_partition(source_folder, target_folder):
+        print(
+            "Source and target folders are on the same partition. Using 'shutil.move'..."
         )
+        for root, _, files in os.walk(source_folder):
+            for file in files:
+                src = os.path.join(root, file)
+                tgt = os.path.join(
+                    target_folder, os.path.relpath(src, source_folder)
+                )
+                try:
+                    print(
+                        f"Creating directories for {tgt} if they don't exist..."
+                    )
+                    os.makedirs(os.path.dirname(tgt), exist_ok=True)
+                    print(f"Moving {src} to {tgt}...")
+                    shutil.move(src, tgt) if not os.path.exists(
+                        tgt
+                    ) else print(
+                        "Target file already exists, not overwriting."
+                    )
+                except OSError as e:
+                    print(
+                        f"Cannot create directory {os.path.dirname(tgt)}: {e}"
+                    )
 
-        # Remove empty directories after the move
-        print("Removing empty directories...")
-        for root, dirs, _ in os.walk(source_folder, topdown=False):
-            for directory in dirs:
-                dir_path = os.path.join(root, directory)
-                if os.path.isdir(dir_path) and not os.listdir(dir_path):
-                    print(f"Removing empty directory {dir_path}...")
-                    os.rmdir(dir_path)
-
-        # Check if source_folder is empty and remove it
-        if not os.listdir(source_folder):
-            print(f"Removing empty source folder {source_folder}...")
-            os.rmdir(source_folder)
     else:
-        print("Source folder does not exist. Exiting...")
+        print(
+            "Source and target folders are on different partitions. Using 'rsync'..."
+        )
+        rsync_script_path = os.path.join(
+            os.path.expanduser("~"),
+            "loadrc/pythonrc/rsync_folder_operations.py",
+        )
+        call([rsync_script_path, source_folder, target_folder, "move"])
+
+    # Remove empty directories after the move
+    remove_empty_dirs_with_shell(source_folder)
+
+    # Check if source_folder is empty and remove it
+    if not os.listdir(source_folder):
+        print(f"Removing empty source folder {source_folder}...")
+        os.rmdir(source_folder)
 
 
 def main():
     if len(sys.argv) != 3:
-        print("Usage: {} source_folder target_folder".format(sys.argv[0]))
+        print(f"Usage: {sys.argv[0]} source_folder target_folder")
         sys.exit(1)
 
-    source_folder = os.path.abspath(sys.argv[1])
-    target_folder = os.path.abspath(sys.argv[2])
+    raw_source_folder = sys.argv[1]
+    raw_target_folder = sys.argv[2]
+
+    # Handle special/remote paths for source_folder
+    source_folder = (
+        raw_source_folder
+        if ":" in raw_source_folder
+        else os.path.abspath(raw_source_folder)
+    )
+
+    # Handle special/remote paths for target_folder
+    target_folder = (
+        raw_target_folder
+        if ":" in raw_target_folder
+        else os.path.abspath(raw_target_folder)
+    )
+
     move_folders(source_folder, target_folder)
 
 
