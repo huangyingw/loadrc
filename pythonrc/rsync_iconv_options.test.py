@@ -31,6 +31,22 @@ class TestRsyncIconvOptions(unittest.TestCase):
         result = get_remote_encoding("user@remote_host:/remote/path")
         self.assertEqual(result, "utf-8")
 
+    @patch("subprocess.check_output")
+    def test_get_remote_encoding_with_mini_path(self, mock_check_output):
+        mock_check_output.return_value = "Linux\n"
+        result = get_remote_encoding("mini:/media/music/")
+        self.assertEqual(result, "utf-8")
+
+    @patch("rsync_iconv_options.get_local_encoding", return_value="utf-8")
+    @patch("rsync_iconv_options.get_remote_encoding", return_value="utf-8")
+    def test_generate_iconv_options_from_local_to_mini(
+        self, mock_get_remote_encoding, mock_get_local_encoding
+    ):
+        iconv_options = generate_iconv_options(
+            "local_source_folder", "mini:/media/music/"
+        )
+        self.assertEqual(iconv_options, "")
+
     @patch("rsync_iconv_options.get_local_encoding", return_value="utf-8")
     @patch("rsync_iconv_options.get_remote_encoding", return_value="utf-8-mac")
     def test_generate_iconv_options_from_linux_to_mac(
