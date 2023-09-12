@@ -74,15 +74,11 @@ def move_folders(source_folder, target_folder):
                         f"Cannot create directory {os.path.dirname(tgt)}: {e}"
                     )
 
-    else:
-        print(
-            "Source and target folders are on different partitions. Using 'rsync'..."
-        )
-        rsync_script_path = os.path.join(
-            os.path.expanduser("~"),
-            "loadrc/pythonrc/rsync_folder_operations.py",
-        )
-        call([rsync_script_path, source_folder, target_folder, "move"])
+    rsync_script_path = os.path.join(
+        os.path.expanduser("~"),
+        "loadrc/pythonrc/rsync_folder_operations.py",
+    )
+    call([rsync_script_path, source_folder, target_folder, "move"])
 
     # Remove empty directories after the move
     remove_empty_dirs_with_shell(source_folder)
