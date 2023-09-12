@@ -88,9 +88,15 @@ def move_folders(source_folder, target_folder):
     remove_empty_dirs_with_shell(source_folder)
 
     # Check if source_folder is empty and remove it
-    if not os.listdir(source_folder):
-        print(f"Removing empty source folder {source_folder}...")
-        os.rmdir(source_folder)
+    if is_remote_folder(source_folder):
+        print("Source folder is remote, skipping directory removal.")
+    else:
+        try:
+            if not os.listdir(source_folder):
+                print(f"Removing empty source folder {source_folder}...")
+                os.rmdir(source_folder)
+        except FileNotFoundError as e:
+            print(f"Error: {e}")
 
 
 def main():
