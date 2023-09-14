@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-TIMEOUT=180
+TIMEOUT=2
 
 # Function to keep the Bluetooth connection alive
 keep_connect() {
