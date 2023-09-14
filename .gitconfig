@@ -64,9 +64,9 @@
 [branch "gdi2"]
     remote = origin
     merge = refs/heads/gdi2
-[branch "fvideos"]
+[branch "find_large_files_with_exclusions"]
     remote = origin
-    merge = refs/heads/fvideos
+    merge = refs/heads/find_large_files_with_exclusions
 [branch "gdif"]
     remote = origin
     merge = refs/heads/gdif
