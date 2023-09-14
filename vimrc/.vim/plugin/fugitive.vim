@@ -747,11 +747,11 @@ function! s:GResolveConflicts() abort
 endfunction
 
 function! s:GrevApply() abort
-    exec '!git apply --reverse --reject --whitespace=fix --recount --allow-empty ' . '"' .  expand('%:p') . '"'
+    exec '!git apply --reverse --reject --whitespace=fix --recount ' . '"' .  expand('%:p') . '"'
 endfunction
 
 function! s:Gapply() abort
-    exec '!git apply --reject --whitespace=fix --recount --allow-empty ' . '"' .  expand('%:p') . '"'
+    exec '!git apply --reject --whitespace=fix --recount ' . '"' .  expand('%:p') . '"'
 endfunction
 
 function! s:Dps() abort
