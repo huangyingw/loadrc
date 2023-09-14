@@ -12,7 +12,7 @@ targetFile="$1"
 # Function to run the script in an infinite loop
 run_in_loop() {
     while true; do
-        ./run_once_script_checker.sh "$targetFile" "$2" "$3" "$4"
+        ~/loadrc/bashrc/run_once_script_checker.sh "$targetFile" "$2" "$3" "$4"
         sleep 1  # Optional: sleep for 1 second before the next iteration
     done
 }
