@@ -19,6 +19,7 @@ pip install \
 pip3 install \
     autoflake \
     autopep8 \
+    bcache-status \
     black \
     ipynb-py-convert \
     packaging \
