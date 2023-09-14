@@ -20312,7 +20312,7 @@ new file mode 160000
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit 9265375004214121ad65438d02cd4e6e660f75f1-dirty
++Subproject commit 8b59ee525f3565e9773f5be3e3f74099364ec7e4-dirty
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 --- /dev/null
