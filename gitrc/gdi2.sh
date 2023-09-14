@@ -63,7 +63,7 @@ fi
 # Discard unnecessary changes and apply the patch
 ~/loadrc/gitrc/discard_unnecessaries.sh
 git checkout -f "$target_branch"
-git apply --reject --whitespace=fix --recount --allow-empty --index "$gdit_diff"
+git apply --reject --whitespace=fix --recount --index "$gdit_diff"
 
 ret_val=$?
 
