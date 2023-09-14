@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+crontab -r
+
 # Get the PIDs of the top 10 I/O-consuming processes
 PIDS=$(iotop -b -n 1 -o -k | awk 'NR>2 {print $1, $10}' | sort -k2 -nr | head -n 10 | awk '{print $1}')
 
