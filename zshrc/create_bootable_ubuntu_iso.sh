@@ -1,5 +1,5 @@
-#!/bin/zsh            
- 
+#!/bin/zsh
+
 # Installing required packages
 apt-get install -y grub-pc-bin grub-efi-amd64-bin
 
@@ -14,7 +14,7 @@ while read line; do
 done < "$EXCLUDE_FILE"
 
 mkdir -p "$WORK_DIR"/casper
-rsync -av --delete --progress "${EXCLUDES[@]}" / "$WORK_DIR"/casper/filesystem.root 
+rsync -av --delete --progress "${EXCLUDES[@]}" / "$WORK_DIR"/casper/filesystem.root
 mksquashfs "$WORK_DIR"/casper/filesystem.root "$WORK_DIR"/casper/filesystem.squashfs -e boot
 
 # Copying kernel and initial ramdisk

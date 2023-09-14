@@ -12,4 +12,4 @@ then
     exit 1
 fi
 
-~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_update_proj.sh
+~/loadrc/bashrc/run_once_script_checker.sh ~/loadrc/bashrc/do_update_proj.sh

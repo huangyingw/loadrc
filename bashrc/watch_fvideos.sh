@@ -1,3 +1,3 @@
 #!/bin/zsh
 
-/root/loadrc/bashrc/check_running.sh /root/loadrc/bashrc/fvideos.sh /media/ 200
+/root/loadrc/bashrc/run_once_script_checker.sh /root/loadrc/bashrc/fvideos.sh /media/ 200

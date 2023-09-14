@@ -14,7 +14,7 @@ function! ExecuteScriptInLoop()
       break
     endif
     " Execute your script and pass the current filename
-    let s:output = system('/root/loadrc/bashrc/check_running.sh ' . shellescape(bufname('%')))
+    let s:output = system('/root/loadrc/bashrc/run_once_script_checker.sh ' . shellescape(bufname('%')))
     echo s:output
     " Pause for 2 seconds
     sleep 2

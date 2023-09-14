@@ -1,2 +1,2 @@
 #!/bin/zsh
-~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/echo.sh
+~/loadrc/bashrc/run_once_script_checker.sh ~/loadrc/bashrc/echo.sh

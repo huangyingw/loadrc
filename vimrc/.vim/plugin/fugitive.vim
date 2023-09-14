@@ -582,7 +582,7 @@ function! s:CatPlay(...) abort
     let file = expand("%:p")
 
     call asyncrun#stop('<bang>')
-    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output) 
+    call asyncrun#run('<bang>', '', '~/loadrc/vishrc/cat_play.sh ' . '"' . expand("%:p") . '"' . ' 2>&1 | tee ' . b:output)
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 

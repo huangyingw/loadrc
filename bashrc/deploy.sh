@@ -11,5 +11,5 @@ fi
 if [[ -n "$host" ]] && [[ -n "$rpath" ]]
 then
     ssh -n "$host" "mkdir -p $rpath"
-    ~/loadrc/bashrc/check_running.sh ~/loadrc/bashrc/do_deploy.sh
+    ~/loadrc/bashrc/run_once_script_checker.sh ~/loadrc/bashrc/do_deploy.sh
 fi
