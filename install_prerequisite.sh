@@ -8,6 +8,7 @@ apt-get install -y \
     astyle \
     automake \
     autotools-dev \
+    bcache-tools \
     binutils \
     build-essential \
     cmake \
