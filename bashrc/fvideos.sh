@@ -35,9 +35,18 @@ function main() {
         cp -fv "${FAVLOGSORT}" fav.log.sort
     else
         # Linux
-        eval "${find_cmd} -printf '%T+ %p\\n' | sort -r | cut -d' ' -f2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\""
+        eval "${find_cmd} -printf '%T+ %p\\n' | \
+            sort -r | \
+            cut -d' ' -f2- | \
+            sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\"" && \
         cp -fv "${FAVLOGSORT}" fav.log.sort
-        eval "${find_cmd} -exec sh -c 'du -b \"{}\" | awk \"{if (\\\$1 > $BYTE_SIZE_OPTION) {size=\\\$1; \\\$1=\\\"\\\"; gsub(/^ /, \\\"\\\", \\\$0); print size\\\",\\\\\\\"'\"{}\"'\\\\\\\"\\\"}}\"' \; | sort -rn > \"${FAVLOG}\""
+
+        eval "${find_cmd} -exec sh -c 'du -b \"{}\" | \
+            awk \"{if (\\\$1 > $BYTE_SIZE_OPTION) { \
+                    size=\\\$1; \\\$1=\\\"\\\"; \
+                    gsub(/^ /, \\\"\\\", \\\$0); \
+                    print size\\\",\\\\\\\"'\"{}\"'\\\\\\\"\\\"}}\"' \; | \
+            sort -rn > \"${FAVLOG}\"" && \
         cp -fv "${FAVLOG}" fav.log
     fi
 
