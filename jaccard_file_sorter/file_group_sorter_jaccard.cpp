@@ -128,6 +128,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 
+    std::cout << "Writing to output file: " << output_filename << std::endl;  // Log output
     std::cout << "Reading file content..." << std::endl;  // Log output
 
     std::vector<std::pair<int, std::string>> file_list;
