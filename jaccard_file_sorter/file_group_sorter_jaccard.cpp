@@ -89,7 +89,7 @@ void group_files_by_similarity_threaded(const std::vector<std::pair<long long in
         std::lock_guard<std::mutex> lock(groups_mutex); // Lock the mutex for groups
         for (const auto& [key, _] : groups)
         {
-            if (jaccard_similarity(key, filename) > 80)
+            if (jaccard_similarity(key, filename) > 90)
             {
                 groups[key].push_back({size, path});
                 added = true;
