@@ -11,6 +11,12 @@
 #include <mutex>
 
 std::mutex jaccard_cache_mutex; // Mutex for jaccard_cache
+std::mutex groups_mutex;  // Mutex for groups
+std::mutex progress_mutex;  // Mutex for progress
+
+// Progress variables
+int total_files = 0;
+int processed_files = 0;
 
 // Define a custom hash for std::pair<std::string, std::string>
 struct pair_hash
@@ -72,7 +78,13 @@ double jaccard_similarity(const std::string& a, const std::string& b)
     }
 }
 
-std::mutex groups_mutex; // Mutex for groups
+// Function to update and print progress
+void update_progress()
+{
+    std::lock_guard<std::mutex> lock(progress_mutex);
+    ++processed_files;
+    std::cout << "Progress: " << processed_files << "/" << total_files << std::endl;
+}
 
 // Function to group files by similarity
 void group_files_by_similarity_threaded(const std::vector<std::pair<long long int, std::string>>& file_list,
@@ -101,6 +113,7 @@ void group_files_by_similarity_threaded(const std::vector<std::pair<long long in
         {
             groups[filename].push_back({size, path});
         }
+        update_progress();
     }
 }
 
@@ -172,6 +185,7 @@ int main(int argc, char* argv[])
 
     std::cout << "Number of threads: " << num_threads << std::endl;
     std::vector<std::thread> threads;
+    total_files = file_list.size();  // Initialize total_files
     int chunk_size = file_list.size() / num_threads;
 
     for (int i = 0; i < num_threads; ++i)
