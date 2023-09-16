@@ -69,10 +69,10 @@ double jaccard_similarity(const std::string& a, const std::string& b)
 }
 
 // Function to group files by similarity
-std::unordered_map<std::string, std::vector<std::pair<int, std::string>>> group_files_by_similarity(const std::vector<std::pair<int, std::string>>& file_list)
+std::unordered_map<std::string, std::vector<std::pair<long long int, std::string>>> group_files_by_similarity(const std::vector<std::pair<long long int, std::string>>& file_list)
 {
     std::cout << "Grouping files by similarity..." << std::endl;  // Log output
-    std::unordered_map<std::string, std::vector<std::pair<int, std::string>>> groups;
+    std::unordered_map<std::string, std::vector<std::pair<long long int, std::string>>> groups;
 
     for (const auto& [size, path] : file_list)
     {
@@ -131,7 +131,7 @@ int main(int argc, char* argv[])
     std::cout << "Writing to output file: " << output_filename << std::endl;  // Log output
     std::cout << "Reading file content..." << std::endl;  // Log output
 
-    std::vector<std::pair<int, std::string>> file_list;
+    std::vector<std::pair<long long int, std::string>> file_list;
     std::string line, size_str, path_str;
     long long int size;  // Use long long int for large file sizes
 
@@ -157,14 +157,14 @@ int main(int argc, char* argv[])
     // Sort files within each group by size
     for (auto& [key, group] : groups)
     {
-        std::sort(group.begin(), group.end(), [](const std::pair<int, std::string>& a, const std::pair<int, std::string>& b)
+        std::sort(group.begin(), group.end(), [](const std::pair<long long int, std::string>& a, const std::pair<long long int, std::string>& b)
         {
             return a.first > b.first;
         });
     }
 
     // Sort groups by the largest file in each group
-    std::vector<std::vector<std::pair<int, std::string>>> sorted_groups;
+    std::vector<std::vector<std::pair<long long int, std::string>>> sorted_groups;
     for (const auto& [_, group] : groups)
     {
         sorted_groups.push_back(group);
