@@ -1,37 +1,71 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <unordered_map>
 #include <vector>
 #include <sstream>
+#include <functional>
 #include <unordered_map>
 #include <unordered_set>
 #include <algorithm>
 
+// Define a custom hash for std::pair<std::string, std::string>
+struct pair_hash
+{
+    template <class T1, class T2>
+    std::size_t operator () (const std::pair<T1, T2>& p) const
+    {
+        auto h1 = std::hash<T1> {}(p.first); // Hash the first element
+        auto h2 = std::hash<T2> {}(p.second); // Hash the second element
+
+        // Combine the two hashes
+        return h1 ^ h2;
+    }
+};
+
+// Jaccard similarity cache
+std::unordered_map<std::pair<std::string, std::string>, double, pair_hash> jaccard_cache;
+
 // Function to calculate Jaccard similarity between two strings
 double jaccard_similarity(const std::string& a, const std::string& b)
 {
-    std::cout << "Calculating Jaccard similarity between: " << a << " and " << b << std::endl;  // Log output
-    std::unordered_set<char> setA(a.begin(), a.end());
-    std::unordered_set<char> setB(b.begin(), b.end());
-
-    std::unordered_set<char> intersection;
-    std::unordered_set<char> unionSet;
-
-    for (char c : setA)
     {
-        if (setB.find(c) != setB.end())
+        // Check if result is in cache
+        auto it = jaccard_cache.find({a, b});
+        if (it != jaccard_cache.end())
         {
-            intersection.insert(c);
+            return it->second;
         }
-        unionSet.insert(c);
-    }
 
-    for (char c : setB)
-    {
-        unionSet.insert(c);
-    }
+        std::cout << "Calculating Jaccard similarity between: " << a << " and " << b << std::endl;  // Log output
+        std::unordered_set<char> setA(a.begin(), a.end());
+        std::unordered_set<char> setB(b.begin(), b.end());
 
-    return static_cast<double>(intersection.size()) / unionSet.size() * 100;
+        std::unordered_set<char> intersection;
+        std::unordered_set<char> unionSet;
+
+        for (char c : setA)
+        {
+            if (setB.find(c) != setB.end())
+            {
+                intersection.insert(c);
+            }
+            unionSet.insert(c);
+        }
+
+        for (char c : setB)
+        {
+            unionSet.insert(c);
+        }
+
+        double result = static_cast<double>(intersection.size()) / unionSet.size() * 100;
+
+        // Store result in cache
+        jaccard_cache[ {a, b}] = result;
+        jaccard_cache[ {b, a}] = result; // Jaccard similarity is commutative
+
+        return result;
+    }
 }
 
 // Function to group files by similarity
