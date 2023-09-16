@@ -1,4 +1,5 @@
 #include <iostream>
+#include <filesystem>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -10,6 +11,33 @@
 #include <thread>
 #include <mutex>
 #include <iomanip>
+#include <spdlog/spdlog.h>  // Include spdlog header
+#include <spdlog/sinks/basic_file_sink.h>  // Include file sink header
+
+// 在main函数或程序初始化部分
+void setup_logger(const std::string& output_filename)
+{
+    try
+    {
+        // Extract the directory from the output_filename
+        std::filesystem::path output_path(output_filename);
+        auto directory = output_path.parent_path();
+
+        // Create the log filename
+        std::string log_filename = "file_group_sorter_jaccard.log";
+
+        // Combine directory and log filename
+        auto full_log_path = directory / log_filename;
+
+        auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(full_log_path.string(), true);
+        auto logger = std::make_shared<spdlog::logger>("file_logger", file_sink);
+        spdlog::register_logger(logger);
+    }
+    catch (const spdlog::spdlog_ex &ex)
+    {
+        std::cout << "Log initialization failed: " << ex.what() << std::endl;
+    }
+}
 
 std::mutex jaccard_cache_mutex; // Mutex for jaccard_cache
 std::mutex groups_mutex;  // Mutex for groups
@@ -85,7 +113,8 @@ void update_progress()
     std::lock_guard<std::mutex> lock(progress_mutex);
     ++processed_files;
     double progress = (static_cast<double>(processed_files) / total_files) * 100;
-    std::cout << "Progress: " << std::fixed << std::setprecision(2) << progress << "%" << std::endl;
+    auto logger = spdlog::get("file_logger");  // Get logger
+    logger->info("Progress: {:.2f}%", progress);  // Use file_logger for logging
 }
 
 // Function to group files by similarity
@@ -93,7 +122,7 @@ void group_files_by_similarity_threaded(const std::vector<std::pair<long long in
                                         std::unordered_map<std::string, std::vector<std::pair<long long int, std::string>>>& groups,
                                         int start, int end)
 {
-    std::cout << "Grouping files by similarity..." << std::endl;  // Log output
+    spdlog::info("Grouping files by similarity...");  // Use spdlog for logging
     for (int i = start; i < end; ++i)
     {
         const auto& [size, path] = file_list[i];
@@ -122,7 +151,6 @@ void group_files_by_similarity_threaded(const std::vector<std::pair<long long in
 // Main function
 int main(int argc, char* argv[])
 {
-    std::cout << "Program started." << std::endl;  // Log output
 
     if (argc != 3)
     {
@@ -132,8 +160,13 @@ int main(int argc, char* argv[])
 
     std::string input_filename = argv[1];
     std::string output_filename = argv[2];
+    setup_logger(output_filename);  // Setup logger based on output_filename
+    auto logger = spdlog::get("file_logger");  // Get logger
 
-    std::cout << "Reading from input file: " << input_filename << std::endl;  // Log output
+    logger->info("Program started.");  // Use spdlog for logging
+
+
+    spdlog::info("Reading from input file: {}", input_filename);  // Use spdlog for logging
 
     std::ifstream infile(input_filename);
     if (!infile.is_open())
@@ -149,8 +182,8 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    std::cout << "Writing to output file: " << output_filename << std::endl;  // Log output
-    std::cout << "Reading file content..." << std::endl;  // Log output
+    spdlog::info("Writing to output file: {}", output_filename);  // Use spdlog for logging
+    spdlog::info("Reading file content...");  // Use spdlog for logging
 
     std::vector<std::pair<long long int, std::string>> file_list;
     std::string line, size_str, path_str;
@@ -185,7 +218,7 @@ int main(int argc, char* argv[])
         num_threads = 2;
     }
 
-    std::cout << "Number of threads: " << num_threads << std::endl;
+    spdlog::info("Number of threads: {}", num_threads);  // Use spdlog for logging
     std::vector<std::thread> threads;
     total_files = file_list.size();  // Initialize total_files
     int chunk_size = file_list.size() / num_threads;
@@ -225,7 +258,7 @@ int main(int argc, char* argv[])
         outfile << std::endl;  // Add an empty line to separate groups
     }
 
-    std::cout << "Program finished successfully." << std::endl;  // Log output
+    logger->info("Program finished successfully.");  // Use spdlog for logging
 
     return 0;
 }
