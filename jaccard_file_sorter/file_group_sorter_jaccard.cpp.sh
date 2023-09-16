@@ -4,6 +4,5 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
 make && \
-    make install
-
-cd -
+    make install && \
+    /usr/local/bin/file_group_sorter_jaccard /media/fav.log /media/fav.log.dup
