@@ -72,6 +72,8 @@ double jaccard_similarity(const std::string& a, const std::string& b)
     }
 }
 
+std::mutex groups_mutex; // Mutex for groups
+
 // Function to group files by similarity
 void group_files_by_similarity_threaded(const std::vector<std::pair<long long int, std::string>>& file_list,
                                         std::unordered_map<std::string, std::vector<std::pair<long long int, std::string>>>& groups,
@@ -84,6 +86,7 @@ void group_files_by_similarity_threaded(const std::vector<std::pair<long long in
         std::string filename = path.substr(path.find_last_of("/") + 1);
         bool added = false;
 
+        std::lock_guard<std::mutex> lock(groups_mutex); // Lock the mutex for groups
         for (const auto& [key, _] : groups)
         {
             if (jaccard_similarity(key, filename) > 80)
@@ -157,7 +160,17 @@ int main(int argc, char* argv[])
 
     std::unordered_map<std::string, std::vector<std::pair<long long int, std::string>>> groups;
 
-    int num_threads = 4; // Number of threads
+    // Get the number of hardware threads available on the system
+    int num_threads = static_cast<int>(std::thread::hardware_concurrency());
+
+
+    // If the function could not determine the number, let's default to 2 threads
+    if (num_threads == 0)
+    {
+        num_threads = 2;
+    }
+
+    std::cout << "Number of threads: " << num_threads << std::endl;
     std::vector<std::thread> threads;
     int chunk_size = file_list.size() / num_threads;
 
