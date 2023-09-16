@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <thread>
 #include <mutex>
+#include <iomanip>
 
 std::mutex jaccard_cache_mutex; // Mutex for jaccard_cache
 std::mutex groups_mutex;  // Mutex for groups
@@ -83,7 +84,8 @@ void update_progress()
 {
     std::lock_guard<std::mutex> lock(progress_mutex);
     ++processed_files;
-    std::cout << "Progress: " << processed_files << "/" << total_files << std::endl;
+    double progress = (static_cast<double>(processed_files) / total_files) * 100;
+    std::cout << "Progress: " << std::fixed << std::setprecision(2) << progress << "%" << std::endl;
 }
 
 // Function to group files by similarity
