@@ -7,6 +7,10 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <algorithm>
+#include <thread>
+#include <mutex>
+
+std::mutex jaccard_cache_mutex; // Mutex for jaccard_cache
 
 // Define a custom hash for std::pair<std::string, std::string>
 struct pair_hash
@@ -28,6 +32,7 @@ std::unordered_map<std::pair<std::string, std::string>, double, pair_hash> jacca
 // Function to calculate Jaccard similarity between two strings
 double jaccard_similarity(const std::string& a, const std::string& b)
 {
+    std::lock_guard<std::mutex> lock(jaccard_cache_mutex); // Lock the mutex
     {
         // Check if result is in cache
         auto it = jaccard_cache.find({a, b});
@@ -68,13 +73,14 @@ double jaccard_similarity(const std::string& a, const std::string& b)
 }
 
 // Function to group files by similarity
-std::unordered_map<std::string, std::vector<std::pair<long long int, std::string>>> group_files_by_similarity(const std::vector<std::pair<long long int, std::string>>& file_list)
+void group_files_by_similarity_threaded(const std::vector<std::pair<long long int, std::string>>& file_list,
+                                        std::unordered_map<std::string, std::vector<std::pair<long long int, std::string>>>& groups,
+                                        int start, int end)
 {
     std::cout << "Grouping files by similarity..." << std::endl;  // Log output
-    std::unordered_map<std::string, std::vector<std::pair<long long int, std::string>>> groups;
-
-    for (const auto& [size, path] : file_list)
+    for (int i = start; i < end; ++i)
     {
+        const auto& [size, path] = file_list[i];
         std::string filename = path.substr(path.find_last_of("/") + 1);
         bool added = false;
 
@@ -93,8 +99,6 @@ std::unordered_map<std::string, std::vector<std::pair<long long int, std::string
             groups[filename].push_back({size, path});
         }
     }
-
-    return groups;
 }
 
 // Main function
@@ -151,19 +155,27 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    auto groups = group_files_by_similarity(file_list);
+    std::unordered_map<std::string, std::vector<std::pair<long long int, std::string>>> groups;
 
-    // Sort files within each group by size
-    for (auto& [key, group] : groups)
+    int num_threads = 4; // Number of threads
+    std::vector<std::thread> threads;
+    int chunk_size = file_list.size() / num_threads;
+
+    for (int i = 0; i < num_threads; ++i)
     {
-        std::sort(group.begin(), group.end(), [](const std::pair<long long int, std::string>& a, const std::pair<long long int, std::string>& b)
-        {
-            return a.first > b.first;
-        });
+        int start = i * chunk_size;
+        int end = (i == num_threads - 1) ? file_list.size() : start + chunk_size;
+        threads.push_back(std::thread(group_files_by_similarity_threaded, std::ref(file_list), std::ref(groups), start, end));
+    }
+
+    for (auto& t : threads)
+    {
+        t.join();
     }
 
     // Sort groups by the largest file in each group
     std::vector<std::vector<std::pair<long long int, std::string>>> sorted_groups;
+
     for (const auto& [_, group] : groups)
     {
         sorted_groups.push_back(group);
