@@ -191,7 +191,7 @@ int main(int argc, char* argv[])
     {
         for (const auto& [size, path] : group)
         {
-            outfile << size << " \"" << path << "\"" << std::endl;
+            outfile << size << ",\"" << path << "\"" << std::endl;
         }
         outfile << std::endl;  // Add an empty line to separate groups
     }
