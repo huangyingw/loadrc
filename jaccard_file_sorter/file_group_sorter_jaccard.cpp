@@ -4,22 +4,20 @@
 #include <string>
 #include <vector>
 #include <sstream>
-#include <functional>
 #include <unordered_map>
 #include <unordered_set>
 #include <algorithm>
 #include <iomanip>
-#include <spdlog/spdlog.h>  // Include spdlog header
-#include <spdlog/sinks/basic_file_sink.h>  // Include file sink header
 #include <leveldb/cache.h>  // Include LevelDB cache header
 #include <atomic>  // Include atomic header
 #include <tbb/parallel_for.h>
 #include <tbb/blocked_range.h>
+#include "xxhash.h"  // Include xxHash header
 
 // Initialize LevelDB LRU Cache
 leveldb::Cache* cache = leveldb::NewLRUCache(1000000000);  // 1GB cache
 
-// 初始化LevelDB LRU缓存
+// Initialize LevelDB LRU cache for groups
 leveldb::Cache* groups_cache = leveldb::NewLRUCache(1000000000);  // 1GB cache for groups
 
 std::unordered_set<std::string> cache_keys;  // to store all keys inserted into the cache
@@ -27,55 +25,19 @@ std::unordered_set<std::string> cache_keys;  // to store all keys inserted into 
 // Generate a sorted cache key for two strings
 std::string generate_cache_key(const std::string& a, const std::string& b)
 {
-    return (a < b) ? (a + "_" + b) : (b + "_" + a);
+    // Determine the order of strings to avoid sorting
+    std::string concatenated = (a < b) ? (a + "_" + b) : (b + "_" + a);
+
+    // Hash the concatenated string using xxHash
+    unsigned long long hash_value = XXH64(concatenated.c_str(), concatenated.size(), 0);
+
+    return std::to_string(hash_value);
 }
-
-// 在main函数或程序初始化部分
-void setup_logger(const std::string& output_filename)
-{
-    try
-    {
-        // Extract the directory from the output_filename
-        std::filesystem::path output_path(output_filename);
-        auto directory = output_path.parent_path();
-
-        // Create the log filename
-        std::string log_filename = "file_group_sorter_jaccard.log";
-
-        // Combine directory and log filename
-        auto full_log_path = directory / log_filename;
-
-        auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(full_log_path.string(), true);
-        auto logger = std::make_shared<spdlog::logger>("file_logger", file_sink);
-        spdlog::register_logger(logger);
-    }
-    catch (const spdlog::spdlog_ex &ex)
-    {
-        std::cout << "Log initialization failed: " << ex.what() << std::endl;
-    }
-}
-
 
 // Progress variables
 int total_files = 0;
 std::atomic<int> processed_files(0);  // Make processed_files atomic
 
-// Define a custom hash for std::pair<std::string, std::string>
-struct pair_hash
-{
-    template <class T1, class T2>
-    std::size_t operator () (const std::pair<T1, T2>& p) const
-    {
-        auto h1 = std::hash<T1> {}(p.first); // Hash the first element
-        auto h2 = std::hash<T2> {}(p.second); // Hash the second element
-
-        // Combine the two hashes
-        return h1 ^ h2;
-    }
-};
-
-// Jaccard similarity cache
-std::unordered_map<std::pair<std::string, std::string>, double, pair_hash> jaccard_cache;
 
 // Function to calculate Jaccard similarity between two strings
 double jaccard_similarity(const std::string& a, const std::string& b)
@@ -93,7 +55,6 @@ double jaccard_similarity(const std::string& a, const std::string& b)
         return *cached_value;
     }
 
-    std::cout << "Calculating Jaccard similarity between: " << a << " and " << b << std::endl;  // Log output
     std::unordered_set<char> setA(a.begin(), a.end());
     std::unordered_set<char> setB(b.begin(), b.end());
 
@@ -131,14 +92,12 @@ void update_progress()
 {
     ++processed_files;  // Atomic operation
     double progress = (static_cast<double>(processed_files.load()) / total_files) * 100;  // Atomic read
-    auto logger = spdlog::get("file_logger");  // Get logger
-    logger->info("Progress: {:.2f}%", progress);  // Use file_logger for logging
+    std::cout << "Progress: " << std::fixed << std::setprecision(2) << progress << "%" << std::endl;
 }
 
 // Function to group files by similarity using Intel TBB
 void group_files_by_similarity_tbb(const std::vector<std::pair<long long int, std::string>>& file_list)
 {
-    spdlog::info("Grouping files by similarity using Intel TBB...");
     tbb::parallel_for(tbb::blocked_range<size_t>(0, file_list.size()), [&](const tbb::blocked_range<size_t>& r)
     {
         for (size_t i = r.begin(); i != r.end(); ++i)
@@ -150,7 +109,7 @@ void group_files_by_similarity_tbb(const std::vector<std::pair<long long int, st
             // Try to find a similar key in the cache
             for (const auto& key : cache_keys)
             {
-                if (jaccard_similarity(key, filename) > 90)
+                if (jaccard_similarity(key, filename) > 80)
                 {
                     leveldb::Cache::Handle* handle = groups_cache->Lookup(key);
                     if (handle != nullptr)
@@ -183,7 +142,6 @@ void group_files_by_similarity_tbb(const std::vector<std::pair<long long int, st
 // Main function
 int main(int argc, char* argv[])
 {
-
     if (argc != 3)
     {
         std::cout << "Usage: ./FileGroupSorter_Jaccard <input_filename> <output_filename>" << std::endl;
@@ -192,13 +150,6 @@ int main(int argc, char* argv[])
 
     std::string input_filename = argv[1];
     std::string output_filename = argv[2];
-    setup_logger(output_filename);  // Setup logger based on output_filename
-    auto logger = spdlog::get("file_logger");  // Get logger
-
-    logger->info("Program started.");  // Use spdlog for logging
-
-
-    spdlog::info("Reading from input file: {}", input_filename);  // Use spdlog for logging
 
     std::ifstream infile(input_filename);
     if (!infile.is_open())
@@ -214,8 +165,6 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    spdlog::info("Writing to output file: {}", output_filename);  // Use spdlog for logging
-    spdlog::info("Reading file content...");  // Use spdlog for logging
 
     std::vector<std::pair<long long int, std::string>> file_list;
     file_list.reserve(20000);  // 预分配内存
@@ -246,7 +195,6 @@ int main(int argc, char* argv[])
 
     // 释放内存
     file_list.clear();
-    std::vector<std::pair<long long int, std::string>>().swap(file_list);
 
     // Sort groups by the largest file in each group
     std::vector<std::vector<std::pair<long long int, std::string>>> sorted_groups;
@@ -277,8 +225,6 @@ int main(int argc, char* argv[])
         }
         outfile << std::endl;  // Add an empty line to separate groups
     }
-
-    logger->info("Program finished successfully.");  // Use spdlog for logging
 
     // Release LevelDB LRU Cache
     delete cache;
