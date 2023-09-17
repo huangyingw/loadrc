@@ -3,7 +3,8 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-#apt install -y libspdlog-dev
+#apt-get install -y libspdlog-dev libleveldb-dev
+
 make && \            
     make install && \
     /usr/local/bin/file_group_sorter_jaccard "/media/fav.log" "/media/fav.log.dup"
