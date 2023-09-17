@@ -6,8 +6,8 @@ CXX = g++
 # Compiler flags
 CXXFLAGS = -Wall -std=c++17
 
-# Linker flags for spdlog and fmt
-LDFLAGS = -lspdlog -lfmt  # 注意这里添加了 -lfmt，并确保它在 -lspdlog 之后
+# Linker flags for spdlog, fmt, and leveldb
+LDFLAGS = -lspdlog -lfmt -lleveldb  # 注意这里添加了 -lleveldb
 
 # Target executable name
 TARGET = file_group_sorter_jaccard
