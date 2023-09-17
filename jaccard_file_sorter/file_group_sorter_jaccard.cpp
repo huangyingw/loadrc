@@ -49,7 +49,6 @@ void setup_logger(const std::string& output_filename)
     }
 }
 
-std::mutex progress_mutex;  // Mutex for progress
 
 // Progress variables
 int total_files = 0;
@@ -149,8 +148,8 @@ void group_files_by_similarity_threaded(const std::vector<std::pair<long long in
                 leveldb::Cache::Handle* handle = groups_cache->Lookup(key);
                 if (handle != nullptr)
                 {
-                    auto* similar_group = reinterpret_cast<std::vector<std::pair<long long int, std::string>>*>(groups_cache->Value(handle));
-                    similar_group->push_back({size, path});
+                    auto* group = reinterpret_cast<std::vector<std::pair<long long int, std::string>>*>(groups_cache->Value(handle));
+                    group->push_back({size, path});
                     groups_cache->Release(handle);
                     added = true;
                     break;
@@ -232,9 +231,6 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    std::unordered_map<std::string, std::vector<std::pair<long long int, std::string>>> groups;
-    groups.reserve(20000);  // 预分配内存
-
     // Get the number of hardware threads available on the system
     int num_threads = static_cast<int>(std::thread::hardware_concurrency());
 
@@ -269,14 +265,18 @@ int main(int argc, char* argv[])
     // Sort groups by the largest file in each group
     std::vector<std::vector<std::pair<long long int, std::string>>> sorted_groups;
 
-    for (const auto& [_, group] : groups)
+
+    // Retrieve groups from cache
+    for (const auto& key : cache_keys)
     {
-        sorted_groups.push_back(group);
+        leveldb::Cache::Handle* handle = groups_cache->Lookup(key);
+        if (handle != nullptr)
+        {
+            auto* group = reinterpret_cast<std::vector<std::pair<long long int, std::string>>*>(groups_cache->Value(handle));
+            sorted_groups.push_back(*group);
+            groups_cache->Release(handle);
+        }
     }
-
-    groups.clear();
-    std::unordered_map<std::string, std::vector<std::pair<long long int, std::string>>>().swap(groups);
-
 
     std::sort(sorted_groups.begin(), sorted_groups.end(), [](const auto & a, const auto & b)
     {
