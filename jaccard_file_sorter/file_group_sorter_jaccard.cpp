@@ -158,12 +158,6 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    std::ofstream outfile(output_filename);
-    if (!outfile.is_open())
-    {
-        std::cerr << "Could not open output file." << std::endl;
-        return 1;
-    }
 
 
     std::vector<std::pair<long long int, std::string>> file_list;
@@ -217,14 +211,24 @@ int main(int argc, char* argv[])
     });
 
     // Write to output file
+    std::ostringstream oss;
     for (const auto& group : sorted_groups)
     {
         for (const auto& [size, path] : group)
         {
-            outfile << size << ",\"" << path << "\"" << std::endl;
+            oss << size << ",\"" << path << "\"\n";
         }
-        outfile << std::endl;  // Add an empty line to separate groups
+        oss << '\n';
     }
+
+    std::ofstream outfile(output_filename);
+
+    if (!outfile.is_open())
+    {
+        std::cerr << "Could not open output file." << std::endl;
+        return 1;
+    }
+    outfile << oss.str();
 
     // Release LevelDB LRU Cache
     delete cache;
