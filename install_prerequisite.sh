@@ -49,6 +49,7 @@ apt-get install -y \
     net-tools \
     nfs-kernel-server \
     npm \
+    nvidia-docker2 \
     openvpn \
     p7zip-full \
     p7zip-rar \
