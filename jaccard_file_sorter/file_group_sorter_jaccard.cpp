@@ -8,7 +8,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <algorithm>
-#include <mutex>
 #include <iomanip>
 #include <spdlog/spdlog.h>  // Include spdlog header
 #include <spdlog/sinks/basic_file_sink.h>  // Include file sink header
@@ -24,6 +23,12 @@ leveldb::Cache* cache = leveldb::NewLRUCache(1000000000);  // 1GB cache
 leveldb::Cache* groups_cache = leveldb::NewLRUCache(1000000000);  // 1GB cache for groups
 
 std::unordered_set<std::string> cache_keys;  // to store all keys inserted into the cache
+
+// Generate a sorted cache key for two strings
+std::string generate_cache_key(const std::string& a, const std::string& b)
+{
+    return (a < b) ? (a + "_" + b) : (b + "_" + a);
+}
 
 // 在main函数或程序初始化部分
 void setup_logger(const std::string& output_filename)
@@ -76,8 +81,8 @@ std::unordered_map<std::pair<std::string, std::string>, double, pair_hash> jacca
 double jaccard_similarity(const std::string& a, const std::string& b)
 {
     // Check if result is in cache
-    // Generate a cache key
-    std::string cache_key = a + "_" + b;
+    // Generate a sorted cache key
+    std::string cache_key = generate_cache_key(a, b);
 
     // Try to find the value in the cache
     leveldb::Cache::Handle* handle = cache->Lookup(cache_key);
