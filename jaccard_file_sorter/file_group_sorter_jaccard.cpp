@@ -8,13 +8,14 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <algorithm>
-#include <thread>
 #include <mutex>
 #include <iomanip>
 #include <spdlog/spdlog.h>  // Include spdlog header
 #include <spdlog/sinks/basic_file_sink.h>  // Include file sink header
 #include <leveldb/cache.h>  // Include LevelDB cache header
 #include <atomic>  // Include atomic header
+#include <tbb/parallel_for.h>
+#include <tbb/blocked_range.h>
 
 // Initialize LevelDB LRU Cache
 leveldb::Cache* cache = leveldb::NewLRUCache(1000000000);  // 1GB cache
@@ -129,47 +130,49 @@ void update_progress()
     logger->info("Progress: {:.2f}%", progress);  // Use file_logger for logging
 }
 
-// Function to group files by similarity
-void group_files_by_similarity_threaded(const std::vector<std::pair<long long int, std::string>>& file_list,
-                                        int start, int end)
+// Function to group files by similarity using Intel TBB
+void group_files_by_similarity_tbb(const std::vector<std::pair<long long int, std::string>>& file_list)
 {
-    spdlog::info("Grouping files by similarity...");  // Use spdlog for logging
-    for (int i = start; i < end; ++i)
+    spdlog::info("Grouping files by similarity using Intel TBB...");
+    tbb::parallel_for(tbb::blocked_range<size_t>(0, file_list.size()), [&](const tbb::blocked_range<size_t>& r)
     {
-        const auto& [size, path] = file_list[i];
-        std::string filename = path.substr(path.find_last_of("/") + 1);
-        bool added = false;
-
-        // Try to find a similar key in the cache
-        for (const auto& key : cache_keys)
+        for (size_t i = r.begin(); i != r.end(); ++i)
         {
-            if (jaccard_similarity(key, filename) > 90)
+            const auto& [size, path] = file_list[i];
+            std::string filename = path.substr(path.find_last_of("/") + 1);
+            bool added = false;
+
+            // Try to find a similar key in the cache
+            for (const auto& key : cache_keys)
             {
-                leveldb::Cache::Handle* handle = groups_cache->Lookup(key);
-                if (handle != nullptr)
+                if (jaccard_similarity(key, filename) > 90)
                 {
-                    auto* group = reinterpret_cast<std::vector<std::pair<long long int, std::string>>*>(groups_cache->Value(handle));
-                    group->push_back({size, path});
-                    groups_cache->Release(handle);
-                    added = true;
-                    break;
+                    leveldb::Cache::Handle* handle = groups_cache->Lookup(key);
+                    if (handle != nullptr)
+                    {
+                        auto* group = reinterpret_cast<std::vector<std::pair<long long int, std::string>>*>(groups_cache->Value(handle));
+                        group->push_back({size, path});
+                        groups_cache->Release(handle);
+                        added = true;
+                        break;
+                    }
                 }
             }
-        }
 
-        if (!added)
-        {
-            // Create a new group if not found in cache
-            auto* new_group = new std::vector<std::pair<long long int, std::string>>();
-            new_group->push_back({size, path});
-            groups_cache->Insert(filename, new_group, sizeof(new_group), [](const leveldb::Slice & key, void* value)
+            if (!added)
             {
-                delete reinterpret_cast<std::vector<std::pair<long long int, std::string>>*>(value);
-            });
-            cache_keys.insert(filename);  // Add the new key to our set of keys
+                // Create a new group if not found in cache
+                auto* new_group = new std::vector<std::pair<long long int, std::string>>();
+                new_group->push_back({size, path});
+                groups_cache->Insert(filename, new_group, sizeof(new_group), [](const leveldb::Slice & key, void* value)
+                {
+                    delete reinterpret_cast<std::vector<std::pair<long long int, std::string>>*>(value);
+                });
+                cache_keys.insert(filename);  // Add the new key to our set of keys
+            }
+            update_progress();
         }
-        update_progress();
-    }
+    });
 }
 
 // Main function
@@ -231,32 +234,10 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    // Get the number of hardware threads available on the system
-    int num_threads = static_cast<int>(std::thread::hardware_concurrency());
-
-
-    // If the function could not determine the number, let's default to 2 threads
-    if (num_threads == 0)
-    {
-        num_threads = 2;
-    }
-
-    spdlog::info("Number of threads: {}", num_threads);  // Use spdlog for logging
-    std::vector<std::thread> threads;
     total_files = file_list.size();  // Initialize total_files
-    int chunk_size = file_list.size() / num_threads;
 
-    for (int i = 0; i < num_threads; ++i)
-    {
-        int start = i * chunk_size;
-        int end = (i == num_threads - 1) ? file_list.size() : start + chunk_size;
-        threads.push_back(std::thread(group_files_by_similarity_threaded, std::ref(file_list), start, end));
-    }
-
-    for (auto& t : threads)
-    {
-        t.join();
-    }
+    // Use TBB's parallel_for for file grouping
+    group_files_by_similarity_tbb(file_list);
 
     // 释放内存
     file_list.clear();
@@ -264,7 +245,6 @@ int main(int argc, char* argv[])
 
     // Sort groups by the largest file in each group
     std::vector<std::vector<std::pair<long long int, std::string>>> sorted_groups;
-
 
     // Retrieve groups from cache
     for (const auto& key : cache_keys)
