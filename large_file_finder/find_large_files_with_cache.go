@@ -17,9 +17,12 @@ type FileInfo struct {
 	ModTime time.Time
 }
 
-// Cache to store file information
-var fileCache = make(map[string]FileInfo)
+// FileCache to store file information
+type FileCache map[string]FileInfo
+
 var cacheMutex = &sync.Mutex{}
+var wg sync.WaitGroup
+var workerPool = make(chan struct{}, 20) // 限制并发数量为20
 
 func loadExcludePatterns(filename string) ([]string, error) {
 	file, err := os.Open(filename)
@@ -36,27 +39,23 @@ func loadExcludePatterns(filename string) ([]string, error) {
 	return patterns, scanner.Err()
 }
 
-func saveToFile(dir, filename string, data map[string]FileInfo, sortByModTime bool) error {
+func saveToFile(dir, filename string, data FileCache, sortByModTime bool) error {
 	file, err := os.Create(filepath.Join(dir, filename))
 	if err != nil {
 		return err
 	}
-	defer file.Close()
+	defer func() {
+		if closeErr := file.Close(); closeErr != nil {
+			fmt.Println("Error closing file:", closeErr)
+		}
+	}()
 
 	var keys []string
 	for k := range data {
 		keys = append(keys, k)
 	}
 
-	if sortByModTime {
-		sort.Slice(keys, func(i, j int) bool {
-			return data[keys[i]].ModTime.After(data[keys[j]].ModTime)
-		})
-	} else {
-		sort.Slice(keys, func(i, j int) bool {
-			return data[keys[i]].Size > data[keys[j]].Size
-		})
-	}
+	sortKeys(keys, data, sortByModTime)
 
 	for _, k := range keys {
 		relativePath, _ := filepath.Rel(dir, k)
@@ -68,6 +67,38 @@ func saveToFile(dir, filename string, data map[string]FileInfo, sortByModTime bo
 		}
 	}
 	return nil
+}
+
+func sortKeys(keys []string, data FileCache, sortByModTime bool) {
+	if sortByModTime {
+		sort.Slice(keys, func(i, j int) bool {
+			return data[keys[i]].ModTime.After(data[keys[j]].ModTime)
+		})
+	} else {
+		sort.Slice(keys, func(i, j int) bool {
+			return data[keys[i]].Size > data[keys[j]].Size
+		})
+	}
+}
+
+func processFile(path string, info os.FileInfo, fileCache FileCache, minSizeBytes int64) {
+	defer wg.Done()
+	<-workerPool // 从workerPool获取一个空结构体，限制并发
+
+	if info.IsDir() {
+		return
+	}
+
+	if info.Size() > minSizeBytes {
+		cacheMutex.Lock()
+		fileCache[path] = FileInfo{
+			Size:    info.Size(),
+			ModTime: info.ModTime(),
+		}
+		cacheMutex.Unlock()
+	}
+
+	workerPool <- struct{}{} // 将空结构体放回workerPool，释放限制
 }
 
 func main() {
@@ -89,12 +120,17 @@ func main() {
 		// return
 	}
 
-	var wg sync.WaitGroup
+	fileCache := make(FileCache)
+
+	for i := 0; i < cap(workerPool); i++ {
+		workerPool <- struct{}{}
+	}
 
 	// Walk the file tree
 	err = filepath.Walk(rootDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
-			return err
+			fmt.Println("Error processing file:", err)
+			return nil
 		}
 
 		for _, pattern := range excludePatterns {
@@ -104,25 +140,7 @@ func main() {
 		}
 
 		wg.Add(1)
-		go func(path string, info os.FileInfo) {
-			defer wg.Done()
-
-			// Skip directories
-			if info.IsDir() {
-				return
-			}
-
-			// Check if the file size is greater than the minimum size
-			if info.Size() > minSizeBytes {
-				cacheMutex.Lock()
-				fileCache[path] = FileInfo{
-					Size:    info.Size(),
-					ModTime: info.ModTime(),
-				}
-				cacheMutex.Unlock()
-			}
-		}(path, info)
-
+		go processFile(path, info, fileCache, minSizeBytes)
 		return nil
 	})
 
