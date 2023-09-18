@@ -1,70 +1,147 @@
 package main
 
 import (
-    "fmt"
-    "io/ioutil"
-    "os"
-    "path/filepath"
-    "sync"
-    "time"
+	"bufio"
+	"fmt"
+	"os"
+	"path/filepath"
+	"sort"
+	"strings"
+	"sync"
+	"time"
 )
 
 // FileInfo holds the information about a file
 type FileInfo struct {
-    Size        int64
-    ModTime     time.Time
+	Size    int64
+	ModTime time.Time
 }
 
 // Cache to store file information
 var fileCache = make(map[string]FileInfo)
 var cacheMutex = &sync.Mutex{}
 
+func loadExcludePatterns(filename string) ([]string, error) {
+	file, err := os.Open(filename)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	var patterns []string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		patterns = append(patterns, scanner.Text())
+	}
+	return patterns, scanner.Err()
+}
+
+func saveToFile(dir, filename string, data map[string]FileInfo, sortByModTime bool) error {
+	file, err := os.Create(filepath.Join(dir, filename))
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	var keys []string
+	for k := range data {
+		keys = append(keys, k)
+	}
+
+	if sortByModTime {
+		sort.Slice(keys, func(i, j int) bool {
+			return data[keys[i]].ModTime.After(data[keys[j]].ModTime)
+		})
+	} else {
+		sort.Slice(keys, func(i, j int) bool {
+			return data[keys[i]].Size > data[keys[j]].Size
+		})
+	}
+
+	for _, k := range keys {
+		relativePath, _ := filepath.Rel(dir, k)
+		if sortByModTime {
+			utcTimestamp := data[k].ModTime.UTC().Unix()
+			fmt.Fprintf(file, "%d,\"./%s\"\n", utcTimestamp, relativePath)
+		} else {
+			fmt.Fprintf(file, "%d,\"./%s\"\n", data[k].Size, relativePath)
+		}
+	}
+	return nil
+}
+
 func main() {
-    // Root directory to start the search
-    rootDir := "./" // Replace with the directory you want to search in
-    // Minimum file size in bytes
-    minSize := int64(200 * 1024 * 1024) // 200 MB
+	if len(os.Args) < 2 {
+		fmt.Println("Usage: ./find_large_files_with_cache <directory>")
+		return
+	}
 
-    var wg sync.WaitGroup
+	// Root directory to start the search
+	rootDir := os.Args[1]
+	// Minimum file size in bytes
+	minSize := 200 // 默认大小为200MB
+	minSizeBytes := int64(minSize * 1024 * 1024)
 
-    // Walk the file tree
-    err := filepath.Walk(rootDir, func(path string, info os.FileInfo, err error) error {
-        if err != nil {
-            return err
-        }
+	excludePatterns, err := loadExcludePatterns(filepath.Join(rootDir, "exclude_patterns.txt"))
+	if err != nil {
+		fmt.Println("Warning: Could not read exclude patterns:", err)
+		// You can return here if you want to terminate the program
+		// return
+	}
 
-        wg.Add(1)
-        go func(path string, info os.FileInfo) {
-            defer wg.Done()
+	var wg sync.WaitGroup
 
-            // Skip directories
-            if info.IsDir() {
-                return
-            }
+	// Walk the file tree
+	err = filepath.Walk(rootDir, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
 
-            // Check if the file size is greater than the minimum size
-            if info.Size() > minSize {
-                cacheMutex.Lock()
-                fileCache[path] = FileInfo{
-                    Size:    info.Size(),
-                    ModTime: info.ModTime(),
-                }
-                cacheMutex.Unlock()
-            }
-        }(path, info)
+		for _, pattern := range excludePatterns {
+			if strings.Contains(path, pattern) {
+				return nil
+			}
+		}
 
-        return nil
-    })
+		wg.Add(1)
+		go func(path string, info os.FileInfo) {
+			defer wg.Done()
 
-    if err != nil {
-        fmt.Println("Error walking the file tree:", err)
-        return
-    }
+			// Skip directories
+			if info.IsDir() {
+				return
+			}
 
-    wg.Wait()
+			// Check if the file size is greater than the minimum size
+			if info.Size() > minSizeBytes {
+				cacheMutex.Lock()
+				fileCache[path] = FileInfo{
+					Size:    info.Size(),
+					ModTime: info.ModTime(),
+				}
+				cacheMutex.Unlock()
+			}
+		}(path, info)
 
-    // Print the cached files
-    for path, info := range fileCache {
-        fmt.Printf("Path: %s, Size: %d, ModTime: %s\n", path, info.Size, info.ModTime)
-    }
+		return nil
+	})
+
+	if err != nil {
+		fmt.Println("Error walking the file tree:", err)
+		return
+	}
+
+	wg.Wait()
+
+	if err := saveToFile(rootDir, "fav.log", fileCache, false); err != nil {
+		fmt.Println("Error saving to fav.log:", err)
+	} else {
+		fmt.Printf("Saved to %s\n", filepath.Join(rootDir, "fav.log"))
+	}
+
+	if err := saveToFile(rootDir, "fav.log.sort", fileCache, true); err != nil {
+		fmt.Println("Error saving to fav.log.sort:", err)
+	} else {
+		fmt.Printf("Saved to %s\n", filepath.Join(rootDir, "fav.log.sort"))
+	}
 }
