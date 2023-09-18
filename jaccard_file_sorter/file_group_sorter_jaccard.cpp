@@ -109,7 +109,7 @@ void group_files_by_similarity_tbb(const std::vector<std::pair<long long int, st
             // Try to find a similar key in the cache
             for (const auto& key : cache_keys)
             {
-                if (jaccard_similarity(key, filename) > 70)
+                if (jaccard_similarity(key, filename) > 80)
                 {
                     leveldb::Cache::Handle* handle = groups_cache->Lookup(key);
                     if (handle != nullptr)
