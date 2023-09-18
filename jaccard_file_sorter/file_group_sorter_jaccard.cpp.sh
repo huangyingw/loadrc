@@ -3,7 +3,7 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-#apt-get install -y libspdlog-dev libleveldb-dev libtbb-dev
+#apt-get install -y libspdlog-dev libleveldb-dev libtbb-dev libxxhash-dev 
 
 make && \            
     make install && \
