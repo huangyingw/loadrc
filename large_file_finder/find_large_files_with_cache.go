@@ -12,10 +12,12 @@ import (
 	"sort"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
-var rdb *redis.Client // 使用Redis作为全局缓存
+var progressCounter int32 // 进度计数器，使用 int32 或 int64 类型
+var rdb *redis.Client     // 使用Redis作为全局缓存
 var ctx = context.Background()
 
 // FileInfo holds the information about a file
@@ -104,7 +106,10 @@ func processFile(path string, info os.FileInfo, fileCache FileCache, minSizeByte
 	defer wg.Done()
 	<-workerPool // 从workerPool获取一个空结构体，限制并发
 
+	fmt.Printf("Processing file: %s\n", path) // 添加日志
+
 	if info.IsDir() {
+		fmt.Printf("Skipping directory: %s\n", path) // 添加日志
 		return
 	}
 
@@ -112,19 +117,24 @@ func processFile(path string, info os.FileInfo, fileCache FileCache, minSizeByte
 		var buf bytes.Buffer
 		enc := gob.NewEncoder(&buf)
 		if err := enc.Encode(FileInfo{Size: info.Size(), ModTime: info.ModTime()}); err != nil {
-			fmt.Println("Error encoding:", err)
+			fmt.Printf("Error encoding: %s, File: %s\n", err, path) // 添加日志
 			return
 		}
 
 		err := rdb.Set(ctx, path, buf.Bytes(), 0).Err()
 		if err != nil {
-			fmt.Println("Error setting Redis key:", err)
+			fmt.Printf("Error setting Redis key: %s, File: %s\n", err, path) // 添加日志
 			return
 		}
 
+		// 使用原子操作更新进度计数器
+		atomic.AddInt32(&progressCounter, 1)
+		fmt.Printf("File processed: %s\n", path) // 添加日志
+	} else {
+		fmt.Printf("File size too small, skipping: %s\n", path) // 添加日志
 	}
 
-	workerPool <- struct{}{}                       // 将空结构体放回workerPool，释放限制
+	workerPool <- struct{}{} // 将空结构体放回workerPool，释放限制
 }
 
 func main() {
@@ -153,6 +163,17 @@ func main() {
 		// return
 	}
 
+	// 启动一个 goroutine 来定期打印进度
+	go func() {
+		for {
+			time.Sleep(1 * time.Second) // 每秒更新一次
+
+			// 使用原子操作读取进度计数器
+			currentProgress := atomic.LoadInt32(&progressCounter)
+			fmt.Printf("Progress: %d files processed.\n", currentProgress)
+		}
+	}()
+
 	// Walk the file tree
 	err = filepath.Walk(rootDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -177,6 +198,10 @@ func main() {
 	}
 
 	wg.Wait()
+
+	// 输出最终的计数器值
+	finalProgress := atomic.LoadInt32(&progressCounter)
+	fmt.Printf("Final progress: %d files processed.\n", finalProgress)
 
 	// 从Redis中读取数据并保存到文件的逻辑应该放在这里
 	iter := rdb.Scan(ctx, 0, "*", 0).Iterator()
