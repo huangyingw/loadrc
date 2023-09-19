@@ -2,7 +2,11 @@ package main
 
 import (
 	"bufio"
+	"bytes"
+	"context"
+	"encoding/gob"
 	"fmt"
+	"github.com/go-redis/redis/v8"
 	"os"
 	"path/filepath"
 	"sort"
@@ -10,6 +14,9 @@ import (
 	"sync"
 	"time"
 )
+
+var rdb *redis.Client // 使用Redis作为全局缓存
+var ctx = context.Background()
 
 // FileInfo holds the information about a file
 type FileInfo struct {
@@ -23,6 +30,18 @@ type FileCache map[string]FileInfo
 var cacheMutex = &sync.Mutex{}
 var wg sync.WaitGroup
 var workerPool = make(chan struct{}, 20) // 限制并发数量为20
+
+// Initialize Redis client
+func init() {
+	rdb = redis.NewClient(&redis.Options{
+		Addr: "localhost:6379",
+	})
+	_, err := rdb.Ping(ctx).Result()
+	if err != nil {
+		fmt.Println("Error connecting to Redis:", err)
+		os.Exit(1)
+	}
+}
 
 func loadExcludePatterns(filename string) ([]string, error) {
 	file, err := os.Open(filename)
@@ -90,18 +109,32 @@ func processFile(path string, info os.FileInfo, fileCache FileCache, minSizeByte
 	}
 
 	if info.Size() > minSizeBytes {
-		cacheMutex.Lock()
-		fileCache[path] = FileInfo{
-			Size:    info.Size(),
-			ModTime: info.ModTime(),
+		var buf bytes.Buffer
+		enc := gob.NewEncoder(&buf)
+		if err := enc.Encode(FileInfo{Size: info.Size(), ModTime: info.ModTime()}); err != nil {
+			fmt.Println("Error encoding:", err)
+			return
 		}
-		cacheMutex.Unlock()
+
+		err := rdb.Set(ctx, path, buf.Bytes(), 0).Err()
+		if err != nil {
+			fmt.Println("Error setting Redis key:", err)
+			return
+		}
+
 	}
 
-	workerPool <- struct{}{} // 将空结构体放回workerPool，释放限制
+	workerPool <- struct{}{}                       // 将空结构体放回workerPool，释放限制
 }
 
 func main() {
+	fileCache := make(FileCache)
+
+	// 初始化workerPool
+	for i := 0; i < 20; i++ {
+		workerPool <- struct{}{}
+	}
+
 	if len(os.Args) < 2 {
 		fmt.Println("Usage: ./find_large_files_with_cache <directory>")
 		return
@@ -120,19 +153,13 @@ func main() {
 		// return
 	}
 
-	fileCache := make(FileCache)
-
-	for i := 0; i < cap(workerPool); i++ {
-		workerPool <- struct{}{}
-	}
-
 	// Walk the file tree
 	err = filepath.Walk(rootDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
-			fmt.Println("Error processing file:", err)
-			return nil
+			return err
 		}
 
+		// 检查是否应该排除该路径
 		for _, pattern := range excludePatterns {
 			if strings.Contains(path, pattern) {
 				return nil
@@ -140,7 +167,7 @@ func main() {
 		}
 
 		wg.Add(1)
-		go processFile(path, info, fileCache, minSizeBytes)
+		go processFile(path, info, fileCache, minSizeBytes) // 使用goroutine
 		return nil
 	})
 
@@ -151,6 +178,22 @@ func main() {
 
 	wg.Wait()
 
+	// 从Redis中读取数据并保存到文件的逻辑应该放在这里
+	iter := rdb.Scan(ctx, 0, "*", 0).Iterator()
+	for iter.Next(ctx) {
+		key := iter.Val()
+		data, err := rdb.Get(ctx, key).Bytes()
+		if err == nil {
+			var fileInfo FileInfo
+			buf := bytes.NewBuffer(data)
+			dec := gob.NewDecoder(buf)
+			if err := dec.Decode(&fileInfo); err == nil {
+				fileCache[key] = fileInfo
+			}
+		}
+	}
+
+	// 使用fileCache保存文件
 	if err := saveToFile(rootDir, "fav.log", fileCache, false); err != nil {
 		fmt.Println("Error saving to fav.log:", err)
 	} else {
