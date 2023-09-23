@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys
 from fuzzywuzzy import fuzz
 from collections import defaultdict

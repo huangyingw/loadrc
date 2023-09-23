@@ -950,7 +950,11 @@ function! s:FolderContentMigrator()
     " Call the folder_content_migrator.py script for each source folder
     let script_path = "~/loadrc/pythonrc/folder_content_migrator.py"
     for source_folder in source_folders
-        let command = '!' . l:script_path . ' ' . l:source_folder . ' ' . l:target_folder . ' 2>&1 | tee -a ' . 'folder_content_migrator.runresult'
+        " Use shellescape to safely quote the folder paths
+        let quoted_source_folder = shellescape(source_folder)
+        let quoted_target_folder = shellescape(target_folder)
+        
+        let command = '!' . l:script_path . ' ' . quoted_source_folder . ' ' . quoted_target_folder . ' 2>&1 | tee -a ' . 'folder_content_migrator.runresult'
         execute command
     endfor
     call OpenOrSwitch('folder_content_migrator.runresult', 'vs')
