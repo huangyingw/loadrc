@@ -20,4 +20,4 @@ vimrc/.vim/spell/en.utf-8.add.spl
 vimrc/.vim/view/
 zerotierrc/crontab_file
 var/
-.config/nvim/secret_config.lua
+.config/nvim/lua/secret_config.lua
