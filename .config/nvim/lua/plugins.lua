@@ -14,4 +14,14 @@ return require('packer').startup(function()
         }
     })
     use('folke/which-key.nvim')
+    use({
+        'huggingface/llm.nvim',
+        config = function()
+            local llm = require('llm')
+            llm.setup({
+                model = "Phind/Phind-CodeLlama-34B-v2",  -- 指定模型
+                -- 其他配置选项
+            })
+        end
+    })
 end)
