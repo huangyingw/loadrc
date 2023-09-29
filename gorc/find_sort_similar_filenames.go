@@ -7,25 +7,34 @@ import (
 	"path/filepath"
 	"regexp"
 	"sort"
-	"strconv"
 	"strings"
+	"sync"
 )
 
-var fileSizeCache = make(map[string]int64)
+var fileSizeCache = sync.Map{}
 
 func getFileSize(filePath string, defaultSize int64) int64 {
-	if size, exists := fileSizeCache[filePath]; exists {
-		return size
+	// 去掉路径中的引号
+	filePath = strings.ReplaceAll(filePath, "\"", "")
+
+	currentDir, _ := os.Getwd()                         // 获取当前工作目录
+	absolutePath := filepath.Join(currentDir, filePath) // 拼接绝对路径
+
+	cleanPath := filepath.Clean(absolutePath) // 清理路径
+
+	if size, exists := fileSizeCache.Load(cleanPath); exists {
+		return size.(int64)
 	}
 
-	fileInfo, err := os.Stat(filePath)
+	fileInfo, err := os.Stat(cleanPath) // 使用清理后的绝对路径
 	if err != nil {
-		fileSizeCache[filePath] = defaultSize
+		fmt.Printf("Error getting file size for '%s': %v. Current directory: '%s'\n", cleanPath, err, currentDir)
+		fileSizeCache.Store(cleanPath, defaultSize)
 		return defaultSize
 	}
 
 	size := fileInfo.Size()
-	fileSizeCache[filePath] = size
+	fileSizeCache.Store(cleanPath, size)
 	return size
 }
 
@@ -67,6 +76,26 @@ func findCloseFiles(fileNames, filePaths, keywords []string) map[string][]string
 	return closeFiles
 }
 
+func processKeyword(keyword string, keywordFiles []string) {
+	sort.Slice(keywordFiles, func(i, j int) bool {
+		return getFileSize(keywordFiles[i], 0) > getFileSize(keywordFiles[j], 0)
+	})
+
+	fmt.Println(keyword + ".txt")
+	outputFile, err := os.Create(keyword + ".txt")
+	if err != nil {
+		fmt.Println("Error creating file:", err)
+		return
+	}
+	defer outputFile.Close() // 确保文件会被关闭
+
+	outputFile.WriteString(keyword + "\n")
+	for _, filePath := range keywordFiles {
+		fileSize := getFileSize(filePath, 0)
+		outputFile.WriteString(fmt.Sprintf("%d,%s\n", fileSize, filePath))
+	}
+}
+
 func main() {
 	args := os.Args[1:]
 	if len(args) != 1 {
@@ -100,28 +129,10 @@ func main() {
 		return len(closeFiles[keywords[i]]) > len(closeFiles[keywords[j]])
 	})
 
-	for _, keyword := range keywords {
-		keywordFiles := closeFiles[keyword]
-		if len(keywordFiles) >= 2 {
-			sort.Slice(keywordFiles, func(i, j int) bool {
-				return getFileSize(keywordFiles[i], 0) > getFileSize(keywordFiles[j], 0)
-			})
-
-			fmt.Println(keyword + ".txt")
-			outputFile, err := os.Create(keyword + ".txt")
-			if err != nil {
-				fmt.Println("Error creating file:", err)
-				return
-			}
-			defer outputFile.Close()
-
-			outputFile.WriteString(keyword + "\n")
-			for _, filePath := range keywordFiles {
-				fileSize := getFileSize(filePath, 0)
-				if fileSize > 0 {
-					outputFile.WriteString(fmt.Sprintf("%d,%s\n", fileSize, filePath))
-				}
-			}
-		}
+	totalKeywords := len(keywords)     // 定义 totalKeywords
+	for i, keyword := range keywords { // 定义 i
+		// 显示进度
+		fmt.Printf("Processing keyword %d of %d: %s\n", i+1, totalKeywords, keyword)
+		processKeyword(keyword, closeFiles[keyword]) // 调用新的 processKeyword 函数
 	}
 }
