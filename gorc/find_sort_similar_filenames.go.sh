@@ -4,5 +4,6 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
 
-go build file_group_sorter_jaccard.go && \
-    ./file_group_sorter_jaccard "/media/fav.log" "/media/fav.log.dup"
+go build find_sort_similar_filenames.go && \
+    cd /media/ && \
+    /root/loadrc/gorc/find_sort_similar_filenames --file=/media/fav.log
