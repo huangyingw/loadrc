@@ -1,7 +1,4 @@
 #!/bin/zsh
-SCRIPT=$(realpath "$0")
-SCRIPTPATH=$(dirname "$SCRIPT")
-cd "$SCRIPTPATH"
 
-
-cd -
+cd /media/
+/root/loadrc/bashrc/run_once_script_checker.sh /root/loadrc/gorc/find_sort_similar_filenames --file=/media/fav.log
