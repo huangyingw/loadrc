@@ -77,11 +77,20 @@ func findCloseFiles(fileNames, filePaths, keywords []string) map[string][]string
 }
 
 func processKeyword(keyword string, keywordFiles []string) {
+	// 对 keywordFiles 进行排序
 	sort.Slice(keywordFiles, func(i, j int) bool {
 		return getFileSize(keywordFiles[i], 0) > getFileSize(keywordFiles[j], 0)
 	})
 
-	fmt.Println(keyword + ".txt")
+	// 准备要写入的数据
+	var outputData strings.Builder
+	outputData.WriteString(keyword + "\n")
+	for _, filePath := range keywordFiles {
+		fileSize := getFileSize(filePath, 0)
+		outputData.WriteString(fmt.Sprintf("%d,%s\n", fileSize, filePath))
+	}
+
+	// 创建并写入文件
 	outputFile, err := os.Create(keyword + ".txt")
 	if err != nil {
 		fmt.Println("Error creating file:", err)
@@ -89,10 +98,9 @@ func processKeyword(keyword string, keywordFiles []string) {
 	}
 	defer outputFile.Close() // 确保文件会被关闭
 
-	outputFile.WriteString(keyword + "\n")
-	for _, filePath := range keywordFiles {
-		fileSize := getFileSize(filePath, 0)
-		outputFile.WriteString(fmt.Sprintf("%d,%s\n", fileSize, filePath))
+	_, err = outputFile.WriteString(outputData.String())
+	if err != nil {
+		fmt.Println("Error writing to file:", err)
 	}
 }
 
