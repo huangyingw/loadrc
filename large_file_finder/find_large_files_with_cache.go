@@ -4,9 +4,12 @@ import (
 	"bufio"
 	"bytes"
 	"context"
+	"crypto/sha256"
 	"encoding/gob"
+	"encoding/hex"
 	"fmt"
 	"github.com/go-redis/redis/v8"
+	"github.com/karrick/godirwalk"
 	"os"
 	"path/filepath"
 	"sort"
@@ -16,22 +19,18 @@ import (
 	"time"
 )
 
-var progressCounter int32 // 进度计数器，使用 int32 或 int64 类型
-var rdb *redis.Client     // 使用Redis作为全局缓存
+var progressCounter int32 // Progress counter
+var rdb *redis.Client     // Redis client
 var ctx = context.Background()
 
-// FileInfo holds the information about a file
+// FileInfo holds file information
 type FileInfo struct {
 	Size    int64
 	ModTime time.Time
 }
 
-// FileCache to store file information
-type FileCache map[string]FileInfo
-
-var cacheMutex = &sync.Mutex{}
 var wg sync.WaitGroup
-var workerPool = make(chan struct{}, 20) // 限制并发数量为20
+var workerPool = make(chan struct{}, 20) // Limit concurrency to 20
 
 // Initialize Redis client
 func init() {
@@ -43,6 +42,13 @@ func init() {
 		fmt.Println("Error connecting to Redis:", err)
 		os.Exit(1)
 	}
+}
+
+// Generate a SHA-256 hash for the given string
+func generateHash(s string) string {
+	hasher := sha256.New()
+	hasher.Write([]byte(s))
+	return hex.EncodeToString(hasher.Sum(nil))
 }
 
 func loadExcludePatterns(filename string) ([]string, error) {
@@ -60,16 +66,32 @@ func loadExcludePatterns(filename string) ([]string, error) {
 	return patterns, scanner.Err()
 }
 
-func saveToFile(dir, filename string, data FileCache, sortByModTime bool) error {
+func saveToFile(dir, filename string, sortByModTime bool) error {
 	file, err := os.Create(filepath.Join(dir, filename))
 	if err != nil {
 		return err
 	}
-	defer func() {
-		if closeErr := file.Close(); closeErr != nil {
-			fmt.Println("Error closing file:", closeErr)
+	defer file.Close()
+
+	iter := rdb.Scan(ctx, 0, "*", 0).Iterator()
+	var data = make(map[string]FileInfo)
+	for iter.Next(ctx) {
+		hashedKey := iter.Val()
+		originalPath, err := rdb.Get(ctx, "path:"+hashedKey).Result()
+		if err != nil {
+			continue
 		}
-	}()
+		value, err := rdb.Get(ctx, hashedKey).Bytes()
+		if err != nil {
+			continue
+		}
+		var fileInfo FileInfo
+		buf := bytes.NewBuffer(value)
+		dec := gob.NewDecoder(buf)
+		if err := dec.Decode(&fileInfo); err == nil {
+			data[originalPath] = fileInfo
+		}
+	}
 
 	var keys []string
 	for k := range data {
@@ -90,7 +112,7 @@ func saveToFile(dir, filename string, data FileCache, sortByModTime bool) error 
 	return nil
 }
 
-func sortKeys(keys []string, data FileCache, sortByModTime bool) {
+func sortKeys(keys []string, data map[string]FileInfo, sortByModTime bool) {
 	if sortByModTime {
 		sort.Slice(keys, func(i, j int) bool {
 			return data[keys[i]].ModTime.After(data[keys[j]].ModTime)
@@ -102,45 +124,50 @@ func sortKeys(keys []string, data FileCache, sortByModTime bool) {
 	}
 }
 
-func processFile(path string, info os.FileInfo, fileCache FileCache, minSizeBytes int64) {
+func processFile(path string, typ os.FileMode) {
 	defer wg.Done()
-	<-workerPool // 从workerPool获取一个空结构体，限制并发
+	<-workerPool // Get an empty struct from workerPool to limit concurrency
 
-	fmt.Printf("Processing file: %s\n", path) // 添加日志
+	fmt.Printf("Processing file: %s\n", path)
 
-	if info.IsDir() {
-		fmt.Printf("Skipping directory: %s\n", path) // 添加日志
+	if typ.IsDir() {
 		return
 	}
 
-	if info.Size() > minSizeBytes {
-		var buf bytes.Buffer
-		enc := gob.NewEncoder(&buf)
-		if err := enc.Encode(FileInfo{Size: info.Size(), ModTime: info.ModTime()}); err != nil {
-			fmt.Printf("Error encoding: %s, File: %s\n", err, path) // 添加日志
-			return
-		}
-
-		err := rdb.Set(ctx, path, buf.Bytes(), 0).Err()
-		if err != nil {
-			fmt.Printf("Error setting Redis key: %s, File: %s\n", err, path) // 添加日志
-			return
-		}
-
-		// 使用原子操作更新进度计数器
-		atomic.AddInt32(&progressCounter, 1)
-		fmt.Printf("File processed: %s\n", path) // 添加日志
-	} else {
-		fmt.Printf("File size too small, skipping: %s\n", path) // 添加日志
+	info, err := os.Stat(path)
+	if err != nil {
+		fmt.Printf("Error stating file: %s, Error: %s\n", path, err)
+		return
 	}
 
-	workerPool <- struct{}{} // 将空结构体放回workerPool，释放限制
+	var buf bytes.Buffer
+	enc := gob.NewEncoder(&buf)
+	if err := enc.Encode(FileInfo{Size: info.Size(), ModTime: info.ModTime()}); err != nil {
+		fmt.Printf("Error encoding: %s, File: %s\n", err, path)
+		return
+	}
+
+	// Generate hash for the file path
+	hashedKey := generateHash(path)
+
+	err = rdb.Set(ctx, hashedKey, buf.Bytes(), 0).Err()
+	if err != nil {
+		fmt.Printf("Error setting Redis key: %s, File: %s\n", err, path)
+		return
+	}
+
+	// Store the mapping between the hash and the original path
+	rdb.Set(ctx, "path:"+hashedKey, path, 0)
+
+	// Update progress counter atomically
+	atomic.AddInt32(&progressCounter, 1)
+	fmt.Printf("File processed: %s\n", path)
+
+	workerPool <- struct{}{} // Release limit
 }
 
 func main() {
-	fileCache := make(FileCache)
-
-	// 初始化workerPool
+	// Initialize workerPool
 	for i := 0; i < 20; i++ {
 		workerPool <- struct{}{}
 	}
@@ -153,79 +180,67 @@ func main() {
 	// Root directory to start the search
 	rootDir := os.Args[1]
 	// Minimum file size in bytes
-	minSize := 200 // 默认大小为200MB
+	minSize := 200 // Default size is 200MB
 	minSizeBytes := int64(minSize * 1024 * 1024)
 
 	excludePatterns, err := loadExcludePatterns(filepath.Join(rootDir, "exclude_patterns.txt"))
 	if err != nil {
 		fmt.Println("Warning: Could not read exclude patterns:", err)
-		// You can return here if you want to terminate the program
-		// return
 	}
 
-	// 启动一个 goroutine 来定期打印进度
+	// Start a goroutine to periodically print progress
 	go func() {
 		for {
-			time.Sleep(1 * time.Second) // 每秒更新一次
+			time.Sleep(1 * time.Second)
 
-			// 使用原子操作读取进度计数器
+			// Atomically read the progress counter
 			currentProgress := atomic.LoadInt32(&progressCounter)
 			fmt.Printf("Progress: %d files processed.\n", currentProgress)
 		}
 	}()
 
-	// Walk the file tree
-	err = filepath.Walk(rootDir, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return err
-		}
+	// Use godirwalk.Walk instead of fastwalk.Walk or filepath.Walk
+	err = godirwalk.Walk(rootDir, &godirwalk.Options{
+		Callback: func(osPathname string, de *godirwalk.Dirent) error {
+			// Check if the path should be excluded
+			for _, pattern := range excludePatterns {
+				if strings.Contains(osPathname, pattern) {
+					return nil
+				}
+			}
 
-		// 检查是否应该排除该路径
-		for _, pattern := range excludePatterns {
-			if strings.Contains(path, pattern) {
+			info, err := os.Stat(osPathname)
+			if err != nil {
+				return err
+			}
+
+			// Filter condition: file size must not be smaller than minSizeBytes
+			if info.Size() < minSizeBytes {
+				fmt.Printf("Skipping small file: %s\n", osPathname)
 				return nil
 			}
-		}
 
-		wg.Add(1)
-		go processFile(path, info, fileCache, minSizeBytes) // 使用goroutine
-		return nil
+			wg.Add(1)
+			go processFile(osPathname, de.ModeType())
+			return nil
+		},
+		Unsorted: true,
 	})
-
-	if err != nil {
-		fmt.Println("Error walking the file tree:", err)
-		return
-	}
 
 	wg.Wait()
 
-	// 输出最终的计数器值
+	// Print the final counter value
 	finalProgress := atomic.LoadInt32(&progressCounter)
 	fmt.Printf("Final progress: %d files processed.\n", finalProgress)
 
-	// 从Redis中读取数据并保存到文件的逻辑应该放在这里
-	iter := rdb.Scan(ctx, 0, "*", 0).Iterator()
-	for iter.Next(ctx) {
-		key := iter.Val()
-		data, err := rdb.Get(ctx, key).Bytes()
-		if err == nil {
-			var fileInfo FileInfo
-			buf := bytes.NewBuffer(data)
-			dec := gob.NewDecoder(buf)
-			if err := dec.Decode(&fileInfo); err == nil {
-				fileCache[key] = fileInfo
-			}
-		}
-	}
-
-	// 使用fileCache保存文件
-	if err := saveToFile(rootDir, "fav.log", fileCache, false); err != nil {
+	// Read data from Redis and save to file
+	if err := saveToFile(rootDir, "fav.log", false); err != nil {
 		fmt.Println("Error saving to fav.log:", err)
 	} else {
 		fmt.Printf("Saved to %s\n", filepath.Join(rootDir, "fav.log"))
 	}
 
-	if err := saveToFile(rootDir, "fav.log.sort", fileCache, true); err != nil {
+	if err := saveToFile(rootDir, "fav.log.sort", true); err != nil {
 		fmt.Println("Error saving to fav.log.sort:", err)
 	} else {
 		fmt.Printf("Saved to %s\n", filepath.Join(rootDir, "fav.log.sort"))
