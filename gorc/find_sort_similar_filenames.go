@@ -131,8 +131,11 @@ func main() {
 
 	totalKeywords := len(keywords)     // 定义 totalKeywords
 	for i, keyword := range keywords { // 定义 i
-		// 显示进度
-		fmt.Printf("Processing keyword %d of %d: %s\n", i+1, totalKeywords, keyword)
-		processKeyword(keyword, closeFiles[keyword]) // 调用新的 processKeyword 函数
+		keywordFiles := closeFiles[keyword]
+		if len(keywordFiles) >= 2 { // 添加这个条件
+			// 显示进度
+			fmt.Printf("Processing keyword %d of %d: %s\n", i+1, totalKeywords, keyword)
+			processKeyword(keyword, keywordFiles) // 调用新的 processKeyword 函数
+		}
 	}
 }
