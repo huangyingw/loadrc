@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 import sys
+import subprocess
+
+try:
+    import fuzzywuzzy
+except ImportError:
+    subprocess.run(["pip3", "install", "fuzzywuzzy"])
+    import fuzzywuzzy
+
 from fuzzywuzzy import fuzz
 from collections import defaultdict
 from operator import itemgetter
@@ -48,25 +56,37 @@ def sort_files(file_list):
     sorted_list = flatten_list(sort_groups_by_largest_file(sorted_groups))
     return sorted_list
 
+
 # Main entry point
 def main(input_filename, output_filename):
     # Read from input file
-    with open(input_filename, 'r') as infile:
+    with open(input_filename, "r") as infile:
         lines = infile.readlines()
 
     # Parse lines into a list of tuples (size, path)
-    file_list = [(int(line.split(',')[0]), line.split(',')[1].strip()) for line in lines]
+    file_list = [
+        (int(line.split(",")[0]), line.split(",")[1].strip()) for line in lines
+    ]
 
     # Sort the files
     sorted_files = sort_files(file_list)
 
     # Write to output file
-    with open(output_filename, 'w') as outfile:
+    with open(output_filename, "w") as outfile:
+        last_group = None
         for size, path in sorted_files:
+            current_group = path.split("/")[-1].split(".")[0]
+            if last_group and fuzz.ratio(last_group, current_group) <= 80:
+                outfile.write("\n")  # Add an empty line to separate groups
             outfile.write(f"{size},{path}\n")
+            last_group = current_group
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python sort_similar_files_by_size.py <input_filename> <output_filename>")
+        print(
+            "Usage: python sort_similar_files_by_size.py <input_filename> <output_filename>"
+        )
+        print(f"Received {len(sys.argv) - 1} arguments: {sys.argv[1:]}")
     else:
         main(sys.argv[1], sys.argv[2])

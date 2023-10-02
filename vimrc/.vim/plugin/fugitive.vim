@@ -963,7 +963,7 @@ endfunction
 function! s:FindSimilarFilenames()
     let l:script_path = "~/loadrc/gorc/find_sort_similar_filenames"
     let l:current_file = expand('%:p')
-    let l:command = '!' . l:script_path . ' --file ' . shellescape(l:current_file) . ' 2>&1 | tee ' . 'find_similar_filenames.runresult'
+    let l:command = '!' . l:script_path . ' --file=' . shellescape(l:current_file) . ' 2>&1 | tee ' . 'find_similar_filenames.runresult'
     execute l:command
 
     call OpenOrSwitch('find_similar_filenames.runresult', 'vs')

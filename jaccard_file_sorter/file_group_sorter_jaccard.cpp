@@ -128,6 +128,13 @@ void group_files_by_similarity_tbb(const std::vector<std::pair<long long int, st
                 // Create a new group if not found in cache
                 auto* new_group = new std::vector<std::pair<long long int, std::string>>();
                 new_group->push_back({size, path});
+
+                // 对新组内的文件按大小进行排序（从大到小）
+                std::sort(new_group->begin(), new_group->end(), [](const auto & a, const auto & b)
+                {
+                    return a.first > b.first;
+                });
+
                 groups_cache->Insert(filename, new_group, sizeof(new_group), [](const leveldb::Slice & key, void* value)
                 {
                     delete reinterpret_cast<std::vector<std::pair<long long int, std::string>>*>(value);
