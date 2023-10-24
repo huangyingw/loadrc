@@ -17,10 +17,8 @@ function main() {
     find_cmd="find . -type f -size +${SIZE_OPTION}M"
 
     # If the exclude file exists, then process it
-    if [ -f "${EXCLUDE_FILE}" ]
-    then
-        while IFS= read -r line
-        do
+    if [ -f "${EXCLUDE_FILE}" ]; then
+        while IFS= read -r line; do
             find_cmd+=" ! -path \"${line}\""
         done < "${EXCLUDE_FILE}"
     fi
@@ -29,25 +27,30 @@ function main() {
 
     if [[ "$OSTYPE" == "darwin"* ]]; then
         # Mac OSX
-        eval "${find_cmd} -exec du -k {} + | sort -rn | cut -f 2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOG}\""
-        cp -fv "${FAVLOG}" fav.log
-        eval "${find_cmd} -exec stat -f '%m %N' {} \; | sort -rn | cut -d' ' -f2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\""
-        cp -fv "${FAVLOGSORT}" fav.log.sort
+        (
+            eval "${find_cmd} -exec du -k {} + | sort -rn | cut -f 2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOG}\""
+        ) && cp -fv "${FAVLOG}" fav.log
+
+        (
+            eval "${find_cmd} -exec stat -f '%m %N' {} \; | sort -rn | cut -d' ' -f2- | sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\""
+        ) && cp -fv "${FAVLOGSORT}" fav.log.sort
     else
         # Linux
-        eval "${find_cmd} -printf '%T+ %p\\n' | \
-            sort -r | \
-            cut -d' ' -f2- | \
-            sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\"" && \
-        cp -fv "${FAVLOGSORT}" fav.log.sort
+        (
+            eval "${find_cmd} -printf '%T+ %p\\n' | \
+                sort -r | \
+                cut -d' ' -f2- | \
+                sed 's/\([\"\\]\)/\\\1/g;s/.*/\"&\"/' > \"${FAVLOGSORT}\""
+        ) && cp -fv "${FAVLOGSORT}" fav.log.sort
 
-        eval "${find_cmd} -exec sh -c 'du -b \"{}\" | \
-            awk \"{if (\\\$1 > $BYTE_SIZE_OPTION) { \
-                    size=\\\$1; \\\$1=\\\"\\\"; \
-                    gsub(/^ /, \\\"\\\", \\\$0); \
-                    print size\\\",\\\\\\\"'\"{}\"'\\\\\\\"\\\"}}\"' \; | \
-            sort -rn > \"${FAVLOG}\"" && \
-        cp -fv "${FAVLOG}" fav.log
+        (
+            eval "${find_cmd} -exec sh -c 'du -b \"{}\" | \
+                awk \"{if (\\\$1 > $BYTE_SIZE_OPTION) { \
+                size=\\\$1; \\\$1=\\\"\\\"; \
+                gsub(/^ /, \\\"\\\", \\\$0); \
+                print size\\\",\\\\\\\"'\"{}\"'\\\\\\\"\\\"}}\"' \; | \
+                sort -rn > \"${FAVLOG}\""
+        ) && cp -fv "${FAVLOG}" fav.log
     fi
 
     cd -
