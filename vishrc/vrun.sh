@@ -127,4 +127,7 @@ case $extension in
         dotnet build
         dotnet run
         ;;
+    go)
+        go run "$file"
+        ;;
 esac
