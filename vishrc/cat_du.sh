@@ -2,9 +2,15 @@
 
 while read ss
 do
-    # 使用awk来提取逗号前面和后面的部分，即文件或目录的大小和路径
+    # 尝试使用awk来提取逗号分隔的文件大小和路径
     filesize_old=$(echo "$ss" | awk -F',' '{print $1}' | sed 's/"//g')
     filepath=$(echo "$ss" | awk -F',' '{print $2}' | sed 's/"//g')
+
+    # 如果filepath为空，则整个字符串可能只是一个路径
+    if [ -z "$filepath" ]; then
+        filepath=$filesize_old
+        filesize_old=""
+    fi
 
     # 检查逗号前面是否有数字（即文件大小）
     if [[ "$filesize_old" =~ ^[0-9]+$ ]]; then
