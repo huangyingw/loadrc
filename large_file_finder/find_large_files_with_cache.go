@@ -12,7 +12,9 @@ import (
 	"github.com/karrick/godirwalk"
 	"os"
 	"path/filepath"
+	"regexp"
 	"sort"
+	"strings"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -60,7 +62,9 @@ func loadExcludePatterns(filename string) ([]string, error) {
 	var patterns []string
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		patterns = append(patterns, scanner.Text())
+		pattern := scanner.Text()
+		fmt.Printf("Loaded exclude pattern: %s\n", pattern) // 打印每个加载的模式
+		patterns = append(patterns, pattern)
 	}
 	return patterns, scanner.Err()
 }
@@ -178,7 +182,7 @@ func main() {
 
 	// Root directory to start the search
 	rootDir := os.Args[1]
-	
+
 	// Minimum file size in bytes
 	minSize := 200 // Default size is 200MB
 	minSizeBytes := int64(minSize * 1024 * 1024)
@@ -186,6 +190,17 @@ func main() {
 	excludePatterns, err := loadExcludePatterns(filepath.Join(rootDir, "exclude_patterns.txt"))
 	if err != nil {
 		fmt.Println("Warning: Could not read exclude patterns:", err)
+	}
+
+	excludeRegexps := make([]*regexp.Regexp, len(excludePatterns))
+	for i, pattern := range excludePatterns {
+		// 将通配符模式转换为正则表达式
+		regexPattern := strings.Replace(pattern, "*", ".*", -1)
+		excludeRegexps[i], err = regexp.Compile(regexPattern)
+		if err != nil {
+			fmt.Printf("Invalid regex pattern '%s': %s\n", regexPattern, err)
+			return
+		}
 	}
 
 	// Start a goroutine to periodically print progress
@@ -199,15 +214,8 @@ func main() {
 	// Use godirwalk.Walk instead of fastwalk.Walk or filepath.Walk
 	err = godirwalk.Walk(rootDir, &godirwalk.Options{
 		Callback: func(osPathname string, de *godirwalk.Dirent) error {
-			// Check if the path should be excluded
-			for _, pattern := range excludePatterns {
-				match, err := filepath.Match(pattern, osPathname)
-				if err != nil {
-					fmt.Printf("Error matching pattern: %s, Error: %s\n", pattern, err)
-					continue
-				}
-				if match {
-					fmt.Printf("Excluding file: %s\n", osPathname) // 打印被排除的文件
+			for _, re := range excludeRegexps {
+				if re.MatchString(osPathname) {
 					return nil
 				}
 			}
