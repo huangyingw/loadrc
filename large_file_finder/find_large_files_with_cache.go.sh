@@ -11,8 +11,5 @@ go get -u github.com/karrick/godirwalk
 
 docker-compose down -v && docker-compose up -d
 
-#go build find_large_files_with_cache.go && \
-#    sudo ./find_large_files_with_cache /media/usb_backup_crypt_5T_1
-
 go build find_large_files_with_cache.go && \
     sudo ./find_large_files_with_cache /media
