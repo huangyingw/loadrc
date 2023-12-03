@@ -127,8 +127,6 @@ func processFile(path string, typ os.FileMode) {
 	defer wg.Done()
 	<-workerPool // Get an empty struct from workerPool to limit concurrency
 
-	fmt.Printf("Processing file: %s\n", path)
-
 	if typ.IsDir() {
 		return
 	}
@@ -156,16 +154,13 @@ func processFile(path string, typ os.FileMode) {
 	pipe.Set(ctx, hashedKey, buf.Bytes(), 0)
 	pipe.Set(ctx, "path:"+hashedKey, path, 0)
 
-	// 执行管道命令
-	_, err = pipe.Exec(ctx)
-	if err != nil {
-		fmt.Printf("Error executing pipeline: %s, File: %s\n", err, path)
+	if _, err = pipe.Exec(ctx); err != nil {
+		fmt.Printf("Error executing pipeline for file: %s: %s\n", path, err)
 		return
 	}
 
 	// Update progress counter atomically
 	atomic.AddInt32(&progressCounter, 1)
-	fmt.Printf("File processed: %s\n", path)
 
 	workerPool <- struct{}{} // Release limit
 }
@@ -183,7 +178,7 @@ func main() {
 
 	// Root directory to start the search
 	rootDir := os.Args[1]
-	fmt.Printf("Starting from directory: %s\n", rootDir) // 打印开始搜索的目录
+	
 	// Minimum file size in bytes
 	minSize := 200 // Default size is 200MB
 	minSizeBytes := int64(minSize * 1024 * 1024)
@@ -197,10 +192,7 @@ func main() {
 	go func() {
 		for {
 			time.Sleep(1 * time.Second)
-
-			// Atomically read the progress counter
-			currentProgress := atomic.LoadInt32(&progressCounter)
-			fmt.Printf("Progress: %d files processed.\n", currentProgress)
+			fmt.Printf("Progress: %d files processed.\n", atomic.LoadInt32(&progressCounter))
 		}
 	}()
 
@@ -252,21 +244,17 @@ func main() {
 	})
 
 	wg.Wait()
+	fmt.Printf("Final progress: %d files processed.\n", atomic.LoadInt32(&progressCounter))
 
-	// Print the final counter value
-	finalProgress := atomic.LoadInt32(&progressCounter)
-	fmt.Printf("Final progress: %d files processed.\n", finalProgress)
-
-	// Read data from Redis and save to file
 	if err := saveToFile(rootDir, "fav.log", false); err != nil {
-		fmt.Println("Error saving to fav.log:", err)
+		fmt.Printf("Error saving to fav.log: %s\n", err)
 	} else {
-		fmt.Printf("Saved to %s\n", filepath.Join(rootDir, "fav.log"))
+		fmt.Printf("Saved data to %s\n", filepath.Join(rootDir, "fav.log"))
 	}
 
 	if err := saveToFile(rootDir, "fav.log.sort", true); err != nil {
-		fmt.Println("Error saving to fav.log.sort:", err)
+		fmt.Printf("Error saving to fav.log.sort: %s\n", err)
 	} else {
-		fmt.Printf("Saved to %s\n", filepath.Join(rootDir, "fav.log.sort"))
+		fmt.Printf("Saved sorted data to %s\n", filepath.Join(rootDir, "fav.log.sort"))
 	}
 }
