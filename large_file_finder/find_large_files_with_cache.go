@@ -149,14 +149,19 @@ func processFile(path string, typ os.FileMode) {
 	// Generate hash for the file path
 	hashedKey := generateHash(path)
 
-	err = rdb.Set(ctx, hashedKey, buf.Bytes(), 0).Err()
+	// 使用管道批量处理Redis命令
+	pipe := rdb.Pipeline()
+
+	// 这里我们添加命令到管道，但不立即检查错误
+	pipe.Set(ctx, hashedKey, buf.Bytes(), 0)
+	pipe.Set(ctx, "path:"+hashedKey, path, 0)
+
+	// 执行管道命令
+	_, err = pipe.Exec(ctx)
 	if err != nil {
-		fmt.Printf("Error setting Redis key: %s, File: %s\n", err, path)
+		fmt.Printf("Error executing pipeline: %s, File: %s\n", err, path)
 		return
 	}
-
-	// Store the mapping between the hash and the original path
-	rdb.Set(ctx, "path:"+hashedKey, path, 0)
 
 	// Update progress counter atomically
 	atomic.AddInt32(&progressCounter, 1)
