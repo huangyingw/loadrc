@@ -199,7 +199,6 @@ func main() {
 	// Use godirwalk.Walk instead of fastwalk.Walk or filepath.Walk
 	err = godirwalk.Walk(rootDir, &godirwalk.Options{
 		Callback: func(osPathname string, de *godirwalk.Dirent) error {
-			fmt.Printf("Visiting: %s, Type: %s\n", osPathname, de.ModeType()) // 打印路径和类型
 			// Check if the path should be excluded
 			for _, pattern := range excludePatterns {
 				match, err := filepath.Match(pattern, osPathname)
@@ -220,7 +219,6 @@ func main() {
 			}
 
 			if fileInfo.Size() < minSizeBytes {
-				fmt.Printf("Skipping small file: %s\n", osPathname) // 打印因大小被跳过的文件
 				return nil
 			}
 
