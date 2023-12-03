@@ -274,3 +274,6 @@
 [submodule "vimrc/.vim/bundle/nvim-ghost.nvim"]
 	path = vimrc/.vim/bundle/nvim-ghost.nvim
 	url = git@github.com:subnut/nvim-ghost.nvim.git
+[submodule "large_file_finder"]
+	path = large_file_finder
+	url = git@github.com:huangyingw/large_file_finder.git
