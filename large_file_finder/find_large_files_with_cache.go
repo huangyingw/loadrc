@@ -226,7 +226,6 @@ func main() {
 				fmt.Printf("Entering directory: %s\n", osPathname)
 				// 可以添加目录处理逻辑
 			} else if fileInfo.Mode().IsRegular() {
-				fmt.Printf("Processing file: %s\n", osPathname)
 				wg.Add(1)
 				go processFile(osPathname, fileInfo.Mode())
 			} else if fileInfo.Mode()&os.ModeSymlink != 0 {
