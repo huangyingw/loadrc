@@ -30,6 +30,27 @@ type FileInfo struct {
 	ModTime time.Time
 }
 
+// Task 定义了工作池中的任务类型
+type Task func()
+
+// NewWorkerPool 创建并返回一个工作池
+func NewWorkerPool(workerCount int) (chan<- Task, *sync.WaitGroup) {
+	var wg sync.WaitGroup
+	taskQueue := make(chan Task)
+
+	for i := 0; i < workerCount; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for task := range taskQueue {
+				task()
+			}
+		}()
+	}
+
+	return taskQueue, &wg
+}
+
 var wg sync.WaitGroup
 var workerPool = make(chan struct{}, 20) // Limit concurrency to 20
 
@@ -50,6 +71,18 @@ func generateHash(s string) string {
 	hasher := sha256.New()
 	hasher.Write([]byte(s))
 	return hex.EncodeToString(hasher.Sum(nil))
+}
+
+func processDirectory(path string) {
+	// 处理目录的逻辑
+	fmt.Printf("Processing directory: %s\n", path)
+	// 可能的操作：遍历目录下的文件等
+}
+
+func processSymlink(path string) {
+	// 处理软链接的逻辑
+	fmt.Printf("Processing symlink: %s\n", path)
+	// 可能的操作：解析软链接，获取实际文件等
 }
 
 func loadExcludePatterns(filename string) ([]string, error) {
@@ -128,9 +161,6 @@ func sortKeys(keys []string, data map[string]FileInfo, sortByModTime bool) {
 }
 
 func processFile(path string, typ os.FileMode) {
-	defer wg.Done()
-	<-workerPool // Get an empty struct from workerPool to limit concurrency
-
 	if typ.IsDir() {
 		return
 	}
@@ -165,16 +195,9 @@ func processFile(path string, typ os.FileMode) {
 
 	// Update progress counter atomically
 	atomic.AddInt32(&progressCounter, 1)
-
-	workerPool <- struct{}{} // Release limit
 }
 
 func main() {
-	// Initialize workerPool
-	for i := 0; i < 20; i++ {
-		workerPool <- struct{}{}
-	}
-
 	if len(os.Args) < 2 {
 		fmt.Println("Usage: ./find_large_files_with_cache <directory>")
 		return
@@ -212,8 +235,14 @@ func main() {
 	}()
 
 	// Use godirwalk.Walk instead of fastwalk.Walk or filepath.Walk
+	// 初始化工作池
+	workerCount := 20 // 可以根据需要调整工作池的大小
+	taskQueue, poolWg := NewWorkerPool(workerCount)
+
+	// 使用 godirwalk.Walk 遍历文件
 	err = godirwalk.Walk(rootDir, &godirwalk.Options{
 		Callback: func(osPathname string, de *godirwalk.Dirent) error {
+			// 排除模式匹配
 			for _, re := range excludeRegexps {
 				if re.MatchString(osPathname) {
 					return nil
@@ -226,31 +255,35 @@ func main() {
 				return err
 			}
 
+			// 检查文件大小是否满足最小阈值
 			if fileInfo.Size() < minSizeBytes {
 				return nil
 			}
 
-			if fileInfo.Mode().IsDir() {
-				fmt.Printf("Entering directory: %s\n", osPathname)
-				// 可以添加目录处理逻辑
-			} else if fileInfo.Mode().IsRegular() {
-				wg.Add(1)
-				go processFile(osPathname, fileInfo.Mode())
-			} else if fileInfo.Mode()&os.ModeSymlink != 0 {
-				fmt.Printf("Found symlink: %s\n", osPathname)
-				// 可以添加软链接处理逻辑
-			} else {
-				fmt.Printf("Skipping unknown type: %s\n", osPathname)
-				// 对于未知类型，您可以选择跳过或处理
+			// 将任务发送到工作池
+			taskQueue <- func() {
+				if fileInfo.Mode().IsDir() {
+					processDirectory(osPathname)
+				} else if fileInfo.Mode().IsRegular() {
+					processFile(osPathname, fileInfo.Mode())
+				} else if fileInfo.Mode()&os.ModeSymlink != 0 {
+					processSymlink(osPathname)
+				} else {
+					fmt.Printf("Skipping unknown type: %s\n", osPathname)
+				}
 			}
+
 			return nil
 		},
 		Unsorted: true,
 	})
 
-	wg.Wait()
+	// 关闭任务队列，并等待所有任务完成
+	close(taskQueue)
+	poolWg.Wait()
 	fmt.Printf("Final progress: %d files processed.\n", atomic.LoadInt32(&progressCounter))
 
+	// 文件处理完成后的保存操作
 	if err := saveToFile(rootDir, "fav.log", false); err != nil {
 		fmt.Printf("Error saving to fav.log: %s\n", err)
 	} else {
