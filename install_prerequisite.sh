@@ -24,6 +24,7 @@ apt-get install -y \
     gdebi-core \
     git \
     git-gui \
+    golang-go \
     gparted \
     graphviz \
     hashcat \
@@ -86,11 +87,33 @@ apt-get install -y \
     python3-nltk
 
 
-pacman -Syy && \
-    pacman --noconfirm -Sy \
-    cryptsetup \
-    gnu-netcat
+# 检查 pacman 是否存在
+if command -v pacman &> /dev/null; then
+    pacman -Syy && \
+        pacman --noconfirm -Sy \
+        cryptsetup \
+        gnu-netcat
+else
+    echo "pacman 命令不存在，跳过 pacman 相关安装"
+fi
 
-modprobe wl
-update-initramfs -u
-locale-gen en_US.UTF-8
+# 检查 modprobe 是否存在
+if command -v modprobe &> /dev/null; then
+    modprobe wl
+else
+    echo "modprobe 命令不存在，跳过 modprobe 操作"
+fi
+
+# 检查 update-initramfs 是否存在
+if command -v update-initramfs &> /dev/null; then
+    update-initramfs -u
+else
+    echo "update-initramfs 命令不存在，跳过 update-initramfs 操作"
+fi
+
+# 检查 locale-gen 是否存在
+if command -v locale-gen &> /dev/null; then
+    locale-gen en_US.UTF-8
+else
+    echo "locale-gen 命令不存在，跳过 locale-gen 操作"
+fi
