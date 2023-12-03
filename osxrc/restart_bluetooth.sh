@@ -26,7 +26,7 @@ ensure_power_on() {
 }
 
 # Array of device IDs
-DEVICE_IDS=("c8-7b-23-cd-44-ba" "ac-bf-71-46-77-65")  # Black Bose QC Earbuds II and Blue Bose QC Earbuds II
+DEVICE_IDS=("ac-bf-71-a1-de-da" "ac-bf-71-46-77-65")  # Black Bose QC Earbuds II and Blue Bose QC Earbuds II
 
 # Turn off Bluetooth
 blueutil -p 0
