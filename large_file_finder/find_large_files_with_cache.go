@@ -13,7 +13,6 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
-	"strings"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -179,6 +178,7 @@ func main() {
 
 	// Root directory to start the search
 	rootDir := os.Args[1]
+	fmt.Printf("Starting from directory: %s\n", rootDir) // 打印开始搜索的目录
 	// Minimum file size in bytes
 	minSize := 200 // Default size is 200MB
 	minSizeBytes := int64(minSize * 1024 * 1024)
@@ -202,26 +202,45 @@ func main() {
 	// Use godirwalk.Walk instead of fastwalk.Walk or filepath.Walk
 	err = godirwalk.Walk(rootDir, &godirwalk.Options{
 		Callback: func(osPathname string, de *godirwalk.Dirent) error {
+			fmt.Printf("Visiting: %s, Type: %s\n", osPathname, de.ModeType()) // 打印路径和类型
 			// Check if the path should be excluded
 			for _, pattern := range excludePatterns {
-				if strings.Contains(osPathname, pattern) {
+				match, err := filepath.Match(pattern, osPathname)
+				if err != nil {
+					fmt.Printf("Error matching pattern: %s, Error: %s\n", pattern, err)
+					continue
+				}
+				if match {
+					fmt.Printf("Excluding file: %s\n", osPathname) // 打印被排除的文件
 					return nil
 				}
 			}
 
-			info, err := os.Stat(osPathname)
+			fileInfo, err := os.Lstat(osPathname)
 			if err != nil {
+				fmt.Printf("Error getting file info: %s\n", err)
 				return err
 			}
 
-			// Filter condition: file size must not be smaller than minSizeBytes
-			if info.Size() < minSizeBytes {
-				fmt.Printf("Skipping small file: %s\n", osPathname)
+			if fileInfo.Size() < minSizeBytes {
+				fmt.Printf("Skipping small file: %s\n", osPathname) // 打印因大小被跳过的文件
 				return nil
 			}
 
-			wg.Add(1)
-			go processFile(osPathname, de.ModeType())
+			if fileInfo.Mode().IsDir() {
+				fmt.Printf("Entering directory: %s\n", osPathname)
+				// 可以添加目录处理逻辑
+			} else if fileInfo.Mode().IsRegular() {
+				fmt.Printf("Processing file: %s\n", osPathname)
+				wg.Add(1)
+				go processFile(osPathname, fileInfo.Mode())
+			} else if fileInfo.Mode()&os.ModeSymlink != 0 {
+				fmt.Printf("Found symlink: %s\n", osPathname)
+				// 可以添加软链接处理逻辑
+			} else {
+				fmt.Printf("Skipping unknown type: %s\n", osPathname)
+				// 对于未知类型，您可以选择跳过或处理
+			}
 			return nil
 		},
 		Unsorted: true,
