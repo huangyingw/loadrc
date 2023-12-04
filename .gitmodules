@@ -277,6 +277,6 @@
 [submodule "bcache-tools"]
 	path = bcache-tools
 	url = https://github.com/g2p/bcache-tools.git
-[submodule "large_file_finder"]
-	path = large_file_finder
-	url = git@github.com:huangyingw/large_file_finder.git
+[submodule "efficient_file_scanner"]
+	path = efficient_file_scanner
+	url = git@github.com:huangyingw/efficient_file_scanner.git
