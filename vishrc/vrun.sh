@@ -128,6 +128,6 @@ case $extension in
         dotnet run
         ;;
     go)
-        go run "$file"
+        go run .
         ;;
 esac
