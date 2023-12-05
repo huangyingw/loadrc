@@ -280,3 +280,6 @@
 [submodule "efficient_file_scanner"]
 	path = efficient_file_scanner
 	url = git@github.com:huangyingw/efficient_file_scanner.git
+[submodule "video_timestamp_jump"]
+	path = video_timestamp_jump
+	url = git@github.com:huangyingw/video_timestamp_jump.git
