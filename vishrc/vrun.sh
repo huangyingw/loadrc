@@ -128,6 +128,11 @@ case $extension in
         dotnet run
         ;;
     go)
-        go run .
+        shFiles=$(ls *.sh 2>/dev/null | wc -l)
+        if [ "$shFiles" -eq 1 ]; then
+            sh *.sh
+        else
+            go run .
+        fi
         ;;
 esac
