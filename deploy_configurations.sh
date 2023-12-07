@@ -20,8 +20,7 @@ fi
 
 # mv -fv ~/.config/git/gitk ~/.config/git/gitk.bak
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/."`hostname`".theanorc  ~/.theanorc
-# ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.config/git/gitk  ~/.config/git/gitk
-# sed -i.bak "s/set ignorespace 0/set ignorespace 1/g" $(which gitk)
+~/loadrc/configure_gitk.sh
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.ssh ~/.ssh
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.tmux.conf ~/.tmux.conf
 ~/loadrc/bashrc/ln_fs.sh ~/loadrc/.config/tig/config ~/.config/tig/config

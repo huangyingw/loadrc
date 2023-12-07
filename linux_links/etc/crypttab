@@ -22,3 +22,4 @@ av82 /dev/disk/by-uuid/824d11c2-e8af-4502-8717-46b6e283d790  /root/loadrc/keys/k
 av161      /dev/disk/by-uuid/1090f9a4-92b5-4fd0-91d5-2b32c6967c8d  /root/loadrc/keys/keyfile   luks
 av162      /dev/disk/by-uuid/db69cdb4-ef3f-442f-9693-65132f6df720  /root/loadrc/keys/keyfile   luks
 secure_bcache      /dev/disk/by-uuid/5c312e50-69c4-40d6-bdf6-498c2f69740a  /root/loadrc/keys/keyfile   luks
+music /dev/disk/by-uuid/ece4ecf7-63aa-4423-91c7-7d5776beb032  /root/loadrc/keys/keyfile   luks
