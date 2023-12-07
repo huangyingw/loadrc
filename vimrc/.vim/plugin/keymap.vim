@@ -105,7 +105,9 @@ function! PlayVideo(...) abort
     let line = substitute(line, '[^"]$', line[strlen(line) - 1] . '"', '')
     let line = substitute(line, ",\"", ",", "")
 
-    call AsyncRunShellCommand('~/loadrc/pythonrc/vlc.py ' . '"' . expand("%:p") . '"' .  ' ' . line)
+    " 获取当前文件所在的目录路径
+    let dir_path = shellescape(expand("%:p:h"))
+    call AsyncRunShellCommand('~/loadrc/video_timestamp_jump/smart_vlc_jump.py ' . dir_path . ' ' . shellescape(line))
 endfunction
 
 function! VDebug()
@@ -479,7 +481,7 @@ nnoremap mf :call ExFilter()<cr>
 nnoremap md :call Vdelete()<cr>
 nnoremap mo :call OpenAll()<cr>
 vnoremap <silent>o :call SearchOpen()<cr>
-vnoremap <silent>m :s/ //<CR>
+vnoremap <silent>m :call ClearSpacesAndUnhighlight()<CR>
 nmap <C-s> :call CSCSearch(0)<cr>
 nnoremap <c-space> :call CSCSearch(4)<cr>
 nmap <C-@> :call CSCSearch(4)<cr>
@@ -561,4 +563,9 @@ endfunction
 
 function! Reverse()
     exec 'g/^/m0'
+endfunction
+
+function! ClearSpacesAndUnhighlight()
+    :s/ //<CR>
+    :noh
 endfunction
