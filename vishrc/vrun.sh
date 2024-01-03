@@ -84,7 +84,7 @@ case $extension in
             SCRIPT=$(realpath "$file")
             SCRIPTPATH=$(dirname "$SCRIPT")
             cd "$SCRIPTPATH"
-            python3 "$file"
+            python "$file"
         fi
         ;;
     vim)
