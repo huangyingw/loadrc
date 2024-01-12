@@ -135,4 +135,27 @@ case $extension in
             go run .
         fi
         ;;
+    puml)
+        # Python 程序的完整路径
+        PROGRAM_PATH="$HOME/myproject/git/system_design/plantumlmacviewer/PlantUMLMacViewer.py"
+
+        # 套接字服务器的地址和端口
+        SOCKET_HOST="localhost"
+        SOCKET_PORT=12345
+
+            # 检查程序是否已经运行
+            if ! pgrep -f $PROGRAM_PATH > /dev/null 2>&1
+            then
+                # 如果程序没有运行，使用 nohup 在后台启动程序
+                nohup python "$PROGRAM_PATH" > "$HOME/PlantUMLMacViewer.log" 2>&1 &
+                echo "PlantUMLMacViewer.py 启动了。"
+                sleep 1  # 等待一秒以确保程序已启动
+            fi
+
+        # 使用 nc 发送文件路径到套接字服务器
+        echo -e "$file" | nc $SOCKET_HOST $SOCKET_PORT
+        echo "文件路径已发送到套接字服务器。"
+        # 切换焦点回 iTerm
+        osascript -e 'tell application "iTerm" to activate'
+        ;;
 esac
