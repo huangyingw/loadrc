@@ -86,20 +86,7 @@ function! Filter()
     exec '%g!/' . b:keyword . '/d'
 endfunction
 
-function! ProcessCurrentLine(...) abort
-    " 检测文件类型
-    if &filetype ==# 'puml'
-        " 如果是 puml 文件，执行 PlantUML 呈现逻辑
-        if &filetype == 'puml'
-            " 执行 PlantUML 命令
-            execute "!java -jar /usr/local/Cellar/plantuml/1.2023.12/libexec/plantuml.jar %" 
-            " 设置一个标志
-            let b:rendered_puml = 1
-        endif
-        return 0
-    endif
-
-    " 如果不是 puml 文件，执行原有的视频播放逻辑
+function! PlayVideo(...) abort
     " Return early if the buffer type is a terminal
     if &buftype ==# "terminal"
         return 0
@@ -502,7 +489,7 @@ nmap <C-f> :call CSCSearch(7)<cr>
 nmap <C-e> :call CSCSearch(1)<cr>
 nmap <C-g> :call CSCSearch(3)<cr>
 nnoremap <leader>d :!rm "%:p"<CR>:q<cr>
-nmap <C-j> :call ProcessCurrentLine()<cr>
+nmap <C-j> :call PlayVideo()<cr>
 nmap <C-p> :call Prune()<cr>
 nmap <C-k> :call KdiffAll()<cr>
 nmap <C-d> :call DiffAll()<cr>
