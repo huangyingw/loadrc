@@ -158,4 +158,18 @@ case $extension in
         # 切换焦点回 iTerm
         osascript -e 'tell application "iTerm" to activate'
         ;;
+    swift)
+        # 去掉文件扩展名，得到可执行文件的名字
+        EXECUTABLE="${file%.swift}"
+        # 编译Swift文件，并生成可执行文件
+        swiftc -framework AppKit "$file" -o "$EXECUTABLE"
+        # 检查编译是否成功
+        if [ $? -eq 0 ]; then
+            # 运行编译后的程序
+            "$EXECUTABLE"
+        else
+            echo "Compilation failed"
+            exit 1
+        fi
+        ;;
 esac
