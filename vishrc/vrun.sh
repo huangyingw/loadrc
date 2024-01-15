@@ -84,7 +84,7 @@ case $extension in
             SCRIPT=$(realpath "$file")
             SCRIPTPATH=$(dirname "$SCRIPT")
             cd "$SCRIPTPATH"
-            python3 "$file"
+            ~/loadrc/bashrc/run_python_script.sh "$file"
         fi
         ;;
     vim)
@@ -133,6 +133,43 @@ case $extension in
             sh *.sh
         else
             go run .
+        fi
+        ;;
+    puml)
+        # Python 程序的完整路径
+        PROGRAM_PATH="$HOME/loadrc/plantumlmacviewer/PlantUMLMacViewer.py"
+
+        # 套接字服务器的地址和端口
+        SOCKET_HOST="localhost"
+        SOCKET_PORT=12345
+
+            # 检查程序是否已经运行
+            if ! pgrep -f $PROGRAM_PATH > /dev/null 2>&1
+            then
+                # 如果程序没有运行，使用 nohup 在后台启动程序
+                nohup python "$PROGRAM_PATH" > "$HOME/PlantUMLMacViewer.log" 2>&1 &
+                echo "PlantUMLMacViewer.py 启动了。"
+                sleep 1  # 等待一秒以确保程序已启动
+            fi
+
+        # 使用 nc 发送文件路径到套接字服务器
+        echo -e "$file" | nc $SOCKET_HOST $SOCKET_PORT
+        echo "文件路径已发送到套接字服务器。"
+        # 切换焦点回 iTerm
+        osascript -e 'tell application "iTerm" to activate'
+        ;;
+    swift)
+        # 去掉文件扩展名，得到可执行文件的名字
+        EXECUTABLE="${file%.swift}"
+        # 编译Swift文件，并生成可执行文件
+        swiftc -framework AppKit "$file" -o "$EXECUTABLE"
+        # 检查编译是否成功
+        if [ $? -eq 0 ]; then
+            # 运行编译后的程序
+            "$EXECUTABLE"
+        else
+            echo "Compilation failed"
+            exit 1
         fi
         ;;
 esac
