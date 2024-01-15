@@ -1,2 +1,1 @@
-*/3 * * * * /Users/huangyingw/loadrc/macosrc/restart_ssh.sh
-*/3 * * * * /Users/ying.huang/loadrc/macosrc/restart_ssh.sh
+*/10 * * * * /Users/huangyingw/loadrc/macosrc/restart_ssh.sh
