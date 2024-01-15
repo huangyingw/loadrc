@@ -137,7 +137,7 @@ case $extension in
         ;;
     puml)
         # Python 程序的完整路径
-        PROGRAM_PATH="$HOME/myproject/git/system_design/plantumlmacviewer/PlantUMLMacViewer.py"
+        PROGRAM_PATH="$HOME/loadrc/plantumlmacviewer/PlantUMLMacViewer.py"
 
         # 套接字服务器的地址和端口
         SOCKET_HOST="localhost"
