@@ -84,7 +84,7 @@ case $extension in
             SCRIPT=$(realpath "$file")
             SCRIPTPATH=$(dirname "$SCRIPT")
             cd "$SCRIPTPATH"
-            python "$file"
+            ~/loadrc/bashrc/run_python_script.sh "$file"
         fi
         ;;
     vim)
