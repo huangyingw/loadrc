@@ -283,3 +283,6 @@
 [submodule "video_timestamp_jump"]
 	path = video_timestamp_jump
 	url = git@github.com:huangyingw/video_timestamp_jump.git
+[submodule "plantumlmacviewer"]
+	path = plantumlmacviewer
+	url = git@github.com:huangyingw/plantumlmacviewer.git
