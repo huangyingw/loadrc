@@ -5,6 +5,7 @@ then
     wakeonlan -i 192.168.2.2 10:7b:44:f0:e7:2f #server
     wakeonlan b0:ea:bc:09:20:c6 #server wifi
     wakeonlan 10:7b:44:f0:e7:2f #server mother board Ethernet
+    wakeonlan 88:c9:b3:b0:e9:1e #server 10G
     wakeonlan 00:e0:4c:68:03:cd
     wakeonlan 00:e0:4c:00:07:a8
     wakeonlan 88:c9:b3:b0:e9:1e
@@ -34,6 +35,7 @@ elif [ "$target" = "server" ]
 then
     wakeonlan -i 192.168.2.12 10:7b:44:f0:e7:2f #server
     wakeonlan b0:ea:bc:09:20:c6 #server wifi
+    wakeonlan 88:c9:b3:b0:e9:1e #server 10G
     ping server
 elif [ "$target" = "movie" ]
 then
