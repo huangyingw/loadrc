@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-TIMEOUT=2
+TIMEOUT=5
 
 # Function to keep the Bluetooth connection alive
 keep_connect() {
@@ -32,7 +32,7 @@ DEVICE_IDS=("ac-bf-71-a1-de-da" "ac-bf-71-46-77-65")  # Black Bose QC Earbuds II
 blueutil -p 0
 
 # Ensure Bluetooth is powered on
-ensure_power_on
+ensure_power_on &
 
 # Connect to all devices in parallel
 for id in "${DEVICE_IDS[@]}"; do
