@@ -14,7 +14,7 @@ first_line=$(head -n 1 "$file")
 # 检查是否包含shebang
 if [[ $first_line == \#!/* ]]; then
     chmod +x "$file"
-    ./"$file"
+    "$file"
 else
     python "$file"
 fi
