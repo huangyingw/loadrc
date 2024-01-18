@@ -158,8 +158,13 @@ function! VRun()
         let b:to_run = b:to_run . '.sh'
     endif
 
-    let b:csdbpath = Cd2Worktree()
-    let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
+    " 检查文件路径是否以 'fugitive:///' 开头
+    if b:to_run =~ '^fugitive:///'
+        let b:output = ''  " 将 b:output 置为空
+    else
+        let b:csdbpath = Cd2Worktree()
+        let b:output = b:csdbpath . '/' . b:file_name . '.runresult'
+    endif
     silent exec '!~/loadrc/bashrc/deploy.sh 2>&1 | tee deploy.findresult'
     call RunShell('~/loadrc/vishrc/vrun.sh', b:to_run, b:output)
 
