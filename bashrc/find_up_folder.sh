@@ -2,7 +2,10 @@
 
 rpath="$1"
 
-while [[ "$rpath" != "" && ! -e "$rpath/$2" ]]
+# 如果路径以 "fugitive://" 开头，则去除这部分
+rpath=${rpath#fugitive://}
+
+while [[ "$rpath" != "" && "$rpath" != "/" && ! -e "$rpath/$2" ]]
 do
     rpath=${rpath%/*}
 done
