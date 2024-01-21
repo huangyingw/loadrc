@@ -284,8 +284,11 @@ function! RunShell(shell, ...)
             exec '!' . run_string
         endif
     endif
-    silent exec '!cp' . ' -fv ' . '"' .  temp_log . '"' . ' ' . '"' .  arg2 . '"'
-    silent exec '!~/loadrc/bashrc/removing_ansi_color_codes.sh' . ' ' . '"' .  arg2 . '"'
+    " 如果 arg2 为空，不执行复制和移除颜色代码的操作
+    if arg2 != ''
+        silent exec '!cp' . ' -fv ' . '"' .  temp_log . '"' . ' ' . '"' .  arg2 . '"'
+        silent exec '!~/loadrc/bashrc/removing_ansi_color_codes.sh' . ' ' . '"' .  arg2 . '"'
+    endif
 endfunc
 
 function! Filter2FindResult()
