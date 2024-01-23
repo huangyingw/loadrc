@@ -59,3 +59,12 @@ else
 endif
 
 set statusline +=\ %{GitBranch()}
+
+" 在 .vimrc 或 init.vim 文件中启用真彩色支持
+if has("termguicolors")
+    set termguicolors
+endif
+
+" 使用十六进制颜色代码
+hi StatusLine guifg=#6971f6 guibg=#fffc7f
+
