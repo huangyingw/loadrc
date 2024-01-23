@@ -68,3 +68,10 @@ endif
 " 使用十六进制颜色代码
 hi StatusLine guifg=#6971f6 guibg=#fffc7f
 
+if &background == 'dark'
+    " 深色主题下的设置
+    highlight CursorLine cterm=underline guibg=Grey40
+else
+    " 浅色主题下的设置
+    highlight CursorLine cterm=underline guibg=Grey90
+endif
