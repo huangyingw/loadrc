@@ -4,7 +4,12 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
 cat ~/loadrc/crontabrc/silent.cron > crontab_file
-cat ~/loadrc/crontabrc/ssh.cron >> crontab_file
+
+# 检查系统是否为macOS
+if [[ "$(uname)" == "Darwin" ]]; then
+    cat ~/loadrc/crontabrc/ssh.cron >> crontab_file
+fi
+
 CRONRC=$HOME/loadrc/crontabrc/."`hostname`".cron
 
 if [ -f "$CRONRC" ]
