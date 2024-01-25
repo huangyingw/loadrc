@@ -59,11 +59,3 @@ else
 endif
 
 set statusline +=\ %{GitBranch()}
-
-" 定义颜色
-highlight NvimLightBlue guibg=#a6dbff
-highlight NvimLightYellow guifg=#fce094
-
-" 设置状态栏颜色
-highlight StatusLine guibg=NvimLightBlue guifg=NvimLightYellow
-
