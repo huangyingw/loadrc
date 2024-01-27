@@ -14,19 +14,13 @@ ACTION="$3"
 # 处理文件列表，移除引号和转义空格
 cat "$FILE_LIST" | sed 's/^"//g;s/"$//g;s/\\ / /g' > "$FILE_LIST".tmp
 
-# 根据动作选择 rsync 选项
-case "$ACTION" in
-    copy)
-        RSYNC_OPTIONS="-aHv --force --progress"
-        ;;
-    move)
-        RSYNC_OPTIONS="-aHv --force --progress --remove-source-files"
-        ;;
-    *)
-        echo "Invalid action: $ACTION"
-        exit 1
-        ;;
-esac
+# 定义一个数组来存储 rsync 的选项
+RSYNC_OPTIONS=(-aHv --force --progress)
+
+# 根据动作选择是否添加移除源文件的选项
+if [ "$ACTION" = "move" ]; then
+    RSYNC_OPTIONS+=("--remove-source-files")
+fi
 
 # 执行 rsync
-rsync $RSYNC_OPTIONS --files-from "$FILE_LIST".tmp . "$DESTINATION"
+rsync "${RSYNC_OPTIONS[@]}" --files-from="$FILE_LIST".tmp . "$DESTINATION"
