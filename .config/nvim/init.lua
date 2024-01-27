@@ -3,7 +3,7 @@ vim.cmd 'set runtimepath^=~/.vim runtimepath+=~/.vim/after'
 vim.cmd 'let &packpath = &runtimepath'
 vim.cmd 'source ~/.vimrc'
 require('plugins')
-require('secret_config')
+-- require('secret_config')
 
 require("chatgpt").setup()
 
