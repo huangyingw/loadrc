@@ -85,7 +85,8 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune 
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RelativePath :execute s:RelativePath()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RmCat :execute s:RmCat(<f-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute s:SelectMove(<f-args>)
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute 's:SelectAction("move", ' . <q-args> . ')'
+command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectCopy :execute 's:SelectAction("copy", ' . <q-args> . ')'
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Split :execute s:Split()
@@ -586,16 +587,19 @@ function! s:CatPlay(...) abort
     call OpenOrSwitch(b:output, 'vs')
 endfunction
 
-function! s:SelectMove(...) abort
+function! s:SelectAction(action, ...) abort
     if &modified
         echom 'Please check and save your file first!!!'
         return 0
     endif
 
+    let l:action = a:action
+    let l:file = expand("%:p")
+    let l:output = l:file . '.' . 'runresult'
+
     if a:0 >= 1
-        let b:output = expand("%:p") . '.runresult'
-        exec '!~/loadrc/bashrc/select_move.sh ' . '"' .  expand("%:p") . '"' . ' ' . '"' . a:1 . '" 2>&1 | tee ' . b:output
-        call OpenOrSwitch(b:output, 'vs')
+        exec '!~/loadrc/bashrc/select_action.sh ' . '"' . l:file . '"' . ' ' . '"' . a:1 . '"' . ' ' . l:action . ' 2>&1 | tee ' . l:output
+        call OpenOrSwitch(l:output, 'vs')
     endif
 
     if a:0 >= 2
