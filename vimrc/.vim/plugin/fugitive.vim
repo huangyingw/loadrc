@@ -85,8 +85,8 @@ command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Prune 
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Reapply :execute s:Reapply()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RelativePath :execute s:RelativePath()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject RmCat :execute s:RmCat(<f-args>)
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectMove :execute 's:SelectAction("move", ' . <q-args> . ')'
-command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SelectCopy :execute 's:SelectAction("copy", ' . <q-args> . ')'
+command! -bang -bar -nargs=+ -complete=customlist,fugitive#CompleteObject SelectMove :call s:SelectAction('move', <f-args>)
+command! -bang -bar -nargs=+ -complete=customlist,fugitive#CompleteObject SelectCopy :call s:SelectAction('copy', <f-args>)
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortBySize :execute s:SortBySize()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject SortByTime :execute s:SortByTime()
 command! -bang -bar -nargs=* -complete=customlist,fugitive#CompleteObject Split :execute s:Split()
