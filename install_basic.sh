@@ -34,6 +34,8 @@ npm -g install \
     js-beautify \
     json2csv
 
+go install github.com/nsf/gocode@latest
+
 ./zerotierrc/all.sh
 ./deploy_configurations.sh
 ./crontabrc/install.sh
