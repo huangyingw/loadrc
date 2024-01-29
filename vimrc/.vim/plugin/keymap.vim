@@ -288,7 +288,6 @@ function! OpenAll()
 endfunction
 
 function! DiffAll()
-    let currentFile = expand("%:p")
     if &diff
         syntax on
         windo diffoff
@@ -299,7 +298,6 @@ function! DiffAll()
         windo set nowrap
         wincmd =
     endif
-    call OpenOrSwitch(currentFile, 'vs')
 endfunction
 
 function! KdiffAll()
