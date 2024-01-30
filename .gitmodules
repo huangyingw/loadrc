@@ -271,9 +271,6 @@
 	path = vimrc/.vim/bundle/vim-gitgutter
 	url = git@github.com:airblade/vim-gitgutter.git
 	branch = master
-[submodule "vimrc/.vim/bundle/nvim-ghost.nvim"]
-	path = vimrc/.vim/bundle/nvim-ghost.nvim
-	url = git@github.com:subnut/nvim-ghost.nvim.git
 [submodule "bcache-tools"]
 	path = bcache-tools
 	url = https://github.com/g2p/bcache-tools.git
