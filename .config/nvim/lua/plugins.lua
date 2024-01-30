@@ -2,6 +2,8 @@
 return require('packer').startup(function()
     use 'wbthomason/packer.nvim'    -- Packer can manage itself
     use 'neovim/nvim-lspconfig'     -- Collection of configurations for built-in LSP client
+
+    --[[
     use({
         "jackMort/ChatGPT.nvim",
         config = function()
@@ -13,5 +15,7 @@ return require('packer').startup(function()
             "nvim-telescope/telescope.nvim"
         }
     })
-    use('folke/which-key.nvim')
+    ]]
+
+    -- use('folke/which-key.nvim')
 end)
