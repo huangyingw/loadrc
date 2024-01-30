@@ -113,7 +113,6 @@ set cmdheight=1                 " use a status bar that is 2 rows high
 
 
 " }}}
-highlight StatusLine cterm=bold ctermfg=yellow ctermbg=blue
 
 " Set a nicer foldtext function
 set foldtext=MyFoldText()
