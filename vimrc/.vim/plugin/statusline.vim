@@ -59,3 +59,5 @@ else
 endif
 
 set statusline +=\ %{GitBranch()}
+
+highlight StatusLine cterm=bold ctermfg=yellow ctermbg=blue
