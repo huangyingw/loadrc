@@ -9,9 +9,11 @@ vim.o.termguicolors = false
 vim.cmd('colorscheme vim')
 
 vim.cmd 'source ~/.vimrc'
+
 require('plugins')
 -- require('secret_config')
 
+--[[
 require("chatgpt").setup()
 
 local chatgpt = require("chatgpt")
@@ -31,3 +33,4 @@ wk.register({
     prefix = "<leader>",
     mode = "v",
 })
+]]
