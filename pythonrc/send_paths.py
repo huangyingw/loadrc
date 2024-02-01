@@ -37,10 +37,17 @@ def send_file_paths(file_path):
     with open(file_path, "r") as file:
         file_paths = file.read()
 
+    print("正在发送以下文件路径到服务器：")
+    print(file_paths)
+
     # 创建 socket 并连接到服务器
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((SOCKET_HOST, SOCKET_PORT))
-        s.sendall(file_paths.encode())
+        try:
+            s.connect((SOCKET_HOST, SOCKET_PORT))
+            s.sendall(file_paths.encode())
+            print("文件路径发送成功。")
+        except Exception as e:
+            print(f"发送文件路径时发生错误：{e}")
 
 
 if __name__ == "__main__":
