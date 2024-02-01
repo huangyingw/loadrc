@@ -14,22 +14,35 @@ SOCKET_PORT = 12345
 
 
 def check_and_start_program():
-    """检查服务器程序是否运行，如果没有，则启动它。"""
+    """检查服务器程序是否运行，如果是，则杀死它并重新启动。"""
     command = f"nohup python {PROGRAM_PATH} > {LOG_FILE} 2>&1 &"
     try:
         # 尝试找到正在运行的程序进程
-        subprocess.check_output(
-            ["pgrep", "-f", PROGRAM_PATH], stderr=subprocess.STDOUT
+        running_procs = (
+            subprocess.check_output(
+                ["pgrep", "-f", PROGRAM_PATH],
+                stderr=subprocess.STDOUT,
+                text=True,
+            )
+            .strip()
+            .split("\n")
         )
-        print("服务器程序已在运行。")
+        if running_procs:
+            print("服务器程序已在运行，正在尝试杀死旧进程...")
+            for pid in running_procs:
+                subprocess.run(["kill", "-9", pid], check=True)
+            print("旧进程已被杀死。")
     except subprocess.CalledProcessError:
-        # 如果没有找到进程，启动服务器程序
-        print("服务器程序未运行，正在启动...")
-        subprocess.Popen(
-            command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
-        )
-        print(f"日志文件: {LOG_FILE}")
-        time.sleep(1)  # 等待一秒以确保程序已启动
+        # 没有找到正在运行的进程
+        print("服务器程序未运行。")
+
+    # 启动服务器程序
+    print("正在启动服务器程序...")
+    subprocess.Popen(
+        command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )
+    print(f"日志文件: {LOG_FILE}")
+    time.sleep(1)  # 等待一秒以确保程序已启动
 
 
 def send_file_paths(file_path):
