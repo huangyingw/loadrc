@@ -28,10 +28,13 @@ function! SendCurrentFileContentToPython()
     " 读取当前文件的所有行作为文件路径列表
     let relative_paths = readfile(expand('%'))
     
-    " 移除路径字符串中开头的"./"和末尾的双引号
-    let absolute_paths = map(copy(relative_paths), 'substitute(substitute(v:val, ''^"\./'', "", ""), ''"$'', "", "")')
+    " 移除路径中的开头 "./"（包括处理双引号的情况）和末尾的双引号
+    let processed_paths = map(relative_paths, 'substitute(substitute(v:val, ''^"\./'', "", ""), ''"$'', "", "")')
     
-    " 将绝对路径列表转换为一个字符串，每个路径由换行符分隔
+    " 使用当前目录路径拼接
+    let absolute_paths = map(processed_paths, 'current_dir . v:val')
+
+    " 将处理后的绝对路径列表转换为一个字符串，每个路径由换行符分隔
     let paths_str = join(absolute_paths, "\n")
     
     " 使用临时文件存储绝对路径列表
