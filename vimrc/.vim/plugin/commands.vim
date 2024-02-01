@@ -28,8 +28,8 @@ function! SendCurrentFileContentToPython()
     " 读取当前文件的所有行作为文件路径列表
     let relative_paths = readfile(expand('%'))
     
-    " 转换相对路径为绝对路径
-    let absolute_paths = map(relative_paths, 'current_dir . v:val')
+    " 移除路径字符串中开头的"./"和末尾的双引号
+    let absolute_paths = map(copy(relative_paths), 'substitute(substitute(v:val, ''^"\./'', "", ""), ''"$'', "", "")')
     
     " 将绝对路径列表转换为一个字符串，每个路径由换行符分隔
     let paths_str = join(absolute_paths, "\n")
@@ -41,7 +41,7 @@ function! SendCurrentFileContentToPython()
     " 构建调用外部 Python 脚本的命令，同时重定向输出到日志文件
     let log_file = expand('~/renderpumlfiles.runresult')
     let python_script = expand('~/loadrc/pythonrc/send_paths.py')
-    let command = 'python ' . shellescape(python_script) . ' ' . shellescape(temp_file) . ' 2>&1 | tee -a ' . shellescape(log_file)
+    let command = 'python ' . shellescape(python_script) . ' ' . shellescape(temp_file) . ' 2>&1 | tee ' . shellescape(log_file)
     
     " 执行外部命令
     execute '!' . command
