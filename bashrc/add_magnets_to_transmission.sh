@@ -3,19 +3,13 @@ SCRIPT=$(realpath "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
-# 检查是否指定了包含 Magnet 链接的文件
-if [ "$#" -ne 1 ]; then
-    echo "使用方法: $0 <magnet_links_file>"
-    exit 1
-fi
-
-# 文件路径硬编码在脚本中，替换为你的文件名
-FILE="your_magnet_links_file.txt"
+# 硬编码的文件路径
+FILE="magnet_links.txt"
 
 # 检查文件是否存在
 if [ ! -f "$FILE" ]; then
     echo "文件不存在: $FILE"
-    exit 2
+    exit 1
 fi
 
 # 读取文件中的每一行并添加到 Transmission
@@ -25,7 +19,5 @@ while IFS= read -r magnet_link; do
 done < "$FILE"
 
 echo "所有 Magnet 链接已添加到 Transmission。"
-
-
 
 cd -
