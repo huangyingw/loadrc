@@ -283,3 +283,6 @@
 [submodule "plantumlmacviewer"]
 	path = plantumlmacviewer
 	url = git@github.com:huangyingw/plantumlmacviewer.git
+[submodule "sshfs"]
+	path = sshfs
+	url = https://github.com/libfuse/sshfs.git

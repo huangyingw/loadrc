@@ -21,3 +21,5 @@ vimrc/.vim/view/
 zerotierrc/crontab_file
 var/
 .config/nvim/lua/secret_config.lua
+bashrc/ed2k_links.txt
+bashrc/magnet_links.txt

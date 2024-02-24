@@ -1,0 +1,224 @@
+diff --git a/.config/nvim/init.lua b/.config/nvim/init.lua
+--- ./.config/nvim/init.lua
++++ ./.config/nvim/init.lua
+@@ -1,6 +1,17 @@
+ -- init.lua
+ vim.cmd 'set runtimepath^=~/.vim runtimepath+=~/.vim/after'
+ vim.cmd 'let &packpath = &runtimepath'
++
++-- 禁用终端的 GUI 颜色支持
++vim.o.termguicolors = false
++
++-- 设置当应用特定颜色方案时改变状态行的颜色
++vim.api.nvim_create_autocmd("ColorScheme", {
++    pattern = "vim",
++    command = "hi StatusLine ctermbg=blue ctermfg=yellow cterm=NONE"
++})
++
++-- 设置当前的颜色方案为 'vim'
+ vim.cmd('colorscheme vim')
+ 
+ vim.cmd 'source ~/.vimrc'
+diff --git a/.gitconfig b/.gitconfig
+--- ./.gitconfig
++++ ./.gitconfig
+@@ -48,8 +48,8 @@
+     remote = origin
+     merge = refs/heads/findresult
+ [gsync]
+-    remote = origin
+-    target = 638c5602f4efdd1deb6691734c02dd0fa0986c7c
++    remote = github
++    target = github/colorscheme
+ [gdio]
+     ignore = ./bashrc/cscope_old.sh
+     ignore = ./bashrc/update_proj_old.sh
+diff --git a/.pathrc b/.pathrc
+--- ./.pathrc
++++ ./.pathrc
+@@ -10,3 +10,16 @@ export PATH=/users/alpine/.node_modules_global/bin:$PATH
+ export PATH=/usr/local/bin:$PATH
+ export PATH=/usr/local/cuda/bin:$PATH
+ export PATH=/usr/local/go/bin:$PATH
++export CFLAGS="-I/usr/local/Cellar/gcc/13.1.0/include/c++/13/x86_64-apple-darwin22 $CFLAGS"
++export CXXFLAGS="-I/usr/local/Cellar/gcc/13.1.0/include/c++/13/x86_64-apple-darwin22 $CXXFLAGS"
++# export PATH="/usr/local/opt/python@3.8/bin:$PATH"
++# export CPLUS_INCLUDE_PATH=/Library/Developer/CommandLineTools//SDKs/MacOSX13.3.sdk/usr/include
++# export LIBRARY_PATH=/Library/Developer/CommandLineTools//SDKs/MacOSX13.3.sdk/usr/lib
++# export CC=/usr/local/bin/gcc-13
++# export CXX=/usr/local/bin/g++-13
++# export CC=/usr/bin/gcc
++# export CXX=/usr/bin/g++
++# export PATH="/usr/local/opt/llvm/bin:$PATH"
++# export C_INCLUDE_PATH=$C_INCLUDE_PATH:/usr/local/Cellar/llvm/16.0.6/include/c++/v1/
++# export C_INCLUDE_PATH=$C_INCLUDE_PATH:/usr/local/Cellar/gcc/13.1.0/include/c++/13/
++# export C_INCLUDE_PATH=$C_INCLUDE_PATH:/usr/local/Cellar/gcc/13.1.0/include/c++/13/tr1/
+diff --git a/.tmux.conf b/.tmux.conf
+--- ./.tmux.conf
++++ ./.tmux.conf
+@@ -1,3 +1,4 @@
++set -g default-terminal "tmux-256color"
+ bind-key -n C-j next-window
+ bind-key -n C-k previous-window
+ bind-key -n C-w new-window
+diff --git a/.zshrc b/.zshrc
+--- ./.zshrc
++++ ./.zshrc
+@@ -99,3 +99,24 @@ source $ZSH/oh-my-zsh.sh
+ 
+ . $HOME/loadrc/.loadrc
+ setopt HIST_IGNORE_ALL_DUPS
++
++# >>> conda initialize >>>
++# !! Contents within this block are managed by 'conda init' !!
++__conda_setup="$('/Users/huangyingw/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
++if [ $? -eq 0 ]; then
++    eval "$__conda_setup"
++else
++    if [ -f "/Users/huangyingw/miniconda3/etc/profile.d/conda.sh" ]; then
++        . "/Users/huangyingw/miniconda3/etc/profile.d/conda.sh"
++    else
++        export PATH="/Users/huangyingw/miniconda3/bin:$PATH"
++    fi
++fi
++unset __conda_setup
++# <<< conda initialize <<<
++
++# export PATH="/usr/local/opt/python@3.8/bin:$PATH"
++#
++# if command -v pyenv 1>/dev/null 2>&1; then
++#   eval "$(pyenv init -)"
++# fi
+diff --git a/bashrc/smount.sh b/bashrc/smount.sh
+--- ./bashrc/smount.sh
++++ ./bashrc/smount.sh
+@@ -12,14 +12,14 @@ mkdir -p ~/nfs/"$remoteServer"
+ 
+ if [ $(uname) = "Linux" ]
+ then
+-    sshfs "$remoteServer":/media/ ~/"$remoteServer"
++    sshfs "$remoteServer":/media/ ~/"$remoteServer" -o reconnect,ServerAliveInterval=15
+     df -TH
+     #ssh  "$remoteServer" 'zsh ~/loadrc/bashrc/kill_top_io_processes.sh'
+ else
+     diskutil unmount force ~/nfs/"$remoteServer"
+     diskutil unmount force ~/"$remoteServer"
+     ps ax | awk '/sshfs '$remoteServer'/NR > 1 {print $1}' | xargs kill -9
+-    sshfs "$remoteServer":/ ~/"$remoteServer"
++    sshfs "$remoteServer":/ ~/"$remoteServer" -o reconnect,ServerAliveInterval=15
+     # sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/nfs/"$remoteServer" &
+     df -H
+ fi
+diff --git a/efficient_file_scanner b/efficient_file_scanner
+--- ./efficient_file_scanner
++++ ./efficient_file_scanner
+@@ -1 +1 @@
+-Subproject commit 97b356f2efac5566e4ca02fd7be2230072d51c88
++Subproject commit c80b88e6171fecabde72d593230f29b51214d9a5-dirty
+diff --git a/neovim b/neovim
+--- ./neovim
++++ ./neovim
+@@ -1 +1 @@
+-Subproject commit afa6603e6d5fece82331db5470d0f35ad1f703eb
++Subproject commit a060c13f55b775b2fafc741a571bb764e804d9db
+diff --git a/rsync b/rsync
+--- ./rsync
++++ ./rsync
+@@ -1 +1 @@
+-Subproject commit 0de21870d03accdd9c5a12e0615eaa119caa1962
++Subproject commit 08049f94f42763b9b8f737153f68db5c61232a4d
+diff --git a/sshfs b/sshfs
+--- ./sshfs
++++ ./sshfs
+@@ -1 +1 @@
+-Subproject commit 08eec625cc71152dfe3c381451361fda15f203e8
++Subproject commit 08eec625cc71152dfe3c381451361fda15f203e8-dirty
+diff --git a/video_timestamp_jump b/video_timestamp_jump
+--- ./video_timestamp_jump
++++ ./video_timestamp_jump
+@@ -1 +1 @@
+-Subproject commit 4893f5a08b89af97879ea1369a484ba348c6a286
++Subproject commit c39a1d21d196d42ee93d2c3847c94169cd147e2e-dirty
+diff --git a/vimrc/.vim/bundle/firenvim b/vimrc/.vim/bundle/firenvim
+--- ./vimrc/.vim/bundle/firenvim
++++ ./vimrc/.vim/bundle/firenvim
+@@ -1 +1 @@
+-Subproject commit 12003d9727bc5074ccb405b3d80e691c72d4859b
++Subproject commit 8c6c00aae7e5762cbcb4cd0df5848e959c4a9572
+diff --git a/vimrc/.vim/bundle/indentLine b/vimrc/.vim/bundle/indentLine
+--- ./vimrc/.vim/bundle/indentLine
++++ ./vimrc/.vim/bundle/indentLine
+@@ -1 +1 @@
+-Subproject commit d15d63bf9c4a74a02470d4bc8ecce53df13e3a75
++Subproject commit b96a75985736da969ac38b72a7716a8c57bdde98
+diff --git a/vimrc/.vim/bundle/neco-vim b/vimrc/.vim/bundle/neco-vim
+--- ./vimrc/.vim/bundle/neco-vim
++++ ./vimrc/.vim/bundle/neco-vim
+@@ -1 +1 @@
+-Subproject commit 6c581808ac3179ea0c640e43c77de48bbbec4fbc
++Subproject commit 1b95bedbeed0b4c81466d40b16bfb0c0ff16721d
+diff --git a/vimrc/.vim/bundle/swift.vim b/vimrc/.vim/bundle/swift.vim
+--- ./vimrc/.vim/bundle/swift.vim
++++ ./vimrc/.vim/bundle/swift.vim
+@@ -1 +1 @@
+-Subproject commit ba6f6cef58d08ac741aaf1626d3799d476cd43b6
++Subproject commit bb62135c4364c84b56499f4b54e1a6b8eca72eec
+diff --git a/vimrc/.vim/bundle/vim-autoformat b/vimrc/.vim/bundle/vim-autoformat
+--- ./vimrc/.vim/bundle/vim-autoformat
++++ ./vimrc/.vim/bundle/vim-autoformat
+@@ -1 +1 @@
+-Subproject commit d88ae71b474ff735b88f48f05b61358dbe15516c
++Subproject commit 641cb3d097c97f1b8f70f1a137ad7aff844f6a8a
+diff --git a/vimrc/.vim/bundle/vim-fugitive b/vimrc/.vim/bundle/vim-fugitive
+--- ./vimrc/.vim/bundle/vim-fugitive
++++ ./vimrc/.vim/bundle/vim-fugitive
+@@ -1 +1 @@
+-Subproject commit 77cb23edcf015a14a0a2eaa9f6ce5498c784643e
++Subproject commit c471dafad79469af6f4ee0479c1c905c1f7a0fc5-dirty
+diff --git a/vimrc/.vim/bundle/vim-gitgutter b/vimrc/.vim/bundle/vim-gitgutter
+--- ./vimrc/.vim/bundle/vim-gitgutter
++++ ./vimrc/.vim/bundle/vim-gitgutter
+@@ -1 +1 @@
+-Subproject commit 44dbd57dd19e8ec58b2a50c787c8ae7bb231c145
++Subproject commit 2ee95686c5944f99b42dd04fec005b30497006de
+diff --git a/vimrc/.vim/bundle/vim-ps1 b/vimrc/.vim/bundle/vim-ps1
+--- ./vimrc/.vim/bundle/vim-ps1
++++ ./vimrc/.vim/bundle/vim-ps1
+@@ -1 +1 @@
+-Subproject commit 502590f90a21f0de2b7664d6d0dcc90e5bb28a9c
++Subproject commit be5dce9cd15176c6b1ecd056a8ced93fc2f6efac
+diff --git a/vimrc/.vim/bundle/vim-rails b/vimrc/.vim/bundle/vim-rails
+--- ./vimrc/.vim/bundle/vim-rails
++++ ./vimrc/.vim/bundle/vim-rails
+@@ -1 +1 @@
+-Subproject commit 959e94b76e6ebdf984acef61649ba7d0f62bd425
++Subproject commit 1ad9663ce31e8c08134849d04184cda94bb42aba
+diff --git a/vimrc/.vim/bundle/vim-snipmate b/vimrc/.vim/bundle/vim-snipmate
+--- ./vimrc/.vim/bundle/vim-snipmate
++++ ./vimrc/.vim/bundle/vim-snipmate
+@@ -1 +1 @@
+-Subproject commit 03579d71eb75756d1c7a676fe3044543febe13ed
++Subproject commit 4eb3e68f50f7902083770622e059b2a0f4683892-dirty
+diff --git a/vimrc/.vimrc b/vimrc/.vimrc
+--- ./vimrc/.vimrc
++++ ./vimrc/.vimrc
+@@ -113,7 +113,6 @@ set cmdheight=1                 " use a status bar that is 2 rows high
+ 
+ 
+ " }}}
+-highlight StatusLine cterm=bold ctermfg=yellow ctermbg=blue
+ 
+ " Set a nicer foldtext function
+ set foldtext=MyFoldText()
+diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
+--- ./vishrc/vrun.sh
++++ ./vishrc/vrun.sh
+@@ -155,8 +155,6 @@ case $extension in
+         # 使用 nc 发送文件路径到套接字服务器
+         echo -e "$file" | nc $SOCKET_HOST $SOCKET_PORT
+         echo "文件路径已发送到套接字服务器。"
+-        # 切换焦点回 iTerm
+-        osascript -e 'tell application "iTerm" to activate'
+         ;;
+     swift)
+         # 去掉文件扩展名，得到可执行文件的名字

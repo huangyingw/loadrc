@@ -317,16 +317,23 @@ diff --git a/.config/nvim/init.lua b/.config/nvim/init.lua
 new file mode 100644
 --- /dev/null
 +++ ./.config/nvim/init.lua
-@@ -0,0 +1,28 @@
+@@ -0,0 +1,36 @@
 +-- init.lua
 +vim.cmd 'set runtimepath^=~/.vim runtimepath+=~/.vim/after'
 +vim.cmd 'let &packpath = &runtimepath'
++
++-- 禁用终端的 GUI 颜色支持
++vim.o.termguicolors = false
++
++-- 设置当前的颜色方案为 'vim'
 +vim.cmd('colorscheme vim')
 +
 +vim.cmd 'source ~/.vimrc'
++
 +require('plugins')
 +-- require('secret_config')
 +
++--[[
 +require("chatgpt").setup()
 +
 +local chatgpt = require("chatgpt")
@@ -345,7 +352,8 @@ new file mode 100644
 +}, {
 +    prefix = "<leader>",
 +    mode = "v",
-+})                    
++})
++]]
 diff --git a/.config/nvim/init.vim b/.config/nvim/init.vim
 new file mode 100644
 --- /dev/null
@@ -358,11 +366,13 @@ diff --git a/.config/nvim/lua/plugins.lua b/.config/nvim/lua/plugins.lua
 new file mode 100644
 --- /dev/null
 +++ ./.config/nvim/lua/plugins.lua
-@@ -0,0 +1,17 @@
+@@ -0,0 +1,21 @@
 +-- plugins.lua
 +return require('packer').startup(function()
 +    use 'wbthomason/packer.nvim'    -- Packer can manage itself
 +    use 'neovim/nvim-lspconfig'     -- Collection of configurations for built-in LSP client
++
++    --[[
 +    use({
 +        "jackMort/ChatGPT.nvim",
 +        config = function()
@@ -374,7 +384,9 @@ new file mode 100644
 +            "nvim-telescope/telescope.nvim"
 +        }
 +    })
-+    use('folke/which-key.nvim')
++    ]]
++
++    -- use('folke/which-key.nvim')
 +end)
 diff --git a/.config/tig/config b/.config/tig/config
 new file mode 100644
@@ -900,9 +912,6 @@ new file mode 100644
 +	path = vimrc/.vim/bundle/vim-gitgutter
 +	url = git@github.com:airblade/vim-gitgutter.git
 +	branch = master
-+[submodule "vimrc/.vim/bundle/nvim-ghost.nvim"]
-+	path = vimrc/.vim/bundle/nvim-ghost.nvim
-+	url = git@github.com:subnut/nvim-ghost.nvim.git
 +[submodule "bcache-tools"]
 +	path = bcache-tools
 +	url = https://github.com/g2p/bcache-tools.git
@@ -915,6 +924,9 @@ new file mode 100644
 +[submodule "plantumlmacviewer"]
 +	path = plantumlmacviewer
 +	url = git@github.com:huangyingw/plantumlmacviewer.git
++[submodule "sshfs"]
++	path = sshfs
++	url = https://github.com/libfuse/sshfs.git
 diff --git a/.gitrc b/.gitrc
 --- ./.gitrc
 +++ ./.gitrc
@@ -1550,7 +1562,6 @@ diff --git a/.shellrc b/.shellrc
 -alias aps='$HOME/bashrc/aps.sh'
 +#!/bin/zsh
 +#alias pm-suspend='$HOME/loadrc/bashrc/sleep.sh'
-+#alias tmux='$HOME/loadrc/bashrc/tmux.sh'
 +alias apf='$HOME/loadrc/bashrc/apf.sh'
 +alias api='apt-get install -y'
 +alias aps='$HOME/loadrc/bashrc/aps.sh'
@@ -1707,6 +1718,7 @@ diff --git a/.shellrc b/.shellrc
 +alias tmbak='$HOME/loadrc/bashrc/tmbak.sh'
 +alias tmirror='$HOME/loadrc/bashrc/tmirror.sh'
 +alias tmov='$HOME/loadrc/bashrc/tmove.sh'
++alias tmux='$HOME/loadrc/bashrc/tmux.sh'
 +alias tnetsync='$HOME/loadrc/bashrc/tnetsync.sh'
 +alias tosmirror='$HOME/loadrc/bashrc/tosmirror.sh'
 +alias trsync_svn='$HOME/loadrc/bashrc/trsync_svn.sh'
@@ -7752,7 +7764,7 @@ new file mode 100755
 +SCRIPTPATH=$(dirname "$SCRIPT")
 +cd "$SCRIPTPATH"
 +
-+./change_mac_hostname.sh studio
++./change_mac_hostname.sh mba
 diff --git a/bashrc/check_disk.sh b/bashrc/check_disk.sh
 new file mode 100755
 --- /dev/null
@@ -9848,7 +9860,7 @@ diff --git a/bashrc/ports_forward.hosts b/bashrc/ports_forward.hosts
 new file mode 100644
 --- /dev/null
 +++ ./bashrc/ports_forward.hosts
-@@ -0,0 +1,9 @@
+@@ -0,0 +1,10 @@
 +work
 +mba
 +mbp
@@ -9858,6 +9870,7 @@ new file mode 100644
 +server
 +imacpro
 +hplaptop
++macmini
 diff --git a/bashrc/ports_forward.sh b/bashrc/ports_forward.sh
 new file mode 100755
 --- /dev/null
@@ -10432,14 +10445,14 @@ new file mode 100755
 +
 +if [ $(uname) = "Linux" ]
 +then
-+    sshfs "$remoteServer":/media/ ~/"$remoteServer"
++    sshfs "$remoteServer":/media/ ~/"$remoteServer" -o reconnect,ServerAliveInterval=15
 +    df -TH
 +    #ssh  "$remoteServer" 'zsh ~/loadrc/bashrc/kill_top_io_processes.sh'
 +else
 +    diskutil unmount force ~/nfs/"$remoteServer"
 +    diskutil unmount force ~/"$remoteServer"
 +    ps ax | awk '/sshfs '$remoteServer'/NR > 1 {print $1}' | xargs kill -9
-+    sshfs "$remoteServer":/ ~/"$remoteServer"
++    sshfs "$remoteServer":/ ~/"$remoteServer" -o reconnect,ServerAliveInterval=15
 +    # sudo mount -o nolocks -o resvport "$remoteServer":/media/ ~/nfs/"$remoteServer" &
 +    df -H
 +fi
@@ -10559,7 +10572,7 @@ new file mode 100755
 +++ ./bashrc/tmux.sh
 @@ -0,0 +1,2 @@
 +#! /bin/zsh
-+tmux attach
++tmux new-session -A -s mosh
 diff --git a/bashrc/tosmirror.sh b/bashrc/tosmirror.sh
 new file mode 100755
 --- /dev/null
@@ -13634,7 +13647,7 @@ new file mode 160000
 --- /dev/null
 +++ ./efficient_file_scanner
 @@ -0,0 +1 @@
-+Subproject commit 9ba338ff8c030e5432143bd6ad53482183c0544f-dirty
++Subproject commit c80b88e6171fecabde72d593230f29b51214d9a5-dirty
 diff --git a/enpass_install.sh b/enpass_install.sh
 new file mode 100755
 --- /dev/null
@@ -21244,7 +21257,7 @@ new file mode 160000
 --- /dev/null
 +++ ./neovim
 @@ -0,0 +1 @@
-+Subproject commit bab8a7dc1ebe07b4c400986be2b73b1f41074122
++Subproject commit e5e552e7006e01b5ec6097079bbd8c63156e47e7
 diff --git a/networkrc/ping.sh b/networkrc/ping.sh
 new file mode 100755
 --- /dev/null
@@ -23637,6 +23650,12 @@ new file mode 100755
 +
 +cd "$(dirname "$file")"
 +mysql -v "$option" -u"$user" -p"$password" -h${host} ${dbinstance} < ${file}
+diff --git a/sshfs b/sshfs
+new file mode 160000
+--- /dev/null
++++ ./sshfs
+@@ -0,0 +1 @@
++Subproject commit 08eec625cc71152dfe3c381451361fda15f203e8-dirty
 diff --git a/submodule_setup.sh b/submodule_setup.sh
 new file mode 100755
 --- /dev/null
@@ -31526,12 +31545,6 @@ new file mode 160000
 +++ ./vimrc/.vim/bundle/neoinclude.vim
 @@ -0,0 +1 @@
 +Subproject commit 954cfc9dfdb303f2c2fa867b9cf949dd74512628
-diff --git a/vimrc/.vim/bundle/nvim-ghost.nvim b/vimrc/.vim/bundle/nvim-ghost.nvim
-new file mode 160000
---- /dev/null
-+++ ./vimrc/.vim/bundle/nvim-ghost.nvim
-@@ -0,0 +1 @@
-+Subproject commit a1ca0b2dac59881066d7ac9373cf64d59ba29d6a
 diff --git a/vimrc/.vim/bundle/nvim-yarp b/vimrc/.vim/bundle/nvim-yarp
 new file mode 160000
 --- /dev/null
@@ -45600,7 +45613,7 @@ new file mode 100644
 +" nnoremap gf gF<cr>
 +nnoremap gf :call OpenOrSwitch(expand(expand("<cfile>")), 'goto')<cr>
 +map oo :call VimOpen()<cr>
-+nnoremap <silent> <leader>g :call AsyncRunShellCommand('gitk --all -p --no-merges --full-diff -- "' . expand("%:p") . '"')<cr>
++nnoremap <silent> <leader>g :call AsyncRunShellCommand('gitk --all -p --full-diff -- "' . expand("%:p") . '"')<cr>
 +nnoremap <leader>1 :let @" = expand("%:p")<CR>
 +
 +function! CutFile2()
@@ -46284,7 +46297,7 @@ diff --git a/vimrc/.vim/plugin/statusline.vim b/vimrc/.vim/plugin/statusline.vim
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vim/plugin/statusline.vim
-@@ -0,0 +1,69 @@
+@@ -0,0 +1,63 @@
 +function! GitBranch()
 +    let branch = FugitiveHead(0)
 +    return branch !=# '' ? ' (' . branch . ')' : ''
@@ -46347,13 +46360,7 @@ new file mode 100644
 +
 +set statusline +=\ %{GitBranch()}
 +
-+" 定义颜色
-+highlight NvimLightBlue guibg=#a6dbff
-+highlight NvimLightYellow guifg=#fce094
-+
-+" 设置状态栏颜色
-+highlight StatusLine guibg=NvimLightBlue guifg=NvimLightYellow
-+
++highlight StatusLine cterm=bold ctermfg=yellow ctermbg=blue
 diff --git a/vimrc/.vim/plugin/taglist-plus.vim b/vimrc/.vim/plugin/taglist-plus.vim
 new file mode 100644
 --- /dev/null
@@ -60604,7 +60611,7 @@ diff --git a/vimrc/.vimrc b/vimrc/.vimrc
 new file mode 100644
 --- /dev/null
 +++ ./vimrc/.vimrc
-@@ -0,0 +1,279 @@
+@@ -0,0 +1,278 @@
 +set helplang=cn
 +set encoding=utf8
 +set fileencodings=utf8,gbk,big5
@@ -60720,7 +60727,6 @@ new file mode 100644
 +
 +
 +" }}}
-+highlight StatusLine cterm=bold ctermfg=yellow ctermbg=blue
 +
 +" Set a nicer foldtext function
 +set foldtext=MyFoldText()
@@ -61223,7 +61229,7 @@ diff --git a/vishrc/vrun.sh b/vishrc/vrun.sh
 new file mode 100755
 --- /dev/null
 +++ ./vishrc/vrun.sh
-@@ -0,0 +1,175 @@
+@@ -0,0 +1,173 @@
 +#!/bin/zsh
 +file="$1"
 +
@@ -61381,8 +61387,6 @@ new file mode 100755
 +        # 使用 nc 发送文件路径到套接字服务器
 +        echo -e "$file" | nc $SOCKET_HOST $SOCKET_PORT
 +        echo "文件路径已发送到套接字服务器。"
-+        # 切换焦点回 iTerm
-+        osascript -e 'tell application "iTerm" to activate'
 +        ;;
 +    swift)
 +        # 去掉文件扩展名，得到可执行文件的名字
