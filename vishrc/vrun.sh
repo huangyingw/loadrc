@@ -137,7 +137,7 @@ case $extension in
         ;;
     puml)
         # Python 程序的完整路径
-        PROGRAM_PATH="$HOME/loadrc/plantumlmacviewer/PlantUMLMacViewer.py"
+        PROGRAM_PATH="$HOME/loadrc/plantumlmacviewer/main.py"
 
         # 套接字服务器的地址和端口
         SOCKET_HOST="localhost"
@@ -155,8 +155,6 @@ case $extension in
         # 使用 nc 发送文件路径到套接字服务器
         echo -e "$file" | nc $SOCKET_HOST $SOCKET_PORT
         echo "文件路径已发送到套接字服务器。"
-        # 切换焦点回 iTerm
-        osascript -e 'tell application "iTerm" to activate'
         ;;
     swift)
         # 去掉文件扩展名，得到可执行文件的名字
