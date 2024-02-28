@@ -26,4 +26,4 @@ echo "File Size Limit: $FILESIZE_MB"
 echo "Log File: $logFile"
 
 # 执行jdupes命令
-jdupes -dNr -X size+:"$FILESIZE_MB" -X nostr:/.git/ "$TARGET" 2>&1 | tee "$logFile"
+jdupes -dNrO --order=time -X size+:"$FILESIZE_MB" -X nostr:/.git/ "$TARGET" 2>&1 | tee "$logFile"
