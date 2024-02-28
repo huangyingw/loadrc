@@ -286,3 +286,6 @@
 [submodule "sshfs"]
 	path = sshfs
 	url = https://github.com/libfuse/sshfs.git
+[submodule "libjodycode"]
+	path = libjodycode
+	url = https://codeberg.org/jbruchon/libjodycode.git
