@@ -22,6 +22,7 @@ function! ExecuteScriptInLoop()
 endfunction
 
 function! SendCurrentFileContentToPython()
+    let worktree = Cd2Worktree()
     " 获取当前文件的目录路径
     let current_dir = expand('%:p:h') . '/'
     
@@ -42,7 +43,7 @@ function! SendCurrentFileContentToPython()
     call writefile(split(paths_str, "\n"), temp_file)
     
     " 构建调用外部 Python 脚本的命令，同时重定向输出到日志文件
-    let log_file = expand('~/renderpumlfiles.runresult')
+    let log_file = expand('renderpumlfiles.runresult')
     let python_script = expand('~/loadrc/pythonrc/send_paths.py')
     let command = 'python ' . shellescape(python_script) . ' ' . shellescape(temp_file) . ' 2>&1 | tee ' . shellescape(log_file)
     
@@ -57,3 +58,29 @@ function! SendCurrentFileContentToPython()
 endfunction
 
 command! RenderPumlFiles call SendCurrentFileContentToPython()
+
+" 定义一个函数用于比较两个窗口中的文件
+function! CompareWithKdiff3()
+    " 确保只有两个窗口打开
+    if winnr('$') != 2
+        echo "需要且仅需要两个窗口打开"
+        return
+    endif
+
+    " 获取第一个窗口中文件的全路径
+    let file1 = fnamemodify(bufname(winbufnr(1)), ':p')
+    " 获取第二个窗口中文件的全路径
+    let file2 = fnamemodify(bufname(winbufnr(2)), ':p')
+
+    " 对文件路径中的空格进行转义
+    let file1_escaped = shellescape(file1, 1)
+    let file2_escaped = shellescape(file2, 1)
+
+    " 使用kdiff3比较这两个文件
+    " 注意：这里假设kdiff3可以在你的环境变量PATH中找到
+    " 如果kdiff3的路径不在PATH中，需要指定完整路径
+    execute '!/usr/local/bin/kdiff3' file1_escaped file2_escaped
+endfunction
+
+" 定义一个简短的Vim命令调用这个函数
+command! Kdiff3 call CompareWithKdiff3()
