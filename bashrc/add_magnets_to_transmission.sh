@@ -6,6 +6,10 @@ cd "$SCRIPTPATH"
 # 硬编码的文件路径
 FILE="magnet_links.txt"
 
+# Transmission 的用户名和密码
+USER="transmission"
+PASS="transmission"
+
 # 检查文件是否存在
 if [ ! -f "$FILE" ]; then
     echo "文件不存在: $FILE"
@@ -15,7 +19,7 @@ fi
 # 读取文件中的每一行并添加到 Transmission
 while IFS= read -r magnet_link; do
     echo "正在添加: $magnet_link"
-    transmission-remote -a "$magnet_link"
+    transmission-remote -n "$USER:$PASS" -a "$magnet_link"
 done < "$FILE"
 
 echo "所有 Magnet 链接已添加到 Transmission。"
