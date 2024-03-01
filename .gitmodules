@@ -289,3 +289,6 @@
 [submodule "libjodycode"]
 	path = libjodycode
 	url = https://codeberg.org/jbruchon/libjodycode.git
+[submodule "screen_share_kit"]
+	path = screen_share_kit
+	url = git@github.com:huangyingw/screen_share_kit.git
