@@ -288,7 +288,7 @@
 	url = https://github.com/libfuse/sshfs.git
 [submodule "libjodycode"]
 	path = libjodycode
-	url = https://codeberg.org/jbruchon/libjodycode.git
+	url = git@github.com:huangyingw/libjodycode.git 
 [submodule "screen_share_kit"]
 	path = screen_share_kit
 	url = git@github.com:huangyingw/screen_share_kit.git
