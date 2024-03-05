@@ -50,7 +50,6 @@ apt-get install -y \
     net-tools \
     nfs-kernel-server \
     npm \
-    nvidia-docker2 \
     openvpn \
     p7zip-full \
     p7zip-rar \
@@ -84,6 +83,7 @@ apt-get install -y \
 apt-get install -y \
     manpages-fr-extra \
     netcat \
+    nvidia-docker2 \
     python3-nltk
 
 
