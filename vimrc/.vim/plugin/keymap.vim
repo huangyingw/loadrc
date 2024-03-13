@@ -39,20 +39,18 @@ function! HighlightKeyword(keyword)
     let old_reg = getreg('"')
     let old_regtype = getregtype('"')
     let @@ = a:keyword
-    if @@ =~? '^[0-9a-z,_]*$' || (@@ =~? '^[0-9a-z ,_]*$' && g:VeryLiteral)
+    if @@ =~? '^[0-9a-z,_]*$' || @@ =~? '^[0-9a-z ,_]*$' && g:VeryLiteral
         let @/ = '\c' . a:keyword
     else
         let pat = @@
         if g:VeryLiteral
             let pat = substitute(pat, '\n', '\\n', 'g')
         else
-            let special_chars = ['\\', '.', '*', '\[', '\]', '^', '$', '\<', '\>', '~', '\+']
-            for ch in special_chars
-                let pat = substitute(pat, ch, '\\' . ch, 'g')
-            endfor
-            let pat = substitute(pat, '^\s\+', '\\s\\+', '')
-            let pat = substitute(pat, '\s\+$', '\\s\\*', '')
-            let pat = substitute(pat, '\s\+', '\\s\\+', 'g')
+            let pat = substitute(pat, '^\_s\+', '\\s\\+', '')
+            let pat = substitute(pat, '\_s\+$', '\\s\\*', '')
+            let pat = substitute(pat, '\_s\+', '\\_s\\+', 'g')
+            let pat = substitute(pat, '\\!', '!', 'g')
+            let pat = substitute(pat, '\\"', '"', 'g')
         endif
         let @/ = '\c' . pat
     endif
