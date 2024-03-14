@@ -42,7 +42,7 @@ function! HighlightKeyword(keyword)
     if @@ =~? '^[0-9a-z,_]*$' || @@ =~? '^[0-9a-z ,_]*$' && g:VeryLiteral
         let @/ = '\c' . a:keyword
     else
-        let pat = escape(@@, '\')
+        let pat = @@
         if g:VeryLiteral
             let pat = substitute(pat, '\n', '\\n', 'g')
         else
@@ -54,7 +54,6 @@ function! HighlightKeyword(keyword)
         endif
         let @/ = '\c' . pat
     endif
-    normal! gV
     call setreg('"', old_reg, old_regtype)
 endfunction
 
@@ -572,3 +571,9 @@ function! ClearSpacesAndUnhighlight()
     :s/ //<CR>
     :noh
 endfunction
+
+
+" 配置jupyter-vim快捷键
+nnoremap <silent> <Leader>jj :JupyterConnect<CR>
+nnoremap <silent> <Leader>je :JupyterExecute<CR>
+nnoremap <silent> <Leader>jc :JupyterExecuteCell<CR>
