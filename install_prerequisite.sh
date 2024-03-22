@@ -39,6 +39,7 @@ apt-get install -y \
     jdupes \
     jq \
     kdiff3 \
+    libpoppler-cpp-dev \
     libsecret-1-dev \
     libsecret-tools \
     locales \
