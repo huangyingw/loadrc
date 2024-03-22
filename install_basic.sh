@@ -12,6 +12,7 @@ pip install \
     autoflake \
     autopep8 \
     ipynb-py-convert \
+    jupytext \
     pdftotext \
     proxybroker \
     pyautogui
@@ -22,6 +23,7 @@ pip3 install \
     bcache-status \
     black \
     ipynb-py-convert \
+    jupytext \
     packaging \
     pdftotext \
     proxybroker \
