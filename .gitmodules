@@ -292,3 +292,6 @@
 [submodule "screen_share_kit"]
 	path = screen_share_kit
 	url = git@github.com:huangyingw/screen_share_kit.git
+[submodule "vimrc/.vim/bundle/jupytext.vim"]
+	path = vimrc/.vim/bundle/jupytext.vim
+	url = git@github.com:goerz/jupytext.vim.git
