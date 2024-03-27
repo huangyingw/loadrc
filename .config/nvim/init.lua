@@ -11,6 +11,7 @@ vim.cmd('colorscheme vim')
 vim.cmd 'source ~/.vimrc'
 
 require('plugins')
+require('keymaps')
 -- require('secret_config')
 
 --[[
