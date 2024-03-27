@@ -12,6 +12,7 @@ vim.cmd 'source ~/.vimrc'
 
 require('plugins')
 require('keymaps')
+require('nvim_molten_config')
 -- require('secret_config')
 
 --[[
