@@ -298,3 +298,6 @@
 [submodule "vimrc/.vim/bundle/molten-nvim"]
 	path = vimrc/.vim/bundle/molten-nvim
 	url = git@github.com:benlubas/molten-nvim.git
+[submodule "vimrc/.vim/bundle/image.nvim"]
+	path = vimrc/.vim/bundle/image.nvim
+	url = git@github.com:3rd/image.nvim.git
