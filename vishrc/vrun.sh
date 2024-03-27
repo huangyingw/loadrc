@@ -101,9 +101,9 @@ case $extension in
     yml)
         if [[ -n "$host" ]] && [[ "$host" != "localhost" ]]
         then
-            ssh -nY "$host" "docker-compose -f $rpath/$rfile up -d --build"
+            ssh -nY "$host" "docker-compose -f $rpath/$rfile up -d --build --force-recreate"
         else
-            docker-compose -f "$file" up -d --build
+            docker-compose -f "$file" up -d --build --force-recreate
         fi
         ;;
     ymldebug)
