@@ -40,10 +40,12 @@ apt-get install -y \
     jdupes \
     jq \
     kdiff3 \
+    libmagickwand-dev \
     libpoppler-cpp-dev \
     libsecret-1-dev \
     libsecret-tools \
     locales \
+    luajit \
     manpages-pl \
     mdadm \
     moreutils \
