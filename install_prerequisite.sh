@@ -46,6 +46,7 @@ apt-get install -y \
     libsecret-tools \
     locales \
     luajit \
+    luarocks \
     manpages-pl \
     mdadm \
     moreutils \
