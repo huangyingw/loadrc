@@ -301,3 +301,6 @@
 [submodule "vimrc/.vim/bundle/image.nvim"]
 	path = vimrc/.vim/bundle/image.nvim
 	url = git@github.com:3rd/image.nvim.git
+[submodule "tmux"]
+	path = tmux
+	url = git@github.com:huangyingw/tmux.git 
