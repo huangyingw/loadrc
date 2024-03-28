@@ -31,6 +31,7 @@ apt-get install -y \
     hfsprogs \
     htop \
     ifenslave \
+    imagemagick \
     inetutils-traceroute \
     iotop \
     iperf \
